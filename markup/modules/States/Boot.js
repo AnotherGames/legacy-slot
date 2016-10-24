@@ -1,4 +1,5 @@
 import { model } from '../../modules/Model/Model';
+import { events } from '../../modules/Events/Events';
 
 export class Boot {
     constructor(game) {
@@ -6,7 +7,6 @@ export class Boot {
     }
     init() {
         console.info('Boot State!');
-        model.data();
     }
     preload() {
 
