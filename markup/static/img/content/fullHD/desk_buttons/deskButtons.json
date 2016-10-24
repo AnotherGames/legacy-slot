@@ -1,0 +1,108 @@
+{"frames": [
+
+{
+	"filename": "batton_auto-on.png",
+	"frame": {"x":381,"y":153,"w":100,"h":146},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":4,"w":100,"h":146},
+	"sourceSize": {"w":100,"h":150}
+},
+{
+	"filename": "batton_auto.png",
+	"frame": {"x":381,"y":301,"w":100,"h":146},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":4,"w":100,"h":146},
+	"sourceSize": {"w":100,"h":150}
+},
+{
+	"filename": "batton_auto_off.png",
+	"frame": {"x":205,"y":304,"w":100,"h":146},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":4,"w":100,"h":146},
+	"sourceSize": {"w":100,"h":150}
+},
+{
+	"filename": "batton_MB.png",
+	"frame": {"x":1,"y":305,"w":100,"h":146},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":4,"w":100,"h":146},
+	"sourceSize": {"w":100,"h":150}
+},
+{
+	"filename": "batton_MB_on.png",
+	"frame": {"x":103,"y":305,"w":100,"h":146},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":4,"w":100,"h":146},
+	"sourceSize": {"w":100,"h":150}
+},
+{
+	"filename": "botton_spin-on.png",
+	"frame": {"x":1,"y":1,"w":190,"h":150},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":190,"h":150},
+	"sourceSize": {"w":190,"h":150}
+},
+{
+	"filename": "botton_spin.png",
+	"frame": {"x":193,"y":1,"w":190,"h":150},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":190,"h":150},
+	"sourceSize": {"w":190,"h":150}
+},
+{
+	"filename": "botton_stop.png",
+	"frame": {"x":1,"y":153,"w":190,"h":150},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":190,"h":150},
+	"sourceSize": {"w":190,"h":150}
+},
+{
+	"filename": "botton_stop_on.png",
+	"frame": {"x":193,"y":153,"w":186,"h":149},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":1,"w":186,"h":149},
+	"sourceSize": {"w":190,"h":150}
+},
+{
+	"filename": "i.png",
+	"frame": {"x":385,"y":1,"w":45,"h":46},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":3,"w":45,"h":46},
+	"sourceSize": {"w":50,"h":50}
+},
+{
+	"filename": "min.png",
+	"frame": {"x":432,"y":1,"w":36,"h":49},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":1,"w":36,"h":49},
+	"sourceSize": {"w":40,"h":50}
+},
+{
+	"filename": "plus.png",
+	"frame": {"x":385,"y":49,"w":36,"h":48},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":2,"w":36,"h":48},
+	"sourceSize": {"w":40,"h":50}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "zombieslot-desk-button-fhd-0.png",
+	"format": "RGBA8888",
+	"size": {"w":482,"h":452},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:20b68c71661f334ccfe61266aadf908b:ea15cb88d5871224eccba5e731cf9749:db8fad7c5c19fd4b1ecf440098eec77e$"
+}
+}

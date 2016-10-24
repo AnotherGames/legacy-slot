@@ -1,0 +1,40 @@
+{
+
+"images": [
+    "Bonuses_hd_2048-0.png"
+],
+
+"frames": [
+    [1, 1, 122, 121, 0, -11, -13],
+    [125, 1, 104, 109, 0, -19, -16],
+    [1, 124, 85, 102, 0, -29, -14],
+    [88, 124, 98, 98, 0, -23, -24],
+    [1, 228, 114, 114, 0, -15, -16],
+    [117, 228, 104, 105, 0, -20, -21],
+    [1, 344, 145, 143, 0, 0, -1],
+    [1, 489, 101, 106, 0, -21, -18],
+    [104, 489, 90, 102, 0, -27, -16],
+    [1, 597, 108, 107, 0, -17, -20],
+    [111, 597, 122, 121, 0, -11, -13]
+],
+
+"animations": {
+    "Zomb-Candle0": { "frames": [0] },
+    "Zomb-Candle1": { "frames": [1] },
+    "Zomb-Candle2": { "frames": [2] },
+    "Zomb-Candle3": { "frames": [3] },
+    "Zomb-Candle4": { "frames": [4] },
+    "Zomb-Candle5": { "frames": [5] },
+    "Zomb-Candle6": { "frames": [6] },
+    "Zomb-Candle7": { "frames": [7] },
+    "Zomb-Candle8": { "frames": [8] },
+    "Zomb-Candle9": { "frames": [9] },
+    "Zomb-Candle10": { "frames": [10] }
+},
+
+"texturepacker": [
+        "SmartUpdateHash: $TexturePacker:SmartUpdate:efa81139eccc442ea50d5dd111857745:45b9b4f8e61daad0838839cbead46cfb:8d298d439d0072d3f2bc4d7ac8463827$",
+        "Created with TexturePacker (https://www.codeandweb.com/texturepacker) for EaselJS"
+]
+
+}
