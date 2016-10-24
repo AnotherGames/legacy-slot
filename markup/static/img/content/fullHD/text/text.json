@@ -1,0 +1,52 @@
+{"frames": [
+
+{
+	"filename": "continue.png",
+	"frame": {"x":1,"y":1,"w":400,"h":120},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":120},
+	"sourceSize": {"w":400,"h":120}
+},
+{
+	"filename": "freeSpins.png",
+	"frame": {"x":1100,"y":1,"w":766,"h":182},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":69,"y":25,"w":766,"h":182},
+	"sourceSize": {"w":900,"h":250}
+},
+{
+	"filename": "logo.png",
+	"frame": {"x":353,"y":185,"w":1215,"h":220},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":69,"y":98,"w":1215,"h":220},
+	"sourceSize": {"w":1334,"h":400}
+},
+{
+	"filename": "play.png",
+	"frame": {"x":1,"y":123,"w":350,"h":200},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":350,"h":200},
+	"sourceSize": {"w":350,"h":200}
+},
+{
+	"filename": "totalW.png",
+	"frame": {"x":403,"y":1,"w":695,"h":176},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":16,"y":19,"w":695,"h":176},
+	"sourceSize": {"w":726,"h":216}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "text-fhd-0.png",
+	"format": "RGBA8888",
+	"size": {"w":1867,"h":406},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:f5a1822fd58f38ded68c22cb1d347366:548d2237e925003c247be0fdfcae1691:3bb5160d4ba88f1396e0f8b6f847417b$"
+}
+}
