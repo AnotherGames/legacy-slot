@@ -1,4 +1,4 @@
-// import { events } from 'components/events/events';
+import { events } from '../../modules/Events/Events';
 
 export let model = (function () {
 
@@ -25,7 +25,7 @@ export let model = (function () {
 
     function state(key, value) {
         return returnData(_state, key, value);
-        // events.trigger(`change:${key}`, _state[key]);
+        events.trigger(`change:${key}`, _state[key]);
     }
 
     function flag(key, value) {
