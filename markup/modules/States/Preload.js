@@ -68,4 +68,6 @@ function loadMainAssets(game) {
     game.load.audio('myAudio6', 'sound/door4.mp3');
     game.load.audio('myAudio7', 'sound/door5.mp3');
     game.load.audio('myAudio8', 'sound/doorsAmbient.mp3');
+    game.load.image('initBG', 'bg/initBG.png');
+    game.load.atlasJSONArray('text', 'text/text.png', 'text/text.json');
 }
