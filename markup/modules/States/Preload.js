@@ -9,10 +9,10 @@ export class Preload {
     }
     preload() {
 
-        let preloadBar = createPreloadBar(this);
-        this.load.setPreloadSprite(preloadBar);
+        this.preloadBar = createPreloadBar(this);
+        this.load.setPreloadSprite(this.preloadBar);
 
-        let preloadCoin = createPreloadCoin(this);
+        this.preloadCoin = createPreloadCoin(this);
 
         this.load.path = `static/img/content/${model.state('res')}/`;
         this.load.audio('myAudio', 'sound/ambient.mp3');
@@ -23,10 +23,24 @@ export class Preload {
         this.load.audio('myAudio6', 'sound/door4.mp3');
         this.load.audio('myAudio7', 'sound/door5.mp3');
         this.load.audio('myAudio8', 'sound/doorsAmbient.mp3');
+
+        this.load.onLoadComplete.add(this.closePreloader, this);
     }
     create() {
         let music = this.add.audio('myAudio');
         music.play();
+    }
+    closePreloader() {
+        let closeCoinTween = this.add.tween(this.preloadCoin.scale);
+        closeCoinTween.to({x: 0, y: 0}, 500, Phaser.Easing.In);
+        closeCoinTween.start();
+        closeCoinTween.onComplete.add(() => {
+            this.state.start('Init');
+        }, this);
+
+        let closeBarTween = this.add.tween(this.preloadBar);
+        closeBarTween.to({alpha: 0}, 400, Phaser.Easing.In);
+        closeBarTween.start();
     }
 }
 
