@@ -4,7 +4,7 @@ import { Init } from '../../modules/States/Init';
 import { Main } from '../../modules/States/Main';
 import { FS } from '../../modules/States/FS';
 
-let game = new Phaser.Game(800, 600, Phaser.AUTO);
+let game = new Phaser.Game(1280, 720, Phaser.AUTO, 'game');
 
 game.state.add('Boot', Boot, true);
 game.state.add('Preload', Preload);
