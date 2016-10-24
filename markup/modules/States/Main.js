@@ -3,7 +3,7 @@ export class Main {
 
     }
     init() {
-        console.log('I am Main State!');
+        console.info('Main State!');
     }
     preload() {
 

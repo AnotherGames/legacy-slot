@@ -1,14 +1,17 @@
+import { model } from '../../modules/Model/Model';
+
 export class Boot {
     constructor(game) {
 
     }
     init() {
-        console.log('I am Boot State!');
+        console.info('Boot State!');
+        model.data();
     }
     preload() {
 
     }
     create() {
-        
+
     }
 }

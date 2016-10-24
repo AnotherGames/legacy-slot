@@ -3,7 +3,7 @@ export class FS {
 
     }
     init() {
-        console.log('I am FS State!');
+        console.info('FS State!');
     }
     preload() {
 

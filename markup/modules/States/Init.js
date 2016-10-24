@@ -3,7 +3,7 @@ export class Init {
 
     }
     init() {
-        console.log('I am Init State!');
+        console.info('Init State!');
     }
     preload() {
 
