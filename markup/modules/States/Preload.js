@@ -15,14 +15,7 @@ export class Preload {
         this.preloadCoin = createPreloadCoin(this);
 
         this.load.path = `static/img/content/${model.state('res')}/`;
-        this.load.audio('myAudio', 'sound/ambient.mp3');
-        this.load.audio('myAudio2', 'sound/doorsAmbient.mp3');
-        this.load.audio('myAudio3', 'sound/door1.mp3');
-        this.load.audio('myAudio4', 'sound/door2.mp3');
-        this.load.audio('myAudio5', 'sound/door3.mp3');
-        this.load.audio('myAudio6', 'sound/door4.mp3');
-        this.load.audio('myAudio7', 'sound/door5.mp3');
-        this.load.audio('myAudio8', 'sound/doorsAmbient.mp3');
+        loadMainAssets(this);
 
         this.load.onLoadComplete.add(this.closePreloader, this);
     }
@@ -64,4 +57,15 @@ function createPreloadCoin(game) {
     coinTween.start();
 
     return preloadCoin;
+}
+
+function loadMainAssets(game) {
+    game.load.audio('myAudio', 'sound/ambient.mp3');
+    game.load.audio('myAudio2', 'sound/doorsAmbient.mp3');
+    game.load.audio('myAudio3', 'sound/door1.mp3');
+    game.load.audio('myAudio4', 'sound/door2.mp3');
+    game.load.audio('myAudio5', 'sound/door3.mp3');
+    game.load.audio('myAudio6', 'sound/door4.mp3');
+    game.load.audio('myAudio7', 'sound/door5.mp3');
+    game.load.audio('myAudio8', 'sound/doorsAmbient.mp3');
 }
