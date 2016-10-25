@@ -1,40 +1,100 @@
+{"frames": [
+
 {
-
-"images": [
-    "Bonuses_hd_2048-0.png"
-],
-
-"frames": [
-    [1, 1, 122, 121, 0, -11, -13],
-    [125, 1, 104, 109, 0, -19, -16],
-    [1, 124, 85, 102, 0, -29, -14],
-    [88, 124, 98, 98, 0, -23, -24],
-    [1, 228, 114, 114, 0, -15, -16],
-    [117, 228, 104, 105, 0, -20, -21],
-    [1, 344, 145, 143, 0, 0, -1],
-    [1, 489, 101, 106, 0, -21, -18],
-    [104, 489, 90, 102, 0, -27, -16],
-    [1, 597, 108, 107, 0, -17, -20],
-    [111, 597, 122, 121, 0, -11, -13]
-],
-
-"animations": {
-    "Zomb-Candle0": { "frames": [0] },
-    "Zomb-Candle1": { "frames": [1] },
-    "Zomb-Candle2": { "frames": [2] },
-    "Zomb-Candle3": { "frames": [3] },
-    "Zomb-Candle4": { "frames": [4] },
-    "Zomb-Candle5": { "frames": [5] },
-    "Zomb-Candle6": { "frames": [6] },
-    "Zomb-Candle7": { "frames": [7] },
-    "Zomb-Candle8": { "frames": [8] },
-    "Zomb-Candle9": { "frames": [9] },
-    "Zomb-Candle10": { "frames": [10] }
+	"filename": "Zomb-Candle0.png",
+	"frame": {"x":148,"y":1,"w":122,"h":121},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":11,"y":13,"w":122,"h":121},
+	"sourceSize": {"w":145,"h":144}
 },
-
-"texturepacker": [
-        "SmartUpdateHash: $TexturePacker:SmartUpdate:efa81139eccc442ea50d5dd111857745:45b9b4f8e61daad0838839cbead46cfb:8d298d439d0072d3f2bc4d7ac8463827$",
-        "Created with TexturePacker (https://www.codeandweb.com/texturepacker) for EaselJS"
-]
-
+{
+	"filename": "Zomb-Candle1.png",
+	"frame": {"x":290,"y":124,"w":104,"h":109},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":19,"y":16,"w":104,"h":109},
+	"sourceSize": {"w":145,"h":144}
+},
+{
+	"filename": "Zomb-Candle2.png",
+	"frame": {"x":93,"y":146,"w":85,"h":102},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":29,"y":14,"w":85,"h":102},
+	"sourceSize": {"w":145,"h":144}
+},
+{
+	"filename": "Zomb-Candle3.png",
+	"frame": {"x":512,"y":1,"w":98,"h":98},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":23,"y":24,"w":98,"h":98},
+	"sourceSize": {"w":145,"h":144}
+},
+{
+	"filename": "Zomb-Candle4.png",
+	"frame": {"x":396,"y":1,"w":114,"h":114},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":15,"y":16,"w":114,"h":114},
+	"sourceSize": {"w":145,"h":144}
+},
+{
+	"filename": "Zomb-Candle5.png",
+	"frame": {"x":396,"y":117,"w":104,"h":105},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":20,"y":21,"w":104,"h":105},
+	"sourceSize": {"w":145,"h":144}
+},
+{
+	"filename": "Zomb-Candle6.png",
+	"frame": {"x":1,"y":1,"w":145,"h":143},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":145,"h":143},
+	"sourceSize": {"w":145,"h":144}
+},
+{
+	"filename": "Zomb-Candle7.png",
+	"frame": {"x":502,"y":117,"w":101,"h":106},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":21,"y":18,"w":101,"h":106},
+	"sourceSize": {"w":145,"h":144}
+},
+{
+	"filename": "Zomb-Candle8.png",
+	"frame": {"x":1,"y":146,"w":90,"h":102},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":27,"y":16,"w":90,"h":102},
+	"sourceSize": {"w":145,"h":144}
+},
+{
+	"filename": "Zomb-Candle9.png",
+	"frame": {"x":180,"y":124,"w":108,"h":107},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":17,"y":20,"w":108,"h":107},
+	"sourceSize": {"w":145,"h":144}
+},
+{
+	"filename": "Zomb-Candle10.png",
+	"frame": {"x":272,"y":1,"w":122,"h":121},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":11,"y":13,"w":122,"h":121},
+	"sourceSize": {"w":145,"h":144}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "candle-fhd-0.png",
+	"format": "RGBA8888",
+	"size": {"w":611,"h":249},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:3d7719299505c546164cd013e318e693:45b9b4f8e61daad0838839cbead46cfb:788f6824853948d9ea21ed7148e46e11$"
+}
 }

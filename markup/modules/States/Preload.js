@@ -24,8 +24,8 @@ export class Preload {
         this.load.onLoadComplete.add(this.closePreloader, this);
     }
     create() {
-        let music = this.add.audio('myAudio');
-        music.play();
+        // let music = this.add.audio('myAudio');
+        // music.play();
     }
     closePreloader() {
         let closeCoinTween = this.add.tween(this.preloadCoin.scale);
@@ -93,8 +93,13 @@ function loadMainAssets(game) {
         game.load.image('ui', 'game/UI_FS.png');
         game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
     }
-    if (model.flag('desktop')) {
+    if (model.flag('mobile')) {
         game.load.atlasJSONArray('mobileButtons', 'mobile_buttons/mobileButtons.png', 'mobile_buttons/mobileButtons.json');
+        game.load.image('altary', 'fs/altary.png');
+        game.load.image('altary', 'fs/altary.png');
+        game.load.image('fsTotalTable', 'fs/fsTotalTable.png');
+        game.load.image('multiRip', 'fs/multiRip.png');
+        game.load.image('multiTable', 'fs/multiTable.png');
     }
 }
 
