@@ -1,0 +1,92 @@
+{"frames": [
+
+{
+	"filename": "icon_0000_Shape-2.png",
+	"frame": {"x":1,"y":1,"w":21,"h":21},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":3,"w":21,"h":21},
+	"sourceSize": {"w":27,"h":27}
+},
+{
+	"filename": "icon_0001_Shape-2-copy.png",
+	"frame": {"x":24,"y":1,"w":21,"h":21},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":3,"w":21,"h":21},
+	"sourceSize": {"w":27,"h":27}
+},
+{
+	"filename": "icon_0002_Shape-2-copy.png",
+	"frame": {"x":47,"y":1,"w":21,"h":21},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":3,"w":21,"h":21},
+	"sourceSize": {"w":27,"h":27}
+},
+{
+	"filename": "icon_0003_sound-2-.png",
+	"frame": {"x":70,"y":1,"w":26,"h":20},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":4,"w":26,"h":20},
+	"sourceSize": {"w":27,"h":27}
+},
+{
+	"filename": "icon_0004_sound-2-.png",
+	"frame": {"x":98,"y":1,"w":26,"h":20},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":4,"w":26,"h":20},
+	"sourceSize": {"w":27,"h":27}
+},
+{
+	"filename": "icon_0005_sound-2-.png",
+	"frame": {"x":70,"y":23,"w":26,"h":20},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":4,"w":26,"h":20},
+	"sourceSize": {"w":27,"h":27}
+},
+{
+	"filename": "icon_0006_Rectangle-1-copy-3.png",
+	"frame": {"x":47,"y":24,"w":21,"h":18},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":5,"w":21,"h":18},
+	"sourceSize": {"w":27,"h":27}
+},
+{
+	"filename": "icon_0007_Rectangle-1-copy-3.png",
+	"frame": {"x":98,"y":23,"w":21,"h":18},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":5,"w":21,"h":18},
+	"sourceSize": {"w":27,"h":27}
+},
+{
+	"filename": "icon_0008_Forma-1.png",
+	"frame": {"x":1,"y":24,"w":21,"h":19},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":4,"w":21,"h":19},
+	"sourceSize": {"w":27,"h":27}
+},
+{
+	"filename": "icon_0009_Forma-1.png",
+	"frame": {"x":24,"y":24,"w":21,"h":19},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":4,"w":21,"h":19},
+	"sourceSize": {"w":27,"h":27}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "zombieslot-footer-hd-0.png",
+	"format": "RGBA8888",
+	"size": {"w":125,"h":44},
+	"scale": "0.666",
+	"smartupdate": "$TexturePacker:SmartUpdate:2b4c3340473127fa5baa5aebd2609b72:7999c6a5c296607aedb1934bf4f415fa:1570ee73969ad76ae7972e0e2ad1f412$"
+}
+}

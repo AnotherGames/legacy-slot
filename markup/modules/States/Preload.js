@@ -14,14 +14,18 @@ export class Preload {
 
         this.preloadCoin = createPreloadCoin(this);
 
+        this.load.path = 'static/img/content/';
+        loadSoundAssets(this);
         this.load.path = `static/img/content/${model.state('res')}/`;
+        loadInitAssets(this);
         loadMainAssets(this);
+        loadFSAssets(this);
 
         this.load.onLoadComplete.add(this.closePreloader, this);
     }
     create() {
-        let music = this.add.audio('myAudio');
-        music.play();
+        // let music = this.add.audio('myAudio');
+        // music.play();
     }
     closePreloader() {
         let closeCoinTween = this.add.tween(this.preloadCoin.scale);
@@ -59,15 +63,46 @@ function createPreloadCoin(game) {
     return preloadCoin;
 }
 
-function loadMainAssets(game) {
-    game.load.audio('myAudio', 'sound/ambient.mp3');
-    game.load.audio('myAudio2', 'sound/doorsAmbient.mp3');
-    game.load.audio('myAudio3', 'sound/door1.mp3');
-    game.load.audio('myAudio4', 'sound/door2.mp3');
-    game.load.audio('myAudio5', 'sound/door3.mp3');
-    game.load.audio('myAudio6', 'sound/door4.mp3');
-    game.load.audio('myAudio7', 'sound/door5.mp3');
-    game.load.audio('myAudio8', 'sound/doorsAmbient.mp3');
+function loadSoundAssets(game) {
+    game.load.audio('fon', 'sound/ambient.mp3');
+    game.load.audio('initFon', 'sound/fsAmbient.mp3');
+    game.load.audio('logoFon', 'sound/logoAmbient.mp3');
+    game.load.audio('baraban', 'sound/baraban.mp3');
+    game.load.audio('buttonClick', 'sound/buttonClick.mp3');
+    game.load.audio('startPerehod', 'sound/startPerehod.mp3');
+    game.load.audio('finishPerehod', 'sound/finishPerehod.mp3');
+    game.load.audio('lineWin', 'sound/lineWin.mp3');
+    game.load.audio('lineWin2', 'sound/lineWin2.mp3');
+}
+
+function loadInitAssets(game) {
     game.load.image('initBG', 'bg/initBG.png');
     game.load.atlasJSONArray('text', 'text/text.png', 'text/text.json');
+}
+
+function loadMainAssets(game) {
+    game.load.image('mainBG', 'bg/mainBG.png');
+    game.load.atlasJSONArray('candle', 'bg/candle.png', 'bg/candle.json');
+    game.load.image('gameMachine', 'game/gameMachine.png');
+    game.load.image('gameBG', 'game/gameBG.png');
+    game.load.image('gameShadow', 'game/gameShadow.png');
+    game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
+    game.load.atlasJSONArray('footerButtons', 'footer/footer.png', 'footer/footer.json');
+    if (model.flag('desktop')) {
+        game.load.image('ui', 'game/UI.png');
+        game.load.image('ui', 'game/UI_FS.png');
+        game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
+    }
+    if (model.flag('mobile')) {
+        game.load.atlasJSONArray('mobileButtons', 'mobile_buttons/mobileButtons.png', 'mobile_buttons/mobileButtons.json');
+        game.load.image('altary', 'fs/altary.png');
+        game.load.image('altary', 'fs/altary.png');
+        game.load.image('fsTotalTable', 'fs/fsTotalTable.png');
+        game.load.image('multiRip', 'fs/multiRip.png');
+        game.load.image('multiTable', 'fs/multiTable.png');
+    }
+}
+
+function loadFSAssets(game) {
+    game.load.image('fsBG', 'bg/fsBG.png');
 }

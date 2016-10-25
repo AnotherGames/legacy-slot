@@ -1,0 +1,196 @@
+{"frames": [
+
+{
+	"filename": "auto01.png",
+	"frame": {"x":72,"y":381,"w":67,"h":67},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":67,"h":67},
+	"sourceSize": {"w":67,"h":67}
+},
+{
+	"filename": "auto02.png",
+	"frame": {"x":1,"y":427,"w":67,"h":67},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":67,"h":67},
+	"sourceSize": {"w":67,"h":67}
+},
+{
+	"filename": "auto03.png",
+	"frame": {"x":141,"y":399,"w":67,"h":67},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":67,"h":67},
+	"sourceSize": {"w":67,"h":67}
+},
+{
+	"filename": "auto04.png",
+	"frame": {"x":70,"y":450,"w":67,"h":67},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":67,"h":67},
+	"sourceSize": {"w":67,"h":67}
+},
+{
+	"filename": "auto05.png",
+	"frame": {"x":1,"y":496,"w":67,"h":67},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":67,"h":67},
+	"sourceSize": {"w":67,"h":67}
+},
+{
+	"filename": "return.png",
+	"frame": {"x":118,"y":237,"w":69,"h":70},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":69,"h":70},
+	"sourceSize": {"w":69,"h":70}
+},
+{
+	"filename": "return02.png",
+	"frame": {"x":118,"y":309,"w":69,"h":70},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":69,"h":70},
+	"sourceSize": {"w":69,"h":70}
+},
+{
+	"filename": "return03.png",
+	"frame": {"x":1,"y":355,"w":69,"h":70},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":69,"h":70},
+	"sourceSize": {"w":69,"h":70}
+},
+{
+	"filename": "setbet01.png",
+	"frame": {"x":139,"y":468,"w":67,"h":67},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":67,"h":67},
+	"sourceSize": {"w":67,"h":67}
+},
+{
+	"filename": "setbet02.png",
+	"frame": {"x":70,"y":519,"w":67,"h":67},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":67,"h":67},
+	"sourceSize": {"w":67,"h":67}
+},
+{
+	"filename": "setbet03.png",
+	"frame": {"x":1,"y":565,"w":67,"h":67},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":67,"h":67},
+	"sourceSize": {"w":67,"h":67}
+},
+{
+	"filename": "setbet04.png",
+	"frame": {"x":139,"y":537,"w":67,"h":67},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":67,"h":67},
+	"sourceSize": {"w":67,"h":67}
+},
+{
+	"filename": "settingmenu01.png",
+	"frame": {"x":70,"y":588,"w":51,"h":51},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":51,"h":51},
+	"sourceSize": {"w":51,"h":51}
+},
+{
+	"filename": "settingmenu02.png",
+	"frame": {"x":123,"y":606,"w":51,"h":51},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":51,"h":51},
+	"sourceSize": {"w":51,"h":51}
+},
+{
+	"filename": "settingmenu03.png",
+	"frame": {"x":176,"y":606,"w":51,"h":51},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":51,"h":51},
+	"sourceSize": {"w":51,"h":51}
+},
+{
+	"filename": "sound01.png",
+	"frame": {"x":189,"y":237,"w":51,"h":52},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":51,"h":52},
+	"sourceSize": {"w":51,"h":52}
+},
+{
+	"filename": "sound02.png",
+	"frame": {"x":189,"y":291,"w":51,"h":52},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":51,"h":52},
+	"sourceSize": {"w":51,"h":52}
+},
+{
+	"filename": "sound03.png",
+	"frame": {"x":189,"y":345,"w":51,"h":52},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":51,"h":52},
+	"sourceSize": {"w":51,"h":52}
+},
+{
+	"filename": "spin01.png",
+	"frame": {"x":1,"y":1,"w":115,"h":116},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":115,"h":116},
+	"sourceSize": {"w":115,"h":116}
+},
+{
+	"filename": "spin02.png",
+	"frame": {"x":118,"y":1,"w":115,"h":116},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":115,"h":116},
+	"sourceSize": {"w":115,"h":116}
+},
+{
+	"filename": "spin03.png",
+	"frame": {"x":1,"y":119,"w":115,"h":116},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":115,"h":116},
+	"sourceSize": {"w":115,"h":116}
+},
+{
+	"filename": "spin04.png",
+	"frame": {"x":118,"y":119,"w":115,"h":116},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":115,"h":116},
+	"sourceSize": {"w":115,"h":116}
+},
+{
+	"filename": "spin05.png",
+	"frame": {"x":1,"y":237,"w":115,"h":116},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":115,"h":116},
+	"sourceSize": {"w":115,"h":116}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "zombieslot-mob-buttons-hd-0.png",
+	"format": "RGBA8888",
+	"size": {"w":241,"h":658},
+	"scale": "0.666",
+	"smartupdate": "$TexturePacker:SmartUpdate:f7f9b99397ae37007ac9f288ef30344b:73fcae57eda02ae55e9e2a84ed131c6b:9ad69616b0bca60fb21b54d1f9d7d4b5$"
+}
+}

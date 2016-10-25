@@ -1,0 +1,284 @@
+{"frames": [
+
+{
+	"filename": "betlevel.png",
+	"frame": {"x":360,"y":1013,"w":121,"h":18},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":121,"h":18},
+	"sourceSize": {"w":121,"h":18}
+},
+{
+	"filename": "bg setbet.png",
+	"frame": {"x":1,"y":1,"w":302,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":302,"h":720},
+	"sourceSize": {"w":302,"h":720}
+},
+{
+	"filename": "coinvalue.png",
+	"frame": {"x":219,"y":1013,"w":139,"h":18},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":139,"h":18},
+	"sourceSize": {"w":139,"h":18}
+},
+{
+	"filename": "fasSpin.png",
+	"frame": {"x":416,"y":723,"w":90,"h":14},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":0,"w":90,"h":14},
+	"sourceSize": {"w":100,"h":15}
+},
+{
+	"filename": "fasSpin_off.png",
+	"frame": {"x":305,"y":412,"w":109,"h":109},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":109,"h":109},
+	"sourceSize": {"w":109,"h":109}
+},
+{
+	"filename": "fastSpin_on.png",
+	"frame": {"x":305,"y":523,"w":109,"h":109},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":109,"h":109},
+	"sourceSize": {"w":109,"h":109}
+},
+{
+	"filename": "handMode.png",
+	"frame": {"x":219,"y":967,"w":97,"h":14},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":0,"w":97,"h":14},
+	"sourceSize": {"w":100,"h":15}
+},
+{
+	"filename": "handMode_off.png",
+	"frame": {"x":305,"y":634,"w":109,"h":109},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":109,"h":109},
+	"sourceSize": {"w":109,"h":109}
+},
+{
+	"filename": "handMode_on.png",
+	"frame": {"x":1,"y":723,"w":109,"h":109},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":109,"h":109},
+	"sourceSize": {"w":109,"h":109}
+},
+{
+	"filename": "history.png",
+	"frame": {"x":416,"y":739,"w":69,"h":14},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":16,"y":0,"w":69,"h":14},
+	"sourceSize": {"w":100,"h":15}
+},
+{
+	"filename": "history_off.png",
+	"frame": {"x":112,"y":723,"w":109,"h":109},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":109,"h":109},
+	"sourceSize": {"w":109,"h":109}
+},
+{
+	"filename": "history_on.png",
+	"frame": {"x":223,"y":745,"w":109,"h":109},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":109,"h":109},
+	"sourceSize": {"w":109,"h":109}
+},
+{
+	"filename": "info.png",
+	"frame": {"x":449,"y":355,"w":52,"h":14},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":23,"y":0,"w":52,"h":14},
+	"sourceSize": {"w":100,"h":15}
+},
+{
+	"filename": "info_off.png",
+	"frame": {"x":334,"y":755,"w":109,"h":109},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":109,"h":109},
+	"sourceSize": {"w":109,"h":109}
+},
+{
+	"filename": "info_on.png",
+	"frame": {"x":1,"y":834,"w":109,"h":109},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":109,"h":109},
+	"sourceSize": {"w":109,"h":109}
+},
+{
+	"filename": "maxbet_active.png",
+	"frame": {"x":305,"y":1,"w":135,"h":135},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":135,"h":135},
+	"sourceSize": {"w":135,"h":135}
+},
+{
+	"filename": "maxbet_deactive.png",
+	"frame": {"x":305,"y":138,"w":135,"h":135},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":135,"h":135},
+	"sourceSize": {"w":135,"h":135}
+},
+{
+	"filename": "maxbet_normal.png",
+	"frame": {"x":305,"y":275,"w":135,"h":135},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":135,"h":135},
+	"sourceSize": {"w":135,"h":135}
+},
+{
+	"filename": "minus active.png",
+	"frame": {"x":449,"y":1,"w":56,"h":57},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":56,"h":57},
+	"sourceSize": {"w":56,"h":57}
+},
+{
+	"filename": "minus deactive.png",
+	"frame": {"x":449,"y":60,"w":56,"h":57},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":56,"h":57},
+	"sourceSize": {"w":56,"h":57}
+},
+{
+	"filename": "minus.png",
+	"frame": {"x":449,"y":119,"w":56,"h":57},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":56,"h":57},
+	"sourceSize": {"w":56,"h":57}
+},
+{
+	"filename": "music.png",
+	"frame": {"x":449,"y":371,"w":52,"h":14},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":24,"y":0,"w":52,"h":14},
+	"sourceSize": {"w":100,"h":15}
+},
+{
+	"filename": "music_off.png",
+	"frame": {"x":112,"y":834,"w":109,"h":109},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":109,"h":109},
+	"sourceSize": {"w":109,"h":109}
+},
+{
+	"filename": "music_on.png",
+	"frame": {"x":223,"y":856,"w":109,"h":109},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":109,"h":109},
+	"sourceSize": {"w":109,"h":109}
+},
+{
+	"filename": "plus active.png",
+	"frame": {"x":449,"y":178,"w":56,"h":57},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":56,"h":57},
+	"sourceSize": {"w":56,"h":57}
+},
+{
+	"filename": "plus deactive.png",
+	"frame": {"x":449,"y":237,"w":56,"h":57},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":56,"h":57},
+	"sourceSize": {"w":56,"h":57}
+},
+{
+	"filename": "plus.png",
+	"frame": {"x":449,"y":296,"w":56,"h":57},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":56,"h":57},
+	"sourceSize": {"w":56,"h":57}
+},
+{
+	"filename": "setbet.png",
+	"frame": {"x":318,"y":977,"w":185,"h":34},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":185,"h":34},
+	"sourceSize": {"w":185,"h":34}
+},
+{
+	"filename": "setbetborder.png",
+	"frame": {"x":442,"y":1,"w":5,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":5,"h":720},
+	"sourceSize": {"w":5,"h":720}
+},
+{
+	"filename": "setbetempty.png",
+	"frame": {"x":112,"y":945,"w":105,"h":106},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":105,"h":106},
+	"sourceSize": {"w":105,"h":106}
+},
+{
+	"filename": "setbetline.png",
+	"frame": {"x":449,"y":387,"w":47,"h":1},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":47,"h":1},
+	"sourceSize": {"w":47,"h":1}
+},
+{
+	"filename": "sound.png",
+	"frame": {"x":223,"y":723,"w":69,"h":14},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":15,"y":0,"w":69,"h":14},
+	"sourceSize": {"w":100,"h":15}
+},
+{
+	"filename": "sound_off.png",
+	"frame": {"x":334,"y":866,"w":109,"h":109},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":109,"h":109},
+	"sourceSize": {"w":109,"h":109}
+},
+{
+	"filename": "sound_on.png",
+	"frame": {"x":1,"y":945,"w":109,"h":109},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":109,"h":109},
+	"sourceSize": {"w":109,"h":109}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "zombieslot-menu-hd-0.png",
+	"format": "RGBA8888",
+	"size": {"w":507,"h":1055},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:7adea722befa79ac241faf712cf5b30e:62530d5b682489cb80fabc5d32561c05:2fb8f0ca85d4b4ba2d2ee54e21409e87$"
+}
+}
