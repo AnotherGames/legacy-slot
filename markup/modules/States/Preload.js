@@ -95,14 +95,26 @@ function loadMainAssets(game) {
     }
     if (model.flag('mobile')) {
         game.load.atlasJSONArray('mobileButtons', 'mobile_buttons/mobileButtons.png', 'mobile_buttons/mobileButtons.json');
-        game.load.image('altary', 'fs/altary.png');
+    }
+    game.load.atlasJSONArray('1', 'elements/one.png', 'elements/one.json');
+    game.load.atlasJSONArray('2', 'elements/two.png', 'elements/two.json');
+    game.load.atlasJSONArray('3', 'elements/three.png', 'elements/three.json');
+    game.load.atlasJSONArray('4', 'elements/four.png', 'elements/four.json');
+    game.load.atlasJSONArray('5', 'elements/five.png', 'elements/five.json');
+    game.load.atlasJSONArray('6', 'elements/six.png', 'elements/six.json');
+    game.load.atlasJSONArray('7', 'elements/seven.png', 'elements/seven.json');
+    game.load.atlasJSONArray('8', 'elements/eight.png', 'elements/eight.json');
+    game.load.atlasJSONArray('9', 'elements/nine.png', 'elements/nine.json');
+    game.load.atlasJSONArray('10', 'elements/ten.png', 'elements/ten.json');
+    game.load.atlasJSONArray('11', 'elements/elleven.png', 'elements/elleven.json');
+}
+
+function loadFSAssets(game) {
+    game.load.image('fsBG', 'bg/fsBG.png');
+    if (model.flag('mobile')) {
         game.load.image('altary', 'fs/altary.png');
         game.load.image('fsTotalTable', 'fs/fsTotalTable.png');
         game.load.image('multiRip', 'fs/multiRip.png');
         game.load.image('multiTable', 'fs/multiTable.png');
     }
-}
-
-function loadFSAssets(game) {
-    game.load.image('fsBG', 'bg/fsBG.png');
 }
