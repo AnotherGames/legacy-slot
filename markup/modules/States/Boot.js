@@ -33,6 +33,7 @@ export class Boot {
     create() {
         this.state.start('Preload');
     }
+
     parseInitData(data) {
         model.data('sessionID', data.SessionID);
         model.data('initBalance', data.Balance);
@@ -50,18 +51,5 @@ export class Boot {
         model.data('currentBalance', currentBalance);
 
         model.log();
-
-        util.request('_Roll').then((data) => {
-            console.log('Roll data:', data);
-            util.request('_Ready').then((data) => {
-                util.request('_Roll').then((data) => {
-                    console.log('Another Roll data:', data);
-                });
-            });
-        });
     }
-}
-
-function functionName() {
-
 }
