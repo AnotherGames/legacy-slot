@@ -4,16 +4,18 @@ export class Init {
     }
     init() {
         console.info('Init State!');
+        this.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+        this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     }
     preload() {
         console.info('Preload init State!');
     }
     create() {
-        var initBackground = this.add.sprite(0, 0, 'initBG');
-        var initLogo = this.add.sprite(this.world.centerX, this.world.centerY * 0.4, 'text', 'logo.png');
+        let initBackground = this.add.sprite(0, 0, 'initBG');
+        let initLogo = this.add.sprite(this.world.centerX, this.world.centerY * 0.4, 'text', 'logo.png');
         initLogo.anchor.set(0.5);
 
-        var initPlayBtn = this.add.sprite(this.world.centerX, this.world.centerY, 'text', 'play.png');
+        let initPlayBtn = this.add.sprite(this.world.centerX, this.world.centerY, 'text', 'play.png');
         initPlayBtn.anchor.set(0.5);
         initPlayBtn.inputEnabled = true;
         initPlayBtn.events.onInputDown.add(gotoPlat, this);
@@ -27,12 +29,10 @@ export class Init {
         this.add.tween(graphics).to( { alpha: 0 }, 2000, "Linear", true);
 
         function gotoPlat() {
-            // this.scale.startFullScreen(false);
-            // this.scale.maxWidth = document.innerWidth;
-            // this.scale.maxHeight = document.innerHeight;
+            this.scale.startFullScreen(false);
 
             let closeAnim = this.add.tween(graphics)
-            closeAnim.to( { alpha: 1 }, 2000, "Linear");
+            closeAnim.to( { alpha: 1 }, 2000, "Linear", false);
             closeAnim.onComplete.add(() => {
                 this.state.start('Main');
             }, this);
