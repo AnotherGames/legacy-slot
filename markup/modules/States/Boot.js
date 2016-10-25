@@ -1,5 +1,6 @@
 import { model } from '../../modules/Model/Model';
 import { events } from '../../modules/Events/Events';
+import { util } from '../../modules/Util/Util';
 
 export class Boot {
     constructor(game) {
@@ -7,6 +8,12 @@ export class Boot {
     }
     init() {
         console.info('Boot State!');
+        util.request('_Initialise', 'normal')
+            .then(this.parseInitData)
+            .catch((error) => {
+                console.error(error.message);
+            });
+
         if (this.game.device.desktop) {
             this.game.scale.setGameSize(1920, 1080);
             model.flag('desktop', true);
@@ -26,4 +33,35 @@ export class Boot {
     create() {
         this.state.start('Preload');
     }
+    parseInitData(data) {
+        model.data('sessionID', data.SessionID);
+        model.data('initBalance', data.Balance);
+        model.data('lines', data.Lines);
+        model.data('symbols', data.Symbols);
+        model.data('saved', data.Saved);
+        model.data('firstScreen', data.FirstScreen);
+        let currentBalance = {
+            betValue: data.Balance.BetLevel[0],
+            coinsValue: data.Balance.CoinValue[0],
+            currency: data.Balance.Currency,
+            scoreCents: data.Balance.ScoreCents,
+            scoreCoins: data.Balance.ScoreCoins
+        };
+        model.data('currentBalance', currentBalance);
+
+        model.log();
+
+        util.request('_Roll').then((data) => {
+            console.log('Roll data:', data);
+            util.request('_Ready').then((data) => {
+                util.request('_Roll').then((data) => {
+                    console.log('Another Roll data:', data);
+                });
+            });
+        });
+    }
+}
+
+function functionName() {
+
 }
