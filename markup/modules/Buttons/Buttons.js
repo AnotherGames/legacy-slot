@@ -10,8 +10,6 @@ export let buttons = (function () {
 
     function drawMobileButtons(container, game, mainWidth) {
 
-        console.log(mainWidth);
-
         spinButton = game.add.sprite(0, game.world.centerY * 0.9, 'mobileButtons', 'spin.png', container);
         spinButton.anchor.set(0.5);
         // spinButton.on('click', handleSpinClick);
