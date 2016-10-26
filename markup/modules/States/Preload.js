@@ -94,9 +94,9 @@ function loadMainAssets(game) {
         game.load.image('ui', 'game/UI_FS.png');
         game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
     }
-    if (model.flag('mobile')) {
-        game.load.atlasJSONArray('mobileButtons', 'mobile_buttons/mobileButtons.png', 'mobile_buttons/mobileButtons.json');
-    }
+    // if (model.flag('mobile')) {
+    game.load.atlasJSONArray('mobileButtons', 'mobile_buttons/mobileButtons.png', 'mobile_buttons/mobileButtons.json');
+    // }
     game.load.atlasJSONArray('1', 'elements/one.png', 'elements/one.json');
     game.load.atlasJSONArray('2', 'elements/two.png', 'elements/two.json');
     game.load.atlasJSONArray('3', 'elements/three.png', 'elements/three.json');
