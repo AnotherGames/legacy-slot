@@ -1,3 +1,4 @@
+import { buttons } from 'modules/Buttons/Buttons';
 import { model } from '../../modules/Model/Model';
 import { config } from '../../modules/Util/Config';
 import { Wheels } from '../../modules/Wheels/Wheels';
@@ -18,6 +19,13 @@ export class Main {
 
     }
     create() {
+        let gameMachine = this.add.sprite(0, 0, 'gameMachine', null, this.mainContainer);
+        buttons.drawMobileButtons(this.buttonsContainer, this, this.mainContainer.width);
+
+        model.data('mainXLeft', 2 * model.data('buttonsDelta'));
+        model.data('mainXRight', this.game.width - this.mainContainer.width - model.data('buttonsDelta') * 2);
+        // gameMachine.x = model.data('buttonsDelta') * 2;
+        this.mainContainer.x = model.data('mainXLeft');
         // const centerEl = this.add.sprite(this.world.centerX, this.world.centerY, '3', '3-n.png').anchor.set(0.5);
 
         const machineContainer = this.add.group(this.mainContainer, 'gameMachine');
@@ -38,5 +46,11 @@ export class Main {
         }
 
         console.log(wheels);
+    }
+    drawMainBG() {
+
+    }
+    drawMainContainer() {
+
     }
 }

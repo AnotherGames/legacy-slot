@@ -76,6 +76,7 @@ function loadSoundAssets(game) {
 }
 
 function loadInitAssets(game) {
+
     game.load.image('initBG', 'bg/initBG.png');
     game.load.atlasJSONArray('text', 'text/text.png', 'text/text.json');
 }
@@ -93,9 +94,9 @@ function loadMainAssets(game) {
         game.load.image('ui', 'game/UI_FS.png');
         game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
     }
-    if (model.flag('mobile')) {
-        game.load.atlasJSONArray('mobileButtons', 'mobile_buttons/mobileButtons.png', 'mobile_buttons/mobileButtons.json');
-    }
+    // if (model.flag('mobile')) {
+    game.load.atlasJSONArray('mobileButtons', 'mobile_buttons/mobileButtons.png', 'mobile_buttons/mobileButtons.json');
+    // }
     game.load.atlasJSONArray('1', 'elements/one.png', 'elements/one.json');
     game.load.atlasJSONArray('2', 'elements/two.png', 'elements/two.json');
     game.load.atlasJSONArray('3', 'elements/three.png', 'elements/three.json');
@@ -107,6 +108,8 @@ function loadMainAssets(game) {
     game.load.atlasJSONArray('9', 'elements/nine.png', 'elements/nine.json');
     game.load.atlasJSONArray('10', 'elements/ten.png', 'elements/ten.json');
     game.load.atlasJSONArray('11', 'elements/elleven.png', 'elements/elleven.json');
+    // all elements
+    game.load.atlasJSONArray('elements', 'elements/elements.png', 'elements/elements.json');
 }
 
 function loadFSAssets(game) {
