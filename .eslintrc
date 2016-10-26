@@ -11,7 +11,9 @@
     },
 
     "globals": {
-        "tars": true
+        "tars": true,
+        "Linear": true,
+        "Phaser": true
     },
 
     "extends": "eslint:recommended",

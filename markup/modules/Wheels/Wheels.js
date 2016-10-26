@@ -1,4 +1,5 @@
-/*  param: {
+export class Wheels {
+    /*  param: {
     state: State,
     parent: Group,
     position: {
@@ -10,7 +11,6 @@
         height: Number
     }
 }   */
-export class Wheels {
     constructor(param) {
         if (param === undefined) {
             console.error('constructor: param is undefined');
@@ -60,24 +60,45 @@ export class Wheels {
         this.container = this.state.add.group(this.parent, 'wheelGroup');
         this.container.position.set(this.position.x, this.position.y);
 
-        this.update();
-    }
-    update() {
-        this.container.y = this.position.y + this.elSize.height * 2;
-
-        for (let i = 0; i < 10; i++) {
+        this.items = [];
+        for (let i = 0; i < 6; i++) {
             const rand = this.state.rnd.integerInRange(1, 11);
             // заменить спрайты blur на Idle;
-            const elem = this.state.add.sprite(0, i * this.elSize.height * -1, rand, rand + '-b.png');
+            // const elem = this.state.add.sprite(0, i * this.elSize.height * -1, rand, rand + '-b.png');
+            const elem = this.state.add.sprite(0, 0, rand, rand + '-b.png');
             elem.anchor.set(0.5);
             this.container.add(elem);
+            this.items.push(elem);
         }
+
+        this.update([1, 2, 3, 4, 5]);
     }
-    run() {
-        this.isRun = true;
+    /*  currElems: []   */
+    update(currElems) {
+        this.container.y = this.position.y + this.elSize.height * 2;
+
+        for (let i = 0; i < 5; i++) {
+            let item = this.items[i];
+            item.y = i * this.elSize.height * -1;
+            // item.animations.play('1-n', 15, true);
+        }
+
+        this.elSwitch = 5;
+    }
+    _run() {
+        if (!this.isRun) {
+            return;
+        }
+
         const runAnim = this.add.tween(this.container);
-        // runAnim.to( { y: this.container.y - this.elSize.height }, 500, "Linear", false);
-        // runAnim.onComplete.add(() => {}, this);
-        // вынести в рекурсию
+        this.items[this.elSwitch % 6].y = this.elSize.height * this.elSwitch;
+        runAnim.to( { y: this.container.y - this.elSize.height }, 500, "Linear", false);
+        runAnim.onComplete.add(() => {}, this);
+
+        ++this.elSwitch;
+    }
+    play() {
+        this.isRun = true;
+        this._run();
     }
 }
