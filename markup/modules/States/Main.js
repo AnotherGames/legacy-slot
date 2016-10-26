@@ -29,15 +29,15 @@ export class Main {
 
         // const centerEl = this.add.sprite(this.world.centerX, this.world.centerY, '3', '3-n.png').anchor.set(0.5);
 
-        const machineContainer = this.add.group(this.mainContainer, 'gameMachine');
-        machineContainer.position.set(this.world.centerX, this.world.centerY);
+        // this.machineContainer = this.add.group(this.mainContainer, 'gameMachine');
+        // this.machineContainer.position.set(this.world.centerX, this.world.centerY);
 
         let wheels = [];
         let elSize = config[model.state('res')].elements;
         for (let i = -2; i < 3; i++) {
             wheels.push(new Wheels({
                 state: this,
-                parent: machineContainer,
+                parent: this.machineContainer,
                 position: {
                     x: i * elSize.width,
                     y: 0
@@ -51,12 +51,12 @@ export class Main {
 
     drawMainBG() {
         let mainBG = this.add.sprite(0, 0, 'mainBG', null, this.bgContainer);
-
     }
 
     drawMainContainer() {
         let gameBG = this.add.sprite(this.world.width * 0.036, this.world.height * 0.1, 'gameBG', null, this.mainContainer);
+        this.machineContainer = this.add.group(this.mainContainer, 'gameMachine');
+        this.machineContainer.position.set(this.world.centerX, this.world.centerY);
         let gameMachine = this.add.sprite(0, 0, 'gameMachine', null, this.mainContainer);
-
     }
 }
