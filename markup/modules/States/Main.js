@@ -42,19 +42,26 @@ export class Main {
                     x: i * elSize.width + config.wheels.margin.x,
                     y: config.wheels.margin.y
                 },
-                elSize
+                elSize,
+                currScreen: [2, 5, 7, 1, 4]
             }));
         }
 
         // Roll
         wheels.forEach((wheel, ind) => {
-            wheel.update([1, 2, 3, 4, 5]);
+            // start roll
+            wheel.update();
             this.time.events.add(Phaser.Timer.SECOND + ind * 100, function () {
                 wheel.play();
             }, wheel);
-
+            // end roll
+            let callback = function () {
+                console.log('Finish roll!');
+                wheel.elements[1].visible = false;
+                console.log('Hide element', wheel.elements[1]);
+            };
             this.time.events.add(Phaser.Timer.SECOND * 5 + ind * 100, function () {
-                wheel.stop([1, 2, 3, 4, 5]);
+                wheel.stop([2, 5, 7, 1, 4], callback);
             }, wheel);
         });
 

@@ -1,18 +1,26 @@
 import { config } from '../../modules/Util/Config';
 
 export class Wheels {
-    /*  param: {
-    state: State,
-    parent: Group,
-    position: {
-        x: Number,
-        y: Number
-    },
-    elSize: {
-        width: Number,
-        height: Number
+    get elements() {
+        let elems = [];
+        for (let i = 2; i < 5; i++) {
+            elems.push( this.items[(this.elSwitch - i) % 6]);
+        }
+        return elems;
     }
-}   */
+    /*  param: {
+        state: State,
+        parent: Group,
+        position: {
+            x: Number,
+            y: Number
+        },
+        elSize: {
+            width: Number,
+            height: Number
+        },
+        currScreen: Array
+    }   */
     constructor(param) {
         if (param === undefined) {
             console.error('constructor: param is undefined');
@@ -58,16 +66,19 @@ export class Wheels {
             console.error('constructor: param.elSize.height is undefined', param);
             return;
         }
+        if (param.currScreen === undefined) {
+            console.error('constructor: param.elSize is undefined', param);
+            return;
+        } else {
+            this.currScreen = param.currScreen;
+        }
 
         this.container = this.state.add.group(this.parent, 'wheelGroup');
         this.container.position.set(this.position.x, this.position.y);
 
         this.items = [];
         for (let i = 0; i < 6; i++) {
-            // const elem = this.state.add.sprite(0, i * this.elSize.height * -1, rand, rand + '-b.png');
-            const rand = this.state.rnd.integerInRange(1, 11);
-            const elem = this._createElement(this.container, rand + '-n', 0, i * this.elSize.height * -1);
-            // const elem = this.state.add.sprite(0, i * this.elSize.height * -1, 'elements', rand + '-b.png');
+            const elem = this._createElement(this.container, param.currScreen[i] + '-n', 0, i * this.elSize.height * -1);
             elem.anchor.set(0.5);
             this.container.add(elem);
             this.items.push(elem);
@@ -82,7 +93,7 @@ export class Wheels {
         param.item.y = param.posY;
         param.item.animations.play(param.anim);
     }
-    update(currElems) {
+    update(currElems = this.currScreen) {
         this.currPosY = this.container.y = this.position.y + this.elSize.height * 2;
 
         for (let i = 0; i < 5; i++) {
@@ -160,6 +171,11 @@ export class Wheels {
                     runAnim1.onComplete.add(() => {
                         runAnim2.start();
                     });
+                    runAnim2.onComplete.add(() => {
+                        if (this.finishCallback) {
+                            this.finishCallback();
+                        }
+                    });
                     runAnim1.start();
                 }, this);
             }
@@ -167,9 +183,11 @@ export class Wheels {
         }
         finishAnims[0].start();
     }
-    stop(finishElems) {
+    stop(finishElems, callback) {
         this.isRun = false;
         this.finishElems = finishElems;
+        this.finishCallback = callback;
+        this.currScreen = finishElems;
     }
     _createElement(container, anim, x, y) {
         let element = this.state.add.sprite(x, y, 'elements', null, container);
