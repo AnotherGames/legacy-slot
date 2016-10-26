@@ -76,6 +76,7 @@ function loadSoundAssets(game) {
 }
 
 function loadInitAssets(game) {
+
     game.load.image('initBG', 'bg/initBG.png');
     game.load.atlasJSONArray('text', 'text/text.png', 'text/text.json');
 }
