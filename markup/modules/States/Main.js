@@ -33,7 +33,7 @@ export class Main {
     }
 
     drawMainContainer() {
-        let gameBG = this.add.sprite(0, 0, 'gameBG', null, this.mainContainer);
+        let gameBG = this.add.sprite(this.world.width * 0.036, this.world.height * 0.1, 'gameBG', null, this.mainContainer);
         let gameMachine = this.add.sprite(0, 0, 'gameMachine', null, this.mainContainer);
 
     }
