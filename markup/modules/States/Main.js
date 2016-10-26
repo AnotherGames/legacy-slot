@@ -59,4 +59,20 @@ export class Main {
         this.machineContainer.position.set(this.world.centerX, this.world.centerY);
         let gameMachine = this.add.sprite(0, 0, 'gameMachine', null, this.mainContainer);
     }
+    createElement(container, anim, x, y) {
+        let element = this.add.sprite(x, y, 'elements', null, container);
+        this.addAnimations()
+        element.animations.add('1-n', ['1-n.png'], 15, true);
+        element.animations.add('1-b', ['1-b.png'], 15, true);
+        element.animations.add('1-w', Phaser.Animation.generateFrameNames('1-w-', 1, 15, '.png', 2), 15, true);
+        element.animations.add('2-n', Phaser.Animation.generateFrameNames('2-n-', 1, 15, '.png', 2), 15, true);
+        element.animations.add('2-b', ['2-b.png'], 15, true);
+        element.animations.add('2-w', Phaser.Animation.generateFrameNames('2-w-', 1, 25, '.png', 2), 15, true);
+        element.animations.add('3-n', ['3-n.png'], 15, true);
+        element.animations.add('3-b', ['3-b.png'], 15, true);
+        element.animations.add('3-w', Phaser.Animation.generateFrameNames('3-w-', 1, 15, '.png', 2), 15, true);
+        element.animations.add('4-n', Phaser.Animation.generateFrameNames('4-n-', 1, 20, '.png', 2), 15, true);
+        element.animations.add('4-b', ['2-b.png'], 15, true);
+        element.animations.add('4-w', Phaser.Animation.generateFrameNames('2-w-', 1, 20, '.png', 2), 15, true);
+    }
 }
