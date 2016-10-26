@@ -24,8 +24,8 @@ export class Main {
 
         model.data('mainXLeft', 2 * model.data('buttonsDelta'));
         model.data('mainXRight', this.game.width - this.mainContainer.width - model.data('buttonsDelta') * 2);
-        // gameMachine.x = model.data('buttonsDelta') * 2;
         this.mainContainer.x = model.data('mainXLeft');
+
         // const centerEl = this.add.sprite(this.world.centerX, this.world.centerY, '3', '3-n.png').anchor.set(0.5);
 
         const machineContainer = this.add.group(this.mainContainer, 'gameMachine');
