@@ -107,6 +107,8 @@ function loadMainAssets(game) {
     game.load.atlasJSONArray('9', 'elements/nine.png', 'elements/nine.json');
     game.load.atlasJSONArray('10', 'elements/ten.png', 'elements/ten.json');
     game.load.atlasJSONArray('11', 'elements/elleven.png', 'elements/elleven.json');
+    // all elements
+    game.load.atlasJSONArray('elements', 'elements/elements.png', 'elements/elements.json');
 }
 
 function loadFSAssets(game) {
