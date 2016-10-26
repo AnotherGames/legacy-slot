@@ -24,7 +24,6 @@ export class Main {
         model.data('mainXLeft', 2 * model.data('buttonsDelta'));
         model.data('mainXRight', this.game.width - this.mainContainer.width - model.data('buttonsDelta') * 2);
         this.mainContainer.x = model.data('mainXLeft');
-        console.log('this.mainContainer.x', this.mainContainer.x);
     }
 
     drawMainBG() {
