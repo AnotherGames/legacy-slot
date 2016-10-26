@@ -1,3 +1,5 @@
+import { config } from '../../modules/Util/Config';
+
 export class Wheels {
     /*  param: {
     state: State,
@@ -64,48 +66,64 @@ export class Wheels {
         for (let i = 0; i < 6; i++) {
             // const elem = this.state.add.sprite(0, i * this.elSize.height * -1, rand, rand + '-b.png');
             const rand = this.state.rnd.integerInRange(1, 11);
-            const elem = this.state.add.sprite(0, i * this.elSize.height * -1, 'elements', rand + '-b.png');
+            const elem = this._createElement(this.container, rand + '-n', 0, i * this.elSize.height * -1);
+            // const elem = this.state.add.sprite(0, i * this.elSize.height * -1, 'elements', rand + '-b.png');
             elem.anchor.set(0.5);
             this.container.add(elem);
             this.items.push(elem);
         }
     }
-    /*  currElems: []   */
+    /*  currElems: {
+            item: Object,
+            posY: Number,
+            anim: String
+        }   */
+    _upElement(param) {
+        param.item.y = param.posY;
+        param.item.animations.play(param.anim);
+    }
     update(currElems) {
-        this.container.y = this.position.y + this.elSize.height * 2;
+        this.currPosY = this.container.y = this.position.y + this.elSize.height * 2;
 
         for (let i = 0; i < 5; i++) {
-            let item = this.items[i];
-            item.y = i * this.elSize.height * -1;
-            // item.animations.play(currElems[4 - i] + '-n', 15, true);
-            item.frameName = currElems[4 - i] + '-b.png';
+            this._upElement({
+                item: this.items[i],
+                posY: i * this.elSize.height * -1,
+                anim: currElems[4 - i] + '-n'
+            });
         }
 
         this.elSwitch = 5;
     }
     _run() {
         const runAnim = this.state.add.tween(this.container);
-        runAnim.to( { y: this.container.y + this.elSize.height }, 30, "Linear", true);
+        this.currPosY += this.elSize.height;
+        runAnim.to( { y: this.currPosY }, config.wheels.speed, "Linear", true);
         runAnim.onComplete.add(() => {
             if (this.isRun) {
+                const rand = this.state.rnd.integerInRange(1, 11);
+                this._upElement({
+                    item: this.items[this.elSwitch % 6],
+                    posY: this.elSize.height * this.elSwitch * -1,
+                    anim: rand + '-b'
+                });
+
+
                 this._run();
             } else {
-                this.lull();
+                this._gotoStop();
             }
         }, this);
-
-        const item = this.items[this.elSwitch % 6];
-        const rand = this.state.rnd.integerInRange(1, 11);
-        item.frameName = rand + '-b.png';
-        item.y = this.elSize.height * this.elSwitch * -1;
 
         ++this.elSwitch;
     }
     play() {
         this.isRun = true;
-        const runAnim1 = this.state.add.tween(this.container).to({ y: this.container.y - 100 }, 500);
-        const runAnim2 = this.state.add.tween(this.container).to({ y: this.container.y + 100 }, 500, "Quart.easeIn");
-        runAnim1.chain(runAnim2);
+        const runAnim1 = this.state.add.tween(this.container).to({ y: this.currPosY - 100 }, 1000, "Quart.easeOut");
+        const runAnim2 = this.state.add.tween(this.container).to({ y: this.currPosY + 100}, 500, "Quart.easeIn");
+        runAnim1.onComplete.add(() => {
+            runAnim2.start();
+        });
         runAnim1.start();
 
         runAnim2.onComplete.add(() => {
@@ -113,11 +131,68 @@ export class Wheels {
         }, this);
 
     }
-    _lull() {
+    _gotoStop() {
+        let finishAnims = [];
+        for (let i = 0; i < 5; i++) {
+            const runAnim = this.state.add.tween(this.container);
+            this.currPosY += this.elSize.height;
+            runAnim.to( { y: this.currPosY }, config.wheels.speed, "Linear");
+            runAnim.onComplete.add(() => {
+                this._upElement({
+                    item: this.items[this.elSwitch % 6],
+                    posY: this.elSize.height * this.elSwitch * -1,
+                    anim: this.finishElems[4 - i] + '-n'
+                });
 
+                ++this.elSwitch;
+            }, this);
+
+
+            if (i !== 0) {
+                finishAnims[finishAnims.length - 1].onComplete.add(() => {
+                    runAnim.start();
+                }, this);
+            }
+            if (i === 4) {
+                runAnim.onComplete.add(() => {
+                    const runAnim1 = this.state.add.tween(this.container).to({ y: this.currPosY + 100 }, 500, "Quart.easeOut");
+                    const runAnim2 = this.state.add.tween(this.container).to({ y: this.currPosY }, 500, "Quart.easeIn");
+                    runAnim1.onComplete.add(() => {
+                        runAnim2.start();
+                    });
+                    runAnim1.start();
+                }, this);
+            }
+            finishAnims.push(runAnim);
+        }
+        finishAnims[0].start();
     }
-    stop(finisElems) {
+    stop(finishElems) {
         this.isRun = false;
-        this.finisElems = finisElems;
+        this.finishElems = finishElems;
+    }
+    _createElement(container, anim, x, y) {
+        let element = this.state.add.sprite(x, y, 'elements', null, container);
+        this.state.addAnimation(element, { el: 1, n: false, w: 15 });
+        this.state.addAnimation(element, { el: 2, n: 15, w: 25 });
+        this.state.addAnimation(element, { el: 3, n: false, w: 15 });
+        this.state.addAnimation(element, { el: 4, n: 20, w: 20 });
+        this.state.addAnimation(element, { el: 5, n: false, w: 15 });
+        this.state.addAnimation(element, { el: 6, n: 15, w: 15 });
+        this.state.addAnimation(element, { el: 7, n: false, w: 15 });
+        this.state.addAnimation(element, { el: 8, n: 15, w: 15 });
+        this.state.addAnimation(element, { el: 9, n: 15, w: 15 });
+        this.state.addAnimation(element, { el: 10, n: 15, w: 15 });
+        this.state.addAnimation(element, { el: 11, n: 15, w: 15 });
+        element.animations.play(anim);
+        return element;
+    }
+    _addAnimation(element, options) {
+        element.animations.add(`${options.el}-n`,
+            options.n
+            ? Phaser.Animation.generateFrameNames(`${options.el}-n-`, 1, options.n, '.png', 2)
+            : [`${options.el}-n.png`], 15, true);
+        element.animations.add(`${options.el}-b`, [`${options.el}-b.png`], 15, true);
+        element.animations.add(`${options.el}-w`, Phaser.Animation.generateFrameNames(`${options.el}-w-`, 1, options.w, '.png', 2), 15, true);
     }
 }

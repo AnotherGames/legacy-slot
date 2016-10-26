@@ -1,4 +1,11 @@
 export let config = {
+    wheels: {
+        margin: {
+            x: 25,
+            y: 30
+        },
+        speed: 40
+    },
     fullHD: {
         elements: {
             width: 256,
@@ -7,8 +14,8 @@ export let config = {
     },
     HD: {
         elements: {
-            width: 169,
-            height: 158
+            width: 192,
+            height: 180
         }
     }
 };
