@@ -19,7 +19,8 @@ export class Main {
 
     }
     create() {
-        let gameMachine = this.add.sprite(0, 0, 'gameMachine', null, this.mainContainer);
+        this.drawMainBG();
+        this.drawMainContainer();
         buttons.drawMobileButtons(this.buttonsContainer, this, this.mainContainer.width);
 
         model.data('mainXLeft', 2 * model.data('buttonsDelta'));
@@ -28,15 +29,15 @@ export class Main {
 
         // const centerEl = this.add.sprite(this.world.centerX, this.world.centerY, '3', '3-n.png').anchor.set(0.5);
 
-        const machineContainer = this.add.group(this.mainContainer, 'gameMachine');
-        machineContainer.position.set(this.world.centerX, this.world.centerY);
+        // this.machineContainer = this.add.group(this.mainContainer, 'gameMachine');
+        // this.machineContainer.position.set(this.world.centerX, this.world.centerY);
 
         let wheels = [];
         let elSize = config[model.state('res')].elements;
         for (let i = -2; i < 3; i++) {
             wheels.push(new Wheels({
                 state: this,
-                parent: machineContainer,
+                parent: this.machineContainer,
                 position: {
                     x: i * elSize.width - 170,
                     y: -65
@@ -52,10 +53,38 @@ export class Main {
         });
 
     }
+
     drawMainBG() {
-
+        let mainBG = this.add.sprite(0, 0, 'mainBG', null, this.bgContainer);
     }
-    drawMainContainer() {
 
+    drawMainContainer() {
+        let gameBG = this.add.sprite(this.world.width * 0.036, this.world.height * 0.1, 'gameBG', null, this.mainContainer);
+        this.machineContainer = this.add.group(this.mainContainer, 'gameMachine');
+        this.machineContainer.position.set(this.world.centerX, this.world.centerY);
+        let gameMachine = this.add.sprite(0, 0, 'gameMachine', null, this.mainContainer);
+    }
+    createElement(container, anim, x, y) {
+        let element = this.add.sprite(x, y, 'elements', null, container);
+        this.addAnimation(element, { el: 1, n: false, w: 15 });
+        this.addAnimation(element, { el: 2, n: 15, w: 25 });
+        this.addAnimation(element, { el: 3, n: false, w: 15 });
+        this.addAnimation(element, { el: 4, n: 20, w: 20 });
+        this.addAnimation(element, { el: 5, n: false, w: 15 });
+        this.addAnimation(element, { el: 6, n: 15, w: 15 });
+        this.addAnimation(element, { el: 7, n: false, w: 15 });
+        this.addAnimation(element, { el: 8, n: 15, w: 15 });
+        this.addAnimation(element, { el: 9, n: 15, w: 15 });
+        this.addAnimation(element, { el: 10, n: 15, w: 15 });
+        this.addAnimation(element, { el: 11, n: 15, w: 15 });
+        element.animations.play(anim);
+    }
+    addAnimation(element, options) {
+        element.animations.add(`${options.el}-n`,
+            options.n
+            ? Phaser.Animation.generateFrameNames(`${options.el}-n-`, 1, options.n, '.png', 2)
+            : [`${options.el}-n.png`], 15, true);
+        element.animations.add(`${options.el}-b`, [`${options.el}-b.png`], 15, true);
+        element.animations.add(`${options.el}-w`, Phaser.Animation.generateFrameNames(`${options.el}-w-`, 1, options.w, '.png', 2), 15, true);
     }
 }

@@ -10,7 +10,7 @@ export let buttons = (function () {
 
     function drawMobileButtons(container, game, mainWidth) {
 
-        spinButton = game.add.sprite(0, game.world.centerY * 0.9, 'mobileButtons', 'spin.png', container);
+        spinButton = game.add.sprite(0, game.world.centerY, 'mobileButtons', 'spin.png', container);
         spinButton.anchor.set(0.5);
         // spinButton.on('click', handleSpinClick);
 
@@ -25,12 +25,12 @@ export let buttons = (function () {
         spinButton.x = xRight;
 
         autoButton = game.add.sprite(xRight, 0, 'mobileButtons', 'auto.png', container);
-        autoButton.y = spinButton.y - spinButton.width / 2 - delta - autoButton.width / 2;
+        autoButton.y = spinButton.y - spinButton.width / 2 - 2 * delta - autoButton.width / 2;
         autoButton.anchor.set(0.5);
         // autoButton.on('click', handleAutoClick);
 
         betButton = game.add.sprite(xRight, 0, 'mobileButtons', 'setBet.png', container);
-        betButton.y = spinButton.y + spinButton.width / 2 + delta + betButton.width / 2;
+        betButton.y = spinButton.y + spinButton.width / 2 + 2 * delta + betButton.width / 2;
         betButton.anchor.set(0.5);
         // betButton.on('click', handleBetClick);
 
