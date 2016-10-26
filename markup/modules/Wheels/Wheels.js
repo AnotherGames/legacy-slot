@@ -62,16 +62,13 @@ export class Wheels {
 
         this.items = [];
         for (let i = 0; i < 6; i++) {
-            const rand = this.state.rnd.integerInRange(1, 11);
-            // заменить спрайты blur на Idle;
             // const elem = this.state.add.sprite(0, i * this.elSize.height * -1, rand, rand + '-b.png');
-            const elem = this.state.add.sprite(0, 0, rand, rand + '-b.png');
+            const rand = this.state.rnd.integerInRange(1, 11);
+            const elem = this.state.add.sprite(0, i * this.elSize.height * -1, 'elements', rand + '-b.png');
             elem.anchor.set(0.5);
             this.container.add(elem);
             this.items.push(elem);
         }
-
-        this.update([1, 2, 3, 4, 5]);
     }
     /*  currElems: []   */
     update(currElems) {
@@ -80,25 +77,47 @@ export class Wheels {
         for (let i = 0; i < 5; i++) {
             let item = this.items[i];
             item.y = i * this.elSize.height * -1;
-            // item.animations.play('1-n', 15, true);
+            // item.animations.play(currElems[4 - i] + '-n', 15, true);
+            item.frameName = currElems[4 - i] + '-b.png';
         }
 
         this.elSwitch = 5;
     }
     _run() {
-        if (!this.isRun) {
-            return;
-        }
+        const runAnim = this.state.add.tween(this.container);
+        runAnim.to( { y: this.container.y + this.elSize.height }, 30, "Linear", true);
+        runAnim.onComplete.add(() => {
+            if (this.isRun) {
+                this._run();
+            } else {
+                this.lull();
+            }
+        }, this);
 
-        const runAnim = this.add.tween(this.container);
-        this.items[this.elSwitch % 6].y = this.elSize.height * this.elSwitch;
-        runAnim.to( { y: this.container.y - this.elSize.height }, 500, "Linear", false);
-        runAnim.onComplete.add(() => {}, this);
+        const item = this.items[this.elSwitch % 6];
+        const rand = this.state.rnd.integerInRange(1, 11);
+        item.frameName = rand + '-b.png';
+        item.y = this.elSize.height * this.elSwitch * -1;
 
         ++this.elSwitch;
     }
     play() {
         this.isRun = true;
-        this._run();
+        const runAnim1 = this.state.add.tween(this.container).to({ y: this.container.y - 100 }, 500);
+        const runAnim2 = this.state.add.tween(this.container).to({ y: this.container.y + 100 }, 500, "Quart.easeIn");
+        runAnim1.chain(runAnim2);
+        runAnim1.start();
+
+        runAnim2.onComplete.add(() => {
+            this._run();
+        }, this);
+
+    }
+    _lull() {
+
+    }
+    stop(finisElems) {
+        this.isRun = false;
+        this.finisElems = finisElems;
     }
 }

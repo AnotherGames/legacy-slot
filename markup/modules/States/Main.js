@@ -38,14 +38,19 @@ export class Main {
                 state: this,
                 parent: machineContainer,
                 position: {
-                    x: i * elSize.width,
-                    y: 0
+                    x: i * elSize.width - 170,
+                    y: -65
                 },
                 elSize
             }));
         }
 
-        console.log(wheels);
+        // Roll
+        wheels.forEach((wheel, ind) => {
+            wheel.update([1, 2, 3, 4, 5]);
+            this.time.events.add(Phaser.Timer.SECOND * ind * 0.3, wheel.play, wheel);
+        });
+
     }
     drawMainBG() {
 
