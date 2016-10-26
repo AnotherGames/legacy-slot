@@ -21,13 +21,13 @@ export class Init {
         darkness.beginFill(0x000000);
         darkness.drawRect(0, 0, this.game.width, this.game.height);
 
-        this.add.tween(darkness).to( { alpha: 0 }, 1000, "Linear", true);
+        this.add.tween(darkness).to( { alpha: 0 }, 1000, 'Linear', true);
 
         function handlePlayBtn() {
             this.scale.startFullScreen(false);
 
-            let closeAnim = this.add.tween(darkness)
-            closeAnim.to( { alpha: 1 }, 500, "Linear", true);
+            let closeAnim = this.add.tween(darkness);
+            closeAnim.to( { alpha: 1 }, 500, 'Linear', true);
             closeAnim.onComplete.add(() => {
                 this.state.start('Main');
             }, this);
