@@ -1,4 +1,5 @@
 import { buttons } from 'modules/Buttons/Buttons';
+import { menu } from 'modules/Menu/Menu';
 import { model } from '../../modules/Model/Model';
 import { config } from '../../modules/Util/Config';
 import { Wheels } from '../../modules/Wheels/Wheels';
@@ -14,6 +15,11 @@ export class Main {
         this.balanceContainer = this.add.group();
         this.buttonsContainer = this.add.group();
         this.menuContainer = this.add.group();
+        model.el('bgContainer', this.bgContainer);
+        model.el('mainContainer', this.mainContainer);
+        model.el('balanceContainer', this.balanceContainer);
+        model.el('buttonsContainer', this.buttonsContainer);
+        model.el('menuContainer', this.menuContainer);
     }
     preload() {
 
@@ -22,7 +28,7 @@ export class Main {
         this.drawMainBG();
         this.drawMainContainer();
         buttons.drawMobileButtons(this.buttonsContainer, this, this.mainContainer.width);
-
+        menu.drawMenu(this.menuContainer, this);
         model.data('mainXLeft', 2 * model.data('buttonsDelta'));
         model.data('mainXRight', this.game.width - this.mainContainer.width - model.data('buttonsDelta') * 2);
         this.mainContainer.x = model.data('mainXLeft');
