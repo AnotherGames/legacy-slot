@@ -180,17 +180,17 @@ export class Wheel {
     }
     _createElement(container, anim, x, y) {
         let element = this.state.add.sprite(x, y, 'elements', null, container);
-        this.state.addAnimation(element, { el: 1, n: false, w: 15 });
-        this.state.addAnimation(element, { el: 2, n: 15, w: 25 });
-        this.state.addAnimation(element, { el: 3, n: false, w: 15 });
-        this.state.addAnimation(element, { el: 4, n: 20, w: 20 });
-        this.state.addAnimation(element, { el: 5, n: false, w: 15 });
-        this.state.addAnimation(element, { el: 6, n: 15, w: 15 });
-        this.state.addAnimation(element, { el: 7, n: false, w: 15 });
-        this.state.addAnimation(element, { el: 8, n: 15, w: 15 });
-        this.state.addAnimation(element, { el: 9, n: 15, w: 15 });
-        this.state.addAnimation(element, { el: 10, n: 15, w: 15 });
-        this.state.addAnimation(element, { el: 11, n: 15, w: 15 });
+        this._addAnimation(element, { el: 1, n: false, w: 15 });
+        this._addAnimation(element, { el: 2, n: 15, w: 25 });
+        this._addAnimation(element, { el: 3, n: false, w: 15 });
+        this._addAnimation(element, { el: 4, n: 20, w: 20 });
+        this._addAnimation(element, { el: 5, n: false, w: 15 });
+        this._addAnimation(element, { el: 6, n: 15, w: 15 });
+        this._addAnimation(element, { el: 7, n: false, w: 15 });
+        this._addAnimation(element, { el: 8, n: 15, w: 15 });
+        this._addAnimation(element, { el: 9, n: 15, w: 15 });
+        this._addAnimation(element, { el: 10, n: 15, w: 15 });
+        this._addAnimation(element, { el: 11, n: 15, w: 15 });
         element.animations.play(anim);
         return element;
     }
