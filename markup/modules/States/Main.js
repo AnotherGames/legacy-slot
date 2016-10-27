@@ -1,7 +1,7 @@
 import { buttons } from 'modules/Buttons/Buttons';
-import { model } from '../../modules/Model/Model';
-import { config } from '../../modules/Util/Config';
-import { Wheels } from '../../modules/Wheels/Wheels';
+import { model } from 'modules/Model/Model';
+import { config } from 'modules/Util/Config';
+import { Wheel } from 'modules/Wheel/Wheel';
 
 export class Main {
     constructor(game) {
@@ -35,7 +35,7 @@ export class Main {
         let wheels = [];
         let elSize = config[model.state('res')].elements;
         for (let i = -2; i < 3; i++) {
-            wheels.push(new Wheels({
+            wheels.push(new Wheel({
                 state: this,
                 parent: this.machineContainer,
                 position: {
@@ -43,24 +43,23 @@ export class Main {
                     y: config.wheels.margin.y
                 },
                 elSize,
-                currScreen: [2, 5, 7, 1, 4]
+                currentScreen: [2, 5, 7, 1, 4]
             }));
         }
 
         // Roll
-        wheels.forEach((wheel, ind) => {
+        wheels.forEach((wheel, columnIndex) => {
             // start roll
             wheel.update();
-            this.time.events.add(Phaser.Timer.SECOND + ind * 100, function () {
+            this.time.events.add(Phaser.Timer.SECOND + columnIndex * 100, function () {
                 wheel.play();
             }, wheel);
+
             // end roll
             let callback = function () {
                 console.log('Finish roll!');
-                wheel.elements[1].visible = false;
-                console.log('Hide element', wheel.elements[1]);
             };
-            this.time.events.add(Phaser.Timer.SECOND * 5 + ind * 100, function () {
+            this.time.events.add(Phaser.Timer.SECOND * 5 + columnIndex * 100, function () {
                 wheel.stop([2, 5, 7, 1, 4], callback);
             }, wheel);
         });
