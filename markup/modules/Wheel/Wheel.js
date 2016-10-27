@@ -1,6 +1,6 @@
 import { config } from '../../modules/Util/Config';
 
-export class Wheels {
+export class Wheel {
     get elements() {
         let elems = [];
         for (let i = 2; i < 5; i++) {
@@ -19,7 +19,7 @@ export class Wheels {
             width: Number,
             height: Number
         },
-        currScreen: Array
+        currentScreen: Array
     }   */
     constructor(param) {
         if (param === undefined) {
@@ -29,7 +29,7 @@ export class Wheels {
         if (param.state === undefined) {
             console.error('constructor: param.state is undefined', param);
             return;
-        } else {
+            } else {
             this.state = param.state;
         }
         if (param.parent === undefined) {
@@ -66,11 +66,11 @@ export class Wheels {
             console.error('constructor: param.elSize.height is undefined', param);
             return;
         }
-        if (param.currScreen === undefined) {
+        if (param.currentScreen === undefined) {
             console.error('constructor: param.elSize is undefined', param);
             return;
         } else {
-            this.currScreen = param.currScreen;
+            this.currentScreen = param.currentScreen;
         }
 
         this.container = this.state.add.group(this.parent, 'wheelGroup');
@@ -78,13 +78,12 @@ export class Wheels {
 
         this.items = [];
         for (let i = 0; i < 6; i++) {
-            const elem = this._createElement(this.container, param.currScreen[i] + '-n', 0, i * this.elSize.height * -1);
+            const elem = this._createElement(this.container, param.currentScreen[i] + '-n', 0, i * this.elSize.height * -1);
             elem.anchor.set(0.5);
-            this.container.add(elem);
             this.items.push(elem);
         }
     }
-    /*  currElems: {
+    /*  param: {
             item: Object,
             posY: Number,
             anim: String
@@ -93,8 +92,8 @@ export class Wheels {
         param.item.y = param.posY;
         param.item.animations.play(param.anim);
     }
-    update(currElems = this.currScreen) {
-        this.currPosY = this.container.y = this.position.y + this.elSize.height * 2;
+    update(currElems = this.currentScreen) {
+        this.wheelY = this.container.y = this.position.y + this.elSize.height * 2;
 
         for (let i = 0; i < 5; i++) {
             this._upElement({
@@ -107,9 +106,9 @@ export class Wheels {
         this.elSwitch = 5;
     }
     _run() {
-        const runAnim = this.state.add.tween(this.container);
-        this.currPosY += this.elSize.height;
-        runAnim.to( { y: this.currPosY }, config.wheels.speed, "Linear", true);
+        this.wheelY += this.elSize.height;
+        const runAnim = this.state.add.tween(this.container)
+            .to( { y: this.wheelY }, config.wheels.speed, "Linear", true);
         runAnim.onComplete.add(() => {
             if (this.isRun) {
                 const rand = this.state.rnd.integerInRange(1, 11);
@@ -118,8 +117,6 @@ export class Wheels {
                     posY: this.elSize.height * this.elSwitch * -1,
                     anim: rand + '-b'
                 });
-
-
                 this._run();
             } else {
                 this._gotoStop();
@@ -130,31 +127,24 @@ export class Wheels {
     }
     play() {
         this.isRun = true;
-        const runAnim1 = this.state.add.tween(this.container).to({ y: this.currPosY - 100 }, 1000, "Quart.easeOut");
-        const runAnim2 = this.state.add.tween(this.container).to({ y: this.currPosY + 100}, 500, "Quart.easeIn");
-        runAnim1.onComplete.add(() => {
-            runAnim2.start();
-        });
-        runAnim1.start();
-
-        runAnim2.onComplete.add(() => {
-            this._run();
-        }, this);
-
+        const startAnim = this.state.add.tween(this.container)
+            .to({ y: this.wheelY + 500 }, 600, "Back.easeIn");
+        startAnim.onComplete.add(this._run, this);
+        startAnim.start();
     }
     _gotoStop() {
         let finishAnims = [];
         for (let i = 0; i < 5; i++) {
-            const runAnim = this.state.add.tween(this.container);
-            this.currPosY += this.elSize.height;
-            runAnim.to( { y: this.currPosY }, config.wheels.speed, "Linear");
+            this.wheelY += this.elSize.height;
+            const runAnim = this.state.add.tween(this.container)
+                .to( { y: this.wheelY }, config.wheels.speed, "Linear");
+
             runAnim.onComplete.add(() => {
                 this._upElement({
                     item: this.items[this.elSwitch % 6],
                     posY: this.elSize.height * this.elSwitch * -1,
-                    anim: this.finishElems[4 - i] + '-n'
+                    anim: this.finishScreen[4 - i] + '-n'
                 });
-
                 ++this.elSwitch;
             }, this);
 
@@ -164,30 +154,29 @@ export class Wheels {
                     runAnim.start();
                 }, this);
             }
+
             if (i === 4) {
                 runAnim.onComplete.add(() => {
-                    const runAnim1 = this.state.add.tween(this.container).to({ y: this.currPosY + 100 }, 500, "Quart.easeOut");
-                    const runAnim2 = this.state.add.tween(this.container).to({ y: this.currPosY }, 500, "Quart.easeIn");
-                    runAnim1.onComplete.add(() => {
-                        runAnim2.start();
-                    });
-                    runAnim2.onComplete.add(() => {
+                    const finishAnim = this.state.add.tween(this.container).to({ y: [this.wheelY - 400, this.wheelY] }, 700, "Back.easeOut");
+                    finishAnim.onComplete.add(() => {
+                        // Fire roll:end event
                         if (this.finishCallback) {
                             this.finishCallback();
                         }
                     });
-                    runAnim1.start();
+                    finishAnim.start();
                 }, this);
             }
+
             finishAnims.push(runAnim);
         }
         finishAnims[0].start();
     }
-    stop(finishElems, callback) {
+    stop(finishScreen, callback) {
         this.isRun = false;
-        this.finishElems = finishElems;
+        this.finishScreen = finishScreen;
+        this.currentScreen = finishScreen;
         this.finishCallback = callback;
-        this.currScreen = finishElems;
     }
     _createElement(container, anim, x, y) {
         let element = this.state.add.sprite(x, y, 'elements', null, container);
