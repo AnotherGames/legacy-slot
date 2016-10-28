@@ -20,6 +20,7 @@ export class Main {
         model.el('balanceContainer', this.balanceContainer);
         model.el('buttonsContainer', this.buttonsContainer);
         model.el('menuContainer', this.menuContainer);
+        model.state('side', 'left');
     }
     preload() {
 
@@ -28,7 +29,6 @@ export class Main {
         this.drawMainBG();
         this.initMainContainer();
         buttons.drawMobileButtons(this.buttonsContainer, this, this.mainContainer.width);
-        menu.drawMenu(this.menuContainer, this);
         model.data('mainXLeft', 2 * model.data('buttonsDelta'));
         model.data('mainXRight', this.game.width - this.mainContainer.width - model.data('buttonsDelta') * 2);
         this.mainContainer.x = model.data('mainXLeft');
