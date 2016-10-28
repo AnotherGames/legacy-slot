@@ -6,6 +6,7 @@ import { FS } from '../../modules/States/FS';
 import { model } from 'modules/Model/Model';
 
 let game = new Phaser.Game(1280, 720, Phaser.AUTO, 'game');
+model.el('game', game);
 
 game.state.add('Boot', Boot, true);
 game.state.add('Preload', Preload);
