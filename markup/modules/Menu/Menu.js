@@ -19,18 +19,27 @@ export let menu = (function () {
 
         const menuBack = game.add.sprite(container.width / 2, game.world.height * 0.9, 'mobileButtons', 'return.png', container);
         menuBack.anchor.set(0.5);
+        menuBack.inputEnabled = true;
+        menuBack.input.priorityID = 2;
 
         // if (name === 'bet') {
         // showBetMenu(container, game);
         // } else if (name === 'auto') {
-        // showAutoMenu(container, game);
+        showAutoMenu(container, game);
         // } else if (name === 'settings') {
-        showSettingsMenu(container, game);
+        // showSettingsMenu(container, game);
         // }
 
         showMenuRight();
 
         overlay.events.onInputDown.add(function () {
+            hideMenu();
+            let tween = game.add.tween(overlay).to( { alpha: 0 }, 2000, 'Quart.easeOut');
+            tween.start();
+            overlay.destroy();
+        });
+
+        menuBack.events.onInputDown.add(function () {
             hideMenu();
             let tween = game.add.tween(overlay).to( { alpha: 0 }, 2000, 'Quart.easeOut');
             tween.start();
@@ -97,8 +106,20 @@ export let menu = (function () {
         const betLevelPlus = game.add.sprite(betLevelBG.x + deltaX, game.world.height * 0.47, 'menuButtons', 'plus.png', betContainer);
         betLevelPlus.anchor.set(0.5);
 
+        betLevelPlus.inputEnabled = true;
+        betLevelPlus.input.priorityID = 2;
+        betLevelPlus.events.onInputDown.add(function () {
+            console.log('i am here');
+        });
+
         const betLevelMinus = game.add.sprite(betLevelBG.x - deltaX, game.world.height * 0.47, 'menuButtons', 'minus.png', betContainer);
         betLevelMinus.anchor.set(0.5);
+
+        betLevelMinus.inputEnabled = true;
+        betLevelMinus.input.priorityID = 2;
+        betLevelMinus.events.onInputDown.add(function () {
+            console.log('i am here');
+        });
 
         const coinValueText = game.add.sprite(container.width / 2, game.world.height * 0.59, 'menuButtons', 'coinValueText.png', betContainer);
         coinValueText.anchor.set(0.5);
@@ -116,22 +137,30 @@ export let menu = (function () {
         const coinValuePlus = game.add.sprite(coinValueBG.x + deltaX, game.world.height * 0.7, 'menuButtons', 'plus.png', betContainer);
         coinValuePlus.anchor.set(0.5);
 
+        coinValuePlus.inputEnabled = true;
+        coinValuePlus.input.priorityID = 2;
+        coinValuePlus.events.onInputDown.add(function () {
+            console.log('i am here');
+        });
+
         const coinValueMinus = game.add.sprite(coinValueBG.x - deltaX, game.world.height * 0.7, 'menuButtons', 'minus.png', betContainer);
         coinValueMinus.anchor.set(0.5);
+
+        coinValueMinus.inputEnabled = true;
+        coinValueMinus.input.priorityID = 2;
+        coinValueMinus.events.onInputDown.add(function () {
+            console.log('i am here');
+        });
     }
 
     function showAutoMenu(container, game) {
         const autoContainer = game.add.group();
         container.add(autoContainer);
-        // const autoTitle = game.add.sprite(container.width / 2, game.world.height * 0.07, 'menuButtons', 'setbetText.png', autoContainer);
-        // autoTitle.anchor.set(0.5);
 
         const autoTitle = game.add.text(container.width / 2, game.world.height * 0.07, 'AUTOPLAY', {font: 'bold 40px Arial', fill: '#fff', align: 'center'}, autoContainer);
         autoTitle.anchor.set(0.5);
         autoTitle.setShadow(0, 0, '#fff', 4);
 
-
-        console.log('container.width', container.width);
         const autoBG10 = game.add.sprite(0, game.world.height * 0.25, 'menuButtons', 'empty.png', autoContainer);
         autoBG10.anchor.set(0.5);
 
@@ -143,6 +172,7 @@ export let menu = (function () {
         autoText10.setShadow(0, 0, '#90fd5a', 6);
 
         autoBG10.inputEnabled = true;
+        autoBG10.input.priorityID = 2;
         autoBG10.events.onInputDown.add(function () {
             console.log('i am here');
         });
@@ -155,6 +185,7 @@ export let menu = (function () {
         autoText25.setShadow(0, 0, '#90fd5a', 6);
 
         autoBG25.inputEnabled = true;
+        autoBG25.input.priorityID = 2;
         autoBG25.events.onInputDown.add(function () {
             console.log('i am here');
         });
@@ -167,6 +198,7 @@ export let menu = (function () {
         autoText50.setShadow(0, 0, '#90fd5a', 6);
 
         autoBG50.inputEnabled = true;
+        autoBG50.input.priorityID = 2;
         autoBG50.events.onInputDown.add(function () {
             console.log('i am here');
         });
@@ -179,6 +211,7 @@ export let menu = (function () {
         autoText100.setShadow(0, 0, '#90fd5a', 6);
 
         autoBG100.inputEnabled = true;
+        autoBG100.input.priorityID = 2;
         autoBG100.events.onInputDown.add(function () {
             console.log('i am here');
         });
@@ -191,6 +224,7 @@ export let menu = (function () {
         autoText250.setShadow(0, 0, '#90fd5a', 6);
 
         autoBG250.inputEnabled = true;
+        autoBG250.input.priorityID = 2;
         autoBG250.events.onInputDown.add(function () {
             console.log('i am here');
         });
@@ -203,6 +237,7 @@ export let menu = (function () {
         autoText500.setShadow(0, 0, '#90fd5a', 6);
 
         autoBG500.inputEnabled = true;
+        autoBG500.input.priorityID = 2;
         autoBG500.events.onInputDown.add(function () {
             console.log('i am here');
         });
@@ -223,11 +258,23 @@ export let menu = (function () {
         soundButton.x = deltaX + soundButton.width / 2;
         let deltaY = 20;
 
+        soundButton.inputEnabled = true;
+        soundButton.input.priorityID = 2;
+        soundButton.events.onInputDown.add(function () {
+            console.log('i am here');
+        });
+
         const soundText = game.add.sprite(soundButton.x, soundButton.y + soundButton.height / 2 + deltaY, 'menuButtons', 'soundText.png', settingsContainer);
         soundText.anchor.set(0.5);
 
         const musicButton = game.add.sprite(2 * deltaX + 1.5 * soundButton.width, game.world.height * 0.2, 'menuButtons', 'musicOn.png', settingsContainer);
         musicButton.anchor.set(0.5);
+
+        musicButton.inputEnabled = true;
+        musicButton.input.priorityID = 2;
+        musicButton.events.onInputDown.add(function () {
+            console.log('i am here');
+        });
 
         const musicText = game.add.sprite(musicButton.x, musicButton.y + musicButton.height / 2 + deltaY, 'menuButtons', 'musicText.png', settingsContainer);
         musicText.anchor.set(0.5);
@@ -235,11 +282,23 @@ export let menu = (function () {
         const fastSpinButton = game.add.sprite(soundButton.x, game.world.height * 0.45, 'menuButtons', 'fastSpinOff.png', settingsContainer);
         fastSpinButton.anchor.set(0.5);
 
+        fastSpinButton.inputEnabled = true;
+        fastSpinButton.input.priorityID = 2;
+        fastSpinButton.events.onInputDown.add(function () {
+            console.log('i am here');
+        });
+
         const fastSpinText = game.add.sprite(fastSpinButton.x, fastSpinButton.y + fastSpinButton.height / 2 + deltaY, 'menuButtons', 'fastSpinText.png', settingsContainer);
         fastSpinText.anchor.set(0.5);
 
         const handModeButton = game.add.sprite(musicButton.x, game.world.height * 0.45, 'menuButtons', 'handModeOff.png', settingsContainer);
         handModeButton.anchor.set(0.5);
+
+        handModeButton.inputEnabled = true;
+        handModeButton.input.priorityID = 2;
+        handModeButton.events.onInputDown.add(function () {
+            console.log('i am here');
+        });
 
         const handModeText = game.add.sprite(handModeButton.x, handModeButton.y + handModeButton.height / 2 + deltaY, 'menuButtons', 'handModeText.png', settingsContainer);
         handModeText.anchor.set(0.5);
@@ -247,11 +306,23 @@ export let menu = (function () {
         const rulesButton = game.add.sprite(soundButton.x, game.world.height * 0.7, 'menuButtons', 'infoOn.png', settingsContainer);
         rulesButton.anchor.set(0.5);
 
+        rulesButton.inputEnabled = true;
+        rulesButton.input.priorityID = 2;
+        rulesButton.events.onInputDown.add(function () {
+            console.log('i am here');
+        });
+
         const rulesText = game.add.sprite(rulesButton.x, rulesButton.y + rulesButton.height / 2 + deltaY, 'menuButtons', 'infoText.png', settingsContainer);
         rulesText.anchor.set(0.5);
 
         const historyButton = game.add.sprite(musicButton.x, game.world.height * 0.7, 'menuButtons', 'historyOff.png', settingsContainer);
         historyButton.anchor.set(0.5);
+
+        historyButton.inputEnabled = true;
+        historyButton.input.priorityID = 2;
+        historyButton.events.onInputDown.add(function () {
+            console.log('i am here');
+        });
 
         const historyText = game.add.sprite(historyButton.x, historyButton.y + historyButton.height / 2 + deltaY, 'menuButtons', 'historyText.png', settingsContainer);
         historyText.anchor.set(0.5);
