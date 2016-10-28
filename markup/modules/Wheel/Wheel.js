@@ -115,24 +115,64 @@ export class Wheel {
         this.elSwitch = 5;
     }
     _run() {
-        this.wheelY += this.elSize.height;
-        const runAnim = this.state.add.tween(this.container)
-            .to( { y: this.wheelY }, config.wheels.speed, "Linear", true);
-        runAnim.onComplete.add(() => {
-            if (this.isRun) {
-                const rand = this.state.rnd.integerInRange(1, 11);
-                this._upElement({
-                    item: this.items[this.elSwitch % 6],
-                    posY: this.elSize.height * this.elSwitch * -1,
+        let _this = this;
+
+        function myTween(k) {
+            if (k > 1) k = 1;
+            let s = 1.0;
+            if ( ( k *= 2 ) < 1 ) return 0.5 * ( k * k * ( ( s + 1 ) * k - s ) );
+            return 0.5 * ( ( k -= 2 ) * k * ( ( s + 1 ) * k + s ) + 2 );
+        }
+
+        let progress = 0;
+        let startTime = this.state.time.totalElapsedSeconds() * 1000;
+        let timeLength = 5000;
+        let startY = _this.wheelY;
+        let endY = this.wheelY + _this.elSize.height * 50;
+        let pathLenth = endY - startY;
+        _this.wheelY += _this.elSize.height;
+
+        let newAnim = function () {
+            let currTime = _this.state.time.totalElapsedSeconds() * 1000 - startTime;
+            progress = currTime / timeLength;
+            _this.container.y = startY + pathLenth * myTween(progress);
+
+            if (_this.container.y > _this.wheelY) {
+
+                const rand = _this.state.rnd.integerInRange(1, 11);
+                _this._upElement({
+                    item: _this.items[_this.elSwitch % 6],
+                    posY: _this.elSize.height * _this.elSwitch * -1,
                     anim: rand + '-b'
                 });
-                this._run();
-            } else {
-                this._gotoStop();
-            }
-        }, this);
 
-        ++this.elSwitch;
+                _this.wheelY += _this.elSize.height;
+                ++_this.elSwitch;
+            }
+
+            if (progress >= 1) {
+                _this.state.frameAnims.splice(_this.state.frameAnims.indexOf(newAnim), 1);
+            }
+        };
+        this.state.frameAnims.push(newAnim);
+
+        // const runAnim = this.state.add.tween(this.container)
+        //     .to( { y: this.wheelY }, config.wheels.speed, "Linear", true);
+        // runAnim.onComplete.add(() => {
+            // if (this.isRun) {
+            //     const rand = this.state.rnd.integerInRange(1, 11);
+            //     this._upElement({
+            //         item: this.items[this.elSwitch % 6],
+            //         posY: this.elSize.height * this.elSwitch * -1,
+            //         anim: rand + '-b'
+            //     });
+            //     this._run();
+            // } else {
+            //     this._gotoStop();
+            // }
+        // }, this);
+        //
+        // ++this.elSwitch;
     }
     play() {
         this.update();
@@ -140,7 +180,8 @@ export class Wheel {
         const startAnim = this.state.add.tween(this.container)
             .to({ y: [this.wheelY + 500, this.wheelY] }, 600, "Back.easeIn");
         startAnim.onComplete.add(this._run, this);
-        startAnim.start();
+        // startAnim.start();
+        this._run();
     }
     _gotoStop() {
         let finishAnims = [];

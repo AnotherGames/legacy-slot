@@ -23,6 +23,12 @@ export class Main {
         model.el('buttonsContainer', this.buttonsContainer);
         model.el('menuContainer', this.menuContainer);
         model.state('side', 'left');
+        this.frameAnims = [];
+    }
+    update() {
+        this.frameAnims.forEach((anim) => {
+            anim();
+        });
     }
     preload() {
 
@@ -65,7 +71,6 @@ export class Main {
         let mask = this.add.graphics();
         mask.beginFill(0x000000);
         mask.drawRect(model.data('mainXLeft') + config[model.state('res')].machine.x, this.mainContainer.y + config[model.state('res')].machine.y, elSize.width * 5, elSize.height * 3);
-        // mask.pivot.set(5 * elSize.width / 2, 3 * elSize.height / 2);
         this.machineContainer.mask = mask;
     }
     /**
@@ -104,17 +109,18 @@ export class Main {
         // Roll
         wheels.forEach((wheel, columnIndex) => {
             // start roll
+            // if (column   Index > 0) return;
             this.time.events.add(Phaser.Timer.SECOND + columnIndex * 100, function () {
                 wheel.play();
             }, wheel);
 
             // end roll
-            let callback = function () {
-                console.log('Finish roll!');
-            };
-            this.time.events.add(Phaser.Timer.SECOND * 5 + columnIndex * 100, function () {
-                wheel.stop([2, 5, 7, 1, 4], callback);
-            }, wheel);
+            // let callback = function () {
+            //     console.log('Finish roll!');
+            // };
+            // this.time.events.add(Phaser.Timer.SECOND * 5 + columnIndex * 100, function () {
+            //     wheel.stop([2, 5, 7, 1, 4], callback);
+            // }, wheel);
         });
     }
 }
