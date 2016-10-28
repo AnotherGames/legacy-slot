@@ -50,7 +50,7 @@ export class Main {
     drawMainContainer() {
         this.machineContainer = this.add.group();
         this.mainContainer.addAt(this.machineContainer, 1);
-        this.machineContainer.position.set(this.mainContainer.width / 2 + config[model.state('res')].machine.x, this.mainContainer.height / 2 + config[model.state('res')].machine.y);
+        this.machineContainer.position.set(this.mainContainer.width / 2 + config[model.state('res')].machine.x, this.mainContainer.height / 2);
 
         const elSize = config[model.state('res')].elements;
         let mask = this.add.graphics();
@@ -73,8 +73,8 @@ export class Main {
                 state: this,
                 parent: this.machineContainer,
                 position: {
-                    x: i * elSize.width,
-                    y: 0
+                    x: i * elSize.width - config[model.state('res')].machine.x,
+                    y: 0 - config[model.state('res')].machine.y * 2
                 },
                 elSize,
                 currentScreen: [2, 5, 7, 1, 4]
@@ -95,7 +95,6 @@ export class Main {
         // Roll
         wheels.forEach((wheel, columnIndex) => {
             // start roll
-            wheel.update();
             this.time.events.add(Phaser.Timer.SECOND + columnIndex * 100, function () {
                 wheel.play();
             }, wheel);

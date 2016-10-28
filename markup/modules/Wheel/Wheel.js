@@ -82,6 +82,8 @@ export class Wheel {
             elem.anchor.set(0.5);
             this.items.push(elem);
         }
+
+        this.update();
     }
     /*  param: {
             item: Object,
@@ -93,7 +95,7 @@ export class Wheel {
         param.item.animations.play(param.anim);
     }
     update(currElems = this.currentScreen) {
-        this.wheelY = this.container.y = this.position.y + this.elSize.height * 2;
+        this.wheelY = this.container.y = this.position.y + this.elSize.height * 3;
 
         for (let i = 0; i < 5; i++) {
             this._upElement({
@@ -126,9 +128,10 @@ export class Wheel {
         ++this.elSwitch;
     }
     play() {
+        this.update();
         this.isRun = true;
         const startAnim = this.state.add.tween(this.container)
-            .to({ y: this.wheelY + 500 }, 600, "Back.easeIn");
+            .to({ y: [this.wheelY + 500, this.wheelY] }, 600, "Back.easeIn");
         startAnim.onComplete.add(this._run, this);
         startAnim.start();
     }
