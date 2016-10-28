@@ -1,4 +1,4 @@
-import { Boot } from '../../modules/States/Boot';
+import { Boot } from 'modules/States/Boot';
 import { Preload } from '../../modules/States/Preload';
 import { Init } from '../../modules/States/Init';
 import { Main } from '../../modules/States/Main';

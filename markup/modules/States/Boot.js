@@ -15,9 +15,9 @@ export class Boot {
             });
 
         // if (this.game.device.desktop) {
-            // this.game.scale.setGameSize(1920, 1080);
-            // model.flag('desktop', true);
-            // model.state('res', 'fullHD');
+        //     this.game.scale.setGameSize(1920, 1080);
+        //     model.flag('desktop', true);
+        //     model.state('res', 'fullHD');
         // } else {
         this.game.scale.setGameSize(1280, 720);
         model.flag('mobile', true);

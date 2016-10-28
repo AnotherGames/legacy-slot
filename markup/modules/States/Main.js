@@ -1,8 +1,10 @@
 import { buttons } from 'modules/Buttons/Buttons';
-import { menu } from 'modules/Menu/Menu';
+// import { menu } from 'modules/Menu/Menu';
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
 import { Wheel } from 'modules/Wheel/Wheel';
+import { balance } from 'modules/Balance/Balance';
+import { events } from 'modules/Events/Events';
 
 export class Main {
     constructor(game) {
@@ -27,8 +29,11 @@ export class Main {
     create() {
         this.drawMainBG();
         this.initMainContainer();
+        // if (model.flag('mobile')) {
         buttons.drawMobileButtons(this.buttonsContainer, this, this.mainContainer.width);
-        menu.drawMenu(this.menuContainer, this);
+        // }
+        // menu.drawMenu(this.menuContainer, this);
+        balance.drawBalanceContainer(this.balanceContainer, this);
         model.data('mainXLeft', 2 * model.data('buttonsDelta'));
         model.data('mainXRight', this.game.width - this.mainContainer.width - model.data('buttonsDelta') * 2);
         this.mainContainer.x = model.data('mainXLeft');
@@ -36,6 +41,10 @@ export class Main {
         this.initWheels();
 
         this.startRoll();
+    }
+
+    update() {
+        events.trigger('updateTime');
     }
 
     drawMainBG() {
