@@ -1,4 +1,5 @@
 import { config } from '../../modules/Util/Config';
+import { Element } from '../../modules/Element/Element';
 
 export class Wheel {
     get elements() {
@@ -78,10 +79,18 @@ export class Wheel {
 
         this.items = [];
         for (let i = 0; i < 6; i++) {
-            const elem = this._createElement(this.container, param.currentScreen[i] + '-n', 0, i * this.elSize.height * -1);
+            const elem = new Element({
+                state: this.state,
+                parent: this.container,
+                animation: '1-n',
+                x: 0,
+                y: i * this.elSize.height * -1
+            }).sprite;
             elem.anchor.set(0.5);
             this.items.push(elem);
         }
+
+        this.update();
     }
     /*  param: {
             item: Object,
@@ -93,7 +102,7 @@ export class Wheel {
         param.item.animations.play(param.anim);
     }
     update(currElems = this.currentScreen) {
-        this.wheelY = this.container.y = this.position.y + this.elSize.height * 2;
+        this.wheelY = this.container.y = this.position.y + this.elSize.height * 3;
 
         for (let i = 0; i < 5; i++) {
             this._upElement({
@@ -126,9 +135,10 @@ export class Wheel {
         ++this.elSwitch;
     }
     play() {
+        this.update();
         this.isRun = true;
         const startAnim = this.state.add.tween(this.container)
-            .to({ y: this.wheelY + 500 }, 600, "Back.easeIn");
+            .to({ y: [this.wheelY + 500, this.wheelY] }, 600, "Back.easeIn");
         startAnim.onComplete.add(this._run, this);
         startAnim.start();
     }
