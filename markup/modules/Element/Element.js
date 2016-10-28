@@ -30,7 +30,6 @@ export class Element {
         this._addAnimation({ el: 9, n: 15, w: 15 });
         this._addAnimation({ el: 10, n: 15, w: 15 });
         this._addAnimation({ el: 11, n: 15, w: 15 });
-        console.log('animation', this.sprite.animations);
         this.sprite.animations.play(param.animation);
     }
     _addAnimation(options) {
