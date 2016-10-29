@@ -70,6 +70,7 @@ export class Wheel {
         this.elSize = param.elSize;
         this.currentScreen = param.currentScreen;
         // инитим внутрение параметры
+        this._gotoPlay = false;
         this._gotoPaused = false;
         this._gotoLoop = false;
         this._pausedStartTime = 0;
@@ -126,37 +127,40 @@ export class Wheel {
         }
 
         this.elSwitch = 5;
+        this._gotoPlay = false;
         this._gotoPaused = false;
-        this._pausedTimeLenth = 0;
         this._gotoLoop = false;
+        this._pausedTimeLenth = 0;
         this._loopLengthY = 0;
         this._wheelStartPos = 0;
     }
     play() {
         if (this.mode === 'roll') return;
 
-        this._pausedTimeLenth += this.state.time.totalElapsedSeconds() * 1000 - this._pausedStartTime;
-        this._gotoPaused = false;
-
-        if (this.mode === 'loop') {
-            this._loopLengthY += this.container.y - this._wheelStartPos;
-            this._wheelStartPos = 0;
+        if (this.mode === 'paused') {
+            this._pausedTimeLenth += this.state.time.totalElapsedSeconds() * 1000 - this._pausedStartTime;
+            this.mode = 'roll';
+            return;
         }
-        this._gotoLoop = false;
 
-        this.mode = 'roll';
+        this._gotoPlay = true;
     }
     paused() {
         if (this.mode === 'paused') return;
 
-        if (this.mode === 'roll') {
-            this._pausedStartTime = this.state.time.totalElapsedSeconds() * 1000;
-        }
-
         this._gotoPaused = true;
+    }
+    _endLoop() {
+        this._pausedTimeLenth += this.state.time.totalElapsedSeconds() * 1000 - this._pausedStartTime;
+        this._loopLengthY += this.wheelY - this._wheelStartPos;
+        this._wheelStartPos = 0;
     }
     loop() {
         if (this.mode === 'loop') return;
+        if (this.mode === 'paused') {
+            console.error('loop: do not goto "Loop" mode if the pause!');
+            return;
+        }
 
         this._gotoLoop = true;
     }
@@ -177,7 +181,7 @@ export class Wheel {
         let _this = this;
         let startTime = this.state.time.totalElapsedSeconds() * 1000;
         let timeLength = config.wheel.roll.time;
-        let easingSeparation = config.wheel.roll.easingSeparation;
+        this.easingSeparation = config.wheel.roll.easingSeparation;
         this.rollLength = config.wheel.roll.length;
         this.finishScreen = finishScreen;
 
@@ -201,7 +205,7 @@ export class Wheel {
                     console.error('roll: param.easingSeparation is incorrectly.', param.easingSeparation);
                     return;
                 }
-                easingSeparation = param.easingSeparation;
+                this.easingSeparation = param.easingSeparation;
             }
             if (typeof (param.callback) === 'function') {
                 this.finishCallback = param.callback;
@@ -209,13 +213,6 @@ export class Wheel {
                 this.finishCallback = undefined;
             }
         }
-
-        const _easingBackInOut = function(k) {
-            if (k > 1) k = 1;
-            let s = easingSeparation;
-            if ( ( k *= 2 ) < 1 ) return 0.5 * ( k * k * ( ( s + 1 ) * k - s ) );
-            return 0.5 * ( ( k -= 2 ) * k * ( ( s + 1 ) * k + s ) + 2 );
-        };
 
         let startY = _this.wheelY;
         let endY = this.wheelY + _this.elSize.height * this.rollLength;
@@ -229,8 +226,8 @@ export class Wheel {
                 case 'loop':
                     _this.container.y += _this._wheelSpeed;
 
-                    _this.elemGotoSwitchTop();
-                    _this.elemGotoSwitchBottom();
+                    _this._elemGotoSwitchTop();
+                    _this._elemGotoSwitchBottom();
                     break;
                 case 'roll':
                     let currTime = _this.state.time.totalElapsedSeconds() * 1000 - (startTime + _this._pausedTimeLenth);
@@ -238,10 +235,10 @@ export class Wheel {
                     if (progress > 1) {
                         progress = 1;
                     }
-                    _this.wheelLastY = _this.container.y = startY + _this._loopLengthY + pathLenth * _easingBackInOut(progress);
+                    _this.wheelLastY = _this.container.y = startY + _this._loopLengthY + pathLenth * _this._easingBackInOut(progress);
 
-                    _this.elemGotoSwitchTop();
-                    _this.elemGotoSwitchBottom();
+                    _this._elemGotoSwitchTop();
+                    _this._elemGotoSwitchBottom();
 
                     if (progress === 1) {
                         _this.state.frameAnims.splice(_this.state.frameAnims.indexOf(anim), 1);
@@ -260,13 +257,22 @@ export class Wheel {
         };
         this.state.frameAnims.push(anim);
     }
-    gotoMode() {
-        if (this._gotoPaused) {
-            this._gotoPaused = false;
-            this.mode = 'paused';
+    _easingBackInOut(k) {
+        if (k > 1) k = 1;
+        let s = this.easingSeparation;
+        if ( ( k *= 2 ) < 1 ) return 0.5 * ( k * k * ( ( s + 1 ) * k - s ) );
+        return 0.5 * ( ( k -= 2 ) * k * ( ( s + 1 ) * k + s ) + 2 );
+    }
+    _gotoMode() {
+        if (this._gotoPlay) {
+            this._gotoPlay = false;
+
+            this._endLoop();
+
+            this.mode = 'roll';
         }
+
         if (this._gotoLoop) {
-            console.log('zahoju');
             this._gotoLoop = false;
 
             if (this.mode === 'roll') {
@@ -276,17 +282,27 @@ export class Wheel {
             this.mode = 'loop';
         }
 
-    }
-    elemGotoSwitchTop() {
-        if (this.container.y < this.wheelY) return;
-        // if (this.isPaused) return;
-        this.gotoMode();
+        if (this._gotoPaused) {
+            this._gotoPaused = false;
 
+            this._endLoop();
+
+            this._pausedStartTime = this.state.time.totalElapsedSeconds() * 1000;
+
+            this.mode = 'paused';
+        }
+    }
+    _elemGotoSwitchTop() {
+        if (this.container.y < this.wheelY) return;
         if (this.mode === 'roll') --this.rollLength;
+
+        this._gotoMode();
 
         const rand = this.state.rnd.integerInRange(1, 11);
         let anim = rand + '-b';
-        if (this.rollLength < 5
+
+        if (this.mode === 'roll'
+            && this.rollLength < 5
             && this.rollLength > -1
         ) {
             anim = this.finishScreen[this.rollLength] + '-n';
@@ -303,13 +319,13 @@ export class Wheel {
         this.wheelY += this.elSize.height;
         ++this.elSwitch;
 
-        this.elemGotoSwitchTop();
+        this._elemGotoSwitchTop();
     }
 
-    elemGotoSwitchBottom() {
+    _elemGotoSwitchBottom() {
         if (this.container.y > this.wheelY - this.elSize.height * 2) return;
         // if (this.isPaused) return;
-        this.gotoMode();
+        this._gotoMode();
 
         if (this.mode === 'roll') ++this.rollLength;
 
@@ -332,6 +348,6 @@ export class Wheel {
         --this.elSwitch;
         this.wheelY -= this.elSize.height;
 
-        this.elemGotoSwitchTop();
+        this._elemGotoSwitchBottom();
     }
 }

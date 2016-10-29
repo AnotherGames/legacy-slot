@@ -124,18 +124,18 @@ export class Main {
                     callback
                 });
             }, wheel);
-        // Paused не работает
-            this.time.events.add(Phaser.Timer.SECOND * 3 + columnIndex * 100, function () {
+        // Paused
+            this.time.events.add(Phaser.Timer.SECOND * 5 + columnIndex * 100, function () {
                 wheel.paused();
                 console.log('Paused');
             }, wheel);
-        // Loop не работает
-            // this.time.events.add(Phaser.Timer.SECOND * 4 + columnIndex * 100, function () {
-            //     wheel.loop();
-            //     console.log('Loop');
-            // }, wheel);
+        // Loop
+            this.time.events.add(Phaser.Timer.SECOND * 3 + columnIndex * 100, function () {
+                wheel.loop();
+                console.log('Loop');
+            }, wheel);
         // Play
-            this.time.events.add(Phaser.Timer.SECOND * 12 + columnIndex * 100, function () {
+            this.time.events.add(Phaser.Timer.SECOND * 8 + columnIndex * 100, function () {
                 wheel.play();
                 console.log('Play');
             }, wheel);
