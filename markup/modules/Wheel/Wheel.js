@@ -82,7 +82,8 @@ export class Wheel {
             const elem = new Element({
                 state: this.state,
                 parent: this.container,
-                animation: '1-n',
+                el: 1,
+                animation: 'n',
                 x: 0,
                 y: i * this.elSize.height * -1
             });
@@ -177,10 +178,6 @@ export class Wheel {
     play() {
         this.update();
         this.isRun = true;
-        const startAnim = this.state.add.tween(this.container)
-            .to({ y: [this.wheelY + 500, this.wheelY] }, 600, "Back.easeIn");
-        startAnim.onComplete.add(this._run, this);
-        // startAnim.start();
         this._run();
     }
     _gotoStop() {
