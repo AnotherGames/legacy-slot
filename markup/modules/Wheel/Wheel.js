@@ -85,8 +85,8 @@ export class Wheel {
                 animation: '1-n',
                 x: 0,
                 y: i * this.elSize.height * -1
-            }).sprite;
-            elem.anchor.set(0.5);
+            });
+            elem.sprite.anchor.set(0.5);
             this.items.push(elem);
         }
 
@@ -98,8 +98,8 @@ export class Wheel {
             anim: String
         }   */
     _upElement(param) {
-        param.item.y = param.posY;
-        param.item.animations.play(param.anim);
+        param.item.sprite.y = param.posY;
+        param.item.play(param.anim);
     }
     update(currElems = this.currentScreen) {
         this.wheelY = this.container.y = this.position.y + this.elSize.height * 3;
@@ -228,29 +228,5 @@ export class Wheel {
         this.finishScreen = finishScreen;
         this.currentScreen = finishScreen;
         this.finishCallback = callback;
-    }
-    _createElement(container, anim, x, y) {
-        let element = this.state.add.sprite(x, y, 'elements', null, container);
-        this._addAnimation(element, { el: 1, n: false, w: 15 });
-        this._addAnimation(element, { el: 2, n: 15, w: 25 });
-        this._addAnimation(element, { el: 3, n: false, w: 15 });
-        this._addAnimation(element, { el: 4, n: 20, w: 20 });
-        this._addAnimation(element, { el: 5, n: false, w: 15 });
-        this._addAnimation(element, { el: 6, n: 15, w: 15 });
-        this._addAnimation(element, { el: 7, n: false, w: 15 });
-        this._addAnimation(element, { el: 8, n: 15, w: 15 });
-        this._addAnimation(element, { el: 9, n: 15, w: 15 });
-        this._addAnimation(element, { el: 10, n: 15, w: 15 });
-        this._addAnimation(element, { el: 11, n: 15, w: 15 });
-        element.animations.play(anim);
-        return element;
-    }
-    _addAnimation(element, options) {
-        element.animations.add(`${options.el}-n`,
-            options.n
-            ? Phaser.Animation.generateFrameNames(`${options.el}-n-`, 1, options.n, '.png', 2)
-            : [`${options.el}-n.png`], 15, true);
-        element.animations.add(`${options.el}-b`, [`${options.el}-b.png`], 15, true);
-        element.animations.add(`${options.el}-w`, Phaser.Animation.generateFrameNames(`${options.el}-w-`, 1, options.w, '.png', 2), 15, true);
     }
 }

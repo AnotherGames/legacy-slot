@@ -26,6 +26,7 @@ export class Main {
         this.frameAnims = [];
     }
     update() {
+        events.trigger('updateTime');
         this.frameAnims.forEach((anim) => {
             anim();
         });
@@ -47,10 +48,6 @@ export class Main {
         this.initWheels();
 
         this.startRoll();
-    }
-
-    update() {
-        events.trigger('updateTime');
     }
 
     drawMainBG() {
