@@ -103,20 +103,34 @@ export class Main {
      */
     startRoll(finishScreen, options, callback) {
         let wheels = model.el('wheels');
-        // Roll
-        wheels.forEach((wheel, columnIndex) => {
-            // start roll
-            // if (column   Index > 0) return;
-            this.time.events.add(Phaser.Timer.SECOND + columnIndex * 100, function () {
-                wheel.play();
-            }, wheel);
 
-            // end roll
-            // let callback = function () {
-            //     console.log('Finish roll!');
-            // };
-            // this.time.events.add(Phaser.Timer.SECOND * 5 + columnIndex * 100, function () {
-            //     wheel.stop([2, 5, 7, 1, 4], callback);
+        // Колбэк вешается на каждое колесо!
+        let countFinish = 0;
+        callback = function () {
+            ++countFinish;
+            if (countFinish === 5) {
+                console.log('Finish roll!');
+            }
+        };
+
+        wheels.forEach((wheel, columnIndex) => {
+        // Roll
+            this.time.events.add(Phaser.Timer.SECOND + columnIndex * 100, function () {
+                // if (columnIndex > 0) return;
+                wheel.roll([2, 5, 7, 1, 4], {
+                    time: 5000,
+                    length: 50,
+                    easingSeparation: 3.7,
+                    callback
+                });
+            }, wheel);
+        // Paused
+            // this.time.events.add(Phaser.Timer.SECOND * 4 + columnIndex * 100, function () {
+            //     wheel.paused();
+            // }, wheel);
+        // Play
+            // this.time.events.add(Phaser.Timer.SECOND * 10 + columnIndex * 100, function () {
+            //     wheel.play();
             // }, wheel);
         });
     }

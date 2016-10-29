@@ -1,10 +1,10 @@
 export let config = {
-    wheels: {
-        margin: {
-            x: 25,
-            y: 30
-        },
-        speed: 40
+    wheel: {
+        roll: {
+            time: 5000,
+            length: 50,
+            easingSeparation: 1
+        }
     },
     fullHD: {
         elements: {

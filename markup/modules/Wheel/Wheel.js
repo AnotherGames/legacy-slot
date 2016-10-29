@@ -23,56 +23,57 @@ export class Wheel {
         currentScreen: Array
     }   */
     constructor(param) {
-        if (param === undefined) {
-            console.error('constructor: param is undefined');
+        if (typeof (param) !== 'object') {
+            console.error('constructor: param is not object');
             return;
         }
         if (param.state === undefined) {
             console.error('constructor: param.state is undefined', param);
             return;
-            } else {
-            this.state = param.state;
         }
         if (param.parent === undefined) {
             console.error('constructor: param.parent is undefined', param);
             return;
-        } else {
-            this.parent = param.parent;
         }
-        if (param.position === undefined) {
+        if (typeof (param.position) !== 'object') {
             console.error('constructor: param.position is undefined', param);
             return;
-        } else {
-            this.position = param.position;
         }
-        if (param.position.x === undefined) {
+        if (typeof (param.position.x) !== 'number') {
             console.error('constructor: param.position.x is undefined', param);
             return;
         }
-        if (param.position.y === undefined) {
+        if (typeof (param.position.y) !== 'number') {
             console.error('constructor: param.position.y is undefined', param);
             return;
         }
-        if (param.elSize === undefined) {
+        if (typeof (param.elSize) !== 'object') {
             console.error('constructor: param.elSize is undefined', param);
             return;
-        } else {
-            this.elSize = param.elSize;
         }
-        if (param.elSize.width === undefined) {
+        if (typeof (param.elSize.width) !== 'number') {
             console.error('constructor: param.elSize.width is undefined', param);
             return;
         }
-        if (param.elSize.height === undefined) {
+        if (typeof (param.elSize.height) !== 'number') {
             console.error('constructor: param.elSize.height is undefined', param);
             return;
         }
         if (param.currentScreen === undefined) {
             console.error('constructor: param.elSize is undefined', param);
             return;
-        } else {
-            this.currentScreen = param.currentScreen;
         }
+        // инитим входящие параметры
+        this.state = param.state;
+        this.parent = param.parent;
+        this.position = param.position;
+        this.elSize = param.elSize;
+        this.currentScreen = param.currentScreen;
+        // инитим внутрение параметры
+        this.isPaused = false;
+        this._gotoPaused = false;
+        this._pausedStart = 0;
+        this._pausedTimeLenth = 0;
 
         this.container = this.state.add.group(this.parent, 'wheelGroup');
         this.container.position.set(this.position.x, this.position.y);
@@ -88,6 +89,7 @@ export class Wheel {
                 y: i * this.elSize.height * -1
             });
             elem.sprite.anchor.set(0.5);
+            // elem.sprite.scale.set(0.5);
             this.items.push(elem);
         }
 
@@ -158,7 +160,7 @@ export class Wheel {
         this.state.frameAnims.push(newAnim);
 
         // const runAnim = this.state.add.tween(this.container)
-        //     .to( { y: this.wheelY }, config.wheels.speed, "Linear", true);
+        //     .to( { y: this.wheelY }, config.wheel.speed, "Linear", true);
         // runAnim.onComplete.add(() => {
             // if (this.isRun) {
             //     const rand = this.state.rnd.integerInRange(1, 11);
@@ -176,9 +178,11 @@ export class Wheel {
         // ++this.elSwitch;
     }
     play() {
-        this.update();
-        this.isRun = true;
-        this._run();
+        if (!this._gotoPaused) return;
+
+        this._pausedTimeLenth += this.state.time.totalElapsedSeconds() * 1000 - this._pausedStart;
+        this._gotoPaused = false;
+        this.isPaused = false;
     }
     _gotoStop() {
         let finishAnims = [];
@@ -225,5 +229,161 @@ export class Wheel {
         this.finishScreen = finishScreen;
         this.currentScreen = finishScreen;
         this.finishCallback = callback;
+    }
+    paused() {
+        this._gotoPaused = true;
+        this._pausedStart = this.state.time.totalElapsedSeconds() * 1000;
+    }
+    /*  *param: {
+            time: Number (milisecond),
+            length: Number (amount of elements, >6),
+            callback: Function
+        }   */
+    roll(finishScreen, param) {
+        if (finishScreen === undefined) {
+            console.error('roll: finishScreen is undefined');
+            return;
+        }
+
+        this.update();
+
+        this.mode = 'roll';
+        this.isRun = true;
+        this._gotoPaused = false;
+        this.isPaused = false;
+        this._pausedTimeLenth = 0;
+
+        let _this = this;
+        let startTime = this.state.time.totalElapsedSeconds() * 1000;
+        let timeLength = config.wheel.roll.time;
+        let rollLength = config.wheel.roll.length;
+        let easingSeparation = config.wheel.roll.easingSeparation;
+        this.finishScreen = finishScreen;
+
+        if (typeof (param) === 'object') {
+            if (typeof (param.time) === 'number') {
+                if (param.time <= 0) {
+                    console.error('roll: param.time is incorrectly.', param.time);
+                    return;
+                }
+                timeLength = param.time;
+            }
+            if (typeof (param.length) === 'number') {
+                if (param.length <= 0) {
+                    console.error('roll: param.length is incorrectly.', param.length);
+                    return;
+                }
+                rollLength = param.length;
+            }
+            if (typeof (param.easingSeparation) === 'number') {
+                if (param.easingSeparation <= 0) {
+                    console.error('roll: param.easingSeparation is incorrectly.', param.easingSeparation);
+                    return;
+                }
+                easingSeparation = param.easingSeparation;
+            }
+            if (typeof (param.callback) === 'function') {
+                this.finishCallback = param.callback;
+            } else {
+                this.finishCallback = undefined;
+            }
+        }
+
+        const _easingBackInOut = function(k) {
+            if (k > 1) k = 1;
+            let s = easingSeparation;
+            if ( ( k *= 2 ) < 1 ) return 0.5 * ( k * k * ( ( s + 1 ) * k - s ) );
+            return 0.5 * ( ( k -= 2 ) * k * ( ( s + 1 ) * k + s ) + 2 );
+        };
+
+        let startY = _this.wheelY;
+        let endY = this.wheelY + _this.elSize.height * rollLength;
+        let pathLenth = endY - startY;
+        _this.wheelY += _this.elSize.height;
+
+        let elemGotoSwitchTop = function () {
+            if (_this.container.y < _this.wheelY) return;
+            // if (_this.isPaused) return;
+            if (_this._gotoPaused) {
+                _this.isPaused = true;
+            }
+
+            --rollLength;
+
+            const rand = _this.state.rnd.integerInRange(1, 11);
+            let anim = rand + '-b';
+            if (rollLength < 5
+                && rollLength > -1
+            ) {
+                anim = finishScreen[rollLength] + '-n';
+            }
+
+            let itemInd = (_this.elSwitch < 0) ? 6 - (Math.abs(_this.elSwitch) % 6) : Math.abs(_this.elSwitch) % 6;
+            // anim = (itemInd + 1) + '-n';
+            _this._upElement({
+                item: _this.items[itemInd],
+                posY: _this.elSize.height * _this.elSwitch * -1,
+                anim
+            });
+
+            _this.wheelY += _this.elSize.height;
+            ++_this.elSwitch;
+
+            elemGotoSwitchTop();
+        };
+
+        let elemGotoSwitchBottom = function () {
+            if (_this.container.y > _this.wheelY - _this.elSize.height * 2) return;
+            // if (_this.isPaused) return;
+            if (_this._gotoPaused) {
+                _this.isPaused = true;
+            }
+
+            ++rollLength;
+
+            const rand = _this.state.rnd.integerInRange(1, 11);
+            let anim = rand + '-b';
+            if (rollLength < 1
+                && rollLength > -4
+            ) {
+                anim = finishScreen[4 + rollLength] + '-n';
+            }
+
+            let itemInd = (_this.elSwitch < 0) ?  6 - (Math.abs(_this.elSwitch) % 6) : Math.abs(_this.elSwitch) % 6;
+            // anim = (itemInd + 1) + '-n';
+            _this._upElement({
+                item: _this.items[itemInd],
+                posY: _this.elSize.height * (_this.elSwitch - 6) * -1,
+                anim
+            });
+
+            --_this.elSwitch;
+            _this.wheelY -= _this.elSize.height;
+
+            elemGotoSwitchTop();
+        };
+
+        let newAnim = function () {
+            if (_this.isPaused) return;
+
+            let currTime = _this.state.time.totalElapsedSeconds() * 1000 - (startTime + _this._pausedTimeLenth);
+            let progress = currTime / timeLength;
+            if (progress > 1) {
+                progress = 1;
+            }
+
+            _this.container.y = startY + pathLenth * _easingBackInOut(progress);
+
+            elemGotoSwitchTop();
+            elemGotoSwitchBottom();
+
+            if (progress === 1) {
+                _this.state.frameAnims.splice(_this.state.frameAnims.indexOf(newAnim), 1);
+                if (_this.finishCallback) {
+                    _this.finishCallback();
+                }
+            }
+        };
+        this.state.frameAnims.push(newAnim);
     }
 }
