@@ -70,10 +70,20 @@ export class Wheel {
         this.elSize = param.elSize;
         this.currentScreen = param.currentScreen;
         // инитим внутрение параметры
-        this.isPaused = false;
         this._gotoPaused = false;
-        this._pausedStart = 0;
+        this._gotoLoop = false;
+        this._pausedStartTime = 0;
         this._pausedTimeLenth = 0;
+        this._loopLengthY = 0;
+        this._wheelSpeed = 0;
+        this._wheelStartPos = 0;
+        this._wheelLastY = this.position.y;
+        Object.defineProperty(this, "wheelLastY", {
+            set: function (val) {
+                this._wheelSpeed = val - this._wheelLastY;
+                this._wheelLastY = val;
+            }
+        });
 
         this.container = this.state.add.group(this.parent, 'wheelGroup');
         this.container.position.set(this.position.x, this.position.y);
@@ -105,7 +115,7 @@ export class Wheel {
         param.item.play(param.anim);
     }
     update(currElems = this.currentScreen) {
-        this.wheelY = this.container.y = this.position.y + this.elSize.height * 3;
+        this.wheelY = this._wheelLastY = this.container.y = this.position.y + this.elSize.height * 3;
 
         for (let i = 0; i < 5; i++) {
             this._upElement({
@@ -116,123 +126,39 @@ export class Wheel {
         }
 
         this.elSwitch = 5;
-    }
-    _run() {
-        let _this = this;
-
-        function myTween(k) {
-            if (k > 1) k = 1;
-            let s = 1.0;
-            if ( ( k *= 2 ) < 1 ) return 0.5 * ( k * k * ( ( s + 1 ) * k - s ) );
-            return 0.5 * ( ( k -= 2 ) * k * ( ( s + 1 ) * k + s ) + 2 );
-        }
-
-        let progress = 0;
-        let startTime = this.state.time.totalElapsedSeconds() * 1000;
-        let timeLength = 5000;
-        let startY = _this.wheelY;
-        let endY = this.wheelY + _this.elSize.height * 50;
-        let pathLenth = endY - startY;
-        _this.wheelY += _this.elSize.height;
-
-        let newAnim = function () {
-            let currTime = _this.state.time.totalElapsedSeconds() * 1000 - startTime;
-            progress = currTime / timeLength;
-            _this.container.y = startY + pathLenth * myTween(progress);
-
-            if (_this.container.y > _this.wheelY) {
-
-                const rand = _this.state.rnd.integerInRange(1, 11);
-                _this._upElement({
-                    item: _this.items[_this.elSwitch % 6],
-                    posY: _this.elSize.height * _this.elSwitch * -1,
-                    anim: rand + '-b'
-                });
-
-                _this.wheelY += _this.elSize.height;
-                ++_this.elSwitch;
-            }
-
-            if (progress >= 1) {
-                _this.state.frameAnims.splice(_this.state.frameAnims.indexOf(newAnim), 1);
-            }
-        };
-        this.state.frameAnims.push(newAnim);
-
-        // const runAnim = this.state.add.tween(this.container)
-        //     .to( { y: this.wheelY }, config.wheel.speed, "Linear", true);
-        // runAnim.onComplete.add(() => {
-            // if (this.isRun) {
-            //     const rand = this.state.rnd.integerInRange(1, 11);
-            //     this._upElement({
-            //         item: this.items[this.elSwitch % 6],
-            //         posY: this.elSize.height * this.elSwitch * -1,
-            //         anim: rand + '-b'
-            //     });
-            //     this._run();
-            // } else {
-            //     this._gotoStop();
-            // }
-        // }, this);
-        //
-        // ++this.elSwitch;
+        this._gotoPaused = false;
+        this._pausedTimeLenth = 0;
+        this._gotoLoop = false;
+        this._loopLengthY = 0;
+        this._wheelStartPos = 0;
     }
     play() {
-        if (!this._gotoPaused) return;
+        if (this.mode === 'roll') return;
 
-        this._pausedTimeLenth += this.state.time.totalElapsedSeconds() * 1000 - this._pausedStart;
+        this._pausedTimeLenth += this.state.time.totalElapsedSeconds() * 1000 - this._pausedStartTime;
         this._gotoPaused = false;
-        this.isPaused = false;
-    }
-    _gotoStop() {
-        let finishAnims = [];
-        for (let i = 0; i < 5; i++) {
-            this.wheelY += this.elSize.height;
-            const runAnim = this.state.add.tween(this.container)
-                .to( { y: this.wheelY }, config.wheels.speed, "Linear");
 
-            runAnim.onComplete.add(() => {
-                this._upElement({
-                    item: this.items[this.elSwitch % 6],
-                    posY: this.elSize.height * this.elSwitch * -1,
-                    anim: this.finishScreen[4 - i] + '-n'
-                });
-                ++this.elSwitch;
-            }, this);
-
-
-            if (i !== 0) {
-                finishAnims[finishAnims.length - 1].onComplete.add(() => {
-                    runAnim.start();
-                }, this);
-            }
-
-            if (i === 4) {
-                runAnim.onComplete.add(() => {
-                    const finishAnim = this.state.add.tween(this.container).to({ y: [this.wheelY - 400, this.wheelY] }, 700, "Back.easeOut");
-                    finishAnim.onComplete.add(() => {
-                        // Fire roll:end event
-                        if (this.finishCallback) {
-                            this.finishCallback();
-                        }
-                    });
-                    finishAnim.start();
-                }, this);
-            }
-
-            finishAnims.push(runAnim);
+        if (this.mode === 'loop') {
+            this._loopLengthY += this.container.y - this._wheelStartPos;
+            this._wheelStartPos = 0;
         }
-        finishAnims[0].start();
-    }
-    stop(finishScreen, callback) {
-        this.isRun = false;
-        this.finishScreen = finishScreen;
-        this.currentScreen = finishScreen;
-        this.finishCallback = callback;
+        this._gotoLoop = false;
+
+        this.mode = 'roll';
     }
     paused() {
+        if (this.mode === 'paused') return;
+
+        if (this.mode === 'roll') {
+            this._pausedStartTime = this.state.time.totalElapsedSeconds() * 1000;
+        }
+
         this._gotoPaused = true;
-        this._pausedStart = this.state.time.totalElapsedSeconds() * 1000;
+    }
+    loop() {
+        if (this.mode === 'loop') return;
+
+        this._gotoLoop = true;
     }
     /*  *param: {
             time: Number (milisecond),
@@ -245,19 +171,14 @@ export class Wheel {
             return;
         }
 
-        this.update();
-
         this.mode = 'roll';
-        this.isRun = true;
-        this._gotoPaused = false;
-        this.isPaused = false;
-        this._pausedTimeLenth = 0;
+        this.update();
 
         let _this = this;
         let startTime = this.state.time.totalElapsedSeconds() * 1000;
         let timeLength = config.wheel.roll.time;
-        let rollLength = config.wheel.roll.length;
         let easingSeparation = config.wheel.roll.easingSeparation;
+        this.rollLength = config.wheel.roll.length;
         this.finishScreen = finishScreen;
 
         if (typeof (param) === 'object') {
@@ -273,7 +194,7 @@ export class Wheel {
                     console.error('roll: param.length is incorrectly.', param.length);
                     return;
                 }
-                rollLength = param.length;
+                this.rollLength = param.length;
             }
             if (typeof (param.easingSeparation) === 'number') {
                 if (param.easingSeparation <= 0) {
@@ -297,93 +218,120 @@ export class Wheel {
         };
 
         let startY = _this.wheelY;
-        let endY = this.wheelY + _this.elSize.height * rollLength;
+        let endY = this.wheelY + _this.elSize.height * this.rollLength;
         let pathLenth = endY - startY;
         _this.wheelY += _this.elSize.height;
 
-        let elemGotoSwitchTop = function () {
-            if (_this.container.y < _this.wheelY) return;
-            // if (_this.isPaused) return;
-            if (_this._gotoPaused) {
-                _this.isPaused = true;
+        let anim = function () {
+            switch (_this.mode) {
+                case 'paused':
+                    break;
+                case 'loop':
+                    _this.container.y += _this._wheelSpeed;
+
+                    _this.elemGotoSwitchTop();
+                    _this.elemGotoSwitchBottom();
+                    break;
+                case 'roll':
+                    let currTime = _this.state.time.totalElapsedSeconds() * 1000 - (startTime + _this._pausedTimeLenth);
+                    let progress = currTime / timeLength;
+                    if (progress > 1) {
+                        progress = 1;
+                    }
+                    _this.wheelLastY = _this.container.y = startY + _this._loopLengthY + pathLenth * _easingBackInOut(progress);
+
+                    _this.elemGotoSwitchTop();
+                    _this.elemGotoSwitchBottom();
+
+                    if (progress === 1) {
+                        _this.state.frameAnims.splice(_this.state.frameAnims.indexOf(anim), 1);
+
+                        _this.mode = 'idle';
+
+                        if (_this.finishCallback) {
+                            _this.finishCallback();
+                        }
+                    }
+                    break;
+                default:
+                    return;
             }
 
-            --rollLength;
-
-            const rand = _this.state.rnd.integerInRange(1, 11);
-            let anim = rand + '-b';
-            if (rollLength < 5
-                && rollLength > -1
-            ) {
-                anim = finishScreen[rollLength] + '-n';
-            }
-
-            let itemInd = (_this.elSwitch < 0) ? 6 - (Math.abs(_this.elSwitch) % 6) : Math.abs(_this.elSwitch) % 6;
-            // anim = (itemInd + 1) + '-n';
-            _this._upElement({
-                item: _this.items[itemInd],
-                posY: _this.elSize.height * _this.elSwitch * -1,
-                anim
-            });
-
-            _this.wheelY += _this.elSize.height;
-            ++_this.elSwitch;
-
-            elemGotoSwitchTop();
         };
+        this.state.frameAnims.push(anim);
+    }
+    gotoMode() {
+        if (this._gotoPaused) {
+            this._gotoPaused = false;
+            this.mode = 'paused';
+        }
+        if (this._gotoLoop) {
+            console.log('zahoju');
+            this._gotoLoop = false;
 
-        let elemGotoSwitchBottom = function () {
-            if (_this.container.y > _this.wheelY - _this.elSize.height * 2) return;
-            // if (_this.isPaused) return;
-            if (_this._gotoPaused) {
-                _this.isPaused = true;
+            if (this.mode === 'roll') {
+                this._pausedStartTime = this.state.time.totalElapsedSeconds() * 1000;
             }
+            this._wheelStartPos = this.wheelY;
+            this.mode = 'loop';
+        }
 
-            ++rollLength;
+    }
+    elemGotoSwitchTop() {
+        if (this.container.y < this.wheelY) return;
+        // if (this.isPaused) return;
+        this.gotoMode();
 
-            const rand = _this.state.rnd.integerInRange(1, 11);
-            let anim = rand + '-b';
-            if (rollLength < 1
-                && rollLength > -4
-            ) {
-                anim = finishScreen[4 + rollLength] + '-n';
-            }
+        if (this.mode === 'roll') --this.rollLength;
 
-            let itemInd = (_this.elSwitch < 0) ?  6 - (Math.abs(_this.elSwitch) % 6) : Math.abs(_this.elSwitch) % 6;
-            // anim = (itemInd + 1) + '-n';
-            _this._upElement({
-                item: _this.items[itemInd],
-                posY: _this.elSize.height * (_this.elSwitch - 6) * -1,
-                anim
-            });
+        const rand = this.state.rnd.integerInRange(1, 11);
+        let anim = rand + '-b';
+        if (this.rollLength < 5
+            && this.rollLength > -1
+        ) {
+            anim = this.finishScreen[this.rollLength] + '-n';
+        }
 
-            --_this.elSwitch;
-            _this.wheelY -= _this.elSize.height;
+        let itemInd = (this.elSwitch < 0) ? 6 - (Math.abs(this.elSwitch) % 6) : Math.abs(this.elSwitch) % 6;
+        // anim = (itemInd + 1) + '-n';
+        this._upElement({
+            item: this.items[itemInd],
+            posY: this.elSize.height * this.elSwitch * -1,
+            anim
+        });
 
-            elemGotoSwitchTop();
-        };
+        this.wheelY += this.elSize.height;
+        ++this.elSwitch;
 
-        let newAnim = function () {
-            if (_this.isPaused) return;
+        this.elemGotoSwitchTop();
+    }
 
-            let currTime = _this.state.time.totalElapsedSeconds() * 1000 - (startTime + _this._pausedTimeLenth);
-            let progress = currTime / timeLength;
-            if (progress > 1) {
-                progress = 1;
-            }
+    elemGotoSwitchBottom() {
+        if (this.container.y > this.wheelY - this.elSize.height * 2) return;
+        // if (this.isPaused) return;
+        this.gotoMode();
 
-            _this.container.y = startY + pathLenth * _easingBackInOut(progress);
+        if (this.mode === 'roll') ++this.rollLength;
 
-            elemGotoSwitchTop();
-            elemGotoSwitchBottom();
+        const rand = this.state.rnd.integerInRange(1, 11);
+        let anim = rand + '-b';
+        if (this.rollLength < 1
+            && this.rollLength > -4
+        ) {
+            anim = this.finishScreen[4 + this.rollLength] + '-n';
+        }
 
-            if (progress === 1) {
-                _this.state.frameAnims.splice(_this.state.frameAnims.indexOf(newAnim), 1);
-                if (_this.finishCallback) {
-                    _this.finishCallback();
-                }
-            }
-        };
-        this.state.frameAnims.push(newAnim);
+        let itemInd = (this.elSwitch < 0) ?  6 - (Math.abs(this.elSwitch) % 6) : Math.abs(this.elSwitch) % 6;
+        // anim = (itemInd + 1) + '-n';
+        this._upElement({
+            item: this.items[itemInd],
+            posY: this.elSize.height * (this.elSwitch - 6) * -1,
+            anim
+        });
+
+        --this.elSwitch;
+        this.wheelY -= this.elSize.height;
+
+        this.elemGotoSwitchTop();
     }
 }
