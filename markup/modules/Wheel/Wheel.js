@@ -10,7 +10,7 @@ export class Wheel {
         return elems;
     }
     /*  param: {
-        state: State,
+        game: State,
         parent: Group,
         position: {
             x: Number,
@@ -27,8 +27,8 @@ export class Wheel {
             console.error('constructor: param is not object');
             return;
         }
-        if (param.state === undefined) {
-            console.error('constructor: param.state is undefined', param);
+        if (param.game === undefined) {
+            console.error('constructor: param.game is undefined', param);
             return;
         }
         if (param.parent === undefined) {
@@ -64,9 +64,10 @@ export class Wheel {
             return;
         }
         // инитим входящие параметры
-        this.state = param.state;
+        this.game = param.game;
         this.parent = param.parent;
         this.position = param.position;
+        this.position.y += 10;
         this.elSize = param.elSize;
         this.currentScreen = param.currentScreen;
         // инитим внутрение параметры
@@ -86,13 +87,13 @@ export class Wheel {
             }
         });
 
-        this.container = this.state.add.group(this.parent, 'wheelGroup');
+        this.container = this.game.add.group(this.parent, 'wheelGroup');
         this.container.position.set(this.position.x, this.position.y);
 
         this.items = [];
         for (let i = 0; i < 6; i++) {
             const elem = new Element({
-                state: this.state,
+                game: this.game,
                 parent: this.container,
                 el: 1,
                 animation: 'n',
@@ -138,7 +139,7 @@ export class Wheel {
         if (this.mode === 'roll') return;
 
         if (this.mode === 'paused') {
-            this._pausedTimeLenth += this.state.time.totalElapsedSeconds() * 1000 - this._pausedStartTime;
+            this._pausedTimeLenth += this.game.time.totalElapsedSeconds() * 1000 - this._pausedStartTime;
             this.mode = 'roll';
             return;
         }
@@ -151,7 +152,7 @@ export class Wheel {
         this._gotoPaused = true;
     }
     _endLoop() {
-        this._pausedTimeLenth += this.state.time.totalElapsedSeconds() * 1000 - this._pausedStartTime;
+        this._pausedTimeLenth += this.game.time.totalElapsedSeconds() * 1000 - this._pausedStartTime;
         this._loopLengthY += this.wheelY - this._wheelStartPos;
         this._wheelStartPos = 0;
     }
@@ -179,7 +180,7 @@ export class Wheel {
         this.update();
 
         let _this = this;
-        let startTime = this.state.time.totalElapsedSeconds() * 1000;
+        let startTime = this.game.time.totalElapsedSeconds() * 1000;
         let timeLength = config.wheel.roll.time;
         this.easingSeparation = config.wheel.roll.easingSeparation;
         this.rollLength = config.wheel.roll.length;
@@ -230,7 +231,7 @@ export class Wheel {
                     _this._elemGotoSwitchBottom();
                     break;
                 case 'roll':
-                    let currTime = _this.state.time.totalElapsedSeconds() * 1000 - (startTime + _this._pausedTimeLenth);
+                    let currTime = _this.game.time.totalElapsedSeconds() * 1000 - (startTime + _this._pausedTimeLenth);
                     let progress = currTime / timeLength;
                     if (progress > 1) {
                         progress = 1;
@@ -241,7 +242,7 @@ export class Wheel {
                     _this._elemGotoSwitchBottom();
 
                     if (progress === 1) {
-                        _this.state.frameAnims.splice(_this.state.frameAnims.indexOf(anim), 1);
+                        _this.game.frameAnims.splice(_this.game.frameAnims.indexOf(anim), 1);
 
                         _this.mode = 'idle';
 
@@ -255,7 +256,7 @@ export class Wheel {
             }
 
         };
-        this.state.frameAnims.push(anim);
+        this.game.frameAnims.push(anim);
     }
     _easingBackInOut(k) {
         if (k > 1) k = 1;
@@ -276,7 +277,7 @@ export class Wheel {
             this._gotoLoop = false;
 
             if (this.mode === 'roll') {
-                this._pausedStartTime = this.state.time.totalElapsedSeconds() * 1000;
+                this._pausedStartTime = this.game.time.totalElapsedSeconds() * 1000;
             }
             this._wheelStartPos = this.wheelY;
             this.mode = 'loop';
@@ -287,7 +288,7 @@ export class Wheel {
 
             this._endLoop();
 
-            this._pausedStartTime = this.state.time.totalElapsedSeconds() * 1000;
+            this._pausedStartTime = this.game.time.totalElapsedSeconds() * 1000;
 
             this.mode = 'paused';
         }
@@ -299,7 +300,7 @@ export class Wheel {
 
         this._gotoMode();
 
-        const rand = this.state.rnd.integerInRange(1, 11);
+        const rand = this.game.rnd.integerInRange(1, 11);
         let anim = rand + '-b';
 
         if (this.mode === 'roll'
@@ -329,7 +330,7 @@ export class Wheel {
 
         this._gotoMode();
 
-        const rand = this.state.rnd.integerInRange(1, 11);
+        const rand = this.game.rnd.integerInRange(1, 11);
         let anim = rand + '-b';
 
         if (this.rollLength < 1
