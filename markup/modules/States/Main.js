@@ -5,6 +5,7 @@ import { config } from 'modules/Util/Config';
 import { Wheel } from 'modules/Wheel/Wheel';
 import { balance } from 'modules/Balance/Balance';
 import { events } from 'modules/Events/Events';
+import { Element } from '../../modules/Element/Element';
 
 export class Main {
     constructor(game) {
@@ -32,7 +33,27 @@ export class Main {
         });
     }
     preload() {
-
+        let container = this.add.group();
+        container.x = -window.innerWidth;
+        const elem = new Element({
+            state: this,
+            parent: container,
+            el: 1,
+            animation: 'n',
+            x: 0,
+            y: 0
+        });
+        let elemMode = ['n','w','b'];
+        let i = 1;
+        let _this = this;
+        this.frameAnims.push(function preloadElems() {
+            elem.play(i + '-' + 'b');
+            i++;
+            if (i >= 12) {
+                _this.frameAnims.splice(_this.frameAnims.indexOf(preloadElems), 1);
+                container.destroy();
+            }
+        });
     }
     create() {
         this.drawMainBG();
