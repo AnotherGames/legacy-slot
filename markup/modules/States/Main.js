@@ -4,6 +4,7 @@ import { model } from 'modules/Model/Model';
 import { roll } from 'modules/Roll/Roll';
 import { config } from 'modules/Util/Config';
 import { Wheel } from 'modules/Wheel/Wheel';
+import { Element } from 'modules/Element/Element';
 import { balance } from 'modules/Balance/Balance';
 import { events } from 'modules/Events/Events';
 
