@@ -47,9 +47,11 @@ export let balance = (function () {
 
     }
 
+
     function drawBalanceText(container, game) {
         let balanceData = {};
         let balanceText = {};
+        let currencySymbol = checkCurrency(model.data('currentBalance').currency);
 
         balanceData.linesLength = model.data('lines').length;
         balanceData.coinsSteps = model.data('initBalance').CoinValue.map((value) => {
@@ -68,24 +70,38 @@ export let balance = (function () {
         balanceData.winCash = (0).toFixed(2);
         balanceData.currency = model.data('initBalance').Currency;
 
-        let currencySymbol = checkCurrency(model.data('currentBalance').currency);
+        let balanceFont;
 
-        balanceText.coinsCashText = game.add.text(375, game.world.height - 25, 'Cash:', {font: '18px Helvetica', fill: '#888888', align: 'center'}, container);
-        balanceText.coinsCash = game.add.text(balanceText.coinsCashText.x + balanceText.coinsCashText.width / 2 + 30, game.world.height - 25, currencySymbol + balanceData.coinsCash, {font: '18px Helvetica', fill: '#dddddd', align: 'center'}, container);
-        balanceText.betCashText = game.add.text(535, game.world.height - 25, 'Bet:', {font: '18px Helvetica', fill: '#888888', align: 'center'}, container);
-        balanceText.betCash = game.add.text(balanceText.betCashText.x + balanceText.betCashText.width / 2 + 30, game.world.height - 25, currencySymbol + balanceData.betCash, {font: '18px Helvetica', fill: '#dddddd', align: 'center'}, container);
-        balanceText.winCashText = game.add.text(660, game.world.height - 25, 'Win:', {font: '18px Helvetica', fill: '#888888', align: 'center'}, container);
-        balanceText.winCash = game.add.text(balanceText.winCashText.x + balanceText.winCashText.width / 2 + 30, game.world.height - 25, currencySymbol + balanceData.winCash, {font: '18px Helvetica', fill: '#dddddd', align: 'center'}, container);
+        if (model.flag('mobile')) {
+            balanceFont = '18px Helvetica';
+        } else {
+            balanceFont = '24px Helvetica';
+        }
 
-        balanceText.coinsSumText = game.add.text(435, game.world.height - 65, 'Coins:', {font: '24px Helvetica', fill: '#dddddd', align: 'center'}, container);
-        balanceText.coinsSum = game.add.text(balanceText.coinsSumText.x + balanceText.coinsSumText.width / 2 + 40, game.world.height - 65, balanceData.coinsSum, {font: 'normal 25px Helvetica', fill: '#e8b075', align: 'center'}, container);
-        balanceText.betSumText = game.add.text(625, game.world.height - 65, 'Bet:', {font: '24px Helvetica', fill: '#dddddd', align: 'center'}, container);
-        balanceText.betSum = game.add.text(balanceText.betSumText.x + balanceText.betSumText.width / 2 + 30, game.world.height - 65, balanceData.betSum, {font: 'normal 25px Helvetica', fill: '#e8b075', align: 'center'}, container);
-        balanceText.coinsSum.setShadow(0, 0, '#e8b075', 4);
-        balanceText.betSum.setShadow(0, 0, '#e8b075', 4);
+        balanceText.coinsCashText = game.add.text(game.world.width * 0.3, game.world.height - 25, 'Cash:', {font: balanceFont, fill: '#888888', align: 'center'}, container);
+        balanceText.coinsCash = game.add.text(balanceText.coinsCashText.x + balanceText.coinsCashText.width / 2 + 30, game.world.height - 25, currencySymbol + balanceData.coinsCash, {font: balanceFont, fill: '#dddddd', align: 'center'}, container);
+        balanceText.betCashText = game.add.text(game.world.width * 0.42, game.world.height - 25, 'Bet:', {font: balanceFont, fill: '#888888', align: 'center'}, container);
+        balanceText.betCash = game.add.text(balanceText.betCashText.x + balanceText.betCashText.width / 2 + 30, game.world.height - 25, currencySymbol + balanceData.betCash, {font: balanceFont, fill: '#dddddd', align: 'center'}, container);
+        balanceText.winCashText = game.add.text(game.world.width * 0.5, game.world.height - 25, 'Win:', {font: balanceFont, fill: '#888888', align: 'center'}, container);
+        balanceText.winCash = game.add.text(balanceText.winCashText.x + balanceText.winCashText.width / 2 + 30, game.world.height - 25, currencySymbol + balanceData.winCash, {font: balanceFont, fill: '#dddddd', align: 'center'}, container);
 
+        if (model.flag('mobile')) {
+            balanceText.coinsSumText = game.add.text(game.world.width * 0.33, game.world.height - 65, 'Coins:', {font: '24px Helvetica', fill: '#dddddd', align: 'center'}, container);
+            balanceText.coinsSum = game.add.text(balanceText.coinsSumText.x + balanceText.coinsSumText.width / 2 + 40, game.world.height - 65, balanceData.coinsSum, {font: 'normal 25px Helvetica', fill: '#e8b075', align: 'center'}, container);
+            balanceText.betSumText = game.add.text(game.world.width * 0.48, game.world.height - 65, 'Bet:', {font: '24px Helvetica', fill: '#dddddd', align: 'center'}, container);
+            balanceText.betSum = game.add.text(balanceText.betSumText.x + balanceText.betSumText.width / 2 + 30, game.world.height - 65, balanceData.betSum, {font: 'normal 25px Helvetica', fill: '#e8b075', align: 'center'}, container);
+            balanceText.coinsSum.setShadow(0, 0, '#e8b075', 4);
+            balanceText.betSum.setShadow(0, 0, '#e8b075', 4);
+        } else {
+            balanceText.coinsSum = game.add.text(20, game.world.height - 65, balanceData.coinsSum, {font: 'normal 25px Helvetica', fill: '#e8b075', align: 'center'}, container);
+            balanceText.coinsValue = game.add.text(40, game.world.height - 65, balanceData.coinsValue, {font: 'normal 25px Helvetica', fill: '#e8b075', align: 'center'}, container);
+            balanceText.betSum = game.add.text(60, game.world.height - 65, balanceData.betSum, {font: 'normal 25px Helvetica', fill: '#e8b075', align: 'center'}, container);
+            balanceText.betValue = game.add.text(80, game.world.height - 65, balanceData.betValue, {font: 'normal 25px Helvetica', fill: '#e8b075', align: 'center'}, container);
+        }
         model.data('balanceText', balanceText);
         model.data('balanceData', balanceData);
+
+        setTimeout(updateBalance(currencySymbol), 500);
     }
 
     function checkCurrency(currency) {
@@ -101,6 +117,38 @@ export let balance = (function () {
         }
 
     }
+
+    function updateBalance(currencySymbol) {
+
+        let balanceData = model.data('balanceData');
+        let balanceText = model.data('balanceText');
+        // console.log(balanceText.coinsValue);
+
+        if (balanceText.coinsValue.text !== balanceData.coinsValue) {
+            balanceText.coinsValue.text = balanceData.coinsValue;
+        }
+        if (balanceText.betValue.text !== balanceData.betValue) {
+            balanceText.betValue.text = balanceData.betValue;
+        }
+
+        if (balanceText.coinsSum.text !== balanceData.coinsSum) {
+            balanceText.coinsSum.text = balanceData.coinsSum;
+        }
+        if (balanceText.betSum.text !== balanceData.betSum) {
+            balanceText.betSum.text = balanceData.betSum;
+        }
+        if (balanceText.coinsCash.text.toString().slice(1) !== balanceData.coinsCash) {
+            balanceText.coinsCash.text = currencySymbol + balanceData.coinsCash;
+        }
+        if (balanceText.betCash.text.toString().slice(1) !== balanceData.betCash) {
+            balanceText.betCash.text = currencySymbol + balanceData.betCash;
+        }
+        if (balanceText.winCash.text.toString().slice(1) !== balanceData.winCash) {
+            balanceText.winCash.text = currencySymbol + balanceData.winCash;
+        }
+
+    }
+
 
     function drawTime(container, game) {
 
