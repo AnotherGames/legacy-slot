@@ -194,7 +194,7 @@ export class Wheel {
                 timeLength = param.time;
             }
             if (typeof (param.length) === 'number') {
-                if (param.length <= 0) {
+                if (param.length === 0) {
                     console.error('roll: param.length is incorrectly.', param.length);
                     return;
                 }
@@ -294,6 +294,7 @@ export class Wheel {
     }
     _elemGotoSwitchTop() {
         if (this.container.y < this.wheelY) return;
+
         if (this.mode === 'roll') --this.rollLength;
 
         this._gotoMode();
@@ -308,7 +309,7 @@ export class Wheel {
             anim = this.finishScreen[this.rollLength] + '-n';
         }
 
-        let itemInd = (this.elSwitch < 0) ? 6 - (Math.abs(this.elSwitch) % 6) : Math.abs(this.elSwitch) % 6;
+        let itemInd = (this.elSwitch < 0) ? 5 - (Math.abs(this.elSwitch + 1) % 6) : Math.abs(this.elSwitch) % 6;
         // anim = (itemInd + 1) + '-n';
         this._upElement({
             item: this.items[itemInd],
@@ -321,23 +322,23 @@ export class Wheel {
 
         this._elemGotoSwitchTop();
     }
-
     _elemGotoSwitchBottom() {
         if (this.container.y > this.wheelY - this.elSize.height * 2) return;
-        // if (this.isPaused) return;
-        this._gotoMode();
 
         if (this.mode === 'roll') ++this.rollLength;
 
+        this._gotoMode();
+
         const rand = this.state.rnd.integerInRange(1, 11);
         let anim = rand + '-b';
+
         if (this.rollLength < 1
             && this.rollLength > -4
         ) {
             anim = this.finishScreen[4 + this.rollLength] + '-n';
         }
 
-        let itemInd = (this.elSwitch < 0) ?  6 - (Math.abs(this.elSwitch) % 6) : Math.abs(this.elSwitch) % 6;
+        let itemInd = (this.elSwitch < 0) ?  5 - (Math.abs(this.elSwitch + 1) % 6) : Math.abs(this.elSwitch) % 6;
         // anim = (itemInd + 1) + '-n';
         this._upElement({
             item: this.items[itemInd],
