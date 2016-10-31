@@ -5,7 +5,7 @@ export let util = (function() {
     const casinoID = 1;
     const userID = 1;
     const mode = {
-        normal: 'qos',
+        normal: 'zombienorm2',
         fsBonus: 'qo5',
         bonus: 'qo2'
     };
