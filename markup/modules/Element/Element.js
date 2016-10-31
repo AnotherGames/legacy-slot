@@ -1,6 +1,6 @@
 export class Element {
     /*  param: {
-            state: Object,
+            game: Object,
             parent: Object,
             el: Number,
             animation: String,
@@ -12,12 +12,14 @@ export class Element {
             console.error('constructor: param is undefined');
             return;
         }
-        if (param.state === undefined) {
-            console.error('constructor: param.state is undefined', param);
+        if (param.game === undefined) {
+            console.error('constructor: param.game is undefined', param);
             return;
         } else {
-            this.state = param.state;
+            this.game = param.game;
         }
+
+        this.state = this.game.state.states.Main;
 
         this.sprite = this.state.add.sprite(param.x, param.y, param.el, null, param.parent);
         switch (param.el) {

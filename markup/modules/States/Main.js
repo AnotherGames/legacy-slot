@@ -1,6 +1,7 @@
 import { buttons } from 'modules/Buttons/Buttons';
 // import { menu } from 'modules/Menu/Menu';
 import { model } from 'modules/Model/Model';
+import { roll } from 'modules/Roll/Roll';
 import { config } from 'modules/Util/Config';
 import { Wheel } from 'modules/Wheel/Wheel';
 import { balance } from 'modules/Balance/Balance';
@@ -12,6 +13,7 @@ export class Main {
 
     }
     init() {
+        this.game.stage.disableVisibilityChange = true;
         console.info('Main State!');
         this.bgContainer = this.add.group();
         this.mainContainer = this.add.group();
@@ -24,36 +26,21 @@ export class Main {
         model.el('buttonsContainer', this.buttonsContainer);
         model.el('menuContainer', this.menuContainer);
         model.state('side', 'left');
-        this.frameAnims = [];
+        // массив в который записываются анимации для проигрывания
+        let game = model.el('game');
+        game.frameAnims = [];
     }
     update() {
         events.trigger('updateTime');
-        this.frameAnims.forEach((anim) => {
+        let game = model.el('game');
+
+        // если есть анимации то мы их запускаем
+        game.frameAnims.forEach((anim) => {
             anim();
         });
     }
     preload() {
-        let container = this.add.group();
-        container.x = -window.innerWidth;
-        const elem = new Element({
-            state: this,
-            parent: container,
-            el: 1,
-            animation: 'n',
-            x: 0,
-            y: 0
-        });
-        let elemMode = ['n','w','b'];
-        let i = 1;
-        let _this = this;
-        this.frameAnims.push(function preloadElems() {
-            elem.play(i + '-' + 'b');
-            i++;
-            if (i >= 12) {
-                _this.frameAnims.splice(_this.frameAnims.indexOf(preloadElems), 1);
-                container.destroy();
-            }
-        });
+        this.loadElementsAtlas();
     }
     create() {
         this.drawMainBG();
@@ -66,9 +53,16 @@ export class Main {
         model.data('mainXRight', this.game.width - this.mainContainer.width - model.data('buttonsDelta') * 2);
         this.mainContainer.x = model.data('mainXLeft');
         this.drawMainContainer();
-        this.initWheels();
 
-        this.startRoll();
+        events.trigger('roll:initWheels');
+
+        model.el('game').time.events.add(3000, () => {
+            events.trigger('roll:requestRoll', {
+                time: 6000,
+                length: 30,
+                ease: 1.2
+            });
+        })
     }
 
     drawMainBG() {
@@ -80,8 +74,35 @@ export class Main {
         let gameMachine = this.add.sprite(0, 0, 'gameMachine', null, this.mainContainer);
     }
 
+    loadElementsAtlas() {
+        let game = model.el('game');
+        let container = this.add.group();
+        // елемент не отображатся на экране
+        container.x = -window.innerWidth;
+        const elem = new Element({
+            game,
+            parent: container,
+            el: 1,
+            animation: 'n',
+            x: 0,
+            y: 0
+        });
+        let elemMode = ['n','w','b'];
+        let i = 1;
+        // прогоняем все анимации
+        game.frameAnims.push(function preloadElems() {
+            elem.play(i + '-' + 'b');
+            i++;
+            if (i >= 12) {
+                game.frameAnims.splice(game.frameAnims.indexOf(preloadElems), 1);
+                container.destroy();
+            }
+        });
+    }
+
     drawMainContainer() {
         this.machineContainer = this.add.group();
+        model.el('machineContainer', this.machineContainer);
         this.mainContainer.addAt(this.machineContainer, 1);
         this.machineContainer.position.set(this.mainContainer.width / 2 + config[model.state('res')].machine.x, this.mainContainer.height / 2);
 
@@ -90,76 +111,5 @@ export class Main {
         mask.beginFill(0x000000);
         mask.drawRect(model.data('mainXLeft') + config[model.state('res')].machine.x, this.mainContainer.y + config[model.state('res')].machine.y, elSize.width * 5, elSize.height * 3);
         this.machineContainer.mask = mask;
-    }
-    /**
-     * [Создание колес с отображением текущего экрана]
-     * @param {Array} currentScreen
-     * @param {Object} options.container
-     * @param {Object} options.state
-     */
-    initWheels(currentScreen, options) {
-        let wheels = [];
-        let elSize = config[model.state('res')].elements;
-        for (let i = -2; i < 3; i++) {
-            wheels.push(new Wheel({
-                state: this,
-                parent: this.machineContainer,
-                position: {
-                    x: i * elSize.width - config[model.state('res')].machine.x,
-                    y: 0 - config[model.state('res')].machine.y * 2
-                },
-                elSize,
-                currentScreen: [2, 5, 7, 1, 4]
-            }));
-        }
-        model.el('wheels', wheels);
-    }
-    /**
-     * [Запуск крутки с необходимыми параметрами]
-     * @param {Array} finishScreen
-     * @param {Boolean} options.fastRoll
-     * @param {Array} options.rollTimeArray
-     * @param {Array} options.currentScreen
-     * @param {Function} callback
-     */
-    startRoll(finishScreen, options, callback) {
-        let wheels = model.el('wheels');
-
-        // Колбэк вешается на каждое колесо!
-        let countFinish = 0;
-        callback = function () {
-            ++countFinish;
-            if (countFinish === 5) {
-                console.log('Finish roll!');
-            }
-        };
-
-        wheels.forEach((wheel, columnIndex) => {
-        // Roll
-            this.time.events.add(Phaser.Timer.SECOND + columnIndex * 100, function () {
-                // if (columnIndex > 0) return;
-                wheel.roll([2, 5, 7, 1, 4], {
-                    time: 5000,
-                    length: 50,
-                    easingSeparation: 3.7,
-                    callback
-                });
-            }, wheel);
-        // Paused
-            this.time.events.add(Phaser.Timer.SECOND * 5 + columnIndex * 100, function () {
-                wheel.paused();
-                console.log('Paused');
-            }, wheel);
-        // Loop
-            this.time.events.add(Phaser.Timer.SECOND * 3 + columnIndex * 100, function () {
-                wheel.loop();
-                console.log('Loop');
-            }, wheel);
-        // Play
-            this.time.events.add(Phaser.Timer.SECOND * 8 + columnIndex * 100, function () {
-                wheel.play();
-                console.log('Play');
-            }, wheel);
-        });
     }
 }
