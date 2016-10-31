@@ -1,7 +1,7 @@
 import { Boot } from 'modules/States/Boot';
 import { Preload } from '../../modules/States/Preload';
 import { Init } from '../../modules/States/Init';
-import { Main } from '../../modules/States/Main';
+import { Main } from 'modules/States/Main';
 import { FS } from '../../modules/States/FS';
 import { model } from 'modules/Model/Model';
 
