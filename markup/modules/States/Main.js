@@ -5,6 +5,7 @@ import { config } from 'modules/Util/Config';
 import { Wheel } from 'modules/Wheel/Wheel';
 import { balance } from 'modules/Balance/Balance';
 import { events } from 'modules/Events/Events';
+import { Element } from '../../modules/Element/Element';
 
 export class Main {
     constructor(game) {
@@ -26,12 +27,33 @@ export class Main {
         this.frameAnims = [];
     }
     update() {
+        events.trigger('updateTime');
         this.frameAnims.forEach((anim) => {
             anim();
         });
     }
     preload() {
-
+        let container = this.add.group();
+        container.x = -window.innerWidth;
+        const elem = new Element({
+            state: this,
+            parent: container,
+            el: 1,
+            animation: 'n',
+            x: 0,
+            y: 0
+        });
+        let elemMode = ['n','w','b'];
+        let i = 1;
+        let _this = this;
+        this.frameAnims.push(function preloadElems() {
+            elem.play(i + '-' + 'b');
+            i++;
+            if (i >= 12) {
+                _this.frameAnims.splice(_this.frameAnims.indexOf(preloadElems), 1);
+                container.destroy();
+            }
+        });
     }
     create() {
         this.drawMainBG();
@@ -47,10 +69,6 @@ export class Main {
         this.initWheels();
 
         this.startRoll();
-    }
-
-    update() {
-        events.trigger('updateTime');
     }
 
     drawMainBG() {
@@ -106,21 +124,42 @@ export class Main {
      */
     startRoll(finishScreen, options, callback) {
         let wheels = model.el('wheels');
-        // Roll
-        wheels.forEach((wheel, columnIndex) => {
-            // start roll
-            // if (column   Index > 0) return;
-            this.time.events.add(Phaser.Timer.SECOND + columnIndex * 100, function () {
-                wheel.play();
-            }, wheel);
 
-            // end roll
-            // let callback = function () {
-            //     console.log('Finish roll!');
-            // };
-            // this.time.events.add(Phaser.Timer.SECOND * 5 + columnIndex * 100, function () {
-            //     wheel.stop([2, 5, 7, 1, 4], callback);
-            // }, wheel);
+        // Колбэк вешается на каждое колесо!
+        let countFinish = 0;
+        callback = function () {
+            ++countFinish;
+            if (countFinish === 5) {
+                console.log('Finish roll!');
+            }
+        };
+
+        wheels.forEach((wheel, columnIndex) => {
+        // Roll
+            this.time.events.add(Phaser.Timer.SECOND + columnIndex * 100, function () {
+                // if (columnIndex > 0) return;
+                wheel.roll([2, 5, 7, 1, 4], {
+                    time: 5000,
+                    length: 50,
+                    easingSeparation: 3.7,
+                    callback
+                });
+            }, wheel);
+        // Paused
+            this.time.events.add(Phaser.Timer.SECOND * 5 + columnIndex * 100, function () {
+                wheel.paused();
+                console.log('Paused');
+            }, wheel);
+        // Loop
+            this.time.events.add(Phaser.Timer.SECOND * 3 + columnIndex * 100, function () {
+                wheel.loop();
+                console.log('Loop');
+            }, wheel);
+        // Play
+            this.time.events.add(Phaser.Timer.SECOND * 8 + columnIndex * 100, function () {
+                wheel.play();
+                console.log('Play');
+            }, wheel);
         });
     }
 }
