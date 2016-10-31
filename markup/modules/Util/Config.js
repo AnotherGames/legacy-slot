@@ -3,7 +3,9 @@ export let config = {
         roll: {
             time: 5000,
             length: 50,
-            easingSeparation: 1
+            easingSeparation: 1,
+            deltaTime: 100,
+            finishScreen: [2, 5, 7, 1, 4]
         }
     },
     fullHD: {
