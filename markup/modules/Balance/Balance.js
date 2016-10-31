@@ -70,6 +70,8 @@ export let balance = (function () {
         balanceData.winCash = (0).toFixed(2);
         balanceData.currency = model.data('initBalance').Currency;
 
+        let mainContainer = model.el('mainContainer');
+
         let balanceFont;
 
         if (model.flag('mobile')) {
@@ -93,10 +95,11 @@ export let balance = (function () {
             balanceText.coinsSum.setShadow(0, 0, '#e8b075', 4);
             balanceText.betSum.setShadow(0, 0, '#e8b075', 4);
         } else {
-            balanceText.coinsSum = game.add.text(20, game.world.height - 65, balanceData.coinsSum, {font: 'normal 25px Helvetica', fill: '#e8b075', align: 'center'}, container);
-            balanceText.coinsValue = game.add.text(40, game.world.height - 65, balanceData.coinsValue, {font: 'normal 25px Helvetica', fill: '#e8b075', align: 'center'}, container);
-            balanceText.betSum = game.add.text(60, game.world.height - 65, balanceData.betSum, {font: 'normal 25px Helvetica', fill: '#e8b075', align: 'center'}, container);
-            balanceText.betValue = game.add.text(80, game.world.height - 65, balanceData.betValue, {font: 'normal 25px Helvetica', fill: '#e8b075', align: 'center'}, container);
+            balanceText.coinsSum = game.add.text(mainContainer.x + 420, mainContainer.height + 2, balanceData.coinsSum, {font: 'normal 32px Helvetica', fill: '#e8b075', align: 'center'}, container);
+            balanceText.coinsValue = game.add.text(mainContainer.x + 1340, mainContainer.height + 85, balanceData.coinsValue, {font: 'normal 32px Helvetica', fill: '#e8b075', align: 'center'}, container);
+            balanceText.betSum = game.add.text(mainContainer.x + 1470, mainContainer.height + 2, balanceData.betSum, {font: 'normal 32px Helvetica', fill: '#e8b075', align: 'center'}, container);
+            balanceText.betValue = game.add.text(mainContainer.x + 540, mainContainer.height + 85, balanceData.betValue, {font: 'normal 32px Helvetica', fill: '#e8b075', align: 'center'}, container);
+            // console.log(balanceText.betValue.y);
         }
         model.data('balanceText', balanceText);
         model.data('balanceData', balanceData);

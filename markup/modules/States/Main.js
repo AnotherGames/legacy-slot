@@ -14,15 +14,16 @@ export class Main {
         console.info('Main State!');
         this.bgContainer = this.add.group();
         this.mainContainer = this.add.group();
-        this.balanceContainer = this.add.group();
         this.buttonsContainer = this.add.group();
         this.panelContainer = this.add.group();
+        this.balanceContainer = this.add.group();
         this.menuContainer = this.add.group();
         model.el('bgContainer', this.bgContainer);
         model.el('mainContainer', this.mainContainer);
         model.el('balanceContainer', this.balanceContainer);
         model.el('buttonsContainer', this.buttonsContainer);
         model.el('menuContainer', this.menuContainer);
+        model.el('panelContainer', this.panelContainer);
         model.state('side', 'left');
         this.frameAnims = [];
     }
@@ -51,7 +52,6 @@ export class Main {
             this.mainContainer.x = model.data('mainXLeft');
         } else {
             this.mainContainer.x = (this.game.width - this.mainContainer.width) / 2;
-            this.mainContainer.y = this.mainContainer.y + 5;
         }
         this.initWheels();
         this.startRoll();
