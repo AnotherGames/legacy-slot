@@ -16,18 +16,18 @@ export let events = {
             }
         }
     },
-    trigger: function (eventName, data) {
+    trigger: function (eventName, arg1, arg2, arg3) {
         if (model.flag('events:debug')) {
             console.info(`Event ${eventName} triggered!`);
         }
         try {
             if (this.events[eventName]) {
                 this.events[eventName].forEach(function (fn) {
-                    fn(data);
+                    fn(arg1, arg2, arg3);
                 });
             }
         } catch (e) {
-            console.error(e.message, eventName, data);
+            console.error(e.message, eventName, arg1, arg2, arg3);
         }
     }
 };
