@@ -48,18 +48,16 @@ export let buttons = (function () {
             events.trigger('menu:showMenu', 'bet');
         });
 
-        // menuButton = game.add.sprite(xRight, 0, 'mobileButtons', 'menu.png', container);
-        // menuButton.anchor.set(0.5);
-        // menuButton.on('click', handleMenuClick);
+    }
 
-        // soundButton = game.add.sprite(xRight, 0, 'mobileButtons', 'sound.png', container);
-        // soundButton.anchor.set(0.5);
-        // soundButton.on('click', handleSoundClick);
-
+    function drawDesktopPanel(container, game, maincontainer) {
+        let panelBG = game.add.sprite(game.world.centerX, 910, 'ui', container);
+        panelBG.anchor.set(0.5);
     }
 
     return {
-        drawMobileButtons
+        drawMobileButtons,
+        drawDesktopPanel
     };
 
 })();
