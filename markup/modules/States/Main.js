@@ -115,10 +115,17 @@ export class Main {
         this.mainContainer.addAt(this.machineContainer, 1);
         this.machineContainer.position.set(this.mainContainer.width / 2 + config[model.state('res')].machine.x, this.mainContainer.height / 2);
 
+        let maskMarginX = config[model.state('res')].machine.x;
+        if (model.flag('mobile')) {
+            maskMarginX += model.data('mainXLeft');
+        } else {
+            maskMarginX += (this.game.width - this.mainContainer.width) / 2;
+        }
+
         const elSize = config[model.state('res')].elements;
         let mask = this.add.graphics();
         mask.beginFill(0x000000);
-        mask.drawRect(config[model.state('res')].machine.x + elSize.width, config[model.state('res')].machine.y, elSize.width * 5, elSize.height * 3);
+        mask.drawRect(maskMarginX, config[model.state('res')].machine.y, elSize.width * 5, elSize.height * 3);
         this.machineContainer.mask = mask;
     }
 }
