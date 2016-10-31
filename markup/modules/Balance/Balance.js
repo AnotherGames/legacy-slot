@@ -52,12 +52,14 @@ export let balance = (function () {
 
     }
 
+
     function drawBalanceText(container, game) {
         let d = 0.01 * model.el('game').width;
         let D = 0.025 * model.el('game').width;
 
         let balanceData = {};
         let balanceText = {};
+        let currencySymbol = checkCurrency(model.data('currentBalance').currency);
 
         let topBalanceContainer = game.add.group();
         let bottomBalanceContainer = game.add.group();
@@ -79,7 +81,7 @@ export let balance = (function () {
         balanceData.winCash = (0).toFixed(2);
         balanceData.currency = model.data('initBalance').Currency;
 
-        let currencySymbol = checkCurrency(model.data('currentBalance').currency);
+        let mainContainer = model.el('mainContainer');
 
         balanceText.coinsCashText = game.add.text(
             0,
@@ -161,6 +163,8 @@ export let balance = (function () {
 
         model.data('balanceText', balanceText);
         model.data('balanceData', balanceData);
+
+        setTimeout(updateBalance(currencySymbol), 500);
     }
 
     function checkCurrency(currency) {
@@ -176,6 +180,38 @@ export let balance = (function () {
         }
 
     }
+
+    function updateBalance(currencySymbol) {
+
+        let balanceData = model.data('balanceData');
+        let balanceText = model.data('balanceText');
+        // console.log(balanceText.coinsValue);
+
+        if (balanceText.coinsValue.text !== balanceData.coinsValue) {
+            balanceText.coinsValue.text = balanceData.coinsValue;
+        }
+        if (balanceText.betValue.text !== balanceData.betValue) {
+            balanceText.betValue.text = balanceData.betValue;
+        }
+
+        if (balanceText.coinsSum.text !== balanceData.coinsSum) {
+            balanceText.coinsSum.text = balanceData.coinsSum;
+        }
+        if (balanceText.betSum.text !== balanceData.betSum) {
+            balanceText.betSum.text = balanceData.betSum;
+        }
+        if (balanceText.coinsCash.text.toString().slice(1) !== balanceData.coinsCash) {
+            balanceText.coinsCash.text = currencySymbol + balanceData.coinsCash;
+        }
+        if (balanceText.betCash.text.toString().slice(1) !== balanceData.betCash) {
+            balanceText.betCash.text = currencySymbol + balanceData.betCash;
+        }
+        if (balanceText.winCash.text.toString().slice(1) !== balanceData.winCash) {
+            balanceText.winCash.text = currencySymbol + balanceData.winCash;
+        }
+
+    }
+
 
     function drawTime(container, game) {
 

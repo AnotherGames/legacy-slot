@@ -6,7 +6,6 @@ import { config } from 'modules/Util/Config';
 import { Wheel } from 'modules/Wheel/Wheel';
 import { balance } from 'modules/Balance/Balance';
 import { events } from 'modules/Events/Events';
-import { Element } from '../../modules/Element/Element';
 
 export class Main {
     constructor(game) {
@@ -17,14 +16,16 @@ export class Main {
         console.info('Main State!');
         this.bgContainer = this.add.group();
         this.mainContainer = this.add.group();
-        this.balanceContainer = this.add.group();
         this.buttonsContainer = this.add.group();
+        this.panelContainer = this.add.group();
+        this.balanceContainer = this.add.group();
         this.menuContainer = this.add.group();
         model.el('bgContainer', this.bgContainer);
         model.el('mainContainer', this.mainContainer);
         model.el('balanceContainer', this.balanceContainer);
         model.el('buttonsContainer', this.buttonsContainer);
         model.el('menuContainer', this.menuContainer);
+        model.el('panelContainer', this.panelContainer);
         model.state('side', 'left');
         // массив в который записываются анимации для проигрывания
         let game = model.el('game');
@@ -38,6 +39,7 @@ export class Main {
         game.frameAnims.forEach((anim) => {
             anim();
         });
+        events.trigger('updateTime');
     }
     preload() {
         this.loadElementsAtlas();
@@ -45,13 +47,14 @@ export class Main {
     create() {
         this.drawMainBG();
         this.initMainContainer();
-        // if (model.flag('mobile')) {
-        buttons.drawMobileButtons(this.buttonsContainer, this, this.mainContainer.width);
-        // }
+        if (model.flag('mobile')) {
+            buttons.drawMobileButtons(this.buttonsContainer, this, this.mainContainer.width);
+            model.data('mainXLeft', 2 * model.data('buttonsDelta'));
+            model.data('mainXRight', this.game.width - this.mainContainer.width - model.data('buttonsDelta') * 2);
+        } else {
+            buttons.drawDesktopPanel(this.panelContainer, this, this.mainContainer);
+        }
         balance.drawBalanceContainer(this.balanceContainer, this);
-        model.data('mainXLeft', 2 * model.data('buttonsDelta'));
-        model.data('mainXRight', this.game.width - this.mainContainer.width - model.data('buttonsDelta') * 2);
-        this.mainContainer.x = model.data('mainXLeft');
         this.drawMainContainer();
 
         events.trigger('roll:initWheels');
@@ -63,6 +66,11 @@ export class Main {
                 ease: 1.2
             });
         })
+        if (model.flag('mobile')) {
+            this.mainContainer.x = model.data('mainXLeft');
+        } else {
+            this.mainContainer.x = (this.game.width - this.mainContainer.width) / 2;
+        }
     }
 
     drawMainBG() {
@@ -109,7 +117,7 @@ export class Main {
         const elSize = config[model.state('res')].elements;
         let mask = this.add.graphics();
         mask.beginFill(0x000000);
-        mask.drawRect(model.data('mainXLeft') + config[model.state('res')].machine.x, this.mainContainer.y + config[model.state('res')].machine.y, elSize.width * 5, elSize.height * 3);
+        mask.drawRect(config[model.state('res')].machine.x + elSize.width, config[model.state('res')].machine.y, elSize.width * 5, elSize.height * 3);
         this.machineContainer.mask = mask;
     }
 }
