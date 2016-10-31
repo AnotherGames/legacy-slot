@@ -74,7 +74,7 @@ export class Main {
         const elSize = config[model.state('res')].elements;
         let mask = this.add.graphics();
         mask.beginFill(0x000000);
-        mask.drawRect(model.data('mainXLeft') + config[model.state('res')].machine.x, this.mainContainer.y + config[model.state('res')].machine.y, elSize.width * 5, elSize.height * 3);
+        mask.drawRect(config[model.state('res')].machine.x + elSize.width, config[model.state('res')].machine.y, elSize.width * 5, elSize.height * 3);
         this.machineContainer.mask = mask;
     }
     /**
