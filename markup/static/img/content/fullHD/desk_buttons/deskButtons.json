@@ -33,6 +33,14 @@
 	"sourceSize": {"w":50,"h":50}
 },
 {
+	"filename": "infoOn.png",
+	"frame": {"x":432,"y":1,"w":45,"h":46},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":3,"w":45,"h":46},
+	"sourceSize": {"w":50,"h":50}
+},
+{
 	"filename": "maxBet.png",
 	"frame": {"x":381,"y":301,"w":100,"h":146},
 	"rotated": false,
@@ -50,7 +58,15 @@
 },
 {
 	"filename": "minus.png",
-	"frame": {"x":385,"y":49,"w":36,"h":48},
+	"frame": {"x":385,"y":100,"w":36,"h":48},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":2,"w":36,"h":48},
+	"sourceSize": {"w":40,"h":50}
+},
+{
+	"filename": "minusOn.png",
+	"frame": {"x":423,"y":100,"w":36,"h":48},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":3,"y":2,"w":36,"h":48},
@@ -58,7 +74,15 @@
 },
 {
 	"filename": "plus.png",
-	"frame": {"x":432,"y":1,"w":36,"h":49},
+	"frame": {"x":385,"y":49,"w":36,"h":49},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":1,"w":36,"h":49},
+	"sourceSize": {"w":40,"h":50}
+},
+{
+	"filename": "plusOn.png",
+	"frame": {"x":423,"y":49,"w":36,"h":49},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":3,"y":1,"w":36,"h":49},
@@ -103,6 +127,6 @@
 	"format": "RGBA8888",
 	"size": {"w":482,"h":452},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:48fde54bb830cc6e2826caf21dc788fc:58f96d5de4f1b27e3f98ec60ddd743ee:7216a24ceb66389c4ebee7eae85622d5$"
+	"smartupdate": "$TexturePacker:SmartUpdate:94b8cc959ecae233cad1b778870d3b6a:9d4a0fe908f4c230bd9208f8fb297d84:7216a24ceb66389c4ebee7eae85622d5$"
 }
 }

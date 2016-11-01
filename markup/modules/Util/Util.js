@@ -17,7 +17,7 @@ export let util = (function() {
                 url = `${serviceUrl}/${name}/${userID}/${casinoID}/${mode[options]}`
                 break;
             case '_Roll':
-                url = `${serviceUrl}/${name}/${model.data('sessionID')}/${model.data('currentBalance').betValue}/${model.data('currentBalance').coinsValue}`
+                url = `${serviceUrl}/${name}/${model.data('sessionID')}/${model.data('currentBalance').betValue}/${model.data('currentBalance').coinsValue * 100}`
                 break;
             case '_Ready':
                 url = `${serviceUrl}/${name}/${model.data('sessionID')}`

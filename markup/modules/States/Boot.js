@@ -43,13 +43,11 @@ export class Boot {
         model.data('firstScreen', data.FirstScreen);
         let currentBalance = {
             betValue: data.Balance.BetLevel[0],
-            coinsValue: data.Balance.CoinValue[0],
+            coinsValue: data.Balance.CoinValue[0] / 100,
             currency: data.Balance.Currency,
             scoreCents: data.Balance.ScoreCents,
             scoreCoins: data.Balance.ScoreCoins
         };
         model.data('currentBalance', currentBalance);
-
-        model.log();
     }
 }

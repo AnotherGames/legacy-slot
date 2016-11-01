@@ -1,5 +1,5 @@
 import { buttons } from 'modules/Buttons/Buttons';
-// import { menu } from 'modules/Menu/Menu';
+import { menu } from 'modules/Menu/Menu';
 import { model } from 'modules/Model/Model';
 import { roll } from 'modules/Roll/Roll';
 import { config } from 'modules/Util/Config';
@@ -28,23 +28,16 @@ export class Main {
         model.el('menuContainer', this.menuContainer);
         model.el('panelContainer', this.panelContainer);
         model.state('side', 'left');
+        model.state('sound', true);
         // массив в который записываются анимации для проигрывания
         let game = model.el('game');
         game.frameAnims = [];
     }
-    update() {
-        events.trigger('updateTime');
-        let game = model.el('game');
 
-        // если есть анимации то мы их запускаем
-        game.frameAnims.forEach((anim) => {
-            anim();
-        });
-        events.trigger('updateTime');
-    }
     preload() {
         this.loadElementsAtlas();
     }
+
     create() {
         this.drawMainBG();
         this.initMainContainer();
@@ -60,18 +53,29 @@ export class Main {
 
         events.trigger('roll:initWheels');
 
-        model.el('game').time.events.add(3000, () => {
-            events.trigger('roll:requestRoll', {
-                time: 6000,
-                length: 30,
-                ease: 1.2
-            });
-        })
+        // model.el('game').time.events.add(3000, () => {
+        //     events.trigger('roll:requestRoll', {
+        //         time: 1500,
+        //         length: 30,
+        //         ease: 1
+        //     });
+        // })
         if (model.flag('mobile')) {
             this.mainContainer.x = model.data('mainXLeft');
         } else {
             this.mainContainer.x = (this.game.width - this.mainContainer.width) / 2;
         }
+    }
+
+    update() {
+        events.trigger('updateTime');
+        let game = model.el('game');
+
+        // если есть анимации то мы их запускаем
+        game.frameAnims.forEach((anim) => {
+            anim();
+        });
+        events.trigger('updateTime');
     }
 
     drawMainBG() {
@@ -96,7 +100,7 @@ export class Main {
             x: 0,
             y: 0
         });
-        let elemMode = ['n','w','b'];
+        let elemMode = ['n', 'w', 'b'];
         let i = 1;
         // прогоняем все анимации
         game.frameAnims.push(function preloadElems() {

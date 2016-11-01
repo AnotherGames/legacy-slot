@@ -184,7 +184,7 @@ export class Wheel {
         let timeLength = config.wheel.roll.time;
         this.easingSeparation = config.wheel.roll.easingSeparation;
         this.rollLength = config.wheel.roll.length;
-        this.finishScreen = finishScreen;
+        this.currentScreen = this.finishScreen = finishScreen;
 
         if (typeof (param) === 'object') {
             if (typeof (param.time) === 'number') {
