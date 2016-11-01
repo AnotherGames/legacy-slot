@@ -87,11 +87,11 @@ export let buttons = (function () {
         panelBG.anchor.set(0.5);
 
         let lines = game.add.text(container.x + 375, mainContainer.height + 85, '10', {font: 'normal 32px Helvetica, Arial', fill: '#e8b075', align: 'center'}, container);
-        let info = game.add.button(container.x + 1490, mainContainer.height + 80, 'deskButtons', actionOnClick, this, 'info.png', 'info.png', 'info.png', container);
-        let betLevelPlus = game.add.button(container.x + 565, mainContainer.height + 82, 'deskButtons', actionOnClick, this, 'plus.png', 'plus.png', 'plus.png', container);
-        let betLevelMinus = game.add.button(container.x + 465, mainContainer.height + 81, 'deskButtons', actionOnClick, this, 'minus.png', 'minus.png', 'minus.png', container);
-        let coinLevelPlus = game.add.button(container.x + 1400, mainContainer.height + 82, 'deskButtons', actionOnClick, this, 'plus.png', 'plus.png', 'plus.png', container);
-        let coinLevelMinus = game.add.button(container.x + 1275, mainContainer.height + 81, 'deskButtons', actionOnClick, this, 'minus.png', 'minus.png', 'minus.png', container);
+        let info = game.add.button(container.x + 1490, mainContainer.height + 80, 'deskButtons', actionOnClick, this, 'infoOn.png', 'info.png', 'infoOn.png', container);
+        let betLevelPlus = game.add.button(container.x + 565, mainContainer.height + 82, 'deskButtons', actionOnClick, this, 'plusOn.png', 'plus.png', 'plusOn.png', container);
+        let betLevelMinus = game.add.button(container.x + 465, mainContainer.height + 81, 'deskButtons', actionOnClick, this, 'minusOn.png', 'minus.png', 'minusOn.png', container);
+        let coinLevelPlus = game.add.button(container.x + 1400, mainContainer.height + 82, 'deskButtons', actionOnClick, this, 'plusOn.png', 'plus.png', 'plusOn.png', container);
+        let coinLevelMinus = game.add.button(container.x + 1275, mainContainer.height + 81, 'deskButtons', actionOnClick, this, 'minusOn.png', 'minus.png', 'minusOn.png', container);
 
         let spinButtonDesk = game.add.button(0, mainContainer.height + 70, 'deskButtons', actionOnClick, this, 'spinOn.png', 'spin.png', 'spinOn.png', container);
         spinButtonDesk.anchor.set(0.5);
