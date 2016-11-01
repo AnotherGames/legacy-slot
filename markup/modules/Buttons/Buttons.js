@@ -88,10 +88,10 @@ export let buttons = (function () {
 
         let lines = game.add.text(container.x + 375, mainContainer.height + 85, '10', {font: 'normal 32px Helvetica, Arial', fill: '#e8b075', align: 'center'}, container);
         let info = game.add.button(container.x + 1490, mainContainer.height + 80, 'deskButtons', actionOnClick, this, 'infoOn.png', 'info.png', 'infoOn.png', container);
-        let betLevelPlus = game.add.button(container.x + 565, mainContainer.height + 82, 'deskButtons', actionOnClick, this, 'plusOn.png', 'plus.png', 'plusOn.png', container);
-        let betLevelMinus = game.add.button(container.x + 465, mainContainer.height + 81, 'deskButtons', actionOnClick, this, 'minusOn.png', 'minus.png', 'minusOn.png', container);
-        let coinLevelPlus = game.add.button(container.x + 1400, mainContainer.height + 82, 'deskButtons', actionOnClick, this, 'plusOn.png', 'plus.png', 'plusOn.png', container);
-        let coinLevelMinus = game.add.button(container.x + 1275, mainContainer.height + 81, 'deskButtons', actionOnClick, this, 'minusOn.png', 'minus.png', 'minusOn.png', container);
+        let betLevelPlus = game.add.button(container.x + 565, mainContainer.height + 82, 'deskButtons', betPlus, this, 'plusOn.png', 'plus.png', 'plusOn.png', container);
+        let betLevelMinus = game.add.button(container.x + 465, mainContainer.height + 81, 'deskButtons', betMinus, this, 'minusOn.png', 'minus.png', 'minusOn.png', container);
+        let coinLevelPlus = game.add.button(container.x + 1400, mainContainer.height + 82, 'deskButtons', coinsPlus, this, 'plusOn.png', 'plus.png', 'plusOn.png', container);
+        let coinLevelMinus = game.add.button(container.x + 1275, mainContainer.height + 81, 'deskButtons', coinsMinus, this, 'minusOn.png', 'minus.png', 'minusOn.png', container);
 
         let spinButtonDesk = game.add.button(0, mainContainer.height + 70, 'deskButtons', actionOnClick, this, 'spinOn.png', 'spin.png', 'spinOn.png', container);
         spinButtonDesk.anchor.set(0.5);
@@ -106,10 +106,30 @@ export let buttons = (function () {
                 ease: 1
             });
         });
-        let maxBetButtonDesk = game.add.button(spinButtonDesk.x + 137, mainContainer.height + 69, 'deskButtons', actionOnClick, this, 'maxBetOn.png', 'maxBet.png', 'maxBetOn.png', container);
+        let maxBetButtonDesk = game.add.button(spinButtonDesk.x + 137, mainContainer.height + 69, 'deskButtons', maxBet, this, 'maxBetOn.png', 'maxBet.png', 'maxBetOn.png', container);
         let autoButtonDesk = game.add.button(spinButtonDesk.x - 137, mainContainer.height + 70, 'deskButtons', actionOnClick, this, 'autoOn.png', 'auto.png', 'autoOn.png', container);
         maxBetButtonDesk.anchor.set(0.5);
         autoButtonDesk.anchor.set(0.5);
+
+        function coinsPlus() {
+            events.trigger('buttons:changeCoins', true);
+        }
+
+        function coinsMinus() {
+            events.trigger('buttons:changeCoins', false);
+        }
+
+        function betPlus() {
+            events.trigger('buttons:changeBet', true);
+        }
+
+        function betMinus() {
+            events.trigger('buttons:changeBet', false);
+        }
+
+        function maxBet() {
+            events.trigger('buttons:maxBet');
+        }
 
         function actionOnClick() {
             console.log('i am clicked!');
