@@ -16,11 +16,7 @@ export let buttons = (function () {
         spinButton.inputEnabled = true;
         spinButton.input.priorityID = 1;
         spinButton.events.onInputDown.add(function () {
-            events.trigger('roll:requestRoll', {
-                time: 1500,
-                length: 30,
-                ease: 1
-            });
+            events.trigger('roll:requestRoll');
         });
 
         let delta = (game.game.width - mainWidth - spinButton.width) / 4;
