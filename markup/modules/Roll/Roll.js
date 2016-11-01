@@ -43,7 +43,7 @@ export let roll = (function() {
 
             let nextScreen = data.Screen;
             if (typeof nextScreen === 'undefined') {
-                console.error('Wrong Roll!', data.ErrorMessage);
+                console.warn('Wrong Roll!', data.ErrorMessage);
                 return;
             }
             let nextWheels = Array(5);
@@ -60,7 +60,7 @@ export let roll = (function() {
         });
     }
 
-    function startRoll(finishScreen, options) {
+    function startRoll(finishScreen, options = {}) {
         let wheels = model.el('wheels');
         let game = model.el('game');
 

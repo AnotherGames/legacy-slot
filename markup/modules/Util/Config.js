@@ -1,8 +1,8 @@
 export let config = {
     wheel: {
         roll: {
-            time: 5000,
-            length: 50,
+            time: 1500,
+            length: 30,
             easingSeparation: 1,
             deltaTime: 100,
             finishScreen: [2, 5, 7, 1, 4]
