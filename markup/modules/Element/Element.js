@@ -21,23 +21,37 @@ export class Element {
 
         this.state = this.game.state.states.Main;
 
-        this.sprite = this.state.add.sprite(param.x, param.y, param.el, null, param.parent);
-        this._addElementAnimations(param.el);
+        this.sprite = this.state.add.sprite(param.x, param.y, 'elements', null, param.parent);
+
+        // this._addElementAnimations(param.el);
+
+        this._addAnimation({ el: 1, n: false, w: 15 });
+        this._addAnimation({ el: 2, n: 15, w: 25 });
+        this._addAnimation({ el: 3, n: false, w: 15 });
+        this._addAnimation({ el: 4, n: 20, w: 20 });
+        this._addAnimation({ el: 5, n: false, w: 15 });
+        this._addAnimation({ el: 6, n: 15, w: 15 });
+        this._addAnimation({ el: 7, n: false, w: 15 });
+        this._addAnimation({ el: 8, n: 15, w: 15 });
+        this._addAnimation({ el: 9, n: 15, w: 15 });
+        this._addAnimation({ el: 10, n: 15, w: 15 });
+        this._addAnimation({ el: 11, n: 15, w: 15 });
+
         this.sprite.animations.play(`${param.el}-${param.animation}`);
     }
 
     play(animation) {
-        let thisAnim = Object.keys(this.sprite.animations._anims).some((key) => {
-            if (parseInt(key) === parseInt(animation)) return true;
-        });
-        if (thisAnim) {
-            this.sprite.animations.play(animation);
-        } else {
-            this.sprite.animations._anims = [];
-            this.sprite.loadTexture(parseInt(animation));
-            this._addElementAnimations(parseInt(animation));
-            this.sprite.animations.play(animation);
-        }
+        // let thisAnim = Object.keys(this.sprite.animations._anims).some((key) => {
+        //     if (parseInt(key) === parseInt(animation)) return true;
+        // });
+        // if (thisAnim) {
+        this.sprite.animations.play(animation);
+        // } else {
+        //     this.sprite.animations._anims = [];
+        //     this.sprite.loadTexture(parseInt(animation));
+        //     this._addElementAnimations(parseInt(animation));
+        //     this.sprite.animations.play(animation);
+        // }
     }
 
     _addElementAnimations(el) {

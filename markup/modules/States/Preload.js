@@ -87,6 +87,8 @@ function loadMainAssets(game) {
     game.load.image('gameMachine', 'game/gameMachine.png');
     game.load.image('gameBG', 'game/gameBG.png');
     game.load.image('gameShadow', 'game/gameShadow.png');
+    game.load.image('infoRules', 'other/infoRules.png');
+    game.load.image('popup', 'other/popup.png');
     game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
     game.load.atlasJSONArray('footerButtons', 'footer/footerButtons.png', 'footer/footerButtons.json');
     if (model.flag('desktop')) {

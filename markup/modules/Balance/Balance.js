@@ -80,7 +80,7 @@ export let balance = (function () {
 
         balanceData.betValue = balanceData.betSteps[0];
         balanceData.betSum = +(balanceData.betValue * balanceData.linesLength).toFixed(0);
-        balanceData.betCash = +(balanceData.betSum * balanceData.coinsValue).toFixed(2);
+        balanceData.betCash = +(balanceData.betSum * balanceData.coinsValue).toFixed(2) + '';
 
         balanceData.winCash = (0).toFixed(2);
         balanceData.currency = model.data('initBalance').Currency;
@@ -134,7 +134,6 @@ export let balance = (function () {
         let bottomLineWidth = balanceText.coinsCashText.width + d + balanceText.coinsCash.width + D + balanceText.betCashText.width + d + balanceText.betCash.width + D + balanceText.winCashText.width + d + balanceText.winCash.width;
 
         bottomBalanceContainer.x = game.world.centerX - bottomLineWidth / 2;
-        // console.log(bottomBalanceContainer.x);
 
         if (model.flag('mobile')) {
             balanceText.coinsSumText = game.add.text(
@@ -173,36 +172,40 @@ export let balance = (function () {
             topBalanceContainer.x = game.world.centerX - topLineWidth / 2;
         } else {
             balanceText.coinsSum = game.add.text(
-                mainContainer.x + 410,
-                mainContainer.height + 5,
+                mainContainer.x + 480,
+                mainContainer.height + 23,
                 balanceData.coinsSum,
                 {font: 'normal 27px Helvetica, Arial', fill: '#e8b075', align: 'center'},
                 container);
+            balanceText.coinsSum.anchor.set(0.5);
             balanceText.coinsValue = game.add.text(
-                mainContainer.x + 1330,
-                mainContainer.height + 88,
+                mainContainer.x + 1360,
+                mainContainer.height + 105,
                 balanceData.coinsValue,
                 {font: 'normal 27px Helvetica, Arial', fill: '#e8b075', align: 'center'},
                 container);
+            balanceText.coinsValue.anchor.set(0.5);
             balanceText.betSum = game.add.text(
-                mainContainer.x + 1460,
-                mainContainer.height + 5,
+                mainContainer.x + 1470,
+                mainContainer.height + 23,
                 balanceData.betSum,
                 {font: 'normal 27px Helvetica, Arial', fill: '#e8b075', align: 'center'},
                 container);
+            balanceText.betSum.anchor.set(0.5);
             balanceText.betValue = game.add.text(
-                mainContainer.x + 530,
-                mainContainer.height + 88,
+                mainContainer.x + 535,
+                mainContainer.height + 105,
                 balanceData.betValue,
                 {font: 'normal 27px Helvetica, Arial', fill: '#e8b075', align: 'center'},
                 container);
+            balanceText.betValue.anchor.set(0.5);
         }
 
 
         model.data('balanceText', balanceText);
         model.data('balanceData', balanceData);
 
-        setTimeout(updateBalance(currencySymbol), 500);
+        setTimeout(updateBalance(), 500);
     }
 
     function checkCurrency(currency) {
@@ -219,10 +222,7 @@ export let balance = (function () {
 
     }
 
-    function updateBalance(currencySymbol) {
-
-        let balanceData = model.data('balanceData');
-        let balanceText = model.data('balanceText');
+    function updateBalance() {
 
         if (model.flag('desktop')) {
             if (balanceText.coinsValue.text !== balanceData.coinsValue) {
@@ -233,21 +233,19 @@ export let balance = (function () {
             }
         }
 
-
         if (balanceText.coinsSum.text !== balanceData.coinsSum) {
             balanceText.coinsSum.text = balanceData.coinsSum;
         }
         if (balanceText.betSum.text !== balanceData.betSum) {
             balanceText.betSum.text = balanceData.betSum;
         }
-        if (balanceText.coinsCash.text.toString().slice(1) != balanceData.coinsCash) {
-            console.log(balanceText.coinsCash.text.toString().slice(1), balanceData.coinsCash);
+        if (balanceText.coinsCash.text.toString().slice(1) !== balanceData.coinsCash) {
             balanceText.coinsCash.text = currencySymbol + balanceData.coinsCash;
         }
-        if (balanceText.betCash.text.toString().slice(1) != balanceData.betCash) {
+        if (balanceText.betCash.text.toString().slice(1) !== balanceData.betCash) {
             balanceText.betCash.text = currencySymbol + balanceData.betCash;
         }
-        if (balanceText.winCash.text.toString().slice(1) != balanceData.winCash) {
+        if (balanceText.winCash.text.toString().slice(1) !== balanceData.winCash) {
             balanceText.winCash.text = currencySymbol + balanceData.winCash;
         }
 
@@ -256,7 +254,7 @@ export let balance = (function () {
     }
 
     function changeBet(moreOrLess, maxBetFlag) {
-        console.log('balanceData', balanceData, currencySymbol);
+
         if (maxBetFlag) {
             balanceData.betValue = balanceData.betSteps[balanceData.betSteps.length - 1];
         } else if (moreOrLess === true && balanceData.betValue !== balanceData.betSteps[balanceData.betSteps.length - 1]) {
