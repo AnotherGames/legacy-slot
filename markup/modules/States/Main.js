@@ -32,19 +32,11 @@ export class Main {
         let game = model.el('game');
         game.frameAnims = [];
     }
-    update() {
-        events.trigger('updateTime');
-        let game = model.el('game');
 
-        // если есть анимации то мы их запускаем
-        game.frameAnims.forEach((anim) => {
-            anim();
-        });
-        events.trigger('updateTime');
-    }
     preload() {
         this.loadElementsAtlas();
     }
+
     create() {
         this.drawMainBG();
         this.initMainContainer();
@@ -60,18 +52,29 @@ export class Main {
 
         events.trigger('roll:initWheels');
 
-        model.el('game').time.events.add(3000, () => {
-            events.trigger('roll:requestRoll', {
-                time: 1500,
-                length: 30,
-                ease: 1
-            });
-        })
+        // model.el('game').time.events.add(3000, () => {
+        //     events.trigger('roll:requestRoll', {
+        //         time: 1500,
+        //         length: 30,
+        //         ease: 1
+        //     });
+        // })
         if (model.flag('mobile')) {
             this.mainContainer.x = model.data('mainXLeft');
         } else {
             this.mainContainer.x = (this.game.width - this.mainContainer.width) / 2;
         }
+    }
+
+    update() {
+        events.trigger('updateTime');
+        let game = model.el('game');
+
+        // если есть анимации то мы их запускаем
+        game.frameAnims.forEach((anim) => {
+            anim();
+        });
+        events.trigger('updateTime');
     }
 
     drawMainBG() {
