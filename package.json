@@ -27,7 +27,7 @@
     "gulp": "^3.9.1"
   },
   "scripts": {
-    "test": "karma start --browsers Chrome,Firefox,Edge --single-run"
+    "test": "karma start --browsers Chrome, Firefox --single-run"
   },
   "author": "",
   "license": "ISC"
