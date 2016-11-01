@@ -23,8 +23,6 @@ export let roll = (function() {
             });
         });
 
-        console.log(firstWheels);
-
         for (let i = -2; i < 3; i++) {
             wheels.push(new Wheel({
                 game, // в опциях можно передавать состояние и контейнер в котором создавать колеса
@@ -44,6 +42,10 @@ export let roll = (function() {
         util.request('_Roll').then((data) => {
 
             let nextScreen = data.Screen;
+            if (typeof nextScreen === 'undefined') {
+                console.error('Wrong Roll!', data.ErrorMessage);
+                return;
+            }
             let nextWheels = Array(5);
 
             nextScreen.forEach((row, rowIndex) => {
@@ -66,7 +68,7 @@ export let roll = (function() {
         let callback = function () {
             ++countFinish;
             if (countFinish === 5) {
-                events.trigger('roll:rollFinished');
+                events.trigger('roll:finishRoll');
                 console.log('Roll finished!');
             }
         };
@@ -85,8 +87,15 @@ export let roll = (function() {
         });
     }
 
+    function finishRoll() {
+        util.request('_Ready').then((data) => {
+            // console.log('Ready done', data);
+        });
+    }
+
     events.on('roll:initWheels', initWheels);
     events.on('roll:requestRoll', requestRoll);
+    events.on('roll:finishRoll', finishRoll);
 
     return {
         initWheels,
