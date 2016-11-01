@@ -221,12 +221,15 @@ export let balance = (function () {
         let balanceText = model.data('balanceText');
         // console.log(balanceText.coinsValue);
 
-        if (balanceText.coinsValue.text !== balanceData.coinsValue) {
-            balanceText.coinsValue.text = balanceData.coinsValue;
+        if (model.flag('desktop')) {
+            if (balanceText.coinsValue.text !== balanceData.coinsValue) {
+                balanceText.coinsValue.text = balanceData.coinsValue;
+            }
+            if (balanceText.betValue.text !== balanceData.betValue) {
+                balanceText.betValue.text = balanceData.betValue;
+            }
         }
-        if (balanceText.betValue.text !== balanceData.betValue) {
-            balanceText.betValue.text = balanceData.betValue;
-        }
+
 
         if (balanceText.coinsSum.text !== balanceData.coinsSum) {
             balanceText.coinsSum.text = balanceData.coinsSum;
