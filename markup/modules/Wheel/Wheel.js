@@ -71,6 +71,7 @@ export class Wheel {
         this.elSize = param.elSize;
         this.currentScreen = param.currentScreen;
         // инитим внутрение параметры
+        this.isFast = false;
         this._gotoPlay = false;
         this._gotoPaused = false;
         this._gotoLoop = false;
@@ -147,6 +148,7 @@ export class Wheel {
         this._gotoPlay = true;
     }
     paused() {
+        if (this.mode === 'idle') return;
         if (this.mode === 'paused') return;
 
         this._gotoPaused = true;
@@ -157,13 +159,19 @@ export class Wheel {
         this._wheelStartPos = 0;
     }
     loop() {
-        if (this.mode === 'loop') return;
-        if (this.mode === 'paused') {
-            console.error('loop: do not goto "Loop" mode if the pause!');
-            return;
-        }
+        if (this.mode !== 'roll') return
 
         this._gotoLoop = true;
+    }
+    fast() {
+        // TODO: добавить проверку на режим fastSpin
+        if (this.isFast) return;
+        this.isFast = true;
+
+        if (this.mode === 'idle') return;
+        let currTime = this.startTime + this.timeLength * this.progress;
+        this.startTime = currTime - config.wheel.roll.fastTime * this.progress;
+        this.timeLength = config.wheel.roll.fastTime;
     }
     /*  *param: {
             time: Number (milisecond),
@@ -180,8 +188,8 @@ export class Wheel {
         this.update();
 
         let _this = this;
-        let startTime = this.game.time.totalElapsedSeconds() * 1000;
-        let timeLength = config.wheel.roll.time;
+        this.startTime = this.game.time.totalElapsedSeconds() * 1000;
+        this.timeLength = config.wheel.roll.time;
         this.easingSeparation = config.wheel.roll.easingSeparation;
         this.rollLength = config.wheel.roll.length;
         this.currentScreen = this.finishScreen = finishScreen;
@@ -192,7 +200,7 @@ export class Wheel {
                     console.error('roll: param.time is incorrectly.', param.time);
                     return;
                 }
-                timeLength = param.time;
+                this.timeLength = param.time;
             }
             if (typeof (param.length) === 'number') {
                 if (param.length === 0) {
@@ -215,10 +223,15 @@ export class Wheel {
             }
         }
 
-        let startY = _this.wheelY;
-        let endY = this.wheelY + _this.elSize.height * this.rollLength;
+        if (this.isFast) {
+            this.timeLength = config.wheel.roll.fastTime;
+        }
+
+        let startY = this.wheelY;
+        let endY = this.wheelY + this.elSize.height * this.rollLength;
         let pathLenth = endY - startY;
-        _this.wheelY += _this.elSize.height;
+        this.wheelY += this.elSize.height;
+        this.progress = 0;
 
         let anim = function () {
             switch (_this.mode) {
@@ -231,20 +244,21 @@ export class Wheel {
                     _this._elemGotoSwitchBottom();
                     break;
                 case 'roll':
-                    let currTime = _this.game.time.totalElapsedSeconds() * 1000 - (startTime + _this._pausedTimeLenth);
-                    let progress = currTime / timeLength;
-                    if (progress > 1) {
-                        progress = 1;
+                    let currTime = _this.game.time.totalElapsedSeconds() * 1000 - (_this.startTime + _this._pausedTimeLenth);
+                    _this.progress = currTime / _this.timeLength;
+                    if (_this.progress > 1) {
+                        _this.progress = 1;
                     }
-                    _this.wheelLastY = _this.container.y = startY + _this._loopLengthY + pathLenth * _this._easingBackInOut(progress);
+                    _this.wheelLastY = _this.container.y = startY + _this._loopLengthY + pathLenth * _this._easingBackInOut(_this.progress);
 
                     _this._elemGotoSwitchTop();
                     _this._elemGotoSwitchBottom();
 
-                    if (progress === 1) {
+                    if (_this.progress === 1) {
                         _this.game.frameAnims.splice(_this.game.frameAnims.indexOf(anim), 1);
 
                         _this.mode = 'idle';
+                        _this.isFast = false;
 
                         if (_this.finishCallback) {
                             _this.finishCallback();

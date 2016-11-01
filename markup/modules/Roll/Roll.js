@@ -43,6 +43,15 @@ export let roll = (function() {
 
             let nextScreen = data.Screen;
             if (typeof nextScreen === 'undefined') {
+                // fast roll
+                if (data.ErrorMessage === 'ReadyWaitActive') {
+                    let wheels = model.el('wheels');
+                    wheels.forEach((wheel) => {
+                        wheel.fast();
+                    });
+                    return;
+                }
+
                 console.warn('Wrong Roll!', data.ErrorMessage);
                 return;
             }
