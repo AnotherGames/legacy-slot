@@ -14,8 +14,11 @@ export let buttons = (function () {
         spinButton.inputEnabled = true;
         spinButton.input.priorityID = 1;
         spinButton.events.onInputDown.add(function () {
-            // events.trigger('menu:showMenu', 'auto');
-            console.log('I am spin Button!');
+            events.trigger('roll:requestRoll' , {
+                time: 1500,
+                length: 30,
+                ease: 1
+            });
         });
 
         let delta = (game.game.width - mainWidth - spinButton.width) / 4;
@@ -66,6 +69,16 @@ export let buttons = (function () {
         let spinButtonDesk = game.add.button(0, mainContainer.height + 70, 'deskButtons', actionOnClick, this, 'spinOn.png', 'spin.png', 'spinOn.png', container);
         spinButtonDesk.anchor.set(0.5);
         spinButtonDesk.x = container.x + 950;
+        spinButtonDesk.inputEnabled = true;
+        spinButtonDesk.input.priorityID = 1;
+        spinButtonDesk.events.onInputDown.add(function () {
+            console.log('I am big Button');
+            events.trigger('roll:requestRoll' , {
+                time: 1500,
+                length: 30,
+                ease: 1
+            });
+        });
         let maxBetButtonDesk = game.add.button(spinButtonDesk.x + 137, mainContainer.height + 69, 'deskButtons', actionOnClick, this, 'maxBetOn.png', 'maxBet.png', 'maxBetOn.png', container);
         let autoButtonDesk = game.add.button(spinButtonDesk.x - 137, mainContainer.height + 70, 'deskButtons', actionOnClick, this, 'autoOn.png', 'auto.png', 'autoOn.png', container);
         maxBetButtonDesk.anchor.set(0.5);
