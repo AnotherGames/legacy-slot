@@ -4,6 +4,9 @@ import { events } from 'modules/Events/Events';
 export let balance = (function () {
 
     let d, D;
+    let balanceData = {};
+    let balanceText = {};
+    let currencySymbol;
 
     function drawBalanceContainer(container, game) {
         let d = 0.01 * model.el('game').width;
@@ -56,14 +59,11 @@ export let balance = (function () {
 
     }
 
-
     function drawBalanceText(container, game) {
         let d = 0.01 * model.el('game').width;
         let D = 0.025 * model.el('game').width;
 
-        let balanceData = {};
-        let balanceText = {};
-        let currencySymbol = checkCurrency(model.data('currentBalance').currency);
+        currencySymbol = checkCurrency(model.data('currentBalance').currency);
 
         let topBalanceContainer = game.add.group();
         let bottomBalanceContainer = game.add.group();
@@ -223,7 +223,6 @@ export let balance = (function () {
 
         let balanceData = model.data('balanceData');
         let balanceText = model.data('balanceText');
-        // console.log(balanceText.coinsValue);
 
         if (model.flag('desktop')) {
             if (balanceText.coinsValue.text !== balanceData.coinsValue) {
@@ -241,18 +240,95 @@ export let balance = (function () {
         if (balanceText.betSum.text !== balanceData.betSum) {
             balanceText.betSum.text = balanceData.betSum;
         }
-        if (balanceText.coinsCash.text.toString().slice(1) !== balanceData.coinsCash) {
+        if (balanceText.coinsCash.text.toString().slice(1) != balanceData.coinsCash) {
+            console.log(balanceText.coinsCash.text.toString().slice(1), balanceData.coinsCash);
             balanceText.coinsCash.text = currencySymbol + balanceData.coinsCash;
         }
-        if (balanceText.betCash.text.toString().slice(1) !== balanceData.betCash) {
+        if (balanceText.betCash.text.toString().slice(1) != balanceData.betCash) {
             balanceText.betCash.text = currencySymbol + balanceData.betCash;
         }
-        if (balanceText.winCash.text.toString().slice(1) !== balanceData.winCash) {
+        if (balanceText.winCash.text.toString().slice(1) != balanceData.winCash) {
             balanceText.winCash.text = currencySymbol + balanceData.winCash;
         }
 
+        model.data('currentBalance', balanceData);
+
     }
 
+    function changeBet(moreOrLess, maxBetFlag) {
+        console.log('balanceData', balanceData, currencySymbol);
+        if (maxBetFlag) {
+            balanceData.betValue = balanceData.betSteps[balanceData.betSteps.length - 1];
+        } else if (moreOrLess === true && balanceData.betValue !== balanceData.betSteps[balanceData.betSteps.length - 1]) {
+            let i = balanceData.betSteps.length;
+            while (i >= 0) {
+                if (balanceData.betSteps[i] === balanceData.betValue) {
+                    balanceData.betValue = balanceData.betSteps[i + 1];
+                    i = -1;
+                }
+                i--;
+            }
+        } else if (moreOrLess === false && balanceData.betValue !== balanceData.betSteps[0]) {
+            let i = balanceData.betSteps.length;
+            while (i >= 0) {
+                if (balanceData.betSteps[i] === balanceData.betValue) {
+                    balanceData.betValue = balanceData.betSteps[i - 1];
+                    i = -1;
+                }
+                i--;
+            }
+        } else {
+            console.warn('Bet change is failed!');
+        }
+        balanceData.betSum = +(balanceData.betValue * balanceData.linesLength).toFixed(0);
+        balanceData.betCash = +(balanceData.betSum * balanceData.coinsValue).toFixed(2);
+        updateBalance();
+        console.log('Bet is changed:', balanceData.betValue);
+        if (balanceData.betValue === balanceData.betSteps[balanceData.betSteps.length - 1]) {
+            console.warn('This bet value is maximum!');
+        } else if (balanceData.betValue === balanceData.betSteps[0]) {
+            console.warn('This bet value is minimum!');
+        }
+    }
+
+    function changeCoins(moreOrLess, maxBetFlag) {
+        if (maxBetFlag) {
+            balanceData.coinsValue = balanceData.coinsSteps[balanceData.coinsSteps.length - 1];
+        } else if (moreOrLess === true && balanceData.coinsValue !== balanceData.coinsSteps[balanceData.coinsSteps.length - 1]) {
+            let i = balanceData.coinsSteps.length;
+            while (i >= 0) {
+                if (balanceData.coinsSteps[i] === balanceData.coinsValue) {
+                    balanceData.coinsValue = balanceData.coinsSteps[i + 1];
+                    i = -1;
+                }
+                i--;
+            }
+        } else if (moreOrLess === false && balanceData.coinsValue !== balanceData.coinsSteps[0]) {
+            let i = balanceData.coinsSteps.length;
+            while (i >= 0) {
+                if (balanceData.coinsSteps[i] === balanceData.coinsValue) {
+                    balanceData.coinsValue = balanceData.coinsSteps[i - 1];
+                    i = -1;
+                }
+                i--;
+            }
+        } else {
+            console.warn('Coins change is failed!');
+        }
+        balanceData.coinsSum = +Math.floor(balanceData.coinsCash / balanceData.coinsValue).toFixed(0);
+        balanceData.betCash = +(balanceData.coinsValue * balanceData.betSum).toFixed(2);
+        updateBalance();
+        console.log('Coins value is changed:', balanceData.coinsValue);
+        if (balanceData.coinsValue === balanceData.coinsSteps[balanceData.coinsSteps.length - 1]) {
+            console.warn('This coins value is maximum!');
+        } else if (balanceData.coinsValue === balanceData.coinsSteps[0]) {
+            console.warn('This coins value is minimum!');
+        }
+    }
+
+    function maxBet() {
+        changeBet(true, true);
+    }
 
     function drawTime(container, game) {
 
@@ -319,9 +395,10 @@ export let balance = (function () {
 
     }
 
-
-
     events.on('updateTime', updateTime);
+    events.on('buttons:changeBet', changeBet);
+    events.on('buttons:changeCoins', changeCoins);
+    events.on('buttons:maxBet', maxBet);
 
     return {
         drawBalanceContainer
