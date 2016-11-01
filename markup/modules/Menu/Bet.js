@@ -1,4 +1,5 @@
 import { model } from '../../modules/Model/Model';
+import { events } from '../../modules/Events/Events';
 
 export function drawBetMenu(container, game) {
     let deltaX = container.width * 0.3;
@@ -21,6 +22,12 @@ export function drawBetMenu(container, game) {
         'maxBet.png',
         betContainer);
     maxBetButton.anchor.set(0.5);
+    maxBetButton.inputEnabled = true;
+    maxBetButton.input.priorityID = 1;
+    maxBetButton.events.onInputDown.add(function () {
+        events.trigger('buttons:maxBet');
+        betText.text = model.data('currentBalance').betValue;
+    });
 
     const betLevel = game.add.sprite(
         container.width / 2,
@@ -58,7 +65,8 @@ export function drawBetMenu(container, game) {
     betPlus.inputEnabled = true;
     betPlus.input.priorityID = 2;
     betPlus.events.onInputDown.add(function () {
-        console.log('i am betPlus');
+        events.trigger('buttons:changeBet', true);
+        betText.text = model.data('currentBalance').betValue;
     });
 
     const betMinus = game.add.sprite(
@@ -72,7 +80,8 @@ export function drawBetMenu(container, game) {
     betMinus.inputEnabled = true;
     betMinus.input.priorityID = 2;
     betMinus.events.onInputDown.add(function () {
-        console.log('i am betMinus');
+        events.trigger('buttons:changeBet', false);
+        betText.text = model.data('currentBalance').betValue;
     });
 
     const coinValue = game.add.sprite(
@@ -111,7 +120,8 @@ export function drawBetMenu(container, game) {
     coinPlus.inputEnabled = true;
     coinPlus.input.priorityID = 2;
     coinPlus.events.onInputDown.add(function () {
-        console.log('i am coinPlus');
+        events.trigger('buttons:changeCoins', true);
+        coinText.text = model.data('currentBalance').coinsValue;
     });
 
     const coinMinus = game.add.sprite(
@@ -125,6 +135,7 @@ export function drawBetMenu(container, game) {
     coinMinus.inputEnabled = true;
     coinMinus.input.priorityID = 2;
     coinMinus.events.onInputDown.add(function () {
-        console.log('i am coinMinus');
+        events.trigger('buttons:changeCoins', false);
+        coinText.text = model.data('currentBalance').coinsValue;
     });
 }
