@@ -1,5 +1,5 @@
 import { buttons } from 'modules/Buttons/Buttons';
-// import { menu } from 'modules/Menu/Menu';
+import { menu } from 'modules/Menu/Menu';
 import { model } from 'modules/Model/Model';
 import { roll } from 'modules/Roll/Roll';
 import { config } from 'modules/Util/Config';
@@ -62,9 +62,9 @@ export class Main {
 
         model.el('game').time.events.add(3000, () => {
             events.trigger('roll:requestRoll', {
-                time: 6000,
+                time: 1500,
                 length: 30,
-                ease: 1.2
+                ease: 1
             });
         })
         if (model.flag('mobile')) {

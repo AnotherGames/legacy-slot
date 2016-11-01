@@ -170,27 +170,27 @@ export let balance = (function () {
         } else {
             balanceText.coinsSum = game.add.text(
                 mainContainer.x + 410,
-                mainContainer.height + 2,
+                mainContainer.height + 5,
                 balanceData.coinsSum,
-                {font: 'normal 32px Helvetica', fill: '#e8b075', align: 'center'},
+                {font: 'normal 27px Helvetica, Arial', fill: '#e8b075', align: 'center'},
                 container);
             balanceText.coinsValue = game.add.text(
                 mainContainer.x + 1330,
-                mainContainer.height + 85,
+                mainContainer.height + 88,
                 balanceData.coinsValue,
-                {font: 'normal 32px Helvetica', fill: '#e8b075', align: 'center'},
+                {font: 'normal 27px Helvetica, Arial', fill: '#e8b075', align: 'center'},
                 container);
             balanceText.betSum = game.add.text(
                 mainContainer.x + 1460,
-                mainContainer.height + 2,
+                mainContainer.height + 5,
                 balanceData.betSum,
-                {font: 'normal 32px Helvetica', fill: '#e8b075', align: 'center'},
+                {font: 'normal 27px Helvetica, Arial', fill: '#e8b075', align: 'center'},
                 container);
             balanceText.betValue = game.add.text(
                 mainContainer.x + 530,
-                mainContainer.height + 85,
+                mainContainer.height + 88,
                 balanceData.betValue,
-                {font: 'normal 32px Helvetica', fill: '#e8b075', align: 'center'},
+                {font: 'normal 27px Helvetica, Arial', fill: '#e8b075', align: 'center'},
                 container);
         }
 

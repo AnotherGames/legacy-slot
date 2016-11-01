@@ -35,6 +35,7 @@ export let buttons = (function () {
         autoButton.input.priorityID = 1;
         autoButton.events.onInputDown.add(function () {
             if (model.state('menu') === 'opened') return;
+            console.log('I am button');
             events.trigger('menu:showMenu', 'auto');
         });
 
@@ -45,6 +46,7 @@ export let buttons = (function () {
         betButton.input.priorityID = 1;
         betButton.events.onInputDown.add(function () {
             if (model.state('menu') === 'opened') return;
+            console.log('I am button');
             events.trigger('menu:showMenu', 'bet');
         });
 
@@ -54,7 +56,7 @@ export let buttons = (function () {
         let panelBG = game.add.sprite(game.world.centerX - 10, mainContainer.height + 70, 'ui', null, container);
         panelBG.anchor.set(0.5);
 
-        let lines = game.add.text(container.x + 375, mainContainer.height + 85, '10', {font: 'normal 32px Helvetica', fill: '#e8b075', align: 'center'}, container);
+        let lines = game.add.text(container.x + 375, mainContainer.height + 85, '10', {font: 'normal 32px Helvetica, Arial', fill: '#e8b075', align: 'center'}, container);
         let info = game.add.button(container.x + 1490, mainContainer.height + 80, 'deskButtons', actionOnClick, this, 'info.png', 'info.png', 'info.png', container);
         let betLevelPlus = game.add.button(container.x + 565, mainContainer.height + 82, 'deskButtons', actionOnClick, this, 'plus.png', 'plus.png', 'plus.png', container);
         let betLevelMinus = game.add.button(container.x + 465, mainContainer.height + 81, 'deskButtons', actionOnClick, this, 'minus.png', 'minus.png', 'minus.png', container);
