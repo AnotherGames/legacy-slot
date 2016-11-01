@@ -51,15 +51,15 @@ export let buttons = (function () {
     }
 
     function drawDesktopPanel(container, game, mainContainer) {
-        let panelBG = game.add.sprite(game.world.centerX, mainContainer.height + 70, 'ui', null, container);
+        let panelBG = game.add.sprite(game.world.centerX - 10, mainContainer.height + 70, 'ui', null, container);
         panelBG.anchor.set(0.5);
 
-        let lines = game.add.text(mainContainer.x + 385, mainContainer.height + 85, '10', {font: 'normal 32px Helvetica', fill: '#e8b075', align: 'center'}, container);
-        let info = game.add.button(mainContainer.x + 1500, mainContainer.height + 80, 'deskButtons', actionOnClick, this, 'info.png', 'info.png', 'info.png', container);
-        let betLevelPlus = game.add.button(mainContainer.x + 575, mainContainer.height + 82, 'deskButtons', actionOnClick, this, 'plus.png', 'plus.png', 'plus.png', container);
-        let betLevelMinus = game.add.button(mainContainer.x + 475, mainContainer.height + 81, 'deskButtons', actionOnClick, this, 'minus.png', 'minus.png', 'minus.png', container);
-        let coinLevelPlus = game.add.button(mainContainer.x + 1410, mainContainer.height + 82, 'deskButtons', actionOnClick, this, 'plus.png', 'plus.png', 'plus.png', container);
-        let coinLevelMinus = game.add.button(mainContainer.x + 1285, mainContainer.height + 81, 'deskButtons', actionOnClick, this, 'minus.png', 'minus.png', 'minus.png', container);
+        let lines = game.add.text(container.x + 375, mainContainer.height + 85, '10', {font: 'normal 32px Helvetica', fill: '#e8b075', align: 'center'}, container);
+        let info = game.add.button(container.x + 1490, mainContainer.height + 80, 'deskButtons', actionOnClick, this, 'info.png', 'info.png', 'info.png', container);
+        let betLevelPlus = game.add.button(container.x + 565, mainContainer.height + 82, 'deskButtons', actionOnClick, this, 'plus.png', 'plus.png', 'plus.png', container);
+        let betLevelMinus = game.add.button(container.x + 465, mainContainer.height + 81, 'deskButtons', actionOnClick, this, 'minus.png', 'minus.png', 'minus.png', container);
+        let coinLevelPlus = game.add.button(container.x + 1400, mainContainer.height + 82, 'deskButtons', actionOnClick, this, 'plus.png', 'plus.png', 'plus.png', container);
+        let coinLevelMinus = game.add.button(container.x + 1275, mainContainer.height + 81, 'deskButtons', actionOnClick, this, 'minus.png', 'minus.png', 'minus.png', container);
 
         let spinButtonDesk = game.add.button(0, mainContainer.height + 70, 'deskButtons', actionOnClick, this, 'spinOn.png', 'spin.png', 'spinOn.png', container);
         spinButtonDesk.anchor.set(0.5);
