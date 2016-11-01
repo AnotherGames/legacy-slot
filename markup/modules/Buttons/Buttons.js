@@ -87,7 +87,7 @@ export let buttons = (function () {
         panelBG.anchor.set(0.5);
 
         let lines = game.add.text(container.x + 375, mainContainer.height + 85, '10', {font: 'normal 32px Helvetica, Arial', fill: '#e8b075', align: 'center'}, container);
-        let info = game.add.button(container.x + 1490, mainContainer.height + 80, 'deskButtons', actionOnClick, this, 'infoOn.png', 'info.png', 'infoOn.png', container);
+        let info = game.add.button(container.x + 1490, mainContainer.height + 80, 'deskButtons', showInfo, this, 'infoOn.png', 'info.png', 'infoOn.png', container);
         let betLevelPlus = game.add.button(container.x + 565, mainContainer.height + 82, 'deskButtons', betPlus, this, 'plusOn.png', 'plus.png', 'plusOn.png', container);
         let betLevelMinus = game.add.button(container.x + 465, mainContainer.height + 81, 'deskButtons', betMinus, this, 'minusOn.png', 'minus.png', 'minusOn.png', container);
         let coinLevelPlus = game.add.button(container.x + 1400, mainContainer.height + 82, 'deskButtons', coinsPlus, this, 'plusOn.png', 'plus.png', 'plusOn.png', container);
@@ -133,6 +133,17 @@ export let buttons = (function () {
 
         function actionOnClick() {
             console.log('i am clicked!');
+        }
+
+        function showInfo() {
+            const overlay = game.add.graphics(0, 0).beginFill(0x000000, 0.8).drawRect(0, 0, game.world.width, game.world.height);
+            const infoRules = game.add.sprite(game.world.centerX, game.world.centerY, 'infoRules');
+            infoRules.anchor.set(0.5);
+            infoRules.inputEnabled = true;
+            infoRules.events.onInputDown.add(function () {
+                infoRules.destroy();
+                overlay.destroy();
+            });
         }
     }
 
