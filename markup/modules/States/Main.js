@@ -35,7 +35,8 @@ export class Main {
     }
 
     preload() {
-        this.loadElementsAtlas();
+        // неимеет смысла при загрузке общего атласа
+        // this.loadElementsAtlas();
     }
 
     create() {
