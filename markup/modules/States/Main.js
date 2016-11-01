@@ -28,6 +28,7 @@ export class Main {
         model.el('menuContainer', this.menuContainer);
         model.el('panelContainer', this.panelContainer);
         model.state('side', 'left');
+        model.state('sound', true);
         // массив в который записываются анимации для проигрывания
         let game = model.el('game');
         game.frameAnims = [];
@@ -99,7 +100,7 @@ export class Main {
             x: 0,
             y: 0
         });
-        let elemMode = ['n','w','b'];
+        let elemMode = ['n', 'w', 'b'];
         let i = 1;
         // прогоняем все анимации
         game.frameAnims.push(function preloadElems() {

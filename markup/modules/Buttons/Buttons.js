@@ -6,6 +6,8 @@ export let buttons = (function () {
     let autoButton;
     let spinButton;
     let betButton;
+    let menuButton;
+    let soundButton;
 
     function drawMobileButtons(container, game, mainWidth) {
 
@@ -14,7 +16,7 @@ export let buttons = (function () {
         spinButton.inputEnabled = true;
         spinButton.input.priorityID = 1;
         spinButton.events.onInputDown.add(function () {
-            events.trigger('roll:requestRoll' , {
+            events.trigger('roll:requestRoll', {
                 time: 1500,
                 length: 30,
                 ease: 1
@@ -32,7 +34,7 @@ export let buttons = (function () {
         spinButton.x = xRight;
 
         autoButton = game.add.sprite(xRight, 0, 'mobileButtons', 'auto.png', container);
-        autoButton.y = spinButton.y - spinButton.width / 2 - 2 * delta - autoButton.width / 2;
+        autoButton.y = spinButton.y - spinButton.width / 2 - delta - autoButton.width / 2;
         autoButton.anchor.set(0.5);
         autoButton.inputEnabled = true;
         autoButton.input.priorityID = 1;
@@ -43,7 +45,7 @@ export let buttons = (function () {
         });
 
         betButton = game.add.sprite(xRight, 0, 'mobileButtons', 'setBet.png', container);
-        betButton.y = spinButton.y + spinButton.width / 2 + 2 * delta + betButton.width / 2;
+        betButton.y = spinButton.y + spinButton.width / 2 + delta + betButton.width / 2;
         betButton.anchor.set(0.5);
         betButton.inputEnabled = true;
         betButton.input.priorityID = 1;
@@ -51,6 +53,31 @@ export let buttons = (function () {
             if (model.state('menu') === 'opened') return;
             console.log('I am button');
             events.trigger('menu:showMenu', 'bet');
+        });
+
+        menuButton = game.add.sprite(xRight, 0, 'mobileButtons', 'menu.png', container);
+        menuButton.y = autoButton.y - autoButton.width / 2 - delta - menuButton.width / 2;
+        menuButton.anchor.set(0.5);
+        menuButton.inputEnabled = true;
+        menuButton.input.priorityID = 1;
+        menuButton.events.onInputDown.add(function () {
+            if (model.state('menu') === 'opened') return;
+            console.log('I am button');
+            events.trigger('menu:showMenu', 'settings');
+        });
+
+        soundButton = game.add.sprite(xRight, 0, 'mobileButtons', 'sound.png', container);
+        soundButton.y = betButton.y + betButton.width / 2 + delta + soundButton.width / 2;
+        soundButton.anchor.set(0.5);
+        soundButton.inputEnabled = true;
+        soundButton.input.priorityID = 1;
+        soundButton.events.onInputDown.add(function () {
+            soundButton.frameName = soundButton.frameName === 'soundOut.png' ? 'sound.png' : 'soundOut.png';
+            if (model.state('sound')) {
+                model.state('sound', false);
+            } else {
+                model.state('sound', true);
+            }
         });
 
     }
@@ -73,7 +100,7 @@ export let buttons = (function () {
         spinButtonDesk.input.priorityID = 1;
         spinButtonDesk.events.onInputDown.add(function () {
             console.log('I am big Button');
-            events.trigger('roll:requestRoll' , {
+            events.trigger('roll:requestRoll', {
                 time: 1500,
                 length: 30,
                 ease: 1
