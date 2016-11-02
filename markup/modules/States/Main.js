@@ -13,8 +13,12 @@ export class Main {
 
     }
     init() {
-        this.game.stage.disableVisibilityChange = true;
         console.info('Main State!');
+        let game = model.el('game');
+        // массив в который записываются анимации для проигрывания
+        game.frameAnims = [];
+
+        this.game.stage.disableVisibilityChange = true;
         this.bgContainer = this.add.group();
         this.mainContainer = this.add.group();
         this.buttonsContainer = this.add.group();
@@ -29,13 +33,10 @@ export class Main {
         model.el('panelContainer', this.panelContainer);
         model.state('side', 'left');
         model.state('sound', true);
-        // массив в который записываются анимации для проигрывания
-        let game = model.el('game');
-        game.frameAnims = [];
     }
 
     preload() {
-        // this.loadElementsAtlas();
+
     }
 
     create() {
@@ -53,13 +54,6 @@ export class Main {
 
         events.trigger('roll:initWheels');
 
-        // model.el('game').time.events.add(3000, () => {
-        //     events.trigger('roll:requestRoll', {
-        //         time: 1500,
-        //         length: 30,
-        //         ease: 1
-        //     });
-        // })
         if (model.flag('mobile')) {
             this.mainContainer.x = model.data('mainXLeft');
         } else {
@@ -86,32 +80,6 @@ export class Main {
         let gameBG = this.add.sprite(config[model.state('res')].machine.x, config[model.state('res')].machine.y, 'gameBG', null, this.mainContainer);
         let gameMachine = this.add.sprite(0, 0, 'gameMachine', null, this.mainContainer);
     }
-
-    // loadElementsAtlas() {
-    //     let game = model.el('game');
-    //     let container = this.add.group();
-    //     // елемент не отображатся на экране
-    //     container.x = -window.innerWidth;
-    //     const elem = new Element({
-    //         game,
-    //         parent: container,
-    //         el: 1,
-    //         animation: 'n',
-    //         x: 0,
-    //         y: 0
-    //     });
-    //     let elemMode = ['n', 'w', 'b'];
-    //     let i = 1;
-    //     // прогоняем все анимации
-    //     game.frameAnims.push(function preloadElems() {
-    //         elem.play(i + '-' + 'b');
-    //         i++;
-    //         if (i >= 12) {
-    //             game.frameAnims.splice(game.frameAnims.indexOf(preloadElems), 1);
-    //             container.destroy();
-    //         }
-    //     });
-    // }
 
     drawMainContainer() {
         this.machineContainer = this.add.group();
