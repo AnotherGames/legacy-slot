@@ -29,6 +29,7 @@ export class Main {
         model.el('panelContainer', this.panelContainer);
         model.state('side', 'left');
         model.state('sound', true);
+        model.state('fastRoll', false);
         // массив в который записываются анимации для проигрывания
         let game = model.el('game');
         game.frameAnims = [];
