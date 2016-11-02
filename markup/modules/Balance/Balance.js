@@ -393,10 +393,36 @@ export let balance = (function () {
 
     }
 
-    events.on('updateTime', updateTime);
+    function rollStart() {
+        if(model.state('roll:progress')) return;
+
+        if (balanceData.coinsSum >= balanceData.betSum) {
+            balanceData.coinsSum = (balanceData.coinsSum - balanceData.betSum).toFixed(0);
+            balanceData.coinsCash = ((balanceData.coinsCash * 100 - balanceData.betCash * 100) / 100).toFixed(2);
+            balanceData.winCash = (0).toFixed(2);
+            updateBalance();
+        } else {
+            model.state('lowBalance', true);
+            console.warn('Too low cash for spin!');
+        }
+    }
+
+    function rollEnd() {
+        const data = model.data('rollResponse');
+        balanceData.winCash = (+data.Balance.TotalWinCents / 100).toFixed(2);
+        balanceData.coinsCash = (+data.Balance.ScoreCents / 100).toFixed(2);
+        balanceData.coinsSum = (+data.Balance.ScoreCoins).toFixed(0);
+        updateBalance();
+    }
+
     events.on('buttons:changeBet', changeBet);
     events.on('buttons:changeCoins', changeCoins);
     events.on('buttons:maxBet', maxBet);
+
+    events.on('updateTime', updateTime);
+
+    events.on('roll:start', rollStart);
+    events.on('roll:end', rollEnd);
 
     return {
         drawBalanceContainer
