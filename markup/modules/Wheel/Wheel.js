@@ -71,11 +71,10 @@ export class Wheel {
         this.elSize = param.elSize;
         this.currentScreen = param.currentScreen;
         // инитим внутрение параметры
+        this.isFast = false;
         this._gotoPlay = false;
         this._gotoPaused = false;
         this._gotoLoop = false;
-        this._pausedStartTime = 0;
-        this._pausedTimeLenth = 0;
         this._loopLengthY = 0;
         this._wheelSpeed = 0;
         this._wheelStartPos = 0;
@@ -101,7 +100,6 @@ export class Wheel {
                 y: i * this.elSize.height * -1
             });
             elem.sprite.anchor.set(0.5);
-            // elem.sprite.scale.set(0.5);
             this.items.push(elem);
         }
 
@@ -131,7 +129,6 @@ export class Wheel {
         this._gotoPlay = false;
         this._gotoPaused = false;
         this._gotoLoop = false;
-        this._pausedTimeLenth = 0;
         this._loopLengthY = 0;
         this._wheelStartPos = 0;
     }
@@ -139,7 +136,7 @@ export class Wheel {
         if (this.mode === 'roll') return;
 
         if (this.mode === 'paused') {
-            this._pausedTimeLenth += this.game.time.totalElapsedSeconds() * 1000 - this._pausedStartTime;
+            this._clock.resume();
             this.mode = 'roll';
             return;
         }
@@ -147,23 +144,34 @@ export class Wheel {
         this._gotoPlay = true;
     }
     paused() {
+        if (this.mode === 'idle') return;
         if (this.mode === 'paused') return;
 
         this._gotoPaused = true;
     }
     _endLoop() {
-        this._pausedTimeLenth += this.game.time.totalElapsedSeconds() * 1000 - this._pausedStartTime;
+        this._clock.resume();
         this._loopLengthY += this.wheelY - this._wheelStartPos;
         this._wheelStartPos = 0;
     }
     loop() {
-        if (this.mode === 'loop') return;
-        if (this.mode === 'paused') {
-            console.error('loop: do not goto "Loop" mode if the pause!');
-            return;
-        }
+        if (this.mode !== 'roll') return;
 
         this._gotoLoop = true;
+    }
+    fast() {
+        // TODO: добавить проверку на режим fastSpin
+        if (this.isFast) return;
+        this.isFast = true;
+
+        if (this.mode === 'idle') return;
+        this.timeLength = config.wheel.roll.fastTime;
+
+        this.timer = this.timeLength * this.progress;
+        this._clock.destroy();
+        this._clock = this.game.time.create(true)
+        this._clock.add(this.timeLength - this.timer, () => {}, this);
+        this._clock.start();
     }
     /*  *param: {
             time: Number (milisecond),
@@ -180,8 +188,7 @@ export class Wheel {
         this.update();
 
         let _this = this;
-        let startTime = this.game.time.totalElapsedSeconds() * 1000;
-        let timeLength = config.wheel.roll.time;
+        this.timeLength = config.wheel.roll.time;
         this.easingSeparation = config.wheel.roll.easingSeparation;
         this.rollLength = config.wheel.roll.length;
         this.currentScreen = this.finishScreen = finishScreen;
@@ -192,7 +199,7 @@ export class Wheel {
                     console.error('roll: param.time is incorrectly.', param.time);
                     return;
                 }
-                timeLength = param.time;
+                this.timeLength = param.time;
             }
             if (typeof (param.length) === 'number') {
                 if (param.length === 0) {
@@ -215,10 +222,20 @@ export class Wheel {
             }
         }
 
-        let startY = _this.wheelY;
-        let endY = this.wheelY + _this.elSize.height * this.rollLength;
+        if (this.isFast) {
+            this.timeLength = config.wheel.roll.fastTime;
+        }
+
+        let startY = this.wheelY;
+        let endY = this.wheelY + this.elSize.height * this.rollLength;
         let pathLenth = endY - startY;
-        _this.wheelY += _this.elSize.height;
+        this.wheelY += this.elSize.height;
+        this.progress = 0;
+
+        this._clock = this.game.time.create(true)
+        this._clock.add(this.timeLength, () => {}, this);
+        this._clock.start();
+        this.timer = 0;
 
         let anim = function () {
             switch (_this.mode) {
@@ -231,20 +248,21 @@ export class Wheel {
                     _this._elemGotoSwitchBottom();
                     break;
                 case 'roll':
-                    let currTime = _this.game.time.totalElapsedSeconds() * 1000 - (startTime + _this._pausedTimeLenth);
-                    let progress = currTime / timeLength;
-                    if (progress > 1) {
-                        progress = 1;
+                    _this.timer = _this.timeLength - _this._clock.duration;
+                    _this.progress = _this.timer / _this.timeLength;
+                    if (_this.progress > 1) {
+                        _this.progress = 1;
                     }
-                    _this.wheelLastY = _this.container.y = startY + _this._loopLengthY + pathLenth * _this._easingBackInOut(progress);
+                    _this.wheelLastY = _this.container.y = startY + _this._loopLengthY + pathLenth * _this._easingBackInOut(_this.progress);
 
                     _this._elemGotoSwitchTop();
                     _this._elemGotoSwitchBottom();
 
-                    if (progress === 1) {
+                    if (_this.progress === 1) {
                         _this.game.frameAnims.splice(_this.game.frameAnims.indexOf(anim), 1);
 
                         _this.mode = 'idle';
+                        _this.isFast = false;
 
                         if (_this.finishCallback) {
                             _this.finishCallback();
@@ -277,7 +295,7 @@ export class Wheel {
             this._gotoLoop = false;
 
             if (this.mode === 'roll') {
-                this._pausedStartTime = this.game.time.totalElapsedSeconds() * 1000;
+                this._clock.pause();
             }
             this._wheelStartPos = this.wheelY;
             this.mode = 'loop';
@@ -288,7 +306,7 @@ export class Wheel {
 
             this._endLoop();
 
-            this._pausedStartTime = this.game.time.totalElapsedSeconds() * 1000;
+            this._clock.pause();
 
             this.mode = 'paused';
         }

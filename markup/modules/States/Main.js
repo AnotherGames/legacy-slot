@@ -13,7 +13,7 @@ export class Main {
 
     }
     init() {
-        this.game.stage.disableVisibilityChange = true;
+        // this.game.stage.disableVisibilityChange = true;
         console.info('Main State!');
         this.bgContainer = this.add.group();
         this.mainContainer = this.add.group();
@@ -35,7 +35,8 @@ export class Main {
     }
 
     preload() {
-        this.loadElementsAtlas();
+        // неимеет смысла при загрузке общего атласа
+        // this.loadElementsAtlas();
     }
 
     create() {
