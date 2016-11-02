@@ -1,4 +1,4 @@
-import { model } from '../../modules/Model/Model';
+import { model } from 'modules/Model/Model';
 import { events } from 'modules/Events/Events';
 
 export let balance = (function () {
@@ -172,7 +172,7 @@ export let balance = (function () {
             topBalanceContainer.x = game.world.centerX - topLineWidth / 2;
         } else {
             balanceText.coinsSum = game.add.text(
-                mainContainer.x + 480,
+                mainContainer.x + 1470,
                 mainContainer.height + 23,
                 balanceData.coinsSum,
                 {font: 'normal 27px Helvetica, Arial', fill: '#e8b075', align: 'center'},
@@ -186,7 +186,7 @@ export let balance = (function () {
                 container);
             balanceText.coinsValue.anchor.set(0.5);
             balanceText.betSum = game.add.text(
-                mainContainer.x + 1470,
+                mainContainer.x + 480,
                 mainContainer.height + 23,
                 balanceData.betSum,
                 {font: 'normal 27px Helvetica, Arial', fill: '#e8b075', align: 'center'},
@@ -209,7 +209,6 @@ export let balance = (function () {
     }
 
     function checkCurrency(currency) {
-
         if (currency === 'USD') {
             return '$ ';
         } else if (currency === 'EUR') {
@@ -219,7 +218,6 @@ export let balance = (function () {
         } else if (currency === 'RUB') {
             return '₽ ';
         }
-
     }
 
     function updateBalance() {
@@ -393,10 +391,36 @@ export let balance = (function () {
 
     }
 
-    events.on('updateTime', updateTime);
+    function rollStart() {
+        if(model.state('roll:progress')) return;
+
+        if (balanceData.coinsSum >= balanceData.betSum) {
+            balanceData.coinsSum = (balanceData.coinsSum - balanceData.betSum).toFixed(0);
+            balanceData.coinsCash = ((balanceData.coinsCash * 100 - balanceData.betCash * 100) / 100).toFixed(2);
+            balanceData.winCash = (0).toFixed(2);
+            updateBalance();
+        } else {
+            model.state('lowBalance', true);
+            console.warn('Too low cash for spin!');
+        }
+    }
+
+    function rollEnd() {
+        const data = model.data('rollResponse');
+        balanceData.winCash = (+data.Balance.TotalWinCents / 100).toFixed(2);
+        balanceData.coinsCash = (+data.Balance.ScoreCents / 100).toFixed(2);
+        balanceData.coinsSum = (+data.Balance.ScoreCoins).toFixed(0);
+        updateBalance();
+    }
+
     events.on('buttons:changeBet', changeBet);
     events.on('buttons:changeCoins', changeCoins);
     events.on('buttons:maxBet', maxBet);
+
+    events.on('updateTime', updateTime);
+
+    events.on('roll:start', rollStart);
+    events.on('roll:end', rollEnd);
 
     return {
         drawBalanceContainer

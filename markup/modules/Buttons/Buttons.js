@@ -16,7 +16,7 @@ export let buttons = (function () {
         spinButton.inputEnabled = true;
         spinButton.input.priorityID = 1;
         spinButton.events.onInputDown.add(function () {
-            events.trigger('roll:requestRoll');
+            events.trigger('roll:request');
         });
 
         let delta = (game.game.width - mainWidth - spinButton.width) / 4;
@@ -36,7 +36,6 @@ export let buttons = (function () {
         autoButton.input.priorityID = 1;
         autoButton.events.onInputDown.add(function () {
             if (model.state('menu') === 'opened') return;
-            console.log('I am button');
             events.trigger('menu:showMenu', 'auto');
         });
 
@@ -47,7 +46,6 @@ export let buttons = (function () {
         betButton.input.priorityID = 1;
         betButton.events.onInputDown.add(function () {
             if (model.state('menu') === 'opened') return;
-            console.log('I am button');
             events.trigger('menu:showMenu', 'bet');
         });
 
@@ -58,7 +56,6 @@ export let buttons = (function () {
         menuButton.input.priorityID = 1;
         menuButton.events.onInputDown.add(function () {
             if (model.state('menu') === 'opened') return;
-            console.log('I am button');
             events.trigger('menu:showMenu', 'settings');
         });
 
@@ -95,8 +92,7 @@ export let buttons = (function () {
         spinButtonDesk.inputEnabled = true;
         spinButtonDesk.input.priorityID = 1;
         spinButtonDesk.events.onInputDown.add(function () {
-            console.log('I am big Button');
-            events.trigger('roll:requestRoll', {
+            events.trigger('roll:request', {
                 time: 1500,
                 length: 30,
                 ease: 1
@@ -128,7 +124,7 @@ export let buttons = (function () {
         }
 
         function actionOnClick() {
-            console.log('i am clicked!');
+
         }
 
         function showInfo() {

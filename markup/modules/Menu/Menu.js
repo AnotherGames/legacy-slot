@@ -47,7 +47,9 @@ export let menu = (function () {
             let overlay = model.el('menuOverlay');
             let tween = game.add.tween(overlay).to( { alpha: 0 }, 2000, 'Quart.easeOut');
             tween.start();
-            overlay.destroy();
+            tween.onComplete.add(() => {
+                overlay.destroy();
+            }, this);
         });
     }
 
