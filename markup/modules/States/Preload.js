@@ -20,6 +20,7 @@ export class Preload {
         loadInitAssets(this);
         loadMainAssets(this);
         loadFSAssets(this);
+        loadGlistaAssets(this);
 
         this.load.onLoadComplete.add(this.closePreloader, this);
     }
@@ -122,4 +123,8 @@ function loadFSAssets(game) {
         game.load.image('multiRip', 'fs/multiRip.png');
         game.load.image('multiTable', 'fs/multiTable.png');
     }
+}
+
+function loadGlistaAssets(game) {
+    game.load.image('glista', 'glista/glista.png');
 }
