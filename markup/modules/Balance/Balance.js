@@ -173,7 +173,7 @@ export let balance = (function () {
         } else {
             balanceText.coinsSum = game.add.text(
                 mainContainer.x + 480,
-                mainContainer.height + 23,
+                mainContainer.height + 20,
                 balanceData.coinsSum,
                 {font: 'normal 27px Helvetica, Arial', fill: '#e8b075', align: 'center'},
                 container);
@@ -187,7 +187,7 @@ export let balance = (function () {
             balanceText.coinsValue.anchor.set(0.5);
             balanceText.betSum = game.add.text(
                 mainContainer.x + 1470,
-                mainContainer.height + 23,
+                mainContainer.height + 20,
                 balanceData.betSum,
                 {font: 'normal 27px Helvetica, Arial', fill: '#e8b075', align: 'center'},
                 container);

@@ -1,5 +1,6 @@
 import { model } from '../../modules/Model/Model';
 import { events } from '../../modules/Events/Events';
+import { drawAutoDesktop } from '../../modules/Buttons/Autoplay';
 
 export let buttons = (function () {
 
@@ -79,19 +80,22 @@ export let buttons = (function () {
     }
 
     function drawDesktopPanel(container, game, mainContainer) {
-        let panelBG = game.add.sprite(game.world.centerX - 10, mainContainer.height + 70, 'ui', null, container);
-        panelBG.anchor.set(0.5);
+        let gameMachine = model.el('gameMachine');
+        container.x = mainContainer.x + 45;
+        container.y = gameMachine.height - 28;
 
-        let lines = game.add.text(container.x + 375, mainContainer.height + 85, '10', {font: 'normal 32px Helvetica, Arial', fill: '#e8b075', align: 'center'}, container);
-        let info = game.add.button(container.x + 1490, mainContainer.height + 80, 'deskButtons', showInfo, this, 'infoOn.png', 'info.png', 'infoOn.png', container);
-        let betLevelPlus = game.add.button(container.x + 565, mainContainer.height + 82, 'deskButtons', betPlus, this, 'plusOn.png', 'plus.png', 'plusOn.png', container);
-        let betLevelMinus = game.add.button(container.x + 465, mainContainer.height + 81, 'deskButtons', betMinus, this, 'minusOn.png', 'minus.png', 'minusOn.png', container);
-        let coinLevelPlus = game.add.button(container.x + 1400, mainContainer.height + 82, 'deskButtons', coinsPlus, this, 'plusOn.png', 'plus.png', 'plusOn.png', container);
-        let coinLevelMinus = game.add.button(container.x + 1275, mainContainer.height + 81, 'deskButtons', coinsMinus, this, 'minusOn.png', 'minus.png', 'minusOn.png', container);
+        let panelBG = game.add.sprite(0, 0, 'ui', null, container);
 
-        let spinButtonDesk = game.add.button(0, mainContainer.height + 70, 'deskButtons', actionOnClick, this, 'spinOn.png', 'spin.png', 'spinOn.png', container);
+        let lines = game.add.text(80, 112, '10', {font: 'normal 27px Helvetica, Arial, Arial', fill: '#e8b075', align: 'center'}, container);
+        let info = game.add.button(container.width - 115, 105, 'deskButtons', showInfo, this, 'infoOn.png', 'info.png', 'infoOn.png', null, container);
+        let betLevelPlus = game.add.button(267, 107, 'deskButtons', betPlus, this, 'plusOn.png', 'plus.png', 'plusOn.png', null, container);
+        let betLevelMinus = game.add.button(172, 107, 'deskButtons', betMinus, this, 'minusOn.png', 'minus.png', 'minusOn.png', null, container);
+        let coinLevelPlus = game.add.button(1100, 107, 'deskButtons', coinsPlus, this, 'plusOn.png', 'plus.png', 'plusOn.png', null, container);
+        let coinLevelMinus = game.add.button(985, 106, 'deskButtons', coinsMinus, this, 'minusOn.png', 'minus.png', 'minusOn.png', null, container);
+
+
+        let spinButtonDesk = game.add.button(container.width / 2, 95, 'deskButtons', actionOnClick, this, 'spinOn.png', 'spin.png', 'spinOn.png', null, container);
         spinButtonDesk.anchor.set(0.5);
-        spinButtonDesk.x = container.x + 950;
         spinButtonDesk.inputEnabled = true;
         spinButtonDesk.input.priorityID = 1;
         spinButtonDesk.events.onInputDown.add(function () {
@@ -102,10 +106,12 @@ export let buttons = (function () {
                 ease: 1
             });
         });
-        let maxBetButtonDesk = game.add.button(spinButtonDesk.x + 137, mainContainer.height + 69, 'deskButtons', maxBet, this, 'maxBetOn.png', 'maxBet.png', 'maxBetOn.png', container);
-        let autoButtonDesk = game.add.button(spinButtonDesk.x - 137, mainContainer.height + 70, 'deskButtons', actionOnClick, this, 'autoOn.png', 'auto.png', 'autoOn.png', container);
+        let maxBetButtonDesk = game.add.button(spinButtonDesk.x + 137, 94, 'deskButtons', maxBet, this, 'maxBetOn.png', 'maxBet.png', 'maxBetOn.png', null, container);
+        let autoButtonDesk = game.add.button(spinButtonDesk.x - 137, 94, 'deskButtons', autoOn, this, 'autoOn.png', 'auto.png', 'autoOn.png', null, container);
         maxBetButtonDesk.anchor.set(0.5);
         autoButtonDesk.anchor.set(0.5);
+        drawAutoDesktop(container, game, mainContainer, autoButtonDesk);
+        let autoDesktopContainer = model.el('autoDesktopContainer');
 
         function coinsPlus() {
             events.trigger('buttons:changeCoins', true);
@@ -125,6 +131,25 @@ export let buttons = (function () {
 
         function maxBet() {
             events.trigger('buttons:maxBet');
+        }
+
+        function autoOn() {
+
+            let autoTween = game.add.tween(autoButtonDesk).to( { x: 365 }, 350, 'Linear');
+            let autoSelectTween = game.add.tween(autoDesktopContainer).to( { x: 495, alpha: 1 }, 250, 'Linear');
+            autoSelectTween.start();
+            autoTween.start();
+            if (model.state('autoPanel') === true) {
+                let autoTweenBack = game.add.tween(autoButtonDesk).to( { x: spinButtonDesk.x - 137}, 350, 'Linear');
+                let autoSelectTweenBack = game.add.tween(autoDesktopContainer).to( { x: 650, alpha: 0 }, 250, 'Linear');
+                autoSelectTweenBack.start();
+                autoTweenBack.start();
+            }
+            if (model.state('autoPanel')) {
+                model.state('autoPanel', false);
+            } else {
+                model.state('autoPanel', true);
+            }
         }
 
         function actionOnClick() {
