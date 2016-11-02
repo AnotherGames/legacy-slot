@@ -13,7 +13,7 @@ export class Main {
 
     }
     init() {
-        // this.game.stage.disableVisibilityChange = true;
+        this.game.stage.disableVisibilityChange = true;
         console.info('Main State!');
         this.bgContainer = this.add.group();
         this.mainContainer = this.add.group();
@@ -35,7 +35,6 @@ export class Main {
     }
 
     preload() {
-        // неимеет смысла при загрузке общего атласа
         // this.loadElementsAtlas();
     }
 
@@ -88,31 +87,31 @@ export class Main {
         let gameMachine = this.add.sprite(0, 0, 'gameMachine', null, this.mainContainer);
     }
 
-    loadElementsAtlas() {
-        let game = model.el('game');
-        let container = this.add.group();
-        // елемент не отображатся на экране
-        container.x = -window.innerWidth;
-        const elem = new Element({
-            game,
-            parent: container,
-            el: 1,
-            animation: 'n',
-            x: 0,
-            y: 0
-        });
-        let elemMode = ['n', 'w', 'b'];
-        let i = 1;
-        // прогоняем все анимации
-        game.frameAnims.push(function preloadElems() {
-            elem.play(i + '-' + 'b');
-            i++;
-            if (i >= 12) {
-                game.frameAnims.splice(game.frameAnims.indexOf(preloadElems), 1);
-                container.destroy();
-            }
-        });
-    }
+    // loadElementsAtlas() {
+    //     let game = model.el('game');
+    //     let container = this.add.group();
+    //     // елемент не отображатся на экране
+    //     container.x = -window.innerWidth;
+    //     const elem = new Element({
+    //         game,
+    //         parent: container,
+    //         el: 1,
+    //         animation: 'n',
+    //         x: 0,
+    //         y: 0
+    //     });
+    //     let elemMode = ['n', 'w', 'b'];
+    //     let i = 1;
+    //     // прогоняем все анимации
+    //     game.frameAnims.push(function preloadElems() {
+    //         elem.play(i + '-' + 'b');
+    //         i++;
+    //         if (i >= 12) {
+    //             game.frameAnims.splice(game.frameAnims.indexOf(preloadElems), 1);
+    //             container.destroy();
+    //         }
+    //     });
+    // }
 
     drawMainContainer() {
         this.machineContainer = this.add.group();

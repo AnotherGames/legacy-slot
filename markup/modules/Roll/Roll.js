@@ -38,8 +38,11 @@ export let roll = (function() {
         model.el('wheels', wheels);
     }
 
-    function requestRoll(options) {
+    function rollRequest(options) {
         util.request('_Roll').then((data) => {
+
+            events.trigger('roll:start');
+            model.state('roll:progress', true);
 
             let nextScreen = data.Screen;
             if (typeof nextScreen === 'undefined') {
@@ -66,6 +69,8 @@ export let roll = (function() {
 
             startRoll(nextWheels, options);
 
+            model.data('rollResponse', data);
+
         });
     }
 
@@ -77,8 +82,8 @@ export let roll = (function() {
         let callback = function () {
             ++countFinish;
             if (countFinish === 5) {
-                events.trigger('roll:finishRoll');
-                console.log('Roll finished!');
+                events.trigger('roll:end');
+                // console.log('Roll finished!');
             }
         };
 
@@ -96,15 +101,16 @@ export let roll = (function() {
         });
     }
 
-    function finishRoll() {
+    function rollEnd() {
         util.request('_Ready').then((data) => {
             // console.log('Ready done', data);
+            model.state('roll:progress', false);
         });
     }
 
     events.on('roll:initWheels', initWheels);
-    events.on('roll:requestRoll', requestRoll);
-    events.on('roll:finishRoll', finishRoll);
+    events.on('roll:request', rollRequest);
+    events.on('roll:end', rollEnd);
 
     return {
         initWheels,
