@@ -1,5 +1,6 @@
 import { model } from 'modules/Model/Model';
 import { events } from 'modules/Events/Events';
+import { util } from 'modules/Util/Util';
 
 export let balance = (function () {
 
@@ -35,6 +36,15 @@ export let balance = (function () {
 
         const homeButton = game.add.button(x[0], y, 'footerButtons', actionOnClick, this, 'homeOn.png', 'home.png', 'homeOn.png', container);
         homeButton.anchor.set(0.5);
+        homeButton.inputEnabled = true;
+        homeButton.input.priorityID = 1;
+        homeButton.events.onInputDown.add(function () {
+            util.request('_Logout')
+                .then((response) => {
+                    console.log('Logout response:', response);
+                });
+            window.history.back();
+        });
 
         if (model.flag('desktop')) {
 
@@ -43,9 +53,29 @@ export let balance = (function () {
 
             const soundButton = game.add.button(x[2], y, 'footerButtons', actionOnClick, this, 'soundOn.png', 'sound.png', container);
             soundButton.anchor.set(0.5);
+            soundButton.inputEnabled = true;
+            soundButton.input.priorityID = 1;
+            soundButton.events.onInputDown.add(function () {
+                // soundButton.frameName = soundButton.frameName === 'soundOut.png' ? 'sound.png' : 'soundOut.png';
+                if (model.state('sound')) {
+                    model.state('sound', false);
+                } else {
+                    model.state('sound', true);
+                }
+            });
 
             const fastButton = game.add.button(x[3], y, 'footerButtons', actionOnClick, this, 'fastSpinOn.png', 'fastSpin.png', container);
             fastButton.anchor.set(0.5);
+            fastButton.inputEnabled = true;
+            fastButton.input.priorityID = 1;
+            fastButton.events.onInputDown.add(function () {
+                // fastButton.frameName = fastButton.frameName === 'soundOut.png' ? 'sound.png' : 'soundOut.png';
+                if (model.state('fastRoll')) {
+                    model.state('fastRoll', false);
+                } else {
+                    model.state('fastRoll', true);
+                }
+            });
 
         }
 
