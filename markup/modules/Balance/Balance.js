@@ -1,4 +1,4 @@
-import { model } from '../../modules/Model/Model';
+import { model } from 'modules/Model/Model';
 import { events } from 'modules/Events/Events';
 
 export let balance = (function () {
@@ -172,7 +172,7 @@ export let balance = (function () {
             topBalanceContainer.x = game.world.centerX - topLineWidth / 2;
         } else {
             balanceText.coinsSum = game.add.text(
-                mainContainer.x + 480,
+                mainContainer.x + 1470,
                 mainContainer.height + 23,
                 balanceData.coinsSum,
                 {font: 'normal 27px Helvetica, Arial', fill: '#e8b075', align: 'center'},
@@ -186,7 +186,7 @@ export let balance = (function () {
                 container);
             balanceText.coinsValue.anchor.set(0.5);
             balanceText.betSum = game.add.text(
-                mainContainer.x + 1470,
+                mainContainer.x + 480,
                 mainContainer.height + 23,
                 balanceData.betSum,
                 {font: 'normal 27px Helvetica, Arial', fill: '#e8b075', align: 'center'},
@@ -209,7 +209,6 @@ export let balance = (function () {
     }
 
     function checkCurrency(currency) {
-
         if (currency === 'USD') {
             return '$ ';
         } else if (currency === 'EUR') {
@@ -219,7 +218,6 @@ export let balance = (function () {
         } else if (currency === 'RUB') {
             return '₽ ';
         }
-
     }
 
     function updateBalance() {
