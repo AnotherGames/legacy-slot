@@ -9,6 +9,9 @@ export let config = {
             finishScreen: [2, 5, 7, 1, 4]
         }
     },
+    glista: {
+        time: 2000
+    },
     fullHD: {
         elements: {
             width: 256,
