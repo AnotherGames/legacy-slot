@@ -92,6 +92,8 @@ function loadMainAssets(game) {
     game.load.image('popup', 'other/popup.png');
     game.load.image('winLine', 'win/winLineRect.png');
     game.load.image('winTotal', 'win/winTotalRect.png');
+    game.load.atlasJSONArray('win', 'win/win.png', 'win/win.json');
+    game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
     game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
     game.load.atlasJSONArray('footerButtons', 'footer/footerButtons.png', 'footer/footerButtons.json');
     if (model.flag('desktop')) {
