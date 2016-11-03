@@ -1,5 +1,6 @@
 import { buttons } from 'modules/Buttons/Buttons';
 import { menu } from 'modules/Menu/Menu';
+import { win } from 'modules/Win/Win';
 import { model } from 'modules/Model/Model';
 import { roll } from 'modules/Roll/Roll';
 import { config } from 'modules/Util/Config';
