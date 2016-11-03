@@ -59,12 +59,21 @@ export class Glista {
             y: 0
         };
 
+
         this.sprites = [];
+        this.light = [];
         for (let atlasInd = 0; atlasInd < 6; atlasInd++) {
             let sprite = this.game.add.sprite( atlasInd * -80, 0, 'glistaAtlas', 5 - atlasInd, param.parent);
-            sprite.anchor.set(0.8, 0.5);
+            sprite.anchor.set(0.7, 0.5);
             sprite.visible = false;
             this.sprites.push(sprite);
+
+            let lightSprite = this.game.add.sprite( atlasInd * -80, 0, 'ligthGlista', null, param.lightParent);
+            // lightSprite.alpha = 0.5;
+            lightSprite.scale.set(1.3 - 0.2 * atlasInd);
+            lightSprite.anchor.set(0.5);
+            lightSprite.visible = false;
+            this.light.push(lightSprite);
         }
 
         this.pointPos = [];
@@ -151,6 +160,9 @@ export class Glista {
             this.sprites[spriteInd].position.set(this.bezierPath.x[0], this.bezierPath.y[0]);
             this.sprites[spriteInd].rotation = 0;
             nodes.push({ x: this.bezierPath.x[0], y: this.bezierPath.y[0], angle: 0 });
+
+            this.light[spriteInd].visible = true;
+            this.light[spriteInd].position.set(this.bezierPath.x[0], this.bezierPath.y[0]);
         }
 
         let _this = this;
@@ -187,6 +199,7 @@ export class Glista {
                 nodes[spriteInd] = { x: px, y: py, angle: angle };
 
                 _this.sprites[spriteInd].position.set(px, py);
+                _this.light[spriteInd].position.set(px, py);
                 if (progress < 0.5) {
                     _this.sprites[spriteInd].scale.set(1.2 - 1.2 * progress);
                 } else {
