@@ -47,6 +47,7 @@ export class Glista {
         // инитим внутрение параметры
         this.timer = 0;
         this.progress = 0;
+        this.isPlay = false;
         this.isRemove = false;
 
         this.pointStartPos = {
@@ -69,7 +70,6 @@ export class Glista {
             this.sprites.push(sprite);
 
             let lightSprite = this.game.add.sprite( atlasInd * -80, 0, 'ligthGlista', null, param.lightParent);
-            // lightSprite.alpha = 0.5;
             lightSprite.scale.set(1.3 - 0.2 * atlasInd);
             lightSprite.anchor.set(0.5);
             lightSprite.visible = false;
@@ -93,6 +93,7 @@ export class Glista {
         *callback: Function
     */
     start(path, time = config.glista.time, callback) {
+        if (this.isPlay) return;
         if (this.isRemove) {
             console.warn('start: Glista is remove.');
             return;
@@ -122,6 +123,8 @@ export class Glista {
             console.error('start: time is incorrectly.', time);
             return;
         }
+
+        this.isPlay = true;
 
         this.direction = (time < 0) ? -1 : 1;
         time = Math.abs(time);
@@ -209,6 +212,7 @@ export class Glista {
             }
 
             if (_this.progress === 1) {
+                _this.isPlay = false;
                 _this.game.frameAnims.splice(_this.game.frameAnims.indexOf(anim), 1);
 
                 for (let spriteInd = 0; spriteInd < 6; spriteInd++) {
@@ -224,6 +228,10 @@ export class Glista {
         this.game.frameAnims.push(anim);
     }
     remove() {
+        if (this.isPlay) {
+            console.error('remove: glista is play.');
+            return;
+        }
         if (this.isRemove) {
             console.warn('remove: Glista is remove.');
             return;
