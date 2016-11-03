@@ -81,7 +81,7 @@ export class Main {
 
         let glista2 = new Glista(glistParam);
         (function glistaStart() {
-            glista2.start([0, null, 2, null, 0], -2000, glistaStart);
+            glista2.start([0, null, 2, null, 0], -2000, function() {glista2.remove();});
         })();
     }
 

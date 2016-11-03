@@ -211,6 +211,11 @@ export class Glista {
             if (_this.progress === 1) {
                 _this.game.frameAnims.splice(_this.game.frameAnims.indexOf(anim), 1);
 
+                for (let spriteInd = 0; spriteInd < 6; spriteInd++) {
+                    _this.sprites[spriteInd].visible = false;
+                    _this.light[spriteInd].visible = false;
+                }
+
                 if (typeof (callback) === 'function') {
                     callback();
                 }
@@ -220,12 +225,15 @@ export class Glista {
     }
     remove() {
         if (this.isRemove) {
-            console.warn('start: Glista is remove.');
+            console.warn('remove: Glista is remove.');
             return;
         }
         this.isRemove = true;
         this.sprites.forEach((sprite) => {
             sprite.destroy();
+        });
+        this.light.forEach((item) => {
+            item.destroy();
         });
     }
 }
