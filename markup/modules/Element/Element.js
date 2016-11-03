@@ -103,6 +103,6 @@ export class Element {
             ? Phaser.Animation.generateFrameNames(`${options.el}-n-`, 1, options.n, '.png', 2)
             : [`${options.el}-n.png`], 15, true);
         this.sprite.animations.add(`${options.el}-b`, [`${options.el}-b.png`], 15, true);
-        this.sprite.animations.add(`${options.el}-w`, Phaser.Animation.generateFrameNames(`${options.el}-w-`, 1, options.w, '.png', 2), 15, true);
+        this.sprite.animations.add(`${options.el}-w`, Phaser.Animation.generateFrameNames(`${options.el}-w-`, 1, options.w, '.png', 2), 15, false);
     }
 }
