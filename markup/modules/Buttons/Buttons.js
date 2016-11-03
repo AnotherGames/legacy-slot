@@ -27,10 +27,17 @@ export let buttons = (function () {
         model.data('buttonsDelta', delta);
         model.data('buttonsXRight', xRight);
         model.data('buttonsXLeft', xLeft);
+        let xSide;
 
-        spinButton.x = xRight;
+        if (model.state('side') === 'right') {
+            xSide = model.data('buttonsXLeft');
+        } else {
+            xSide = model.data('buttonsXRight');
+        }
 
-        autoButton = game.add.sprite(xRight, 0, 'mobileButtons', 'auto.png', container);
+        spinButton.x = xSide;
+
+        autoButton = game.add.sprite(xSide, 0, 'mobileButtons', 'auto.png', container);
         autoButton.y = spinButton.y - spinButton.width / 2 - delta - autoButton.width / 2;
         autoButton.anchor.set(0.5);
         autoButton.inputEnabled = true;
@@ -40,7 +47,7 @@ export let buttons = (function () {
             events.trigger('menu:showMenu', 'auto');
         });
 
-        betButton = game.add.sprite(xRight, 0, 'mobileButtons', 'setBet.png', container);
+        betButton = game.add.sprite(xSide, 0, 'mobileButtons', 'setBet.png', container);
         betButton.y = spinButton.y + spinButton.width / 2 + delta + betButton.width / 2;
         betButton.anchor.set(0.5);
         betButton.inputEnabled = true;
@@ -50,7 +57,7 @@ export let buttons = (function () {
             events.trigger('menu:showMenu', 'bet');
         });
 
-        menuButton = game.add.sprite(xRight, 0, 'mobileButtons', 'menu.png', container);
+        menuButton = game.add.sprite(xSide, 0, 'mobileButtons', 'menu.png', container);
         menuButton.y = autoButton.y - autoButton.width / 2 - delta - menuButton.width / 2;
         menuButton.anchor.set(0.5);
         menuButton.inputEnabled = true;
@@ -60,7 +67,7 @@ export let buttons = (function () {
             events.trigger('menu:showMenu', 'settings');
         });
 
-        soundButton = game.add.sprite(xRight, 0, 'mobileButtons', 'sound.png', container);
+        soundButton = game.add.sprite(xSide, 0, 'mobileButtons', 'sound.png', container);
         soundButton.y = betButton.y + betButton.width / 2 + delta + soundButton.width / 2;
         soundButton.anchor.set(0.5);
         soundButton.inputEnabled = true;
@@ -74,6 +81,12 @@ export let buttons = (function () {
             }
         });
 
+
+        model.el('spinButton', spinButton);
+        model.el('autoButton', autoButton);
+        model.el('betButton', betButton);
+        model.el('menuButton', menuButton);
+        model.el('soundButton', soundButton);
     }
 
     function drawDesktopPanel(container, game, mainContainer) {

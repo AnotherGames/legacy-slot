@@ -8,7 +8,7 @@ import { drawSettingsMenu } from '../../modules/Menu/Settings';
 export let menu = (function () {
 
     function drawOverlay(game) {
-        const overlay = game.add.graphics(0, 0, model.el('buttonsContainer')).beginFill(0x000000, 0.5).drawRect(0, 0, game.world.width, game.world.height)
+        const overlay = game.add.graphics(0, 0, model.el('buttonsContainer')).beginFill(0x000000, 0.5).drawRect(0, 0, game.world.width, game.world.height);
         overlay.alpha = 0;
         let tween = game.add.tween(overlay).to( { alpha: 1 }, 1000, 'Quart.easeOut');
         tween.start();
@@ -86,6 +86,7 @@ export let menu = (function () {
             showMenuFromLeft();
         }
 
+        // console.log(container);
     }
 
     function showMenuFromRight() {
@@ -135,7 +136,8 @@ export let menu = (function () {
     events.on('menu:showMenu', showMenu);
 
     return {
-        showMenu
+        showMenu,
+        hideMenu
     };
 
 })();
