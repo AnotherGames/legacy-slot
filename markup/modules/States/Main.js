@@ -69,26 +69,7 @@ export class Main {
         darkness.beginFill(0x000000);
         darkness.drawRect(0, 0, this.game.width, this.game.height);
         this.add.tween(darkness).to( { alpha: 0 }, 1000, 'Linear', true);
-
-        // Draw glisty
-        let glistaLightContainer = model.el('glistaLightContainer');
-        let glistaContainer = model.el('glistaContainer');
-        let glistParam = {
-            game: this.game,
-            lightParent: glistaLightContainer,
-            parent: glistaContainer,
-            elSize: config[model.state('res')].elements
-        };
-
-        let glista1 = new Glista(glistParam);
-        (function glistaStart() {
-            glista1.start([2, null, 0, null, 2], 2000, glistaStart);
-        })();
-
-        let glista2 = new Glista(glistParam);
-        (function glistaStart() {
-            glista2.start([0, null, 2, null, 0], -2000, function() {glista2.remove();});
-        })();
+        model.el('darkness', darkness);
     }
 
     update() {

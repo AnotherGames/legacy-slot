@@ -4,6 +4,7 @@ import { Init } from '../../modules/States/Init';
 import { Main } from 'modules/States/Main';
 import { FS } from '../../modules/States/FS';
 import { model } from 'modules/Model/Model';
+import { events } from 'modules/Events/Events';
 
 let game = new Phaser.Game(1280, 720, Phaser.AUTO, 'game');
 model.el('game', game);
@@ -15,3 +16,4 @@ game.state.add('Main', Main);
 game.state.add('FS', FS);
 
 export { model };
+export { events };
