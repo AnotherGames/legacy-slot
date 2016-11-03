@@ -95,6 +95,7 @@ function loadMainAssets(game) {
         game.load.image('ui', 'game/UI.png');
         game.load.image('ui', 'game/UI_FS.png');
         game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
+        game.load.image('autoSelect', 'desk_buttons/autoSelect.png');
     }
     if (model.flag('mobile')) {
         game.load.atlasJSONArray('mobileButtons', 'mobile_buttons/mobileButtons.png', 'mobile_buttons/mobileButtons.json');
