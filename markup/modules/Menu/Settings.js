@@ -69,11 +69,14 @@ export function drawSettingsMenu(container, game) {
     musicButton.inputEnabled = true;
     musicButton.input.priorityID = 2;
     musicButton.events.onInputDown.add(function () {
+        let fonSound = model.el('fonSound');
         if (model.state('music') === true) {
             model.state('music', false);
+            fonSound.stop();
             musicButton.frameName = 'musicOff.png';
         } else {
             model.state('music', true);
+            fonSound.play();
             musicButton.frameName = 'musicOn.png';
         }
         console.log(model.state('music'));

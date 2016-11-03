@@ -8,6 +8,8 @@ export class Init {
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     }
     create() {
+        let initSound = this.add.audio('initFon', true);
+        initSound.play();
         let initBackground = this.add.sprite(0, 0, 'initBG');
         let initLogo = this.add.sprite(this.world.centerX, this.world.centerY * 0.4, 'text', 'logo.png');
         initLogo.anchor.set(0.5);
@@ -25,7 +27,7 @@ export class Init {
 
         function handlePlayBtn() {
             this.scale.startFullScreen(false);
-
+            initSound.stop();
             let closeAnim = this.add.tween(darkness);
             closeAnim.to( { alpha: 1 }, 500, 'Linear', true);
             closeAnim.onComplete.add(() => {

@@ -11,12 +11,14 @@ export let buttons = (function () {
     let soundButton;
 
     function drawMobileButtons(container, game, mainWidth) {
-
+        let buttonSound = game.add.audio('buttonClick');
+        model.el('buttonSound', buttonSound);
         spinButton = game.add.sprite(0, game.world.centerY, 'mobileButtons', 'spin.png', container);
         spinButton.anchor.set(0.5);
         spinButton.inputEnabled = true;
         spinButton.input.priorityID = 1;
         spinButton.events.onInputDown.add(function () {
+            buttonSound.play();
             events.trigger('roll:request');
         });
 
@@ -43,6 +45,7 @@ export let buttons = (function () {
         autoButton.inputEnabled = true;
         autoButton.input.priorityID = 1;
         autoButton.events.onInputDown.add(function () {
+            buttonSound.play();
             if (model.state('menu') === 'opened') return;
             events.trigger('menu:showMenu', 'auto');
         });
@@ -53,6 +56,7 @@ export let buttons = (function () {
         betButton.inputEnabled = true;
         betButton.input.priorityID = 1;
         betButton.events.onInputDown.add(function () {
+            buttonSound.play();
             if (model.state('menu') === 'opened') return;
             events.trigger('menu:showMenu', 'bet');
         });
@@ -63,6 +67,7 @@ export let buttons = (function () {
         menuButton.inputEnabled = true;
         menuButton.input.priorityID = 1;
         menuButton.events.onInputDown.add(function () {
+            buttonSound.play();
             if (model.state('menu') === 'opened') return;
             events.trigger('menu:showMenu', 'settings');
         });
@@ -73,6 +78,7 @@ export let buttons = (function () {
         soundButton.inputEnabled = true;
         soundButton.input.priorityID = 1;
         soundButton.events.onInputDown.add(function () {
+            buttonSound.play();
             soundButton.frameName = soundButton.frameName === 'soundOut.png' ? 'sound.png' : 'soundOut.png';
             if (model.state('sound')) {
                 model.state('sound', false);
@@ -100,6 +106,8 @@ export let buttons = (function () {
     }
 
     function drawDesktopPanel(container, game, mainContainer) {
+        // let buttonSound = model.el('buttonSound');
+        let buttonSound = game.add.audio('buttonClick');
         let gameMachine = model.el('gameMachine');
         container.x = mainContainer.x + 45;
         container.y = gameMachine.height - 28;
@@ -119,6 +127,7 @@ export let buttons = (function () {
         spinButtonDesk.inputEnabled = true;
         spinButtonDesk.input.priorityID = 1;
         spinButtonDesk.events.onInputDown.add(function () {
+            buttonSound.play();
             events.trigger('roll:request', {
                 time: 1500,
                 length: 30,
@@ -133,27 +142,32 @@ export let buttons = (function () {
         let autoDesktopContainer = model.el('autoDesktopContainer');
 
         function coinsPlus() {
+            buttonSound.play();
             events.trigger('buttons:changeCoins', true);
         }
 
         function coinsMinus() {
+            buttonSound.play();
             events.trigger('buttons:changeCoins', false);
         }
 
         function betPlus() {
+            buttonSound.play();
             events.trigger('buttons:changeBet', true);
         }
 
         function betMinus() {
+            buttonSound.play();
             events.trigger('buttons:changeBet', false);
         }
 
         function maxBet() {
+            buttonSound.play();
             events.trigger('buttons:maxBet');
         }
 
         function autoOn() {
-
+            buttonSound.play();
             let autoTween = game.add.tween(autoButtonDesk).to( { x: 365 }, 350, 'Linear');
             let autoSelectTween = game.add.tween(autoDesktopContainer).to( { x: 495, alpha: 1 }, 250, 'Linear');
             autoSelectTween.start();
@@ -176,6 +190,7 @@ export let buttons = (function () {
         }
 
         function showInfo() {
+            buttonSound.play();
             const overlay = game.add.graphics(0, 0).beginFill(0x000000, 0.8).drawRect(0, 0, game.world.width, game.world.height);
             const infoRules = game.add.sprite(game.world.centerX, game.world.centerY, 'infoRules');
             infoRules.anchor.set(0.5);
