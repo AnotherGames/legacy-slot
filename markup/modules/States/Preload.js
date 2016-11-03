@@ -6,6 +6,7 @@ export class Preload {
     }
     init() {
         console.info('Preload State!');
+        this.add.plugin(Fabrique.Plugins.Spine);
     }
     preload() {
 
@@ -21,6 +22,7 @@ export class Preload {
         loadMainAssets(this);
         loadFSAssets(this);
         loadGlistaAssets(this);
+        loadSkeletonAssets(this);
 
         this.load.onLoadComplete.add(this.closePreloader, this);
     }
@@ -133,4 +135,11 @@ function loadFSAssets(game) {
 function loadGlistaAssets(game) {
     game.load.image('ligthGlista', 'glista/lightGlista.png');
     game.load.atlasJSONArray('glistaAtlas', 'glista/glista.png', 'glista/glista.json');
+}
+
+function loadSkeletonAssets(game) {
+    game.load.spine(
+        'skelet',                        //The key used for Phaser's cache
+        'skeleton/skeleton.json'    //The location of the spine's json file
+    );
 }
