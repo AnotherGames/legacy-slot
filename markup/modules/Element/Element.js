@@ -1,3 +1,5 @@
+import { model } from '../../modules/Model/Model';
+
 export class Element {
     /*  param: {
             game: Object,
@@ -38,6 +40,9 @@ export class Element {
         this._addAnimation({ el: 11, n: 15, w: 15 });
 
         this.sprite.animations.play(`${param.el}-${param.animation}`);
+        if (model.flag('mobile')) {
+            this.sprite.scale.x = this.sprite.scale.y = 1.5;
+        }
     }
 
     play(animation) {
