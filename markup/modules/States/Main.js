@@ -62,14 +62,20 @@ export class Main {
         }
 
         // Draw glisty
-        let glista = new Glista({
+        let glistParam = {
             game: this.game,
             parent: this.machineContainer,
             elSize: config[model.state('res')].elements
-        });
+        };
 
+        let glista1 = new Glista(glistParam);
         (function glistaStart() {
-            glista.start([2, null, 0, null, 2], 2000, glistaStart);
+            glista1.start([2, null, 0, null, 2], 2000, glistaStart);
+        })();
+
+        let glista2 = new Glista(glistParam);
+        (function glistaStart() {
+            glista2.start([0, null, 2, null, 0], -2000, glistaStart);
         })();
     }
 
