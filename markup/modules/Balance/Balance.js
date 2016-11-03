@@ -203,28 +203,28 @@ export let balance = (function () {
         } else {
             balanceText.coinsSum = game.add.text(
                 mainContainer.x + 1470,
-                mainContainer.height + 23,
+                mainContainer.height + 19,
                 balanceData.coinsSum,
                 {font: 'normal 27px Helvetica, Arial', fill: '#e8b075', align: 'center'},
                 container);
             balanceText.coinsSum.anchor.set(0.5);
             balanceText.coinsValue = game.add.text(
                 mainContainer.x + 1360,
-                mainContainer.height + 105,
+                mainContainer.height + 102,
                 balanceData.coinsValue,
                 {font: 'normal 27px Helvetica, Arial', fill: '#e8b075', align: 'center'},
                 container);
             balanceText.coinsValue.anchor.set(0.5);
             balanceText.betSum = game.add.text(
                 mainContainer.x + 480,
-                mainContainer.height + 23,
+                mainContainer.height + 19,
                 balanceData.betSum,
                 {font: 'normal 27px Helvetica, Arial', fill: '#e8b075', align: 'center'},
                 container);
             balanceText.betSum.anchor.set(0.5);
             balanceText.betValue = game.add.text(
                 mainContainer.x + 535,
-                mainContainer.height + 105,
+                mainContainer.height + 102,
                 balanceData.betValue,
                 {font: 'normal 27px Helvetica, Arial', fill: '#e8b075', align: 'center'},
                 container);
