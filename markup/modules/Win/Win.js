@@ -43,24 +43,23 @@ export let win = (function() {
 
     function drawWinNumber(number) {
         if (number < 0) return;
+
+        addWinSplash(number, 0);
+        addWinSplash(number, 1);
+
+    }
+
+    function addWinSplash(number, indx) {
         let game = model.el('game');
         let winTop = model.el('winTop');
 
         let winSplash = game.add.sprite(0, 0, 'win', null, winTop);
         winSplash.anchor.set(0.5);
-        winSplash.position.x = config[model.state('res')].win[number][0].x;
-        winSplash.position.y = config[model.state('res')].win[number][0].y;
+        winSplash.position.x = config[model.state('res')].win[number][indx].x;
+        winSplash.position.y = config[model.state('res')].win[number][indx].y;
         winSplash.animations.add('win', Phaser.Animation.generateFrameNames('Splash-Splash', 1, 14, '.png', 1), 15, false);
         winSplash.animations.play('win');
         winSplash.animations.getAnimation('win').killOnComplete = true;
-
-        let winSplash2 = game.add.sprite(0, 0, 'win', null, winTop);
-        winSplash2.anchor.set(0.5);
-        winSplash2.position.x = config[model.state('res')].win[number][1].x;
-        winSplash2.position.y = config[model.state('res')].win[number][1].y;
-        winSplash2.animations.add('win', Phaser.Animation.generateFrameNames('Splash-Splash', 1, 14, '.png', 1), 15, false);
-        winSplash2.animations.play('win');
-        winSplash2.animations.getAnimation('win').killOnComplete = true;
     }
 
     function cleanWin() {
