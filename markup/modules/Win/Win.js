@@ -8,7 +8,8 @@ export let win = (function() {
         let data = model.data('rollResponse');
 
         let winTop = game.add.group();
-        game.add.sprite(0, 0, 'winTotal');
+        let winTotal = game.add.sprite(game.world.centerX, game.world.centerY, 'winTotal', null, winTop);
+        winTotal.anchor.set(0.5);
     }
 
     events.on('roll:end', drawWin);
