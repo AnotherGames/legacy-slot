@@ -3,6 +3,7 @@ import { config } from '../../modules/Util/Config';
 export class Glista {
     /*  param: {
         game: Game,
+        lightParent: Group,
         parent: Group,
         elSize: {
             width: Number,
@@ -16,6 +17,10 @@ export class Glista {
         }
         if (param.game === undefined) {
             console.error('constructor: param.game is undefined', param);
+            return;
+        }
+        if (param.lightParent === undefined) {
+            console.error('constructor: param.parent is undefined', param);
             return;
         }
         if (param.parent === undefined) {
@@ -36,6 +41,7 @@ export class Glista {
         }
         // инитим входящие параметры
         this.game = param.game;
+        this.lightParent = param.lightParent;
         this.parent = param.parent;
         this.elSize = param.elSize;
         // инитим внутрение параметры

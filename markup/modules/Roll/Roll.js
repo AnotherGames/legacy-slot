@@ -23,10 +23,12 @@ export let roll = (function() {
             });
         });
 
+        let elementsContainer = model.el('elementsContainer');
+
         for (let i = -2; i < 3; i++) {
             wheels.push(new Wheel({
                 game, // в опциях можно передавать состояние и контейнер в котором создавать колеса
-                parent: machineContainer,
+                parent: elementsContainer,
                 position: {
                     x: i * elSize.width - config[model.state('res')].machine.x,
                     y: 0 - config[model.state('res')].machine.y * 2

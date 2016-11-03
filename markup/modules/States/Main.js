@@ -65,9 +65,12 @@ export class Main {
         }
 
         // Draw glisty
+        let glistaLightContainer = model.el('glistaLightContainer');
+        let glistaContainer = model.el('glistaContainer');
         let glistParam = {
             game: this.game,
-            parent: this.machineContainer,
+            lightParent: glistaLightContainer,
+            parent: glistaContainer,
             elSize: config[model.state('res')].elements
         };
 
@@ -121,5 +124,17 @@ export class Main {
         mask.beginFill(0x000000);
         mask.drawRect(maskMarginX, config[model.state('res')].machine.y, elSize.width * 5, elSize.height * 3);
         this.machineContainer.mask = mask;
+
+        let glistaLightContainer = this.game.add.group();
+        model.el('glistaLightContainer', glistaLightContainer);
+        this.machineContainer.add(glistaLightContainer);
+
+        let elementsContainer = this.game.add.group();
+        model.el('elementsContainer', elementsContainer);
+        this.machineContainer.add(elementsContainer);
+
+        let glistaContainer = this.game.add.group();
+        model.el('glistaContainer', glistaContainer);
+        this.machineContainer.add(glistaContainer);
     }
 }
