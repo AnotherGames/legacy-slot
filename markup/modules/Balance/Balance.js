@@ -33,18 +33,18 @@ export let balance = (function () {
             y = game.world.height - 15;
         }
 
-        const homeButton = game.add.button(x[0], y, 'footerButtons', actionOnClick, this, 'homeOn.png', 'home.png', 'homeOn.png', container);
+        const homeButton = game.add.button(x[0], y, 'footerButtons', actionOnClick, this, 'homeOn.png', 'home.png', 'homeOn.png', null, container);
         homeButton.anchor.set(0.5);
 
         if (model.flag('desktop')) {
 
-            const menuButton = game.add.button(x[1], y, 'footerButtons', actionOnClick, this, 'menuOn.png', 'menu.png', 'menuOn.png', container);
+            const menuButton = game.add.button(x[1], y, 'footerButtons', actionOnClick, this, 'menuOn.png', 'menu.png', 'menuOn.png', null, container);
             menuButton.anchor.set(0.5);
 
-            const soundButton = game.add.button(x[2], y, 'footerButtons', actionOnClick, this, 'soundOn.png', 'sound.png', container);
+            const soundButton = game.add.button(x[2], y, 'footerButtons', actionOnClick, this, 'soundOn.png', 'sound.png', null, container);
             soundButton.anchor.set(0.5);
 
-            const fastButton = game.add.button(x[3], y, 'footerButtons', actionOnClick, this, 'fastSpinOn.png', 'fastSpin.png', container);
+            const fastButton = game.add.button(x[3], y, 'footerButtons', actionOnClick, this, 'fastSpinOn.png', 'fastSpin.png', null, container);
             fastButton.anchor.set(0.5);
 
         }

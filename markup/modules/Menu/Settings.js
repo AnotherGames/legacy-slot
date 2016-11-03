@@ -1,4 +1,5 @@
 import { model } from '../../modules/Model/Model';
+import { menu } from '../../modules/Menu/Menu';
 
 export function drawSettingsMenu(container, game) {
     const settingsContainer = game.add.group();
@@ -16,7 +17,7 @@ export function drawSettingsMenu(container, game) {
         0,
         game.world.height * 0.2,
         'menuButtons',
-        'soundOff.png',
+        'soundOn.png',
         settingsContainer);
     soundButton.anchor.set(0.5);
 
@@ -27,7 +28,14 @@ export function drawSettingsMenu(container, game) {
     soundButton.inputEnabled = true;
     soundButton.input.priorityID = 2;
     soundButton.events.onInputDown.add(function () {
-        console.log('i am soundButton');
+        if (model.state('sound') === true) {
+            model.state('sound', false);
+            soundButton.frameName = 'soundOff.png';
+        } else {
+            model.state('sound', true);
+            soundButton.frameName = 'soundOn.png';
+        }
+        console.log(model.state('sound'));
     });
 
     const soundText = game.add.sprite(
@@ -49,7 +57,14 @@ export function drawSettingsMenu(container, game) {
     musicButton.inputEnabled = true;
     musicButton.input.priorityID = 2;
     musicButton.events.onInputDown.add(function () {
-        console.log('i am musicButton');
+        if (model.state('music') === true) {
+            model.state('music', false);
+            musicButton.frameName = 'musicOff.png';
+        } else {
+            model.state('music', true);
+            musicButton.frameName = 'musicOn.png';
+        }
+        console.log(model.state('music'));
     });
 
     const musicText = game.add.sprite(
@@ -86,14 +101,19 @@ export function drawSettingsMenu(container, game) {
         musicButton.x,
         game.world.height * 0.45,
         'menuButtons',
-        'handModeOff.png',
+        null,
         settingsContainer);
+    if (model.state('side') === 'left') {
+        handModeButton.frameName = 'handModeOff.png';
+    } else {
+        handModeButton.frameName = 'handModeOn.png';
+    }
     handModeButton.anchor.set(0.5);
 
     handModeButton.inputEnabled = true;
     handModeButton.input.priorityID = 2;
     handModeButton.events.onInputDown.add(function () {
-        console.log('i am handModeButton');
+        handleChangeSide(handModeButton);
     });
 
     const handModeText = game.add.sprite(
@@ -116,6 +136,14 @@ export function drawSettingsMenu(container, game) {
     rulesButton.input.priorityID = 2;
     rulesButton.events.onInputDown.add(function () {
         console.log('i am rulesButton');
+        const overlay = game.add.graphics(0, 0).beginFill(0x000000, 0.8).drawRect(0, 0, game.world.width, game.world.height);
+        const infoRules = game.add.sprite(game.world.centerX, game.world.centerY, 'infoRules');
+        infoRules.anchor.set(0.5);
+        infoRules.inputEnabled = true;
+        infoRules.events.onInputDown.add(function () {
+            infoRules.destroy();
+            overlay.destroy();
+        });
     });
 
     const rulesText = game.add.sprite(
@@ -130,7 +158,7 @@ export function drawSettingsMenu(container, game) {
         musicButton.x,
         game.world.height * 0.7,
         'menuButtons',
-        'historyOff.png',
+        'historyOn.png',
         settingsContainer);
     historyButton.anchor.set(0.5);
 
@@ -138,8 +166,12 @@ export function drawSettingsMenu(container, game) {
     historyButton.input.priorityID = 2;
     historyButton.events.onInputDown.add(function () {
         console.log('i am historyButton');
+        $('.history').toggleClass('closed');
     });
 
+    $('.history__button').click((event) => {
+        $('.history').toggleClass('closed');
+    });
     const historyText = game.add.sprite(
         historyButton.x,
         historyButton.y + historyButton.height / 2 + deltaY,
@@ -148,4 +180,43 @@ export function drawSettingsMenu(container, game) {
         settingsContainer);
     historyText.anchor.set(0.5);
 
+}
+
+function handleChangeSide(handModeButton) {
+    const overlay = model.el('menuOverlay');
+    overlay.destroy();
+    menu.hideMenu();
+    const mainContainer = model.el('mainContainer');
+    const mask = model.el('mask');
+    let xSide;
+    if (model.state('side') === 'left') {
+        model.state('side', 'right');
+        handModeButton.frameName = 'handModeOn.png';
+        xSide = model.data('buttonsXLeft');
+        changeSideButtons(xSide);
+        mainContainer.x = model.data('mainXRight');
+        mask.x = model.data('mainXRight');
+        // console.log(model.state('side'));
+    } else {
+        model.state('side', 'left');
+        handModeButton.frameName = 'handModeOff.png';
+        xSide = model.data('buttonsXRight');
+        changeSideButtons(xSide);
+        mainContainer.x = model.data('mainXLeft');
+        mask.x = model.data('mainXLeft');
+    }
+}
+
+function changeSideButtons(xSide) {
+    let spinButton = model.el('spinButton');
+    let autoButton = model.el('autoButton');
+    let betButton = model.el('betButton');
+    let menuButton = model.el('menuButton');
+    let soundButton = model.el('soundButton');
+
+    spinButton.x = xSide;
+    autoButton.x = xSide;
+    betButton.x = xSide;
+    menuButton.x = xSide;
+    soundButton.x = xSide;
 }

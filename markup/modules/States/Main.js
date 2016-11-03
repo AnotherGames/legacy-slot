@@ -19,17 +19,17 @@ export class Main {
         this.mainContainer = this.add.group();
         this.buttonsContainer = this.add.group();
         this.panelContainer = this.add.group();
-        // this.mainContainer.add(this.panelContainer);
         this.balanceContainer = this.add.group();
         this.menuContainer = this.add.group();
         model.el('bgContainer', this.bgContainer);
         model.el('mainContainer', this.mainContainer);
         model.el('balanceContainer', this.balanceContainer);
         model.el('buttonsContainer', this.buttonsContainer);
-        model.el('menuContainer', this.menuContainer);
         model.el('panelContainer', this.panelContainer);
+        model.el('menuContainer', this.menuContainer);
         model.state('side', 'left');
         model.state('sound', true);
+        model.state('music', true);
         model.state('autoPanel', false);
         // массив в который записываются анимации для проигрывания
         let game = model.el('game');
@@ -133,5 +133,6 @@ export class Main {
         mask.beginFill(0x000000);
         mask.drawRect(maskMarginX, config[model.state('res')].machine.y, elSize.width * 5, elSize.height * 3);
         this.machineContainer.mask = mask;
+        model.el('mask', mask);
     }
 }
