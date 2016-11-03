@@ -18,14 +18,14 @@ export function drawAutoDesktop(container, game, mainContainer, autoButton) {
         autoDesktopContainer);
     autoplayBG.anchor.set(0.5);
 
-    const autoBG10 = game.add.graphics(0, 0, autoDesktopContainer).beginFill(0xffffff, 0.2).drawRect(0, 0, 72, 37);
-    autoBG10.x = -83;
+    const autoBG10 = game.add.graphics(0, 0, autoDesktopContainer).beginFill(0xffffff, 0.2).drawRect(0, 0, 70, 37);
+    autoBG10.x = -81;
     autoBG10.y = -60;
     autoBG10.alpha = 0;
 
     const autoText10 = game.add.text(
         autoBG10.x + autoBG10.width / 2,
-        autoBG10.y + autoBG10.height / 2,
+        autoBG10.y + autoBG10.height / 2 + 2,
         '10',
         {font: 'normal 24px Arial', fill: '#e8b075', align: 'center'},
         autoDesktopContainer);
@@ -50,7 +50,7 @@ export function drawAutoDesktop(container, game, mainContainer, autoButton) {
 
     const autoText25 = game.add.text(
         autoBG25.x + autoBG25.width / 2,
-        autoBG25.y + autoBG25.height / 2,
+        autoBG25.y + autoBG25.height / 2 + 2,
         '25',
         {font: 'normal 24px Arial', fill: '#e8b075', align: 'center'},
         autoDesktopContainer);
@@ -68,14 +68,14 @@ export function drawAutoDesktop(container, game, mainContainer, autoButton) {
         console.log('i am autoBG25');
     });
 
-    const autoBG50 = game.add.graphics(0, 0, autoDesktopContainer).beginFill(0xffffff, 0.2).drawRect(0, 0, 72, 37);
-    autoBG50.x = -83;
+    const autoBG50 = game.add.graphics(0, 0, autoDesktopContainer).beginFill(0xffffff, 0.2).drawRect(0, 0, 70, 37);
+    autoBG50.x = -81;
     autoBG50.y = -19;
     autoBG50.alpha = 0;
 
     const autoText50 = game.add.text(
         autoBG50.x + autoBG50.width / 2,
-        autoBG50.y + autoBG50.height / 2,
+        autoBG50.y + autoBG50.height / 2 + 2,
         '50',
         {font: 'normal 24px Arial', fill: '#e8b075', align: 'center'},
         autoDesktopContainer);
@@ -100,7 +100,7 @@ export function drawAutoDesktop(container, game, mainContainer, autoButton) {
 
     const autoText100 = game.add.text(
         autoBG100.x + autoBG100.width / 2,
-        autoBG100.y + autoBG100.height / 2,
+        autoBG100.y + autoBG100.height / 2 + 2,
         '100',
         {font: 'normal 24px Arial', fill: '#e8b075', align: 'center'},
         autoDesktopContainer);
@@ -119,13 +119,13 @@ export function drawAutoDesktop(container, game, mainContainer, autoButton) {
     });
 
     const autoBG250 = game.add.graphics(0, 0, autoDesktopContainer).beginFill(0xffffff, 0.2).drawRect(0, 0, 70, 37);
-    autoBG250.x = -83;
+    autoBG250.x = -81;
     autoBG250.y = 23;
     autoBG250.alpha = 0;
 
     const autoText250 = game.add.text(
         autoBG250.x + autoBG250.width / 2,
-        autoBG250.y + autoBG250.height / 2,
+        autoBG250.y + autoBG250.height / 2 + 2,
         '250',
         {font: 'normal 24px Arial', fill: '#e8b075', align: 'center'},
         autoDesktopContainer);
@@ -150,7 +150,7 @@ export function drawAutoDesktop(container, game, mainContainer, autoButton) {
 
     const autoText500 = game.add.text(
         autoBG500.x + autoBG500.width / 2,
-        autoBG500.y + autoBG500.height / 2,
+        autoBG500.y + autoBG500.height / 2 + 2,
         '500',
         {font: 'normal 24px Arial', fill: '#e8b075', align: 'center'},
         autoDesktopContainer);
