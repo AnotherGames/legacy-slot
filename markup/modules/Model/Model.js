@@ -24,8 +24,8 @@ export let model = (function () {
     }
 
     function state(key, value) {
-        return returnData(_state, key, value);
         events.trigger(`change:${key}`, _state[key]);
+        return returnData(_state, key, value);
     }
 
     function flag(key, value) {

@@ -1,5 +1,6 @@
 import { model } from '../../modules/Model/Model';
 import { menu } from '../../modules/Menu/Menu';
+import { events } from '../../modules/Events/Events';
 
 export function drawSettingsMenu(container, game) {
     const settingsContainer = game.add.group();
@@ -17,8 +18,13 @@ export function drawSettingsMenu(container, game) {
         0,
         game.world.height * 0.2,
         'menuButtons',
-        'soundOn.png',
+        null,
         settingsContainer);
+    if (model.state('sound') === false) {
+        soundButton.frameName = 'soundOff.png';
+    } else {
+        soundButton.frameName = 'soundOn.png';
+    }
     soundButton.anchor.set(0.5);
 
     let deltaY = 20;
@@ -35,6 +41,7 @@ export function drawSettingsMenu(container, game) {
             model.state('sound', true);
             soundButton.frameName = 'soundOn.png';
         }
+        events.trigger('buttons:changeSoundButton');
         console.log(model.state('sound'));
     });
 
@@ -50,8 +57,13 @@ export function drawSettingsMenu(container, game) {
         2 * deltaX + 1.5 * soundButton.width,
         game.world.height * 0.2,
         'menuButtons',
-        'musicOn.png',
+        null,
         settingsContainer);
+    if (model.state('music') === false) {
+        musicButton.frameName = 'musicOff.png';
+    } else {
+        musicButton.frameName = 'musicOn.png';
+    }
     musicButton.anchor.set(0.5);
 
     musicButton.inputEnabled = true;
@@ -79,14 +91,26 @@ export function drawSettingsMenu(container, game) {
         soundButton.x,
         game.world.height * 0.45,
         'menuButtons',
-        'fastSpinOff.png',
+        null,
         settingsContainer);
+    if (model.state('fastRoll') === false) {
+        fastSpinButton.frameName = 'fastSpinOff.png';
+    } else {
+        fastSpinButton.frameName = 'fastSpinOn.png';
+    }
     fastSpinButton.anchor.set(0.5);
 
     fastSpinButton.inputEnabled = true;
     fastSpinButton.input.priorityID = 2;
     fastSpinButton.events.onInputDown.add(function () {
-        console.log('i am fastSpinButton');
+        if (model.state('fastRoll') === true) {
+            model.state('fastRoll', false);
+            fastSpinButton.frameName = 'fastSpinOff.png';
+        } else {
+            model.state('fastRoll', true);
+            fastSpinButton.frameName = 'fastSpinOn.png';
+        }
+        console.log(model.state('fastRoll'));
     });
 
     const fastSpinText = game.add.sprite(
