@@ -129,5 +129,5 @@ function loadFSAssets(game) {
 }
 
 function loadGlistaAssets(game) {
-    game.load.image('glista', 'glista/glista.png');
+    game.load.atlasJSONArray('glistaAtlas', 'glista/glista.png', 'glista/glista.json');
 }
