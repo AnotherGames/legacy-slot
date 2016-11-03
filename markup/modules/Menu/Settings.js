@@ -195,15 +195,14 @@ function handleChangeSide(handModeButton) {
         xSide = model.data('buttonsXLeft');
         changeSideButtons(xSide);
         mainContainer.x = model.data('mainXRight');
-        mask.x = model.data('mainXRight');
-        // console.log(model.state('side'));
+        mask.x = model.data('mainXRight') - model.data('mainXLeft');
     } else {
         model.state('side', 'left');
         handModeButton.frameName = 'handModeOff.png';
         xSide = model.data('buttonsXRight');
         changeSideButtons(xSide);
         mainContainer.x = model.data('mainXLeft');
-        mask.x = model.data('mainXLeft');
+        mask.x = 0;
     }
 }
 
