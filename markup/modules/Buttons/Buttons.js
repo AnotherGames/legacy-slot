@@ -79,14 +79,24 @@ export let buttons = (function () {
             } else {
                 model.state('sound', true);
             }
+            console.log(model.state('sound'));
         });
-
 
         model.el('spinButton', spinButton);
         model.el('autoButton', autoButton);
         model.el('betButton', betButton);
         model.el('menuButton', menuButton);
         model.el('soundButton', soundButton);
+
+    }
+
+    function changeSoundButton() {
+        console.log(' i am changing sound');
+        if (model.state('sound') === false) {
+            soundButton.frameName = 'soundOut.png';
+        } else {
+            soundButton.frameName = 'sound.png';
+        }
     }
 
     function drawDesktopPanel(container, game, mainContainer) {
@@ -176,6 +186,8 @@ export let buttons = (function () {
             });
         }
     }
+
+    events.on('buttons:changeSoundButton', changeSoundButton);
 
     return {
         drawMobileButtons,
