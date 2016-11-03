@@ -64,6 +64,12 @@ export class Main {
             buttons.drawDesktopPanel(this.panelContainer, this, this.mainContainer);
         }
 
+        // PreAnimation
+        let darkness = this.add.graphics();
+        darkness.beginFill(0x000000);
+        darkness.drawRect(0, 0, this.game.width, this.game.height);
+        this.add.tween(darkness).to( { alpha: 0 }, 1000, 'Linear', true);
+
         // Draw glisty
         let glistaLightContainer = model.el('glistaLightContainer');
         let glistaContainer = model.el('glistaContainer');
