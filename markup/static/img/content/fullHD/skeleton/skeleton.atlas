@@ -1,0 +1,146 @@
+
+skeleton.png
+size: 4096,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Potez/E_0007_Layer-1
+  rotate: false
+  xy: 2826, 324
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: -1
+Potez/cloud_2_r
+  rotate: false
+  xy: 2801, 1532
+  size: 1000, 500
+  orig: 1000, 500
+  offset: 0, 0
+  index: -1
+Potez/cloud_r
+  rotate: false
+  xy: 1924, 857
+  size: 1000, 500
+  orig: 1000, 500
+  offset: 0, 0
+  index: -1
+Potez/z_0000_Layer-8
+  rotate: false
+  xy: 2, 2
+  size: 1139, 948
+  orig: 1139, 948
+  offset: 0, 0
+  index: -1
+Potez/z_0003_Shape-6
+  rotate: false
+  xy: 2926, 626
+  size: 587, 454
+  orig: 587, 454
+  offset: 0, 0
+  index: -1
+Potez/z_0004_Shape-5
+  rotate: false
+  xy: 2171, 367
+  size: 512, 488
+  orig: 512, 488
+  offset: 0, 0
+  index: -1
+Potez/z_0005_Shape-4
+  rotate: true
+  xy: 1643, 338
+  size: 517, 526
+  orig: 517, 526
+  offset: 0, 0
+  index: -1
+Potez/z_0006_Shape-3
+  rotate: false
+  xy: 3588, 1081
+  size: 423, 449
+  orig: 423, 449
+  offset: 0, 0
+  index: -1
+Potez/z_0007_Shape-2
+  rotate: false
+  xy: 1143, 336
+  size: 498, 614
+  orig: 498, 614
+  offset: 0, 0
+  index: -1
+Potez/z_0009_Layer-5
+  rotate: false
+  xy: 1924, 1359
+  size: 875, 673
+  orig: 875, 673
+  offset: 0, 0
+  index: -1
+Potez/z_0010_Layer-24-copy
+  rotate: true
+  xy: 3515, 656
+  size: 423, 539
+  orig: 423, 539
+  offset: 0, 0
+  index: -1
+Potez/z_0011_Layer-3
+  rotate: false
+  xy: 3311, 177
+  size: 177, 229
+  orig: 177, 229
+  offset: 0, 0
+  index: -1
+Potez/z_0014_Rectangle-6
+  rotate: true
+  xy: 3128, 408
+  size: 216, 365
+  orig: 216, 365
+  offset: 0, 0
+  index: -1
+Potez/z_0015_Rectangle-4
+  rotate: false
+  xy: 3803, 1670
+  size: 281, 362
+  orig: 281, 362
+  offset: 0, 0
+  index: -1
+Potez/z_0016_Layer-1
+  rotate: false
+  xy: 3137, 143
+  size: 172, 263
+  orig: 172, 263
+  offset: 0, 0
+  index: -1
+Potez/z_0017_Rectangle-3
+  rotate: true
+  xy: 1143, 41
+  size: 293, 435
+  orig: 293, 435
+  offset: 0, 0
+  index: -1
+Potez/z_0019_Rectangle-1
+  rotate: true
+  xy: 2826, 124
+  size: 198, 309
+  orig: 198, 309
+  offset: 0, 0
+  index: -1
+Potez/z_0021_Layer-7
+  rotate: false
+  xy: 2926, 1082
+  size: 660, 448
+  orig: 660, 448
+  offset: 0, 0
+  index: -1
+Potez/z_0022_Layer-4
+  rotate: false
+  xy: 2685, 133
+  size: 139, 722
+  orig: 139, 722
+  offset: 0, 0
+  index: -1
+Potez/z_0023_Layer-15-copy
+  rotate: false
+  xy: 2, 952
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
