@@ -100,7 +100,7 @@ function loadMainAssets(game) {
     game.load.atlasJSONArray('footerButtons', 'footer/footerButtons.png', 'footer/footerButtons.json');
     if (model.flag('desktop')) {
         game.load.image('ui', 'game/UI.png');
-        game.load.image('ui', 'game/UI_FS.png');
+        game.load.image('uiFS', 'game/UI_FS.png');
         game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
         game.load.image('autoSelect', 'desk_buttons/autoSelect.png');
     }

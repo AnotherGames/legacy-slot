@@ -202,11 +202,22 @@ export let buttons = (function () {
         }
     }
 
+    function drawDesktopFSPanel(container, game, mainContainer) {
+        let gameMachine = model.el('gameMachine');
+        container.x = mainContainer.x + 38;
+        container.y = gameMachine.height - 28;
+
+        let panelBG = game.add.sprite(0, 0, 'uiFS', null, container);
+
+        let lines = game.add.text(55, 112, '10', {font: 'normal 27px Helvetica, Arial, Arial', fill: '#e8b075', align: 'center'}, container);
+    }
+
     events.on('buttons:changeSoundButton', changeSoundButton);
 
     return {
         drawMobileButtons,
-        drawDesktopPanel
+        drawDesktopPanel,
+        drawDesktopFSPanel
     };
 
 })();

@@ -38,6 +38,7 @@ export class Main {
         model.state('music', true);
         model.state('autoPanel', false);
         model.state('fastRoll', false);
+
     }
 
     preload() {
@@ -73,6 +74,7 @@ export class Main {
         darkness.drawRect(0, 0, this.game.width, this.game.height);
         this.add.tween(darkness).to( { alpha: 0 }, 1000, 'Linear', true);
         model.el('darkness', darkness);
+        this.state.start('FS');
     }
 
     update() {
@@ -83,7 +85,7 @@ export class Main {
         game.frameAnims.forEach((anim) => {
             anim();
         });
-        events.trigger('updateTime');
+
     }
 
     drawMainBG() {
@@ -95,7 +97,7 @@ export class Main {
         skeleton.scale.set(1);
         skeleton.setAnimationByName(
             0,          // Track index
-            'animation',     // Animation's name
+            '1',     // Animation's name
             true        // If the animation should loop or not
         );
         this.bgContainer.add(skeleton);
