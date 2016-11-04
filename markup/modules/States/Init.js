@@ -8,7 +8,7 @@ export class Init {
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     }
     create() {
-        let initSound = this.add.audio('initFon', true);
+        let initSound = this.add.audio('initFon', 1, true);
         initSound.play();
         let initBackground = this.add.sprite(0, 0, 'initBG');
         let initLogo = this.add.sprite(this.world.centerX, this.world.centerY * 0.4, 'text', 'logo.png');

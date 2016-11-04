@@ -1,6 +1,7 @@
 import { model } from '../../modules/Model/Model';
 
 export function drawAutoMenu(container, game) {
+    let buttonSound = model.el('buttonSound');
     const autoContainer = game.add.group();
     container.add(autoContainer);
 
@@ -36,6 +37,7 @@ export function drawAutoMenu(container, game) {
     autoBG10.inputEnabled = true;
     autoBG10.input.priorityID = 2;
     autoBG10.events.onInputDown.add(function () {
+        buttonSound.play();
         console.log('i am autoBG10');
     });
 
@@ -59,6 +61,7 @@ export function drawAutoMenu(container, game) {
     autoBG25.inputEnabled = true;
     autoBG25.input.priorityID = 2;
     autoBG25.events.onInputDown.add(function () {
+        buttonSound.play();
         console.log('i am autoBG25');
     });
 
@@ -82,6 +85,7 @@ export function drawAutoMenu(container, game) {
     autoBG50.inputEnabled = true;
     autoBG50.input.priorityID = 2;
     autoBG50.events.onInputDown.add(function () {
+        buttonSound.play();
         console.log('i am autoBG50');
     });
 
@@ -105,6 +109,7 @@ export function drawAutoMenu(container, game) {
     autoBG100.inputEnabled = true;
     autoBG100.input.priorityID = 2;
     autoBG100.events.onInputDown.add(function () {
+        buttonSound.play();
         console.log('i am autoBG100');
     });
 
@@ -128,6 +133,7 @@ export function drawAutoMenu(container, game) {
     autoBG250.inputEnabled = true;
     autoBG250.input.priorityID = 2;
     autoBG250.events.onInputDown.add(function () {
+        buttonSound.play();
         console.log('i am autoBG250');
     });
 
@@ -151,6 +157,7 @@ export function drawAutoMenu(container, game) {
     autoBG500.inputEnabled = true;
     autoBG500.input.priorityID = 2;
     autoBG500.events.onInputDown.add(function () {
+        buttonSound.play();
         console.log('i am autoBG500');
     });
 

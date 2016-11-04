@@ -68,8 +68,8 @@ function createPreloadCoin(game) {
 
 function loadSoundAssets(game) {
     game.load.audio('fon', 'sound/ambient.mp3');
-    game.load.audio('initFon', 'sound/fsAmbient.mp3');
-    game.load.audio('logoFon', 'sound/logoAmbient.mp3');
+    game.load.audio('fsFon', 'sound/fsAmbient.mp3');
+    game.load.audio('initFon', 'sound/logoAmbient.mp3');
     game.load.audio('baraban', 'sound/baraban.mp3');
     game.load.audio('buttonClick', 'sound/buttonClick.mp3');
     game.load.audio('startPerehod', 'sound/startPerehod.mp3');
@@ -139,7 +139,7 @@ function loadGlistaAssets(game) {
 
 function loadSkeletonAssets(game) {
     game.load.spine(
-        'skelet',                        //The key used for Phaser's cache
-        'skeleton/skeleton.json'    //The location of the spine's json file
+        'skelet',                        // The key used for Phaser's cache
+        'skeleton/skeleton.json'    // The location of the spine's json file
     );
 }

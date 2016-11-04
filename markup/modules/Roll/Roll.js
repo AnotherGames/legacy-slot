@@ -5,7 +5,7 @@ import { config } from 'modules/Util/Config';
 import { util } from 'modules/Util/Util';
 
 
-export let roll = (function() {
+export let roll = (function () {
 
     function initWheels(currentScreen, options) {
         let game = model.el('game');
@@ -79,6 +79,15 @@ export let roll = (function() {
     function startRoll(finishScreen, options = {}) {
         let wheels = model.el('wheels');
         let game = model.el('game');
+        let barabanSound = game.add.audio('baraban');
+        let duration;
+        if (model.state('fastRoll') === false) {
+            duration = config.wheel.roll.time / 1000;
+        } else {
+            duration = config.wheel.roll.fastTime / 1000;
+        }
+        barabanSound.addMarker('roll', 0, duration, 1, false);
+        barabanSound.play('roll');
 
         let countFinish = 0;
         let callback = function () {
@@ -117,6 +126,6 @@ export let roll = (function() {
     return {
         initWheels,
         startRoll
-    }
+    };
 
 })();

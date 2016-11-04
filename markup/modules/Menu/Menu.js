@@ -38,11 +38,13 @@ export let menu = (function () {
     }
 
     function drawBackButton(game, container) {
+        let buttonSound = model.el('buttonSound');
         const menuBack = game.add.sprite(container.width / 2, game.world.height * 0.9, 'mobileButtons', 'return.png', container);
         menuBack.anchor.set(0.5);
         menuBack.inputEnabled = true;
         menuBack.input.priorityID = 2;
         menuBack.events.onInputDown.add(function () {
+            buttonSound.play();
             hideMenu();
             let overlay = model.el('menuOverlay');
             let tween = game.add.tween(overlay).to( { alpha: 0 }, 2000, 'Quart.easeOut');

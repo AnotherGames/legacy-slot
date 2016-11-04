@@ -5,6 +5,7 @@ import { events } from '../../modules/Events/Events';
 export function drawSettingsMenu(container, game) {
     const settingsContainer = game.add.group();
     container.add(settingsContainer);
+    let buttonSound = model.el('buttonSound');
 
     const settingsTitle = game.add.text(
         container.width / 2,
@@ -34,6 +35,7 @@ export function drawSettingsMenu(container, game) {
     soundButton.inputEnabled = true;
     soundButton.input.priorityID = 2;
     soundButton.events.onInputDown.add(function () {
+        buttonSound.play();
         if (model.state('sound') === true) {
             model.state('sound', false);
             soundButton.frameName = 'soundOff.png';
@@ -69,6 +71,7 @@ export function drawSettingsMenu(container, game) {
     musicButton.inputEnabled = true;
     musicButton.input.priorityID = 2;
     musicButton.events.onInputDown.add(function () {
+        buttonSound.play();
         let fonSound = model.el('fonSound');
         if (model.state('music') === true) {
             model.state('music', false);
@@ -106,6 +109,7 @@ export function drawSettingsMenu(container, game) {
     fastSpinButton.inputEnabled = true;
     fastSpinButton.input.priorityID = 2;
     fastSpinButton.events.onInputDown.add(function () {
+        buttonSound.play();
         if (model.state('fastRoll') === true) {
             model.state('fastRoll', false);
             fastSpinButton.frameName = 'fastSpinOff.png';
@@ -140,6 +144,7 @@ export function drawSettingsMenu(container, game) {
     handModeButton.inputEnabled = true;
     handModeButton.input.priorityID = 2;
     handModeButton.events.onInputDown.add(function () {
+        buttonSound.play();
         handleChangeSide(handModeButton);
     });
 
@@ -162,6 +167,7 @@ export function drawSettingsMenu(container, game) {
     rulesButton.inputEnabled = true;
     rulesButton.input.priorityID = 2;
     rulesButton.events.onInputDown.add(function () {
+        buttonSound.play();
         console.log('i am rulesButton');
         const overlay = game.add.graphics(0, 0).beginFill(0x000000, 0.8).drawRect(0, 0, game.world.width, game.world.height);
         const infoRules = game.add.sprite(game.world.centerX, game.world.centerY, 'infoRules');
@@ -192,6 +198,7 @@ export function drawSettingsMenu(container, game) {
     historyButton.inputEnabled = true;
     historyButton.input.priorityID = 2;
     historyButton.events.onInputDown.add(function () {
+        buttonSound.play();
         console.log('i am historyButton');
         $('.history').toggleClass('closed');
     });

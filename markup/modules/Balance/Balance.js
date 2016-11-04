@@ -10,6 +10,7 @@ export let balance = (function () {
     let currencySymbol;
 
     function drawBalanceContainer(container, game) {
+        let buttonSound = model.el('buttonSound');
         let d = 0.01 * model.el('game').width;
         let D = 0.02 * model.el('game').width;
         // console.log(d, D);
@@ -39,6 +40,7 @@ export let balance = (function () {
         homeButton.inputEnabled = true;
         homeButton.input.priorityID = 1;
         homeButton.events.onInputDown.add(function () {
+            buttonSound.play();
             util.request('_Logout')
                 .then((response) => {
                     console.log('Logout response:', response);
@@ -56,6 +58,7 @@ export let balance = (function () {
             soundButton.inputEnabled = true;
             soundButton.input.priorityID = 1;
             soundButton.events.onInputDown.add(function () {
+                buttonSound.play();
                 // soundButton.frameName = soundButton.frameName === 'soundOut.png' ? 'sound.png' : 'soundOut.png';
                 if (model.state('sound')) {
                     model.state('sound', false);
@@ -69,6 +72,7 @@ export let balance = (function () {
             fastButton.inputEnabled = true;
             fastButton.input.priorityID = 1;
             fastButton.events.onInputDown.add(function () {
+                buttonSound.play();
                 // fastButton.frameName = fastButton.frameName === 'soundOut.png' ? 'sound.png' : 'soundOut.png';
                 if (model.state('fastRoll')) {
                     model.state('fastRoll', false);
@@ -422,7 +426,7 @@ export let balance = (function () {
     }
 
     function rollStart() {
-        if(model.state('roll:progress')) return;
+        if (model.state('roll:progress')) return;
 
         if (balanceData.coinsSum >= balanceData.betSum) {
             balanceData.coinsSum = (balanceData.coinsSum - balanceData.betSum).toFixed(0);

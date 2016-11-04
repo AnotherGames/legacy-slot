@@ -45,7 +45,7 @@ export class Main {
     }
 
     create() {
-        let fonSound = this.add.audio('fon', true);
+        let fonSound = this.add.audio('fon', 1, true);
         model.el('fonSound', fonSound);
         fonSound.play();
         this.drawMainBG();

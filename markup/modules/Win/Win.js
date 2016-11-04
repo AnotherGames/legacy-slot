@@ -3,7 +3,7 @@ import { events } from 'modules/Events/Events';
 import { config } from 'modules/Util/Config';
 import { Glista } from 'modules/Glista/Glista';
 
-export let win = (function() {
+export let win = (function () {
 
     let glistaDoneCounter;
     let glistaFiredCounter;
@@ -20,6 +20,10 @@ export let win = (function() {
 
         let game = model.el('game');
         let mainContainer = model.el('mainContainer');
+        let winSound = Math.round(Math.random()) ? game.add.audio('lineWin') : game.add.audio('lineWin2');
+        winSound.addMarker('win', 0, 1, 1, false);
+        winSound.play('win');
+
 
         let winTop = game.add.group();
 
@@ -99,7 +103,7 @@ export let win = (function() {
     function drawWinGlista(number) {
         if (number < 0) return;
 
-        glistaFiredCounter++
+        glistaFiredCounter++;
 
         let line = model.data('lines')[number - 1];
         let game = model.el('game');
@@ -115,7 +119,7 @@ export let win = (function() {
         line.forEach((coord) => {
             glistaMas.push(coord.Y);
         });
-        glista.start(glistaMas, 1000, function() {
+        glista.start(glistaMas, 1000, function () {
             glista.remove();
             glistaDoneCounter++;
             if (glistaDoneCounter == glistaFiredCounter) {
