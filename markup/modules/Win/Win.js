@@ -119,12 +119,12 @@ export let win = (function () {
         line.forEach((coord) => {
             glistaMas.push(coord.Y);
         });
-        glista.start(glistaMas, 1000, function () {
+        cleanWinElements();
+        glista.start(glistaMas, 1000, function() {
             glista.remove();
             glistaDoneCounter++;
             if (glistaDoneCounter == glistaFiredCounter) {
                 console.log('Screen is done!');
-                cleanWinElements();
                 cleanWin();
             }
         });
@@ -136,7 +136,10 @@ export let win = (function () {
             let wheel = wheelObj.elements;
             wheel.forEach((element) => {
                 let elementName = parseInt(element.sprite.animations.currentAnim.name);
-                element.play(`${elementName}-n`);
+                element.sprite.animations.getAnimation(`${elementName}-w`).onComplete.add(() => {
+                    console.log('Animation complete:', `${elementName}-w`);
+                    element.play(`${elementName}-n`);
+                });
             });
         });
     }
