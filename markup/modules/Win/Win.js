@@ -124,7 +124,6 @@ export let win = (function () {
             glista.remove();
             glistaDoneCounter++;
             if (glistaDoneCounter == glistaFiredCounter) {
-                console.log('Screen is done!');
                 cleanWin();
             }
         });
