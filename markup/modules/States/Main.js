@@ -87,19 +87,21 @@ export class Main {
     }
 
     drawMainBG() {
-        let skeleton = this.game.add.spine(
+        let animBG = this.game.add.spine(
             this.game.world.centerX,        // X positon
             this.game.world.centerY,        // Y position
-            'skelet'     // the key of the object in cache
+            'animBG'     // the key of the object in cache
         );
-        skeleton.scale.set(1);
-        skeleton.setAnimationByName(
+        animBG.scale.set(1);
+        animBG.setAnimationByName(
             0,          // Track index
             'animation',     // Animation's name
             true        // If the animation should loop or not
         );
-        this.bgContainer.add(skeleton);
-        // let mainBG = this.add.sprite(0, 0, 'mainBG', null, this.bgContainer);
+        this.bgContainer.add(animBG);
+        model.el('animMainBG', animBG);
+        let mainBG = this.add.sprite(0, 0, 'mainBG', null, this.bgContainer);
+        model.el('mainBG', mainBG);
     }
 
     initMainContainer() {
