@@ -35,16 +35,24 @@ export function drawSettingsMenu(container, game) {
     soundButton.inputEnabled = true;
     soundButton.input.priorityID = 2;
     soundButton.events.onInputDown.add(function () {
-        buttonSound.play();
+        events.trigger('buttons:changeSoundButton');
+        // TODO: вынести в controller.sound
+        let fonSound = model.el('fonSound');
+
         if (model.state('sound') === true) {
             model.state('sound', false);
             soundButton.frameName = 'soundOff.png';
+
+            model.state('music', false);
+            fonSound.stop();
         } else {
+            buttonSound.play();
             model.state('sound', true);
             soundButton.frameName = 'soundOn.png';
+
+            model.state('music', true);
+            fonSound.play();
         }
-        events.trigger('buttons:changeSoundButton');
-        console.log(model.state('sound'));
     });
 
     const soundText = game.add.sprite(
