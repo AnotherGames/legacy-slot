@@ -20,7 +20,18 @@ html
 
     body
         style.
+            .closed {
+                display: none;
+            }
+            #darkness {
+                z-index: 10;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.3);
+            }
             #settings {
+                z-index: 11;
                 position: absolute;
                 width: 1670px;
                 border: 1px rgba(151, 151, 151, 0.3) solid;
@@ -103,15 +114,6 @@ html
                 width: 350px;
                 height: 14px;
                 background: rgba(126,199,16,1);
-                /*
-                background: -moz-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(126,199,16,1) 100%);
-                background: -webkit-gradient(left top, right top, color-stop(0%, rgba(255,255,255,1)), color-stop(100%, rgba(126,199,16,1)));
-                background: -webkit-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(126,199,16,1) 100%);
-                background: -o-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(126,199,16,1) 100%);
-                background: -ms-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(126,199,16,1) 100%);
-                background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(126,199,16,1) 100%);
-                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#7ec710', GradientType=1 );
-                */
             }
             input[type=range]::-webkit-slider-thumb {
                 -webkit-appearance: none;
@@ -129,6 +131,7 @@ html
             }
             button {
                 width: 200px;
+                height: 135px;
                 margin: 0 10px;
                 border: none;
                 border-radius: 5px;
@@ -163,11 +166,12 @@ html
                 right: 42px;
             }
         #game
+            #darkness.closed
             section(class="history closed")
                 iframe(src="http://casino.bossgs.org/userinfo/index.html" class="history__iframe")
                 button(class="history__button") Close
-            section#settings
-                div.section
+            section#settings.closed
+                .section
                     .title Audio
                     .volumeContainer
                         |   Volume
@@ -181,22 +185,26 @@ html
                         input#checkMusic.checkbox(type='checkbox')
                         label(for='checkMusic') Music
                     .title Options
-                    input#fastSpin.checkbox(type='checkbox')
-                    label(for='fastSpin') Fast Spin
-                div.section
+                    .marginBottom
+                        input#fastSpin.checkbox(type='checkbox')
+                        label(for='fastSpin') Fast Spin
+                    .marginBottom
+                        input#isAnimations.checkbox(type='checkbox')
+                        label(for='isAnimations') Animations
+                .section
                     .title Stop Autoplay
                     .marginBottom
                         input#optionAutoplay1.checkbox(type='checkbox')
                         label(for='optionAutoplay1') On single of at least
-                        input#optionAutoplay1.inputText(type='text', value='0')
+                        input#optionAutoplayVal1.inputText(type='number', value='0')
                     .marginBottom
                         input#optionAutoplay2.checkbox(type='checkbox')
                         label(for='optionAutoplay2') If cash increasesby
-                        input#optionAutoplay2.inputText(type='text', value='0')
+                        input#optionAutoplayVal2.inputText(type='number', value='0')
                     .marginBottom
                         input#optionAutoplay3.checkbox(type='checkbox')
                         label(for='optionAutoplay3') If cash decreases by
-                        input#optionAutoplay3.inputText(type='text', value='0')
+                        input#optionAutoplayVal3.inputText(type='number', value='0')
                     .marginBottom
                         input#optionAutoplay4.checkbox(type='checkbox')
                         label(for='optionAutoplay4') When entering Free Spins
