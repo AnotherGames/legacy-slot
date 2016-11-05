@@ -1,6 +1,5 @@
 import { model } from 'modules/Model/Model';
 import { events } from 'modules/Events/Events';
-import { util } from 'modules/Util/Util';
 
 export let balance = (function () {
 
@@ -10,7 +9,6 @@ export let balance = (function () {
     let currencySymbol;
 
     function drawBalanceContainer(container, game) {
-        let buttonSound = model.el('buttonSound');
         let d = 0.01 * model.el('game').width;
         let D = 0.02 * model.el('game').width;
         // console.log(d, D);

@@ -64,14 +64,13 @@ export class Main {
             model.data('mainXRight', this.game.width - this.mainContainer.width - model.data('buttonsDelta') * 2);
         }
         balance.drawBalanceContainer(this.balanceContainer, this);
-        this.drawHomeButton(this.balanceContainer);
+        buttons.drawHomeButton(this.balanceContainer, this);
         this.drawMainContainer();
 
         events.trigger('roll:initWheels');
 
         if (model.flag('mobile')) {
             this.mainContainer.x = model.data('mainXLeft');
-        } else {
         } else {    // Desktop
             this.mainContainer.x = (this.game.width - this.mainContainer.width) / 2;
             buttons.drawDesktopPanel(this.panelContainer, this, this.mainContainer);
@@ -84,25 +83,6 @@ export class Main {
         darkness.drawRect(0, 0, this.game.width, this.game.height);
         this.add.tween(darkness).to( { alpha: 0 }, 1000, 'Linear', true);
         model.el('darkness', darkness);
-    }
-
-    drawHomeButton(container) {
-        let x = 25;
-        let y = (model.flag('mobile')) ? this.game.world.height - 50 : this.game.world.height - 15;
-
-        function homeOnClick() {
-            buttonSound.play(); // TODO: вынести в controller.sound
-            util.request('_Logout')
-                .then((response) => {
-                    console.log('Logout response:', response);
-                });
-            window.history.back();
-        }
-
-        const homeButton = this.game.add.button(x, y, 'footerButtons', homeOnClick, this, 'homeOn.png', 'home.png', 'homeOn.png', null, container);
-        homeButton.anchor.set(0.5);
-        homeButton.inputEnabled = true;
-        homeButton.input.priorityID = 1;
     }
 
     update() {

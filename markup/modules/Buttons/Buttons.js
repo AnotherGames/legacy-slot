@@ -1,6 +1,7 @@
 import { model } from '../../modules/Model/Model';
 import { events } from '../../modules/Events/Events';
 import { drawAutoDesktop } from '../../modules/Buttons/Autoplay';
+import { util } from 'modules/Util/Util';
 
 export let buttons = (function () {
 
@@ -9,6 +10,26 @@ export let buttons = (function () {
     let betButton;
     let menuButton;
     let soundButton;
+
+    function drawHomeButton(container, game) {
+        let x = 25;
+        let y = (model.flag('mobile')) ? game.world.height - 50 : game.world.height - 15;
+
+        function homeOnClick() {
+            let buttonSound = model.el('buttonSound');
+            buttonSound.play(); // TODO: вынести в controller.sound
+            util.request('_Logout')
+                .then((response) => {
+                    console.log('Logout response:', response);
+                });
+            window.history.back();
+        }
+
+        const homeButton = game.add.button(x, y, 'footerButtons', homeOnClick, this, 'homeOn.png', 'home.png', 'homeOn.png', null, container);
+        homeButton.anchor.set(0.5);
+        homeButton.inputEnabled = true;
+        homeButton.input.priorityID = 1;
+    }
 
     function drawMobileButtons(container, game, mainWidth) {
         let buttonSound = model.el('buttonSound');
@@ -279,6 +300,7 @@ export let buttons = (function () {
     events.on('buttons:changeSoundButton', changeSoundButton);
 
     return {
+        drawHomeButton,
         drawMobileButtons,
         drawDesktopPanel,
         drawDesktopBottomButtons
