@@ -72,8 +72,10 @@ export class Main {
         if (model.flag('mobile')) {
             this.mainContainer.x = model.data('mainXLeft');
         } else {
+        } else {    // Desktop
             this.mainContainer.x = (this.game.width - this.mainContainer.width) / 2;
             buttons.drawDesktopPanel(this.panelContainer, this, this.mainContainer);
+            buttons.drawDesktopBottomButtons(this.balanceContainer, this);
         }
 
         // PreAnimation
