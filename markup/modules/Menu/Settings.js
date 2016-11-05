@@ -203,9 +203,6 @@ export function drawSettingsMenu(container, game) {
         $('.history').toggleClass('closed');
     });
 
-    $('.history__button').click((event) => {
-        $('.history').toggleClass('closed');
-    });
     const historyText = game.add.sprite(
         historyButton.x,
         historyButton.y + historyButton.height / 2 + deltaY,

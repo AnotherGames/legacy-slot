@@ -52,6 +52,10 @@ export class Main {
         let buttonSound = this.game.add.audio('buttonClick');
         model.el('buttonSound', buttonSound);
 
+        $('.history__button').click((event) => {
+            $('.history').addClass('closed');
+        });
+
         this.drawMainBG();
         this.initMainContainer();
         if (model.flag('mobile')) {
