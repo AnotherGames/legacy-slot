@@ -22,36 +22,6 @@ export let balance = (function () {
             footerBGTop.beginFill(0x000000, 0.6).drawRect(0, game.world.height - 70, game.world.width, 40);
         }
 
-        let x;
-        let y;
-
-        if (model.flag('mobile')) {
-            x = [25, 75, game.world.width - 35, game.world.width - 85];
-            y = game.world.height - 50;
-        }
-
-        if (model.flag('desktop')) {
-            x = [25, 75, 125, 175];
-            y = game.world.height - 15;
-        }
-
-        const homeButton = game.add.button(x[0], y, 'footerButtons', actionOnClick, this, 'homeOn.png', 'home.png', 'homeOn.png', null, container);
-        homeButton.anchor.set(0.5);
-        homeButton.inputEnabled = true;
-        homeButton.input.priorityID = 1;
-        homeButton.events.onInputDown.add(function () {
-            buttonSound.play();
-            util.request('_Logout')
-                .then((response) => {
-                    console.log('Logout response:', response);
-                });
-            window.history.back();
-        });
-
-        function actionOnClick() {
-            console.log('i am clicked!');
-        }
-
         drawTime(container, game);
 
         drawBalanceText(container, game);
