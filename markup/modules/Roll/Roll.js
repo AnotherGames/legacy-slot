@@ -100,8 +100,12 @@ export let roll = (function () {
 
         wheels.forEach((wheel, columnIndex) => {
             // Roll
+            if (model.state('fastRoll')) {
+                wheel.fast();
+            }
             game.time.events.add(columnIndex * config.wheel.roll.deltaTime, () => {
                 wheel.roll(finishScreen[columnIndex] || config.wheel.roll.finishScreen, {
+                    // TODO: для обычних круток используй параметры конфига.
                     time: options.time,
                     length: options.length,
                     easingSeparation: options.ease,
