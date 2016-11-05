@@ -90,7 +90,6 @@ export function drawSettingsMenu(container, game) {
             fonSound.play();
             musicButton.frameName = 'musicOn.png';
         }
-        console.log(model.state('music'));
     });
 
     const musicText = game.add.sprite(
@@ -125,7 +124,6 @@ export function drawSettingsMenu(container, game) {
             model.state('fastRoll', true);
             fastSpinButton.frameName = 'fastSpinOn.png';
         }
-        console.log(model.state('fastRoll'));
     });
 
     const fastSpinText = game.add.sprite(
