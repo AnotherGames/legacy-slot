@@ -11,8 +11,7 @@ export let buttons = (function () {
     let soundButton;
 
     function drawMobileButtons(container, game, mainWidth) {
-        let buttonSound = game.add.audio('buttonClick');
-        model.el('buttonSound', buttonSound);
+        let buttonSound = model.el('buttonSound');
         spinButton = game.add.sprite(0, game.world.centerY, 'mobileButtons', 'spin.png', container);
         spinButton.anchor.set(0.5);
         spinButton.inputEnabled = true;

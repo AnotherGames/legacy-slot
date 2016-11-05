@@ -48,6 +48,10 @@ export class Main {
         let fonSound = this.add.audio('fon', 1, true);
         model.el('fonSound', fonSound);
         fonSound.play();
+
+        let buttonSound = this.game.add.audio('buttonClick');
+        model.el('buttonSound', buttonSound);
+
         this.drawMainBG();
         this.initMainContainer();
         if (model.flag('mobile')) {
