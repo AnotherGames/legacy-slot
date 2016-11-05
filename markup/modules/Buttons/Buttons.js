@@ -128,9 +128,10 @@ export let buttons = (function () {
         spinButtonDesk.events.onInputDown.add(function () {
             buttonSound.play();
             events.trigger('roll:request', {
-                time: 1500,
-                length: 30,
-                ease: 1
+                // TODO: для обычних круток используй параметры конфига.
+                // time: 1500,
+                // length: 30,
+                // ease: 1
             });
         });
         let maxBetButtonDesk = game.add.button(spinButtonDesk.x + 137, 94, 'deskButtons', maxBet, this, 'maxBetOn.png', 'maxBet.png', 'maxBetOn.png', null, container);
