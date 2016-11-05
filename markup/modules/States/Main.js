@@ -75,6 +75,7 @@ export class Main {
             this.mainContainer.x = (this.game.width - this.mainContainer.width) / 2;
             buttons.drawDesktopPanel(this.panelContainer, this, this.mainContainer);
             buttons.drawDesktopBottomButtons(this.balanceContainer, this);
+            this.initDesktopSettings();
         }
 
         // PreAnimation
@@ -151,5 +152,67 @@ export class Main {
         model.el('glistaContainer', glistaContainer);
         this.machineContainer.add(glistaContainer);
         model.el('mask', mask);
+    }
+    initDesktopSettings() {
+        let _this = this;
+        $('#volume').on('input change', function () {
+            _this.game.sound.volume = this.value / 100;
+        });
+        $('#checkSound').on('change', function () {
+            model.state('sound', this.checked);
+            // console.log(this.id, this.checked);
+        });
+        $('#checkMusic').on('change', function () {
+            let fonSound = model.el('fonSound');
+            model.state('music', this.checked);
+            if (this.checked) {
+                fonSound.play();
+            } else {
+                fonSound.stop();
+            }
+            // console.log(this.id, this.checked);
+        });
+        $('#fastSpin').on('change', function () {
+            model.state('fastRoll', this.checked);
+            // console.log(this.id, this.checked);
+        });
+        $('#isAnimations').on('change', function () {
+            // console.log(this.id, this.checked);
+        });
+        $('#optionAutoplay1').on('change', function () {
+            console.log(this.id, this.checked);
+        });
+        $('#optionAutoplayVal1').on('input change', function () {
+            console.log('optionAutoplayVal1', this.value);
+        });
+        $('#optionAutoplay2').on('change', function () {
+            console.log(this.id, this.checked);
+        });
+        $('#optionAutoplayVal2').on('input change', function () {
+            console.log('optionAutoplayVal2', this.value);
+        });
+        $('#optionAutoplay3').on('change', function () {
+            console.log(this.id, this.checked);
+        });
+        $('#optionAutoplayVal3').on('input change', function () {
+            console.log('optionAutoplayVal3', this.value);
+        });
+        $('#optionAutoplay4').on('change', function () {
+            console.log(this.id, this.checked);
+        });
+        $('#btnHistory').on('click', function () {
+            $('.history').removeClass('closed');
+            // console.log('btnHistory');
+        });
+        $('#btnRules').on('click', function () {
+            console.log('btnRules');
+        });
+        $('#settingsSave').on('click', function () {
+            $('#settings').addClass('closed');
+            $('#darkness').addClass('closed');
+            $('.history').addClass('closed');
+            $('#darkness').off();
+            // TODO: request new settings.
+        });
     }
 }
