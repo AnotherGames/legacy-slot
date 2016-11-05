@@ -19,6 +19,7 @@ export class Main {
         let game = model.el('game');
         // массив в который записываются анимации для проигрывания
         game.frameAnims = [];
+        game.spriteAnims = [];
 
         this.game.stage.disableVisibilityChange = true;
         this.bgContainer = this.add.group();
@@ -38,6 +39,7 @@ export class Main {
         model.state('music', true);
         model.state('autoPanel', false);
         model.state('fastRoll', false);
+        model.state('isAnimations', true);
     }
 
     preload() {
@@ -113,6 +115,12 @@ export class Main {
         model.el('animMainBG', animBG);
         let mainBG = this.add.sprite(0, 0, 'mainBG', null, this.bgContainer);
         model.el('mainBG', mainBG);
+
+        if (model.state('isAnimations')) {
+            mainBG.visible = false;
+        } else {
+            animBG.visible = false;
+        }
     }
 
     initMainContainer() {
@@ -177,6 +185,23 @@ export class Main {
             // console.log(this.id, this.checked);
         });
         $('#isAnimations').on('change', function () {
+            let isAnim = this.checked;
+            model.state('isAnimations', isAnim);
+
+            let animMainBG = model.el('animMainBG');
+            let mainBG = model.el('mainBG');
+
+            if (isAnim) {
+                animMainBG.visible = true;
+                mainBG.visible = false;
+            } else {
+                mainBG.visible = true;
+                animMainBG.visible = false;
+            }
+
+            _this.game.spriteAnims.forEach((elem) => {
+                elem.sprite.animations.paused = !isAnim;
+            });
             // console.log(this.id, this.checked);
         });
         $('#optionAutoplay1').on('change', function () {

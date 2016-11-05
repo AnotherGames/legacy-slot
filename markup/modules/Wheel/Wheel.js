@@ -102,6 +102,7 @@ export class Wheel {
             });
             elem.sprite.anchor.set(0.5);
             this.items.push(elem);
+            this.game.spriteAnims.push(elem);
         }
 
         this.update();
