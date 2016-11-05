@@ -48,41 +48,6 @@ export let balance = (function () {
             window.history.back();
         });
 
-        if (model.flag('desktop')) {
-
-            const menuButton = game.add.button(x[1], y, 'footerButtons', actionOnClick, this, 'menuOn.png', 'menu.png', 'menuOn.png', null, container);
-            menuButton.anchor.set(0.5);
-
-            const soundButton = game.add.button(x[2], y, 'footerButtons', actionOnClick, this, 'soundOn.png', 'sound.png', null, container);
-            soundButton.anchor.set(0.5);
-            soundButton.inputEnabled = true;
-            soundButton.input.priorityID = 1;
-            soundButton.events.onInputDown.add(function () {
-                buttonSound.play();
-                // soundButton.frameName = soundButton.frameName === 'soundOut.png' ? 'sound.png' : 'soundOut.png';
-                if (model.state('sound')) {
-                    model.state('sound', false);
-                } else {
-                    model.state('sound', true);
-                }
-            });
-
-            const fastButton = game.add.button(x[3], y, 'footerButtons', actionOnClick, this, 'fastSpinOn.png', 'fastSpin.png', null, container);
-            fastButton.anchor.set(0.5);
-            fastButton.inputEnabled = true;
-            fastButton.input.priorityID = 1;
-            fastButton.events.onInputDown.add(function () {
-                buttonSound.play();
-                // fastButton.frameName = fastButton.frameName === 'soundOut.png' ? 'sound.png' : 'soundOut.png';
-                if (model.state('fastRoll')) {
-                    model.state('fastRoll', false);
-                } else {
-                    model.state('fastRoll', true);
-                }
-            });
-
-        }
-
         function actionOnClick() {
             console.log('i am clicked!');
         }
