@@ -13,17 +13,12 @@ export let sound = {
     },
     /* val: Number (0 - 100) */
     set volume(val) {
-        if (typeof (val) !== 'number') {
-            console.error('set isMusic: Input parameter is not number', val);
-            return;
-        }
-        if (val === this._volume) return;
-
-        let _val = val / 100;
+        let _val = +val / 100;
         if (_val < 0) _val = 0;
         if (_val > 1) _val = 1;
-        this._volume = _val;
+        if (_val === this._volume) return;
 
+        this._volume = _val;
         this.game.sound.volume = _val;
     },
 
