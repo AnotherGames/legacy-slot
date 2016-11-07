@@ -313,7 +313,7 @@ export let buttons = (function () {
         drawHomeButton,
         drawMobileButtons,
         drawDesktopPanel,
-        drawDesktopFSPanel
+        drawDesktopFSPanel,
         drawDesktopBottomButtons
     };
 
