@@ -84,7 +84,7 @@ export class Main {
         darkness.drawRect(0, 0, this.game.width, this.game.height);
         this.add.tween(darkness).to( { alpha: 0 }, 1000, 'Linear', true);
         model.el('darkness', darkness);
-        this.state.start('FS');
+        // this.state.start('FS');
     }
 
     update() {
