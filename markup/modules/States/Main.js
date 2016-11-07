@@ -43,6 +43,7 @@ export class Main {
         model.state('autoPanel', false);
         model.state('fastRoll', false);
         model.state('isAnimations', true);
+        model.state('autoEnd', true);
     }
 
     preload() {
