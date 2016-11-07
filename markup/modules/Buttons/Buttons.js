@@ -106,15 +106,16 @@ export let buttons = (function () {
         soundButton.input.priorityID = 1;
         soundButton.events.onInputDown.add(function () {
             // soundButton.frameName = (soundButton.frameName === 'soundOut.png') ? 'sound.png' : 'soundOut.png';
-            if (sound.volume > 0) {
+            if (sound.isSound || sound.isMusic) {
                 soundButton.frameName = 'soundOut.png';
-                sound.volume = 0;
+                sound.isSound = false;
+                sound.isMusic = false;
             } else {
                 soundButton.frameName = 'sound.png';
-                sound.volume = 1;
+                sound.isSound = true;
+                sound.isMusic = true;
                 sound.sounds.button.play();
             }
-            console.log(model.state('sound'));
         });
 
         model.el('spinButton', spinButton);
@@ -235,8 +236,9 @@ export let buttons = (function () {
         let y = game.world.height - 15;
 
         function menuOnClick() {
-            $('#checkSound').prop('checked', model.state('sound'));
-            $('#checkMusic').prop('checked', model.state('music'));
+            $('#volume').prop('value', sound.volume * 100);
+            $('#checkSound').prop('checked', sound.isSound);
+            $('#checkMusic').prop('checked', sound.isMusic);
             $('#fastSpin').prop('checked', model.state('fastRoll'));
             $('#isAnimations').prop('checked', model.state('isAnimations'));
 
@@ -258,12 +260,12 @@ export let buttons = (function () {
 
         let soundButton;
         function soundOnClick() {
-            if (game.sound.volume > 0) {
+            if (sound.volume > 0) {
                 soundButton.frameName = 'soundOff.png';
-                game.sound.volume = 0;
+                sound.volume = 0;
             } else {
                 soundButton.frameName = 'soundOn.png';
-                game.sound.volume = 1;
+                sound.volume = 100;
             }
         }
 
