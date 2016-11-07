@@ -10,10 +10,6 @@ export let mobileSettings = {
     _deltaX: undefined,
     _deltaY: 20,
 
-    _handleChangeSide: function () {
-        console.log('_handleChangeSide');
-    },
-
     _drawBackground: function (game) {
         const menuBG = game.add.graphics(0, 0, this.container);
         menuBG.beginFill(0x000000).drawRect(0, 0, game.world.width * 0.22, game.world.height);
