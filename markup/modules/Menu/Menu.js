@@ -3,7 +3,6 @@ import { events } from '../../modules/Events/Events';
 
 import { drawBetMenu } from '../../modules/Menu/Bet';
 import { drawAutoMenu } from '../../modules/Menu/Auto';
-import { settings } from '../../modules/Menu/Settings';
 import { sound } from '../../modules/Sound/Sound';
 
 export let menu = (function () {
@@ -68,9 +67,6 @@ export let menu = (function () {
             case 'auto':
                 drawAutoMenu(container, game);
                 break;
-            case 'settings':
-                settings.drawMobileSettingsMenu(container, game);
-                break;
             default:
                 console.warn('Wrong menu name!');
         }
@@ -82,8 +78,6 @@ export let menu = (function () {
         if (model.state('side') === 'right') {
             showMenuFromLeft();
         }
-
-        // console.log(container);
     }
 
     function showMenuFromRight() {
