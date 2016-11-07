@@ -11,11 +11,23 @@ export let autoplay = (function () {
 
     function initAutoplay(amount) {
         let game = model.el('game');
-        let spinButton = model.el('spinButton');
-        let buttonsContainer = model.el('buttonsContainer');
-        autoText = game.add.text(spinButton.x, spinButton.y, amount, {font: '60px Arial, Helvetica', fill: '#fff'}, buttonsContainer);
-        autoText.anchor.set(0.5);
-        model.data('autoNextCount', 0);
+        if (model.flag('mobile')) {
+            let spinButton = model.el('spinButton');
+            let buttonsContainer = model.el('buttonsContainer');
+            autoText = game.add.text(spinButton.x, spinButton.y, amount, {font: '60px Arial, Helvetica', fill: '#fff'}, buttonsContainer);
+            autoText.anchor.set(0.5);
+        } else {
+            let autoButtonDesk = model.el('autoButtonDesk');
+            let panelContainer = model.el('panelContainer');
+            if (amount >= 250) {
+                autoText = game.add.text(525, autoButtonDesk.y, amount, {font: '40px Arial, Helvetica', fill: '#fff'}, panelContainer);
+            } else {
+                autoText = game.add.text(525, autoButtonDesk.y, amount, {font: '60px Arial, Helvetica', fill: '#fff'}, panelContainer);
+            }
+            autoText.anchor.set(0.5);
+            autoText.alpha = 0;
+            game.add.tween(autoText).to({alpha: 1}, 500, 'Linear', true);
+        }
         autoCount = amount;
         autoEnd = false;
         model.state('autoEnd', false);
@@ -35,7 +47,6 @@ export let autoplay = (function () {
             //     storage.changeState('autoplay', 'ended');
             //     events.trigger('autoplay:ended');
             // } else {
-                model.data('autoNextCount', 0);
                 events.trigger('autoplay:startRoll');
             // }
         }
@@ -45,7 +56,11 @@ export let autoplay = (function () {
             events.trigger('autoplay:count', autoCount);
         } else {
             model.state('autoplay', null);
-            events.trigger('autoplay:stop');
+            if (model.flag('mobile')) {
+                events.trigger('autoplay:stop');
+            } else {
+                events.trigger('autoplay:stop:desktop');
+            }
         }
     }
 
@@ -57,8 +72,10 @@ export let autoplay = (function () {
     }
 
     events.on('autoplay:init', initAutoplay);
+    events.on('autoplay:init:desktop', initAutoplay);
     events.on('autoplay:next', startAutoplay);
     events.on('autoplay:stop', stopAutoplay);
+    events.on('autoplay:stop:desktop', stopAutoplay);
 
     return {
         initAutoplay,
