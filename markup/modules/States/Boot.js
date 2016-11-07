@@ -19,6 +19,9 @@ export class Boot {
             model.flag('desktop', true);
             model.state('res', 'fullHD');
         } else {
+            if (this.game.device.iOS || this.game.device.iPhone) {
+                $('body, html').addClass('ios');
+            }
             this.game.scale.setGameSize(1280, 720);
             model.flag('mobile', true);
             model.state('res', 'HD');

@@ -3,7 +3,8 @@ import { events } from '../../modules/Events/Events';
 
 import { drawBetMenu } from '../../modules/Menu/Bet';
 import { drawAutoMenu } from '../../modules/Menu/Auto';
-import { drawSettingsMenu } from '../../modules/Menu/Settings';
+import { settings } from '../../modules/Menu/Settings';
+import { sound } from '../../modules/Sound/Sound';
 
 export let menu = (function () {
 
@@ -16,11 +17,6 @@ export let menu = (function () {
         overlay.input.priorityID = 0;
         overlay.events.onInputDown.add(function () {
             hideMenu();
-            let tween = game.add.tween(overlay).to( { alpha: 0 }, 1000, 'Quart.easeOut');
-            tween.start();
-            tween.onComplete.add(() => {
-                overlay.destroy();
-            }, this);
         });
         model.el('menuOverlay', overlay);
         return overlay;
@@ -38,13 +34,12 @@ export let menu = (function () {
     }
 
     function drawBackButton(game, container) {
-        let buttonSound = model.el('buttonSound');
         const menuBack = game.add.sprite(container.width / 2, game.world.height * 0.9, 'mobileButtons', 'return.png', container);
         menuBack.anchor.set(0.5);
         menuBack.inputEnabled = true;
         menuBack.input.priorityID = 2;
         menuBack.events.onInputDown.add(function () {
-            buttonSound.play();
+            sound.sounds.button.play();
             hideMenu();
             let overlay = model.el('menuOverlay');
             let tween = game.add.tween(overlay).to( { alpha: 0 }, 2000, 'Quart.easeOut');
@@ -74,7 +69,7 @@ export let menu = (function () {
                 drawAutoMenu(container, game);
                 break;
             case 'settings':
-                drawSettingsMenu(container, game);
+                settings.drawMobileSettingsMenu(container, game);
                 break;
             default:
                 console.warn('Wrong menu name!');
@@ -114,28 +109,36 @@ export let menu = (function () {
     function hideMenu() {
         const game = model.el('game');
         const menuContainer = model.el('menuContainer');
+        const overlay = model.el('menuOverlay');
 
         if (model.state('side') === 'left') {
-            const tween = game.add.tween(menuContainer).to( { x: game.world.width }, 1000, 'Quart.easeOut');
-            tween.start();
-            tween.onComplete.add(() => {
-                model.state('menu', 'closed');
-                menuContainer.removeAll(true);
-            }, this);
+            game.add.tween(menuContainer).to( { x: game.world.width }, 1000, 'Quart.easeOut', true)
+                .onComplete.add(() => {
+                    model.state('menu', 'closed');
+                    menuContainer.removeAll(true);
+                }, this);
+            game.add.tween(overlay).to( { alpha: 0 }, 1000, 'Quart.easeOut', true)
+                .onComplete.add(() => {
+                    overlay.destroy();
+                }, this);
         }
 
         if (model.state('side') === 'right') {
-            const tween = game.add.tween(menuContainer).to( { x: 0 - menuContainer.width }, 1000, 'Quart.easeOut');
-            tween.start();
-            tween.onComplete.add(() => {
-                model.state('menu', 'closed');
-                menuContainer.removeAll(true);
-            }, this);
+            game.add.tween(menuContainer).to( { x: 0 - menuContainer.width }, 1000, 'Quart.easeOut', true)
+                .onComplete.add(() => {
+                    model.state('menu', 'closed');
+                    menuContainer.removeAll(true);
+                }, this);
+            game.add.tween(overlay).to( { alpha: 0 }, 1000, 'Quart.easeOut', true)
+                .onComplete.add(() => {
+                    overlay.destroy();
+                }, this);
         }
 
     }
 
     events.on('menu:showMenu', showMenu);
+    events.on('menu:hideMenu', hideMenu);
 
     return {
         showMenu,

@@ -2,9 +2,10 @@
 
 html, body {
     // height: 100%;
-    height: 2500px; // Hack for iOS
     background: black;
-
+    & .ios {
+        height: 2500px; // Hack for iOS
+    }
 }
 #game {
     background: black;
@@ -41,4 +42,150 @@ canvas {
     &.closed {
         display: none;
     }
+}
+
+.closed {
+    display: none;
+}
+#darkness {
+    z-index: 10;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+}
+#settings {
+    z-index: 11;
+    position: absolute;
+    width: 1670px;
+    border: 1px rgba(151, 151, 151, 0.3) solid;
+    border-radius: 3px;
+    background: rgba(0, 0, 0, 0.9);
+    font-size: 36px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+}
+#settings .section {
+    float: left;
+    width: calc(50% - 80px);
+    padding: 0 40px;
+    text-align: left;
+}
+#settings .title {
+    background: rgba(255, 255, 255, 0.18);
+    padding: 18px 32px;
+    margin: 46px 0;
+    border-radius: 5px;
+    font-size: 45px;
+}
+.volumeContainer {
+    padding: 31px 0 62px 0;
+}
+.checkbox {
+  vertical-align: top;
+  margin: 0 3px 0 0;
+}
+.checkbox + label {
+  cursor: pointer;
+}
+.checkbox:not(checked) {
+  position: absolute;
+  opacity: 0;
+}
+.checkbox:not(checked) + label {
+  position: relative;
+  padding: 0 0 0 110px;
+}
+.checkbox:not(checked) + label:before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0;
+  width: 80px;
+  height: 36px;
+  border-radius: 17px;
+  background: #535353;
+  box-shadow: inset 0 2px 3px rgba(0,0,0,.2);
+}
+.checkbox:not(checked) + label:after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 3px;
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+    background: #FFF;
+    box-shadow: 0 2px 5px rgba(0,0,0,.3);
+    transition: all .2s;
+}
+.checkbox:checked + label:before {
+  background: #7ec710;
+}
+.checkbox:checked + label:after {
+  left: 47px;
+}
+.checkbox:focus + label:before {
+  box-shadow: 0 0 0 3px rgba(255,255,0,.5);
+}
+input[type=range] {
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 8px;
+    width: 350px;
+    height: 14px;
+    background: rgba(126,199,16,1);
+}
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+    background: #FFF;
+    box-shadow: 0 2px 5px rgba(0,0,0,.3);
+}
+.marginBottom {
+        margin-bottom: 25px;
+}
+.btnContainer {
+    text-align: center;
+}
+button {
+    width: 200px;
+    height: 135px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+}
+#btnRules {
+    background: #9d9f29;
+}
+#btnHistory {
+    background: #559b21;
+}
+#settingsSave {
+    background: white;
+    color: black;
+    margin: 45px;
+    margin-top: 100px;
+}
+.voiceImg {
+    width: 80px;
+    margin: -17px 21px;
+}
+.marginLeft {
+    margin-left: 45px;
+}
+.inputText {
+    background: white;
+    color: black;
+    width: 160px;
+    text-align: center;
+    border-radius: 12px;
+    position: absolute;
+    right: 42px;
 }

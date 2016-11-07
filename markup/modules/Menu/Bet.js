@@ -1,8 +1,8 @@
 import { model } from '../../modules/Model/Model';
 import { events } from '../../modules/Events/Events';
+import { sound } from '../../modules/Sound/Sound';
 
 export function drawBetMenu(container, game) {
-    let buttonSound = model.el('buttonSound');
     let deltaX = container.width * 0.3;
 
     const betContainer = game.add.group();
@@ -26,7 +26,7 @@ export function drawBetMenu(container, game) {
     maxBetButton.inputEnabled = true;
     maxBetButton.input.priorityID = 1;
     maxBetButton.events.onInputDown.add(function () {
-        buttonSound.play();
+        sound.sounds.button.play();
         events.trigger('buttons:maxBet');
         betText.text = model.data('currentBalance').betValue;
     });
@@ -67,7 +67,7 @@ export function drawBetMenu(container, game) {
     betPlus.inputEnabled = true;
     betPlus.input.priorityID = 2;
     betPlus.events.onInputDown.add(function () {
-        buttonSound.play();
+        sound.sounds.button.play();
         events.trigger('buttons:changeBet', true);
         betText.text = model.data('currentBalance').betValue;
     });
@@ -83,7 +83,7 @@ export function drawBetMenu(container, game) {
     betMinus.inputEnabled = true;
     betMinus.input.priorityID = 2;
     betMinus.events.onInputDown.add(function () {
-        buttonSound.play();
+        sound.sounds.button.play();
         events.trigger('buttons:changeBet', false);
         betText.text = model.data('currentBalance').betValue;
     });
@@ -124,7 +124,7 @@ export function drawBetMenu(container, game) {
     coinPlus.inputEnabled = true;
     coinPlus.input.priorityID = 2;
     coinPlus.events.onInputDown.add(function () {
-        buttonSound.play();
+        sound.sounds.button.play();
         events.trigger('buttons:changeCoins', true);
         coinText.text = model.data('currentBalance').coinsValue;
     });
@@ -140,7 +140,7 @@ export function drawBetMenu(container, game) {
     coinMinus.inputEnabled = true;
     coinMinus.input.priorityID = 2;
     coinMinus.events.onInputDown.add(function () {
-        buttonSound.play();
+        sound.sounds.button.play();
         events.trigger('buttons:changeCoins', false);
         coinText.text = model.data('currentBalance').coinsValue;
     });
