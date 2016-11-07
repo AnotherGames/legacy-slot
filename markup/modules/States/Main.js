@@ -38,8 +38,6 @@ export class Main {
         model.el('panelContainer', this.panelContainer);
         model.el('menuContainer', this.menuContainer);
         model.state('side', 'left');
-        model.state('sound', true);
-        model.state('music', true);
         model.state('autoPanel', false);
         model.state('fastRoll', false);
         model.state('isAnimations', true);
