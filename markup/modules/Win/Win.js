@@ -136,7 +136,6 @@ export let win = (function () {
             wheel.forEach((element) => {
                 let elementName = parseInt(element.sprite.animations.currentAnim.name);
                 element.sprite.animations.getAnimation(`${elementName}-w`).onComplete.add(() => {
-                    console.log('Animation complete:', `${elementName}-w`);
                     element.play(`${elementName}-n`);
                 });
             });
