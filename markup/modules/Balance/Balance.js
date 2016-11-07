@@ -286,7 +286,7 @@ export let balance = (function () {
             }
         }
 
-        if (model.state('FSMode') === false) {
+        if (model.state('FSMode') == false) {
             if (balanceText.coinsSum.text !== balanceData.coinsSum) {
                 balanceText.coinsSum.text = balanceData.coinsSum;
             }
