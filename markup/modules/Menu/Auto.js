@@ -1,4 +1,5 @@
 import { model } from '../../modules/Model/Model';
+import { events } from 'modules/Events/Events';
 
 export function drawAutoMenu(container, game) {
     let buttonSound = model.el('buttonSound');
@@ -63,6 +64,7 @@ export function drawAutoMenu(container, game) {
     autoBG25.events.onInputDown.add(function () {
         buttonSound.play();
         console.log('i am autoBG25');
+        events.trigger('autoplay:init', 25);
     });
 
     const autoBG50 = game.add.sprite(

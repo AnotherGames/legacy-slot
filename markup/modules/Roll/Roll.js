@@ -119,6 +119,16 @@ export let roll = (function () {
     function rollEnd() {
         util.request('_Ready').then((data) => {
             // console.log('Ready done', data);
+            let rollResponse = model.data('rollResponse');
+            if (rollResponse.Balance.TotalWinCoins > 0) {
+                setTimeout(() => {
+                    if (model.state('autoEnd')) return;
+                    events.trigger('autoplay:next');
+                }, 1000)
+            } else {
+                if (model.state('autoEnd')) return;
+                events.trigger('autoplay:next');
+            }
             model.state('roll:progress', false);
         });
     }
@@ -126,6 +136,7 @@ export let roll = (function () {
     events.on('roll:initWheels', initWheels);
     events.on('roll:request', rollRequest);
     events.on('roll:end', rollEnd);
+    events.on('autoplay:startRoll', rollRequest);
 
     return {
         initWheels,
