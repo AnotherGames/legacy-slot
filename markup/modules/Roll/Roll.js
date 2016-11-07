@@ -79,7 +79,7 @@ export let roll = (function () {
     function startRoll(finishScreen, options = {}) {
         let wheels = model.el('wheels');
         let game = model.el('game');
-        let barabanSound = game.add.audio('baraban');
+        let barabanSound = model.el('barabanSound');
         let duration;
         if (model.state('fastRoll') === false) {
             duration = config.wheel.roll.time / 1000;
