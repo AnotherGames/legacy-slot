@@ -8,7 +8,7 @@ export class Boot {
     }
     init() {
         console.info('Boot State!');
-        util.request('_Initialise', 'normal')
+        util.request('_Initialise', 'fsBonus')
             .then(this.parseInitData)
             .catch((error) => {
                 console.error(error.message);

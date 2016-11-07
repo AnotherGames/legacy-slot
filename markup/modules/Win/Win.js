@@ -16,7 +16,19 @@ export let win = (function () {
         let data = model.data('rollResponse');
         let winTotalData = data.Balance.TotalWinCoins;
         let winLines = data.WinLines;
+        let nextMode = data.NextMode;
 
+        if (nextMode == 'fsBonus') {
+            if (model.flag('mobile')) {
+                events.trigger('autoplay:stop');
+            } else {
+                events.trigger('autoplay:stop:desktop');
+            }
+            setTimeout(() => {
+                let game = model.el('game');
+                game.state.start('FS');
+            }, 2000);
+        }
         if (winTotalData === 0) return;
 
         let game = model.el('game');
