@@ -1,12 +1,12 @@
 import { model } from '../../modules/Model/Model';
 import { menu } from '../../modules/Menu/Menu';
 import { events } from '../../modules/Events/Events';
+import { sound } from '../../modules/Sound/Sound';
 
 export let settings = (function () {
     function drawMobileSettingsMenu(container, game) {
         const settingsContainer = game.add.group();
         container.add(settingsContainer);
-        let buttonSound = model.el('buttonSound');
 
         const settingsTitle = game.add.text(
             container.width / 2,
@@ -22,7 +22,7 @@ export let settings = (function () {
             'menuButtons',
             null,
             settingsContainer);
-        if (model.state('sound') === false) {
+        if (!sound.isSound) {
             soundButton.frameName = 'soundOff.png';
         } else {
             soundButton.frameName = 'soundOn.png';
@@ -37,22 +37,13 @@ export let settings = (function () {
         soundButton.input.priorityID = 2;
         soundButton.events.onInputDown.add(function () {
             events.trigger('buttons:changeSoundButton');
-            // TODO: вынести в controller.sound
-            let fonSound = model.el('fonSound');
-
-            if (model.state('sound') === true) {
-                model.state('sound', false);
+            if (sound.isSound) {
                 soundButton.frameName = 'soundOff.png';
-
-                model.state('music', false);
-                fonSound.stop();
+                sound.isSound = false;
             } else {
-                buttonSound.play();
-                model.state('sound', true);
                 soundButton.frameName = 'soundOn.png';
-
-                model.state('music', true);
-                fonSound.play();
+                sound.isSound = true;
+                sound.sounds.button.play();
             }
         });
 
@@ -70,7 +61,7 @@ export let settings = (function () {
             'menuButtons',
             null,
             settingsContainer);
-        if (model.state('music') === false) {
+        if (!sound.isMusic) {
             musicButton.frameName = 'musicOff.png';
         } else {
             musicButton.frameName = 'musicOn.png';
@@ -80,16 +71,13 @@ export let settings = (function () {
         musicButton.inputEnabled = true;
         musicButton.input.priorityID = 2;
         musicButton.events.onInputDown.add(function () {
-            buttonSound.play();
-            let fonSound = model.el('fonSound');
-            if (model.state('music') === true) {
-                model.state('music', false);
-                fonSound.stop();
+            sound.sounds.button.play();
+            if (sound.isMusic) {
                 musicButton.frameName = 'musicOff.png';
+                sound.isMusic = false;
             } else {
-                model.state('music', true);
-                fonSound.play();
                 musicButton.frameName = 'musicOn.png';
+                sound.isMusic = true;
             }
         });
 
@@ -117,7 +105,7 @@ export let settings = (function () {
         fastSpinButton.inputEnabled = true;
         fastSpinButton.input.priorityID = 2;
         fastSpinButton.events.onInputDown.add(function () {
-            buttonSound.play();
+            sound.sounds.button.play();
             if (model.state('fastRoll') === true) {
                 model.state('fastRoll', false);
                 fastSpinButton.frameName = 'fastSpinOff.png';
@@ -151,8 +139,8 @@ export let settings = (function () {
         handModeButton.inputEnabled = true;
         handModeButton.input.priorityID = 2;
         handModeButton.events.onInputDown.add(function () {
-            buttonSound.play();
-        _handleChangeSide(handModeButton);
+            sound.sounds.button.play();
+            _handleChangeSide(handModeButton);
         });
 
         const handModeText = game.add.sprite(
@@ -174,7 +162,7 @@ export let settings = (function () {
         rulesButton.inputEnabled = true;
         rulesButton.input.priorityID = 2;
         rulesButton.events.onInputDown.add(function () {
-            buttonSound.play();
+            sound.sounds.button.play();
             console.log('i am rulesButton');
             const overlay = game.add.graphics(0, 0).beginFill(0x000000, 0.8).drawRect(0, 0, game.world.width, game.world.height);
             const infoRules = game.add.sprite(game.world.centerX, game.world.centerY, 'infoRules');
@@ -205,9 +193,8 @@ export let settings = (function () {
         historyButton.inputEnabled = true;
         historyButton.input.priorityID = 2;
         historyButton.events.onInputDown.add(function () {
-            buttonSound.play();
-            console.log('i am historyButton');
-            $('.history').toggleClass('closed');
+            sound.sounds.button.play();
+            $('.history').removeClass('closed');
         });
 
         const historyText = game.add.sprite(
@@ -259,25 +246,16 @@ export let settings = (function () {
 
     function initDesktopSettings(game) {
         $('#volume').on('input change', function () {
-            game.sound.volume = this.value / 100;
+            sound.volume = this.value;
         });
         $('#checkSound').on('change', function () {
-            let buttonSound = model.el('buttonSound');
-            let barabanSound = model.el('barabanSound');
-            model.state('sound', this.checked);
-
-            buttonSound.mute = !this.checked;
-            barabanSound.mute = !this.checked;
-            // console.log(this.id, this.checked);
+            sound.isSound = this.checked;
         });
         $('#checkMusic').on('change', function () {
-            let fonSound = model.el('fonSound');
-            model.state('music', this.checked);
-            fonSound.mute = !this.checked;
+            sound.isMusic = this.checked;
         });
         $('#fastSpin').on('change', function () {
             model.state('fastRoll', this.checked);
-            // console.log(this.id, this.checked);
         });
         $('#isAnimations').on('change', function () {
             let isAnim = this.checked;
@@ -297,7 +275,6 @@ export let settings = (function () {
             game.spriteAnims.forEach((elem) => {
                 elem.sprite.animations.paused = !isAnim;
             });
-            // console.log(this.id, this.checked);
         });
         $('#optionAutoplay1').on('change', function () {
             console.log(this.id, this.checked);
@@ -322,7 +299,6 @@ export let settings = (function () {
         });
         $('#btnHistory').on('click', function () {
             $('.history').removeClass('closed');
-            // console.log('btnHistory');
         });
         $('#btnRules').on('click', function () {
             console.log('btnRules');

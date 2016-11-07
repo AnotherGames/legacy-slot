@@ -3,7 +3,7 @@ import { events } from 'modules/Events/Events';
 import { Wheel } from 'modules/Wheel/Wheel';
 import { config } from 'modules/Util/Config';
 import { util } from 'modules/Util/Util';
-
+import { sound } from '../../modules/Sound/Sound';
 
 export let roll = (function () {
 
@@ -79,15 +79,14 @@ export let roll = (function () {
     function startRoll(finishScreen, options = {}) {
         let wheels = model.el('wheels');
         let game = model.el('game');
-        let barabanSound = model.el('barabanSound');
         let duration;
         if (model.state('fastRoll') === false) {
             duration = config.wheel.roll.time / 1000;
         } else {
             duration = config.wheel.roll.fastTime / 1000;
         }
-        barabanSound.addMarker('roll', 0, duration, 1, false);
-        barabanSound.play('roll');
+        sound.sounds.baraban.addMarker('roll', 0, duration, 1, false);
+        sound.sounds.baraban.play('roll');
 
         let countFinish = 0;
         let callback = function () {

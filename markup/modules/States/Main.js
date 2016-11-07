@@ -11,6 +11,7 @@ import { balance } from 'modules/Balance/Balance';
 import { autoplay } from 'modules/Autoplay/Autoplay';
 import { events } from 'modules/Events/Events';
 import { settings } from '../../modules/Menu/Settings';
+import { sound } from '../../modules/Sound/Sound';
 
 export class Main {
     constructor(game) {
@@ -49,15 +50,8 @@ export class Main {
     }
 
     create() {
-        let fonSound = this.add.audio('fon', 1, true);
-        model.el('fonSound', fonSound);
-        fonSound.play();
-
-        let buttonSound = this.game.add.audio('buttonClick');
-        model.el('buttonSound', buttonSound);
-
-        let barabanSound = this.game.add.audio('baraban');
-        model.el('barabanSound', barabanSound);
+        sound.init(this.game);
+        sound.music.fon.play();
 
         $('.history__button').click((event) => {
             $('.history').addClass('closed');
