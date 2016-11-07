@@ -234,17 +234,6 @@ export let buttons = (function () {
 
         }
 
-        function showInfo() {
-            sound.sounds.button.play();
-            const overlay = game.add.graphics(0, 0).beginFill(0x000000, 0.8).drawRect(0, 0, game.world.width, game.world.height);
-            const infoRules = game.add.sprite(game.world.centerX, game.world.centerY, 'infoRules');
-            infoRules.anchor.set(0.5);
-            infoRules.inputEnabled = true;
-            infoRules.events.onInputDown.add(function () {
-                infoRules.destroy();
-                overlay.destroy();
-            });
-        }
     }
 
     function drawDesktopFSPanel(container, game, mainContainer) {
@@ -264,6 +253,7 @@ export let buttons = (function () {
     }
 
     function showInfo() {
+        sound.sounds.button.play();
         let game = model.el('game');
         const overlay = game.add.graphics(0, 0).beginFill(0x000000, 0.8).drawRect(0, 0, game.world.width, game.world.height);
         const infoRules = game.add.sprite(game.world.centerX, game.world.centerY, 'infoRules');
@@ -316,21 +306,24 @@ export let buttons = (function () {
         soundButton.anchor.set(0.5);
         soundButton.inputEnabled = true;
         soundButton.input.priorityID = 1;
+        soundButton.freezeFrames = true;
 
         function fastOnClick() {
             if (model.state('fastRoll')) {
                 model.state('fastRoll', false);
+                fastButton.frameName = 'fastSpinOff.png';
             } else {
                 model.state('fastRoll', true);
+                fastButton.frameName = 'fastSpinOn.png';
             }
-
             sound.sounds.button.play();
         }
 
-        const fastButton = game.add.button(x[3], y, 'footerButtons', fastOnClick, this, 'fastSpinOn.png', 'fastSpin.png', null, container);
+        const fastButton = game.add.button(x[3], y, 'footerButtons', fastOnClick, this, null, 'fastSpinOff.png', null, container);
         fastButton.anchor.set(0.5);
         fastButton.inputEnabled = true;
         fastButton.input.priorityID = 1;
+        fastButton.freezeFrames = true;
     }
 
     function autoStart() {
