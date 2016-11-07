@@ -170,10 +170,29 @@ export class FS {
             multiX = 1400;
             multiY = 970;
         }
-        const fsMulti = this.add.sprite(multiX, multiY, 'numbers', 'multi' + '1' + '.png', this.fsContainer);
+        const fsMulti = this.add.sprite(multiX,
+            multiY, 'numbers',
+            'multi' + '1' + '.png',
+            this.fsContainer);
         fsMulti.anchor.set(0.5);
-        // const fsLevel = this.add.bitmapText(100, 100, 'numbers', '15', null, this.fsContainer);
-        // fsLevel.anchor.set(0.5);
+        let levelX;
+        let levelY;
+        let levelFont;
+        if (model.flag('mobile')) {
+            levelX = 240;
+            levelY = 55;
+            levelFont = 'bold 40px Helvetica, Arial';
+        } else {
+            levelX = 1195;
+            levelY = 950;
+            levelFont = 'bold 80px Helvetica, Arial';
+        }
+        const fsLevel = this.add.text(levelX,
+            levelY,
+            '15',
+            {font: levelFont, fill: '#fff', align: 'center'},
+            this.fsContainer);
+        fsLevel.anchor.set(0.5);
 
     }
 
