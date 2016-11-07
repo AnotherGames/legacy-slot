@@ -8,6 +8,7 @@ import { Wheel } from 'modules/Wheel/Wheel';
 import { Glista } from 'modules/Glista/Glista';
 import { Element } from 'modules/Element/Element';
 import { balance } from 'modules/Balance/Balance';
+import { autoplay } from 'modules/Autoplay/Autoplay';
 import { events } from 'modules/Events/Events';
 import { settings } from '../../modules/Menu/Settings';
 import { sound } from '../../modules/Sound/Sound';

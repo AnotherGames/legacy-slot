@@ -37,9 +37,11 @@ export let buttons = (function () {
         spinButton.inputEnabled = true;
         spinButton.input.priorityID = 1;
         spinButton.events.onInputDown.add(function () {
+            if (spinButton.frameName == 'spinEmpty.png') return;
             sound.sounds.button.play();
             events.trigger('roll:request');
         });
+        model.el('spinButton', spinButton);
 
         let delta = (game.game.width - mainWidth - spinButton.width) / 4;
         let xRight = 3 * delta + mainWidth + (spinButton.width / 2);
@@ -66,7 +68,11 @@ export let buttons = (function () {
         autoButton.events.onInputDown.add(function () {
             sound.sounds.button.play();
             if (model.state('menu') === 'opened') return;
-            events.trigger('menu:showMenu', 'auto');
+            if (autoButton.frameName == 'stop.png') {
+                events.trigger('autoplay:stop');
+            } else {
+                events.trigger('menu:showMenu', 'auto');
+            }
         });
 
         betButton = game.add.sprite(xSide, 0, 'mobileButtons', 'setBet.png', container);
@@ -75,6 +81,7 @@ export let buttons = (function () {
         betButton.inputEnabled = true;
         betButton.input.priorityID = 1;
         betButton.events.onInputDown.add(function () {
+            if (betButton.frameName == 'setBetOut.png') return;
             sound.sounds.button.play();
             if (model.state('menu') === 'opened') return;
             events.trigger('menu:showMenu', 'bet');
@@ -86,6 +93,7 @@ export let buttons = (function () {
         menuButton.inputEnabled = true;
         menuButton.input.priorityID = 1;
         menuButton.events.onInputDown.add(function () {
+            if (menuButton.frameName == 'menuOut.png') return;
             sound.sounds.button.play();
             if (model.state('menu') === 'opened') return;
             events.trigger('menu:showMenu', 'settings');
@@ -280,8 +288,24 @@ export let buttons = (function () {
         fastButton.input.priorityID = 1;
     }
 
+    function autoStart() {
+        spinButton.frameName = 'spinEmpty.png';
+        betButton.frameName = 'setBetOut.png';
+        menuButton.frameName = 'menuOut.png';
+        autoButton.frameName = 'stop.png';
+    }
+
+    function autoStop() {
+        spinButton.frameName = 'spin.png';
+        betButton.frameName = 'setBet.png';
+        menuButton.frameName = 'menu.png';
+        autoButton.frameName = 'auto.png';
+    }
+
 
     events.on('buttons:changeSoundButton', changeSoundButton);
+    events.on('autoplay:init', autoStart);
+    events.on('autoplay:stop', autoStop);
 
     return {
         drawHomeButton,

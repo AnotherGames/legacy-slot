@@ -17,11 +17,6 @@ export let menu = (function () {
         overlay.input.priorityID = 0;
         overlay.events.onInputDown.add(function () {
             hideMenu();
-            let tween = game.add.tween(overlay).to( { alpha: 0 }, 1000, 'Quart.easeOut');
-            tween.start();
-            tween.onComplete.add(() => {
-                overlay.destroy();
-            }, this);
         });
         model.el('menuOverlay', overlay);
         return overlay;
@@ -114,28 +109,36 @@ export let menu = (function () {
     function hideMenu() {
         const game = model.el('game');
         const menuContainer = model.el('menuContainer');
+        const overlay = model.el('menuOverlay');
 
         if (model.state('side') === 'left') {
-            const tween = game.add.tween(menuContainer).to( { x: game.world.width }, 1000, 'Quart.easeOut');
-            tween.start();
-            tween.onComplete.add(() => {
-                model.state('menu', 'closed');
-                menuContainer.removeAll(true);
-            }, this);
+            game.add.tween(menuContainer).to( { x: game.world.width }, 1000, 'Quart.easeOut', true)
+                .onComplete.add(() => {
+                    model.state('menu', 'closed');
+                    menuContainer.removeAll(true);
+                }, this);
+            game.add.tween(overlay).to( { alpha: 0 }, 1000, 'Quart.easeOut', true)
+                .onComplete.add(() => {
+                    overlay.destroy();
+                }, this);
         }
 
         if (model.state('side') === 'right') {
-            const tween = game.add.tween(menuContainer).to( { x: 0 - menuContainer.width }, 1000, 'Quart.easeOut');
-            tween.start();
-            tween.onComplete.add(() => {
-                model.state('menu', 'closed');
-                menuContainer.removeAll(true);
-            }, this);
+            game.add.tween(menuContainer).to( { x: 0 - menuContainer.width }, 1000, 'Quart.easeOut', true)
+                .onComplete.add(() => {
+                    model.state('menu', 'closed');
+                    menuContainer.removeAll(true);
+                }, this);
+            game.add.tween(overlay).to( { alpha: 0 }, 1000, 'Quart.easeOut', true)
+                .onComplete.add(() => {
+                    overlay.destroy();
+                }, this);
         }
 
     }
 
     events.on('menu:showMenu', showMenu);
+    events.on('menu:hideMenu', hideMenu);
 
     return {
         showMenu,
