@@ -11,13 +11,18 @@ export let autoplay = (function () {
 
     function initAutoplay(amount) {
         let game = model.el('game');
-        autoText = game.add.text(0, 0, amount, {font: '40px Arial', fill: '#fff'});
+        let spinButton = model.el('spinButton');
+        let buttonsContainer = model.el('buttonsContainer');
+        autoText = game.add.text(spinButton.x, spinButton.y, amount, {font: '60px Arial, Helvetica', fill: '#fff'}, buttonsContainer);
+        autoText.anchor.set(0.5);
         model.data('autoNextCount', 0);
         autoCount = amount;
         autoEnd = false;
+        model.state('autoEnd', false);
         startAutoplay();
-        events.trigger('menu:hideMenu');
-        console.log('I am initing autoplay!');
+        if (model.flag('mobile')) {
+            events.trigger('menu:hideMenu');
+        }
     }
 
     function startAutoplay() {
@@ -39,24 +44,21 @@ export let autoplay = (function () {
             model.data('autoCount', autoCount);
             events.trigger('autoplay:count', autoCount);
         } else {
-            stopAutoplay();
             model.state('autoplay', null);
-            events.trigger('autoplay:end');
+            events.trigger('autoplay:stop');
         }
     }
 
     function stopAutoplay() {
         autoEnd = true;
+        model.state('autoEnd', true);
+        autoText.destroy();
         // clearTimeout(model.data('autoTimeout'));
-    }
-
-    function autoNext() {
-        console.log('I am called!');
     }
 
     events.on('autoplay:init', initAutoplay);
     events.on('autoplay:next', startAutoplay);
-    events.on('autoplay:next', autoNext);
+    events.on('autoplay:stop', stopAutoplay);
 
     return {
         initAutoplay,
