@@ -26,13 +26,20 @@ export class Init {
         this.add.tween(darkness).to( { alpha: 0 }, 1000, 'Linear', true);
 
         function handlePlayBtn() {
-            this.scale.startFullScreen(false);
+
+            fullScreen();
+            // this.scale.startFullScreen(false);
             initSound.stop();
             let closeAnim = this.add.tween(darkness);
             closeAnim.to( { alpha: 1 }, 500, 'Linear', true);
             closeAnim.onComplete.add(() => {
                 this.state.start('Main');
             }, this);
+        }
+        function fullScreen(e) {
+            $('#game').addClass('full');
+            e = e || document.querySelector('#game');
+            e.requestFullScreen ? e.requestFullScreen() : e.mozRequestFullScreen ? e.mozRequestFullScreen() : e.webkitRequestFullScreen && e.webkitRequestFullScreen();
         }
     }
 }

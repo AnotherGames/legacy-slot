@@ -1,6 +1,5 @@
 import { model } from 'modules/Model/Model';
 import { events } from 'modules/Events/Events';
-import { util } from 'modules/Util/Util';
 
 export let balance = (function () {
 
@@ -10,7 +9,6 @@ export let balance = (function () {
     let currencySymbol;
 
     function drawBalanceContainer(container, game) {
-        let buttonSound = model.el('buttonSound');
         let d = 0.01 * model.el('game').width;
         let D = 0.02 * model.el('game').width;
         // console.log(d, D);
@@ -20,71 +18,6 @@ export let balance = (function () {
         if (model.flag('mobile')) {
             const footerBGTop = game.add.graphics(0, 0, container);
             footerBGTop.beginFill(0x000000, 0.6).drawRect(0, game.world.height - 70, game.world.width, 40);
-        }
-
-        let x;
-        let y;
-
-        if (model.flag('mobile')) {
-            x = [25, 75, game.world.width - 35, game.world.width - 85];
-            y = game.world.height - 50;
-        }
-
-        if (model.flag('desktop')) {
-            x = [25, 75, 125, 175];
-            y = game.world.height - 15;
-        }
-
-        const homeButton = game.add.button(x[0], y, 'footerButtons', actionOnClick, this, 'homeOn.png', 'home.png', 'homeOn.png', null, container);
-        homeButton.anchor.set(0.5);
-        homeButton.inputEnabled = true;
-        homeButton.input.priorityID = 1;
-        homeButton.events.onInputDown.add(function () {
-            buttonSound.play();
-            util.request('_Logout')
-                .then((response) => {
-                    console.log('Logout response:', response);
-                });
-            window.history.back();
-        });
-
-        if (model.flag('desktop')) {
-
-            const menuButton = game.add.button(x[1], y, 'footerButtons', actionOnClick, this, 'menuOn.png', 'menu.png', 'menuOn.png', null, container);
-            menuButton.anchor.set(0.5);
-
-            const soundButton = game.add.button(x[2], y, 'footerButtons', actionOnClick, this, 'soundOn.png', 'sound.png', null, container);
-            soundButton.anchor.set(0.5);
-            soundButton.inputEnabled = true;
-            soundButton.input.priorityID = 1;
-            soundButton.events.onInputDown.add(function () {
-                buttonSound.play();
-                // soundButton.frameName = soundButton.frameName === 'soundOut.png' ? 'sound.png' : 'soundOut.png';
-                if (model.state('sound')) {
-                    model.state('sound', false);
-                } else {
-                    model.state('sound', true);
-                }
-            });
-
-            const fastButton = game.add.button(x[3], y, 'footerButtons', actionOnClick, this, 'fastSpinOn.png', 'fastSpin.png', null, container);
-            fastButton.anchor.set(0.5);
-            fastButton.inputEnabled = true;
-            fastButton.input.priorityID = 1;
-            fastButton.events.onInputDown.add(function () {
-                buttonSound.play();
-                // fastButton.frameName = fastButton.frameName === 'soundOut.png' ? 'sound.png' : 'soundOut.png';
-                if (model.state('fastRoll')) {
-                    model.state('fastRoll', false);
-                } else {
-                    model.state('fastRoll', true);
-                }
-            });
-
-        }
-
-        function actionOnClick() {
-            console.log('i am clicked!');
         }
 
         drawTime(container, game);

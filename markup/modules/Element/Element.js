@@ -51,6 +51,9 @@ export class Element {
         // });
         // if (thisAnim) {
         this.sprite.animations.play(animation);
+        if (!model.state('isAnimations')) {
+            this.sprite.animations.paused = true;
+        }
         // } else {
         //     this.sprite.animations._anims = [];
         //     this.sprite.loadTexture(parseInt(animation));

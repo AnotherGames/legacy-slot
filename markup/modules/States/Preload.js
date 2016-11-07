@@ -139,7 +139,7 @@ function loadGlistaAssets(game) {
 
 function loadSkeletonAssets(game) {
     game.load.spine(
-        'skelet',                        // The key used for Phaser's cache
+        'animBG',                        // The key used for Phaser's cache
         'skeleton/skeleton.json'    // The location of the spine's json file
     );
 }
