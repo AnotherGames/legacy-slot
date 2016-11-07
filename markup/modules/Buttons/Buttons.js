@@ -2,6 +2,7 @@ import { model } from '../../modules/Model/Model';
 import { events } from '../../modules/Events/Events';
 import { drawAutoDesktop } from '../../modules/Buttons/Autoplay';
 import { util } from 'modules/Util/Util';
+import { sound } from '../../modules/Sound/Sound';
 
 export let buttons = (function () {
 
@@ -16,8 +17,7 @@ export let buttons = (function () {
         let y = (model.flag('mobile')) ? game.world.height - 50 : game.world.height - 15;
 
         function homeOnClick() {
-            let buttonSound = model.el('buttonSound');
-            buttonSound.play(); // TODO: вынести в controller.sound
+            sound.sounds.button.play();
             util.request('_Logout')
                 .then((response) => {
                     console.log('Logout response:', response);
@@ -32,14 +32,13 @@ export let buttons = (function () {
     }
 
     function drawMobileButtons(container, game, mainWidth) {
-        let buttonSound = model.el('buttonSound');
         spinButton = game.add.sprite(0, game.world.centerY, 'mobileButtons', 'spin.png', container);
         spinButton.anchor.set(0.5);
         spinButton.inputEnabled = true;
         spinButton.input.priorityID = 1;
         spinButton.events.onInputDown.add(function () {
             if (spinButton.frameName == 'spinEmpty.png') return;
-            buttonSound.play();
+            sound.sounds.button.play();
             events.trigger('roll:request');
         });
         model.el('spinButton', spinButton);
@@ -67,7 +66,7 @@ export let buttons = (function () {
         autoButton.inputEnabled = true;
         autoButton.input.priorityID = 1;
         autoButton.events.onInputDown.add(function () {
-            buttonSound.play();
+            sound.sounds.button.play();
             if (model.state('menu') === 'opened') return;
             if (autoButton.frameName == 'stop.png') {
                 events.trigger('autoplay:stop');
@@ -83,7 +82,7 @@ export let buttons = (function () {
         betButton.input.priorityID = 1;
         betButton.events.onInputDown.add(function () {
             if (betButton.frameName == 'setBetOut.png') return;
-            buttonSound.play();
+            sound.sounds.button.play();
             if (model.state('menu') === 'opened') return;
             events.trigger('menu:showMenu', 'bet');
         });
@@ -95,7 +94,7 @@ export let buttons = (function () {
         menuButton.input.priorityID = 1;
         menuButton.events.onInputDown.add(function () {
             if (menuButton.frameName == 'menuOut.png') return;
-            buttonSound.play();
+            sound.sounds.button.play();
             if (model.state('menu') === 'opened') return;
             events.trigger('menu:showMenu', 'settings');
         });
@@ -106,12 +105,14 @@ export let buttons = (function () {
         soundButton.inputEnabled = true;
         soundButton.input.priorityID = 1;
         soundButton.events.onInputDown.add(function () {
-            buttonSound.play();
-            soundButton.frameName = soundButton.frameName === 'soundOut.png' ? 'sound.png' : 'soundOut.png';
-            if (model.state('sound')) {
-                model.state('sound', false);
+            // soundButton.frameName = (soundButton.frameName === 'soundOut.png') ? 'sound.png' : 'soundOut.png';
+            if (sound.volume > 0) {
+                soundButton.frameName = 'soundOut.png';
+                sound.volume = 0;
             } else {
-                model.state('sound', true);
+                soundButton.frameName = 'sound.png';
+                sound.volume = 1;
+                sound.sounds.button.play();
             }
             console.log(model.state('sound'));
         });
@@ -134,8 +135,6 @@ export let buttons = (function () {
     }
 
     function drawDesktopPanel(container, game, mainContainer) {
-        // let buttonSound = model.el('buttonSound');
-        let buttonSound = game.add.audio('buttonClick');
         let gameMachine = model.el('gameMachine');
         container.x = mainContainer.x + 45;
         container.y = gameMachine.height - 28;
@@ -155,7 +154,7 @@ export let buttons = (function () {
         spinButtonDesk.inputEnabled = true;
         spinButtonDesk.input.priorityID = 1;
         spinButtonDesk.events.onInputDown.add(function () {
-            buttonSound.play();
+            sound.sounds.button.play();
             events.trigger('roll:request', {
                 // TODO: для обычних круток используй параметры конфига.
                 // time: 1500,
@@ -171,32 +170,32 @@ export let buttons = (function () {
         let autoDesktopContainer = model.el('autoDesktopContainer');
 
         function coinsPlus() {
-            buttonSound.play();
+            sound.sounds.button.play();
             events.trigger('buttons:changeCoins', true);
         }
 
         function coinsMinus() {
-            buttonSound.play();
+            sound.sounds.button.play();
             events.trigger('buttons:changeCoins', false);
         }
 
         function betPlus() {
-            buttonSound.play();
+            sound.sounds.button.play();
             events.trigger('buttons:changeBet', true);
         }
 
         function betMinus() {
-            buttonSound.play();
+            sound.sounds.button.play();
             events.trigger('buttons:changeBet', false);
         }
 
         function maxBet() {
-            buttonSound.play();
+            sound.sounds.button.play();
             events.trigger('buttons:maxBet');
         }
 
         function autoOn() {
-            buttonSound.play();
+            sound.sounds.button.play();
             let autoTween = game.add.tween(autoButtonDesk).to( { x: 365 }, 350, 'Linear');
             let autoSelectTween = game.add.tween(autoDesktopContainer).to( { x: 495, alpha: 1 }, 250, 'Linear');
             autoSelectTween.start();
@@ -219,7 +218,7 @@ export let buttons = (function () {
         }
 
         function showInfo() {
-            buttonSound.play();
+            sound.sounds.button.play();
             const overlay = game.add.graphics(0, 0).beginFill(0x000000, 0.8).drawRect(0, 0, game.world.width, game.world.height);
             const infoRules = game.add.sprite(game.world.centerX, game.world.centerY, 'infoRules');
             infoRules.anchor.set(0.5);
@@ -232,8 +231,6 @@ export let buttons = (function () {
     }
 
     function drawDesktopBottomButtons(container, game) {
-        let buttonSound = model.el('buttonSound');
-
         let x = [25, 75, 125, 175];
         let y = game.world.height - 15;
 
@@ -253,7 +250,7 @@ export let buttons = (function () {
                 $('#darkness').off();
             });
 
-            buttonSound.play(); // TODO: вынести в controller.sound
+            sound.sounds.button.play();
         }
 
         const menuButton = game.add.button(x[1], y, 'footerButtons', menuOnClick, this, 'menuOn.png', 'menu.png', 'menuOn.png', null, container);
@@ -261,24 +258,12 @@ export let buttons = (function () {
 
         let soundButton;
         function soundOnClick() {
-            // soundButton.frameName = soundButton.frameName === 'soundOut.png' ? 'sound.png' : 'soundOut.png';
-            // TODO: вынести в controller.sound
-            let fonSound = model.el('fonSound');
-
-            if (model.state('sound') === true) {
-                model.state('sound', false);
+            if (game.sound.volume > 0) {
                 soundButton.frameName = 'soundOff.png';
-
-                model.state('music', false);
-                fonSound.stop();
+                game.sound.volume = 0;
             } else {
-                model.state('sound', true);
                 soundButton.frameName = 'soundOn.png';
-
-                model.state('music', true);
-                fonSound.play();
-
-                buttonSound.play(); // TODO: вынести в controller.sound
+                game.sound.volume = 1;
             }
         }
 
@@ -288,14 +273,13 @@ export let buttons = (function () {
         soundButton.input.priorityID = 1;
 
         function fastOnClick() {
-            // fastButton.frameName = fastButton.frameName === 'soundOut.png' ? 'sound.png' : 'soundOut.png';
             if (model.state('fastRoll')) {
                 model.state('fastRoll', false);
             } else {
                 model.state('fastRoll', true);
             }
 
-            buttonSound.play(); // TODO: вынести в controller.sound
+            sound.sounds.button.play();
         }
 
         const fastButton = game.add.button(x[3], y, 'footerButtons', fastOnClick, this, 'fastSpinOn.png', 'fastSpin.png', null, container);

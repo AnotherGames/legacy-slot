@@ -3,7 +3,8 @@ import { events } from '../../modules/Events/Events';
 
 import { drawBetMenu } from '../../modules/Menu/Bet';
 import { drawAutoMenu } from '../../modules/Menu/Auto';
-import { drawSettingsMenu } from '../../modules/Menu/Settings';
+import { settings } from '../../modules/Menu/Settings';
+import { sound } from '../../modules/Sound/Sound';
 
 export let menu = (function () {
 
@@ -33,13 +34,12 @@ export let menu = (function () {
     }
 
     function drawBackButton(game, container) {
-        let buttonSound = model.el('buttonSound');
         const menuBack = game.add.sprite(container.width / 2, game.world.height * 0.9, 'mobileButtons', 'return.png', container);
         menuBack.anchor.set(0.5);
         menuBack.inputEnabled = true;
         menuBack.input.priorityID = 2;
         menuBack.events.onInputDown.add(function () {
-            buttonSound.play();
+            sound.sounds.button.play();
             hideMenu();
             let overlay = model.el('menuOverlay');
             let tween = game.add.tween(overlay).to( { alpha: 0 }, 2000, 'Quart.easeOut');
@@ -69,7 +69,7 @@ export let menu = (function () {
                 drawAutoMenu(container, game);
                 break;
             case 'settings':
-                drawSettingsMenu(container, game);
+                settings.drawMobileSettingsMenu(container, game);
                 break;
             default:
                 console.warn('Wrong menu name!');
