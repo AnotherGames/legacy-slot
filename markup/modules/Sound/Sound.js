@@ -68,11 +68,12 @@ export let sound = {
     init: function (game) {
         this.game = game;
         // Fon
-        this.music.fonMusic = this.game.add.audio('fonMusic', 1, true);
+        this.music.fon = this.game.add.audio('fon', 1, true);
         // Sound
+        //
         this.sounds.button = this.game.add.audio('buttonClick');
         this.sounds.baraban = this.game.add.audio('baraban');
-        this.sound.lineWin = game.add.audio('lineWin');
-        this.sound.lineWin2 = game.add.audio('lineWin2');
+        this.sounds.lineWin = game.add.audio('lineWin');
+        this.sounds.lineWin2 = game.add.audio('lineWin2');
     }
 };

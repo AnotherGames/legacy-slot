@@ -1,8 +1,8 @@
 import { model } from '../../modules/Model/Model';
 import { events } from 'modules/Events/Events';
+import { sound } from '../../modules/Sound/Sound';
 
 export function drawAutoMenu(container, game) {
-    let buttonSound = model.el('buttonSound');
     const autoContainer = game.add.group();
     container.add(autoContainer);
 
@@ -38,7 +38,7 @@ export function drawAutoMenu(container, game) {
     autoBG10.inputEnabled = true;
     autoBG10.input.priorityID = 2;
     autoBG10.events.onInputDown.add(function () {
-        buttonSound.play();
+        sound.sounds.button.play();
         events.trigger('autoplay:init', 10);
     });
 
@@ -62,7 +62,7 @@ export function drawAutoMenu(container, game) {
     autoBG25.inputEnabled = true;
     autoBG25.input.priorityID = 2;
     autoBG25.events.onInputDown.add(function () {
-        buttonSound.play();
+        sound.sounds.button.play();
         events.trigger('autoplay:init', 25);
     });
 
@@ -86,7 +86,7 @@ export function drawAutoMenu(container, game) {
     autoBG50.inputEnabled = true;
     autoBG50.input.priorityID = 2;
     autoBG50.events.onInputDown.add(function () {
-        buttonSound.play();
+        sound.sounds.button.play();
         events.trigger('autoplay:init', 50);
     });
 
@@ -110,7 +110,7 @@ export function drawAutoMenu(container, game) {
     autoBG100.inputEnabled = true;
     autoBG100.input.priorityID = 2;
     autoBG100.events.onInputDown.add(function () {
-        buttonSound.play();
+        sound.sounds.button.play();
         events.trigger('autoplay:init', 100);
     });
 
@@ -134,7 +134,7 @@ export function drawAutoMenu(container, game) {
     autoBG250.inputEnabled = true;
     autoBG250.input.priorityID = 2;
     autoBG250.events.onInputDown.add(function () {
-        buttonSound.play();
+        sound.sounds.button.play();
         events.trigger('autoplay:init', 250);
     });
 
@@ -158,7 +158,7 @@ export function drawAutoMenu(container, game) {
     autoBG500.inputEnabled = true;
     autoBG500.input.priorityID = 2;
     autoBG500.events.onInputDown.add(function () {
-        buttonSound.play();
+        sound.sounds.button.play();
         events.trigger('autoplay:init', 500);
     });
 
