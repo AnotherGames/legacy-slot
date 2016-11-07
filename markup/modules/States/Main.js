@@ -12,6 +12,7 @@ import { autoplay } from 'modules/Autoplay/Autoplay';
 import { events } from 'modules/Events/Events';
 import { settings } from '../../modules/Menu/Settings';
 import { sound } from '../../modules/Sound/Sound';
+import { mobileSettings } from '../../modules/Menu/MobileSettings';
 
 export class Main {
     constructor(game) {
@@ -61,6 +62,7 @@ export class Main {
         this.initMainContainer();
         if (model.flag('mobile')) {
             buttons.drawMobileButtons(this.buttonsContainer, this, this.mainContainer.width);
+            mobileSettings.draw(this.game);
             model.data('mainXLeft', 2 * model.data('buttonsDelta'));
             model.data('mainXRight', this.game.width - this.mainContainer.width - model.data('buttonsDelta') * 2);
         }

@@ -3,6 +3,7 @@ import { events } from '../../modules/Events/Events';
 import { drawAutoDesktop } from '../../modules/Buttons/Autoplay';
 import { util } from 'modules/Util/Util';
 import { sound } from '../../modules/Sound/Sound';
+import { controller } from 'modules/Controller/Controller';
 
 export let buttons = (function () {
 
@@ -45,7 +46,7 @@ export let buttons = (function () {
         spinButton.inputEnabled = true;
         spinButton.input.priorityID = 1;
         spinButton.events.onInputDown.add(function () {
-            if (spinButton.frameName == 'spinEmpty.png') return;
+            if (spinButton.frameName === 'spinEmpty.png') return;
             sound.sounds.button.play();
             events.trigger('roll:request');
         });
@@ -76,7 +77,7 @@ export let buttons = (function () {
         autoButton.events.onInputDown.add(function () {
             sound.sounds.button.play();
             if (model.state('menu') === 'opened') return;
-            if (autoButton.frameName == 'stop.png') {
+            if (autoButton.frameName === 'stop.png') {
                 events.trigger('autoplay:stop');
             } else {
                 events.trigger('menu:showMenu', 'auto');
@@ -89,7 +90,7 @@ export let buttons = (function () {
         betButton.inputEnabled = true;
         betButton.input.priorityID = 1;
         betButton.events.onInputDown.add(function () {
-            if (betButton.frameName == 'setBetOut.png') return;
+            if (betButton.frameName === 'setBetOut.png') return;
             sound.sounds.button.play();
             if (model.state('menu') === 'opened') return;
             events.trigger('menu:showMenu', 'bet');
@@ -101,10 +102,11 @@ export let buttons = (function () {
         menuButton.inputEnabled = true;
         menuButton.input.priorityID = 1;
         menuButton.events.onInputDown.add(function () {
-            if (menuButton.frameName == 'menuOut.png') return;
+            if (controller.isEvent) return;
+            if (model.state('menu') === 'open') return;
+
             sound.sounds.button.play();
-            if (model.state('menu') === 'opened') return;
-            events.trigger('menu:showMenu', 'settings');
+            controller.mobile.settings.open();
         });
 
         soundButton = game.add.sprite(xSide, 0, 'mobileButtons', 'sound.png', container);
@@ -287,7 +289,6 @@ export let buttons = (function () {
 
             sound.sounds.button.play();
         }
-
         const menuButton = game.add.button(x[1], y, 'footerButtons', menuOnClick, this, 'menuOn.png', 'menu.png', 'menuOn.png', null, container);
         menuButton.anchor.set(0.5);
 
