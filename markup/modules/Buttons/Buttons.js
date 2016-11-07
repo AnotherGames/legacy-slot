@@ -12,6 +12,14 @@ export let buttons = (function () {
     let menuButton;
     let soundButton;
 
+    let autoButtonDesk;
+    let spinButtonDesk;
+    let maxBetButtonDesk;
+    let betLevelPlus;
+    let betLevelMinus;
+    let coinLevelPlus;
+    let coinLevelMinus;
+
     function drawHomeButton(container, game) {
         let x = 25;
         let y = (model.flag('mobile')) ? game.world.height - 50 : game.world.height - 15;
@@ -106,16 +114,15 @@ export let buttons = (function () {
         soundButton.input.priorityID = 1;
         soundButton.events.onInputDown.add(function () {
             // soundButton.frameName = (soundButton.frameName === 'soundOut.png') ? 'sound.png' : 'soundOut.png';
-            if (sound.isSound || sound.isMusic) {
+            if (sound.volume > 0) {
                 soundButton.frameName = 'soundOut.png';
-                sound.isSound = false;
-                sound.isMusic = false;
+                sound.volume = 0;
             } else {
                 soundButton.frameName = 'sound.png';
-                sound.isSound = true;
-                sound.isMusic = true;
+                sound.volume = 1;
                 sound.sounds.button.play();
             }
+            console.log(model.state('sound'));
         });
 
         model.el('spinButton', spinButton);
@@ -144,17 +151,21 @@ export let buttons = (function () {
 
         let lines = game.add.text(80, 112, '10', {font: 'normal 27px Helvetica, Arial, Arial', fill: '#e8b075', align: 'center'}, container);
         let info = game.add.button(container.width - 115, 105, 'deskButtons', showInfo, this, 'infoOn.png', 'info.png', 'infoOn.png', null, container);
-        let betLevelPlus = game.add.button(267, 107, 'deskButtons', betPlus, this, 'plusOn.png', 'plus.png', 'plusOn.png', null, container);
-        let betLevelMinus = game.add.button(172, 107, 'deskButtons', betMinus, this, 'minusOn.png', 'minus.png', 'minusOn.png', null, container);
-        let coinLevelPlus = game.add.button(1100, 107, 'deskButtons', coinsPlus, this, 'plusOn.png', 'plus.png', 'plusOn.png', null, container);
-        let coinLevelMinus = game.add.button(985, 106, 'deskButtons', coinsMinus, this, 'minusOn.png', 'minus.png', 'minusOn.png', null, container);
+        betLevelPlus = game.add.button(267, 107, 'deskButtons', betPlus, this, 'plusOn.png', 'plus.png', 'plusOn.png', null, container);
+        betLevelMinus = game.add.button(172, 107, 'deskButtons', betMinus, this, 'minusOn.png', 'minus.png', 'minusOn.png', null, container);
+        coinLevelPlus = game.add.button(1100, 107, 'deskButtons', coinsPlus, this, 'plusOn.png', 'plus.png', 'plusOn.png', null, container);
+        coinLevelMinus = game.add.button(985, 106, 'deskButtons', coinsMinus, this, 'minusOn.png', 'minus.png', 'minusOn.png', null, container);
 
 
-        let spinButtonDesk = game.add.button(container.width / 2, 95, 'deskButtons', actionOnClick, this, 'spinOn.png', 'spin.png', 'spinOn.png', null, container);
+        spinButtonDesk = game.add.button(container.width / 2, 95, 'deskButtons', actionOnClick, this, 'spinOn.png', 'spin.png', 'spinOn.png', null, container);
         spinButtonDesk.anchor.set(0.5);
         spinButtonDesk.inputEnabled = true;
         spinButtonDesk.input.priorityID = 1;
         spinButtonDesk.events.onInputDown.add(function () {
+            if (spinButtonDesk.frameName == 'stop.png') {
+                events.trigger('autoplay:stop:desktop');
+                return;
+            }
             sound.sounds.button.play();
             events.trigger('roll:request', {
                 // TODO: для обычних круток используй параметры конфига.
@@ -163,8 +174,9 @@ export let buttons = (function () {
                 // ease: 1
             });
         });
-        let maxBetButtonDesk = game.add.button(spinButtonDesk.x + 137, 94, 'deskButtons', maxBet, this, 'maxBetOn.png', 'maxBet.png', 'maxBetOn.png', null, container);
-        let autoButtonDesk = game.add.button(spinButtonDesk.x - 137, 94, 'deskButtons', autoOn, this, 'autoOn.png', 'auto.png', 'autoOn.png', null, container);
+        maxBetButtonDesk = game.add.button(spinButtonDesk.x + 137, 94, 'deskButtons', maxBet, this, 'maxBetOn.png', 'maxBet.png', 'maxBetOn.png', null, container);
+        autoButtonDesk = game.add.button(spinButtonDesk.x - 137, 94, 'deskButtons', autoOn, this, 'autoOn.png', 'auto.png', 'autoOn.png', null, container);
+        model.el('autoButtonDesk', autoButtonDesk);
         maxBetButtonDesk.anchor.set(0.5);
         autoButtonDesk.anchor.set(0.5);
         drawAutoDesktop(container, game, mainContainer, autoButtonDesk);
@@ -191,11 +203,15 @@ export let buttons = (function () {
         }
 
         function maxBet() {
+            if (maxBetButtonDesk.frameName == 'maxBetOn.png') return;
             sound.sounds.button.play();
             events.trigger('buttons:maxBet');
         }
 
+        events.on('autoplay:init:desktop', autoOn);
+
         function autoOn() {
+            if (autoButtonDesk.frameName == 'autoEmpty.png' && model.state('autoPanel') === false) return;
             sound.sounds.button.play();
             let autoTween = game.add.tween(autoButtonDesk).to( { x: 365 }, 350, 'Linear');
             let autoSelectTween = game.add.tween(autoDesktopContainer).to( { x: 495, alpha: 1 }, 250, 'Linear');
@@ -236,9 +252,8 @@ export let buttons = (function () {
         let y = game.world.height - 15;
 
         function menuOnClick() {
-            $('#volume').prop('value', sound.volume * 100);
-            $('#checkSound').prop('checked', sound.isSound);
-            $('#checkMusic').prop('checked', sound.isMusic);
+            $('#checkSound').prop('checked', model.state('sound'));
+            $('#checkMusic').prop('checked', model.state('music'));
             $('#fastSpin').prop('checked', model.state('fastRoll'));
             $('#isAnimations').prop('checked', model.state('isAnimations'));
 
@@ -260,12 +275,12 @@ export let buttons = (function () {
 
         let soundButton;
         function soundOnClick() {
-            if (sound.volume > 0) {
+            if (game.sound.volume > 0) {
                 soundButton.frameName = 'soundOff.png';
-                sound.volume = 0;
+                game.sound.volume = 0;
             } else {
                 soundButton.frameName = 'soundOn.png';
-                sound.volume = 100;
+                game.sound.volume = 1;
             }
         }
 
@@ -304,10 +319,38 @@ export let buttons = (function () {
         autoButton.frameName = 'auto.png';
     }
 
+    function autoStartDesktop() {
+        spinButtonDesk.frameName = 'stop.png';
+        spinButtonDesk.freezeFrames = true;
+        autoButtonDesk.frameName = 'autoEmpty.png';
+        autoButtonDesk.freezeFrames = true;
+        maxBetButtonDesk.frameName = 'maxBetOn.png';
+        maxBetButtonDesk.freezeFrames = true;
+        betLevelPlus.visible = false;
+        betLevelMinus.visible = false;
+        coinLevelPlus.visible = false;
+        coinLevelMinus.visible = false;
+    }
+
+    function autoStopDesktop() {
+        spinButtonDesk.frameName = 'spin.png';
+        spinButtonDesk.freezeFrames = false;
+        autoButtonDesk.frameName = 'auto.png';
+        autoButtonDesk.freezeFrames = false;
+        maxBetButtonDesk.frameName = 'maxBet.png';
+        maxBetButtonDesk.freezeFrames = false;
+        betLevelPlus.visible = true;
+        betLevelMinus.visible = true;
+        coinLevelPlus.visible = true;
+        coinLevelMinus.visible = true;
+    }
+
 
     events.on('buttons:changeSoundButton', changeSoundButton);
     events.on('autoplay:init', autoStart);
     events.on('autoplay:stop', autoStop);
+    events.on('autoplay:init:desktop', autoStartDesktop);
+    events.on('autoplay:stop:desktop', autoStopDesktop);
 
     return {
         drawHomeButton,
