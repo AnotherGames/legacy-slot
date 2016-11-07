@@ -114,7 +114,7 @@ export let win = (function () {
             wheels.forEach((wheelObj) => {
                 wheelObj.elements.forEach((element) => {
                     let elementName = parseInt(element.sprite.animations.currentAnim.name);
-                    if (elementName == '9') { // нужно будет поправить на 10
+                    if (elementName == '10') {
                         element.play(`${elementName}-w`);
                     }
                 });
