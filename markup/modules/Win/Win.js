@@ -2,6 +2,7 @@ import { model } from 'modules/Model/Model';
 import { events } from 'modules/Events/Events';
 import { config } from 'modules/Util/Config';
 import { Glista } from 'modules/Glista/Glista';
+import { sound } from '../../modules/Sound/Sound';
 
 export let win = (function () {
 
@@ -20,7 +21,7 @@ export let win = (function () {
 
         let game = model.el('game');
         let mainContainer = model.el('mainContainer');
-        let winSound = Math.round(Math.random()) ? game.add.audio('lineWin') : game.add.audio('lineWin2');
+        let winSound = Math.round(Math.random()) ? sound.sounds.lineWin : sound.sounds.lineWin2;
         winSound.addMarker('win', 0, 1, 1, false);
         winSound.play('win');
 
@@ -136,7 +137,6 @@ export let win = (function () {
             wheel.forEach((element) => {
                 let elementName = parseInt(element.sprite.animations.currentAnim.name);
                 element.sprite.animations.getAnimation(`${elementName}-w`).onComplete.add(() => {
-                    console.log('Animation complete:', `${elementName}-w`);
                     element.play(`${elementName}-n`);
                 });
             });

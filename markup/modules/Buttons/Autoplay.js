@@ -1,4 +1,6 @@
 import { model } from '../../modules/Model/Model';
+import { events } from '../../modules/Events/Events';
+import { sound } from '../../modules/Sound/Sound';
 
 export function drawAutoDesktop(container, game, mainContainer, autoButton) {
     // console.log(container);
@@ -40,7 +42,8 @@ export function drawAutoDesktop(container, game, mainContainer, autoButton) {
         autoBG10.alpha = 0;
     });
     autoBG10.events.onInputDown.add(function () {
-        console.log('i am autoBG10');
+        sound.sounds.button.play();
+        events.trigger('autoplay:init:desktop', 10);
     });
 
     const autoBG25 = game.add.graphics(0, 0, autoDesktopContainer).beginFill(0xffffff, 0.2).drawRect(0, 0, 75, 37);
@@ -65,7 +68,8 @@ export function drawAutoDesktop(container, game, mainContainer, autoButton) {
         autoBG25.alpha = 0;
     });
     autoBG25.events.onInputDown.add(function () {
-        console.log('i am autoBG25');
+        sound.sounds.button.play();
+        events.trigger('autoplay:init:desktop', 25);
     });
 
     const autoBG50 = game.add.graphics(0, 0, autoDesktopContainer).beginFill(0xffffff, 0.2).drawRect(0, 0, 70, 37);
@@ -90,7 +94,8 @@ export function drawAutoDesktop(container, game, mainContainer, autoButton) {
         autoBG50.alpha = 0;
     });
     autoBG50.events.onInputDown.add(function () {
-        console.log('i am autoBG50');
+        sound.sounds.button.play();
+        events.trigger('autoplay:init:desktop', 50);
     });
 
     const autoBG100 = game.add.graphics(0, 0, autoDesktopContainer).beginFill(0xffffff, 0.2).drawRect(0, 0, 75, 37);
@@ -115,7 +120,8 @@ export function drawAutoDesktop(container, game, mainContainer, autoButton) {
         autoBG100.alpha = 0;
     });
     autoBG100.events.onInputDown.add(function () {
-        console.log('i am autoBG100');
+        sound.sounds.button.play();
+        events.trigger('autoplay:init:desktop', 100);
     });
 
     const autoBG250 = game.add.graphics(0, 0, autoDesktopContainer).beginFill(0xffffff, 0.2).drawRect(0, 0, 70, 37);
@@ -140,7 +146,8 @@ export function drawAutoDesktop(container, game, mainContainer, autoButton) {
         autoBG250.alpha = 0;
     });
     autoBG250.events.onInputDown.add(function () {
-        console.log('i am autoBG250');
+        sound.sounds.button.play();
+        events.trigger('autoplay:init:desktop', 250);
     });
 
     const autoBG500 = game.add.graphics(0, 0, autoDesktopContainer).beginFill(0xffffff, 0.2).drawRect(0, 0, 75, 37);
@@ -165,7 +172,8 @@ export function drawAutoDesktop(container, game, mainContainer, autoButton) {
         autoBG500.alpha = 0;
     });
     autoBG500.events.onInputDown.add(function () {
-        console.log('i am autoBG500');
+        sound.sounds.button.play();
+        events.trigger('autoplay:init:desktop', 500);
     });
 
 }

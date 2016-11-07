@@ -8,7 +8,10 @@ import { Wheel } from 'modules/Wheel/Wheel';
 import { Glista } from 'modules/Glista/Glista';
 import { Element } from 'modules/Element/Element';
 import { balance } from 'modules/Balance/Balance';
+import { autoplay } from 'modules/Autoplay/Autoplay';
 import { events } from 'modules/Events/Events';
+import { settings } from '../../modules/Menu/Settings';
+import { sound } from '../../modules/Sound/Sound';
 
 export class Main {
     constructor(game) {
@@ -35,11 +38,10 @@ export class Main {
         model.el('panelContainer', this.panelContainer);
         model.el('menuContainer', this.menuContainer);
         model.state('side', 'left');
-        model.state('sound', true);
-        model.state('music', true);
         model.state('autoPanel', false);
         model.state('fastRoll', false);
         model.state('isAnimations', true);
+        model.state('autoEnd', true);
     }
 
     preload() {
@@ -47,12 +49,8 @@ export class Main {
     }
 
     create() {
-        let fonSound = this.add.audio('fon', 1, true);
-        model.el('fonSound', fonSound);
-        fonSound.play();
-
-        let buttonSound = this.game.add.audio('buttonClick');
-        model.el('buttonSound', buttonSound);
+        sound.init(this.game);
+        sound.music.fon.play();
 
         $('.history__button').click((event) => {
             $('.history').addClass('closed');
@@ -77,7 +75,7 @@ export class Main {
             this.mainContainer.x = (this.game.width - this.mainContainer.width) / 2;
             buttons.drawDesktopPanel(this.panelContainer, this, this.mainContainer);
             buttons.drawDesktopBottomButtons(this.balanceContainer, this);
-            this.initDesktopSettings();
+            settings.initDesktopSettings(this.game);
         }
 
         // PreAnimation
@@ -161,84 +159,5 @@ export class Main {
         model.el('glistaContainer', glistaContainer);
         this.machineContainer.add(glistaContainer);
         model.el('mask', mask);
-    }
-    initDesktopSettings() {
-        let _this = this;
-        $('#volume').on('input change', function () {
-            _this.game.sound.volume = this.value / 100;
-        });
-        $('#checkSound').on('change', function () {
-            model.state('sound', this.checked);
-            // console.log(this.id, this.checked);
-        });
-        $('#checkMusic').on('change', function () {
-            let fonSound = model.el('fonSound');
-            model.state('music', this.checked);
-            if (this.checked) {
-                fonSound.play();
-            } else {
-                fonSound.stop();
-            }
-            // console.log(this.id, this.checked);
-        });
-        $('#fastSpin').on('change', function () {
-            model.state('fastRoll', this.checked);
-            // console.log(this.id, this.checked);
-        });
-        $('#isAnimations').on('change', function () {
-            let isAnim = this.checked;
-            model.state('isAnimations', isAnim);
-
-            let animMainBG = model.el('animMainBG');
-            let mainBG = model.el('mainBG');
-
-            if (isAnim) {
-                animMainBG.visible = true;
-                mainBG.visible = false;
-            } else {
-                mainBG.visible = true;
-                animMainBG.visible = false;
-            }
-
-            _this.game.spriteAnims.forEach((elem) => {
-                elem.sprite.animations.paused = !isAnim;
-            });
-            // console.log(this.id, this.checked);
-        });
-        $('#optionAutoplay1').on('change', function () {
-            console.log(this.id, this.checked);
-        });
-        $('#optionAutoplayVal1').on('input change', function () {
-            console.log('optionAutoplayVal1', this.value);
-        });
-        $('#optionAutoplay2').on('change', function () {
-            console.log(this.id, this.checked);
-        });
-        $('#optionAutoplayVal2').on('input change', function () {
-            console.log('optionAutoplayVal2', this.value);
-        });
-        $('#optionAutoplay3').on('change', function () {
-            console.log(this.id, this.checked);
-        });
-        $('#optionAutoplayVal3').on('input change', function () {
-            console.log('optionAutoplayVal3', this.value);
-        });
-        $('#optionAutoplay4').on('change', function () {
-            console.log(this.id, this.checked);
-        });
-        $('#btnHistory').on('click', function () {
-            $('.history').removeClass('closed');
-            // console.log('btnHistory');
-        });
-        $('#btnRules').on('click', function () {
-            console.log('btnRules');
-        });
-        $('#settingsSave').on('click', function () {
-            $('#settings').addClass('closed');
-            $('#darkness').addClass('closed');
-            $('.history').addClass('closed');
-            $('#darkness').off();
-            // TODO: request new settings.
-        });
     }
 }

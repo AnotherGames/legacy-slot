@@ -2,6 +2,7 @@ import { model } from '../../modules/Model/Model';
 import { events } from '../../modules/Events/Events';
 import { drawAutoDesktop } from '../../modules/Buttons/Autoplay';
 import { util } from 'modules/Util/Util';
+import { sound } from '../../modules/Sound/Sound';
 
 export let buttons = (function () {
 
@@ -11,13 +12,20 @@ export let buttons = (function () {
     let menuButton;
     let soundButton;
 
+    let autoButtonDesk;
+    let spinButtonDesk;
+    let maxBetButtonDesk;
+    let betLevelPlus;
+    let betLevelMinus;
+    let coinLevelPlus;
+    let coinLevelMinus;
+
     function drawHomeButton(container, game) {
         let x = 25;
         let y = (model.flag('mobile')) ? game.world.height - 50 : game.world.height - 15;
 
         function homeOnClick() {
-            let buttonSound = model.el('buttonSound');
-            buttonSound.play(); // TODO: вынести в controller.sound
+            sound.sounds.button.play();
             util.request('_Logout')
                 .then((response) => {
                     console.log('Logout response:', response);
@@ -32,15 +40,16 @@ export let buttons = (function () {
     }
 
     function drawMobileButtons(container, game, mainWidth) {
-        let buttonSound = model.el('buttonSound');
         spinButton = game.add.sprite(0, game.world.centerY, 'mobileButtons', 'spin.png', container);
         spinButton.anchor.set(0.5);
         spinButton.inputEnabled = true;
         spinButton.input.priorityID = 1;
         spinButton.events.onInputDown.add(function () {
-            buttonSound.play();
+            if (spinButton.frameName == 'spinEmpty.png') return;
+            sound.sounds.button.play();
             events.trigger('roll:request');
         });
+        model.el('spinButton', spinButton);
 
         let delta = (game.game.width - mainWidth - spinButton.width) / 4;
         let xRight = 3 * delta + mainWidth + (spinButton.width / 2);
@@ -65,9 +74,13 @@ export let buttons = (function () {
         autoButton.inputEnabled = true;
         autoButton.input.priorityID = 1;
         autoButton.events.onInputDown.add(function () {
-            buttonSound.play();
+            sound.sounds.button.play();
             if (model.state('menu') === 'opened') return;
-            events.trigger('menu:showMenu', 'auto');
+            if (autoButton.frameName == 'stop.png') {
+                events.trigger('autoplay:stop');
+            } else {
+                events.trigger('menu:showMenu', 'auto');
+            }
         });
 
         betButton = game.add.sprite(xSide, 0, 'mobileButtons', 'setBet.png', container);
@@ -76,7 +89,8 @@ export let buttons = (function () {
         betButton.inputEnabled = true;
         betButton.input.priorityID = 1;
         betButton.events.onInputDown.add(function () {
-            buttonSound.play();
+            if (betButton.frameName == 'setBetOut.png') return;
+            sound.sounds.button.play();
             if (model.state('menu') === 'opened') return;
             events.trigger('menu:showMenu', 'bet');
         });
@@ -87,7 +101,8 @@ export let buttons = (function () {
         menuButton.inputEnabled = true;
         menuButton.input.priorityID = 1;
         menuButton.events.onInputDown.add(function () {
-            buttonSound.play();
+            if (menuButton.frameName == 'menuOut.png') return;
+            sound.sounds.button.play();
             if (model.state('menu') === 'opened') return;
             events.trigger('menu:showMenu', 'settings');
         });
@@ -98,12 +113,14 @@ export let buttons = (function () {
         soundButton.inputEnabled = true;
         soundButton.input.priorityID = 1;
         soundButton.events.onInputDown.add(function () {
-            buttonSound.play();
-            soundButton.frameName = soundButton.frameName === 'soundOut.png' ? 'sound.png' : 'soundOut.png';
-            if (model.state('sound')) {
-                model.state('sound', false);
+            // soundButton.frameName = (soundButton.frameName === 'soundOut.png') ? 'sound.png' : 'soundOut.png';
+            if (sound.volume > 0) {
+                soundButton.frameName = 'soundOut.png';
+                sound.volume = 0;
             } else {
-                model.state('sound', true);
+                soundButton.frameName = 'sound.png';
+                sound.volume = 1;
+                sound.sounds.button.play();
             }
             console.log(model.state('sound'));
         });
@@ -126,8 +143,6 @@ export let buttons = (function () {
     }
 
     function drawDesktopPanel(container, game, mainContainer) {
-        // let buttonSound = model.el('buttonSound');
-        let buttonSound = game.add.audio('buttonClick');
         let gameMachine = model.el('gameMachine');
         container.x = mainContainer.x + 45;
         container.y = gameMachine.height - 28;
@@ -136,18 +151,22 @@ export let buttons = (function () {
 
         let lines = game.add.text(80, 112, '10', {font: 'normal 27px Helvetica, Arial, Arial', fill: '#e8b075', align: 'center'}, container);
         let info = game.add.button(container.width - 115, 105, 'deskButtons', showInfo, this, 'infoOn.png', 'info.png', 'infoOn.png', null, container);
-        let betLevelPlus = game.add.button(267, 107, 'deskButtons', betPlus, this, 'plusOn.png', 'plus.png', 'plusOn.png', null, container);
-        let betLevelMinus = game.add.button(172, 107, 'deskButtons', betMinus, this, 'minusOn.png', 'minus.png', 'minusOn.png', null, container);
-        let coinLevelPlus = game.add.button(1100, 107, 'deskButtons', coinsPlus, this, 'plusOn.png', 'plus.png', 'plusOn.png', null, container);
-        let coinLevelMinus = game.add.button(985, 106, 'deskButtons', coinsMinus, this, 'minusOn.png', 'minus.png', 'minusOn.png', null, container);
+        betLevelPlus = game.add.button(267, 107, 'deskButtons', betPlus, this, 'plusOn.png', 'plus.png', 'plusOn.png', null, container);
+        betLevelMinus = game.add.button(172, 107, 'deskButtons', betMinus, this, 'minusOn.png', 'minus.png', 'minusOn.png', null, container);
+        coinLevelPlus = game.add.button(1100, 107, 'deskButtons', coinsPlus, this, 'plusOn.png', 'plus.png', 'plusOn.png', null, container);
+        coinLevelMinus = game.add.button(985, 106, 'deskButtons', coinsMinus, this, 'minusOn.png', 'minus.png', 'minusOn.png', null, container);
 
 
-        let spinButtonDesk = game.add.button(container.width / 2, 95, 'deskButtons', actionOnClick, this, 'spinOn.png', 'spin.png', 'spinOn.png', null, container);
+        spinButtonDesk = game.add.button(container.width / 2, 95, 'deskButtons', actionOnClick, this, 'spinOn.png', 'spin.png', 'spinOn.png', null, container);
         spinButtonDesk.anchor.set(0.5);
         spinButtonDesk.inputEnabled = true;
         spinButtonDesk.input.priorityID = 1;
         spinButtonDesk.events.onInputDown.add(function () {
-            buttonSound.play();
+            if (spinButtonDesk.frameName == 'stop.png') {
+                events.trigger('autoplay:stop:desktop');
+                return;
+            }
+            sound.sounds.button.play();
             events.trigger('roll:request', {
                 // TODO: для обычних круток используй параметры конфига.
                 // time: 1500,
@@ -155,40 +174,45 @@ export let buttons = (function () {
                 // ease: 1
             });
         });
-        let maxBetButtonDesk = game.add.button(spinButtonDesk.x + 137, 94, 'deskButtons', maxBet, this, 'maxBetOn.png', 'maxBet.png', 'maxBetOn.png', null, container);
-        let autoButtonDesk = game.add.button(spinButtonDesk.x - 137, 94, 'deskButtons', autoOn, this, 'autoOn.png', 'auto.png', 'autoOn.png', null, container);
+        maxBetButtonDesk = game.add.button(spinButtonDesk.x + 137, 94, 'deskButtons', maxBet, this, 'maxBetOn.png', 'maxBet.png', 'maxBetOn.png', null, container);
+        autoButtonDesk = game.add.button(spinButtonDesk.x - 137, 94, 'deskButtons', autoOn, this, 'autoOn.png', 'auto.png', 'autoOn.png', null, container);
+        model.el('autoButtonDesk', autoButtonDesk);
         maxBetButtonDesk.anchor.set(0.5);
         autoButtonDesk.anchor.set(0.5);
         drawAutoDesktop(container, game, mainContainer, autoButtonDesk);
         let autoDesktopContainer = model.el('autoDesktopContainer');
 
         function coinsPlus() {
-            buttonSound.play();
+            sound.sounds.button.play();
             events.trigger('buttons:changeCoins', true);
         }
 
         function coinsMinus() {
-            buttonSound.play();
+            sound.sounds.button.play();
             events.trigger('buttons:changeCoins', false);
         }
 
         function betPlus() {
-            buttonSound.play();
+            sound.sounds.button.play();
             events.trigger('buttons:changeBet', true);
         }
 
         function betMinus() {
-            buttonSound.play();
+            sound.sounds.button.play();
             events.trigger('buttons:changeBet', false);
         }
 
         function maxBet() {
-            buttonSound.play();
+            if (maxBetButtonDesk.frameName == 'maxBetOn.png') return;
+            sound.sounds.button.play();
             events.trigger('buttons:maxBet');
         }
 
+        events.on('autoplay:init:desktop', autoOn);
+
         function autoOn() {
-            buttonSound.play();
+            if (autoButtonDesk.frameName == 'autoEmpty.png' && model.state('autoPanel') === false) return;
+            sound.sounds.button.play();
             let autoTween = game.add.tween(autoButtonDesk).to( { x: 365 }, 350, 'Linear');
             let autoSelectTween = game.add.tween(autoDesktopContainer).to( { x: 495, alpha: 1 }, 250, 'Linear');
             autoSelectTween.start();
@@ -210,6 +234,17 @@ export let buttons = (function () {
 
         }
 
+        function showInfo() {
+            sound.sounds.button.play();
+            const overlay = game.add.graphics(0, 0).beginFill(0x000000, 0.8).drawRect(0, 0, game.world.width, game.world.height);
+            const infoRules = game.add.sprite(game.world.centerX, game.world.centerY, 'infoRules');
+            infoRules.anchor.set(0.5);
+            infoRules.inputEnabled = true;
+            infoRules.events.onInputDown.add(function () {
+                infoRules.destroy();
+                overlay.destroy();
+            });
+        }
     }
 
     function drawDesktopFSPanel(container, game, mainContainer) {
@@ -241,8 +276,6 @@ export let buttons = (function () {
     }
 
     function drawDesktopBottomButtons(container, game) {
-        let buttonSound = model.el('buttonSound');
-
         let x = [25, 75, 125, 175];
         let y = game.world.height - 15;
 
@@ -262,7 +295,7 @@ export let buttons = (function () {
                 $('#darkness').off();
             });
 
-            buttonSound.play(); // TODO: вынести в controller.sound
+            sound.sounds.button.play();
         }
 
         const menuButton = game.add.button(x[1], y, 'footerButtons', menuOnClick, this, 'menuOn.png', 'menu.png', 'menuOn.png', null, container);
@@ -270,24 +303,12 @@ export let buttons = (function () {
 
         let soundButton;
         function soundOnClick() {
-            // soundButton.frameName = soundButton.frameName === 'soundOut.png' ? 'sound.png' : 'soundOut.png';
-            // TODO: вынести в controller.sound
-            let fonSound = model.el('fonSound');
-
-            if (model.state('sound') === true) {
-                model.state('sound', false);
+            if (game.sound.volume > 0) {
                 soundButton.frameName = 'soundOff.png';
-
-                model.state('music', false);
-                fonSound.stop();
+                game.sound.volume = 0;
             } else {
-                model.state('sound', true);
                 soundButton.frameName = 'soundOn.png';
-
-                model.state('music', true);
-                fonSound.play();
-
-                buttonSound.play(); // TODO: вынести в controller.sound
+                game.sound.volume = 1;
             }
         }
 
@@ -297,14 +318,13 @@ export let buttons = (function () {
         soundButton.input.priorityID = 1;
 
         function fastOnClick() {
-            // fastButton.frameName = fastButton.frameName === 'soundOut.png' ? 'sound.png' : 'soundOut.png';
             if (model.state('fastRoll')) {
                 model.state('fastRoll', false);
             } else {
                 model.state('fastRoll', true);
             }
 
-            buttonSound.play(); // TODO: вынести в controller.sound
+            sound.sounds.button.play();
         }
 
         const fastButton = game.add.button(x[3], y, 'footerButtons', fastOnClick, this, 'fastSpinOn.png', 'fastSpin.png', null, container);
@@ -313,8 +333,52 @@ export let buttons = (function () {
         fastButton.input.priorityID = 1;
     }
 
+    function autoStart() {
+        spinButton.frameName = 'spinEmpty.png';
+        betButton.frameName = 'setBetOut.png';
+        menuButton.frameName = 'menuOut.png';
+        autoButton.frameName = 'stop.png';
+    }
+
+    function autoStop() {
+        spinButton.frameName = 'spin.png';
+        betButton.frameName = 'setBet.png';
+        menuButton.frameName = 'menu.png';
+        autoButton.frameName = 'auto.png';
+    }
+
+    function autoStartDesktop() {
+        spinButtonDesk.frameName = 'stop.png';
+        spinButtonDesk.freezeFrames = true;
+        autoButtonDesk.frameName = 'autoEmpty.png';
+        autoButtonDesk.freezeFrames = true;
+        maxBetButtonDesk.frameName = 'maxBetOn.png';
+        maxBetButtonDesk.freezeFrames = true;
+        betLevelPlus.visible = false;
+        betLevelMinus.visible = false;
+        coinLevelPlus.visible = false;
+        coinLevelMinus.visible = false;
+    }
+
+    function autoStopDesktop() {
+        spinButtonDesk.frameName = 'spin.png';
+        spinButtonDesk.freezeFrames = false;
+        autoButtonDesk.frameName = 'auto.png';
+        autoButtonDesk.freezeFrames = false;
+        maxBetButtonDesk.frameName = 'maxBet.png';
+        maxBetButtonDesk.freezeFrames = false;
+        betLevelPlus.visible = true;
+        betLevelMinus.visible = true;
+        coinLevelPlus.visible = true;
+        coinLevelMinus.visible = true;
+    }
+
 
     events.on('buttons:changeSoundButton', changeSoundButton);
+    events.on('autoplay:init', autoStart);
+    events.on('autoplay:stop', autoStop);
+    events.on('autoplay:init:desktop', autoStartDesktop);
+    events.on('autoplay:stop:desktop', autoStopDesktop);
 
     return {
         drawHomeButton,
