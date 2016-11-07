@@ -3,7 +3,7 @@ import { events } from '../../modules/Events/Events';
 
 import { drawBetMenu } from '../../modules/Menu/Bet';
 import { drawAutoMenu } from '../../modules/Menu/Auto';
-import { drawSettingsMenu } from '../../modules/Menu/Settings';
+import { settings } from '../../modules/Menu/Settings';
 
 export let menu = (function () {
 
@@ -74,7 +74,7 @@ export let menu = (function () {
                 drawAutoMenu(container, game);
                 break;
             case 'settings':
-                drawSettingsMenu(container, game);
+                settings.drawMobileSettingsMenu(container, game);
                 break;
             default:
                 console.warn('Wrong menu name!');
