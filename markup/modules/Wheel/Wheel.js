@@ -71,6 +71,7 @@ export class Wheel {
         this.elSize = param.elSize;
         this.currentScreen = param.currentScreen;
         // инитим внутрение параметры
+        this.mode = 'idle';
         this.isFast = false;
         this._gotoPlay = false;
         this._gotoPaused = false;
@@ -101,6 +102,7 @@ export class Wheel {
             });
             elem.sprite.anchor.set(0.5);
             this.items.push(elem);
+            this.game.spriteAnims.push(elem);
         }
 
         this.update();

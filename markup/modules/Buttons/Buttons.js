@@ -1,6 +1,7 @@
 import { model } from '../../modules/Model/Model';
 import { events } from '../../modules/Events/Events';
 import { drawAutoDesktop } from '../../modules/Buttons/Autoplay';
+import { util } from 'modules/Util/Util';
 
 export let buttons = (function () {
 
@@ -10,9 +11,28 @@ export let buttons = (function () {
     let menuButton;
     let soundButton;
 
+    function drawHomeButton(container, game) {
+        let x = 25;
+        let y = (model.flag('mobile')) ? game.world.height - 50 : game.world.height - 15;
+
+        function homeOnClick() {
+            let buttonSound = model.el('buttonSound');
+            buttonSound.play(); // TODO: вынести в controller.sound
+            util.request('_Logout')
+                .then((response) => {
+                    console.log('Logout response:', response);
+                });
+            window.history.back();
+        }
+
+        const homeButton = game.add.button(x, y, 'footerButtons', homeOnClick, this, 'homeOn.png', 'home.png', 'homeOn.png', null, container);
+        homeButton.anchor.set(0.5);
+        homeButton.inputEnabled = true;
+        homeButton.input.priorityID = 1;
+    }
+
     function drawMobileButtons(container, game, mainWidth) {
-        let buttonSound = game.add.audio('buttonClick');
-        model.el('buttonSound', buttonSound);
+        let buttonSound = model.el('buttonSound');
         spinButton = game.add.sprite(0, game.world.centerY, 'mobileButtons', 'spin.png', container);
         spinButton.anchor.set(0.5);
         spinButton.inputEnabled = true;
@@ -129,9 +149,10 @@ export let buttons = (function () {
         spinButtonDesk.events.onInputDown.add(function () {
             buttonSound.play();
             events.trigger('roll:request', {
-                time: 1500,
-                length: 30,
-                ease: 1
+                // TODO: для обычних круток используй параметры конфига.
+                // time: 1500,
+                // length: 30,
+                // ease: 1
             });
         });
         let maxBetButtonDesk = game.add.button(spinButtonDesk.x + 137, 94, 'deskButtons', maxBet, this, 'maxBetOn.png', 'maxBet.png', 'maxBetOn.png', null, container);
@@ -202,11 +223,87 @@ export let buttons = (function () {
         }
     }
 
+    function drawDesktopBottomButtons(container, game) {
+        let buttonSound = model.el('buttonSound');
+
+        let x = [25, 75, 125, 175];
+        let y = game.world.height - 15;
+
+        function menuOnClick() {
+            $('#checkSound').prop('checked', model.state('sound'));
+            $('#checkMusic').prop('checked', model.state('music'));
+            $('#fastSpin').prop('checked', model.state('fastRoll'));
+            $('#isAnimations').prop('checked', model.state('isAnimations'));
+
+            $('#settings').removeClass('closed');
+            $('#darkness').removeClass('closed');
+
+            $('#darkness').on('click', function () {
+                $('#settings').addClass('closed');
+                $('#darkness').addClass('closed');
+                $('.history').addClass('closed');
+                $('#darkness').off();
+            });
+
+            buttonSound.play(); // TODO: вынести в controller.sound
+        }
+
+        const menuButton = game.add.button(x[1], y, 'footerButtons', menuOnClick, this, 'menuOn.png', 'menu.png', 'menuOn.png', null, container);
+        menuButton.anchor.set(0.5);
+
+        let soundButton;
+        function soundOnClick() {
+            // soundButton.frameName = soundButton.frameName === 'soundOut.png' ? 'sound.png' : 'soundOut.png';
+            // TODO: вынести в controller.sound
+            let fonSound = model.el('fonSound');
+
+            if (model.state('sound') === true) {
+                model.state('sound', false);
+                soundButton.frameName = 'soundOff.png';
+
+                model.state('music', false);
+                fonSound.stop();
+            } else {
+                model.state('sound', true);
+                soundButton.frameName = 'soundOn.png';
+
+                model.state('music', true);
+                fonSound.play();
+
+                buttonSound.play(); // TODO: вынести в controller.sound
+            }
+        }
+
+        soundButton = game.add.button(x[2], y, 'footerButtons', soundOnClick, this, 'soundOn.png', 'sound.png', null, container);
+        soundButton.anchor.set(0.5);
+        soundButton.inputEnabled = true;
+        soundButton.input.priorityID = 1;
+
+        function fastOnClick() {
+            // fastButton.frameName = fastButton.frameName === 'soundOut.png' ? 'sound.png' : 'soundOut.png';
+            if (model.state('fastRoll')) {
+                model.state('fastRoll', false);
+            } else {
+                model.state('fastRoll', true);
+            }
+
+            buttonSound.play(); // TODO: вынести в controller.sound
+        }
+
+        const fastButton = game.add.button(x[3], y, 'footerButtons', fastOnClick, this, 'fastSpinOn.png', 'fastSpin.png', null, container);
+        fastButton.anchor.set(0.5);
+        fastButton.inputEnabled = true;
+        fastButton.input.priorityID = 1;
+    }
+
+
     events.on('buttons:changeSoundButton', changeSoundButton);
 
     return {
+        drawHomeButton,
         drawMobileButtons,
-        drawDesktopPanel
+        drawDesktopPanel,
+        drawDesktopBottomButtons
     };
 
 })();

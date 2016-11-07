@@ -19,6 +19,7 @@ export class Main {
         let game = model.el('game');
         // массив в который записываются анимации для проигрывания
         game.frameAnims = [];
+        game.spriteAnims = [];
 
         this.game.stage.disableVisibilityChange = true;
         this.bgContainer = this.add.group();
@@ -38,6 +39,7 @@ export class Main {
         model.state('music', true);
         model.state('autoPanel', false);
         model.state('fastRoll', false);
+        model.state('isAnimations', true);
     }
 
     preload() {
@@ -48,6 +50,14 @@ export class Main {
         let fonSound = this.add.audio('fon', 1, true);
         model.el('fonSound', fonSound);
         fonSound.play();
+
+        let buttonSound = this.game.add.audio('buttonClick');
+        model.el('buttonSound', buttonSound);
+
+        $('.history__button').click((event) => {
+            $('.history').addClass('closed');
+        });
+
         this.drawMainBG();
         this.initMainContainer();
         if (model.flag('mobile')) {
@@ -56,15 +66,18 @@ export class Main {
             model.data('mainXRight', this.game.width - this.mainContainer.width - model.data('buttonsDelta') * 2);
         }
         balance.drawBalanceContainer(this.balanceContainer, this);
+        buttons.drawHomeButton(this.balanceContainer, this);
         this.drawMainContainer();
 
         events.trigger('roll:initWheels');
 
         if (model.flag('mobile')) {
             this.mainContainer.x = model.data('mainXLeft');
-        } else {
+        } else {    // Desktop
             this.mainContainer.x = (this.game.width - this.mainContainer.width) / 2;
             buttons.drawDesktopPanel(this.panelContainer, this, this.mainContainer);
+            buttons.drawDesktopBottomButtons(this.balanceContainer, this);
+            this.initDesktopSettings();
         }
 
         // PreAnimation
@@ -87,19 +100,27 @@ export class Main {
     }
 
     drawMainBG() {
-        let skeleton = this.game.add.spine(
+        let animBG = this.game.add.spine(
             this.game.world.centerX,        // X positon
             this.game.world.centerY,        // Y position
-            'skelet'     // the key of the object in cache
+            'animBG'     // the key of the object in cache
         );
-        skeleton.scale.set(1);
-        skeleton.setAnimationByName(
+        animBG.scale.set(1);
+        animBG.setAnimationByName(
             0,          // Track index
             'animation',     // Animation's name
             true        // If the animation should loop or not
         );
-        this.bgContainer.add(skeleton);
-        // let mainBG = this.add.sprite(0, 0, 'mainBG', null, this.bgContainer);
+        this.bgContainer.add(animBG);
+        model.el('animMainBG', animBG);
+        let mainBG = this.add.sprite(0, 0, 'mainBG', null, this.bgContainer);
+        model.el('mainBG', mainBG);
+
+        if (model.state('isAnimations')) {
+            mainBG.visible = false;
+        } else {
+            animBG.visible = false;
+        }
     }
 
     initMainContainer() {
@@ -139,5 +160,84 @@ export class Main {
         model.el('glistaContainer', glistaContainer);
         this.machineContainer.add(glistaContainer);
         model.el('mask', mask);
+    }
+    initDesktopSettings() {
+        let _this = this;
+        $('#volume').on('input change', function () {
+            _this.game.sound.volume = this.value / 100;
+        });
+        $('#checkSound').on('change', function () {
+            model.state('sound', this.checked);
+            // console.log(this.id, this.checked);
+        });
+        $('#checkMusic').on('change', function () {
+            let fonSound = model.el('fonSound');
+            model.state('music', this.checked);
+            if (this.checked) {
+                fonSound.play();
+            } else {
+                fonSound.stop();
+            }
+            // console.log(this.id, this.checked);
+        });
+        $('#fastSpin').on('change', function () {
+            model.state('fastRoll', this.checked);
+            // console.log(this.id, this.checked);
+        });
+        $('#isAnimations').on('change', function () {
+            let isAnim = this.checked;
+            model.state('isAnimations', isAnim);
+
+            let animMainBG = model.el('animMainBG');
+            let mainBG = model.el('mainBG');
+
+            if (isAnim) {
+                animMainBG.visible = true;
+                mainBG.visible = false;
+            } else {
+                mainBG.visible = true;
+                animMainBG.visible = false;
+            }
+
+            _this.game.spriteAnims.forEach((elem) => {
+                elem.sprite.animations.paused = !isAnim;
+            });
+            // console.log(this.id, this.checked);
+        });
+        $('#optionAutoplay1').on('change', function () {
+            console.log(this.id, this.checked);
+        });
+        $('#optionAutoplayVal1').on('input change', function () {
+            console.log('optionAutoplayVal1', this.value);
+        });
+        $('#optionAutoplay2').on('change', function () {
+            console.log(this.id, this.checked);
+        });
+        $('#optionAutoplayVal2').on('input change', function () {
+            console.log('optionAutoplayVal2', this.value);
+        });
+        $('#optionAutoplay3').on('change', function () {
+            console.log(this.id, this.checked);
+        });
+        $('#optionAutoplayVal3').on('input change', function () {
+            console.log('optionAutoplayVal3', this.value);
+        });
+        $('#optionAutoplay4').on('change', function () {
+            console.log(this.id, this.checked);
+        });
+        $('#btnHistory').on('click', function () {
+            $('.history').removeClass('closed');
+            // console.log('btnHistory');
+        });
+        $('#btnRules').on('click', function () {
+            console.log('btnRules');
+        });
+        $('#settingsSave').on('click', function () {
+            $('#settings').addClass('closed');
+            $('#darkness').addClass('closed');
+            $('.history').addClass('closed');
+            $('#darkness').off();
+            // TODO: request new settings.
+        });
     }
 }
