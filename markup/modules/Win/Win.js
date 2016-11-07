@@ -16,7 +16,20 @@ export let win = (function () {
         let data = model.data('rollResponse');
         let winTotalData = data.Balance.TotalWinCoins;
         let winLines = data.WinLines;
+        let nextMode = data.NextMode;
+        let mode = data.Mode;
 
+        if (mode == 'root' && nextMode == 'fsBonus') {
+            if (model.flag('mobile')) {
+                events.trigger('autoplay:stop');
+            } else {
+                events.trigger('autoplay:stop:desktop');
+            }
+            setTimeout(() => {
+                let game = model.el('game');
+                game.state.start('FS');
+            }, 2000);
+        }
         if (winTotalData === 0) return;
 
         let game = model.el('game');
@@ -25,7 +38,9 @@ export let win = (function () {
         winSound.addMarker('win', 0, 1, 1, false);
         winSound.play('win');
 
-
+        // if (model.el('winTop')) {
+        //
+        // }
         let winTop = game.add.group();
 
         mainContainer.addAt(winTop, mainContainer.children.length);
@@ -45,7 +60,13 @@ export let win = (function () {
         let game = model.el('game');
         let mainContainer = model.el('mainContainer');
         let winTop = model.el('winTop');
-        let gameMachine = mainContainer.getAt(2);
+        console.log(mainContainer);
+        let gameMachine;
+        if (model.state('FSMode')) {
+            gameMachine = mainContainer.getAt(0);
+        } else {
+            gameMachine = mainContainer.getAt(2);
+        }
 
         let winTotal = game.add.sprite(gameMachine.width / 2, gameMachine.height / 2, 'winTotal', null, winTop);
         winTotal.anchor.set(0.5);

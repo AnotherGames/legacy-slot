@@ -95,12 +95,13 @@ function loadMainAssets(game) {
     game.load.image('winLine', 'win/winLineRect.png');
     game.load.image('winTotal', 'win/winTotalRect.png');
     game.load.atlasJSONArray('win', 'win/win.png', 'win/win.json');
+    game.load.atlasJSONArray('numbers', 'numbers/numbers.png', 'numbers/numbers.json');
     game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
     game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
     game.load.atlasJSONArray('footerButtons', 'footer/footerButtons.png', 'footer/footerButtons.json');
     if (model.flag('desktop')) {
         game.load.image('ui', 'game/UI.png');
-        game.load.image('ui', 'game/UI_FS.png');
+        game.load.image('uiFS', 'game/UI_FS.png');
         game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
         game.load.image('autoSelect', 'desk_buttons/autoSelect.png');
     }

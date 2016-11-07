@@ -42,6 +42,7 @@ export class Main {
         model.state('fastRoll', false);
         model.state('isAnimations', true);
         model.state('autoEnd', true);
+        model.state('FSMode', false);
     }
 
     preload() {
@@ -84,6 +85,7 @@ export class Main {
         darkness.drawRect(0, 0, this.game.width, this.game.height);
         this.add.tween(darkness).to( { alpha: 0 }, 1000, 'Linear', true);
         model.el('darkness', darkness);
+        // this.state.start('FS');
     }
 
     update() {
@@ -94,7 +96,7 @@ export class Main {
         game.frameAnims.forEach((anim) => {
             anim();
         });
-        events.trigger('updateTime');
+
     }
 
     drawMainBG() {
@@ -106,7 +108,7 @@ export class Main {
         animBG.scale.set(1);
         animBG.setAnimationByName(
             0,          // Track index
-            'animation',     // Animation's name
+            '1',     // Animation's name
             true        // If the animation should loop or not
         );
         this.bgContainer.add(animBG);
