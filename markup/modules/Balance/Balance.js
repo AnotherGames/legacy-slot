@@ -138,6 +138,41 @@ export let balance = (function () {
                 let topLineWidth = balanceText.coinsSumText.width + d + balanceText.coinsSum.width + D + balanceText.betSumText.width + d + balanceText.betSum.width;
 
                 topBalanceContainer.x = game.world.centerX - topLineWidth / 2;
+            } else {
+                balanceText.winText = game.add.text(
+                    0,
+                    game.world.height - 65,
+                    'Win:',
+                    {font: '24px Helvetica, Arial', fill: '#dddddd', align: 'center'},
+                    topBalanceContainer);
+
+                balanceText.winSum = game.add.text(
+                    balanceText.winText.x + balanceText.winText.width + d,
+                    game.world.height - 65,
+                    '0',
+                    {font: '25px Helvetica, Arial', fill: '#e8b075', align: 'center'},
+                    topBalanceContainer);
+
+                balanceText.totalWinText = game.add.text(
+                    balanceText.winSum.x + balanceText.winSum.width + D,
+                    game.world.height - 65,
+                    'Total Win:',
+                    {font: '24px Helvetica, Arial', fill: '#dddddd', align: 'center'},
+                    topBalanceContainer);
+
+                balanceText.totalWinSum = game.add.text(
+                    balanceText.totalWinText.x + balanceText.totalWinText.width + d,
+                    game.world.height - 65,
+                    '0',
+                    {font: '25px Helvetica, Arial', fill: '#e8b075', align: 'center'},
+                    topBalanceContainer);
+
+                balanceText.winSum.setShadow(0, 0, '#e8b075', 2);
+                balanceText.totalWinSum.setShadow(0, 0, '#e8b075', 2);
+
+                let topLineWidth = balanceText.winText.width + d + balanceText.winSum.width + D + balanceText.totalWinText.width + d + balanceText.totalWinSum.width;
+
+                topBalanceContainer.x = game.world.centerX - topLineWidth / 2;
             }
         } else if (model.flag('desktop') && model.state('FSMode')) {
             balanceText.coinsSum = game.add.text(
@@ -147,6 +182,7 @@ export let balance = (function () {
                 {font: 'normal 27px Helvetica, Arial', fill: '#e8b075', align: 'center'},
                 container);
             balanceText.coinsSum.anchor.set(0.5);
+
             balanceText.coinsValue = game.add.text(
                 mainContainer.x + 785,
                 mainContainer.height + 102,
@@ -154,6 +190,7 @@ export let balance = (function () {
                 {font: 'normal 27px Helvetica, Arial', fill: '#e8b075', align: 'center'},
                 container);
             balanceText.coinsValue.anchor.set(0.5);
+
             balanceText.betSum = game.add.text(
                 mainContainer.x + 765,
                 mainContainer.height + 19,
@@ -161,6 +198,7 @@ export let balance = (function () {
                 {font: 'normal 27px Helvetica, Arial', fill: '#e8b075', align: 'center'},
                 container);
             balanceText.betSum.anchor.set(0.5);
+
             balanceText.betValue = game.add.text(
                 mainContainer.x + 690,
                 mainContainer.height + 102,
@@ -168,6 +206,22 @@ export let balance = (function () {
                 {font: 'normal 27px Helvetica, Arial', fill: '#e8b075', align: 'center'},
                 container);
             balanceText.betValue.anchor.set(0.5);
+
+            balanceText.winSum = game.add.text(
+                mainContainer.x + 1745,
+                mainContainer.height + 22,
+                '0',
+                {font: 'normal 27px Helvetica, Arial', fill: '#e8b075', align: 'center'},
+                container);
+            balanceText.winSum.anchor.set(0.5);
+
+            balanceText.totalWinSum = game.add.text(
+                mainContainer.x + 1745,
+                mainContainer.height + 68,
+                '0',
+                {font: 'normal 27px Helvetica, Arial', fill: '#e8b075', align: 'center'},
+                container);
+            balanceText.totalWinSum.anchor.set(0.5);
         } else {
             balanceText.coinsSum = game.add.text(
                 mainContainer.x + 1470,
@@ -176,6 +230,7 @@ export let balance = (function () {
                 {font: 'normal 27px Helvetica, Arial', fill: '#e8b075', align: 'center'},
                 container);
             balanceText.coinsSum.anchor.set(0.5);
+
             balanceText.coinsValue = game.add.text(
                 mainContainer.x + 1360,
                 mainContainer.height + 102,
@@ -183,6 +238,7 @@ export let balance = (function () {
                 {font: 'normal 27px Helvetica, Arial', fill: '#e8b075', align: 'center'},
                 container);
             balanceText.coinsValue.anchor.set(0.5);
+
             balanceText.betSum = game.add.text(
                 mainContainer.x + 480,
                 mainContainer.height + 19,
@@ -190,6 +246,7 @@ export let balance = (function () {
                 {font: 'normal 27px Helvetica, Arial', fill: '#e8b075', align: 'center'},
                 container);
             balanceText.betSum.anchor.set(0.5);
+
             balanceText.betValue = game.add.text(
                 mainContainer.x + 535,
                 mainContainer.height + 102,

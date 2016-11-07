@@ -26,12 +26,14 @@ export class FS {
         this.panelContainer = this.add.group();
         this.balanceContainer = this.add.group();
         this.menuContainer = this.add.group();
+        this.fsContainer = this.add.group();
         model.el('bgContainer', this.bgContainer);
         model.el('mainContainer', this.mainContainer);
         model.el('balanceContainer', this.balanceContainer);
         model.el('buttonsContainer', this.buttonsContainer);
         model.el('panelContainer', this.panelContainer);
         model.el('menuContainer', this.menuContainer);
+        model.el('fsContainer', this.fsContainer);
         model.state('FSMode', true);
     }
     preload() {
@@ -41,8 +43,15 @@ export class FS {
         let fonFSSound = this.add.audio('fsFon', 1, true);
         model.el('fonFSSound', fonFSSound);
         fonFSSound.play();
+
+        let buttonSound = this.game.add.audio('buttonClick');
+        model.el('buttonSound', buttonSound);
+
+        $('.history__button').click((event) => {
+            $('.history').addClass('closed');
+        });
+
         this.drawMainBG();
-        this.drawFSElements();
         this.initMainContainer();
         if (model.flag('mobile')) {
             // buttons.drawMobileButtons(this.buttonsContainer, this, this.mainContainer.width);
@@ -50,16 +59,21 @@ export class FS {
             model.data('mainXRight', this.game.width - this.mainContainer.width - model.data('buttonsDelta') * 2);
         }
         balance.drawBalanceContainer(this.balanceContainer, this);
+        buttons.drawHomeButton(this.balanceContainer, this);
         this.drawMainContainer();
+        this.drawFSElements();
 
         events.trigger('roll:initWheels');
 
         if (model.flag('mobile')) {
             this.mainContainer.x = model.data('mainXRight');
-        } else {
+        } else {    // Desktop
             this.mainContainer.x = this.game.width - this.mainContainer.width;
             buttons.drawDesktopFSPanel(this.panelContainer, this, this.mainContainer);
+            buttons.drawDesktopBottomButtons(this.balanceContainer, this);
+            this.initDesktopSettings();
         }
+
 
         // PreAnimation
         let darkness = model.el('darkness');
@@ -102,7 +116,7 @@ export class FS {
     }
 
     initMainContainer() {
-        let gameMachine = this.add.sprite(0, 0, 'gameMachine', null, this.mainContainer);
+        const gameMachine = this.add.sprite(0, 0, 'gameMachine', null, this.mainContainer);
         model.el('gameMachine', gameMachine);
     }
 
@@ -140,8 +154,106 @@ export class FS {
 
     drawFSElements() {
         if (model.flag('mobile')) {
-            let FSLevel = this.add.sprite(0, 0, 'fsTotalTable', null, this.mainContainer);
-            FSLevel.anchor.set(0.5);
+            const mozgCountBG = this.add.sprite(385, 30, 'multiTable', null, this.fsContainer);
+            mozgCountBG.anchor.set(0.5);
+            const fsLevelBG = this.add.sprite(240, 55, 'fsTotalTable', null, this.fsContainer);
+            fsLevelBG.anchor.set(0.5);
+            const multiBG = this.add.sprite(120, 600, 'multiRip', null, this.fsContainer);
+            multiBG.anchor.set(0.5);
         }
+        let multiX;
+        let multiY;
+        if (model.flag('mobile')) {
+            multiX = 120;
+            multiY = 600;
+        } else {
+            multiX = 1400;
+            multiY = 970;
+        }
+        const fsMulti = this.add.sprite(multiX, multiY, 'numbers', 'multi' + '1' + '.png', this.fsContainer);
+        fsMulti.anchor.set(0.5);
+        // const fsLevel = this.add.bitmapText(100, 100, 'numbers', '15', null, this.fsContainer);
+        // fsLevel.anchor.set(0.5);
+
+    }
+
+    initDesktopSettings() {
+        let _this = this;
+        $('#volume').on('input change', function () {
+            _this.game.sound.volume = this.value / 100;
+        });
+        $('#checkSound').on('change', function () {
+            model.state('sound', this.checked);
+            // console.log(this.id, this.checked);
+        });
+        $('#checkMusic').on('change', function () {
+            let fonSound = model.el('fonSound');
+            model.state('music', this.checked);
+            if (this.checked) {
+                fonSound.play();
+            } else {
+                fonSound.stop();
+            }
+            // console.log(this.id, this.checked);
+        });
+        $('#fastSpin').on('change', function () {
+            model.state('fastRoll', this.checked);
+            // console.log(this.id, this.checked);
+        });
+        $('#isAnimations').on('change', function () {
+            let isAnim = this.checked;
+            model.state('isAnimations', isAnim);
+
+            let animMainBG = model.el('animMainBG');
+            let mainBG = model.el('mainBG');
+
+            if (isAnim) {
+                animMainBG.visible = true;
+                mainBG.visible = false;
+            } else {
+                mainBG.visible = true;
+                animMainBG.visible = false;
+            }
+
+            _this.game.spriteAnims.forEach((elem) => {
+                elem.sprite.animations.paused = !isAnim;
+            });
+            // console.log(this.id, this.checked);
+        });
+        $('#optionAutoplay1').on('change', function () {
+            console.log(this.id, this.checked);
+        });
+        $('#optionAutoplayVal1').on('input change', function () {
+            console.log('optionAutoplayVal1', this.value);
+        });
+        $('#optionAutoplay2').on('change', function () {
+            console.log(this.id, this.checked);
+        });
+        $('#optionAutoplayVal2').on('input change', function () {
+            console.log('optionAutoplayVal2', this.value);
+        });
+        $('#optionAutoplay3').on('change', function () {
+            console.log(this.id, this.checked);
+        });
+        $('#optionAutoplayVal3').on('input change', function () {
+            console.log('optionAutoplayVal3', this.value);
+        });
+        $('#optionAutoplay4').on('change', function () {
+            console.log(this.id, this.checked);
+        });
+        $('#btnHistory').on('click', function () {
+            $('.history').removeClass('closed');
+            // console.log('btnHistory');
+        });
+        $('#btnRules').on('click', function () {
+            console.log('btnRules');
+        });
+        $('#settingsSave').on('click', function () {
+            $('#settings').addClass('closed');
+            $('#darkness').addClass('closed');
+            $('.history').addClass('closed');
+            $('#darkness').off();
+            // TODO: request new settings.
+        });
     }
 }

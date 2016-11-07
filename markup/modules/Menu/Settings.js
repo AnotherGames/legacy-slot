@@ -179,6 +179,7 @@ export function drawSettingsMenu(container, game) {
         const infoRules = game.add.sprite(game.world.centerX, game.world.centerY, 'infoRules');
         infoRules.anchor.set(0.5);
         infoRules.inputEnabled = true;
+        rulesButton.input.priorityID = 3;
         infoRules.events.onInputDown.add(function () {
             infoRules.destroy();
             overlay.destroy();

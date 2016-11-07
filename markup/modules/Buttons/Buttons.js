@@ -210,17 +210,6 @@ export let buttons = (function () {
 
         }
 
-        function showInfo() {
-            buttonSound.play();
-            const overlay = game.add.graphics(0, 0).beginFill(0x000000, 0.8).drawRect(0, 0, game.world.width, game.world.height);
-            const infoRules = game.add.sprite(game.world.centerX, game.world.centerY, 'infoRules');
-            infoRules.anchor.set(0.5);
-            infoRules.inputEnabled = true;
-            infoRules.events.onInputDown.add(function () {
-                infoRules.destroy();
-                overlay.destroy();
-            });
-        }
     }
 
     function drawDesktopFSPanel(container, game, mainContainer) {
@@ -228,9 +217,27 @@ export let buttons = (function () {
         container.x = mainContainer.x + 38;
         container.y = gameMachine.height - 28;
 
-        let panelBG = game.add.sprite(0, 0, 'uiFS', null, container);
+        const panelBG = game.add.sprite(0, 0, 'uiFS', null, container);
 
-        let lines = game.add.text(55, 112, '10', {font: 'normal 27px Helvetica, Arial, Arial', fill: '#e8b075', align: 'center'}, container);
+        const lines = game.add.text(55,
+            112,
+            '10',
+            {font: 'normal 27px Helvetica, Arial', fill: '#e8b075', align: 'center'},
+            container);
+
+        const info = game.add.button(42, 27, 'deskButtons', showInfo, this, 'infoOn.png', 'info.png', 'infoOn.png', null, container);
+    }
+
+    function showInfo() {
+        let game = model.el('game');
+        const overlay = game.add.graphics(0, 0).beginFill(0x000000, 0.8).drawRect(0, 0, game.world.width, game.world.height);
+        const infoRules = game.add.sprite(game.world.centerX, game.world.centerY, 'infoRules');
+        infoRules.anchor.set(0.5);
+        infoRules.inputEnabled = true;
+        infoRules.events.onInputDown.add(function () {
+            infoRules.destroy();
+            overlay.destroy();
+        });
     }
 
     function drawDesktopBottomButtons(container, game) {
