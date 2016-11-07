@@ -54,6 +54,9 @@ export class Main {
         let buttonSound = this.game.add.audio('buttonClick');
         model.el('buttonSound', buttonSound);
 
+        let barabanSound = this.game.add.audio('baraban');
+        model.el('barabanSound', barabanSound);
+
         $('.history__button').click((event) => {
             $('.history').addClass('closed');
         });
@@ -161,24 +164,25 @@ export class Main {
         this.machineContainer.add(glistaContainer);
         model.el('mask', mask);
     }
+
     initDesktopSettings() {
         let _this = this;
         $('#volume').on('input change', function () {
             _this.game.sound.volume = this.value / 100;
         });
         $('#checkSound').on('change', function () {
+            let buttonSound = model.el('buttonSound');
+            let barabanSound = model.el('barabanSound');
             model.state('sound', this.checked);
+
+            buttonSound.mute = !this.checked;
+            barabanSound.mute = !this.checked;
             // console.log(this.id, this.checked);
         });
         $('#checkMusic').on('change', function () {
             let fonSound = model.el('fonSound');
             model.state('music', this.checked);
-            if (this.checked) {
-                fonSound.play();
-            } else {
-                fonSound.stop();
-            }
-            // console.log(this.id, this.checked);
+            fonSound.mute = !this.checked;
         });
         $('#fastSpin').on('change', function () {
             model.state('fastRoll', this.checked);

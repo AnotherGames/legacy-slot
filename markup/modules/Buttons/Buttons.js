@@ -98,12 +98,17 @@ export let buttons = (function () {
         soundButton.inputEnabled = true;
         soundButton.input.priorityID = 1;
         soundButton.events.onInputDown.add(function () {
-            buttonSound.play();
+            let barabanSound = model.el('barabanSound');
             soundButton.frameName = soundButton.frameName === 'soundOut.png' ? 'sound.png' : 'soundOut.png';
             if (model.state('sound')) {
+                barabanSound.mute = true;
+                buttonSound.mute = true;
                 model.state('sound', false);
             } else {
                 model.state('sound', true);
+                barabanSound.mute = false;
+                buttonSound.mute = false;
+                buttonSound.play();
             }
             console.log(model.state('sound'));
         });
@@ -253,24 +258,14 @@ export let buttons = (function () {
 
         let soundButton;
         function soundOnClick() {
-            // soundButton.frameName = soundButton.frameName === 'soundOut.png' ? 'sound.png' : 'soundOut.png';
+            // soundButton.frameName = soundButton.frameName === 'soundOn.png' ? 'soundOff.png' : 'soundOn.png';
             // TODO: вынести в controller.sound
-            let fonSound = model.el('fonSound');
-
-            if (model.state('sound') === true) {
-                model.state('sound', false);
+            if (game.sound.volume > 0) {
                 soundButton.frameName = 'soundOff.png';
-
-                model.state('music', false);
-                fonSound.stop();
+                game.sound.volume = 0;
             } else {
-                model.state('sound', true);
                 soundButton.frameName = 'soundOn.png';
-
-                model.state('music', true);
-                fonSound.play();
-
-                buttonSound.play(); // TODO: вынести в controller.sound
+                game.sound.volume = 1;
             }
         }
 
