@@ -42,6 +42,7 @@ export class Main {
         model.state('fastRoll', false);
         model.state('isAnimations', true);
         model.state('autoEnd', true);
+        model.state('FSMode', false);
     }
 
     preload() {

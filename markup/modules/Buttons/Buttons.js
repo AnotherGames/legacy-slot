@@ -203,7 +203,7 @@ export let buttons = (function () {
         }
 
         function maxBet() {
-            if (maxBetButtonDesk.frameName == 'maxBetOn.png') return;
+            if (model.state('autoEnd') == false) return;
             sound.sounds.button.play();
             events.trigger('buttons:maxBet');
         }
