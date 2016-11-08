@@ -20,9 +20,9 @@ export let win = (function () {
         let mode = data.Mode;
 
         if (mode == 'root' && nextMode == 'fsBonus') {
-            if (model.flag('mobile')) {
+            if (model.flag('mobile') && !model.state('autoEnd')) {
                 events.trigger('autoplay:stop');
-            } else {
+            } else if (model.flag('desktop') && !model.state('autoEnd')) {
                 events.trigger('autoplay:stop:desktop');
             }
             setTimeout(() => {
@@ -60,7 +60,6 @@ export let win = (function () {
         let game = model.el('game');
         let mainContainer = model.el('mainContainer');
         let winTop = model.el('winTop');
-        console.log(mainContainer);
         let gameMachine;
         if (model.state('FSMode')) {
             gameMachine = mainContainer.getAt(0);
