@@ -34,6 +34,8 @@ export let balance = (function () {
 
         let topBalanceContainer = game.add.group();
         let bottomBalanceContainer = game.add.group();
+        container.add(topBalanceContainer);
+        container.add(bottomBalanceContainer);
 
         balanceData.linesLength = model.data('lines').length;
         balanceData.coinsSteps = model.data('initBalance').CoinValue.map((value) => {
@@ -259,6 +261,8 @@ export let balance = (function () {
 
         model.data('balanceText', balanceText);
         model.data('balanceData', balanceData);
+        model.el('topBalanceContainer', topBalanceContainer);
+        model.el('bottomBalanceContainer', bottomBalanceContainer);
 
         setTimeout(updateBalance(), 500);
     }

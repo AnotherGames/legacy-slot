@@ -27,7 +27,7 @@ export let win = (function () {
             }
             setTimeout(() => {
                 let game = model.el('game');
-                game.state.start('FS');
+                events.trigger('main:drawTransitionScreen');
             }, 2000);
         }
 
@@ -151,7 +151,7 @@ export let win = (function () {
             glistaMas.push(coord.Y);
         });
         cleanWinElements();
-        glista.start(glistaMas, 1000, function() {
+        glista.start(glistaMas, 1000, function () {
             glista.remove();
             glistaDoneCounter++;
             if (glistaDoneCounter == glistaFiredCounter) {

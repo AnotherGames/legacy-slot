@@ -33,18 +33,21 @@ export class Main {
         this.panelContainer = this.add.group();
         this.balanceContainer = this.add.group();
         this.menuContainer = this.add.group();
+        this.transitionContainer = this.add.group();
         model.el('bgContainer', this.bgContainer);
         model.el('mainContainer', this.mainContainer);
         model.el('balanceContainer', this.balanceContainer);
         model.el('buttonsContainer', this.buttonsContainer);
         model.el('panelContainer', this.panelContainer);
         model.el('menuContainer', this.menuContainer);
+        model.el('transitionContainer', this.transitionContainer);
         model.state('side', 'left');
         model.state('autoPanel', false);
         model.state('fastRoll', false);
         model.state('isAnimations', true);
         model.state('autoEnd', true);
         model.state('FSMode', false);
+        events.on('main:drawTransitionScreen', this.drawTransitionScreen);
     }
 
     preload() {
@@ -87,8 +90,7 @@ export class Main {
         darkness.beginFill(0x000000);
         darkness.drawRect(0, 0, this.game.width, this.game.height);
         this.add.tween(darkness).to( { alpha: 0 }, 1000, 'Linear', true);
-        model.el('darkness', darkness);
-        // this.state.start('FS');
+
     }
 
     update() {
@@ -163,4 +165,71 @@ export class Main {
         this.machineContainer.add(glistaContainer);
         model.el('mask', mask);
     }
+
+    drawTransitionScreen() {
+        let game = model.el('game');
+        let transitionContainer = model.el('transitionContainer');
+
+        const transitionBG = game.add.sprite(0, 0, 'initBG', null, transitionContainer);
+        const freeSpinsText = game.add.sprite(game.world.width / 2,
+            -400,
+            'text',
+            'freeSpins.png',
+            transitionContainer);
+        freeSpinsText.anchor.set(0.5);
+        // freeSpinsText.scale.setTo(0.1, 0.1);
+
+        const freeSpinsLevel = game.add.text(game.world.width / 2,
+            -200,
+            '15',
+            {font: 'bold 140px Helvetica, Arial', fill: '#fff', align: 'center'},
+            transitionContainer);
+        freeSpinsLevel.anchor.set(0.5);
+        // freeSpinsLevel.scale.setTo(0.1, 0.1);
+
+        const axeBig = game.add.sprite(game.world.width / 2 + 250,
+            game.world.height / 2,
+            'axe',
+            null,
+            transitionContainer);
+        axeBig.anchor.set(0.5);
+        axeBig.scale.setTo(0.1, 0.1);
+
+        const axeSmall = game.add.sprite(game.world.width / 2 - 250,
+            game.world.height / 2 + 50,
+            'axeSmall',
+            null,
+            transitionContainer);
+        axeSmall.anchor.set(0.5);
+        axeSmall.scale.setTo(0.1, 0.1);
+
+        const continueText = game.add.sprite(game.world.width / 2,
+            game.world.height * 0.8,
+            'text',
+            'continue.png',
+            transitionContainer);
+        continueText.anchor.set(0.5);
+        continueText.scale.setTo(0.1, 0.1);
+
+        continueText.inputEnabled = true;
+        continueText.input.priorityID = 2;
+        continueText.events.onInputDown.add(function () {
+            sound.sounds.button.play();
+            game.state.start('FS');
+        });
+
+        game.add.tween(freeSpinsText).to({y: game.world.height * 0.2}, 1000, Phaser.Easing.Bounce.Out, true);
+        game.add.tween(freeSpinsLevel).to({y: game.world.height / 2}, 1000, Phaser.Easing.Bounce.Out, true);
+        game.add.tween(axeBig.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true, 300);
+        game.add.tween(axeSmall.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true, 300);
+        game.add.tween(continueText.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true)
+            .onComplete.add(() => {
+                continueText.rotation = 0.1;
+                game.add.tween(continueText).to({rotation: -0.1}, 100, Phaser.Easing.Elastic.Out, true, 0, 4, true)
+                    .onComplete.add(() => {
+                        continueText.rotation = 0;
+                    }, this);
+            }, this);
+    }
+
 }
