@@ -1,0 +1,5053 @@
+{
+skeleton: { hash: "VEAa7X6eyGYHXSMbuHjPy2xnVE8", spine: "3.4.02", width: 599.45, height: 526.7, images: "" },
+bones: [
+	{ name: "root" },
+	{ name: "Ass", parent: "root", x: 4.06, y: -76.64 },
+	{ name: "Body", parent: "Ass", length: 89.91, rotation: 90, y: 22.35 },
+	{ name: "Head", parent: "Body", length: 70.01, rotation: 5.84, x: 160.01, y: 6.09 },
+	{ name: "LL", parent: "Ass", length: 89.03, rotation: -83.26, x: 60.95, y: 6.6 },
+	{ name: "RH", parent: "Body", length: 44.13, rotation: 101.56, x: 111.25, y: 115.31 },
+	{ name: "RL", parent: "Ass", length: 93.37, rotation: -106.78, x: -55.87, y: 6.6 },
+	{ name: "bone", parent: "RH", length: 38.77, rotation: -6.34, x: 55.99, y: -0.05 },
+	{ name: "bone2", parent: "RL", length: 55.91, rotation: -71.29, x: 101.73, y: 5.69 },
+	{ name: "bone3", parent: "bone", length: 51.81, rotation: -4.95, x: 55.37, y: -2.52 },
+	{ name: "bone4", parent: "LL", length: 61.57, rotation: 72.51, x: 103.3, y: -13.22 },
+	{ name: "bone5", parent: "bone3", length: 30.9, rotation: -46.62, x: -2.65, y: -23.86 },
+	{ name: "bone6", parent: "Body", length: 46.23, rotation: -90.45, x: 137.15, y: -105.15 },
+	{ name: "bone7", parent: "bone6", length: 46.23, rotation: 1.35, x: 62.49, y: -1.56 },
+	{ name: "bone8", parent: "bone7", length: 55.62, rotation: -10.26, x: 57.34, y: -3.96 },
+	{ name: "bone9", parent: "bone8", length: 32.42, rotation: -45.22, x: -7.47, y: -23.37 },
+	{ name: "bone10", parent: "Head", x: 130.46, y: 2.49 },
+	{ name: "bone11", parent: "Head", length: 63.48, rotation: -56.2, x: 59.18, y: 69.52 },
+	{ name: "bone12", parent: "Head", length: 60.45, rotation: 56.2, x: 60.12, y: -81.2 },
+	{ name: "bone13", parent: "Head", x: 56.28, y: 36.12 },
+	{ name: "bone14", parent: "bone13", x: 16.22, y: -1.14 },
+	{ name: "bone15", parent: "Head", x: 61.01, y: -47.59 },
+	{ name: "bone16", parent: "bone15", x: 12.98, y: -2.85 },
+	{ name: "bone17", parent: "Head", x: -16.64, y: -8 }
+],
+slots: [
+	{ name: "Interface_Zombi_FS_0032_Altary", bone: "root", attachment: "Z-por/Interface_Zombi_FS_0032_Altary" },
+	{ name: "Interface_Zombi_FS_0009_Layer-18", bone: "Head", attachment: "Z-por/Interface_Zombi_FS_0009_Layer-18" },
+	{ name: "Interface_Zombi_FS_0008_Layer-17", bone: "bone10", attachment: "Z-por/Interface_Zombi_FS_0008_Layer-17" },
+	{ name: "Interface_Zombi_FS_0026_Kosty", bone: "LL", attachment: "Z-por/Interface_Zombi_FS_0026_Kosty" },
+	{ name: "Interface_Zombi_FS_0028_Layer-12", bone: "LL", attachment: "Z-por/Interface_Zombi_FS_0028_Layer-12" },
+	{ name: "Interface_Zombi_FS_0027_Noga_L", bone: "bone4", attachment: "Z-por/Interface_Zombi_FS_0027_Noga_L" },
+	{ name: "Interface_Zombi_FS_0014_Layer-3", bone: "LL", attachment: "Z-por/Interface_Zombi_FS_0014_Layer-3" },
+	{ name: "Interface_Zombi_FS_0029_Layer-16", bone: "RL", attachment: "Z-por/Interface_Zombi_FS_0029_Layer-16" },
+	{ name: "Interface_Zombi_FS_0031_Noga_R", bone: "RL", attachment: "Z-por/Interface_Zombi_FS_0031_Noga_R" },
+	{ name: "Interface_Zombi_FS_0012_Layer-4", bone: "RL", attachment: "Z-por/Interface_Zombi_FS_0012_Layer-4" },
+	{ name: "Interface_Zombi_FS_0013_Body", bone: "Ass", attachment: "Z-por/Interface_Zombi_FS_0013_Body" },
+	{ name: "Interface_Zombi_FS_0025_Ruka_R", bone: "bone", attachment: "Z-por/Interface_Zombi_FS_0025_Ruka_R" },
+	{ name: "Interface_Zombi_FS_0023_Layer-10", bone: "bone3", attachment: "Z-por/Interface_Zombi_FS_0023_Layer-10" },
+	{ name: "Interface_Zombi_FS_0022_Layer-11", bone: "bone5", attachment: "Z-por/Interface_Zombi_FS_0022_Layer-11" },
+	{ name: "Interface_Zombi_FS_0021_Layer-14", bone: "RH", attachment: "Z-por/Interface_Zombi_FS_0021_Layer-14" },
+	{ name: "Interface_Zombi_FS_0024_Layer-9", bone: "RH", attachment: "Z-por/Interface_Zombi_FS_0024_Layer-9" },
+	{ name: "Interface_Zombi_FS_0020_Ruka_L", bone: "bone7", attachment: "Z-por/Interface_Zombi_FS_0020_Ruka_L" },
+	{ name: "Interface_Zombi_FS_0019_Layer-6", bone: "bone8", attachment: "Z-por/Interface_Zombi_FS_0019_Layer-6" },
+	{ name: "Interface_Zombi_FS_0018_Layer-8", bone: "bone8", attachment: "Z-por/Interface_Zombi_FS_0018_Layer-8" },
+	{ name: "Interface_Zombi_FS_0017_Layer-7", bone: "bone9", attachment: "Z-por/Interface_Zombi_FS_0017_Layer-7" },
+	{ name: "Interface_Zombi_FS_0015_Layer-15", bone: "bone6", attachment: "Z-por/Interface_Zombi_FS_0015_Layer-15" },
+	{ name: "Interface_Zombi_FS_0016_Layer-5", bone: "bone6", attachment: "Z-por/Interface_Zombi_FS_0016_Layer-5" },
+	{ name: "Interface_Zombi_FS_0011_Layer-1", bone: "Body", attachment: "Z-por/Interface_Zombi_FS_0011_Layer-1" },
+	{ name: "Interface_Zombi_FS_0010_Layer-2", bone: "Head", attachment: "Z-por/Interface_Zombi_FS_0010_Layer-2" },
+	{ name: "Interface_Zombi_FS_0007_Head", bone: "Head", attachment: "Z-por/Interface_Zombi_FS_0007_Head" },
+	{ name: "Interface_Zombi_FS_0003_Layer-21", bone: "bone13", attachment: "Z-por/Interface_Zombi_FS_0003_Layer-21" },
+	{ name: "Interface_Zombi_FS_0002_Layer-23", bone: "bone14", attachment: "Z-por/Interface_Zombi_FS_0002_Layer-23" },
+	{ name: "Interface_Zombi_FS_0000_Layer-19", bone: "bone11", attachment: "Z-por/Interface_Zombi_FS_0000_Layer-19" },
+	{ name: "Interface_Zombi_FS_0005_Layer-22", bone: "bone15", attachment: "Z-por/Interface_Zombi_FS_0005_Layer-22" },
+	{ name: "Interface_Zombi_FS_0004_Layer-24", bone: "bone16", attachment: "Z-por/Interface_Zombi_FS_0004_Layer-24" },
+	{ name: "Interface_Zombi_FS_0001_Layer-20", bone: "bone12", attachment: "Z-por/Interface_Zombi_FS_0001_Layer-20" },
+	{ name: "Interface_Zombi_FS_0006_Layer-25", bone: "bone17", attachment: "Z-por/Interface_Zombi_FS_0006_Layer-25" },
+	{ name: "Interface_Zombi_FS_0030_Layer-13", bone: "bone2", attachment: "Z-por/Interface_Zombi_FS_0030_Layer-13" }
+],
+skins: {
+	default: {
+		"Interface_Zombi_FS_0000_Layer-19": {
+			"Z-por/Interface_Zombi_FS_0000_Layer-19": { x: 30.79, y: -3.48, rotation: -39.63, width: 70, height: 60 }
+		},
+		"Interface_Zombi_FS_0001_Layer-20": {
+			"Z-por/Interface_Zombi_FS_0001_Layer-20": { x: 33.26, y: 4.31, rotation: -152.05, width: 76, height: 48 }
+		},
+		"Interface_Zombi_FS_0002_Layer-23": {
+			"Z-por/Interface_Zombi_FS_0002_Layer-23": { x: -1.73, y: 0.02, rotation: -95.84, width: 24, height: 24 }
+		},
+		"Interface_Zombi_FS_0003_Layer-21": {
+			"Z-por/Interface_Zombi_FS_0003_Layer-21": { x: 4.13, y: -0.36, rotation: -95.84, width: 59, height: 66 }
+		},
+		"Interface_Zombi_FS_0004_Layer-24": {
+			"Z-por/Interface_Zombi_FS_0004_Layer-24": { x: 1.17, y: 0.35, rotation: -95.84, width: 18, height: 18 }
+		},
+		"Interface_Zombi_FS_0005_Layer-22": {
+			"Z-por/Interface_Zombi_FS_0005_Layer-22": { x: 2.24, y: 0.3, rotation: -95.84, width: 62, height: 62 }
+		},
+		"Interface_Zombi_FS_0006_Layer-25": {
+			"Z-por/Interface_Zombi_FS_0006_Layer-25": { x: -0.58, y: 4.24, rotation: -95.84, width: 89, height: 59 }
+		},
+		Interface_Zombi_FS_0007_Head: {
+			"Z-por/Interface_Zombi_FS_0007_Head": { x: 37.76, y: -8.06, rotation: -95.84, width: 223, height: 219 }
+		},
+		"Interface_Zombi_FS_0008_Layer-17": {
+			"Z-por/Interface_Zombi_FS_0008_Layer-17": { x: 8.52, y: 0.41, rotation: -95.84, width: 121, height: 54 }
+		},
+		"Interface_Zombi_FS_0009_Layer-18": {
+			"Z-por/Interface_Zombi_FS_0009_Layer-18": { x: 123.57, y: 6.05, rotation: -95.84, width: 136, height: 55 }
+		},
+		"Interface_Zombi_FS_0010_Layer-2": {
+			"Z-por/Interface_Zombi_FS_0010_Layer-2": { x: 36.86, y: 3.82, rotation: -95.84, width: 61, height: 83 }
+		},
+		"Interface_Zombi_FS_0011_Layer-1": {
+			"Z-por/Interface_Zombi_FS_0011_Layer-1": { x: 112.22, y: 5.3, rotation: -90, width: 262, height: 233 }
+		},
+		"Interface_Zombi_FS_0012_Layer-4": {
+			"Z-por/Interface_Zombi_FS_0012_Layer-4": { x: 29.54, y: 1.57, rotation: 106.78, width: 96, height: 108 }
+		},
+		Interface_Zombi_FS_0013_Body: {
+			"Z-por/Interface_Zombi_FS_0013_Body": { x: 3, y: 8.5, width: 204, height: 119 }
+		},
+		"Interface_Zombi_FS_0014_Layer-3": {
+			"Z-por/Interface_Zombi_FS_0014_Layer-3": { x: 26.84, y: 4.66, rotation: 83.26, width: 100, height: 111 }
+		},
+		"Interface_Zombi_FS_0015_Layer-15": {
+			"Z-por/Interface_Zombi_FS_0015_Layer-15": { x: 25.56, y: -5.98, rotation: 0.45, width: 76, height: 95 }
+		},
+		"Interface_Zombi_FS_0016_Layer-5": {
+			"Z-por/Interface_Zombi_FS_0016_Layer-5": { x: 24.5, y: -8.18, rotation: 0.45, width: 100, height: 95 }
+		},
+		"Interface_Zombi_FS_0017_Layer-7": {
+			"Z-por/Interface_Zombi_FS_0017_Layer-7": { x: 25.93, y: -1.32, rotation: 54.58, width: 55, height: 59 }
+		},
+		"Interface_Zombi_FS_0018_Layer-8": {
+			"Z-por/Interface_Zombi_FS_0018_Layer-8": { x: 0.62, y: 3.49, rotation: 9.36, width: 40, height: 58 }
+		},
+		"Interface_Zombi_FS_0019_Layer-6": {
+			"Z-por/Interface_Zombi_FS_0019_Layer-6": { x: 34.65, y: -2.93, rotation: 9.36, width: 82, height: 99 }
+		},
+		Interface_Zombi_FS_0020_Ruka_L: {
+			"Z-por/Interface_Zombi_FS_0020_Ruka_L": { x: 33.16, y: -7.09, rotation: -0.9, width: 86, height: 83 }
+		},
+		"Interface_Zombi_FS_0021_Layer-14": {
+			"Z-por/Interface_Zombi_FS_0021_Layer-14": { x: 18.76, y: 3.93, rotation: 168.43, width: 77, height: 94 }
+		},
+		"Interface_Zombi_FS_0022_Layer-11": {
+			"Z-por/Interface_Zombi_FS_0022_Layer-11": { x: 14.06, y: -1.78, rotation: -133.65, width: 48, height: 44 }
+		},
+		"Interface_Zombi_FS_0023_Layer-10": {
+			"Z-por/Interface_Zombi_FS_0023_Layer-10": { x: 27.7, y: 11.68, rotation: 179.72, width: 93, height: 101 }
+		},
+		"Interface_Zombi_FS_0024_Layer-9": {
+			"Z-por/Interface_Zombi_FS_0024_Layer-9": { x: 15.47, y: 9.63, rotation: 168.43, width: 109, height: 98 }
+		},
+		Interface_Zombi_FS_0025_Ruka_R: {
+			"Z-por/Interface_Zombi_FS_0025_Ruka_R": { x: 20.16, y: 7.8, rotation: 174.77, width: 86, height: 85 }
+		},
+		Interface_Zombi_FS_0026_Kosty: {
+			"Z-por/Interface_Zombi_FS_0026_Kosty": { x: 49.9, y: 2.65, rotation: 83.26, width: 66, height: 93 }
+		},
+		Interface_Zombi_FS_0027_Noga_L: {
+			"Z-por/Interface_Zombi_FS_0027_Noga_L": { x: 38.08, y: -9.88, rotation: 10.74, width: 120, height: 64 }
+		},
+		"Interface_Zombi_FS_0028_Layer-12": {
+			"Z-por/Interface_Zombi_FS_0028_Layer-12": { x: 68.23, y: 1.42, rotation: 83.26, width: 95, height: 145 }
+		},
+		"Interface_Zombi_FS_0029_Layer-16": {
+			"Z-por/Interface_Zombi_FS_0029_Layer-16": { x: 46.74, y: 3.99, rotation: 106.78, width: 82, height: 81 }
+		},
+		"Interface_Zombi_FS_0030_Layer-13": {
+			"Z-por/Interface_Zombi_FS_0030_Layer-13": { x: 22.89, y: 15.27, rotation: 178.07, width: 118, height: 62 }
+		},
+		Interface_Zombi_FS_0031_Noga_R: {
+			"Z-por/Interface_Zombi_FS_0031_Noga_R": { x: 59.71, y: 11.36, rotation: 106.78, width: 103, height: 133 }
+		},
+		Interface_Zombi_FS_0032_Altary: {
+			"Z-por/Interface_Zombi_FS_0032_Altary": { width: 478, height: 512 }
+		}
+	}
+},
+animations: {
+	Win0: {
+		bones: {
+			Ass: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 0.8333, angle: 0, curve: "stepped" },
+					{ time: 1, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 0.8333, x: 0, y: 0 },
+					{ time: 0.9, x: 0, y: 25.68 },
+					{ time: 1, x: -1.54, y: -65.27 },
+					{ time: 1.0666, x: -1.54, y: -70.75 },
+					{ time: 1.3333, x: -1.54, y: -64.35 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 0.8333, x: 1, y: 1 },
+					{ time: 0.9, x: 1.041, y: 1.041 },
+					{ time: 1, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone2: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.3333, angle: -16.72, curve: "stepped" },
+					{ time: 0.5, angle: -16.72 },
+					{ time: 0.8333, angle: -10.03 },
+					{ time: 0.9, angle: 24.14 },
+					{ time: 1, angle: 5.98, curve: "stepped" },
+					{ time: 1.1666, angle: 5.98, curve: "stepped" },
+					{ time: 1.3333, angle: 5.98 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 0.8333, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 0.8333, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			RL: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.3333, angle: -19, curve: "stepped" },
+					{ time: 0.5, angle: -19 },
+					{ time: 0.8333, angle: -11.4 },
+					{ time: 1, angle: 10.28, curve: "stepped" },
+					{ time: 1.1666, angle: 10.28, curve: "stepped" },
+					{ time: 1.3333, angle: 10.28 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 0.8333, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 0.8333, x: 1, y: 1 },
+					{ time: 1.0666, x: 0.893, y: 1.072 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone4: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.3333, angle: 25.82, curve: "stepped" },
+					{ time: 0.5, angle: 25.82 },
+					{ time: 0.8333, angle: 15.49 },
+					{ time: 0.9, angle: -17.39 },
+					{ time: 1, angle: -3.59, curve: "stepped" },
+					{ time: 1.1666, angle: -3.59, curve: "stepped" },
+					{ time: 1.3333, angle: -3.59 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 0.8333, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 0.8333, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			LL: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.3333, angle: 26.91, curve: "stepped" },
+					{ time: 0.5, angle: 26.91 },
+					{ time: 0.8333, angle: 16.14 },
+					{ time: 1, angle: -2.81, curve: "stepped" },
+					{ time: 1.1666, angle: -2.81, curve: "stepped" },
+					{ time: 1.3333, angle: -2.81 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 0.8333, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 0.8333, x: 1, y: 1 },
+					{ time: 1.0666, x: 0.913, y: 1.106 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone9: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.1, angle: -16.84 },
+					{ time: 0.1666, angle: -35.59 },
+					{ time: 0.3333, angle: -37.9 },
+					{ time: 0.6666, angle: -46.03 },
+					{ time: 0.8333, angle: -34.52 },
+					{ time: 1, angle: -34.23, curve: "stepped" },
+					{ time: 1.1666, angle: -34.23, curve: "stepped" },
+					{ time: 1.3333, angle: -34.23 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 0.8333, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 0.8333, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone8: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.1, angle: -7.14 },
+					{ time: 0.1666, angle: 16.29 },
+					{ time: 0.3333, angle: 29.55 },
+					{ time: 0.6666, angle: 3.44 },
+					{ time: 0.8333, angle: 2.58 },
+					{ time: 1, angle: 21.21, curve: "stepped" },
+					{ time: 1.1666, angle: 21.21, curve: "stepped" },
+					{ time: 1.3333, angle: 21.21 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 0.8333, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 0.8333, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone7: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.1, angle: -12.42 },
+					{ time: 0.1666, angle: 17.6 },
+					{ time: 0.3333, angle: -3.79 },
+					{ time: 0.5, angle: 4.72 },
+					{ time: 0.6666, angle: -29.68 },
+					{ time: 0.8333, angle: -22.26 },
+					{ time: 1, angle: -30.96, curve: "stepped" },
+					{ time: 1.1666, angle: -30.96, curve: "stepped" },
+					{ time: 1.3333, angle: -30.96 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 0.8333, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 0.8333, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone6: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.1, angle: 11.99 },
+					{ time: 0.1666, angle: 18.27 },
+					{ time: 0.3333, angle: -18.5 },
+					{ time: 0.6666, angle: 1.79 },
+					{ time: 0.8333, angle: 1.34 },
+					{ time: 0.9333, angle: -5.03 },
+					{ time: 1, angle: -27.89, curve: "stepped" },
+					{ time: 1.1666, angle: -27.89, curve: "stepped" },
+					{ time: 1.3333, angle: -27.89 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 0.8333, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.1666, x: 1.061, y: 1.061 },
+					{ time: 0.8333, x: 1.026, y: 1.026 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone5: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.1, angle: -21.75 },
+					{ time: 0.1666, angle: -41.1 },
+					{ time: 0.6666, angle: -36.72 },
+					{ time: 0.8333, angle: -27.54 },
+					{ time: 1, angle: -18.36, curve: "stepped" },
+					{ time: 1.3333, angle: -18.36 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 0.8333, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 0.8333, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone3: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.1, angle: 16.37 },
+					{ time: 0.1666, angle: 24.65 },
+					{ time: 0.6666, angle: -2.49 },
+					{ time: 0.8333, angle: -1.87 },
+					{ time: 1, angle: -3.95, curve: "stepped" },
+					{ time: 1.1666, angle: -3.95, curve: "stepped" },
+					{ time: 1.3333, angle: -3.95 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 0.8333, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 0.8333, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.1, angle: 13.7 },
+					{ time: 0.1666, angle: -6.96 },
+					{ time: 0.3333, angle: 6.14 },
+					{ time: 0.5, angle: -11.15 },
+					{ time: 0.6666, angle: 13.7 },
+					{ time: 0.8333, angle: 10.27 },
+					{ time: 1, angle: 28.18, curve: "stepped" },
+					{ time: 1.1666, angle: 28.18, curve: "stepped" },
+					{ time: 1.3333, angle: 28.18 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 0.8333, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 0.8333, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			RH: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.1, angle: -15.51 },
+					{ time: 0.1666, angle: -24.97 },
+					{ time: 0.3333, angle: 6.52 },
+					{ time: 0.5, angle: 5.43 },
+					{ time: 0.6666, angle: 28.55 },
+					{ time: 0.8333, angle: 21.41 },
+					{ time: 0.9333, angle: 14.13 },
+					{ time: 1, angle: 31.78, curve: "stepped" },
+					{ time: 1.1666, angle: 31.78, curve: "stepped" },
+					{ time: 1.3333, angle: 31.78 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 0.8333, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.1666, x: 1.082, y: 1.082 },
+					{ time: 0.8333, x: 1.035, y: 1.035 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone17: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 0.8333, angle: 0, curve: "stepped" },
+					{ time: 1, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 0.8333, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.1, x: 0.71, y: 1 },
+					{ time: 0.1666, x: 0.986, y: 1.358 },
+					{ time: 0.8333, x: 0.994, y: 1.153 },
+					{ time: 1, x: 1.087, y: 0.917, curve: "stepped" },
+					{ time: 1.1666, x: 1.087, y: 0.917, curve: "stepped" },
+					{ time: 1.3333, x: 1.087, y: 0.917 }
+				]
+			},
+			bone16: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 0.8333, angle: 0, curve: "stepped" },
+					{ time: 1, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0 },
+					{ time: 0.1, x: -16.38, y: -6.16 },
+					{ time: 0.1666, x: -11.63, y: 7.9 },
+					{ time: 0.3333, x: -9.53, y: -1.68, curve: "stepped" },
+					{ time: 0.5, x: -9.53, y: -1.68 },
+					{ time: 0.6666, x: -12.98, y: 16.47, curve: "stepped" },
+					{ time: 0.8333, x: -12.98, y: 16.47 },
+					{ time: 1, x: -11.62, y: 13.8, curve: "stepped" },
+					{ time: 1.1666, x: -11.62, y: 13.8, curve: "stepped" },
+					{ time: 1.3333, x: -11.62, y: 13.8 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.1, x: 1.254, y: 1.254 },
+					{ time: 0.1666, x: 1.893, y: 1.893 },
+					{ time: 0.6666, x: 1.8, y: 1.8, curve: "stepped" },
+					{ time: 0.8333, x: 1.8, y: 1.8 },
+					{ time: 1.1666, x: 1.266, y: 1.463 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone15: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 0.8333, angle: 0, curve: "stepped" },
+					{ time: 1, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 0.8333, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 0.8333, x: 1, y: 1 },
+					{ time: 1.0666, x: 0.594, y: 0.911 },
+					{ time: 1.1666, x: 1.234, y: 1.009 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone14: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 0.8333, angle: 0, curve: "stepped" },
+					{ time: 1, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0 },
+					{ time: 0.1, x: -16.85, y: 6.74 },
+					{ time: 0.1666, x: -9.07, y: -2.42 },
+					{ time: 0.3333, x: -6.89, y: -8.24, curve: "stepped" },
+					{ time: 0.5, x: -6.89, y: -8.24 },
+					{ time: 0.6666, x: -11.82, y: 10.67, curve: "stepped" },
+					{ time: 0.8333, x: -11.82, y: 10.67 },
+					{ time: 1, x: -11.18, y: -6, curve: "stepped" },
+					{ time: 1.1666, x: -11.18, y: -6, curve: "stepped" },
+					{ time: 1.3333, x: -11.18, y: -6 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.1, x: 0.629, y: 0.629 },
+					{ time: 0.1666, x: 1.551, y: 1.551 },
+					{ time: 0.6666, x: 1.412, y: 1.412, curve: "stepped" },
+					{ time: 0.8333, x: 1.412, y: 1.412 },
+					{ time: 1.1666, x: 1.137, y: 1.291 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone13: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 0.8333, angle: 0, curve: "stepped" },
+					{ time: 1, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 0.8333, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 0.8333, x: 1, y: 1 },
+					{ time: 1.0666, x: 0.594, y: 0.911 },
+					{ time: 1.1666, x: 1.234, y: 1.009 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone12: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.1, angle: 6.81 },
+					{ time: 0.1666, angle: -13.01 },
+					{ time: 0.3333, angle: -16.19, curve: "stepped" },
+					{ time: 0.5, angle: -16.19 },
+					{ time: 0.8333, angle: -9.71 },
+					{ time: 1, angle: -12.16 },
+					{ time: 1.0666, angle: 19.75 },
+					{ time: 1.1666, angle: -12.16, curve: "stepped" },
+					{ time: 1.3333, angle: -12.16 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 0.8333, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 0.8333, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone11: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.1, angle: -9.63 },
+					{ time: 0.1666, angle: 7.87 },
+					{ time: 0.3333, angle: -0.59, curve: "stepped" },
+					{ time: 0.5, angle: -0.59 },
+					{ time: 0.8333, angle: -0.35 },
+					{ time: 1, angle: 8.08 },
+					{ time: 1.0666, angle: -21.06 },
+					{ time: 1.1666, angle: 8.08, curve: "stepped" },
+					{ time: 1.3333, angle: 8.08 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 0.8333, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 0.8333, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone10: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 0.8333, angle: 0, curve: "stepped" },
+					{ time: 1, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0 },
+					{ time: 0.1, x: -6.12, y: 0 },
+					{ time: 0.1666, x: -5.03, y: 0 },
+					{ time: 0.8333, x: -2.15, y: 0 },
+					{ time: 1, x: -1.43, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: -1.43, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.1, x: 1, y: 1.116 },
+					{ time: 0.1666, x: 1.485, y: 1.204 },
+					{ time: 0.8333, x: 1.207, y: 1.087 },
+					{ time: 1, x: 1.138, y: 1.058 },
+					{ time: 1.0666, x: 1.331, y: 1.046 },
+					{ time: 1.1666, x: 1.069, y: 1.029 },
+					{ time: 1.2333, x: 1.125, y: 1.146 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			Head: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.1, angle: -5.79 },
+					{ time: 0.3333, angle: -13.42 },
+					{ time: 0.5, angle: -16.02 },
+					{ time: 0.6666, angle: 2.94 },
+					{ time: 0.8333, angle: 4.61 },
+					{ time: 1, angle: -8.52, curve: "stepped" },
+					{ time: 1.1666, angle: -8.52, curve: "stepped" },
+					{ time: 1.3333, angle: -8.52 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0 },
+					{ time: 0.1, x: -10.81, y: -1.7 },
+					{ time: 0.8333, x: -4.38, y: -0.69 },
+					{ time: 1, x: -2.92, y: -0.46, curve: "stepped" },
+					{ time: 1.3333, x: -2.92, y: -0.46 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.1, x: 1.021, y: 1.021 },
+					{ time: 0.1666, x: 1.159, y: 1.159 },
+					{ time: 0.8333, x: 1.068, y: 1.068 },
+					{ time: 1, x: 1.107, y: 1.107, curve: "stepped" },
+					{ time: 1.1666, x: 1.107, y: 1.107, curve: "stepped" },
+					{ time: 1.3333, x: 1.107, y: 1.107 }
+				]
+			},
+			Body: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 0.1666, angle: 0 },
+					{ time: 0.3333, angle: -4.05 },
+					{ time: 0.5, angle: -5.14 },
+					{ time: 0.6666, angle: 6.39 },
+					{ time: 0.8333, angle: 1.86 },
+					{ time: 1, angle: 1.24, curve: "stepped" },
+					{ time: 1.3333, angle: 1.24 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 0.8333, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.1, x: 1.017, y: 1.022 },
+					{ time: 0.1666, x: 1.058, y: 1.063 },
+					{ time: 0.8333, x: 1.025, y: 1.027 },
+					{ time: 1.0666, x: 0.946, y: 1.014 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			}
+		}
+	},
+	Win1: {
+		bones: {
+			Ass: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: -1.54, y: -64.35, curve: "stepped" },
+					{ time: 1, x: -1.54, y: -64.35 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.5, x: 1, y: 1.018 },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone2: {
+				rotate: [
+					{ time: 0, angle: 5.98, curve: "stepped" },
+					{ time: 1, angle: 5.98 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			RL: {
+				rotate: [
+					{ time: 0, angle: 10.28, curve: "stepped" },
+					{ time: 1, angle: 10.28 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone4: {
+				rotate: [
+					{ time: 0, angle: -3.59, curve: "stepped" },
+					{ time: 1, angle: -3.59 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			LL: {
+				rotate: [
+					{ time: 0, angle: -2.81, curve: "stepped" },
+					{ time: 1, angle: -2.81 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone9: {
+				rotate: [
+					{ time: 0, angle: -34.23 },
+					{ time: 0.6, angle: -15.73 },
+					{ time: 1, angle: -34.23 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone8: {
+				rotate: [
+					{ time: 0, angle: 21.21 },
+					{ time: 0.6, angle: 8.04 },
+					{ time: 1, angle: 21.21 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone7: {
+				rotate: [
+					{ time: 0, angle: -30.96 },
+					{ time: 0.6, angle: -38.52 },
+					{ time: 1, angle: -30.96 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone6: {
+				rotate: [
+					{ time: 0, angle: -27.89 },
+					{ time: 0.6, angle: -15.55 },
+					{ time: 1, angle: -27.89 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone5: {
+				rotate: [
+					{ time: 0, angle: -18.36 },
+					{ time: 0.6, angle: -7.86 },
+					{ time: 1, angle: -18.36 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone3: {
+				rotate: [
+					{ time: 0, angle: -3.95 },
+					{ time: 0.6, angle: 4.38 },
+					{ time: 1, angle: -3.95 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone: {
+				rotate: [
+					{ time: 0, angle: 28.18 },
+					{ time: 0.6, angle: 46.23 },
+					{ time: 1, angle: 28.18 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			RH: {
+				rotate: [
+					{ time: 0, angle: 31.78 },
+					{ time: 0.6, angle: 8.75 },
+					{ time: 1, angle: 31.78 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone17: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1.087, y: 0.917 },
+					{ time: 0.2666, x: 1.122, y: 1.007 },
+					{ time: 0.4666, x: 1.111, y: 1.025 },
+					{ time: 0.6666, x: 0.893, y: 1.001 },
+					{ time: 0.8333, x: 1.004, y: 0.881 },
+					{ time: 1, x: 1.087, y: 0.917 }
+				]
+			},
+			bone16: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: -11.62, y: 13.8, curve: "stepped" },
+					{ time: 1, x: -11.62, y: 13.8 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.2666, x: 1.561, y: 1.561 },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone15: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone14: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: -11.18, y: -6, curve: "stepped" },
+					{ time: 1, x: -11.18, y: -6 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.7333, x: 1.553, y: 1.553 },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone13: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone12: {
+				rotate: [
+					{ time: 0, angle: -12.16 },
+					{ time: 0.7333, angle: 0.84 },
+					{ time: 1, angle: -12.16 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone11: {
+				rotate: [
+					{ time: 0, angle: 8.08 },
+					{ time: 0.2666, angle: 0.57 },
+					{ time: 1, angle: 8.08 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone10: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: -1.43, y: 0, curve: "stepped" },
+					{ time: 1, x: -1.43, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.4, x: 1.076, y: 1.076 },
+					{ time: 0.6666, x: 1.243, y: 1.042 },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			Head: {
+				rotate: [
+					{ time: 0, angle: -8.52 },
+					{ time: 0.5, angle: -11.02 },
+					{ time: 1, angle: -8.52 }
+				],
+				translate: [
+					{ time: 0, x: -2.92, y: -0.46 },
+					{ time: 0.3333, x: -10.17, y: 0.09 },
+					{ time: 0.6666, x: -1.06, y: -0.6 },
+					{ time: 1, x: -2.92, y: -0.46 }
+				],
+				scale: [
+					{ time: 0, x: 1.107, y: 1.107 },
+					{ time: 0.5, x: 1.177, y: 1.177 },
+					{ time: 1, x: 1.107, y: 1.107 }
+				]
+			},
+			Body: {
+				rotate: [
+					{ time: 0, angle: 1.24 },
+					{ time: 0.5666, angle: 0.38 },
+					{ time: 1, angle: 1.24 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.4333, x: 1.046, y: 1.047 },
+					{ time: 1, x: 1, y: 1 }
+				]
+			}
+		}
+	},
+	Win2: {
+		bones: {
+			Ass: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: -1.54, y: -64.35 },
+					{ time: 0.5, x: -1.54, y: -70.34 },
+					{ time: 1, x: -1.54, y: -64.35 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone2: {
+				rotate: [
+					{ time: 0, angle: 5.98 },
+					{ time: 0.5, angle: -7.18 },
+					{ time: 1, angle: 5.98 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			RL: {
+				rotate: [
+					{ time: 0, angle: 10.28 },
+					{ time: 0.5, angle: 5.24 },
+					{ time: 1, angle: 10.28 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone4: {
+				rotate: [
+					{ time: 0, angle: -3.59 },
+					{ time: 0.5, angle: 8.96 },
+					{ time: 1, angle: -3.59 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			LL: {
+				rotate: [
+					{ time: 0, angle: -2.81 },
+					{ time: 0.5, angle: 0.07 },
+					{ time: 1, angle: -2.81 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone9: {
+				rotate: [
+					{ time: 0, angle: -34.23 },
+					{ time: 0.2666, angle: -64.23 },
+					{ time: 0.7333, angle: -68.43 },
+					{ time: 1, angle: -34.23 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone8: {
+				rotate: [
+					{ time: 0, angle: 21.21 },
+					{ time: 0.2666, angle: 29.04 },
+					{ time: 0.7333, angle: 48.28 },
+					{ time: 1, angle: 21.21 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone7: {
+				rotate: [
+					{ time: 0, angle: -30.96 },
+					{ time: 0.2666, angle: -43.89 },
+					{ time: 0.7333, angle: -44.37 },
+					{ time: 1, angle: -30.96 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone6: {
+				rotate: [
+					{ time: 0, angle: -27.89 },
+					{ time: 0.2666, angle: 27.03 },
+					{ time: 0.7333, angle: 20.95 },
+					{ time: 1, angle: -27.89 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone5: {
+				rotate: [
+					{ time: 0, angle: -18.36 },
+					{ time: 0.2666, angle: -44.81 },
+					{ time: 0.7333, angle: -36.21 },
+					{ time: 1, angle: -18.36 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone3: {
+				rotate: [
+					{ time: 0, angle: -3.95 },
+					{ time: 0.2666, angle: 25.1 },
+					{ time: 0.7333, angle: 28.2 },
+					{ time: 1, angle: -3.95 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone: {
+				rotate: [
+					{ time: 0, angle: 28.18 },
+					{ time: 0.2666, angle: 40.74 },
+					{ time: 0.7333, angle: 51.36 },
+					{ time: 1, angle: 28.18 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			RH: {
+				rotate: [
+					{ time: 0, angle: 31.78 },
+					{ time: 0.2666, angle: -22.56 },
+					{ time: 0.7333, angle: -11.23 },
+					{ time: 1, angle: 31.78 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone17: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1.087, y: 0.917, curve: "stepped" },
+					{ time: 1, x: 1.087, y: 0.917 }
+				]
+			},
+			bone16: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: -11.62, y: 13.8 },
+					{ time: 0.5, x: 5.01, y: 13.8 },
+					{ time: 1, x: -11.62, y: 13.8 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone15: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone14: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: -11.18, y: -6 },
+					{ time: 0.5, x: 2.72, y: -6 },
+					{ time: 1, x: -11.18, y: -6 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone13: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone12: {
+				rotate: [
+					{ time: 0, angle: -12.16 },
+					{ time: 0.5, angle: -28.99 },
+					{ time: 1, angle: -12.16 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone11: {
+				rotate: [
+					{ time: 0, angle: 8.08 },
+					{ time: 0.5, angle: 24.14 },
+					{ time: 1, angle: 8.08 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone10: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: -1.43, y: 0, curve: "stepped" },
+					{ time: 1, x: -1.43, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			Head: {
+				rotate: [
+					{ time: 0, angle: -8.52 },
+					{ time: 0.2666, angle: 2.41 },
+					{ time: 0.4, angle: 7.38 },
+					{ time: 0.8333, angle: -13.33 },
+					{ time: 1, angle: -8.52 }
+				],
+				translate: [
+					{ time: 0, x: -2.92, y: -0.46 },
+					{ time: 0.2666, x: -10.76, y: -1.59 },
+					{ time: 0.6666, x: 4.91, y: -0.88 },
+					{ time: 1, x: -2.92, y: -0.46 }
+				],
+				scale: [
+					{ time: 0, x: 1.107, y: 1.107, curve: "stepped" },
+					{ time: 1, x: 1.107, y: 1.107 }
+				]
+			},
+			Body: {
+				rotate: [
+					{ time: 0, angle: 1.24 },
+					{ time: 0.2666, angle: 6.62 },
+					{ time: 0.7333, angle: -5.16 },
+					{ time: 1, angle: 1.24 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.3333, x: 1.074, y: 1 },
+					{ time: 0.7333, x: 1.06, y: 1.008 },
+					{ time: 1, x: 1, y: 1 }
+				]
+			}
+		}
+	},
+	Win3: {
+		bones: {
+			Ass: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: -1.54, y: -64.35, curve: "stepped" },
+					{ time: 1, x: -1.54, y: -64.35 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone2: {
+				rotate: [
+					{ time: 0, angle: 5.98 },
+					{ time: 0.5666, angle: 12.82 },
+					{ time: 1, angle: 5.98 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			RL: {
+				rotate: [
+					{ time: 0, angle: 10.28 },
+					{ time: 0.3666, angle: 11.64 },
+					{ time: 1, angle: 10.28 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone4: {
+				rotate: [
+					{ time: 0, angle: -3.59 },
+					{ time: 0.5666, angle: -7.25 },
+					{ time: 1, angle: -3.59 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			LL: {
+				rotate: [
+					{ time: 0, angle: -2.81 },
+					{ time: 0.6666, angle: -4.05 },
+					{ time: 1, angle: -2.81 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone9: {
+				rotate: [
+					{ time: 0, angle: -34.23 },
+					{ time: 0.2333, angle: -48.54 },
+					{ time: 0.4333, angle: -31.79 },
+					{ time: 0.7666, angle: 13.42 },
+					{ time: 1, angle: -34.23 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone8: {
+				rotate: [
+					{ time: 0, angle: 21.21 },
+					{ time: 0.2333, angle: 1.57 },
+					{ time: 0.4333, angle: 20.6, curve: "stepped" },
+					{ time: 0.7666, angle: 20.6 },
+					{ time: 1, angle: 21.21 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone7: {
+				rotate: [
+					{ time: 0, angle: -30.96 },
+					{ time: 0.2333, angle: -36.95 },
+					{ time: 0.4333, angle: -40.82 },
+					{ time: 0.7666, angle: -29.49 },
+					{ time: 1, angle: -30.96 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone6: {
+				rotate: [
+					{ time: 0, angle: -27.89 },
+					{ time: 0.2333, angle: 3.29 },
+					{ time: 0.4333, angle: -36.85 },
+					{ time: 0.7666, angle: -59.13 },
+					{ time: 1, angle: -27.89 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone5: {
+				rotate: [
+					{ time: 0, angle: -18.36 },
+					{ time: 0.2333, angle: -31.34 },
+					{ time: 0.4333, angle: -36.54 },
+					{ time: 0.7666, angle: -11.84 },
+					{ time: 1, angle: -18.36 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone3: {
+				rotate: [
+					{ time: 0, angle: -3.95 },
+					{ time: 0.2333, angle: 8.27 },
+					{ time: 0.4333, angle: 10.85 },
+					{ time: 0.7666, angle: 20.17 },
+					{ time: 1, angle: -3.95 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone: {
+				rotate: [
+					{ time: 0, angle: 28.18 },
+					{ time: 0.2333, angle: 55.23 },
+					{ time: 0.4333, angle: 35.25 },
+					{ time: 0.7666, angle: 19.6 },
+					{ time: 1, angle: 28.18 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			RH: {
+				rotate: [
+					{ time: 0, angle: 31.78 },
+					{ time: 0.2333, angle: 0.08 },
+					{ time: 0.4333, angle: 43.65 },
+					{ time: 0.7666, angle: 59.54 },
+					{ time: 1, angle: 31.78 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone17: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1.087, y: 0.917, curve: "stepped" },
+					{ time: 1, x: 1.087, y: 0.917 }
+				]
+			},
+			bone16: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: -11.62, y: 13.8 },
+					{ time: 0.2333, x: -6.01, y: 13.8 },
+					{ time: 0.5666, x: -15.18, y: 12.74, curve: "stepped" },
+					{ time: 0.7666, x: -15.18, y: 12.74 },
+					{ time: 1, x: -11.62, y: 13.8 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 0.5666, x: 1, y: 1 },
+					{ time: 0.7, x: 1.176, y: 1.176 },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone15: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone14: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: -11.18, y: -6 },
+					{ time: 0.2333, x: -5.56, y: -6 },
+					{ time: 0.4333, x: -20.82, y: -11.68 },
+					{ time: 0.5666, x: -16.36, y: -6.59, curve: "stepped" },
+					{ time: 0.7666, x: -16.36, y: -6.59 },
+					{ time: 1, x: -11.18, y: -6 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 0.5666, x: 1, y: 1 },
+					{ time: 0.7, x: 1.176, y: 1.176 },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone13: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone12: {
+				rotate: [
+					{ time: 0, angle: -12.16 },
+					{ time: 0.2333, angle: -20.45 },
+					{ time: 0.4333, angle: 5.74, curve: "stepped" },
+					{ time: 0.7666, angle: 5.74 },
+					{ time: 1, angle: -12.16 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone11: {
+				rotate: [
+					{ time: 0, angle: 8.08 },
+					{ time: 0.2333, angle: 12.28 },
+					{ time: 0.4333, angle: -8.89, curve: "stepped" },
+					{ time: 0.7666, angle: -8.89 },
+					{ time: 1, angle: 8.08 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			bone10: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: -1.43, y: 0, curve: "stepped" },
+					{ time: 1, x: -1.43, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1, x: 1, y: 1 }
+				]
+			},
+			Head: {
+				rotate: [
+					{ time: 0, angle: -8.52 },
+					{ time: 0.4333, angle: -15.59, curve: "stepped" },
+					{ time: 0.7666, angle: -15.59 },
+					{ time: 1, angle: -8.52 }
+				],
+				translate: [
+					{ time: 0, x: -2.92, y: -0.46 },
+					{ time: 0.2333, x: 3.79, y: 2.18 },
+					{ time: 0.4333, x: -34.45, y: 4.25, curve: "stepped" },
+					{ time: 0.7666, x: -34.45, y: 4.25 },
+					{ time: 1, x: -2.92, y: -0.46 }
+				],
+				scale: [
+					{ time: 0, x: 1.107, y: 1.107, curve: "stepped" },
+					{ time: 1, x: 1.107, y: 1.107 }
+				]
+			},
+			Body: {
+				rotate: [
+					{ time: 0, angle: 1.24 },
+					{ time: 0.2333, angle: -2.17 },
+					{ time: 0.7666, angle: 4.26 },
+					{ time: 1, angle: 1.24 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.2333, x: 1.046, y: 1 },
+					{ time: 0.4333, x: 0.94, y: 1 },
+					{ time: 0.6, x: 0.913, y: 0.976 },
+					{ time: 0.7666, x: 0.94, y: 1 },
+					{ time: 1, x: 1, y: 1 }
+				]
+			}
+		}
+	},
+	idle0: {
+		slots: {
+			"Interface_Zombi_FS_0000_Layer-19": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0001_Layer-20": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0002_Layer-23": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0003_Layer-21": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0004_Layer-24": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0005_Layer-22": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0006_Layer-25": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			Interface_Zombi_FS_0007_Head: {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0008_Layer-17": {
+				color: [
+					{ time: 0, color: "ffffff00", curve: "stepped" },
+					{ time: 1.3333, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0009_Layer-18": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0016_Layer-5": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0017_Layer-7": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0018_Layer-8": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0019_Layer-6": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			Interface_Zombi_FS_0020_Ruka_L: {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0022_Layer-11": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0023_Layer-10": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0024_Layer-9": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			Interface_Zombi_FS_0025_Ruka_R: {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			Interface_Zombi_FS_0027_Noga_L: {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0028_Layer-12": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0030_Layer-13": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			Interface_Zombi_FS_0031_Noga_R: {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			}
+		},
+		bones: {
+			Ass: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.3333, angle: 0.81 },
+					{ time: 0.8333, angle: -1.32 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone2: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4333, angle: 7.61 },
+					{ time: 0.9, angle: -6.84 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			RL: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.6666, angle: -10.01 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.4, x: 0.98, y: 1 },
+					{ time: 0.8333, x: 1.026, y: 1 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone4: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.6666, angle: -11.08 },
+					{ time: 1, angle: 2.14 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			LL: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4, angle: -5.49 },
+					{ time: 0.9333, angle: 9.84 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.4333, x: 1.052, y: 1 },
+					{ time: 1, x: 0.969, y: 1 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone6: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4, angle: -7.99 },
+					{ time: 0.9333, angle: 9.88 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			RH: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.5, angle: -5.68 },
+					{ time: 1, angle: 2.91 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone17: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.3333, x: 0.811, y: 1.026 },
+					{ time: 0.5666, x: 1.08, y: 0.967 },
+					{ time: 0.9, x: 0.808, y: 0.929 },
+					{ time: 1.0333, x: 0.813, y: 1.016 },
+					{ time: 1.1666, x: 1.072, y: 1.009 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone16: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0 },
+					{ time: 0.6666, x: -6.72, y: 1.03 },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.3333, x: 1.375, y: 1.375 },
+					{ time: 0.8333, x: 0.712, y: 0.712 },
+					{ time: 1.0666, x: 1.32, y: 1.32 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone15: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone14: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0 },
+					{ time: 0.4333, x: -10.35, y: 0 },
+					{ time: 0.8666, x: -2.41, y: -7.86 },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.0666, x: 0.768, y: 0.768 },
+					{ time: 0.1666, x: 1, y: 1 },
+					{ time: 0.2333, x: 0.768, y: 0.768 },
+					{ time: 0.3333, x: 0.866, y: 0.866 },
+					{ time: 0.4, x: 0.768, y: 0.768 },
+					{ time: 0.5, x: 1, y: 1 },
+					{ time: 0.5666, x: 0.768, y: 0.768 },
+					{ time: 0.6666, x: 1.178, y: 1.178 },
+					{ time: 0.7333, x: 0.768, y: 0.768 },
+					{ time: 0.8333, x: 1, y: 1 },
+					{ time: 0.9, x: 0.768, y: 0.768 },
+					{ time: 1, x: 0.906, y: 0.906 },
+					{ time: 1.0666, x: 0.768, y: 0.768 },
+					{ time: 1.1666, x: 1, y: 1 },
+					{ time: 1.2333, x: 0.768, y: 0.768 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone13: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone12: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4, angle: 5.36 },
+					{ time: 0.9333, angle: -11.97 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone11: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.2666, angle: -8.28 },
+					{ time: 0.7333, angle: 9.77 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone10: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.1666, x: 0.839, y: 1.101 },
+					{ time: 0.3333, x: 1.142, y: 1 },
+					{ time: 0.5, x: 0.899, y: 1.061 },
+					{ time: 0.6666, x: 1.276, y: 1.049 },
+					{ time: 0.8333, x: 1.005, y: 1.036 },
+					{ time: 1, x: 1.211, y: 0.954 },
+					{ time: 1.1666, x: 0.947, y: 1.118 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			Head: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.5, angle: -8.7 },
+					{ time: 0.9, angle: 1 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			Body: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.5, angle: 3.77 },
+					{ time: 0.9666, angle: -1.88 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4, angle: 6.17 },
+					{ time: 0.7, angle: -9.22 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone9: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.5, angle: -25.21 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone8: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.6666, angle: 19.27 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone7: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.3333, angle: -7.31 },
+					{ time: 0.9333, angle: 9.74 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone5: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.5, angle: -19.11 },
+					{ time: 1, angle: 7.13 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone3: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4, angle: 9.06 },
+					{ time: 0.6666, angle: 14.13 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			}
+		}
+	},
+	idle1: {
+		slots: {
+			"Interface_Zombi_FS_0000_Layer-19": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0001_Layer-20": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0002_Layer-23": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0003_Layer-21": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0004_Layer-24": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0005_Layer-22": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0006_Layer-25": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			Interface_Zombi_FS_0007_Head: {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0008_Layer-17": {
+				color: [
+					{ time: 0, color: "ffffff00", curve: "stepped" },
+					{ time: 1.3333, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0009_Layer-18": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0016_Layer-5": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0017_Layer-7": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0018_Layer-8": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0019_Layer-6": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			Interface_Zombi_FS_0020_Ruka_L: {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0022_Layer-11": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0023_Layer-10": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0024_Layer-9": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			Interface_Zombi_FS_0025_Ruka_R: {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0030_Layer-13": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			Interface_Zombi_FS_0031_Noga_R: {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			}
+		},
+		bones: {
+			Ass: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.3333, angle: 0.81 },
+					{ time: 0.8333, angle: -1.32 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone2: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4333, angle: 7.61 },
+					{ time: 0.9, angle: -6.84 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			RL: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.6666, angle: -10.01 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.4, x: 0.98, y: 1 },
+					{ time: 0.8333, x: 1.026, y: 1 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone4: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.6666, angle: -11.08 },
+					{ time: 1, angle: 2.14 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			LL: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4, angle: -5.49 },
+					{ time: 0.9333, angle: 9.84 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.4333, x: 1.052, y: 1 },
+					{ time: 1, x: 0.969, y: 1 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone6: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4, angle: -7.99 },
+					{ time: 0.9333, angle: 9.88 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			RH: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.5, angle: -5.68 },
+					{ time: 1, angle: 2.91 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone17: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.3333, x: 0.811, y: 1.026 },
+					{ time: 0.5666, x: 1.08, y: 0.967 },
+					{ time: 0.9, x: 0.808, y: 0.929 },
+					{ time: 1.0333, x: 0.813, y: 1.016 },
+					{ time: 1.1666, x: 1.072, y: 1.009 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone16: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0 },
+					{ time: 0.6666, x: -6.72, y: 1.03 },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.3333, x: 1.375, y: 1.375 },
+					{ time: 0.8333, x: 0.712, y: 0.712 },
+					{ time: 1.0666, x: 1.32, y: 1.32 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone15: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone14: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0 },
+					{ time: 0.4333, x: -10.35, y: 0 },
+					{ time: 0.8666, x: -2.41, y: -7.86 },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.0666, x: 0.768, y: 0.768 },
+					{ time: 0.1666, x: 1, y: 1 },
+					{ time: 0.2333, x: 0.768, y: 0.768 },
+					{ time: 0.3333, x: 0.866, y: 0.866 },
+					{ time: 0.4, x: 0.768, y: 0.768 },
+					{ time: 0.5, x: 1, y: 1 },
+					{ time: 0.5666, x: 0.768, y: 0.768 },
+					{ time: 0.6666, x: 1.178, y: 1.178 },
+					{ time: 0.7333, x: 0.768, y: 0.768 },
+					{ time: 0.8333, x: 1, y: 1 },
+					{ time: 0.9, x: 0.768, y: 0.768 },
+					{ time: 1, x: 0.906, y: 0.906 },
+					{ time: 1.0666, x: 0.768, y: 0.768 },
+					{ time: 1.1666, x: 1, y: 1 },
+					{ time: 1.2333, x: 0.768, y: 0.768 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone13: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone12: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4, angle: 5.36 },
+					{ time: 0.9333, angle: -11.97 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone11: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.2666, angle: -8.28 },
+					{ time: 0.7333, angle: 9.77 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone10: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.1666, x: 0.839, y: 1.101 },
+					{ time: 0.3333, x: 1.142, y: 1 },
+					{ time: 0.5, x: 0.899, y: 1.061 },
+					{ time: 0.6666, x: 1.276, y: 1.049 },
+					{ time: 0.8333, x: 1.005, y: 1.036 },
+					{ time: 1, x: 1.211, y: 0.954 },
+					{ time: 1.1666, x: 0.947, y: 1.118 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			Head: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.5, angle: -8.7 },
+					{ time: 0.9, angle: 1 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			Body: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.5, angle: 3.77 },
+					{ time: 0.9666, angle: -1.88 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4, angle: 6.17 },
+					{ time: 0.7, angle: -9.22 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone9: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.5, angle: -25.21 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone8: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.6666, angle: 19.27 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone7: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.3333, angle: -7.31 },
+					{ time: 0.9333, angle: 9.74 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone5: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.5, angle: -19.11 },
+					{ time: 1, angle: 7.13 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone3: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4, angle: 9.06 },
+					{ time: 0.6666, angle: 14.13 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			}
+		}
+	},
+	idle2: {
+		slots: {
+			"Interface_Zombi_FS_0000_Layer-19": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0001_Layer-20": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0002_Layer-23": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0003_Layer-21": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0004_Layer-24": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0005_Layer-22": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0006_Layer-25": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			Interface_Zombi_FS_0007_Head: {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0008_Layer-17": {
+				color: [
+					{ time: 0, color: "ffffff00", curve: "stepped" },
+					{ time: 1.3333, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0009_Layer-18": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0016_Layer-5": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0017_Layer-7": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0018_Layer-8": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0019_Layer-6": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			Interface_Zombi_FS_0020_Ruka_L: {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0030_Layer-13": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			Interface_Zombi_FS_0031_Noga_R: {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			}
+		},
+		bones: {
+			Ass: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.3333, angle: 0.81 },
+					{ time: 0.8333, angle: -1.32 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone2: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4333, angle: 7.61 },
+					{ time: 0.9, angle: -6.84 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			RL: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.6666, angle: -10.01 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.4, x: 0.98, y: 1 },
+					{ time: 0.8333, x: 1.026, y: 1 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone4: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.6666, angle: -11.08 },
+					{ time: 1, angle: 2.14 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			LL: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4, angle: -5.49 },
+					{ time: 0.9333, angle: 9.84 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.4333, x: 1.052, y: 1 },
+					{ time: 1, x: 0.969, y: 1 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone6: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4, angle: -7.99 },
+					{ time: 0.9333, angle: 9.88 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			RH: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.5, angle: -5.68 },
+					{ time: 1, angle: 2.91 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone17: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.3333, x: 0.811, y: 1.026 },
+					{ time: 0.5666, x: 1.08, y: 0.967 },
+					{ time: 0.9, x: 0.808, y: 0.929 },
+					{ time: 1.0333, x: 0.813, y: 1.016 },
+					{ time: 1.1666, x: 1.072, y: 1.009 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone16: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0 },
+					{ time: 0.6666, x: -6.72, y: 1.03 },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.3333, x: 1.375, y: 1.375 },
+					{ time: 0.8333, x: 0.712, y: 0.712 },
+					{ time: 1.0666, x: 1.32, y: 1.32 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone15: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone14: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0 },
+					{ time: 0.4333, x: -10.35, y: 0 },
+					{ time: 0.8666, x: -2.41, y: -7.86 },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.0666, x: 0.768, y: 0.768 },
+					{ time: 0.1666, x: 1, y: 1 },
+					{ time: 0.2333, x: 0.768, y: 0.768 },
+					{ time: 0.3333, x: 0.866, y: 0.866 },
+					{ time: 0.4, x: 0.768, y: 0.768 },
+					{ time: 0.5, x: 1, y: 1 },
+					{ time: 0.5666, x: 0.768, y: 0.768 },
+					{ time: 0.6666, x: 1.178, y: 1.178 },
+					{ time: 0.7333, x: 0.768, y: 0.768 },
+					{ time: 0.8333, x: 1, y: 1 },
+					{ time: 0.9, x: 0.768, y: 0.768 },
+					{ time: 1, x: 0.906, y: 0.906 },
+					{ time: 1.0666, x: 0.768, y: 0.768 },
+					{ time: 1.1666, x: 1, y: 1 },
+					{ time: 1.2333, x: 0.768, y: 0.768 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone13: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone12: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4, angle: 5.36 },
+					{ time: 0.9333, angle: -11.97 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone11: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.2666, angle: -8.28 },
+					{ time: 0.7333, angle: 9.77 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone10: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.1666, x: 0.839, y: 1.101 },
+					{ time: 0.3333, x: 1.142, y: 1 },
+					{ time: 0.5, x: 0.899, y: 1.061 },
+					{ time: 0.6666, x: 1.276, y: 1.049 },
+					{ time: 0.8333, x: 1.005, y: 1.036 },
+					{ time: 1, x: 1.211, y: 0.954 },
+					{ time: 1.1666, x: 0.947, y: 1.118 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			Head: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.5, angle: -8.7 },
+					{ time: 0.9, angle: 1 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			Body: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.5, angle: 3.77 },
+					{ time: 0.9666, angle: -1.88 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4, angle: 6.17 },
+					{ time: 0.7, angle: -9.22 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone9: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.5, angle: -25.21 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone8: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.6666, angle: 19.27 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone7: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.3333, angle: -7.31 },
+					{ time: 0.9333, angle: 9.74 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone5: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.5, angle: -19.11 },
+					{ time: 1, angle: 7.13 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone3: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4, angle: 9.06 },
+					{ time: 0.6666, angle: 14.13 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			}
+		}
+	},
+	idle3: {
+		slots: {
+			"Interface_Zombi_FS_0000_Layer-19": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0001_Layer-20": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0002_Layer-23": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0003_Layer-21": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0004_Layer-24": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0005_Layer-22": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0006_Layer-25": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			Interface_Zombi_FS_0007_Head: {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0008_Layer-17": {
+				color: [
+					{ time: 0, color: "ffffff00", curve: "stepped" },
+					{ time: 1.3333, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0009_Layer-18": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0016_Layer-5": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0017_Layer-7": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0018_Layer-8": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0019_Layer-6": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			Interface_Zombi_FS_0020_Ruka_L: {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			}
+		},
+		bones: {
+			Ass: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.3333, angle: 0.81 },
+					{ time: 0.8333, angle: -1.32 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone2: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4333, angle: 7.61 },
+					{ time: 0.9, angle: -6.84 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			RL: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.6666, angle: -10.01 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.4, x: 0.98, y: 1 },
+					{ time: 0.8333, x: 1.026, y: 1 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone4: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.6666, angle: -11.08 },
+					{ time: 1, angle: 2.14 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			LL: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4, angle: -5.49 },
+					{ time: 0.9333, angle: 9.84 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.4333, x: 1.052, y: 1 },
+					{ time: 1, x: 0.969, y: 1 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone6: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4, angle: -7.99 },
+					{ time: 0.9333, angle: 9.88 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			RH: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.5, angle: -5.68 },
+					{ time: 1, angle: 2.91 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone17: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.3333, x: 0.811, y: 1.026 },
+					{ time: 0.5666, x: 1.08, y: 0.967 },
+					{ time: 0.9, x: 0.808, y: 0.929 },
+					{ time: 1.0333, x: 0.813, y: 1.016 },
+					{ time: 1.1666, x: 1.072, y: 1.009 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone16: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0 },
+					{ time: 0.6666, x: -6.72, y: 1.03 },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.3333, x: 1.375, y: 1.375 },
+					{ time: 0.8333, x: 0.712, y: 0.712 },
+					{ time: 1.0666, x: 1.32, y: 1.32 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone15: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone14: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0 },
+					{ time: 0.4333, x: -10.35, y: 0 },
+					{ time: 0.8666, x: -2.41, y: -7.86 },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.0666, x: 0.768, y: 0.768 },
+					{ time: 0.1666, x: 1, y: 1 },
+					{ time: 0.2333, x: 0.768, y: 0.768 },
+					{ time: 0.3333, x: 0.866, y: 0.866 },
+					{ time: 0.4, x: 0.768, y: 0.768 },
+					{ time: 0.5, x: 1, y: 1 },
+					{ time: 0.5666, x: 0.768, y: 0.768 },
+					{ time: 0.6666, x: 1.178, y: 1.178 },
+					{ time: 0.7333, x: 0.768, y: 0.768 },
+					{ time: 0.8333, x: 1, y: 1 },
+					{ time: 0.9, x: 0.768, y: 0.768 },
+					{ time: 1, x: 0.906, y: 0.906 },
+					{ time: 1.0666, x: 0.768, y: 0.768 },
+					{ time: 1.1666, x: 1, y: 1 },
+					{ time: 1.2333, x: 0.768, y: 0.768 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone13: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone12: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4, angle: 5.36 },
+					{ time: 0.9333, angle: -11.97 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone11: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.2666, angle: -8.28 },
+					{ time: 0.7333, angle: 9.77 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone10: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.1666, x: 0.839, y: 1.101 },
+					{ time: 0.3333, x: 1.142, y: 1 },
+					{ time: 0.5, x: 0.899, y: 1.061 },
+					{ time: 0.6666, x: 1.276, y: 1.049 },
+					{ time: 0.8333, x: 1.005, y: 1.036 },
+					{ time: 1, x: 1.211, y: 0.954 },
+					{ time: 1.1666, x: 0.947, y: 1.118 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			Head: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.5, angle: -8.7 },
+					{ time: 0.9, angle: 1 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			Body: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.5, angle: 3.77 },
+					{ time: 0.9666, angle: -1.88 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4, angle: 6.17 },
+					{ time: 0.7, angle: -9.22 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone9: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.5, angle: -25.21 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone8: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.6666, angle: 19.27 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone7: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.3333, angle: -7.31 },
+					{ time: 0.9333, angle: 9.74 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone5: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.5, angle: -19.11 },
+					{ time: 1, angle: 7.13 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone3: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4, angle: 9.06 },
+					{ time: 0.6666, angle: 14.13 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			}
+		}
+	},
+	idle4: {
+		slots: {
+			"Interface_Zombi_FS_0000_Layer-19": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0001_Layer-20": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0002_Layer-23": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0003_Layer-21": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0004_Layer-24": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0005_Layer-22": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0006_Layer-25": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			Interface_Zombi_FS_0007_Head: {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0008_Layer-17": {
+				color: [
+					{ time: 0, color: "ffffff00", curve: "stepped" },
+					{ time: 1.3333, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0009_Layer-18": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			}
+		},
+		bones: {
+			Ass: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.3333, angle: 0.81 },
+					{ time: 0.8333, angle: -1.32 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone2: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4333, angle: 7.61 },
+					{ time: 0.9, angle: -6.84 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			RL: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.6666, angle: -10.01 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.4, x: 0.98, y: 1 },
+					{ time: 0.8333, x: 1.026, y: 1 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone4: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.6666, angle: -11.08 },
+					{ time: 1, angle: 2.14 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			LL: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4, angle: -5.49 },
+					{ time: 0.9333, angle: 9.84 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.4333, x: 1.052, y: 1 },
+					{ time: 1, x: 0.969, y: 1 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone6: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4, angle: -7.99 },
+					{ time: 0.9333, angle: 9.88 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			RH: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.5, angle: -5.68 },
+					{ time: 1, angle: 2.91 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone17: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.3333, x: 0.811, y: 1.026 },
+					{ time: 0.5666, x: 1.08, y: 0.967 },
+					{ time: 0.9, x: 0.808, y: 0.929 },
+					{ time: 1.0333, x: 0.813, y: 1.016 },
+					{ time: 1.1666, x: 1.072, y: 1.009 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone16: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0 },
+					{ time: 0.6666, x: -6.72, y: 1.03 },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.3333, x: 1.375, y: 1.375 },
+					{ time: 0.8333, x: 0.712, y: 0.712 },
+					{ time: 1.0666, x: 1.32, y: 1.32 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone15: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone14: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0 },
+					{ time: 0.4333, x: -10.35, y: 0 },
+					{ time: 0.8666, x: -2.41, y: -7.86 },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.0666, x: 0.768, y: 0.768 },
+					{ time: 0.1666, x: 1, y: 1 },
+					{ time: 0.2333, x: 0.768, y: 0.768 },
+					{ time: 0.3333, x: 0.866, y: 0.866 },
+					{ time: 0.4, x: 0.768, y: 0.768 },
+					{ time: 0.5, x: 1, y: 1 },
+					{ time: 0.5666, x: 0.768, y: 0.768 },
+					{ time: 0.6666, x: 1.178, y: 1.178 },
+					{ time: 0.7333, x: 0.768, y: 0.768 },
+					{ time: 0.8333, x: 1, y: 1 },
+					{ time: 0.9, x: 0.768, y: 0.768 },
+					{ time: 1, x: 0.906, y: 0.906 },
+					{ time: 1.0666, x: 0.768, y: 0.768 },
+					{ time: 1.1666, x: 1, y: 1 },
+					{ time: 1.2333, x: 0.768, y: 0.768 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone13: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone12: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4, angle: 5.36 },
+					{ time: 0.9333, angle: -11.97 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone11: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.2666, angle: -8.28 },
+					{ time: 0.7333, angle: 9.77 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone10: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.1666, x: 0.839, y: 1.101 },
+					{ time: 0.3333, x: 1.142, y: 1 },
+					{ time: 0.5, x: 0.899, y: 1.061 },
+					{ time: 0.6666, x: 1.276, y: 1.049 },
+					{ time: 0.8333, x: 1.005, y: 1.036 },
+					{ time: 1, x: 1.211, y: 0.954 },
+					{ time: 1.1666, x: 0.947, y: 1.118 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			Head: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.5, angle: -8.7 },
+					{ time: 0.9, angle: 1 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			Body: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.5, angle: 3.77 },
+					{ time: 0.9666, angle: -1.88 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4, angle: 6.17 },
+					{ time: 0.7, angle: -9.22 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone9: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.5, angle: -25.21 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone8: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.6666, angle: 19.27 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone7: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.3333, angle: -7.31 },
+					{ time: 0.9333, angle: 9.74 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone5: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.5, angle: -19.11 },
+					{ time: 1, angle: 7.13 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone3: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4, angle: 9.06 },
+					{ time: 0.6666, angle: 14.13 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			}
+		}
+	},
+	idle5: {
+		slots: {
+			"Interface_Zombi_FS_0002_Layer-23": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0004_Layer-24": {
+				color: [
+					{ time: 0, color: "ffffff00" }
+				]
+			},
+			"Interface_Zombi_FS_0008_Layer-17": {
+				color: [
+					{ time: 0, color: "ffffff00", curve: "stepped" },
+					{ time: 1.3333, color: "ffffff00" }
+				]
+			}
+		},
+		bones: {
+			Ass: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.3333, angle: 0.81 },
+					{ time: 0.8333, angle: -1.32 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone2: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4333, angle: 7.61 },
+					{ time: 0.9, angle: -6.84 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			RL: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.6666, angle: -10.01 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.4, x: 0.98, y: 1 },
+					{ time: 0.8333, x: 1.026, y: 1 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone4: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.6666, angle: -11.08 },
+					{ time: 1, angle: 2.14 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			LL: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4, angle: -5.49 },
+					{ time: 0.9333, angle: 9.84 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.4333, x: 1.052, y: 1 },
+					{ time: 1, x: 0.969, y: 1 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone6: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4, angle: -7.99 },
+					{ time: 0.9333, angle: 9.88 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			RH: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.5, angle: -5.68 },
+					{ time: 1, angle: 2.91 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone17: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.3333, x: 0.811, y: 1.026 },
+					{ time: 0.5666, x: 1.08, y: 0.967 },
+					{ time: 0.9, x: 0.808, y: 0.929 },
+					{ time: 1.0333, x: 0.813, y: 1.016 },
+					{ time: 1.1666, x: 1.072, y: 1.009 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone16: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0 },
+					{ time: 0.6666, x: -6.72, y: 1.03 },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.3333, x: 1.375, y: 1.375 },
+					{ time: 0.8333, x: 0.712, y: 0.712 },
+					{ time: 1.0666, x: 1.32, y: 1.32 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone15: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone14: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0 },
+					{ time: 0.4333, x: -10.35, y: 0 },
+					{ time: 0.8666, x: -2.41, y: -7.86 },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.0666, x: 0.768, y: 0.768 },
+					{ time: 0.1666, x: 1, y: 1 },
+					{ time: 0.2333, x: 0.768, y: 0.768 },
+					{ time: 0.3333, x: 0.866, y: 0.866 },
+					{ time: 0.4, x: 0.768, y: 0.768 },
+					{ time: 0.5, x: 1, y: 1 },
+					{ time: 0.5666, x: 0.768, y: 0.768 },
+					{ time: 0.6666, x: 1.178, y: 1.178 },
+					{ time: 0.7333, x: 0.768, y: 0.768 },
+					{ time: 0.8333, x: 1, y: 1 },
+					{ time: 0.9, x: 0.768, y: 0.768 },
+					{ time: 1, x: 0.906, y: 0.906 },
+					{ time: 1.0666, x: 0.768, y: 0.768 },
+					{ time: 1.1666, x: 1, y: 1 },
+					{ time: 1.2333, x: 0.768, y: 0.768 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone13: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone12: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4, angle: 5.36 },
+					{ time: 0.9333, angle: -11.97 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone11: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.2666, angle: -8.28 },
+					{ time: 0.7333, angle: 9.77 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone10: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.1666, x: 0.839, y: 1.101 },
+					{ time: 0.3333, x: 1.142, y: 1 },
+					{ time: 0.5, x: 0.899, y: 1.061 },
+					{ time: 0.6666, x: 1.276, y: 1.049 },
+					{ time: 0.8333, x: 1.005, y: 1.036 },
+					{ time: 1, x: 1.211, y: 0.954 },
+					{ time: 1.1666, x: 0.947, y: 1.118 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			Head: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.5, angle: -8.7 },
+					{ time: 0.9, angle: 1 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			Body: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.5, angle: 3.77 },
+					{ time: 0.9666, angle: -1.88 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4, angle: 6.17 },
+					{ time: 0.7, angle: -9.22 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone9: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.5, angle: -25.21 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone8: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.6666, angle: 19.27 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone7: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.3333, angle: -7.31 },
+					{ time: 0.9333, angle: 9.74 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone5: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.5, angle: -19.11 },
+					{ time: 1, angle: 7.13 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone3: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4, angle: 9.06 },
+					{ time: 0.6666, angle: 14.13 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			}
+		}
+	},
+	idle6: {
+		bones: {
+			Ass: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.3333, angle: 0.81 },
+					{ time: 0.8333, angle: -1.32 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone2: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4333, angle: 7.61 },
+					{ time: 0.9, angle: -6.84 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			RL: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.6666, angle: -10.01 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.4, x: 0.98, y: 1 },
+					{ time: 0.8333, x: 1.026, y: 1 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone4: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.6666, angle: -11.08 },
+					{ time: 1, angle: 2.14 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			LL: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4, angle: -5.49 },
+					{ time: 0.9333, angle: 9.84 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.4333, x: 1.052, y: 1 },
+					{ time: 1, x: 0.969, y: 1 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone6: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4, angle: -7.99 },
+					{ time: 0.9333, angle: 9.88 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			RH: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.5, angle: -5.68 },
+					{ time: 1, angle: 2.91 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone17: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.3333, x: 0.811, y: 1.026 },
+					{ time: 0.5666, x: 1.08, y: 0.967 },
+					{ time: 0.9, x: 0.808, y: 0.929 },
+					{ time: 1.0333, x: 0.813, y: 1.016 },
+					{ time: 1.1666, x: 1.072, y: 1.009 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone16: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0 },
+					{ time: 0.6666, x: -6.72, y: 1.03 },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.3333, x: 1.375, y: 1.375 },
+					{ time: 0.8333, x: 0.712, y: 0.712 },
+					{ time: 1.0666, x: 1.32, y: 1.32 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone15: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone14: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0 },
+					{ time: 0.4333, x: -10.35, y: 0 },
+					{ time: 0.8666, x: -2.41, y: -7.86 },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.0666, x: 0.768, y: 0.768 },
+					{ time: 0.1666, x: 1, y: 1 },
+					{ time: 0.2333, x: 0.768, y: 0.768 },
+					{ time: 0.3333, x: 0.866, y: 0.866 },
+					{ time: 0.4, x: 0.768, y: 0.768 },
+					{ time: 0.5, x: 1, y: 1 },
+					{ time: 0.5666, x: 0.768, y: 0.768 },
+					{ time: 0.6666, x: 1.178, y: 1.178 },
+					{ time: 0.7333, x: 0.768, y: 0.768 },
+					{ time: 0.8333, x: 1, y: 1 },
+					{ time: 0.9, x: 0.768, y: 0.768 },
+					{ time: 1, x: 0.906, y: 0.906 },
+					{ time: 1.0666, x: 0.768, y: 0.768 },
+					{ time: 1.1666, x: 1, y: 1 },
+					{ time: 1.2333, x: 0.768, y: 0.768 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone13: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone12: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4, angle: 5.36 },
+					{ time: 0.9333, angle: -11.97 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone11: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.2666, angle: -8.28 },
+					{ time: 0.7333, angle: 9.77 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone10: {
+				rotate: [
+					{ time: 0, angle: 0, curve: "stepped" },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1 },
+					{ time: 0.1666, x: 0.839, y: 1.101 },
+					{ time: 0.3333, x: 1.142, y: 1 },
+					{ time: 0.5, x: 0.899, y: 1.061 },
+					{ time: 0.6666, x: 1.276, y: 1.049 },
+					{ time: 0.8333, x: 1.005, y: 1.036 },
+					{ time: 1, x: 1.211, y: 0.954 },
+					{ time: 1.1666, x: 0.947, y: 1.118 },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			Head: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.5, angle: -8.7 },
+					{ time: 0.9, angle: 1 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			Body: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.5, angle: 3.77 },
+					{ time: 0.9666, angle: -1.88 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4, angle: 6.17 },
+					{ time: 0.7, angle: -9.22 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone9: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.5, angle: -25.21 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone8: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.6666, angle: 19.27 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone7: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.3333, angle: -7.31 },
+					{ time: 0.9333, angle: 9.74 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone5: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.5, angle: -19.11 },
+					{ time: 1, angle: 7.13 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			},
+			bone3: {
+				rotate: [
+					{ time: 0, angle: 0 },
+					{ time: 0.4, angle: 9.06 },
+					{ time: 0.6666, angle: 14.13 },
+					{ time: 1.3333, angle: 0 }
+				],
+				translate: [
+					{ time: 0, x: 0, y: 0, curve: "stepped" },
+					{ time: 1.3333, x: 0, y: 0 }
+				],
+				scale: [
+					{ time: 0, x: 1, y: 1, curve: "stepped" },
+					{ time: 1.3333, x: 1, y: 1 }
+				]
+			}
+		}
+	}
+}
+}
