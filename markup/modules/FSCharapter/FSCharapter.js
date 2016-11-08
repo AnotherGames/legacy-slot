@@ -32,7 +32,6 @@ export class FSCharapter {
         this.position = param.position;
         // инит внутрение параметры
         this.level = 0;
-        console.log(this.level);
 
         this.char = this.game.add.spine(
             this.position.x,        // X positon
@@ -42,28 +41,25 @@ export class FSCharapter {
         this.char.setAnimationByName(0, 'idle' + this.level, true);
     }
     Up() {
-        if (this.level >= 5) return;
+        if (this.level >= 7) return;
         this.level = this.level + 1;
-        console.log(this.level);
-        if (this.level < 5) {
-            this.char.setAnimationByName(0, 'idle' + this.level, true);
+        if (this.level < 7) {
+            this.char.setAnimationByName(0, 'transition' + this.level, false);
+            this.char.addAnimationByName(0, 'idle' + this.level, true);
         } else {
-            this.char.setAnimationByName(0, 'idle5', false);
-            this.char.setAnimationByName(0, 'idle6', false);
-            this.char.addAnimationByName(0, 'Win0', false);
-            this.char.addAnimationByName(0, 'Win1', true);
-
+            this.char.setAnimationByName(0, 'transition7', false);
+            this.char.addAnimationByName(0, 'idle7', true);
             let switcher = true;
             let _this = this;
             let randomAnim = function () {
                 _this.game.time.events.add(5000, () => {
                     switcher = !switcher;
                     if (switcher) {
-                        _this.char.setAnimationByName(0, 'Win2', false);
+                        _this.char.setAnimationByName(0, 'win0', false);
                     } else {
-                        _this.char.setAnimationByName(0, 'Win3', false);
+                        _this.char.setAnimationByName(0, 'win1', false);
                     }
-                    _this.char.addAnimationByName(0, 'Win1', true);
+                    _this.char.addAnimationByName(0, 'idle7', true);
                     randomAnim();
                 }, _this);
             };
