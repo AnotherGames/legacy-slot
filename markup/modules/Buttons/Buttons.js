@@ -303,7 +303,7 @@ export let buttons = (function () {
             }
         }
 
-        soundButton = game.add.button(x[2], y, 'footerButtons', soundOnClick, this, 'soundOn.png', 'sound.png', null, container);
+        soundButton = game.add.button(x[2], y, 'footerButtons', soundOnClick, this, 'soundOn.png', 'sound.png', null, null, container);
         soundButton.anchor.set(0.5);
         soundButton.inputEnabled = true;
         soundButton.input.priorityID = 1;
@@ -320,7 +320,7 @@ export let buttons = (function () {
             sound.sounds.button.play();
         }
 
-        const fastButton = game.add.button(x[3], y, 'footerButtons', fastOnClick, this, null, 'fastSpinOff.png', null, container);
+        const fastButton = game.add.button(x[3], y, 'footerButtons', fastOnClick, this, null, 'fastSpinOff.png', null, null, container);
         fastButton.anchor.set(0.5);
         fastButton.inputEnabled = true;
         fastButton.input.priorityID = 1;

@@ -27,7 +27,7 @@ export let win = (function () {
             }
             setTimeout(() => {
                 let game = model.el('game');
-                game.state.start('FS');
+                events.trigger('main:drawTransitionScreen');
             }, 2000);
         }
         if (winTotalData === 0) return;
@@ -60,7 +60,7 @@ export let win = (function () {
         let game = model.el('game');
         let mainContainer = model.el('mainContainer');
         let winTop = model.el('winTop');
-        console.log(mainContainer);
+        // console.log(mainContainer);
         let gameMachine;
         if (model.state('FSMode')) {
             gameMachine = mainContainer.getAt(0);
@@ -142,7 +142,7 @@ export let win = (function () {
             glistaMas.push(coord.Y);
         });
         cleanWinElements();
-        glista.start(glistaMas, 1000, function() {
+        glista.start(glistaMas, 1000, function () {
             glista.remove();
             glistaDoneCounter++;
             if (glistaDoneCounter == glistaFiredCounter) {
