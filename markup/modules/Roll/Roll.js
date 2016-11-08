@@ -118,15 +118,39 @@ export let roll = (function () {
     function rollEnd() {
         util.request('_Ready').then((data) => {
             // console.log('Ready done', data);
-            let rollResponse = model.data('rollResponse');
-            if (rollResponse.Balance.TotalWinCoins > 0) {
-                setTimeout(() => {
+            if (!model.state('FSMode')) {
+                let rollResponse = model.data('rollResponse');
+                if (rollResponse.Balance.TotalWinCoins > 0) {
+                    setTimeout(() => {
+                        if (model.state('autoEnd')) return;
+                        events.trigger('autoplay:next');
+                    }, 1000)
+                } else {
                     if (model.state('autoEnd')) return;
                     events.trigger('autoplay:next');
-                }, 1000)
-            } else {
-                if (model.state('autoEnd')) return;
-                events.trigger('autoplay:next');
+                }
+            }
+
+            // FS
+            if (model.state('FSMode')) {
+                let rollResponse = model.data('rollResponse');
+                if (rollResponse.WinLines.length > 0) {
+                    if (model.state('evilBrain')) {
+                        setTimeout(() => {
+                            // if (model.state('fsEnd')) return;
+                            events.trigger('fs:next');
+                            model.state('evilBrain', false);
+                        }, 1500);
+                    } else {
+                        setTimeout(() => {
+                            // if (model.state('fsEnd')) return;
+                            events.trigger('fs:next');
+                        }, 1000);
+                    }
+                } else {
+                    // if (model.state('fsEnd')) return;
+                    events.trigger('fs:next');
+                }
             }
             model.state('roll:progress', false);
         });

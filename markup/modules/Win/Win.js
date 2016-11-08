@@ -30,7 +30,6 @@ export let win = (function () {
                 game.state.start('FS');
             }, 2000);
         }
-        if (winTotalData === 0) return;
 
         let game = model.el('game');
         let mainContainer = model.el('mainContainer');
@@ -56,6 +55,7 @@ export let win = (function () {
     }
 
     function drawTotalWin(winTotalData) {
+        if (winTotalData === 0) return;
 
         let game = model.el('game');
         let mainContainer = model.el('mainContainer');
@@ -109,11 +109,21 @@ export let win = (function () {
 
             }
         } else {
-            console.log();
             wheels.forEach((wheelObj) => {
                 wheelObj.elements.forEach((element) => {
                     let elementName = parseInt(element.sprite.animations.currentAnim.name);
                     if (elementName == '10') {
+                        element.play(`${elementName}-w`);
+                    }
+                    if (elementName == '11') {
+                        let game = model.el('game');
+                        console.log('Brains!');
+                        events.trigger('fs:brain');
+                        model.state('evilBrain', true);
+                        game.add.tween(element.sprite.scale).to({x: 1.7, y: 1.7}, 700, 'Linear', true)
+                            .onComplete.add(() => {
+                                element.sprite.scale.x = element.sprite.scale.y = 1;
+                            });
                         element.play(`${elementName}-w`);
                     }
                 });
