@@ -6,6 +6,7 @@ export let fs = (function () {
     let fsCount;
     let fsEnd;
     let fsText;
+    let brainCount = 0;
 
     function initFS(amount) {
         let game = model.el('game');
@@ -62,6 +63,15 @@ export let fs = (function () {
 
     function fsBrain() {
         fsText.text = '+3';
+        let fsMulti = model.el('fsMulti');
+        let multiValue = model.data('rollResponse').FsBonus.Multi;
+        fsMulti.frameName = 'multi' + multiValue + '.png';
+        brainCount++;
+        if (brainCount === 3) {
+            model.el('zombie').Up();
+            brainCount = 0;
+        }
+        let levelValue = model.data('rollResponse').FsBonus.Level;
     }
 
     events.on('fs:init', initFS);

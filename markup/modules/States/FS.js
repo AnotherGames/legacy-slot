@@ -131,7 +131,7 @@ export class FS {
             game: this.game,
             position: {
                 x: 270,
-                y: 680
+                y: 700
             }
         });
         model.el('zombie', zombie);
