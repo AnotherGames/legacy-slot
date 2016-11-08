@@ -88,6 +88,8 @@ export class FS {
         events.trigger('fs:init', 15);
 
         this.drawLevelCharacter();
+        this.drawFlyingBrain();
+
         let darkness = this.add.graphics();
         darkness.beginFill(0x000000);
         darkness.drawRect(0, 0, this.game.width, this.game.height);
@@ -130,11 +132,22 @@ export class FS {
     }
 
     drawLevelCharacter() {
+
+        let x, y;
+
+        if (model.flag('mobile')) {
+            x = 120;
+            y = 400;
+        } else {
+            x = 270;
+            y = 700;
+        }
+
         let zombie = new FSCharapter({
             game: this.game,
             position: {
-                x: 270,
-                y: 700
+                x,
+                y
             }
         });
         model.el('zombie', zombie);
@@ -142,6 +155,22 @@ export class FS {
 
     drawFlyingBrain() {
 
+        let x, y;
+
+        if (model.flag('mobile')) {
+            x = 100;
+            y = 80;
+        } else {
+            x = 200;
+            y = 120;
+        }
+
+        let brain = this.game.add.spine(
+            x,        // X positon
+            y,        // Y position
+            'FlyingBrain'     // the key of the object in cache
+        );
+        brain.setAnimationByName(0, 'Idle', true);
     }
 
     initMainContainer() {

@@ -71,6 +71,7 @@ export let fs = (function () {
         // let multiValue = model.data('rollResponse').FsBonus.Level;
         if (multiValue > model.data('fsMulti')) {
             model.el('zombie').Up();
+            model.data('fsMulti', multiValue);
         }
     }
 

@@ -6,7 +6,7 @@ export let util = (function() {
     const userID = 1;
     const mode = {
         normal: 'zombienorm2',
-        fsBonus: 'zombiefs',
+        fsBonus: 'zombiefs2',
         bonus: 'qo2'
     };
 

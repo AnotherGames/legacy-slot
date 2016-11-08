@@ -155,4 +155,8 @@ function loadFSCharapter(game) {
         'FSCharapter',                        // The key used for Phaser's cache
         'FSCharapter/Zomb.json'    // The location of the spine's json file
     );
+    game.load.spine(
+        'FlyingBrain',                        // The key used for Phaser's cache
+        'FSCharapter/Brain.json'    // The location of the spine's json file
+    );
 }
