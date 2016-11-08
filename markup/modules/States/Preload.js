@@ -22,7 +22,8 @@ export class Preload {
         loadMainAssets(this);
         loadFSAssets(this);
         loadGlistaAssets(this);
-        loadSkeletonAssets(this);
+        loadAnimBGAssets(this);
+        loadFSCharapter(this);
 
         this.load.onLoadComplete.add(this.closePreloader, this);
     }
@@ -138,9 +139,16 @@ function loadGlistaAssets(game) {
     game.load.atlasJSONArray('glistaAtlas', 'glista/glista.png', 'glista/glista.json');
 }
 
-function loadSkeletonAssets(game) {
+function loadAnimBGAssets(game) {
     game.load.spine(
         'animBG',                        // The key used for Phaser's cache
         'skeleton/skeleton.json'    // The location of the spine's json file
+    );
+}
+
+function loadFSCharapter(game) {
+    game.load.spine(
+        'FSCharapter',                        // The key used for Phaser's cache
+        'FSCharapter/Zomb.json'    // The location of the spine's json file
     );
 }
