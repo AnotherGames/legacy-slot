@@ -8,26 +8,26 @@ export let controller = {
     },
 
     mobile: {
+        time: 1000,
         settings: {
             open: function () {
                 if (this._isEvent) return;
                 let _this = this;
 
                 this._isEvent = true;
-                let time = 1000;
                 let settings = mobileSettings;
 
                 if (model.state('side') === 'left') {
                     settings.container.x = settings.game.world.width;
-                    settings.game.add.tween(settings.container).to( { x: settings.game.world.width - settings.container.width }, time, 'Quart.easeOut', true);
+                    settings.game.add.tween(settings.container).to( { x: settings.game.world.width - settings.container.width }, this.time, 'Quart.easeOut', true);
                 } else {
                     settings.container.x = -settings.container.width;
-                    settings.game.add.tween(settings.container).to( { x: 0 }, time, 'Quart.easeOut', true);
+                    settings.game.add.tween(settings.container).to( { x: 0 }, this.time, 'Quart.easeOut', true);
                 }
 
                 settings.overlay.alpha = 0;
                 settings.overlay.visible = true;
-                settings.game.add.tween(settings.overlay).to( { alpha: 0.5 }, time, 'Quart.easeOut', true)
+                settings.game.add.tween(settings.overlay).to( { alpha: 0.5 }, this.time, 'Quart.easeOut', true)
                 .onComplete.add(() => {
                     model.state('menu', 'open');
                     _this._isEvent = false;
@@ -38,18 +38,17 @@ export let controller = {
                 let _this = this;
 
                 this._isEvent = true;
-                let time = 1000;
                 let settings = mobileSettings;
 
                 if (model.state('side') === 'left') {
-                    settings.game.add.tween(settings.container).to( { x: settings.game.world.width }, time, 'Quart.easeOut', true);
+                    settings.game.add.tween(settings.container).to( { x: settings.game.world.width }, this.time, 'Quart.easeOut', true);
                 } else {
-                    settings.game.add.tween(settings.container).to( { x: -settings.container.width }, time, 'Quart.easeOut', true);
+                    settings.game.add.tween(settings.container).to( { x: -settings.container.width }, this.time, 'Quart.easeOut', true);
                 }
 
-                settings.game.add.tween(settings.overlay).to( { alpha: 0 }, time, 'Quart.easeOut', true)
+                settings.game.add.tween(settings.overlay).to( { alpha: 0 }, this.time, 'Quart.easeOut', true)
                 .onComplete.add(() => {
-                    model.state('menu', 'clos');
+                    model.state('menu', 'close');
                     settings.overlay.visible = false;
                     _this._isEvent = false;
                 }, this);
@@ -86,6 +85,49 @@ export let controller = {
                 betButton.x = xSide;
                 menuButton.x = xSide;
                 soundButton.x = xSide;
+            }
+        },
+        rules: {
+            open: function () {
+                let _this = this;
+
+                this._isEvent = true;
+                let settings = mobileSettings;
+
+                settings.overlay.events.onInputDown.removeAll();
+                settings.overlay.events.onInputDown.add(settings._overlaySettingsEvent);
+                console.log(settings.overlay.alpha);
+
+                if (model.state('side') === 'left') {
+                    settings.game.add.tween(settings.container).to( { x: settings.game.world.width }, this.time, 'Quart.easeOut', true);
+                } else {
+                    settings.game.add.tween(settings.container).to( { x: -settings.container.width }, this.time, 'Quart.easeOut', true);
+                }
+
+                settings.infoRules.alpha = 0;
+                settings.infoRules.visible = true;
+                settings.game.add.tween(settings.infoRules).to( { alpha: 1 }, this.time, 'Quart.easeOut', true)
+                .onComplete.add(() => {
+                    _this._isEvent = false;
+                }, this);
+            },
+            close: function () {
+                let _this = this;
+
+                this._isEvent = true;
+                let settings = mobileSettings;
+
+                settings.overlay.events.onInputDown.removeAll();
+                settings.overlay.events.onInputDown.add(settings._overlayRulesEvent);
+
+                settings.game.add.tween(settings.infoRules).to( { alpha: 0 }, this.time, 'Quart.easeOut', true);
+
+                settings.game.add.tween(settings.overlay).to( { alpha: 0 }, this.time, 'Quart.easeOut', true)
+                .onComplete.add(() => {
+                    model.state('menu', 'close');
+                    settings.overlay.visible = false;
+                    _this._isEvent = false;
+                }, this);
             }
         }
     }

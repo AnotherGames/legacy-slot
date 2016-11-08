@@ -6,6 +6,7 @@ import { controller } from 'modules/Controller/Controller';
 export let mobileSettings = {
     game: undefined,
     container: undefined,
+    infoRules: undefined,
     overlay: undefined,
     _deltaX: undefined,
     _deltaY: 20,
@@ -187,15 +188,7 @@ export let mobileSettings = {
         rulesButton.events.onInputDown.add(function () {
             if (controller.isEvent) return;
             sound.sounds.button.play();
-            console.log('i am rulesButton');
-            // const overlay = game.add.graphics(0, 0).beginFill(0x000000, 0.8).drawRect(0, 0, game.world.width, game.world.height);
-            // const infoRules = game.add.sprite(game.world.centerX, game.world.centerY, 'infoRules');
-            // infoRules.anchor.set(0.5);
-            // infoRules.inputEnabled = true;
-            // infoRules.events.onInputDown.add(function () {
-            //     infoRules.destroy();
-            //     overlay.destroy();
-            // });
+            controller.mobile.rules.open();
         });
 
         const rulesText = game.add.sprite(
@@ -242,6 +235,12 @@ export let mobileSettings = {
             controller.mobile.settings.close();
         });
     },
+    _overlaySettingsEvent: function () {
+        controller.mobile.settings.close();
+    },
+    _overlayRulesEvent: function () {
+        controller.mobile.rules.close();
+    },
     _drawOverlay: function (game) {
         this.overlay = game.add.graphics(0, 0, model.el('buttonsContainer')).beginFill(0x000000, 0.5).drawRect(0, 0, game.world.width, game.world.height);
         this.overlay.visible = false;
@@ -249,8 +248,14 @@ export let mobileSettings = {
         tween.start();
         this.overlay.inputEnabled = true;
         this.overlay.input.priorityID = 0;
-        this.overlay.events.onInputDown.add(function () {
-            controller.mobile.settings.close();
+    },
+    _drawRulesScreen: function (game) {
+        this.infoRules = game.add.sprite(game.world.centerX, game.world.centerY, 'infoRules');
+        this.infoRules.anchor.set(0.5);
+        this.infoRules.visible = false;
+        this.infoRules.inputEnabled = true;
+        this.infoRules.events.onInputDown.add(function () {
+            controller.mobile.rules.close();
         });
     },
 
@@ -269,6 +274,7 @@ export let mobileSettings = {
         this._drawHistoryButton(game);
         this._drawBackButton(game);
         this._drawOverlay(game);
+        this._drawRulesScreen(game);
 
         if (model.state('side') === 'left') {
             this.container.x = game.world.width;
