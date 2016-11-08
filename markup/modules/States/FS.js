@@ -176,6 +176,7 @@ export class FS {
             'FlyingBrain'     // the key of the object in cache
         );
         brain.setAnimationByName(0, 'Idle', true);
+        model.el('flyingBrain', brain);
     }
 
     initMainContainer() {

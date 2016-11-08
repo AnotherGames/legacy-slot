@@ -122,7 +122,11 @@ export let win = (function () {
                         model.state('evilBrain', true);
                         game.add.tween(element.sprite.scale).to({x: 1.7, y: 1.7}, 700, 'Linear', true)
                             .onComplete.add(() => {
-                                element.sprite.scale.x = element.sprite.scale.y = 1;
+                                if (model.flag('mobile')) {
+                                    element.sprite.scale.x = element.sprite.scale.y = 1.5;
+                                } else {
+                                    element.sprite.scale.x = element.sprite.scale.y = 1;
+                                }
                             });
                         element.play(`${elementName}-w`);
                     }
@@ -196,9 +200,11 @@ export let win = (function () {
             transitionContainer);
         winText.anchor.set(0.5);
 
+        let winCountValue = model.data('rollResponse').FsBonus.TotalFSWinCoins;
+
         const winCount = game.add.text(game.world.width / 2,
             -200,
-            '15',
+            winCountValue,
             {font: 'bold 140px Helvetica, Arial', fill: '#fff', align: 'center'},
             transitionContainer);
         winCount.anchor.set(0.5);

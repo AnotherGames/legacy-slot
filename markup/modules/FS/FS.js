@@ -70,26 +70,51 @@ export let fs = (function () {
         let multiValue = model.data('rollResponse').FsBonus.Multi;
         fsMulti.frameName = 'multi' + multiValue + '.png';
 
-        // let multiValue = model.data('rollResponse').FsBonus.Level;
         if (multiValue > model.data('fsMulti')) {
             model.el('zombie').Up();
             model.data('fsMulti', multiValue);
         }
+
+        // if (model.data('fsMulti') === 7) {
+        //     let brain = model.el('flyingBrain');
+        //     brain.setAnimationByName(0, 'Win2', false);
+        //     let zombie = model.el('zombie');
+        //     zombie.Up();
+        //     zombie.Up();
+        // }
+        changeBrainPanel();
     }
 
-    function changeBrainPanel(number) {
-        let x, y;
-        let game = model.el('game');
-        if (model.flag('mobile')) {
-            let mozgCountBG = model.el('mozgCountBG');
-            x = mozgCountBG.x;
-            y = mozgCountBG.y;
+    function changeBrainPanel() {
+        if (model.el('brainPanel')) {
+            let levelValue = model.data('rollResponse').FsBonus.Level;
+            let levelABS = levelValue % 3;
+            let brainPanel = model.el('brainPanel');
+            if (levelABS === 0) {
+                brainPanel.frameName = `03.png`;
+                setTimeout(() => {
+                    brainPanel.visible = false;
+                }, 500);
+            } else {
+                brainPanel.visible = true;
+                brainPanel.frameName = `0${levelABS}.png`;
+            }
         } else {
-            x = 200;
-            y = 600;
+            let x, y;
+            let game = model.el('game');
+            if (model.flag('mobile')) {
+                let mozgCountBG = model.el('mozgCountBG');
+                x = mozgCountBG.x;
+                y = mozgCountBG.y;
+            } else {
+                x = 972;
+                y = 949;
+            }
+            let brainPanel = game.add.sprite(x, y, 'mozgiPanel', '01.png');
+            brainPanel.anchor.set(0.5);
+            brainPanel.visible = false;
+            model.el('brainPanel', brainPanel);
         }
-        let brainPanel = game.add.sprite(x, y, 'mozgiPanel', '01.png');
-        brainPanel.anchor.set(0.5);
     }
 
     events.on('fs:init', initFS);
