@@ -1,0 +1,244 @@
+
+Zomb.png
+size: 2048,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Z-por/Interface_Zombi_FS_0000_Layer-19
+  rotate: false
+  xy: 920, 198
+  size: 70, 60
+  orig: 70, 60
+  offset: 0, 0
+  index: -1
+Z-por/Interface_Zombi_FS_0001_Layer-20
+  rotate: false
+  xy: 992, 206
+  size: 76, 48
+  orig: 76, 48
+  offset: 0, 0
+  index: -1
+Z-por/Interface_Zombi_FS_0002_Layer-23
+  rotate: false
+  xy: 2009, 486
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
+Z-por/Interface_Zombi_FS_0003_Layer-21
+  rotate: true
+  xy: 1120, 330
+  size: 59, 66
+  orig: 59, 66
+  offset: 0, 0
+  index: -1
+Z-por/Interface_Zombi_FS_0004_Layer-24
+  rotate: false
+  xy: 1070, 236
+  size: 18, 18
+  orig: 18, 18
+  offset: 0, 0
+  index: -1
+Z-por/Interface_Zombi_FS_0005_Layer-22
+  rotate: false
+  xy: 1393, 343
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+Z-por/Interface_Zombi_FS_0006_Layer-25
+  rotate: false
+  xy: 903, 260
+  size: 89, 59
+  orig: 89, 59
+  offset: 0, 0
+  index: -1
+Z-por/Interface_Zombi_FS_0007_Head
+  rotate: false
+  xy: 516, 56
+  size: 223, 219
+  orig: 223, 219
+  offset: 0, 0
+  index: -1
+Z-por/Interface_Zombi_FS_0008_Layer-17
+  rotate: false
+  xy: 780, 265
+  size: 121, 54
+  orig: 121, 54
+  offset: 0, 0
+  index: -1
+Z-por/Interface_Zombi_FS_0009_Layer-18
+  rotate: false
+  xy: 982, 334
+  size: 136, 55
+  orig: 136, 55
+  offset: 0, 0
+  index: -1
+Z-por/Interface_Zombi_FS_0010_Layer-2
+  rotate: true
+  xy: 1308, 344
+  size: 61, 83
+  orig: 61, 83
+  offset: 0, 0
+  index: -1
+Z-por/Interface_Zombi_FS_0011_Layer-1
+  rotate: false
+  xy: 516, 277
+  size: 262, 233
+  orig: 262, 233
+  offset: 0, 0
+  index: -1
+Z-por/Interface_Zombi_FS_0012_Layer-4
+  rotate: true
+  xy: 1694, 414
+  size: 96, 108
+  orig: 96, 108
+  offset: 0, 0
+  index: -1
+Z-por/Interface_Zombi_FS_0013_Body
+  rotate: false
+  xy: 982, 391
+  size: 204, 119
+  orig: 204, 119
+  offset: 0, 0
+  index: -1
+Z-por/Interface_Zombi_FS_0014_Layer-3
+  rotate: true
+  xy: 1470, 410
+  size: 100, 111
+  orig: 100, 111
+  offset: 0, 0
+  index: -1
+Z-por/Interface_Zombi_FS_0015_Layer-15
+  rotate: true
+  xy: 994, 256
+  size: 76, 95
+  orig: 76, 95
+  offset: 0, 0
+  index: -1
+Z-por/Interface_Zombi_FS_0016_Layer-5
+  rotate: false
+  xy: 1804, 415
+  size: 100, 95
+  orig: 100, 95
+  offset: 0, 0
+  index: -1
+Z-por/Interface_Zombi_FS_0017_Layer-7
+  rotate: false
+  xy: 863, 199
+  size: 55, 59
+  orig: 55, 59
+  offset: 0, 0
+  index: -1
+Z-por/Interface_Zombi_FS_0018_Layer-8
+  rotate: true
+  xy: 516, 14
+  size: 40, 58
+  orig: 40, 58
+  offset: 0, 0
+  index: -1
+Z-por/Interface_Zombi_FS_0019_Layer-6
+  rotate: false
+  xy: 741, 98
+  size: 82, 99
+  orig: 82, 99
+  offset: 0, 0
+  index: -1
+Z-por/Interface_Zombi_FS_0020_Ruka_L
+  rotate: true
+  xy: 825, 111
+  size: 86, 83
+  orig: 86, 83
+  offset: 0, 0
+  index: -1
+Z-por/Interface_Zombi_FS_0021_Layer-14
+  rotate: false
+  xy: 741, 2
+  size: 77, 94
+  orig: 77, 94
+  offset: 0, 0
+  index: -1
+Z-por/Interface_Zombi_FS_0022_Layer-11
+  rotate: false
+  xy: 576, 10
+  size: 48, 44
+  orig: 48, 44
+  offset: 0, 0
+  index: -1
+Z-por/Interface_Zombi_FS_0023_Layer-10
+  rotate: true
+  xy: 1906, 417
+  size: 93, 101
+  orig: 93, 101
+  offset: 0, 0
+  index: -1
+Z-por/Interface_Zombi_FS_0024_Layer-9
+  rotate: false
+  xy: 1583, 412
+  size: 109, 98
+  orig: 109, 98
+  offset: 0, 0
+  index: -1
+Z-por/Interface_Zombi_FS_0025_Ruka_R
+  rotate: false
+  xy: 910, 111
+  size: 86, 85
+  orig: 86, 85
+  offset: 0, 0
+  index: -1
+Z-por/Interface_Zombi_FS_0026_Kosty
+  rotate: true
+  xy: 1091, 262
+  size: 66, 93
+  orig: 66, 93
+  offset: 0, 0
+  index: -1
+Z-por/Interface_Zombi_FS_0027_Noga_L
+  rotate: false
+  xy: 741, 199
+  size: 120, 64
+  orig: 120, 64
+  offset: 0, 0
+  index: -1
+Z-por/Interface_Zombi_FS_0028_Layer-12
+  rotate: true
+  xy: 1188, 415
+  size: 95, 145
+  orig: 95, 145
+  offset: 0, 0
+  index: -1
+Z-por/Interface_Zombi_FS_0029_Layer-16
+  rotate: true
+  xy: 998, 122
+  size: 82, 81
+  orig: 82, 81
+  offset: 0, 0
+  index: -1
+Z-por/Interface_Zombi_FS_0030_Layer-13
+  rotate: false
+  xy: 1188, 351
+  size: 118, 62
+  orig: 118, 62
+  offset: 0, 0
+  index: -1
+Z-por/Interface_Zombi_FS_0031_Noga_R
+  rotate: true
+  xy: 1335, 407
+  size: 103, 133
+  orig: 103, 133
+  offset: 0, 0
+  index: -1
+Z-por/Interface_Zombi_FS_0032_Altary
+  rotate: true
+  xy: 2, 32
+  size: 478, 512
+  orig: 478, 512
+  offset: 0, 0
+  index: -1
+Z-por/M_0005_Group-185-copy-4
+  rotate: false
+  xy: 780, 321
+  size: 200, 189
+  orig: 200, 189
+  offset: 0, 0
+  index: -1
