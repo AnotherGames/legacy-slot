@@ -218,16 +218,18 @@ export class Main {
             game.state.start('FS');
         });
 
-        const tween1 = game.add.tween(freeSpinsText).to({y: game.world.height * 0.2}, 1000, Phaser.Easing.Bounce.Out, true);
-        tween1.start();
-        const tween5 = game.add.tween(freeSpinsLevel).to({y: game.world.height / 2}, 1000, Phaser.Easing.Bounce.Out, true);
-        tween5.start();
-        const tween2 = game.add.tween(axeBig.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true, 300);
-        tween2.start();
-        const tween3 = game.add.tween(axeSmall.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true, 300);
-        tween3.start();
-        const tween4 = game.add.tween(continueText.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true, 600);
-        tween4.start();
+        game.add.tween(freeSpinsText).to({y: game.world.height * 0.2}, 1000, Phaser.Easing.Bounce.Out, true);
+        game.add.tween(freeSpinsLevel).to({y: game.world.height / 2}, 1000, Phaser.Easing.Bounce.Out, true);
+        game.add.tween(axeBig.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true, 300);
+        game.add.tween(axeSmall.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true, 300);
+        game.add.tween(continueText.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true)
+            .onComplete.add(() => {
+                continueText.rotation = 0.1;
+                game.add.tween(continueText).to({rotation: -0.1}, 100, Phaser.Easing.Elastic.Out, true, 0, 4, true)
+                    .onComplete.add(() => {
+                        continueText.rotation = 0;
+                    }, this);
+            }, this);
     }
 
 }
