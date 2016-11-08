@@ -33,6 +33,7 @@ export class FS {
         this.balanceContainer = this.add.group();
         this.menuContainer = this.add.group();
         this.fsContainer = this.add.group();
+
         model.el('bgContainer', this.bgContainer);
         model.el('mainContainer', this.mainContainer);
         model.el('balanceContainer', this.balanceContainer);
@@ -40,6 +41,7 @@ export class FS {
         model.el('panelContainer', this.panelContainer);
         model.el('menuContainer', this.menuContainer);
         model.el('fsContainer', this.fsContainer);
+
         model.state('FSMode', true);
         model.state('fastRoll', false);
         model.state('isAnimations', true);
@@ -83,12 +85,13 @@ export class FS {
         }
 
         // PreAnimation
-        let darkness = model.el('darkness');
-        this.add.tween(darkness).to( { alpha: 0 }, 1000, 'Linear', true);
-
         events.trigger('fs:init', 15);
 
         this.drawLevelCharacter();
+        let darkness = this.add.graphics();
+        darkness.beginFill(0x000000);
+        darkness.drawRect(0, 0, this.game.width, this.game.height);
+        this.add.tween(darkness).to( { alpha: 0 }, 2500, 'Linear', true);
     }
 
     update() {
@@ -172,7 +175,6 @@ export class FS {
         let elementsContainer = this.game.add.group();
         model.el('elementsContainer', elementsContainer);
         this.machineContainer.add(elementsContainer);
-
 
         let glistaContainer = this.game.add.group();
         model.el('glistaContainer', glistaContainer);

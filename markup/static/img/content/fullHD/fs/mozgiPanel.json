@@ -1,0 +1,36 @@
+{"frames": [
+
+{
+	"filename": "UI_FS_01.png",
+	"frame": {"x":1,"y":1,"w":192,"h":191},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":2,"w":192,"h":191},
+	"sourceSize": {"w":192,"h":200}
+},
+{
+	"filename": "UI_FS_02.png",
+	"frame": {"x":195,"y":1,"w":192,"h":191},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":2,"w":192,"h":191},
+	"sourceSize": {"w":192,"h":200}
+},
+{
+	"filename": "UI_FS_03.png",
+	"frame": {"x":389,"y":1,"w":192,"h":191},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":2,"w":192,"h":191},
+	"sourceSize": {"w":192,"h":200}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "mozgiPanel.png",
+	"format": "RGBA8888",
+	"size": {"w":582,"h":193},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:1ad5f597d46dc3ef9fab5e34ac789f43:c1be46a47e7d11857487631f8328804d:baa7f61ab1eb1316a333c664353b0b9f$"
+}
+}
