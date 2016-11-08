@@ -272,6 +272,7 @@ export let buttons = (function () {
         let y = game.world.height - 15;
 
         function menuOnClick() {
+            $('#volume').prop('value', sound.volume * 100);
             $('#checkSound').prop('checked', model.state('sound'));
             $('#checkMusic').prop('checked', model.state('music'));
             $('#fastSpin').prop('checked', model.state('fastRoll'));
@@ -294,12 +295,12 @@ export let buttons = (function () {
 
         let soundButton;
         function soundOnClick() {
-            if (game.sound.volume > 0) {
+            if (sound.volume > 0) {
                 soundButton.frameName = 'soundOff.png';
-                game.sound.volume = 0;
+                sound.volume = 0;
             } else {
                 soundButton.frameName = 'soundOn.png';
-                game.sound.volume = 1;
+                sound.volume = 100;
             }
         }
 
