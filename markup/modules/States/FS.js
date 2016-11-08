@@ -13,6 +13,8 @@ import { events } from 'modules/Events/Events';
 import { settings } from '../../modules/Menu/Settings';
 import { sound } from '../../modules/Sound/Sound';
 import { mobileSettings } from '../../modules/Menu/MobileSettings';
+import { fs } from '../../modules/FS/FS';
+import { FSCharapter } from '../../modules/FSCharapter/FSCharapter';
 
 
 export class FS {
@@ -80,10 +82,13 @@ export class FS {
             settings.initDesktopSettings(this.game);
         }
 
-
         // PreAnimation
         let darkness = model.el('darkness');
         this.add.tween(darkness).to( { alpha: 0 }, 1000, 'Linear', true);
+
+        events.trigger('fs:init', 15);
+
+        this.drawLevelCharacter();
     }
 
     update() {
@@ -119,6 +124,21 @@ export class FS {
         } else {
             animBG.visible = false;
         }
+    }
+
+    drawLevelCharacter() {
+        let zombie = new FSCharapter({
+            game: this.game,
+            position: {
+                x: 270,
+                y: 680
+            }
+        });
+        model.el('zombie', zombie);
+    }
+
+    drawFlyingBrain() {
+
     }
 
     initMainContainer() {
@@ -181,9 +201,10 @@ export class FS {
         }
         const fsMulti = this.add.sprite(multiX,
             multiY, 'numbers',
-            'multi' + '1' + '.png',
+            'multi' + '2' + '.png',
             this.fsContainer);
         fsMulti.anchor.set(0.5);
+        model.el('fsMulti', fsMulti);
         let levelX;
         let levelY;
         let levelFont;
@@ -192,8 +213,8 @@ export class FS {
             levelY = 55;
             levelFont = 'bold 40px Helvetica, Arial';
         } else {
-            levelX = 1195;
-            levelY = 950;
+            levelX = 1197;
+            levelY = 947;
             levelFont = 'bold 80px Helvetica, Arial';
         }
         const fsLevel = this.add.text(levelX,
@@ -201,7 +222,9 @@ export class FS {
             '15',
             {font: levelFont, fill: '#fff', align: 'center'},
             this.fsContainer);
-        fsLevel.anchor.set(0.5);
+        model.el('fsLevel', fsLevel);
+        fsLevel.anchor.set(0.5)
+        fsLevel.alpha = 0;
 
     }
 
