@@ -89,6 +89,7 @@ export let fs = (function () {
             y = 600;
         }
         let brainPanel = game.add.sprite(x, y, 'mozgiPanel', '01.png');
+        brainPanel.anchor.set(0.5);
     }
 
     events.on('fs:init', initFS);

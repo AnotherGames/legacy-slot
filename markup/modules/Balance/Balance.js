@@ -154,6 +154,7 @@ export let balance = (function () {
                     '0',
                     {font: '25px Helvetica, Arial', fill: '#e8b075', align: 'center'},
                     topBalanceContainer);
+                model.el('winSum', balanceText.winSum);
 
                 balanceText.totalWinText = game.add.text(
                     balanceText.winSum.x + balanceText.winSum.width + D,
@@ -168,6 +169,7 @@ export let balance = (function () {
                     '0',
                     {font: '25px Helvetica, Arial', fill: '#e8b075', align: 'center'},
                     topBalanceContainer);
+                model.el('totalWinSum', balanceText.totalWinSum);
 
                 balanceText.winSum.setShadow(0, 0, '#e8b075', 2);
                 balanceText.totalWinSum.setShadow(0, 0, '#e8b075', 2);
