@@ -13,6 +13,7 @@ import { events } from 'modules/Events/Events';
 import { settings } from '../../modules/Menu/Settings';
 import { sound } from '../../modules/Sound/Sound';
 import { mobileSettings } from '../../modules/Menu/MobileSettings';
+import { FSCharapter } from '../../modules/FSCharapter/FSCharapter';
 
 export class Main {
     constructor(game) {
@@ -88,6 +89,18 @@ export class Main {
         this.add.tween(darkness).to( { alpha: 0 }, 1000, 'Linear', true);
         model.el('darkness', darkness);
         // this.state.start('FS');
+
+        // FS ZOMB
+        let zomb = new FSCharapter({
+            game: this.game,
+            position: {
+                x: 500,
+                y: 500
+            }
+        });
+        setInterval(function () {
+            zomb.Up();
+        }, 2000);
     }
 
     update() {
