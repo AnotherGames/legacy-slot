@@ -128,6 +128,7 @@ function loadFSAssets(game) {
     game.load.image('fsBG', 'bg/fsBG.png');
     game.load.image('axe', 'fs/axe.png');
     game.load.image('axeSmall', 'fs/axeSmall.png');
+    game.load.image('skull', 'fs/skull.png');
     game.load.atlasJSONArray('mozgiPanel', 'fs/mozgiPanel.png', 'fs/mozgiPanel.json');
     if (model.flag('mobile')) {
         game.load.image('altary', 'fs/altary.png');

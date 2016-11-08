@@ -21,6 +21,7 @@ export let fs = (function () {
         fsCount = amount;
         fsEnd = false;
         model.state('fsEnd', false);
+        model.data('fsMulti', 2);
         startFSRoll();
     }
 
@@ -66,12 +67,11 @@ export let fs = (function () {
         let fsMulti = model.el('fsMulti');
         let multiValue = model.data('rollResponse').FsBonus.Multi;
         fsMulti.frameName = 'multi' + multiValue + '.png';
-        brainCount++;
-        if (brainCount === 3) {
+
+        // let multiValue = model.data('rollResponse').FsBonus.Level;
+        if (multiValue > model.data('fsMulti')) {
             model.el('zombie').Up();
-            brainCount = 0;
         }
-        let levelValue = model.data('rollResponse').FsBonus.Level;
     }
 
     events.on('fs:init', initFS);
