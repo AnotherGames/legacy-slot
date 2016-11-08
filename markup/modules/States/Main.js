@@ -107,7 +107,6 @@ export class Main {
             this.game.world.centerY,        // Y position
             'animBG'     // the key of the object in cache
         );
-        animBG.scale.set(1);
         animBG.setAnimationByName(
             0,          // Track index
             '1',     // Animation's name
