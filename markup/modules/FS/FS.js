@@ -23,6 +23,7 @@ export let fs = (function () {
         model.state('fsEnd', false);
         model.data('fsMulti', 2);
         startFSRoll();
+        changeBrainPanel();
     }
 
     function startFSRoll() {
@@ -54,11 +55,12 @@ export let fs = (function () {
         let game = model.el('game');
         model.state('fsEnd', true);
         fsText.destroy();
-        setTimeout(() => {
-            if (game.state.current != 'Main') {
-                game.state.start('Main');
-            }
-        }, 2500);
+        events.trigger('main:drawWinScreen');
+        // setTimeout(() => {
+        //     if (game.state.current != 'Main') {
+        //         game.state.start('Main');
+        //     }
+        // }, 2500);
         // clearTimeout(model.data('autoTimeout'));
     }
 
@@ -73,6 +75,20 @@ export let fs = (function () {
             model.el('zombie').Up();
             model.data('fsMulti', multiValue);
         }
+    }
+
+    function changeBrainPanel(number) {
+        let x, y;
+        let game = model.el('game');
+        if (model.flag('mobile')) {
+            let mozgCountBG = model.el('mozgCountBG');
+            x = mozgCountBG.x;
+            y = mozgCountBG.y;
+        } else {
+            x = 200;
+            y = 600;
+        }
+        let brainPanel = game.add.sprite(x, y, 'mozgiPanel', '01.png');
     }
 
     events.on('fs:init', initFS);

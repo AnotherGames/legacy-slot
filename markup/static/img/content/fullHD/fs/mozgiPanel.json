@@ -1,7 +1,7 @@
 {"frames": [
 
 {
-	"filename": "UI_FS_01.png",
+	"filename": "01.png",
 	"frame": {"x":1,"y":1,"w":192,"h":191},
 	"rotated": false,
 	"trimmed": true,
@@ -9,7 +9,7 @@
 	"sourceSize": {"w":192,"h":200}
 },
 {
-	"filename": "UI_FS_02.png",
+	"filename": "02.png",
 	"frame": {"x":195,"y":1,"w":192,"h":191},
 	"rotated": false,
 	"trimmed": true,
@@ -17,7 +17,7 @@
 	"sourceSize": {"w":192,"h":200}
 },
 {
-	"filename": "UI_FS_03.png",
+	"filename": "03.png",
 	"frame": {"x":389,"y":1,"w":192,"h":191},
 	"rotated": false,
 	"trimmed": true,

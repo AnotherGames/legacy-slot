@@ -45,6 +45,7 @@ export class FS {
         model.state('FSMode', true);
         model.state('fastRoll', false);
         model.state('isAnimations', true);
+
     }
     preload() {
 
@@ -90,10 +91,14 @@ export class FS {
         this.drawLevelCharacter();
         this.drawFlyingBrain();
 
+        this.transitionContainer = this.add.group();
+        model.el('transitionContainer', this.transitionContainer);
+
         let darkness = this.add.graphics();
         darkness.beginFill(0x000000);
         darkness.drawRect(0, 0, this.game.width, this.game.height);
         this.add.tween(darkness).to( { alpha: 0 }, 2500, 'Linear', true);
+
     }
 
     update() {
@@ -216,6 +221,7 @@ export class FS {
         if (model.flag('mobile')) {
             const mozgCountBG = this.add.sprite(385, 30, 'multiTable', null, this.fsContainer);
             mozgCountBG.anchor.set(0.5);
+            model.el('mozgCountBG', mozgCountBG);
             const fsLevelBG = this.add.sprite(240, 55, 'fsTotalTable', null, this.fsContainer);
             fsLevelBG.anchor.set(0.5);
             const multiBG = this.add.sprite(120, 600, 'multiRip', null, this.fsContainer);

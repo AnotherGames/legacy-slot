@@ -133,6 +133,7 @@ export let roll = (function () {
 
             // FS
             if (model.state('FSMode')) {
+
                 let rollResponse = model.data('rollResponse');
                 if (rollResponse.WinLines.length > 0) {
                     if (model.state('evilBrain')) {
@@ -151,6 +152,13 @@ export let roll = (function () {
                     // if (model.state('fsEnd')) return;
                     events.trigger('fs:next');
                 }
+
+                let winSum = model.el('winSum');
+                let totalWinSum = model.el('totalWinSum');
+
+                totalWinSum.text = rollResponse.FsBonus.TotalFSWinCoins;
+                winSum.text = rollResponse.Balance.TotalWinCoins;
+
             }
             model.state('roll:progress', false);
         });

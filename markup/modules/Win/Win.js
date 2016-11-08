@@ -184,9 +184,66 @@ export let win = (function () {
         }
     }
 
+    function drawWinScreen() {
+        let game = model.el('game');
+        let transitionContainer = model.el('transitionContainer');
+
+        const transitionBG = game.add.sprite(0, 0, 'initBG', null, transitionContainer);
+        const winText = game.add.sprite(game.world.width / 2,
+            -400,
+            'text',
+            'totalW.png',
+            transitionContainer);
+        winText.anchor.set(0.5);
+
+        const winCount = game.add.text(game.world.width / 2,
+            -200,
+            '15',
+            {font: 'bold 140px Helvetica, Arial', fill: '#fff', align: 'center'},
+            transitionContainer);
+        winCount.anchor.set(0.5);
+
+        const skull = game.add.sprite(game.world.width / 2,
+            game.world.height * 0.7,
+            'skull',
+            null,
+            transitionContainer);
+        skull.anchor.set(0.5);
+        skull.scale.setTo(0.1, 0.1);
+
+        const continueText = game.add.sprite(game.world.width / 2,
+            game.world.height * 0.9,
+            'text',
+            'continue.png',
+            transitionContainer);
+        continueText.anchor.set(0.5);
+        continueText.scale.setTo(0.1, 0.1);
+
+        continueText.inputEnabled = true;
+        continueText.input.priorityID = 2;
+        continueText.events.onInputDown.add(function () {
+            sound.sounds.button.play();
+            game.state.start('Main');
+        });
+
+        game.add.tween(winText).to({y: game.world.height * 0.2}, 1000, Phaser.Easing.Bounce.Out, true);
+        game.add.tween(winCount).to({y: game.world.height * 0.45}, 1000, Phaser.Easing.Bounce.Out, true);
+        game.add.tween(continueText.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true);
+        game.add.tween(skull.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true, 300)
+            .onComplete.add(() => {
+                skull.rotation = 0.1;
+                game.add.tween(skull).to({rotation: -0.1}, 100, Phaser.Easing.Elastic.Out, true, 0, 4, true)
+                    .onComplete.add(() => {
+                        skull.rotation = 0;
+                    }, this);
+            }, this);
+    }
+
     events.on('roll:end', showWin);
     events.on('roll:start', cleanWin);
     events.on('win:clean', cleanWinElements);
+
+    events.on('main:drawWinScreen', drawWinScreen);
 
     return {
 
