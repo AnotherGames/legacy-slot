@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "Whdjx3rVpMynVA2KBCiPjT3KPAo", "spine": "3.4.02", "width": 5577.28, "height": 2563.89, "images": "" },
+"skeleton": { "hash": "N1/O3WZukernySjwo59LP2FMYxI", "spine": "3.4.02", "width": 5350.87, "height": 2566.88, "images": "" },
 "bones": [
 	{ "name": "root" },
 	{ "name": "Back", "parent": "root" },
@@ -42,58 +42,58 @@
 "skins": {
 	"default": {
 		"Potez/E_0007_Layer-1": {
-			"Potez/E_0007_Layer-1": { "x": 6.95, "y": -2.76, "scaleX": 2.816, "scaleY": 2.816, "width": 300, "height": 300 }
+			"Potez/E_0007_Layer-1": { "x": 6.95, "y": -2.76, "scaleX": 5.651, "scaleY": 5.651, "width": 150, "height": 150 }
 		},
 		"Potez/cloud": {
-			"Potez/cloud": { "x": 243.19, "y": -77.25, "scaleX": -2.876, "scaleY": 2.975, "width": 1000, "height": 500 }
+			"Potez/cloud": { "x": 243.19, "y": -77.25, "scaleX": -4.844, "scaleY": 5.97, "width": 500, "height": 250 }
 		},
 		"Potez/cloud_2_r": {
-			"Potez/cloud_2_r": { "x": -742.07, "y": -84.72, "width": 1000, "height": 500 }
+			"Potez/cloud_2_r": { "x": -742.07, "y": -84.72, "scaleX": 2.006, "scaleY": 2.006, "width": 500, "height": 250 }
 		},
 		"Potez/cloud_r": {
-			"Potez/cloud_r": { "x": 809.97, "y": -125.05, "width": 1000, "height": 500 }
+			"Potez/cloud_r": { "x": 809.97, "y": -125.05, "scaleX": 2.006, "scaleY": 2.006, "width": 500, "height": 250 }
 		},
 		"Potez/fff": {
-			"Potez/fff": { "x": -117.71, "y": 414.55, "width": 800, "height": 938 }
+			"Potez/fff": { "x": -117.71, "y": 414.55, "scaleX": 2.006, "scaleY": 2.006, "width": 400, "height": 469 }
 		},
 		"Potez/z_0000_Layer-8": {
-			"Potez/z_0000_Layer-8": { "x": 33.38, "y": -120.36, "scaleX": 2.135, "scaleY": 1.105, "width": 1139, "height": 948 }
+			"Potez/z_0000_Layer-8": { "x": 33.38, "y": -80.15, "scaleX": 4.283, "scaleY": 2.218, "width": 570, "height": 474 }
 		},
 		"Potez/z_0009_Layer-5": {
-			"Potez/z_0009_Layer-5": { "x": 161.17, "y": 272.92, "width": 875, "height": 673 }
+			"Potez/z_0009_Layer-5": { "x": 161.17, "y": 272.92, "scaleX": 2.006, "scaleY": 2.006, "width": 438, "height": 337 }
 		},
 		"Potez/z_0010_Layer-24-copy": {
-			"Potez/z_0010_Layer-24-copy": { "y": 235.42, "width": 423, "height": 539 }
+			"Potez/z_0010_Layer-24-copy": { "y": 235.42, "scaleX": 2.006, "scaleY": 2.006, "width": 212, "height": 270 }
 		},
 		"Potez/z_0010_Layer-24-copy2": {
-			"Potez/z_0010_Layer-24-copy": { "y": 239.62, "width": 423, "height": 539 }
+			"Potez/z_0010_Layer-24-copy": { "y": 239.62, "scaleX": 2.006, "scaleY": 2.006, "width": 212, "height": 270 }
 		},
 		"Potez/z_0011_Layer-3": {
-			"Potez/z_0011_Layer-3": { "y": 195.69, "scaleX": 1.933, "scaleY": 1.933, "width": 177, "height": 229 }
+			"Potez/z_0011_Layer-3": { "y": 195.69, "scaleX": 3.878, "scaleY": 3.878, "width": 89, "height": 115 }
 		},
 		"Potez/z_0014_Rectangle-6": {
-			"Potez/z_0014_Rectangle-6": { "x": 2.33, "y": 15.9, "scaleX": 0.103, "scaleY": 0.103, "width": 216, "height": 365 }
+			"Potez/z_0014_Rectangle-6": { "x": 2.33, "y": 15.9, "scaleX": 0.207, "scaleY": 0.207, "width": 108, "height": 183 }
 		},
 		"Potez/z_0015_Rectangle-4": {
-			"Potez/z_0015_Rectangle-4": { "y": 123.92, "width": 281, "height": 362 }
+			"Potez/z_0015_Rectangle-4": { "y": 123.92, "scaleX": 2.006, "scaleY": 2.006, "width": 141, "height": 181 }
 		},
 		"Potez/z_0016_Layer-1": {
-			"Potez/z_0016_Layer-1": { "x": 2.32, "y": 51.12, "scaleX": 0.555, "scaleY": 0.555, "width": 172, "height": 263 }
+			"Potez/z_0016_Layer-1": { "x": 2.32, "y": 51.12, "scaleX": 1.114, "scaleY": 1.114, "width": 86, "height": 132 }
 		},
 		"Potez/z_0017_Rectangle-3": {
-			"Potez/z_0017_Rectangle-3": { "x": -17.49, "y": 50.54, "scaleX": 0.265, "scaleY": 0.265, "width": 293, "height": 435 }
+			"Potez/z_0017_Rectangle-3": { "x": -17.49, "y": 50.54, "scaleX": 0.532, "scaleY": 0.532, "width": 147, "height": 218 }
 		},
 		"Potez/z_0019_Rectangle-1": {
-			"Potez/z_0019_Rectangle-1": { "x": 53.57, "y": 128.91, "width": 198, "height": 309 }
+			"Potez/z_0019_Rectangle-1": { "x": 53.57, "y": 128.91, "scaleX": 2.006, "scaleY": 2.006, "width": 99, "height": 155 }
 		},
 		"Potez/z_0021_Layer-7": {
-			"Potez/z_0021_Layer-7": { "x": 600.39, "y": 317, "width": 660, "height": 448 }
+			"Potez/z_0021_Layer-7": { "x": 600.39, "y": 317, "scaleX": 2.006, "scaleY": 2.006, "width": 330, "height": 224 }
 		},
 		"Potez/z_0022_Layer-4": {
-			"Potez/z_0022_Layer-4": { "x": 0.83, "y": -178.34, "scaleX": 13.843, "width": 139, "height": 722 }
+			"Potez/z_0022_Layer-4": { "x": 0.83, "y": -178.34, "scaleX": 27.773, "scaleY": 2.006, "width": 70, "height": 361 }
 		},
 		"Potez/z_0023_Layer-15-copy": {
-			"Potez/z_0023_Layer-15-copy": { "width": 1920, "height": 1080 }
+			"Potez/z_0023_Layer-15-copy": { "scaleX": 2.006, "scaleY": 2.006, "width": 960, "height": 540 }
 		}
 	}
 },
