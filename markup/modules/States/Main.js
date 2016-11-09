@@ -17,6 +17,7 @@ import { FSCharapter } from '../../modules/FSCharapter/FSCharapter';
 
 
 import { controller } from 'modules/AutoDeskButton/controller';
+import { controller as mobileController } from 'modules/MobileSettings/controller';
 
 export class Main {
     constructor(game) {
@@ -95,6 +96,7 @@ export class Main {
         darkness.drawRect(0, 0, this.game.width, this.game.height);
         this.add.tween(darkness).to( { alpha: 0 }, 1000, 'Linear', true);
         controller.init();
+        mobileController.init();
     }
 
     update() {
