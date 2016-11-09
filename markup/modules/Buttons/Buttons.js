@@ -115,16 +115,20 @@ export let buttons = (function () {
         soundButton.inputEnabled = true;
         soundButton.input.priorityID = 1;
         soundButton.events.onInputDown.add(function () {
-            // soundButton.frameName = (soundButton.frameName === 'soundOut.png') ? 'sound.png' : 'soundOut.png';
-            if (sound.volume > 0) {
+            let settingsSoundButton = model.el('settingsButtonSound');
+            let settingsMusicButton = model.el('settingsButtonMusic');
+            if (sound.isSound || sound.isMusic) {
+                sound.isSound = sound.isMusic = false;
                 soundButton.frameName = 'soundOut.png';
-                sound.volume = 0;
+                settingsSoundButton.frameName = 'soundOff.png';
+                settingsMusicButton.frameName = 'musicOff.png';
             } else {
+                sound.isSound = sound.isMusic = true;
                 soundButton.frameName = 'sound.png';
-                sound.volume = 1;
+                settingsSoundButton.frameName = 'soundOn.png';
+                settingsMusicButton.frameName = 'musicOn.png';
                 sound.sounds.button.play();
             }
-            console.log(model.state('sound'));
         });
 
         model.el('spinButton', spinButton);
