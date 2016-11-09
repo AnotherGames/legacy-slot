@@ -212,9 +212,9 @@ export class Main {
         continueText.anchor.set(0.5);
         continueText.scale.setTo(0.1, 0.1);
 
-        continueText.inputEnabled = true;
-        continueText.input.priorityID = 2;
-        continueText.events.onInputDown.add(function () {
+        transitionBG.inputEnabled = true;
+        transitionBG.input.priorityID = 2;
+        transitionBG.events.onInputDown.add(function () {
             sound.music.startPerehod.stop();
             sound.sounds.button.play();
             game.state.start('FS');
