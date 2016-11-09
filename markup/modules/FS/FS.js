@@ -44,7 +44,7 @@ export let fs = (function () {
             fsText.text = fsCount;
             model.data('fsCount', fsCount);
             // events.trigger('fsplay:count', fsCount);
-        } else {
+        } else if (!fsEnd) {
             events.trigger('fs:stop');
             // model.state('autoplay', null);
         }
@@ -117,10 +117,15 @@ export let fs = (function () {
         }
     }
 
+    function endFix() {
+        console.log('End fix!');
+    }
+
     events.on('fs:init', initFS);
     events.on('fs:next', startFSRoll);
     events.on('fs:stop', stopFS);
     events.on('fs:brain', fsBrain);
+    events.on('fs:stop', endFix);
     // events.on('autoplay:init:desktop', initAutoplay);
     // events.on('autoplay:stop', stopAutoplay);
     // events.on('autoplay:stop:desktop', stopAutoplay);
