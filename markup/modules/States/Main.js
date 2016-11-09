@@ -56,7 +56,7 @@ export class Main {
     }
 
     create() {
-        sound.init(this.game);
+        sound.init({});
         sound.music.fon.play();
 
         $('.history__button').click((event) => {

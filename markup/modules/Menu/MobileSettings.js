@@ -4,11 +4,11 @@ import { model } from 'modules/Model/Model';
 import { controller } from 'modules/Controller/Controller';
 
 export let mobileSettings = {
-    game: undefined,
-    container: undefined,
-    infoRules: undefined,
-    overlay: undefined,
-    _deltaX: undefined,
+    game: null,
+    container: null,
+    infoRules: null,
+    overlay: null,
+    _deltaX: null,
     _deltaY: 20,
 
     _drawBackground: function (game) {
@@ -51,13 +51,19 @@ export let mobileSettings = {
         let _this = this;
         this.soundButton.events.onInputDown.add(function () {
             if (controller.isEvent) return;
+            let menuButtonSound = model.el('soundButton');
+
             events.trigger('buttons:changeSoundButton');
             if (sound.isSound) {
                 _this.soundButton.frameName = 'soundOff.png';
                 sound.isSound = false;
+                if (!sound.isMusic) {
+                    menuButtonSound.frameName = 'soundOut.png';
+                }
             } else {
                 _this.soundButton.frameName = 'soundOn.png';
                 sound.isSound = true;
+                menuButtonSound.frameName = 'sound.png';
                 sound.sounds.button.play();
             }
         });
@@ -69,6 +75,8 @@ export let mobileSettings = {
             'soundText.png',
             this.container);
         soundText.anchor.set(0.5);
+
+        model.el('settingsButtonSound', this.soundButton);
     },
     _drawMusicButton: function (game) {
         this.musicButton = game.add.sprite(
@@ -89,13 +97,19 @@ export let mobileSettings = {
         let _this = this;
         this.musicButton.events.onInputDown.add(function () {
             if (controller.isEvent) return;
+            let menuButtonSound = model.el('soundButton');
+
             sound.sounds.button.play();
             if (sound.isMusic) {
                 _this.musicButton.frameName = 'musicOff.png';
                 sound.isMusic = false;
+                if (!sound.isMusic) {
+                    menuButtonSound.frameName = 'soundOut.png';
+                }
             } else {
                 _this.musicButton.frameName = 'musicOn.png';
                 sound.isMusic = true;
+                menuButtonSound.frameName = 'sound.png';
             }
         });
 
@@ -106,6 +120,8 @@ export let mobileSettings = {
             'musicText.png',
             this.container);
         musicText.anchor.set(0.5);
+
+        model.el('settingsButtonMusic', this.musicButton);
     },
     _drawFastSpinButton: function (game) {
         const fastSpinButton = game.add.sprite(
