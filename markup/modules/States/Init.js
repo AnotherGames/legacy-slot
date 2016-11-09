@@ -33,7 +33,7 @@ export class Init {
             .onComplete.add(() => {
                 this.playInterval = setInterval(() => {
                     initPlayBtn.rotation = 0.1;
-                    this.add.tween(initPlayBtn).to({rotation: -0.1}, 130, Phaser.Easing.Elastic.Out, true, 0, 3, true)
+                    this.add.tween(initPlayBtn).to({rotation: -0.1}, 100, 'Linear', true, 0, 3, true)
                         .onComplete.add(() => {
                             initPlayBtn.rotation = 0;
                         }, this);

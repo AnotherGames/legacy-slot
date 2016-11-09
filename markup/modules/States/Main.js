@@ -224,7 +224,7 @@ export class Main {
         game.add.tween(continueText.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true)
             .onComplete.add(() => {
                 continueText.rotation = 0.1;
-                game.add.tween(continueText).to({rotation: -0.1}, 100, Phaser.Easing.Elastic.Out, true, 0, 4, true)
+                game.add.tween(continueText).to({rotation: -0.1}, 100, 'Linear', true, 0, 4, true)
                     .onComplete.add(() => {
                         continueText.rotation = 0;
                     }, this);

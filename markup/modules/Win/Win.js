@@ -238,7 +238,7 @@ export let win = (function () {
         game.add.tween(skull.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true, 300)
             .onComplete.add(() => {
                 skull.rotation = 0.1;
-                game.add.tween(skull).to({rotation: -0.1}, 100, Phaser.Easing.Elastic.Out, true, 0, 4, true)
+                game.add.tween(skull).to({rotation: -0.1}, 100, 'Linear', true, 0, 4, true)
                     .onComplete.add(() => {
                         skull.rotation = 0;
                     }, this);
