@@ -1,7 +1,7 @@
 import { model } from 'modules/Model/Model';
-import { events } from 'modules/Events/Events';
+import { events } from 'modules/Util/Events';
 import { config } from 'modules/Util/Config';
-import { Glista } from 'modules/Glista/Glista';
+import { Glista } from 'modules/Class/Glista';
 import { sound } from '../../modules/Sound/Sound';
 
 export let win = (function () {

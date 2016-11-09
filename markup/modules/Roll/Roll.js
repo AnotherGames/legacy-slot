@@ -1,8 +1,8 @@
 import { model } from 'modules/Model/Model';
-import { events } from 'modules/Events/Events';
-import { Wheel } from 'modules/Wheel/Wheel';
+import { events } from 'modules/Util/Events';
+import { Wheel } from 'modules/Class/Wheel';
 import { config } from 'modules/Util/Config';
-import { util } from 'modules/Util/Util';
+import { request } from 'modules/Util/Request';
 import { sound } from '../../modules/Sound/Sound';
 
 export let roll = (function () {
@@ -41,7 +41,7 @@ export let roll = (function () {
     }
 
     function rollRequest(options) {
-        util.request('_Roll').then((data) => {
+        request.send('Roll').then((data) => {
 
             events.trigger('roll:start');
             model.state('roll:progress', true);
@@ -116,7 +116,7 @@ export let roll = (function () {
     }
 
     function rollEnd() {
-        util.request('_Ready').then((data) => {
+        request.send('Ready').then((data) => {
             // console.log('Ready done', data);
             if (!model.state('FSMode')) {
                 let rollResponse = model.data('rollResponse');

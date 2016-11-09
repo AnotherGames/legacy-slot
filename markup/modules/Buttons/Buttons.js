@@ -1,7 +1,7 @@
 import { model } from '../../modules/Model/Model';
-import { events } from '../../modules/Events/Events';
+import { events } from 'modules/Util/Events';
 import { drawAutoDesktop } from '../../modules/Buttons/Autoplay';
-import { util } from 'modules/Util/Util';
+import { request } from 'modules/Util/Request';
 import { sound } from '../../modules/Sound/Sound';
 import { controller } from 'modules/Controller/Controller';
 
@@ -27,7 +27,7 @@ export let buttons = (function () {
 
         function homeOnClick() {
             sound.sounds.button.play();
-            util.request('_Logout')
+            request.send('Logout')
                 .then((response) => {
                     console.log('Logout response:', response);
                 });

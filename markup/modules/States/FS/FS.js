@@ -4,17 +4,17 @@ import { win } from 'modules/Win/Win';
 import { model } from 'modules/Model/Model';
 import { roll } from 'modules/Roll/Roll';
 import { config } from 'modules/Util/Config';
-import { Wheel } from 'modules/Wheel/Wheel';
-import { Glista } from 'modules/Glista/Glista';
-import { Element } from 'modules/Element/Element';
+import { Wheel } from 'modules/Class/Wheel';
+import { Glista } from 'modules/Class/Glista';
+import { Element } from 'modules/Class/Element';
 import { balance } from 'modules/Balance/Balance';
 import { autoplay } from 'modules/Autoplay/Autoplay';
-import { events } from 'modules/Events/Events';
-import { settings } from '../../modules/Menu/Settings';
-import { sound } from '../../modules/Sound/Sound';
-import { mobileSettings } from '../../modules/Menu/MobileSettings';
-import { fs } from '../../modules/FS/FS';
-import { FSCharapter } from '../../modules/FSCharapter/FSCharapter';
+import { events } from 'modules/Util/Events';
+import { settings } from 'modules/Menu/Settings';
+import { sound } from 'modules/Sound/Sound';
+import { mobileSettings } from 'modules/Menu/MobileSettings';
+import { fs } from 'modules/States/FS/FSController';
+import { Zombie } from 'modules/Class/Zombie';
 
 
 export class FS {
@@ -148,7 +148,7 @@ export class FS {
             y = 700;
         }
 
-        let zombie = new FSCharapter({
+        let zombie = new Zombie({
             game: this.game,
             position: {
                 x,

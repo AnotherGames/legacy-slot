@@ -1,4 +1,4 @@
-import { events } from '../../modules/Events/Events';
+import { events } from 'modules/Util/Events';
 
 export let model = (function () {
 

@@ -1,4 +1,4 @@
-import { model } from '../../modules/Model/Model';
+import { model } from 'modules/Model/Model';
 
 export class Element {
     /*  param: {

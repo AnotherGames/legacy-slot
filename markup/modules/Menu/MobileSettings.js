@@ -1,5 +1,5 @@
 import { sound } from '../../modules/Sound/Sound';
-import { events } from 'modules/Events/Events';
+import { events } from 'modules/Util/Events';
 import { model } from 'modules/Model/Model';
 import { controller } from 'modules/Controller/Controller';
 

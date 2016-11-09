@@ -4,20 +4,15 @@ import { win } from 'modules/Win/Win';
 import { model } from 'modules/Model/Model';
 import { roll } from 'modules/Roll/Roll';
 import { config } from 'modules/Util/Config';
-import { Wheel } from 'modules/Wheel/Wheel';
-import { Glista } from 'modules/Glista/Glista';
-import { Element } from 'modules/Element/Element';
+import { Wheel } from 'modules/Class/Wheel';
+import { Glista } from 'modules/Class/Glista';
+import { Element } from 'modules/Class/Element';
 import { balance } from 'modules/Balance/Balance';
 import { autoplay } from 'modules/Autoplay/Autoplay';
-import { events } from 'modules/Events/Events';
-import { settings } from '../../modules/Menu/Settings';
-import { sound } from '../../modules/Sound/Sound';
-import { mobileSettings } from '../../modules/Menu/MobileSettings';
-import { FSCharapter } from '../../modules/FSCharapter/FSCharapter';
-
-
-import { controller } from 'modules/AutoDeskButton/controller';
-import { controller as mobileController } from 'modules/MobileSettings/controller';
+import { events } from 'modules/Util/Events';
+import { settings } from 'modules/Menu/Settings';
+import { sound } from 'modules/Sound/Sound';
+import { mobileSettings } from 'modules/Menu/MobileSettings';
 
 export class Main {
     constructor(game) {
@@ -95,8 +90,6 @@ export class Main {
         darkness.beginFill(0x000000);
         darkness.drawRect(0, 0, this.game.width, this.game.height);
         this.add.tween(darkness).to( { alpha: 0 }, 1000, 'Linear', true);
-        controller.init();
-        mobileController.init();
     }
 
     update() {

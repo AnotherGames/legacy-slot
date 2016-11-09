@@ -1,5 +1,5 @@
 import { model } from 'modules/Model/Model';
-import { events } from 'modules/Events/Events';
+import { events } from 'modules/Util/Events';
 
 export let balance = (function () {
 

@@ -1,5 +1,5 @@
 import { config } from '../../modules/Util/Config';
-import { Element } from '../../modules/Element/Element';
+import { Element } from '../../modules/Class/Element';
 
 export class Wheel {
     get elements() {

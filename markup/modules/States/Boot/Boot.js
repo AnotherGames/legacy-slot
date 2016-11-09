@@ -1,6 +1,6 @@
-import { model } from '../../modules/Model/Model';
-import { events } from '../../modules/Events/Events';
-import { util } from '../../modules/Util/Util';
+import { model } from 'modules/Model/Model';
+import { events } from 'modules/Util/Events';
+import { request } from 'modules/Util/Request';
 
 export class Boot {
     constructor(game) {
@@ -8,7 +8,7 @@ export class Boot {
     }
     init() {
         console.info('Boot State!');
-        util.request('_Initialise', 'fsBonus')
+        request.send('Initialise', 'fsBonus')
             .then(this.parseInitData)
             .catch((error) => {
                 console.error(error.message);
