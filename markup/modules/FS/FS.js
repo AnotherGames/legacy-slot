@@ -23,7 +23,7 @@ export let fs = (function () {
         model.state('fsEnd', false);
         model.data('fsMulti', 2);
         startFSRoll();
-        changeBrainPanel();
+        drawBrainPanel();
     }
 
     function startFSRoll() {
@@ -85,35 +85,35 @@ export let fs = (function () {
         changeBrainPanel();
     }
 
-    function changeBrainPanel() {
-        if (model.el('brainPanel')) {
-            let levelValue = model.data('rollResponse').FsBonus.Level;
-            let levelABS = levelValue % 3;
-            let brainPanel = model.el('brainPanel');
-            if (levelABS === 0) {
-                brainPanel.frameName = `03.png`;
-                setTimeout(() => {
-                    brainPanel.visible = false;
-                }, 500);
-            } else {
-                brainPanel.visible = true;
-                brainPanel.frameName = `0${levelABS}.png`;
-            }
+    function drawBrainPanel() {
+        let x, y;
+        let game = model.el('game');
+        if (model.flag('mobile')) {
+            let mozgCountBG = model.el('mozgCountBG');
+            x = mozgCountBG.x;
+            y = mozgCountBG.y;
         } else {
-            let x, y;
-            let game = model.el('game');
-            if (model.flag('mobile')) {
-                let mozgCountBG = model.el('mozgCountBG');
-                x = mozgCountBG.x;
-                y = mozgCountBG.y;
-            } else {
-                x = 972;
-                y = 949;
-            }
-            let brainPanel = game.add.sprite(x, y, 'mozgiPanel', '01.png');
-            brainPanel.anchor.set(0.5);
-            brainPanel.visible = false;
-            model.el('brainPanel', brainPanel);
+            x = 972;
+            y = 949;
+        }
+        let brainPanel = game.add.sprite(x, y, 'mozgiPanel', '01.png');
+        brainPanel.anchor.set(0.5);
+        brainPanel.visible = false;
+        model.el('brainPanel', brainPanel);
+    }
+
+    function changeBrainPanel() {
+        let levelValue = model.data('rollResponse').FsBonus.Level;
+        let levelABS = levelValue % 3;
+        let brainPanel = model.el('brainPanel');
+        if (levelABS === 0) {
+            brainPanel.frameName = `03.png`;
+            setTimeout(() => {
+                brainPanel.visible = false;
+            }, 500);
+        } else {
+            brainPanel.visible = true;
+            brainPanel.frameName = `0${levelABS}.png`;
         }
     }
 
