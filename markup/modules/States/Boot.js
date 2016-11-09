@@ -52,5 +52,6 @@ export class Boot {
             scoreCoins: data.Balance.ScoreCoins
         };
         model.data('currentBalance', currentBalance);
+        model.state('balance:init', true);
     }
 }

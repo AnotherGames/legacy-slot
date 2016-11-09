@@ -37,22 +37,25 @@ export let balance = (function () {
         container.add(topBalanceContainer);
         container.add(bottomBalanceContainer);
 
-        balanceData.linesLength = model.data('lines').length;
-        balanceData.coinsSteps = model.data('initBalance').CoinValue.map((value) => {
-            return (value / 100).toFixed(2);
-        });
-        balanceData.betSteps = model.data('initBalance').BetLevel;
+        if (model.state('balance:init')) {
+            balanceData.linesLength = model.data('lines').length;
+            balanceData.coinsSteps = model.data('initBalance').CoinValue.map((value) => {
+                return (value / 100).toFixed(2);
+            });
+            balanceData.betSteps = model.data('initBalance').BetLevel;
 
-        balanceData.coinsValue = balanceData.coinsSteps[0];
-        balanceData.coinsSum = model.data('initBalance').ScoreCoins;
-        balanceData.coinsCash = +(model.data('initBalance').ScoreCents / 100).toFixed(2);
+            balanceData.coinsValue = balanceData.coinsSteps[0];
+            balanceData.coinsSum = model.data('initBalance').ScoreCoins;
+            balanceData.coinsCash = +(model.data('initBalance').ScoreCents / 100).toFixed(2);
 
-        balanceData.betValue = balanceData.betSteps[0];
-        balanceData.betSum = +(balanceData.betValue * balanceData.linesLength).toFixed(0);
-        balanceData.betCash = +(balanceData.betSum * balanceData.coinsValue).toFixed(2) + '';
+            balanceData.betValue = balanceData.betSteps[0];
+            balanceData.betSum = +(balanceData.betValue * balanceData.linesLength).toFixed(0);
+            balanceData.betCash = +(balanceData.betSum * balanceData.coinsValue).toFixed(2) + '';
 
-        balanceData.winCash = (0).toFixed(2);
-        balanceData.currency = model.data('initBalance').Currency;
+            balanceData.winCash = (0).toFixed(2);
+            balanceData.currency = model.data('initBalance').Currency;
+            model.state('balance:init', false);
+        }
 
         let mainContainer = model.el('mainContainer');
         let balanceFont;
