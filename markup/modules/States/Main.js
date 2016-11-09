@@ -15,6 +15,9 @@ import { sound } from '../../modules/Sound/Sound';
 import { mobileSettings } from '../../modules/Menu/MobileSettings';
 import { FSCharapter } from '../../modules/FSCharapter/FSCharapter';
 
+
+import { controller } from 'modules/AutoDeskButton/controller';
+
 export class Main {
     constructor(game) {
 
@@ -91,7 +94,7 @@ export class Main {
         darkness.beginFill(0x000000);
         darkness.drawRect(0, 0, this.game.width, this.game.height);
         this.add.tween(darkness).to( { alpha: 0 }, 1000, 'Linear', true);
-
+        controller.init();
     }
 
     update() {
