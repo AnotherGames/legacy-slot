@@ -64,6 +64,9 @@ export let sound = {
         this.game = game;
         // Fon
         this.music.fon = this.game.add.audio('fon', 1, true);
+        this.music.fsFon = this.game.add.audio('fsFon', 1, true);
+        this.music.startPerehod = this.game.add.audio('startPerehod', 1, true);
+        this.music.finishPerehod = this.game.add.audio('finishPerehod', 1, true);
         // Sound
         //
         this.sounds.button = this.game.add.audio('buttonClick');

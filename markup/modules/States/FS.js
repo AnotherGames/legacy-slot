@@ -51,9 +51,8 @@ export class FS {
 
     }
     create() {
-        let fonFSSound = this.add.audio('fsFon', 1, true);
-        model.el('fonFSSound', fonFSSound);
-        fonFSSound.play();
+        sound.init(this.game);
+        sound.music.fsFon.play();
 
         let buttonSound = this.game.add.audio('buttonClick');
         model.el('buttonSound', buttonSound);
@@ -261,7 +260,7 @@ export class FS {
             {font: levelFont, fill: '#fff', align: 'center'},
             this.fsContainer);
         model.el('fsLevel', fsLevel);
-        fsLevel.anchor.set(0.5)
+        fsLevel.anchor.set(0.5);
         fsLevel.alpha = 0;
 
     }

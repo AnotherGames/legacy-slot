@@ -30,16 +30,8 @@ export let win = (function () {
                 events.trigger('main:drawTransitionScreen');
             }, 2000);
         }
-
         let game = model.el('game');
         let mainContainer = model.el('mainContainer');
-        let winSound = Math.round(Math.random()) ? sound.sounds.lineWin : sound.sounds.lineWin2;
-        winSound.addMarker('win', 0, 1, 1, false);
-        winSound.play('win');
-
-        // if (model.el('winTop')) {
-        //
-        // }
         let winTop = game.add.group();
 
         mainContainer.addAt(winTop, mainContainer.children.length);
@@ -72,6 +64,10 @@ export let win = (function () {
 
         let winTotalText = game.add.text(gameMachine.width / 2, gameMachine.height / 2 + 5, winTotalData, {font: '60px Helvetice, Arial', fill: '#e8b075', align: 'center'}, winTop);
         winTotalText.anchor.set(0.5);
+
+        let winSound = Math.round(Math.random()) ? sound.sounds.lineWin : sound.sounds.lineWin2;
+        winSound.addMarker('win', 0, 1, 1, false);
+        winSound.play('win');
 
     }
 
@@ -191,6 +187,8 @@ export let win = (function () {
     function drawWinScreen() {
         let game = model.el('game');
         let transitionContainer = model.el('transitionContainer');
+        sound.music.fsFon.stop();
+        sound.music.finishPerehod.play();
 
         const transitionBG = game.add.sprite(0, 0, 'initBG', null, transitionContainer);
         const winText = game.add.sprite(game.world.width / 2,
@@ -228,7 +226,9 @@ export let win = (function () {
         continueText.inputEnabled = true;
         continueText.input.priorityID = 2;
         continueText.events.onInputDown.add(function () {
+            sound.music.finishPerehod.stop();
             sound.sounds.button.play();
+            // sound.music.fon.play();
             game.state.start('Main');
         });
 

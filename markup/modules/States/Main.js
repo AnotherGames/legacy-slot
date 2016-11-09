@@ -48,7 +48,7 @@ export class Main {
         model.state('autoEnd', true);
         model.state('FSMode', false);
         events.on('main:drawTransitionScreen', this.drawTransitionScreen);
-        // events.on('main:drawWinScreen', this.drawWinScreen);
+
     }
 
     preload() {
@@ -170,6 +170,8 @@ export class Main {
     drawTransitionScreen() {
         let game = model.el('game');
         let transitionContainer = model.el('transitionContainer');
+        sound.music.fon.stop();
+        sound.music.startPerehod.play();
 
         const transitionBG = game.add.sprite(0, 0, 'initBG', null, transitionContainer);
         const freeSpinsText = game.add.sprite(game.world.width / 2,
@@ -213,6 +215,7 @@ export class Main {
         continueText.inputEnabled = true;
         continueText.input.priorityID = 2;
         continueText.events.onInputDown.add(function () {
+            sound.music.startPerehod.stop();
             sound.sounds.button.play();
             game.state.start('FS');
         });
