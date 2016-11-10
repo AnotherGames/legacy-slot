@@ -7,8 +7,8 @@ export let view = (() => {
         coinCashValue = model.balance('coinCash'),
         betCashValue = model.balance('betCash'),
         winCashValue = model.balance('winCash'),
-        greyStyle = {font: '18px Helvetica, Arial', fill: '#888888', align: 'center'},
-        cashStyle = {font: '18px Helvetica, Arial', fill: '#ffffff', align: 'center'},
+        greyStyle = {font: '20px Helvetica, Arial', fill: '#888888', align: 'center'},
+        cashStyle = {font: '20px Helvetica, Arial', fill: '#ffffff', align: 'center'},
         y = model.data('footerBottomCenterY')
     }) {
         const game = model.el('game');
