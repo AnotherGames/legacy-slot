@@ -42,9 +42,11 @@ export let controller = (() => {
 
         if (game.device.desktop) {
             game.scale.setGameSize(1920, 1080);
+            model.state('desktop', true);
             model.state('res', 'fullHD');
         } else {
             game.scale.setGameSize(1280, 720);
+            model.state('mobile', true);
             model.state('res', 'HD');
         }
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
