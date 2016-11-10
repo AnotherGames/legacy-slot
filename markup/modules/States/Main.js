@@ -12,7 +12,7 @@ import { autoplay } from 'modules/Autoplay/Autoplay';
 import { events } from 'modules/Events/Events';
 import { settings } from '../../modules/Menu/Settings';
 import { sound } from '../../modules/Sound/Sound';
-import { controller } from '../../modules/Controller/Controller';
+import { controller as mobileSettingsController } from '../../modules/MobileSettings/Controller';
 import { FSCharapter } from '../../modules/FSCharapter/FSCharapter';
 
 export class Main {
@@ -67,7 +67,7 @@ export class Main {
         this.initMainContainer();
         if (model.flag('mobile')) {
             buttons.drawMobileButtons(this.buttonsContainer, this, this.mainContainer.width);
-            controller.mobile.settings.init();
+            mobileSettingsController.init({});
             model.data('mainXLeft', 2 * model.data('buttonsDelta'));
             model.data('mainXRight', this.game.width - this.mainContainer.width - model.data('buttonsDelta') * 2);
         }
