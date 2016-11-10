@@ -59,8 +59,8 @@ export class Main {
     }
 
     create() {
-        footerController.initMobile();
-        balanceController.initMobile();
+        footerController.initDesktop();
+        balanceController.initDesktop();
 
 
         sound.init(this.game);
