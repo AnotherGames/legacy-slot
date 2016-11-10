@@ -59,13 +59,62 @@ export let view = (() => {
         model.data('footerBottomCenterY', game.height - heightBottom / 2);
     }
 
+    function drawHomeButton({
+        x = 25,
+        mobileY = model.el('game').height - 50,
+        desktopY = model.el('game').height - 15,
+        container = model.group('footer')
+    }) {
+        const game = model.el('game');
+        let y = (model.state('mobile')) ? mobileY : desktopY;
+        const homeButton = game.add.button(x, y, 'footerButtons', null, null, 'homeOn.png', 'home.png', 'homeOn.png', null, container);
+        homeButton.anchor.set(0.5);
+        model.el('homeButton', homeButton);
+        return homeButton;
+    }
+
+    function drawMenuButton({
+        x = 75,
+        y = model.el('game').height - 15,
+        container = model.group('footer')
+    }) {
+        const game = model.el('game');
+        const menuButton = game.add.button(x, y, 'footerButtons', null, null, 'menuOn.png', 'menu.png', 'menuOn.png', null, container);
+        menuButton.anchor.set(0.5);
+        model.el('menuButton', menuButton);
+        return menuButton;
+    }
+
+    function drawSoundButton({
+        x = 125,
+        y = model.el('game').height - 15,
+        container = model.group('footer')
+    }) {
+        const game = model.el('game');
+        const soundButton = game.add.button(x, y, 'footerButtons', null, null, 'soundOn.png', 'sound.png', null, null, container);
+        soundButton.anchor.set(0.5);
+        model.el('soundButton', soundButton);
+        return soundButton;
+    }
+
+    function drawFastButton({
+        x = 175,
+        y = model.el('game').height - 15,
+        container = model.group('footer')
+    }) {
+        const game = model.el('game');
+        const fastButton = game.add.button(x, y, 'footerButtons', null, null, null, 'fastSpinOff.png', null, null, container);
+        fastButton.anchor.set(0.5);
+        model.el('fastButton', fastButton);
+        return fastButton;
+    }
+
     function drawTime({
         container = model.group('footer'),
         styleDesktop = {font: '18px Helvetica, Arial', align: 'center'},
-        styleMobile = {font: '24px Helvetica, Arial', align: 'center'},
+        styleMobile = {font: '22px Helvetica, Arial', align: 'center'},
         color = '#e8b075'
     }) {
-        console.log('I am drawing Time!');
         const game = model.el('game');
 
         let currentHour = new Date().getHours();
@@ -99,8 +148,6 @@ export let view = (() => {
         footerTime.anchor.set(0.5);
         footerTime.x = game.width - footerTime.width;
         footerTime.fill = color;
-
-        console.log('Footer time: ', footerTime);
 
         model.el('footerTime', footerTime);
 
@@ -136,6 +183,10 @@ export let view = (() => {
     return {
         drawMobileFooter,
         drawDesktopFooter,
+        drawHomeButton,
+        drawMenuButton,
+        drawSoundButton,
+        drawFastButton,
         drawTime,
         updateTime
     }
