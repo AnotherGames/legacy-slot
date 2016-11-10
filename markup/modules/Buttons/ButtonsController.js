@@ -9,20 +9,20 @@ export let controller = (() => {
     function init() {
         game = model.el('game');
 
-        view.drawSpinButton({});
-        view.drawAutoButton({});
-        view.drawBetButton({});
-        view.drawMenuButton({});
-        view.drawSoundButton({});
+        view.draw.SpinButton({});
+        view.draw.AutoButton({});
+        view.draw.BetButton({});
+        view.draw.MenuButton({});
+        view.draw.SoundButton({});
 
         setButtonsX();
         setButtonsY();
     }
 
     function setButtonsX() {
-        let spinButtonWidth = 173;
+        const spinButtonWidth = 173; // Add some magic
         model.el('spinButtonWidth', spinButtonWidth);
-        let buttonsDelta = (game.width - model.group('main').width - spinButtonWidth) / 4; //
+        let buttonsDelta = (game.width - model.group('main').width - spinButtonWidth) / 4;
         model.el('buttonsDelta', buttonsDelta);
 
         let xRight = 3 * buttonsDelta + model.group('main').width + (spinButtonWidth / 2);
