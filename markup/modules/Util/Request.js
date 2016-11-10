@@ -17,7 +17,7 @@ export let request = (() => {
                 url = `${serviceUrl}/_${name}/${userID}/${casinoID}/${mode[options]}`;
                 break;
             case 'Roll':
-                url = `${serviceUrl}/_${name}/${model.data('sessionID')}/${model.data('currentBalance').betValue}/${model.data('currentBalance').coinsValue * 100}`;
+                url = `${serviceUrl}/_${name}/${model.data('sessionID')}/${model.balance('betValue')}/${model.balance('coinValue') * 100}`;
                 break;
             case 'Ready':
                 url = `${serviceUrl}/_${name}/${model.data('sessionID')}`;
