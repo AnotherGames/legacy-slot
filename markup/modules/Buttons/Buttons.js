@@ -104,7 +104,7 @@ export let buttons = (function () {
         menuButton.events.onInputDown.add(function () {
             if (model.state('menu') === 'open') return;
 
-            controller.handle.open();
+            controller.handle.openSettings();
         });
 
         soundButton = game.add.sprite(xSide, 0, 'mobileButtons', 'sound.png', container);
