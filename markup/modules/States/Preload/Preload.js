@@ -35,8 +35,8 @@ export class Preload {
         let closeCoinTween = this.add.tween(this.preloadCoin.scale);
         closeCoinTween.to({x: 0, y: 0}, 500, Phaser.Easing.In);
         closeCoinTween.start();
+        this.state.start('Init');
         closeCoinTween.onComplete.add(() => {
-            this.state.start('Init');
         }, this);
 
         let closeBarTween = this.add.tween(this.preloadBar);
