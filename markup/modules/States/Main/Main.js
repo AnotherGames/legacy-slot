@@ -2,7 +2,7 @@ import { buttons } from 'modules/Buttons/Buttons';
 import { menu } from 'modules/Menu/Menu';
 import { win } from 'modules/Win/Win';
 import { model } from 'modules/Model/Model';
-import { roll } from 'modules/Roll/Roll';
+// import { roll } from 'modules/Roll/Roll';
 import { config } from 'modules/Util/Config';
 import { Wheel } from 'modules/Class/Wheel';
 import { Glista } from 'modules/Class/Glista';
@@ -16,6 +16,7 @@ import { mobileSettings } from 'modules/Menu/MobileSettings';
 
 import { controller as balanceController } from 'modules/Balance/BalanceController';
 import { controller as footerController } from 'modules/Footer/FooterController';
+import { controller as rollController } from 'modules/Roll/RollController';
 
 
 export class Main {
@@ -82,7 +83,7 @@ export class Main {
         // buttons.drawHomeButton(this.balanceContainer, this);
         this.drawMainContainer();
 
-        events.trigger('roll:initWheels');
+        rollController.init();
 
         if (model.state('mobile')) {
             this.mainContainer.x = model.data('mainXLeft');
