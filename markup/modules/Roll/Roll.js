@@ -165,8 +165,8 @@ export let roll = (function () {
     }
 
     events.on('roll:initWheels', initWheels);
-    events.on('roll:request', rollRequest);
-    events.on('roll:end', rollEnd);
+    // events.on('roll:request', rollRequest);
+    // events.on('roll:end', rollEnd);
     events.on('autoplay:startRoll', rollRequest);
 
     return {

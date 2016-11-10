@@ -1,19 +1,21 @@
-import { buttons } from 'modules/Buttons/Buttons';
+import { events } from 'modules/Util/Events';
+import { model } from 'modules/Model/Model';
+import { config } from 'modules/Util/Config';
+
+
+// import { buttons } from 'modules/Buttons/Buttons';
+// import { roll } from 'modules/Roll/Roll';
+// import { Wheel } from 'modules/Class/Wheel';
+// import { Glista } from 'modules/Class/Glista';
+// import { Element } from 'modules/Class/Element';
+// import { balance } from 'modules/Balance/Balance';
+// import { mobileSettings } from 'modules/Menu/MobileSettings';
+import { autoplay } from 'modules/Autoplay/Autoplay';
+import { settings } from 'modules/Menu/Settings';
 import { menu } from 'modules/Menu/Menu';
 import { win } from 'modules/Win/Win';
-import { model } from 'modules/Model/Model';
-// import { roll } from 'modules/Roll/Roll';
-import { config } from 'modules/Util/Config';
-import { Wheel } from 'modules/Class/Wheel';
-import { Glista } from 'modules/Class/Glista';
-import { Element } from 'modules/Class/Element';
-// import { balance } from 'modules/Balance/Balance';
-import { autoplay } from 'modules/Autoplay/Autoplay';
-import { events } from 'modules/Util/Events';
-import { settings } from 'modules/Menu/Settings';
-import { sound } from 'modules/Sound/Sound';
-import { mobileSettings } from 'modules/Menu/MobileSettings';
 
+import { sound } from 'modules/Sound/Sound';
 import { controller as balanceController } from 'modules/Balance/BalanceController';
 import { controller as footerController } from 'modules/Footer/FooterController';
 import { controller as panelController } from 'modules/Panel/PanelController';
@@ -27,7 +29,7 @@ export class Main {
     }
     init() {
         console.info('Main State!');
-        let game = model.el('game');
+        const game = model.el('game');
         // массив в который записываются анимации для проигрывания
         game.frameAnims = [];
         game.spriteAnims = [];
@@ -68,8 +70,8 @@ export class Main {
         this.drawMainBG();
         this.initMainContainer();
         this.drawMainContainer();
-        footerController.initMobile();
-        balanceController.initMobile();
+        footerController.initDesktop();
+        balanceController.initDesktop();
 
         sound.init(this.game);
         sound.music.fon.play();
@@ -79,11 +81,15 @@ export class Main {
         });
 
         if (model.state('mobile')) {
-            // buttons.drawMobileButtons(this.buttonsContainer, this, this.mainContainer.width);
             buttonsController.init();
-            mobileSettings.draw(this.game);
+
+
             model.data('mainXLeft', 2 * model.el('buttonsDelta'));
             model.data('mainXRight', this.game.width - this.mainContainer.width - model.el('buttonsDelta') * 2);
+
+
+            // buttons.drawMobileButtons(this.buttonsContainer, this, this.mainContainer.width);
+            // mobileSettings.draw(this.game);
         }
         // balance.drawBalanceContainer(this.balanceContainer, this);
         // buttons.drawHomeButton(this.balanceContainer, this);
@@ -108,16 +114,12 @@ export class Main {
     }
 
     update() {
-        footerController.updateTime();
-
-        // events.trigger('updateTime');
-        let game = model.el('game');
-
-        // если есть анимации то мы их запускаем
+        const game = model.el('game');
         game.frameAnims.forEach((anim) => {
             anim();
         });
 
+        footerController.updateTime();
     }
 
     drawMainBG() {

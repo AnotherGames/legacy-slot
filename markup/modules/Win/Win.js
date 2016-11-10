@@ -245,7 +245,7 @@ export let win = (function () {
             }, this);
     }
 
-    events.on('roll:end', showWin);
+    // events.on('roll:end', showWin);
     events.on('roll:start', cleanWin);
     events.on('win:clean', cleanWinElements);
 

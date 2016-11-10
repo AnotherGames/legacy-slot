@@ -7,12 +7,12 @@ import { config } from 'modules/Util/Config';
 import { Wheel } from 'modules/Class/Wheel';
 import { Glista } from 'modules/Class/Glista';
 import { Element } from 'modules/Class/Element';
-import { balance } from 'modules/Balance/Balance';
+// import { balance } from 'modules/Balance/Balance';
 import { autoplay } from 'modules/Autoplay/Autoplay';
 import { events } from 'modules/Util/Events';
 import { settings } from 'modules/Menu/Settings';
 import { sound } from 'modules/Sound/Sound';
-import { mobileSettings } from 'modules/Menu/MobileSettings';
+// import { mobileSettings } from 'modules/Menu/MobileSettings';
 import { fs } from 'modules/States/FS/FSController';
 import { Zombie } from 'modules/Class/Zombie';
 

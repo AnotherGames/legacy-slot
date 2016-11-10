@@ -489,7 +489,7 @@ export let balance = (function () {
     events.on('updateTime', updateTime);
 
     events.on('roll:start', rollStart);
-    events.on('roll:end', rollEnd);
+    // events.on('roll:end', rollEnd);
 
     return {
         drawBalanceContainer

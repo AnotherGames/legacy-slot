@@ -3,7 +3,7 @@ import { events } from 'modules/Util/Events';
 import { drawAutoDesktop } from '../../modules/Buttons/Autoplay';
 import { request } from 'modules/Util/Request';
 import { sound } from '../../modules/Sound/Sound';
-import { controller } from 'modules/Controller/Controller';
+// import { controller } from 'modules/Controller/Controller';
 
 export let buttons = (function () {
 
