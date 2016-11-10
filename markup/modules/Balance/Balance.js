@@ -15,7 +15,7 @@ export let balance = (function () {
         const footerBGDown = game.add.graphics(0, 0, container);
         footerBGDown.beginFill(0x000000).drawRect(0, game.world.height - 30, game.world.width, 30);
 
-        if (model.flag('mobile')) {
+        if (model.state('mobile')) {
             const footerBGTop = game.add.graphics(0, 0, container);
             footerBGTop.beginFill(0x000000, 0.6).drawRect(0, game.world.height - 70, game.world.width, 40);
         }
@@ -60,7 +60,7 @@ export let balance = (function () {
         let mainContainer = model.el('mainContainer');
         let balanceFont;
 
-        if (model.flag('mobile')) {
+        if (model.state('mobile')) {
             balanceFont = '18px Helvetica, Arial';
         } else {
             balanceFont = '24px Helvetica, Arial';
@@ -107,7 +107,7 @@ export let balance = (function () {
 
         bottomBalanceContainer.x = game.world.centerX - bottomLineWidth / 2;
 
-        if (model.flag('mobile')) {
+        if (model.state('mobile')) {
             if (model.state('FSMode') === false ) {
                 balanceText.coinsSumText = game.add.text(
                     0,
@@ -181,7 +181,7 @@ export let balance = (function () {
 
                 topBalanceContainer.x = game.world.centerX - topLineWidth / 2;
             }
-        } else if (model.flag('desktop') && model.state('FSMode')) {
+        } else if (model.state('desktop') && model.state('FSMode')) {
             balanceText.coinsSum = game.add.text(
                 mainContainer.x + 1745,
                 mainContainer.height + 116,
@@ -288,7 +288,7 @@ export let balance = (function () {
 
     function updateBalance() {
 
-        if (model.flag('desktop')) {
+        if (model.state('desktop')) {
             if (balanceText.coinsValue.text !== balanceData.coinsValue) {
                 balanceText.coinsValue.text = balanceData.coinsValue;
             }
@@ -412,12 +412,12 @@ export let balance = (function () {
         let font;
         let y;
 
-        if (model.flag('desktop')) {
+        if (model.state('desktop')) {
             font = 'bold 24px Helvetica';
             y = game.world.height - 12;
         }
 
-        if (model.flag('mobile')) {
+        if (model.state('mobile')) {
             font = '18px Helvetica';
             y = game.world.height - 12;
         }

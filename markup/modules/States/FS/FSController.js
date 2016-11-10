@@ -11,7 +11,7 @@ export let fs = (function () {
     function initFS(amount) {
         let game = model.el('game');
         let fsLevel = model.el('fsLevel');
-        if (model.flag('mobile')) {
+        if (model.state('mobile')) {
             fsText = game.add.text(fsLevel.x, fsLevel.y, amount, {font: '60px Arial, Helvetica', fill: '#fff'});
             fsText.anchor.set(0.5);
         } else {
@@ -88,7 +88,7 @@ export let fs = (function () {
     function drawBrainPanel() {
         let x, y;
         let game = model.el('game');
-        if (model.flag('mobile')) {
+        if (model.state('mobile')) {
             let mozgCountBG = model.el('mozgCountBG');
             x = mozgCountBG.x;
             y = mozgCountBG.y;

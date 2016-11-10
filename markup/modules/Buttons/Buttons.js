@@ -23,7 +23,7 @@ export let buttons = (function () {
 
     function drawHomeButton(container, game) {
         let x = 25;
-        let y = (model.flag('mobile')) ? game.world.height - 50 : game.world.height - 15;
+        let y = (model.state('mobile')) ? game.world.height - 50 : game.world.height - 15;
 
         function homeOnClick() {
             sound.sounds.button.play();

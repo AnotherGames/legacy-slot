@@ -40,7 +40,7 @@ export class Element {
         this._addAnimation({ el: 11, n: 15, w: 15 });
 
         this.sprite.animations.play(`${param.el}-${param.animation}`);
-        if (model.flag('mobile')) {
+        if (model.state('mobile')) {
             this.sprite.scale.x = this.sprite.scale.y = 1.5;
         }
     }

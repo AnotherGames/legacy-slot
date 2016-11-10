@@ -11,7 +11,7 @@ export let autoplay = (function () {
 
     function initAutoplay(amount) {
         let game = model.el('game');
-        if (model.flag('mobile')) {
+        if (model.state('mobile')) {
             let spinButton = model.el('spinButton');
             let buttonsContainer = model.el('buttonsContainer');
             autoText = game.add.text(spinButton.x, spinButton.y, amount, {font: '60px Arial, Helvetica', fill: '#fff'}, buttonsContainer);
@@ -32,7 +32,7 @@ export let autoplay = (function () {
         autoEnd = false;
         model.state('autoEnd', false);
         startAutoplay();
-        if (model.flag('mobile')) {
+        if (model.state('mobile')) {
             events.trigger('menu:hideMenu');
         }
     }
@@ -56,7 +56,7 @@ export let autoplay = (function () {
             events.trigger('autoplay:count', autoCount);
         } else {
             model.state('autoplay', null);
-            if (model.flag('mobile')) {
+            if (model.state('mobile')) {
                 events.trigger('autoplay:stop');
             } else {
                 events.trigger('autoplay:stop:desktop');

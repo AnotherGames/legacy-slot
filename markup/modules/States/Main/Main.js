@@ -64,7 +64,7 @@ export class Main {
 
         this.drawMainBG();
         this.initMainContainer();
-        if (model.flag('mobile')) {
+        if (model.state('mobile')) {
             buttons.drawMobileButtons(this.buttonsContainer, this, this.mainContainer.width);
             mobileSettings.draw(this.game);
             model.data('mainXLeft', 2 * model.data('buttonsDelta'));
@@ -76,7 +76,7 @@ export class Main {
 
         events.trigger('roll:initWheels');
 
-        if (model.flag('mobile')) {
+        if (model.state('mobile')) {
             this.mainContainer.x = model.data('mainXLeft');
         } else {    // Desktop
             this.mainContainer.x = (this.game.width - this.mainContainer.width) / 2;
@@ -139,7 +139,7 @@ export class Main {
         this.machineContainer.position.set(this.mainContainer.width / 2 + config[model.state('res')].machine.x, this.mainContainer.height / 2);
 
         let maskMarginX = config[model.state('res')].machine.x;
-        if (model.flag('mobile')) {
+        if (model.state('mobile')) {
             maskMarginX += model.data('mainXLeft');
         } else {
             maskMarginX += (this.game.width - this.mainContainer.width) / 2;

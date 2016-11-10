@@ -64,7 +64,7 @@ export class FS {
 
         this.drawMainBG();
         this.initMainContainer();
-        if (model.flag('mobile')) {
+        if (model.state('mobile')) {
             // buttons.drawMobileButtons(this.buttonsContainer, this, this.mainContainer.width);
             model.data('mainXLeft', 2 * model.data('buttonsDelta'));
             model.data('mainXRight', this.game.width - this.mainContainer.width - model.data('buttonsDelta') * 2);
@@ -76,7 +76,7 @@ export class FS {
 
         events.trigger('roll:initWheels');
 
-        if (model.flag('mobile')) {
+        if (model.state('mobile')) {
             this.mainContainer.x = model.data('mainXRight');
         } else {    // Desktop
             this.mainContainer.x = this.game.width - this.mainContainer.width;
@@ -140,7 +140,7 @@ export class FS {
 
         let x, y;
 
-        if (model.flag('mobile')) {
+        if (model.state('mobile')) {
             x = 120;
             y = 400;
         } else {
@@ -162,7 +162,7 @@ export class FS {
 
         let x, y;
 
-        if (model.flag('mobile')) {
+        if (model.state('mobile')) {
             x = 100;
             y = 80;
         } else {
@@ -191,7 +191,7 @@ export class FS {
         this.machineContainer.position.set(this.mainContainer.width / 2 + config[model.state('res')].machine.x, this.mainContainer.height / 2);
 
         let maskMarginX = config[model.state('res')].machine.x;
-        if (model.flag('mobile')) {
+        if (model.state('mobile')) {
             maskMarginX += model.data('mainXRight');
         } else {
             maskMarginX += this.game.width - this.mainContainer.width;
@@ -219,7 +219,7 @@ export class FS {
     }
 
     drawFSElements() {
-        if (model.flag('mobile')) {
+        if (model.state('mobile')) {
             const mozgCountBG = this.add.sprite(385, 30, 'multiTable', null, this.fsContainer);
             mozgCountBG.anchor.set(0.5);
             model.el('mozgCountBG', mozgCountBG);
@@ -230,7 +230,7 @@ export class FS {
         }
         let multiX;
         let multiY;
-        if (model.flag('mobile')) {
+        if (model.state('mobile')) {
             multiX = 120;
             multiY = 600;
         } else {
@@ -246,7 +246,7 @@ export class FS {
         let levelX;
         let levelY;
         let levelFont;
-        if (model.flag('mobile')) {
+        if (model.state('mobile')) {
             levelX = 240;
             levelY = 55;
             levelFont = 'bold 40px Helvetica, Arial';

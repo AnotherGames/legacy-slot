@@ -100,13 +100,13 @@ function loadMainAssets(game) {
     game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
     game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
     game.load.atlasJSONArray('footerButtons', 'footer/footerButtons.png', 'footer/footerButtons.json');
-    if (model.flag('desktop')) {
+    if (model.state('desktop')) {
         game.load.image('ui', 'game/UI.png');
         game.load.image('uiFS', 'game/UI_FS.png');
         game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
         game.load.image('autoSelect', 'desk_buttons/autoSelect.png');
     }
-    if (model.flag('mobile')) {
+    if (model.state('mobile')) {
         game.load.atlasJSONArray('mobileButtons', 'mobile_buttons/mobileButtons.png', 'mobile_buttons/mobileButtons.json');
     }
     game.load.atlasJSONArray('1', 'elements/one.png', 'elements/one.json');
@@ -130,7 +130,7 @@ function loadFSAssets(game) {
     game.load.image('axeSmall', 'fs/axeSmall.png');
     game.load.image('skull', 'fs/skull.png');
     game.load.atlasJSONArray('mozgiPanel', 'fs/mozgiPanel.png', 'fs/mozgiPanel.json');
-    if (model.flag('mobile')) {
+    if (model.state('mobile')) {
         game.load.image('altary', 'fs/altary.png');
         game.load.image('fsTotalTable', 'fs/fsTotalTable.png');
         game.load.image('multiRip', 'fs/multiRip.png');
