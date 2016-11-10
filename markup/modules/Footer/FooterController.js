@@ -6,16 +6,22 @@ export let controller = (() => {
 
     function initDesktop() {
         view.drawDesktopFooter({});
+        view.drawTime({});
     }
 
     function initMobile() {
         view.drawMobileFooter({});
+        view.drawTime({});
+    }
 
+    function updateTime() {
+        view.updateTime();
     }
 
     return {
         initDesktop,
-        initMobile
+        initMobile,
+        updateTime
     }
 
 })();
