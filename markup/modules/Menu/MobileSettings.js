@@ -1,7 +1,7 @@
 import { sound } from '../../modules/Sound/Sound';
 import { events } from 'modules/Events/Events';
 import { model } from 'modules/Model/Model';
-import { controller } from 'modules/Controller/Controller';
+// import { controller } from 'modules/Controller/Controller';
 
 export let mobileSettings = {
     game: null,
@@ -50,7 +50,7 @@ export let mobileSettings = {
         this.soundButton.input.priorityID = 2;
         let _this = this;
         this.soundButton.events.onInputDown.add(function () {
-            if (controller.isEvent) return;
+            // if (controller.isEvent) return;
             let menuButtonSound = model.el('soundButton');
 
             events.trigger('buttons:changeSoundButton');
@@ -96,7 +96,7 @@ export let mobileSettings = {
         this.musicButton.input.priorityID = 2;
         let _this = this;
         this.musicButton.events.onInputDown.add(function () {
-            if (controller.isEvent) return;
+            // if (controller.isEvent) return;
             let menuButtonSound = model.el('soundButton');
 
             sound.sounds.button.play();
@@ -140,7 +140,7 @@ export let mobileSettings = {
         fastSpinButton.inputEnabled = true;
         fastSpinButton.input.priorityID = 2;
         fastSpinButton.events.onInputDown.add(function () {
-            if (controller.isEvent) return;
+            // if (controller.isEvent) return;
             sound.sounds.button.play();
             if (model.state('fastRoll') === true) {
                 model.state('fastRoll', false);
@@ -177,9 +177,9 @@ export let mobileSettings = {
         this.handModeButton.input.priorityID = 2;
         let _this = this;
         this.handModeButton.events.onInputDown.add(function () {
-            if (controller.isEvent) return;
+            // if (controller.isEvent) return;
             sound.sounds.button.play();
-            controller.mobile.settings.handleChangeSide();
+            // controller.mobile.settings.handleChangeSide();
         });
 
         const handModeText = game.add.sprite(
@@ -202,9 +202,9 @@ export let mobileSettings = {
         rulesButton.inputEnabled = true;
         rulesButton.input.priorityID = 2;
         rulesButton.events.onInputDown.add(function () {
-            if (controller.isEvent) return;
+            // if (controller.isEvent) return;
             sound.sounds.button.play();
-            controller.mobile.rules.open();
+            // controller.mobile.rules.open();
         });
 
         const rulesText = game.add.sprite(
@@ -227,7 +227,7 @@ export let mobileSettings = {
         historyButton.inputEnabled = true;
         historyButton.input.priorityID = 2;
         historyButton.events.onInputDown.add(function () {
-            if (controller.isEvent) return;
+            // if (controller.isEvent) return;
             sound.sounds.button.play();
             $('.history').removeClass('closed');
         });
@@ -246,16 +246,16 @@ export let mobileSettings = {
         backButton.inputEnabled = true;
         backButton.input.priorityID = 2;
         backButton.events.onInputDown.add(function () {
-            if (controller.isEvent) return;
+            // if (controller.isEvent) return;
             sound.sounds.button.play();
-            controller.mobile.settings.close();
+            // controller.mobile.settings.close();
         });
     },
     _overlaySettingsEvent: function () {
-        controller.mobile.settings.close();
+        // controller.mobile.settings.close();
     },
     _overlayRulesEvent: function () {
-        controller.mobile.rules.close();
+        // controller.mobile.rules.close();
     },
     _drawOverlay: function (game) {
         this.overlay = game.add.graphics(0, 0, model.el('buttonsContainer')).beginFill(0x000000, 0.5).drawRect(0, 0, game.world.width, game.world.height);
@@ -271,7 +271,7 @@ export let mobileSettings = {
         this.infoRules.visible = false;
         this.infoRules.inputEnabled = true;
         this.infoRules.events.onInputDown.add(function () {
-            controller.mobile.rules.close();
+            // controller.mobile.rules.close();
         });
     },
 
