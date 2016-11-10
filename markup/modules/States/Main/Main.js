@@ -7,12 +7,16 @@ import { config } from 'modules/Util/Config';
 import { Wheel } from 'modules/Class/Wheel';
 import { Glista } from 'modules/Class/Glista';
 import { Element } from 'modules/Class/Element';
-import { balance } from 'modules/Balance/Balance';
+// import { balance } from 'modules/Balance/Balance';
 import { autoplay } from 'modules/Autoplay/Autoplay';
 import { events } from 'modules/Util/Events';
 import { settings } from 'modules/Menu/Settings';
 import { sound } from 'modules/Sound/Sound';
 import { mobileSettings } from 'modules/Menu/MobileSettings';
+
+import { controller as balanceController } from 'modules/Balance/BalanceController';
+import { controller as footerController } from 'modules/Footer/FooterController';
+
 
 export class Main {
     constructor(game) {
@@ -55,6 +59,10 @@ export class Main {
     }
 
     create() {
+        footerController.initMobile();
+        balanceController.initMobile();
+
+
         sound.init(this.game);
         sound.music.fon.play();
 
@@ -70,8 +78,8 @@ export class Main {
             model.data('mainXLeft', 2 * model.data('buttonsDelta'));
             model.data('mainXRight', this.game.width - this.mainContainer.width - model.data('buttonsDelta') * 2);
         }
-        balance.drawBalanceContainer(this.balanceContainer, this);
-        buttons.drawHomeButton(this.balanceContainer, this);
+        // balance.drawBalanceContainer(this.balanceContainer, this);
+        // buttons.drawHomeButton(this.balanceContainer, this);
         this.drawMainContainer();
 
         events.trigger('roll:initWheels');
@@ -80,8 +88,8 @@ export class Main {
             this.mainContainer.x = model.data('mainXLeft');
         } else {    // Desktop
             this.mainContainer.x = (this.game.width - this.mainContainer.width) / 2;
-            buttons.drawDesktopPanel(this.panelContainer, this, this.mainContainer);
-            buttons.drawDesktopBottomButtons(this.balanceContainer, this);
+            // buttons.drawDesktopPanel(this.panelContainer, this, this.mainContainer);
+            // buttons.drawDesktopBottomButtons(this.balanceContainer, this);
             settings.initDesktopSettings(this.game);
         }
 
@@ -93,7 +101,9 @@ export class Main {
     }
 
     update() {
-        events.trigger('updateTime');
+        footerController.updateTime();
+
+        // events.trigger('updateTime');
         let game = model.el('game');
 
         // если есть анимации то мы их запускаем
