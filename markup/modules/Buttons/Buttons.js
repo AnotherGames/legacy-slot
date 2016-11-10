@@ -55,6 +55,7 @@ export let buttons = (function () {
         let delta = (game.game.width - mainWidth - spinButton.width) / 4;
         let xRight = 3 * delta + mainWidth + (spinButton.width / 2);
         let xLeft = delta + spinButton.width / 2;
+        console.log(spinButton.width);
 
         model.data('buttonsDelta', delta);
         model.data('buttonsXRight', xRight);

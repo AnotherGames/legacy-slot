@@ -16,6 +16,8 @@ import { mobileSettings } from 'modules/Menu/MobileSettings';
 
 import { controller as balanceController } from 'modules/Balance/BalanceController';
 import { controller as footerController } from 'modules/Footer/FooterController';
+import { controller as panelController } from 'modules/Panel/PanelController';
+import { controller as buttonsController } from 'modules/Buttons/ButtonsController';
 import { controller as rollController } from 'modules/Roll/RollController';
 
 
@@ -40,9 +42,12 @@ export class Main {
         this.transitionContainer = this.add.group();
         model.el('bgContainer', this.bgContainer);
         model.el('mainContainer', this.mainContainer);
+        model.group('main', this.mainContainer);
         model.el('balanceContainer', this.balanceContainer);
         model.el('buttonsContainer', this.buttonsContainer);
+        model.group('buttons', this.buttonsContainer);
         model.el('panelContainer', this.panelContainer);
+        model.group('panel', this.panelContainer);
         model.el('menuContainer', this.menuContainer);
         model.el('transitionContainer', this.transitionContainer);
         model.state('side', 'left');
@@ -60,9 +65,11 @@ export class Main {
     }
 
     create() {
-        footerController.initDesktop();
-        balanceController.initDesktop();
-
+        this.drawMainBG();
+        this.initMainContainer();
+        this.drawMainContainer();
+        footerController.initMobile();
+        balanceController.initMobile();
 
         sound.init(this.game);
         sound.music.fon.play();
@@ -71,17 +78,15 @@ export class Main {
             $('.history').addClass('closed');
         });
 
-        this.drawMainBG();
-        this.initMainContainer();
         if (model.state('mobile')) {
-            buttons.drawMobileButtons(this.buttonsContainer, this, this.mainContainer.width);
+            // buttons.drawMobileButtons(this.buttonsContainer, this, this.mainContainer.width);
+            buttonsController.init();
             mobileSettings.draw(this.game);
-            model.data('mainXLeft', 2 * model.data('buttonsDelta'));
-            model.data('mainXRight', this.game.width - this.mainContainer.width - model.data('buttonsDelta') * 2);
+            model.data('mainXLeft', 2 * model.el('buttonsDelta'));
+            model.data('mainXRight', this.game.width - this.mainContainer.width - model.el('buttonsDelta') * 2);
         }
         // balance.drawBalanceContainer(this.balanceContainer, this);
         // buttons.drawHomeButton(this.balanceContainer, this);
-        this.drawMainContainer();
 
         rollController.init();
 
@@ -92,6 +97,7 @@ export class Main {
             // buttons.drawDesktopPanel(this.panelContainer, this, this.mainContainer);
             // buttons.drawDesktopBottomButtons(this.balanceContainer, this);
             settings.initDesktopSettings(this.game);
+            panelController.init();
         }
 
         // PreAnimation
