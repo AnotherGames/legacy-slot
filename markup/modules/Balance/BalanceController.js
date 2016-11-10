@@ -17,10 +17,22 @@ export let controller = (() => {
         view.drawCashBalance({});
     }
 
+    function updateBalance() {
+        if (model.state('mobile')) {
+            view.updateCashBalance({});
+            view.updateCoinBalance({});
+        } else {
+            view.updateCashBalance({});
+            // Добавить обновление десктопного баланса
+        }
+    }
+
+    events.on('model:balance:update', updateBalance);
+
     return {
         initMobile,
         initDesktop,
         initFS
-    }
+    };
 
 })();
