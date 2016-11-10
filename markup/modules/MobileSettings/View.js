@@ -3,8 +3,47 @@ import { model } from 'modules/Model/Model';
 export let view = (() => {
 
     let draw = {
+        _button: function ({
+            container = model.el('settingsContainer'),
+            spriteName = 'soundOn.png',
+            heightPercentage = 0.2,
+            side = 'left'
+        }) {
+            const game = model.el('game');
+            let button = game.add.sprite(0, game.height * heightPercentage, 'menuButtons', spriteName, container);
+            button.anchor.set(0.5);
 
-        Container: function() {
+            // Расчет отступа от края контенера
+            let buttonMargin = (container.width - button.width * 2.5) / 3;
+            if (side === 'left') {
+                button.x = buttonMargin + button.width / 2;
+            } else {
+                button.x = 2 * buttonMargin + 1.5 * button.width;
+            }
+
+            return button;
+        },
+
+        _buttonText: function ({
+            container = model.el('settingsContainer'),
+            button = model.el('settingsSoundButton'),
+            spriteName = 'soundText.png'
+        }) {
+            const game = model.el('game');
+
+            const text = game.add.sprite(
+                button.x,
+                button.y + button.height / 2,
+                'menuButtons',
+                spriteName,
+                container);
+            text.y += text.height;
+            text.anchor.set(0.5);
+
+            return text;
+        },
+
+        Container: function () {
             const game = model.el('game');
             let container = game.add.group();
             if (model.state('side') === 'left') {
@@ -16,8 +55,7 @@ export let view = (() => {
             return container;
         },
 
-        Overlay: function({
-            container = model.el('settingsContainer'),
+        Overlay: function ({
             color = 0x000000,
             alpha = 0
         }) {
@@ -31,7 +69,7 @@ export let view = (() => {
             return overlay;
         },
 
-        BG: function({
+        BG: function ({
             container = model.el('settingsContainer'),
             widthPercentage = 0.22,
             color = 0x000000
@@ -44,7 +82,7 @@ export let view = (() => {
             return menuBG;
         },
 
-        Border: function({
+        Border: function ({
             container = model.el('settingsContainer'),
             color = 0xffffff,
             alpha = 0.3,
@@ -58,7 +96,7 @@ export let view = (() => {
             return menuBorder;
         },
 
-        Title: function({
+        Title: function ({
             container = model.el('settingsContainer'),
             heightPercentage = 0.07,
             text = 'SETTINGS',
@@ -76,7 +114,191 @@ export let view = (() => {
             return settingsTitle;
         },
 
-        BackButton: function({
+        SoundButton: function ({
+            container = model.el('settingsContainer'),
+            heightPercentage = 0.2
+        }) {
+            let button = this._button({
+                container,
+                spriteName: 'soundOn.png',
+                heightPercentage,
+                side: 'left'
+            });
+
+            if (!model.state('sound')) {
+                button.frameName = 'soundOff.png';
+            }
+
+            model.el('settingsSoundButton', button);
+            return button;
+        },
+
+        SoundButtonText: function ({
+            container = model.el('settingsContainer')
+        }) {
+            let text = this._buttonText({
+                container,
+                button: model.el('settingsSoundButton'),
+                spriteName: 'soundText.png'
+            });
+
+            model.el('SettingsSoundText', text);
+            return text;
+        },
+
+        MusicButton: function ({
+            container = model.el('settingsContainer'),
+            heightPercentage = 0.2
+        }) {
+            let button = this._button({
+                container,
+                spriteName: 'musicOn.png',
+                heightPercentage,
+                side: 'right'
+            });
+
+            if (!model.state('music')) {
+                button.frameName = 'musicOff.png';
+            }
+
+            model.el('settingsMusicButton', button);
+            return button;
+        },
+
+        MusicButtonText: function ({
+            container = model.el('settingsContainer')
+        }) {
+            let text = this._buttonText({
+                container,
+                button: model.el('settingsMusicButton'),
+                spriteName: 'musicText.png'
+            });
+
+            model.el('SettingsMusicText', text);
+            return text;
+        },
+
+        FastSpinButton: function ({
+            container = model.el('settingsContainer'),
+            heightPercentage = 0.45
+        }) {
+            let button = this._button({
+                container,
+                spriteName: 'fastSpinOn.png',
+                heightPercentage,
+                side: 'left'
+            });
+
+            if (!model.state('fastRoll')) {
+                button.frameName = 'fastSpinOff.png';
+            }
+
+            model.el('settingsFastSpinButton', button);
+            return button;
+        },
+
+        FastSpinButtonText: function ({
+            container = model.el('settingsContainer')
+        }) {
+            let text = this._buttonText({
+                container,
+                button: model.el('settingsFastSpinButton'),
+                spriteName: 'fastSpinText.png'
+            });
+
+            model.el('SettingsFastSpinText', text);
+            return text;
+        },
+
+        HandModeButton: function ({
+            container = model.el('settingsContainer'),
+            heightPercentage = 0.45
+        }) {
+            let button = this._button({
+                container,
+                spriteName: 'handModeOn.png',
+                heightPercentage,
+                side: 'rigth'
+            });
+
+            if (model.state('side') === 'left') {
+                button.frameName = 'handModeOff.png';
+            }
+
+            model.el('settingsHandModeButton', button);
+            return button;
+        },
+
+        HandModeButtonText: function ({
+            container = model.el('settingsContainer')
+        }) {
+            let text = this._buttonText({
+                container,
+                button: model.el('settingsHandModeButton'),
+                spriteName: 'handModeText.png'
+            });
+
+            model.el('SettingsHandModeText', text);
+            return text;
+        },
+
+        RulesButton: function ({
+            container = model.el('settingsContainer'),
+            heightPercentage = 0.7
+        }) {
+            let button = this._button({
+                container,
+                spriteName: 'infoOn.png',
+                heightPercentage,
+                side: 'left'
+            });
+
+            model.el('settingsRulesButton', button);
+            return button;
+        },
+
+        RulesButtonText: function ({
+            container = model.el('settingsContainer')
+        }) {
+            let text = this._buttonText({
+                container,
+                button: model.el('settingsRulesButton'),
+                spriteName: 'infoText.png'
+            });
+
+            model.el('SettingsRulesText', text);
+            return text;
+        },
+
+        HistoryButton: function ({
+            container = model.el('settingsContainer'),
+            heightPercentage = 0.7
+        }) {
+            let button = this._button({
+                container,
+                spriteName: 'historyOn.png',
+                heightPercentage,
+                side: 'right'
+            });
+
+            model.el('settingsHistoryButton', button);
+            return button;
+        },
+
+        HistoryButtonText: function ({
+            container = model.el('settingsContainer')
+        }) {
+            let text = this._buttonText({
+                container,
+                button: model.el('settingsHistoryButton'),
+                spriteName: 'historyText.png'
+            });
+
+            model.el('SettingsHistoryText', text);
+            return text;
+        },
+
+        BackButton: function ({
             container = model.el('settingsContainer'),
             heightPercentage = 0.9
         }) {
@@ -91,7 +313,7 @@ export let view = (() => {
 
     let show = {
 
-        Settings: function({
+        Settings: function ({
             container = model.el('settingsContainer'),
             time = 700
         }) {
@@ -105,7 +327,7 @@ export let view = (() => {
             }
         },
 
-        Overlay: function({
+        Overlay: function ({
             finalAlpha = 0.5,
             time = 700
         }) {
@@ -120,7 +342,7 @@ export let view = (() => {
 
     let hide = {
 
-        Settings: function({
+        Settings: function ({
             container = model.el('settingsContainer'),
             time = 700
         }) {
@@ -132,7 +354,7 @@ export let view = (() => {
             }
         },
 
-        Overlay: function({
+        Overlay: function ({
             time = 700
         }) {
             const game = model.el('game');
