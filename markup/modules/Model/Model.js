@@ -64,6 +64,7 @@ export let model = (() => {
         model.data('numberOfLines', initData.Lines.length);
         model.data('firstScreen', initData.FirstScreen);
         model.state('initScreen', true);
+        model.state('fastRoll', false);
 
         events.trigger('model:states:init');
 
