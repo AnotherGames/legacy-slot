@@ -35,12 +35,19 @@ export let controller = (() => {
 
     function startRoll(options) {
         if (!model.state('ready')) return;
+        if (!model.checkBalance()) {
+            console.warn('Not enought money!');
+            return;
+        }
         request.send('Roll')
             .then((data) => {
                 events.trigger('roll:start');
+                model.data('rollResponse', data);
+                model.updateBalance({startRoll: true});
+
+                model.state('ready', false);
                 model.state('roll:progress', true);
                 model.state('roll:fast', false);
-                model.data('rollResponse', data);
 
                 _playRollSound();
 
@@ -70,7 +77,7 @@ export let controller = (() => {
                 function callback() {
                     ++countFinish;
                     if (countFinish === 5) {
-                        // events.trigger('roll:end');
+                        events.trigger('roll:end');
                     }
                 }
 
@@ -88,52 +95,19 @@ export let controller = (() => {
     }
 
     function endRoll() {
+        if (model.state('ready')) return;
         request.send('Ready').then((data) => {
-            // console.log('Ready done', data);
-            if (!model.state('FSMode')) {
-                let rollResponse = model.data('rollResponse');
-                if (rollResponse.Balance.TotalWinCoins > 0) {
-                    setTimeout(() => {
-                        if (model.state('autoEnd')) return;
-                        events.trigger('autoplay:next');
-                    }, 1000)
-                } else {
-                    if (model.state('autoEnd')) return;
-                    events.trigger('autoplay:next');
-                }
-            }
 
-            // FS
-            if (model.state('FSMode')) {
-
-                let rollResponse = model.data('rollResponse');
-                if (rollResponse.WinLines.length > 0) {
-                    if (model.state('evilBrain')) {
-                        setTimeout(() => {
-                            // if (model.state('fsEnd')) return;
-                            events.trigger('fs:next');
-                            model.state('evilBrain', false);
-                        }, 1500);
-                    } else {
-                        setTimeout(() => {
-                            // if (model.state('fsEnd')) return;
-                            events.trigger('fs:next');
-                        }, 1000);
-                    }
-                } else {
-                    // if (model.state('fsEnd')) return;
-                    events.trigger('fs:next');
-                }
-
-                let winSum = model.el('winSum');
-                let totalWinSum = model.el('totalWinSum');
-
-                // totalWinSum.text = rollResponse.FsBonus.TotalFSWinCoins;
-                // winSum.text = rollResponse.Balance.TotalWinCoins;
-
-            }
-            model.state('roll:progress', false);
+            model.updateBalance({endRoll: true});
             model.state('ready', true);
+            model.state('roll:progress', false);
+
+            if (!model.state('FSMode')) {
+                _runNextAutoIfExist();
+            } else {
+                _runNextFSIfExist();
+            }
+
         });
     }
 
@@ -159,10 +133,30 @@ export let controller = (() => {
         return result;
     }
 
+    function _runNextAutoIfExist() {
+        let rollResponse = model.data('rollResponse');
+        let time = (rollResponse.Balance.TotalWinCoins) ? 1000 : 0;
+
+        setTimeout(() => {
+            if (model.state('autoEnd')) return;
+            events.trigger('autoplay:next');
+        }, time);
+
+    }
+
+    function _runNextFSIfExist() {
+        let rollResponse = model.data('rollResponse');
+        let time = (rollResponse.WinLines.length) ? 1000 : 0;
+
+        setTimeout(() => {
+            if (model.state('fsEnd')) return;
+            events.trigger('fs:next');
+        }, time);
+
+    }
 
     events.on('roll:request', startRoll);
     events.on('roll:end', endRoll);
-    // events.on('autoplay:startRoll', rollRequest);
 
     return {
         init
