@@ -42,6 +42,8 @@ export let controller = (() => {
 
         let xRight = 3 * buttonsDelta + model.group('main').width + (spinButtonWidth / 2);
         let xLeft = buttonsDelta + spinButtonWidth / 2;
+        model.data('buttonsXRight', xRight);
+        model.data('buttonsXLeft', xLeft);
 
         let spinButton = model.el('spinButton');
         let betButton = model.el('betButton');
