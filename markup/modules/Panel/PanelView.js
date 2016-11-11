@@ -180,6 +180,36 @@ export let view = (() => {
             return autoBG;
         },
 
+        autoCount: function({
+            amount = 10,
+            x = 525,
+            y = model.el('autoButtonDesk').y,
+            container = model.group('panel'),
+            font = '60px Arial, Helvetica',
+            color = '#fff'
+        }) {
+            if (amount >= 250) {
+                font = '40px Arial, Helvetica';
+            }
+            const game = model.el('game');
+            const autoCount = game.add.text(x, y, amount, {font: font, fill: color, align: 'center'}, container);
+            autoCount.anchor.set(0.5);
+            autoCount.alpha = 0;
+            game.add.tween(autoCount).to({alpha: 1}, 500, 'Linear', true, 200);
+            model.el('autoCount', autoCount);
+            return autoCount;
+        },
+
+        updateCount: function({
+            count = 10
+        }) {
+            model.el('autoCount').text = count;
+        },
+
+        removeCount: function() {
+            model.el('autoCount').destroy();
+        },
+
         fsCandle: function({
             x = 513,
             y = 95,
@@ -261,10 +291,10 @@ export let view = (() => {
         betLevelPlus.visible = false;
         const betLevelMinus = model.el('betLevelMinus');
         betLevelMinus.visible = false;
-        const coinLevelPlus = model.el('coinLevelPlus');
-        coinLevelPlus.visible = false;
-        const coinLevelMinus = model.el('coinLevelMinus');
-        coinLevelMinus.visible = false;
+        const coinsLevelPlus = model.el('coinsLevelPlus');
+        coinsLevelPlus.visible = false;
+        const coinsLevelMinus = model.el('coinsLevelMinus');
+        coinsLevelMinus.visible = false;
     }
 
     function autoStopDesktop() {
@@ -281,10 +311,10 @@ export let view = (() => {
         betLevelPlus.visible = true;
         const betLevelMinus = model.el('betLevelMinus');
         betLevelMinus.visible = true;
-        const coinLevelPlus = model.el('coinLevelPlus');
-        coinLevelPlus.visible = true;
-        const coinLevelMinus = model.el('coinLevelMinus');
-        coinLevelMinus.visible = true;
+        const coinsLevelPlus = model.el('coinsLevelPlus');
+        coinsLevelPlus.visible = true;
+        const coinsLevelMinus = model.el('coinsLevelMinus');
+        coinsLevelMinus.visible = true;
     }
 
 
