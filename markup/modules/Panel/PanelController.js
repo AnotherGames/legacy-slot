@@ -7,7 +7,7 @@ export let controller = (() => {
 
     function init() {
 
-        view.drawPanelBG({});
+        view.draw.PanelBG({});
 
         let game = model.el('game');
         let autoDesktopContainer = game.add.group();
@@ -17,109 +17,136 @@ export let controller = (() => {
         autoDesktopContainer.alpha = 0;
         model.group('autoDesktop', autoDesktopContainer);
 
-        view.drawLinesNumber({});
-        view.drawAutoPanel({});
+        view.draw.LinesNumber({});
+        view.draw.AutoPanel({}).forEach((panelButton) => {
+            panelButton.inputEnabled = true;
+            panelButton.events.onInputDown.add(handle.panelButton, panelButton);
+        });
 
-        let spinButtonDesk = view.drawSpinButton({});
+        let spinButtonDesk = view.draw.SpinButton({});
             spinButtonDesk.input.priorityID = 1; // проанализировать зачем здесь приоритет
-            spinButtonDesk.onInputDown.add(handleSpin);
+            spinButtonDesk.onInputDown.add(handle.spin);
 
         model.state('autoClosed', true); // состояние для кнопки авто, закрыта по умолчанию
-        let autoButtonDesk = view.drawAutoButton({});
-            autoButtonDesk.onInputDown.add(handleAuto);
+        let autoButtonDesk = view.draw.AutoButton({});
+            autoButtonDesk.onInputDown.add(handle.auto);
 
-        let maxBetButtonDesk = view.drawMaxBetButton({});
-            maxBetButtonDesk.onInputDown.add(handleMaxBet);
+        let maxBetButtonDesk = view.draw.MaxBetButton({});
+            maxBetButtonDesk.onInputDown.add(handle.maxBet);
 
-        let infoButtonDesk = view.drawInfoButton({});
-            infoButtonDesk.onInputDown.add(handleInfo);
+        let infoButtonDesk = view.draw.InfoButton({});
+            infoButtonDesk.onInputDown.add(handle.info);
 
-        let betLevelPlus = view.drawPlusButton({});
-            betLevelPlus.onInputDown.add(handleBetPlus);
+        let betLevelPlus = view.draw.PlusButton({});
+            model.el('betLevelPlus', betLevelPlus);
+            betLevelPlus.onInputDown.add(handle.betPlus);
 
-        let betLevelMinus = view.drawMinusButton({});
-            betLevelMinus.onInputDown.add(handleBetMinus);
+        let betLevelMinus = view.draw.MinusButton({});
+            model.el('betLevelMinus', betLevelMinus);
+            betLevelMinus.onInputDown.add(handle.betMinus);
 
-        let coinsLevelPlus = view.drawPlusButton({x: 1100});
-            coinsLevelPlus.onInputDown.add(handleCoinsPlus);
+        let coinsLevelPlus = view.draw.PlusButton({x: 1100});
+            model.el('coinsLevelPlus', coinsLevelPlus);
+            coinsLevelPlus.onInputDown.add(handle.coinsPlus);
 
-        let coinsLevelMinus = view.drawMinusButton({x: 985});
-            coinsLevelMinus.onInputDown.add(handleCoinsMinus);
+        let coinsLevelMinus = view.draw.MinusButton({x: 985});
+            model.el('coinsLevelMinus', coinsLevelMinus);
+            coinsLevelMinus.onInputDown.add(handle.coinsMinus);
 
     }
 
-    function handleSpin() {
-        const spinButtonDesk = model.el('spinButtonDesk');
-        sound.sounds.button.play();
-        if (spinButtonDesk.frameName == 'stop.png') {
-            events.trigger('autoplay:stop:desktop');
-            return;
-        }
-        sound.sounds.button.play();
-        events.trigger('roll:request', {
-            // TODO: для обычних круток используй параметры конфига.
-            // time: 1500,
-            // length: 30,
-            // ease: 1
-        });
-    }
-
-    function handleAuto() {
-        const autoButtonDesk = model.el('autoButtonDesk');
-        sound.sounds.button.play();
-        if (model.state('autoClosed')) {
-            model.state('autoClosed', false);
-            view.autoButtonOpen({});
-            view.autoPanelOpen({});
-        } else {
-            model.state('autoClosed', true);
-            view.autoButtonClose({});
-            view.autoPanelClose({});
-        }
-    }
-
-    function handleMaxBet() {
-        if (model.state('autoEnd') == false) return;
-        sound.sounds.button.play();
-        events.trigger('buttons:maxBet');
-    }
-
-    function handleInfo() {
-        sound.sounds.button.play();
-        let infoRules = view.showInfo({});
-            infoRules.inputEnabled = true;
-            infoRules.input.priorityID = 2;
-            infoRules.events.onInputDown.add(() => {
-                let overlay = model.el('overlay');
-                overlay.destroy();
-                infoRules.destroy();
+    const handle = {
+        spin: function() {
+            const spinButtonDesk = model.el('spinButtonDesk');
+            sound.sounds.button.play();
+            if (spinButtonDesk.frameName == 'stop.png') {
+                events.trigger('autoplay:stop:desktop');
+                return;
+            }
+            sound.sounds.button.play();
+            events.trigger('roll:request', {
+                // TODO: для обычних круток используй параметры конфига.
+                // time: 1500,
+                // length: 30,
+                // ease: 1
             });
+        },
+
+        auto: function() {
+            const autoButtonDesk = model.el('autoButtonDesk');
+            sound.sounds.button.play();
+            if (model.state('autoClosed')) {
+                model.state('autoClosed', false);
+                view.show.autoButton({});
+                view.show.autoPanel({});
+            } else {
+                model.state('autoClosed', true);
+                view.hide.autoButton({});
+                view.hide.autoPanel({});
+            }
+        },
+
+        maxBet: function() {
+            console.log('i am here');
+            if (model.state('autoEnd') == false) return;
+            sound.sounds.button.play();
+            events.trigger('buttons:maxBet');
+        },
+
+        info: function() {
+            sound.sounds.button.play();
+            let infoRules = view.show.info({});
+                infoRules.inputEnabled = true;
+                infoRules.input.priorityID = 2;
+                infoRules.events.onInputDown.add(() => {
+                    let overlay = model.el('overlay');
+                    overlay.destroy();
+                    infoRules.destroy();
+                });
+        },
+
+        betPlus: function() {
+            sound.sounds.button.play();
+            events.trigger('buttons:changeBet', true);
+        },
+
+        betMinus: function() {
+            sound.sounds.button.play();
+            events.trigger('buttons:changeBet', false);
+        },
+
+        coinsPlus: function() {
+            sound.sounds.button.play();
+            events.trigger('buttons:changeCoins', true);
+        },
+
+        coinsMinus: function() {
+            sound.sounds.button.play();
+            events.trigger('buttons:changeCoins', false);
+        },
+
+        panelButton: function() {
+            console.log(this);
+            const amount = this.amount;
+            events.trigger('autoplay:init:desktop', amount);
+        }
+
     }
 
-    function handleBetPlus() {
-        sound.sounds.button.play();
-        events.trigger('buttons:changeBet', true);
+    function autoStart() {
+        view.autoStartDesktop();
     }
 
-    function handleBetMinus() {
-        sound.sounds.button.play();
-        events.trigger('buttons:changeBet', false);
-    }
-
-    function handleCoinsPlus() {
-        sound.sounds.button.play();
-        events.trigger('buttons:changeCoins', true);
-    }
-
-    function handleCoinsMinus() {
-        sound.sounds.button.play();
-        events.trigger('buttons:changeCoins', false);
+    function autoStop() {
+        view.autoStopDesktop();
     }
 
     // events.on('autoplay:init:desktop', handleAuto); // ивент для запуска автоплея, автоматически закрывает панель
 
     return {
-        init
+        init,
+        autoStart,
+        autoStop
     };
 
 })();
