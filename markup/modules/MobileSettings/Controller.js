@@ -182,7 +182,7 @@ export let controller = (() => {
         let historyButton = view.draw.HistoryButton({});
             historyButton.inputEnabled = true;
             historyButton.input.priorityID = 12;
-            // historyButton.events.onInputDown.add(handle.);
+            historyButton.events.onInputDown.add(handle.showHistory);
         view.draw.HistoryButtonText({});
 
         let backButton = view.draw.BackButton({});
