@@ -119,6 +119,43 @@ export let view = (() => {
             model.el('coinValue', coinValue);
             model.el('betValue', betValue);
 
+        },
+
+        FSDesktopBalance: function({
+            game = model.el('game'),
+            container = model.group('panel'),
+            coinSumValue = model.balance('coinSum'),
+            betSumValue = model.balance('betSum'),
+            coinValueAmount = model.balance('coinValue'),
+            betValueAmount = model.balance('betValue'),
+            sumStyle = {font: '24px Helvetica, Arial', fill: '#e8b075', align: 'center'},
+            valueStyle = {font: '27px Helvetica, Arial', fill: '#e8b075', align: 'center'},
+            y = [50, 96, 133, 145],
+            x = [154, 230, 250, 1212]
+        }) {
+
+            let coinSum = game.add.text(x[3], y[3], `${coinSumValue.toFixed(0)}`, sumStyle, container);
+            let betSum = game.add.text(x[1], y[0], `${betSumValue.toFixed(0)}`, sumStyle, container);
+
+            let coinValue = game.add.text(x[2], y[2], `${coinValueAmount}`, valueStyle, container);
+            let betValue = game.add.text(x[0], y[2], `${betValueAmount}`, valueStyle, container);
+
+            let winSum = game.add.text(x[3], y[0], `0`, sumStyle, container);
+            let totalWinSum = game.add.text(x[3], y[1], `0`, sumStyle, container);
+
+            _setAnchorInCenter([coinSum, betSum, coinValue, betValue, winSum, totalWinSum]);
+
+            model.el('coinSum', coinSum);
+            model.el('betSum', betSum);
+            model.el('coinValue', coinValue);
+            model.el('betValue', betValue);
+            model.el('winSum', winSum);
+            model.el('totalWinSum', totalWinSum);
+
+        },
+
+        FSMobileBalance: function() {
+
         }
 
     };
@@ -182,6 +219,32 @@ export let view = (() => {
             betSum.text = `${betSumValue.toFixed(0)}`;
             coinValue.text = `${coinValueAmount.toFixed(2)}`;
             betValue.text = `${betValueAmount}`;
+
+        },
+
+        FSDesktopBalance: function({
+            winSumValue = model.balance('coinSum'),
+            totalWinSumValue = model.balance('betSum')
+        }) {
+
+            let winSum = model.el('winSum', winSum),
+                totalWinSum = model.el('totalWinSum', totalWinSum);
+
+            winSum.text = `${winSumValue}`;
+            totalWinSum.text = `${totalWinSumValue}`;
+
+        },
+
+        FSMobileBalance: function({
+            winSumValue = model.balance('coinSum'),
+            totalWinSumValue = model.balance('betSum')
+        }) {
+
+            let winSum = model.el('winSum', winSum),
+                totalWinSum = model.el('totalWinSum', totalWinSum);
+
+            winSum.text = `${winSumValue}`;
+            totalWinSum.text = `${totalWinSumValue}`;
 
         }
 

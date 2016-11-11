@@ -14,15 +14,22 @@ export let controller = (() => {
         view.draw.DesktopBalance({});
     }
 
-    function initFS() {
+    function initFSMobile() {
         view.draw.CashBalance({});
+        view.draw.FSMobileBalance({});
+    }
+
+    function initFSDesktop() {
+        view.draw.CashBalance({});
+        view.draw.FSDesktopBalance({});
     }
 
     function updateBalance() {
         if (model.state('mobile')) {
             view.update.CashBalance({});
             view.update.CoinBalance({});
-        } else {
+        }
+        if (model.state('desktop')) {
             view.update.CashBalance({});
             view.update.DesktopBalance({});
         }
@@ -33,7 +40,8 @@ export let controller = (() => {
     return {
         initMobile,
         initDesktop,
-        initFS
+        initFSMobile,
+        initFSDesktop
     };
 
 })();
