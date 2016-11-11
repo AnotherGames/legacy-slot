@@ -307,6 +307,16 @@ export let view = (() => {
             backButton.anchor.set(0.5);
             model.el('settingsBackButton', backButton);
             return backButton;
+        },
+
+        RulesScreen: function () {
+            const game = model.el('game');
+            let infoRules = game.add.sprite(game.world.centerX, game.world.centerY, 'infoRules');
+            infoRules.anchor.set(0.5);
+            infoRules.alpha = 0;
+            infoRules.visible = false;
+            model.el('rulesScreen', infoRules);
+            return infoRules;
         }
 
     };
@@ -333,11 +343,18 @@ export let view = (() => {
         }) {
             const game = model.el('game');
             let overlay = model.el('settingsOverlay');
-                overlay.alpha = 0;
                 overlay.visible = true;
             return game.add.tween(overlay).to( { alpha: finalAlpha }, time, 'Quart.easeOut', true);
-        }
+        },
 
+        Rules: function ({
+            time = 700
+        }) {
+            const game = model.el('game');
+            let infoRules = model.el('rulesScreen');
+                infoRules.visible = true;
+            return game.add.tween(infoRules).to( { alpha: 1 }, time, 'Quart.easeOut', true);
+        }
     };
 
     let hide = {
@@ -359,7 +376,23 @@ export let view = (() => {
         }) {
             const game = model.el('game');
             let overlay = model.el('settingsOverlay');
-            return game.add.tween(overlay).to( { alpha: 0 }, time, 'Quart.easeOut', true)
+            let tween = game.add.tween(overlay).to( { alpha: 0 }, time, 'Quart.easeOut', true);
+            tween.onComplete.add(() => {
+                model.el('settingsOverlay').visible = false;
+            });
+            return tween;
+        },
+
+        Rules: function ({
+            time = 700
+        }) {
+            const game = model.el('game');
+            let infoRules = model.el('rulesScreen');
+            let tween = game.add.tween(infoRules).to( { alpha: 0 }, time, 'Quart.easeOut', true);
+            tween.onComplete.add(() => {
+                infoRules.visible = false;
+            });
+            return tween;
         }
 
     };
