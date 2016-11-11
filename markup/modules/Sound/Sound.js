@@ -50,6 +50,8 @@ export let sound = {
 
         model.state('sound', val);
 
+        model.state('sound', val);
+
         let keys = Object.keys(this.sounds);
         keys.forEach((key) => {
             this.sounds[key].mute = !val;

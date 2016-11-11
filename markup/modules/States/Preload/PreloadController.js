@@ -1,0 +1,135 @@
+import { model } from 'modules/Model/Model';
+import { events } from 'modules/Util/Events';
+import { view } from 'modules/States/Preload/PreloadView';
+
+export let controller = (() => {
+
+    function init() {
+        const game = model.el('game');
+        game.add.plugin(Fabrique.Plugins.Spine);
+    }
+
+    function preload() {
+        const game = model.el('game');
+        game.load.setPreloadSprite(view.drawPreloadBar());
+        view.drawPreloadCoin();
+
+        loadSounds();
+        loadInitAssets();
+        loadMainAssets();
+        loadFSAssets();
+        loadSpineAssets();
+
+        game.load.onLoadComplete.add(hidePreloader);
+    }
+
+    function loadSounds() {
+        const game = model.el('game');
+        game.load.path = 'static/img/content/sound/';
+        game.load.audio('fon', 'ambient.mp3');
+        game.load.audio('fsFon', 'fsAmbient.mp3');
+        game.load.audio('initFon', 'logoAmbient.mp3');
+        game.load.audio('baraban', 'baraban.mp3');
+        game.load.audio('buttonClick', 'buttonClick.mp3');
+        game.load.audio('startPerehod', 'startPerehod.mp3');
+        game.load.audio('finishPerehod', 'finishPerehod.mp3');
+        game.load.audio('lineWin', 'lineWin.mp3');
+        game.load.audio('lineWin2', 'lineWin2.mp3');
+    }
+
+    function loadInitAssets() {
+        const game = model.el('game');
+        game.load.path = `static/img/content/${model.state('res')}/`;
+        game.load.image('initBG', 'bg/initBG.png');
+        game.load.atlasJSONArray('text', 'text/text.png', 'text/text.json');
+    }
+
+    function loadMainAssets() {
+        const game = model.el('game');
+        game.load.image('mainBG', 'bg/mainBG.png');
+        game.load.atlasJSONArray('candle', 'bg/candle.png', 'bg/candle.json');
+        game.load.image('gameMachine', 'game/gameMachine.png');
+        game.load.image('gameBG', 'game/gameBG.png');
+        game.load.image('gameShadow', 'game/gameShadow.png');
+        game.load.image('infoRules', 'other/infoRules.png');
+        game.load.image('popup', 'other/popup.png');
+        game.load.image('winLine', 'win/winLineRect.png');
+        game.load.image('winTotal', 'win/winTotalRect.png');
+        game.load.atlasJSONArray('win', 'win/win.png', 'win/win.json');
+        game.load.atlasJSONArray('numbers', 'numbers/numbers.png', 'numbers/numbers.json');
+        game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
+        game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
+        game.load.atlasJSONArray('footerButtons', 'footer/footerButtons.png', 'footer/footerButtons.json');
+        if (model.state('desktop')) {
+            game.load.image('ui', 'game/UI.png');
+            game.load.image('uiFS', 'game/UI_FS.png');
+            game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
+            game.load.image('autoSelect', 'desk_buttons/autoSelect.png');
+        }
+        if (model.state('mobile')) {
+            game.load.atlasJSONArray('mobileButtons', 'mobile_buttons/mobileButtons.png', 'mobile_buttons/mobileButtons.json');
+        }
+        game.load.atlasJSONArray('1', 'elements/one.png', 'elements/one.json');
+        game.load.atlasJSONArray('2', 'elements/two.png', 'elements/two.json');
+        game.load.atlasJSONArray('3', 'elements/three.png', 'elements/three.json');
+        game.load.atlasJSONArray('4', 'elements/four.png', 'elements/four.json');
+        game.load.atlasJSONArray('5', 'elements/five.png', 'elements/five.json');
+        game.load.atlasJSONArray('6', 'elements/six.png', 'elements/six.json');
+        game.load.atlasJSONArray('7', 'elements/seven.png', 'elements/seven.json');
+        game.load.atlasJSONArray('8', 'elements/eight.png', 'elements/eight.json');
+        game.load.atlasJSONArray('9', 'elements/nine.png', 'elements/nine.json');
+        game.load.atlasJSONArray('10', 'elements/ten.png', 'elements/ten.json');
+        game.load.atlasJSONArray('11', 'elements/elleven.png', 'elements/elleven.json');
+        // all elements
+        game.load.atlasJSONArray('elements', 'elements/elements.png', 'elements/elements.json');
+        // Glista
+        game.load.image('ligthGlista', 'glista/lightGlista.png');
+        game.load.atlasJSONArray('glistaAtlas', 'glista/glista.png', 'glista/glista.json');
+    }
+
+    function loadFSAssets() {
+        const game = model.el('game');
+        game.load.image('fsBG', 'bg/fsBG.png');
+        game.load.image('axe', 'fs/axe.png');
+        game.load.image('axeSmall', 'fs/axeSmall.png');
+        game.load.image('skull', 'fs/skull.png');
+        game.load.atlasJSONArray('mozgiPanel', 'fs/mozgiPanel.png', 'fs/mozgiPanel.json');
+        if (model.state('mobile')) {
+            game.load.image('altary', 'fs/altary.png');
+            game.load.image('fsTotalTable', 'fs/fsTotalTable.png');
+            game.load.image('multiRip', 'fs/multiRip.png');
+            game.load.image('multiTable', 'fs/multiTable.png');
+        }
+    }
+
+    function loadSpineAssets() {
+        const game = model.el('game');
+        game.load.spine('animBG', 'skeleton/skeleton.json');
+        game.load.spine('FSCharapter', 'FSCharapter/Zomb.json');
+        game.load.spine('FlyingBrain', 'FSCharapter/Brain.json');
+    }
+
+    function hidePreloader() {
+        const game = model.el('game');
+        view.hideCoin();
+        view.hideBar();
+        view.lastDarkness();
+        if (model.state('initScreen')) {
+            game.state.start('Init');
+        } else {
+            game.state.start('Main');
+        }
+        // TODO: Нужно переходить на главный экран после окончания затемнения,
+        // но таким образом мы зависаем на состоянии Preload
+        // view.lastDarkness().onComplete.add(() => {
+        //     if (model.state('initScreen')) {
+            //     game.state.start('Init');
+            // } else {
+            //     game.state.start('Main');
+            // }
+        // });
+    }
+
+    events.on('preload:init', init);
+    events.on('preload:preload', preload);
+})();

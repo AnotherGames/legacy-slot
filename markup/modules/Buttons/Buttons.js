@@ -1,9 +1,9 @@
 import { model } from '../../modules/Model/Model';
-import { events } from '../../modules/Events/Events';
+import { events } from 'modules/Util/Events';
 import { drawAutoDesktop } from '../../modules/Buttons/Autoplay';
-import { util } from 'modules/Util/Util';
+import { request } from 'modules/Util/Request';
 import { sound } from '../../modules/Sound/Sound';
-import { controller } from 'modules/MobileSettings/Controller';
+// import { controller } from 'modules/Controller/Controller';
 
 export let buttons = (function () {
 
@@ -23,11 +23,11 @@ export let buttons = (function () {
 
     function drawHomeButton(container, game) {
         let x = 25;
-        let y = (model.flag('mobile')) ? game.world.height - 50 : game.world.height - 15;
+        let y = (model.state('mobile')) ? game.world.height - 50 : game.world.height - 15;
 
         function homeOnClick() {
             sound.sounds.button.play();
-            util.request('_Logout')
+            request.send('Logout')
                 .then((response) => {
                     console.log('Logout response:', response);
                 });
@@ -55,6 +55,7 @@ export let buttons = (function () {
         let delta = (game.game.width - mainWidth - spinButton.width) / 4;
         let xRight = 3 * delta + mainWidth + (spinButton.width / 2);
         let xLeft = delta + spinButton.width / 2;
+        console.log(spinButton.width);
 
         model.data('buttonsDelta', delta);
         model.data('buttonsXRight', xRight);

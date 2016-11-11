@@ -1,4 +1,4 @@
-import { model } from '../../modules/Model/Model';
+import { model } from 'modules/Model/Model';
 
 export let events = {
     events: {},
@@ -17,9 +17,6 @@ export let events = {
         }
     },
     trigger: function (eventName, arg1, arg2, arg3) {
-        if (model.flag('events:debug')) {
-            console.info(`Event ${eventName} triggered!`);
-        }
         try {
             if (this.events[eventName]) {
                 this.events[eventName].forEach(function (fn) {

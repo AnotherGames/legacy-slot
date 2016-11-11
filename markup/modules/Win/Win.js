@@ -1,7 +1,7 @@
 import { model } from 'modules/Model/Model';
-import { events } from 'modules/Events/Events';
+import { events } from 'modules/Util/Events';
 import { config } from 'modules/Util/Config';
-import { Glista } from 'modules/Glista/Glista';
+import { Glista } from 'modules/Class/Glista';
 import { sound } from '../../modules/Sound/Sound';
 
 export let win = (function () {
@@ -20,9 +20,9 @@ export let win = (function () {
         let mode = data.Mode;
 
         if (mode == 'root' && nextMode == 'fsBonus') {
-            if (model.flag('mobile') && !model.state('autoEnd')) {
+            if (model.state('mobile') && !model.state('autoEnd')) {
                 events.trigger('autoplay:stop');
-            } else if (model.flag('desktop') && !model.state('autoEnd')) {
+            } else if (model.state('desktop') && !model.state('autoEnd')) {
                 events.trigger('autoplay:stop:desktop');
             }
             setTimeout(() => {
@@ -118,7 +118,7 @@ export let win = (function () {
                         model.state('evilBrain', true);
                         game.add.tween(element.sprite.scale).to({x: 1.7, y: 1.7}, 700, 'Linear', true)
                             .onComplete.add(() => {
-                                if (model.flag('mobile')) {
+                                if (model.state('mobile')) {
                                     element.sprite.scale.x = element.sprite.scale.y = 1.5;
                                 } else {
                                     element.sprite.scale.x = element.sprite.scale.y = 1;
@@ -245,7 +245,7 @@ export let win = (function () {
             }, this);
     }
 
-    events.on('roll:end', showWin);
+    // events.on('roll:end', showWin);
     events.on('roll:start', cleanWin);
     events.on('win:clean', cleanWinElements);
 

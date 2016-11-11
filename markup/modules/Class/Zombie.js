@@ -1,4 +1,4 @@
-export class FSCharapter {
+export class Zombie {
     /*  param: {
             game: State,
             position: {
