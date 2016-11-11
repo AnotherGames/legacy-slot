@@ -71,11 +71,11 @@ export let autoplay = (function () {
         // clearTimeout(model.data('autoTimeout'));
     }
 
-    events.on('autoplay:init', initAutoplay);
-    events.on('autoplay:init:desktop', initAutoplay);
-    events.on('autoplay:next', startAutoplay);
-    events.on('autoplay:stop', stopAutoplay);
-    events.on('autoplay:stop:desktop', stopAutoplay);
+    // events.on('autoplay:init', initAutoplay);
+    // events.on('autoplay:init:desktop', initAutoplay);
+    // events.on('autoplay:next', startAutoplay);
+    // events.on('autoplay:stop', stopAutoplay);
+    // events.on('autoplay:stop:desktop', stopAutoplay);
 
     return {
         initAutoplay,

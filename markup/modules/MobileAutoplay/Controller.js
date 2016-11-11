@@ -1,4 +1,5 @@
 import { model } from 'modules/Model/Model';
+import { events } from 'modules/Util/Events';
 import { view } from 'modules/MobileAutoplay/View';
 import { sound } from 'modules/Sound/Sound';
 
@@ -23,6 +24,12 @@ export let controller = (() => {
 
             view.hide.Overlay({});
             model.state('autoplayPanel', 'close');
+        },
+        initAuto: function (amount) {
+            if (model.state('autoplayPanel') === 'close') return;
+
+            handle.closePanel();
+            events.trigger('autoplay:init', amount);
         }
     };
 
@@ -50,39 +57,39 @@ export let controller = (() => {
             side: 'left'});
             button10.inputEnabled = true;
             button10.input.priorityID = 12;
-            // button10.events.onInputDown.add(handle.);
-        let button100 = view.draw.Button({
-            container: model.el('autoplayContainer'),
-            heightPercentage: 0.2,
-            text: '100',
-            side: 'right'});
-            button100.inputEnabled = true;
-            button100.input.priorityID = 12;
-            // button100.events.onInputDown.add(handle.);
+            button10.events.onInputDown.add(handle.initAuto.bind(10));
         let button25 = view.draw.Button({
             container: model.el('autoplayContainer'),
-            heightPercentage: 0.45,
+            heightPercentage: 0.2,
             text: '25',
-            side: 'left'});
+            side: 'right'});
             button25.inputEnabled = true;
             button25.input.priorityID = 12;
-            // button25.events.onInputDown.add(handle.);
-        let button250 = view.draw.Button({
-            container: model.el('autoplayContainer'),
-            heightPercentage: 0.45,
-            text: '250',
-            side: 'right'});
-            button250.inputEnabled = true;
-            button250.input.priorityID = 12;
-            // button250.events.onInputDown.add(handle.);
+            button25.events.onInputDown.add(handle.initAuto.bind(25));
         let button50 = view.draw.Button({
             container: model.el('autoplayContainer'),
-            heightPercentage: 0.70,
+            heightPercentage: 0.45,
             text: '50',
             side: 'left'});
             button50.inputEnabled = true;
             button50.input.priorityID = 12;
-            // button50.events.onInputDown.add(handle.);
+            button50.events.onInputDown.add(handle.initAuto.bind(50));
+        let button100 = view.draw.Button({
+            container: model.el('autoplayContainer'),
+            heightPercentage: 0.45,
+            text: '100',
+            side: 'right'});
+            button100.inputEnabled = true;
+            button100.input.priorityID = 12;
+            button100.events.onInputDown.add(handle.initAuto.bind(100));
+        let button250 = view.draw.Button({
+            container: model.el('autoplayContainer'),
+            heightPercentage: 0.70,
+            text: '250',
+            side: 'left'});
+            button250.inputEnabled = true;
+            button250.input.priorityID = 12;
+            button250.events.onInputDown.add(handle.initAuto.bind(250));
         let button500 = view.draw.Button({
             container: model.el('autoplayContainer'),
             heightPercentage: 0.70,
@@ -90,7 +97,7 @@ export let controller = (() => {
             side: 'right'});
             button500.inputEnabled = true;
             button500.input.priorityID = 12;
-            // button500.events.onInputDown.add(handle.);
+            button500.events.onInputDown.add(handle.initAuto.bind(500));
 
         let backButton = view.draw.BackButton({});
             backButton.inputEnabled = true;

@@ -125,7 +125,7 @@ export let controller = (() => {
 
         panelButton: function() {
             const amount = this.amount;
-            events.trigger('autoplay:init:desktop', amount);
+            events.trigger('autoplay:init', amount);
         }
 
     }

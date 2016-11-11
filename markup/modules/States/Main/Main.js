@@ -10,19 +10,20 @@ import { config } from 'modules/Util/Config';
 // import { Element } from 'modules/Class/Element';
 // import { balance } from 'modules/Balance/Balance';
 // import { mobileSettings } from 'modules/Menu/MobileSettings';
-import { autoplay } from 'modules/Autoplay/Autoplay';
+// import { autoplay } from 'modules/Autoplay/Autoplay';
+// import { menu } from 'modules/Menu/Menu';
 import { settings } from 'modules/Menu/Settings';
-import { menu } from 'modules/Menu/Menu';
 import { win } from 'modules/Win/Win';
 
 import { sound } from 'modules/Sound/Sound';
+import { view as transitionView } from 'modules/Transition/transitionView';
 import { controller as balanceController } from 'modules/Balance/BalanceController';
 import { controller as footerController } from 'modules/Footer/FooterController';
 import { controller as panelController } from 'modules/Panel/PanelController';
 import { controller as buttonsController } from 'modules/Buttons/ButtonsController';
 import { controller as rollController } from 'modules/Roll/RollController';
+import { controller as autoplayController } from 'modules/Autoplay/AutoplayController';
 import { controller as mobileSettingsController } from 'modules/MobileSettings/Controller';
-import { view as transitionView } from 'modules/Transition/transitionView';
 import { controller as mobileAutoplayController } from 'modules/MobileAutoplay/Controller';
 
 export class Main {

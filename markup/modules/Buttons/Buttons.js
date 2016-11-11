@@ -213,7 +213,7 @@ export let buttons = (function () {
             events.trigger('buttons:maxBet');
         }
 
-        events.on('autoplay:init:desktop', autoOn);
+        // events.on('autoplay:init:desktop', autoOn);
 
         function autoOn() {
             if (autoButtonDesk.frameName == 'autoEmpty.png' && model.state('autoPanel') === false) return;
@@ -373,10 +373,10 @@ export let buttons = (function () {
 
 
     events.on('buttons:changeSoundButton', changeSoundButton);
-    events.on('autoplay:init', autoStart);
-    events.on('autoplay:stop', autoStop);
-    events.on('autoplay:init:desktop', autoStartDesktop);
-    events.on('autoplay:stop:desktop', autoStopDesktop);
+    // events.on('autoplay:init', autoStart);
+    // events.on('autoplay:stop', autoStop);
+    // events.on('autoplay:init:desktop', autoStartDesktop);
+    // events.on('autoplay:stop:desktop', autoStopDesktop);
 
     return {
         drawHomeButton,
