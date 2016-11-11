@@ -63,7 +63,6 @@ export let sound = {
         sound = true,
         music = true
     }) {
-        console.log(model);
         const game = model.el('game');
         // Fon
         this.music.fon = game.add.audio('fon', 1, true);

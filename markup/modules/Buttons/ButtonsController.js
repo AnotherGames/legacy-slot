@@ -2,6 +2,7 @@ import { model } from 'modules/Model/Model';
 import { view } from 'modules/Buttons/ButtonsView';
 import { events } from 'modules/Util/Events';
 import { sound } from 'modules/Sound/Sound';
+import { controller as mobileSettingsController } from 'modules/MobileSettings/Controller';
 
 export let controller = (() => {
     let game;
@@ -112,6 +113,7 @@ export let controller = (() => {
             if (model.state('menu') === 'open') return;
 
             sound.sounds.button.play();
+            mobileSettingsController.handle.openSettings({});
             // controller.mobile.settings.open();
         },
 
