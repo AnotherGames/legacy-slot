@@ -4,6 +4,7 @@ import { events } from 'modules/Util/Events';
 import { sound } from 'modules/Sound/Sound';
 import { controller as mobileSettingsController } from 'modules/MobileSettings/Controller';
 import { controller as mobileAutoplayController } from 'modules/MobileAutoplay/Controller';
+import { controller as mobileSetBetController } from 'modules/MobileSetBet/Controller';
 
 export let controller = (() => {
     let game;
@@ -109,7 +110,8 @@ export let controller = (() => {
             if (betButton.frameName === 'setBetOut.png') return;
             sound.sounds.button.play();
             if (model.state('menu') === 'opened') return;
-            events.trigger('menu:showMenu', 'bet');
+            // events.trigger('menu:showMenu', 'bet');
+            mobileSetBetController.handle.openPanel({});
         },
 
 

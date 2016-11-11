@@ -21,9 +21,10 @@ import { controller as footerController } from 'modules/Footer/FooterController'
 import { controller as panelController } from 'modules/Panel/PanelController';
 import { controller as buttonsController } from 'modules/Buttons/ButtonsController';
 import { controller as rollController } from 'modules/Roll/RollController';
-import { controller as mobileSettingsController } from 'modules/MobileSettings/Controller';
 import { view as transitionView } from 'modules/Transition/transitionView';
+import { controller as mobileSettingsController } from 'modules/MobileSettings/Controller';
 import { controller as mobileAutoplayController } from 'modules/MobileAutoplay/Controller';
+import { controller as mobileSetBetController } from 'modules/MobileSetBet/Controller';
 
 export class Main {
     constructor(game) {
@@ -111,6 +112,7 @@ export class Main {
             balanceController.initMobile();
             mobileSettingsController.init({});
             mobileAutoplayController.init({});
+            mobileSetBetController.init({});
         } else {    // Desktop
             this.mainContainer.x = (this.game.width - this.mainContainer.width) / 2;
             // buttons.drawDesktopPanel(this.panelContainer, this, this.mainContainer);
