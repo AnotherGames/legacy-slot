@@ -14,9 +14,14 @@ export let controller = (() => {
         view.draw.DesktopBalance({});
     }
 
-    function initFS() {
+    function initFSMobile() {
         view.draw.CashBalance({});
-        view.draw.FSBalance({});
+        view.draw.FSMobileBalance({});
+    }
+
+    function initFSDesktop() {
+        view.draw.CashBalance({});
+        view.draw.FSDesktopBalance({});
     }
 
     function updateBalance() {
@@ -35,7 +40,8 @@ export let controller = (() => {
     return {
         initMobile,
         initDesktop,
-        initFS
+        initFSMobile,
+        initFSDesktop
     };
 
 })();

@@ -122,7 +122,7 @@ export let view = (() => {
 
         },
 
-        FSBalance: function({
+        FSDesktopBalance: function({
             game = model.el('game'),
             container = model.group('panel'),
             coinSumValue = model.balance('coinSum'),
@@ -152,6 +152,10 @@ export let view = (() => {
             model.el('betValue', betValue);
             model.el('winSum', winSum);
             model.el('totalWinSum', totalWinSum);
+
+        },
+
+        FSMobileBalance: function() {
 
         }
 
@@ -219,7 +223,20 @@ export let view = (() => {
 
         },
 
-        FSBalance: function({
+        FSDesktopBalance: function({
+            winSumValue = model.balance('coinSum'),
+            totalWinSumValue = model.balance('betSum')
+        }) {
+
+            let winSum = model.el('winSum', winSum),
+                totalWinSum = model.el('totalWinSum', totalWinSum);
+
+            winSum.text = `${winSumValue}`;
+            totalWinSum.text = `${totalWinSumValue}`;
+
+        },
+
+        FSMobileBalance: function({
             winSumValue = model.balance('coinSum'),
             totalWinSumValue = model.balance('betSum')
         }) {
