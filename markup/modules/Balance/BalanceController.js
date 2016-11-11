@@ -16,13 +16,15 @@ export let controller = (() => {
 
     function initFS() {
         view.draw.CashBalance({});
+        view.draw.FSBalance({});
     }
 
     function updateBalance() {
         if (model.state('mobile')) {
             view.update.CashBalance({});
             view.update.CoinBalance({});
-        } else {
+        }
+        if (model.state('desktop')) {
             view.update.CashBalance({});
             view.update.DesktopBalance({});
         }
