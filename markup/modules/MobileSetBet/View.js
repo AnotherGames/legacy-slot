@@ -54,7 +54,7 @@ export let view = (() => {
         BetLevelValue: function ({
             container = model.el('setbetContainer'),
             betBG = model.el('setbetPanelBetBG'),
-            value = 0 // model.data('currentBalance').betValue
+            value = model.balance('betValue')
         }) {
             const game = model.el('game');
 
@@ -141,7 +141,7 @@ export let view = (() => {
         coinValue: function ({
             container = model.el('setbetContainer'),
             coinBG = model.el('setbetPanelCoinBG'),
-            value = 0 // model.data('currentBalance').coinsValue
+            value = model.balance('coinValue')
         }) {
             const game = model.el('game');
 
@@ -278,6 +278,18 @@ export let view = (() => {
 
     };
 
+    let update = {
+
+        CoinValue: function () {
+            model.el('setbetPanelCoinValue').text = model.balance('coinValue');
+        },
+
+        BetValue: function () {
+            model.el('setbetPanelBetLevelValue').text = model.balance('betValue');
+        }
+
+    };
+
     let show = {
 
         Panel: function ({
@@ -335,6 +347,7 @@ export let view = (() => {
 
     return {
         draw,
+        update,
         show,
         hide
     };

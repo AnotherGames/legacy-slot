@@ -33,28 +33,23 @@ export let controller = (() => {
         },
         maxBet: function () {
             sound.sounds.button.play();
-            // events.trigger('buttons:maxBet');
-            // betText.text = model.data('currentBalance').betValue;
+            model.changeBet({toMax: true});
         },
         betLevelPlus: function () {
             sound.sounds.button.play();
-            // events.trigger('buttons:changeBet', true);
-            // model.el('setbetPanelBetLevelValue').text = model.data('currentBalance').betValue;
+            model.changeBet({up: true});
         },
         betLevelMinus: function () {
             sound.sounds.button.play();
-            // events.trigger('buttons:changeBet', false);
-            // model.el('setbetPanelBetLevelValue').text = model.data('currentBalance').betValue;
+            model.changeBet({down: true});
         },
         coinPlus: function () {
             sound.sounds.button.play();
-            // events.trigger('buttons:changeCoins', true);
-            // model.el('setbetPanelCoinValue').text = model.data('currentBalance').coinsValue;
+            model.changeCoin({up: true});
         },
         coinMinus: function () {
             sound.sounds.button.play();
-            // events.trigger('buttons:changeCoins', false);
-            // model.el('setbetPanelCoinValue').text = model.data('currentBalance').coinsValue;
+            model.changeCoin({down: true});
         }
     };
 
@@ -111,6 +106,21 @@ export let controller = (() => {
 
         model.state('setbetPanel', 'close');
     }
+
+    let update = {
+
+        CoinValue: function () {
+            view.update.CoinValue({});
+        },
+
+        BetValue: function () {
+            view.update.BetValue({});
+        }
+
+    };
+
+    events.on('model:balance:update', update.CoinValue);
+    events.on('model:balance:update', update.BetValue);
 
     return {
         init,
