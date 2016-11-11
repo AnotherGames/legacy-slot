@@ -22,6 +22,7 @@ import { controller as panelController } from 'modules/Panel/PanelController';
 import { controller as buttonsController } from 'modules/Buttons/ButtonsController';
 import { controller as rollController } from 'modules/Roll/RollController';
 import { controller as mobileSettingsController } from 'modules/MobileSettings/Controller';
+import { view as transitionView } from 'modules/Transition/transitionView';
 
 export class Main {
     constructor(game) {
@@ -41,6 +42,8 @@ export class Main {
         this.panelContainer = this.add.group();
         this.balanceContainer = this.add.group();
         this.menuContainer = this.add.group();
+        this.footerContainer = this.add.group();
+        this.balanceCashContainer = this.add.group();
         this.transitionContainer = this.add.group();
         model.el('bgContainer', this.bgContainer);
         model.el('mainContainer', this.mainContainer);
@@ -50,15 +53,18 @@ export class Main {
         model.group('buttons', this.buttonsContainer);
         model.el('panelContainer', this.panelContainer);
         model.group('panel', this.panelContainer);
+        model.group('footer', this.footerContainer);
+        model.group('balanceCash', this.balanceCashContainer);
         model.el('menuContainer', this.menuContainer);
         model.el('transitionContainer', this.transitionContainer);
+        model.group('transition', this.transitionContainer);
         model.state('side', 'left');
         model.state('autoPanel', false);
         model.state('fastRoll', false);
         model.state('isAnimations', true);
         model.state('autoEnd', true);
         model.state('FSMode', false);
-        events.on('main:drawTransitionScreen', this.drawTransitionScreen);
+        events.on('main:drawTransitionScreen', transitionView.fsStart);
         // events.on('main:drawWinScreen', this.drawWinScreen);
     }
 
@@ -112,6 +118,7 @@ export class Main {
             balanceController.initDesktop();
         }
 
+        transitionView.fsStart();
         // PreAnimation
         let darkness = this.add.graphics();
         darkness.beginFill(0x000000);

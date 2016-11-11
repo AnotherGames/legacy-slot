@@ -10,9 +10,7 @@ export let view = (() => {
         alphaBottom = 0.7
     }) {
         const game = model.el('game');
-
-        let footerContainer = game.add.group();
-        model.group('footer', footerContainer);
+        let footerContainer = model.group('footer');
 
         let footerTop = game.add.graphics(0, 0, footerContainer)
         .beginFill(color, alphaTop).drawRect(
@@ -44,8 +42,7 @@ export let view = (() => {
     }) {
         const game = model.el('game');
 
-        let footerContainer = game.add.group();
-        model.group('footer', footerContainer);
+        let footerContainer = model.group('footer');
 
         let footerBottom = game.add.graphics(0, 0, footerContainer)
             .beginFill(color, alphaBottom).drawRect(
