@@ -72,8 +72,7 @@ export let view = (() => {
         }) {
             const game = model.el('game');
 
-            let balanceCashContainer = game.add.group();
-            model.group('balanceCash', balanceCashContainer);
+            let balanceCashContainer = model.group('balanceCash');
 
             let coinCashText = game.add.text(0, y, 'Cash: ', greyStyle, balanceCashContainer);
             let betCashText = game.add.text(0, y, 'Bet: ', greyStyle, balanceCashContainer);
