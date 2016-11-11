@@ -22,6 +22,7 @@ import { controller as panelController } from 'modules/Panel/PanelController';
 import { controller as buttonsController } from 'modules/Buttons/ButtonsController';
 import { controller as rollController } from 'modules/Roll/RollController';
 import { controller as mobileSettingsController } from 'modules/MobileSettings/Controller';
+import { controller as mobileAutoplayController } from 'modules/MobileAutoplay/Controller';
 
 export class Main {
     constructor(game) {
@@ -103,6 +104,7 @@ export class Main {
             this.mainContainer.x = model.data('mainXLeft');
             balanceController.initMobile();
             mobileSettingsController.init({});
+            mobileAutoplayController.init({});
         } else {    // Desktop
             this.mainContainer.x = (this.game.width - this.mainContainer.width) / 2;
             // buttons.drawDesktopPanel(this.panelContainer, this, this.mainContainer);
