@@ -12,7 +12,6 @@ import { autoplay } from 'modules/Autoplay/Autoplay';
 import { events } from 'modules/Events/Events';
 import { settings } from '../../modules/Menu/Settings';
 import { sound } from '../../modules/Sound/Sound';
-import { mobileSettings } from '../../modules/Menu/MobileSettings';
 import { fs } from '../../modules/FS/FS';
 import { FSCharapter } from '../../modules/FSCharapter/FSCharapter';
 

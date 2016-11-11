@@ -3,7 +3,7 @@ import { events } from '../../modules/Events/Events';
 import { drawAutoDesktop } from '../../modules/Buttons/Autoplay';
 import { util } from 'modules/Util/Util';
 import { sound } from '../../modules/Sound/Sound';
-import { controller } from 'modules/Controller/Controller';
+import { controller } from 'modules/MobileSettings/Controller';
 
 export let buttons = (function () {
 
@@ -102,11 +102,9 @@ export let buttons = (function () {
         menuButton.inputEnabled = true;
         menuButton.input.priorityID = 1;
         menuButton.events.onInputDown.add(function () {
-            if (controller.isEvent) return;
             if (model.state('menu') === 'open') return;
 
-            sound.sounds.button.play();
-            controller.mobile.settings.open();
+            controller.handle.openSettings();
         });
 
         soundButton = game.add.sprite(xSide, 0, 'mobileButtons', 'sound.png', container);
