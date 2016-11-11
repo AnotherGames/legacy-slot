@@ -61,12 +61,10 @@ export let view = (() => {
 
     function drawHomeButton({
         x = 25,
-        mobileY = model.el('game').height - 50,
-        desktopY = model.el('game').height - 15,
+        y = model.el('game').height - 15,
         container = model.group('footer')
     }) {
         const game = model.el('game');
-        let y = (model.state('mobile')) ? mobileY : desktopY;
         const homeButton = game.add.button(x, y, 'footerButtons', null, null, 'homeOn.png', 'home.png', 'homeOn.png', null, container);
         homeButton.anchor.set(0.5);
         model.el('homeButton', homeButton);

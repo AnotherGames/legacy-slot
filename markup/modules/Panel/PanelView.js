@@ -182,7 +182,6 @@ export let view = (() => {
             time = 250
         }) {
             const game = model.el('game');
-            console.log(model.group('autoDesktop'));
             const autoDesktopContainer = model.group('autoDesktop');
             return game.add.tween(autoDesktopContainer).to( { x: finalX, alpha: 1 }, time, 'Linear', true)
         },
@@ -217,7 +216,6 @@ export let view = (() => {
             time = 250
         }) {
             const game = model.el('game');
-            console.log('autopanel closed');
             const autoDesktopContainer = model.group('autoDesktop');
             return game.add.tween(autoDesktopContainer).to( { x: finalX, alpha: 0 }, time, 'Linear', true)
         }

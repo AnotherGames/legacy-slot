@@ -70,7 +70,11 @@ export class Main {
         this.drawMainBG();
         this.initMainContainer();
         this.drawMainContainer();
-        footerController.initDesktop();
+        if (model.state('mobile')) {
+            footerController.initMobile();
+        } else {
+            footerController.initDesktop();
+        }
 
         sound.init(this.game);
         sound.music.fon.play();
@@ -97,6 +101,7 @@ export class Main {
 
         if (model.state('mobile')) {
             this.mainContainer.x = model.data('mainXLeft');
+            balanceController.initMobile();
         } else {    // Desktop
             this.mainContainer.x = (this.game.width - this.mainContainer.width) / 2;
             // buttons.drawDesktopPanel(this.panelContainer, this, this.mainContainer);
