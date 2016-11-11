@@ -6,18 +6,11 @@ import { sound } from 'modules/Sound/Sound';
 export let controller = (() => {
 
     function init() {
+        let game = model.el('game');
 
         view.draw.PanelBG({});
-
-        let game = model.el('game');
-        let autoDesktopContainer = game.add.group();
-        model.group('autoDesktop', autoDesktopContainer);
-        model.group('panel').add(autoDesktopContainer);
-            autoDesktopContainer.x = 650;
-            autoDesktopContainer.y = 95;
-            autoDesktopContainer.alpha = 0;
-
         view.draw.LinesNumber({});
+        view.draw.AutoContainer({});
         view.draw.AutoPanel({}).forEach((panelButton) => {
             panelButton.inputEnabled = true;
             panelButton.events.onInputDown.add(handle.panelButton, panelButton);
@@ -53,6 +46,18 @@ export let controller = (() => {
             model.el('coinsLevelMinus', coinsLevelMinus);
             coinsLevelMinus.onInputDown.add(handle.coinsMinus);
 
+    }
+
+    function initFS() {
+        view.draw.PanelBG({x: model.group('main').x + 38, frameName: 'uiFS'});
+        view.draw.LinesNumber({x: 55, y: 115});
+
+        let infoButtonDesk = view.draw.InfoButton({x: 42, y: 27});
+            infoButtonDesk.onInputDown.add(handle.info);
+
+        let candle1 = view.draw.fsCandle({});
+        candle1.scale.set(0.7);
+        let candle2 = view.draw.fsCandle({x: 878, y: 18});
     }
 
     const handle = {
@@ -138,7 +143,8 @@ export let controller = (() => {
     return {
         init,
         autoStart,
-        autoStop
+        autoStop,
+        initFS
     };
 
 })();

@@ -3,6 +3,7 @@ import { model } from 'modules/Model/Model';
 export let view = (() => {
 
     let draw = {
+
         PanelBG: function({
             x = model.group('main').x + 45,
             y = model.el('gameMachine').height - 28,
@@ -15,6 +16,19 @@ export let view = (() => {
 
             const panelBG = game.add.sprite(0, 0, frameName, null, container);
             return panelBG;
+        },
+
+        AutoContainer: function({
+            x = 650,
+            y = 95
+        }) {
+            const game = model.el('game');
+            const autoDesktopContainer = game.add.group();
+            model.group('panel').add(autoDesktopContainer);
+            autoDesktopContainer.x = x;
+            autoDesktopContainer.y = y;
+            autoDesktopContainer.alpha = 0;
+            model.group('autoDesktop', autoDesktopContainer);
         },
 
         SpinButton: function({
@@ -164,6 +178,18 @@ export let view = (() => {
             });
 
             return autoBG;
+        },
+
+        fsCandle: function({
+            x = 513,
+            y = 95,
+            container = model.el('panelContainer')
+        }) {
+            const game = model.el('game');
+            const candle = game.add.sprite(x, y, 'candle', null, container);
+            candle.animations.add('burn');
+            candle.animations.play('burn', 12, true);
+            return candle;
         }
     }
 
