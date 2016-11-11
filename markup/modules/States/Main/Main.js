@@ -71,7 +71,6 @@ export class Main {
         this.initMainContainer();
         this.drawMainContainer();
         footerController.initDesktop();
-        balanceController.initDesktop();
 
         sound.init(this.game);
         sound.music.fon.play();
@@ -104,6 +103,7 @@ export class Main {
             // buttons.drawDesktopBottomButtons(this.balanceContainer, this);
             settings.initDesktopSettings(this.game);
             panelController.init();
+            balanceController.initDesktop();
         }
 
         // PreAnimation

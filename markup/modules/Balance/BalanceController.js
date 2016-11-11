@@ -5,25 +5,26 @@ import { view } from 'modules/Balance/BalanceView';
 export let controller = (() => {
 
     function initMobile() {
-        view.drawCashBalance({});
-        view.drawCoinBalance({});
+        view.draw.CashBalance({});
+        view.draw.CoinBalance({});
     }
 
     function initDesktop() {
-        view.drawCashBalance({});
+        view.draw.CashBalance({});
+        view.draw.DesktopBalance({});
     }
 
     function initFS() {
-        view.drawCashBalance({});
+        view.draw.CashBalance({});
     }
 
     function updateBalance() {
         if (model.state('mobile')) {
-            view.updateCashBalance({});
-            view.updateCoinBalance({});
+            view.update.CashBalance({});
+            view.update.CoinBalance({});
         } else {
-            view.updateCashBalance({});
-            // Добавить обновление десктопного баланса
+            view.update.CashBalance({});
+            view.update.DesktopBalance({});
         }
     }
 
