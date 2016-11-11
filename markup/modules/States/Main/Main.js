@@ -118,7 +118,6 @@ export class Main {
             balanceController.initDesktop();
         }
 
-        transitionView.fsStart();
         // PreAnimation
         let darkness = this.add.graphics();
         darkness.beginFill(0x000000);
