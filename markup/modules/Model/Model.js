@@ -135,6 +135,8 @@ export let model = (() => {
     function changeCoin({up, down, toMax, toMin}) {
 
         let coinValue = model.balance('coinValue');
+        let betCash = model.balance('betCash');
+        let betSum = model.balance('betSum');
         let coinSteps = model.balance('coinSteps');
         let currentCoinStep = model.balance('currentCoinStep');
 
@@ -156,8 +158,10 @@ export let model = (() => {
         }
 
         coinValue = coinSteps[currentCoinStep];
+        betCash = betSum * coinValue;
         model.balance('currentCoinStep', currentCoinStep);
         model.balance('coinValue', coinValue);
+        model.balance('betCash', betCash);
         updateBalance({coin: true});
         return coinValue;
 
