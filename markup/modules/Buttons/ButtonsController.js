@@ -108,8 +108,6 @@ export let controller = (() => {
             events.trigger('menu:showMenu', 'bet');
         },
 
-
-
         menuButton: function() {
             if (controller.isEvent) return;
             if (model.state('menu') === 'open') return;
