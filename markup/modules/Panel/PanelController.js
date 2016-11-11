@@ -138,7 +138,8 @@ export let controller = (() => {
         view.autoStopDesktop();
     }
 
-    // events.on('autoplay:init:desktop', handleAuto); // ивент для запуска автоплея, автоматически закрывает панель
+    events.on('autoplay:init', autoStart);
+    events.on('autoplay:stop', autoStop);
 
     return {
         init,

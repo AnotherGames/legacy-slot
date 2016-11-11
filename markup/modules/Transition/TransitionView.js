@@ -16,6 +16,9 @@ export let view = (() => {
         const game = model.el('game');
         const transitionContainer = model.group('transition');
 
+        sound.music.fon.stop();
+        sound.music.startPerehod.play();
+
         const transitionBG = game.add.sprite(0, 0, 'initBG', null, transitionContainer);
         model.el('transitionBG', transitionBG);
         const freeSpinsText = game.add.sprite(game.world.width / 2,
@@ -86,24 +89,125 @@ export let view = (() => {
 
     function _fsStartInput() {
         const game = model.el('game');
-        const continueText = model.el('continueText');
-        continueText.inputEnabled = true;
-        continueText.input.priorityID = 2;
-        continueText.events.onInputDown.add(function () {
+        const transitionBG = model.el('transitionBG');
+        transitionBG.inputEnabled = true;
+        transitionBG.input.priorityID = 2;
+        transitionBG.events.onInputDown.add(function () {
             console.log('i am i am starting fs');
             sound.sounds.button.play();
+            sound.music.startPerehod.stop();
+            sound.music.fsFon.play();
             // game.state.start('FS');
         });
     }
 
     function _fsStartHide() {
         console.log('i am starting fs after timeout');
+        sound.music.startPerehod.stop();
+        sound.music.fsFon.play();
         const game = model.el('game');
         // game.state.start('FS');
     }
 
+    function fsFinish() {
+        _fsFinishDraw();
+        _fsFinishTween();
+        _fsFinishInput();
+        setTimeout(function () {
+            _fsFinishHide();
+        }, 10000);
+    }
+
+    function _fsFinishDraw() {
+        const game = model.el('game');
+        const transitionContainer = model.group('transition');
+        sound.music.fsFon.stop();
+        sound.music.finishPerehod.play();
+
+        const transitionBG = game.add.sprite(0, 0, 'initBG', null, transitionContainer);
+        model.el('transitionBG', transitionBG);
+
+        const winText = game.add.sprite(game.world.width / 2,
+            -400,
+            'text',
+            'totalW.png',
+            transitionContainer);
+        winText.anchor.set(0.5);
+        model.el('winText', winText);
+
+        let winCountValue = model.data('rollResponse').FsBonus.TotalFSWinCoins;
+
+        const winCount = game.add.text(game.world.width / 2,
+            -200,
+            winCountValue,
+            {font: 'bold 140px Helvetica, Arial', fill: '#fff', align: 'center'},
+            transitionContainer);
+        winCount.anchor.set(0.5);
+        model.el('winCount', winCount);
+
+        const skull = game.add.sprite(game.world.width / 2,
+            game.world.height * 0.7,
+            'skull',
+            null,
+            transitionContainer);
+        skull.anchor.set(0.5);
+        skull.scale.setTo(0.1, 0.1);
+        model.el('skull', skull);
+
+        const continueText = game.add.sprite(game.world.width / 2,
+            game.world.height * 0.9,
+            'text',
+            'continue.png',
+            transitionContainer);
+        continueText.anchor.set(0.5);
+        continueText.scale.setTo(0.1, 0.1);
+        model.el('continueText', continueText);
+    }
+
+    function _fsFinishTween() {
+        const game = model.el('game');
+        const winText = model.el('winText');
+        const winCount = model.el('winCount');
+        const skull = model.el('skull');
+        const continueText = model.el('continueText');
+        game.add.tween(winText).to({y: game.world.height * 0.2}, 1500, Phaser.Easing.Bounce.Out, true);
+        game.add.tween(winCount).to({y: game.world.height * 0.45}, 1500, Phaser.Easing.Bounce.Out, true);
+        game.add.tween(continueText.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true);
+        game.add.tween(skull.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true)
+            .onComplete.add(() => {
+                skull.rotation = 0.1;
+                game.add.tween(skull).to({rotation: -0.1}, 100, 'Linear', true, 0, 4, true)
+                    .onComplete.add(() => {
+                        skull.rotation = 0;
+                    }, this);
+            }, this);
+    }
+
+    function _fsFinishInput() {
+        console.log('i am finishing fs');
+        const game = model.el('game');
+        const transitionBG = model.el('transitionBG');
+        transitionBG.inputEnabled = true;
+        transitionBG.input.priorityID = 2;
+        transitionBG.events.onInputDown.add(function () {
+            sound.sounds.button.play();
+            sound.music.finishPerehod.stop();
+            sound.music.fon.play();
+            // game.state.start('Main');
+        });
+    }
+
+    function _fsFinishHide() {
+        console.log('i am finishing fs after timeout');
+        sound.music.finishPerehod.stop();
+        sound.music.fon.play();
+        const game = model.el('game');
+        // game.state.start('Main');
+    }
+
     return {
-        fsStart
+        fsStart,
+        fsFinish
     }
 
 })();
