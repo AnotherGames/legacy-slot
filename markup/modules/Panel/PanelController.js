@@ -65,7 +65,7 @@ export let controller = (() => {
             sound.sounds.button.play();
             const spinButtonDesk = model.el('spinButtonDesk');
             if (spinButtonDesk.frameName == 'stop.png') {
-                events.trigger('autoplay:stop:desktop');
+                events.trigger('autoplay:stop');
                 return;
             }
             events.trigger('roll:request');
@@ -130,16 +130,24 @@ export let controller = (() => {
 
     }
 
-    function autoStart() {
+    function autoStart(amount) {
         view.autoStartDesktop();
+        view.draw.autoCount({amount});
+        handle.auto();
     }
 
     function autoStop() {
         view.autoStopDesktop();
+        view.draw.removeCount();
+    }
+
+    function autoChangeCount(count) {
+        view.draw.updateCount({count});
     }
 
     events.on('autoplay:init', autoStart);
     events.on('autoplay:stop', autoStop);
+    events.on('autoplay:count', autoChangeCount);
 
     return {
         init,
