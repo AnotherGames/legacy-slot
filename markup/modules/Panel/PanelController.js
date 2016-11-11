@@ -11,11 +11,11 @@ export let controller = (() => {
 
         let game = model.el('game');
         let autoDesktopContainer = game.add.group();
-        model.group('panel').add(autoDesktopContainer);
-        autoDesktopContainer.x = 650;
-        autoDesktopContainer.y = 95;
-        autoDesktopContainer.alpha = 0;
         model.group('autoDesktop', autoDesktopContainer);
+        model.group('panel').add(autoDesktopContainer);
+            autoDesktopContainer.x = 650;
+            autoDesktopContainer.y = 95;
+            autoDesktopContainer.alpha = 0;
 
         view.draw.LinesNumber({});
         view.draw.AutoPanel({}).forEach((panelButton) => {
@@ -57,19 +57,13 @@ export let controller = (() => {
 
     const handle = {
         spin: function() {
-            const spinButtonDesk = model.el('spinButtonDesk');
             sound.sounds.button.play();
+            const spinButtonDesk = model.el('spinButtonDesk');
             if (spinButtonDesk.frameName == 'stop.png') {
                 events.trigger('autoplay:stop:desktop');
                 return;
             }
-            sound.sounds.button.play();
-            events.trigger('roll:request', {
-                // TODO: для обычних круток используй параметры конфига.
-                // time: 1500,
-                // length: 30,
-                // ease: 1
-            });
+            events.trigger('roll:request');
         },
 
         auto: function() {
@@ -87,10 +81,9 @@ export let controller = (() => {
         },
 
         maxBet: function() {
-            console.log('i am here');
             if (model.state('autoEnd') == false) return;
             sound.sounds.button.play();
-            events.trigger('buttons:maxBet');
+            model.changeBet({toMax: true});
         },
 
         info: function() {
@@ -107,26 +100,25 @@ export let controller = (() => {
 
         betPlus: function() {
             sound.sounds.button.play();
-            events.trigger('buttons:changeBet', true);
+            model.changeBet({up: true});
         },
 
         betMinus: function() {
             sound.sounds.button.play();
-            events.trigger('buttons:changeBet', false);
+            model.changeBet({down: true});
         },
 
         coinsPlus: function() {
             sound.sounds.button.play();
-            events.trigger('buttons:changeCoins', true);
+            model.changeCoin({up: true});
         },
 
         coinsMinus: function() {
             sound.sounds.button.play();
-            events.trigger('buttons:changeCoins', false);
+            model.changeCoin({down: true});
         },
 
         panelButton: function() {
-            console.log(this);
             const amount = this.amount;
             events.trigger('autoplay:init:desktop', amount);
         }
