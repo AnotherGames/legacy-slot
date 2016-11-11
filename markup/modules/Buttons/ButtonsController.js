@@ -3,6 +3,7 @@ import { view } from 'modules/Buttons/ButtonsView';
 import { events } from 'modules/Util/Events';
 import { sound } from 'modules/Sound/Sound';
 import { controller as mobileSettingsController } from 'modules/MobileSettings/Controller';
+import { controller as mobileAutoplayController } from 'modules/MobileAutoplay/Controller';
 
 export let controller = (() => {
     let game;
@@ -98,7 +99,8 @@ export let controller = (() => {
             if (autoButton.frameName === 'stop.png') {
                 events.trigger('autoplay:stop');
             } else {
-                events.trigger('menu:showMenu', 'auto');
+                // events.trigger('menu:showMenu', 'auto');
+                mobileAutoplayController.handle.openPanel({});
             }
         },
 
