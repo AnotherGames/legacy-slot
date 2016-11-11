@@ -11,6 +11,14 @@ export let controller = (() => {
         openPanel: function () {
             if (model.state('autoplayPanel') === 'open') return;
             model.state('autoplayPanel', 'open');
+
+            if (model.state('side') === 'right') {
+                let border = model.el('autoplayBorder');
+                border.x = model.el('autoplayContainer').width - border.width;
+            } else {
+                model.el('autoplayBorder').x = 0;
+            }
+
             view.show.Panel({});
             view.show.Overlay({});
         },
