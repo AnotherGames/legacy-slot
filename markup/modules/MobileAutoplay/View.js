@@ -3,17 +3,21 @@ import { model } from 'modules/Model/Model';
 export let view = (() => {
 
     let draw = {
-        _button: function ({
+        Button: function ({
             container = model.el('autoplayContainer'),
-            spriteName = 'soundOn.png',
             heightPercentage = 0.2,
+            text = '0',
             side = 'left'
         }) {
             const game = model.el('game');
-            let button = game.add.sprite(0, game.height * heightPercentage, 'menuButtons', spriteName, container);
-            button.anchor.set(0.5);
 
-            // Расчет отступа от края контенера
+            const button = game.add.sprite(
+                0,
+                game.height * heightPercentage,
+                'menuButtons',
+                'empty.png',
+                container);
+            button.anchor.set(0.5);
             let buttonMargin = (container.width - button.width * 2.5) / 3;
             if (side === 'left') {
                 button.x = buttonMargin + button.width / 2;
@@ -21,26 +25,16 @@ export let view = (() => {
                 button.x = 2 * buttonMargin + 1.5 * button.width;
             }
 
-            return button;
-        },
-
-        _buttonText: function ({
-            container = model.el('autoplayContainer'),
-            button = null,
-            spriteName = 'soundText.png'
-        }) {
-            const game = model.el('game');
-
-            const text = game.add.sprite(
-                button.x,
-                button.y + button.height / 2,
-                'menuButtons',
-                spriteName,
+            const buttonText = game.add.text(
+                button.x + 2,
+                button.y + 2,
+                text,
+                {font: 'bold 45px Arial', fill: '#90fd5a', align: 'center'},
                 container);
-            text.y += text.height;
-            text.anchor.set(0.5);
+            buttonText.anchor.set(0.5);
+            buttonText.setShadow(0, 0, '#90fd5a', 6);
 
-            return text;
+            return button;
         },
 
         Container: function () {

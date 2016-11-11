@@ -43,6 +43,55 @@ export let controller = (() => {
         view.draw.Border({});
         view.draw.Title({});
 
+        let button10 = view.draw.Button({
+            container: model.el('autoplayContainer'),
+            heightPercentage: 0.2,
+            text: '10',
+            side: 'left'});
+            button10.inputEnabled = true;
+            button10.input.priorityID = 12;
+            // button10.events.onInputDown.add(handle.);
+        let button100 = view.draw.Button({
+            container: model.el('autoplayContainer'),
+            heightPercentage: 0.2,
+            text: '100',
+            side: 'right'});
+            button100.inputEnabled = true;
+            button100.input.priorityID = 12;
+            // button100.events.onInputDown.add(handle.);
+        let button25 = view.draw.Button({
+            container: model.el('autoplayContainer'),
+            heightPercentage: 0.45,
+            text: '25',
+            side: 'left'});
+            button25.inputEnabled = true;
+            button25.input.priorityID = 12;
+            // button25.events.onInputDown.add(handle.);
+        let button250 = view.draw.Button({
+            container: model.el('autoplayContainer'),
+            heightPercentage: 0.45,
+            text: '250',
+            side: 'right'});
+            button250.inputEnabled = true;
+            button250.input.priorityID = 12;
+            // button250.events.onInputDown.add(handle.);
+        let button50 = view.draw.Button({
+            container: model.el('autoplayContainer'),
+            heightPercentage: 0.70,
+            text: '50',
+            side: 'left'});
+            button50.inputEnabled = true;
+            button50.input.priorityID = 12;
+            // button50.events.onInputDown.add(handle.);
+        let button500 = view.draw.Button({
+            container: model.el('autoplayContainer'),
+            heightPercentage: 0.70,
+            text: '500',
+            side: 'right'});
+            button500.inputEnabled = true;
+            button500.input.priorityID = 12;
+            // button500.events.onInputDown.add(handle.);
+
         let backButton = view.draw.BackButton({});
             backButton.inputEnabled = true;
             backButton.input.priorityID = 12;
