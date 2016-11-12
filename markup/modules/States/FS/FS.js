@@ -15,6 +15,7 @@ import { sound } from 'modules/Sound/Sound';
 // import { mobileSettings } from 'modules/Menu/MobileSettings';
 import { fs } from 'modules/States/FS/FSController';
 import { Zombie } from 'modules/Class/Zombie';
+import { Brain } from 'modules/Class/Brain';
 
 
 export class FS {
@@ -170,12 +171,13 @@ export class FS {
             y = 120;
         }
 
-        let brain = this.game.add.spine(
-            x,        // X positon
-            y,        // Y position
-            'FlyingBrain'     // the key of the object in cache
-        );
-        brain.setAnimationByName(0, 'Idle', true);
+        let brain = new Brain({
+            game: this.game,
+            position: {
+                x,
+                y
+            }
+        });
         model.el('flyingBrain', brain);
     }
 
