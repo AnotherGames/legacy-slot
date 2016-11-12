@@ -103,6 +103,7 @@ export class Main {
             // buttons.drawMobileButtons(this.buttonsContainer, this, this.mainContainer.width);
             // mobileSettings.draw(this.game);
         }
+        this.drawMachineMask();
         // balance.drawBalanceContainer(this.balanceContainer, this);
         // buttons.drawHomeButton(this.balanceContainer, this);
 
@@ -168,12 +169,7 @@ export class Main {
         model.el('gameMachine', gameMachine);
     }
 
-    drawMainContainer() {
-        this.machineContainer = this.add.group();
-        model.el('machineContainer', this.machineContainer);
-        this.mainContainer.addAt(this.machineContainer, 1);
-        this.machineContainer.position.set(this.mainContainer.width / 2 + config[model.state('res')].machine.x, this.mainContainer.height / 2);
-
+    drawMachineMask() {
         let maskMarginX = config[model.state('res')].machine.x;
         if (model.state('mobile')) {
             maskMarginX += model.data('mainXLeft');
@@ -186,6 +182,14 @@ export class Main {
         mask.beginFill(0x000000);
         mask.drawRect(maskMarginX, config[model.state('res')].machine.y, elSize.width * 5, elSize.height * 3);
         this.machineContainer.mask = mask;
+        model.el('mask', mask);
+    }
+
+    drawMainContainer() {
+        this.machineContainer = this.add.group();
+        model.el('machineContainer', this.machineContainer);
+        this.mainContainer.addAt(this.machineContainer, 1);
+        this.machineContainer.position.set(this.mainContainer.width / 2 + config[model.state('res')].machine.x, this.mainContainer.height / 2);
 
         let glistaLightContainer = this.game.add.group();
         model.el('glistaLightContainer', glistaLightContainer);
@@ -198,7 +202,6 @@ export class Main {
         let glistaContainer = this.game.add.group();
         model.el('glistaContainer', glistaContainer);
         this.machineContainer.add(glistaContainer);
-        model.el('mask', mask);
     }
 
 }
