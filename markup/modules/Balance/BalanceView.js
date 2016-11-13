@@ -210,10 +210,10 @@ export let view = (() => {
             betValueAmount = model.balance('betValue'),
         }) {
 
-            let coinSum = model.el('coinSum', coinSum),
-                betSum = model.el('betSum', betSum),
-                coinValue = model.el('coinValue', coinValue),
-                betValue = model.el('betValue', betValue);
+            let coinSum = model.el('coinSum'),
+                betSum = model.el('betSum'),
+                coinValue = model.el('coinValue'),
+                betValue = model.el('betValue');
 
             coinSum.text = `${coinSumValue.toFixed(0)}`;
             betSum.text = `${betSumValue.toFixed(0)}`;
@@ -227,8 +227,8 @@ export let view = (() => {
             totalWinSumValue = model.balance('betSum')
         }) {
 
-            let winSum = model.el('winSum', winSum),
-                totalWinSum = model.el('totalWinSum', totalWinSum);
+            let winSum = model.el('winSum'),
+                totalWinSum = model.el('totalWinSum');
 
             winSum.text = `${winSumValue}`;
             totalWinSum.text = `${totalWinSumValue}`;
@@ -240,8 +240,8 @@ export let view = (() => {
             totalWinSumValue = model.balance('betSum')
         }) {
 
-            let winSum = model.el('winSum', winSum),
-                totalWinSum = model.el('totalWinSum', totalWinSum);
+            let winSum = model.el('winSum'),
+                totalWinSum = model.el('totalWinSum');
 
             winSum.text = `${winSumValue}`;
             totalWinSum.text = `${totalWinSumValue}`;
