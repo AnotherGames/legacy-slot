@@ -40,14 +40,20 @@ export class Zombie {
         );
         this.char.setAnimationByName(0, 'idle' + this.level, true);
     }
-    Up() {
-        if (this.level >= 7) return;
-        this.level = this.level + 1;
-        if (this.level < 7) {
-            this.char.setAnimationByName(0, 'transition' + this.level, false);
+    Up(callback) {
+        if (this.level >= 6) return;
+        let anim;
+        let animTime = 0;
+        ++this.level;
+        if (this.level < 6) {
+            anim = this.char.setAnimationByName(0, 'transition' + this.level, false);
+            animTime += anim.endTime;
             this.char.addAnimationByName(0, 'idle' + this.level, true);
         } else {
-            this.char.setAnimationByName(0, 'transition7', false);
+            anim = this.char.setAnimationByName(0, 'transition6', false);
+            animTime += anim.endTime;
+            anim = this.char.addAnimationByName(0, 'transition7', false);
+            animTime += anim.endTime;
             this.char.addAnimationByName(0, 'idle7', true);
             let switcher = true;
             let _this = this;
@@ -66,5 +72,11 @@ export class Zombie {
             randomAnim();
         }
         this.char.setToSetupPose();
+
+        this.game.time.events.add(animTime * 1000, () => {
+            if (typeof (callback) === 'function') {
+                callback();
+            }
+        });
     }
 }
