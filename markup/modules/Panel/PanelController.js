@@ -125,6 +125,7 @@ export let controller = (() => {
         },
 
         panelButton: function() {
+            if (!model.state('autoEnd')) return;
             const amount = this.amount;
             events.trigger('autoplay:init', amount);
         }
