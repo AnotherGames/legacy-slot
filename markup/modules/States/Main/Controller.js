@@ -8,6 +8,7 @@ import { controller as footerController } from 'modules/Footer/FooterController'
 import { controller as panelController } from 'modules/Panel/PanelController';
 import { controller as buttonsController } from 'modules/Buttons/ButtonsController';
 import { controller as rollController } from 'modules/Roll/RollController';
+import { controller as winController } from 'modules/Win/WinController';
 import { controller as mobileSettingsController } from 'modules/MobileSettings/Controller';
 import { controller as mobileAutoplayController } from 'modules/MobileAutoplay/Controller';
 import { controller as mobileSetBetController } from 'modules/MobileSetBet/Controller';
@@ -93,6 +94,7 @@ export class Main {
     }
 
     update() {
+        footerController.updateTime({});
         const game = model.el('game');
         game.frameAnims.forEach((anim) => {
             anim();

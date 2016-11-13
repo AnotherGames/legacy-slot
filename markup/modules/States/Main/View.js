@@ -86,6 +86,10 @@ export let view = (() => {
             model.el('machineContainer', machineGroup);
             mainGroup.addAt(machineGroup, 1);
 
+            game.winTopContainer = game.add.group();
+            model.group('winTop', game.winTopContainer);
+            mainGroup.addAt(game.winTopContainer, 2);
+
             machineGroup.position.set(mainGroup.width / 2 + config[model.state('res')].machine.x, mainGroup.height / 2);
 
             machineGroup.glistaLightContainer = game.add.group();
