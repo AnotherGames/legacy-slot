@@ -12,8 +12,8 @@ import { config } from 'modules/Util/Config';
 // import { mobileSettings } from 'modules/Menu/MobileSettings';
 // import { autoplay } from 'modules/Autoplay/Autoplay';
 // import { menu } from 'modules/Menu/Menu';
+// import { win } from 'modules/Win/Win';
 import { settings } from 'modules/Menu/Settings';
-import { win } from 'modules/Win/Win';
 
 import { sound } from 'modules/Sound/Sound';
 import { view as transitionView } from 'modules/Transition/transitionView';
@@ -26,6 +26,7 @@ import { controller as autoplayController } from 'modules/Autoplay/AutoplayContr
 import { controller as mobileSettingsController } from 'modules/MobileSettings/Controller';
 import { controller as mobileAutoplayController } from 'modules/MobileAutoplay/Controller';
 import { controller as mobileSetBetController } from 'modules/MobileSetBet/Controller';
+import { controller as winController } from 'modules/Win/WinController';
 import { keyboard } from 'modules/Keyboard/Keyboard';
 
 export class Main {
@@ -232,6 +233,10 @@ export class Main {
         model.el('machineContainer', this.machineContainer);
         this.mainContainer.addAt(this.machineContainer, 1);
         this.machineContainer.position.set(this.mainContainer.width / 2 + config[model.state('res')].machine.x, this.mainContainer.height / 2);
+
+        let winTopContainer = this.game.add.group();
+        model.group('winTop', winTopContainer);
+        this.mainContainer.add(winTopContainer, 2);
 
         let glistaLightContainer = this.game.add.group();
         model.el('glistaLightContainer', glistaLightContainer);
