@@ -26,6 +26,7 @@ import { controller as autoplayController } from 'modules/Autoplay/AutoplayContr
 import { controller as mobileSettingsController } from 'modules/MobileSettings/Controller';
 import { controller as mobileAutoplayController } from 'modules/MobileAutoplay/Controller';
 import { controller as mobileSetBetController } from 'modules/MobileSetBet/Controller';
+import { keyboard } from 'modules/Keyboard/Keyboard';
 
 export class Main {
     constructor(game) {
@@ -123,6 +124,47 @@ export class Main {
             panelController.init();
             balanceController.initDesktop();
         }
+
+        // Space
+        keyboard.Add({
+            key: 32,
+            down: function () {
+                events.trigger('roll:request');
+                return true;
+            }
+        });
+        // Up
+        keyboard.Add({
+            key: 38,
+            down: function () {
+                model.changeCoin({up: true});
+                return true;
+            }
+        });
+        // Down
+        keyboard.Add({
+            key: 40,
+            down: function () {
+                model.changeCoin({down: true});
+                return true;
+            }
+        });
+        // Right
+        keyboard.Add({
+            key: 39,
+            down: function () {
+                model.changeBet({up: true});
+                return true;
+            }
+        });
+        // Left
+        keyboard.Add({
+            key: 37,
+            down: function () {
+                model.changeBet({down: true});
+                return true;
+            }
+        });
 
         // PreAnimation
         let darkness = this.add.graphics();

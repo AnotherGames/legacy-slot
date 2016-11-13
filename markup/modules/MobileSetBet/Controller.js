@@ -4,6 +4,7 @@ import { view } from 'modules/MobileSetBet/View';
 import { sound } from 'modules/Sound/Sound';
 
 export let controller = (() => {
+    if (model.state('desktop')) return;
 
     let game;
 
@@ -110,10 +111,12 @@ export let controller = (() => {
     let update = {
 
         CoinValue: function () {
+            if (model.state('desktop')) return;
             view.update.CoinValue({});
         },
 
         BetValue: function () {
+            if (model.state('desktop')) return;
             view.update.BetValue({});
         }
 
