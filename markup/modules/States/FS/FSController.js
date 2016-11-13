@@ -75,13 +75,15 @@ export let fs = (function () {
             model.data('fsMulti', multiValue);
         }
 
-        // if (model.data('fsMulti') === 7) {
-        //     let brain = model.el('flyingBrain');
-        //     brain.setAnimationByName(0, 'Win2', false);
-        //     let zombie = model.el('zombie');
-        //     zombie.Up();
-        //     zombie.Up();
-        // }
+        if (model.data('fsMulti') === 7) {
+            let brain = model.el('flyingBrain');
+            let zombie = model.el('zombie');
+            zombie.Up(() => {
+                brain.Up(() => {
+                    zombie.Up();
+                });
+            });
+        }
         changeBrainPanel();
     }
 
