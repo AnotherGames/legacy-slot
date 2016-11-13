@@ -137,6 +137,27 @@ export let controller = (() => {
         }
     }
 
+    function autoStart(amount) {
+        if (model.state('desktop')) return;
+        view.auto.Start();
+        let text = view.draw.autoCount({amount});
+    }
+
+    function autoStop() {
+        if (model.state('desktop')) return;
+        view.auto.Stop();
+        view.draw.removeCount();
+    }
+
+    function autoChangeCount(count) {
+        if (model.state('desktop')) return;
+        view.draw.updateCount({count});
+    }
+
+    events.on('autoplay:init', autoStart);
+    events.on('autoplay:stop', autoStop);
+    events.on('autoplay:count', autoChangeCount);
+
     return {
         init
     };

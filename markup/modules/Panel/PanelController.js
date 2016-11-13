@@ -133,17 +133,20 @@ export let controller = (() => {
     }
 
     function autoStart(amount) {
+        if (model.state('mobile')) return;
         view.autoStartDesktop();
         view.draw.autoCount({amount});
         handle.auto();
     }
 
     function autoStop() {
+        if (model.state('mobile')) return;
         view.autoStopDesktop();
         view.draw.removeCount();
     }
 
     function autoChangeCount(count) {
+        if (model.state('mobile')) return;
         view.draw.updateCount({count});
     }
 

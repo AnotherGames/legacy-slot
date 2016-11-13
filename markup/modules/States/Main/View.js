@@ -88,7 +88,7 @@ export let view = (() => {
 
             game.winTopContainer = game.add.group();
             model.group('winTop', game.winTopContainer);
-            mainGroup.addAt(game.winTopContainer, 2);
+            mainGroup.addAt(game.winTopContainer, 3);
 
             machineGroup.position.set(mainGroup.width / 2 + config[model.state('res')].machine.x, mainGroup.height / 2);
 
