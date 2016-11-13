@@ -72,6 +72,7 @@ export let controller = (() => {
         },
 
         auto: function() {
+            if (!model.state('autoEnd') || model.state('roll:progress')) return;
             const autoButtonDesk = model.el('autoButtonDesk');
             sound.sounds.button.play();
             if (model.state('autoClosed')) {
