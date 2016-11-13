@@ -10,7 +10,7 @@ model.el('game', game);
 import { Boot } from 'modules/States/Boot/Boot';
 import { Preload } from 'modules/States/Preload/Preload';
 import { Init } from 'modules/States/Init/Init';
-import { Main } from 'modules/States/Main/Main';
+import { Main } from 'modules/States/Main/Controller';
 import { FS } from 'modules/States/FS/FS';
 
 game.state.add('Boot', Boot, true);
