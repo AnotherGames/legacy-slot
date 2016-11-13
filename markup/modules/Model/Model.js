@@ -61,6 +61,7 @@ export let model = (() => {
     function initStates(initData) {
 
         model.data('sessionID', initData.SessionID);
+        model.data('lines', initData.Lines);
         model.data('numberOfLines', initData.Lines.length);
         model.data('firstScreen', initData.FirstScreen);
         model.state('initScreen', true);

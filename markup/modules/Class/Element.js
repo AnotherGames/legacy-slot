@@ -62,6 +62,16 @@ export class Element {
         // }
     }
 
+    win() {
+        let name = parseInt(this.sprite.animations.currentAnim.name);
+        this.play(`${name}-w`);
+    }
+
+    normal() {
+        let name = parseInt(this.sprite.animations.currentAnim.name);
+        this.play(`${name}-n`);
+    }
+
     _addElementAnimations(el) {
         switch (el) {
             case 1:
