@@ -1,5 +1,4 @@
 import { model } from 'modules/Model/Model';
-import { events } from 'modules/Util/Events';
 import { request } from 'modules/Util/Request';
 import { sound } from 'modules/Sound/Sound';
 import { view } from 'modules/Footer/FooterView';
@@ -7,35 +6,35 @@ import { view } from 'modules/Footer/FooterView';
 export let controller = (() => {
 
     function initDesktop() {
-        view.drawDesktopFooter({});
-        view.drawTime({});
+        view.draw.DesktopFooter({});
+        view.draw.Time({});
 
-        let homeButton = view.drawHomeButton({});
+        let homeButton = view.draw.HomeButton({});
             homeButton.onInputDown.add(handle.Home);
-        let menuButton = view.drawMenuButton({});
+        let menuButton = view.draw.MenuButton({});
             menuButton.onInputDown.add(handle.Menu);
-        let soundButton = view.drawSoundButton({});
+        let soundButton = view.draw.SoundButton({});
             soundButton.freezeFrames = true;
             soundButton.onInputDown.add(handle.Sound);
-        let fastButton = view.drawFastButton({});
+        let fastButton = view.draw.FastButton({});
             fastButton.freezeFrames = true;
             fastButton.onInputDown.add(handle.Fast);
     }
 
     function initMobile() {
-        view.drawMobileFooter({});
-        view.drawTime({});
+        view.draw.MobileFooter({});
+        view.draw.Time({});
 
-        let homeButton = view.drawHomeButton({});
+        let homeButton = view.draw.HomeButton({});
             homeButton.onInputDown.add(handle.Home);
     }
 
     function updateTime() {
-        view.updateTime();
+        view.update.Time();
     }
 
     const handle = {
-        Menu: function() {
+        Menu: function () {
             sound.sounds.button.play();
 
             $('#volume').prop('value', sound.volume * 100);
@@ -54,7 +53,7 @@ export let controller = (() => {
                 $('#darkness').off();
             });
         },
-        Sound: function() {
+        Sound: function () {
             let soundButton = model.el('soundButton');
             if (sound.volume > 0) {
                 soundButton.frameName = 'soundOff.png';
@@ -75,7 +74,7 @@ export let controller = (() => {
                 fastButton.frameName = 'fastSpinOn.png';
             }
         },
-        Home: function() {
+        Home: function () {
             sound.sounds.button.play();
             request.send('Logout')
                 .then((response) => {
@@ -89,6 +88,6 @@ export let controller = (() => {
         initDesktop,
         initMobile,
         updateTime
-    }
+    };
 
 })();
