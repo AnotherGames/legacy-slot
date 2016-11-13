@@ -133,6 +133,38 @@ export class Main {
                 return true;
             }
         });
+        // Up
+        keyboard.Add({
+            key: 38,
+            down: function () {
+                model.changeCoin({up: true});
+                return true;
+            }
+        });
+        // Down
+        keyboard.Add({
+            key: 40,
+            down: function () {
+                model.changeCoin({down: true});
+                return true;
+            }
+        });
+        // Right
+        keyboard.Add({
+            key: 39,
+            down: function () {
+                model.changeBet({up: true});
+                return true;
+            }
+        });
+        // Left
+        keyboard.Add({
+            key: 37,
+            down: function () {
+                model.changeBet({down: true});
+                return true;
+            }
+        });
 
         // PreAnimation
         let darkness = this.add.graphics();
