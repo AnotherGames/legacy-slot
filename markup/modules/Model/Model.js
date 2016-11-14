@@ -67,6 +67,7 @@ export let model = (() => {
         model.state('initScreen', true);
         model.state('fastRoll', false);
         model.state('ready', true);
+        model.state('firstFS', false);
 
         events.trigger('model:states:init');
 
