@@ -208,8 +208,8 @@ export let view = (() => {
 
         Count: function({
             start = 15,
-            fontDesktop = 'bold 80px Helvetica, Arial',
-            fontMobile = 'bold 40px Helvetica, Arial',
+            fontDesktop = '80',
+            fontMobile = '60',
             container = model.group('panel')
         }) {
             const game = model.el('game');
@@ -225,12 +225,7 @@ export let view = (() => {
                 y = 98;
                 font = fontDesktop;
             }
-            const fsCount = game.add.text(
-                x,
-                y,
-                start,
-                {font, fill: '#fff', align: 'center'},
-                container);
+            const fsCount = game.add.bitmapText(x, y, 'fsLevelNumbers', start, font, container);
             fsCount.anchor.set(0.5)
             model.el('fsCount', fsCount);
         },
