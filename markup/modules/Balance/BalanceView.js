@@ -154,8 +154,30 @@ export let view = (() => {
 
         },
 
-        FSMobileBalance: function() {
+        FSMobileBalance: function({
+            totalWinValue = model.balance('totalWin'),
+            winValue = model.balance('fsWin'),
+            greyStyle = {font: '24px Helvetica, Arial', fill: '#dddddd', align: 'center'},
+            cashStyle = {font: '25px Helvetica, Arial', fill: '#e8b075', align: 'center'},
+            y = model.data('footerTopCenterY')
+        }) {
+            const game = model.el('game');
 
+            let balanceCoinContainer = game.add.group();
+            model.group('balanceCoin', balanceCoinContainer);
+
+            let totalWinText = game.add.text(0, y, 'Total Win: ', greyStyle, balanceCoinContainer);
+            let winText = game.add.text(0, y, 'Win: ', greyStyle, balanceCoinContainer);
+            let totalWinSum = game.add.text(0, y, `${totalWinValue.toFixed(0)}`, cashStyle, balanceCoinContainer);
+            let winSum = game.add.text(0, y, `${winValue.toFixed(0)}`, cashStyle, balanceCoinContainer);
+
+            model.el('totalWinText', totalWinText);
+            model.el('winText', winText);
+            model.el('totalWinSum', totalWinSum);
+            model.el('winSum', winSum);
+
+            _setAnchorInCenter([totalWinText, totalWinSum, winText, winSum]);
+            _calcTextPosition([[totalWinText, totalWinSum], [winText, winSum]], balanceCoinContainer);
         }
 
     };
@@ -223,8 +245,8 @@ export let view = (() => {
         },
 
         FSDesktopBalance: function({
-            winSumValue = model.balance('coinSum'),
-            totalWinSumValue = model.balance('betSum')
+            winSumValue = model.balance('fsWin'),
+            totalWinSumValue = model.balance('totalWin')
         }) {
 
             let winSum = model.el('winSum'),
@@ -236,8 +258,8 @@ export let view = (() => {
         },
 
         FSMobileBalance: function({
-            winSumValue = model.balance('coinSum'),
-            totalWinSumValue = model.balance('betSum')
+            winSumValue = model.balance('fsWin'),
+            totalWinSumValue = model.balance('totalWin')
         }) {
 
             let winSum = model.el('winSum'),

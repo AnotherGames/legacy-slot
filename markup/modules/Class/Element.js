@@ -21,9 +21,9 @@ export class Element {
             this.game = param.game;
         }
 
-        this.state = this.game.state.states.Main;
+        const game = model.el('game');
 
-        this.sprite = this.state.add.sprite(param.x, param.y, 'elements', null, param.parent);
+        this.sprite = game.add.sprite(param.x, param.y, 'elements', null, param.parent);
 
         // this._addElementAnimations(param.el);
 

@@ -1,5 +1,7 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
+import { Zombie } from 'modules/Class/Zombie';
+import { Brain } from 'modules/Class/Brain';
 
 export let view = (() => {
 
@@ -51,7 +53,7 @@ export let view = (() => {
             );
             animBG.setAnimationByName(
                 0,          // Track index
-                '1',     // Animation's name
+                '2',     // Animation's name
                 true        // If the animation should loop or not
             );
             game.bgContainer.add(animBG);
@@ -72,8 +74,6 @@ export let view = (() => {
         }) {
             let mainGroup = game.mainContainer;
 
-            let gameBG = game.add.sprite(config[model.state('res')].machine.x, config[model.state('res')].machine.y, 'gameBG', null, mainGroup);
-            model.el('gameBG', gameBG);
             let gameMachine = game.add.sprite(0, 0, 'gameMachine', null, mainGroup);
             model.el('gameMachine', gameMachine);
         },
@@ -88,7 +88,7 @@ export let view = (() => {
 
             game.winTopContainer = game.add.group();
             model.group('winTop', game.winTopContainer);
-            mainGroup.addAt(game.winTopContainer, 3);
+            mainGroup.addAt(game.winTopContainer, 2);
 
             machineGroup.position.set(mainGroup.width / 2 + config[model.state('res')].machine.x, mainGroup.height / 2);
 
@@ -109,21 +109,12 @@ export let view = (() => {
             game = model.el('game'),
             machineGroup = model.el('machineContainer')
         }) {
-            let maskMarginX = config[model.state('res')].machine.x;
-            if (model.state('mobile')) {
-                if (model.state('side') === 'right') {
-                    maskMarginX += model.data('mainXRight');
-                } else {
-                    maskMarginX += model.data('mainXLeft');
-                }
-            } else {
-                maskMarginX += (game.width - game.mainContainer.width) / 2;
-            }
-
             const elSize = config[model.state('res')].elements;
+
             let mask = game.add.graphics();
-            mask.beginFill(0x000000);
-            mask.drawRect(maskMarginX, config[model.state('res')].machine.y, elSize.width * 5, elSize.height * 3);
+                mask.beginFill(0x000000);
+                mask.drawRect(0, config[model.state('res')].machine.y, game.width, elSize.height * 3);
+
             machineGroup.mask = mask;
             model.el('mask', mask);
         },
@@ -134,8 +125,136 @@ export let view = (() => {
             let darkness = game.add.graphics();
             darkness.beginFill(0x000000);
             darkness.drawRect(0, 0, game.width, game.height);
-            return darkness;
+            return game.add.tween(darkness).to( { alpha: 0 }, 1000, 'Linear', true);
+        },
+
+        Zombie() {
+            const game = model.el('game');
+            let x, y, scale;
+
+            if (model.state('mobile')) {
+                x = 120;
+                y = 440;
+                scale = 0.8;
+            } else {
+                x = 270;
+                y = 700;
+                scale = 1;
+            }
+
+            let zombie = new Zombie({
+                game,
+                position: {
+                    x,
+                    y
+                }
+            });
+
+            zombie.char.scale.x = zombie.char.scale.y = scale;
+            model.el('zombie', zombie);
+        },
+
+        Brain() {
+            const game = model.el('game');
+            let x, y, scale;
+
+            if (model.state('mobile')) {
+                x = 100;
+                y = 80;
+                scale = 0.8;
+            } else {
+                x = 200;
+                y = 120;
+                scale = 1;
+            }
+
+            let brain = new Brain({
+                game,
+                position: {
+                    x,
+                    y
+                }
+            });
+
+            brain.char.scale.x = brain.char.scale.y = scale;
+            model.el('flyingBrain', brain);
+        },
+
+        Multi: function({
+            start = 2,
+            container = model.group('panel')
+        }) {
+            const game = model.el('game');
+            let x, y;
+            if (model.state('mobile')) {
+                x = 125;
+                y = 625;
+                let multiBG = game.add.sprite(x, y, 'multiRip', null, container);
+                    multiBG.anchor.set(0.5);
+            } else {
+                x = 860;
+                y = 118;
+            }
+            const fsMulti = game.add.sprite(
+                x,
+                y,
+                'numbers',
+                `multi${start}.png`,
+                container);
+            fsMulti.anchor.set(0.5);
+            model.el('fsMulti', fsMulti);
+            return fsMulti;
+        },
+
+        Count: function({
+            start = 15,
+            fontDesktop = 'bold 80px Helvetica, Arial',
+            fontMobile = 'bold 40px Helvetica, Arial',
+            container = model.group('panel')
+        }) {
+            const game = model.el('game');
+            let x, y, font;
+            if (model.state('mobile')) {
+                x = 1180;
+                y = 68;
+                font = fontMobile;
+                const countBG = game.add.sprite(x, y - 5, 'fsTotalTable', null, container);
+                countBG.anchor.set(0.5);
+            } else {
+                x = 657;
+                y = 98;
+                font = fontDesktop;
+            }
+            const fsCount = game.add.text(
+                x,
+                y,
+                start,
+                {font, fill: '#fff', align: 'center'},
+                container);
+            fsCount.anchor.set(0.5)
+            model.el('fsCount', fsCount);
+        },
+
+        BrainLevel: function({
+            container = model.group('panel')
+        }) {
+            const game = model.el('game');
+            let x, y;
+            if (model.state('mobile')) {
+                x = 350;
+                y = 33;
+                let brainBG = game.add.sprite(x, y, 'multiTable', null, container);
+                    brainBG.anchor.set(0.5);
+            } else {
+                x = 437;
+                y = 100;
+            }
+            let brainPanel = game.add.sprite(x, y, 'mozgiPanel', '01.png', container);
+                brainPanel.anchor.set(0.5);
+                brainPanel.visible = false;
+            model.el('brainPanel', brainPanel);
         }
+
     };
 
     return {

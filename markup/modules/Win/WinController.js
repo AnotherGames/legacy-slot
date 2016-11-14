@@ -22,9 +22,10 @@ export let controller = (() => {
 
             events.trigger('autoplay:stop');
 
-            // setTimeout(() => {
-            //     events.trigger('main:drawTransitionScreen');
-            // }, 2000);
+            setTimeout(() => {
+                model.el('game').state.start('FS');
+                // events.trigger('main:drawTransitionScreen');
+            }, 2000);
         }
 
         if (winLines.length) {

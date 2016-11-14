@@ -98,6 +98,9 @@ export let model = (() => {
         model.balance('currency', initData.Currency);
         model.balance('currencySymbol', _checkCurrencySymbol(initData.Currency));
 
+        model.balance('fsWin', 0);
+        model.balance('totalWin', 0);
+
         events.trigger('model:balance:init');
 
     }
@@ -211,10 +214,15 @@ export let model = (() => {
             model.balance('coinCash', endData.ScoreCents / 100);
         }
         if (startFSRoll) {
-
+            let newTotalWin = +model.balance('fsWin') + +model.balance('totalWin');
+            model.balance('fsWin', 0);
+            model.balance('totalWin', newTotalWin);
         }
         if (endFSRoll) {
+            let endData = model.data('rollResponse');
 
+            model.balance('fsWin', endData.Balance.TotalWinCoins);
+            model.balance('totalWin', endData.FsBonus.TotalFSWinCoins);
         }
 
         events.trigger('model:balance:update');

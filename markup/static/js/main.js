@@ -11,7 +11,7 @@ import { Boot } from 'modules/States/Boot/Controller';
 import { Preload } from 'modules/States/Preload/Controller';
 import { Init } from 'modules/States/Init/Controller';
 import { Main } from 'modules/States/Main/Controller';
-import { FS } from 'modules/States/FS/FS';
+import { FS } from 'modules/States/FS/Controller';
 
 game.state.add('Boot', Boot, true);
 game.state.add('Preload', Preload);
