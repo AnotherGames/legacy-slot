@@ -6,9 +6,9 @@ export class Init {
 
     }
     init() {
-        const game = model.el('game');
-        game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
-        game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        let game = model.el('game');
+            game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+            game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     }
 
     create() {
@@ -17,8 +17,9 @@ export class Init {
         view.drawLogo();
 
         let initPlay = view.drawPlay();
-        initPlay.inputEnabled = true;
-        initPlay.events.onInputDown.add(this.handlePlay.bind(this));
+            initPlay.inputEnabled = true;
+            initPlay.events.onInputDown.add(this.handlePlay, this);
+
         model.el('initPlayTween')
             .onComplete.add(() => {
                 view.playYoyoTween({});
@@ -29,10 +30,6 @@ export class Init {
 
     handlePlay() {
         const game = model.el('game');
-        // Старый метод выхода в фуллскрин
-        // game.scale.startFullScreen(false);
-        // Новый метод выхода в фуллскрин
-        console.log(this);
         this.fullScreen();
         view.stopYoyoTween();
         view.lastDarkness()
@@ -42,8 +39,8 @@ export class Init {
             });
     }
 
-    fullScreen(event) {
-        let _e = event || document.querySelector('#game');
+    fullScreen(element) {
+        let _e = element || document.querySelector('#game');
 
         if (_e.requestFullScreen) _e.requestFullScreen();
         else if (_e.mozRequestFullScreen) _e.mozRequestFullScreen();
