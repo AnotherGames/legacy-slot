@@ -29,15 +29,13 @@ export let view = (() => {
         freeSpinsText.anchor.set(0.5);
         model.el('freeSpinsText', freeSpinsText);
 
-        const freeSpinsLevel = game.add.text(game.world.width / 2,
-            -200,
-            '15',
-            {font: 'bold 140px Helvetica, Arial', fill: '#fff', align: 'center'},
-            transitionContainer);
+        const freeSpinsLevel = game.add.bitmapText(game.world.width / 2, -200, 'numbersFont', '15', 120, transitionContainer);
+        freeSpinsLevel.align = 'center';
         freeSpinsLevel.anchor.set(0.5);
+        console.log(freeSpinsLevel);
         model.el('freeSpinsLevel', freeSpinsLevel);
 
-        const axeBig = game.add.sprite(game.world.width / 2 + 250,
+        const axeBig = game.add.sprite(game.world.width / 2 + 350,
             game.world.height / 2,
             'axe',
             null,
@@ -46,7 +44,7 @@ export let view = (() => {
         axeBig.scale.setTo(0.1, 0.1);
         model.el('axeBig', axeBig);
 
-        const axeSmall = game.add.sprite(game.world.width / 2 - 250,
+        const axeSmall = game.add.sprite(game.world.width / 2 - 350,
             game.world.height / 2 + 50,
             'axeSmall',
             null,
@@ -137,13 +135,11 @@ export let view = (() => {
 
         let winCountValue = model.data('rollResponse').FsBonus.TotalFSWinCoins;
 
-        const winCount = game.add.text(game.world.width / 2,
-            -200,
-            winCountValue,
-            {font: 'bold 140px Helvetica, Arial', fill: '#fff', align: 'center'},
-            transitionContainer);
-        winCount.anchor.set(0.5);
-        model.el('winCount', winCount);
+        const freeSpinsLevel = game.add.bitmapText(game.world.width / 2, -200, 'numbersFont', winCountValue, 120, transitionContainer);
+        freeSpinsLevel.align = 'center';
+        freeSpinsLevel.anchor.set(0.5);
+        console.log(freeSpinsLevel);
+        model.el('freeSpinsLevel', freeSpinsLevel);
 
         const skull = game.add.sprite(game.world.width / 2,
             game.world.height * 0.7,
