@@ -7,9 +7,9 @@ export let view = (() => {
         _fsStartDraw();
         _fsStartTween();
         _fsStartInput();
-        setTimeout(function () {
-            _fsStartHide();
-        }, 10000);
+        // setTimeout(function () {
+        //     _fsStartHide();
+        // }, 10000);
     }
 
     function _fsStartDraw() {
