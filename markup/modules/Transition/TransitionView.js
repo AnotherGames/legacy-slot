@@ -111,9 +111,9 @@ export let view = (() => {
         _fsFinishDraw();
         _fsFinishTween();
         _fsFinishInput();
-        setTimeout(function () {
-            _fsFinishHide();
-        }, 10000);
+        // setTimeout(function () {
+        //     _fsFinishHide();
+        // }, 10000);
     }
 
     function _fsFinishDraw() {
