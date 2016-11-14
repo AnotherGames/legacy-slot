@@ -13,6 +13,7 @@ import { controller as panelController } from 'modules/Panel/PanelController';
 import { controller as buttonsController } from 'modules/Buttons/ButtonsController';
 import { controller as rollController } from 'modules/Roll/RollController';
 import { controller as winController } from 'modules/Win/WinController';
+import { view as transitionView } from 'modules/Transition/TransitionView';
 
 export class FS {
     constructor(game) {
@@ -165,7 +166,8 @@ export class FS {
         console.log('I am stoping FS!');
 
         setTimeout(() => {
-            model.el('game').state.start('Main');
+            transitionView.fsFinish();
+            // model.el('game').state.start('Main');
         }, 2000);
 
         model.state('fsEnd', true);
