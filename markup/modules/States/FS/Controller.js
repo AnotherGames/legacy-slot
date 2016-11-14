@@ -183,19 +183,21 @@ export class FS {
         model.data('fsCount', rollData.FreeSpinsLeft);
         fsMulti.frameName = `multi${multiValue}.png`;
 
-        if (multiValue > model.data('fsMulti')) {
-            model.el('zombie').Up();
-            model.data('fsMulti', multiValue);
-        }
+        let currMulti = model.data('fsMulti');
 
-        if (model.data('fsMulti') === 7) {
-            let brain = model.el('flyingBrain');
-            let zombie = model.el('zombie');
-            zombie.Up(() => {
-                brain.Up(() => {
-                    zombie.Up();
+        if (multiValue > currMulti) {
+            if (currMulti === 6) {
+                let brain = model.el('flyingBrain');
+                let zombie = model.el('zombie');
+                zombie.Up(() => {
+                    brain.Up(() => {
+                        zombie.Up();
+                    });
                 });
-            });
+            } else {
+                model.el('zombie').Up();
+                model.data('fsMulti', multiValue);
+            }
         }
         this.searchBrains();
     }
