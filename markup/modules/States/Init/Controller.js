@@ -1,23 +1,24 @@
 import { model } from 'modules/Model/Model';
-import { events } from 'modules/Util/Events';
-import { view } from 'modules/States/Init/InitView';
+import { view } from 'modules/States/Init/View';
 
-export let controller = (() => {
+export class Init {
+    constructor(game) {
 
-    function init() {
+    }
+    init() {
         const game = model.el('game');
         game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     }
 
-    function create() {
+    create() {
         view.playMusic();
         view.drawBG();
         view.drawLogo();
 
         let initPlay = view.drawPlay();
         initPlay.inputEnabled = true;
-        initPlay.events.onInputDown.add(handlePlay);
+        initPlay.events.onInputDown.add(this.handlePlay.bind(this));
         model.el('initPlayTween')
             .onComplete.add(() => {
                 view.playYoyoTween({});
@@ -26,12 +27,13 @@ export let controller = (() => {
         view.firstDarkness();
     }
 
-    function handlePlay() {
+    handlePlay() {
         const game = model.el('game');
         // Старый метод выхода в фуллскрин
         // game.scale.startFullScreen(false);
         // Новый метод выхода в фуллскрин
-        fullScreen();
+        console.log(this);
+        this.fullScreen();
         view.stopYoyoTween();
         view.lastDarkness()
             .onComplete.add(() => {
@@ -40,16 +42,11 @@ export let controller = (() => {
             });
     }
 
-    function fullScreen(e) {
-        e = e || document.querySelector('#game');
-        e.requestFullScreen ?
-        e.requestFullScreen() :
-        e.mozRequestFullScreen ?
-        e.mozRequestFullScreen() :
-        e.webkitRequestFullScreen &&
-        e.webkitRequestFullScreen();
-    }
+    fullScreen(event) {
+        let _e = event || document.querySelector('#game');
 
-    events.on('init:init', init);
-    events.on('init:create', create);
-})();
+        if (_e.requestFullScreen) _e.requestFullScreen();
+        else if (_e.mozRequestFullScreen) _e.mozRequestFullScreen();
+        else if (_e.webkitRequestFullScreen) _e.webkitRequestFullScreen();
+    }
+}

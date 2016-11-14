@@ -9,7 +9,7 @@ model.el('game', game);
 
 import { Boot } from 'modules/States/Boot/Boot';
 import { Preload } from 'modules/States/Preload/Preload';
-import { Init } from 'modules/States/Init/Init';
+import { Init } from 'modules/States/Init/Controller';
 import { Main } from 'modules/States/Main/Controller';
 import { FS } from 'modules/States/FS/FS';
 
