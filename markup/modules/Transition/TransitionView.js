@@ -162,10 +162,14 @@ export let view = (() => {
 
     function _fsFinishTween() {
         const game = model.el('game');
+        const zombie = model.el('zombie');
+        const brain = model.el('flyingBrain');
         const winText = model.el('winText');
         const winCount = model.el('winCount');
         const skull = model.el('skull');
         const continueText = model.el('continueText');
+        zombie.char.alpha = 0;
+        brain.char.alpha = 0;
         game.add.tween(winText).to({y: game.world.height * 0.2}, 1500, Phaser.Easing.Bounce.Out, true);
         game.add.tween(winCount).to({y: game.world.height * 0.45}, 1500, Phaser.Easing.Bounce.Out, true);
         game.add.tween(continueText.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true);
