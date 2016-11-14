@@ -39,6 +39,7 @@ export let controller = (() => {
             console.warn('Not enought money!');
             return;
         }
+        model.state('ready', false);
         request.send('Roll')
             .then((data) => {
                 events.trigger('roll:start');
@@ -50,7 +51,6 @@ export let controller = (() => {
                     model.updateBalance({startRoll: true});
                 }
 
-                model.state('ready', false);
                 model.state('roll:progress', true);
                 model.state('roll:fast', false);
 
