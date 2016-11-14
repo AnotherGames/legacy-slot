@@ -90,6 +90,11 @@ export let view = (() => {
             const game = model.el('game');
             const soundButton = game.add.button(x, y, 'footerButtons', null, null, 'soundOn.png', 'sound.png', null, null, container);
             soundButton.anchor.set(0.5);
+            if (model.state('volume')) {
+                soundButton.frameName = 'soundOn.png';
+            } else {
+                soundButton.frameName = 'soundOff.png';
+            }
             model.el('soundButton', soundButton);
             return soundButton;
         },
@@ -102,6 +107,11 @@ export let view = (() => {
             const game = model.el('game');
             const fastButton = game.add.button(x, y, 'footerButtons', null, null, null, 'fastSpinOff.png', null, null, container);
             fastButton.anchor.set(0.5);
+            if (model.state('fastRoll')) {
+                fastButton.frameName = 'fastSpin.png';
+            } else {
+                fastButton.frameName = 'fastSpinOff.png';
+            }
             model.el('fastButton', fastButton);
             return fastButton;
         },
