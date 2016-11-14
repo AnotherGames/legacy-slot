@@ -1,5 +1,6 @@
 import { config } from '../../modules/Util/Config';
 import { Element } from '../../modules/Class/Element';
+import { model } from 'modules/Model/Model';
 
 export class Wheel {
     get elements() {
@@ -320,7 +321,12 @@ export class Wheel {
 
         this._gotoMode();
 
-        const rand = this.game.rnd.integerInRange(1, 11);
+        let rand;
+        if (model.state('FSMode')) {
+            rand = this.game.rnd.integerInRange(1, 11);
+        } else {
+            rand = this.game.rnd.integerInRange(1, 10);
+        }
         let anim = rand + '-b';
 
         if (this.mode === 'roll'
@@ -350,7 +356,12 @@ export class Wheel {
 
         this._gotoMode();
 
-        const rand = this.game.rnd.integerInRange(1, 11);
+        let rand;
+        if (model.state('FSMode')) {
+            rand = this.game.rnd.integerInRange(1, 11);
+        } else {
+            rand = this.game.rnd.integerInRange(1, 10);
+        }
         let anim = rand + '-b';
 
         if (this.rollLength < 1
