@@ -20,7 +20,9 @@ export let controller = (() => {
 
         if (mode == 'root' && nextMode == 'fsBonus') {
 
-            events.trigger('autoplay:stop');
+            if (!model.state('autoEnd')) {
+                events.trigger('autoplay:stop');
+            }
 
             setTimeout(() => {
                 model.el('game').state.start('FS');
