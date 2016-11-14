@@ -95,7 +95,7 @@ export let view = (() => {
             sound.sounds.button.play();
             sound.music.startPerehod.stop();
             sound.music.fsFon.play();
-            // game.state.start('FS');
+            model.el('game').state.start('FS');
         });
     }
 
@@ -104,7 +104,7 @@ export let view = (() => {
         sound.music.startPerehod.stop();
         sound.music.fsFon.play();
         const game = model.el('game');
-        // game.state.start('FS');
+        model.el('game').state.start('FS');
     }
 
     function fsFinish() {
@@ -133,7 +133,7 @@ export let view = (() => {
         winText.anchor.set(0.5);
         model.el('winText', winText);
 
-        let winCountValue = model.data('rollResponse').FsBonus.TotalFSWinCoins;
+        let winCountValue = model.balance('totalWin');
 
         const freeSpinsLevel = game.add.bitmapText(game.world.width / 2, -200, 'numbersFont', winCountValue, 120, transitionContainer);
         freeSpinsLevel.align = 'center';
@@ -189,7 +189,7 @@ export let view = (() => {
             sound.sounds.button.play();
             sound.music.finishPerehod.stop();
             sound.music.fon.play();
-            // game.state.start('Main');
+            model.el('game').state.start('Main');
         });
     }
 
@@ -198,7 +198,7 @@ export let view = (() => {
         sound.music.finishPerehod.stop();
         sound.music.fon.play();
         const game = model.el('game');
-        // game.state.start('Main');
+        model.el('game').state.start('Main');
     }
 
     return {

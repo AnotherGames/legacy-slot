@@ -14,7 +14,6 @@ import { controller as mobileSettingsController } from 'modules/MobileSettings/C
 import { controller as mobileAutoplayController } from 'modules/MobileAutoplay/Controller';
 import { controller as mobileSetBetController } from 'modules/MobileSetBet/Controller';
 import { keyboard } from 'modules/Keyboard/Keyboard';
-import { view as transitionView } from 'modules/Transition/TransitionView';
 
 export class Main {
     constructor(game) {

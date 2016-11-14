@@ -1,6 +1,7 @@
 import { model } from 'modules/Model/Model';
 import { events } from 'modules/Util/Events';
 import { view } from 'modules/Win/WinView';
+import { view as transitionView } from 'modules/Transition/TransitionView';
 
 export let controller = (() => {
 
@@ -25,8 +26,8 @@ export let controller = (() => {
             }
 
             setTimeout(() => {
-                model.el('game').state.start('FS');
-                // events.trigger('main:drawTransitionScreen');
+                transitionView.fsStart();
+                // model.el('game').state.start('FS');
             }, 2000);
         }
 
