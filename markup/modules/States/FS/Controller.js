@@ -141,8 +141,8 @@ export class FS {
             events.trigger('fs:count', fsCount);
 
         }
-
-        if (fsCount === 0 && rollData.NextMode === 'root') {
+        //  && rollData.NextMode === 'root'
+        if (fsCount === 0) {
 
             events.trigger('fs:stop');
 

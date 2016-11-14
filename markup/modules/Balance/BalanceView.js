@@ -259,14 +259,19 @@ export let view = (() => {
 
         FSMobileBalance: function({
             winSumValue = model.balance('fsWin'),
-            totalWinSumValue = model.balance('totalWin')
+            totalWinSumValue = model.balance('totalWin'),
+            balanceCoinContainer = model.group('balanceCoin')
         }) {
 
             let winSum = model.el('winSum'),
-                totalWinSum = model.el('totalWinSum');
+                winText = model.el('winText'),
+                totalWinSum = model.el('totalWinSum'),
+                totalWinText = model.el('totalWinText');
 
             winSum.text = `${winSumValue}`;
             totalWinSum.text = `${totalWinSumValue}`;
+
+            _calcTextPosition([[totalWinText, totalWinSum], [winText, winSum]], balanceCoinContainer);
 
         }
 
