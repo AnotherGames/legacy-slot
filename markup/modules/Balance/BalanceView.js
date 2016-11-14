@@ -163,8 +163,9 @@ export let view = (() => {
         }) {
             const game = model.el('game');
 
-            let balanceCoinContainer = model.group('balanceCoin');
-            
+            let balanceCoinContainer = game.add.group();
+            model.group('balanceCoin', balanceCoinContainer);
+
             let totalWinText = game.add.text(0, y, 'Total Win: ', greyStyle, balanceCoinContainer);
             let winText = game.add.text(0, y, 'Win: ', greyStyle, balanceCoinContainer);
             let totalWinSum = game.add.text(0, y, `${totalWinValue.toFixed(0)}`, cashStyle, balanceCoinContainer);
