@@ -7,7 +7,7 @@ keyboard.init();
 const game = new Phaser.Game(1280, 720, Phaser.AUTO, 'game');
 model.el('game', game);
 
-import { Boot } from 'modules/States/Boot/Boot';
+import { Boot } from 'modules/States/Boot/Controller';
 import { Preload } from 'modules/States/Preload/Controller';
 import { Init } from 'modules/States/Init/Controller';
 import { Main } from 'modules/States/Main/Controller';

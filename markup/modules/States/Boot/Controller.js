@@ -2,9 +2,12 @@ import { model } from 'modules/Model/Model';
 import { events } from 'modules/Util/Events';
 import { request } from 'modules/Util/Request';
 
-export let controller = (() => {
+export class Boot {
+    constructor(game) {
 
-    function init() {
+    }
+
+    init() {
         request.send('Initialise', 'normal')
             .then((initData) => {
                 model.initStates(initData);
@@ -16,20 +19,20 @@ export let controller = (() => {
                 console.error(err);
             });
 
-        _checkDevice();
+        this._checkDevice();
     }
 
-    function preload() {
+    preload() {
         const game = model.el('game');
 
-        loadPreloadAssets();
+        this.loadPreloadAssets();
 
         game.load.onLoadComplete.add(() => {
             game.state.start('Preload');
         });
     }
 
-    function loadPreloadAssets() {
+    loadPreloadAssets() {
         const game = model.el('game');
 
         game.load.path = `static/img/content/${model.state('res')}/preloader/`;
@@ -37,7 +40,7 @@ export let controller = (() => {
         game.load.atlasJSONHash('preloadCoin', 'coin-0.png', 'coin.json');
     }
 
-    function _checkDevice() {
+    _checkDevice() {
         const game = model.el('game');
 
         if (game.device.desktop) {
@@ -51,7 +54,4 @@ export let controller = (() => {
         }
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     }
-
-    events.on('boot:init', init);
-    events.on('boot:preload', preload);
-})();
+}
