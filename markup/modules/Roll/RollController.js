@@ -43,7 +43,12 @@ export let controller = (() => {
             .then((data) => {
                 events.trigger('roll:start');
                 model.data('rollResponse', data);
-                model.updateBalance({startRoll: true});
+
+                if (model.state('FSMode')) {
+                    model.updateBalance({startFSRoll: true});
+                } else {
+                    model.updateBalance({startRoll: true});
+                }
 
                 model.state('ready', false);
                 model.state('roll:progress', true);
@@ -98,7 +103,11 @@ export let controller = (() => {
         if (model.state('ready')) return;
         request.send('Ready').then((data) => {
 
-            model.updateBalance({endRoll: true});
+            if (model.state('FSMode')) {
+                model.updateBalance({endFSRoll: true});
+            } else {
+                model.updateBalance({endRoll: true});
+            }
             model.state('ready', true);
             model.state('roll:progress', false);
 
