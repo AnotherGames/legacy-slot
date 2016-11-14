@@ -63,6 +63,11 @@ export let controller = (() => {
     const handle = {
         spin: function() {
             sound.sounds.button.play();
+            if (!model.state('autoClosed')) {
+                model.state('autoClosed', true);
+                view.hide.autoButton({});
+                view.hide.autoPanel({});
+            }
             const spinButtonDesk = model.el('spinButtonDesk');
             if (spinButtonDesk.frameName == 'stop.png') {
                 events.trigger('autoplay:stop');
