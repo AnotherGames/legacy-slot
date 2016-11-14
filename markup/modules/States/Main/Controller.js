@@ -23,19 +23,13 @@ export class Main {
     init() {
         console.info('Main State!');
         const game = model.el('game');
-        sound.init(this.game);
+        sound.init({sound: model.state('sound'), volume: model.state('volume'), music: model.state('music')});
         // массив в который записываются анимации для проигрывания
         game.frameAnims = [];
         game.spriteAnims = [];
 
         game.stage.disableVisibilityChange = true;
 
-        model.state('side', 'left');
-        model.state('autoPanel', false);
-        model.state('fastRoll', false);
-        model.state('isAnimations', true);
-        model.state('autoEnd', true);
-        model.state('FSMode', false);
 
         mainView.create.groups({});
     }

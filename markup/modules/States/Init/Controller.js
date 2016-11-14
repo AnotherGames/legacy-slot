@@ -6,6 +6,16 @@ export class Init {
 
     }
     init() {
+        model.state('side', 'left');
+        model.state('autoPanel', false);
+        model.state('fastRoll', false);
+        model.state('isAnimations', true);
+        model.state('autoEnd', true);
+        model.state('FSMode', false);
+        model.state('sound', true);
+        model.state('volume', 1);
+        model.state('music', true);
+
         let game = model.el('game');
             game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
             game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;

@@ -23,7 +23,7 @@ export class FS {
     init() {
         console.info('FS State!');
         const game = model.el('game');
-        sound.init(game);
+        sound.init({sound: model.state('sound'), volume: model.state('volume'), music: model.state('music')});
 
         // массив в который записываются анимации для проигрывания
         game.frameAnims = [];
@@ -169,6 +169,7 @@ export class FS {
         console.log('I am stoping FS!');
 
         setTimeout(() => {
+            sound.music.fsFon.stop();
             transitionView.fsFinish();
             // model.el('game').state.start('Main');
         }, 2000);
