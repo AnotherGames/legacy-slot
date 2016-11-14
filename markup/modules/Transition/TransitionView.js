@@ -32,7 +32,6 @@ export let view = (() => {
         const freeSpinsLevel = game.add.bitmapText(game.world.width / 2, -200, 'numbersFont', '15', 120, transitionContainer);
         freeSpinsLevel.align = 'center';
         freeSpinsLevel.anchor.set(0.5);
-        console.log(freeSpinsLevel);
         model.el('freeSpinsLevel', freeSpinsLevel);
 
         const axeBig = game.add.sprite(game.world.width / 2 + 350,
@@ -91,7 +90,6 @@ export let view = (() => {
         transitionBG.inputEnabled = true;
         transitionBG.input.priorityID = 2;
         transitionBG.events.onInputDown.add(function () {
-            console.log('i am i am starting fs');
             sound.sounds.button.play();
             sound.music.startPerehod.stop();
             sound.music.fsFon.play();
