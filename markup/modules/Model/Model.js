@@ -222,7 +222,9 @@ export let model = (() => {
             let endData = model.data('rollResponse');
 
             model.balance('fsWin', endData.Balance.TotalWinCoins);
-            model.balance('totalWin', endData.FsBonus.TotalFSWinCoins);
+            if (endData.FsBonus) {
+                model.balance('totalWin', endData.FsBonus.TotalFSWinCoins);
+            }
         }
 
         events.trigger('model:balance:update');
