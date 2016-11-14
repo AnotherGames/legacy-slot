@@ -1,74 +1,185 @@
-import { model } from 'modules/Model/Model';
 import { events } from 'modules/Util/Events';
+import { model } from 'modules/Model/Model';
 
-export let fs = (function () {
+import { keyboard } from 'modules/Keyboard/Keyboard';
+import { settings } from 'modules/Menu/Settings';
+import { sound } from 'modules/Sound/Sound';
 
-    let fsCount;
-    let fsEnd;
-    let fsText;
-    let brainCount = 0;
+import { view as fsView } from 'modules/States/FS/View';
 
-    function initFS(amount) {
-        let game = model.el('game');
-        let fsLevel = model.el('fsLevel');
-        if (model.state('mobile')) {
-            fsText = game.add.text(fsLevel.x, fsLevel.y, amount, {font: '60px Arial, Helvetica', fill: '#fff'});
-            fsText.anchor.set(0.5);
-        } else {
-            fsText = game.add.text(fsLevel.x, fsLevel.y, amount, {font: '80px Arial, Helvetica', fill: '#fff'});
-            fsText.anchor.set(0.5);
-        }
-        fsCount = amount;
-        fsEnd = false;
-        model.state('fsEnd', false);
+import { controller as balanceController } from 'modules/Balance/BalanceController';
+import { controller as footerController } from 'modules/Footer/FooterController';
+import { controller as panelController } from 'modules/Panel/PanelController';
+import { controller as buttonsController } from 'modules/Buttons/ButtonsController';
+import { controller as rollController } from 'modules/Roll/RollController';
+import { controller as winController } from 'modules/Win/WinController';
+
+export class FS {
+    constructor(game) {
+
+    }
+
+    init() {
+        console.info('FS State!');
+        const game = model.el('game');
+        sound.init(game);
+
+        // массив в который записываются анимации для проигрывания
+        game.frameAnims = [];
+        game.spriteAnims = [];
+
+        game.stage.disableVisibilityChange = true;
+
+        model.state('FSMode', true);
         model.data('fsMulti', 2);
-        startFSRoll();
-        drawBrainPanel();
+
+        fsView.create.groups({});
+
+        this.keyboardEventsRemove();
+
+        events.on('fs:init', this.initFS.bind(this));
+        events.on('fs:next', this.nextFS.bind(this));
+        events.on('fs:count', this.countFS.bind(this, {start: true}));
+        events.on('fs:stop', this.stopFS.bind(this));
+        events.on('fs:brain', this.onBrain.bind(this));
+
+        setTimeout(() => {
+            events.trigger('fs:init', 15);
+        }, 1000)
     }
 
-    function startFSRoll() {
-        fsCount = model.data('rollResponse').FreeSpinsLeft;
+    preload() {
+
+    }
+
+    create() {
+        const game = model.el('game');
+
+        sound.music.fsFon.play();
+
+        fsView.draw.mainBG({});
+        fsView.draw.mainContainer({});
+        fsView.draw.machineContainer({});
+
+        rollController.init();
+
+        if (model.state('mobile')) {
+            footerController.initMobile();
+            balanceController.initFSMobile();
+
+            game.mainContainer.x = model.data('mainXRight');
+        } else {    // Desktop
+            footerController.initDesktop();
+
+            game.mainContainer.x = game.width - game.mainContainer.width;
+
+            settings.initDesktopSettings(game);
+            panelController.initFS();
+            balanceController.initFSDesktop();
+        }
+
+        fsView.draw.machineMask({});
+
+        fsView.draw.Zombie();
+        fsView.draw.Brain();
+
+        fsView.draw.Multi({});
+        fsView.draw.Count({});
+        fsView.draw.BrainLevel({});
+
+        // PreAnimation
+        fsView.draw.darkness({});
+
+        setInterval(() => {
+            footerController.updateTime({});
+        }, 1000);
+    }
+
+    update() {
+        const game = model.el('game');
+        game.frameAnims.forEach((anim) => {
+            anim();
+        });
+    }
+
+    keyboardEventsRemove() {
+        // Space
+        keyboard.Remove(32);
+        // Up
+        keyboard.Remove(38);
+        // Down
+        keyboard.Remove(40);
+        // Right
+        keyboard.Remove(39);
+        // Left
+        keyboard.Remove(37);
+    }
+
+    initFS(amount) {
+        console.log('I am initing FS: ', amount);
+
+        model.state('fsEnd', false);
+        model.data('fsCount', amount);
+
+        this.nextFS();
+    }
+
+    nextFS() {
+        let fsCount = model.data('fsCount');
+        let rollData = model.data('rollResponse');
         fsCount--;
-        if (!fsEnd) {
-            // if (utils.lowBalance()) {
-            //     autoEnd = true;
-            //     stopAutoplay();
-            //     utils.showPopup('Low balance!');
-            //     storage.changeState('autoplay', 'ended');
-            //     events.trigger('autoplay:ended');
-            // } else {
-                events.trigger('autoplay:startRoll');
-            // }
+
+        if (!model.state('fsEnd')) {
+
+            events.trigger('roll:request');
+
         }
-        if (fsCount > 0) {
-            fsText.text = fsCount;
+
+        if (fsCount >= 0) {
+
             model.data('fsCount', fsCount);
-            // events.trigger('fsplay:count', fsCount);
-        } else if (!fsEnd) {
+            events.trigger('fs:count', fsCount);
+
+        }
+
+        if (fsCount === 0 && rollData.NextMode === 'root') {
+
             events.trigger('fs:stop');
-            // model.state('autoplay', null);
+
         }
     }
 
-    function stopFS() {
-        fsEnd = true;
-        let game = model.el('game');
-        model.state('fsEnd', true);
-        fsText.destroy();
-        events.trigger('main:drawWinScreen');
-        // setTimeout(() => {
-        //     if (game.state.current != 'Main') {
-        //         game.state.start('Main');
-        //     }
-        // }, 2500);
-        // clearTimeout(model.data('autoTimeout'));
+    countFS({
+        start,
+        end
+    }) {
+        if (start) {
+            model.el('fsCount').text = model.data('fsCount');
+        }
+        if (end) {
+            model.el('fsCount').text = 'end';
+        }
     }
 
-    function fsBrain() {
-        fsText.text = '+3';
+    stopFS() {
+        console.log('I am stoping FS!');
+
+        setTimeout(() => {
+            model.el('game').state.start('Main');
+        }, 2000);
+
+        model.state('fsEnd', true);
+    }
+
+    onBrain() {
+        let rollData = model.data('rollResponse');
+        let fsCount = model.el('fsCount');
         let fsMulti = model.el('fsMulti');
-        let multiValue = model.data('rollResponse').FsBonus.Multi;
-        fsMulti.frameName = 'multi' + multiValue + '.png';
+        let multiValue = rollData.FsBonus.Multi;
+
+        fsCount.text = '+3';
+        model.data('fsCount', rollData.FreeSpinsLeft);
+        fsMulti.frameName = `multi${multiValue}.png`;
 
         if (multiValue > model.data('fsMulti')) {
             model.el('zombie').Up();
@@ -84,27 +195,10 @@ export let fs = (function () {
                 });
             });
         }
-        changeBrainPanel();
+        this.searchBrains();
     }
 
-    function drawBrainPanel() {
-        let x, y;
-        let game = model.el('game');
-        if (model.state('mobile')) {
-            let mozgCountBG = model.el('mozgCountBG');
-            x = mozgCountBG.x;
-            y = mozgCountBG.y;
-        } else {
-            x = 972;
-            y = 949;
-        }
-        let brainPanel = game.add.sprite(x, y, 'mozgiPanel', '01.png');
-        brainPanel.anchor.set(0.5);
-        brainPanel.visible = false;
-        model.el('brainPanel', brainPanel);
-    }
-
-    function changeBrainPanel() {
+    searchBrains() {
         let levelValue = model.data('rollResponse').FsBonus.Level;
         let levelABS = levelValue % 3;
         let brainPanel = model.el('brainPanel');
@@ -118,22 +212,4 @@ export let fs = (function () {
             brainPanel.frameName = `0${levelABS}.png`;
         }
     }
-
-    function endFix() {
-        console.log('End fix!');
-    }
-
-    events.on('fs:init', initFS);
-    events.on('fs:next', startFSRoll);
-    events.on('fs:stop', stopFS);
-    events.on('fs:brain', fsBrain);
-    events.on('fs:stop', endFix);
-    // events.on('autoplay:init:desktop', initAutoplay);
-    // events.on('autoplay:stop', stopAutoplay);
-    // events.on('autoplay:stop:desktop', stopAutoplay);
-
-    return {
-        initFS
-    };
-
-})();
+}
