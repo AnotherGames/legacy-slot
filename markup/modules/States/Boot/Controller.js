@@ -8,7 +8,7 @@ export class Boot {
     }
 
     init() {
-        request.send('Initialise', 'normal')
+        request.send('Initialise', 'fsBonus')
             .then((initData) => {
                 model.initStates(initData);
                 model.initSettings(initData.Settings);
