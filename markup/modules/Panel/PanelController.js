@@ -130,7 +130,7 @@ export let controller = (() => {
         },
 
         panelButton: function() {
-            if (!model.state('autoEnd')) return;
+            if (!model.state('autoEnd') || model.state('roll:progress')) return;
             const amount = this.amount;
             events.trigger('autoplay:init', amount);
         }
