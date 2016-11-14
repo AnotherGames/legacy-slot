@@ -2,31 +2,23 @@
 
 {
 	"filename": "fastSpin.png",
-	"frame": {"x":1,"y":1,"w":28,"h":28},
+	"frame": {"x":118,"y":1,"w":26,"h":27},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":6,"y":6,"w":28,"h":28},
+	"spriteSourceSize": {"x":8,"y":7,"w":26,"h":27},
 	"sourceSize": {"w":40,"h":40}
 },
 {
 	"filename": "fastSpinOff.png",
-	"frame": {"x":31,"y":1,"w":28,"h":28},
+	"frame": {"x":146,"y":1,"w":26,"h":27},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":6,"y":6,"w":28,"h":28},
-	"sourceSize": {"w":40,"h":40}
-},
-{
-	"filename": "fastSpinOn.png",
-	"frame": {"x":61,"y":1,"w":28,"h":28},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":6,"y":6,"w":28,"h":28},
+	"spriteSourceSize": {"x":8,"y":7,"w":26,"h":27},
 	"sourceSize": {"w":40,"h":40}
 },
 {
 	"filename": "home.png",
-	"frame": {"x":208,"y":1,"w":29,"h":26},
+	"frame": {"x":174,"y":1,"w":29,"h":26},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":6,"y":7,"w":29,"h":26},
@@ -34,7 +26,7 @@
 },
 {
 	"filename": "homeOn.png",
-	"frame": {"x":239,"y":1,"w":29,"h":26},
+	"frame": {"x":205,"y":1,"w":29,"h":26},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":6,"y":7,"w":29,"h":26},
@@ -42,7 +34,7 @@
 },
 {
 	"filename": "menu.png",
-	"frame": {"x":270,"y":1,"w":30,"h":25},
+	"frame": {"x":236,"y":1,"w":30,"h":25},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":5,"y":8,"w":30,"h":25},
@@ -50,7 +42,7 @@
 },
 {
 	"filename": "menuOn.png",
-	"frame": {"x":302,"y":1,"w":30,"h":25},
+	"frame": {"x":268,"y":1,"w":30,"h":25},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":5,"y":8,"w":30,"h":25},
@@ -58,7 +50,7 @@
 },
 {
 	"filename": "sound.png",
-	"frame": {"x":91,"y":1,"w":37,"h":27},
+	"frame": {"x":1,"y":1,"w":37,"h":27},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":2,"y":7,"w":37,"h":27},
@@ -66,7 +58,7 @@
 },
 {
 	"filename": "soundOff.png",
-	"frame": {"x":130,"y":1,"w":37,"h":27},
+	"frame": {"x":40,"y":1,"w":37,"h":27},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":2,"y":7,"w":37,"h":27},
@@ -74,7 +66,7 @@
 },
 {
 	"filename": "soundOn.png",
-	"frame": {"x":169,"y":1,"w":37,"h":27},
+	"frame": {"x":79,"y":1,"w":37,"h":27},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":2,"y":7,"w":37,"h":27},
@@ -85,8 +77,8 @@
 	"version": "1.0",
 	"image": "footerButtons.png",
 	"format": "RGBA8888",
-	"size": {"w":333,"h":30},
+	"size": {"w":299,"h":29},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:5bdceae15a79a32c7deea45654545cc3:b2437c576b6b2c5c0a9d630c1055f735:f59bcc267fb47013248841b9aa324429$"
+	"smartupdate": "$TexturePacker:SmartUpdate:4c870b2cf36c9b6675c1f8dbdbfcb56d:e0bc6214fa026f3d2c463d9d3e565512:f59bcc267fb47013248841b9aa324429$"
 }
 }
