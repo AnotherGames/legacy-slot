@@ -209,7 +209,7 @@ export let view = (() => {
         Count: function({
             start = 15,
             fontDesktop = '80',
-            fontMobile = '60',
+            fontMobile = '50',
             container = model.group('panel')
         }) {
             const game = model.el('game');

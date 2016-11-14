@@ -34,6 +34,9 @@ export let view = (() => {
             game.balanceCashContainer = game.add.group();
             model.group('balanceCash', game.balanceCashContainer);
 
+            game.balanceCoinContainer = game.add.group();
+            model.group('balanceCoin', game.balanceCoinContainer);
+
             game.transitionContainer = game.add.group();
             model.el('transitionContainer', game.transitionContainer);
             model.group('transition', game.transitionContainer);

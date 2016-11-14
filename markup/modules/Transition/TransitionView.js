@@ -135,11 +135,11 @@ export let view = (() => {
 
         let winCountValue = model.balance('totalWin');
 
-        const freeSpinsLevel = game.add.bitmapText(game.world.width / 2, -200, 'numbersFont', winCountValue, 120, transitionContainer);
-        freeSpinsLevel.align = 'center';
-        freeSpinsLevel.anchor.set(0.5);
-        console.log(freeSpinsLevel);
-        model.el('freeSpinsLevel', freeSpinsLevel);
+        const winCount = game.add.bitmapText(game.world.width / 2, -200, 'numbersFont', winCountValue, 120, transitionContainer);
+        winCount.align = 'center';
+        winCount.anchor.set(0.5);
+        console.log(winCount);
+        model.el('winCount', winCount);
 
         const skull = game.add.sprite(game.world.width / 2,
             game.world.height * 0.7,
