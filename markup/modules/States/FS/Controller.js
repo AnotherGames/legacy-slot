@@ -38,15 +38,14 @@ export class FS {
 
         this.keyboardEventsRemove();
 
-        events.on('fs:init', this.initFS.bind(this));
-        events.on('fs:next', this.nextFS.bind(this));
-        events.on('fs:count', this.countFS.bind(this, {start: true}));
-        events.on('fs:stop', this.stopFS.bind(this));
-        events.on('fs:brain', this.onBrain.bind(this));
-
-        setTimeout(() => {
-            events.trigger('fs:init', 15);
-        }, 1000)
+        if (model.state('firstFS') === false) {
+            events.on('fs:init', this.initFS.bind(this));
+            events.on('fs:next', this.nextFS.bind(this));
+            events.on('fs:count', this.countFS.bind(this, {start: true}));
+            events.on('fs:stop', this.stopFS.bind(this));
+            events.on('fs:brain', this.onBrain.bind(this));
+            model.state('firstFS', true);
+        }
     }
 
     preload() {
@@ -94,6 +93,9 @@ export class FS {
         setInterval(() => {
             footerController.updateTime({});
         }, 1000);
+        setTimeout(() => {
+            events.trigger('fs:init', 15);
+        }, 1000)
     }
 
     update() {
@@ -117,6 +119,7 @@ export class FS {
     }
 
     initFS(amount) {
+        if (model.state('fsEnd') === false) return;
         console.log('I am initing FS: ', amount);
 
         model.state('fsEnd', false);
