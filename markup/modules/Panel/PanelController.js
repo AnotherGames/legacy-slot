@@ -101,10 +101,16 @@ export let controller = (() => {
         info: function() {
             sound.sounds.button.play();
             let infoRules = view.show.info({});
+            let overlay = model.el('overlay');
+            overlay.inputEnabled = true;
+            overlay.input.priorityID = 2;
                 infoRules.inputEnabled = true;
-                infoRules.input.priorityID = 2;
+                infoRules.input.priorityID = 3;
                 infoRules.events.onInputDown.add(() => {
-                    let overlay = model.el('overlay');
+                    overlay.destroy();
+                    infoRules.destroy();
+                });
+                overlay.events.onInputDown.add(() => {
                     overlay.destroy();
                     infoRules.destroy();
                 });
