@@ -5,7 +5,7 @@ import { request } from 'modules/Util/Request';
 export let controller = (() => {
 
     function init() {
-        request.send('Initialise', 'normal')
+        request.send('Initialise', 'fsBonus')
             .then((initData) => {
                 model.initStates(initData);
                 model.initSettings(initData.Settings);
