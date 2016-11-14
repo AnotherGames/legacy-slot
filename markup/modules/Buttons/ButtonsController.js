@@ -91,6 +91,7 @@ export let controller = (() => {
             if (spinButton.frameName === 'spinEmpty.png') return;
             sound.sounds.button.play();
             events.trigger('roll:request');
+            events.trigger('roll:fast');
         },
 
         autoButton: function() {

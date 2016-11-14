@@ -91,6 +91,7 @@ export let controller = (() => {
                 wheel.fast();
             });
             model.state('roll:fast', true);
+            console.log('i am doing fast roll');
         }
     }
 
@@ -157,6 +158,7 @@ export let controller = (() => {
 
     events.on('roll:request', startRoll);
     events.on('roll:end', endRoll);
+    events.on('roll:fast', fastRoll);
 
     return {
         init

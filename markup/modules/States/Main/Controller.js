@@ -108,6 +108,7 @@ export class Main {
             key: 32,
             down: function () {
                 events.trigger('roll:request');
+                events.trigger('roll:fast');
                 return true;
             }
         });

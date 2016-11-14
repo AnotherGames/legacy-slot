@@ -74,6 +74,7 @@ export let controller = (() => {
                 return;
             }
             events.trigger('roll:request');
+            events.trigger('roll:fast');
         },
 
         auto: function() {
