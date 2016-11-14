@@ -151,7 +151,7 @@ export let view = (() => {
         model.el('skull', skull);
 
         const continueText = game.add.sprite(game.world.width / 2,
-            game.world.height * 0.9,
+            game.world.height * 0.85,
             'text',
             'continue.png',
             transitionContainer);
