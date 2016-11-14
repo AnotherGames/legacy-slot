@@ -1,29 +1,32 @@
 import { model } from 'modules/Model/Model';
 import { events } from 'modules/Util/Events';
-import { view } from 'modules/States/Preload/PreloadView';
+import { view } from 'modules/States/Preload/View';
 
-export let controller = (() => {
+export class Preload {
+    constructor(game) {
 
-    function init() {
+    }
+
+    init() {
         const game = model.el('game');
         game.add.plugin(Fabrique.Plugins.Spine);
     }
 
-    function preload() {
+    preload() {
         const game = model.el('game');
         game.load.setPreloadSprite(view.drawPreloadBar());
         view.drawPreloadCoin();
 
-        loadSounds();
-        loadInitAssets();
-        loadMainAssets();
-        loadFSAssets();
-        loadSpineAssets();
+        this.loadSounds();
+        this.loadInitAssets();
+        this.loadMainAssets();
+        this.loadFSAssets();
+        this.loadSpineAssets();
 
-        game.load.onLoadComplete.add(hidePreloader);
+        game.load.onLoadComplete.add(this.hidePreloader);
     }
 
-    function loadSounds() {
+    loadSounds() {
         const game = model.el('game');
         game.load.path = 'static/img/content/sound/';
         game.load.audio('fon', 'ambient.mp3');
@@ -37,14 +40,14 @@ export let controller = (() => {
         game.load.audio('lineWin2', 'lineWin2.mp3');
     }
 
-    function loadInitAssets() {
+    loadInitAssets() {
         const game = model.el('game');
         game.load.path = `static/img/content/${model.state('res')}/`;
         game.load.image('initBG', 'bg/initBG.png');
         game.load.atlasJSONArray('text', 'text/text.png', 'text/text.json');
     }
 
-    function loadMainAssets() {
+    loadMainAssets() {
         const game = model.el('game');
         game.load.image('mainBG', 'bg/mainBG.png');
         game.load.atlasJSONArray('candle', 'bg/candle.png', 'bg/candle.json');
@@ -87,7 +90,7 @@ export let controller = (() => {
         game.load.atlasJSONArray('glistaAtlas', 'glista/glista.png', 'glista/glista.json');
     }
 
-    function loadFSAssets() {
+    loadFSAssets() {
         const game = model.el('game');
         game.load.image('fsBG', 'bg/fsBG.png');
         game.load.image('axe', 'fs/axe.png');
@@ -102,14 +105,14 @@ export let controller = (() => {
         }
     }
 
-    function loadSpineAssets() {
+    loadSpineAssets() {
         const game = model.el('game');
         game.load.spine('animBG', 'skeleton/skeleton.json');
         game.load.spine('FSCharapter', 'FSCharapter/Zomb.json');
         game.load.spine('FlyingBrain', 'FSCharapter/Brain.json');
     }
 
-    function hidePreloader() {
+    hidePreloader() {
         const game = model.el('game');
         view.hideCoin();
         view.hideBar();
@@ -129,7 +132,4 @@ export let controller = (() => {
             // }
         // });
     }
-
-    events.on('preload:init', init);
-    events.on('preload:preload', preload);
-})();
+}
