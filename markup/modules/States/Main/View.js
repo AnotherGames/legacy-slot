@@ -111,7 +111,11 @@ export let view = (() => {
         }) {
             let maskMarginX = config[model.state('res')].machine.x;
             if (model.state('mobile')) {
-                maskMarginX += model.data('mainXLeft');
+                if (model.state('side') === 'right') {
+                    maskMarginX += model.data('mainXRight');
+                } else {
+                    maskMarginX += model.data('mainXLeft');
+                }
             } else {
                 maskMarginX += (game.width - game.mainContainer.width) / 2;
             }

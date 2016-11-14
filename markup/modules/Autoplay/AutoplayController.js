@@ -7,8 +7,6 @@ export let controller = (() => {
 
         console.log('I am initing autoPlay: ', amount);
 
-        const game = model.el('game');
-
         model.state('autoEnd', false);
         model.data('autoCount', amount);
 
