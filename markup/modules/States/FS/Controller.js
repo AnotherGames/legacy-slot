@@ -176,6 +176,7 @@ export class FS {
 
         model.state('lockedButtons', false);
         model.state('fsEnd', true);
+        model.state('FSMode', false);
     }
 
     onBrain() {

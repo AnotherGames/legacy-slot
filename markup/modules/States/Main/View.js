@@ -15,11 +15,9 @@ export let view = (() => {
             model.group('main', game.mainContainer);
 
             game.buttonsContainer = game.add.group();
-            model.el('buttonsContainer', game.buttonsContainer);
             model.group('buttons', game.buttonsContainer);
 
             game.panelContainer = game.add.group();
-            model.el('panelContainer', game.panelContainer);
             model.group('panel', game.panelContainer);
 
             game.balanceContainer = game.add.group();
@@ -38,7 +36,6 @@ export let view = (() => {
             model.group('balanceCoin', game.balanceCoinContainer);
 
             game.transitionContainer = game.add.group();
-            model.el('transitionContainer', game.transitionContainer);
             model.group('transition', game.transitionContainer);
         }
     };

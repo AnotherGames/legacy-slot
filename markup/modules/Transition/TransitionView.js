@@ -21,7 +21,7 @@ export let view = (() => {
 
         const transitionBG = game.add.sprite(0, 0, 'initBG', null, transitionContainer);
         model.el('transitionBG', transitionBG);
-        const freeSpinsText = game.add.sprite(game.world.width / 2,
+        const freeSpinsText = game.add.sprite(game.width / 2,
             -400,
             'text',
             'freeSpins.png',
@@ -29,12 +29,12 @@ export let view = (() => {
         freeSpinsText.anchor.set(0.5);
         model.el('freeSpinsText', freeSpinsText);
 
-        const freeSpinsLevel = game.add.bitmapText(game.world.width / 2, -200, 'numbersFont', '15', 120, transitionContainer);
+        const freeSpinsLevel = game.add.bitmapText(game.width / 2, -200, 'numbersFont', '15', 120, transitionContainer);
         freeSpinsLevel.align = 'center';
         freeSpinsLevel.anchor.set(0.5);
         model.el('freeSpinsLevel', freeSpinsLevel);
 
-        const axeBig = game.add.sprite(game.world.width / 2 + 350,
+        const axeBig = game.add.sprite(game.width / 2 + 350,
             game.world.height / 2,
             'axe',
             null,
@@ -43,7 +43,7 @@ export let view = (() => {
         axeBig.scale.setTo(0.1, 0.1);
         model.el('axeBig', axeBig);
 
-        const axeSmall = game.add.sprite(game.world.width / 2 - 350,
+        const axeSmall = game.add.sprite(game.width / 2 - 350,
             game.world.height / 2 + 50,
             'axeSmall',
             null,
@@ -52,8 +52,8 @@ export let view = (() => {
         axeSmall.scale.setTo(0.1, 0.1);
         model.el('axeSmall', axeSmall);
 
-        const continueText = game.add.sprite(game.world.width / 2,
-            game.world.height * 0.8,
+        const continueText = game.add.sprite(game.width / 2,
+            game.world.height * 0.75,
             'text',
             'continue.png',
             transitionContainer);
@@ -70,8 +70,8 @@ export let view = (() => {
         const axeSmall = model.el('axeSmall');
         const continueText = model.el('continueText');
 
-        game.add.tween(freeSpinsText).to({y: game.world.height * 0.2}, 1500, Phaser.Easing.Bounce.Out, true);
-        game.add.tween(freeSpinsLevel).to({y: game.world.height / 2}, 1500, Phaser.Easing.Bounce.Out, true);
+        game.add.tween(freeSpinsText).to({y: game.height * 0.2}, 1500, Phaser.Easing.Bounce.Out, true);
+        game.add.tween(freeSpinsLevel).to({y: game.height / 2}, 1500, Phaser.Easing.Bounce.Out, true);
         game.add.tween(axeBig.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true);
         game.add.tween(axeSmall.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true);
         game.add.tween(continueText.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true)
@@ -123,7 +123,7 @@ export let view = (() => {
         const transitionBG = game.add.sprite(0, 0, 'initBG', null, transitionContainer);
         model.el('transitionBG', transitionBG);
 
-        const winText = game.add.sprite(game.world.width / 2,
+        const winText = game.add.sprite(game.width / 2,
             -400,
             'text',
             'totalW.png',
@@ -133,14 +133,17 @@ export let view = (() => {
 
         let winCountValue = model.balance('totalWin');
 
-        const winCount = game.add.bitmapText(game.world.width / 2, -200, 'numbersFont', winCountValue, 120, transitionContainer);
+        const winCount = game.add.bitmapText(game.width / 2, -200, 'numbersFont', winCountValue, 120, transitionContainer);
         winCount.align = 'center';
         winCount.anchor.set(0.5);
+        if (model.state('mobile')) {
+            winCount.scale.setTo(0.8, 0.8);
+        }
         console.log(winCount);
         model.el('winCount', winCount);
 
-        const skull = game.add.sprite(game.world.width / 2,
-            game.world.height * 0.7,
+        const skull = game.add.sprite(game.width / 2,
+            game.world.height * 0.65,
             'skull',
             null,
             transitionContainer);
@@ -148,28 +151,34 @@ export let view = (() => {
         skull.scale.setTo(0.1, 0.1);
         model.el('skull', skull);
 
-        const continueText = game.add.sprite(game.world.width / 2,
+        const continueText = game.add.sprite(game.width / 2,
             game.world.height * 0.85,
             'text',
             'continue.png',
             transitionContainer);
         continueText.anchor.set(0.5);
+        if (model.state('mobile')) {
+            continueText.y = game.world.height * 0.8;
+        }
         continueText.scale.setTo(0.1, 0.1);
         model.el('continueText', continueText);
+
+        const zombie = model.el('zombie');
+        const brain = model.el('flyingBrain');
+        zombie.char.alpha = 0;
+        brain.char.alpha = 0;
     }
 
     function _fsFinishTween() {
         const game = model.el('game');
-        const zombie = model.el('zombie');
-        const brain = model.el('flyingBrain');
         const winText = model.el('winText');
         const winCount = model.el('winCount');
         const skull = model.el('skull');
         const continueText = model.el('continueText');
-        zombie.char.alpha = 0;
-        brain.char.alpha = 0;
-        game.add.tween(winText).to({y: game.world.height * 0.2}, 1500, Phaser.Easing.Bounce.Out, true);
-        game.add.tween(winCount).to({y: game.world.height * 0.45}, 1500, Phaser.Easing.Bounce.Out, true);
+
+        game.add.tween(winText).to({y: game.height * 0.2}, 1500, Phaser.Easing.Bounce.Out, true);
+        game.add.tween(winCount).to({y: game.height * 0.45}, 1500, Phaser.Easing.Bounce.Out, true);
+        console.log('winText', winText.x);
         game.add.tween(continueText.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true);
         game.add.tween(skull.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true)
             .onComplete.add(() => {
