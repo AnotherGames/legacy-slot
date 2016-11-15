@@ -269,6 +269,34 @@ export let view = (() => {
             brainPanel.visible = false;
             container.add(brainPanel);
             model.el('brainPanel', brainPanel);
+        },
+
+        CountPlus3: function({
+            game = model.el('game'),
+            x = model.el('gameMachine').width / 2,
+            y = model.el('gameMachine').height / 3,
+            container = model.group('main')
+        }) {
+            console.log('i am drawing plus3');
+            let countPlus3 = game.add.bitmapText(x, y, 'numbersFont', '+3', 120, container);
+            countPlus3.align = 'center';
+            countPlus3.anchor.set(0.5);
+            model.el('countPlus3', countPlus3);
+            countPlus3.scale.set(0.1);
+
+            let tweenY;
+            if(model.state('desktop')) {
+                tweenY = 850;
+            } else {
+                tweenY = 650;
+            }
+
+            game.add.tween(countPlus3.scale).to({x: 1.0, y: 1.0}, 2000, Phaser.Easing.Elastic.Out, true)
+            // game.add.tween(countPlus3).to({y: tweenY}, 1500, Phaser.Easing.Elastic.Out, true, 700);
+            // game.add.tween(countPlus3).to({alpha: 0}, 1500, Phaser.Easing.Elastic.Out, true, 700)
+                .onComplete.add(() => {
+                    countPlus3.destroy();
+                }, this);
         }
 
     };

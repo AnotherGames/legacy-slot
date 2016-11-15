@@ -163,10 +163,6 @@ export let view = (() => {
         continueText.scale.setTo(0.1, 0.1);
         model.el('continueText', continueText);
 
-        // const zombie = model.el('zombie');
-        // const brain = model.el('flyingBrain');
-        // zombie.char.alpha = 0;
-        // brain.char.alpha = 0;
     }
 
     function _fsFinishTween() {

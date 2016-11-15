@@ -44,6 +44,7 @@ export class FS {
             events.on('fs:count', this.countFS.bind(this));
             events.on('fs:stop', this.stopFS.bind(this));
             events.on('fs:brain', this.onBrain.bind(this));
+            events.on('fs:brain', fsView.draw.CountPlus3.bind(null, {}));
             model.state('firstFS', true);
         }
     }
@@ -181,8 +182,7 @@ export class FS {
         setTimeout(() => {
             sound.music.fsFon.stop();
             transitionView.fsFinish();
-            // model.el('game').state.start('Main');
-        }, 2000);
+        }, 1000);
 
         model.state('lockedButtons', false);
         model.state('fsEnd', true);
