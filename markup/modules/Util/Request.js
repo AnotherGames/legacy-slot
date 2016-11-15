@@ -1,4 +1,5 @@
 import { model } from 'modules/Model/Model';
+import { noConnect } from 'modules/Util/NoConnect';
 
 export let request = (() => {
     const serviceUrl = 'http://gameservice.bossgs.org/devslotv2/SlotService.svc';
@@ -29,15 +30,23 @@ export let request = (() => {
                 console.warn('We have no such request!');
                 break;
         }
-        console.info(`Request: ${url}`);
         return new Promise(function (resolve, reject) {
-            $.ajax({
-                url: url,
-                dataType: 'JSONP',
-                type: 'GET',
-                success: resolve,
-                error: reject
-            });
+            if (model.state('isNoConnect')) {
+                resolve(noConnect[name]);
+            } else {
+                let func = function (res) {
+                    console.info(`Request: ${url}`);
+                    console.log('success', name, res);
+                    resolve(res);
+                };
+                $.ajax({
+                    url: url,
+                    dataType: 'JSONP',
+                    type: 'GET',
+                    success: func,
+                    error: reject
+                });
+            }
         });
     }
     return {
