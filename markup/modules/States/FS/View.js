@@ -37,6 +37,9 @@ export let view = (() => {
             game.balanceCoinContainer = game.add.group();
             model.group('balanceCoin', game.balanceCoinContainer);
 
+            game.fsContainer = game.add.group();
+            model.group('fs', game.fsContainer);
+
             game.transitionContainer = game.add.group();
             model.group('transition', game.transitionContainer);
         }
@@ -130,6 +133,7 @@ export let view = (() => {
 
         Zombie() {
             const game = model.el('game');
+            const fsContainer = model.group('fs');
             let x, y, scale;
 
             if (model.state('mobile')) {
@@ -151,11 +155,25 @@ export let view = (() => {
             });
 
             zombie.char.scale.x = zombie.char.scale.y = scale;
+            fsContainer.add(zombie.char);
             model.el('zombie', zombie);
+        },
+
+        fsCandle: function({
+            x = 35,
+            y = 480,
+            container = model.group('fs')
+        }) {
+            const game = model.el('game');
+            const candle = game.add.sprite(x, y, 'candle', null, container);
+            candle.animations.add('burn');
+            candle.animations.play('burn', 12, true);
+            return candle;
         },
 
         Brain() {
             const game = model.el('game');
+            const fsContainer = model.group('fs');
             let x, y, scale;
 
             if (model.state('mobile')) {
@@ -177,6 +195,8 @@ export let view = (() => {
             });
 
             brain.char.scale.x = brain.char.scale.y = scale;
+            fsContainer.add(brain.char);
+            console.log('fsContainer', fsContainer);
             model.el('flyingBrain', brain);
         },
 

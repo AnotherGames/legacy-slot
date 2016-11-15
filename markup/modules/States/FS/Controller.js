@@ -82,6 +82,19 @@ export class FS {
 
         fsView.draw.Zombie();
         fsView.draw.Brain();
+        if (model.state('desktop')) {
+            let candle1 = fsView.draw.fsCandle({});
+            candle1.scale.set(0.8);
+            let candle2 = fsView.draw.fsCandle({x: 62, y: 500});
+            candle2.scale.set(0.7);
+            let candle3 = fsView.draw.fsCandle({x: 372, y: 440});
+        } else {
+            let candle1 = fsView.draw.fsCandle({x: -12, y: 315});
+            candle1.scale.set(0.8);
+            let candle2 = fsView.draw.fsCandle({x: 5, y: 330});
+            candle2.scale.set(0.7);
+            let candle3 = fsView.draw.fsCandle({x: 164, y: 292});
+        }
 
         fsView.draw.Multi({});
         fsView.draw.Count({});
