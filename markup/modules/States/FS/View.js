@@ -17,11 +17,9 @@ export let view = (() => {
             model.group('main', game.mainContainer);
 
             game.buttonsContainer = game.add.group();
-            model.el('buttonsContainer', game.buttonsContainer);
             model.group('buttons', game.buttonsContainer);
 
             game.panelContainer = game.add.group();
-            model.el('panelContainer', game.panelContainer);
             model.group('panel', game.panelContainer);
 
             game.balanceContainer = game.add.group();
@@ -36,8 +34,10 @@ export let view = (() => {
             game.balanceCashContainer = game.add.group();
             model.group('balanceCash', game.balanceCashContainer);
 
+            game.balanceCoinContainer = game.add.group();
+            model.group('balanceCoin', game.balanceCoinContainer);
+
             game.transitionContainer = game.add.group();
-            model.el('transitionContainer', game.transitionContainer);
             model.group('transition', game.transitionContainer);
         }
     };
@@ -215,13 +215,13 @@ export let view = (() => {
             const game = model.el('game');
             let x, y, font;
             if (model.state('mobile')) {
-                x = 1180;
+                x = 1183;
                 y = 68;
                 font = fontMobile;
                 const countBG = game.add.sprite(x, y - 5, 'fsTotalTable', null, container);
                 countBG.anchor.set(0.5);
             } else {
-                x = 657;
+                x = 659;
                 y = 98;
                 font = fontDesktop;
             }

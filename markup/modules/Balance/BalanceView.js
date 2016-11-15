@@ -43,8 +43,7 @@ export let view = (() => {
         }) {
             const game = model.el('game');
 
-            let balanceCoinContainer = game.add.group();
-            model.group('balanceCoin', balanceCoinContainer);
+            let balanceCoinContainer = model.group('balanceCoin');
 
             let coinSumText = game.add.text(0, y, 'Coins: ', greyStyle, balanceCoinContainer);
             let betSumText = game.add.text(0, y, 'Bet: ', greyStyle, balanceCoinContainer);
@@ -163,8 +162,7 @@ export let view = (() => {
         }) {
             const game = model.el('game');
 
-            let balanceCoinContainer = game.add.group();
-            model.group('balanceCoin', balanceCoinContainer);
+            let balanceCoinContainer = model.group('balanceCoin');
 
             let totalWinText = game.add.text(0, y, 'Total Win: ', greyStyle, balanceCoinContainer);
             let winText = game.add.text(0, y, 'Win: ', greyStyle, balanceCoinContainer);
@@ -197,6 +195,7 @@ export let view = (() => {
             let coinSumText = model.el('coinSumText'),
                 betSumText = model.el('betSumText'),
                 balanceCoinContainer = model.group('balanceCoin');
+
 
             _calcTextPosition([[coinSumText, coinSum], [betSumText, betSum]], balanceCoinContainer);
 

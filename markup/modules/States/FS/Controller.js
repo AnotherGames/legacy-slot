@@ -175,6 +175,7 @@ export class FS {
         }, 2000);
 
         model.state('fsEnd', true);
+        model.state('FSMode', false);
     }
 
     onBrain() {
