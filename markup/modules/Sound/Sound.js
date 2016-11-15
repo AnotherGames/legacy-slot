@@ -16,8 +16,7 @@ export let sound = {
 
         model.state('volume', _val);
 
-        const game = model.el('game');
-        game.sound.volume = _val;
+        this.game.sound.volume = _val;
     },
 
     get isMusic() {
@@ -61,7 +60,19 @@ export let sound = {
         sound = true,
         music = true
     }) {
+        if (this.game) {
+            let keys = Object.keys(this.sounds);
+            keys.forEach((key) => {
+                this.sounds[key].stop();
+            });
+            keys = Object.keys(this.music);
+            keys.forEach((key) => {
+                this.music[key].stop();
+            });
+        }
+
         const game = model.el('game');
+        this.game = game;
         // Fon
         this.music.fon = game.add.audio('fon', 1, true);
         this.music.fsFon = game.add.audio('fsFon', 1, true);
