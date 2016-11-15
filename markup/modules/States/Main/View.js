@@ -111,11 +111,7 @@ export let view = (() => {
         }) {
             let maskMarginX = config[model.state('res')].machine.x;
             if (model.state('mobile')) {
-                if (model.state('side') === 'right') {
-                    maskMarginX += model.data('mainXRight');
-                } else {
-                    maskMarginX += model.data('mainXLeft');
-                }
+                maskMarginX += model.data('mainXLeft');
             } else {
                 maskMarginX += (game.width - game.mainContainer.width) / 2;
             }
@@ -125,6 +121,10 @@ export let view = (() => {
             mask.beginFill(0x000000);
             mask.drawRect(maskMarginX, config[model.state('res')].machine.y, elSize.width * 5, elSize.height * 3);
             machineGroup.mask = mask;
+
+            if (model.state('side') === 'right')
+                mask.x = model.data('mainXRight') - model.data('mainXLeft');
+
             model.el('mask', mask);
         },
 
