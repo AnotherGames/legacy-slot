@@ -77,22 +77,23 @@ export let sound = {
         this.game = game;
         // Fon
         this.music.fon = game.add.audio('fon', 1, true);
-        this.music.fon.mute = !music;
         this.music.fsFon = game.add.audio('fsFon', 1, true);
-        this.music.fsFon.mute = !music;
         this.music.startPerehod = game.add.audio('startPerehod', 1, true);
-        this.music.startPerehod.mute = !music;
         this.music.finishPerehod = game.add.audio('finishPerehod', 1, true);
-        this.music.finishPerehod.mute = !music;
         // Sound
         this.sounds.button = game.add.audio('buttonClick');
-        this.sounds.button.mute = !sound;
         this.sounds.baraban = game.add.audio('baraban');
-        this.sounds.baraban.mute = !sound;
         this.sounds.lineWin = game.add.audio('lineWin');
-        this.sounds.lineWin.mute = !sound;
         this.sounds.lineWin2 = game.add.audio('lineWin2');
-        this.sounds.lineWin2.mute = !sound;
+
+        let keys = Object.keys(this.sounds);
+        keys.forEach((key) => {
+            this.sounds[key].mute = !sound;
+        });
+        keys = Object.keys(this.music);
+        keys.forEach((key) => {
+            this.music[key].mute = !music;
+        });
 
         model.state('volume', volume);
         model.state('sound', sound);
