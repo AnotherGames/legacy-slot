@@ -51,7 +51,6 @@ export class Boot {
             if (game.device.iOS) {
                 $('html, body').addClass('ios');
             }
-            console.log(game.device);
             game.scale.setGameSize(1280, 720);
             model.state('mobile', true);
             model.state('res', 'HD');
