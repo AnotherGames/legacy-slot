@@ -218,21 +218,27 @@ export let model = (() => {
             model.balance('winCash', 0);
         }
         if (endFS) {
+            let newCoinSum = model.balance('coinSum') + model.balance('totalWin');
+            model.balance('coinSum', newCoinSum);
+            let newCoinCash = (model.balance('coinCash') * 100 + model.balance('winCash') * 100) / 100;
+            model.balance('coinCash', newCoinCash);
             model.balance('fsWin', 0);
             model.balance('totalWin', 0);
         }
         if (startFSRoll) {
             let newTotalWin = +model.balance('fsWin') + +model.balance('totalWin');
+            let newWinCash = newTotalWin * model.balance('coinValue');
             model.balance('fsWin', 0);
             model.balance('totalWin', newTotalWin);
+            model.balance('winCash', newWinCash);
         }
         if (endFSRoll) {
             let endData = model.data('rollResponse');
 
             model.balance('fsWin', endData.Balance.TotalWinCoins);
             if (endData.FsBonus) {
-                model.balance('totalWin', endData.FsBonus.TotalFSWinCoins);
                 model.balance('winCash', endData.FsBonus.TotalFSWinCents / 100);
+                model.balance('totalWin', endData.FsBonus.TotalFSWinCoins);
             }
         }
 

@@ -145,11 +145,7 @@ export class FS {
     nextFS() {
         let rollData = model.data('rollResponse');
 
-        console.log('Roll Data: ', model.data('rollResponse'));
-
         if (!model.state('fsEnd') && rollData.NextMode !== 'root') {
-
-            console.log('I am in fsNext!');
 
             events.trigger('fs:count', {start: true});
             events.trigger('roll:request');
