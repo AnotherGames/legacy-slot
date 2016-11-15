@@ -42,6 +42,10 @@ export class Init {
     handlePlay() {
         const game = model.el('game');
         this.fullScreen();
+        document.body.addEventListener('touchstart', () => {
+            this.fullScreen();
+        });
+
         view.stopYoyoTween();
         view.lastDarkness()
             .onComplete.add(() => {
