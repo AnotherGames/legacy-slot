@@ -240,7 +240,6 @@ export class FS {
             brainPanel.addAnimationByName(0,'w1.5', true);
         }
         if (levelABS === 2){
-            console.warn('levelABS', levelABS);
             brainPanel.setAnimationByName(0,'w2', false);
             brainPanel.addAnimationByName(0,'w2.5', true);
         }

@@ -57,8 +57,13 @@ export let controller = (() => {
             });;
     }
 
+    function oneAfterAnother() {
+        console.log('I am one after Another!');
+    }
+
     events.on('roll:end', showWin);
     events.on('roll:start', cleanWin);
     events.on('win:clean', cleanWin);
+    events.on('win:oneAfterAnother', oneAfterAnother);
 
 })();

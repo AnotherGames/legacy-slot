@@ -126,6 +126,9 @@ export let view = (() => {
                 model.data('glistaDoneCounter', glistaDoneCounter);
                 if (glistaDoneCounter == glistaFiredCounter) {
                     events.trigger('win:clean');
+                    if (model.state('autoEnd') || model.state('fsEnd')) {
+                        events.trigger('win:oneAfterAnother');
+                    }
                 }
             });
 
