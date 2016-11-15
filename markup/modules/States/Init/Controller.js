@@ -6,7 +6,7 @@ export class Init {
 
     }
     init() {
-        model.state('isNoConnect', true);
+        model.state('isNoConnect', false);
         model.state('side', 'left');
         model.state('autoPanel', false);
         model.state('fastRoll', false);
