@@ -41,9 +41,15 @@ export class Init {
 
     handlePlay() {
         const game = model.el('game');
-        this.fullScreen();
+
+        if (model.state('mobile')) game.scale.startFullScreen();
+        else this.fullScreen();
+
         document.body.addEventListener('touchstart', () => {
-            this.fullScreen();
+            model.el('game').scale.startFullScreen();
+        });
+        window.addEventListener("orientationchange", function() {
+            console.log('game.refresh');
         });
 
         view.stopYoyoTween();
