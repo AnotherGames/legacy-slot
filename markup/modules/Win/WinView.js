@@ -69,6 +69,12 @@ export let view = (() => {
                         let elementName = parseInt(element.sprite.animations.currentAnim.name);
                         if (elementName == '10') {
                             element.win();
+                            let rollData = model.data('rollResponse');
+                            if (rollData.WinLines.length === 1) {
+                                setTimeout(() => {
+                                    events.trigger('win:clean');
+                                }, 1000)
+                            }
                         }
                         if (elementName == '11') {
                             element.win();
