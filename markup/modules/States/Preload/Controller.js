@@ -112,6 +112,8 @@ export class Preload {
         game.load.spine('animBG', 'skeleton/skeleton.json');
         game.load.spine('FSCharapter', 'FSCharapter/Zomb.json');
         game.load.spine('FlyingBrain', 'FSCharapter/Brain.json');
+        game.load.spine('mozgiCount', 'fs/mozgi.json');
+
     }
 
     hidePreloader() {
