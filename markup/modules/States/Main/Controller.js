@@ -41,10 +41,6 @@ export class Main {
         const game = model.el('game');
         sound.music.fon.play();
 
-        $('.history__button').click((event) => {
-            $('.history').addClass('closed');
-        });
-
         mainView.draw.mainBG({});
         mainView.draw.mainContainer({});
         mainView.draw.machineContainer({});

@@ -23,6 +23,14 @@ export class Init {
     }
 
     create() {
+        let settingsWidth = $('#settings').width();
+        let multiplay = window.innerWidth / settingsWidth * 0.8;
+        $('#settings').css('transform', 'translate(-50%, -50%) scale(' + multiplay + ',' + multiplay + ')');
+
+        $('.history__button').click((event) => {
+            $('.history').addClass('closed');
+        });
+
         view.playMusic();
         view.drawBG();
         view.drawLogo();
