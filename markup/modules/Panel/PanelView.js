@@ -32,7 +32,7 @@ export let view = (() => {
         },
 
         SpinButton: function({
-            x = model.el('panelContainer').width / 2,
+            x = model.group('panel').width / 2,
             y = 95,
             container = model.group('panel')
         }) {
@@ -68,7 +68,7 @@ export let view = (() => {
         },
 
         InfoButton: function({
-            x = model.el('panelContainer').width - 115,
+            x = model.group('panel').width - 115,
             y = 105,
             container = model.group('panel')
         }) {
@@ -213,7 +213,7 @@ export let view = (() => {
         fsCandle: function({
             x = 513,
             y = 95,
-            container = model.el('panelContainer')
+            container = model.group('panel')
         }) {
             const game = model.el('game');
             const candle = game.add.sprite(x, y, 'candle', null, container);
