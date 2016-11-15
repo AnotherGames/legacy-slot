@@ -241,8 +241,8 @@ export let view = (() => {
                 const countBG = game.add.sprite(x, y - 5, 'fsTotalTable', null, container);
                 countBG.anchor.set(0.5);
             } else {
-                x = 659;
-                y = 98;
+                x = 662;
+                y = 94;
                 font = fontDesktop;
             }
             const fsCount = game.add.bitmapText(x, y, 'fsLevelNumbers', start, font, container);
