@@ -43,7 +43,7 @@ export let request = (() => {
             } else {
                 let func = function (res) {
                     console.info(`Request: ${url}`);
-                    console.log('success', name, res);
+                    console.log('success', name, new Date(), res);
                     resolve(res);
                 };
                 $.ajax({
