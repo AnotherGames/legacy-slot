@@ -128,12 +128,18 @@ export let controller = (() => {
 
         soundButton: function() {
             let soundButton = model.el('soundButton');
-            if (sound.volume > 0) {
+            let settingsSoundButton = model.el('settingsSoundButton');
+            let settingsMusicButton = model.el('settingsMusicButton');
+            if (sound.isSound || sound.isMusic) {
+                sound.isSound = sound.isMusic = false;
                 soundButton.frameName = 'soundOut.png';
-                sound.volume = 0;
+                settingsSoundButton.frameName = 'soundOff.png';
+                settingsMusicButton.frameName = 'musicOff.png';
             } else {
+                sound.isSound = sound.isMusic = true;
                 soundButton.frameName = 'sound.png';
-                sound.volume = 1;
+                settingsSoundButton.frameName = 'soundOn.png';
+                settingsMusicButton.frameName = 'musicOn.png';
                 sound.sounds.button.play();
             }
         }
