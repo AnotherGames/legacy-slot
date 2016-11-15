@@ -30,6 +30,9 @@ export class Main {
 
         game.stage.disableVisibilityChange = true;
 
+        // Оюнуление результатов Фри-спинов
+        model.balance('fsWin', 0);
+        model.balance('totalWin', 0);
 
         mainView.create.groups({});
     }

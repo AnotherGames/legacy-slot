@@ -106,6 +106,7 @@ export let controller = (() => {
 
             if (model.state('FSMode')) {
                 model.updateBalance({endFSRoll: true});
+                events.trigger('fs:count', {end: true});
             } else {
                 model.updateBalance({endRoll: true});
             }

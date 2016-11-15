@@ -41,7 +41,7 @@ export class FS {
         if (model.state('firstFS') === false) {
             events.on('fs:init', this.initFS.bind(this));
             events.on('fs:next', this.nextFS.bind(this));
-            events.on('fs:count', this.countFS.bind(this, {start: true}));
+            events.on('fs:count', this.countFS.bind(this));
             events.on('fs:stop', this.stopFS.bind(this));
             events.on('fs:brain', this.onBrain.bind(this));
             model.state('firstFS', true);
@@ -129,24 +129,18 @@ export class FS {
     }
 
     nextFS() {
-        let fsCount = model.data('fsCount');
         let rollData = model.data('rollResponse');
-        fsCount--;
+
+        console.log('Roll Data: ', model.data('rollResponse'));
 
         if (!model.state('fsEnd')) {
 
+            events.trigger('fs:count', {start: true});
             events.trigger('roll:request');
 
         }
 
-        if (fsCount >= 0) {
-
-            model.data('fsCount', fsCount);
-            events.trigger('fs:count', fsCount);
-
-        }
-        //  && rollData.NextMode === 'root'
-        if (fsCount === 0) {
+        if (rollData.NextMode === 'root') {
 
             events.trigger('fs:stop');
 
@@ -158,10 +152,14 @@ export class FS {
         end
     }) {
         if (start) {
-            model.el('fsCount').text = model.data('fsCount');
+            let newFsCount = model.data('fsCount');
+                newFsCount--;
+            model.data('fsCount', newFsCount);
+            model.el('fsCount').text = newFsCount;
         }
         if (end) {
-            model.el('fsCount').text = 'end';
+            model.data('fsCount', model.data('rollResponse').FreeSpinsLeft);
+            model.el('fsCount').text = model.data('rollResponse').FreeSpinsLeft;
         }
     }
 
