@@ -192,12 +192,9 @@ export class FS {
 
     onBrain() {
         let rollData = model.data('rollResponse');
-        let fsCount = model.el('fsCount');
         let fsMulti = model.el('fsMulti');
         let multiValue = rollData.FsBonus.Multi;
 
-        fsCount.text = '+3';
-        model.data('fsCount', rollData.FreeSpinsLeft);
         fsMulti.frameName = `multi${multiValue}.png`;
 
         let currMulti = model.data('fsMulti');
