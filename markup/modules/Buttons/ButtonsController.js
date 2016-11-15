@@ -87,6 +87,7 @@ export let controller = (() => {
 
     const handle = {
         spinButton: function () {
+            if (model.state('lockedButtons')) return;
             let spinButton = model.el('spinButton');
             if (spinButton.frameName === 'spinEmpty.png') return;
             sound.sounds.button.play();

@@ -174,6 +174,7 @@ export class FS {
             // model.el('game').state.start('Main');
         }, 2000);
 
+        model.state('lockedButtons', false);
         model.state('fsEnd', true);
     }
 

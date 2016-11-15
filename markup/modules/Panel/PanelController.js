@@ -62,6 +62,7 @@ export let controller = (() => {
 
     const handle = {
         spin: function() {
+            if (model.state('lockedButtons')) return;
             sound.sounds.button.play();
             if (!model.state('autoClosed')) {
                 model.state('autoClosed', true);

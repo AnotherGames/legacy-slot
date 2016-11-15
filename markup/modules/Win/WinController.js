@@ -21,6 +21,8 @@ export let controller = (() => {
 
         if (mode == 'root' && nextMode == 'fsBonus') {
 
+            model.state('lockedButtons', true);
+
             if (!model.state('autoEnd')) {
                 events.trigger('autoplay:stop');
             }
