@@ -52,10 +52,15 @@ export class Main {
             buttonsController.init();
 
             let mainXLeft = model.el('buttonsDelta') * 2;
+            let mainXRight = game.width - game.mainContainer.width - model.el('buttonsDelta') * 2;
             model.data('mainXLeft', mainXLeft);
-            model.data('mainXRight', game.width - game.mainContainer.width - model.el('buttonsDelta') * 2);
+            model.data('mainXRight', mainXRight);
 
-            game.mainContainer.x = mainXLeft;
+            if (model.state('side') === 'left') {
+                game.mainContainer.x = mainXLeft;
+            } else {
+                game.mainContainer.x = mainXRight;
+            }
 
             balanceController.initMobile();
             mobileSettingsController.init({});

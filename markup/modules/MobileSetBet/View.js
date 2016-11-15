@@ -197,11 +197,7 @@ export let view = (() => {
         Container: function () {
             const game = model.el('game');
             let container = game.add.group();
-            if (model.state('side') === 'left') {
-                container.x = game.world.width;
-            } else {
-                container.x = -container.x;
-            }
+            container.x = game.world.width;
             model.el('setbetContainer', container);
             return container;
         },
@@ -297,11 +293,14 @@ export let view = (() => {
             time = 700
         }) {
             const game = model.el('game');
+            let border = model.el('setbetBorder');
             if (model.state('side') === 'left') {
                 container.x = game.width;
+                border.x = 0;
                 return game.add.tween(container).to( { x: game.width - container.width }, time, 'Quart.easeOut', true);
             } else {
                 container.x = -container.width;
+                border.x = model.el('setbetContainer').width - border.width;
                 return game.add.tween(container).to( { x: 0 }, time, 'Quart.easeOut', true);
             }
         },

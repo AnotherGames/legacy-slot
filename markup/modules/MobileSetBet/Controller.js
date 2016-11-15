@@ -12,12 +12,6 @@ export let controller = (() => {
         openPanel: function () {
             if (model.state('setbetPanel') === 'open') return;
             model.state('setbetPanel', 'open');
-            if (model.state('side') === 'right') {
-                let border = model.el('setbetBorder');
-                border.x = model.el('setbetContainer').width - border.width;
-            } else {
-                model.el('setbetBorder').x = 0;
-            }
             view.show.Panel({});
             view.show.Overlay({});
         },
