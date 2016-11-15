@@ -3,8 +3,15 @@ import { noConnect } from 'modules/Util/NoConnect';
 
 export let request = (() => {
     const serviceUrl = 'http://gameservice.bossgs.org/devslotv2/SlotService.svc';
-    const casinoID = 1;
-    const userID = 1;
+    let casinoID = 1;
+    let userID = 1;
+
+    if (localStorage.getItem('userID')) {
+        userID = localStorage.getItem('userID');
+    }
+    if (localStorage.getItem('casinoID')) {
+        casinoID = localStorage.getItem('casinoID');
+    }
 
     const mode = {
         normal: 'zombienorm2',
