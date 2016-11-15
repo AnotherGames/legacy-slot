@@ -172,7 +172,7 @@ export let model = (() => {
 
     }
 
-    function updateBalance({bet, coin, startRoll, endRoll, startFSRoll, endFSRoll}) {
+    function updateBalance({bet, coin, startRoll, endRoll, startFSRoll, endFSRoll, startFS, endFS}) {
 
         // Добавить начало конец бонусного раунда
 
@@ -214,6 +214,13 @@ export let model = (() => {
             model.balance('coinSum', endData.ScoreCoins);
             model.balance('coinCash', endData.ScoreCents / 100);
         }
+        if (startFS) {
+            model.balance('winCash', 0);
+        }
+        if (endFS) {
+            model.balance('fsWin', 0);
+            model.balance('totalWin', 0);
+        }
         if (startFSRoll) {
             let newTotalWin = +model.balance('fsWin') + +model.balance('totalWin');
             model.balance('fsWin', 0);
@@ -225,6 +232,7 @@ export let model = (() => {
             model.balance('fsWin', endData.Balance.TotalWinCoins);
             if (endData.FsBonus) {
                 model.balance('totalWin', endData.FsBonus.TotalFSWinCoins);
+                model.balance('winCash', endData.FsBonus.TotalFSWinCents / 100);
             }
         }
 

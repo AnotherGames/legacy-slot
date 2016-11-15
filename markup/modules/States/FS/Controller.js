@@ -137,6 +137,7 @@ export class FS {
 
         model.state('fsEnd', false);
         model.data('fsCount', amount);
+        model.updateBalance({startFS: true});
 
         this.nextFS();
     }
@@ -146,7 +147,9 @@ export class FS {
 
         console.log('Roll Data: ', model.data('rollResponse'));
 
-        if (!model.state('fsEnd')) {
+        if (!model.state('fsEnd') && rollData.NextMode !== 'root') {
+
+            console.log('I am in fsNext!');
 
             events.trigger('fs:count', {start: true});
             events.trigger('roll:request');
@@ -188,6 +191,7 @@ export class FS {
         model.state('lockedButtons', false);
         model.state('fsEnd', true);
         model.state('FSMode', false);
+        model.updateBalance({endFS: true});
     }
 
     onBrain() {
