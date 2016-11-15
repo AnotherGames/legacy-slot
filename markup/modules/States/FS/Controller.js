@@ -217,17 +217,66 @@ export class FS {
     }
 
     searchBrains() {
+        console.warn('search brain started');
         let levelValue = model.data('rollResponse').FsBonus.Level;
         let levelABS = levelValue % 3;
         let brainPanel = model.el('brainPanel');
+        brainPanel.visible = true;
         if (levelABS === 0) {
-            brainPanel.frameName = `03.png`;
+            console.warn('levelABS', levelABS);
+            brainPanel.setAnimationByName(0,'w3', false);
+            brainPanel.addAnimationByName(0,'w4', false);
             setTimeout(() => {
-                brainPanel.visible = false;
-            }, 500);
-        } else {
-            brainPanel.visible = true;
-            brainPanel.frameName = `0${levelABS}.png`;
+                brainPanel.destroy();
+                model.state('brainPanel', false);
+            }, 1000);
         }
+        if (levelABS === 1){
+            console.warn('levelABS', levelABS);
+            if(model.state('brainPanel') === false) {
+                console.warn('i am here');
+                fsView.draw.BrainLevel({});
+                brainPanel = model.el('brainPanel');
+                brainPanel.visible = true;
+                model.state('brainPanel', true);
+            }
+            brainPanel.setAnimationByName(0,'w1', false);
+            brainPanel.addAnimationByName(0,'w1.5', true);
+        }
+        if (levelABS === 2){
+            console.warn('levelABS', levelABS);
+            brainPanel.setAnimationByName(0,'w2', false);
+            brainPanel.addAnimationByName(0,'w2.5', true);
+        }
+
+        // if (levelABS === 1){
+        //     console.warn('levelABS', levelABS);
+        //     console.warn('brainPanel', brainPanel);
+        //     brainPanel.setAnimationByName(0,'w1', false);
+        //     brainPanel.addAnimationByName(0,'w1.5', true);
+        //     brainPanel.setAnimationByName(0,'w2', false);
+        //     brainPanel.addAnimationByName(0,'w2.5', true);
+        //     brainPanel.setAnimationByName(0,'w3', false);
+        //     brainPanel.addAnimationByName(0,'w4', false);
+        //     setTimeout(() => {
+        //             brainPanel.destroy();
+        //         }, 1500);
+        //
+        // }
+        // if (levelABS === 2) {
+        //     console.warn('levelABS', levelABS);
+        //     fsView.draw.BrainLevel({});
+        //     let brainPanel = model.el('brainPanel');
+        //     brainPanel.visible = true;
+        //     console.warn('brainPanel2', brainPanel);
+        //     brainPanel.setAnimationByName(0,'w1', false);
+        //     brainPanel.addAnimationByName(0,'w1.5', true);
+        //     brainPanel.setAnimationByName(0,'w2', false);
+        //     brainPanel.addAnimationByName(0,'w2.5', true);
+        //     brainPanel.setAnimationByName(0,'w3', false);
+        //     brainPanel.addAnimationByName(0,'w4', false);
+        //
+        // }
+
     }
 }

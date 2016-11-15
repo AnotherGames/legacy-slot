@@ -264,9 +264,10 @@ export let view = (() => {
                 x = 437;
                 y = 100;
             }
-            let brainPanel = game.add.sprite(x, y, 'mozgiPanel', '01.png', container);
-                brainPanel.anchor.set(0.5);
-                brainPanel.visible = false;
+            let brainPanel = game.add.spine(x, y, 'mozgiCount');
+            brainPanel.setAnimationByName(0, 'w1.5', true);
+            brainPanel.visible = false;
+            container.add(brainPanel);
             model.el('brainPanel', brainPanel);
         }
 
