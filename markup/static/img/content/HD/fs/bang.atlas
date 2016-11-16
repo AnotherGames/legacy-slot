@@ -1,0 +1,20 @@
+
+bang.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+For_Effects/E_0005_Layer-2
+  rotate: false
+  xy: 408, 37
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: -1
+For_Effects/ss_0004_Layer-4
+  rotate: false
+  xy: 2, 2
+  size: 404, 335
+  orig: 404, 335
+  offset: 0, 0
+  index: -1
