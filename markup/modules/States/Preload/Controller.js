@@ -87,7 +87,6 @@ export class Preload {
         game.load.image('axe', 'fs/axe.png');
         game.load.image('axeSmall', 'fs/axeSmall.png');
         game.load.image('skull', 'fs/skull.png');
-        game.load.atlasJSONArray('mozgiPanel', 'fs/mozgiPanel.png', 'fs/mozgiPanel.json');
         if (model.state('mobile')) {
             game.load.image('fsTotalTable', 'fs/fsTotalTable.png');
             game.load.image('multiRip', 'fs/multiRip.png');
