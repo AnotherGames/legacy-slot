@@ -238,6 +238,7 @@ export class FS {
         let brainPanel = model.el('brainPanel');
         brainPanel.visible = true;
         if (levelABS === 0) {
+            console.warn('levelABS', levelABS);
             brainPanel.setAnimationByName(0,'w3', false);
             brainPanel.addAnimationByName(0,'w4', false);
             setTimeout(() => {
@@ -246,6 +247,7 @@ export class FS {
             }, 1000);
         }
         if (levelABS === 1){
+            console.warn('levelABS', levelABS);
             if(model.state('brainPanel') === false) {
                 fsView.draw.BrainLevel({});
                 brainPanel = model.el('brainPanel');
@@ -256,6 +258,7 @@ export class FS {
             brainPanel.addAnimationByName(0,'w1.5', true);
         }
         if (levelABS === 2){
+            console.warn('levelABS', levelABS);
             brainPanel.setAnimationByName(0,'w2', false);
             brainPanel.addAnimationByName(0,'w2.5', true);
         }
