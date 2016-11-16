@@ -44,7 +44,7 @@ export class FS {
             events.on('fs:count', this.countFS.bind(this));
             events.on('fs:stop', this.stopFS.bind(this));
             events.on('fs:brain', this.onBrain.bind(this));
-            events.on('fs:brain', fsView.draw.CountPlus3.bind(null, {}));
+            events.on('fs:brain', fsView.draw.CountPlus3.bind(this, {}));
             model.state('firstFS', true);
         }
     }

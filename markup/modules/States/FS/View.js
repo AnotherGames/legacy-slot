@@ -285,18 +285,45 @@ export let view = (() => {
             countPlus3.scale.set(0.1);
 
             let tweenY;
+            let tweenX;
             if(model.state('desktop')) {
-                tweenY = 850;
+                tweenX = countPlus3.x;
+                tweenY = 950;
             } else {
-                tweenY = 650;
+                tweenX = 1180;
+                tweenY = 50;
             }
 
-            game.add.tween(countPlus3.scale).to({x: 1.0, y: 1.0}, 2000, Phaser.Easing.Elastic.Out, true)
-            // game.add.tween(countPlus3).to({y: tweenY}, 1500, Phaser.Easing.Elastic.Out, true, 700);
-            // game.add.tween(countPlus3).to({alpha: 0}, 1500, Phaser.Easing.Elastic.Out, true, 700)
+            game.add.tween(countPlus3.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true);
+            game.add.tween(countPlus3).to({x: tweenX, y: tweenY}, 300, 'Linear', true, 1000);
+            game.add.tween(countPlus3).to({alpha: 0}, 300, 'Linear', true, 1000)
                 .onComplete.add(() => {
                     countPlus3.destroy();
+                    view.draw._showBang({});
                 }, this);
+        },
+
+        _showBang: function ({
+            container = model.group('panel')
+        }) {
+            const game = model.el('game');
+            let x, y;
+            if (model.state('mobile')) {
+                x = 1180;
+                y = 105;
+            } else {
+                x = 660;
+                y = 100;
+            }
+            let fsCountBG = game.add.spine(x, y, 'fsCount');
+            container.add(fsCountBG);
+            model.el('fsCountBG', fsCountBG);
+            fsCountBG.setAnimationByName(0, 'w-0', false);
+
+            setTimeout(() => {
+                fsCountBG.destroy();
+            }, 500);
+
         }
 
     };

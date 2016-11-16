@@ -29,8 +29,7 @@ export let controller = (() => {
 
             setTimeout(() => {
                 transitionView.fsStart();
-                // model.el('game').state.start('FS');
-            }, 2000);
+            }, 1500);
         }
 
         if (winLines.length) {
