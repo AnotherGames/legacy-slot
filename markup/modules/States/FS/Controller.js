@@ -197,6 +197,7 @@ export class FS {
         model.state('fsEnd', true);
         model.state('FSMode', false);
         model.updateBalance({endFS: true});
+        model.el('brainPanel').destroy();
     }
 
     onBrain() {
