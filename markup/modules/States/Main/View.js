@@ -1,5 +1,6 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
+import { view as transitionView } from 'modules/Transition/TransitionView';
 
 export let view = (() => {
 
@@ -9,6 +10,7 @@ export let view = (() => {
         }) {
             game.bgContainer = game.add.group();
             model.el('bgContainer', game.bgContainer);
+            model.group('bg', game.bgContainer);
 
             game.mainContainer = game.add.group();
             model.el('mainContainer', game.mainContainer);
@@ -64,6 +66,9 @@ export let view = (() => {
                 mainBG.visible = false;
             } else {
                 animBG.visible = false;
+                for (let i = 0; i < 5; i++) {
+                    transitionView.addCloud({container: model.group('bg')});
+                }
             }
         },
 

@@ -21,6 +21,14 @@ export let view = (() => {
 
         const transitionBG = game.add.sprite(0, 0, 'initBG', null, transitionContainer);
         model.el('transitionBG', transitionBG);
+
+        const cloudContainer = game.add.group();
+        transitionContainer.add(cloudContainer);
+        model.group('cloudContainer', cloudContainer);
+        for (let i = 0; i < 5; i++) {
+            addCloud({});
+        }
+
         const freeSpinsText = game.add.sprite(game.width / 2,
             -400,
             'text',
@@ -60,6 +68,8 @@ export let view = (() => {
         continueText.anchor.set(0.5);
         continueText.scale.setTo(0.1, 0.1);
         model.el('continueText', continueText);
+
+
     }
 
     function _fsStartTween() {
@@ -122,6 +132,13 @@ export let view = (() => {
 
         const transitionBG = game.add.sprite(0, 0, 'initBG', null, transitionContainer);
         model.el('transitionBG', transitionBG);
+
+        const cloudContainer = game.add.group();
+        transitionContainer.add(cloudContainer);
+        model.group('cloudContainer', cloudContainer);
+        for (let i = 0; i < 5; i++) {
+            addCloud({});
+        }
 
         const winText = game.add.sprite(game.width / 2,
             -400,
@@ -207,9 +224,41 @@ export let view = (() => {
         model.el('game').state.start('Main');
     }
 
+    function addCloud({
+        container = model.group('cloudContainer')
+    }) {
+        console.log('i am drawing cloud!');
+        const game = model.el('game');
+
+        let number = game.rnd.integerInRange(1, 4);
+        const cloud = game.add.sprite(0, 150, 'clouds', `cloud${number}.png`, container);
+        cloud.anchor.set(0.5);
+
+        let time = game.rnd.integerInRange(40, 60);
+        let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
+        let delta;
+        cloud.y = cloud.y = cloud.y + game.rnd.integerInRange(0, 250);
+        // cloud.scale.set(Math.random() * 0.5 + 0.5);
+        if (side === 'left') {
+            cloud.x = -cloud.width;
+            delta = game.width + cloud.width;
+        } else {
+            cloud.x = game.width + cloud.width;
+            delta = -cloud.width;
+        }
+
+        game.add.tween(cloud).to({x: delta}, time * 1000, 'Linear', true)
+            .onComplete.add(() => {
+                cloud.destroy();
+                addCloud({});
+            }, this);
+
+    }
+
     return {
         fsStart,
-        fsFinish
+        fsFinish,
+        addCloud
     }
 
 })();

@@ -1,5 +1,6 @@
 import { model } from '../../modules/Model/Model';
 import { sound } from '../../modules/Sound/Sound';
+import { view as transitionView } from 'modules/Transition/TransitionView';
 
 export let settings = (function () {
     function initDesktopSettings(game) {
@@ -28,6 +29,9 @@ export let settings = (function () {
             } else {
                 mainBG.visible = true;
                 animMainBG.visible = false;
+                for (let i = 0; i < 5; i++) {
+                    transitionView.addCloud({container: model.group('bg')});
+                }
             }
 
             game.spriteAnims.forEach((elem) => {
