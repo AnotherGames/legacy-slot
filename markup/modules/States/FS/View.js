@@ -277,7 +277,9 @@ export let view = (() => {
             y = model.el('gameMachine').height / 3,
             container = model.group('main')
         }) {
-            console.log('i am drawing plus3');
+            if (model.state('CountPlus3')) return;
+            model.state('CountPlus3', true);
+            console.warn('i am drawing plus3');
             let countPlus3 = game.add.bitmapText(x, y, 'numbersFont', '+3', 120, container);
             countPlus3.align = 'center';
             countPlus3.anchor.set(0.5);
@@ -299,6 +301,7 @@ export let view = (() => {
             game.add.tween(countPlus3).to({alpha: 0}, 300, 'Linear', true, 1000)
                 .onComplete.add(() => {
                     countPlus3.destroy();
+                    model.state('CountPlus3', false);
                     view.draw._showBang({});
                 }, this);
         },
