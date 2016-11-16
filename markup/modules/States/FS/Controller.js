@@ -222,11 +222,18 @@ export class FS {
                 model.data('fsMulti', multiValue);
             }
         }
-        this.searchBrains();
+        this.searchBrains({});
     }
 
-    searchBrains() {
-        let levelValue = model.data('rollResponse').FsBonus.Level;
+    searchBrains({
+        startLevel
+    }) {
+        let levelValue;
+        if (startLevel) {
+            levelValue = startLevel;
+        } else {
+            levelValue = model.data('rollResponse').FsBonus.Level;
+        }
         let levelABS = levelValue % 3;
         let brainPanel = model.el('brainPanel');
         brainPanel.visible = true;
