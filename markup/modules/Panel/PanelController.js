@@ -49,6 +49,7 @@ export let controller = (() => {
     }
 
     function initFS() {
+        let game = model.el('game');
         view.draw.PanelBG({x: model.group('main').x + 38, frameName: 'uiFS'});
         view.draw.LinesNumber({x: 55, y: 115});
 
@@ -57,7 +58,10 @@ export let controller = (() => {
 
         let candle1 = view.draw.fsCandle({});
         candle1.scale.set(0.7);
-        let candle2 = view.draw.fsCandle({x: 878, y: 18});
+        let time = game.rnd.integerInRange(10, 70);
+        setTimeout(() => {
+            let candle2 = view.draw.fsCandle({x: 878, y: 18});
+        }, time);
     }
 
     const handle = {
