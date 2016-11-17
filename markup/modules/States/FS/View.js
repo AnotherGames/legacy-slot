@@ -299,7 +299,6 @@ export let view = (() => {
         }) {
             if (model.state('CountPlus3')) return;
             model.state('CountPlus3', true);
-            console.warn('i am drawing plus3');
 
             if (model.state('desktop')) {
                 deltaX = 25;
