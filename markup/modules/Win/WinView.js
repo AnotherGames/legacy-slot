@@ -98,7 +98,7 @@ export let view = (() => {
                                 if (scatterCount === 1) {
                                     model.state('axesPlaing', true);
                                     setTimeout(() => {
-                                        events.trigger('win:oneAfterAnother:next');
+                                        events.trigger('win:oneAfterAnother');
 
                                     }, 1500);
                                 }
@@ -169,7 +169,7 @@ export let view = (() => {
                         } else {
                             setTimeout(() => {
                                 if(model.state('axesPlaing')) return;
-                                events.trigger('win:oneAfterAnother:next');
+                                events.trigger('win:oneAfterAnother');
                             }, 500);
                         }
                     }
@@ -191,8 +191,14 @@ export let view = (() => {
             let lineValue = line.Line;
             let currentLineY = model.data('lines')[lineValue - 1][countValue - 1].Y;
 
-            let x = 256 * (countValue - 0.5) + 140;
-            let y = 240 * (currentLineY + 0.5) + 180;
+            let x, y;
+            if (model.state('mobile')) {
+                x = 192 * (countValue - 0.5) + 105;
+                y = 180 * (currentLineY + 0.5) + 135;
+            } else {
+                x = 256 * (countValue - 0.5) + 140;
+                y = 240 * (currentLineY + 0.5) + 180;
+            }
 
             let winBG = game.add.sprite(x, y + 4, 'winLine', null, container);
                 winBG.anchor.set(0.5);
