@@ -152,7 +152,8 @@ export let view = (() => {
                 position: {
                     x,
                     y
-                }
+                },
+                level: 2
             });
 
             zombie.char.scale.x = zombie.char.scale.y = scale;

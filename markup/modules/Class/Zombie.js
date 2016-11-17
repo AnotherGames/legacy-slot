@@ -4,7 +4,8 @@ export class Zombie {
             position: {
                 x: Number,
                 y: Number
-            }
+            },
+            level: Number ()
         }   */
     constructor(param) {
         if (typeof (param) !== 'object') {
@@ -30,8 +31,11 @@ export class Zombie {
         // инит входящие параметры
         this.game = param.game;
         this.position = param.position;
-        // инит внутрение параметры
         this.level = 0;
+        if (typeof (param.level) === 'number') {
+            if (param.level > 7 || param.level < 2) console.error('constructor: param.level is incorrect');
+            else this.level = param.level - 2;
+        }
 
         this.char = this.game.add.spine(
             this.position.x,        // X positon
