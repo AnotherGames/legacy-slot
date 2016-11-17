@@ -32,9 +32,9 @@ export class Zombie {
         this.game = param.game;
         this.position = param.position;
         this.level = 0;
-        if (typeof (param.level) === 'number') {
-            if (param.level > 7 || param.level < 2) console.error('constructor: param.level is incorrect');
-            else this.level = param.level - 2;
+        if (typeof (param.multi) === 'number') {
+            if (param.multi > 7 || param.multi < 2) console.error('constructor: param.multi is incorrect');
+            else this.level = param.multi - 2;
         }
 
         this.char = this.game.add.spine(
