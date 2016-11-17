@@ -79,7 +79,7 @@ export let model = (() => {
 
     function initSaved(saved) {
         if (!saved) return;
-        let fsCount = saved.RemainSpins;
+        let fsCount = +saved.RemainSpins + 1;
         let fsLevel = saved.Multiplier.MultiplierStep;
         let fsMulti = saved.Multiplier.MultiplierValue;
         let totalWin = saved.CurrentTotalWinCoins;
@@ -231,10 +231,11 @@ export let model = (() => {
             model.balance('winCash', 0);
         }
         if (endFS) {
-            let newCoinSum = model.balance('coinSum') + model.balance('totalWin');
-            model.balance('coinSum', newCoinSum);
-            let newCoinCash = (model.balance('coinCash') * 100 + model.balance('winCash') * 100) / 100;
-            model.balance('coinCash', newCoinCash);
+            let endData = model.data('rollResponse').Balance;
+            // let newCoinSum = model.balance('coinSum') + model.balance('totalWin');
+            // let newCoinCash = (model.balance('coinCash') * 100 + model.balance('winCash') * 100) / 100;
+            model.balance('coinSum', endData.ScoreCoins);
+            model.balance('coinCash', endData.ScoreCents / 100);
             model.balance('fsWin', 0);
             model.balance('totalWin', 0);
         }

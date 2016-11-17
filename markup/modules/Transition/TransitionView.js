@@ -149,7 +149,7 @@ export let view = (() => {
         winText.anchor.set(0.5);
         model.el('winText', winText);
 
-        let winCountValue = model.data('rollResponse').FsBonus.TotalFSWinCoins;
+        let winCountValue = model.data('rollResponse').FsBonus.TotalFSWinCoins + model.data('rollResponse').Balance.TotalWinCoins;
 
         const winCount = game.add.bitmapText(game.width / 2, -200, 'numbersFont', winCountValue, 120, transitionContainer);
         winCount.align = 'center';
