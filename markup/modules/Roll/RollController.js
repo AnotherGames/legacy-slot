@@ -38,6 +38,7 @@ export let controller = (() => {
         if (!model.state('ready')) return;
         if (!model.checkBalance()) {
             console.warn('Not enought money!');
+            mainView.draw.showPopup({message: 'You have low balance on your account'});
             return;
         }
         model.state('ready', false);
