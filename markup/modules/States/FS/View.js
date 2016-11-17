@@ -11,6 +11,7 @@ export let view = (() => {
         }) {
             game.bgContainer = game.add.group();
             model.el('bgContainer', game.bgContainer);
+            model.group('bg', game.bgContainer);
 
             game.mainContainer = game.add.group();
             model.el('mainContainer', game.mainContainer);
@@ -280,7 +281,9 @@ export let view = (() => {
             if (model.state('CountPlus3')) return;
             model.state('CountPlus3', true);
             console.warn('i am drawing plus3');
-            let countPlus3 = game.add.bitmapText(x, y, 'numbersFont', '+3', 120, container);
+            const circleBG = game.add.sprite(x + 25, y - 30, 'circleBG', null, container);
+            circleBG.anchor.set(0.5);
+            const countPlus3 = game.add.bitmapText(x, y, 'numbersFont', '+3', 120, container);
             countPlus3.align = 'center';
             countPlus3.anchor.set(0.5);
             model.el('countPlus3', countPlus3);
@@ -297,10 +300,12 @@ export let view = (() => {
             }
 
             game.add.tween(countPlus3.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true);
+            game.add.tween(circleBG).to({alpha: 0}, 1000, 'Linear', true, 500);
             game.add.tween(countPlus3).to({x: tweenX, y: tweenY}, 300, 'Linear', true, 1000);
             game.add.tween(countPlus3).to({alpha: 0}, 300, 'Linear', true, 1000)
                 .onComplete.add(() => {
                     countPlus3.destroy();
+                    circleBG.destroy();
                     model.state('CountPlus3', false);
                     view.draw._showBang({});
                 }, this);
