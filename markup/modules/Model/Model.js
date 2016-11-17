@@ -78,7 +78,20 @@ export let model = (() => {
     }
 
     function initSaved(saved) {
-
+        if (!saved) return;
+        let fsCount = saved.RemainSpins;
+        let fsLevel = saved.Multiplier.MultiplierStep;
+        let fsMulti = saved.Multiplier.MultiplierValue;
+        let totalWin = saved.CurrentTotalWinCoins;
+        let winCash = saved.CurrentTotalWinCents;
+        model.balance('winCash', winCash / 100);
+        model.balance('totalWin', totalWin);
+        model.data('savedFS', {
+            fsCount,
+            fsLevel,
+            fsMulti
+        });
+        model.data('rollResponse', {NextMode: 'fsBonus'});
     }
 
     function initBalance(initData) {
