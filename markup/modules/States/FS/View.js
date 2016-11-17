@@ -275,6 +275,8 @@ export let view = (() => {
             brainPanel.visible = false;
             container.add(brainPanel);
             model.el('brainPanel', brainPanel);
+            // console.warn(brainPanel);
+            // return brainPanel;
         },
 
         CountPlus3: function({
