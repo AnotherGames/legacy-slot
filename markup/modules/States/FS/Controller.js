@@ -229,21 +229,14 @@ export class FS {
     searchBrains({
         startLevel
     }) {
-        let levelValue;
-        if (startLevel) {
-            levelValue = startLevel;
-        } else {
-            levelValue = model.data('rollResponse').FsBonus.Level;
-        }
+        let levelValue = startLevel || model.data('rollResponse').FsBonus.Level;
         let levelABS = levelValue % 3;
         let brainPanel = model.el('brainPanel');
         if (model.state('brainPanel') === false) {
             fsView.draw.BrainLevel({});
             brainPanel = model.el('brainPanel');
-            console.warn(brainPanel);
             model.state('brainPanel', true);
         }
-        // brainPanel.visible = true;
         if (levelABS === 0) {
             console.warn('levelABS', levelABS);
             brainPanel.visible = true;
