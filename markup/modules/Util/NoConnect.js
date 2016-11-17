@@ -161,7 +161,7 @@ export let noConnect = {
                 --this._fsCount;
                 let nextMode = (this._fsCount === 0) ? 'root' : 'fsBonus';
                 ++this._fsLevel;
-                this._fsMulti = parseInt(this._fsLevel / 3);
+                this._fsMulti = 2 + parseInt(this._fsLevel / 3);
                 return {
                     Balance: {
                         BetLevel: 1,
