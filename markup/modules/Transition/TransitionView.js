@@ -238,7 +238,11 @@ export let view = (() => {
         let time = game.rnd.integerInRange(40, 60);
         let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
         let delta;
-        cloud.y = cloud.y = cloud.y + game.rnd.integerInRange(0, 250);
+        if (model.state('desktop')) {
+            cloud.y = cloud.y = cloud.y + game.rnd.integerInRange(0, 250);
+        } else {
+            cloud.y = cloud.y = cloud.y + game.rnd.integerInRange(0, 100);
+        }
         cloud.x = x;
 
         if (container === model.group('bg')){
@@ -257,7 +261,7 @@ export let view = (() => {
         game.add.tween(cloud).to({x: delta}, time * 1000, 'Linear', true)
             .onComplete.add(() => {
                 cloud.destroy();
-                if (container === model.group('bg')){
+                if (container === model.group('bg') && model.state('isAnimations' == false)){
                     addCloud({container: model.group('bg')});
                 }
             }, this);

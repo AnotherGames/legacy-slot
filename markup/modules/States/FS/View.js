@@ -2,6 +2,7 @@ import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
 import { Zombie } from 'modules/Class/Zombie';
 import { Brain } from 'modules/Class/Brain';
+import { view as transitionView } from 'modules/Transition/TransitionView';
 
 export let view = (() => {
 
@@ -70,6 +71,9 @@ export let view = (() => {
                 mainBG.visible = false;
             } else {
                 animBG.visible = false;
+                for (let i = 0; i < 5; i++) {
+                    transitionView.addCloud({container: model.group('bg')});
+                }
             }
         },
 
@@ -281,9 +285,9 @@ export let view = (() => {
             if (model.state('CountPlus3')) return;
             model.state('CountPlus3', true);
             console.warn('i am drawing plus3');
-            const circleBG = game.add.sprite(x + 25, y - 30, 'circleBG', null, container);
+            const circleBG = game.add.sprite(x, y - 30, 'circleBG', null, container);
             circleBG.anchor.set(0.5);
-            const countPlus3 = game.add.bitmapText(x, y, 'numbersFont', '+3', 120, container);
+            const countPlus3 = game.add.bitmapText(x - 25, y, 'numbersFont', '+3', 120, container);
             countPlus3.align = 'center';
             countPlus3.anchor.set(0.5);
             model.el('countPlus3', countPlus3);
