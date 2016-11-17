@@ -283,22 +283,32 @@ export let view = (() => {
             brainPanel.visible = false;
             container.add(brainPanel);
             model.el('brainPanel', brainPanel);
-            // console.warn(brainPanel);
-            // return brainPanel;
         },
 
         CountPlus3: function({
             game = model.el('game'),
             x = model.el('gameMachine').width / 2,
             y = model.el('gameMachine').height / 3,
+            size = 120,
+            deltaX = 15,
+            deltaY = 15,
             container = model.group('main')
         }) {
             if (model.state('CountPlus3')) return;
             model.state('CountPlus3', true);
             console.warn('i am drawing plus3');
-            const circleBG = game.add.sprite(x, y - 30, 'circleBG', null, container);
+
+            if (model.state('desktop')) {
+                deltaX = 25;
+                deltaY = 30;
+            }
+            const circleBG = game.add.sprite(x, y - deltaY, 'circleBG', null, container);
             circleBG.anchor.set(0.5);
-            const countPlus3 = game.add.bitmapText(x - 25, y, 'numbersFont', '+3', 120, container);
+            if (model.state('mobile')) {
+                circleBG.scale.set(0.6);
+                size = 70;
+            }
+            const countPlus3 = game.add.bitmapText(x - deltaX, y, 'numbersFont', '+3', size, container);
             countPlus3.align = 'center';
             countPlus3.anchor.set(0.5);
             model.el('countPlus3', countPlus3);
