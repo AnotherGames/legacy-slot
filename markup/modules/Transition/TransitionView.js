@@ -1,5 +1,6 @@
 import { model } from 'modules/Model/Model';
 import { sound } from 'modules/Sound/Sound';
+import { config } from 'modules/Util/Config';
 
 export let view = (() => {
 
@@ -7,14 +8,14 @@ export let view = (() => {
         _fsStartDraw();
         _fsStartTween();
         _fsStartInput();
-
         const game = model.el('game');
-        game.time.events.add(10000, () => {
-            console.log('gotoFS');
-            sound.sounds.button.play();
-            sound.music.startPerehod.stop();
-            model.el('game').state.start('FS');
-        });
+        if (model.state('autoTransititon')) {
+            game.time.events.add(config.autoTransitionTime, () => {
+                sound.sounds.button.play();
+                sound.music.startPerehod.stop();
+                model.el('game').state.start('FS');
+            });
+        }
     }
 
     function _fsStartDraw() {
@@ -125,11 +126,13 @@ export let view = (() => {
         _fsFinishTween();
         _fsFinishInput();
         const game = model.el('game');
-        game.time.events.add(10000, () => {
-            sound.sounds.button.play();
-            sound.music.finishPerehod.stop();
-            model.el('game').state.start('Main');
-        });
+        if (model.state('autoTransititon')) {
+            game.time.events.add(config.autoTransitionTime, () => {
+                sound.sounds.button.play();
+                sound.music.finishPerehod.stop();
+                model.el('game').state.start('Main');
+            });
+        }
     }
 
     function _fsFinishDraw() {

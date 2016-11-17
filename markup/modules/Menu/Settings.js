@@ -59,6 +59,9 @@ export let settings = (function () {
         $('#optionAutoplay4').on('change', function () {
             console.log(this.id, this.checked);
         });
+        $('#optionAutoplay5').on('change', function () {
+            model.state('autoTransititon', this.checked);
+        });
         $('#btnHistory').on('click', function () {
             $('.history').removeClass('closed');
         });

@@ -1,4 +1,5 @@
 export let config = {
+    autoTransitionTime: 10000,
     wheel: {
         roll: {
             time: 1500,

@@ -135,7 +135,7 @@ input[type=range] {
     -webkit-appearance: none;
     appearance: none;
     border-radius: 8px;
-    width: 350px;
+    width: calc(100% - 410px);
     height: 14px;
     background: rgba(126,199,16,1);
 }
