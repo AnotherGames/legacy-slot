@@ -1,5 +1,4 @@
 import { model } from 'modules/Model/Model';
-import { view as transitionView } from 'modules/Transition/TransitionView';
 
 export let view = (() => {
 
@@ -22,9 +21,6 @@ export let view = (() => {
         let initBG = game.add.sprite(0, 0, 'initBG');
         model.el('initBG', initBG);
         return initBG;
-        for (let i = 0; i < 5; i++) {
-            transitionView.addCloud({});
-        }
     }
 
     function drawLogo() {
