@@ -25,6 +25,20 @@ export class FS {
         const game = model.el('game');
         sound.init({sound: model.state('sound'), volume: model.state('volume'), music: model.state('music')});
 
+        if (model.data('savedFS')) {
+            let saved = model.data('savedFS');
+            this.fsCount = saved.fsCount;
+            this.fsMulti = saved.fsMulti;
+            this.fsLevel = saved.fsLevel;
+            model.data('savedFS', null);
+            model.data('fsMulti', this.fsMulti);
+        } else {
+            this.fsCount = 15;
+            this.fsMulti = 2;
+            this.fsLevel = 0;
+            model.data('fsMulti', 2);
+        }
+
         // массив в который записываются анимации для проигрывания
         game.frameAnims = [];
         game.spriteAnims = [];
@@ -32,7 +46,6 @@ export class FS {
         game.stage.disableVisibilityChange = true;
 
         model.state('FSMode', true);
-        model.data('fsMulti', 2);
 
         fsView.create.groups({});
 
@@ -81,8 +94,10 @@ export class FS {
 
         fsView.draw.machineMask({});
 
-        fsView.draw.Zombie();
         fsView.draw.Brain();
+        fsView.draw.Zombie(this.fsMulti);
+
+
         let time = game.rnd.integerInRange(10, 70);
         if (model.state('desktop')) {
             let candle1 = fsView.draw.fsCandle({});
@@ -106,9 +121,18 @@ export class FS {
             }, time);
         }
 
-        fsView.draw.Multi({});
-        fsView.draw.Count({});
+        fsView.draw.Multi({
+            start: this.fsMulti
+        });
+        fsView.draw.Count({
+            start: this.fsCount
+        });
         fsView.draw.BrainLevel({});
+        if (this.fsLevel > 0) {
+            this.searchBrains({
+                startLevel: this.fsLevel
+            })
+        }
 
         // PreAnimation
         fsView.draw.darkness({});
@@ -117,7 +141,7 @@ export class FS {
             footerController.updateTime({});
         }, 1000);
         setTimeout(() => {
-            events.trigger('fs:init', 15);
+            events.trigger('fs:init', this.fsCount);
         }, 1000)
     }
 

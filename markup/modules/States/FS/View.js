@@ -136,7 +136,8 @@ export let view = (() => {
             return game.add.tween(darkness).to( { alpha: 0 }, 1000, 'Linear', true);
         },
 
-        Zombie() {
+        Zombie(start) {
+            if (!start) start = 2;
             const game = model.el('game');
             const fsContainer = model.group('fs');
             let x, y, scale;
@@ -157,8 +158,15 @@ export let view = (() => {
                     x,
                     y
                 },
-                multi: 2
+                multi: start
             });
+
+            let brain = model.el('flyingBrain');
+            if (start == 7) {
+                brain.Up(() => {
+                    zombie.Up();
+                });
+            }
 
             zombie.char.scale.x = zombie.char.scale.y = scale;
             fsContainer.add(zombie.char);

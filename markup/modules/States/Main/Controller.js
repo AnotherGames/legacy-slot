@@ -23,6 +23,11 @@ export class Main {
     init() {
         console.info('Main State!');
         const game = model.el('game');
+
+        if (model.data('savedFS')) {
+            game.state.start('FS');
+        }
+
         sound.init({sound: model.state('sound'), volume: model.state('volume'), music: model.state('music')});
         // массив в который записываются анимации для проигрывания
         game.frameAnims = [];
