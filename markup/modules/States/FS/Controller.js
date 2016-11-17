@@ -232,7 +232,6 @@ export class FS {
         fsMulti.frameName = `multi${multiValue}.png`;
 
         let currMulti = model.data('fsMulti');
-
         if (multiValue > currMulti) {
             if (currMulti === 6) {
                 let brain = model.el('flyingBrain');
@@ -247,7 +246,9 @@ export class FS {
                 model.data('fsMulti', multiValue);
             }
         }
-        this.searchBrains({});
+        if (currMulti < 6){
+            this.searchBrains({});
+        }
     }
 
     searchBrains({

@@ -75,7 +75,7 @@ export let view = (() => {
                 }
 
             } else {
-
+                let lvlCounter = 0;
                 let scatterCount = 0;
                 wheels.forEach((wheelObj) => {
 
@@ -106,7 +106,10 @@ export let view = (() => {
                         }
                         if (elementName == '11') {
                             element.win();
-                            events.trigger('fs:brain');
+                            if(lvlCounter == 0){
+                                events.trigger('fs:brain');
+                                lvlCounter++;
+                            }
                             game.add.tween(element.sprite.scale).to({x: 1.7, y: 1.7}, 700, 'Linear', true)
                                 .onComplete.add(() => {
                                     if (model.state('mobile')) {
