@@ -7,9 +7,14 @@ export let view = (() => {
         _fsStartDraw();
         _fsStartTween();
         _fsStartInput();
-        // setTimeout(function () {
-        //     _fsStartHide();
-        // }, 10000);
+
+        const game = model.el('game');
+        game.time.events.add(10000, () => {
+            console.log('gotoFS');
+            sound.sounds.button.play();
+            sound.music.startPerehod.stop();
+            model.el('game').state.start('FS');
+        });
     }
 
     function _fsStartDraw() {
@@ -103,7 +108,6 @@ export let view = (() => {
         transitionBG.events.onInputDown.add(function () {
             sound.sounds.button.play();
             sound.music.startPerehod.stop();
-            sound.music.fsFon.play();
             model.el('game').state.start('FS');
         });
     }
@@ -120,9 +124,12 @@ export let view = (() => {
         _fsFinishDraw();
         _fsFinishTween();
         _fsFinishInput();
-        // setTimeout(function () {
-        //     _fsFinishHide();
-        // }, 10000);
+        const game = model.el('game');
+        game.time.events.add(10000, () => {
+            sound.sounds.button.play();
+            sound.music.finishPerehod.stop();
+            model.el('game').state.start('Main');
+        });
     }
 
     function _fsFinishDraw() {
@@ -205,14 +212,12 @@ export let view = (() => {
 
     function _fsFinishInput() {
         console.log('i am finishing fs');
-        const game = model.el('game');
         const transitionBG = model.el('transitionBG');
         transitionBG.inputEnabled = true;
         transitionBG.input.priorityID = 2;
         transitionBG.events.onInputDown.add(function () {
             sound.sounds.button.play();
             sound.music.finishPerehod.stop();
-            sound.music.fon.play();
             model.el('game').state.start('Main');
         });
     }
