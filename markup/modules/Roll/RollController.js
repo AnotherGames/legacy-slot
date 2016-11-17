@@ -70,8 +70,8 @@ export let controller = (() => {
                         wheel.roll(finishScreen[columnIndex] || config.wheel.roll.finishScreen, {
                             // TODO: для обычних круток используй параметры конфига.
                             time: 1500,
-                            length: 30,
-                            easingSeparation: 1.2,
+                            length: 25,
+                            easingSeparation: 0.9,
                             callback
                         });
                     }, wheel);
