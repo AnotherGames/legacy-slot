@@ -148,7 +148,7 @@ export let view = (() => {
         showPopup: function({
             message = 'popup',
             container = model.group('popup'),
-            font = 'normal 60px Arial',
+            font = 'normal 54px Arial',
             color = '#e8b075'
         }) {
             console.log('i am showing popup');
@@ -158,7 +158,7 @@ export let view = (() => {
             const popup = game.add.sprite(game.width / 2, game.height / 2, 'popup', null, container);
             popup.anchor.set(0.5);
             model.el('popup', popup);
-            const popupText = game.add.text(game.width / 2, game.height / 2, message,{font: font, fill: color, align: 'center'}, container);
+            const popupText = game.add.text(game.width / 2, game.height / 2, message, {font: font, fill: color, align: 'center', wordWrap: true, wordWrapWidth: popup.width - 60}, container);
             popupText.anchor.set(0.5);
 
             overlay.inputEnabled = true;
@@ -167,9 +167,15 @@ export let view = (() => {
             popup.input.priorityID = 3;
             popup.events.onInputDown.add(() => {
                 container.removeAll();
+                if (message === 'Your session is closed. Please click to restart') {
+                    window.location.reload();
+                }
             });
             overlay.events.onInputDown.add(() => {
                 container.removeAll();
+                if (message === 'Your session is closed. Please click to restart') {
+                    window.location.reload();
+                }
             });
         }
     };

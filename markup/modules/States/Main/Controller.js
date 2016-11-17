@@ -49,7 +49,7 @@ export class Main {
         mainView.draw.mainBG({});
         mainView.draw.mainContainer({});
         mainView.draw.machineContainer({});
-        // mainView.draw.showPopup({});
+        mainView.draw.showPopup({});
 
         rollController.init();
 
