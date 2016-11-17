@@ -37,7 +37,8 @@ export let view = (() => {
         freeSpinsText.anchor.set(0.5);
         model.el('freeSpinsText', freeSpinsText);
 
-        const freeSpinsLevel = game.add.bitmapText(game.width / 2, -200, 'numbersFont', '15', 120, transitionContainer);
+        let freeSpinsCount = model.data('rollResponse').FreeSpinsLeft;
+        const freeSpinsLevel = game.add.bitmapText(game.width / 2, -200, 'numbersFont', freeSpinsCount, 120, transitionContainer);
         freeSpinsLevel.align = 'center';
         freeSpinsLevel.anchor.set(0.5);
         model.el('freeSpinsLevel', freeSpinsLevel);
