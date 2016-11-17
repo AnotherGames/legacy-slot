@@ -57,9 +57,9 @@ export class Init {
         document.body.addEventListener('touchstart', () => {
             model.el('game').scale.startFullScreen();
         });
-        window.addEventListener("orientationchange", function() {
-            console.log('game.refresh');
-        });
+        // window.addEventListener("orientationchange", function() {
+        //     console.log('game.refresh');
+        // });
 
         view.stopYoyoTween();
         view.lastDarkness()
