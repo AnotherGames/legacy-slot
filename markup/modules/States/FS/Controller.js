@@ -230,11 +230,11 @@ export class FS {
         let multiValue = rollData.FsBonus.Multi;
 
         fsMulti.frameName = `multi${multiValue}.png`;
+        let brain = model.el('flyingBrain');
 
         let currMulti = model.data('fsMulti');
         if (multiValue > currMulti) {
             if (currMulti === 6) {
-                let brain = model.el('flyingBrain');
                 let zombie = model.el('zombie');
                 zombie.Up(() => {
                     brain.Up(() => {
@@ -246,7 +246,8 @@ export class FS {
                 model.data('fsMulti', multiValue);
             }
         }
-        if (currMulti < 6){
+        if (currMulti < 7){
+            brain.Win();
             this.searchBrains({});
         }
     }
