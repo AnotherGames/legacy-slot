@@ -24,10 +24,6 @@ export class Main {
         console.info('Main State!');
         const game = model.el('game');
 
-        if (model.data('savedFS')) {
-            game.state.start('FS');
-        }
-
         sound.init({sound: model.state('sound'), volume: model.state('volume'), music: model.state('music')});
         // массив в который записываются анимации для проигрывания
         game.frameAnims = [];
@@ -92,6 +88,10 @@ export class Main {
         setInterval(() => {
             footerController.updateTime();
         }, 10000);
+
+        if (model.data('savedFS')) {
+            game.state.start('FS');
+        }
     }
 
     update() {
