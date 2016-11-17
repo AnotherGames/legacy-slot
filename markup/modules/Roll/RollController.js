@@ -4,6 +4,7 @@ import { config } from 'modules/Util/Config';
 import { request } from 'modules/Util/Request';
 import { sound } from 'modules/Sound/Sound';
 import { Wheel } from 'modules/Class/Wheel';
+import { view as mainView } from 'modules/States/Main/View';
 
 export let controller = (() => {
 
@@ -42,6 +43,11 @@ export let controller = (() => {
         model.state('ready', false);
         request.send('Roll')
             .then((data) => {
+
+                if (data.ErrorMessage === 'SessionClosedOrNotOpened') {
+                    mainView.draw.showPopup({message: 'Your session is closed. Please click to restart'});
+                }
+
                 events.trigger('roll:start');
                 model.data('rollResponse', data);
 

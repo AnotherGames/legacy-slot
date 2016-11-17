@@ -37,6 +37,9 @@ export let view = (() => {
             game.balanceCoinContainer = game.add.group();
             model.group('balanceCoin', game.balanceCoinContainer);
 
+            game.popupCoinContainer = game.add.group();
+            model.group('popup', game.popupCoinContainer);
+
             game.transitionContainer = game.add.group();
             model.group('transition', game.transitionContainer);
         }
@@ -140,6 +143,34 @@ export let view = (() => {
             darkness.beginFill(0x000000);
             darkness.drawRect(0, 0, game.width, game.height);
             return darkness;
+        },
+
+        showPopup: function({
+            message = 'popup',
+            container = model.group('popup'),
+            font = 'normal 60px Arial',
+            color = '#e8b075'
+        }) {
+            console.log('i am showing popup');
+            const game = model.el('game');
+            const overlay = game.add.graphics(0, 0).beginFill(0x000000, 0.8).drawRect(0, 0, game.width, game.height);
+            container.add(overlay);
+            const popup = game.add.sprite(game.width / 2, game.height / 2, 'popup', null, container);
+            popup.anchor.set(0.5);
+            model.el('popup', popup);
+            const popupText = game.add.text(game.width / 2, game.height / 2, message,{font: font, fill: color, align: 'center'}, container);
+            popupText.anchor.set(0.5);
+
+            overlay.inputEnabled = true;
+            overlay.input.priorityID = 2;
+            popup.inputEnabled = true;
+            popup.input.priorityID = 3;
+            popup.events.onInputDown.add(() => {
+                container.removeAll();
+            });
+            overlay.events.onInputDown.add(() => {
+                container.removeAll();
+            });
         }
     };
 
