@@ -12,6 +12,7 @@ export class Init {
         model.state('fastRoll', false);
         model.state('isAnimations', true);
         model.state('autoEnd', true);
+        model.state('fsEnd', true);
         model.state('FSMode', false);
         model.state('sound', true);
         model.state('volume', 1);

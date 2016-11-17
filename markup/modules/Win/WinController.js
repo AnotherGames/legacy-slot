@@ -43,12 +43,21 @@ export let controller = (() => {
             view.draw.WinElements({number: winLine.Line, amount: winLine.Count});
             view.draw.WinGlista({number: winLine.Line});
         });
+        model.state('showAllLines', true);
     }
 
-    function cleanWin() {
+    function cleanWin(cleanAlpha = false) {
         let container = model.group('winTop');
         model.data('glistaFiredCounter', 0);
         model.data('glistaDoneCounter', 0);
+        if (cleanAlpha) {
+            let wheels = model.el('wheels');
+            wheels.forEach((wheel) => {
+                wheel.elements.forEach((element) => {
+                    element.sprite.alpha = 1;
+                });
+            });
+        }
         view.hide.WinTop({})
             .onComplete.add(() => {
                 container.removeAll();
@@ -57,12 +66,45 @@ export let controller = (() => {
     }
 
     function oneAfterAnother() {
-        console.log('I am one after Another!');
+        if (model.state('roll:progress')) return;
+
+        model.data('glistaFiredCounter', 0);
+        model.data('glistaDoneCounter', 0);
+
+        let index = model.data('currentLineIndex') || 0;
+        let winLines = model.data('rollResponse').WinLines;
+        if (index >= winLines.length) {
+            index = 0;
+        }
+        let currentLine = winLines[index];
+
+        if (currentLine) {
+            if (currentLine.Line > 0) {
+                model.state('axesPlaing', false);
+                view.draw.WinNumber({number: currentLine.Line});
+                view.draw.WinElements({number: currentLine.Line, amount: currentLine.Count, alpha: 0.5});
+                view.draw.WinGlista({number: currentLine.Line});
+                view.draw.WinLineTable({line: currentLine});
+            } else {
+                view.draw.WinElements({number: currentLine.Line, amount: currentLine.Count, alpha: 0.5});
+            }
+        } else {
+            return;
+        }
+
+        let nextIndex = ++index;
+        if (nextIndex == winLines.length) {
+            nextIndex = 0;
+        }
+
+        model.data('currentLineIndex', nextIndex);
+
     }
 
     events.on('roll:end', showWin);
-    events.on('roll:start', cleanWin);
+    events.on('roll:start', cleanWin.bind(null, true));
     events.on('win:clean', cleanWin);
     events.on('win:oneAfterAnother', oneAfterAnother);
+    events.on('win:oneAfterAnother:next', oneAfterAnother);
 
 })();
