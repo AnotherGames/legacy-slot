@@ -50,6 +50,7 @@ export class Preload {
     loadMainAssets() {
         const game = model.el('game');
         game.load.image('mainBG', 'bg/mainBG.png');
+        game.load.atlasJSONArray('clouds', 'bg/clouds.png', 'bg/clouds.json');
         game.load.atlasJSONArray('candle', 'bg/candle.png', 'bg/candle.json');
         game.load.image('gameMachine', 'game/gameMachine.png');
         game.load.image('gameBG', 'game/gameBG.png');
