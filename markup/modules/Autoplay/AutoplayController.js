@@ -9,6 +9,7 @@ export let controller = (() => {
 
         model.state('autoEnd', false);
         model.data('autoCount', amount);
+        model.data('autoCashSumStart', model.balance('coinCash'));
 
         startAutoplay();
     }
@@ -16,6 +17,41 @@ export let controller = (() => {
 
 
     function startAutoplay() {
+
+        if (model.state('autoCashUp')) {
+            console.log('I am in cashUP');
+            if (model.balance('coinCash') - model.data('autoCashSumStart') > model.data('autoCashSumDelta')) {
+                console.warn('cashUP is stoping!');
+                events.trigger('autoplay:stop');
+                // model.data('autoCashSumDelta', null);
+                // model.state('autoCashUp', null);
+                return;
+            }
+        }
+
+        if (model.state('autoCashDown')) {
+            console.log('I am in cashDOWN');
+            console.log('CashStart: ', model.data('autoCashSumStart'));
+            console.log('CashSum: ', model.balance('coinCash'));
+            console.log('CashDelta: ', model.data('autoCashSumDelta'));
+            if (model.data('autoCashSumStart') - model.balance('coinCash') > model.data('autoCashSumDelta')) {
+                console.warn('cashDOWN is stoping!');
+                events.trigger('autoplay:stop');
+                // model.data('autoCashSumDelta', null);
+                // model.state('autoCashDown', null);
+                return;
+            }
+        }
+
+        if (model.state('autoCashLine')) {
+            if (model.balance('winCash') - model.data('autoCashLineDelta') > 0) {
+                events.trigger('autoplay:stop');
+                // model.data('autoCashLineDelta', null);
+                // model.state('autoCashLine', null);
+                return;
+            }
+        }
+
         let autoCount = model.data('autoCount');
         autoCount--;
 

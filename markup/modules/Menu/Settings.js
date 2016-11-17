@@ -40,21 +40,27 @@ export let settings = (function () {
         });
         $('#optionAutoplay1').on('change', function () {
             console.log(this.id, this.checked);
+            model.state('autoCashLine', this.checked);
         });
         $('#optionAutoplayVal1').on('input change', function () {
             console.log('optionAutoplayVal1', this.value);
+            model.data('autoCashLineDelta', this.value);
         });
         $('#optionAutoplay2').on('change', function () {
             console.log(this.id, this.checked);
+            model.state('autoCashUp', this.checked);
         });
         $('#optionAutoplayVal2').on('input change', function () {
             console.log('optionAutoplayVal2', this.value);
+            model.data('autoCashSumDelta', this.value);
         });
         $('#optionAutoplay3').on('change', function () {
             console.log(this.id, this.checked);
+            model.state('autoCashDown', this.checked);
         });
         $('#optionAutoplayVal3').on('input change', function () {
             console.log('optionAutoplayVal3', this.value);
+            model.data('autoCashSumDelta', this.value);
         });
         $('#optionAutoplay4').on('change', function () {
             console.log(this.id, this.checked);
