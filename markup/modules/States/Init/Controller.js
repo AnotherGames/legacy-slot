@@ -10,6 +10,7 @@ export class Init {
         model.state('side', 'left');
         model.state('autoPanel', false);
         model.state('fastRoll', false);
+        model.state('autoTransititon', false);
         model.state('isAnimations', true);
         model.state('autoEnd', true);
         model.state('fsEnd', true);
