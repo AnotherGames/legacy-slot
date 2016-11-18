@@ -305,14 +305,40 @@ export let view = (() => {
             return backButton;
         },
 
-        RulesScreen: function () {
+        RulesScreen: function (container) {
             const game = model.el('game');
-            let infoRules = game.add.sprite(game.world.centerX, game.world.centerY, 'infoRules');
+            // let infoRules = game.add.sprite(game.world.centerX, game.world.centerY, 'infoRules');
+            // infoRules.anchor.set(0.5);
+            // infoRules.alpha = 0;
+            // infoRules.visible = false;
+            // model.el('rulesScreen', infoRules);
+            let infoRules = game.add.sprite(model.el('game').world.centerX, model.el('game').world.centerY, 'info', '1_en.png', container);
             infoRules.anchor.set(0.5);
-            infoRules.alpha = 0;
-            infoRules.visible = false;
-            model.el('rulesScreen', infoRules);
-            return infoRules;
+            infoRules.scale.set(1.4);
+            model.el('infoRules', infoRules);
+            const closed = game.add.sprite(infoRules.width - 80, infoRules.height - (infoRules.height - 70), 'closed', null, container);
+            model.el('closed', closed);
+            const arrowRight = game.add.sprite(infoRules.width / 2 + 140, infoRules.height - 130, 'ar', null, container);
+            model.el('arrowRight', arrowRight);
+            const arrowLeft = game.add.sprite(infoRules.width / 2 - 140, infoRules.height - 130, 'arLeft', null, container);
+            model.el('arrowLeft', arrowLeft);
+
+            let infoMarkers = [];
+            let infoMarker = game.add.sprite(infoRules.width / 2 - 60, infoRules.height - 110, 'infoMarker', 'marker_on.png', container);
+            infoMarker.name = 'infoMarker0';
+            infoMarkers.push(infoMarker);
+
+            for (let i = 1; i < 7; i++) {
+                let name = 'infoMarker' + i;
+                let counter = i;
+                let marker = game.add.sprite(infoMarker.x, infoRules.height - 110, 'infoMarker', 'marker_off.png', container);
+                marker.name = name;
+                marker.x = marker.x + 30 * i;
+                infoMarkers.push(marker);
+            }
+            model.el('infoMarkers', infoMarkers);
+            container.visible = false;
+            return container;
         }
 
     };
@@ -350,9 +376,11 @@ export let view = (() => {
             time = 700
         }) {
             const game = model.el('game');
-            let infoRules = model.el('rulesScreen');
-                infoRules.visible = true;
-            return game.add.tween(infoRules).to( { alpha: 1 }, time, 'Quart.easeOut', true);
+            const container = model.group('info');
+            container.visible = true;
+            // let infoRules = model.el('rulesScreen');
+            //     infoRules.visible = true;
+            return game.add.tween(container).to( { alpha: 1 }, time, 'Quart.easeOut', true);
         }
     };
 
@@ -386,10 +414,11 @@ export let view = (() => {
             time = 700
         }) {
             const game = model.el('game');
-            let infoRules = model.el('rulesScreen');
-            let tween = game.add.tween(infoRules).to( { alpha: 0 }, time, 'Quart.easeOut', true);
+            const container = model.group('info');
+            // let infoRules = model.el('rulesScreen');
+            let tween = game.add.tween(container).to( { alpha: 0 }, time, 'Quart.easeOut', true);
             tween.onComplete.add(() => {
-                infoRules.visible = false;
+                container.visible = false;
             });
             return tween;
         }

@@ -1,6 +1,7 @@
 import { model } from '../../modules/Model/Model';
 import { sound } from '../../modules/Sound/Sound';
 import { view as transitionView } from 'modules/Transition/TransitionView';
+import { controller as panelController } from 'modules/Panel/PanelController';
 
 export let settings = (function () {
     function initDesktopSettings(game) {
@@ -73,6 +74,11 @@ export let settings = (function () {
         });
         $('#btnRules').on('click', function () {
             console.log('btnRules');
+            panelController.handle.info();
+            $('#settings').addClass('closed');
+            $('#darkness').addClass('closed');
+            $('.history').addClass('closed');
+            $('#darkness').off();
         });
         $('#settingsSave').on('click', function () {
             $('#settings').addClass('closed');

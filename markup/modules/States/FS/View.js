@@ -42,8 +42,8 @@ export let view = (() => {
             game.fsContainer = game.add.group();
             model.group('fs', game.fsContainer);
 
-            game.popupCoinContainer = game.add.group();
-            model.group('popup', game.popupCoinContainer);
+            game.popupContainer = game.add.group();
+            model.group('popup', game.popupContainer);
 
             game.transitionContainer = game.add.group();
             model.group('transition', game.transitionContainer);
