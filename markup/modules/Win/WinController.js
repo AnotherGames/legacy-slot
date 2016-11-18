@@ -60,6 +60,7 @@ export let controller = (() => {
         }
         view.hide.WinTop({})
             .onComplete.add(() => {
+                console.log('I am hiding winTop!');
                 container.removeAll();
                 container.alpha = 1;
             });;
@@ -87,6 +88,7 @@ export let controller = (() => {
                 view.draw.WinLineTable({line: currentLine});
             } else {
                 view.draw.WinElements({number: currentLine.Line, amount: currentLine.Count, alpha: 0.5});
+                view.draw.WinLineTable({line: currentLine, scatter: true});
             }
         } else {
             return;

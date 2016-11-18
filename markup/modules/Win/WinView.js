@@ -99,7 +99,6 @@ export let view = (() => {
                                     model.state('axesPlaing', true);
                                     setTimeout(() => {
                                         events.trigger('win:oneAfterAnother');
-
                                     }, 1500);
                                 }
                             }
@@ -183,21 +182,52 @@ export let view = (() => {
 
         WinLineTable: function({
             line,
+            scatter,
             container = model.group('winTop'),
             game = model.el('game')
         }) {
             let winValue = line.Win;
             let countValue = line.Count;
             let lineValue = line.Line;
-            let currentLineY = model.data('lines')[lineValue - 1][countValue - 1].Y;
+            let currentLineY;
+            if (!scatter) {
+                currentLineY = model.data('lines')[lineValue - 1][countValue - 1].Y;
+            }
 
             let x, y;
-            if (model.state('mobile')) {
-                x = 192 * (countValue - 0.5) + 105;
-                y = 180 * (currentLineY + 0.5) + 135;
-            } else {
-                x = 256 * (countValue - 0.5) + 140;
-                y = 240 * (currentLineY + 0.5) + 180;
+            if (scatter) {
+                let lastWheel = 0;
+                let lastElement = 0;
+                let wheels = model.el('wheels');
+                wheels.forEach((wheel, wheelIndex) => {
+                    let elements = wheel.elements;
+                    elements.forEach((element, elementIndex) => {
+                        let name = parseInt(element.sprite.animations.currentAnim.name);
+                        if (name == 10) {
+                            if (wheelIndex > lastWheel) {
+                                lastWheel = wheelIndex;
+                                lastElement = elementIndex;
+                            }
+                        }
+                    });
+                });
+                if (model.state('mobile')) {
+                    x = 192 * (lastWheel + 0.5) + 105;
+                    y = 180 * (lastElement + 0.5) + 135;
+                } else {
+                    x = 256 * (lastWheel + 0.5) + 140;
+                    y = 240 * (lastElement + 0.5) + 180;
+                }
+            }
+
+            if (!scatter) {
+                if (model.state('mobile')) {
+                    x = 192 * (countValue - 0.5) + 105;
+                    y = 180 * (currentLineY + 0.5) + 135;
+                } else {
+                    x = 256 * (countValue - 0.5) + 140;
+                    y = 240 * (currentLineY + 0.5) + 180;
+                }
             }
 
             let winBG = game.add.sprite(x, y + 4, 'winLine', null, container);
@@ -205,7 +235,6 @@ export let view = (() => {
             let text = game.add.text(x, y, winValue, {font: '25px Arial, Helvetica', fill: '#e8b075'}, container);
                 text.anchor.set(0.5);
 
-            console.log('currentElement: ', x, y);
         }
 
     };
