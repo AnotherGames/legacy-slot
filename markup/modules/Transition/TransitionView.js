@@ -197,7 +197,7 @@ export let view = (() => {
         sound.music.fsFon.volume = 0;
         sound.music.fsFon.play();
 
-        let timeLength = 5000;
+        let timeLength = config.countMeterTime;
         let _clock = game.time.create(true);
         _clock.add(timeLength, () => {}, this);
         _clock.start();
