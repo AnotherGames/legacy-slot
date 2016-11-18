@@ -246,7 +246,9 @@ export let view = (() => {
             .to({height: height}, 200, 'Linear')
             .start();
 
-        setTimeout(_addCoin, 75, container);
+        game.time.events.add(75, () => {
+            _addCoin(container)
+        });
     }
     function _coinsTween() {
         const game = model.el('game');

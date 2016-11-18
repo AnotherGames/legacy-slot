@@ -91,15 +91,15 @@ export let view = (() => {
 
                             let rollData = model.data('rollResponse');
                             if (rollData.WinLines.length === 1) {
-                                setTimeout(() => {
+                                game.time.events.add(1000, () => {
                                     events.trigger('win:clean');
-                                }, 1000)
+                                });
                             } else {
                                 if (scatterCount === 1) {
                                     model.state('axesPlaing', true);
-                                    setTimeout(() => {
+                                    game.time.events.add(1500, () => {
                                         events.trigger('win:oneAfterAnother');
-                                    }, 1500);
+                                    });
                                 }
                             }
                         }
@@ -160,16 +160,16 @@ export let view = (() => {
 
                     if (model.state('autoEnd') && model.state('fsEnd')) {
                         if (model.state('showAllLines')) {
-                            setTimeout(() => {
+                            game.time.events.add(500, () => {
                                 if(model.state('axesPlaing')) return;
                                 events.trigger('win:oneAfterAnother');
-                            }, 500);
+                            });
                             model.state('showAllLines', false);
                         } else {
-                            setTimeout(() => {
+                            game.time.events.add(500, () => {
                                 if(model.state('axesPlaing')) return;
                                 events.trigger('win:oneAfterAnother');
-                            }, 500);
+                            });
                         }
                     }
 

@@ -152,24 +152,25 @@ export let controller = (() => {
     }
 
     function _runNextAutoIfExist() {
+        const game = model.el('game');
         let rollResponse = model.data('rollResponse');
         let time = (rollResponse.Balance.TotalWinCoins) ? 1000 : 0;
 
-        setTimeout(() => {
+        game.time.events.add(time, () => {
             if (model.state('autoEnd')) return;
             events.trigger('autoplay:next');
-        }, time);
-
+        });
     }
 
     function _runNextFSIfExist() {
+        const game = model.el('game');
         let rollResponse = model.data('rollResponse');
         let time = (rollResponse.WinLines.length) ? 1000 : 0;
 
-        setTimeout(() => {
+        game.time.events.add(time, () => {
             if (model.state('fsEnd')) return;
             events.trigger('fs:next');
-        }, time);
+        });
 
     }
 

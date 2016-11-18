@@ -27,9 +27,10 @@ export let controller = (() => {
                 events.trigger('autoplay:stop');
             }
 
-            setTimeout(() => {
+            const game = model.el('game');
+            game.time.events.add(1500, () => {
                 transitionView.fsStart();
-            }, 1500);
+            });
         }
 
         if (winLines.length) {

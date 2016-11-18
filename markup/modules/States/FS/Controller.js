@@ -235,10 +235,11 @@ export class FS {
     stopFS() {
         console.log('I am stoping FS!');
 
-        setTimeout(() => {
+        const game = model.el('game');
+        game.time.events.add(1000, () => {
             sound.music.fsFon.stop();
             transitionView.fsFinish();
-        }, 1000);
+        });
 
         model.state('lockedButtons', false);
         model.state('fsEnd', true);
@@ -296,10 +297,11 @@ export class FS {
             brainPanel.visible = true;
             brainPanel.setAnimationByName(0,'w3', false);
             brainPanel.addAnimationByName(0,'w4', false);
-            setTimeout(() => {
+            const game = model.el('game');
+            game.time.events.add(1000, () => {
                 brainPanel.destroy();
                 model.state('brainPanel', false);
-            }, 1000);
+            });
         }
         if (levelABS === 1){
             // console.warn('levelABS', levelABS);

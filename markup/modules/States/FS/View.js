@@ -355,10 +355,9 @@ export let view = (() => {
             model.el('fsCountBG', fsCountBG);
             fsCountBG.setAnimationByName(0, 'w-0', false);
 
-            setTimeout(() => {
+            game.time.events.add(500, () => {
                 fsCountBG.destroy();
-            }, 500);
-
+            });
         }
 
     };

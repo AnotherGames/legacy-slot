@@ -59,9 +59,9 @@ export let controller = (() => {
         let candle1 = view.draw.fsCandle({});
         candle1.scale.set(0.7);
         let time = game.rnd.integerInRange(10, 70);
-        setTimeout(() => {
+        game.time.events.add(time, () => {
             let candle2 = view.draw.fsCandle({x: 878, y: 18});
-        }, time);
+        });
     }
 
     const handle = {
