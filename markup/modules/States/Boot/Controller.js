@@ -8,6 +8,7 @@ export class Boot {
     }
 
     init() {
+        model.state('isNoConnect', true);
         request.send('Initialise', 'fsBonus')
             .then((initData) => {
                 model.initStates(initData);
