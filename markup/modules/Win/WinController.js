@@ -60,7 +60,6 @@ export let controller = (() => {
         }
         view.hide.WinTop({})
             .onComplete.add(() => {
-                console.log('I am hiding winTop!');
                 container.removeAll();
                 container.alpha = 1;
             });;

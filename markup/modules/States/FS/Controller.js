@@ -280,6 +280,8 @@ export class FS {
     searchBrains({
         startLevel
     }) {
+        let brainSound = Math.round(Math.random()) ? sound.sounds.brain1 : sound.sounds.brain2;
+
         let levelValue = startLevel || model.data('rollResponse').FsBonus.Level;
         let levelABS = levelValue % 3;
         let brainPanel = model.el('brainPanel');
@@ -290,6 +292,7 @@ export class FS {
         }
         if (levelABS === 0) {
             // console.warn('levelABS', levelABS);
+            brainSound.play();
             brainPanel.visible = true;
             brainPanel.setAnimationByName(0,'w3', false);
             brainPanel.addAnimationByName(0,'w4', false);
@@ -300,12 +303,14 @@ export class FS {
         }
         if (levelABS === 1){
             // console.warn('levelABS', levelABS);
+            brainSound.play();
             brainPanel.visible = true;
             brainPanel.setAnimationByName(0,'w1', false);
             brainPanel.addAnimationByName(0,'w1.5', true);
         }
         if (levelABS === 2){
             // console.warn('levelABS', levelABS);
+            brainSound.play();
             brainPanel.visible = true;
             brainPanel.setAnimationByName(0,'w2', false);
             brainPanel.addAnimationByName(0,'w2.5', true);

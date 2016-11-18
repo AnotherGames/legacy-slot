@@ -38,6 +38,8 @@ export class Preload {
         game.load.audio('finishPerehod', 'finishPerehod.mp3');
         game.load.audio('lineWin', 'lineWin.mp3');
         game.load.audio('lineWin2', 'lineWin2.mp3');
+        game.load.audio('mozgi1', 'mozgi1.mp3');
+        game.load.audio('mozgi2', 'mozgi2.mp3');
     }
 
     loadInitAssets() {

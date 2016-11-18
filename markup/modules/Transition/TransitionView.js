@@ -266,7 +266,6 @@ export let view = (() => {
         x = model.el('game').rnd.integerInRange(0, model.el('game').width),
         container = model.group('cloudContainer')
     }) {
-        console.log('i am drawing cloud!');
         const game = model.el('game');
 
         let number = game.rnd.integerInRange(1, 4);

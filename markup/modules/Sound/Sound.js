@@ -85,6 +85,8 @@ export let sound = {
         this.sounds.baraban = game.add.audio('baraban');
         this.sounds.lineWin = game.add.audio('lineWin');
         this.sounds.lineWin2 = game.add.audio('lineWin2');
+        this.sounds.brain1 = game.add.audio('mozgi1');
+        this.sounds.brain2 = game.add.audio('mozgi2');
 
         let keys = Object.keys(this.sounds);
         keys.forEach((key) => {
