@@ -146,7 +146,7 @@ export class FS {
         sound.music.fsFon.volume = 0;
         sound.music.fsFon.play();
 
-        let timeLength = config.fadeinMusic;
+        let timeLength = config.fadeinMusicTime;
         let _clock = game.time.create(true);
         _clock.add(timeLength, () => {}, this);
         _clock.start();
