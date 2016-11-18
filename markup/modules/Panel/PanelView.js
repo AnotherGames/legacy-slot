@@ -244,14 +244,37 @@ export let view = (() => {
 
         info: function({
             x = model.el('game').world.centerX,
-            y = model.el('game').world.centerY
+            y = model.el('game').world.centerY,
+            container = model.group('popup')
         }) {
             const game = model.el('game');
             const overlay = game.add.graphics(0, 0).beginFill(0x000000, 0.8).drawRect(0, 0, game.width, game.height);
+            container.add(overlay);
             model.el('overlay', overlay);
-            const infoRules = game.add.sprite(x, y, 'infoRules');
+            let infoRules = game.add.sprite(x, y, 'info', '1_en.png', container);
             infoRules.anchor.set(0.5);
             model.el('infoRules', infoRules);
+            const closed = game.add.sprite(infoRules.width - 70, infoRules.height - (infoRules.height - 110), 'closed', null, container);
+            model.el('closed', closed);
+            const arrowRight = game.add.sprite(infoRules.width / 2 + 80, infoRules.height - 100, 'ar', null, container);
+            model.el('arrowRight', arrowRight);
+            const arrowLeft = game.add.sprite(infoRules.width / 2 - 80, infoRules.height - 100, 'arLeft', null, container);
+            model.el('arrowLeft', arrowLeft);
+
+            let infoMarkers = [];
+            let infoMarker = game.add.sprite(infoRules.width / 2 - 40, infoRules.height - 130, 'infoMarker', 'marker_on.png', container);
+            infoMarker.name = 'infoMarker0';
+            infoMarkers.push(infoMarker);
+
+            for (let i = 1; i < 7; i++) {
+                let name = 'infoMarker' + i;
+                let counter = i;
+                let marker = game.add.sprite(infoMarker.x, infoRules.height - 130, 'infoMarker', 'marker_off.png', container);
+                marker.name = name;
+                marker.x = marker.x + 30 * i;
+                infoMarkers.push(marker);
+            }
+            model.el('infoMarkers', infoMarkers);
             return infoRules;
         }
 

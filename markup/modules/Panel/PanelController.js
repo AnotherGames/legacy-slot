@@ -107,18 +107,44 @@ export let controller = (() => {
             sound.sounds.button.play();
             let infoRules = view.show.info({});
             let overlay = model.el('overlay');
+            let closed = model.el('closed');
+            let arrowRight = model.el('arrowRight');
+            let arrowLeft = model.el('arrowLeft');
+            let infoMarkers = model.el('infoMarkers');
+            let counter = 0;
             overlay.inputEnabled = true;
             overlay.input.priorityID = 2;
-                infoRules.inputEnabled = true;
-                infoRules.input.priorityID = 3;
-                infoRules.events.onInputDown.add(() => {
-                    overlay.destroy();
-                    infoRules.destroy();
-                });
-                overlay.events.onInputDown.add(() => {
-                    overlay.destroy();
-                    infoRules.destroy();
-                });
+            closed.inputEnabled = true;
+            closed.input.priorityID = 3;
+            arrowRight.inputEnabled = true;
+            arrowRight.input.priorityID = 3;
+            arrowLeft.inputEnabled = true;
+            arrowLeft.input.priorityID = 3;
+
+            overlay.events.onInputDown.add(() => {
+                model.group('popup').removeAll();
+                counter = 0;
+            });
+            closed.events.onInputDown.add(() => {
+                model.group('popup').removeAll();
+                counter = 0;
+            });
+            arrowRight.events.onInputDown.add(() => {
+                if (counter > 5) {
+                    return;
+                }
+                counter++;
+                infoRules.frameName = counter + 1 + '_en.png';
+                infoMarkers[counter].frameName = 'marker_on.png';
+            });
+            arrowLeft.events.onInputDown.add(() => {
+                if (counter < 1) {
+                    return;
+                }
+                counter--;
+                infoRules.frameName = counter + 1 + '_en.png';
+                infoMarkers[counter + 1].frameName = 'marker_off.png';
+            });
         },
 
         betPlus: function() {
@@ -175,7 +201,8 @@ export let controller = (() => {
         init,
         autoStart,
         autoStop,
-        initFS
+        initFS,
+        handle
     };
 
 })();
