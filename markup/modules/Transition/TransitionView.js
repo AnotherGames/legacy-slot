@@ -152,10 +152,17 @@ export let view = (() => {
             addCloud({});
         }
 
+        let winTextFrame;
+        if (model.data('fsMulti') === 7) {
+            winTextFrame = 'bigW.png';
+        } else {
+            winTextFrame = 'totalW.png';
+        }
+
         const winText = game.add.sprite(game.width / 2,
             -400,
             'text',
-            'totalW.png',
+            winTextFrame,
             transitionContainer);
         winText.anchor.set(0.5);
         model.el('winText', winText);
