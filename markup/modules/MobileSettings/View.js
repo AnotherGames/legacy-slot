@@ -272,7 +272,7 @@ export let view = (() => {
         }) {
             let button = this._button({
                 container,
-                spriteName: 'historyOn.png',
+                spriteName: 'historyOff.png',
                 heightPercentage,
                 side: 'right'
             });

@@ -1,6 +1,7 @@
 import { model } from 'modules/Model/Model';
 import { view } from 'modules/MobileSettings/View';
 import { sound } from 'modules/Sound/Sound';
+import { view as mainView } from 'modules/States/Main/View';
 
 export let controller = (() => {
 
@@ -127,7 +128,7 @@ export let controller = (() => {
         },
         showHistory: function () {
             sound.sounds.button.play();
-            $('.history').removeClass('closed');
+            // $('.history').removeClass('closed');
         }
     };
 
