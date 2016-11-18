@@ -102,23 +102,19 @@ export class FS {
         if (model.state('desktop')) {
             let candle1 = fsView.draw.fsCandle({});
             candle1.scale.set(0.8);
-            setTimeout(() => {
+            game.time.events.add(time, () => {
                 let candle2 = fsView.draw.fsCandle({x: 62, y: 500});
                 candle2.scale.set(0.7);
-            }, time);
-            setTimeout(() => {
                 let candle3 = fsView.draw.fsCandle({x: 372, y: 440});
-            }, time);
+            });
         } else {
             let candle1 = fsView.draw.fsCandle({x: -12, y: 315});
             candle1.scale.set(0.8);
-            setTimeout(() => {
+            game.time.events.add(time, () => {
                 let candle2 = fsView.draw.fsCandle({x: 5, y: 330});
                 candle2.scale.set(0.7);
-            }, time);
-            setTimeout(() => {
                 let candle3 = fsView.draw.fsCandle({x: 164, y: 292});
-            }, time);
+            });
         }
 
         fsView.draw.Multi({
@@ -137,12 +133,10 @@ export class FS {
         // PreAnimation
         fsView.draw.darkness({});
 
-        setInterval(() => {
+        game.time.events.add(1000, () => {
             footerController.updateTime({});
-        }, 1000);
-        setTimeout(() => {
             events.trigger('fs:init', this.fsCount);
-        }, 1000)
+        });
     }
 
     update() {
