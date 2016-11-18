@@ -235,7 +235,7 @@ export class Wheel {
         this.wheelY += this.elSize.height;
         this.progress = 0;
 
-        this._clock = this.game.time.create(true)
+        this._clock = this.game.time.create(true);
         this._clock.add(this.timeLength, () => {}, this);
         this._clock.start();
         this.timer = 0;
