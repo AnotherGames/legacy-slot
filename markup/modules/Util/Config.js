@@ -1,4 +1,5 @@
 export let config = {
+    fadeinMusic: 5000,
     autoTransitionTime: 10000,
     wheel: {
         roll: {

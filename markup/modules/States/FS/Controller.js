@@ -1,5 +1,6 @@
 import { events } from 'modules/Util/Events';
 import { model } from 'modules/Model/Model';
+import { config } from 'modules/Util/Config';
 
 import { keyboard } from 'modules/Keyboard/Keyboard';
 import { settings } from 'modules/Menu/Settings';
@@ -69,7 +70,7 @@ export class FS {
     create() {
         const game = model.el('game');
 
-        sound.music.fsFon.play();
+        this.playFonMusic();
 
         fsView.draw.mainBG({});
         fsView.draw.mainContainer({});
@@ -137,6 +138,34 @@ export class FS {
             footerController.updateTime({});
             events.trigger('fs:init', this.fsCount);
         });
+    }
+
+    playFonMusic() {
+        const game = model.el('game');
+
+        sound.music.fsFon.volume = 0;
+        sound.music.fsFon.play();
+
+        let timeLength = config.fadeinMusic;
+        let _clock = game.time.create(true);
+        _clock.add(timeLength, () => {}, this);
+        _clock.start();
+        let timer = 0;
+
+        let anim = function () {
+            timer = timeLength - _clock.duration;
+            let progress = timer / timeLength;
+            if (progress > 1) {
+                progress = 1;
+            }
+            sound.music.fsFon.volume = progress;
+
+            if (progress === 1) {
+                game.frameAnims.splice(game.frameAnims.indexOf(anim), 1);
+            }
+
+        };
+        this.game.frameAnims.push(anim);
     }
 
     update() {
