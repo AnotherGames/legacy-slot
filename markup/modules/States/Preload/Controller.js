@@ -60,6 +60,7 @@ export class Preload {
         // game.load.image('infoRules', 'other/infoRules.png');
         game.load.image('popup', 'other/popup.png');
         game.load.image('closed', 'other/closed.png');
+        game.load.image('transitionCoin', 'other/transitionCoin.png');
         game.load.image('ar', 'other/ar.png');
         game.load.image('arLeft', 'other/arLeft.png');
         game.load.atlasJSONArray('info', 'other/info.png', 'other/info.json');

@@ -125,6 +125,7 @@ export let view = (() => {
         _fsFinishDraw();
         _fsFinishTween();
         _fsFinishInput();
+        _coinsTween();
         const game = model.el('game');
         if (model.state('autoTransititon')) {
             game.time.events.add(config.autoTransitionTime, () => {
@@ -216,6 +217,42 @@ export let view = (() => {
 
         };
         game.frameAnims.push(anim);
+    }
+
+    function _addCoin(container) {
+        const game = model.el('game');
+        if (container.y >= game.height * 5.7) return;
+
+        let posX = game.rnd.integerInRange(game.width * 0.1, game.width * 0.9);
+        let coin = game.add.sprite(posX, container.y * -1 - 100, 'transitionCoin', null, container);
+        coin.anchor.set(0.5);
+        let scale = game.rnd.integerInRange(50, 100) / 75;
+        coin.scale.set(scale, scale);
+        let height = coin.height;
+        coin.height = game.rnd.integerInRange(height * 0.3, height);
+        let tween = game.add.tween(coin)
+            .to({rotation: 200}, 1000, 'Linear', true)
+            .start();
+        tween.onComplete.add(() => {
+            coin.destroy();
+        });
+        game.add.tween(coin)
+            .to({height: height}, 200, 'Linear')
+            .to({height: height * 0.2}, 100, 'Linear')
+            .to({height: height}, 200, 'Linear')
+            .to({height: height * 0.2}, 100, 'Linear')
+            .to({height: height}, 200, 'Linear')
+            .to({height: height * 0.2}, 100, 'Linear')
+            .to({height: height}, 200, 'Linear')
+            .start();
+
+        setTimeout(_addCoin, 75, container);
+    }
+    function _coinsTween() {
+        const game = model.el('game');
+        let coinsContainer = game.add.group();
+        _addCoin(coinsContainer);
+        game.add.tween(coinsContainer).to({y: game.height * 7}, 5000, 'Linear', true);
     }
 
     function _fsFinishTween() {
