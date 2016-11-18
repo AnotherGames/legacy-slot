@@ -111,6 +111,51 @@ export let noConnect = {
                 }]
             }
         },
+        get winAxes() {
+            return {
+                Balance: {
+                    BetLevel: 1,
+                    CoinValue: 1,
+                    Currency: 'USD',
+                    ScoreCents: 12797167,
+                    ScoreCoins: 12797167,
+                    TotalWinCents: 48,
+                    TotalWinCoins: 48
+                },
+                FreeSpinsLeft: 0,
+                FreeSpinsWin: 0,
+                FsBonus: null,
+                LinesCount: 10,
+                Mode: 'root',
+                NextMode: 'root',
+                Screen: [
+                    [ 3, 5, 2, 1, 2],
+                    [ 8, 3, 10, 5, 5],
+                    [ 6, 9, 6, 2, 3],
+                    [ 1, 4, 7, 10, 7],
+                    [ 3, 6, 8, 10, 5]
+                ],
+                WinLines: [{
+                    Count: 2,
+                    Line: -1,
+                    Name: 'Axes',
+                    Symbol: '10',
+                    Win: 20
+                }, {
+                    Count: 2,
+                    Line: 4,
+                    Name: 'Watermelon',
+                    Symbol: '8',
+                    Win: 20
+                }, {
+                    Count: 3,
+                    Line: 5,
+                    Name: 'Jack',
+                    Symbol: '1',
+                    Win: 3
+                }]
+            }
+        },
         fs: {
             _fsCount: 0,
             _fsLevel: 0,
@@ -212,7 +257,7 @@ export let noConnect = {
         if (model.state('FSMode')) {
             return this._Roll.fs.scatter;
         }
-        return this._Roll.win;
+        return this._Roll.winAxes;
     },
 
     Ready: {
