@@ -159,9 +159,7 @@ export let view = (() => {
         winText.anchor.set(0.5);
         model.el('winText', winText);
 
-        let winCountValue = model.data('rollResponse').FsBonus.TotalFSWinCoins + model.data('rollResponse').Balance.TotalWinCoins;
-
-        const winCount = game.add.bitmapText(game.width / 2, -200, 'numbersFont', winCountValue, 120, transitionContainer);
+        const winCount = game.add.bitmapText(game.width / 2, -200, 'numbersFont', 0, 120, transitionContainer);
         winCount.align = 'center';
         winCount.anchor.set(0.5);
         if (model.state('mobile')) {
@@ -193,6 +191,33 @@ export let view = (() => {
 
     }
 
+    function _сountMeter(count, elem) {
+        const game = model.el('game');
+
+        sound.music.fsFon.volume = 0;
+        sound.music.fsFon.play();
+
+        let timeLength = 5000;
+        let _clock = game.time.create(true);
+        _clock.add(timeLength, () => {}, this);
+        _clock.start();
+
+        let anim = function () {
+            let timer = timeLength - _clock.duration;
+            let progress = timer / timeLength;
+            if (progress > 1) {
+                progress = 1;
+            }
+            elem.setText( parseInt(count * progress) );
+
+            if (progress === 1) {
+                game.frameAnims.splice(game.frameAnims.indexOf(anim), 1);
+            }
+
+        };
+        game.frameAnims.push(anim);
+    }
+
     function _fsFinishTween() {
         const game = model.el('game');
         const winText = model.el('winText');
@@ -200,7 +225,11 @@ export let view = (() => {
         const skull = model.el('skull');
         const continueText = model.el('continueText');
 
-        game.add.tween(winText).to({y: game.height * 0.2}, 1500, Phaser.Easing.Bounce.Out, true);
+        game.add.tween(winText).to({y: game.height * 0.2}, 1500, Phaser.Easing.Bounce.Out, true)
+            .onComplete.add(() => {
+                let winCountValue = model.data('rollResponse').FsBonus.TotalFSWinCoins + model.data('rollResponse').Balance.TotalWinCoins;
+                _сountMeter(winCountValue, winCount);
+            });
         game.add.tween(winCount).to({y: game.height * 0.45}, 1500, Phaser.Easing.Bounce.Out, true);
         game.add.tween(continueText.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true);
         game.add.tween(skull.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true)
