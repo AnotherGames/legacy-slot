@@ -68,6 +68,7 @@ export let model = (() => {
         model.state('fastRoll', false);
         model.state('ready', true);
         model.state('firstFS', false);
+        model.state('autoClosed', true);
 
         events.trigger('model:states:init');
 
