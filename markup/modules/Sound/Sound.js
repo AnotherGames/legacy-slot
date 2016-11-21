@@ -4,6 +4,18 @@ export let sound = {
     sounds: {},
     music: {},
 
+    _lastVolume: 100,
+    get lastVolume() {
+        return this._lastVolume;
+    },
+    set lastVolume(val) {
+        if (val == 0) {
+            this._lastVolume = 1;
+        } else {
+            this._lastVolume = val;
+        }
+    },
+
     get volume() {
         return model.state('volume');
     },

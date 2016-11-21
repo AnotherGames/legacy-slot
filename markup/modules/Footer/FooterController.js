@@ -58,10 +58,11 @@ export let controller = (() => {
             let soundButton = model.el('soundButton');
             if (sound.volume > 0) {
                 soundButton.frameName = 'soundOff.png';
+                sound.lastVolume = sound.volume * 100;
                 sound.volume = 0;
             } else {
                 soundButton.frameName = 'soundOn.png';
-                sound.volume = 100;
+                sound.volume = sound.lastVolume;
             }
         },
         Fast: function () {

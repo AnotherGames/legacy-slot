@@ -6,6 +6,13 @@ import { controller as panelController } from 'modules/Panel/PanelController';
 export let settings = (function () {
     function initDesktopSettings(game) {
         $('#volume').on('input change', function () {
+            let soundButton = model.el('soundButton');
+            if (this.value == 0) {
+                soundButton.frameName = 'soundOff.png';
+                sound.lastVolume = sound.volume * 100;
+            } else {
+                soundButton.frameName = 'soundOn.png';
+            }
             sound.volume = this.value;
         });
         $('#checkSound').on('change', function () {
