@@ -105,12 +105,12 @@ export let view = (() => {
             container = model.group('footer')
         }) {
             const game = model.el('game');
-            const fastButton = game.add.button(x, y, 'footerButtons', null, null, null, 'fastSpinOff.png', null, null, container);
+            const fastButton = game.add.button(x, y, 'footerButtons', null, null, null, 'fastSpin.png', null, null, container);
             fastButton.anchor.set(0.5);
             if (model.state('fastRoll')) {
-                fastButton.frameName = 'fastSpin.png';
-            } else {
                 fastButton.frameName = 'fastSpinOff.png';
+            } else {
+                fastButton.frameName = 'fastSpin.png';
             }
             model.el('fastButton', fastButton);
             return fastButton;

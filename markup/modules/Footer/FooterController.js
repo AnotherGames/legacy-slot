@@ -69,10 +69,10 @@ export let controller = (() => {
             let fastButton = model.el('fastButton');
             if (model.state('fastRoll')) {
                 model.state('fastRoll', false);
-                fastButton.frameName = 'fastSpinOff.png';
+                fastButton.frameName = 'fastSpin.png';
             } else {
                 model.state('fastRoll', true);
-                fastButton.frameName = 'fastSpin.png';
+                fastButton.frameName = 'fastSpinOff.png';
             }
         },
         Home: function () {
