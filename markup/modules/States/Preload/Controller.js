@@ -57,7 +57,6 @@ export class Preload {
         game.load.image('gameMachine', 'game/gameMachine.png');
         game.load.image('gameBG', 'game/gameBG.png');
         game.load.image('gameShadow', 'game/gameShadow.png');
-        // game.load.image('infoRules', 'other/infoRules.png');
         game.load.image('popup', 'other/popup.png');
         game.load.image('closed', 'other/closed.png');
         game.load.image('transitionCoin', 'other/transitionCoin.png');
