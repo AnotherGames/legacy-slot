@@ -206,7 +206,15 @@ export let view = (() => {
 
             let winBG = game.add.sprite(x, y + 4, 'winLine', null, container);
                 winBG.anchor.set(0.5);
-            let text = game.add.text(x, y, winValue, {font: '25px Arial, Helvetica', fill: '#e8b075'}, container);
+            let font;
+            if (winValue > 999) {
+                font = '15px Arial, Helvetica';
+            } else if (winValue > 99) {
+                font = '18px Arial, Helvetica';
+            } else {
+                font = '25px Arial, Helvetica';
+            }
+            let text = game.add.text(x, y, winValue, {font: font, fill: '#9be20a'}, container);
                 text.anchor.set(0.5);
 
         }
