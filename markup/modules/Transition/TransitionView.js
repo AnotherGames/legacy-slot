@@ -141,7 +141,9 @@ export let view = (() => {
         const transitionContainer = model.group('transition');
         sound.music.fsFon.stop();
         sound.music.finishPerehod.play();
-
+        if (model.data('fsMulti') === 7) {
+            sound.sounds.zombie2.play();
+        }
         const transitionBG = game.add.sprite(0, 0, 'initBG', null, transitionContainer);
         model.el('transitionBG', transitionBG);
 

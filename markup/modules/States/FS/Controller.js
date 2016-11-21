@@ -263,6 +263,7 @@ export class FS {
                 zombie.Up(() => {
                     brain.Up(() => {
                         zombie.Up();
+                        sound.sounds.zombie1.play();
                     });
                 });
                 model.data('fsMulti', multiValue);

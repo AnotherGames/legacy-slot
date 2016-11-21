@@ -99,6 +99,8 @@ export let sound = {
         this.sounds.lineWin2 = game.add.audio('lineWin2');
         this.sounds.brain1 = game.add.audio('mozgi1');
         this.sounds.brain2 = game.add.audio('mozgi2');
+        this.sounds.zombie1 = game.add.audio('zombie1');
+        this.sounds.zombie2 = game.add.audio('zombie2');
 
         let keys = Object.keys(this.sounds);
         keys.forEach((key) => {
@@ -107,6 +109,7 @@ export let sound = {
         keys = Object.keys(this.music);
         keys.forEach((key) => {
             this.music[key].mute = !music;
+            this.music[key].volume = 0.7;
         });
 
         model.state('volume', volume);
