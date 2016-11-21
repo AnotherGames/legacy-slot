@@ -50,7 +50,7 @@ export let controller = (() => {
 
     function initFS() {
         let game = model.el('game');
-        view.draw.PanelBG({x: model.group('main').x + 38, frameName: 'uiFS'});
+        view.draw.PanelBG({x: model.group('main').x + 38, deltaY: -20, frameName: 'uiFS'});
         view.draw.LinesNumber({x: 55, y: 115});
 
         let infoButtonDesk = view.draw.InfoButton({x: 42, y: 27});
