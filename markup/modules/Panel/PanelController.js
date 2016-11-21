@@ -114,12 +114,14 @@ export let controller = (() => {
             let counter = 0;
             overlay.inputEnabled = true;
             overlay.input.priorityID = 2;
+            infoRules.inputEnabled = true;
+            infoRules.input.priorityID = 3;
             closed.inputEnabled = true;
-            closed.input.priorityID = 3;
+            closed.input.priorityID = 4;
             arrowRight.inputEnabled = true;
-            arrowRight.input.priorityID = 3;
+            arrowRight.input.priorityID = 4;
             arrowLeft.inputEnabled = true;
-            arrowLeft.input.priorityID = 3;
+            arrowLeft.input.priorityID = 4;
 
             overlay.events.onInputDown.add(() => {
                 model.group('popup').removeAll();
