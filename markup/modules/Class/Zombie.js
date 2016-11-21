@@ -59,16 +59,12 @@ export class Zombie {
             anim = this.char.addAnimationByName(0, 'transition7', false);
             animTime += anim.endTime;
             this.char.addAnimationByName(0, 'idle7', true);
-            let switcher = true;
+            let switcher = 2;
             let _this = this;
             let randomAnim = function () {
-                _this.game.time.events.add(5000, () => {
-                    switcher = !switcher;
-                    if (switcher) {
-                        _this.char.setAnimationByName(0, 'win0', false);
-                    } else {
-                        _this.char.setAnimationByName(0, 'win1', false);
-                    }
+                _this.game.time.events.add(10000, () => {
+                    ++switcher;
+                    _this.char.setAnimationByName(0, 'win' + (switcher % 4), false);
                     _this.char.addAnimationByName(0, 'idle7', true);
                     randomAnim();
                 }, _this);

@@ -148,7 +148,7 @@ export let view = (() => {
             if (model.state('mobile')) {
                 x = 120;
                 y = 440;
-                scale = 0.8;
+                scale = 0.6;
             } else {
                 x = 270;
                 y = 700;
