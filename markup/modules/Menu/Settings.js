@@ -28,6 +28,14 @@ export let settings = (function () {
             let isAnim = this.checked;
             model.state('isAnimations', isAnim);
 
+            game.spriteAnims.forEach((elem) => {
+                elem.sprite.animations.paused = !isAnim;
+            });
+        });
+        $('#isAnimBG').on('change', function () {
+            let isAnim = this.checked;
+            model.state('isAnimBG', isAnim);
+
             let animMainBG = model.el('animMainBG');
             let mainBG = model.el('mainBG');
 
@@ -41,10 +49,6 @@ export let settings = (function () {
                     transitionView.addCloud({container: model.group('bg')});
                 }
             }
-
-            game.spriteAnims.forEach((elem) => {
-                elem.sprite.animations.paused = !isAnim;
-            });
         });
         $('#optionAutoplay1').on('change', function () {
             console.log(this.id, this.checked);

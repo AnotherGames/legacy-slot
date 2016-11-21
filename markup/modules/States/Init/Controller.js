@@ -11,6 +11,7 @@ export class Init {
         model.state('fastRoll', false);
         model.state('autoTransititon', false);
         model.state('isAnimations', true);
+        model.state('isAnimBG', true);
         model.state('autoEnd', true);
         model.state('fsEnd', true);
         model.state('FSMode', false);

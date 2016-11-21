@@ -65,7 +65,7 @@ export let view = (() => {
             let mainBG = game.add.sprite(0, 0, 'mainBG', null, game.bgContainer);
             model.el('mainBG', mainBG);
 
-            if (model.state('isAnimations')) {
+            if (model.state('isAnimBG')) {
                 mainBG.visible = false;
             } else {
                 animBG.visible = false;

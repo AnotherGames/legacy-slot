@@ -42,7 +42,8 @@ export let controller = (() => {
             $('#checkMusic').prop('checked', model.state('music'));
             $('#fastSpin').prop('checked', model.state('fastRoll'));
             $('#isAnimations').prop('checked', model.state('isAnimations'));
-            $('#isAnimations').prop('checked', model.state('optionAutoplay5'));
+            $('#isAnimBG').prop('checked', model.state('isAnimBG'));
+            $('#optionAutoplay5').prop('checked', model.state('optionAutoplay5'));
 
             $('#settings').removeClass('closed');
             $('#darkness').removeClass('closed');
