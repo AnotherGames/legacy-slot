@@ -238,7 +238,7 @@ export class FS {
         const game = model.el('game');
         game.time.events.add(1500, () => {
             sound.music.fsFon.stop();
-            transitionView.fsFinish();
+                transitionView.fsFinish();
         });
 
         model.state('lockedButtons', false);

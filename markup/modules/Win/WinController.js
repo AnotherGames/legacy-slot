@@ -30,6 +30,7 @@ export let controller = (() => {
             const game = model.el('game');
             game.time.events.add(1500, () => {
                 transitionView.fsStart();
+
             });
         }
 
