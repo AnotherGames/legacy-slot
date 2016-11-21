@@ -6,8 +6,23 @@ import { view as mainView } from 'modules/States/Main/View';
 export let controller = (() => {
 
     let game;
+    let touchX = 0;
 
     let handle = {
+        _touchEnd: function () {
+            document.removeEventListener('touchend', handle._touchEnd, false);
+            if ( touchX + 100 < game.input.mouse.input.x) {
+                handle.switchRulesLeft();
+            } else
+            if (touchX - 100 > game.input.mouse.input.x) {
+                handle.switchRulesRight();
+            }
+        },
+        touchRules: function () {
+            touchX = game.input.mouse.input.x;
+
+            document.addEventListener("touchend", handle._touchEnd, false);
+        },
         openSettings: function () {
             if (model.state('settings') === 'open') return;
             model.state('settings', 'open');
@@ -133,29 +148,40 @@ export let controller = (() => {
         },
         switchRulesRight: function () {
             let counter = model.el('infoCounter');
-            if (counter > 5) {
-                return;
-            }
-            counter++;
-            let infoRules = model.el('infoRules');
             let infoMarkers = model.el('infoMarkers');
-            infoRules.frameName = counter + 1 + '_en.png';
-            infoMarkers[counter].frameName = 'marker_on.png';
-            model.el('infoCounter', counter);
 
+            infoMarkers.forEach((elem) => {
+                elem.frameName = 'marker_off.png';
+            });
+            if (counter > 5) {
+                counter = 0;
+            } else {
+                counter++;
+            }
+            infoMarkers[counter].frameName = 'marker_on.png';
+
+            let infoRules = model.el('infoRules');
+            infoRules.frameName = counter + 1 + '_en.png';
+            model.el('infoCounter', counter);
         },
         switchRulesLeft: function () {
             let counter = model.el('infoCounter');
-            if (counter < 1) {
-                return;
-            }
-            counter--;
-            let infoRules = model.el('infoRules');
             let infoMarkers = model.el('infoMarkers');
-            infoRules.frameName = counter + 1 + '_en.png';
-            infoMarkers[counter + 1].frameName = 'marker_off.png';
-            model.el('infoCounter', counter);
 
+            infoMarkers.forEach((elem) => {
+                elem.frameName = 'marker_off.png';
+            });
+            if (counter < 1) {
+                counter = 6;
+            } else {
+                counter--;
+                infoMarkers[counter + 1].frameName = 'marker_off.png';
+            }
+            infoMarkers[counter].frameName = 'marker_on.png';
+
+            let infoRules = model.el('infoRules');
+            infoRules.frameName = counter + 1 + '_en.png';
+            model.el('infoCounter', counter);
         },
         showHistory: function () {
             sound.sounds.button.play();
@@ -239,6 +265,7 @@ export let controller = (() => {
         arrowRight.input.priorityID = 12;
         arrowLeft.inputEnabled = true;
         arrowLeft.input.priorityID = 12;
+        infoRules.events.onInputDown.add(handle.touchRules);
         closed.events.onInputDown.add(handle.closeRules);
         arrowRight.events.onInputDown.add(handle.switchRulesRight);
         arrowLeft.events.onInputDown.add(handle.switchRulesLeft);

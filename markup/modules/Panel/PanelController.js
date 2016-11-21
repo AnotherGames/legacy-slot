@@ -132,20 +132,29 @@ export let controller = (() => {
                 counter = 0;
             });
             arrowRight.events.onInputDown.add(() => {
+                infoMarkers.forEach((elem) => {
+                    elem.frameName = 'marker_off.png';
+                });
                 if (counter > 5) {
-                    return;
+                    counter = 0;
+                } else {
+                    counter++;
                 }
-                counter++;
-                infoRules.frameName = counter + 1 + '_en.png';
                 infoMarkers[counter].frameName = 'marker_on.png';
+                infoRules.frameName = counter + 1 + '_en.png';
             });
             arrowLeft.events.onInputDown.add(() => {
+                infoMarkers.forEach((elem) => {
+                    elem.frameName = 'marker_off.png';
+                });
                 if (counter < 1) {
-                    return;
+                    counter = 6;
+                } else {
+                    counter--;
+                    infoMarkers[counter + 1].frameName = 'marker_off.png';
                 }
-                counter--;
+                infoMarkers[counter].frameName = 'marker_on.png';
                 infoRules.frameName = counter + 1 + '_en.png';
-                infoMarkers[counter + 1].frameName = 'marker_off.png';
             });
         },
 
