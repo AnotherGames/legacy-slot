@@ -136,7 +136,7 @@ export let view = (() => {
             let darkness = game.add.graphics();
             darkness.beginFill(0x000000);
             darkness.drawRect(0, 0, game.width, game.height);
-            return game.add.tween(darkness).to( { alpha: 0 }, 1000, 'Linear', true);
+            return game.add.tween(darkness).to( { alpha: 0 }, 1500, 'Linear', true);
         },
 
         Zombie(start) {

@@ -82,7 +82,7 @@ export class Main {
 
         // PreAnimation
         let darkness = mainView.draw.darkness({});
-        this.add.tween(darkness).to( { alpha: 0 }, 1000, 'Linear', true);
+        this.add.tween(darkness).to( { alpha: 0 }, 1500, 'Linear', true);
 
         setInterval(() => {
             footerController.updateTime();

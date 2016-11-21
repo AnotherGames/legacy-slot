@@ -5,10 +5,17 @@ import { config } from 'modules/Util/Config';
 export let view = (() => {
 
     function fsStart() {
+        const game = model.el('game');
+        let darkness = game.add.graphics();
+        darkness.beginFill(0x000000);
+        darkness.drawRect(0, 0, game.width, game.height);
+        game.add.tween(darkness).to( { alpha: 0 }, 1500, 'Linear', true)
+            .onComplete.add(() => {
+                darkness.destroy();
+            }, this);
         _fsStartDraw();
         _fsStartTween();
         _fsStartInput();
-        const game = model.el('game');
         if (model.state('autoTransititon')) {
             game.time.events.add(config.autoTransitionTime, () => {
                 sound.sounds.button.play();
@@ -122,11 +129,18 @@ export let view = (() => {
     }
 
     function fsFinish() {
+        const game = model.el('game');
+        let darkness = game.add.graphics();
+        darkness.beginFill(0x000000);
+        darkness.drawRect(0, 0, game.width, game.height);
+        game.add.tween(darkness).to( { alpha: 0 }, 1500, 'Linear', true)
+            .onComplete.add(() => {
+                darkness.destroy();
+            }, this);
         _fsFinishDraw();
         _fsFinishTween();
         _fsFinishInput();
         _coinsTween();
-        const game = model.el('game');
         if (model.state('autoTransititon')) {
             game.time.events.add(config.autoTransitionTime, () => {
                 sound.sounds.button.play();
