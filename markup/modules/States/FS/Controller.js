@@ -236,7 +236,7 @@ export class FS {
         console.log('I am stoping FS!');
 
         const game = model.el('game');
-        game.time.events.add(1000, () => {
+        game.time.events.add(1500, () => {
             sound.music.fsFon.stop();
             transitionView.fsFinish();
         });

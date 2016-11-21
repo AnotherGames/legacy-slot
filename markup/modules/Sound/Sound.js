@@ -109,7 +109,7 @@ export let sound = {
         keys = Object.keys(this.music);
         keys.forEach((key) => {
             this.music[key].mute = !music;
-            this.music[key].volume = 0.7;
+            this.music[key].volume = 0.6;
         });
 
         model.state('volume', volume);
