@@ -10,7 +10,8 @@ export let controller = (() => {
 
     function showWin() {
 
-        let mainContainer = model.group('main'),
+        let game = model.el('game'),
+            mainContainer = model.group('main'),
             winTopContainer = model.group('winTop');
 
         let data = model.data('rollResponse'),
@@ -19,6 +20,9 @@ export let controller = (() => {
             mode = data.Mode,
             nextMode = data.NextMode;
 
+        if (winLines.length === 0) return;
+
+        // Check for FS
         if (mode == 'root' && nextMode == 'fsBonus') {
 
             model.state('lockedButtons', true);
@@ -34,10 +38,7 @@ export let controller = (() => {
             });
         }
 
-        if (winLines.length) {
-            view.play.WinSound();
-        }
-
+        view.play.WinSound();
         view.draw.TotalWin({winTotalData});
 
         winLines.forEach((winLine) => {
@@ -45,13 +46,21 @@ export let controller = (() => {
             view.draw.WinElements({number: winLine.Line, amount: winLine.Count});
             view.draw.WinGlista({number: winLine.Line});
         });
-        model.state('showAllLines', true);
+
+        game.time.events.add(1400, () => {
+            if (model.state('autoEnd')
+            && model.state('fsEnd')
+            && !model.state('roll:progress')) {
+                oneAfterAnother();
+            }
+        });
     }
 
     function cleanWin(cleanAlpha = false) {
         let container = model.group('winTop');
         model.data('glistaFiredCounter', 0);
         model.data('glistaDoneCounter', 0);
+
         if (cleanAlpha) {
             let wheels = model.el('wheels');
             wheels.forEach((wheel) => {
@@ -60,6 +69,7 @@ export let controller = (() => {
                 });
             });
         }
+
         view.hide.WinTop({})
             .onComplete.add(() => {
                 container.removeAll();
@@ -102,12 +112,15 @@ export let controller = (() => {
 
         model.data('currentLineIndex', nextIndex);
 
+        let game = model.el('game');
+        game.time.events.add(1400, () => {
+            oneAfterAnother();
+        });
+
     }
 
     events.on('roll:end', showWin);
     events.on('roll:start', cleanWin.bind(null, true));
     events.on('win:clean', cleanWin);
-    events.on('win:oneAfterAnother', oneAfterAnother);
-    events.on('win:oneAfterAnother:next', oneAfterAnother);
 
 })();

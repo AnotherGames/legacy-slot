@@ -76,7 +76,6 @@ export let view = (() => {
 
             } else {
                 let lvlCounter = 0;
-                let scatterCount = 0;
                 wheels.forEach((wheelObj) => {
 
                     wheelObj.elements.forEach((element) => {
@@ -85,23 +84,14 @@ export let view = (() => {
                         let elementName = parseInt(element.sprite.animations.currentAnim.name);
 
                         if (elementName == '10') {
-                            scatterCount++;
                             element.win();
                             element.sprite.alpha = 1;
 
-                            let rollData = model.data('rollResponse');
-                            if (rollData.WinLines.length === 1) {
-                                game.time.events.add(1000, () => {
-                                    events.trigger('win:clean');
-                                });
-                            } else {
-                                if (scatterCount === 1) {
-                                    model.state('axesPlaing', true);
-                                    game.time.events.add(1500, () => {
-                                        events.trigger('win:oneAfterAnother');
-                                    });
-                                }
-                            }
+                            let game = model.el('game');
+                            game.time.events.add(1000, () => {
+                                events.trigger('win:clean');
+                            });
+
                         }
                         if (elementName == '11') {
                             element.win();
@@ -150,29 +140,13 @@ export let view = (() => {
                 glistaMas.push(coord.Y);
             });
 
-            glista.start(glistaMas, time, function () {
+            glista.start(glistaMas, time, () => {
                 glista.remove();
                 glistaDoneCounter++;
                 model.data('glistaDoneCounter', glistaDoneCounter);
 
                 if (glistaDoneCounter == glistaFiredCounter) {
                     events.trigger('win:clean');
-
-                    if (model.state('autoEnd') && model.state('fsEnd')) {
-                        if (model.state('showAllLines')) {
-                            game.time.events.add(500, () => {
-                                if(model.state('axesPlaing')) return;
-                                events.trigger('win:oneAfterAnother');
-                            });
-                            model.state('showAllLines', false);
-                        } else {
-                            game.time.events.add(500, () => {
-                                if(model.state('axesPlaing')) return;
-                                events.trigger('win:oneAfterAnother');
-                            });
-                        }
-                    }
-
                 }
 
             });
