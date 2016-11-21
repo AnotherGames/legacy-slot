@@ -292,8 +292,6 @@ export let view = (() => {
             game = model.el('game'),
             x = model.el('gameMachine').width / 2,
             y = model.el('gameMachine').height / 3,
-            size = 120,
-            deltaX = 15,
             deltaY = 15,
             container = model.group('main')
         }) {
@@ -301,38 +299,27 @@ export let view = (() => {
             model.state('CountPlus3', true);
 
             if (model.state('desktop')) {
-                deltaX = 25;
                 deltaY = 30;
             }
-            const circleBG = game.add.sprite(x, y - deltaY, 'circleBG', null, container);
-            circleBG.anchor.set(0.5);
-            if (model.state('mobile')) {
-                circleBG.scale.set(0.6);
-                size = 70;
-            }
-            const countPlus3 = game.add.bitmapText(x - deltaX, y, 'numbersFont', '+3', size, container);
-            countPlus3.align = 'center';
-            countPlus3.anchor.set(0.5);
-            model.el('countPlus3', countPlus3);
-            countPlus3.scale.set(0.1);
+            const plus3 = game.add.sprite(x, y - deltaY, 'plus3', null, container);
+            plus3.anchor.set(0.5);
+            model.el('plus3', plus3);
 
             let tweenY;
             let tweenX;
             if(model.state('desktop')) {
-                tweenX = countPlus3.x;
+                tweenX = plus3.x;
                 tweenY = 950;
             } else {
                 tweenX = 1180;
                 tweenY = 50;
             }
 
-            game.add.tween(countPlus3.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true);
-            game.add.tween(circleBG).to({alpha: 0}, 1000, 'Linear', true, 500);
-            game.add.tween(countPlus3).to({x: tweenX, y: tweenY}, 300, 'Linear', true, 1000);
-            game.add.tween(countPlus3).to({alpha: 0}, 300, 'Linear', true, 1000)
+            game.add.tween(plus3.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true);
+            game.add.tween(plus3).to({x: tweenX, y: tweenY}, 300, 'Linear', true, 1000);
+            game.add.tween(plus3).to({alpha: 0}, 300, 'Linear', true, 1000)
                 .onComplete.add(() => {
-                    countPlus3.destroy();
-                    circleBG.destroy();
+                    plus3.destroy();
                     model.state('CountPlus3', false);
                     view.draw._showBang({});
                 }, this);
