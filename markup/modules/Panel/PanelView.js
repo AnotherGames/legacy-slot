@@ -9,12 +9,13 @@ export let view = (() => {
             y = model.el('gameMachine').height - 28,
             container = model.group('panel'),
             frameName = 'ui',
+            deltaY = 0
         }) {
             const game = model.el('game');
             container.x = x;
             container.y = y;
 
-            const panelBG = game.add.sprite(0, 0, frameName, null, container);
+            const panelBG = game.add.sprite(0, deltaY, frameName, null, container);
             return panelBG;
         },
 

@@ -44,8 +44,8 @@ export let settings = (function () {
             model.state('autoCashLine', this.checked);
         });
         $('#optionAutoplayVal1').on('input change', function () {
-            if ($('#optionAutoplayVal1').val() < 0) {
-                $('#optionAutoplayVal1').val(0);
+            if (this.value < 0) {
+                this.value = 0;
             }
             console.log('optionAutoplayVal1', this.value);
             model.data('autoCashLineDelta', this.value);
@@ -55,8 +55,8 @@ export let settings = (function () {
             model.state('autoCashUp', this.checked);
         });
         $('#optionAutoplayVal2').on('input change', function () {
-            if ($('#optionAutoplayVal2').val() < 0) {
-                $('#optionAutoplayVal2').val(0);
+            if (this.value < 0) {
+                this.value = 0;
             }
             console.log('optionAutoplayVal2', this.value);
             model.data('autoCashSumDelta', this.value);
@@ -66,8 +66,8 @@ export let settings = (function () {
             model.state('autoCashDown', this.checked);
         });
         $('#optionAutoplayVal3').on('input change', function () {
-            if ($('#optionAutoplayVal3').val() < 0) {
-                $('#optionAutoplayVal3').val(0);
+            if (this.value < 0) {
+                this.value = 0;
             }
             console.log('optionAutoplayVal3', this.value);
             model.data('autoCashSumDelta', this.value);

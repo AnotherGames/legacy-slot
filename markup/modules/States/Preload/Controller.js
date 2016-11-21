@@ -57,7 +57,6 @@ export class Preload {
         game.load.image('gameMachine', 'game/gameMachine.png');
         game.load.image('gameBG', 'game/gameBG.png');
         game.load.image('gameShadow', 'game/gameShadow.png');
-        // game.load.image('infoRules', 'other/infoRules.png');
         game.load.image('popup', 'other/popup.png');
         game.load.image('closed', 'other/closed.png');
         game.load.image('transitionCoin', 'other/transitionCoin.png');
@@ -96,7 +95,7 @@ export class Preload {
         game.load.image('axe', 'fs/axe.png');
         game.load.image('axeSmall', 'fs/axeSmall.png');
         game.load.image('skull', 'fs/skull.png');
-        game.load.image('circleBG', 'fs/circle.png');
+        game.load.image('plus3', 'fs/plus3.png');
         if (model.state('mobile')) {
             game.load.image('fsTotalTable', 'fs/fsTotalTable.png');
             game.load.image('multiRip', 'fs/multiRip.png');
