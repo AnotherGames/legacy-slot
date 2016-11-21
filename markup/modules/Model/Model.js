@@ -64,10 +64,21 @@ export let model = (() => {
         model.data('lines', initData.Lines);
         model.data('numberOfLines', initData.Lines.length);
         model.data('firstScreen', initData.FirstScreen);
+
         model.state('initScreen', true);
         model.state('fastRoll', false);
         model.state('ready', true);
         model.state('firstFS', false);
+        model.state('side', 'left');
+        model.state('autoPanel', false);
+        model.state('autoTransititon', false);
+        model.state('isAnimations', true);
+        model.state('autoEnd', true);
+        model.state('fsEnd', true);
+        model.state('FSMode', false);
+        model.state('sound', true);
+        model.state('volume', 1);
+        model.state('music', true);
         model.state('autoClosed', true);
 
         events.trigger('model:states:init');
