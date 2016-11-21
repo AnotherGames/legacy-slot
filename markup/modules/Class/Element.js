@@ -28,9 +28,9 @@ export class Element {
         // this._addElementAnimations(param.el);
 
         this._addAnimation({ el: 1, n: false, w: 15 });
-        this._addAnimation({ el: 2, n: 15, w: 25 });
+        this._addAnimation({ el: 2, n: 20, w: 20 });
         this._addAnimation({ el: 3, n: false, w: 15 });
-        this._addAnimation({ el: 4, n: 20, w: 20 });
+        this._addAnimation({ el: 4, n: 15, w: 25 });
         this._addAnimation({ el: 5, n: false, w: 15 });
         this._addAnimation({ el: 6, n: 15, w: 15 });
         this._addAnimation({ el: 7, n: false, w: 15 });
