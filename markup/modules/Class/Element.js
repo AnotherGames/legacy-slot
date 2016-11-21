@@ -25,8 +25,6 @@ export class Element {
 
         this.sprite = game.add.sprite(param.x, param.y, 'elements', null, param.parent);
 
-        // this._addElementAnimations(param.el);
-
         this._addAnimation({ el: 1, n: false, w: 15 });
         this._addAnimation({ el: 2, n: 20, w: 20 });
         this._addAnimation({ el: 3, n: false, w: 15 });
@@ -46,20 +44,10 @@ export class Element {
     }
 
     play(animation) {
-        // let thisAnim = Object.keys(this.sprite.animations._anims).some((key) => {
-        //     if (parseInt(key) === parseInt(animation)) return true;
-        // });
-        // if (thisAnim) {
         this.sprite.animations.play(animation);
         if (!model.state('isAnimations')) {
             this.sprite.animations.paused = true;
         }
-        // } else {
-        //     this.sprite.animations._anims = [];
-        //     this.sprite.loadTexture(parseInt(animation));
-        //     this._addElementAnimations(parseInt(animation));
-        //     this.sprite.animations.play(animation);
-        // }
     }
 
     win() {
@@ -72,45 +60,8 @@ export class Element {
 
     normal() {
         let name = parseInt(this.sprite.animations.currentAnim.name);
+        if (this.sprite.animations.currentAnim === `${name}-n`) return;
         this.play(`${name}-n`);
-    }
-
-    _addElementAnimations(el) {
-        switch (el) {
-            case 1:
-                this._addAnimation({ el: 1, n: false, w: 15 });
-                break;
-            case 2:
-                this._addAnimation({ el: 2, n: 15, w: 25 });
-                break;
-            case 3:
-                this._addAnimation({ el: 3, n: false, w: 15 });
-                break;
-            case 4:
-                this._addAnimation({ el: 4, n: 20, w: 20 });
-                break;
-            case 5:
-                this._addAnimation({ el: 5, n: false, w: 15 });
-                break;
-            case 6:
-                this._addAnimation({ el: 6, n: 15, w: 15 });
-                break;
-            case 7:
-                this._addAnimation({ el: 7, n: false, w: 15 });
-                break;
-            case 8:
-                this._addAnimation({ el: 8, n: 15, w: 15 });
-                break;
-            case 9:
-                this._addAnimation({ el: 9, n: 15, w: 15 });
-                break;
-            case 10:
-                this._addAnimation({ el: 10, n: 15, w: 15 });
-                break;
-            case 11:
-                this._addAnimation({ el: 11, n: 15, w: 15 });
-                break;
-        }
     }
 
     _addAnimation(options) {
