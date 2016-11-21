@@ -158,7 +158,7 @@ export let view = (() => {
             const popup = game.add.sprite(game.width / 2, game.height / 2, 'popup', null, container);
             popup.anchor.set(0.5);
             model.el('popup', popup);
-            const popupText = game.add.text(game.width / 2, game.height / 2, message, {font: font, fill: color, align: 'center', wordWrap: true, wordWrapWidth: popup.width - 60}, container);
+            const popupText = game.add.text(game.width / 2, game.height / 2, message, {font: font, fill: color, align: 'center', wordWrap: true, wordWrapWidth: popup.width - 80}, container);
             popupText.anchor.set(0.5);
 
             overlay.inputEnabled = true;

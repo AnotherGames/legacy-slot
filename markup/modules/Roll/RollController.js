@@ -36,14 +36,21 @@ export let controller = (() => {
 
     function startRoll(options) {
         if (!model.state('ready')) return;
+        let game = model.el('game');
         if (!model.checkBalance()) {
             console.warn('Not enought money!');
             mainView.draw.showPopup({message: 'You have low balance on your account'});
             return;
         }
         model.state('ready', false);
+        let rollPopupTimer = game.time.events.add(4000, () => {
+            mainView.draw.showPopup({message: 'You have weak Internet connection'});
+        });
+
         request.send('Roll')
             .then((data) => {
+
+                game.time.events.remove(rollPopupTimer);
 
                 if (data.ErrorMessage === 'SessionClosedOrNotOpened') {
                     mainView.draw.showPopup({message: 'Your session is closed. Please click to restart'});
@@ -63,7 +70,6 @@ export let controller = (() => {
 
                 _playRollSound();
 
-                const game = model.el('game');
                 let wheels = model.el('wheels');
                 let finishScreen = _convertArray(data.Screen);
 
