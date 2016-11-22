@@ -91,9 +91,10 @@ export let controller = (() => {
 
         auto: function() {
             if (!model.state('autoEnd') || model.state('roll:progress')) return;
+            if (model.state('lockedButtons')) return;
 
             sound.sounds.button.play();
-            if (model.state('autoClosed')) {
+            if (model.state('autoClosed') && !model.data('remainAutoCount')) {
                 model.state('autoClosed', false);
                 view.show.autoButton({});
                 view.show.autoPanel({});
@@ -105,6 +106,7 @@ export let controller = (() => {
         },
 
         maxBet: function() {
+            if (model.state('lockedButtons')) return;
             if (model.state('autoEnd') == false) return;
 
             sound.sounds.button.play();
@@ -112,6 +114,7 @@ export let controller = (() => {
         },
 
         info: function() {
+            if (model.state('lockedButtons')) return;
             sound.sounds.button.play();
 
             let infoRules = view.show.info({});
