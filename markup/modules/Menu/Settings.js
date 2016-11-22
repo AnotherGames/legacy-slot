@@ -84,6 +84,7 @@ export let settings = (function () {
             model.data('autoCashSumDelta', this.value);
         });
         $('#optionAutoplay4').on('change', function () {
+            model.state('autoStopWhenFS', this.checked);
             console.log(this.id, this.checked);
         });
         $('#optionAutoplay5').on('change', function () {
