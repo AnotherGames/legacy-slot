@@ -29,7 +29,7 @@ export class Main {
         game.frameAnims = [];
         game.spriteAnims = [];
 
-        game.stage.disableVisibilityChange = true;
+        game.stage.disableVisibilityChange = false;
 
         mainView.create.groups({});
     }
