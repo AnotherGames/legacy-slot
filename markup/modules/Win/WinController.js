@@ -28,6 +28,9 @@ export let controller = (() => {
             model.state('lockedButtons', true);
 
             if (!model.state('autoEnd')) {
+                if (!model.state('autoStopWhenFS')) {
+                    model.data('remainAutoCount', model.data('autoCount'));
+                }
                 events.trigger('autoplay:stop');
             }
 

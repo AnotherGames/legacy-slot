@@ -91,6 +91,10 @@ export class Main {
         if (model.data('savedFS')) {
             game.state.start('FS');
         }
+        if (model.data('remainAutoCount') && !model.state('autoStopWhenFS')) {
+            events.trigger('autoplay:init', model.data('remainAutoCount'));
+            model.data('remainAutoCount', null);
+        }
     }
 
     update() {
