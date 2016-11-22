@@ -26,6 +26,13 @@ export class Init {
         view.drawBGLogo();
         let luchi = view.drawLuchi();
         game.add.tween(luchi).to({rotation: 2 * Math.PI}, 20000, 'Linear', true, 0, -1);
+        game.add.tween(luchi).to({alpha: 0.5}, 20000, 'Linear', true)
+            .onComplete.add(() => {
+                game.add.tween(luchi).to({alpha: 1}, 20000, 'Linear', true)
+                    .onComplete.add(() => {
+                        game.add.tween(luchi).to({alpha: 0.5}, 20000, 'Linear', true)
+                    }, this);
+            }, this);
         view.drawLogo();
 
         let initPlay = view.drawPlay();
