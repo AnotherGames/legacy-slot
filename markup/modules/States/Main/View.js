@@ -56,7 +56,7 @@ export let view = (() => {
             );
             animBG.setAnimationByName(
                 0,          // Track index
-                '1',     // Animation's name
+                'animation',     // Animation's name
                 true        // If the animation should loop or not
             );
             game.bgContainer.add(animBG);

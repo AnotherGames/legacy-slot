@@ -48,16 +48,21 @@ export class Preload {
         const game = model.el('game');
         game.load.path = `static/img/content/${model.state('res')}/`;
         game.load.image('initBG', 'bg/initBG.png');
+        game.load.image('initLogo', 'bg/initLogo.png');
         game.load.atlasJSONArray('text', 'text/text.png', 'text/text.json');
     }
 
     loadMainAssets() {
         const game = model.el('game');
         game.load.image('mainBG', 'bg/mainBG.png');
+        game.load.image('luchi', 'bg/luchi.png');
+        game.load.image('logos', 'bg/logos.png');
         game.load.atlasJSONArray('clouds', 'bg/clouds.png', 'bg/clouds.json');
         game.load.atlasJSONArray('candle', 'bg/candle.png', 'bg/candle.json');
         game.load.image('gameMachine', 'game/gameMachine.png');
         game.load.image('gameBG', 'game/gameBG.png');
+        game.load.image('gmLogo', 'game/gmLogo.png');
+        game.load.image('gmLogoFS', 'game/gmLogoFS.png');
         game.load.image('gameShadow', 'game/gameShadow.png');
         game.load.image('popup', 'other/popup.png');
         game.load.image('closed', 'other/closed.png');
@@ -98,6 +103,10 @@ export class Preload {
         game.load.image('axeSmall', 'fs/axeSmall.png');
         game.load.image('skull', 'fs/skull.png');
         game.load.image('plus3', 'fs/plus3.png');
+        game.load.image('freeSpins', 'fs/freeSpins.png');
+        game.load.image('multiplier', 'fs/multiplier.png');
+        game.load.image('freeSpinsPanelFS', 'fs/freeSpinsPanelFS.png');
+        game.load.image('multiPanelFS', 'fs/multiPanelFS.png');
         if (model.state('mobile')) {
             game.load.image('fsTotalTable', 'fs/fsTotalTable.png');
             game.load.image('multiRip', 'fs/multiRip.png');

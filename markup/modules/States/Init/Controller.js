@@ -12,6 +12,7 @@ export class Init {
     }
 
     create() {
+        let game = model.el('game');
         let settingsWidth = $('#settings').width();
         let multiplay = window.innerWidth / settingsWidth * 0.8;
         $('#settings').css('transform', 'translate(-50%, -50%) scale(' + multiplay + ',' + multiplay + ')');
@@ -22,6 +23,9 @@ export class Init {
 
         view.playMusic();
         view.drawBG();
+        view.drawBGLogo();
+        let luchi = view.drawLuchi();
+        game.add.tween(luchi).to({rotation: 2 * Math.PI}, 20000, 'Linear', true, 0, -1);
         view.drawLogo();
 
         let initPlay = view.drawPlay();
