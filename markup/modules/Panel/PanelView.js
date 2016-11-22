@@ -82,8 +82,8 @@ export let view = (() => {
         PlusButton: function({
             game = model.el('game'),
             container = model.group('panel'),
-            x = 267,
-            y = 107,
+            x = 268,
+            y = 106,
         }) {
             let plusButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'plusOn.png', 'plus.png', 'plusOn.png', null, container);
             return plusButtonDesk;
@@ -92,8 +92,8 @@ export let view = (() => {
         MinusButton: function({
             game = model.el('game'),
             container = model.group('panel'),
-            x = 172,
-            y = 107
+            x = 170,
+            y = 106
         }) {
             let minusButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'minusOn.png', 'minus.png', 'minusOn.png', null, container);
             return minusButtonDesk;
