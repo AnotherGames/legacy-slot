@@ -1,4 +1,5 @@
 import { sound } from 'modules/Sound/Sound';
+import { model } from 'modules/Model/Model';
 
 export class Zombie {
     /*  param: {
@@ -64,13 +65,14 @@ export class Zombie {
             let switcher = 2;
             let _this = this;
             let randomAnim = function () {
-                _this.game.time.events.add(10000, () => {
+                let zombieRandom = _this.game.time.events.add(10000, () => {
                     sound.sounds.zombie1.play();
                     ++switcher;
                     _this.char.setAnimationByName(0, 'win' + (switcher % 4), false);
                     _this.char.addAnimationByName(0, 'idle7', true);
                     randomAnim();
                 }, _this);
+                model.data('zombieRandom', zombieRandom);
             };
             randomAnim();
         }
