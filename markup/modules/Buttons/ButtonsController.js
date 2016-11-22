@@ -96,6 +96,7 @@ export let controller = (() => {
         },
 
         autoButton: function() {
+            if (model.state('lockedButtons')) return;
             // if (model.state('roll:progress')) return;
             sound.sounds.button.play();
             let autoButton = model.el('autoButton');
@@ -109,6 +110,7 @@ export let controller = (() => {
         },
 
         betButton: function() {
+            if (model.state('lockedButtons')) return;
             // if (model.state('roll:progress')) return;
             let betButton = model.el('betButton');
             if (betButton.frameName === 'setBetOut.png') return;
@@ -121,6 +123,7 @@ export let controller = (() => {
 
 
         menuButton: function() {
+            if (model.state('lockedButtons')) return;
             // if (model.state('roll:progress')) return;
             if (controller.isEvent) return;
             if (model.state('menu') === 'open') return;
