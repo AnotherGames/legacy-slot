@@ -35,7 +35,7 @@ export let view = (() => {
         SpinButton: function({
             game = model.el('game'),
             x = model.group('panel').width / 2,
-            y = 95,
+            y = 97,
             container = model.group('panel')
         }) {
             let spinButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'spinOn.png', 'spin.png', 'spinOn.png', null, container);
