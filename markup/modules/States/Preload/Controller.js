@@ -48,21 +48,18 @@ export class Preload {
         const game = model.el('game');
         game.load.path = `static/img/content/${model.state('res')}/`;
         game.load.image('initBG', 'bg/initBG.png');
-        game.load.image('initLogo', 'bg/initLogo.png');
         game.load.atlasJSONArray('text', 'text/text.png', 'text/text.json');
     }
 
     loadMainAssets() {
         const game = model.el('game');
         game.load.image('mainBG', 'bg/mainBG.png');
-        game.load.image('luchi', 'bg/luchi.png');
         game.load.image('logos', 'bg/logos.png');
         game.load.atlasJSONArray('clouds', 'bg/clouds.png', 'bg/clouds.json');
         game.load.atlasJSONArray('candle', 'bg/candle.png', 'bg/candle.json');
         game.load.image('gameMachine', 'game/gameMachine.png');
         game.load.image('gameBG', 'game/gameBG.png');
-        game.load.image('gmLogo', 'game/gmLogo.png');
-        game.load.image('gmLogoFS', 'game/gmLogoFS.png');
+        game.load.image('gameLogo', 'game/gmLogo.png');
         game.load.image('gameShadow', 'game/gameShadow.png');
         game.load.image('popup', 'other/popup.png');
         game.load.image('closed', 'other/closed.png');
@@ -116,7 +113,8 @@ export class Preload {
 
     loadSpineAssets() {
         const game = model.el('game');
-        game.load.spine('animBG', 'skeleton/skeleton.json');
+        game.load.spine('animBG', 'spine/skeleton.json');
+        game.load.spine('logo', 'spine/logo.json');
         game.load.spine('FSCharapter', 'FSCharapter/Zomb.json');
         game.load.spine('FlyingBrain', 'FSCharapter/Brain.json');
         game.load.spine('mozgiCount', 'fs/mozgi.json');
