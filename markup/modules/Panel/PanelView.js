@@ -7,8 +7,8 @@ export let view = (() => {
         PanelBG: function({
             game = model.el('game'),
             container = model.group('panel'),
-            x = model.group('main').x + 45,
-            y = model.el('gameMachine').height - 28,
+            x = model.group('main').x + 34,
+            y = model.el('gameMachine').height + 45,
             frameName = 'ui',
             deltaY = 0
         }) {
@@ -22,7 +22,7 @@ export let view = (() => {
         AutoContainer: function({
             game = model.el('game'),
             x = 650,
-            y = 95
+            y = 100
         }) {
             let autoDesktopContainer = game.add.group();
                 autoDesktopContainer.x = x;
@@ -35,7 +35,7 @@ export let view = (() => {
         SpinButton: function({
             game = model.el('game'),
             x = model.group('panel').width / 2,
-            y = 97,
+            y = 101,
             container = model.group('panel')
         }) {
             let spinButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'spinOn.png', 'spin.png', 'spinOn.png', null, container);
@@ -48,7 +48,7 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('panel'),
             x = model.el('spinButtonDesk').x - 137,
-            y = 95
+            y = 100
         }) {
             let autoButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'autoOn.png', 'auto.png', 'autoOn.png', null, container);
                 autoButtonDesk.anchor.set(0.5);
@@ -60,7 +60,7 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('panel'),
             x = model.el('spinButtonDesk').x + 137,
-            y = 95
+            y = 100
         }) {
             let maxBetButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'maxBetOn.png', 'maxBet.png', 'maxBetOn.png', null, container);
                 maxBetButtonDesk.anchor.set(0.5);
@@ -82,8 +82,8 @@ export let view = (() => {
         PlusButton: function({
             game = model.el('game'),
             container = model.group('panel'),
-            x = 268,
-            y = 106,
+            x = 273,
+            y = 108,
         }) {
             let plusButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'plusOn.png', 'plus.png', 'plusOn.png', null, container);
             return plusButtonDesk;
@@ -92,8 +92,8 @@ export let view = (() => {
         MinusButton: function({
             game = model.el('game'),
             container = model.group('panel'),
-            x = 170,
-            y = 106
+            x = 175,
+            y = 108
         }) {
             let minusButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'minusOn.png', 'minus.png', 'minusOn.png', null, container);
             return minusButtonDesk;
@@ -102,8 +102,8 @@ export let view = (() => {
         LinesNumber: function({
             game = model.el('game'),
             container = model.group('panel'),
-            x = 80,
-            y = 112,
+            x = 105,
+            y = 116,
             font = 'normal 27px Helvetica, Arial',
             color = '#e8b075',
         }) {
@@ -121,11 +121,11 @@ export let view = (() => {
             model.el('autoplayBG', autoplayBG);
 
             let autoBG10 = this._AutoPanelItem({});
-            let autoBG25 = this._AutoPanelItem({text: 25, x: -5, y: -60, width: 75, height: 37});
-            let autoBG50 = this._AutoPanelItem({text: 50, x: -81, y: -19, width: 70, height: 37});
-            let autoBG100 = this._AutoPanelItem({text: 100, x: -5, y: -19, width: 75, height: 37});
-            let autoBG250 = this._AutoPanelItem({text: 250, x: -81, y: 23, width: 70, height: 37});
-            let autoBG500 = this._AutoPanelItem({text: 500, x: -5, y: 23, width: 75, height: 37});
+            let autoBG25 = this._AutoPanelItem({text: 25, x: -2, y: -62, width: 75, height: 37});
+            let autoBG50 = this._AutoPanelItem({text: 50, x: -80, y: -21, width: 70, height: 37});
+            let autoBG100 = this._AutoPanelItem({text: 100, x: -2, y: -21, width: 75, height: 37});
+            let autoBG250 = this._AutoPanelItem({text: 250, x: -80, y: 21, width: 70, height: 37});
+            let autoBG500 = this._AutoPanelItem({text: 500, x: -2, y: 21, width: 75, height: 37});
 
             model.el('autoBG10', autoBG10);
             model.el('autoBG25', autoBG25);
@@ -143,8 +143,8 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('autoDesktop'),
             text = 10,
-            x = -81,
-            y = -60,
+            x = -80,
+            y = -62,
             width = 70,
             height = 37,
             font = 'normal 24px Arial',
@@ -282,7 +282,7 @@ export let view = (() => {
     let hide = {
         autoButton: function({
             game = model.el('game'),
-            finalX = 519,
+            finalX = 523,
             time = 350
         }) {
             let autoButtonDesk = model.el('autoButtonDesk');
