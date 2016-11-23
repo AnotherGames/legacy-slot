@@ -21,7 +21,7 @@ export let view = (() => {
             let winTotal = game.add.sprite(gameMachine.width / 2, gameMachine.height / 2, 'winTotal', null, container);
             winTotal.anchor.set(0.5);
 
-            let winTotalText = game.add.text(gameMachine.width / 2, gameMachine.height / 2 + 5, winTotalData, style, container);
+            let winTotalText = game.add.text(gameMachine.width / 2, gameMachine.height / 2, winTotalData, style, container);
             winTotalText.anchor.set(0.5);
         },
 
@@ -204,7 +204,7 @@ export let view = (() => {
                 }
             }
 
-            let winBG = game.add.sprite(x, y + 4, 'winLine', null, container);
+            let winBG = game.add.sprite(x, y - 3, 'winLine', null, container);
                 winBG.anchor.set(0.5);
             let font;
             if (winValue > 999) {
@@ -214,7 +214,7 @@ export let view = (() => {
             } else {
                 font = '25px Arial, Helvetica';
             }
-            let text = game.add.text(x, y, winValue, {font: font, fill: '#9be20a'}, container);
+            let text = game.add.text(x, y, winValue, {font: font, fill: '#eacf16', align: 'center'}, container);
                 text.anchor.set(0.5);
 
         }

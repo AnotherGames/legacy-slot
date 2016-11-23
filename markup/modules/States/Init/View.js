@@ -23,19 +23,29 @@ export let view = (() => {
         return initBG;
     }
 
+    function drawBGLogo() {
+        const game = model.el('game');
+        let BGLogo = game.add.sprite(50, game.height * 0.85, 'logos');
+        model.el('BGLogo', BGLogo);
+        return BGLogo; 
+    }
+
     function drawLogo() {
         const game = model.el('game');
-        let initLogo = game.add.sprite(game.world.centerX, game.world.centerY * 0.4, 'text', 'logo.png');
-            initLogo.anchor.set(0.5);
-            initLogo.scale.setTo(0.1, 0.1);
-        game.add.tween(initLogo.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true);
+        let deltaY = 50;
+        if (model.state('desktop')) {
+            deltaY = 150;
+        }
+        let initLogo = game.add.spine(game.world.centerX, game.world.centerY - deltaY, 'logo');
+        initLogo.setAnimationByName(0, '1', true);
+
         model.el('initLogo', initLogo);
         return initLogo;
     }
 
     function drawPlay() {
         const game = model.el('game');
-        let initPlay = game.add.sprite(game.world.centerX, game.world.centerY, 'text', 'play.png');
+        let initPlay = game.add.sprite(game.world.centerX, game.height * 0.8, 'text', 'play.png');
             initPlay.anchor.set(0.5);
             initPlay.scale.setTo(0.1, 0.1);
         let initPlayTween = game.add.tween(initPlay.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true);
@@ -84,6 +94,7 @@ export let view = (() => {
         playMusic,
         stopMusic,
         drawBG,
+        drawBGLogo,
         drawLogo,
         drawPlay,
         playYoyoTween,

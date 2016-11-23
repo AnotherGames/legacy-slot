@@ -8,7 +8,7 @@ export let view = (() => {
             color = 0x000000,
             heightTop = 40,
             heightBottom = 30,
-            alphaTop = 0.25,
+            alphaTop = 0.4,
             alphaBottom = 0.7
         }) {
             const game = model.el('game');
@@ -39,7 +39,7 @@ export let view = (() => {
 
         DesktopFooter: function ({
             color = 0x000000,
-            heightBottom = 30,
+            heightBottom = 40,
             alphaBottom = 0.7
         }) {
             const game = model.el('game');
@@ -60,10 +60,13 @@ export let view = (() => {
 
         HomeButton: function ({
             x = 25,
-            y = model.el('game').height - 15,
+            y = model.el('game').height - 20,
             container = model.group('footer')
         }) {
             const game = model.el('game');
+            if (model.state('mobile')) {
+                y = model.el('game').height - 15;
+            }
             const homeButton = game.add.button(x, y, 'footerButtons', null, null, 'homeOn.png', 'home.png', 'homeOn.png', null, container);
             homeButton.anchor.set(0.5);
             model.el('homeButton', homeButton);
@@ -72,7 +75,7 @@ export let view = (() => {
 
         MenuButton: function ({
             x = 75,
-            y = model.el('game').height - 15,
+            y = model.el('game').height - 20,
             container = model.group('footer')
         }) {
             const game = model.el('game');
@@ -84,7 +87,7 @@ export let view = (() => {
 
         SoundButton: function ({
             x = 125,
-            y = model.el('game').height - 15,
+            y = model.el('game').height - 20,
             container = model.group('footer')
         }) {
             const game = model.el('game');
@@ -101,7 +104,7 @@ export let view = (() => {
 
         FastButton: function ({
             x = 175,
-            y = model.el('game').height - 15,
+            y = model.el('game').height - 20,
             container = model.group('footer')
         }) {
             const game = model.el('game');
@@ -146,9 +149,15 @@ export let view = (() => {
                 style = styleMobile;
             }
 
+            let y = 17;
+
+            if (model.state('mobile')) {
+                y = 12;
+            }
+
             let footerTime = game.add.text(
                 0,
-                game.height - 12,
+                game.height - y,
                 `${currentHour} : ${currentMinutes}`,
                 style,
                 container);

@@ -1,0 +1,104 @@
+
+logo.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1/Logo_0000_Layer-3371-copy
+  rotate: true
+  xy: 1787, 1149
+  size: 889, 175
+  orig: 889, 175
+  offset: 0, 0
+  index: -1
+1/Logo_0001_Layer-3371
+  rotate: false
+  xy: 451, 207
+  size: 526, 176
+  orig: 526, 176
+  offset: 0, 0
+  index: -1
+1/Logo_0003_Layer-3375
+  rotate: true
+  xy: 1201, 968
+  size: 179, 283
+  orig: 179, 283
+  offset: 0, 0
+  index: -1
+1/Logo_0004_Fish2_0003_Layer-1
+  rotate: false
+  xy: 451, 385
+  size: 553, 571
+  orig: 553, 571
+  offset: 0, 0
+  index: -1
+1/Logo_0005_Layer-3374
+  rotate: false
+  xy: 1208, 753
+  size: 141, 213
+  orig: 141, 213
+  offset: 0, 0
+  index: -1
+1/Logo_0006_Fish2_0002_Layer-6
+  rotate: false
+  xy: 1006, 394
+  size: 178, 158
+  orig: 178, 158
+  offset: 0, 0
+  index: -1
+1/Logo_0007_Fish2_0001_Layer-5
+  rotate: true
+  xy: 2, 2
+  size: 118, 127
+  orig: 118, 127
+  offset: 0, 0
+  index: -1
+1/Logo_0008_Fish2_0000_Layer-4
+  rotate: false
+  xy: 1208, 646
+  size: 101, 105
+  orig: 101, 105
+  offset: 0, 0
+  index: -1
+1/Logo_0009_Fish2_0005_Group-7
+  rotate: true
+  xy: 1509, 1217
+  size: 821, 276
+  orig: 821, 276
+  offset: 0, 0
+  index: -1
+1/Logo_0010_Group-207-copy
+  rotate: false
+  xy: 1201, 1149
+  size: 306, 889
+  orig: 306, 889
+  offset: 0, 0
+  index: -1
+1/Logo_0011_Group-207
+  rotate: false
+  xy: 2, 122
+  size: 447, 834
+  orig: 447, 834
+  offset: 0, 0
+  index: -1
+1/Zastavka_MS_0001_Shape-21-copy
+  rotate: false
+  xy: 2, 958
+  size: 1197, 1080
+  orig: 1197, 1080
+  offset: 0, 0
+  index: -1
+200x200/E_0003_Layer-5
+  rotate: false
+  xy: 1006, 756
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+200x200/E_0004_Layer-4
+  rotate: false
+  xy: 1006, 554
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1

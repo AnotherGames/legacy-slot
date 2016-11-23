@@ -21,8 +21,8 @@ export let config = {
             height: 240
         },
         machine: {
-            x: 60,
-            y: 113
+            x: 58,
+            y: 44
         },
         win: {
             '4': [{x: 50, y: 160}, {x: 1355, y: 160}],

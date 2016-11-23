@@ -54,10 +54,12 @@ export class Preload {
     loadMainAssets() {
         const game = model.el('game');
         game.load.image('mainBG', 'bg/mainBG.png');
+        game.load.image('logos', 'bg/logos.png');
         game.load.atlasJSONArray('clouds', 'bg/clouds.png', 'bg/clouds.json');
         game.load.atlasJSONArray('candle', 'bg/candle.png', 'bg/candle.json');
         game.load.image('gameMachine', 'game/gameMachine.png');
         game.load.image('gameBG', 'game/gameBG.png');
+        game.load.image('gameLogo', 'game/gmLogo.png');
         game.load.image('gameShadow', 'game/gameShadow.png');
         game.load.image('popup', 'other/popup.png');
         game.load.image('closed', 'other/closed.png');
@@ -69,6 +71,7 @@ export class Preload {
         game.load.image('winLine', 'win/winLineRect.png');
         game.load.image('winTotal', 'win/winTotalRect.png');
         game.load.atlasJSONArray('win', 'win/win.png', 'win/win.json');
+        game.load.atlasJSONArray('win', 'win/LineNumbers.png', 'win/LineNumbers.json');
         game.load.atlasJSONArray('numbers', 'numbers/multiNumbers.png', 'numbers/multiNumbers.json');
         game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
         game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
@@ -98,6 +101,10 @@ export class Preload {
         game.load.image('axeSmall', 'fs/axeSmall.png');
         game.load.image('skull', 'fs/skull.png');
         game.load.image('plus3', 'fs/plus3.png');
+        game.load.image('freeSpins', 'fs/freeSpins.png');
+        game.load.image('multiplier', 'fs/multiplier.png');
+        game.load.image('freeSpinsPanelFS', 'fs/freeSpinsPanelFS.png');
+        game.load.image('multiPanelFS', 'fs/multiPanelFS.png');
         if (model.state('mobile')) {
             game.load.image('fsTotalTable', 'fs/fsTotalTable.png');
             game.load.image('multiRip', 'fs/multiRip.png');
@@ -107,7 +114,8 @@ export class Preload {
 
     loadSpineAssets() {
         const game = model.el('game');
-        game.load.spine('animBG', 'skeleton/skeleton.json');
+        game.load.spine('animBG', 'spine/skeleton.json');
+        game.load.spine('logo', 'spine/logo.json');
         game.load.spine('FSCharapter', 'FSCharapter/Zomb.json');
         game.load.spine('FlyingBrain', 'FSCharapter/Brain.json');
         game.load.spine('mozgiCount', 'fs/mozgi.json');

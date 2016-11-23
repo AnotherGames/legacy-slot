@@ -101,8 +101,8 @@ export let view = (() => {
             betValueAmount = model.balance('betValue'),
             sumStyle = {font: '24px Helvetica, Arial', fill: '#e8b075', align: 'center'},
             valueStyle = {font: '27px Helvetica, Arial', fill: '#e8b075', align: 'center'},
-            y = [48, 130],
-            x = [180, 240, 1065, 1180]
+            y = [53, 135],
+            x = [185, 245, 1070, 1185]
         }) {
 
             let coinSum = game.add.text(x[3], y[0], `${coinSumValue.toFixed(0)}`, sumStyle, container);

@@ -12,6 +12,7 @@ export class Init {
     }
 
     create() {
+        let game = model.el('game');
         let settingsWidth = $('#settings').width();
         let multiplay = window.innerWidth / settingsWidth * 0.8;
         $('#settings').css('transform', 'translate(-50%, -50%) scale(' + multiplay + ',' + multiplay + ')');
@@ -22,6 +23,7 @@ export class Init {
 
         view.playMusic();
         view.drawBG();
+        view.drawBGLogo();
         view.drawLogo();
 
         let initPlay = view.drawPlay();
