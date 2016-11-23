@@ -85,7 +85,8 @@ export let view = (() => {
         }) {
             let mainGroup = game.mainContainer;
 
-            let gameMachine = game.add.sprite(0, 0, 'gameMachine', null, mainGroup);
+            let gameMachine = game.add.sprite(0, config[model.state('res')].gameMachine.y, 'gameMachine', null, mainGroup);
+            gameMachine.anchor.set(0.5);
             model.el('gameMachine', gameMachine);
         },
 
@@ -101,7 +102,7 @@ export let view = (() => {
             model.group('winTop', game.winTopContainer);
             mainGroup.addAt(game.winTopContainer, 2);
 
-            machineGroup.position.set(mainGroup.width / 2 + config[model.state('res')].machine.x, mainGroup.height / 2);
+            // machineGroup.position.set(mainGroup.width / 2 + config[model.state('res')].machine.x, mainGroup.height / 2);
 
             machineGroup.glistaLightContainer = game.add.group();
             model.el('glistaLightContainer', machineGroup.glistaLightContainer);
@@ -124,7 +125,8 @@ export let view = (() => {
 
             let mask = game.add.graphics();
                 mask.beginFill(0x000000);
-                mask.drawRect(0, config[model.state('res')].machine.y, game.width, elSize.height * 3);
+                mask.drawRect(0, game.world.centerY + config[model.state('res')].mainContainer.y, game.width, elSize.height * 3);
+            mask.pivot.set(0, elSize.height * 1.5);
 
             machineGroup.mask = mask;
             model.el('mask', mask);
@@ -290,8 +292,8 @@ export let view = (() => {
 
         CountPlus3: function({
             game = model.el('game'),
-            x = model.el('gameMachine').width / 2,
-            y = model.el('gameMachine').height / 3,
+            x = 0, // model.el('gameMachine').width / 2,
+            y = game.height / 5 * -1, // model.el('gameMachine').height / 3,
             deltaY = 15,
             container = model.group('main')
         }) {

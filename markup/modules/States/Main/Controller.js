@@ -1,5 +1,6 @@
 import { events } from 'modules/Util/Events';
 import { model } from 'modules/Model/Model';
+import { config } from 'modules/Util/Config';
 import { view as mainView } from 'modules/States/Main/View';
 import { settings } from 'modules/Menu/Settings';
 import { sound } from 'modules/Sound/Sound';
@@ -52,8 +53,8 @@ export class Main {
             footerController.initMobile();
             buttonsController.init();
 
-            let mainXLeft = model.el('buttonsDelta') * 2;
-            let mainXRight = game.width - game.mainContainer.width - model.el('buttonsDelta') * 2;
+            let mainXLeft = model.el('buttonsDelta') * 2 + game.mainContainer.width / 2;
+            let mainXRight = game.width - game.mainContainer.width - model.el('buttonsDelta') * 2 + game.mainContainer.width / 2;
             model.data('mainXLeft', mainXLeft);
             model.data('mainXRight', mainXRight);
 
@@ -63,14 +64,17 @@ export class Main {
                 game.mainContainer.x = mainXRight;
             }
 
+            game.mainContainer.y = game.world.centerY + config[model.state('res')].mainContainer.y;
+
             balanceController.initMobile();
             mobileSettingsController.init({});
             mobileAutoplayController.init({});
             mobileSetBetController.init({});
         } else {    // Desktop
             footerController.initDesktop();
-            game.mainContainer.x = (game.width - model.el('gameMachine').width) / 2;
-            game.mainContainer.y = 60;
+
+            game.mainContainer.x = game.world.centerX;
+            game.mainContainer.y = game.world.centerY + config[model.state('res')].mainContainer.y;
 
             settings.initDesktopSettings(game);
             panelController.init();

@@ -15,13 +15,10 @@ export let view = (() => {
             style = {font: '60px Helvetice, Arial', fill: '#e8b075', align: 'center'}
         }) {
             if (winTotalData === 0) return;
-
-            let gameMachine = model.el('gameMachine');
-
-            let winTotal = game.add.sprite(gameMachine.width / 2, gameMachine.height / 2, 'winTotal', null, container);
+            let winTotal = game.add.sprite(0, 0, 'winTotal', null, container);
             winTotal.anchor.set(0.5);
 
-            let winTotalText = game.add.text(gameMachine.width / 2, gameMachine.height / 2, winTotalData, style, container);
+            let winTotalText = game.add.text(0, 5, winTotalData, style, container);
             winTotalText.anchor.set(0.5);
         },
 
@@ -33,8 +30,10 @@ export let view = (() => {
         }) {
             let winSplash = game.add.sprite(0, 0, 'win', null, container);
                 winSplash.anchor.set(0.5);
-                winSplash.x = config[model.state('res')].win[number][ind].x;
-                winSplash.y = config[model.state('res')].win[number][ind].y;
+
+                let gameMachine = model.el('gameMachine');
+                winSplash.x = config[model.state('res')].win[number][ind].x - gameMachine.width / 2;
+                winSplash.y = config[model.state('res')].win[number][ind].y - gameMachine.height / 2 - 25;
                 winSplash.animations.add('win', Phaser.Animation.generateFrameNames('Splash-Splash', 1, 14, '.png', 1), 15, false);
                 winSplash.animations.play('win');
                 winSplash.animations.getAnimation('win').killOnComplete = true;
@@ -160,6 +159,7 @@ export let view = (() => {
             container = model.group('winTop'),
             game = model.el('game')
         }) {
+            let gameMachine = model.el('gameMachine');
             let winValue = line.Win;
             let countValue = line.Count;
             let lineValue = line.Line;
@@ -185,22 +185,23 @@ export let view = (() => {
                         }
                     });
                 });
+
                 if (model.state('mobile')) {
-                    x = 192 * (lastWheel + 0.5) + 105;
-                    y = 180 * (lastElement + 0.5) + 135;
+                    x = 192 * (lastWheel + 0.5) + 105 - gameMachine.width / 2;
+                    y = 180 * (lastElement + 0.5) + 135 - gameMachine.height / 2 - 25;
                 } else {
-                    x = 256 * (lastWheel + 0.5) + 140;
-                    y = 240 * (lastElement + 0.5) + 180;
+                    x = 256 * (lastWheel + 0.5) + 140 - gameMachine.width / 2;
+                    y = 240 * (lastElement + 0.5) + 180 - gameMachine.height / 2 - 25;
                 }
             }
 
             if (!scatter) {
                 if (model.state('mobile')) {
-                    x = 192 * (countValue - 0.5) + 105;
-                    y = 180 * (currentLineY + 0.5) + 135;
+                    x = 192 * (countValue - 0.5) + 105 - gameMachine.width / 2;
+                    y = 180 * (currentLineY + 0.5) + 135 - gameMachine.height / 2 - 25;
                 } else {
-                    x = 256 * (countValue - 0.5) + 140;
-                    y = 240 * (currentLineY + 0.5) + 180;
+                    x = 256 * (countValue - 0.5) + 140 - gameMachine.width / 2;
+                    y = 240 * (currentLineY + 0.5) + 180 - gameMachine.height / 2 - 25;
                 }
             }
 

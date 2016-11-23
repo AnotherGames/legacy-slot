@@ -80,10 +80,12 @@ export let view = (() => {
         }) {
             let mainGroup = game.mainContainer;
 
-            let gameBG = game.add.sprite(config[model.state('res')].machine.x, config[model.state('res')].machine.y, 'gameBG', null, mainGroup);
+            let gameBG = game.add.sprite(0, 0, 'gameBG', null, mainGroup);
+            gameBG.anchor.set(0.5);
             model.el('gameBG', gameBG);
 
-            let gameMachine = game.add.sprite(0, 0, 'gameMachine', null, mainGroup);
+            let gameMachine = game.add.sprite(0, config[model.state('res')].gameMachine.y, 'gameMachine', null, mainGroup);
+            gameMachine.anchor.set(0.5);
             model.el('gameMachine', gameMachine);
 
             let gameLogo = game.add.sprite(gameMachine.width / 2 + 30, 5, 'gameLogo', null, mainGroup);
@@ -103,8 +105,6 @@ export let view = (() => {
             model.group('winTop', game.winTopContainer);
             mainGroup.addAt(game.winTopContainer, 3);
 
-            machineGroup.position.set(mainGroup.width / 2 + config[model.state('res')].machine.x, mainGroup.height / 2);
-
             machineGroup.glistaLightContainer = game.add.group();
             model.el('glistaLightContainer', machineGroup.glistaLightContainer);
             machineGroup.add(machineGroup.glistaLightContainer);
@@ -122,20 +122,23 @@ export let view = (() => {
             game = model.el('game'),
             machineGroup = model.el('machineContainer')
         }) {
-            let maskMarginX = config[model.state('res')].machine.x;
-            console.log('Mask Margin: ', maskMarginX);
-            if (model.state('mobile')) {
-                maskMarginX += model.data('mainXLeft');
-            } else {
-                maskMarginX += (game.width - game.mainContainer.width) / 2;
-            }
-
-            console.log('Mask Margin after: ', maskMarginX);
-
             const elSize = config[model.state('res')].elements;
             let mask = game.add.graphics();
             mask.beginFill(0x000000);
-            mask.drawRect(maskMarginX, config[model.state('res')].machine.y, elSize.width * 5, elSize.height * 3);
+
+            let maskX;
+            if (model.state('mobile')) {
+                maskX = model.data('mainXLeft');
+            } else {
+                maskX = game.world.centerX;
+            }
+
+            mask.drawRect(
+                maskX,
+                game.world.centerY + config[model.state('res')].mainContainer.y,
+                elSize.width * 5,
+                elSize.height * 3);
+            mask.pivot.set(elSize.width * 2.5, elSize.height * 1.5);
             machineGroup.mask = mask;
 
             if (model.state('side') === 'right')
@@ -153,7 +156,7 @@ export let view = (() => {
             return darkness;
         },
 
-        showPopup: function({
+        showPopup: function ({
             message = 'popup',
             container = model.group('popup'),
             font = 'normal 54px Arial',

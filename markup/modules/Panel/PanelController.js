@@ -50,7 +50,7 @@ export let controller = (() => {
         let game = model.el('game');
 
         view.draw.PanelBG({
-            x: model.group('main').x + 38,
+            x: model.group('main').x,
             deltaY: -20,
             frameName: 'uiFS'
         });

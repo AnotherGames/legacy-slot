@@ -68,7 +68,6 @@ export class Wheel {
         this.game = param.game;
         this.parent = param.parent;
         this.position = param.position;
-        this.position.y += 10;
         this.elSize = param.elSize;
         this.currentScreen = param.currentScreen;
         // инитим внутрение параметры
