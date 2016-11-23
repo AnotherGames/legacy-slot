@@ -27,19 +27,7 @@ export let view = (() => {
         const game = model.el('game');
         let BGLogo = game.add.sprite(50, game.height * 0.85, 'logos');
         model.el('BGLogo', BGLogo);
-        return BGLogo;
-    }
-
-    function drawLuchi() {
-        const game = model.el('game');
-        let deltaY = 50;
-        if (model.state('desktop')) {
-            deltaY = 150;
-        }
-        let luchi = game.add.sprite(game.world.centerX, game.world.centerY - deltaY, 'luchi');
-        luchi.anchor.set(0.5);
-        model.el('luchi', luchi);
-        return luchi;
+        return BGLogo; 
     }
 
     function drawLogo() {
@@ -48,10 +36,9 @@ export let view = (() => {
         if (model.state('desktop')) {
             deltaY = 150;
         }
-        let initLogo = game.add.sprite(game.world.centerX, game.world.centerY - deltaY, 'initLogo', null);
-            initLogo.anchor.set(0.5);
-            initLogo.scale.setTo(0.1, 0.1);
-        game.add.tween(initLogo.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true);
+        let initLogo = game.add.spine(game.world.centerX, game.world.centerY - deltaY, 'logo');
+        initLogo.setAnimationByName(0, '1', true);
+
         model.el('initLogo', initLogo);
         return initLogo;
     }
@@ -108,7 +95,6 @@ export let view = (() => {
         stopMusic,
         drawBG,
         drawBGLogo,
-        drawLuchi,
         drawLogo,
         drawPlay,
         playYoyoTween,
