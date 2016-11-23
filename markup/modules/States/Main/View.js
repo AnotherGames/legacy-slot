@@ -88,8 +88,8 @@ export let view = (() => {
             gameMachine.anchor.set(0.5);
             model.el('gameMachine', gameMachine);
 
-            let gameLogo = game.add.sprite(gameMachine.width / 2 + 30, 5, 'gameLogo', null, mainGroup);
-            gameLogo.anchor.set(0.5);
+            let gameLogo = game.add.sprite(0, -game.height / 2 + 50, 'gameLogo', null, mainGroup);
+            gameLogo.anchor.set(0.5, 0);
             model.el('gameLogo', gameLogo);
         },
 
