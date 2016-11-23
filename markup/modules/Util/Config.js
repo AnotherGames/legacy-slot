@@ -24,15 +24,11 @@ export let config = {
             x: 0,
             y: -30
         },
-
         elements: {
             width: 256,
             height: 240
         },
-        machine: {
-            x: 60,
-            y: 113
-        },
+
         win: {
             '4': [{x: 50, y: 160}, {x: 1355, y: 160}],
             '2': [{x: 45, y: 225}, {x: 1360, y: 225}],
@@ -55,15 +51,11 @@ export let config = {
             x: 0,
             y: -25
         },
-
         elements: {
             width: 192,
             height: 180
         },
-        machine: {
-            x: 45,
-            y: 85
-        },
+
         win: {
             '4': [{x: 40, y: 120}, {x: 1015, y: 120}],
             '2': [{x: 30, y: 170}, {x: 1015, y: 170}],
