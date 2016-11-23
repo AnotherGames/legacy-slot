@@ -23,8 +23,8 @@ export let controller = (() => {
                 game,
                 parent: elementsContainer,
                 position: {
-                    x: i * elSize.width - config[model.state('res')].machine.x,
-                    y: 0 - config[model.state('res')].machine.y * 2
+                    x: i * elSize.width, // - config[model.state('res')].machine.x,
+                    y: -elSize.height // - config[model.state('res')].machine.y * 2
                 },
                 elSize,
                 currentScreen: firstWheels[i + 2]

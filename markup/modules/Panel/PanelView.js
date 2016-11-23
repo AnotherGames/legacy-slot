@@ -7,15 +7,16 @@ export let view = (() => {
         PanelBG: function({
             game = model.el('game'),
             container = model.group('panel'),
-            x = model.group('main').x + 45,
+            x = game.world.centerX,
             y = model.el('gameMachine').height - 28,
             frameName = 'ui',
             deltaY = 0
         }) {
             container.x = x;
             container.y = y;
-
             const panelBG = game.add.sprite(0, deltaY, frameName, null, container);
+
+            container.pivot.set(panelBG.width / 2, 0);
             return panelBG;
         },
 

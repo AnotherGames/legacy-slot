@@ -1,7 +1,7 @@
 import { model } from 'modules/Model/Model';
 
 export let noConnect = {
-    fsLength: 3,
+    fsLength: 100,
 
     Initialise: {
         Balance: {
@@ -257,7 +257,7 @@ export let noConnect = {
         if (model.state('FSMode')) {
             return this._Roll.fs.scatter;
         }
-        return this._Roll.winAxes;
+        return this._Roll.goFS;
     },
 
     Ready: {

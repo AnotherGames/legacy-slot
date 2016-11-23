@@ -16,6 +16,15 @@ export let config = {
         time: 2000
     },
     fullHD: {
+        mainContainer: {
+            x: 0,
+            y: -80
+        },
+        gameMachine: {
+            x: 0,
+            y: -30
+        },
+
         elements: {
             width: 256,
             height: 240
@@ -38,6 +47,15 @@ export let config = {
         }
     },
     HD: {
+        mainContainer: {
+            x: 0,
+            y: 0
+        },
+        gameMachine: {
+            x: 0,
+            y: -25
+        },
+
         elements: {
             width: 192,
             height: 180
