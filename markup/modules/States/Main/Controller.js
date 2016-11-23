@@ -69,7 +69,8 @@ export class Main {
             mobileSetBetController.init({});
         } else {    // Desktop
             footerController.initDesktop();
-            game.mainContainer.x = (game.width - game.mainContainer.width) / 2;
+            game.mainContainer.x = (game.width - model.el('gameMachine').width) / 2;
+            game.mainContainer.y = 60;
 
             settings.initDesktopSettings(game);
             panelController.init();

@@ -82,8 +82,13 @@ export let view = (() => {
 
             let gameBG = game.add.sprite(config[model.state('res')].machine.x, config[model.state('res')].machine.y, 'gameBG', null, mainGroup);
             model.el('gameBG', gameBG);
+
             let gameMachine = game.add.sprite(0, 0, 'gameMachine', null, mainGroup);
             model.el('gameMachine', gameMachine);
+
+            let gameLogo = game.add.sprite(gameMachine.width / 2 + 30, 5, 'gameLogo', null, mainGroup);
+            gameLogo.anchor.set(0.5);
+            model.el('gameLogo', gameLogo);
         },
 
         machineContainer: function ({
@@ -118,11 +123,14 @@ export let view = (() => {
             machineGroup = model.el('machineContainer')
         }) {
             let maskMarginX = config[model.state('res')].machine.x;
+            console.log('Mask Margin: ', maskMarginX);
             if (model.state('mobile')) {
                 maskMarginX += model.data('mainXLeft');
             } else {
                 maskMarginX += (game.width - game.mainContainer.width) / 2;
             }
+
+            console.log('Mask Margin after: ', maskMarginX);
 
             const elSize = config[model.state('res')].elements;
             let mask = game.add.graphics();
