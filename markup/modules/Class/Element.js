@@ -25,16 +25,16 @@ export class Element {
 
         this.sprite = game.add.sprite(param.x, param.y, 'elements', null, param.parent);
 
-        this._addAnimation({ el: 1, n: false, w: 30 });
-        this._addAnimation({ el: 2, n: 30, w: 30 });
-        this._addAnimation({ el: 3, n: false, w: 30 });
-        this._addAnimation({ el: 4, n: 30, w: 30 });
-        this._addAnimation({ el: 5, n: false, w: 30 });
-        this._addAnimation({ el: 6, n: 30, w: 30 });
-        this._addAnimation({ el: 7, n: false, w: 30 });
-        this._addAnimation({ el: 8, n: 30, w: 30 });
-        this._addAnimation({ el: 9, n: 30, w: 30 });
-        this._addAnimation({ el: 10, n: 30, w: 30 });
+        this._addAnimation({ el: 1, n: false, w: 16 });
+        this._addAnimation({ el: 2, n: 16, w: 16 });
+        this._addAnimation({ el: 3, n: false, w: 16 });
+        this._addAnimation({ el: 4, n: 16, w: 16 });
+        this._addAnimation({ el: 5, n: false, w: 16 });
+        this._addAnimation({ el: 6, n: 16, w: 16 });
+        this._addAnimation({ el: 7, n: false, w: 16 });
+        this._addAnimation({ el: 8, n: 16, w: 16 });
+        this._addAnimation({ el: 9, n: 16, w: 16 });
+        this._addAnimation({ el: 10, n: 16, w: 16 });
         // this._addAnimation({ el: 11, n: 15, w: 15 });
 
         this.sprite.animations.play(`${param.el}-${param.animation}`);
@@ -74,8 +74,8 @@ export class Element {
         this.sprite.animations.add(`${options.el}-n`,
             options.n
             ? Phaser.Animation.generateFrameNames(`${prefix}${options.el}-n-`, 1, options.n, '.png', 2)
-            : [`${prefix}${options.el}-n-01.png`], 30, true);
-        this.sprite.animations.add(`${options.el}-b`, [`${prefix}${options.el}-b-01.png`], 30, true);
-        this.sprite.animations.add(`${options.el}-w`, Phaser.Animation.generateFrameNames(`${prefix}${options.el}-w-`, 1, options.w, '.png', 2), 30, false);
+            : [`${prefix}${options.el}-n-01.png`], 16, true);
+        this.sprite.animations.add(`${options.el}-b`, [`${prefix}${options.el}-b-01.png`], 16, true);
+        this.sprite.animations.add(`${options.el}-w`, Phaser.Animation.generateFrameNames(`${prefix}${options.el}-w-`, 1, options.w, '.png', 2), 16, false);
     }
 }
