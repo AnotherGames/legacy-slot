@@ -39,10 +39,10 @@ export let controller = (() => {
     function setButtonsX() {
         const spinButtonWidth = 173; // Add some magic
         model.el('spinButtonWidth', spinButtonWidth);
-        let buttonsDelta = (game.width - model.group('main').width - spinButtonWidth) / 4;
+        let buttonsDelta = (game.width - model.el('gameMachine').width - spinButtonWidth) / 4;
         model.el('buttonsDelta', buttonsDelta);
 
-        let xRight = 3 * buttonsDelta + model.group('main').width + (spinButtonWidth / 2);
+        let xRight = 3 * buttonsDelta + model.el('gameMachine').width + (spinButtonWidth / 2);
         let xLeft = buttonsDelta + spinButtonWidth / 2;
         model.data('buttonsXRight', xRight);
         model.data('buttonsXLeft', xLeft);
