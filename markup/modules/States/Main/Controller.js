@@ -115,6 +115,7 @@ export class Main {
         keyboard.Add({
             key: 32,
             down: function () {
+                if (model.state('lockedButtons')) return;
                 events.trigger('roll:request');
                 events.trigger('roll:fast');
                 return true;
