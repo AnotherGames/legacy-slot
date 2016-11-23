@@ -44,7 +44,7 @@ export class FS {
         game.frameAnims = [];
         game.spriteAnims = [];
 
-        game.stage.disableVisibilityChange = true;
+        game.stage.disableVisibilityChange = false;
 
         model.state('FSMode', true);
 
