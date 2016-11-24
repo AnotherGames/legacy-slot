@@ -50,7 +50,7 @@ export class FS {
 
         fsView.create.groups({});
 
-        this.keyboardEventsRemove();
+        keyboard.removeDefaultKey();
 
         if (model.state('firstFS') === false) {
             events.on('fs:init', this.initFS.bind(this));
@@ -175,19 +175,6 @@ export class FS {
         game.frameAnims.forEach((anim) => {
             anim();
         });
-    }
-
-    keyboardEventsRemove() {
-        // Space
-        keyboard.Remove(32);
-        // Up
-        keyboard.Remove(38);
-        // Down
-        keyboard.Remove(40);
-        // Right
-        keyboard.Remove(39);
-        // Left
-        keyboard.Remove(37);
     }
 
     initFS(amount) {
