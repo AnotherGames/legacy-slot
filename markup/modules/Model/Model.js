@@ -81,9 +81,9 @@ export let model = (() => {
         model.state('music', true);
         model.state('autoClosed', true);
         model.state('isAnimBG', true);
+        model.state('autoPanel', false);
 
         events.trigger('model:states:init');
-
     }
 
     function initSettings(settings) {

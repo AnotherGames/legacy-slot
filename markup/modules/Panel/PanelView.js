@@ -183,12 +183,12 @@ export let view = (() => {
             amount = 10,
             x = 525,
             y = model.el('autoButtonDesk').y,
-            font = '60px Arial, Helvetica',
+            font = '45px Arial, Helvetica',
             color = '#fff'
         }) {
-            if (amount >= 250) {
-                font = '40px Arial, Helvetica';
-            }
+            // if (amount >= 250) {
+            //     font = '40px Arial, Helvetica';
+            // }
             let autoCount = game.add.text(x, y, amount, {font: font, fill: color, align: 'center'}, container);
                 autoCount.anchor.set(0.5);
                 autoCount.alpha = 0;
@@ -233,10 +233,13 @@ export let view = (() => {
         autoPanel: function({
             game = model.el('game'),
             finalX = 495,
-            time = 250
+            time = 350
         }) {
             let autoDesktopContainer = model.group('autoDesktop');
             return game.add.tween(autoDesktopContainer).to( { x: finalX, alpha: 1 }, time, 'Linear', true)
+                .onComplete.add(() => {
+                    model.state('autoPanel', true);
+                });
         },
 
         info: function({
@@ -293,10 +296,14 @@ export let view = (() => {
         autoPanel: function({
             game = model.el('game'),
             finalX = 650,
-            time = 250
+            time = 350
         }) {
+            model.state('autoPanel', false);
             let autoDesktopContainer = model.group('autoDesktop');
             return game.add.tween(autoDesktopContainer).to( { x: finalX, alpha: 0 }, time, 'Linear', true)
+                .onComplete.add(() => {
+                    model.state('autoPanel', false);
+                });
         }
     }
 

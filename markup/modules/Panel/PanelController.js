@@ -195,9 +195,11 @@ export let controller = (() => {
         },
 
         panelButton: function() {
+            if (!model.state('autoPanel')) return ;
             if (!model.state('autoEnd') || model.state('roll:progress')) return;
             const amount = this.amount;
             events.trigger('autoplay:init', amount);
+            model.state('autoPanel', false);
         }
 
     }
