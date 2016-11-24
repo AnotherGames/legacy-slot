@@ -126,6 +126,7 @@ export class Main {
         keyboard.Add({
             key: 38,
             down: function () {
+                if (model.state('lockedButtons')) return;
                 model.changeCoin({up: true});
                 return true;
             }
@@ -134,6 +135,7 @@ export class Main {
         keyboard.Add({
             key: 40,
             down: function () {
+                if (model.state('lockedButtons')) return;
                 model.changeCoin({down: true});
                 return true;
             }
@@ -142,6 +144,7 @@ export class Main {
         keyboard.Add({
             key: 39,
             down: function () {
+                if (model.state('lockedButtons')) return;
                 model.changeBet({up: true});
                 return true;
             }
@@ -150,6 +153,7 @@ export class Main {
         keyboard.Add({
             key: 37,
             down: function () {
+                if (model.state('lockedButtons')) return;
                 model.changeBet({down: true});
                 return true;
             }
