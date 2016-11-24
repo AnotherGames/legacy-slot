@@ -28,23 +28,37 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('winTop')
         }) {
-            let winSplash = game.add.sprite(0, 0, 'win', null, container);
-                winSplash.anchor.set(0.5);
+            let leftArr = model.el('leftArr');
+            let winSplash = leftArr.filter((el) => {
+                return el.name === number;
+            })[0];
 
-                let gameMachine = model.el('gameMachine');
-                winSplash.x = config[model.state('res')].win[number][ind].x - gameMachine.width / 2;
-                winSplash.y = config[model.state('res')].win[number][ind].y - gameMachine.height / 2 - 25;
-                winSplash.animations.add('win', Phaser.Animation.generateFrameNames('Splash-Splash', 1, 14, '.png', 1), 15, false);
-                winSplash.animations.play('win');
-                winSplash.animations.getAnimation('win').killOnComplete = true;
-            return winSplash;
+            winSplash.animations.add('win', Phaser.Animation.generateFrameNames('line_splash-' + number + '_', 1, 12, '.png', 1), 15, false);
+            winSplash.animations.play('win');
+            winSplash.animations.getAnimation('win').onComplete.add(() => {
+                winSplash.frameName = 'line_splash-' + number + '_12.png';
+            });
+
+
+            let rightArr = model.el('rightArr');
+            let winSplashRight = rightArr.filter((el) => {
+                return el.name === number;
+            })[0];
+
+            winSplashRight.animations.add('win', Phaser.Animation.generateFrameNames('line_splash-' + number + '_', 1, 12, '.png', 1), 15, false);
+            winSplashRight.animations.play('win');
+            winSplashRight.animations.getAnimation('win').onComplete.add(() => {
+                winSplashRight.frameName = 'line_splash-' + number + '_12.png';
+            });
+
+            // return winSplash;
         },
 
         WinNumber: function ({number}) {
             if (number < 0) return;
 
             draw.WinSplash({number, ind: 0});
-            draw.WinSplash({number, ind: 1});
+            // draw.WinSplash({number, ind: 1});
 
         },
 
@@ -69,8 +83,20 @@ export let view = (() => {
                     let wheel = wheels[col].elements;
                     let coord = line[col].Y;
                     let element = wheel[coord];
-                        element.sprite.alpha = 1;
                         element.win();
+                        element.sprite.alpha = 1;
+                        element.sprite.scale.set(0.3);
+                        if (model.state('desktop')) {
+                            game.add.tween(element.sprite.scale).to({x: 1.2,  y: 1.2}, 700, Phaser.Easing.Bounce.Out, true)
+                                .onComplete.add(() => {
+                                    game.add.tween(element.sprite.scale).to({x: 1.0,  y: 1.0}, 400, 'Linear', true)
+                                }, this);
+                        } else {
+                            game.add.tween(element.sprite.scale).to({x: 1.8,  y: 1.8}, 700, Phaser.Easing.Bounce.Out, true)
+                                .onComplete.add(() => {
+                                    game.add.tween(element.sprite.scale).to({x: 1.5,  y: 1.5}, 400, 'Linear', true)
+                                }, this);
+                        }
                 }
 
             } else {
@@ -85,8 +111,19 @@ export let view = (() => {
                         if (elementName == '10') {
                             element.win();
                             element.sprite.alpha = 1;
+                            element.sprite.scale.set(0.3);
+                            if (model.state('desktop')) {
+                                game.add.tween(element.sprite.scale).to({x: 1.2,  y: 1.2}, 700, Phaser.Easing.Bounce.Out, true)
+                                    .onComplete.add(() => {
+                                        game.add.tween(element.sprite.scale).to({x: 1.0,  y: 1.0}, 400, 'Linear', true)
+                                    }, this);
+                            } else {
+                                game.add.tween(element.sprite.scale).to({x: 1.7,  y: 1.7}, 700, Phaser.Easing.Bounce.Out, true)
+                                    .onComplete.add(() => {
+                                        game.add.tween(element.sprite.scale).to({x: 1.5,  y: 1.5}, 400, 'Linear', true)
+                                    }, this);
+                            }
 
-                            let game = model.el('game');
                             game.time.events.add(1000, () => {
                                 events.trigger('win:clean');
                             });
@@ -188,20 +225,20 @@ export let view = (() => {
 
                 if (model.state('mobile')) {
                     x = 192 * (lastWheel + 0.5) + 105 - gameMachine.width / 2;
-                    y = 180 * (lastElement + 0.5) + 135 - gameMachine.height / 2 - 25;
+                    y = 180 * (lastElement + 0.5) + 130 - gameMachine.height / 2 - 25;
                 } else {
                     x = 256 * (lastWheel + 0.5) + 140 - gameMachine.width / 2;
-                    y = 240 * (lastElement + 0.5) + 180 - gameMachine.height / 2 - 25;
+                    y = 240 * (lastElement + 0.5) + 155 - gameMachine.height / 2 - 25;
                 }
             }
 
             if (!scatter) {
                 if (model.state('mobile')) {
                     x = 192 * (countValue - 0.5) + 105 - gameMachine.width / 2;
-                    y = 180 * (currentLineY + 0.5) + 135 - gameMachine.height / 2 - 25;
+                    y = 180 * (currentLineY + 0.5) + 130 - gameMachine.height / 2 - 25;
                 } else {
                     x = 256 * (countValue - 0.5) + 140 - gameMachine.width / 2;
-                    y = 240 * (currentLineY + 0.5) + 180 - gameMachine.height / 2 - 25;
+                    y = 240 * (currentLineY + 0.5) + 155 - gameMachine.height / 2 - 25;
                 }
             }
 

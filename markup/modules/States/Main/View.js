@@ -88,9 +88,46 @@ export let view = (() => {
             gameMachine.anchor.set(0.5);
             model.el('gameMachine', gameMachine);
 
-            let gameLogo = game.add.sprite(0, -game.height / 2 + 50, 'gameLogo', null, mainGroup);
+            let deltaY = 50;
+            if (model.state('mobile')) {
+                deltaY = 10;
+            }
+
+            let gameLogo = game.add.sprite(0, -game.height / 2 + deltaY, 'gameLogo', null, mainGroup);
             gameLogo.anchor.set(0.5, 0);
             model.el('gameLogo', gameLogo);
+        },
+
+        lineNumbers: function ({
+            game = model.el('game')
+        }) {
+            let mainGroup = game.mainContainer;
+            let gameMachine = model.el('gameMachine');
+
+            let leftArr = [];
+
+            for (let i = 1; i < 11; i++) {
+                let name = i;
+                let lineNumber = game.add.sprite(config[model.state('res')].win[i][0].x - gameMachine.width / 2, config[model.state('res')].win[i][0].y - gameMachine.height / 2 - 60, 'lineNumbers', 'line_splash-' + i +'_0.png', mainGroup);
+                lineNumber.normal = function() {lineNumber.frameName = 'line_splash-' + name + '_0.png'};
+                lineNumber.name = name;
+                lineNumber.anchor.set(0.5);
+                leftArr.push(lineNumber);
+            }
+
+            model.el('leftArr', leftArr);
+
+            let rightArr = [];
+
+            for (let i = 1; i < 11; i++) {
+                let name = i;
+                let lineNumber = game.add.sprite(config[model.state('res')].win[i][1].x - gameMachine.width / 2, config[model.state('res')].win[i][0].y - gameMachine.height / 2 - 60, 'lineNumbers', 'line_splash-' + i +'_0.png', mainGroup);
+                lineNumber.normal = function() {lineNumber.frameName = 'line_splash-' + name + '_0.png'};
+                lineNumber.name = name;
+                lineNumber.anchor.set(0.5);
+                rightArr.push(lineNumber);
+            }
+            model.el('rightArr', rightArr);
         },
 
         machineContainer: function ({
