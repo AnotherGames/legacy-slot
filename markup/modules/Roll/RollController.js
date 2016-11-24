@@ -36,6 +36,7 @@ export let controller = (() => {
 
     function startRoll(options) {
         if (!model.state('ready')) return;
+        model.state('lockedButtons', true);
         let game = model.el('game');
         if (!model.checkBalance()) {
             console.warn('Not enought money!');
@@ -115,6 +116,7 @@ export let controller = (() => {
 
     function endRoll() {
         if (model.state('ready')) return;
+        model.state('lockedButtons', false);
         request.send('Ready').then((data) => {
 
             if (model.state('FSMode')) {
