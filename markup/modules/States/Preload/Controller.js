@@ -71,7 +71,7 @@ export class Preload {
         game.load.image('winLine', 'win/winLineRect.png');
         game.load.image('winTotal', 'win/winTotalRect.png');
         game.load.atlasJSONArray('win', 'win/win.png', 'win/win.json');
-        game.load.atlasJSONArray('win', 'win/LineNumbers.png', 'win/LineNumbers.json');
+        game.load.atlasJSONArray('lineNumbers', 'win/lineNumbers.png', 'win/lineNumbers.json');
         game.load.atlasJSONArray('numbers', 'numbers/multiNumbers.png', 'numbers/multiNumbers.json');
         game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
         game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');

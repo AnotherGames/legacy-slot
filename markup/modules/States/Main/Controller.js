@@ -46,6 +46,7 @@ export class Main {
         mainView.draw.mainBG({});
         mainView.draw.mainContainer({});
         mainView.draw.machineContainer({});
+        mainView.draw.lineNumbers({});
 
         rollController.init();
 
@@ -53,8 +54,8 @@ export class Main {
             footerController.initMobile();
             buttonsController.init();
 
-            let mainXLeft = model.el('buttonsDelta') * 2 + game.mainContainer.width / 2;
-            let mainXRight = game.width - game.mainContainer.width - model.el('buttonsDelta') * 2 + game.mainContainer.width / 2;
+            let mainXLeft = model.el('buttonsDelta') * 2 + model.el('gameMachine').width / 2;
+            let mainXRight = game.width - model.el('gameMachine').width - model.el('buttonsDelta') * 2 + model.el('gameMachine').width / 2;
             model.data('mainXLeft', mainXLeft);
             model.data('mainXRight', mainXRight);
 

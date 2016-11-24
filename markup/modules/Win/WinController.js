@@ -63,6 +63,16 @@ export let controller = (() => {
         let container = model.group('winTop');
         model.data('glistaFiredCounter', 0);
         model.data('glistaDoneCounter', 0);
+        let leftArr = model.el('leftArr');
+        let rightArr = model.el('rightArr');
+
+        leftArr.forEach((el) => {
+            el.normal();
+        });
+
+        rightArr.forEach((el) => {
+            el.normal();
+        })
 
         if (cleanAlpha) {
             let wheels = model.el('wheels');
@@ -97,11 +107,11 @@ export let controller = (() => {
             if (currentLine.Line > 0) {
                 model.state('axesPlaing', false);
                 view.draw.WinNumber({number: currentLine.Line});
-                view.draw.WinElements({number: currentLine.Line, amount: currentLine.Count, alpha: 0.5});
+                view.draw.WinElements({number: currentLine.Line, amount: currentLine.Count, alpha: 1});
                 view.draw.WinGlista({number: currentLine.Line});
                 view.draw.WinLineTable({line: currentLine});
             } else {
-                view.draw.WinElements({number: currentLine.Line, amount: currentLine.Count, alpha: 0.5});
+                view.draw.WinElements({number: currentLine.Line, amount: currentLine.Count, alpha: 1});
                 view.draw.WinLineTable({line: currentLine, scatter: true});
             }
         } else {

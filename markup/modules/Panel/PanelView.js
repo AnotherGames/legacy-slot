@@ -7,8 +7,8 @@ export let view = (() => {
         PanelBG: function({
             game = model.el('game'),
             container = model.group('panel'),
-            x = game.world.centerX,
-            y = model.el('gameMachine').height + 42,
+            x = game.world.centerX + 4,
+            y = model.el('gameMachine').height + 43,
             frameName = 'ui',
             deltaY = 0
         }) {
