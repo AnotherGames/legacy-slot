@@ -56,11 +56,11 @@ export let view = (() => {
             game = model.el('game')
         }) {
 
-            wheels.forEach((wheel) => {
-                wheel.elements.forEach((element) => {
-                    element.sprite.alpha = alpha;
-                });
-            });
+            // wheels.forEach((wheel) => {
+            //     wheel.elements.forEach((element) => {
+            //         element.sprite.alpha = alpha;
+            //     });
+            // });
 
             if (number > 0) {
                 let line = model.data('lines')[number - 1];
@@ -69,7 +69,7 @@ export let view = (() => {
                     let wheel = wheels[col].elements;
                     let coord = line[col].Y;
                     let element = wheel[coord];
-                        element.sprite.alpha = 1;
+                        // element.sprite.alpha = 1;
                         element.win();
                 }
 
@@ -84,7 +84,7 @@ export let view = (() => {
 
                         if (elementName == '10') {
                             element.win();
-                            element.sprite.alpha = 1;
+                            // element.sprite.alpha = 1;
 
                             let game = model.el('game');
                             game.time.events.add(1000, () => {

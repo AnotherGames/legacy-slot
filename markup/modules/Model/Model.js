@@ -80,7 +80,7 @@ export let model = (() => {
         model.state('volume', 1);
         model.state('music', true);
         model.state('autoClosed', true);
-        model.state('isAnimBG', true);
+        model.state('isAnimBG', false);
 
         events.trigger('model:states:init');
 

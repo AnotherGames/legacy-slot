@@ -100,7 +100,7 @@ export class Wheel {
                 x: 0,
                 y: i * this.elSize.height * -1
             });
-            elem.sprite.anchor.set(0.5);
+            // elem.sprite.anchor.set(0.5);
             this.items.push(elem);
             this.game.spriteAnims.push(elem);
         }
@@ -113,7 +113,7 @@ export class Wheel {
             anim: String
         }   */
     _upElement(param) {
-        param.item.sprite.y = param.posY;
+        param.item.group.y = param.posY;
         param.item.play(param.anim);
     }
     update(currElems = this.currentScreen) {
