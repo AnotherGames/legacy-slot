@@ -184,12 +184,12 @@ export let view = (() => {
             x = 525,
             y = model.el('autoButtonDesk').y,
             font = '60px Arial, Helvetica',
-            color = '#fff'
+            color = '#e5c14c'
         }) {
             if (amount >= 250) {
                 font = '40px Arial, Helvetica';
             }
-            let autoCount = game.add.text(x, y, amount, {font: font, fill: color, align: 'center'}, container);
+            let autoCount = game.add.text(x, y, amount, {font: font, fill: color, align: 'center', stroke: '#000000', strokeThickness: 2}, container);
                 autoCount.anchor.set(0.5);
                 autoCount.alpha = 0;
             model.el('autoCount', autoCount);

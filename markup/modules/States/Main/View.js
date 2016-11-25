@@ -69,9 +69,9 @@ export let view = (() => {
                 mainBG.visible = false;
             } else {
                 animBG.visible = false;
-                for (let i = 0; i < 5; i++) {
-                    transitionView.addCloud({container: model.group('bg')});
-                }
+                // for (let i = 0; i < 5; i++) {
+                //     transitionView.addCloud({container: model.group('bg')});
+                // }
             }
         },
 

@@ -225,20 +225,20 @@ export let view = (() => {
 
                 if (model.state('mobile')) {
                     x = 192 * (lastWheel + 0.5) + 105 - gameMachine.width / 2;
-                    y = 180 * (lastElement + 0.5) + 130 - gameMachine.height / 2 - 25;
+                    y = 180 * (lastElement + 0.5) + 125 - gameMachine.height / 2 - 25;
                 } else {
                     x = 256 * (lastWheel + 0.5) + 140 - gameMachine.width / 2;
-                    y = 240 * (lastElement + 0.5) + 155 - gameMachine.height / 2 - 25;
+                    y = 240 * (lastElement + 0.5) + 150 - gameMachine.height / 2 - 25;
                 }
             }
 
             if (!scatter) {
                 if (model.state('mobile')) {
                     x = 192 * (countValue - 0.5) + 105 - gameMachine.width / 2;
-                    y = 180 * (currentLineY + 0.5) + 130 - gameMachine.height / 2 - 25;
+                    y = 180 * (currentLineY + 0.5) + 125 - gameMachine.height / 2 - 25;
                 } else {
                     x = 256 * (countValue - 0.5) + 140 - gameMachine.width / 2;
-                    y = 240 * (currentLineY + 0.5) + 155 - gameMachine.height / 2 - 25;
+                    y = 240 * (currentLineY + 0.5) + 150 - gameMachine.height / 2 - 25;
                 }
             }
 

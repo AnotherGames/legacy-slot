@@ -32,23 +32,23 @@ export let view = (() => {
         sound.music.fon.stop();
         sound.music.startPerehod.play();
 
-        const transitionBG = game.add.sprite(0, 0, 'initBG', null, transitionContainer);
+        const transitionBG = game.add.graphics(0, 0, container).beginFill(0x000000, 0.8).drawRect(0, 0, game.width, game.height);
         model.el('transitionBG', transitionBG);
 
         const cloudContainer = game.add.group();
         transitionContainer.add(cloudContainer);
         model.group('cloudContainer', cloudContainer);
-        for (let i = 0; i < 5; i++) {
-            addCloud({});
-        }
+        // for (let i = 0; i < 5; i++) {
+        //     addCloud({});
+        // }
 
-        const freeSpinsText = game.add.sprite(game.width / 2,
+        const freeSpinsBG = game.add.sprite(game.width / 2,
             -400,
-            'text',
-            'freeSpins.png',
+            'freeSpins',
+            'null.png',
             transitionContainer);
-        freeSpinsText.anchor.set(0.5);
-        model.el('freeSpinsText', freeSpinsText);
+        freeSpinsBG.anchor.set(0.5);
+        model.el('freeSpinsBG', freeSpinsBG);
 
         let freeSpinsCount = model.data('rollResponse').FreeSpinsLeft;
         const freeSpinsLevel = game.add.bitmapText(game.width / 2, -200, 'numbersFont', freeSpinsCount, 120, transitionContainer);
@@ -56,23 +56,23 @@ export let view = (() => {
         freeSpinsLevel.anchor.set(0.5);
         model.el('freeSpinsLevel', freeSpinsLevel);
 
-        const axeBig = game.add.sprite(game.width / 2 + 350,
-            game.world.height / 2,
-            'axe',
-            null,
-            transitionContainer);
-        axeBig.anchor.set(0.5);
-        axeBig.scale.setTo(0.1, 0.1);
-        model.el('axeBig', axeBig);
-
-        const axeSmall = game.add.sprite(game.width / 2 - 350,
-            game.world.height / 2 + 50,
-            'axeSmall',
-            null,
-            transitionContainer);
-        axeSmall.anchor.set(0.5);
-        axeSmall.scale.setTo(0.1, 0.1);
-        model.el('axeSmall', axeSmall);
+        // const axeBig = game.add.sprite(game.width / 2 + 350,
+        //     game.world.height / 2,
+        //     'axe',
+        //     null,
+        //     transitionContainer);
+        // axeBig.anchor.set(0.5);
+        // axeBig.scale.setTo(0.1, 0.1);
+        // model.el('axeBig', axeBig);
+        //
+        // const axeSmall = game.add.sprite(game.width / 2 - 350,
+        //     game.world.height / 2 + 50,
+        //     'axeSmall',
+        //     null,
+        //     transitionContainer);
+        // axeSmall.anchor.set(0.5);
+        // axeSmall.scale.setTo(0.1, 0.1);
+        // model.el('axeSmall', axeSmall);
 
         const continueText = game.add.sprite(game.width / 2,
             game.world.height * 0.75,
@@ -94,10 +94,10 @@ export let view = (() => {
         const axeSmall = model.el('axeSmall');
         const continueText = model.el('continueText');
 
-        game.add.tween(freeSpinsText).to({y: game.height * 0.2}, 1500, Phaser.Easing.Bounce.Out, true);
+        game.add.tween(freeSpinsBG).to({y: game.height * 0.2}, 1500, Phaser.Easing.Bounce.Out, true);
         game.add.tween(freeSpinsLevel).to({y: game.height / 2}, 1500, Phaser.Easing.Bounce.Out, true);
-        game.add.tween(axeBig.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true);
-        game.add.tween(axeSmall.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true);
+        // game.add.tween(axeBig.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true);
+        // game.add.tween(axeSmall.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true);
         game.add.tween(continueText.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true)
             .onComplete.add(() => {
                 continueText.rotation = 0.1;
@@ -165,9 +165,9 @@ export let view = (() => {
         const cloudContainer = game.add.group();
         transitionContainer.add(cloudContainer);
         model.group('cloudContainer', cloudContainer);
-        for (let i = 0; i < 5; i++) {
-            addCloud({});
-        }
+        // for (let i = 0; i < 5; i++) {
+        //     addCloud({});
+        // }
 
         let winTextFrame;
         if (model.data('fsMulti') === 7) {

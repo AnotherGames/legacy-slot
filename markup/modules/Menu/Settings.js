@@ -45,9 +45,9 @@ export let settings = (function () {
             } else {
                 mainBG.visible = true;
                 animMainBG.visible = false;
-                for (let i = 0; i < 5; i++) {
-                    transitionView.addCloud({container: model.group('bg')});
-                }
+                // for (let i = 0; i < 5; i++) {
+                //     transitionView.addCloud({container: model.group('bg')});
+                // }
             }
         });
         $('#optionAutoplay1').on('change', function () {
