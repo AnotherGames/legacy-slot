@@ -12,13 +12,13 @@ export let view = (() => {
             winTotalData,
             game = model.el('game'),
             container = model.group('winTop'),
-            style = {font: '60px Helvetice, Arial', fill: '#e8b075', align: 'center'}
+            style = {font: '66px Helvetica, Arial', fill: '#fee73f', align: 'center', stroke: '#000000', strokeThickness: 3}
         }) {
             if (winTotalData === 0) return;
             let winTotal = game.add.sprite(0, 0, 'winTotal', null, container);
             winTotal.anchor.set(0.5);
 
-            let winTotalText = game.add.text(0, 5, winTotalData, style, container);
+            let winTotalText = game.add.text(0, -5, winTotalData, style, container);
             winTotalText.anchor.set(0.5);
         },
 
