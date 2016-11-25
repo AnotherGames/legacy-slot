@@ -197,7 +197,8 @@ export let view = (() => {
             message = 'popup',
             container = model.group('popup'),
             font = 'normal 54px Arial',
-            color = '#e8b075'
+            color = '#e8b075',
+            onClick = true
         }) {
             console.log('i am showing popup');
             const game = model.el('game');
@@ -208,23 +209,29 @@ export let view = (() => {
             model.el('popup', popup);
             const popupText = game.add.text(game.width / 2, game.height / 2, message, {font: font, fill: color, align: 'center', wordWrap: true, wordWrapWidth: popup.width - 80}, container);
             popupText.anchor.set(0.5);
-
             overlay.inputEnabled = true;
-            overlay.input.priorityID = 2;
             popup.inputEnabled = true;
-            popup.input.priorityID = 3;
-            popup.events.onInputDown.add(() => {
-                container.removeAll();
-                if (message === 'Your session is closed. Please click to restart') {
-                    window.location.reload();
-                }
-            });
-            overlay.events.onInputDown.add(() => {
-                container.removeAll();
-                if (message === 'Your session is closed. Please click to restart') {
-                    window.location.reload();
-                }
-            });
+            if (onClick) {
+                overlay.input.priorityID = 2;
+                popup.input.priorityID = 3;
+                popup.events.onInputDown.add(() => {
+                    container.removeAll();
+                    if (message === 'Your session is closed. Please click to restart'
+                    || message === 'The connection failed. Please click to restart') {
+                        window.location.reload();
+                    }
+                });
+                overlay.events.onInputDown.add(() => {
+                    container.removeAll();
+                    if (message === 'Your session is closed. Please click to restart'
+                    || message === 'The connection failed. Please click to restart') {
+                        window.location.reload();
+                    }
+                });
+            }
+
+            container.delete = function() {container.removeAll()};
+            return container;
         }
     };
 
