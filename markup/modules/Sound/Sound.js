@@ -112,6 +112,8 @@ export let sound = {
             this.music[key].volume = 0.6;
         });
 
+        this.volume = volume * 100;
+
         model.state('volume', volume);
         model.state('sound', sound);
         model.state('music', music);
