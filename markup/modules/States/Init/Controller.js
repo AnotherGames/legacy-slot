@@ -33,6 +33,8 @@ export class Init {
                 view.playYoyoTween({});
             });
 
+
+        const game = model.el('game');
         let soundContainer = game.add.group();
         soundContainer.position.set(game.width - 500, game.height - 100);
         let style = { font: "bold 42px Arial", fill: "#f3eba0"};
