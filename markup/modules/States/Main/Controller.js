@@ -84,7 +84,7 @@ export class Main {
 
         mainView.draw.machineMask({});
 
-        this.keyboardEventsInit();
+        keyboard.initDefaultKey();
 
         // PreAnimation
         let darkness = mainView.draw.darkness({});
@@ -108,55 +108,6 @@ export class Main {
         const game = model.el('game');
         game.frameAnims.forEach((anim) => {
             anim();
-        });
-    }
-
-    keyboardEventsInit() {
-        // Space
-        keyboard.Add({
-            key: 32,
-            down: function () {
-                if (model.state('lockedButtons')) return;
-                events.trigger('roll:request');
-                events.trigger('roll:fast');
-                return true;
-            }
-        });
-        // Up
-        keyboard.Add({
-            key: 38,
-            down: function () {
-                if (model.state('lockedButtons')) return;
-                model.changeCoin({up: true});
-                return true;
-            }
-        });
-        // Down
-        keyboard.Add({
-            key: 40,
-            down: function () {
-                if (model.state('lockedButtons')) return;
-                model.changeCoin({down: true});
-                return true;
-            }
-        });
-        // Right
-        keyboard.Add({
-            key: 39,
-            down: function () {
-                if (model.state('lockedButtons')) return;
-                model.changeBet({up: true});
-                return true;
-            }
-        });
-        // Left
-        keyboard.Add({
-            key: 37,
-            down: function () {
-                if (model.state('lockedButtons')) return;
-                model.changeBet({down: true});
-                return true;
-            }
         });
     }
 

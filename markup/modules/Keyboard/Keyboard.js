@@ -1,3 +1,6 @@
+import { model } from 'modules/Model/Model';
+import { events } from 'modules/Util/Events';
+
 export let keyboard = {
     _stack: {},
     _press: {},
@@ -103,5 +106,67 @@ export let keyboard = {
         if ( this._press[key]) {
             delete this._press[key];
         }
-    }
+    },
+
+    initDefaultKey: function() {
+            // Space
+            this.Add({
+                key: 32,
+                down: function () {
+                    if (model.state('lockedButtons') || model.state('roll:progress') || !model.state('autoEnd')) return;
+                    events.trigger('roll:request');
+                    events.trigger('roll:fast');
+                    return true;
+                }
+            });
+            // Up
+            this.Add({
+                key: 38,
+                down: function () {
+                    if (model.state('roll:progress') || !model.state('autoEnd')) return;
+                    model.changeCoin({up: true});
+                    return true;
+                }
+            });
+            // Down
+            this.Add({
+                key: 40,
+                down: function () {
+                    if (model.state('roll:progress') || !model.state('autoEnd')) return;
+                    model.changeCoin({down: true});
+                    return true;
+                }
+            });
+            // Right
+            this.Add({
+                key: 39,
+                down: function () {
+                    if (model.state('roll:progress') || !model.state('autoEnd')) return;
+                    model.changeBet({up: true});
+                    return true;
+                }
+            });
+            // Left
+            this.Add({
+                key: 37,
+                down: function () {
+                    if (model.state('roll:progress') || !model.state('autoEnd')) return;
+                    model.changeBet({down: true});
+                    return true;
+                }
+            });
+        },
+
+        removeDefaultKey: function(){
+            // Space
+            this.Remove(32);
+            // Up
+            this.Remove(38);
+            // Down
+            this.Remove(40);
+            // Right
+            this.Remove(39);
+            // Left
+            this.Remove(37);
+        }
 };
