@@ -1,6 +1,8 @@
 import { model } from 'modules/Model/Model';
 import { events } from 'modules/Util/Events';
+import { popup } from 'modules/Util/Popup';
 import { view } from 'modules/States/Preload/View';
+import { view as mainView } from 'modules/States/Main/View';
 
 export class Preload {
     constructor(game) {
@@ -24,6 +26,10 @@ export class Preload {
         this.loadSpineAssets();
 
         game.load.onLoadComplete.add(this.hidePreloader);
+        if (model.state('inisializeFail')) {
+            let popupInitContainer = game.add.group();
+            popup.showPopup({message: 'The connection failed. Please click to restart', container: popupInitContainer});
+        }
     }
 
     loadSounds() {
@@ -61,7 +67,7 @@ export class Preload {
         game.load.image('gameBG', 'game/gameBG.png');
         game.load.image('gameLogo', 'game/gmLogo.png');
         game.load.image('gameShadow', 'game/gameShadow.png');
-        game.load.image('popup', 'other/popup.png');
+        // game.load.image('popup', 'other/popup.png');
         game.load.image('closed', 'other/closed.png');
         game.load.image('transitionCoin', 'other/transitionCoin.png');
         game.load.image('ar', 'other/ar.png');
@@ -130,8 +136,6 @@ export class Preload {
         view.lastDarkness();
         if (model.state('initScreen')) {
             game.state.start('Init');
-        } else {
-            game.state.start('Main');
         }
         // TODO: Нужно переходить на главный экран после окончания затемнения,
         // но таким образом мы зависаем на состоянии Preload

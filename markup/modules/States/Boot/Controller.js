@@ -19,6 +19,7 @@ export class Boot {
             })
             .catch((err) => {
                 console.error(err);
+                model.state('inisializeFail', true);
             });
 
         this._checkDevice();
@@ -37,6 +38,7 @@ export class Boot {
     loadPreloadAssets() {
         const game = model.el('game');
 
+        game.load.image('popup', `static/img/content/${model.state('res')}/other/popup.png`);
         game.load.path = `static/img/content/${model.state('res')}/preloader/`;
         game.load.image('preloadBar', 'preloaderBar.png');
         game.load.atlasJSONHash('preloadCoin', 'coin-0.png', 'coin.json');
