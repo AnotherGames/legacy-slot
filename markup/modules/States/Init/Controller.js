@@ -97,7 +97,7 @@ export class Init {
         view.stopYoyoTween();
         view.lastDarkness()
             .onComplete.add(() => {
-                view.stopMusic();
+                // view.stopMusic();
                 game.state.start('Main');
             });
     }
