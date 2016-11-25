@@ -1,10 +1,10 @@
 import { model } from 'modules/Model/Model';
 import { events } from 'modules/Util/Events';
 import { config } from 'modules/Util/Config';
+import { popup } from 'modules/Util/Popup';
 import { request } from 'modules/Util/Request';
 import { sound } from 'modules/Sound/Sound';
 import { Wheel } from 'modules/Class/Wheel';
-import { view as mainView } from 'modules/States/Main/View';
 
 export let controller = (() => {
 
@@ -40,12 +40,12 @@ export let controller = (() => {
         let game = model.el('game');
         if (!model.checkBalance()) {
             console.warn('Not enought money!');
-            mainView.draw.showPopup({message: 'You have low balance on your account'});
+            popup.showPopup({message: 'You have low balance on your account'});
             return;
         }
         model.state('ready', false);
         let rollPopupTimer = game.time.events.add(4000, () => {
-            mainView.draw.showPopup({message: 'You have weak Internet connection'});
+            popup.showPopup({message: 'You have weak Internet connection'});
         });
 
         request.send('Roll')
@@ -54,7 +54,7 @@ export let controller = (() => {
                 game.time.events.remove(rollPopupTimer);
 
                 if (data.ErrorMessage === 'SessionClosedOrNotOpened') {
-                    mainView.draw.showPopup({message: 'Your session is closed. Please click to restart'});
+                    popup.showPopup({message: 'Your session is closed. Please click to restart'});
                 }
 
                 events.trigger('roll:start');
