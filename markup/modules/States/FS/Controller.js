@@ -57,8 +57,8 @@ export class FS {
             events.on('fs:next', this.nextFS.bind(this));
             events.on('fs:count', this.countFS.bind(this));
             events.on('fs:stop', this.stopFS.bind(this));
-            events.on('fs:brain', this.onBrain.bind(this));
-            events.on('fs:brain', fsView.draw.CountPlus3.bind(this, {}));
+            // events.on('fs:brain', this.onBrain.bind(this));
+            // events.on('fs:brain', fsView.draw.CountPlus3.bind(this, {}));
             model.state('firstFS', true);
         }
     }
@@ -75,6 +75,9 @@ export class FS {
         fsView.draw.mainBG({});
         fsView.draw.mainContainer({});
         fsView.draw.machineContainer({});
+        fsView.draw.lineNumbers({});
+        game.mainContainer.x = game.world.centerX;
+        game.mainContainer.y = game.world.centerY + config[model.state('res')].mainContainer.y;
 
         rollController.init();
 
@@ -82,14 +85,8 @@ export class FS {
             footerController.initMobile();
             balanceController.initFSMobile();
 
-            game.mainContainer.x = model.data('mainXRight');
-            game.mainContainer.y = game.world.centerY + config[model.state('res')].mainContainer.y;
         } else {    // Desktop
             footerController.initDesktop();
-
-            game.mainContainer.x = game.width - game.mainContainer.width / 2;
-            game.mainContainer.y = game.world.centerY + config[model.state('res')].mainContainer.y;
-
             settings.initDesktopSettings(game);
             panelController.initFS();
             balanceController.initFSDesktop();
@@ -97,28 +94,28 @@ export class FS {
 
         fsView.draw.machineMask({});
 
-        fsView.draw.Brain();
-        fsView.draw.Zombie(this.fsMulti);
+        // fsView.draw.Brain();
+        // fsView.draw.Zombie(this.fsMulti);
 
 
-        let time = game.rnd.integerInRange(10, 70);
-        if (model.state('desktop')) {
-            let candle1 = fsView.draw.fsCandle({});
-            candle1.scale.set(0.8);
-            game.time.events.add(time, () => {
-                let candle2 = fsView.draw.fsCandle({x: 62, y: 500});
-                candle2.scale.set(0.7);
-                let candle3 = fsView.draw.fsCandle({x: 372, y: 440});
-            });
-        } else {
-            let candle1 = fsView.draw.fsCandle({x: -12, y: 315});
-            candle1.scale.set(0.8);
-            game.time.events.add(time, () => {
-                let candle2 = fsView.draw.fsCandle({x: 5, y: 330});
-                candle2.scale.set(0.7);
-                let candle3 = fsView.draw.fsCandle({x: 164, y: 292});
-            });
-        }
+        // let time = game.rnd.integerInRange(10, 70);
+        // if (model.state('desktop')) {
+        //     let candle1 = fsView.draw.fsCandle({});
+        //     candle1.scale.set(0.8);
+        //     game.time.events.add(time, () => {
+        //         let candle2 = fsView.draw.fsCandle({x: 62, y: 500});
+        //         candle2.scale.set(0.7);
+        //         let candle3 = fsView.draw.fsCandle({x: 372, y: 440});
+        //     });
+        // } else {
+        //     let candle1 = fsView.draw.fsCandle({x: -12, y: 315});
+        //     candle1.scale.set(0.8);
+        //     game.time.events.add(time, () => {
+        //         let candle2 = fsView.draw.fsCandle({x: 5, y: 330});
+        //         candle2.scale.set(0.7);
+        //         let candle3 = fsView.draw.fsCandle({x: 164, y: 292});
+        //     });
+        // }
 
         fsView.draw.Multi({
             start: this.fsMulti
@@ -126,12 +123,12 @@ export class FS {
         fsView.draw.Count({
             start: this.fsCount
         });
-        fsView.draw.BrainLevel({});
-        if (this.fsLevel > 0) {
-            this.searchBrains({
-                startLevel: this.fsLevel
-            })
-        }
+        // fsView.draw.BrainLevel({});
+        // if (this.fsLevel > 0) {
+        //     this.searchBrains({
+        //         startLevel: this.fsLevel
+        //     })
+        // }
 
         // PreAnimation
         fsView.draw.darkness({});
@@ -238,6 +235,7 @@ export class FS {
     }
 
     onBrain() {
+        console.log(' i am in brain function');
         let rollData = model.data('rollResponse');
         let fsMulti = model.el('fsMulti');
         let multiValue = rollData.FsBonus.Multi;

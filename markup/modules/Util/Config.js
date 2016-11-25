@@ -49,7 +49,7 @@ export let config = {
     HD: {
         mainContainer: {
             x: 0,
-            y: 0
+            y: -10
         },
         gameMachine: {
             x: 0,

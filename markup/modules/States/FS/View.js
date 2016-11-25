@@ -85,9 +85,54 @@ export let view = (() => {
         }) {
             let mainGroup = game.mainContainer;
 
+            let gameBG = game.add.sprite(0, 0, 'gameBG', null, mainGroup);
+            gameBG.anchor.set(0.5);
+            model.el('gameBG', gameBG);
+
             let gameMachine = game.add.sprite(0, config[model.state('res')].gameMachine.y, 'gameMachine', null, mainGroup);
             gameMachine.anchor.set(0.5);
             model.el('gameMachine', gameMachine);
+
+            let deltaY = 50;
+            if (model.state('mobile')) {
+                deltaY = 10;
+            }
+
+            let gameLogo = game.add.sprite(0, -game.height / 2 + deltaY, 'gameLogo', null, mainGroup);
+            gameLogo.anchor.set(0.5, 0);
+            model.el('gameLogo', gameLogo);
+        },
+
+        lineNumbers: function ({
+            game = model.el('game')
+        }) {
+            let mainGroup = game.mainContainer;
+            let gameMachine = model.el('gameMachine');
+
+            let leftArr = [];
+
+            for (let i = 1; i < 11; i++) {
+                let name = i;
+                let lineNumber = game.add.sprite(config[model.state('res')].win[i][0].x - gameMachine.width / 2, config[model.state('res')].win[i][0].y - gameMachine.height / 2 - 60, 'lineNumbers', 'line_splash-' + i +'_0.png', mainGroup);
+                lineNumber.normal = function() {lineNumber.frameName = 'line_splash-' + name + '_0.png'};
+                lineNumber.name = name;
+                lineNumber.anchor.set(0.5);
+                leftArr.push(lineNumber);
+            }
+
+            model.el('leftArr', leftArr);
+
+            let rightArr = [];
+
+            for (let i = 1; i < 11; i++) {
+                let name = i;
+                let lineNumber = game.add.sprite(config[model.state('res')].win[i][1].x - gameMachine.width / 2, config[model.state('res')].win[i][0].y - gameMachine.height / 2 - 60, 'lineNumbers', 'line_splash-' + i +'_0.png', mainGroup);
+                lineNumber.normal = function() {lineNumber.frameName = 'line_splash-' + name + '_0.png'};
+                lineNumber.name = name;
+                lineNumber.anchor.set(0.5);
+                rightArr.push(lineNumber);
+            }
+            model.el('rightArr', rightArr);
         },
 
         machineContainer: function ({
@@ -100,9 +145,7 @@ export let view = (() => {
 
             game.winTopContainer = game.add.group();
             model.group('winTop', game.winTopContainer);
-            mainGroup.addAt(game.winTopContainer, 2);
-
-            // machineGroup.position.set(mainGroup.width / 2 + config[model.state('res')].machine.x, mainGroup.height / 2);
+            mainGroup.addAt(game.winTopContainer, 3);
 
             machineGroup.glistaLightContainer = game.add.group();
             model.el('glistaLightContainer', machineGroup.glistaLightContainer);
@@ -122,13 +165,22 @@ export let view = (() => {
             machineGroup = model.el('machineContainer')
         }) {
             const elSize = config[model.state('res')].elements;
-
             let mask = game.add.graphics();
-                mask.beginFill(0x000000);
-                mask.drawRect(0, game.world.centerY + config[model.state('res')].mainContainer.y, game.width, elSize.height * 3);
-            mask.pivot.set(0, elSize.height * 1.5);
+            mask.beginFill(0x000000);
 
+            let maskX = game.world.centerX;
+
+            mask.drawRect(
+                maskX,
+                game.world.centerY + config[model.state('res')].mainContainer.y,
+                elSize.width * 5,
+                elSize.height * 3);
+            mask.pivot.set(elSize.width * 2.5, elSize.height * 1.5);
             machineGroup.mask = mask;
+
+            if (model.state('side') === 'right')
+                mask.x = model.data('mainXRight') - model.data('mainXLeft');
+
             model.el('mask', mask);
         },
 

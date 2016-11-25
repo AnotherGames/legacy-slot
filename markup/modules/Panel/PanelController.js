@@ -50,8 +50,6 @@ export let controller = (() => {
         let game = model.el('game');
 
         view.draw.PanelBG({
-            x: model.group('main').x,
-            deltaY: -20,
             frameName: 'uiFS'
         });
         view.draw.LinesNumber({x: 55, y: 115});
@@ -59,13 +57,13 @@ export let controller = (() => {
         let infoButtonDesk = view.draw.InfoButton({x: 42, y: 27});
             infoButtonDesk.onInputDown.add(handle.info);
 
-        let candle1 = view.draw.fsCandle({});
-            candle1.scale.set(0.7);
-
-        let time = game.rnd.integerInRange(10, 70);
-        game.time.events.add(time, () => {
-            let candle2 = view.draw.fsCandle({x: 878, y: 18});
-        });
+        // let candle1 = view.draw.fsCandle({});
+        //     candle1.scale.set(0.7);
+        //
+        // let time = game.rnd.integerInRange(10, 70);
+        // game.time.events.add(time, () => {
+        //     let candle2 = view.draw.fsCandle({x: 878, y: 18});
+        // });
     }
 
     const handle = {

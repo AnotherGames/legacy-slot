@@ -32,7 +32,7 @@ export let view = (() => {
         sound.music.fon.stop();
         sound.music.startPerehod.play();
 
-        const transitionBG = game.add.graphics(0, 0, container).beginFill(0x000000, 0.8).drawRect(0, 0, game.width, game.height);
+        const transitionBG = game.add.graphics(0, 0, transitionContainer).beginFill(0x000000, 0.8).drawRect(0, 0, game.width, game.height);
         model.el('transitionBG', transitionBG);
 
         const cloudContainer = game.add.group();
