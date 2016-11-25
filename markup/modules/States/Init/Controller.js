@@ -69,13 +69,13 @@ export class Init {
         if (game.sound.volume > 0) {
             game.sound.volume = 0;
             this.sprite2.x = 270;
-            model.state('initScreen', false);
+            model.state('volume', 0);
             this.textOff.setStyle(this.styleOn);
             this.textOn.setStyle(this.styleOff);
         } else {
             game.sound.volume = 1;
             this.sprite2.x = 310;
-            model.state('initScreen', true);
+            model.state('volume', 1);
             this.textOff.setStyle(this.styleOff);
             this.textOn.setStyle(this.styleOn);
         }
