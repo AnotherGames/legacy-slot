@@ -14,8 +14,8 @@ export let request = (() => {
     }
 
     const mode = {
-        normal: 'monsushi3',
-        fsBonus: 'monsfs3'
+        normal: 'monsushi4',
+        fsBonus: 'monsfs4'
     };
 
     function send(name, options) {
