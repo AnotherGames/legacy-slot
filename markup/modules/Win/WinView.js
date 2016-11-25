@@ -51,16 +51,18 @@ export let view = (() => {
         WinElements: function ({
             number,
             amount,
-            alpha = 1,
+            alpha = false,
             wheels = model.el('wheels'),
             game = model.el('game')
         }) {
 
-            // wheels.forEach((wheel) => {
-            //     wheel.elements.forEach((element) => {
-            //         element.sprite.alpha = alpha;
-            //     });
-            // });
+            if (alpha) {
+                wheels.forEach((wheel) => {
+                    wheel.elements.forEach((element) => {
+                        element.hide();
+                    });
+                });
+            }
 
             if (number > 0) {
                 let line = model.data('lines')[number - 1];
@@ -69,8 +71,8 @@ export let view = (() => {
                     let wheel = wheels[col].elements;
                     let coord = line[col].Y;
                     let element = wheel[coord];
-                        // element.sprite.alpha = 1;
                         element.win();
+                        element.show();
                 }
 
             } else {
@@ -80,11 +82,11 @@ export let view = (() => {
                     wheelObj.elements.forEach((element) => {
 
 
-                        let elementName = parseInt(element.sprite.animations.currentAnim.name);
+                        let elementName = parseInt(element.sprites[element.active - 1].animations.currentAnim.name);
 
                         if (elementName == '10') {
                             element.win();
-                            // element.sprite.alpha = 1;
+                            element.show();
 
                             let game = model.el('game');
                             game.time.events.add(1000, () => {
@@ -98,12 +100,12 @@ export let view = (() => {
                                 events.trigger('fs:brain');
                                 lvlCounter++;
                             }
-                            game.add.tween(element.sprite.scale).to({x: 1.7, y: 1.7}, 700, 'Linear', true)
+                            game.add.tween(element.sprites[element.active - 1].scale).to({x: 1.7, y: 1.7}, 700, 'Linear', true)
                                 .onComplete.add(() => {
                                     if (model.state('mobile')) {
-                                        element.sprite.scale.x = element.sprite.scale.y = 1.5;
+                                        element.sprites[element.active - 1].scale.x = element.sprites[element.active - 1].scale.y = 1.5;
                                     } else {
-                                        element.sprite.scale.x = element.sprite.scale.y = 1;
+                                        element.sprites[element.active - 1].scale.x = element.sprites[element.active - 1].scale.y = 1;
                                     }
                                 });
                         }
@@ -176,7 +178,7 @@ export let view = (() => {
                 wheels.forEach((wheel, wheelIndex) => {
                     let elements = wheel.elements;
                     elements.forEach((element, elementIndex) => {
-                        let name = parseInt(element.sprite.animations.currentAnim.name);
+                        let name = parseInt(element.sprites[element.active - 1].animations.currentAnim.name);
                         if (name == 10) {
                             if (wheelIndex > lastWheel) {
                                 lastWheel = wheelIndex;

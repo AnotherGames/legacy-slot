@@ -69,43 +69,54 @@ export class Element {
 
             }
         }
-
-        this.sprites[param.el].animations.play(`${param.el}-${param.animation}`);
         this.sprites.forEach((sprite) => {
             sprite.visible = false;
             sprite.anchor.set(0.5);
         });
+        this.active = param.el;
         this.sprites[param.el - 1].visible = true;
+        this.sprites[param.el - 1].animations.play(`${param.el}-${param.animation}`);
         // if (model.state('mobile')) {
         //     this.sprite.scale.x = this.sprite.scale.y = 1.5;
         // }
     }
 
     play(animation) {
+        console.log('if: ', this.sprites[this.active - 1].animations.currentAnim.name, animation);
+        if (this.sprites[this.active - 1].animations.currentAnim.name === animation) {
+            console.log('Normal anim!');
+            return;
+        }
+        // this.play(`${this.active}-n`);
         this.sprites.forEach((sprite) => {
             sprite.visible = false;
-        })
-        this.sprites[parseInt(animation) - 1].visible = true;
-        this.sprites[parseInt(animation) - 1].animations.play(animation);
-        // if (!model.state('isAnimations')) {
-        //     this.sprite.animations.paused = true;
-        // }
+        });
+        this.active = parseInt(animation);
+        this.sprites[this.active - 1].visible = true;
+        console.log('I am playing new anim!');
+        this.sprites[this.active - 1].animations.play(animation);
     }
 
     win() {
-        let name = parseInt(this.sprites.filter((sprite) => {
-            return sprite.visible === true;
-        })[0].animations.currentAnim.name);
-        this.play(`${name}-w`);
-        // this.sprite.animations.currentAnim.onComplete.add(() => {
-        //     this.play(`${name}-n`);
-        // });
+        this.play(`${this.active}-w`);
+        this.sprites[this.active - 1].animations.currentAnim.onComplete.add(() => {
+            this.play(`${this.active}-n`);
+        });
     }
 
     normal() {
-        // let name = parseInt(this.sprite.animations.currentAnim.name);
-        // if (this.sprite.animations.currentAnim === `${name}-n`) return;
-        // this.play(`${name}-n`);
+        if (this.sprites[this.active - 1].animations.currentAnim === `${this.active}-n`) {
+            return;
+        }
+        this.play(`${this.active}-n`);
+    }
+
+    hide() {
+        this.sprites[this.active - 1].alpha = 0.5;
+    }
+
+    show() {
+        this.sprites[this.active - 1].alpha = 1;
     }
 
     _addAnimation(sprite, options) {
@@ -114,6 +125,6 @@ export class Element {
             ? Phaser.Animation.generateFrameNames(`${options.el}-n-`, 1, options.n, '.png', 2)
             : [`${options.el}-n.png`], 15, true);
         sprite.animations.add(`${options.el}-b`, [`${options.el}-b.png`], 15, true);
-        sprite.animations.add(`${options.el}-w`, Phaser.Animation.generateFrameNames(`${options.el}-w-`, 1, options.w, '.png', 2), 15, true);
+        sprite.animations.add(`${options.el}-w`, Phaser.Animation.generateFrameNames(`${options.el}-w-`, 1, options.w, '.png', 2), 15, false);
     }
 }
