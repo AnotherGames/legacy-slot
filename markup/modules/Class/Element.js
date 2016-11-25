@@ -86,7 +86,6 @@ export class Element {
             sprite.visible = false;
         })
         this.sprites[parseInt(animation) - 1].visible = true;
-        console.log('Parsed anim: ', parseInt(animation) - 1);
         this.sprites[parseInt(animation) - 1].animations.play(animation);
         // if (!model.state('isAnimations')) {
         //     this.sprite.animations.paused = true;

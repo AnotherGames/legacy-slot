@@ -29,24 +29,6 @@ export class Init {
             initPlay.inputEnabled = true;
             initPlay.events.onInputDown.add(this.handlePlay, this);
 
-        let game = model.el('game');
-        let group = game.add.group();
-        let testElements = [];
-        for (let i = 0; i < 6; i++) {
-            for (let j = 0; j < 6; j++) {
-                let testElement = new Element({
-                    game: game,
-                    parent: group,
-                    el: 10,
-                    animation: 'w',
-                    x: 80 * i,
-                    y: 60 * j
-                });
-                testElements.push(testElement);
-            }
-        }
-        model.el('testElements', testElements);
-
         model.el('initPlayTween')
             .onComplete.add(() => {
                 view.playYoyoTween({});
