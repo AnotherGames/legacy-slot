@@ -21,7 +21,7 @@ export class Init {
             $('.history').addClass('closed');
         });
 
-        view.playMusic();
+        // view.playMusic();
         view.drawBG();
         view.drawBGLogo();
         view.drawLogo();
