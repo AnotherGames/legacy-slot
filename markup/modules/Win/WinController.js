@@ -23,7 +23,7 @@ export let controller = (() => {
         if (winLines.length === 0) return;
 
         // Check for FS
-        if (mode == 'root' && nextMode == 'fsBonus') {
+        if (mode == 'root' && nextMode.split('-')[0] == 'fsBonus') {
 
             model.state('lockedButtons', true);
 
