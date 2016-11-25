@@ -1,4 +1,5 @@
 import { model } from 'modules/Model/Model';
+import { config } from 'modules/Util/Config';
 
 export let view = (() => {
 
@@ -7,8 +8,8 @@ export let view = (() => {
         PanelBG: function({
             game = model.el('game'),
             container = model.group('panel'),
-            x = game.world.centerX + 4,
-            y = model.el('gameMachine').height + 43,
+            x = game.world.centerX + config[model.state('res')].panelMargin.x,
+            y = model.el('gameMachine').height + config[model.state('res')].panelMargin.y,
             frameName = 'ui',
             deltaY = 0
         }) {

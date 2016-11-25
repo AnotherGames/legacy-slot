@@ -24,6 +24,10 @@ export let config = {
             x: 0,
             y: 0
         },
+        panelMargin: {
+            x: 4,
+            y: 43
+        },
         elements: {
             width: 256,
             height: 240
