@@ -30,6 +30,8 @@ export class Element {
         this.sprites = [];
         for (let i = 1; i < 12; i++) {
             let sprite = game.add.sprite(0, 0, i, null, this.group);
+            sprite.visible = false;
+            sprite.anchor.set(0.5);
             this.sprites.push(sprite);
             switch (i) {
                 case 1:
@@ -69,54 +71,44 @@ export class Element {
 
             }
         }
-        this.sprites.forEach((sprite) => {
-            sprite.visible = false;
-            sprite.anchor.set(0.5);
-        });
+
         this.active = param.el;
-        this.sprites[param.el - 1].visible = true;
-        this.sprites[param.el - 1].animations.play(`${param.el}-${param.animation}`);
-        // if (model.state('mobile')) {
-        //     this.sprite.scale.x = this.sprite.scale.y = 1.5;
-        // }
+        this.activeSprite = this.sprites[param.el - 1];
+        this.activeSprite.visible = true;
+        this.activeSprite.animations.play(`${param.el}-${param.animation}`);
     }
 
     play(animation) {
-        console.log('if: ', this.sprites[this.active - 1].animations.currentAnim.name, animation);
-        if (this.sprites[this.active - 1].animations.currentAnim.name === animation) {
-            console.log('Normal anim!');
-            return;
-        }
-        // this.play(`${this.active}-n`);
-        this.sprites.forEach((sprite) => {
-            sprite.visible = false;
-        });
+        if (this.activeSprite.animations.currentAnim.name === animation) return;
+
+        this.activeSprite.visible = false;
+
         this.active = parseInt(animation);
-        this.sprites[this.active - 1].visible = true;
-        console.log('I am playing new anim!');
-        this.sprites[this.active - 1].animations.play(animation);
+        this.activeSprite = this.sprites[this.active - 1];
+        this.activeSprite.visible = true;
+        this.activeSprite.animations.play(animation);
     }
 
     win() {
         this.play(`${this.active}-w`);
-        this.sprites[this.active - 1].animations.currentAnim.onComplete.add(() => {
+        this.activeSprite.animations.currentAnim.onComplete.add(() => {
             this.play(`${this.active}-n`);
         });
     }
 
     normal() {
-        if (this.sprites[this.active - 1].animations.currentAnim === `${this.active}-n`) {
+        if (this.activeSprite.animations.currentAnim === `${this.active}-n`) {
             return;
         }
         this.play(`${this.active}-n`);
     }
 
     hide() {
-        this.sprites[this.active - 1].alpha = 0.5;
+        this.activeSprite.alpha = 0.5;
     }
 
     show() {
-        this.sprites[this.active - 1].alpha = 1;
+        this.activeSprite.alpha = 1;
     }
 
     _addAnimation(sprite, options) {
