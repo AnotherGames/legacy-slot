@@ -15,7 +15,13 @@ export let controller = (() => {
         let wheels = [];
         let elSize = config[model.state('res')].elements;
 
-        let firstScreen = model.data('firstScreen');
+        let firstScreen;
+        if (model.data('startFSScreen') !== undefined && !model.state('FSMode') ) {
+            firstScreen = model.data('startFSScreen');
+            model.data('startFSScreen', undefined);
+        } else {
+            firstScreen = model.data('firstScreen');
+        }
         let firstWheels = _convertArray(firstScreen);
 
         for (let i = -2; i < 3; i++) {
