@@ -4,6 +4,8 @@ import { model } from 'modules/Model/Model';
 
 export class Wheel {
     get elements() {
+        if (this.elSwitch === undefined) return;
+
         let elems = [];
         for (let i = 2; i < 5; i++) {
             elems.push( this.items[(this.elSwitch - i) % 6]);
@@ -100,7 +102,6 @@ export class Wheel {
                 x: 0,
                 y: i * this.elSize.height * -1
             });
-            elem.sprite.anchor.set(0.5);
             this.items.push(elem);
             this.game.spriteAnims.push(elem);
         }
@@ -113,18 +114,30 @@ export class Wheel {
             anim: String
         }   */
     _upElement(param) {
-        param.item.sprite.y = param.posY;
+        param.item.group.y = param.posY;
         param.item.play(param.anim);
     }
     update(currElems = this.currentScreen) {
         this.wheelY = this._wheelLastY = this.container.y = this.position.y + this.elSize.height * 3;
 
-        for (let i = 0; i < 5; i++) {
-            this._upElement({
-                item: this.items[i],
-                posY: i * this.elSize.height * -1,
-                anim: currElems[4 - i] + '-n'
-            });
+        if (this.elSwitch === undefined) {
+            for (let i = 0; i < 5; i++) {
+                this._upElement({
+                    item: this.items[i],
+                    posY: i * this.elSize.height * -1,
+                    anim: currElems[4 - i] + '-n'
+                });
+            }
+
+        } else {
+            let elems = [];
+            for (let i = 5; i > -1; i--) {
+                let item = this.items[(this.elSwitch - i) % 6];
+                item.group.y = (5 - i) * this.elSize.height * -1;
+                elems.push( item);
+            }
+
+            this.items = elems;
         }
 
         this.elSwitch = 5;

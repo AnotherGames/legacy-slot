@@ -22,6 +22,7 @@ export class Preload {
         this.loadMainAssets();
         this.loadFSAssets();
         this.loadSpineAssets();
+        this.loadTest();
 
         game.load.onLoadComplete.add(this.hidePreloader);
     }
@@ -113,6 +114,21 @@ export class Preload {
         game.load.spine('mozgiCount', 'fs/mozgi.json');
         game.load.spine('fsCount', 'fs/bang.json');
 
+    }
+
+    loadTest() {
+        const game = model.el('game');
+        game.load.atlasJSONArray('1', 'elements/1.png', 'elements/1.json');
+        game.load.atlasJSONArray('2', 'elements/2.png', 'elements/2.json');
+        game.load.atlasJSONArray('3', 'elements/3.png', 'elements/3.json');
+        game.load.atlasJSONArray('4', 'elements/4.png', 'elements/4.json');
+        game.load.atlasJSONArray('5', 'elements/5.png', 'elements/5.json');
+        game.load.atlasJSONArray('6', 'elements/6.png', 'elements/6.json');
+        game.load.atlasJSONArray('7', 'elements/7.png', 'elements/7.json');
+        game.load.atlasJSONArray('8', 'elements/8.png', 'elements/8.json');
+        game.load.atlasJSONArray('9', 'elements/9.png', 'elements/9.json');
+        game.load.atlasJSONArray('10', 'elements/10.png', 'elements/10.json');
+        game.load.atlasJSONArray('11', 'elements/11.png', 'elements/11.json');
     }
 
     hidePreloader() {
