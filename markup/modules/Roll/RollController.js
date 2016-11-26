@@ -24,16 +24,16 @@ export let controller = (() => {
         }
         let firstWheels = _convertArray(firstScreen);
 
-        for (let i = -2; i < 3; i++) {
+        for (let i = 0; i < 5; i++) {
             wheels.push(new Wheel({
                 game,
                 parent: elementsContainer,
                 position: {
-                    x: i * elSize.width, // - config[model.state('res')].machine.x,
-                    y: -elSize.height // - config[model.state('res')].machine.y * 2
+                    x: (i - 2) * elSize.width,
+                    y: -elSize.height
                 },
                 elSize,
-                currentScreen: firstWheels[i + 2]
+                currentScreen: firstWheels[i]
             }));
         }
 
