@@ -34,7 +34,9 @@ export let controller = (() => {
                 events.trigger('autoplay:stop');
             }
 
-            const game = model.el('game');
+            model.data('startFSScreen', data.Screen);
+            model.data('firstScreen', data.Screen);
+
             game.time.events.add(1500, () => {
                 // transitionView.fsStart();
                 console.log('I am in FS!');
