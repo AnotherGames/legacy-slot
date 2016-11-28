@@ -1,5 +1,6 @@
 import { model } from 'modules/Model/Model';
 import { view } from 'modules/States/Init/View';
+import { Element } from 'modules/Class/Element';
 
 export class Init {
     constructor(game) {

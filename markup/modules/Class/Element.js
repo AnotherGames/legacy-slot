@@ -23,59 +23,109 @@ export class Element {
 
         const game = model.el('game');
 
-        this.sprite = game.add.sprite(param.x, param.y, 'elements', null, param.parent);
+        this.group = game.add.group(param.parent);
+        this.group.x = param.x;
+        this.group.y = param.y;
 
-        this._addAnimation({ el: 1, n: false, w: 16 });
-        this._addAnimation({ el: 2, n: 16, w: 16 });
-        this._addAnimation({ el: 3, n: false, w: 16 });
-        this._addAnimation({ el: 4, n: 16, w: 16 });
-        this._addAnimation({ el: 5, n: false, w: 16 });
-        this._addAnimation({ el: 6, n: 16, w: 16 });
-        this._addAnimation({ el: 7, n: false, w: 16 });
-        this._addAnimation({ el: 8, n: 16, w: 16 });
-        this._addAnimation({ el: 9, n: 16, w: 16 });
-        this._addAnimation({ el: 10, n: 16, w: 16 });
-        // this._addAnimation({ el: 11, n: 15, w: 15 });
-
-        this.sprite.animations.play(`${param.el}-${param.animation}`);
-        if (model.state('mobile')) {
-            this.sprite.scale.x = this.sprite.scale.y = 1.5;
+        this.sprites = [];
+        for (let i = 1; i < 11; i++) {
+            let prefix;
+            if (i < 10) {
+                prefix = '0';
+            } else {
+                prefix = '';
+            }
+            let sprite = game.add.sprite(0, 0, `${prefix}${i}`, null, this.group);
+            sprite.visible = false;
+            sprite.anchor.set(0.5);
+            this.sprites.push(sprite);
+            switch (i) {
+                case 1:
+                    this._addAnimation(sprite, { el: 1, n: false, w: 16 });
+                    break;
+                case 2:
+                    this._addAnimation(sprite, { el: 2, n: 16, w: 16 });
+                    break;
+                case 3:
+                    this._addAnimation(sprite, { el: 3, n: false, w: 16 });
+                    break;
+                case 4:
+                    this._addAnimation(sprite, { el: 4, n: 16, w: 16 });
+                    break;
+                case 5:
+                    this._addAnimation(sprite, { el: 5, n: false, w: 16 });
+                    break;
+                case 6:
+                    this._addAnimation(sprite, { el: 6, n: 16, w: 16 });
+                    break;
+                case 7:
+                    this._addAnimation(sprite, { el: 7, n: false, w: 16 });
+                    break;
+                case 8:
+                    this._addAnimation(sprite, { el: 8, n: 16, w: 16 });
+                    break;
+                case 9:
+                    this._addAnimation(sprite, { el: 9, n: 16, w: 16 });
+                    break;
+                case 10:
+                    this._addAnimation(sprite, { el: 10, n: 16, w: 16 });
+                    break;
+                default:
+                    break;
+            }
         }
+
+        this.active = param.el;
+        this.activeSprite = this.sprites[param.el - 1];
+        this.activeSprite.visible = true;
+        this.activeSprite.animations.play(`${param.el}-${param.animation}`);
     }
 
     play(animation) {
-        this.sprite.animations.play(animation);
-        if (!model.state('isAnimations')) {
-            this.sprite.animations.paused = true;
-        }
+        if (this.activeSprite.animations.currentAnim.name === animation) return;
+
+        this.activeSprite.visible = false;
+
+        this.active = parseInt(animation);
+        this.activeSprite = this.sprites[this.active - 1];
+        this.activeSprite.visible = true;
+        this.activeSprite.animations.play(animation);
     }
 
     win() {
-        let name = parseInt(this.sprite.animations.currentAnim.name);
-        this.play(`${name}-w`);
-        this.sprite.animations.currentAnim.onComplete.add(() => {
-            this.play(`${name}-n`);
+        this.play(`${this.active}-w`);
+        this.activeSprite.animations.currentAnim.onComplete.add(() => {
+            this.play(`${this.active}-n`);
         });
     }
 
     normal() {
-        let name = parseInt(this.sprite.animations.currentAnim.name);
-        if (this.sprite.animations.currentAnim === `${name}-n`) return;
-        this.play(`${name}-n`);
+        if (this.activeSprite.animations.currentAnim === `${this.active}-n`) {
+            return;
+        }
+        this.play(`${this.active}-n`);
     }
 
-    _addAnimation(options) {
+    hide() {
+        this.activeSprite.alpha = 0.5;
+    }
+
+    show() {
+        this.activeSprite.alpha = 1;
+    }
+
+    _addAnimation(sprite, options) {
         let prefix;
         if (options.el < 10) {
             prefix = 0;
         } else {
             prefix = '';
         }
-        this.sprite.animations.add(`${options.el}-n`,
+        sprite.animations.add(`${options.el}-n`,
             options.n
             ? Phaser.Animation.generateFrameNames(`${prefix}${options.el}-n-`, 1, options.n, '.png', 2)
             : [`${prefix}${options.el}-n-01.png`], 16, true);
-        this.sprite.animations.add(`${options.el}-b`, [`${prefix}${options.el}-b-01.png`], 16, true);
-        this.sprite.animations.add(`${options.el}-w`, Phaser.Animation.generateFrameNames(`${prefix}${options.el}-w-`, 1, options.w, '.png', 2), 16, false);
+        sprite.animations.add(`${options.el}-b`, [`${prefix}${options.el}-b-01.png`], 16, true);
+        sprite.animations.add(`${options.el}-w`, Phaser.Animation.generateFrameNames(`${prefix}${options.el}-w-`, 1, options.w, '.png', 2), 16, false);
     }
 }

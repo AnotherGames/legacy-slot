@@ -34,7 +34,9 @@ export let controller = (() => {
                 events.trigger('autoplay:stop');
             }
 
-            const game = model.el('game');
+            model.data('startFSScreen', data.Screen);
+            model.data('firstScreen', data.Screen);
+
             game.time.events.add(1500, () => {
                 // transitionView.fsStart();
                 console.log('I am in FS!');
@@ -76,12 +78,12 @@ export let controller = (() => {
         })
 
         if (cleanAlpha) {
-            let wheels = model.el('wheels');
-            wheels.forEach((wheel) => {
-                wheel.elements.forEach((element) => {
-                    element.sprite.alpha = 1;
-                });
-            });
+            // let wheels = model.el('wheels');
+            // wheels.forEach((wheel) => {
+            //     wheel.elements.forEach((element) => {
+            //         element.sprite.alpha = 1;
+            //     });
+            // });
         }
 
         view.hide.WinTop({})
