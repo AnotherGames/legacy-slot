@@ -101,6 +101,41 @@ export class Main {
             events.trigger('autoplay:init', model.data('remainAutoCount'));
             model.data('remainAutoCount', null);
         }
+
+        let lastTime = new Date().getTime();
+        let fps = 1;
+        let lowCount = 0;
+
+        let checkFPS = function () {
+            if ( !model.state('isFirstAutoChangeAnimBG') ) return;
+            if ( !model.state('isAnimBG') ) return;
+            if (lastTime + 1000 > new Date().getTime() ) {
+                fps++;
+            } else {
+                if (fps < 30) {
+                    console.log('FPS:', fps);
+                    lowCount++;
+                    if (lowCount > 3) {
+                        model.state('isAnimBG', false);
+                        let animMainBG = model.el('animMainBG');
+                        let mainBG = model.el('mainBG');
+
+                        mainBG.visible = true;
+                        animMainBG.visible = false;
+
+                        model.state('isFirstAutoChangeAnimBG', false);
+                        console.log('Auto Change AnimBG.');
+                    }
+                } else {
+                    if (lowCount > 0) {
+                        lowCount--;
+                    }
+                }
+                lastTime = new Date().getTime();
+                fps = 1;
+            }
+        };
+        game.frameAnims.push(checkFPS);
     }
 
     update() {
