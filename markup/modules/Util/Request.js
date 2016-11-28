@@ -35,6 +35,7 @@ export let request = (() => {
                 }
                 break;
             case 'Roll':
+                console.log('--------------');
                 url = `${serviceUrl}/_${name}/${model.data('sessionID')}/${model.balance('betValue')}/${model.balance('coinValue') * 100}`;
                 break;
             case 'Ready':
