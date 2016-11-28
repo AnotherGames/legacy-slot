@@ -51,6 +51,7 @@ export let controller = (() => {
             $('#darkness').removeClass('closed');
 
             $('#darkness').on('click', function () {
+                model.state('menuOpened', false);
                 $('#settings').addClass('closed');
                 $('#darkness').addClass('closed');
                 $('.history').addClass('closed');
