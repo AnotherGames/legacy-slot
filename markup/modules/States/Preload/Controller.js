@@ -95,6 +95,16 @@ export class Preload {
         }
         // all elements
         game.load.atlasJSONArray('elements', 'elements/elements.png', 'elements/elements.json');
+        game.load.atlasJSONArray('01', 'elements/01.png', 'elements/01.json');
+        game.load.atlasJSONArray('02', 'elements/02.png', 'elements/02.json');
+        game.load.atlasJSONArray('03', 'elements/03.png', 'elements/03.json');
+        game.load.atlasJSONArray('04', 'elements/04.png', 'elements/04.json');
+        game.load.atlasJSONArray('05', 'elements/05.png', 'elements/05.json');
+        game.load.atlasJSONArray('06', 'elements/06.png', 'elements/06.json');
+        game.load.atlasJSONArray('07', 'elements/07.png', 'elements/07.json');
+        game.load.atlasJSONArray('08', 'elements/08.png', 'elements/08.json');
+        game.load.atlasJSONArray('09', 'elements/09.png', 'elements/09.json');
+        game.load.atlasJSONArray('10', 'elements/10.png', 'elements/10.json');
         // Glista
         game.load.image('ligthGlista', 'glista/lightGlista.png');
         game.load.atlasJSONArray('glistaAtlas', 'glista/glista.png', 'glista/glista.json');
