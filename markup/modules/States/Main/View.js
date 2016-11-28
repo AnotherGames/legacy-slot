@@ -73,6 +73,13 @@ export let view = (() => {
                 //     transitionView.addCloud({container: model.group('bg')});
                 // }
             }
+
+            if (model.state('desktop')) {
+                let sticks = game.add.sprite(300, game.height * 0.6, 'sticks', null, game.bgContainer);
+                sticks.anchor.set(0.5);
+                model.el('sticks', sticks);
+            }
+
         },
 
         mainContainer: function ({

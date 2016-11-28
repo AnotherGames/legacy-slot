@@ -42,11 +42,7 @@ export let view = (() => {
         //     addCloud({});
         // }
 
-        const freeSpinsBG = game.add.sprite(game.width / 2,
-            -400,
-            'freeSpins',
-            null,
-            transitionContainer);
+        const freeSpinsBG = game.add.sprite(game.width / 2, -400, 'freeSpins', null, transitionContainer);
         freeSpinsBG.anchor.set(0.5);
         model.el('freeSpinsBG', freeSpinsBG);
 
@@ -59,6 +55,25 @@ export let view = (() => {
         if (model.state('mobile')) {
             freeSpinsLevel.scale.set(0.75);
         }
+
+        const multiBG = game.add.sprite(game.width / 2, game.height * 0.3, 'multiplier', null, transitionContainer);
+        multiBG.anchor.set(0.5);
+        multiBG.alpha = 0;
+        multiBG.scale.setTo(0.1, 0.1);
+        model.el('multiBG', multiBG);
+
+        let delta = 20;
+        if (model.state('desktop')) {
+            delta = 50;
+        }
+
+        let multiValue = model.data('rollResponse').NextMode.split('-')[1];
+        const multiLevel = game.add.sprite(game.width / 2, multiBG.y + delta, 'multiNumbers', `multi${multiValue}.png`, transitionContainer);
+        multiLevel.align = 'center';
+        multiLevel.anchor.set(0.5);
+        multiLevel.alpha = 0;
+        multiLevel.scale.setTo(0.1, 0.1);
+        model.el('multiLevel', multiLevel);
 
         // const axeBig = game.add.sprite(game.width / 2 + 350,
         //     game.world.height / 2,
@@ -94,6 +109,8 @@ export let view = (() => {
         const game = model.el('game');
         const freeSpinsBG = model.el('freeSpinsBG');
         const freeSpinsLevel = model.el('freeSpinsLevel');
+        const multiBG = model.el('multiBG');
+        const multiLevel = model.el('multiLevel');
         // const axeBig = model.el('axeBig');
         // const axeSmall = model.el('axeSmall');
         const continueText = model.el('continueText');
@@ -103,7 +120,17 @@ export let view = (() => {
         }
 
         game.add.tween(freeSpinsBG).to({y: game.height * 0.3}, 1500, Phaser.Easing.Bounce.Out, true);
-        game.add.tween(freeSpinsLevel).to({y: freeSpinsBG.height / 2 + delta}, 1500, Phaser.Easing.Bounce.Out, true);
+        game.add.tween(freeSpinsLevel).to({y: freeSpinsBG.height / 2 + delta}, 1500, Phaser.Easing.Bounce.Out, true)
+        .onComplete.add(() => {
+            game.add.tween(freeSpinsBG.scale).to({x: 0.1, y: 0.1}, 500, Phaser.Easing.Elastic.Out, true);
+            game.add.tween(freeSpinsLevel.scale).to({x: 0.1, y: 0.1}, 500, Phaser.Easing.Elastic.Out, true);
+            game.add.tween(freeSpinsBG).to({alpha: 0}, 500, 'Linear', true);
+            game.add.tween(freeSpinsLevel).to({alpha: 0}, 500, 'Linear', true);
+            game.add.tween(multiBG).to({alpha: 1}, 500, 'Linear', true);
+            game.add.tween(multiLevel).to({alpha: 1}, 500, 'Linear', true);
+            game.add.tween(multiBG.scale).to({x: 1.0, y: 1.0}, 1500, Phaser.Easing.Elastic.Out, true);
+            game.add.tween(multiLevel.scale).to({x: 1.4, y: 1.4}, 1500, Phaser.Easing.Elastic.Out, true);
+        }, this);
         // game.add.tween(axeBig.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true);
         // game.add.tween(axeSmall.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true);
         game.add.tween(continueText.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true)
