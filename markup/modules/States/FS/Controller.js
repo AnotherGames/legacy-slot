@@ -2,7 +2,6 @@ import { events } from 'modules/Util/Events';
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
 
-import { keyboard } from 'modules/Keyboard/Keyboard';
 import { settings } from 'modules/Menu/Settings';
 import { sound } from 'modules/Sound/Sound';
 
@@ -49,8 +48,6 @@ export class FS {
         model.state('FSMode', true);
 
         fsView.create.groups({});
-
-        keyboard.removeDefaultKey();
 
         if (model.state('firstFS') === false) {
             events.on('fs:init', this.initFS.bind(this));
