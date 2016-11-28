@@ -85,10 +85,6 @@ export let view = (() => {
         }) {
             let mainGroup = game.mainContainer;
 
-            let gameBG = game.add.sprite(0, 0, 'gameBG', null, mainGroup);
-            gameBG.anchor.set(0.5);
-            model.el('gameBG', gameBG);
-
             let gameMachine = game.add.sprite(0, config[model.state('res')].gameMachine.y, 'gameMachine', null, mainGroup);
             gameMachine.anchor.set(0.5);
             model.el('gameMachine', gameMachine);
@@ -305,20 +301,22 @@ export let view = (() => {
             container = model.group('panel')
         }) {
             const game = model.el('game');
-            let x, y, font;
+            let x, y, font, deltaY;
             if (model.state('mobile')) {
                 x = 270;
                 y = 60;
                 font = fontMobile;
+                deltaY = 10;
             } else {
                 x = 510;
                 y = 90;
                 font = fontDesktop;
+                deltaY = 15;
             }
             const countBG = game.add.sprite(x, y, 'freeSpinsPanelFS', null, container);
             countBG.anchor.set(0.5);
 
-            const fsCount = game.add.bitmapText(x, y + 15, 'numbersFont', start, font, container);
+            const fsCount = game.add.bitmapText(x, y + deltaY, 'numbersFont', start, font, container);
             fsCount.anchor.set(0.5)
             model.el('fsCount', fsCount);
         },

@@ -32,7 +32,7 @@ export let view = (() => {
         sound.music.fon.stop();
         sound.music.startPerehod.play();
 
-        const transitionBG = game.add.graphics(0, 0, transitionContainer).beginFill(0x000000, 0.8).drawRect(0, 0, game.width, game.height);
+        const transitionBG = game.add.graphics(0, 0, transitionContainer).beginFill(0x000000, 0.9).drawRect(0, 0, game.width, game.height);
         model.el('transitionBG', transitionBG);
 
         const cloudContainer = game.add.group();
@@ -45,16 +45,20 @@ export let view = (() => {
         const freeSpinsBG = game.add.sprite(game.width / 2,
             -400,
             'freeSpins',
-            'null.png',
+            null,
             transitionContainer);
         freeSpinsBG.anchor.set(0.5);
         model.el('freeSpinsBG', freeSpinsBG);
 
         let freeSpinsCount = model.data('rollResponse').FreeSpinsLeft;
-        const freeSpinsLevel = game.add.bitmapText(game.width / 2, -200, 'numbersFont', freeSpinsCount, 120, transitionContainer);
+        const freeSpinsLevel = game.add.bitmapText(game.width / 2 - 25, -400, 'numbersFont', freeSpinsCount, 120, transitionContainer);
         freeSpinsLevel.align = 'center';
         freeSpinsLevel.anchor.set(0.5);
         model.el('freeSpinsLevel', freeSpinsLevel);
+
+        if (model.state('mobile')) {
+            freeSpinsLevel.scale.set(0.75);
+        }
 
         // const axeBig = game.add.sprite(game.width / 2 + 350,
         //     game.world.height / 2,
@@ -75,7 +79,7 @@ export let view = (() => {
         // model.el('axeSmall', axeSmall);
 
         const continueText = game.add.sprite(game.width / 2,
-            game.world.height * 0.75,
+            game.world.height * 0.6,
             'text',
             'continue.png',
             transitionContainer);
@@ -88,14 +92,18 @@ export let view = (() => {
 
     function _fsStartTween() {
         const game = model.el('game');
-        const freeSpinsText = model.el('freeSpinsText');
+        const freeSpinsBG = model.el('freeSpinsBG');
         const freeSpinsLevel = model.el('freeSpinsLevel');
-        const axeBig = model.el('axeBig');
-        const axeSmall = model.el('axeSmall');
+        // const axeBig = model.el('axeBig');
+        // const axeSmall = model.el('axeSmall');
         const continueText = model.el('continueText');
+        let delta = 0;
+        if (model.state('mobile')) {
+            delta = 110;
+        }
 
-        game.add.tween(freeSpinsBG).to({y: game.height * 0.2}, 1500, Phaser.Easing.Bounce.Out, true);
-        game.add.tween(freeSpinsLevel).to({y: game.height / 2}, 1500, Phaser.Easing.Bounce.Out, true);
+        game.add.tween(freeSpinsBG).to({y: game.height * 0.3}, 1500, Phaser.Easing.Bounce.Out, true);
+        game.add.tween(freeSpinsLevel).to({y: freeSpinsBG.height / 2 + delta}, 1500, Phaser.Easing.Bounce.Out, true);
         // game.add.tween(axeBig.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true);
         // game.add.tween(axeSmall.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true);
         game.add.tween(continueText.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true)
@@ -140,7 +148,7 @@ export let view = (() => {
         _fsFinishDraw();
         _fsFinishTween();
         _fsFinishInput();
-        _coinsTween();
+        // _coinsTween();
         if (model.state('autoTransititon')) {
             game.time.events.add(config.autoTransitionTime, () => {
                 sound.sounds.button.play();
@@ -159,7 +167,7 @@ export let view = (() => {
         if (model.data('fsMulti') === 7) {
             sound.sounds.zombie2.play();
         }
-        const transitionBG = game.add.sprite(0, 0, 'initBG', null, transitionContainer);
+        const transitionBG = game.add.graphics(0, 0, transitionContainer).beginFill(0x000000, 0.9).drawRect(0, 0, game.width, game.height);
         model.el('transitionBG', transitionBG);
 
         const cloudContainer = game.add.group();
@@ -176,11 +184,7 @@ export let view = (() => {
             winTextFrame = 'totalW.png';
         }
 
-        const winText = game.add.sprite(game.width / 2,
-            -400,
-            'text',
-            winTextFrame,
-            transitionContainer);
+        const winText = game.add.sprite(game.width / 2, -400, 'text', winTextFrame, transitionContainer);
         winText.anchor.set(0.5);
         model.el('winText', winText);
 
@@ -193,27 +197,48 @@ export let view = (() => {
         console.log(winCount);
         model.el('winCount', winCount);
 
-        const skull = game.add.sprite(game.width / 2,
-            game.world.height * 0.65,
-            'skull',
-            null,
-            transitionContainer);
-        skull.anchor.set(0.5);
-        skull.scale.setTo(0.1, 0.1);
-        model.el('skull', skull);
+        // const skull = game.add.sprite(game.width / 2,
+        //     game.world.height * 0.65,
+        //     'skull',
+        //     null,
+        //     transitionContainer);
+        // skull.anchor.set(0.5);
+        // skull.scale.setTo(0.1, 0.1);
+        // model.el('skull', skull);
 
         const continueText = game.add.sprite(game.width / 2,
-            game.world.height * 0.85,
+            game.height * 0.65,
             'text',
             'continue.png',
             transitionContainer);
         continueText.anchor.set(0.5);
-        if (model.state('mobile')) {
-            continueText.y = game.world.height * 0.8;
-        }
         continueText.scale.setTo(0.1, 0.1);
         model.el('continueText', continueText);
 
+    }
+
+    function _fsFinishTween() {
+        const game = model.el('game');
+        const winText = model.el('winText');
+        const winCount = model.el('winCount');
+        // const skull = model.el('skull');
+        const continueText = model.el('continueText');
+
+        game.add.tween(winText).to({y: game.height * 0.25}, 1500, Phaser.Easing.Bounce.Out, true)
+            .onComplete.add(() => {
+                let winCountValue = model.data('rollResponse').FsBonus.TotalFSWinCoins + model.data('rollResponse').Balance.TotalWinCoins;
+                _сountMeter(winCountValue, winCount);
+            });
+        // game.add.tween(skull.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true);
+        game.add.tween(winCount).to({y: game.height * 0.45}, 1500, Phaser.Easing.Bounce.Out, true);
+        game.add.tween(continueText.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true)
+            .onComplete.add(() => {
+                continueText.rotation = 0.1;
+                game.add.tween(continueText).to({rotation: -0.1}, 100, 'Linear', true, 0, 4, true)
+                    .onComplete.add(() => {
+                        continueText.rotation = 0;
+                    }, this);
+            }, this);
     }
 
     function _сountMeter(count, elem) {
@@ -279,30 +304,6 @@ export let view = (() => {
         let coinsContainer = game.add.group();
         _addCoin(coinsContainer);
         game.add.tween(coinsContainer).to({y: game.height * 7}, 5000, 'Linear', true);
-    }
-
-    function _fsFinishTween() {
-        const game = model.el('game');
-        const winText = model.el('winText');
-        const winCount = model.el('winCount');
-        const skull = model.el('skull');
-        const continueText = model.el('continueText');
-
-        game.add.tween(winText).to({y: game.height * 0.2}, 1500, Phaser.Easing.Bounce.Out, true)
-            .onComplete.add(() => {
-                let winCountValue = model.data('rollResponse').FsBonus.TotalFSWinCoins + model.data('rollResponse').Balance.TotalWinCoins;
-                _сountMeter(winCountValue, winCount);
-            });
-        game.add.tween(winCount).to({y: game.height * 0.45}, 1500, Phaser.Easing.Bounce.Out, true);
-        game.add.tween(continueText.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true);
-        game.add.tween(skull.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true)
-            .onComplete.add(() => {
-                skull.rotation = 0.1;
-                game.add.tween(skull).to({rotation: -0.1}, 100, 'Linear', true, 0, 4, true)
-                    .onComplete.add(() => {
-                        skull.rotation = 0;
-                    }, this);
-            }, this);
     }
 
     function _fsFinishInput() {

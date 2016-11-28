@@ -86,7 +86,7 @@ export class Preload {
         game.load.bitmapFont("numbersFont", "numbers/numbers.png", "numbers/numbers.xml");
         // game.load.bitmapFont("fsLevelNumbers", "numbers/numbers1.png", "numbers/numbers1.xml");
         if (model.state('desktop')) {
-            // game.load.image('ui', 'game/UI.png');
+            game.load.image('ui', 'game/UI.png');
             game.load.image('uiFS', 'game/UI_FS.png');
             game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
             game.load.image('autoSelect', 'desk_buttons/autoSelect.png');

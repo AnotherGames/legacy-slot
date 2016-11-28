@@ -38,9 +38,9 @@ export let controller = (() => {
             model.data('firstScreen', data.Screen);
 
             game.time.events.add(1500, () => {
-                // transitionView.fsStart();
+                transitionView.fsStart();
                 console.log('I am in FS!');
-                game.state.start('FS');
+                // game.state.start('FS');
             });
         }
 
