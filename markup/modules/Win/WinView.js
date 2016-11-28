@@ -65,18 +65,9 @@ export let view = (() => {
         WinElements: function ({
             number,
             amount,
-            alpha = false,
             wheels = model.el('wheels'),
             game = model.el('game')
         }) {
-
-            if (alpha) {
-                wheels.forEach((wheel) => {
-                    wheel.elements.forEach((element) => {
-                        element.hide();
-                    });
-                });
-            }
 
             if (number > 0) {
                 let line = model.data('lines')[number - 1];
@@ -86,19 +77,11 @@ export let view = (() => {
                     let coord = line[col].Y;
                     let element = wheel[coord];
                         element.win();
-                        element.sprite.alpha = 1;
-                        element.sprite.scale.set(0.3);
-                        if (model.state('desktop')) {
-                            game.add.tween(element.sprite.scale).to({x: 1.2,  y: 1.2}, 700, Phaser.Easing.Bounce.Out, true)
-                                .onComplete.add(() => {
-                                    game.add.tween(element.sprite.scale).to({x: 1.0,  y: 1.0}, 400, 'Linear', true)
-                                }, this);
-                        } else {
-                            game.add.tween(element.sprite.scale).to({x: 1.8,  y: 1.8}, 700, Phaser.Easing.Bounce.Out, true)
-                                .onComplete.add(() => {
-                                    game.add.tween(element.sprite.scale).to({x: 1.5,  y: 1.5}, 400, 'Linear', true)
-                                }, this);
-                        }
+                        element.group.scale.set(0.3);
+                        game.add.tween(element.group.scale).to({x: 1.2,  y: 1.2}, 700, Phaser.Easing.Bounce.Out, true)
+                            .onComplete.add(() => {
+                                game.add.tween(element.group.scale).to({x: 1.0,  y: 1.0}, 400, 'Linear', true)
+                            }, this);
                 }
 
             } else {
@@ -112,39 +95,16 @@ export let view = (() => {
 
                         if (elementName == '10') {
                             element.win();
-                            element.sprite.alpha = 1;
-                            element.sprite.scale.set(0.3);
-                            if (model.state('desktop')) {
-                                game.add.tween(element.sprite.scale).to({x: 1.2,  y: 1.2}, 700, Phaser.Easing.Bounce.Out, true)
-                                    .onComplete.add(() => {
-                                        game.add.tween(element.sprite.scale).to({x: 1.0,  y: 1.0}, 400, 'Linear', true)
-                                    }, this);
-                            } else {
-                                game.add.tween(element.sprite.scale).to({x: 1.7,  y: 1.7}, 700, Phaser.Easing.Bounce.Out, true)
-                                    .onComplete.add(() => {
-                                        game.add.tween(element.sprite.scale).to({x: 1.5,  y: 1.5}, 400, 'Linear', true)
-                                    }, this);
-                            }
+                            element.group.scale.set(0.3);
+                            game.add.tween(element.group.scale).to({x: 1.2,  y: 1.2}, 700, Phaser.Easing.Bounce.Out, true)
+                                .onComplete.add(() => {
+                                    game.add.tween(element.group.scale).to({x: 1.0,  y: 1.0}, 400, 'Linear', true)
+                                }, this);
 
                             game.time.events.add(1000, () => {
                                 events.trigger('win:clean');
                             });
 
-                        }
-                        if (elementName == '11') {
-                            element.win();
-                            if(lvlCounter == 0){
-                                events.trigger('fs:brain');
-                                lvlCounter++;
-                            }
-                            game.add.tween(element.sprites[element.active - 1].scale).to({x: 1.7, y: 1.7}, 700, 'Linear', true)
-                                .onComplete.add(() => {
-                                    if (model.state('mobile')) {
-                                        element.sprites[element.active - 1].scale.x = element.sprites[element.active - 1].scale.y = 1.5;
-                                    } else {
-                                        element.sprites[element.active - 1].scale.x = element.sprites[element.active - 1].scale.y = 1;
-                                    }
-                                });
                         }
                     });
                 });
@@ -256,6 +216,9 @@ export let view = (() => {
             }
             let text = game.add.text(x, y, winValue, {font: font, fill: '#eacf16', align: 'center'}, container);
                 text.anchor.set(0.5);
+            if (model.state('mobile')) {
+                winBG.scale.set(0.8);
+            }
 
         }
 
