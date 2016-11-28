@@ -82,6 +82,8 @@ export let model = (() => {
         model.state('autoClosed', true);
         model.state('isAnimBG', true);
         model.state('autoPanel', false);
+        model.state('infoPanelOpen', false);
+        model.state('menuOpened', false);
 
         events.trigger('model:states:init');
     }

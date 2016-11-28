@@ -35,6 +35,7 @@ export let controller = (() => {
 
     const handle = {
         Menu: function () {
+            model.state('menuOpened', true);
             sound.sounds.button.play();
 
             $('#volume').prop('value', sound.volume * 100);
