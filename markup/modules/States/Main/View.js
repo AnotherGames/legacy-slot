@@ -50,7 +50,7 @@ export let view = (() => {
             game = model.el('game')
         }) {
             let animBG = game.add.spine(
-                game.world.centerX,        // X positon
+                game.world.centerX - 3,        // X positon
                 game.world.centerY,        // Y position
                 'animBG'     // the key of the object in cache
             );
