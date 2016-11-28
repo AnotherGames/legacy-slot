@@ -1,5 +1,6 @@
 import { model } from 'modules/Model/Model';
 import { events } from 'modules/Util/Events';
+import { controller as panelController} from 'modules/Panel/PanelController';
 
 export let keyboard = {
     _stack: {},
@@ -113,7 +114,7 @@ export let keyboard = {
             this.Add({
                 key: 32,
                 down: function () {
-                    if (model.state('lockedButtons') || model.state('roll:progress') || !model.state('autoEnd')) return;
+                    if (model.state('lockedButtons') || model.state('roll:progress') || !model.state('autoEnd') || model.state('menuOpened') || model.state('infoPanelOpen')) return;
                     events.trigger('roll:request');
                     events.trigger('roll:fast');
                     return true;
@@ -123,7 +124,7 @@ export let keyboard = {
             this.Add({
                 key: 38,
                 down: function () {
-                    if (model.state('roll:progress') || !model.state('autoEnd')) return;
+                    if (model.state('roll:progress') || !model.state('autoEnd') || model.state('menuOpened') || model.state('infoPanelOpen')) return;
                     model.changeCoin({up: true});
                     return true;
                 }
@@ -132,7 +133,7 @@ export let keyboard = {
             this.Add({
                 key: 40,
                 down: function () {
-                    if (model.state('roll:progress') || !model.state('autoEnd')) return;
+                    if (model.state('roll:progress') || !model.state('autoEnd') || model.state('menuOpened') || model.state('infoPanelOpen')) return;
                     model.changeCoin({down: true});
                     return true;
                 }
@@ -141,7 +142,11 @@ export let keyboard = {
             this.Add({
                 key: 39,
                 down: function () {
-                    if (model.state('roll:progress') || !model.state('autoEnd')) return;
+                    if (model.state('roll:progress') || !model.state('autoEnd') || model.state('menuOpened')) return;
+                    if (model.state('infoPanelOpen')) {
+                        panelController.handle.switchInfoRight();
+                        return true;
+                    }
                     model.changeBet({up: true});
                     return true;
                 }
@@ -150,7 +155,11 @@ export let keyboard = {
             this.Add({
                 key: 37,
                 down: function () {
-                    if (model.state('roll:progress') || !model.state('autoEnd')) return;
+                    if (model.state('roll:progress') || !model.state('autoEnd') || model.state('menuOpened')) return;
+                    if (model.state('infoPanelOpen')) {
+                        panelController.handle.switchInfoLeft();
+                        return true;
+                    }
                     model.changeBet({down: true});
                     return true;
                 }
