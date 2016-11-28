@@ -84,6 +84,7 @@ export let model = (() => {
         model.state('autoPanel', false);
         model.state('infoPanelOpen', false);
         model.state('menuOpened', false);
+        model.state('isFirstAutoChangeAnimBG', true);
 
         events.trigger('model:states:init');
     }
