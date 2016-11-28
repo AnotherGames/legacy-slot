@@ -34,10 +34,10 @@ export class FS {
             model.data('savedFS', null);
             model.data('fsMulti', this.fsMulti);
         } else {
-            this.fsCount = 15;
-            this.fsMulti = 2;
+            this.fsCount = model.data('rollResponse').FreeSpinsWin;
+            this.fsMulti = model.data('rollResponse').NextMode.split('-')[1];
             this.fsLevel = 0;
-            model.data('fsMulti', 2);
+            model.data('fsMulti', this.fsMulti);
         }
 
         // массив в который записываются анимации для проигрывания
@@ -231,7 +231,7 @@ export class FS {
         model.state('fsEnd', true);
         model.state('FSMode', false);
         model.updateBalance({endFS: true});
-        model.el('brainPanel').destroy();
+        // model.el('brainPanel').destroy();
     }
 
     onBrain() {

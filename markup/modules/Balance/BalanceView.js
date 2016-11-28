@@ -129,7 +129,7 @@ export let view = (() => {
             betValueAmount = model.balance('betValue'),
             sumStyle = {font: '24px Helvetica, Arial', fill: '#e8b075', align: 'center'},
             valueStyle = {font: '27px Helvetica, Arial', fill: '#e8b075', align: 'center'},
-            y = [50, 96, 133, 145],
+            y = [55, 100, 138, 150],
             x = [154, 230, 250, 1212]
         }) {
 

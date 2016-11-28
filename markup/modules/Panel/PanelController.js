@@ -52,7 +52,7 @@ export let controller = (() => {
         view.draw.PanelBG({
             frameName: 'uiFS'
         });
-        view.draw.LinesNumber({x: 55, y: 115});
+        view.draw.LinesNumber({x: 55, y: 118});
 
         let infoButtonDesk = view.draw.InfoButton({x: 42, y: 27});
             infoButtonDesk.onInputDown.add(handle.info);
