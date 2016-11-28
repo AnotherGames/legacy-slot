@@ -70,11 +70,11 @@ export let view = (() => {
             game = model.el('game')
         }) {
 
-            wheels.forEach((wheel) => {
-                wheel.elements.forEach((element) => {
-                    element.sprite.alpha = alpha;
-                });
-            });
+            // wheels.forEach((wheel) => {
+            //     wheel.elements.forEach((element) => {
+            //         element.sprite.alpha = alpha;
+            //     });
+            // });
 
             if (number > 0) {
                 let line = model.data('lines')[number - 1];

@@ -76,12 +76,12 @@ export let controller = (() => {
         })
 
         if (cleanAlpha) {
-            let wheels = model.el('wheels');
-            wheels.forEach((wheel) => {
-                wheel.elements.forEach((element) => {
-                    element.sprite.alpha = 1;
-                });
-            });
+            // let wheels = model.el('wheels');
+            // wheels.forEach((wheel) => {
+            //     wheel.elements.forEach((element) => {
+            //         element.sprite.alpha = 1;
+            //     });
+            // });
         }
 
         view.hide.WinTop({})
