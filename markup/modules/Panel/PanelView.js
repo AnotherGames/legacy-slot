@@ -252,27 +252,27 @@ export let view = (() => {
             model.el('overlay', overlay);
 
             let infoRules = game.add.sprite(x, y, 'info', '1_en.png', container);
-                infoRules.anchor.set(0.5);
+            infoRules.anchor.set(0.5);
             model.el('infoRules', infoRules);
 
-            let closed = game.add.sprite(infoRules.width - 70, infoRules.height - (infoRules.height - 110), 'closed', null, container);
+            let closed = game.add.sprite(infoRules.width + 90, infoRules.height - (infoRules.height - 100), 'closed', null, container);
             model.el('closed', closed);
 
-            let arrowRight = game.add.sprite(infoRules.width / 2 + 80, infoRules.height - 100, 'ar', null, container);
+            let arrowRight = game.add.sprite(infoRules.width / 2 + 150, infoRules.height + 50, 'ar', null, container);
             model.el('arrowRight', arrowRight);
 
-            let arrowLeft = game.add.sprite(infoRules.width / 2 - 80, infoRules.height - 100, 'arLeft', null, container);
+            let arrowLeft = game.add.sprite(infoRules.width / 2 - 40, infoRules.height + 50, 'arLeft', null, container);
             model.el('arrowLeft', arrowLeft);
 
             let infoMarkers = [];
-            let infoMarker = game.add.sprite(infoRules.width / 2 - 40, infoRules.height - 130, 'infoMarker', 'marker_on.png', container);
+            let infoMarker = game.add.sprite(infoRules.width / 2, infoRules.height + 20, 'infoMarker', 'marker_on.png', container);
                 infoMarker.name = 'infoMarker0';
                 infoMarkers.push(infoMarker);
 
-            for (let i = 1; i < 7; i++) {
+            for (let i = 1; i < 8; i++) {
                 let name = 'infoMarker' + i;
                 let counter = i;
-                let marker = game.add.sprite(infoMarker.x, infoRules.height - 130, 'infoMarker', 'marker_off.png', container);
+                let marker = game.add.sprite(infoMarker.x, infoRules.height + 20, 'infoMarker', 'marker_off.png', container);
                 marker.name = name;
                 marker.x = marker.x + 30 * i;
                 infoMarkers.push(marker);
