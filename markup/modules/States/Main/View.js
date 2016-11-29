@@ -119,6 +119,22 @@ export let view = (() => {
                 lineNumber.normal = function() {lineNumber.frameName = 'line_splash-' + name + '_0.png'};
                 lineNumber.name = name;
                 lineNumber.anchor.set(0.5);
+                lineNumber.inputEnabled = true;
+                lineNumber.input.priorityID = 12;
+                lineNumber.input.pixelPerfectOver = 1;
+                lineNumber.events.onInputOver.add(() => {
+                    console.log('I am line number: %d!', lineNumber.name);
+                    if (lineNumber.lineShape) {
+                        lineNumber.lineShape.destroy();
+                    }
+                    lineNumber.lineShape = this.lineShape(lineNumber.name);
+                });
+
+                lineNumber.events.onInputOut.add(() => {
+                    if (lineNumber.lineShape) {
+                        lineNumber.lineShape.destroy();
+                    }
+                });
                 leftArr.push(lineNumber);
             }
 
@@ -128,13 +144,51 @@ export let view = (() => {
 
             for (let i = 1; i < 11; i++) {
                 let name = i;
-                let lineNumber = game.add.sprite(config[model.state('res')].win[i][1].x - gameMachine.width / 2, config[model.state('res')].win[i][0].y - gameMachine.height / 2 - 60, 'lineNumbers', 'line_splash-' + i +'_0.png', mainGroup);
+                let lineNumber = game.add.sprite(
+                    config[model.state('res')].win[i][1].x - gameMachine.width / 2,
+                    config[model.state('res')].win[i][0].y - gameMachine.height / 2 - 60,
+                    'lineNumbers', 'line_splash-' + i +'_0.png', mainGroup);
                 lineNumber.normal = function() {lineNumber.frameName = 'line_splash-' + name + '_0.png'};
                 lineNumber.name = name;
                 lineNumber.anchor.set(0.5);
+                lineNumber.inputEnabled = true;
+                lineNumber.input.priorityID = 12;
+                lineNumber.input.pixelPerfectOver = 1;
+                lineNumber.events.onInputOver.add(() => {
+                    console.log('I am line number: %d!', lineNumber.name);
+                    if (lineNumber.lineShape) {
+                        lineNumber.lineShape.destroy();
+                    }
+                    lineNumber.lineShape = this.lineShape(lineNumber.name);
+                });
+
+                lineNumber.events.onInputOut.add(() => {
+                    if (lineNumber.lineShape) {
+                        lineNumber.lineShape.destroy();
+                    }
+                });
+
                 rightArr.push(lineNumber);
             }
             model.el('rightArr', rightArr);
+        },
+
+        lineShape: function(number) {
+            console.log('I am drawing shape!');
+            let game = model.el('game');
+            let container = model.el('glistaLightContainer');
+            let line = model.data('lines')[number - 1];
+            let elSize = config[model.state('res')].elements;
+            let lineShape = game.add.graphics(0, 0, container);
+            lineShape
+                // .beginFill(0x000000)
+                .lineStyle(4, 0xfee73f, 0.8)
+                .moveTo((line[0].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[0].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + 50)
+                .lineTo((line[1].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[1].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + 50)
+                .lineTo((line[2].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[2].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + 50)
+                .lineTo((line[3].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[3].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + 50)
+                .lineTo((line[4].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[4].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + 50)
+            return lineShape;
         },
 
         machineContainer: function ({
