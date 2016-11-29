@@ -128,6 +128,11 @@ export let view = (() => {
                         lineNumber.lineShape.destroy();
                     }
                     lineNumber.lineShape = this.lineShape(lineNumber.name);
+                    setTimeout(() => {
+                        if (lineNumber.lineShape) {
+                            lineNumber.lineShape.destroy();
+                        }
+                    }, 1000);
                 });
 
                 lineNumber.events.onInputOut.add(() => {
@@ -160,6 +165,11 @@ export let view = (() => {
                         lineNumber.lineShape.destroy();
                     }
                     lineNumber.lineShape = this.lineShape(lineNumber.name);
+                    setTimeout(() => {
+                        if (lineNumber.lineShape) {
+                            lineNumber.lineShape.destroy();
+                        }
+                    }, 1000);
                 });
 
                 lineNumber.events.onInputOut.add(() => {
