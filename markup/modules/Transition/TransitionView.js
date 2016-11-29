@@ -56,7 +56,7 @@ export let view = (() => {
             freeSpinsLevel.scale.set(0.75);
         }
 
-        const multiBG = game.add.sprite(game.width / 2, game.height * 0.3, 'multiplier', null, transitionContainer);
+        const multiBG = game.add.sprite(game.width / 2, game.height * 0.44, 'multiplier', null, transitionContainer);
         multiBG.anchor.set(0.5);
         multiBG.alpha = 0;
         multiBG.scale.setTo(0.1, 0.1);
@@ -94,7 +94,7 @@ export let view = (() => {
         // model.el('axeSmall', axeSmall);
 
         const continueText = game.add.sprite(game.width / 2,
-            game.world.height * 0.6,
+            game.world.height * 0.7,
             'text',
             'continue.png',
             transitionContainer);
@@ -114,23 +114,60 @@ export let view = (() => {
         // const axeBig = model.el('axeBig');
         // const axeSmall = model.el('axeSmall');
         const continueText = model.el('continueText');
-        let delta = 0;
+        let delta = 160;
         if (model.state('mobile')) {
-            delta = 110;
+            delta = 220;
         }
 
-        game.add.tween(freeSpinsBG).to({y: game.height * 0.3}, 1500, Phaser.Easing.Bounce.Out, true);
-        game.add.tween(freeSpinsLevel).to({y: freeSpinsBG.height / 2 + delta}, 1500, Phaser.Easing.Bounce.Out, true)
-        .onComplete.add(() => {
+
+        function _addFSBG(){
+            game.add.tween(freeSpinsBG).to({y: game.height * 0.44}, 1500, Phaser.Easing.Bounce.Out, true);
+            game.add.tween(freeSpinsLevel).to({y: freeSpinsBG.height / 2 + delta}, 1500, Phaser.Easing.Bounce.Out, true)
+                .onComplete.add(() => {
+                    _removeFSBG();
+                }, this);
+        }
+
+        function _removeFSBG() {
             game.add.tween(freeSpinsBG.scale).to({x: 0.1, y: 0.1}, 500, Phaser.Easing.Elastic.Out, true);
             game.add.tween(freeSpinsLevel.scale).to({x: 0.1, y: 0.1}, 500, Phaser.Easing.Elastic.Out, true);
             game.add.tween(freeSpinsBG).to({alpha: 0}, 500, 'Linear', true);
-            game.add.tween(freeSpinsLevel).to({alpha: 0}, 500, 'Linear', true);
+            game.add.tween(freeSpinsLevel).to({alpha: 0}, 500, 'Linear', true)
+            _addMultiBG();
+        }
+
+        function _addMultiBG() {
             game.add.tween(multiBG).to({alpha: 1}, 500, 'Linear', true);
             game.add.tween(multiLevel).to({alpha: 1}, 500, 'Linear', true);
             game.add.tween(multiBG.scale).to({x: 1.0, y: 1.0}, 1500, Phaser.Easing.Elastic.Out, true);
-            game.add.tween(multiLevel.scale).to({x: 1.4, y: 1.4}, 1500, Phaser.Easing.Elastic.Out, true);
-        }, this);
+            game.add.tween(multiLevel.scale).to({x: 1.6, y: 1.6}, 1500, Phaser.Easing.Elastic.Out, true)
+                .onComplete.add(() => {
+                    _removeMultiBG();
+                }, this);
+        }
+
+        function _removeMultiBG() {
+            let fsLevelScale = 1;
+            if (model.state('mobile')) {
+                fsLevelScale = 0.75;
+            };
+
+            game.add.tween(multiBG.scale).to({x: 0.1, y: 0.1}, 500, Phaser.Easing.Elastic.Out, true);
+            game.add.tween(multiLevel.scale).to({x: 0.1, y: 0.1}, 500, Phaser.Easing.Elastic.Out, true);
+            game.add.tween(multiBG).to({alpha: 0}, 500, 'Linear', true);
+            game.add.tween(multiLevel).to({alpha: 0}, 1500, 'Linear', true);
+            game.add.tween(freeSpinsBG).to({alpha: 1}, 500, 'Linear', true);
+            game.add.tween(freeSpinsLevel).to({alpha: 1}, 500, 'Linear', true);
+            game.add.tween(freeSpinsBG.scale).to({x: 1.0, y: 1.0}, 1500, Phaser.Easing.Elastic.Out, true);
+            game.add.tween(freeSpinsLevel.scale).to({x: fsLevelScale, y: fsLevelScale}, 1500, Phaser.Easing.Elastic.Out, true)
+                .onComplete.add(() => {
+                    _removeFSBG();
+                })
+
+        }
+
+        _addFSBG();
+
         // game.add.tween(axeBig.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true);
         // game.add.tween(axeSmall.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true);
         game.add.tween(continueText.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true)
