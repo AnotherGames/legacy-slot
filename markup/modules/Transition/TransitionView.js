@@ -131,8 +131,8 @@ export let view = (() => {
         function _removeFSBG() {
             game.add.tween(freeSpinsBG.scale).to({x: 0.1, y: 0.1}, 500, Phaser.Easing.Elastic.Out, true);
             game.add.tween(freeSpinsLevel.scale).to({x: 0.1, y: 0.1}, 500, Phaser.Easing.Elastic.Out, true);
-            game.add.tween(freeSpinsBG).to({alpha: 0}, 500, 'Linear', true);
-            game.add.tween(freeSpinsLevel).to({alpha: 0}, 500, 'Linear', true)
+            game.add.tween(freeSpinsBG).to({alpha: 0}, 250, Phaser.Easing.Elastic.Out, true);
+            game.add.tween(freeSpinsLevel).to({alpha: 0}, 250, Phaser.Easing.Elastic.Out, true)
             _addMultiBG();
         }
 
@@ -154,8 +154,8 @@ export let view = (() => {
 
             game.add.tween(multiBG.scale).to({x: 0.1, y: 0.1}, 500, Phaser.Easing.Elastic.Out, true);
             game.add.tween(multiLevel.scale).to({x: 0.1, y: 0.1}, 500, Phaser.Easing.Elastic.Out, true);
-            game.add.tween(multiBG).to({alpha: 0}, 500, 'Linear', true);
-            game.add.tween(multiLevel).to({alpha: 0}, 1500, 'Linear', true);
+            game.add.tween(multiBG).to({alpha: 0}, 250, Phaser.Easing.Elastic.Out, true);
+            game.add.tween(multiLevel).to({alpha: 0}, 250, Phaser.Easing.Elastic.Out, true);
             game.add.tween(freeSpinsBG).to({alpha: 1}, 500, 'Linear', true);
             game.add.tween(freeSpinsLevel).to({alpha: 1}, 500, 'Linear', true);
             game.add.tween(freeSpinsBG.scale).to({x: 1.0, y: 1.0}, 1500, Phaser.Easing.Elastic.Out, true);
