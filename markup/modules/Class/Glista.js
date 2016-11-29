@@ -63,8 +63,8 @@ export class Glista {
 
         this.sprites = [];
         this.light = [];
-        for (let atlasInd = 0; atlasInd < 6; atlasInd++) {
-            let sprite = this.game.add.sprite( atlasInd * -80, 0, 'glistaAtlas', 5 - atlasInd, param.parent);
+        for (let atlasInd = 1; atlasInd < 7; atlasInd++) {
+            let sprite = this.game.add.sprite( atlasInd * -300, 0, 'glistaAtlas', `G_000${atlasInd}.png`, param.parent);
             sprite.anchor.set(0.7, 0.5);
             sprite.visible = false;
             this.sprites.push(sprite);
@@ -174,7 +174,7 @@ export class Glista {
         this._clock.start();
         this.timer = 0;
         this.progress = 0;
-        let margin = 0.03;
+        let margin = 0.045;
 
 
         let anim = function () {
@@ -185,9 +185,9 @@ export class Glista {
             }
 
             if (_this.progress < 0.5) {
-                margin = 0.03 - 0.015 * _this.progress;
+                margin = 0.045 - 0.015 * _this.progress;
             } else {
-                margin = 0.03 - 0.015 * (1 - _this.progress);
+                margin = 0.045 - 0.015 * (1 - _this.progress);
             }
 
             for (let spriteInd = 0; spriteInd < 6; spriteInd++) {
