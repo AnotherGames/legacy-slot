@@ -24,7 +24,7 @@ export let controller = (() => {
             document.addEventListener("touchend", handle._touchEnd, false);
         },
         openSettings: function () {
-            if (model.state('settings') === 'open') return;
+            if(model.state('lockedButtons') || model.state('roll:progress') || !model.state('autoEnd') || model.state('settings') === 'open') return;
             model.state('settings', 'open');
             view.show.Settings({});
             view.show.Overlay({});

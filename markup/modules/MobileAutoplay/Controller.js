@@ -9,7 +9,7 @@ export let controller = (() => {
 
     let handle = {
         openPanel: function () {
-            if (model.state('autoplayPanel') === 'open') return;
+            if (model.state('autoplayPanel') === 'open' || model.state('roll:progress')) return;
             model.state('autoplayPanel', 'open');
 
             view.show.Panel({});
