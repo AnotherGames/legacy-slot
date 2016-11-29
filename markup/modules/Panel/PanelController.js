@@ -120,10 +120,12 @@ export let controller = (() => {
             let infoRules = view.show.info({});
             let overlay = model.el('overlay');
             let closed = model.el('closed');
+            let infoMarkers = model.el('infoMarkers');
             let arrowRight = model.el('arrowRight');
             let arrowLeft = model.el('arrowLeft');
-            let infoMarkers = model.el('infoMarkers');
             let counter = 0;
+            model.el('infoCounter', counter);
+            model.state('infoPanelOpen', true);
 
             overlay.inputEnabled = true;
             overlay.input.priorityID = 2;
@@ -139,39 +141,57 @@ export let controller = (() => {
             overlay.events.onInputDown.add(() => {
                 model.group('popup').removeAll();
                 counter = 0;
+                model.el('infoCounter', counter);
+                model.state('infoPanelOpen', false);
             });
 
             closed.events.onInputDown.add(() => {
                 model.group('popup').removeAll();
                 counter = 0;
+                model.el('infoCounter', counter);
+                model.state('infoPanelOpen', false);
             });
 
-            arrowRight.events.onInputDown.add(() => {
-                infoMarkers.forEach((elem) => {
-                    elem.frameName = 'marker_off.png';
-                });
-                if (counter > 6) {
-                    counter = 0;
-                } else {
-                    counter++;
-                }
-                infoMarkers[counter].frameName = 'marker_on.png';
-                infoRules.frameName = `${counter + 1}_en.png`;
-            });
+            arrowRight.events.onInputDown.add(handle.switchInfoRight);
 
-            arrowLeft.events.onInputDown.add(() => {
-                infoMarkers.forEach((elem) => {
-                    elem.frameName = 'marker_off.png';
-                });
-                if (counter < 1) {
-                    counter = 7;
-                } else {
-                    counter--;
-                    infoMarkers[counter + 1].frameName = 'marker_off.png';
-                }
-                infoMarkers[counter].frameName = 'marker_on.png';
-                infoRules.frameName = `${counter + 1}_en.png`;
+            arrowLeft.events.onInputDown.add(handle.switchInfoLeft);
+        },
+
+        switchInfoRight: function () {
+            let infoRules = model.el('infoRules');
+            let counter = model.el('infoCounter');
+            let infoMarkers = model.el('infoMarkers');
+
+            infoMarkers.forEach((elem) => {
+                elem.frameName = 'marker_off.png';
             });
+            if (counter > 5) {
+                counter = 0;
+            } else {
+                counter++;
+            }
+            model.el('infoCounter', counter);
+            infoMarkers[counter].frameName = 'marker_on.png';
+            infoRules.frameName = `${counter + 1}_en.png`;
+        },
+
+        switchInfoLeft: function () {
+            let infoRules = model.el('infoRules');
+            let counter = model.el('infoCounter');
+            let infoMarkers = model.el('infoMarkers');
+
+            infoMarkers.forEach((elem) => {
+                elem.frameName = 'marker_off.png';
+            });
+            if (counter < 1) {
+                counter = 6;
+            } else {
+                counter--;
+                infoMarkers[counter + 1].frameName = 'marker_off.png';
+            }
+            model.el('infoCounter', counter);
+            infoMarkers[counter].frameName = 'marker_on.png';
+            infoRules.frameName = `${counter + 1}_en.png`;
         },
 
         betPlus: function() {
