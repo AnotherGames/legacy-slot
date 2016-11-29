@@ -114,7 +114,7 @@ export let controller = (() => {
         },
 
         info: function() {
-            if (model.state('lockedButtons')) return;
+            if(model.state('lockedButtons') || model.state('roll:progress') || !model.state('autoEnd')) return;
             sound.sounds.button.play();
 
             let infoRules = view.show.info({});
@@ -138,23 +138,20 @@ export let controller = (() => {
             arrowLeft.inputEnabled = true;
             arrowLeft.input.priorityID = 4;
 
-            overlay.events.onInputDown.add(() => {
-                model.group('popup').removeAll();
-                counter = 0;
-                model.el('infoCounter', counter);
-                model.state('infoPanelOpen', false);
-            });
+            overlay.events.onInputDown.add(handle.closeInfo);
 
-            closed.events.onInputDown.add(() => {
-                model.group('popup').removeAll();
-                counter = 0;
-                model.el('infoCounter', counter);
-                model.state('infoPanelOpen', false);
-            });
+            closed.events.onInputDown.add(handle.closeInfo);
 
             arrowRight.events.onInputDown.add(handle.switchInfoRight);
 
             arrowLeft.events.onInputDown.add(handle.switchInfoLeft);
+        },
+
+        closeInfo: function () {
+            model.group('popup').removeAll();
+            let counter = 0;
+            model.el('infoCounter', counter);
+            model.state('infoPanelOpen', false);
         },
 
         switchInfoRight: function () {
@@ -165,7 +162,7 @@ export let controller = (() => {
             infoMarkers.forEach((elem) => {
                 elem.frameName = 'marker_off.png';
             });
-            if (counter > 5) {
+            if (counter > 6) {
                 counter = 0;
             } else {
                 counter++;
@@ -184,7 +181,7 @@ export let controller = (() => {
                 elem.frameName = 'marker_off.png';
             });
             if (counter < 1) {
-                counter = 6;
+                counter = 7;
             } else {
                 counter--;
                 infoMarkers[counter + 1].frameName = 'marker_off.png';
