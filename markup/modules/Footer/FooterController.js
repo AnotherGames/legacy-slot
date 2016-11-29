@@ -35,6 +35,7 @@ export let controller = (() => {
 
     const handle = {
         Menu: function () {
+            if(model.state('lockedButtons') || model.state('roll:progress') || !model.state('autoEnd')) return;
             model.state('menuOpened', true);
             sound.sounds.button.play();
 
