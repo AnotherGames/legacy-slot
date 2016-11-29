@@ -43,6 +43,9 @@ export let model = (() => {
             case 'USD':
                 return '$ ';
                 break;
+            case 'cns':
+                return '$ ';
+                break;
             case 'EUR':
                 return '€ ';
                 break;
