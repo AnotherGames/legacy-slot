@@ -117,7 +117,7 @@ export let controller = (() => {
                 view.draw.WinLineTable({line: currentLine});
             } else {
                 view.draw.WinElements({number: currentLine.Line, amount: currentLine.Count, alpha: 1});
-                view.draw.WinLineTable({line: currentLine, scatter: true});
+                // view.draw.WinLineTable({line: currentLine, scatter: true});
             }
         } else {
             return;
