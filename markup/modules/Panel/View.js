@@ -164,6 +164,10 @@ export let view = (() => {
                 autoBG.events.onInputOut.add(function () {
                     autoBG.alpha = 0;
                 });
+                autoBG.events.onInputDown.add(() => {
+                    view.hide.autoPanel({});
+                    view.hide.autoButton({});
+                })
 
             let autoText = game.add.text(
                 autoBG.x + autoBG.width / 2,
@@ -298,7 +302,7 @@ export let view = (() => {
             finalX = 650,
             time = 350
         }) {
-            model.state('autoPanel', false);
+            // model.state('autoPanel', false);
             let autoDesktopContainer = model.group('autoDesktop');
             return game.add.tween(autoDesktopContainer).to( { x: finalX, alpha: 0 }, time, 'Linear', true)
                 .onComplete.add(() => {
