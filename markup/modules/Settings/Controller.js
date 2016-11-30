@@ -1,4 +1,5 @@
 import { model } from 'modules/Model/Model';
+import { view as transitionView } from 'modules/Transition/View';
 
 import { controller as soundController } from 'modules/Sound/Controller';
 import { controller as panelController } from 'modules/Panel/Controller';
@@ -102,7 +103,7 @@ export let controller = (function () {
             $('#darkness').off();
         });
         $('#settingsSave').on('click', function () {
-            game.input.keyboard.enabled = true; 
+            game.input.keyboard.enabled = true;
             $('#settings').addClass('closed');
             $('#darkness').addClass('closed');
             $('.history').addClass('closed');

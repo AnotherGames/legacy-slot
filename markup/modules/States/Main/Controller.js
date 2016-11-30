@@ -112,7 +112,7 @@ export class Main {
             if (lastTime + 1000 > new Date().getTime() ) {
                 fps++;
             } else {
-                if (fps < 30) {
+                if (fps < 10) {
                     console.log('FPS:', fps);
                     lowCount++;
                     if (lowCount > 3) {

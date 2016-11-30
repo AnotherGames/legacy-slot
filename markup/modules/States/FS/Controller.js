@@ -16,7 +16,6 @@ import { controller as winController } from 'modules/Win/Controller';
 export let controller = (() => {
 
     function init(amount) {
-        console.log('I am initing FS!');
         if (model.state('fsEnd') === false) return;
 
         model.state('fsEnd', false);
@@ -27,7 +26,6 @@ export let controller = (() => {
     }
 
     function next() {
-        console.log('I am spining FS!');
         let rollData = model.data('rollResponse');
 
         if (!model.state('fsEnd') && rollData.NextMode !== 'root') {
