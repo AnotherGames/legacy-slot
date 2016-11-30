@@ -78,9 +78,7 @@ export let controller = (() => {
                 view.hide.autoButton({});
                 view.hide.autoPanel({});
             }
-            let infoButtonDesk = model.el('infoButtonDesk');
-                infoButtonDesk.frameName = 'infoOn.png';
-                infoButtonDesk.freezeFrames = true;
+
             const spinButtonDesk = model.el('spinButtonDesk');
             if (spinButtonDesk.frameName == 'stop.png') {
 
@@ -244,6 +242,27 @@ export let controller = (() => {
 
         view.draw.updateCount({count});
     }
+
+    function freezeInfo() {
+        if(model.state('mobile')) return;
+        if(!model.state('autoEnd')) return;
+
+        let infoButtonDesk = model.el('infoButtonDesk');
+            infoButtonDesk.frameName = 'infoOn.png';
+            infoButtonDesk.freezeFrames = true;
+    }
+
+    function unfreezeInfo() {
+        if(model.state('mobile')) return;
+        if(!model.state('autoEnd')) return;
+
+        let infoButtonDesk = model.el('infoButtonDesk');
+        infoButtonDesk.frameName = 'info.png';
+        infoButtonDesk.freezeFrames = false;
+    }
+
+    events.on('roll:start', freezeInfo);
+    events.on('roll:end', unfreezeInfo);
 
     events.on('autoplay:init', autoStart);
     events.on('autoplay:stop', autoStop);

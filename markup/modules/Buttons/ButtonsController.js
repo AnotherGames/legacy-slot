@@ -88,10 +88,12 @@ export let controller = (() => {
     const handle = {
         spinButton: function () {
             if (model.state('lockedButtons')) return;
+
             let spinButton = model.el('spinButton');
             if (spinButton.frameName === 'spinEmpty.png') return;
-            view.draw.lockedButtons();
+
             sound.sounds.button.play();
+
             events.trigger('roll:request');
             events.trigger('roll:fast');
         },
@@ -120,8 +122,6 @@ export let controller = (() => {
             // events.trigger('menu:showMenu', 'bet');
             mobileSetBetController.handle.openPanel({});
         },
-
-
 
         menuButton: function() {
             if (model.state('lockedButtons')) return;
@@ -168,6 +168,9 @@ export let controller = (() => {
         if (model.state('desktop')) return;
         view.draw.updateCount({count});
     }
+
+    events.on('roll:start', view.draw.lockButtons);
+    events.on('roll:end', view.draw.unlockButtons);
 
     events.on('autoplay:init', autoStart);
     events.on('autoplay:stop', autoStop);

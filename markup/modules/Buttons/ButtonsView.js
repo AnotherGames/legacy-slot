@@ -95,16 +95,20 @@ export let view = (() => {
             model.el('autoCount').destroy();
         },
 
-        lockedButtons: function() {
+        lockButtons: function() {
+            if(model.state('desktop')) return;
+            if(!model.state('autoEnd')) return;
             model.el('betButton').frameName = 'setBetOut.png';
             model.el('menuButton').frameName = 'menuOut.png';
             model.el('autoButton').frameName = 'autoOut.png';
         },
 
-        unlockedButtons: function() {
+        unlockButtons: function() {
+            if(model.state('desktop')) return;
+            if(!model.state('autoEnd')) return;
             model.el('betButton').frameName = 'setBet.png';
             model.el('menuButton').frameName = 'menu.png';
-            model.el('autoButton').frameName = 'auto.png';    
+            model.el('autoButton').frameName = 'auto.png';
         }
 
     };
