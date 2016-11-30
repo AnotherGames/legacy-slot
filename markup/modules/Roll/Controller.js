@@ -1,5 +1,4 @@
 import { model } from 'modules/Model/Model';
-import { events } from 'modules/Util/Events';
 import { config } from 'modules/Util/Config';
 import { request } from 'modules/Util/Request';
 import { Wheel } from 'modules/Class/Wheel';

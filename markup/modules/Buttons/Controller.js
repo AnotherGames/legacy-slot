@@ -1,6 +1,5 @@
 import { model } from 'modules/Model/Model';
 import { view } from 'modules/Buttons/View';
-import { events } from 'modules/Util/Events';
 import { controller as rollController } from 'modules/Roll/Controller';
 import { controller as soundController } from 'modules/Sound/Controller';
 import { controller as autoplayController } from 'modules/Autoplay/Controller';

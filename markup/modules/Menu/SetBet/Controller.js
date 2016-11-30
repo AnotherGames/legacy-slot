@@ -1,5 +1,4 @@
 import { model } from 'modules/Model/Model';
-import { events } from 'modules/Util/Events';
 import { view } from 'modules/Menu/SetBet/View';
 import { controller as soundController } from 'modules/Sound/Controller';
 

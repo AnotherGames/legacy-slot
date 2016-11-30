@@ -1,6 +1,5 @@
 import { model } from 'modules/Model/Model';
 
-import { events } from 'modules/Util/Events';
 import { config } from 'modules/Util/Config';
 
 import { view as mainView } from 'modules/States/Main/View';

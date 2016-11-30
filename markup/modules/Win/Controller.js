@@ -1,7 +1,5 @@
 import { model } from 'modules/Model/Model';
 
-import { events } from 'modules/Util/Events';
-
 import { view } from 'modules/Win/View';
 import { view as transitionView } from 'modules/Transition/View';
 

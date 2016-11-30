@@ -1,5 +1,4 @@
 import { model } from 'modules/Model/Model';
-import { events } from 'modules/Util/Events';
 
 import { controller as rollController } from 'modules/Roll/Controller';
 import { controller as panelController } from 'modules/Panel/Controller';

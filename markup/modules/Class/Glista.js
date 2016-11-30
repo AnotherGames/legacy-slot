@@ -1,4 +1,4 @@
-import { config } from '../../modules/Util/Config';
+import { config } from 'modules/Util/Config';
 
 export class Glista {
     /*  param: {

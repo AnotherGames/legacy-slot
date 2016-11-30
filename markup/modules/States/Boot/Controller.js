@@ -1,5 +1,4 @@
 import { model } from 'modules/Model/Model';
-import { events } from 'modules/Util/Events';
 import { request } from 'modules/Util/Request';
 
 export class Boot {

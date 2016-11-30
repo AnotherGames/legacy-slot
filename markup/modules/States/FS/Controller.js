@@ -1,4 +1,3 @@
-import { events } from 'modules/Util/Events';
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
 
