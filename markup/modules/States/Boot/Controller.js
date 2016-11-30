@@ -47,14 +47,14 @@ export class Boot {
 
         if (game.device.desktop) {
             game.scale.setGameSize(1920, 1080);
-            model.state('desktop', true);
+            model.desktop = true;
             model.state('res', 'fullHD');
         } else {
             if (game.device.iOS) {
                 $('html, body').addClass('ios');
             }
             game.scale.setGameSize(1280, 720);
-            model.state('mobile', true);
+            model.mobile = true;
             model.state('res', 'HD');
         }
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
