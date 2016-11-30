@@ -3,7 +3,6 @@ import { view } from 'modules/Menu/SetBet/View';
 import { controller as soundController } from 'modules/Sound/Controller';
 
 export let controller = (() => {
-    if (model.desktop) return;
 
     let game;
 
@@ -114,9 +113,6 @@ export let controller = (() => {
         }
 
     };
-
-    events.on('model:balance:update', update.CoinValue);
-    events.on('model:balance:update', update.BetValue);
 
     return {
         init,

@@ -1,5 +1,4 @@
 import { model } from 'modules/Model/Model';
-import { events } from 'modules/Util/Events';
 import { view } from 'modules/Balance/View';
 
 export let controller = (() => {
@@ -45,8 +44,6 @@ export let controller = (() => {
             }
         }
     }
-
-    events.on('model:balance:update', updateBalance);
 
     return {
         initMobile,

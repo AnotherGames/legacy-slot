@@ -1,5 +1,4 @@
 import { model } from 'modules/Model/Model';
-import { events } from 'modules/Util/Events';
 import { config } from 'modules/Util/Config';
 import { controller as soundController } from 'modules/Sound/Controller';
 import { controller as fsController } from 'modules/States/FS/Controller';

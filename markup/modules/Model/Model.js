@@ -1,7 +1,5 @@
-import { events } from 'modules/Util/Events';
-
-// import { controller as balanceController } from 'modules/Balance/Controller';
-// import { controller as setBetController } from 'modules/Menu/SetBet/Controller';
+import { controller as balanceController } from 'modules/Balance/Controller';
+import { controller as setBetController } from 'modules/Menu/SetBet/Controller';
 
 export let model = (() => {
 
@@ -274,7 +272,11 @@ export let model = (() => {
             }
         }
 
-        events.trigger('model:balance:update');
+        if (model.mobile) {
+            setBetController.update.CoinValue({});
+            setBetController.update.BetValue({});
+        }
+        balanceController.updateBalance({});
 
     }
 
