@@ -2,7 +2,6 @@ import { model } from 'modules/Model/Model';
 import { events } from 'modules/Util/Events';
 import { view } from 'modules/Win/WinView';
 import { view as transitionView } from 'modules/Transition/TransitionView';
-import { keyboard } from 'modules/Keyboard/Keyboard';
 
 export let controller = (() => {
 

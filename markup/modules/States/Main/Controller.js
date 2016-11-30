@@ -14,7 +14,6 @@ import { controller as autoplayController } from 'modules/Autoplay/AutoplayContr
 import { controller as mobileSettingsController } from 'modules/MobileSettings/Controller';
 import { controller as mobileAutoplayController } from 'modules/MobileAutoplay/Controller';
 import { controller as mobileSetBetController } from 'modules/MobileSetBet/Controller';
-import { keyboard } from 'modules/Keyboard/Keyboard';
 
 export class Main {
     constructor(game) {
