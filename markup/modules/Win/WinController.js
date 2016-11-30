@@ -37,7 +37,7 @@ export let controller = (() => {
 
             model.data('startFSScreen', data.Screen);
             model.data('firstScreen', data.Screen);
-            keyboard.removeDefaultKey();
+            game.input.keyboard.enabled = false;
 
             game.time.events.add(1500, () => {
                 transitionView.fsStart();

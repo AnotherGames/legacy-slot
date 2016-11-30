@@ -35,8 +35,9 @@ export let controller = (() => {
 
     const handle = {
         Menu: function () {
+            let game = model.el('game');
             if(model.state('lockedButtons') || model.state('roll:progress') || !model.state('autoEnd')) return;
-            model.state('menuOpened', true);
+            game.input.keyboard.enabled = false;
             sound.sounds.button.play();
 
             $('#volume').prop('value', sound.volume * 100);
@@ -52,7 +53,7 @@ export let controller = (() => {
             $('#darkness').removeClass('closed');
 
             $('#darkness').on('click', function () {
-                model.state('menuOpened', false);
+                game.input.keyboard.enabled = true;
                 $('#settings').addClass('closed');
                 $('#darkness').addClass('closed');
                 $('.history').addClass('closed');

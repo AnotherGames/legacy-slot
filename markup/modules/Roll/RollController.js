@@ -53,6 +53,8 @@ export let controller = (() => {
             mainView.draw.showPopup({message: 'You have weak Internet connection'});
         });
 
+        game.input.keyboard.enabled = false;
+
         request.send('Roll')
             .then((data) => {
 
@@ -120,6 +122,7 @@ export let controller = (() => {
     }
 
     function endRoll() {
+        let game = model.el('game');
         if (model.state('ready')) return;
         request.send('Ready').then((data) => {
 
@@ -139,6 +142,9 @@ export let controller = (() => {
             }
 
         });
+        if (model.state('autoEnd')){
+            game.input.keyboard.enabled = true;
+        }
     }
 
     function _playRollSound() {

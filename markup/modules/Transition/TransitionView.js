@@ -130,6 +130,7 @@ export let view = (() => {
 
     function fsFinish() {
         const game = model.el('game');
+        game.input.keyboard.enabled = true;
         let darkness = game.add.graphics();
         darkness.beginFill(0x000000);
         darkness.drawRect(0, 0, game.width, game.height);

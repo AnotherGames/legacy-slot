@@ -117,7 +117,7 @@ export let controller = (() => {
         info: function() {
             if(model.state('lockedButtons') || model.state('roll:progress') || !model.state('autoEnd')) return;
             sound.sounds.button.play();
-
+            let game = model.el('game');
             let infoRules = view.show.info({});
             let overlay = model.el('overlay');
             let closed = model.el('closed');
@@ -125,8 +125,10 @@ export let controller = (() => {
             let arrowRight = model.el('arrowRight');
             let arrowLeft = model.el('arrowLeft');
             let counter = 0;
+
             model.el('infoCounter', counter);
             model.state('infoPanelOpen', true);
+            game.input.keyboard.enabled = false;
 
             overlay.inputEnabled = true;
             overlay.input.priorityID = 2;
@@ -149,8 +151,11 @@ export let controller = (() => {
         },
 
         closeInfo: function () {
-            model.group('popup').removeAll();
+            let game = model.el('game');
             let counter = 0;
+
+            game.input.keyboard.enabled = true;
+            model.group('popup').removeAll();
             model.el('infoCounter', counter);
             model.state('infoPanelOpen', false);
         },

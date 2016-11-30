@@ -102,7 +102,7 @@ export let settings = (function () {
             $('#darkness').off();
         });
         $('#settingsSave').on('click', function () {
-            model.state('menuOpened', false);
+            game.input.keyboard.enabled = true;
             $('#settings').addClass('closed');
             $('#darkness').addClass('closed');
             $('.history').addClass('closed');

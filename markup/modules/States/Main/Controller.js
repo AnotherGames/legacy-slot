@@ -83,7 +83,7 @@ export class Main {
 
         mainView.draw.machineMask({});
 
-        keyboard.initDefaultKey();
+        this.initKeys();
 
         // PreAnimation
         let darkness = mainView.draw.darkness({});
@@ -143,6 +143,36 @@ export class Main {
         game.frameAnims.forEach((anim) => {
             anim();
         });
+    }
+
+    initKeys() {
+        let game = model.el('game');
+
+        let space = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+        space.onDown.add(() => {
+            panelController.handle.spin();
+        });
+
+        let up = game.input.keyboard.addKey(Phaser.Keyboard.UP);
+        up.onDown.add(() => {
+            model.changeCoin({up: true});
+        });
+
+        let down = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
+        down.onDown.add(() => {
+            model.changeCoin({down: true});
+        });
+
+        let right = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+        right.onDown.add(() => {
+            model.changeBet({up: true});
+        });
+
+        let left = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
+        left.onDown.add(() => {
+            model.changeBet({down: true});
+        });
+
     }
 
 }
