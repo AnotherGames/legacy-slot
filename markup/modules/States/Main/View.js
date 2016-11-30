@@ -123,7 +123,7 @@ export let view = (() => {
             mask.beginFill(0x000000);
 
             let maskX;
-            if (model.state('mobile')) {
+            if (model.mobile) {
                 maskX = model.data('mainXLeft');
             } else {
                 maskX = game.world.centerX;

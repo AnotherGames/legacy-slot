@@ -76,13 +76,13 @@ export class Preload {
         game.load.atlasJSONArray('footerButtons', 'footer/footerButtons.png', 'footer/footerButtons.json');
         game.load.bitmapFont("numbersFont", "numbers/numbers.png", "numbers/numbers.xml");
         game.load.bitmapFont("fsLevelNumbers", "numbers/numbers1.png", "numbers/numbers1.xml");
-        if (model.state('desktop')) {
+        if (model.desktop) {
             game.load.image('ui', 'game/UI.png');
             game.load.image('uiFS', 'game/UI_FS.png');
             game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
             game.load.image('autoSelect', 'desk_buttons/autoSelect.png');
         }
-        if (model.state('mobile')) {
+        if (model.mobile) {
             game.load.atlasJSONArray('mobileButtons', 'mobile_buttons/mobileButtons.png', 'mobile_buttons/mobileButtons.json');
         }
         // all elements
@@ -99,7 +99,7 @@ export class Preload {
         game.load.image('axeSmall', 'fs/axeSmall.png');
         game.load.image('skull', 'fs/skull.png');
         game.load.image('plus3', 'fs/plus3.png');
-        if (model.state('mobile')) {
+        if (model.mobile) {
             game.load.image('fsTotalTable', 'fs/fsTotalTable.png');
             game.load.image('multiRip', 'fs/multiRip.png');
             game.load.image('multiTable', 'fs/multiTable.png');

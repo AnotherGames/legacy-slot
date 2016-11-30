@@ -26,20 +26,20 @@ export let controller = (() => {
 
     function updateBalance() {
         if (model.state('FSMode')) {
-            if (model.state('mobile')) {
+            if (model.mobile) {
                 view.update.FSMobileBalance({});
                 view.update.CashBalance({});
             }
-            if (model.state('desktop')) {
+            if (model.desktop) {
                 view.update.FSDesktopBalance({});
                 view.update.CashBalance({});
             }
         } else {
-            if (model.state('mobile')) {
+            if (model.mobile) {
                 view.update.CashBalance({});
                 view.update.CoinBalance({});
             }
-            if (model.state('desktop')) {
+            if (model.desktop) {
                 view.update.CashBalance({});
                 view.update.DesktopBalance({});
             }

@@ -4,7 +4,7 @@ import { view } from 'modules/Menu/SetBet/View';
 import { controller as soundController } from 'modules/Sound/Controller';
 
 export let controller = (() => {
-    if (model.state('desktop')) return;
+    if (model.desktop) return;
 
     let game;
 
@@ -105,12 +105,12 @@ export let controller = (() => {
     let update = {
 
         CoinValue: function () {
-            if (model.state('desktop')) return;
+            if (model.desktop) return;
             view.update.CoinValue({});
         },
 
         BetValue: function () {
-            if (model.state('desktop')) return;
+            if (model.desktop) return;
             view.update.BetValue({});
         }
 

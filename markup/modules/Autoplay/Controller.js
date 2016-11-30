@@ -12,7 +12,7 @@ export let controller = (() => {
         model.data('autoCount', amount);
         model.data('autoCashSumStart', model.balance('coinCash'));
 
-        if (model.state('mobile')) {
+        if (model.mobile) {
             buttonsController.auto.start();
         } else {
             panelController.auto.start();
@@ -56,7 +56,7 @@ export let controller = (() => {
         if (autoCount > 0) {
             model.data('autoCount', autoCount); // Проверить нужность
 
-            if (model.state('mobile')) {
+            if (model.mobile) {
                 buttonsController.auto.change(autoCount);
             } else {
                 panelController.auto.change(autoCount);
@@ -70,7 +70,7 @@ export let controller = (() => {
         console.log('I am stoping autoplay!');
         model.state('autoEnd', true);
 
-        if (model.state('mobile')) {
+        if (model.mobile) {
             buttonsController.auto.stop();
         } else {
             panelController.auto.stop();

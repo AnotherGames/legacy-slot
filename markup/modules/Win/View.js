@@ -103,7 +103,7 @@ export let view = (() => {
                             }
                             game.add.tween(element.sprites[element.active - 1].scale).to({x: 1.7, y: 1.7}, 700, 'Linear', true)
                                 .onComplete.add(() => {
-                                    if (model.state('mobile')) {
+                                    if (model.mobile) {
                                         element.sprites[element.active - 1].scale.x = element.sprites[element.active - 1].scale.y = 1.5;
                                     } else {
                                         element.sprites[element.active - 1].scale.x = element.sprites[element.active - 1].scale.y = 1;
@@ -189,7 +189,7 @@ export let view = (() => {
                     });
                 });
 
-                if (model.state('mobile')) {
+                if (model.mobile) {
                     x = 192 * (lastWheel + 0.5) + 105 - gameMachine.width / 2;
                     y = 180 * (lastElement + 0.5) + 135 - gameMachine.height / 2 - 25;
                 } else {
@@ -199,7 +199,7 @@ export let view = (() => {
             }
 
             if (!scatter) {
-                if (model.state('mobile')) {
+                if (model.mobile) {
                     x = 192 * (countValue - 0.5) + 105 - gameMachine.width / 2;
                     y = 180 * (currentLineY + 0.5) + 135 - gameMachine.height / 2 - 25;
                 } else {

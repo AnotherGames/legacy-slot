@@ -138,11 +138,11 @@ export let view = (() => {
 
             let style;
 
-            if (model.state('desktop')) {
+            if (model.desktop) {
                 style = styleDesktop;
             }
 
-            if (model.state('mobile')) {
+            if (model.mobile) {
                 style = styleMobile;
             }
 

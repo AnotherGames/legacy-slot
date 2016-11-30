@@ -51,7 +51,7 @@ export class Main {
 
         rollController.init();
 
-        if (model.state('mobile')) {
+        if (model.mobile) {
             footerController.initMobile();
             buttonsController.init();
 

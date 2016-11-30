@@ -58,9 +58,6 @@ export let controller = (() => {
         });
         view.draw.LinesNumber({x: 55, y: 115});
 
-        let infoButtonDesk = view.draw.InfoButton({x: 42, y: 27});
-            infoButtonDesk.onInputDown.add(handle.info);
-
         let candle1 = view.draw.fsCandle({});
             candle1.scale.set(0.7);
 
@@ -234,7 +231,7 @@ export let controller = (() => {
     let auto = {
 
         start: function(amount) {
-            if (model.state('mobile')) return;
+            if (model.mobile) return;
 
             view.autoStartDesktop();
             view.draw.autoCount({amount});
@@ -242,14 +239,14 @@ export let controller = (() => {
         },
 
         stop: function() {
-            if (model.state('mobile')) return;
+            if (model.mobile) return;
 
             view.autoStopDesktop();
             view.draw.removeCount();
         },
 
         change: function(count) {
-            if (model.state('mobile')) return;
+            if (model.mobile) return;
 
             view.draw.updateCount({count});
         }
@@ -257,7 +254,7 @@ export let controller = (() => {
     };
 
     function freezeInfo() {
-        if(model.state('mobile')) return;
+        if(model.mobile) return;
         if(!model.state('autoEnd')) return;
 
         let infoButtonDesk = model.el('infoButtonDesk');
@@ -266,7 +263,7 @@ export let controller = (() => {
     }
 
     function unfreezeInfo() {
-        if(model.state('mobile')) return;
+        if(model.mobile) return;
         if(!model.state('autoEnd')) return;
 
         let infoButtonDesk = model.el('infoButtonDesk');

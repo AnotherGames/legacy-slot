@@ -72,7 +72,7 @@ export let controller = (() => {
 
                 winController.cleanWin(true);
 
-                if(model.state('mobile')) {
+                if(model.mobile) {
                     buttonsController.freezeInfo();
                 } else {
                     panelController.freezeInfo();
@@ -118,7 +118,7 @@ export let controller = (() => {
                     if (countFinish === 5) {
                         endRoll();
                         winController.showWin();
-                        if(model.state('mobile')) {
+                        if(model.mobile) {
                             buttonsController.unfreezeInfo();
                         } else {
                             panelController.unfreezeInfo();

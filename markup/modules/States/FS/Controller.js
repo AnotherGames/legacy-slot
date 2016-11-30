@@ -74,7 +74,7 @@ export class FS {
 
         rollController.init();
 
-        if (model.state('mobile')) {
+        if (model.mobile) {
             footerController.initMobile();
             balanceController.initFSMobile();
 
@@ -98,7 +98,7 @@ export class FS {
 
 
         let time = game.rnd.integerInRange(10, 70);
-        if (model.state('desktop')) {
+        if (model.desktop) {
             let candle1 = fsView.draw.fsCandle({});
             candle1.scale.set(0.8);
             game.time.events.add(time, () => {

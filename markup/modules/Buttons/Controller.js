@@ -155,33 +155,33 @@ export let controller = (() => {
     let auto = {
 
         start: function(amount) {
-            if (model.state('desktop')) return;
+            if (model.desktop) return;
             view.auto.Start();
             let text = view.draw.autoCount({amount});
         },
 
         stop: function() {
-            if (model.state('desktop')) return;
+            if (model.desktop) return;
             view.auto.Stop();
             view.draw.removeCount();
         },
 
         change: function(count) {
-            if (model.state('desktop')) return;
+            if (model.desktop) return;
             view.draw.updateCount({count});
         }
 
     };
 
     function freezeInfo() {
-        if(!model.state('mobile')) return;
+        if(!model.mobile) return;
         if(!model.state('autoEnd')) return;
 
         view.draw.lockButtons();
     }
 
     function unfreezeInfo() {
-        if(!model.state('mobile')) return;
+        if(!model.mobile) return;
         if(!model.state('autoEnd')) return;
 
         view.draw.unlockButtons();

@@ -147,7 +147,7 @@ export let view = (() => {
             const fsContainer = model.group('fs');
             let x, y, scale;
 
-            if (model.state('mobile')) {
+            if (model.mobile) {
                 x = 120;
                 y = 440;
                 scale = 0.6;
@@ -195,7 +195,7 @@ export let view = (() => {
             const fsContainer = model.group('fs');
             let x, y, scale;
 
-            if (model.state('mobile')) {
+            if (model.mobile) {
                 x = 100;
                 y = 80;
                 scale = 0.8;
@@ -225,7 +225,7 @@ export let view = (() => {
         }) {
             const game = model.el('game');
             let x, y;
-            if (model.state('mobile')) {
+            if (model.mobile) {
                 x = 125;
                 y = 625;
                 let multiBG = game.add.sprite(x, y, 'multiRip', null, container);
@@ -253,7 +253,7 @@ export let view = (() => {
         }) {
             const game = model.el('game');
             let x, y, font;
-            if (model.state('mobile')) {
+            if (model.mobile) {
                 x = 1183;
                 y = 68;
                 font = fontMobile;
@@ -274,7 +274,7 @@ export let view = (() => {
         }) {
             const game = model.el('game');
             let x, y;
-            if (model.state('mobile')) {
+            if (model.mobile) {
                 x = 350;
                 y = 33;
                 let brainBG = game.add.sprite(x, y, 'multiTable', null, container);
@@ -300,7 +300,7 @@ export let view = (() => {
             if (model.state('CountPlus3')) return;
             model.state('CountPlus3', true);
 
-            if (model.state('desktop')) {
+            if (model.desktop) {
                 deltaY = 30;
             }
             const plus3 = game.add.sprite(x, y - deltaY, 'plus3', null, container);
@@ -309,7 +309,7 @@ export let view = (() => {
 
             let tweenY;
             let tweenX;
-            if(model.state('desktop')) {
+            if(model.desktop) {
                 tweenX = plus3.x;
                 tweenY = 950;
             } else {
@@ -332,7 +332,7 @@ export let view = (() => {
         }) {
             const game = model.el('game');
             let x, y;
-            if (model.state('mobile')) {
+            if (model.mobile) {
                 x = 1180;
                 y = 105;
             } else {

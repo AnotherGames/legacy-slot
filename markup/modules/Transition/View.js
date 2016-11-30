@@ -188,7 +188,7 @@ export let view = (() => {
         const winCount = game.add.bitmapText(game.width / 2, -200, 'numbersFont', 0, 120, transitionContainer);
         winCount.align = 'center';
         winCount.anchor.set(0.5);
-        if (model.state('mobile')) {
+        if (model.mobile) {
             winCount.scale.setTo(0.8, 0.8);
         }
         console.log(winCount);
@@ -209,7 +209,7 @@ export let view = (() => {
             'continue.png',
             transitionContainer);
         continueText.anchor.set(0.5);
-        if (model.state('mobile')) {
+        if (model.mobile) {
             continueText.y = game.world.height * 0.8;
         }
         continueText.scale.setTo(0.1, 0.1);
@@ -339,7 +339,7 @@ export let view = (() => {
         let time = game.rnd.integerInRange(40, 60);
         let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
         let delta;
-        if (model.state('desktop')) {
+        if (model.desktop) {
             cloud.y = cloud.y = cloud.y + game.rnd.integerInRange(0, 250);
         } else {
             cloud.y = cloud.y = cloud.y + game.rnd.integerInRange(0, 100);

@@ -87,7 +87,7 @@ export class Init {
     handlePlay() {
         const game = model.el('game');
 
-        if (model.state('mobile')) game.scale.startFullScreen();
+        if (model.mobile) game.scale.startFullScreen();
         else this.fullScreen();
 
         document.body.addEventListener('touchstart', () => {
