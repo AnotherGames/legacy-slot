@@ -219,11 +219,13 @@ export let controller = (() => {
         },
 
         panelButton: function() {
-            if (!model.state('autoPanel')) return ;
             if (!model.state('autoEnd') || model.state('roll:progress')) return;
+            let autoButtonDesk = model.el('autoButtonDesk');
+            if (autoButtonDesk.x > 370) return;
             const amount = this.amount;
             autoplayController.init(amount);
-            model.state('autoPanel', false);
+            view.hide.autoButton({});
+            view.hide.autoPanel({});
         }
 
     };
