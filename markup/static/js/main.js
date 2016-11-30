@@ -1,8 +1,5 @@
 import { model } from 'modules/Model/Model';
 
-import { events } from 'modules/Util/Events';
-import { keyboard } from 'modules/Util/Keyboard';
-
 const game = new Phaser.Game(1280, 720, Phaser.AUTO, 'game');
 model.el('game', game);
 
@@ -19,4 +16,3 @@ game.state.add('Main', Main);
 game.state.add('FS', FS);
 
 export { model };
-export { events };

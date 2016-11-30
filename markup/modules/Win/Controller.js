@@ -1,7 +1,6 @@
 import { model } from 'modules/Model/Model';
 
 import { events } from 'modules/Util/Events';
-import { keyboard } from 'modules/Util/Keyboard';
 
 import { view } from 'modules/Win/View';
 import { view as transitionView } from 'modules/Transition/View';
@@ -41,7 +40,7 @@ export let controller = (() => {
 
             model.data('startFSScreen', data.Screen);
             model.data('firstScreen', data.Screen);
-            keyboard.removeDefaultKey();
+            game.input.keyboard.enabled = false;
 
             game.time.events.add(1500, () => {
                 transitionView.fsStart();
