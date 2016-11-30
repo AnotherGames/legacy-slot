@@ -1,6 +1,6 @@
 import { model } from 'modules/Model/Model';
 import { events } from 'modules/Util/Events';
-import { view } from 'modules/Balance/BalanceView';
+import { view } from 'modules/Balance/View';
 
 export let controller = (() => {
 
@@ -52,7 +52,8 @@ export let controller = (() => {
         initMobile,
         initDesktop,
         initFSMobile,
-        initFSDesktop
+        initFSDesktop,
+        updateBalance
     };
 
 })();

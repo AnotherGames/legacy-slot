@@ -1,7 +1,8 @@
 import { model } from 'modules/Model/Model';
 import { events } from 'modules/Util/Events';
-import { view } from 'modules/MobileAutoplay/View';
-import { sound } from 'modules/Sound/Sound';
+import { view } from 'modules/Menu/Autoplay/View';
+import { controller as soundController } from 'modules/Sound/Controller';
+import { controller as autoplayController } from 'modules/Autoplay/Controller';
 
 export let controller = (() => {
 
@@ -18,7 +19,7 @@ export let controller = (() => {
         closePanel: function () {
             if (model.state('autoplayPanel') === 'close') return;
 
-            sound.sounds.button.play();
+            soundController.sounds.button.play();
             if (model.state('autoplayPanel') === 'open') {
                 view.hide.Panel({});
             }
@@ -30,7 +31,7 @@ export let controller = (() => {
             if (model.state('autoplayPanel') === 'close') return;
 
             handle.closePanel();
-            events.trigger('autoplay:init', amount);
+            autoplayController.init(amount);
         }
     };
 

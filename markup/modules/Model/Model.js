@@ -1,5 +1,8 @@
 import { events } from 'modules/Util/Events';
 
+// import { controller as balanceController } from 'modules/Balance/Controller';
+// import { controller as setBetController } from 'modules/Menu/SetBet/Controller';
+
 export let model = (() => {
 
     let _data = {},
@@ -88,8 +91,6 @@ export let model = (() => {
         model.state('infoPanelOpen', false);
         model.state('menuOpened', false);
         model.state('isFirstAutoChangeAnimBG', true);
-
-        events.trigger('model:states:init');
     }
 
     function initSettings(settings) {
@@ -133,8 +134,6 @@ export let model = (() => {
 
         model.balance('fsWin', 0);
         model.balance('totalWin', 0);
-
-        events.trigger('model:balance:init');
 
     }
 

@@ -1,20 +1,23 @@
-import { events } from 'modules/Util/Events';
 import { model } from 'modules/Model/Model';
+
+import { events } from 'modules/Util/Events';
 import { config } from 'modules/Util/Config';
+import { keyboard } from 'modules/Util/Keyboard';
+
 import { view as mainView } from 'modules/States/Main/View';
-import { settings } from 'modules/Menu/Settings';
-import { sound } from 'modules/Sound/Sound';
-import { controller as balanceController } from 'modules/Balance/BalanceController';
-import { controller as footerController } from 'modules/Footer/FooterController';
-import { controller as panelController } from 'modules/Panel/PanelController';
-import { controller as buttonsController } from 'modules/Buttons/ButtonsController';
-import { controller as rollController } from 'modules/Roll/RollController';
-import { controller as winController } from 'modules/Win/WinController';
-import { controller as autoplayController } from 'modules/Autoplay/AutoplayController';
-import { controller as mobileSettingsController } from 'modules/MobileSettings/Controller';
-import { controller as mobileAutoplayController } from 'modules/MobileAutoplay/Controller';
-import { controller as mobileSetBetController } from 'modules/MobileSetBet/Controller';
-import { keyboard } from 'modules/Keyboard/Keyboard';
+
+import { controller as soundController } from 'modules/Sound/Controller';
+import { controller as settingsController } from 'modules/Settings/Controller';
+import { controller as balanceController } from 'modules/Balance/Controller';
+import { controller as footerController } from 'modules/Footer/Controller';
+import { controller as panelController } from 'modules/Panel/Controller';
+import { controller as buttonsController } from 'modules/Buttons/Controller';
+import { controller as rollController } from 'modules/Roll/Controller';
+import { controller as winController } from 'modules/Win/Controller';
+import { controller as autoplayController } from 'modules/Autoplay/Controller';
+import { controller as mobileSettingsController } from 'modules/Menu/Settings/Controller';
+import { controller as mobileAutoplayController } from 'modules/Menu/Autoplay/Controller';
+import { controller as mobileSetBetController } from 'modules/Menu/SetBet/Controller';
 
 export class Main {
     constructor(game) {
@@ -25,7 +28,7 @@ export class Main {
         console.info('Main State!');
         const game = model.el('game');
 
-        sound.init({sound: model.state('sound'), volume: model.state('volume'), music: model.state('music')});
+        soundController.init({sound: model.state('sound'), volume: model.state('volume'), music: model.state('music')});
         // массив в который записываются анимации для проигрывания
         game.frameAnims = [];
         game.spriteAnims = [];
@@ -41,7 +44,7 @@ export class Main {
 
     create() {
         const game = model.el('game');
-        sound.music.fon.play();
+        soundController.music.fon.play();
 
         mainView.draw.mainBG({});
         mainView.draw.mainContainer({});
@@ -76,7 +79,7 @@ export class Main {
             game.mainContainer.x = game.world.centerX;
             game.mainContainer.y = game.world.centerY + config[model.state('res')].mainContainer.y;
 
-            settings.initDesktopSettings(game);
+            settingsController.initDesktopSettings(game);
             panelController.init();
             balanceController.initDesktop();
         }
@@ -97,7 +100,7 @@ export class Main {
             game.state.start('FS');
         }
         if (model.data('remainAutoCount') && !model.state('autoStopWhenFS')) {
-            events.trigger('autoplay:init', model.data('remainAutoCount'));
+            autoplayController.init(model.data('remainAutoCount'));
             model.data('remainAutoCount', null);
         }
 

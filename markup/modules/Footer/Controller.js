@@ -1,7 +1,9 @@
 import { model } from 'modules/Model/Model';
 import { request } from 'modules/Util/Request';
-import { sound } from 'modules/Sound/Sound';
-import { view } from 'modules/Footer/FooterView';
+
+import { view } from 'modules/Footer/View';
+
+import { controller as soundController } from 'modules/Sound/Controller';
 
 export let controller = (() => {
 
@@ -37,9 +39,9 @@ export let controller = (() => {
         Menu: function () {
             if(model.state('lockedButtons') || model.state('roll:progress') || !model.state('autoEnd')) return;
             model.state('menuOpened', true);
-            sound.sounds.button.play();
+            soundController.sounds.button.play();
 
-            $('#volume').prop('value', sound.volume * 100);
+            $('#volume').prop('value', soundController.volume * 100);
             $('#checkSound').prop('checked', model.state('sound'));
             $('#checkMusic').prop('checked', model.state('music'));
             $('#fastSpin').prop('checked', model.state('fastRoll'));
@@ -61,17 +63,17 @@ export let controller = (() => {
         },
         Sound: function () {
             let soundButton = model.el('soundButton');
-            if (sound.volume > 0) {
+            if (soundController.volume > 0) {
                 soundButton.frameName = 'soundOff.png';
-                sound.lastVolume = sound.volume * 100;
-                sound.volume = 0;
+                soundController.lastVolume = soundController.volume * 100;
+                soundController.volume = 0;
             } else {
                 soundButton.frameName = 'soundOn.png';
-                sound.volume = sound.lastVolume;
+                soundController.volume = soundController.lastVolume;
             }
         },
         Fast: function () {
-            sound.sounds.button.play();
+            soundController.sounds.button.play();
             let fastButton = model.el('fastButton');
             if (model.state('fastRoll')) {
                 model.state('fastRoll', false);
@@ -82,7 +84,7 @@ export let controller = (() => {
             }
         },
         Home: function () {
-            sound.sounds.button.play();
+            soundController.sounds.button.play();
             request.send('Logout')
                 .then((response) => {
                     console.log('Logout response:', response);

@@ -1,25 +1,25 @@
-import { model } from '../../modules/Model/Model';
-import { sound } from '../../modules/Sound/Sound';
-import { view as transitionView } from 'modules/Transition/TransitionView';
-import { controller as panelController } from 'modules/Panel/PanelController';
+import { model } from 'modules/Model/Model';
 
-export let settings = (function () {
+import { controller as soundController } from 'modules/Sound/Controller';
+import { controller as panelController } from 'modules/Panel/Controller';
+
+export let controller = (function () {
     function initDesktopSettings(game) {
         $('#volume').on('input change', function () {
             let soundButton = model.el('soundButton');
             if (this.value == 0) {
                 soundButton.frameName = 'soundOff.png';
-                sound.lastVolume = sound.volume * 100;
+                soundController.lastVolume = soundController.volume * 100;
             } else {
                 soundButton.frameName = 'soundOn.png';
             }
-            sound.volume = this.value;
+            soundController.volume = this.value;
         });
         $('#checkSound').on('change', function () {
-            sound.isSound = this.checked;
+            soundController.isSound = this.checked;
         });
         $('#checkMusic').on('change', function () {
-            sound.isMusic = this.checked;
+            soundController.isMusic = this.checked;
         });
         $('#fastSpin').on('change', function () {
             model.state('fastRoll', this.checked);

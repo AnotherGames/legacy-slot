@@ -1,10 +1,12 @@
 import { model } from 'modules/Model/Model';
-import { view } from 'modules/Buttons/ButtonsView';
+import { view } from 'modules/Buttons/View';
 import { events } from 'modules/Util/Events';
-import { sound } from 'modules/Sound/Sound';
-import { controller as mobileSettingsController } from 'modules/MobileSettings/Controller';
-import { controller as mobileAutoplayController } from 'modules/MobileAutoplay/Controller';
-import { controller as mobileSetBetController } from 'modules/MobileSetBet/Controller';
+import { controller as rollController } from 'modules/Roll/Controller';
+import { controller as soundController } from 'modules/Sound/Controller';
+import { controller as autoplayController } from 'modules/Autoplay/Controller';
+import { controller as mobileSettingsController } from 'modules/Menu/Settings/Controller';
+import { controller as mobileAutoplayController } from 'modules/Menu/Autoplay/Controller';
+import { controller as mobileSetBetController } from 'modules/Menu/SetBet/Controller';
 
 export let controller = (() => {
     let game;
@@ -92,22 +94,21 @@ export let controller = (() => {
             let spinButton = model.el('spinButton');
             if (spinButton.frameName === 'spinEmpty.png') return;
 
-            sound.sounds.button.play();
+            soundController.sounds.button.play();
 
-            events.trigger('roll:request');
-            events.trigger('roll:fast');
+            rollController.startRoll();
+            rollController.fastRoll();
         },
 
         autoButton: function() {
             if (model.state('lockedButtons')) return;
             // if (model.state('roll:progress')) return;
-            sound.sounds.button.play();
+            soundController.sounds.button.play();
             let autoButton = model.el('autoButton');
             if (model.state('menu') === 'opened') return;
             if (autoButton.frameName === 'stop.png') {
-                events.trigger('autoplay:stop');
+                autoplayController.stop();
             } else {
-                // events.trigger('menu:showMenu', 'auto');
                 mobileAutoplayController.handle.openPanel({});
             }
         },
@@ -117,9 +118,8 @@ export let controller = (() => {
             // if (model.state('roll:progress')) return;
             let betButton = model.el('betButton');
             if (betButton.frameName === 'setBetOut.png') return;
-            sound.sounds.button.play();
+            soundController.sounds.button.play();
             if (model.state('menu') === 'opened') return;
-            // events.trigger('menu:showMenu', 'bet');
             mobileSetBetController.handle.openPanel({});
         },
 
@@ -129,7 +129,7 @@ export let controller = (() => {
             if (controller.isEvent) return;
             if (model.state('menu') === 'open') return;
 
-            sound.sounds.button.play();
+            soundController.sounds.button.play();
             mobileSettingsController.handle.openSettings({});
         },
 
@@ -137,47 +137,61 @@ export let controller = (() => {
             let soundButton = model.el('soundButton');
             let settingsSoundButton = model.el('settingsSoundButton');
             let settingsMusicButton = model.el('settingsMusicButton');
-            if (sound.isSound || sound.isMusic) {
-                sound.isSound = sound.isMusic = false;
+            if (soundController.isSound || soundController.isMusic) {
+                soundController.isSound = soundController.isMusic = false;
                 soundButton.frameName = 'soundOut.png';
                 settingsSoundButton.frameName = 'soundOff.png';
                 settingsMusicButton.frameName = 'musicOff.png';
             } else {
-                sound.isSound = sound.isMusic = true;
+                soundController.isSound = soundController.isMusic = true;
                 soundButton.frameName = 'sound.png';
                 settingsSoundButton.frameName = 'soundOn.png';
                 settingsMusicButton.frameName = 'musicOn.png';
-                sound.sounds.button.play();
+                soundController.sounds.button.play();
             }
         }
+    };
+
+    let auto = {
+
+        start: function(amount) {
+            if (model.state('desktop')) return;
+            view.auto.Start();
+            let text = view.draw.autoCount({amount});
+        },
+
+        stop: function() {
+            if (model.state('desktop')) return;
+            view.auto.Stop();
+            view.draw.removeCount();
+        },
+
+        change: function(count) {
+            if (model.state('desktop')) return;
+            view.draw.updateCount({count});
+        }
+
+    };
+
+    function freezeInfo() {
+        if(!model.state('mobile')) return;
+        if(!model.state('autoEnd')) return;
+
+        view.draw.lockButtons();
     }
 
-    function autoStart(amount) {
-        if (model.state('desktop')) return;
-        view.auto.Start();
-        let text = view.draw.autoCount({amount});
+    function unfreezeInfo() {
+        if(!model.state('mobile')) return;
+        if(!model.state('autoEnd')) return;
+
+        view.draw.unlockButtons();
     }
-
-    function autoStop() {
-        if (model.state('desktop')) return;
-        view.auto.Stop();
-        view.draw.removeCount();
-    }
-
-    function autoChangeCount(count) {
-        if (model.state('desktop')) return;
-        view.draw.updateCount({count});
-    }
-
-    events.on('roll:start', view.draw.lockButtons);
-    events.on('roll:end', view.draw.unlockButtons);
-
-    events.on('autoplay:init', autoStart);
-    events.on('autoplay:stop', autoStop);
-    events.on('autoplay:count', autoChangeCount);
 
     return {
-        init
+        init,
+        auto,
+        freezeInfo,
+        unfreezeInfo
     };
 
 })();

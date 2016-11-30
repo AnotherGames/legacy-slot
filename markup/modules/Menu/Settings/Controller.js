@@ -1,7 +1,7 @@
 import { model } from 'modules/Model/Model';
-import { view } from 'modules/MobileSettings/View';
-import { sound } from 'modules/Sound/Sound';
+import { view } from 'modules/Menu/Settings/View';
 import { view as mainView } from 'modules/States/Main/View';
+import { controller as soundController } from 'modules/Sound/Controller';
 
 export let controller = (() => {
 
@@ -32,7 +32,7 @@ export let controller = (() => {
         closeSettings: function () {
             if (model.state('settings') === 'close') return;
 
-            sound.sounds.button.play();
+            soundController.sounds.button.play();
             if (model.state('settings') === 'rules') {
                 view.hide.Rules({});
             }
@@ -86,39 +86,39 @@ export let controller = (() => {
             let menuButtonSound = model.el('soundButton');
             let soundButton = model.el('settingsSoundButton');
 
-            if (sound.isSound) {
+            if (soundController.isSound) {
                 soundButton.frameName = 'soundOff.png';
-                sound.isSound = false;
-                if (!sound.isMusic) {
+                soundController.isSound = false;
+                if (!soundController.isMusic) {
                     menuButtonSound.frameName = 'soundOut.png';
                 }
             } else {
                 soundButton.frameName = 'soundOn.png';
-                sound.isSound = true;
+                soundController.isSound = true;
                 menuButtonSound.frameName = 'sound.png';
-                sound.sounds.button.play();
+                soundController.sounds.button.play();
             }
         },
         changeMusic: function () {
             let menuButtonSound = model.el('soundButton');
             let musicButton = model.el('settingsMusicButton');
 
-            sound.sounds.button.play();
-            if (sound.isMusic) {
+            soundController.sounds.button.play();
+            if (soundController.isMusic) {
                 musicButton.frameName = 'musicOff.png';
-                sound.isMusic = false;
-                if (!sound.isMusic) {
+                soundController.isMusic = false;
+                if (!soundController.isMusic) {
                     menuButtonSound.frameName = 'soundOut.png';
                 }
             } else {
                 musicButton.frameName = 'musicOn.png';
-                sound.isMusic = true;
+                soundController.isMusic = true;
                 menuButtonSound.frameName = 'sound.png';
             }
         },
         changeFastSpin: function () {
             let fastSpinButton = model.el('settingsFastSpinButton');
-            sound.sounds.button.play();
+            soundController.sounds.button.play();
             if (model.state('fastRoll') === true) {
                 model.state('fastRoll', false);
                 fastSpinButton.frameName = 'fastSpinOff.png';
@@ -184,7 +184,7 @@ export let controller = (() => {
             model.el('infoCounter', counter);
         },
         showHistory: function () {
-            sound.sounds.button.play();
+            soundController.sounds.button.play();
             // $('.history').removeClass('closed');
         }
     };

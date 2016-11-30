@@ -1,7 +1,8 @@
 import { model } from 'modules/Model/Model';
 import { events } from 'modules/Util/Events';
 import { config } from 'modules/Util/Config';
-import { sound } from 'modules/Sound/Sound';
+import { controller as soundController } from 'modules/Sound/Controller';
+import { controller as winController } from 'modules/Win/Controller';
 import { Glista } from 'modules/Class/Glista';
 
 export let view = (() => {
@@ -90,7 +91,7 @@ export let view = (() => {
 
                             let game = model.el('game');
                             game.time.events.add(1000, () => {
-                                events.trigger('win:clean');
+                                winController.cleanWin();
                             });
 
                         }
@@ -147,7 +148,7 @@ export let view = (() => {
                 model.data('glistaDoneCounter', glistaDoneCounter);
 
                 if (glistaDoneCounter == glistaFiredCounter) {
-                    events.trigger('win:clean');
+                    winController.cleanWin();
                 }
 
             });
@@ -227,7 +228,7 @@ export let view = (() => {
     let play = {
 
         WinSound: function() {
-            let winSound = Math.round(Math.random()) ? sound.sounds.lineWin : sound.sounds.lineWin2;
+            let winSound = Math.round(Math.random()) ? soundController.sounds.lineWin : soundController.sounds.lineWin2;
                 winSound.addMarker('win', 0, 1, 1, false);
                 winSound.play('win');
             return winSound;

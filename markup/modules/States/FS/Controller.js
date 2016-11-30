@@ -2,18 +2,17 @@ import { events } from 'modules/Util/Events';
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
 
-import { settings } from 'modules/Menu/Settings';
-import { sound } from 'modules/Sound/Sound';
-
 import { view as fsView } from 'modules/States/FS/View';
+import { view as transitionView } from 'modules/Transition/View';
 
-import { controller as balanceController } from 'modules/Balance/BalanceController';
-import { controller as footerController } from 'modules/Footer/FooterController';
-import { controller as panelController } from 'modules/Panel/PanelController';
-import { controller as buttonsController } from 'modules/Buttons/ButtonsController';
-import { controller as rollController } from 'modules/Roll/RollController';
-import { controller as winController } from 'modules/Win/WinController';
-import { view as transitionView } from 'modules/Transition/TransitionView';
+import { controller as soundController } from 'modules/Sound/Controller';
+import { controller as settingsController } from 'modules/Settings/Controller';
+import { controller as balanceController } from 'modules/Balance/Controller';
+import { controller as footerController } from 'modules/Footer/Controller';
+import { controller as panelController } from 'modules/Panel/Controller';
+import { controller as buttonsController } from 'modules/Buttons/Controller';
+import { controller as rollController } from 'modules/Roll/Controller';
+import { controller as winController } from 'modules/Win/Controller';
 
 export class FS {
     constructor(game) {
@@ -23,7 +22,7 @@ export class FS {
     init() {
         console.info('FS State!');
         const game = model.el('game');
-        sound.init({sound: model.state('sound'), volume: model.state('volume'), music: model.state('music')});
+        soundController.init({sound: model.state('sound'), volume: model.state('volume'), music: model.state('music')});
 
         if (model.data('savedFS')) {
             let saved = model.data('savedFS');
@@ -87,7 +86,7 @@ export class FS {
             game.mainContainer.x = game.width - game.mainContainer.width / 2;
             game.mainContainer.y = game.world.centerY + config[model.state('res')].mainContainer.y;
 
-            settings.initDesktopSettings(game);
+            settingsController.initDesktopSettings(game);
             panelController.initFS();
             balanceController.initFSDesktop();
         }
@@ -142,8 +141,8 @@ export class FS {
     playFonMusic() {
         const game = model.el('game');
 
-        sound.music.fsFon.volume = 0;
-        sound.music.fsFon.play();
+        soundController.music.fsFon.volume = 0;
+        soundController.music.fsFon.play();
 
         let timeLength = config.fadeinMusicTime;
         let _clock = game.time.create(true);
@@ -157,7 +156,7 @@ export class FS {
             if (progress > 1) {
                 progress = 1;
             }
-            sound.music.fsFon.volume = progress;
+            soundController.music.fsFon.volume = progress;
 
             if (progress === 1) {
                 game.frameAnims.splice(game.frameAnims.indexOf(anim), 1);
@@ -191,7 +190,7 @@ export class FS {
         if (!model.state('fsEnd') && rollData.NextMode !== 'root') {
 
             events.trigger('fs:count', {start: true});
-            events.trigger('roll:request');
+            rollController.startRoll();
 
         }
 
@@ -223,7 +222,7 @@ export class FS {
 
         const game = model.el('game');
         game.time.events.add(1500, () => {
-            sound.music.fsFon.stop();
+            soundController.music.fsFon.stop();
                 transitionView.fsFinish();
         });
 
@@ -249,7 +248,7 @@ export class FS {
                 zombie.Up(() => {
                     brain.Up(() => {
                         zombie.Up();
-                        sound.sounds.zombie1.play();
+                        soundController.sounds.zombie1.play();
                     });
                 });
                 model.data('fsMulti', multiValue);
@@ -268,7 +267,7 @@ export class FS {
     searchBrains({
         startLevel
     }) {
-        let brainSound = Math.round(Math.random()) ? sound.sounds.brain1 : sound.sounds.brain2;
+        let brainSound = Math.round(Math.random()) ? soundController.sounds.brain1 : soundController.sounds.brain2;
 
         let levelValue = startLevel || model.data('rollResponse').FsBonus.Level;
         let levelABS = levelValue % 3;

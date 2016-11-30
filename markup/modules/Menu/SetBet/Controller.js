@@ -1,7 +1,7 @@
 import { model } from 'modules/Model/Model';
 import { events } from 'modules/Util/Events';
-import { view } from 'modules/MobileSetBet/View';
-import { sound } from 'modules/Sound/Sound';
+import { view } from 'modules/Menu/SetBet/View';
+import { controller as soundController } from 'modules/Sound/Controller';
 
 export let controller = (() => {
     if (model.state('desktop')) return;
@@ -18,7 +18,7 @@ export let controller = (() => {
         closePanel: function () {
             if (model.state('setbetPanel') === 'close') return;
 
-            sound.sounds.button.play();
+            soundController.sounds.button.play();
             if (model.state('setbetPanel') === 'open') {
                 view.hide.Panel({});
             }
@@ -27,23 +27,23 @@ export let controller = (() => {
             model.state('setbetPanel', 'close');
         },
         maxBet: function () {
-            sound.sounds.button.play();
+            soundController.sounds.button.play();
             model.changeBet({toMax: true});
         },
         betLevelPlus: function () {
-            sound.sounds.button.play();
+            soundController.sounds.button.play();
             model.changeBet({up: true});
         },
         betLevelMinus: function () {
-            sound.sounds.button.play();
+            soundController.sounds.button.play();
             model.changeBet({down: true});
         },
         coinPlus: function () {
-            sound.sounds.button.play();
+            soundController.sounds.button.play();
             model.changeCoin({up: true});
         },
         coinMinus: function () {
-            sound.sounds.button.play();
+            soundController.sounds.button.play();
             model.changeCoin({down: true});
         }
     };
@@ -121,6 +121,7 @@ export let controller = (() => {
 
     return {
         init,
-        handle
+        handle,
+        update
     };
 })();

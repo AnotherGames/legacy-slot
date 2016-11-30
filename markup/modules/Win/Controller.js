@@ -1,8 +1,12 @@
 import { model } from 'modules/Model/Model';
+
 import { events } from 'modules/Util/Events';
-import { view } from 'modules/Win/WinView';
-import { view as transitionView } from 'modules/Transition/TransitionView';
-import { keyboard } from 'modules/Keyboard/Keyboard';
+import { keyboard } from 'modules/Util/Keyboard';
+
+import { view } from 'modules/Win/View';
+import { view as transitionView } from 'modules/Transition/View';
+
+import { controller as autoplayController } from 'modules/Autoplay/Controller';
 
 export let controller = (() => {
 
@@ -32,7 +36,7 @@ export let controller = (() => {
                 if (!model.state('autoStopWhenFS')) {
                     model.data('remainAutoCount', model.data('autoCount'));
                 }
-                events.trigger('autoplay:stop');
+                autoplayController.stop();
             }
 
             model.data('startFSScreen', data.Screen);
@@ -127,8 +131,9 @@ export let controller = (() => {
 
     }
 
-    events.on('roll:end', showWin);
-    events.on('roll:start', cleanWin.bind(null, true));
-    events.on('win:clean', cleanWin);
+    return {
+        showWin,
+        cleanWin
+    };
 
 })();

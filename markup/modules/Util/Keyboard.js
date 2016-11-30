@@ -1,6 +1,7 @@
 import { model } from 'modules/Model/Model';
 import { events } from 'modules/Util/Events';
-import { controller as panelController} from 'modules/Panel/PanelController';
+import { controller as panelController} from 'modules/Panel/Controller';
+import { controller as rollController} from 'modules/Roll/Controller';
 
 export let keyboard = {
     _stack: {},
@@ -114,9 +115,14 @@ export let keyboard = {
             this.Add({
                 key: 32,
                 down: function () {
-                    if (model.state('lockedButtons') || model.state('roll:progress') || !model.state('autoEnd') || model.state('menuOpened') || model.state('infoPanelOpen')) return;
-                    events.trigger('roll:request');
-                    events.trigger('roll:fast');
+                    if (model.state('lockedButtons')
+                    || model.state('roll:progress')
+                    || !model.state('autoEnd')
+                    || model.state('menuOpened')
+                    || model.state('infoPanelOpen')) return;
+
+                    rollController.startRoll();
+                    rollController.fastRoll();
                     return true;
                 }
             });

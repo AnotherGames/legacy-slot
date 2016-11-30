@@ -2,9 +2,15 @@ import { model } from 'modules/Model/Model';
 import { events } from 'modules/Util/Events';
 import { config } from 'modules/Util/Config';
 import { request } from 'modules/Util/Request';
-import { sound } from 'modules/Sound/Sound';
 import { Wheel } from 'modules/Class/Wheel';
+
 import { view as mainView } from 'modules/States/Main/View';
+
+import { controller as soundController } from 'modules/Sound/Controller';
+import { controller as autoplayController } from 'modules/Autoplay/Controller';
+import { controller as panelController } from 'modules/Panel/Controller';
+import { controller as buttonsController } from 'modules/Buttons/Controller';
+import { controller as winController } from 'modules/Win/Controller';
 
 export let controller = (() => {
 
@@ -62,7 +68,14 @@ export let controller = (() => {
                     mainView.draw.showPopup({message: 'Your session is closed. Please click to restart'});
                 }
 
-                events.trigger('roll:start');
+                winController.cleanWin(true);
+
+                if(model.state('mobile')) {
+                    buttonsController.freezeInfo();
+                } else {
+                    panelController.freezeInfo();
+                }
+
                 model.data('rollResponse', data);
 
                 if (model.state('FSMode')) {
@@ -101,7 +114,13 @@ export let controller = (() => {
                 function callback() {
                     ++countFinish;
                     if (countFinish === 5) {
-                        events.trigger('roll:end');
+                        endRoll();
+                        winController.showWin();
+                        if(model.state('mobile')) {
+                            buttonsController.unfreezeInfo();
+                        } else {
+                            panelController.unfreezeInfo();
+                        }
                     }
                 }
 
@@ -148,8 +167,8 @@ export let controller = (() => {
         } else {
             duration = config.wheel.roll.time / 1000;
         }
-        sound.sounds.baraban.addMarker('roll', 0, duration, 1, false);
-        sound.sounds.baraban.play('roll');
+        soundController.sounds.baraban.addMarker('roll', 0, duration, 1, false);
+        soundController.sounds.baraban.play('roll');
     }
 
     function _convertArray(arr) {
@@ -170,7 +189,7 @@ export let controller = (() => {
 
         game.time.events.add(time, () => {
             if (model.state('autoEnd')) return;
-            events.trigger('autoplay:next');
+            autoplayController.start()
         });
     }
 
@@ -186,12 +205,11 @@ export let controller = (() => {
 
     }
 
-    events.on('roll:request', startRoll);
-    events.on('roll:end', endRoll);
-    events.on('roll:fast', fastRoll);
-
     return {
-        init
+        init,
+        startRoll,
+        endRoll,
+        fastRoll
     };
 
 })();

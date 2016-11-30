@@ -1,5 +1,5 @@
 import { model } from 'modules/Model/Model';
-import { sound } from 'modules/Sound/Sound';
+import { controller as soundController } from 'modules/Sound/Controller';
 import { config } from 'modules/Util/Config';
 
 export let view = (() => {
@@ -18,8 +18,8 @@ export let view = (() => {
         _fsStartInput();
         if (model.state('autoTransititon')) {
             game.time.events.add(config.autoTransitionTime, () => {
-                sound.sounds.button.play();
-                sound.music.startPerehod.stop();
+                soundController.sounds.button.play();
+                soundController.music.startPerehod.stop();
                 model.el('game').state.start('FS');
             });
         }
@@ -29,8 +29,8 @@ export let view = (() => {
         const game = model.el('game');
         const transitionContainer = model.group('transition');
 
-        sound.music.fon.stop();
-        sound.music.startPerehod.play();
+        soundController.music.fon.stop();
+        soundController.music.startPerehod.play();
 
         const transitionBG = game.add.sprite(0, 0, 'initBG', null, transitionContainer);
         model.el('transitionBG', transitionBG);
@@ -114,16 +114,16 @@ export let view = (() => {
         transitionBG.inputEnabled = true;
         transitionBG.input.priorityID = 2;
         transitionBG.events.onInputDown.add(function () {
-            sound.sounds.button.play();
-            sound.music.startPerehod.stop();
+            soundController.sounds.button.play();
+            soundController.music.startPerehod.stop();
             model.el('game').state.start('FS');
         });
     }
 
     function _fsStartHide() {
         console.log('i am starting fs after timeout');
-        sound.music.startPerehod.stop();
-        sound.music.fsFon.play();
+        soundController.music.startPerehod.stop();
+        soundController.music.fsFon.play();
         const game = model.el('game');
         model.el('game').state.start('FS');
     }
@@ -143,8 +143,8 @@ export let view = (() => {
         _coinsTween();
         if (model.state('autoTransititon')) {
             game.time.events.add(config.autoTransitionTime, () => {
-                sound.sounds.button.play();
-                sound.music.finishPerehod.stop();
+                soundController.sounds.button.play();
+                soundController.music.finishPerehod.stop();
                 model.el('game').state.start('Main');
             });
         }
@@ -153,11 +153,11 @@ export let view = (() => {
     function _fsFinishDraw() {
         const game = model.el('game');
         const transitionContainer = model.group('transition');
-        sound.music.fsFon.stop();
+        soundController.music.fsFon.stop();
         game.time.events.remove(model.data('zombieRandom'));
-        sound.music.finishPerehod.play();
+        soundController.music.finishPerehod.play();
         if (model.data('fsMulti') === 7) {
-            sound.sounds.zombie2.play();
+            soundController.sounds.zombie2.play();
         }
         const transitionBG = game.add.sprite(0, 0, 'initBG', null, transitionContainer);
         model.el('transitionBG', transitionBG);
@@ -219,8 +219,8 @@ export let view = (() => {
     function _сountMeter(count, elem) {
         const game = model.el('game');
 
-        sound.music.fsFon.volume = 0;
-        sound.music.fsFon.play();
+        soundController.music.fsFon.volume = 0;
+        soundController.music.fsFon.play();
 
         let timeLength = config.countMeterTime;
         let _clock = game.time.create(true);
@@ -311,16 +311,16 @@ export let view = (() => {
         transitionBG.inputEnabled = true;
         transitionBG.input.priorityID = 2;
         transitionBG.events.onInputDown.add(function () {
-            sound.sounds.button.play();
-            sound.music.finishPerehod.stop();
+            soundController.sounds.button.play();
+            soundController.music.finishPerehod.stop();
             model.el('game').state.start('Main');
         });
     }
 
     function _fsFinishHide() {
         console.log('i am finishing fs after timeout');
-        sound.music.finishPerehod.stop();
-        sound.music.fon.play();
+        soundController.music.finishPerehod.stop();
+        soundController.music.fon.play();
         const game = model.el('game');
         model.el('game').state.start('Main');
     }

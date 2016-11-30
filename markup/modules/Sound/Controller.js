@@ -1,6 +1,6 @@
 import { model } from 'modules/Model/Model';
 
-export let sound = {
+export let controller = {
     sounds: {},
     music: {},
 

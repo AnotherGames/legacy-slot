@@ -1,7 +1,9 @@
 import { model } from 'modules/Model/Model';
-import { view } from 'modules/Panel/PanelView';
+import { view } from 'modules/Panel/View';
 import { events } from 'modules/Util/Events';
-import { sound } from 'modules/Sound/Sound';
+import { controller as soundController } from 'modules/Sound/Controller';
+import { controller as autoplayController } from 'modules/Autoplay/Controller';
+import { controller as rollController } from 'modules/Roll/Controller';
 
 export let controller = (() => {
 
@@ -72,7 +74,7 @@ export let controller = (() => {
         spin: function() {
             if (model.state('lockedButtons')) return;
 
-            sound.sounds.button.play();
+            soundController.sounds.button.play();
             if (!model.state('autoClosed')) {
                 model.state('autoClosed', true);
                 view.hide.autoButton({});
@@ -82,19 +84,19 @@ export let controller = (() => {
             const spinButtonDesk = model.el('spinButtonDesk');
             if (spinButtonDesk.frameName == 'stop.png') {
 
-                events.trigger('autoplay:stop');
+                autoplayController.stop();
                 return;
             }
 
-            events.trigger('roll:request');
-            events.trigger('roll:fast');
+            rollController.startRoll();
+            rollController.fastRoll();
         },
 
         auto: function() {
             if (!model.state('autoEnd') || model.state('roll:progress')) return;
             if (model.state('lockedButtons')) return;
 
-            sound.sounds.button.play();
+            soundController.sounds.button.play();
             if (model.state('autoClosed') && !model.data('remainAutoCount')) {
                 model.state('autoClosed', false);
                 view.show.autoButton({});
@@ -110,13 +112,13 @@ export let controller = (() => {
             if (model.state('lockedButtons')) return;
             if (model.state('autoEnd') == false) return;
 
-            sound.sounds.button.play();
+            soundController.sounds.button.play();
             model.changeBet({toMax: true});
         },
 
         info: function() {
             if(model.state('lockedButtons') || model.state('roll:progress') || !model.state('autoEnd')) return;
-            sound.sounds.button.play();
+            soundController.sounds.button.play();
 
             let infoRules = view.show.info({});
             let overlay = model.el('overlay');
@@ -193,22 +195,22 @@ export let controller = (() => {
         },
 
         betPlus: function() {
-            sound.sounds.button.play();
+            soundController.sounds.button.play();
             model.changeBet({up: true});
         },
 
         betMinus: function() {
-            sound.sounds.button.play();
+            soundController.sounds.button.play();
             model.changeBet({down: true});
         },
 
         coinsPlus: function() {
-            sound.sounds.button.play();
+            soundController.sounds.button.play();
             model.changeCoin({up: true});
         },
 
         coinsMinus: function() {
-            sound.sounds.button.play();
+            soundController.sounds.button.play();
             model.changeCoin({down: true});
         },
 
@@ -216,32 +218,36 @@ export let controller = (() => {
             if (!model.state('autoPanel')) return ;
             if (!model.state('autoEnd') || model.state('roll:progress')) return;
             const amount = this.amount;
-            events.trigger('autoplay:init', amount);
+            autoplayController.init(amount);
             model.state('autoPanel', false);
         }
 
-    }
+    };
 
-    function autoStart(amount) {
-        if (model.state('mobile')) return;
+    let auto = {
 
-        view.autoStartDesktop();
-        view.draw.autoCount({amount});
-        handle.auto();
-    }
+        start: function(amount) {
+            if (model.state('mobile')) return;
 
-    function autoStop() {
-        if (model.state('mobile')) return;
+            view.autoStartDesktop();
+            view.draw.autoCount({amount});
+            handle.auto();
+        },
 
-        view.autoStopDesktop();
-        view.draw.removeCount();
-    }
+        stop: function() {
+            if (model.state('mobile')) return;
 
-    function autoChangeCount(count) {
-        if (model.state('mobile')) return;
+            view.autoStopDesktop();
+            view.draw.removeCount();
+        },
 
-        view.draw.updateCount({count});
-    }
+        change: function(count) {
+            if (model.state('mobile')) return;
+
+            view.draw.updateCount({count});
+        }
+
+    };
 
     function freezeInfo() {
         if(model.state('mobile')) return;
@@ -261,19 +267,13 @@ export let controller = (() => {
         infoButtonDesk.freezeFrames = false;
     }
 
-    events.on('roll:start', freezeInfo);
-    events.on('roll:end', unfreezeInfo);
-
-    events.on('autoplay:init', autoStart);
-    events.on('autoplay:stop', autoStop);
-    events.on('autoplay:count', autoChangeCount);
-
     return {
         init,
-        autoStart,
-        autoStop,
         initFS,
-        handle
+        auto,
+        handle,
+        freezeInfo,
+        unfreezeInfo
     };
 
 })();
