@@ -1,6 +1,7 @@
 import { model } from 'modules/Model/Model';
-import { controller as soundController } from 'modules/Sound/Controller';
 import { config } from 'modules/Util/Config';
+
+import { controller as soundController } from 'modules/Sound/Controller';
 
 export let view = (() => {
 
@@ -130,7 +131,7 @@ export let view = (() => {
 
     function fsFinish() {
         const game = model.el('game');
-        game.input.keyboard.enabled = true; 
+        game.input.keyboard.enabled = true;
         let darkness = game.add.graphics();
         darkness.beginFill(0x000000);
         darkness.drawRect(0, 0, game.width, game.height);

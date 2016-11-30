@@ -1,4 +1,5 @@
 import { model } from 'modules/Model/Model';
+
 import { view } from 'modules/Balance/View';
 
 export let controller = (() => {

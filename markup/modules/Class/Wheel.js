@@ -1,6 +1,6 @@
-import { config } from '../../modules/Util/Config';
-import { Element } from '../../modules/Class/Element';
 import { model } from 'modules/Model/Model';
+import { config } from 'modules/Util/Config';
+import { Element } from 'modules/Class/Element';
 
 export class Wheel {
     get elements() {

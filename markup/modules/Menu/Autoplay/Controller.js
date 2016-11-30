@@ -1,5 +1,6 @@
 import { model } from 'modules/Model/Model';
 import { view } from 'modules/Menu/Autoplay/View';
+
 import { controller as soundController } from 'modules/Sound/Controller';
 import { controller as autoplayController } from 'modules/Autoplay/Controller';
 

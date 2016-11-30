@@ -1,6 +1,8 @@
 import { model } from 'modules/Model/Model';
+
 import { view } from 'modules/Menu/Settings/View';
 import { view as mainView } from 'modules/States/Main/View';
+
 import { controller as soundController } from 'modules/Sound/Controller';
 
 export let controller = (() => {

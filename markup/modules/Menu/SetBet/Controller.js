@@ -1,5 +1,6 @@
 import { model } from 'modules/Model/Model';
 import { view } from 'modules/Menu/SetBet/View';
+
 import { controller as soundController } from 'modules/Sound/Controller';
 
 export let controller = (() => {
