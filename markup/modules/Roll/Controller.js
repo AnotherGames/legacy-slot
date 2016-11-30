@@ -61,8 +61,17 @@ export let controller = (() => {
 
         game.input.keyboard.enabled = false;
 
+        if(!model.state('FSMode')){
+          if(model.mobile) {
+            buttonsController.freezeInfo();
+          } else {
+            panelController.freezeInfo();
+          }
+        }
+
         request.send('Roll')
             .then((data) => {
+
 
                 game.time.events.remove(rollPopupTimer);
 
@@ -71,12 +80,6 @@ export let controller = (() => {
                 }
 
                 winController.cleanWin(true);
-
-                if(model.mobile) {
-                    buttonsController.freezeInfo();
-                } else {
-                    panelController.freezeInfo();
-                }
 
                 model.data('rollResponse', data);
 
@@ -118,11 +121,7 @@ export let controller = (() => {
                     if (countFinish === 5) {
                         endRoll();
                         winController.showWin();
-                        if(model.mobile) {
-                            buttonsController.unfreezeInfo();
-                        } else {
-                            panelController.unfreezeInfo();
-                        }
+
                     }
                 }
 
@@ -145,6 +144,7 @@ export let controller = (() => {
         if (model.state('ready')) return;
         request.send('Ready').then((data) => {
 
+
             if (model.state('FSMode')) {
                 model.updateBalance({endFSRoll: true});
                 fsController.count({end: true});
@@ -161,6 +161,15 @@ export let controller = (() => {
             }
 
         });
+
+        if(!model.state('FSMode')){
+          if(model.mobile) {
+            buttonsController.unfreezeInfo();
+          } else {
+            panelController.unfreezeInfo();
+          }
+        }
+
         if (model.state('autoEnd')){
             game.input.keyboard.enabled = true;
         }
