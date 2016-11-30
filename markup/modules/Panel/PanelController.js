@@ -78,9 +78,12 @@ export let controller = (() => {
                 view.hide.autoButton({});
                 view.hide.autoPanel({});
             }
-
+            let infoButtonDesk = model.el('infoButtonDesk');
+                infoButtonDesk.frameName = 'infoOn.png';
+                infoButtonDesk.freezeFrames = true;
             const spinButtonDesk = model.el('spinButtonDesk');
             if (spinButtonDesk.frameName == 'stop.png') {
+
                 events.trigger('autoplay:stop');
                 return;
             }

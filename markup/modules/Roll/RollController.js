@@ -139,6 +139,18 @@ export let controller = (() => {
             }
 
         });
+
+        if (!model.state('autoEnd')) return;
+        if (model.state('mobile')) {
+            model.el('betButton').frameName = 'setBet.png';
+            model.el('menuButton').frameName = 'menu.png';
+            model.el('autoButton').frameName = 'auto.png';
+        } else {
+            let infoButtonDesk = model.el('infoButtonDesk');
+                infoButtonDesk.frameName = 'info.png';
+                infoButtonDesk.freezeFrames = false;
+        }
+
     }
 
     function _playRollSound() {

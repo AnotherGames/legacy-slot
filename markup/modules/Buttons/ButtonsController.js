@@ -90,6 +90,7 @@ export let controller = (() => {
             if (model.state('lockedButtons')) return;
             let spinButton = model.el('spinButton');
             if (spinButton.frameName === 'spinEmpty.png') return;
+            view.draw.lockedButtons();
             sound.sounds.button.play();
             events.trigger('roll:request');
             events.trigger('roll:fast');

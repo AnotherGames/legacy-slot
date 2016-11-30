@@ -317,6 +317,9 @@ export let view = (() => {
         let maxBetButtonDesk = model.el('maxBetButtonDesk');
             maxBetButtonDesk.frameName = 'maxBetOn.png';
             maxBetButtonDesk.freezeFrames = true;
+        let infoButtonDesk = model.el('infoButtonDesk');
+            infoButtonDesk.frameName = 'infoOn.png';
+            infoButtonDesk.freezeFrames = true;
         let betLevelPlus = model.el('betLevelPlus');
             betLevelPlus.visible = false;
         let betLevelMinus = model.el('betLevelMinus');
@@ -337,6 +340,9 @@ export let view = (() => {
         let maxBetButtonDesk = model.el('maxBetButtonDesk');
             maxBetButtonDesk.frameName = 'maxBet.png';
             maxBetButtonDesk.freezeFrames = false;
+        let infoButtonDesk = model.el('infoButtonDesk');
+            infoButtonDesk.frameName = 'info.png';
+            infoButtonDesk.freezeFrames = false;
         let betLevelPlus = model.el('betLevelPlus');
             betLevelPlus.visible = true;
         let betLevelMinus = model.el('betLevelMinus');
