@@ -3,8 +3,6 @@ import { model } from 'modules/Model/Model';
 import { events } from 'modules/Util/Events';
 import { keyboard } from 'modules/Util/Keyboard';
 
-keyboard.init();
-
 const game = new Phaser.Game(1280, 720, Phaser.AUTO, 'game');
 model.el('game', game);
 
