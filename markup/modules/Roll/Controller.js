@@ -11,6 +11,7 @@ import { controller as autoplayController } from 'modules/Autoplay/Controller';
 import { controller as panelController } from 'modules/Panel/Controller';
 import { controller as buttonsController } from 'modules/Buttons/Controller';
 import { controller as winController } from 'modules/Win/Controller';
+import { controller as fsController } from 'modules/States/FS/Controller';
 
 export let controller = (() => {
 
@@ -147,7 +148,7 @@ export let controller = (() => {
 
             if (model.state('FSMode')) {
                 model.updateBalance({endFSRoll: true});
-                events.trigger('fs:count', {end: true});
+                fsController.count({end: true});
             } else {
                 model.updateBalance({endRoll: true});
             }
@@ -161,7 +162,7 @@ export let controller = (() => {
             }
 
         });
-        if (model.state('autoEnd')){ 
+        if (model.state('autoEnd')){
             game.input.keyboard.enabled = true;
         }
     }
@@ -206,7 +207,7 @@ export let controller = (() => {
 
         game.time.events.add(time, () => {
             if (model.state('fsEnd')) return;
-            events.trigger('fs:next');
+            fsController.next();
         });
 
     }

@@ -2,6 +2,7 @@ import { model } from 'modules/Model/Model';
 import { events } from 'modules/Util/Events';
 import { config } from 'modules/Util/Config';
 import { controller as soundController } from 'modules/Sound/Controller';
+import { controller as fsController } from 'modules/States/FS/Controller';
 import { controller as winController } from 'modules/Win/Controller';
 import { Glista } from 'modules/Class/Glista';
 
@@ -98,7 +99,7 @@ export let view = (() => {
                         if (elementName == '11') {
                             element.win();
                             if(lvlCounter == 0){
-                                events.trigger('fs:brain');
+                                fsController.brain();
                                 lvlCounter++;
                             }
                             game.add.tween(element.sprites[element.active - 1].scale).to({x: 1.7, y: 1.7}, 700, 'Linear', true)

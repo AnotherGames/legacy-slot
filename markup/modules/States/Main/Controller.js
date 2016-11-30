@@ -17,6 +17,7 @@ import { controller as autoplayController } from 'modules/Autoplay/Controller';
 import { controller as mobileSettingsController } from 'modules/Menu/Settings/Controller';
 import { controller as mobileAutoplayController } from 'modules/Menu/Autoplay/Controller';
 import { controller as mobileSetBetController } from 'modules/Menu/SetBet/Controller';
+import { controller as fsController } from 'modules/States/FS/Controller';
 
 export class Main {
     constructor(game) {

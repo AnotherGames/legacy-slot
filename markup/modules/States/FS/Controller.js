@@ -14,6 +14,149 @@ import { controller as buttonsController } from 'modules/Buttons/Controller';
 import { controller as rollController } from 'modules/Roll/Controller';
 import { controller as winController } from 'modules/Win/Controller';
 
+export let controller = (() => {
+
+    function init(amount) {
+        console.log('I am initing FS!');
+        if (model.state('fsEnd') === false) return;
+
+        model.state('fsEnd', false);
+        model.data('fsCount', amount);
+        model.updateBalance({startFS: true});
+
+        next();
+    }
+
+    function next() {
+        console.log('I am spining FS!');
+        let rollData = model.data('rollResponse');
+
+        if (!model.state('fsEnd') && rollData.NextMode !== 'root') {
+            controller.count({start: true});
+            rollController.startRoll();
+        }
+
+        if (rollData.NextMode === 'root') {
+            stop();
+        }
+    }
+
+    function count({
+        start,
+        end
+    }) {
+        if (start) {
+            let newFsCount = model.data('fsCount');
+            newFsCount--;
+            model.data('fsCount', newFsCount);
+            model.el('fsCount').text = newFsCount;
+        }
+        if (end) {
+            model.data('fsCount', model.data('rollResponse').FreeSpinsLeft);
+            model.el('fsCount').text = model.data('rollResponse').FreeSpinsLeft;
+        }
+    }
+
+    function stop() {
+        console.log('I am stoping FS!');
+
+        const game = model.el('game');
+        game.time.events.add(1500, () => {
+            soundController.music.fsFon.stop();
+            transitionView.fsFinish();
+        });
+
+        model.state('lockedButtons', false);
+        model.state('fsEnd', true);
+        model.state('FSMode', false);
+        model.updateBalance({endFS: true});
+        model.el('brainPanel').destroy();
+    }
+
+    function brain() {
+        let rollData = model.data('rollResponse');
+        let fsMulti = model.el('fsMulti');
+        let multiValue = rollData.FsBonus.Multi;
+
+        fsMulti.frameName = `multi${multiValue}.png`;
+        let brain = model.el('flyingBrain');
+        let currMulti = model.data('fsMulti');
+
+        if (multiValue > currMulti) {
+            if (currMulti === 6) {
+                let zombie = model.el('zombie');
+                zombie.Up(() => {
+                    brain.Up(() => {
+                        zombie.Up();
+                        soundController.sounds.zombie1.play();
+                    });
+                });
+                model.data('fsMulti', multiValue);
+            } else {
+                model.el('zombie').Up();
+                model.data('fsMulti', multiValue);
+            }
+        }
+
+        if (currMulti < 7) {
+            brain.Win();
+            searchBrains({});
+        }
+
+        fsView.draw.CountPlus3({});
+    }
+
+    function searchBrains({
+        startLevel
+    }) {
+        let brainSound = Math.round(Math.random()) ? soundController.sounds.brain1 : soundController.sounds.brain2;
+
+        let levelValue = startLevel || model.data('rollResponse').FsBonus.Level;
+        let levelABS = levelValue % 3;
+        let brainPanel = model.el('brainPanel');
+        if (model.state('brainPanel') === false) {
+            fsView.draw.BrainLevel({});
+            brainPanel = model.el('brainPanel');
+            model.state('brainPanel', true);
+        }
+        if (levelABS === 0) {
+            // console.warn('levelABS', levelABS);
+            brainSound.play();
+            brainPanel.visible = true;
+            brainPanel.setAnimationByName(0,'w3', false);
+            brainPanel.addAnimationByName(0,'w4', false);
+            const game = model.el('game');
+            game.time.events.add(1000, () => {
+                brainPanel.destroy();
+                model.state('brainPanel', false);
+            });
+        }
+        if (levelABS === 1){
+            // console.warn('levelABS', levelABS);
+            brainSound.play();
+            brainPanel.visible = true;
+            brainPanel.setAnimationByName(0,'w1', false);
+            brainPanel.addAnimationByName(0,'w1.5', true);
+        }
+        if (levelABS === 2){
+            // console.warn('levelABS', levelABS);
+            brainSound.play();
+            brainPanel.visible = true;
+            brainPanel.setAnimationByName(0,'w2', false);
+            brainPanel.addAnimationByName(0,'w2.5', true);
+        }
+
+    }
+
+    return {
+        init,
+        next,
+        count,
+        stop,
+        brain
+    };
+})();
+
 export class FS {
     constructor(game) {
 
@@ -46,21 +189,8 @@ export class FS {
 
         model.state('FSMode', true);
 
+
         fsView.create.groups({});
-
-        if (model.state('firstFS') === false) {
-            events.on('fs:init', this.initFS.bind(this));
-            events.on('fs:next', this.nextFS.bind(this));
-            events.on('fs:count', this.countFS.bind(this));
-            events.on('fs:stop', this.stopFS.bind(this));
-            events.on('fs:brain', this.onBrain.bind(this));
-            events.on('fs:brain', fsView.draw.CountPlus3.bind(this, {}));
-            model.state('firstFS', true);
-        }
-    }
-
-    preload() {
-
     }
 
     create() {
@@ -124,7 +254,7 @@ export class FS {
         });
         fsView.draw.BrainLevel({});
         if (this.fsLevel > 0) {
-            this.searchBrains({
+            controller.searchBrains({
                 startLevel: this.fsLevel
             })
         }
@@ -134,7 +264,7 @@ export class FS {
 
         game.time.events.add(1000, () => {
             footerController.updateTime({});
-            events.trigger('fs:init', this.fsCount);
+            controller.init(this.fsCount);
         });
     }
 
@@ -173,136 +303,4 @@ export class FS {
         });
     }
 
-    initFS(amount) {
-        if (model.state('fsEnd') === false) return;
-        console.log('I am initing FS: ', amount);
-
-        model.state('fsEnd', false);
-        model.data('fsCount', amount);
-        model.updateBalance({startFS: true});
-
-        this.nextFS();
-    }
-
-    nextFS() {
-        let rollData = model.data('rollResponse');
-
-        if (!model.state('fsEnd') && rollData.NextMode !== 'root') {
-
-            events.trigger('fs:count', {start: true});
-            rollController.startRoll();
-
-        }
-
-        if (rollData.NextMode === 'root') {
-
-            events.trigger('fs:stop');
-
-        }
-    }
-
-    countFS({
-        start,
-        end
-    }) {
-        if (start) {
-            let newFsCount = model.data('fsCount');
-                newFsCount--;
-            model.data('fsCount', newFsCount);
-            model.el('fsCount').text = newFsCount;
-        }
-        if (end) {
-            model.data('fsCount', model.data('rollResponse').FreeSpinsLeft);
-            model.el('fsCount').text = model.data('rollResponse').FreeSpinsLeft;
-        }
-    }
-
-    stopFS() {
-        console.log('I am stoping FS!');
-
-        const game = model.el('game');
-        game.time.events.add(1500, () => {
-            soundController.music.fsFon.stop();
-                transitionView.fsFinish();
-        });
-
-        model.state('lockedButtons', false);
-        model.state('fsEnd', true);
-        model.state('FSMode', false);
-        model.updateBalance({endFS: true});
-        model.el('brainPanel').destroy();
-    }
-
-    onBrain() {
-        let rollData = model.data('rollResponse');
-        let fsMulti = model.el('fsMulti');
-        let multiValue = rollData.FsBonus.Multi;
-
-        fsMulti.frameName = `multi${multiValue}.png`;
-        let brain = model.el('flyingBrain');
-        let currMulti = model.data('fsMulti');
-
-        if (multiValue > currMulti) {
-            if (currMulti === 6) {
-                let zombie = model.el('zombie');
-                zombie.Up(() => {
-                    brain.Up(() => {
-                        zombie.Up();
-                        soundController.sounds.zombie1.play();
-                    });
-                });
-                model.data('fsMulti', multiValue);
-            } else {
-                model.el('zombie').Up();
-                model.data('fsMulti', multiValue);
-            }
-        }
-
-        if (currMulti < 7) {
-            brain.Win();
-            this.searchBrains({});
-        }
-    }
-
-    searchBrains({
-        startLevel
-    }) {
-        let brainSound = Math.round(Math.random()) ? soundController.sounds.brain1 : soundController.sounds.brain2;
-
-        let levelValue = startLevel || model.data('rollResponse').FsBonus.Level;
-        let levelABS = levelValue % 3;
-        let brainPanel = model.el('brainPanel');
-        if (model.state('brainPanel') === false) {
-            fsView.draw.BrainLevel({});
-            brainPanel = model.el('brainPanel');
-            model.state('brainPanel', true);
-        }
-        if (levelABS === 0) {
-            // console.warn('levelABS', levelABS);
-            brainSound.play();
-            brainPanel.visible = true;
-            brainPanel.setAnimationByName(0,'w3', false);
-            brainPanel.addAnimationByName(0,'w4', false);
-            const game = model.el('game');
-            game.time.events.add(1000, () => {
-                brainPanel.destroy();
-                model.state('brainPanel', false);
-            });
-        }
-        if (levelABS === 1){
-            // console.warn('levelABS', levelABS);
-            brainSound.play();
-            brainPanel.visible = true;
-            brainPanel.setAnimationByName(0,'w1', false);
-            brainPanel.addAnimationByName(0,'w1.5', true);
-        }
-        if (levelABS === 2){
-            // console.warn('levelABS', levelABS);
-            brainSound.play();
-            brainPanel.visible = true;
-            brainPanel.setAnimationByName(0,'w2', false);
-            brainPanel.addAnimationByName(0,'w2.5', true);
-        }
-
-    }
-}
+};
