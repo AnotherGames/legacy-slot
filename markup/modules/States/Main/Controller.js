@@ -52,14 +52,14 @@ export class Main {
 
         if (model.mobile) {
             footerController.initMobile();
-            buttonsController.init();
+            buttonsController.drawButtons();
 
             let mainXLeft = model.el('buttonsDelta') * 2 + game.mainContainer.width / 2;
             let mainXRight = game.width - game.mainContainer.width - model.el('buttonsDelta') * 2 + game.mainContainer.width / 2;
             model.data('mainXLeft', mainXLeft);
             model.data('mainXRight', mainXRight);
 
-            if (model.state('side') === 'left') {
+            if (model.state('gameSideLeft')) {
                 game.mainContainer.x = mainXLeft;
             } else {
                 game.mainContainer.x = mainXRight;

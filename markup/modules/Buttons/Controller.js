@@ -56,6 +56,7 @@ export let controller = (() => {
         let menuButton = model.el('menuButton');
 
         if (model.state('side') === 'left') {
+        if (model.state('gameSideLeft')) {
             spinButton.x = xRight;
             betButton.x = xRight;
             autoButton.x = xRight;

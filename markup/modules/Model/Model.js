@@ -84,7 +84,7 @@ export let model = (() => {
         model.state('fastRoll', false);
         model.state('ready', true);
         model.state('firstFS', false);
-        model.state('side', 'left');
+        model.state('gameSideLeft', true);
         model.state('isAnimations', true);
         model.state('fsEnd', true);
         model.state('FSMode', false);

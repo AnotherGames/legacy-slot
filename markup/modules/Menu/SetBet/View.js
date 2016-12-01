@@ -294,7 +294,7 @@ export let view = (() => {
         }) {
             const game = model.el('game');
             let border = model.el('setbetBorder');
-            if (model.state('side') === 'left') {
+            if (model.state('gameSideLeft')) {
                 container.x = game.width;
                 border.x = 0;
                 return game.add.tween(container).to( { x: game.width - container.width }, time, 'Quart.easeOut', true);
@@ -323,7 +323,7 @@ export let view = (() => {
             time = 700
         }) {
             const game = model.el('game');
-            if (model.state('side') === 'left') {
+            if (model.state('gameSideLeft')) {
                 return game.add.tween(container).to( { x: game.width }, time, 'Quart.easeOut', true);
             } else {
                 return game.add.tween(container).to( { x: -container.width }, time, 'Quart.easeOut', true);

@@ -57,15 +57,15 @@ export let controller = (() => {
             const mainContainer = model.el('mainContainer');
             const mask = model.el('mask');
             let xSide;
-            if (model.state('side') === 'left') {
-                model.state('side', 'right');
+            if (model.state('gameSideLeft')) {
+                model.state('gameSideLeft', false);
                 model.el('settingsHandModeButton').frameName = 'handModeOn.png';
 
                 xSide = model.data('buttonsXLeft');
                 game.add.tween(mainContainer).to( { x: model.data('mainXRight') }, time, 'Quart.easeOut', true);
                 game.add.tween(mask).to( { x: model.data('mainXRight') - model.data('mainXLeft') }, time, 'Quart.easeOut', true);
             } else {
-                model.state('side', 'left');
+                model.state('gameSideLeft', true);
                 model.el('settingsHandModeButton').frameName = 'handModeOff.png';
 
                 xSide = model.data('buttonsXRight');
