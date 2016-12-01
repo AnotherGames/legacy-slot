@@ -65,7 +65,7 @@ export let controller = (() => {
 
         model.state('lockedButtons', false);
         model.state('fsEnd', true);
-        model.state('FSMode', false);
+        model.state('fs', false);
         model.updateBalance({endFS: true});
         model.el('brainPanel').destroy();
     }
@@ -184,7 +184,7 @@ export class FS {
 
         game.stage.disableVisibilityChange = false;
 
-        model.state('FSMode', true);
+        model.state('fs', true);
 
 
         fsView.create.groups({});

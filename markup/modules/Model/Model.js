@@ -87,7 +87,7 @@ export let model = (() => {
         model.state('gameSideLeft', true);
         model.state('isAnimations', true);
         model.state('fsEnd', true);
-        model.state('FSMode', false);
+        model.state('fs', false);
         model.state('sound', true);
         model.state('volume', 1);
         model.state('music', true);

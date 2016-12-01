@@ -6,12 +6,13 @@ import { controller as buttonsController } from 'modules/Buttons/Controller';
 
 export let controller = (() => {
 
-    function start(amount) {
+    function start(count) {
 
+        // Ищменяем состояния автоплея
         model.state('autoplay:start', true);
         model.state('autoplay:end', false);
 
-        model.data('autoplay:count', amount);
+        model.data('autoplay:count', count);
         model.data('autoplay:startCash', model.balance('coinCash'));
 
         // Переводим кнопки в режим автоигры
@@ -30,15 +31,16 @@ export let controller = (() => {
         // Проверка тонких настроек автоплея
         checkSettings();
 
-        // Изменить счетчик автоплея
-        let autoplayCount = model.data('autoplay:count');
-            autoplayCount--;
-
         // Начать следующую крутку
         if (model.state('autoplay:start')) {
             rollController.startRoll();
         }
 
+        // Изменить счетчик автоплея
+        let autoplayCount = model.data('autoplay:count');
+        autoplayCount--;
+
+        // Если крутки остались
         if (autoplayCount > 0) {
             model.data('autoplay:count', autoplayCount);
 
@@ -56,6 +58,7 @@ export let controller = (() => {
 
     function stop() {
 
+        // Изменяет состояния автоплея
         model.state('autoplay:end', true);
         model.state('autoplay:start', false);
 
@@ -68,27 +71,25 @@ export let controller = (() => {
     }
 
     function checkSettings() {
+
         // Проверка на увеличение кеша
         if (model.state('autoplay:cashUp')) {
-            if (model.balance('coinCash') - model.data('autoplay:startCash') > model.data('autoCashSumDelta')) {
+            if (model.balance('coinCash') - model.data('autoplay:startCash') > model.state('autoplay:cashDelta')) {
                 stop();
-                return;
             }
         }
 
         // Проверка на понижение кеша
         if (model.state('autoplay:cashDown')) {
-            if (model.data('autoplay:startCash') - model.balance('coinCash') > model.data('autoCashSumDelta')) {
+            if (model.data('autoplay:startCash') - model.balance('coinCash') > model.state('autoplay:cashDelta')) {
                 stop();
-                return;
             }
         }
 
         // Проверка на максимальный выигрыш за одну крутку
         if (model.state('autoplay:cashRoll')) {
-            if (model.balance('winCash') - model.data('autoCashLineDelta') > 0) {
+            if (model.balance('winCash') - model.state('autoplay:cashRollDelta') > 0) {
                 stop();
-                return;
             }
         }
     }

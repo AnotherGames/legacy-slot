@@ -34,33 +34,9 @@ export let view = (() => {
 
     let draw = {
 
-        CoinBalance: function({
-            coinSumValue = model.balance('coinSum'),
-            betSumValue = model.balance('betSum'),
-            greyStyle = {font: '24px Helvetica, Arial', fill: '#dddddd', align: 'center'},
-            cashStyle = {font: '25px Helvetica, Arial', fill: '#e8b075', align: 'center'},
-            y = model.data('footerTopCenterY')
-        }) {
-            const game = model.el('game');
-
-            let balanceCoinContainer = model.group('balanceCoin');
-
-            let coinSumText = game.add.text(0, y, 'Coins: ', greyStyle, balanceCoinContainer);
-            let betSumText = game.add.text(0, y, 'Bet: ', greyStyle, balanceCoinContainer);
-            let coinSum = game.add.text(0, y, `${coinSumValue.toFixed(0)}`, cashStyle, balanceCoinContainer);
-            let betSum = game.add.text(0, y, `${betSumValue.toFixed(0)}`, cashStyle, balanceCoinContainer);
-
-            model.el('coinSumText', coinSumText);
-            model.el('betSumText', betSumText);
-            model.el('coinSum', coinSum);
-            model.el('betSum', betSum);
-
-            _setAnchorInCenter([coinSumText, coinSum, betSumText, betSum]);
-            _calcTextPosition([[coinSumText, coinSum], [betSumText, betSum]], balanceCoinContainer);
-
-        },
-
         CashBalance: function({
+            game = model.el('game'),
+            container = model.group('balanceCash'),
             currencySymbol = model.balance('currencySymbol'),
             coinCashValue = model.balance('coinCash'),
             betCashValue = model.balance('betCash'),
@@ -69,16 +45,13 @@ export let view = (() => {
             cashStyle = {font: '20px Helvetica, Arial', fill: '#ffffff', align: 'center'},
             y = model.data('footerBottomCenterY')
         }) {
-            const game = model.el('game');
 
-            let balanceCashContainer = model.group('balanceCash');
-
-            let coinCashText = game.add.text(0, y, 'Cash: ', greyStyle, balanceCashContainer);
-            let betCashText = game.add.text(0, y, 'Bet: ', greyStyle, balanceCashContainer);
-            let winCashText = game.add.text(0, y, 'Win: ', greyStyle, balanceCashContainer);
-            let coinCash = game.add.text(0, y, `${currencySymbol} ${coinCashValue.toFixed(2)}`, cashStyle, balanceCashContainer);
-            let betCash = game.add.text(0, y, `${currencySymbol} ${betCashValue.toFixed(2)}`, cashStyle, balanceCashContainer);
-            let winCash = game.add.text(0, y, `${currencySymbol} ${winCashValue.toFixed(2)}`, cashStyle, balanceCashContainer);
+            let coinCashText = game.add.text(0, y, 'Cash: ', greyStyle, container);
+            let betCashText = game.add.text(0, y, 'Bet: ', greyStyle, container);
+            let winCashText = game.add.text(0, y, 'Win: ', greyStyle, container);
+            let coinCash = game.add.text(0, y, `${currencySymbol} ${coinCashValue.toFixed(2)}`, cashStyle, container);
+            let betCash = game.add.text(0, y, `${currencySymbol} ${betCashValue.toFixed(2)}`, cashStyle, container);
+            let winCash = game.add.text(0, y, `${currencySymbol} ${winCashValue.toFixed(2)}`, cashStyle, container);
 
             model.el('coinCashText', coinCashText);
             model.el('betCashText', betCashText);
@@ -88,7 +61,32 @@ export let view = (() => {
             model.el('winCash', winCash);
 
             _setAnchorInCenter([coinCashText, coinCash, betCashText, betCash, winCashText, winCash]);
-            _calcTextPosition([[coinCashText, coinCash], [betCashText, betCash], [winCashText, winCash]], balanceCashContainer);
+            _calcTextPosition([[coinCashText, coinCash], [betCashText, betCash], [winCashText, winCash]], container);
+
+        },
+
+        MobileBalance: function({
+            game = model.el('game'),
+            container = model.group('balanceCoin'),
+            coinSumValue = model.balance('coinSum'),
+            betSumValue = model.balance('betSum'),
+            greyStyle = {font: '24px Helvetica, Arial', fill: '#dddddd', align: 'center'},
+            cashStyle = {font: '25px Helvetica, Arial', fill: '#e8b075', align: 'center'},
+            y = model.data('footerTopCenterY')
+        }) {
+
+            let coinSumText = game.add.text(0, y, 'Coins: ', greyStyle, container);
+            let betSumText = game.add.text(0, y, 'Bet: ', greyStyle, container);
+            let coinSum = game.add.text(0, y, `${coinSumValue.toFixed(0)}`, cashStyle, container);
+            let betSum = game.add.text(0, y, `${betSumValue.toFixed(0)}`, cashStyle, container);
+
+            model.el('coinSumText', coinSumText);
+            model.el('betSumText', betSumText);
+            model.el('coinSum', coinSum);
+            model.el('betSum', betSum);
+
+            _setAnchorInCenter([coinSumText, coinSum, betSumText, betSum]);
+            _calcTextPosition([[coinSumText, coinSum], [betSumText, betSum]], container);
 
         },
 
@@ -111,13 +109,37 @@ export let view = (() => {
             let coinValue = game.add.text(x[2], y[1], `${coinValueAmount}`, valueStyle, container);
             let betValue = game.add.text(x[1], y[1], `${betValueAmount}`, valueStyle, container);
 
-            _setAnchorInCenter([coinSum, betSum, coinValue, betValue]);
-
             model.el('coinSum', coinSum);
             model.el('betSum', betSum);
             model.el('coinValue', coinValue);
             model.el('betValue', betValue);
 
+            _setAnchorInCenter([coinSum, betSum, coinValue, betValue]);
+
+        },
+
+        FSMobileBalance: function({
+            game = model.el('game'),
+            container = model.group('balanceCoin'),
+            totalWinValue = model.balance('totalWin'),
+            winValue = model.balance('fsWin'),
+            greyStyle = {font: '24px Helvetica, Arial', fill: '#dddddd', align: 'center'},
+            cashStyle = {font: '25px Helvetica, Arial', fill: '#e8b075', align: 'center'},
+            y = model.data('footerTopCenterY')
+        }) {
+
+            let totalWinText = game.add.text(0, y, 'Total Win: ', greyStyle, container);
+            let winText = game.add.text(0, y, 'Win: ', greyStyle, container);
+            let totalWinSum = game.add.text(0, y, `${totalWinValue.toFixed(0)}`, cashStyle, container);
+            let winSum = game.add.text(0, y, `${winValue.toFixed(0)}`, cashStyle, container);
+
+            model.el('totalWinText', totalWinText);
+            model.el('winText', winText);
+            model.el('totalWinSum', totalWinSum);
+            model.el('winSum', winSum);
+
+            _setAnchorInCenter([totalWinText, totalWinSum, winText, winSum]);
+            _calcTextPosition([[totalWinText, totalWinSum], [winText, winSum]], container);
         },
 
         FSDesktopBalance: function({
@@ -142,8 +164,6 @@ export let view = (() => {
             let winSum = game.add.text(x[3], y[0], `0`, sumStyle, container);
             let totalWinSum = game.add.text(x[3], y[1], `0`, sumStyle, container);
 
-            _setAnchorInCenter([coinSum, betSum, coinValue, betValue, winSum, totalWinSum]);
-
             model.el('coinSum', coinSum);
             model.el('betSum', betSum);
             model.el('coinValue', coinValue);
@@ -151,76 +171,52 @@ export let view = (() => {
             model.el('winSum', winSum);
             model.el('totalWinSum', totalWinSum);
 
-        },
+            _setAnchorInCenter([coinSum, betSum, coinValue, betValue, winSum, totalWinSum]);
 
-        FSMobileBalance: function({
-            totalWinValue = model.balance('totalWin'),
-            winValue = model.balance('fsWin'),
-            greyStyle = {font: '24px Helvetica, Arial', fill: '#dddddd', align: 'center'},
-            cashStyle = {font: '25px Helvetica, Arial', fill: '#e8b075', align: 'center'},
-            y = model.data('footerTopCenterY')
-        }) {
-            const game = model.el('game');
-
-            let balanceCoinContainer = model.group('balanceCoin');
-
-            let totalWinText = game.add.text(0, y, 'Total Win: ', greyStyle, balanceCoinContainer);
-            let winText = game.add.text(0, y, 'Win: ', greyStyle, balanceCoinContainer);
-            let totalWinSum = game.add.text(0, y, `${totalWinValue.toFixed(0)}`, cashStyle, balanceCoinContainer);
-            let winSum = game.add.text(0, y, `${winValue.toFixed(0)}`, cashStyle, balanceCoinContainer);
-
-            model.el('totalWinText', totalWinText);
-            model.el('winText', winText);
-            model.el('totalWinSum', totalWinSum);
-            model.el('winSum', winSum);
-
-            _setAnchorInCenter([totalWinText, totalWinSum, winText, winSum]);
-            _calcTextPosition([[totalWinText, totalWinSum], [winText, winSum]], balanceCoinContainer);
         }
 
     };
 
     let update = {
 
-        CoinBalance: function({
-            coinSumValue = model.balance('coinSum'),
-            betSumValue = model.balance('betSum')
-        }) {
-
-            let coinSum = model.el('coinSum'),
-                betSum = model.el('betSum');
-            coinSum.text = `${coinSumValue.toFixed(0)}`;
-            betSum.text = `${betSumValue.toFixed(0)}`;
-
-            let coinSumText = model.el('coinSumText'),
-                betSumText = model.el('betSumText'),
-                balanceCoinContainer = model.group('balanceCoin');
-
-
-            _calcTextPosition([[coinSumText, coinSum], [betSumText, betSum]], balanceCoinContainer);
-
-        },
-
         CashBalance: function({
+            container = model.group('balanceCash'),
             currencySymbol = model.balance('currencySymbol'),
             coinCashValue = model.balance('coinCash'),
             betCashValue = model.balance('betCash'),
             winCashValue = model.balance('winCash')
         }) {
 
-            let coinCash = model.el('coinCash'),
-                betCash = model.el('betCash'),
-                winCash = model.el('winCash');
+            let coinCash = model.el('coinCash');
+            let betCash = model.el('betCash');
+            let winCash = model.el('winCash');
+            let coinCashText = model.el('coinCashText');
+            let betCashText = model.el('betCashText');
+            let winCashText = model.el('winCashText');
+
             coinCash.text = `${currencySymbol} ${coinCashValue.toFixed(2)}`;
             betCash.text = `${currencySymbol} ${betCashValue.toFixed(2)}`;
             winCash.text = `${currencySymbol} ${winCashValue.toFixed(2)}`;
 
-            let coinCashText = model.el('coinCashText'),
-                betCashText = model.el('betCashText'),
-                winCashText = model.el('winCashText'),
-                balanceCashContainer = model.group('balanceCash');
+            _calcTextPosition([[coinCashText, coinCash], [betCashText, betCash], [winCashText, winCash]], container);
 
-            _calcTextPosition([[coinCashText, coinCash], [betCashText, betCash], [winCashText, winCash]], balanceCashContainer);
+        },
+
+        MobileBalance: function({
+            container = model.group('balanceCoin'),
+            coinSumValue = model.balance('coinSum'),
+            betSumValue = model.balance('betSum')
+        }) {
+
+            let coinSum = model.el('coinSum');
+            let betSum = model.el('betSum');
+            let coinSumText = model.el('coinSumText');
+            let betSumText = model.el('betSumText');
+
+            coinSum.text = `${coinSumValue.toFixed(0)}`;
+            betSum.text = `${betSumValue.toFixed(0)}`;
+
+            _calcTextPosition([[coinSumText, coinSum], [betSumText, betSum]], container);
 
         },
 
@@ -231,10 +227,10 @@ export let view = (() => {
             betValueAmount = model.balance('betValue'),
         }) {
 
-            let coinSum = model.el('coinSum'),
-                betSum = model.el('betSum'),
-                coinValue = model.el('coinValue'),
-                betValue = model.el('betValue');
+            let coinSum = model.el('coinSum');
+            let betSum = model.el('betSum');
+            let coinValue = model.el('coinValue');
+            let betValue = model.el('betValue');
 
             coinSum.text = `${coinSumValue.toFixed(0)}`;
             betSum.text = `${betSumValue.toFixed(0)}`;
@@ -243,90 +239,42 @@ export let view = (() => {
 
         },
 
+        FSMobileBalance: function({
+            winSumValue = model.balance('fsWin'),
+            totalWinSumValue = model.balance('totalWin'),
+            container = model.group('balanceCoin')
+        }) {
+
+            let winSum = model.el('winSum');
+            let winText = model.el('winText');
+            let totalWinSum = model.el('totalWinSum');
+            let totalWinText = model.el('totalWinText');
+
+            winSum.text = `${winSumValue}`;
+            totalWinSum.text = `${totalWinSumValue}`;
+
+            _calcTextPosition([[totalWinText, totalWinSum], [winText, winSum]], container);
+
+        },
+
         FSDesktopBalance: function({
             winSumValue = model.balance('fsWin'),
             totalWinSumValue = model.balance('totalWin')
         }) {
 
-            let winSum = model.el('winSum'),
-                totalWinSum = model.el('totalWinSum');
+            let winSum = model.el('winSum');
+            let totalWinSum = model.el('totalWinSum');
 
             winSum.text = `${winSumValue}`;
             totalWinSum.text = `${totalWinSumValue}`;
 
-        },
-
-        FSMobileBalance: function({
-            winSumValue = model.balance('fsWin'),
-            totalWinSumValue = model.balance('totalWin'),
-            balanceCoinContainer = model.group('balanceCoin')
-        }) {
-
-            let winSum = model.el('winSum'),
-                winText = model.el('winText'),
-                totalWinSum = model.el('totalWinSum'),
-                totalWinText = model.el('totalWinText');
-
-            winSum.text = `${winSumValue}`;
-            totalWinSum.text = `${totalWinSumValue}`;
-
-            _calcTextPosition([[totalWinText, totalWinSum], [winText, winSum]], balanceCoinContainer);
-
-        }
-
-    };
-
-    let show = {
-
-        CoinBalance: function() {
-            let balanceCoinContainer = model.group('balanceCoin');
-
-            if (balanceCoinContainer) {
-                balanceCoinContainer.visible = true;
-            }
-        },
-
-        CashBalance: function() {
-            let balanceCashContainer = model.group('balanceCash');
-
-            if (balanceCashContainer) {
-                balanceCashContainer.visible = true;
-            }
-        }
-
-    };
-
-    let hide = {
-
-        CoinBalance: function({ hide = true }) {
-            let balanceCoinContainer = model.group('balanceCoin');
-
-            if (hide) {
-                balanceCoinContainer.visible = false;
-            } else {
-                balanceCoinContainer.destroy(true);
-                model.group('balanceCoin', null);
-            }
-        },
-
-        CashBalance: function({ hide = true }) {
-            let balanceCashContainer = model.group('balanceCash');
-
-            if (hide) {
-                balanceCashContainer.visible = false;
-            } else {
-                balanceCashContainer.destroy(true);
-                model.group('balanceCash', null);
-            }
         }
 
     };
 
     return {
         draw,
-        update,
-        show,
-        hide
+        update
     }
 
 })();
