@@ -1,5 +1,6 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
+import { Dragon } from 'modules/Class/Dragon';
 import { view as transitionView } from 'modules/Transition/TransitionView';
 
 export let view = (() => {
@@ -42,6 +43,9 @@ export let view = (() => {
 
             game.transitionContainer = game.add.group();
             model.group('transition', game.transitionContainer);
+
+            game.dragonContainer = game.add.group();
+            model.group('dragon', game.dragonContainer);
         }
     };
 
@@ -50,15 +54,11 @@ export let view = (() => {
             game = model.el('game')
         }) {
             let animBG = game.add.spine(
-                game.world.centerX,        // X positon
-                game.world.centerY,        // Y position
-                'animBG'     // the key of the object in cache
+                game.world.centerX,
+                game.world.centerY,
+                'animBG'
             );
-            animBG.setAnimationByName(
-                0,          // Track index
-                'animation',     // Animation's name
-                true        // If the animation should loop or not
-            );
+            animBG.setAnimationByName(0, 'animation', true);
             game.bgContainer.add(animBG);
             model.el('animMainBG', animBG);
 
@@ -69,9 +69,7 @@ export let view = (() => {
                 mainBG.visible = false;
             } else {
                 animBG.visible = false;
-                // for (let i = 0; i < 5; i++) {
-                //     transitionView.addCloud({container: model.group('bg')});
-                // }
+
             }
 
             if (model.state('desktop')) {
@@ -95,14 +93,37 @@ export let view = (() => {
             gameMachine.anchor.set(0.5);
             model.el('gameMachine', gameMachine);
 
-            let deltaY = 50;
+            let deltaY = 70;
             if (model.state('mobile')) {
                 deltaY = 10;
             }
 
-            let gameLogo = game.add.sprite(0, -game.height / 2 + deltaY, 'gameLogo', null, mainGroup);
+            let dragonContainer = game.dragonContainer;
+            dragonContainer.x = game.world.centerX;
+            dragonContainer.y = game.world.centerY;
+
+            this.addDragon({});
+
+            let gameLogo = game.add.sprite(0, -550, 'gameLogo', null, dragonContainer);
             gameLogo.anchor.set(0.5, 0);
+            gameLogo.scale.set(0.9);
             model.el('gameLogo', gameLogo);
+        },
+
+        addDragon: function ({
+            game = model.el('game')
+        }) {
+            let container = game.dragonContainer;
+            let x, y;
+            if (model.state('mobile')) {
+                x = -30;
+                y = 20;
+            } else {
+                x = -30;
+                y = 20;
+            }
+            let dragon = new Dragon({position: {x, y}, container});
+            model.el('dragon', dragon);
         },
 
         lineNumbers: function ({

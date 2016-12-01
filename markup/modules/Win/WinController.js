@@ -1,6 +1,7 @@
 import { model } from 'modules/Model/Model';
 import { events } from 'modules/Util/Events';
 import { view } from 'modules/Win/WinView';
+import { Dragon } from 'modules/Class/Dragon';
 import { view as transitionView } from 'modules/Transition/TransitionView';
 import { keyboard } from 'modules/Keyboard/Keyboard';
 
@@ -39,7 +40,10 @@ export let controller = (() => {
             model.data('firstScreen', data.Screen);
             keyboard.removeDefaultKey();
 
-            game.time.events.add(1500, () => {
+            let dragon = model.el('dragon');
+            dragon.FlyFS();
+
+            game.time.events.add(2500, () => {
                 transitionView.fsStart();
                 console.log('I am in FS!');
                 // game.state.start('FS');

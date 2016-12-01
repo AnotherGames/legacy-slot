@@ -119,6 +119,7 @@ export class Preload {
         const game = model.el('game');
         game.load.spine('animBG', 'spine/skeleton.json');
         game.load.spine('logo', 'spine/logo.json');
+        game.load.spine('dragon', 'spine/Dragon.json');
 
     }
 

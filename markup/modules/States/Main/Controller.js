@@ -1,6 +1,7 @@
 import { events } from 'modules/Util/Events';
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
+import { Dragon } from 'modules/Class/Dragon';
 import { view as mainView } from 'modules/States/Main/View';
 import { settings } from 'modules/Menu/Settings';
 import { sound } from 'modules/Sound/Sound';
@@ -47,6 +48,7 @@ export class Main {
         mainView.draw.mainContainer({});
         mainView.draw.machineContainer({});
         mainView.draw.lineNumbers({});
+
 
         rollController.init();
 
@@ -112,7 +114,7 @@ export class Main {
             if (lastTime + 1000 > new Date().getTime() ) {
                 fps++;
             } else {
-                if (fps < 30) {
+                if (fps < 20) {
                     console.log('FPS:', fps);
                     lowCount++;
                     if (lowCount > 3) {

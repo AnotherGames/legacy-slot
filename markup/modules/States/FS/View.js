@@ -1,7 +1,7 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
-import { Zombie } from 'modules/Class/Zombie';
-import { Brain } from 'modules/Class/Brain';
+// import { Zombie } from 'modules/Class/Zombie';
+// import { Brain } from 'modules/Class/Brain';
 import { view as transitionView } from 'modules/Transition/TransitionView';
 
 export let view = (() => {
