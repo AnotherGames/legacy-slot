@@ -76,7 +76,7 @@ export let model = (() => {
         model.state('autoplay:cashDown', false);
         model.state('autoplay:cashRoll', false);
         model.state('autoTransititon', false);
-        model.state('autoClosed', true);
+        model.state('autoplay:panelClosed', true);
         model.data('autoplay:count', 0);
         model.data('autoplay:startCash', 0);
 

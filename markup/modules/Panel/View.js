@@ -103,12 +103,11 @@ export let view = (() => {
         LinesNumber: function({
             game = model.el('game'),
             container = model.group('panel'),
+            style = {font: 'normal 27px Helvetica, Arial', align: 'center', fill: '#e8b075'},
             x = 80,
             y = 112,
-            font = 'normal 27px Helvetica, Arial',
-            color = '#e8b075',
         }) {
-            let linesNumber = game.add.text(x, y, '10', {font: font, fill: color, align: 'center'}, container);
+            let linesNumber = game.add.text(x, y, '10', style, container);
             model.el('linesNumber', linesNumber);
             return linesNumber;
         },
@@ -180,16 +179,12 @@ export let view = (() => {
         autoCount: function({
             game = model.el('game'),
             container = model.group('panel'),
+            style = {font: '45px Arial, Helvetica', align: 'center', fill: '#fff'},
             amount = 10,
             x = 525,
             y = model.el('autoButtonDesk').y,
-            font = '45px Arial, Helvetica',
-            color = '#fff'
         }) {
-            // if (amount >= 250) {
-            //     font = '40px Arial, Helvetica';
-            // }
-            let autoCount = game.add.text(x, y, amount, {font: font, fill: color, align: 'center'}, container);
+            let autoCount = game.add.text(x, y, amount, style, container);
                 autoCount.anchor.set(0.5);
                 autoCount.alpha = 0;
             model.el('autoCount', autoCount);
@@ -249,8 +244,8 @@ export let view = (() => {
             model.el('overlay', overlay);
 
             let infoRules = game.add.sprite(x, y, 'info', '1_en.png', container);
-            infoRules.anchor.set(0.5);
-            infoRules.scale.set(1.3);
+                infoRules.anchor.set(0.5);
+                infoRules.scale.set(1.3);
             model.el('infoRules', infoRules);
 
             let closed = game.add.sprite(infoRules.width + 260, infoRules.height - (infoRules.height - 180), 'closed', null, container);

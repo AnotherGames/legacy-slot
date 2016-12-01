@@ -214,7 +214,7 @@ export class FS {
             game.mainContainer.y = game.world.centerY + config[model.res].mainContainer.y;
 
             settingsController.initDesktopSettings(game);
-            panelController.initFS();
+            panelController.drawFsPanel();
             balanceController.initFSDesktop();
         }
 
