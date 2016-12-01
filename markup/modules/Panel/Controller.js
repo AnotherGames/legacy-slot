@@ -7,7 +7,7 @@ import { controller as rollController } from 'modules/Roll/Controller';
 
 export let controller = (() => {
 
-    function init() {
+    function drawButtons() {
         let game = model.el('game');
 
         view.draw.PanelBG({});
@@ -50,6 +50,7 @@ export let controller = (() => {
 
     function initFS() {
         let game = model.el('game');
+        let time = game.rnd.integerInRange(10, 70);
 
         view.draw.PanelBG({
             x: model.group('main').x,
@@ -57,13 +58,10 @@ export let controller = (() => {
             frameName: 'uiFS'
         });
         view.draw.LinesNumber({x: 55, y: 115});
-
-        let candle1 = view.draw.fsCandle({});
-            candle1.scale.set(0.7);
-
-        let time = game.rnd.integerInRange(10, 70);
+        view.draw.fsCandle({})
+            .scale.set(0.7);
         game.time.events.add(time, () => {
-            let candle2 = view.draw.fsCandle({x: 878, y: 18});
+            view.draw.fsCandle({x: 878, y: 18});
         });
     }
 
@@ -276,7 +274,7 @@ export let controller = (() => {
     }
 
     return {
-        init,
+        drawButtons,
         initFS,
         auto,
         handle,

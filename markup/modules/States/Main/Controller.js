@@ -78,7 +78,7 @@ export class Main {
             game.mainContainer.y = game.world.centerY + config[model.res].mainContainer.y;
 
             settingsController.initDesktopSettings(game);
-            panelController.init();
+            panelController.drawButtons();
             balanceController.initDesktop();
         }
 
