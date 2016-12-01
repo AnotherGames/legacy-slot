@@ -152,10 +152,7 @@ export let view = (() => {
             color = '#e8b075',
             shadowColor = '#e8b075'
         }) {
-            let autoBG = game.add.graphics(0, 0, container)
-                .beginFill(0xffffff, 0.2)
-                .drawRect(0, 0, width, height);
-
+            let autoBG = game.add.graphics(0, 0, container).beginFill(0xffffff, 0.2).drawRect(0, 0, width, height);
                 autoBG.x = x;
                 autoBG.y = y;
                 autoBG.amount = text;
@@ -253,26 +250,27 @@ export let view = (() => {
 
             let infoRules = game.add.sprite(x, y, 'info', '1_en.png', container);
             infoRules.anchor.set(0.5);
+            infoRules.scale.set(1.3);
             model.el('infoRules', infoRules);
 
-            let closed = game.add.sprite(infoRules.width + 90, infoRules.height - (infoRules.height - 100), 'closed', null, container);
+            let closed = game.add.sprite(infoRules.width + 260, infoRules.height - (infoRules.height - 180), 'closed', null, container);
             model.el('closed', closed);
 
-            let arrowRight = game.add.sprite(infoRules.width / 2 + 150, infoRules.height + 50, 'ar', null, container);
+            let arrowRight = game.add.sprite(game.width / 2 + 60, infoRules.height + 160, 'ar', null, container);
             model.el('arrowRight', arrowRight);
 
-            let arrowLeft = game.add.sprite(infoRules.width / 2 - 40, infoRules.height + 50, 'arLeft', null, container);
+            let arrowLeft = game.add.sprite(game.width / 2 - 100, infoRules.height + 160, 'arLeft', null, container);
             model.el('arrowLeft', arrowLeft);
 
             let infoMarkers = [];
-            let infoMarker = game.add.sprite(infoRules.width / 2, infoRules.height + 20, 'infoMarker', 'marker_on.png', container);
+            let infoMarker = game.add.sprite(game.width / 2 - 80, infoRules.height + 130, 'infoMarker', 'marker_on.png', container);
                 infoMarker.name = 'infoMarker0';
                 infoMarkers.push(infoMarker);
 
             for (let i = 1; i < 8; i++) {
                 let name = 'infoMarker' + i;
                 let counter = i;
-                let marker = game.add.sprite(infoMarker.x, infoRules.height + 20, 'infoMarker', 'marker_off.png', container);
+                let marker = game.add.sprite(infoMarker.x, infoRules.height + 130, 'infoMarker', 'marker_off.png', container);
                 marker.name = name;
                 marker.x = marker.x + 30 * i;
                 infoMarkers.push(marker);
