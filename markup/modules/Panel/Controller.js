@@ -48,7 +48,7 @@ export let controller = (() => {
 
     }
 
-    function initFS() {
+    function drawFsPanel() {
         let game = model.el('game');
         let time = game.rnd.integerInRange(10, 70);
 
@@ -70,8 +70,8 @@ export let controller = (() => {
             if (model.state('buttons:locked')) return;
 
             soundController.sounds.button.play();
-            if (!model.state('autoClosed')) {
-                model.state('autoClosed', true);
+            if (!model.state('autoplay:panelClosed')) {
+                model.state('autoplay:panelClosed', true);
                 view.hide.autoButton({});
                 view.hide.autoPanel({});
             }
@@ -88,16 +88,18 @@ export let controller = (() => {
         },
 
         auto: function() {
-            if (model.state('autoplay:start') || model.state('roll:progress')) return;
-            if (model.state('buttons:locked')) return;
+            if (model.state('autoplay:start')
+            || model.state('roll:progress')
+            || model.state('buttons:locked')) return;
 
             soundController.sounds.button.play();
-            if (model.state('autoClosed') && !model.data('remainAutoCount')) {
-                model.state('autoClosed', false);
+
+            if (model.state('autoplay:panelClosed') && !model.data('remainAutoCount')) {
+                model.state('autoplay:panelClosed', false);
                 view.show.autoButton({});
                 view.show.autoPanel({});
             } else {
-                model.state('autoClosed', true);
+                model.state('autoplay:panelClosed', true);
                 view.hide.autoButton({});
                 view.hide.autoPanel({});
             }
@@ -112,11 +114,13 @@ export let controller = (() => {
         },
 
         info: function() {
-            if(model.state('buttons:locked') || model.state('roll:progress') || model.state('autoplay:start')) return;
+            if(model.state('buttons:locked')
+            || model.state('roll:progress')
+            || model.state('autoplay:start')) return;
+
             soundController.sounds.button.play();
 
             let game = model.el('game');
-
             let infoRules = view.show.info({});
             let overlay = model.el('overlay');
             let closed = model.el('closed');
@@ -127,8 +131,8 @@ export let controller = (() => {
 
             model.el('infoCounter', counter);
             model.state('infoPanelOpen', true);
-            game.input.keyboard.enabled = false;
 
+            game.input.keyboard.enabled = false;
             overlay.inputEnabled = true;
             overlay.input.priorityID = 2;
             infoRules.inputEnabled = true;
@@ -141,11 +145,8 @@ export let controller = (() => {
             arrowLeft.input.priorityID = 4;
 
             overlay.events.onInputDown.add(handle.closeInfo);
-
             closed.events.onInputDown.add(handle.closeInfo);
-
             arrowRight.events.onInputDown.add(handle.switchInfoRight);
-
             arrowLeft.events.onInputDown.add(handle.switchInfoLeft);
         },
 
@@ -219,12 +220,13 @@ export let controller = (() => {
         panelButton: function() {
             // Если у нас автоплей или идет крутка, то не должна работать
             // При нажатии должна закрыть панель
+            //365 конечный икс кнопки автоплея при открытии, 370 взят с запасом
             if (model.state('autoplay:start') || model.state('roll:progress')) return;
             let autoButtonDesk = model.el('autoButtonDesk');
             const amount = this.amount;
+            if (autoButtonDesk.x > 370) return;
             view.hide.autoButton({});
             view.hide.autoPanel({});
-            if (autoButtonDesk.x > 370) return;
             autoplayController.start(amount);
         }
 
@@ -233,30 +235,23 @@ export let controller = (() => {
     let auto = {
 
         start: function(amount) {
-            if (model.mobile) return;
-
             view.autoStartDesktop();
             view.draw.autoCount({amount});
             handle.auto();
         },
 
         stop: function() {
-            if (model.mobile) return;
-
             view.autoStopDesktop();
             view.draw.removeCount();
         },
 
         change: function(count) {
-            if (model.mobile) return;
-
             view.draw.updateCount({count});
         }
 
     };
 
     function freezeInfo() {
-        if(model.mobile) return;
         if(model.state('autoplay:start')) return;
 
         let infoButtonDesk = model.el('infoButtonDesk');
@@ -265,7 +260,6 @@ export let controller = (() => {
     }
 
     function unfreezeInfo() {
-        if(model.mobile) return;
         if(model.state('autoplay:start')) return;
 
         let infoButtonDesk = model.el('infoButtonDesk');
@@ -275,7 +269,7 @@ export let controller = (() => {
 
     return {
         drawButtons,
-        initFS,
+        drawFsPanel,
         auto,
         handle,
         freezeInfo,
