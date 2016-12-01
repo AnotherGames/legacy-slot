@@ -91,41 +91,12 @@ export class FS {
 
         fsView.draw.machineMask({});
 
-        // fsView.draw.Brain();
-        // fsView.draw.Zombie(this.fsMulti);
-
-
-        // let time = game.rnd.integerInRange(10, 70);
-        // if (model.state('desktop')) {
-        //     let candle1 = fsView.draw.fsCandle({});
-        //     candle1.scale.set(0.8);
-        //     game.time.events.add(time, () => {
-        //         let candle2 = fsView.draw.fsCandle({x: 62, y: 500});
-        //         candle2.scale.set(0.7);
-        //         let candle3 = fsView.draw.fsCandle({x: 372, y: 440});
-        //     });
-        // } else {
-        //     let candle1 = fsView.draw.fsCandle({x: -12, y: 315});
-        //     candle1.scale.set(0.8);
-        //     game.time.events.add(time, () => {
-        //         let candle2 = fsView.draw.fsCandle({x: 5, y: 330});
-        //         candle2.scale.set(0.7);
-        //         let candle3 = fsView.draw.fsCandle({x: 164, y: 292});
-        //     });
-        // }
-
         fsView.draw.Multi({
             start: this.fsMulti
         });
         fsView.draw.Count({
             start: this.fsCount
         });
-        // fsView.draw.BrainLevel({});
-        // if (this.fsLevel > 0) {
-        //     this.searchBrains({
-        //         startLevel: this.fsLevel
-        //     })
-        // }
 
         // PreAnimation
         fsView.draw.darkness({});
@@ -228,80 +199,39 @@ export class FS {
         model.state('fsEnd', true);
         model.state('FSMode', false);
         model.updateBalance({endFS: true});
-        // model.el('brainPanel').destroy();
-    }
-
-    onBrain() {
-        console.log(' i am in brain function');
-        let rollData = model.data('rollResponse');
-        let fsMulti = model.el('fsMulti');
-        let multiValue = rollData.FsBonus.Multi;
-
-        fsMulti.frameName = `multi${multiValue}.png`;
-        let brain = model.el('flyingBrain');
-        let currMulti = model.data('fsMulti');
-
-        if (multiValue > currMulti) {
-            if (currMulti === 6) {
-                let zombie = model.el('zombie');
-                zombie.Up(() => {
-                    brain.Up(() => {
-                        zombie.Up();
-                        sound.sounds.zombie1.play();
-                    });
-                });
-                model.data('fsMulti', multiValue);
-            } else {
-                model.el('zombie').Up();
-                model.data('fsMulti', multiValue);
-            }
-        }
-
-        if (currMulti < 7) {
-            brain.Win();
-            this.searchBrains({});
-        }
-    }
-
-    searchBrains({
-        startLevel
-    }) {
-        let brainSound = Math.round(Math.random()) ? sound.sounds.brain1 : sound.sounds.brain2;
-
-        let levelValue = startLevel || model.data('rollResponse').FsBonus.Level;
-        let levelABS = levelValue % 3;
-        let brainPanel = model.el('brainPanel');
-        if (model.state('brainPanel') === false) {
-            fsView.draw.BrainLevel({});
-            brainPanel = model.el('brainPanel');
-            model.state('brainPanel', true);
-        }
-        if (levelABS === 0) {
-            // console.warn('levelABS', levelABS);
-            brainSound.play();
-            brainPanel.visible = true;
-            brainPanel.setAnimationByName(0,'w3', false);
-            brainPanel.addAnimationByName(0,'w4', false);
-            const game = model.el('game');
-            game.time.events.add(1000, () => {
-                brainPanel.destroy();
-                model.state('brainPanel', false);
-            });
-        }
-        if (levelABS === 1){
-            // console.warn('levelABS', levelABS);
-            brainSound.play();
-            brainPanel.visible = true;
-            brainPanel.setAnimationByName(0,'w1', false);
-            brainPanel.addAnimationByName(0,'w1.5', true);
-        }
-        if (levelABS === 2){
-            // console.warn('levelABS', levelABS);
-            brainSound.play();
-            brainPanel.visible = true;
-            brainPanel.setAnimationByName(0,'w2', false);
-            brainPanel.addAnimationByName(0,'w2.5', true);
-        }
 
     }
+
+    // onBrain() {
+    //     console.log(' i am in brain function');
+    //     let rollData = model.data('rollResponse');
+    //     let fsMulti = model.el('fsMulti');
+    //     let multiValue = rollData.FsBonus.Multi;
+    //
+    //     fsMulti.frameName = `multi${multiValue}.png`;
+    //     let brain = model.el('flyingBrain');
+    //     let currMulti = model.data('fsMulti');
+    //
+    //     if (multiValue > currMulti) {
+    //         if (currMulti === 6) {
+    //             let zombie = model.el('zombie');
+    //             zombie.Up(() => {
+    //                 brain.Up(() => {
+    //                     zombie.Up();
+    //                     sound.sounds.zombie1.play();
+    //                 });
+    //             });
+    //             model.data('fsMulti', multiValue);
+    //         } else {
+    //             model.el('zombie').Up();
+    //             model.data('fsMulti', multiValue);
+    //         }
+    //     }
+    //
+    //     if (currMulti < 7) {
+    //         brain.Win();
+    //         this.searchBrains({});
+    //     }
+    // }
+
 }

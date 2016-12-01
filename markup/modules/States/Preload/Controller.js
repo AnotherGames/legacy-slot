@@ -63,29 +63,22 @@ export class Preload {
         game.load.image('mainBG', 'bg/mainBG.png');
         game.load.image('logos', 'bg/logos.png');
         game.load.image('sticks', 'bg/palki.png');
-        game.load.atlasJSONArray('clouds', 'bg/clouds.png', 'bg/clouds.json');
-        game.load.atlasJSONArray('candle', 'bg/candle.png', 'bg/candle.json');
         game.load.image('gameMachine', 'game/gameMachine.png');
         game.load.image('gameBG', 'game/gameBG.png');
         game.load.image('gameLogo', 'game/gmLogo.png');
         game.load.image('gameShadow', 'game/gameShadow.png');
-        // game.load.image('popup', 'other/popup.png');
         game.load.image('closed', 'other/closed.png');
-        game.load.image('transitionCoin', 'other/transitionCoin.png');
         game.load.image('ar', 'other/ar.png');
         game.load.image('arLeft', 'other/arLeft.png');
         game.load.atlasJSONArray('info', 'other/info.png', 'other/info.json');
         game.load.atlasJSONArray('infoMarker', 'other/infoMarker.png', 'other/infoMarker.json');
         game.load.image('winLine', 'win/winLineRect.png');
         game.load.image('winTotal', 'win/winTotalRect.png');
-        game.load.atlasJSONArray('win', 'win/win.png', 'win/win.json');
         game.load.atlasJSONArray('lineNumbers', 'win/lineNumbers.png', 'win/lineNumbers.json');
         game.load.atlasJSONArray('multiNumbers', 'numbers/multiNumbers.png', 'numbers/multiNumbers.json');
         game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
-        // game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
         game.load.atlasJSONArray('footerButtons', 'footer/footerButtons.png', 'footer/footerButtons.json');
         game.load.bitmapFont("numbersFont", "numbers/numbers.png", "numbers/numbers.xml");
-        // game.load.bitmapFont("fsLevelNumbers", "numbers/numbers1.png", "numbers/numbers1.xml");
         if (model.state('desktop')) {
             game.load.image('ui', 'game/UI.png');
             game.load.image('uiFS', 'game/UI_FS.png');
@@ -96,7 +89,6 @@ export class Preload {
             game.load.atlasJSONArray('mobileButtons', 'mobile_buttons/mobileButtons.png', 'mobile_buttons/mobileButtons.json');
         }
         // all elements
-        game.load.atlasJSONArray('elements', 'elements/elements.png', 'elements/elements.json');
         game.load.atlasJSONArray('01', 'elements/01.png', 'elements/01.json');
         game.load.atlasJSONArray('02', 'elements/02.png', 'elements/02.json');
         game.load.atlasJSONArray('03', 'elements/03.png', 'elements/03.json');
@@ -115,29 +107,18 @@ export class Preload {
     loadFSAssets() {
         const game = model.el('game');
         game.load.image('fsBG', 'bg/fsBG.png');
-        // game.load.image('axe', 'fs/axe.png');
-        // game.load.image('axeSmall', 'fs/axeSmall.png');
-        game.load.image('skull', 'fs/skull.png');
-        game.load.image('plus3', 'fs/plus3.png');
+
         game.load.image('freeSpins', 'fs/freeSpins.png');
         game.load.image('multiplier', 'fs/multiplier.png');
         game.load.image('freeSpinsPanelFS', 'fs/freeSpinsPanelFS.png');
         game.load.image('multiPanelFS', 'fs/multiPanelFS.png');
-        if (model.state('mobile')) {
-            // game.load.image('fsTotalTable', 'fs/fsTotalTable.png');
-            // game.load.image('multiRip', 'fs/multiRip.png');
-            // game.load.image('multiTable', 'fs/multiTable.png');
-        }
+
     }
 
     loadSpineAssets() {
         const game = model.el('game');
         game.load.spine('animBG', 'spine/skeleton.json');
         game.load.spine('logo', 'spine/logo.json');
-        game.load.spine('FSCharapter', 'FSCharapter/Zomb.json');
-        game.load.spine('FlyingBrain', 'FSCharapter/Brain.json');
-        game.load.spine('mozgiCount', 'fs/mozgi.json');
-        game.load.spine('fsCount', 'fs/bang.json');
 
     }
 

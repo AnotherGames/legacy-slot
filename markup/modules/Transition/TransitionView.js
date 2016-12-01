@@ -35,13 +35,6 @@ export let view = (() => {
         const transitionBG = game.add.graphics(0, 0, transitionContainer).beginFill(0x000000, 0.9).drawRect(0, 0, game.width, game.height);
         model.el('transitionBG', transitionBG);
 
-        const cloudContainer = game.add.group();
-        transitionContainer.add(cloudContainer);
-        model.group('cloudContainer', cloudContainer);
-        // for (let i = 0; i < 5; i++) {
-        //     addCloud({});
-        // }
-
         const freeSpinsBG = game.add.sprite(game.width / 2, -400, 'freeSpins', null, transitionContainer);
         freeSpinsBG.anchor.set(0.5);
         model.el('freeSpinsBG', freeSpinsBG);
@@ -75,24 +68,6 @@ export let view = (() => {
         multiLevel.scale.setTo(0.1, 0.1);
         model.el('multiLevel', multiLevel);
 
-        // const axeBig = game.add.sprite(game.width / 2 + 350,
-        //     game.world.height / 2,
-        //     'axe',
-        //     null,
-        //     transitionContainer);
-        // axeBig.anchor.set(0.5);
-        // axeBig.scale.setTo(0.1, 0.1);
-        // model.el('axeBig', axeBig);
-        //
-        // const axeSmall = game.add.sprite(game.width / 2 - 350,
-        //     game.world.height / 2 + 50,
-        //     'axeSmall',
-        //     null,
-        //     transitionContainer);
-        // axeSmall.anchor.set(0.5);
-        // axeSmall.scale.setTo(0.1, 0.1);
-        // model.el('axeSmall', axeSmall);
-
         const continueText = game.add.sprite(game.width / 2,
             game.world.height * 0.7,
             'text',
@@ -111,8 +86,7 @@ export let view = (() => {
         const freeSpinsLevel = model.el('freeSpinsLevel');
         const multiBG = model.el('multiBG');
         const multiLevel = model.el('multiLevel');
-        // const axeBig = model.el('axeBig');
-        // const axeSmall = model.el('axeSmall');
+
         const continueText = model.el('continueText');
         let delta = 160;
         if (model.state('mobile')) {
@@ -168,8 +142,6 @@ export let view = (() => {
 
         _addFSBG();
 
-        // game.add.tween(axeBig.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true);
-        // game.add.tween(axeSmall.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true);
         game.add.tween(continueText.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true)
             .onComplete.add(() => {
                 continueText.rotation = 0.1;
@@ -212,7 +184,7 @@ export let view = (() => {
         _fsFinishDraw();
         _fsFinishTween();
         _fsFinishInput();
-        // _coinsTween();
+
         if (model.state('autoTransititon')) {
             game.time.events.add(config.autoTransitionTime, () => {
                 sound.sounds.button.play();
@@ -234,13 +206,6 @@ export let view = (() => {
         const transitionBG = game.add.graphics(0, 0, transitionContainer).beginFill(0x000000, 0.9).drawRect(0, 0, game.width, game.height);
         model.el('transitionBG', transitionBG);
 
-        const cloudContainer = game.add.group();
-        transitionContainer.add(cloudContainer);
-        model.group('cloudContainer', cloudContainer);
-        // for (let i = 0; i < 5; i++) {
-        //     addCloud({});
-        // }
-
         let winTextFrame;
         if (model.data('fsMulti') === 7) {
             winTextFrame = 'bigW.png';
@@ -261,15 +226,6 @@ export let view = (() => {
         console.log(winCount);
         model.el('winCount', winCount);
 
-        // const skull = game.add.sprite(game.width / 2,
-        //     game.world.height * 0.65,
-        //     'skull',
-        //     null,
-        //     transitionContainer);
-        // skull.anchor.set(0.5);
-        // skull.scale.setTo(0.1, 0.1);
-        // model.el('skull', skull);
-
         const continueText = game.add.sprite(game.width / 2,
             game.height * 0.65,
             'text',
@@ -285,7 +241,7 @@ export let view = (() => {
         const game = model.el('game');
         const winText = model.el('winText');
         const winCount = model.el('winCount');
-        // const skull = model.el('skull');
+
         const continueText = model.el('continueText');
 
         game.add.tween(winText).to({y: game.height * 0.25}, 1500, Phaser.Easing.Bounce.Out, true)
@@ -293,7 +249,7 @@ export let view = (() => {
                 let winCountValue = model.data('rollResponse').FsBonus.TotalFSWinCoins + model.data('rollResponse').Balance.TotalWinCoins;
                 _сountMeter(winCountValue, winCount);
             });
-        // game.add.tween(skull.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true);
+
         game.add.tween(winCount).to({y: game.height * 0.45}, 1500, Phaser.Easing.Bounce.Out, true);
         game.add.tween(continueText.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true)
             .onComplete.add(() => {
@@ -332,44 +288,6 @@ export let view = (() => {
         game.frameAnims.push(anim);
     }
 
-    function _addCoin(container) {
-        const game = model.el('game');
-        if (container.y >= game.height * 5.7) return;
-
-        let posX = game.rnd.integerInRange(game.width * 0.1, game.width * 0.9);
-        let coin = game.add.sprite(posX, container.y * -1 - 100, 'transitionCoin', null, container);
-        coin.anchor.set(0.5);
-        let scale = game.rnd.integerInRange(50, 100) / 75;
-        coin.scale.set(scale, scale);
-        let height = coin.height;
-        coin.height = game.rnd.integerInRange(height * 0.3, height);
-        let tween = game.add.tween(coin)
-            .to({rotation: 200}, 1000, 'Linear', true)
-            .start();
-        tween.onComplete.add(() => {
-            coin.destroy();
-        });
-        game.add.tween(coin)
-            .to({height: height}, 200, 'Linear')
-            .to({height: height * 0.2}, 100, 'Linear')
-            .to({height: height}, 200, 'Linear')
-            .to({height: height * 0.2}, 100, 'Linear')
-            .to({height: height}, 200, 'Linear')
-            .to({height: height * 0.2}, 100, 'Linear')
-            .to({height: height}, 200, 'Linear')
-            .start();
-
-        game.time.events.add(75, () => {
-            _addCoin(container)
-        });
-    }
-    function _coinsTween() {
-        const game = model.el('game');
-        let coinsContainer = game.add.group();
-        _addCoin(coinsContainer);
-        game.add.tween(coinsContainer).to({y: game.height * 7}, 5000, 'Linear', true);
-    }
-
     function _fsFinishInput() {
         console.log('i am finishing fs');
         const transitionBG = model.el('transitionBG');
@@ -390,53 +308,10 @@ export let view = (() => {
         model.el('game').state.start('Main');
     }
 
-    function addCloud({
-        x = model.el('game').rnd.integerInRange(0, model.el('game').width),
-        container = model.group('cloudContainer')
-    }) {
-        const game = model.el('game');
-
-        let number = game.rnd.integerInRange(1, 4);
-        const cloud = game.add.sprite(0, 150, 'clouds', `cloud${number}.png`, container);
-        cloud.anchor.set(0.5);
-
-        let time = game.rnd.integerInRange(40, 60);
-        let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
-        let delta;
-        if (model.state('desktop')) {
-            cloud.y = cloud.y = cloud.y + game.rnd.integerInRange(0, 250);
-        } else {
-            cloud.y = cloud.y = cloud.y + game.rnd.integerInRange(0, 100);
-        }
-        cloud.x = x;
-
-        if (container === model.group('bg')){
-            if (side === 'left') {
-                cloud.x = -cloud.width;
-            } else {
-                cloud.x = game.width + cloud.width;
-            }
-        }
-        if (side === 'left') {
-            delta = game.width + cloud.width;
-        } else {
-            delta = -cloud.width;
-        }
-
-        game.add.tween(cloud).to({x: delta}, time * 1000, 'Linear', true)
-            .onComplete.add(() => {
-                cloud.destroy();
-                if (container === model.group('bg') && model.state('isAnimations' == false)){
-                    addCloud({container: model.group('bg')});
-                }
-            }, this);
-
-    }
 
     return {
         fsStart,
-        fsFinish,
-        addCloud
+        fsFinish
     }
 
 })();
