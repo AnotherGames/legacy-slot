@@ -95,12 +95,11 @@ export class Wheel {
         this.items = [];
         for (let i = 0; i < 6; i++) {
             const elem = new Element({
-                game: this.game,
-                parent: this.container,
-                el: 1,
-                animation: 'n',
-                x: 0,
-                y: i * this.elSize.height * -1
+                container: this.container,
+                position: {
+                    x: 0,
+                    y: i * this.elSize.height * -1
+                }
             });
             this.items.push(elem);
             this.game.spriteAnims.push(elem);

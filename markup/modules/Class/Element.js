@@ -1,88 +1,44 @@
 import { model } from 'modules/Model/Model';
+import { config } from 'modules/Util/Config';
 
 export class Element {
-    /*  param: {
-            game: Object,
-            parent: Object,
-            el: Number,
-            animation: String,
-            x: Number,
-            y: Number
-        }   */
-    constructor(param) {
-        if (param === undefined) {
-            console.error('constructor: param is undefined');
-            return;
-        }
-        if (param.game === undefined) {
-            console.error('constructor: param.game is undefined', param);
-            return;
-        } else {
-            this.game = param.game;
-        }
 
-        const game = model.el('game');
+    constructor({ position, container }) {
+        let game = model.el('game');
 
-        this.group = game.add.group(param.parent);
-        this.group.x = param.x;
-        this.group.y = param.y;
+        // Создаем контейнер для элементов (это будет один элемент на экране)
+        this.group = game.add.group(container);
+        this.group.x = position.x;
+        this.group.y = position.y;
 
+        // Заполняем его спрайтами всех элементов (они будут расположенны друг на друге)
         this.sprites = [];
-        for (let i = 1; i < 12; i++) {
+        for (let i = 1; i <= config.symbolsCount; i++) {
+            // Создаем по спрайту для каждого символа и делаем их не видимыми
             let sprite = game.add.sprite(0, 0, i, null, this.group);
-            sprite.visible = false;
-            sprite.anchor.set(0.5);
+                sprite.anchor.set(0.5);
+                sprite.visible = false;
             this.sprites.push(sprite);
-            switch (i) {
-                case 1:
-                    this._addAnimation(sprite, { el: 1, n: false, w: 15 });
-                    break;
-                case 2:
-                    this._addAnimation(sprite, { el: 2, n: 20, w: 20 });
-                    break;
-                case 3:
-                    this._addAnimation(sprite, { el: 3, n: false, w: 15 });
-                    break;
-                case 4:
-                    this._addAnimation(sprite, { el: 4, n: 15, w: 25 });
-                    break;
-                case 5:
-                    this._addAnimation(sprite, { el: 5, n: false, w: 15 });
-                    break;
-                case 6:
-                    this._addAnimation(sprite, { el: 6, n: 15, w: 15 });
-                    break;
-                case 7:
-                    this._addAnimation(sprite, { el: 7, n: false, w: 15 });
-                    break;
-                case 8:
-                    this._addAnimation(sprite, { el: 8, n: 15, w: 15 });
-                    break;
-                case 9:
-                    this._addAnimation(sprite, { el: 9, n: 15, w: 15 });
-                    break;
-                case 10:
-                    this._addAnimation(sprite, { el: 10, n: 15, w: 15 });
-                    break;
-                case 11:
-                    this._addAnimation(sprite, { el: 11, n: 15, w: 15 });
-                    break;
-                default:
 
-            }
+            // Каждому спрайту добавляем необходимые анимации
+            this.addSpriteAnimation(sprite, i);
         }
 
-        this.active = param.el;
-        this.activeSprite = this.sprites[param.el - 1];
+        // По умолчанию все символы будут проигрывать анимацию "1-n" и этот символ будет видимым
+        this.active = 1;
+        this.activeSprite = this.sprites[0];
         this.activeSprite.visible = true;
-        this.activeSprite.animations.play(`${param.el}-${param.animation}`);
+        this.activeSprite.animations.play('1-n');
     }
 
     play(animation) {
+        // Если спрайт уже проигрывает нужную нам анимацию, то мы ничего не будем делать чтобы анимация не прыгала
         if (this.activeSprite.animations.currentAnim.name === animation) return;
 
+        // Делаем невидимым спрайт который раньше играл анимацию
         this.activeSprite.visible = false;
 
+        // Находим новый активный спрайт, делаем его видимым и запускаем нужную анимацию
         this.active = parseInt(animation);
         this.activeSprite = this.sprites[this.active - 1];
         this.activeSprite.visible = true;
@@ -90,28 +46,67 @@ export class Element {
     }
 
     win() {
+        // Проигрывам выигрышную анимацию
         this.play(`${this.active}-w`);
         this.activeSprite.animations.currentAnim.onComplete.add(() => {
+            // После которой опять играем нормальную анимацию
             this.play(`${this.active}-n`);
         });
     }
 
-    normal() {
-        if (this.activeSprite.animations.currentAnim === `${this.active}-n`) {
-            return;
-        }
-        this.play(`${this.active}-n`);
-    }
-
     hide() {
+        // Делаем элемент полупрозрачным
         this.activeSprite.alpha = 0.5;
     }
 
     show() {
+        // Возращаем нормальное состояние
         this.activeSprite.alpha = 1;
     }
 
-    _addAnimation(sprite, options) {
+    // Вспомогательные методы для добавления анимаций для спрайтов
+    addSpriteAnimation(sprite, index) {
+        switch (index) {
+            case 1:
+                this.addAnimation(sprite, { el: 1, n: false, w: 15 });
+                break;
+            case 2:
+                this.addAnimation(sprite, { el: 2, n: 20, w: 20 });
+                break;
+            case 3:
+                this.addAnimation(sprite, { el: 3, n: false, w: 15 });
+                break;
+            case 4:
+                this.addAnimation(sprite, { el: 4, n: 15, w: 25 });
+                break;
+            case 5:
+                this.addAnimation(sprite, { el: 5, n: false, w: 15 });
+                break;
+            case 6:
+                this.addAnimation(sprite, { el: 6, n: 15, w: 15 });
+                break;
+            case 7:
+                this.addAnimation(sprite, { el: 7, n: false, w: 15 });
+                break;
+            case 8:
+                this.addAnimation(sprite, { el: 8, n: 15, w: 15 });
+                break;
+            case 9:
+                this.addAnimation(sprite, { el: 9, n: 15, w: 15 });
+                break;
+            case 10:
+                this.addAnimation(sprite, { el: 10, n: 15, w: 15 });
+                break;
+            case 11:
+                this.addAnimation(sprite, { el: 11, n: 15, w: 15 });
+                break;
+            default:
+                break;
+
+        }
+    }
+
+    addAnimation(sprite, options) {
         sprite.animations.add(`${options.el}-n`,
             options.n
             ? Phaser.Animation.generateFrameNames(`${options.el}-n-`, 1, options.n, '.png', 2)
