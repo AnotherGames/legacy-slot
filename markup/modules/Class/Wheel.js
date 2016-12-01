@@ -334,7 +334,7 @@ export class Wheel {
         this._gotoMode();
 
         let rand;
-        if (model.state('FSMode')) {
+        if (model.state('fs')) {
             rand = this.game.rnd.integerInRange(1, 11);
         } else {
             rand = this.game.rnd.integerInRange(1, 10);
@@ -369,7 +369,7 @@ export class Wheel {
         this._gotoMode();
 
         let rand;
-        if (model.state('FSMode')) {
+        if (model.state('fs')) {
             rand = this.game.rnd.integerInRange(1, 11);
         } else {
             rand = this.game.rnd.integerInRange(1, 10);

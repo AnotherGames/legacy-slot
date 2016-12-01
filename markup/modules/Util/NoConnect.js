@@ -254,7 +254,7 @@ export let noConnect = {
         }
     },
     get Roll() {
-        if (model.state('FSMode')) {
+        if (model.state('fs')) {
             return this._Roll.fs.scatter;
         }
         return this._Roll.goFS;

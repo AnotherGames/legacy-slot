@@ -22,7 +22,7 @@ export let controller = (() => {
         let elSize = config[model.state('res')].elements;
 
         let firstScreen;
-        if (model.data('startFSScreen') !== undefined && !model.state('FSMode') ) {
+        if (model.data('startFSScreen') !== undefined && !model.state('fs') ) {
             firstScreen = model.data('startFSScreen');
             model.data('startFSScreen', undefined);
         } else {
@@ -61,7 +61,7 @@ export let controller = (() => {
 
         game.input.keyboard.enabled = false;
 
-        if(!model.state('FSMode')){
+        if(!model.state('fs')){
           if(model.mobile) {
             buttonsController.freezeInfo();
           } else {
@@ -83,7 +83,7 @@ export let controller = (() => {
 
                 model.data('rollResponse', data);
 
-                if (model.state('FSMode')) {
+                if (model.state('fs')) {
                     model.updateBalance({startFSRoll: true});
                 } else {
                     model.updateBalance({startRoll: true});
@@ -145,7 +145,7 @@ export let controller = (() => {
         request.send('Ready').then((data) => {
 
 
-            if (model.state('FSMode')) {
+            if (model.state('fs')) {
                 model.updateBalance({endFSRoll: true});
                 fsController.count({end: true});
             } else {
@@ -154,7 +154,7 @@ export let controller = (() => {
             model.state('ready', true);
             model.state('roll:progress', false);
 
-            if (!model.state('FSMode')) {
+            if (!model.state('fs')) {
                 _runNextAutoIfExist();
             } else {
                 _runNextFSIfExist();
@@ -162,7 +162,7 @@ export let controller = (() => {
 
         });
 
-        if(!model.state('FSMode')){
+        if(!model.state('fs')){
           if(model.mobile) {
             buttonsController.unfreezeInfo();
           } else {

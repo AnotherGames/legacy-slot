@@ -60,7 +60,7 @@ export let controller = (function () {
                 this.value = 0;
             }
             console.log('optionAutoplayVal1', this.value);
-            model.data('autoCashLineDelta', this.value);
+            model.state('autoplay:cashRollDelta', this.value);
         });
         $('#optionAutoplay2').on('change', function () {
             console.log(this.id, this.checked);
@@ -71,7 +71,7 @@ export let controller = (function () {
                 this.value = 0;
             }
             console.log('optionAutoplayVal2', this.value);
-            model.data('autoCashSumDelta', this.value);
+            model.state('autoplay:cashDelta', this.value);
         });
         $('#optionAutoplay3').on('change', function () {
             console.log(this.id, this.checked);
@@ -82,7 +82,7 @@ export let controller = (function () {
                 this.value = 0;
             }
             console.log('optionAutoplayVal3', this.value);
-            model.data('autoCashSumDelta', this.value);
+            model.state('autoplay:cashDelta', this.value);
         });
         $('#optionAutoplay4').on('change', function () {
             model.state('autoStopWhenFS', this.checked);

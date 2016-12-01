@@ -6,7 +6,7 @@ export let controller = (() => {
 
     function initMobile() {
         view.draw.CashBalance({});
-        view.draw.CoinBalance({});
+        view.draw.MobileBalance({});
     }
 
     function initDesktop() {
@@ -25,7 +25,7 @@ export let controller = (() => {
     }
 
     function updateBalance() {
-        if (model.state('FSMode')) {
+        if (model.state('fs')) {
             if (model.mobile) {
                 view.update.FSMobileBalance({});
                 view.update.CashBalance({});
@@ -36,12 +36,12 @@ export let controller = (() => {
             }
         } else {
             if (model.mobile) {
+                view.update.MobileBalance({});
                 view.update.CashBalance({});
-                view.update.CoinBalance({});
             }
             if (model.desktop) {
-                view.update.CashBalance({});
                 view.update.DesktopBalance({});
+                view.update.CashBalance({});
             }
         }
     }
