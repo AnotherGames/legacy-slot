@@ -19,7 +19,7 @@ export let controller = (() => {
         const elementsContainer = model.el('elementsContainer');
 
         let wheels = [];
-        let elSize = config[model.state('res')].elements;
+        let elSize = config[model.res].elements;
 
         let firstScreen;
         if (model.data('startFSScreen') !== undefined && !model.state('fs') ) {
@@ -63,7 +63,7 @@ export let controller = (() => {
 
         if(!model.state('fs')){
           if(model.mobile) {
-            buttonsController.freezeInfo();
+            buttonsController.lockButtons();
           } else {
             panelController.freezeInfo();
           }
@@ -164,7 +164,7 @@ export let controller = (() => {
 
         if(!model.state('fs')){
           if(model.mobile) {
-            buttonsController.unfreezeInfo();
+            buttonsController.unlockButtons();
           } else {
             panelController.unfreezeInfo();
           }

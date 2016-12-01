@@ -36,7 +36,7 @@ export class Boot {
     loadPreloadAssets() {
         const game = model.el('game');
 
-        game.load.path = `static/img/content/${model.state('res')}/preloader/`;
+        game.load.path = `static/img/content/${model.res}/preloader/`;
         game.load.image('preloadBar', 'preloaderBar.png');
         game.load.atlasJSONHash('preloadCoin', 'coin-0.png', 'coin.json');
     }
@@ -47,14 +47,14 @@ export class Boot {
         if (game.device.desktop) {
             game.scale.setGameSize(1920, 1080);
             model.desktop = true;
-            model.state('res', 'fullHD');
+            model.res = 'fullHD';
         } else {
             if (game.device.iOS) {
                 $('html, body').addClass('ios');
             }
             game.scale.setGameSize(1280, 720);
             model.mobile = true;
-            model.state('res', 'HD');
+            model.res = 'HD';
         }
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     }

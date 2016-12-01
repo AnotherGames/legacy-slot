@@ -40,18 +40,19 @@ export let controller = (() => {
     }
 
     function setButtonsX() {
-        const spinButtonWidth = config[model.state('res')].spinButtonWidth;
         let spinButton = model.el('spinButton');
         let betButton = model.el('betButton');
         let autoButton = model.el('autoButton');
         let soundButton = model.el('soundButton');
         let menuButton = model.el('menuButton');
+
+        let spinButtonWidth = config[model.res].spinButtonWidth;
         let buttonsDelta = (game.width - model.group('main').width - spinButtonWidth) / 4;
         let xRight = 3 * buttonsDelta + model.group('main').width + (spinButtonWidth / 2);
         let xLeft = buttonsDelta + spinButtonWidth / 2;
 
-        model.el('spinButtonWidth', spinButtonWidth);
-        model.el('buttonsDelta', buttonsDelta);
+        model.data('spinButtonWidth', spinButtonWidth);
+        model.data('buttonsDelta', buttonsDelta);
         model.data('buttonsXRight', xRight);
         model.data('buttonsXLeft', xLeft);
 
@@ -72,13 +73,14 @@ export let controller = (() => {
     }
 
     function setButtonsY() {
-        let buttonsDelta = model.el('buttonsDelta');
-        let spinButtonWidth = model.el('spinButtonWidth');
         let spinButton = model.el('spinButton');
         let betButton = model.el('betButton');
         let autoButton = model.el('autoButton');
         let soundButton = model.el('soundButton');
         let menuButton = model.el('menuButton');
+
+        let buttonsDelta = model.data('buttonsDelta');
+        let spinButtonWidth = model.data('spinButtonWidth');
 
         betButton.y = spinButton.y + spinButtonWidth / 2 + buttonsDelta + betButton.width / 2;
         autoButton.y = spinButton.y - spinButtonWidth / 2 - buttonsDelta - autoButton.width / 2;
@@ -87,7 +89,7 @@ export let controller = (() => {
 
     }
 
-    const handle = {
+    let handle = {
         spinButton: function () {
             let spinButton = model.el('spinButton');
 
@@ -101,11 +103,9 @@ export let controller = (() => {
         },
 
         autoButton: function() {
+            if (model.state('buttons:locked')) return;
             let autoButton = model.el('autoButton');
 
-            if (model.state('buttons:locked')
-            || model.state('menu') === 'opened') return;
-            // if (model.state('roll:progress')) return;
             soundController.sounds.button.play();
 
             if (autoButton.frameName === 'stop.png') {
@@ -119,18 +119,16 @@ export let controller = (() => {
             let betButton = model.el('betButton');
 
             if (model.state('buttons:locked')
-            || betButton.frameName === 'setBetOut.png'
-            || model.state('menu') === 'opened') return;
-            // if (model.state('roll:progress')) return;
+            || betButton.frameName === 'setBetOut.png') return;
+
             soundController.sounds.button.play();
             mobileSetBetController.handle.openPanel({});
         },
 
         menuButton: function() {
             if (model.state('buttons:locked')
-            || model.state('roll:progress')
-            || controller.isEvent
-            || model.state('menu') === 'open') return;
+            || model.state('roll:progress')) return;
+
             soundController.sounds.button.play();
             mobileSettingsController.handle.openSettings({});
         },
@@ -163,7 +161,6 @@ export let controller = (() => {
             soundButton.frameName = 'sound.png';
             settingsSoundButton.frameName = 'soundOn.png';
             settingsMusicButton.frameName = 'musicOn.png';
-            // soundController.sounds.button.play();
         }
     };
 
@@ -185,17 +182,16 @@ export let controller = (() => {
 
     };
 
-    //TODO do smth with this shit
-    function freezeInfo() {
-        if(!model.mobile) return;
-        if(model.state('autoplay:start')) return;
+    function lockButtons() {
+        if(model.desktop
+        || model.state('autoplay:start')) return;
 
         view.draw.lockButtons();
     }
 
-    function unfreezeInfo() {
-        if(!model.mobile) return;
-        if(model.state('autoplay:start')) return;
+    function unlockButtons() {
+        if(model.desktop
+        || model.state('autoplay:start')) return;
 
         view.draw.unlockButtons();
     }
@@ -203,8 +199,8 @@ export let controller = (() => {
     return {
         drawButtons,
         auto,
-        freezeInfo,
-        unfreezeInfo
+        lockButtons,
+        unlockButtons
     };
 
 })();

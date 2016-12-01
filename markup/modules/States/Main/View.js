@@ -84,7 +84,7 @@ export let view = (() => {
             gameBG.anchor.set(0.5);
             model.el('gameBG', gameBG);
 
-            let gameMachine = game.add.sprite(0, config[model.state('res')].gameMachine.y, 'gameMachine', null, mainGroup);
+            let gameMachine = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachine', null, mainGroup);
             gameMachine.anchor.set(0.5);
             model.el('gameMachine', gameMachine);
         },
@@ -118,7 +118,7 @@ export let view = (() => {
             game = model.el('game'),
             machineGroup = model.el('machineContainer')
         }) {
-            const elSize = config[model.state('res')].elements;
+            const elSize = config[model.res].elements;
             let mask = game.add.graphics();
             mask.beginFill(0x000000);
 
@@ -131,7 +131,7 @@ export let view = (() => {
 
             mask.drawRect(
                 maskX,
-                game.world.centerY + config[model.state('res')].mainContainer.y,
+                game.world.centerY + config[model.res].mainContainer.y,
                 elSize.width * 5,
                 elSize.height * 3);
             mask.pivot.set(elSize.width * 2.5, elSize.height * 1.5);

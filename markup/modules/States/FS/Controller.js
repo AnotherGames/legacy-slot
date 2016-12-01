@@ -206,12 +206,12 @@ export class FS {
             balanceController.initFSMobile();
 
             game.mainContainer.x = model.data('mainXRight');
-            game.mainContainer.y = game.world.centerY + config[model.state('res')].mainContainer.y;
+            game.mainContainer.y = game.world.centerY + config[model.res].mainContainer.y;
         } else {    // Desktop
             footerController.initDesktop();
 
             game.mainContainer.x = game.width - game.mainContainer.width / 2;
-            game.mainContainer.y = game.world.centerY + config[model.state('res')].mainContainer.y;
+            game.mainContainer.y = game.world.centerY + config[model.res].mainContainer.y;
 
             settingsController.initDesktopSettings(game);
             panelController.initFS();

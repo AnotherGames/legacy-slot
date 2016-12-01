@@ -34,8 +34,8 @@ export let view = (() => {
                 winSplash.anchor.set(0.5);
 
                 let gameMachine = model.el('gameMachine');
-                winSplash.x = config[model.state('res')].win[number][ind].x - gameMachine.width / 2;
-                winSplash.y = config[model.state('res')].win[number][ind].y - gameMachine.height / 2 - 25;
+                winSplash.x = config[model.res].win[number][ind].x - gameMachine.width / 2;
+                winSplash.y = config[model.res].win[number][ind].y - gameMachine.height / 2 - 25;
                 winSplash.animations.add('win', Phaser.Animation.generateFrameNames('Splash-Splash', 1, 14, '.png', 1), 15, false);
                 winSplash.animations.play('win');
                 winSplash.animations.getAnimation('win').killOnComplete = true;
@@ -131,7 +131,7 @@ export let view = (() => {
                 game,
                 lightParent: glistaLightContainer,
                 parent: glistaContainer,
-                elSize: config[model.state('res')].elements
+                elSize: config[model.res].elements
             });
 
             glistaFiredCounter++;

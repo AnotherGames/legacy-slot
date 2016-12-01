@@ -54,8 +54,8 @@ export class Main {
             footerController.initMobile();
             buttonsController.drawButtons();
 
-            let mainXLeft = model.el('buttonsDelta') * 2 + game.mainContainer.width / 2;
-            let mainXRight = game.width - game.mainContainer.width - model.el('buttonsDelta') * 2 + game.mainContainer.width / 2;
+            let mainXLeft = model.data('buttonsDelta') * 2 + game.mainContainer.width / 2;
+            let mainXRight = game.width - game.mainContainer.width - model.data('buttonsDelta') * 2 + game.mainContainer.width / 2;
             model.data('mainXLeft', mainXLeft);
             model.data('mainXRight', mainXRight);
 
@@ -65,7 +65,7 @@ export class Main {
                 game.mainContainer.x = mainXRight;
             }
 
-            game.mainContainer.y = game.world.centerY + config[model.state('res')].mainContainer.y;
+            game.mainContainer.y = game.world.centerY + config[model.res].mainContainer.y;
 
             balanceController.initMobile();
             mobileSettingsController.init({});
@@ -75,7 +75,7 @@ export class Main {
             footerController.initDesktop();
 
             game.mainContainer.x = game.world.centerX;
-            game.mainContainer.y = game.world.centerY + config[model.state('res')].mainContainer.y;
+            game.mainContainer.y = game.world.centerY + config[model.res].mainContainer.y;
 
             settingsController.initDesktopSettings(game);
             panelController.init();

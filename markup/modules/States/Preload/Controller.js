@@ -46,7 +46,7 @@ export class Preload {
 
     loadInitAssets() {
         const game = model.el('game');
-        game.load.path = `static/img/content/${model.state('res')}/`;
+        game.load.path = `static/img/content/${model.res}/`;
         game.load.image('initBG', 'bg/initBG.png');
         game.load.atlasJSONArray('text', 'text/text.png', 'text/text.json');
     }
