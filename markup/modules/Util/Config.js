@@ -43,6 +43,7 @@ export let config = {
         }
     },
     HD: {
+        spinButtonWidth: 173,
         mainContainer: {
             x: 0,
             y: 0

@@ -1,4 +1,5 @@
 import { model } from 'modules/Model/Model';
+import { config } from 'modules/Util/Config';
 import { view } from 'modules/Buttons/View';
 
 import { controller as rollController } from 'modules/Roll/Controller';
@@ -11,7 +12,7 @@ import { controller as mobileSetBetController } from 'modules/Menu/SetBet/Contro
 export let controller = (() => {
     let game;
 
-    function init() {
+    function drawButtons() {
         game = model.el('game');
 
         let spinButton = view.draw.SpinButton({});
@@ -39,23 +40,22 @@ export let controller = (() => {
     }
 
     function setButtonsX() {
-        const spinButtonWidth = 173; // Add some magic
-        model.el('spinButtonWidth', spinButtonWidth);
-        let buttonsDelta = (game.width - model.group('main').width - spinButtonWidth) / 4;
-        model.el('buttonsDelta', buttonsDelta);
-
-        let xRight = 3 * buttonsDelta + model.group('main').width + (spinButtonWidth / 2);
-        let xLeft = buttonsDelta + spinButtonWidth / 2;
-        model.data('buttonsXRight', xRight);
-        model.data('buttonsXLeft', xLeft);
-
+        const spinButtonWidth = config[model.state('res')].spinButtonWidth;
         let spinButton = model.el('spinButton');
         let betButton = model.el('betButton');
         let autoButton = model.el('autoButton');
         let soundButton = model.el('soundButton');
         let menuButton = model.el('menuButton');
+        let buttonsDelta = (game.width - model.group('main').width - spinButtonWidth) / 4;
+        let xRight = 3 * buttonsDelta + model.group('main').width + (spinButtonWidth / 2);
+        let xLeft = buttonsDelta + spinButtonWidth / 2;
 
-        if (model.state('side') === 'left') {
+        model.el('spinButtonWidth', spinButtonWidth);
+        model.el('buttonsDelta', buttonsDelta);
+        model.data('buttonsXRight', xRight);
+        model.data('buttonsXLeft', xLeft);
+
+
         if (model.state('gameSideLeft')) {
             spinButton.x = xRight;
             betButton.x = xRight;
@@ -74,7 +74,6 @@ export let controller = (() => {
     function setButtonsY() {
         let buttonsDelta = model.el('buttonsDelta');
         let spinButtonWidth = model.el('spinButtonWidth');
-
         let spinButton = model.el('spinButton');
         let betButton = model.el('betButton');
         let autoButton = model.el('autoButton');
@@ -90,10 +89,10 @@ export let controller = (() => {
 
     const handle = {
         spinButton: function () {
-            if (model.state('lockedButtons')) return;
-
             let spinButton = model.el('spinButton');
-            if (spinButton.frameName === 'spinEmpty.png') return;
+
+            if (model.state('lockedButtons')
+            || spinButton.frameName === 'spinEmpty.png') return;
 
             soundController.sounds.button.play();
 
@@ -102,11 +101,13 @@ export let controller = (() => {
         },
 
         autoButton: function() {
-            if (model.state('lockedButtons')) return;
+            let autoButton = model.el('autoButton');
+
+            if (model.state('lockedButtons')
+            || model.state('menu') === 'opened') return;
             // if (model.state('roll:progress')) return;
             soundController.sounds.button.play();
-            let autoButton = model.el('autoButton');
-            if (model.state('menu') === 'opened') return;
+
             if (autoButton.frameName === 'stop.png') {
                 autoplayController.stop();
             } else {
@@ -115,65 +116,76 @@ export let controller = (() => {
         },
 
         betButton: function() {
-            if (model.state('lockedButtons')) return;
-            // if (model.state('roll:progress')) return;
             let betButton = model.el('betButton');
-            if (betButton.frameName === 'setBetOut.png') return;
+
+            if (model.state('lockedButtons')
+            || betButton.frameName === 'setBetOut.png'
+            || model.state('menu') === 'opened') return;
+            // if (model.state('roll:progress')) return;
             soundController.sounds.button.play();
-            if (model.state('menu') === 'opened') return;
             mobileSetBetController.handle.openPanel({});
         },
 
         menuButton: function() {
-            if (model.state('lockedButtons')) return;
-            // if (model.state('roll:progress')) return;
-            if (controller.isEvent) return;
-            if (model.state('menu') === 'open') return;
-
+            if (model.state('lockedButtons')
+            || model.state('roll:progress')
+            || controller.isEvent
+            || model.state('menu') === 'open') return;
             soundController.sounds.button.play();
             mobileSettingsController.handle.openSettings({});
         },
 
         soundButton: function() {
+            if (soundController.isSound || soundController.isMusic) {
+                handle.turnOffSound();
+            } else {
+                handle.turnOnSound();
+            }
+        },
+
+        turnOffSound: function() {
             let soundButton = model.el('soundButton');
             let settingsSoundButton = model.el('settingsSoundButton');
             let settingsMusicButton = model.el('settingsMusicButton');
-            if (soundController.isSound || soundController.isMusic) {
-                soundController.isSound = soundController.isMusic = false;
-                soundButton.frameName = 'soundOut.png';
-                settingsSoundButton.frameName = 'soundOff.png';
-                settingsMusicButton.frameName = 'musicOff.png';
-            } else {
-                soundController.isSound = soundController.isMusic = true;
-                soundButton.frameName = 'sound.png';
-                settingsSoundButton.frameName = 'soundOn.png';
-                settingsMusicButton.frameName = 'musicOn.png';
-                soundController.sounds.button.play();
-            }
+
+            soundController.isSound = soundController.isMusic = false;
+            soundButton.frameName = 'soundOut.png';
+            settingsSoundButton.frameName = 'soundOff.png';
+            settingsMusicButton.frameName = 'musicOff.png';
+        },
+
+        turnOnSound: function() {
+            let soundButton = model.el('soundButton');
+            let settingsSoundButton = model.el('settingsSoundButton');
+            let settingsMusicButton = model.el('settingsMusicButton');
+
+            soundController.isSound = soundController.isMusic = true;
+            soundButton.frameName = 'sound.png';
+            settingsSoundButton.frameName = 'soundOn.png';
+            settingsMusicButton.frameName = 'musicOn.png';
+            // soundController.sounds.button.play();
         }
     };
 
     let auto = {
 
         start: function(amount) {
-            if (model.desktop) return;
             view.auto.Start();
-            let text = view.draw.autoCount({amount});
+            view.draw.autoCount({amount});
         },
 
         stop: function() {
-            if (model.desktop) return;
             view.auto.Stop();
             view.draw.removeCount();
         },
 
         change: function(count) {
-            if (model.desktop) return;
             view.draw.updateCount({count});
         }
 
     };
 
+    //TODO do smth with this shit
     function freezeInfo() {
         if(!model.mobile) return;
         if(model.state('autoplay:start')) return;
@@ -189,7 +201,7 @@ export let controller = (() => {
     }
 
     return {
-        init,
+        drawButtons,
         auto,
         freezeInfo,
         unfreezeInfo
