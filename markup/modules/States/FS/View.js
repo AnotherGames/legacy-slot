@@ -206,7 +206,6 @@ export let view = (() => {
             }
 
             let brain = new Brain({
-                game,
                 position: {
                     x,
                     y
