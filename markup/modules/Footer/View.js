@@ -5,25 +5,25 @@ export let view = (() => {
     let draw = {
 
         MobileFooter: function ({
+            game = model.el('game'),
+            container = model.group('footer'),
             color = 0x000000,
             heightTop = 40,
             heightBottom = 30,
             alphaTop = 0.25,
             alphaBottom = 0.7
         }) {
-            const game = model.el('game');
-            let footerContainer = model.group('footer');
 
-            let footerTop = game.add.graphics(0, 0, footerContainer)
-            .beginFill(color, alphaTop).drawRect(
-                0,
-                game.height - (heightTop + heightBottom),
-                game.width,
-                heightTop
-            );
+            let footerTop = game.add.graphics(0, 0, container)
+                .beginFill(color, alphaTop).drawRect(
+                    0,
+                    game.height - (heightTop + heightBottom),
+                    game.width,
+                    heightTop
+                );
             model.el('footerTop', footerTop);
 
-            let footerBottom = game.add.graphics(0, 0, footerContainer)
+            let footerBottom = game.add.graphics(0, 0, container)
                 .beginFill(color, alphaBottom).drawRect(
                     0,
                     game.height - heightBottom,
@@ -38,15 +38,14 @@ export let view = (() => {
         },
 
         DesktopFooter: function ({
+            game = model.el('game'),
+            container = model.group('footer'),
             color = 0x000000,
             heightBottom = 30,
             alphaBottom = 0.7
         }) {
-            const game = model.el('game');
 
-            let footerContainer = model.group('footer');
-
-            let footerBottom = game.add.graphics(0, 0, footerContainer)
+            let footerBottom = game.add.graphics(0, 0, container)
                 .beginFill(color, alphaBottom).drawRect(
                     0,
                     game.height - heightBottom,
@@ -59,37 +58,38 @@ export let view = (() => {
         },
 
         HomeButton: function ({
+            game = model.el('game'),
+            container = model.group('footer'),
             x = 25,
-            y = model.el('game').height - 15,
-            container = model.group('footer')
+            y = model.el('game').height - 15
         }) {
-            const game = model.el('game');
-            const homeButton = game.add.button(x, y, 'footerButtons', null, null, 'homeOn.png', 'home.png', 'homeOn.png', null, container);
-            homeButton.anchor.set(0.5);
+            let homeButton = game.add.button(x, y, 'footerButtons', null, null, 'homeOn.png', 'home.png', 'homeOn.png', null, container);
+                homeButton.anchor.set(0.5);
             model.el('homeButton', homeButton);
             return homeButton;
         },
 
         MenuButton: function ({
+            game = model.el('game'),
+            container = model.group('footer'),
             x = 75,
-            y = model.el('game').height - 15,
-            container = model.group('footer')
+            y = model.el('game').height - 15
         }) {
-            const game = model.el('game');
-            const menuButton = game.add.button(x, y, 'footerButtons', null, null, 'menuOn.png', 'menu.png', 'menuOn.png', null, container);
-            menuButton.anchor.set(0.5);
+            let menuButton = game.add.button(x, y, 'footerButtons', null, null, 'menuOn.png', 'menu.png', 'menuOn.png', null, container);
+                menuButton.anchor.set(0.5);
             model.el('menuButton', menuButton);
             return menuButton;
         },
 
         SoundButton: function ({
+            game = model.el('game'),
+            container = model.group('footer'),
             x = 125,
-            y = model.el('game').height - 15,
-            container = model.group('footer')
+            y = model.el('game').height - 15
         }) {
-            const game = model.el('game');
-            const soundButton = game.add.button(x, y, 'footerButtons', null, null, 'soundOn.png', 'sound.png', null, null, container);
-            soundButton.anchor.set(0.5);
+            let soundButton = game.add.button(x, y, 'footerButtons', null, null, 'soundOn.png', 'sound.png', null, null, container);
+                soundButton.anchor.set(0.5);
+            // Определяем начальный фрейм
             if (model.state('volume')) {
                 soundButton.frameName = 'soundOn.png';
             } else {
@@ -100,13 +100,14 @@ export let view = (() => {
         },
 
         FastButton: function ({
+            game = model.el('game'),
+            container = model.group('footer'),
             x = 175,
-            y = model.el('game').height - 15,
-            container = model.group('footer')
+            y = model.el('game').height - 15
         }) {
-            const game = model.el('game');
-            const fastButton = game.add.button(x, y, 'footerButtons', null, null, null, 'fastSpin.png', null, null, container);
-            fastButton.anchor.set(0.5);
+            let fastButton = game.add.button(x, y, 'footerButtons', null, null, null, 'fastSpin.png', null, null, container);
+                fastButton.anchor.set(0.5);
+            // Определяем начальный фрейм
             if (model.state('fastRoll')) {
                 fastButton.frameName = 'fastSpinOff.png';
             } else {
@@ -117,22 +118,20 @@ export let view = (() => {
         },
 
         Time: function ({
+            game = model.el('game'),
             container = model.group('footer'),
-            styleDesktop = {font: '18px Helvetica, Arial', align: 'center'},
-            styleMobile = {font: '22px Helvetica, Arial', align: 'center'},
-            color = '#e8b075'
+            styleDesktop = {font: '18px Helvetica, Arial', align: 'center', fill: '#e8b075'},
+            styleMobile = {font: '22px Helvetica, Arial', align: 'center', fill: '#e8b075'}
         }) {
-            const game = model.el('game');
-
             let currentHour = new Date().getHours();
             let currentMinutes = new Date().getMinutes();
 
             if (currentHour < 10) {
-                currentHour = '0' + currentHour;
+                currentHour = `0${currentHour}`;
                 model.data('currentHour', currentHour);
             }
             if (currentMinutes < 10) {
-                currentMinutes = '0' + currentMinutes;
+                currentMinutes = `0${currentMinutes}`;
                 model.data('currentMinutes', currentMinutes);
             }
 
@@ -154,7 +153,6 @@ export let view = (() => {
                 container);
             footerTime.anchor.set(0.5);
             footerTime.x = game.width - footerTime.width;
-            footerTime.fill = color;
 
             model.el('footerTime', footerTime);
 
@@ -173,10 +171,10 @@ export let view = (() => {
             let minutes = new Date().getMinutes();
 
             if (hours < 10) {
-                hours = '0' + hours;
+                hours = `0${hours}`;
             }
             if (minutes < 10) {
-                minutes = '0' + minutes;
+                minutes = `0${minutes}`;
             }
 
             if (currentHour !== hours) {

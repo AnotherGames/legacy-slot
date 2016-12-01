@@ -8,7 +8,7 @@ export class Zombie {
     constructor({ position, multi }) {
 
         // инит входящие параметры
-        let game = model.el('game');
+        this.game = model.el('game');
         this.position = position;
         if (multi) {
             this.multi = multi - 2;
@@ -71,10 +71,10 @@ export class Zombie {
             soundController.sounds.zombie1.play();
             ++this.switcher;
             // Играем следующую случайную анимацию
-            this.char.setAnimationByName(0, 'win' + (switcher % 4), false);
+            this.char.setAnimationByName(0, 'win' + (this.switcher % 4), false);
             this.char.addAnimationByName(0, 'idle7', true);
             // Запускаем таймер снова
-            randomAnim();
+            this.randomAnim();
         }, this);
         // Записываем таймер чтобы удалить на экране выхода из Фри Спинов
         model.data('zombie:randomTimer', zombieRandomTimer);

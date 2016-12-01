@@ -13,11 +13,14 @@ export let controller = (() => {
 
         let homeButton = view.draw.HomeButton({});
             homeButton.onInputDown.add(handle.Home);
+
         let menuButton = view.draw.MenuButton({});
             menuButton.onInputDown.add(handle.Menu);
+
         let soundButton = view.draw.SoundButton({});
             soundButton.freezeFrames = true;
             soundButton.onInputDown.add(handle.Sound);
+
         let fastButton = view.draw.FastButton({});
             fastButton.freezeFrames = true;
             fastButton.onInputDown.add(handle.Fast);
@@ -37,11 +40,17 @@ export let controller = (() => {
 
     const handle = {
         Menu: function () {
+            if (model.state('buttons:locked')
+            || model.state('roll:progress')
+            || model.state('autoplay:start')) return;
+
             let game = model.el('game');
-            if(model.state('lockedButtons') || model.state('roll:progress') || model.state('autoplay:start')) return;
+            // Выключаем управление с клавиатуры
             game.input.keyboard.enabled = false;
+
             soundController.sounds.button.play();
 
+            // Обновляем состояния чекбоксов в настройках
             $('#volume').prop('value', soundController.volume * 100);
             $('#checkSound').prop('checked', model.state('sound'));
             $('#checkMusic').prop('checked', model.state('music'));
@@ -51,31 +60,39 @@ export let controller = (() => {
             $('#optionAutoplay4').prop('checked', model.state('autoStopWhenFS'));
             $('#optionAutoplay5').prop('checked', model.state('optionAutoplay5'));
 
+            // Открываем настройки
             $('#settings').removeClass('closed');
             $('#darkness').removeClass('closed');
 
+            // при клике на оверлей закрываем настройки
             $('#darkness').on('click', function () {
-                game.input.keyboard.enabled = true; 
+                // Включаем управление с клавиатуры
+                game.input.keyboard.enabled = true;
                 $('#settings').addClass('closed');
                 $('#darkness').addClass('closed');
                 $('.history').addClass('closed');
                 $('#darkness').off();
             });
         },
+
         Sound: function () {
             let soundButton = model.el('soundButton');
             if (soundController.volume > 0) {
+                // Если были звуки - мы их вырубаем
                 soundButton.frameName = 'soundOff.png';
                 soundController.lastVolume = soundController.volume * 100;
                 soundController.volume = 0;
             } else {
+                // Если не было - включаем на последнюю сохраненную громкость
                 soundButton.frameName = 'soundOn.png';
                 soundController.volume = soundController.lastVolume;
             }
         },
+
         Fast: function () {
             soundController.sounds.button.play();
             let fastButton = model.el('fastButton');
+            // Ищменяем состояние fastRoll и меняем фрейм кнопки
             if (model.state('fastRoll')) {
                 model.state('fastRoll', false);
                 fastButton.frameName = 'fastSpin.png';
@@ -84,12 +101,15 @@ export let controller = (() => {
                 fastButton.frameName = 'fastSpinOff.png';
             }
         },
+
         Home: function () {
             soundController.sounds.button.play();
+            // Отправляем запрос Logout
             request.send('Logout')
                 .then((response) => {
                     console.log('Logout response:', response);
                 });
+            // Возвращаемся на предыдущую страницу
             window.history.back();
         }
     };

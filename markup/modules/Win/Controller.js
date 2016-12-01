@@ -27,7 +27,7 @@ export let controller = (() => {
         // Check for FS
         if (mode == 'root' && nextMode == 'fsBonus') {
 
-            model.state('lockedButtons', true);
+            model.state('buttons:locked', true);
 
             if (model.state('autoplay:start')) {
                 if (!model.state('autoStopWhenFS')) {

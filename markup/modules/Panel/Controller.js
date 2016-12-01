@@ -69,7 +69,7 @@ export let controller = (() => {
 
     const handle = {
         spin: function() {
-            if (model.state('lockedButtons')) return;
+            if (model.state('buttons:locked')) return;
 
             soundController.sounds.button.play();
             if (!model.state('autoClosed')) {
@@ -91,7 +91,7 @@ export let controller = (() => {
 
         auto: function() {
             if (model.state('autoplay:start') || model.state('roll:progress')) return;
-            if (model.state('lockedButtons')) return;
+            if (model.state('buttons:locked')) return;
 
             soundController.sounds.button.play();
             if (model.state('autoClosed') && !model.data('remainAutoCount')) {
@@ -106,7 +106,7 @@ export let controller = (() => {
         },
 
         maxBet: function() {
-            if (model.state('lockedButtons')) return;
+            if (model.state('buttons:locked')) return;
             if (model.state('autoplay:end') == false) return;
 
             soundController.sounds.button.play();
@@ -114,7 +114,7 @@ export let controller = (() => {
         },
 
         info: function() {
-            if(model.state('lockedButtons') || model.state('roll:progress') || model.state('autoplay:start')) return;
+            if(model.state('buttons:locked') || model.state('roll:progress') || model.state('autoplay:start')) return;
             soundController.sounds.button.play();
 
             let game = model.el('game');

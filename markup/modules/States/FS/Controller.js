@@ -63,7 +63,7 @@ export let controller = (() => {
             transitionView.fsFinish();
         });
 
-        model.state('lockedButtons', false);
+        model.state('buttons:locked', false);
         model.state('fsEnd', true);
         model.state('fs', false);
         model.updateBalance({endFS: true});

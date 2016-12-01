@@ -26,7 +26,7 @@ export let controller = (() => {
             document.addEventListener("touchend", handle._touchEnd, false);
         },
         openSettings: function () {
-            if(model.state('lockedButtons') || model.state('roll:progress') || model.state('autoplay:start') || model.state('settings') === 'open') return;
+            if(model.state('buttons:locked') || model.state('roll:progress') || model.state('autoplay:start') || model.state('settings') === 'open') return;
             model.state('settings', 'open');
             view.show.Settings({});
             view.show.Overlay({});

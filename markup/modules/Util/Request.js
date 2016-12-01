@@ -53,7 +53,7 @@ export let request = (() => {
             } else {
                 let func = function (res) {
                     if (name =='Roll') {
-                        console.log('Roll: ', res);
+                        console.log(res);
                     }
                     console.info(`Request: ${url}`);
                     resolve(res);
