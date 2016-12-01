@@ -53,7 +53,7 @@ export let controller = (function () {
         });
         $('#optionAutoplay1').on('change', function () {
             console.log(this.id, this.checked);
-            model.state('autoCashLine', this.checked);
+            model.state('autoplay:cashRoll', this.checked);
         });
         $('#optionAutoplayVal1').on('input change', function () {
             if (this.value < 0) {
@@ -64,7 +64,7 @@ export let controller = (function () {
         });
         $('#optionAutoplay2').on('change', function () {
             console.log(this.id, this.checked);
-            model.state('autoCashUp', this.checked);
+            model.state('autoplay:cashUp', this.checked);
         });
         $('#optionAutoplayVal2').on('input change', function () {
             if (this.value < 0) {
@@ -75,7 +75,7 @@ export let controller = (function () {
         });
         $('#optionAutoplay3').on('change', function () {
             console.log(this.id, this.checked);
-            model.state('autoCashDown', this.checked);
+            model.state('autoplay:cashDown', this.checked);
         });
         $('#optionAutoplayVal3').on('input change', function () {
             if (this.value < 0) {

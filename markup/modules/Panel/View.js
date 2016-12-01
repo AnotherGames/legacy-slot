@@ -152,7 +152,10 @@ export let view = (() => {
             color = '#e8b075',
             shadowColor = '#e8b075'
         }) {
-            let autoBG = game.add.graphics(0, 0, container).beginFill(0xffffff, 0.2).drawRect(0, 0, width, height);
+            let autoBG = game.add.graphics(0, 0, container)
+                .beginFill(0xffffff, 0.2)
+                .drawRect(0, 0, width, height);
+
                 autoBG.x = x;
                 autoBG.y = y;
                 autoBG.amount = text;

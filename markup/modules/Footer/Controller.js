@@ -38,7 +38,7 @@ export let controller = (() => {
     const handle = {
         Menu: function () {
             let game = model.el('game');
-            if(model.state('lockedButtons') || model.state('roll:progress') || !model.state('autoEnd')) return;
+            if(model.state('lockedButtons') || model.state('roll:progress') || model.state('autoplay:start')) return;
             game.input.keyboard.enabled = false;
             soundController.sounds.button.play();
 

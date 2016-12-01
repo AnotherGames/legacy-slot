@@ -98,7 +98,7 @@ export class Main {
             game.state.start('FS');
         }
         if (model.data('remainAutoCount') && !model.state('autoStopWhenFS')) {
-            autoplayController.init(model.data('remainAutoCount'));
+            autoplayController.start(model.data('remainAutoCount'));
             model.data('remainAutoCount', null);
         }
 

@@ -97,7 +97,7 @@ export let view = (() => {
 
         lockButtons: function() {
             if(model.desktop) return;
-            if(!model.state('autoEnd')) return;
+            if(model.state('autoplay:start')) return;
             model.el('betButton').frameName = 'setBetOut.png';
             model.el('menuButton').frameName = 'menuOut.png';
             model.el('autoButton').frameName = 'autoOut.png';
@@ -105,7 +105,7 @@ export let view = (() => {
 
         unlockButtons: function() {
             if(model.desktop) return;
-            if(!model.state('autoEnd')) return;
+            if(model.state('autoplay:start')) return;
             model.el('betButton').frameName = 'setBet.png';
             model.el('menuButton').frameName = 'menu.png';
             model.el('autoButton').frameName = 'auto.png';

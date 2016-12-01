@@ -29,9 +29,9 @@ export let controller = (() => {
 
             model.state('lockedButtons', true);
 
-            if (!model.state('autoEnd')) {
+            if (model.state('autoplay:start')) {
                 if (!model.state('autoStopWhenFS')) {
-                    model.data('remainAutoCount', model.data('autoCount'));
+                    model.data('remainAutoCount', model.data('autoplay:count'));
                 }
                 autoplayController.stop();
             }
@@ -56,7 +56,7 @@ export let controller = (() => {
         });
 
         game.time.events.add(1400, () => {
-            if (model.state('autoEnd')
+            if (model.state('autoplay:end')
             && model.state('fsEnd')
             && !model.state('roll:progress')) {
                 oneAfterAnother();

@@ -90,7 +90,7 @@ export let controller = (() => {
         },
 
         auto: function() {
-            if (!model.state('autoEnd') || model.state('roll:progress')) return;
+            if (model.state('autoplay:start') || model.state('roll:progress')) return;
             if (model.state('lockedButtons')) return;
 
             soundController.sounds.button.play();
@@ -107,14 +107,14 @@ export let controller = (() => {
 
         maxBet: function() {
             if (model.state('lockedButtons')) return;
-            if (model.state('autoEnd') == false) return;
+            if (model.state('autoplay:end') == false) return;
 
             soundController.sounds.button.play();
             model.changeBet({toMax: true});
         },
 
         info: function() {
-            if(model.state('lockedButtons') || model.state('roll:progress') || !model.state('autoEnd')) return;
+            if(model.state('lockedButtons') || model.state('roll:progress') || model.state('autoplay:start')) return;
             soundController.sounds.button.play();
 
             let game = model.el('game');
@@ -219,13 +219,15 @@ export let controller = (() => {
         },
 
         panelButton: function() {
-            if (!model.state('autoEnd') || model.state('roll:progress')) return;
+            // Если у нас автоплей или идет крутка, то не должна работать
+            // При нажатии должна закрыть панель
+            if (model.state('autoplay:start') || model.state('roll:progress')) return;
             let autoButtonDesk = model.el('autoButtonDesk');
-            if (autoButtonDesk.x > 370) return;
             const amount = this.amount;
-            autoplayController.init(amount);
             view.hide.autoButton({});
             view.hide.autoPanel({});
+            if (autoButtonDesk.x > 370) return;
+            autoplayController.start(amount);
         }
 
     };
@@ -257,7 +259,7 @@ export let controller = (() => {
 
     function freezeInfo() {
         if(model.mobile) return;
-        if(!model.state('autoEnd')) return;
+        if(model.state('autoplay:start')) return;
 
         let infoButtonDesk = model.el('infoButtonDesk');
             infoButtonDesk.frameName = 'infoOn.png';
@@ -266,7 +268,7 @@ export let controller = (() => {
 
     function unfreezeInfo() {
         if(model.mobile) return;
-        if(!model.state('autoEnd')) return;
+        if(model.state('autoplay:start')) return;
 
         let infoButtonDesk = model.el('infoButtonDesk');
         infoButtonDesk.frameName = 'info.png';

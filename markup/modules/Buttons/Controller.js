@@ -175,14 +175,14 @@ export let controller = (() => {
 
     function freezeInfo() {
         if(!model.mobile) return;
-        if(!model.state('autoEnd')) return;
+        if(model.state('autoplay:start')) return;
 
         view.draw.lockButtons();
     }
 
     function unfreezeInfo() {
         if(!model.mobile) return;
-        if(!model.state('autoEnd')) return;
+        if(model.state('autoplay:start')) return;
 
         view.draw.unlockButtons();
     }

@@ -31,7 +31,7 @@ export let controller = (() => {
             if (model.state('autoplayPanel') === 'close') return;
 
             handle.closePanel();
-            autoplayController.init(amount);
+            autoplayController.start(amount);
         }
     };
 

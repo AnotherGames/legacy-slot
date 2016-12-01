@@ -170,7 +170,7 @@ export let controller = (() => {
           }
         }
 
-        if (model.state('autoEnd')){
+        if (model.state('autoplay:end')){
             game.input.keyboard.enabled = true;
         }
     }
@@ -203,8 +203,8 @@ export let controller = (() => {
         let time = (rollResponse.Balance.TotalWinCoins) ? 1000 : 0;
 
         game.time.events.add(time, () => {
-            if (model.state('autoEnd')) return;
-            autoplayController.start()
+            if (model.state('autoplay:end')) return;
+            autoplayController.next()
         });
     }
 

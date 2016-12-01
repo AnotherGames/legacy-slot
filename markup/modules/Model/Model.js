@@ -69,20 +69,28 @@ export let model = (() => {
         model.data('numberOfLines', initData.Lines.length);
         model.data('firstScreen', initData.FirstScreen);
 
+        // Autoplay States
+        model.state('autoplay:end', true);
+        model.state('autoplay:start', false);
+        model.state('autoplay:cashUp', false);
+        model.state('autoplay:cashDown', false);
+        model.state('autoplay:cashRoll', false);
+        model.state('autoTransititon', false);
+        model.state('autoClosed', true);
+        model.data('autoplay:count', 0);
+        model.data('autoplay:startCash', 0);
+
         model.state('initScreen', true);
         model.state('fastRoll', false);
         model.state('ready', true);
         model.state('firstFS', false);
         model.state('side', 'left');
-        model.state('autoTransititon', false);
         model.state('isAnimations', true);
-        model.state('autoEnd', true);
         model.state('fsEnd', true);
         model.state('FSMode', false);
         model.state('sound', true);
         model.state('volume', 1);
         model.state('music', true);
-        model.state('autoClosed', true);
         model.state('isAnimBG', true);
         model.state('infoPanelOpen', false);
         model.state('menuOpened', false);
