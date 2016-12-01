@@ -158,7 +158,6 @@ export let view = (() => {
             }
 
             let zombie = new Zombie({
-                game,
                 position: {
                     x,
                     y

@@ -156,7 +156,7 @@ export let view = (() => {
         const game = model.el('game');
         const transitionContainer = model.group('transition');
         soundController.music.fsFon.stop();
-        game.time.events.remove(model.data('zombieRandom'));
+        game.time.events.remove(model.data('zombie:randomTimer'));
         soundController.music.finishPerehod.play();
         if (model.data('fsMulti') === 7) {
             soundController.sounds.zombie2.play();

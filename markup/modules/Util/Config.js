@@ -3,6 +3,7 @@ export let config = {
     countMeterTime: 2500,
     autoTransitionTime: 10000,
     symbolsCount: 11,
+    maxMulti: 7,
     wheel: {
         roll: {
             time: 1500,

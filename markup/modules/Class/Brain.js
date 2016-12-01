@@ -28,7 +28,9 @@ export class Brain {
         let anim = this.char.setAnimationByName(0, 'Win2', false);
         // В конце анимации вызываем callback (анимация собирания Зомби)
         this.game.time.events.add(anim.endTime * 1000, () => {
-            callback();
+            if (typeof callback == 'function') {
+                callback();
+            }
         });
     }
 }
