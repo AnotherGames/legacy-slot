@@ -4,225 +4,210 @@ export let view = (() => {
 
     let draw = {
         maxBetButton: function ({
+            game = model.el('game'),
             container = model.el('setbetContainer')
         }) {
-            const game = model.el('game');
-
-            const maxBetButton = game.add.sprite(
+            let maxBetButton = game.add.sprite(
                 container.width / 2,
                 game.world.height * 0.22,
                 'menuButtons',
                 'maxBet.png',
                 container);
-            maxBetButton.anchor.set(0.5);
+                maxBetButton.anchor.set(0.5);
             return maxBetButton;
         },
 
         BetLevelText: function ({
+            game = model.el('game'),
             container = model.el('setbetContainer')
         }) {
-            const game = model.el('game');
-
-            const betLevelText = game.add.sprite(
+            let betLevelText = game.add.sprite(
                 container.width / 2,
                 game.world.height * 0.36,
                 'menuButtons',
                 'betLevelText.png',
                 container);
-            betLevelText.anchor.set(0.5);
-
+                betLevelText.anchor.set(0.5);
             return betLevelText;
         },
 
         BetLevelBG: function ({
+            game = model.el('game'),
             container = model.el('setbetContainer')
         }) {
-            const game = model.el('game');
-
-            const betBG = game.add.sprite(
+            let betBG = game.add.sprite(
                 container.width / 2,
                 game.world.height * 0.47,
                 'menuButtons',
                 'empty.png',
                 container);
-            betBG.anchor.set(0.5);
-
+                betBG.anchor.set(0.5);
             model.el('setbetPanelBetBG', betBG);
             return betBG;
         },
 
         BetLevelValue: function ({
+            game = model.el('game'),
             container = model.el('setbetContainer'),
             betBG = model.el('setbetPanelBetBG'),
             value = model.balance('betValue')
         }) {
-            const game = model.el('game');
-
-            const betLevelValue = game.add.text(
+            let betLevelValue = game.add.text(
                 betBG.x,
                 betBG.y,
                 value,
                 {font: 'bold 60px Arial', fill: '#90fd5a', align: 'center'},
                 container);
-            betLevelValue.setShadow(0, 0, '#90fd5a', 8);
-            betLevelValue.anchor.set(0.5);
-
+                betLevelValue.setShadow(0, 0, '#90fd5a', 8);
+                betLevelValue.anchor.set(0.5);
             model.el('setbetPanelBetLevelValue', betLevelValue);
             return betLevelValue;
         },
 
         BetLevelPlus: function ({
+            game = model.el('game'),
             container = model.el('setbetContainer'),
             betBG = model.el('setbetPanelBetBG')
         }) {
-            const game = model.el('game');
             let deltaX = container.width * 0.3;
 
-            const betPlus = game.add.sprite(
+            let betPlus = game.add.sprite(
                 betBG.x + deltaX,
                 game.world.height * 0.47,
                 'menuButtons',
                 'plus.png',
                 container);
-            betPlus.anchor.set(0.5);
-
+                betPlus.anchor.set(0.5);
             return betPlus;
         },
 
         BetLevelMinus: function ({
+            game = model.el('game'),
             container = model.el('setbetContainer'),
             betBG = model.el('setbetPanelBetBG')
         }) {
-            const game = model.el('game');
             let deltaX = container.width * 0.3;
 
-            const betMinus = game.add.sprite(
+            let betMinus = game.add.sprite(
                 betBG.x - deltaX,
                 game.world.height * 0.47,
                 'menuButtons',
                 'minus.png',
                 container);
-            betMinus.anchor.set(0.5);
-
+                betMinus.anchor.set(0.5);
             return betMinus;
         },
 
         coinText: function ({
+            game = model.el('game'),
             container = model.el('setbetContainer')
         }) {
-            const game = model.el('game');
-
-            const coinValue = game.add.sprite(
+            let coinValue = game.add.sprite(
                 container.width / 2,
                 game.world.height * 0.59,
                 'menuButtons',
                 'coinValueText.png',
                 container);
-            coinValue.anchor.set(0.5);
+                coinValue.anchor.set(0.5);
         },
 
         coinBG: function ({
+            game = model.el('game'),
             container = model.el('setbetContainer')
         }) {
-            const game = model.el('game');
-
-            const coinBG = game.add.sprite(
+            let coinBG = game.add.sprite(
                 container.width / 2,
                 game.world.height * 0.7,
                 'menuButtons',
                 'empty.png',
                 container);
-            coinBG.anchor.set(0.5);
-
+                coinBG.anchor.set(0.5);
             model.el('setbetPanelCoinBG', coinBG);
             return coinBG;
         },
 
         coinValue: function ({
+            game = model.el('game'),
             container = model.el('setbetContainer'),
             coinBG = model.el('setbetPanelCoinBG'),
             value = model.balance('coinValue')
         }) {
-            const game = model.el('game');
-
-            const coinText = game.add.text(
+            let coinText = game.add.text(
                 coinBG.x,
                 coinBG.y,
                 value,
                 {font: 'bold 35px Arial', fill: '#90fd5a', align: 'center'},
                 container);
-            coinText.anchor.set(0.5);
-            coinText.setShadow(0, 0, '#90fd5a', 8);
-
+                coinText.anchor.set(0.5);
+                coinText.setShadow(0, 0, '#90fd5a', 8);
             model.el('setbetPanelCoinValue', coinText);
             return coinText;
         },
 
         CoinPlus: function ({
+            game = model.el('game'),
             container = model.el('setbetContainer'),
             coinBG = model.el('setbetPanelCoinBG')
         }) {
-            const game = model.el('game');
             let deltaX = container.width * 0.3;
 
-            const betPlus = game.add.sprite(
+            let betPlus = game.add.sprite(
                 coinBG.x + deltaX,
                 game.world.height * 0.70,
                 'menuButtons',
                 'plus.png',
                 container);
-            betPlus.anchor.set(0.5);
-
+                betPlus.anchor.set(0.5);
             return betPlus;
         },
 
         CoinMinus: function ({
+            game = model.el('game'),
             container = model.el('setbetContainer'),
             coinBG = model.el('setbetPanelCoinBG')
         }) {
-            const game = model.el('game');
             let deltaX = container.width * 0.3;
 
-            const betMinus = game.add.sprite(
+            let betMinus = game.add.sprite(
                 coinBG.x - deltaX,
                 game.world.height * 0.70,
                 'menuButtons',
                 'minus.png',
                 container);
-            betMinus.anchor.set(0.5);
-
+                betMinus.anchor.set(0.5);
             return betMinus;
         },
 
-        Container: function () {
-            const game = model.el('game');
+        Container: function ({
+            game = model.el('game')
+        }) {
             let container = game.add.group();
-            container.x = game.world.width;
+                container.x = game.world.width;
             model.el('setbetContainer', container);
             return container;
         },
 
         Overlay: function ({
+            game = model.el('game'),
             color = 0x000000,
             alpha = 0
         }) {
-            const game = model.el('game');
             let overlay = game.add.graphics(0, 0)
                 .beginFill(color)
                 .drawRect(0, 0, game.width, game.height);
-            overlay.alpha = alpha;
-            overlay.visible = false;
+                overlay.alpha = alpha;
+                overlay.visible = false;
             model.el('setbetOverlay', overlay);
             return overlay;
         },
 
         BG: function ({
+            game = model.el('game'),
             container = model.el('setbetContainer'),
             widthPercentage = 0.22,
             color = 0x000000
         }) {
-            const game = model.el('game');
-            const menuBG = game.add.graphics(0, 0, container)
+            let menuBG = game.add.graphics(0, 0, container)
                 .beginFill(color)
                 .drawRect(0, 0, game.width * widthPercentage, game.height);
             model.el('setbetBG', menuBG);
@@ -230,13 +215,13 @@ export let view = (() => {
         },
 
         Border: function ({
+            game = model.el('game'),
             container = model.el('setbetContainer'),
             color = 0xffffff,
             alpha = 0.3,
             widthPercentage = 0.002
         }) {
-            const game = model.el('game');
-            const menuBorder = game.add.graphics(0, 0, container)
+            let menuBorder = game.add.graphics(0, 0, container)
                 .beginFill(color, alpha)
                 .drawRect(0, 0, game.width * widthPercentage, game.height);
             model.el('setbetBorder', menuBorder);
@@ -244,30 +229,35 @@ export let view = (() => {
         },
 
         Title: function ({
+            game = model.el('game'),
             container = model.el('setbetContainer'),
             heightPercentage = 0.07,
             text = 'SET BET',
             style = {font: 'bold 40px Arial', fill: '#fff', align: 'center'}
         }) {
-            const game = model.el('game');
-            const setbetTitle = game.add.text(
+            let setbetTitle = game.add.text(
                 container.width / 2,
                 game.height * heightPercentage,
                 text,
                 style,
                 container);
-            setbetTitle.anchor.set(0.5);
+                setbetTitle.anchor.set(0.5);
             model.el('setbetTitle', setbetTitle);
             return setbetTitle;
         },
 
         BackButton: function ({
+            game = model.el('game'),
             container = model.el('setbetContainer'),
             heightPercentage = 0.9
         }) {
-            const game = model.el('game');
-            const backButton = game.add.sprite(container.width / 2, game.world.height * heightPercentage, 'mobileButtons', 'return.png', container);
-            backButton.anchor.set(0.5);
+            let backButton = game.add.sprite(
+                container.width / 2,
+                game.world.height * heightPercentage,
+                'mobileButtons',
+                'return.png',
+                container);
+                backButton.anchor.set(0.5);
             model.el('setbetBackButton', backButton);
             return backButton;
         }
@@ -289,10 +279,10 @@ export let view = (() => {
     let show = {
 
         Panel: function ({
+            game = model.el('game'),
             container = model.el('setbetContainer'),
             time = 700
         }) {
-            const game = model.el('game');
             let border = model.el('setbetBorder');
             if (model.state('gameSideLeft')) {
                 container.x = game.width;
@@ -306,10 +296,10 @@ export let view = (() => {
         },
 
         Overlay: function ({
+            game = model.el('game'),
             finalAlpha = 0.5,
             time = 700
         }) {
-            const game = model.el('game');
             let overlay = model.el('setbetOverlay');
                 overlay.visible = true;
             return game.add.tween(overlay).to( { alpha: finalAlpha }, time, 'Quart.easeOut', true);
@@ -319,10 +309,10 @@ export let view = (() => {
     let hide = {
 
         Panel: function ({
+            game = model.el('game'),
             container = model.el('setbetContainer'),
             time = 700
         }) {
-            const game = model.el('game');
             if (model.state('gameSideLeft')) {
                 return game.add.tween(container).to( { x: game.width }, time, 'Quart.easeOut', true);
             } else {
@@ -331,14 +321,14 @@ export let view = (() => {
         },
 
         Overlay: function ({
+            game = model.el('game'),
             time = 700
         }) {
-            const game = model.el('game');
             let overlay = model.el('setbetOverlay');
             let tween = game.add.tween(overlay).to( { alpha: 0 }, time, 'Quart.easeOut', true);
-            tween.onComplete.add(() => {
-                model.el('setbetOverlay').visible = false;
-            });
+                tween.onComplete.add(() => {
+                    model.el('setbetOverlay').visible = false;
+                });
             return tween;
         }
 

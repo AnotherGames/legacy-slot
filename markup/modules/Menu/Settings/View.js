@@ -1,17 +1,23 @@
 import { model } from 'modules/Model/Model';
+import { config } from 'modules/Util/Config';
 
 export let view = (() => {
 
     let draw = {
         _button: function ({
+            game = model.el('game'),
             container = model.el('settingsContainer'),
             spriteName = 'soundOn.png',
             heightPercentage = 0.2,
             side = 'left'
         }) {
-            const game = model.el('game');
-            let button = game.add.sprite(0, game.height * heightPercentage, 'menuButtons', spriteName, container);
-            button.anchor.set(0.5);
+            let button = game.add.sprite(
+                0,
+                game.height * heightPercentage,
+                'menuButtons',
+                spriteName,
+                container);
+                button.anchor.set(0.5);
 
             // Расчет отступа от края контенера
             let buttonMargin = (container.width - button.width * 2.5) / 3;
@@ -25,53 +31,52 @@ export let view = (() => {
         },
 
         _buttonText: function ({
+            game = model.el('game'),
             container = model.el('settingsContainer'),
             button = model.el('settingsSoundButton'),
             spriteName = 'soundText.png'
         }) {
-            const game = model.el('game');
-
-            const text = game.add.sprite(
+            let text = game.add.sprite(
                 button.x,
                 button.y + button.height / 2,
                 'menuButtons',
                 spriteName,
                 container);
-            text.y += text.height;
-            text.anchor.set(0.5);
-
+                text.y += text.height;
+                text.anchor.set(0.5);
             return text;
         },
 
-        Container: function () {
-            const game = model.el('game');
+        Container: function ({
+            game = model.el('game')
+        }) {
             let container = game.add.group();
-            container.x = game.world.width;
+                container.x = game.world.width;
             model.el('settingsContainer', container);
             return container;
         },
 
         Overlay: function ({
+            game = model.el('game'),
             color = 0x000000,
             alpha = 0
         }) {
-            const game = model.el('game');
             let overlay = game.add.graphics(0, 0)
                 .beginFill(color)
                 .drawRect(0, 0, game.width, game.height);
-            overlay.alpha = alpha;
-            overlay.visible = false;
+                overlay.alpha = alpha;
+                overlay.visible = false;
             model.el('settingsOverlay', overlay);
             return overlay;
         },
 
         BG: function ({
+            game = model.el('game'),
             container = model.el('settingsContainer'),
             widthPercentage = 0.22,
             color = 0x000000
         }) {
-            const game = model.el('game');
-            const menuBG = game.add.graphics(0, 0, container)
+            let menuBG = game.add.graphics(0, 0, container)
                 .beginFill(color)
                 .drawRect(0, 0, game.width * widthPercentage, game.height);
             model.el('settingsBG', menuBG);
@@ -79,13 +84,13 @@ export let view = (() => {
         },
 
         Border: function ({
+            game = model.el('game'),
             container = model.el('settingsContainer'),
             color = 0xffffff,
             alpha = 0.3,
             widthPercentage = 0.002
         }) {
-            const game = model.el('game');
-            const menuBorder = game.add.graphics(0, 0, container)
+            let menuBorder = game.add.graphics(0, 0, container)
                 .beginFill(color, alpha)
                 .drawRect(0, 0, game.width * widthPercentage, game.height);
             model.el('settingsBorder', menuBorder);
@@ -93,24 +98,25 @@ export let view = (() => {
         },
 
         Title: function ({
+            game = model.el('game'),
             container = model.el('settingsContainer'),
             heightPercentage = 0.07,
             text = 'SETTINGS',
             style = {font: 'bold 40px Arial', fill: '#fff', align: 'center'}
         }) {
-            const game = model.el('game');
-            const settingsTitle = game.add.text(
+            let settingsTitle = game.add.text(
                 container.width / 2,
                 game.height * heightPercentage,
                 text,
                 style,
                 container);
-            settingsTitle.anchor.set(0.5);
+                settingsTitle.anchor.set(0.5);
             model.el('settingsTitle', settingsTitle);
             return settingsTitle;
         },
 
         SoundButton: function ({
+            game = model.el('game'),
             container = model.el('settingsContainer'),
             heightPercentage = 0.2
         }) {
@@ -295,45 +301,81 @@ export let view = (() => {
         },
 
         BackButton: function ({
+            game = model.el('game'),
             container = model.el('settingsContainer'),
             heightPercentage = 0.9
         }) {
-            const game = model.el('game');
-            const backButton = game.add.sprite(container.width / 2, game.world.height * heightPercentage, 'mobileButtons', 'return.png', container);
-            backButton.anchor.set(0.5);
+            let backButton = game.add.sprite(
+                container.width / 2,
+                game.world.height * heightPercentage,
+                'mobileButtons',
+                'return.png',
+                container);
+                backButton.anchor.set(0.5);
             model.el('settingsBackButton', backButton);
             return backButton;
         },
 
         RulesScreen: function (container) {
-            const game = model.el('game');
-            let infoRules = game.add.sprite(model.el('game').world.centerX, model.el('game').world.centerY, 'info', '1_en.png', container);
-            infoRules.anchor.set(0.5);
-            infoRules.scale.set(1.1);
+            let game = model.el('game');
+            let infoRules = game.add.sprite(
+                game.world.centerX,
+                game.world.centerY,
+                'info',
+                '1_en.png',
+                container);
+                infoRules.anchor.set(0.5);
+                infoRules.scale.set(1.1);
             model.el('infoRules', infoRules);
 
-            const closed = game.add.sprite(infoRules.width + 80, infoRules.height - (infoRules.height - 60), 'closed', null, container);
+            let closed = game.add.sprite(
+                infoRules.width + 80,
+                60,
+                'closed',
+                null,
+                container);
             model.el('closed', closed);
 
-            const arrowRight = game.add.sprite(infoRules.width / 2 + 200, infoRules.height + 40, 'ar', null, container);
+            let arrowRight = game.add.sprite(
+                infoRules.width / 2 + 200,
+                infoRules.height + 40,
+                'ar',
+                null,
+                container);
             model.el('arrowRight', arrowRight);
 
-            const arrowLeft = game.add.sprite(infoRules.width / 2 - 40, infoRules.height + 40, 'arLeft', null, container);
+            let arrowLeft = game.add.sprite(
+                infoRules.width / 2 - 40,
+                infoRules.height + 40,
+                'arLeft',
+                null,
+                container);
             model.el('arrowLeft', arrowLeft);
 
             let infoMarkers = [];
-            let infoMarker = game.add.sprite(infoRules.width / 2, infoRules.height + 20, 'infoMarker', 'marker_on.png', container);
-            infoMarker.name = 'infoMarker0';
+            let infoMarker = game.add.sprite(
+                infoRules.width / 2,
+                infoRules.height + 20,
+                'infoMarker',
+                'marker_on.png',
+                container);
+                infoMarker.name = 'infoMarker0';
             infoMarkers.push(infoMarker);
 
-            for (let i = 1; i < 8; i++) {
+            for (let i = 1; i < config.numOfInfoDots; i++) {
                 let name = 'infoMarker' + i;
                 let counter = i;
-                let marker = game.add.sprite(infoMarker.x, infoRules.height + 20, 'infoMarker', 'marker_off.png', container);
-                marker.name = name;
-                marker.x = marker.x + 30 * i;
+                let marker = game.add.sprite(
+                    infoMarker.x,
+                    infoRules.height + 20,
+                    'infoMarker',
+                    'marker_off.png',
+                    container);
+                    marker.name = name;
+                    marker.x = marker.x + 30 * i;
                 infoMarkers.push(marker);
             }
+
             model.el('infoMarkers', infoMarkers);
             container.visible = false;
             return container;
@@ -344,10 +386,10 @@ export let view = (() => {
     let show = {
 
         Settings: function ({
+            game = model.el('game'),
             container = model.el('settingsContainer'),
             time = 700
         }) {
-            const game = model.el('game');
             let border = model.el('settingsBorder');
             if (model.state('gameSideLeft')) {
                 container.x = game.width;
@@ -361,23 +403,21 @@ export let view = (() => {
         },
 
         Overlay: function ({
+            game = model.el('game'),
             finalAlpha = 0.5,
             time = 700
         }) {
-            const game = model.el('game');
             let overlay = model.el('settingsOverlay');
                 overlay.visible = true;
             return game.add.tween(overlay).to( { alpha: finalAlpha }, time, 'Quart.easeOut', true);
         },
 
         Rules: function ({
+            game = model.el('game'),
             time = 700
         }) {
-            const game = model.el('game');
-            const container = model.group('info');
-            container.visible = true;
-            // let infoRules = model.el('rulesScreen');
-            //     infoRules.visible = true;
+            let container = model.group('info');
+                container.visible = true;
             return game.add.tween(container).to( { alpha: 1 }, time, 'Quart.easeOut', true);
         }
     };
@@ -385,10 +425,10 @@ export let view = (() => {
     let hide = {
 
         Settings: function ({
+            game = model.el('game'),
             container = model.el('settingsContainer'),
             time = 700
         }) {
-            const game = model.el('game');
             if (model.state('gameSideLeft')) {
                 return game.add.tween(container).to( { x: game.width }, time, 'Quart.easeOut', true);
             } else {
@@ -397,27 +437,26 @@ export let view = (() => {
         },
 
         Overlay: function ({
+            game = model.el('game'),
             time = 700
         }) {
-            const game = model.el('game');
             let overlay = model.el('settingsOverlay');
             let tween = game.add.tween(overlay).to( { alpha: 0 }, time, 'Quart.easeOut', true);
-            tween.onComplete.add(() => {
-                model.el('settingsOverlay').visible = false;
-            });
+                tween.onComplete.add(() => {
+                    model.el('settingsOverlay').visible = false;
+                });
             return tween;
         },
 
         Rules: function ({
+            game = model.el('game'),
             time = 700
         }) {
-            const game = model.el('game');
-            const container = model.group('info');
-            // let infoRules = model.el('rulesScreen');
+            let container = model.group('info');
             let tween = game.add.tween(container).to( { alpha: 0 }, time, 'Quart.easeOut', true);
-            tween.onComplete.add(() => {
-                container.visible = false;
-            });
+                tween.onComplete.add(() => {
+                    container.visible = false;
+                });
             return tween;
         }
 

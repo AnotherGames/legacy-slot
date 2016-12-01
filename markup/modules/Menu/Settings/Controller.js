@@ -1,4 +1,5 @@
 import { model } from 'modules/Model/Model';
+import { config } from 'modules/Util/Config';
 
 import { view } from 'modules/Menu/Settings/View';
 import { view as mainView } from 'modules/States/Main/View';
@@ -13,7 +14,7 @@ export let controller = (() => {
     let handle = {
         _touchEnd: function () {
             document.removeEventListener('touchend', handle._touchEnd, false);
-            if ( touchX + 100 < game.input.mouse.input.x) {
+            if (touchX + 100 < game.input.mouse.input.x) {
                 handle.switchRulesLeft();
             } else
             if (touchX - 100 > game.input.mouse.input.x) {
@@ -26,7 +27,11 @@ export let controller = (() => {
             document.addEventListener("touchend", handle._touchEnd, false);
         },
         openSettings: function () {
-            if(model.state('buttons:locked') || model.state('roll:progress') || model.state('autoplay:start') || model.state('settings') === 'open') return;
+            if(model.state('buttons:locked')
+            || model.state('roll:progress')
+            || model.state('autoplay:start')
+            || model.state('settings') === 'open') return;
+
             model.state('settings', 'open');
             view.show.Settings({});
             view.show.Overlay({});
@@ -78,6 +83,7 @@ export let controller = (() => {
             let betButton = model.el('betButton');
             let menuButton = model.el('menuButton');
             let soundButton = model.el('soundButton');
+
             spinButton.x = xSide;
             autoButton.x = xSide;
             betButton.x = xSide;
@@ -155,7 +161,7 @@ export let controller = (() => {
             infoMarkers.forEach((elem) => {
                 elem.frameName = 'marker_off.png';
             });
-            if (counter > 6) {
+            if (counter > config.numOfInfoDots - 2) {
                 counter = 0;
             } else {
                 counter++;
@@ -174,7 +180,7 @@ export let controller = (() => {
                 elem.frameName = 'marker_off.png';
             });
             if (counter < 1) {
-                counter = 7;
+                counter = config.numOfInfoDots - 1;
             } else {
                 counter--;
                 infoMarkers[counter + 1].frameName = 'marker_off.png';
@@ -187,7 +193,6 @@ export let controller = (() => {
         },
         showHistory: function () {
             soundController.sounds.button.play();
-            // $('.history').removeClass('closed');
         }
     };
 
@@ -253,20 +258,24 @@ export let controller = (() => {
         let infoContainer = game.add.group();
         model.group('info', infoContainer);
         view.draw.RulesScreen(infoContainer);
+
         let infoRules = model.el('infoRules');
         let closed = model.el('closed');
         let arrowRight = model.el('arrowRight');
         let arrowLeft = model.el('arrowLeft');
         let infoMarkers = model.el('infoMarkers');
         let counter = 0;
+
         infoRules.inputEnabled = true;
-        infoRules.input.priorityID = 11;
         closed.inputEnabled = true;
-        closed.input.priorityID = 12;
         arrowRight.inputEnabled = true;
-        arrowRight.input.priorityID = 12;
         arrowLeft.inputEnabled = true;
+
+        infoRules.input.priorityID = 11;
+        closed.input.priorityID = 12;
+        arrowRight.input.priorityID = 12;
         arrowLeft.input.priorityID = 12;
+
         infoRules.events.onInputDown.add(handle.touchRules);
         closed.events.onInputDown.add(handle.closeRules);
         arrowRight.events.onInputDown.add(handle.switchRulesRight);
