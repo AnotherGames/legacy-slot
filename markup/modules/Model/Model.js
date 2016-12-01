@@ -103,19 +103,21 @@ export let model = (() => {
 
     function initSaved(saved) {
         if (!saved) return;
+
         let fsCount = +saved.RemainSpins + 1;
         let fsLevel = saved.Multiplier.MultiplierStep;
         let fsMulti = saved.Multiplier.MultiplierValue;
         let totalWin = saved.CurrentTotalWinCoins;
         let winCash = saved.CurrentTotalWinCents;
+
         model.balance('winCash', winCash / 100);
         model.balance('totalWin', totalWin);
+        model.data('rollResponse', {NextMode: 'fsBonus'});
         model.data('savedFS', {
             fsCount,
             fsLevel,
             fsMulti
         });
-        model.data('rollResponse', {NextMode: 'fsBonus'});
     }
 
     function initBalance(initData) {
@@ -209,8 +211,6 @@ export let model = (() => {
 
     function updateBalance({bet, coin, startRoll, endRoll, startFSRoll, endFSRoll, startFS, endFS}) {
 
-        // Добавить начало конец бонусного раунда
-
         if (bet) {
             let betValue = model.balance('betValue');
             let coinValue = model.balance('coinValue');
@@ -254,8 +254,6 @@ export let model = (() => {
         }
         if (endFS) {
             let endData = model.data('rollResponse').Balance;
-            // let newCoinSum = model.balance('coinSum') + model.balance('totalWin');
-            // let newCoinCash = (model.balance('coinCash') * 100 + model.balance('winCash') * 100) / 100;
             model.balance('coinSum', endData.ScoreCoins);
             model.balance('coinCash', endData.ScoreCents / 100);
             model.balance('fsWin', 0);
