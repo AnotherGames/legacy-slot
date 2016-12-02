@@ -185,7 +185,7 @@ export class FS {
         let game = model.el('game');
 
         // Играем фоновую музыку
-        this.playFonMusic();
+        soundController.music.playMusic('fsFon');
 
         // Отрисовуем основной контейнер
         fsView.draw.mainBG({});
@@ -258,35 +258,6 @@ export class FS {
         model.el('game').frameAnims.forEach((anim) => {
             anim();
         });
-    }
-
-    playFonMusic() {
-        const game = model.el('game');
-
-        soundController.music.playMusic('fsFon');
-        soundController.music.changeMusicVolume('fsFon', 0)
-
-        let timeLength = config.fadeinMusicTime;
-        let _clock = game.time.create(true);
-        _clock.add(timeLength, () => {}, this);
-        _clock.start();
-        let timer = 0;
-
-        let anim = function () {
-            timer = timeLength - _clock.duration;
-            let progress = timer / timeLength;
-            if (progress > 1) {
-                progress = 1;
-            }
-
-            soundController.music.changeMusicVolume('fsFon', progress)
-
-            if (progress === 1) {
-                game.frameAnims.splice(game.frameAnims.indexOf(anim), 1);
-            }
-
-        };
-        this.game.frameAnims.push(anim);
     }
 
     positionMainContainer() {
