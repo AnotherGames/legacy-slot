@@ -96,7 +96,7 @@ export let controller = (() => {
             if (model.state('buttons:locked')
             || spinButton.frameName === 'spinEmpty.png') return;
 
-            soundController.sounds.button.play();
+            soundController.sounds.playSound('buttonClick');
 
             rollController.startRoll();
             rollController.fastRoll();
@@ -106,7 +106,7 @@ export let controller = (() => {
             if (model.state('buttons:locked')) return;
             let autoButton = model.el('autoButton');
 
-            soundController.sounds.button.play();
+            soundController.sounds.playSound('buttonClick');
 
             if (autoButton.frameName === 'stop.png') {
                 autoplayController.stop();
@@ -121,7 +121,7 @@ export let controller = (() => {
             if (model.state('buttons:locked')
             || betButton.frameName === 'setBetOut.png') return;
 
-            soundController.sounds.button.play();
+            soundController.sounds.playSound('buttonClick');
             mobileSetBetController.handle.openPanel({});
         },
 
@@ -129,7 +129,7 @@ export let controller = (() => {
             if (model.state('buttons:locked')
             || model.state('roll:progress')) return;
 
-            soundController.sounds.button.play();
+            soundController.sounds.playSound('buttonClick');
             mobileSettingsController.handle.openSettings({});
         },
 

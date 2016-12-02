@@ -48,7 +48,7 @@ export let controller = (() => {
             // Выключаем управление с клавиатуры
             game.input.keyboard.enabled = false;
 
-            soundController.sounds.button.play();
+            soundController.sounds.playSound('buttonClick');
 
             // Обновляем состояния чекбоксов в настройках
             $('#volume').prop('value', soundController.volume * 100);
@@ -77,20 +77,28 @@ export let controller = (() => {
 
         Sound: function () {
             let soundButton = model.el('soundButton');
-            if (soundController.volume > 0) {
-                // Если были звуки - мы их вырубаем
+            if (model.state('globalSound')){
                 soundButton.frameName = 'soundOff.png';
-                soundController.lastVolume = soundController.volume * 100;
-                soundController.volume = 0;
+                soundController.sounds.switchVolume()
             } else {
-                // Если не было - включаем на последнюю сохраненную громкость
-                soundButton.frameName = 'soundOn.png';
-                soundController.volume = soundController.lastVolume;
+                model.state('globalSound', true)
+                soundButton.frameName = 'sound.png';
+                soundController.sounds.switchVolume();
             }
+            // if (soundController.volume > 0) {
+            //     // Если были звуки - мы их вырубаем
+            //     soundButton.frameName = 'soundOff.png';
+            //     soundController.lastVolume = soundController.volume * 100;
+            //     soundController.volume = 0;
+            // } else {
+            //     // Если не было - включаем на последнюю сохраненную громкость
+            //     soundButton.frameName = 'soundOn.png';
+            //     soundController.volume = soundController.lastVolume;
+            // }
         },
 
         Fast: function () {
-            soundController.sounds.button.play();
+            soundController.sounds.playSound('buttonClick');
             let fastButton = model.el('fastButton');
             // Ищменяем состояние fastRoll и меняем фрейм кнопки
             if (model.state('fastRoll')) {
@@ -103,7 +111,7 @@ export let controller = (() => {
         },
 
         Home: function () {
-            soundController.sounds.button.play();
+            soundController.sounds.playSound('buttonClick');
             // Отправляем запрос Logout
             request.send('Logout')
                 .then((response) => {

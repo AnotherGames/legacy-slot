@@ -39,7 +39,7 @@ export let controller = (() => {
         closeSettings: function () {
             if (model.state('settings') === 'close') return;
 
-            soundController.sounds.button.play();
+            soundController.sounds.playSound('buttonClick');
             if (model.state('settings') === 'rules') {
                 view.hide.Rules({});
             }
@@ -104,14 +104,14 @@ export let controller = (() => {
                 soundButton.frameName = 'soundOn.png';
                 soundController.isSound = true;
                 menuButtonSound.frameName = 'sound.png';
-                soundController.sounds.button.play();
+                soundController.sounds.playSound('buttonClick');
             }
         },
         changeMusic: function () {
             let menuButtonSound = model.el('soundButton');
             let musicButton = model.el('settingsMusicButton');
 
-            soundController.sounds.button.play();
+            soundController.sounds.playSound('buttonClick');
             if (soundController.isMusic) {
                 musicButton.frameName = 'musicOff.png';
                 soundController.isMusic = false;
@@ -126,7 +126,7 @@ export let controller = (() => {
         },
         changeFastSpin: function () {
             let fastSpinButton = model.el('settingsFastSpinButton');
-            soundController.sounds.button.play();
+            soundController.sounds.playSound('buttonClick');
             if (model.state('fastRoll') === true) {
                 model.state('fastRoll', false);
                 fastSpinButton.frameName = 'fastSpinOff.png';
@@ -192,7 +192,7 @@ export let controller = (() => {
             model.el('infoCounter', counter);
         },
         showHistory: function () {
-            soundController.sounds.button.play();
+            soundController.sounds.playSound('buttonClick');
         }
     };
 

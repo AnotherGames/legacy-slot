@@ -1,6 +1,7 @@
 import { model } from 'modules/Model/Model';
 import { view } from 'modules/States/Init/View';
 import { Element } from 'modules/Class/Element';
+import { controller as soundController} from 'modules/Sound/Controller';
 
 export class Init {
     constructor(game) {
@@ -34,17 +35,20 @@ export class Init {
     }
 
     switchSound() {
+        soundController.sounds.switchVolume
         let game = model.el('game');
-        if (game.sound.volume > 0) {
-            game.sound.volume = 0;
+        if (model.state('globalSound')) {
+            soundController.sounds.switchVolume()
+            // game.sound.volume = 0;
             this.sprite2.x = 270;
-            model.state('volume', 0);
+            // model.state('volume', 0);
             this.textOff.setStyle(this.styleOn);
             this.textOn.setStyle(this.styleOff);
         } else {
-            game.sound.volume = 1;
+            soundController.sounds.switchVolume()
+            // game.sound.volume = 1;
             this.sprite2.x = 310;
-            model.state('volume', 1);
+            // model.state('volume', 1);
             this.textOff.setStyle(this.styleOff);
             this.textOn.setStyle(this.styleOn);
         }

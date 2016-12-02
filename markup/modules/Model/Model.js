@@ -80,6 +80,9 @@ export let model = (() => {
         model.data('autoplay:count', 0);
         model.data('autoplay:startCash', 0);
 
+        model.state('sound', true);
+        model.state('music', true);
+        model.state('globalSound', true);
         model.state('initScreen', true);
         model.state('fastRoll', false);
         model.state('ready', true);

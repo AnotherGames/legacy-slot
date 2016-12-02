@@ -84,7 +84,8 @@ export let view = (() => {
                     wheelObj.elements.forEach((element) => {
 
 
-                        let elementName = parseInt(element.sprites[element.active - 1].animations.currentAnim.name);
+                        let elementName = parseInt(element.sprites[element.active - 1]
+                                            .animations.currentAnim.name);
 
                         if (elementName == '10') {
                             element.win();
@@ -102,12 +103,15 @@ export let view = (() => {
                                 fsController.brain();
                                 lvlCounter++;
                             }
-                            game.add.tween(element.sprites[element.active - 1].scale).to({x: 1.7, y: 1.7}, 700, 'Linear', true)
+                            game.add.tween(element.sprites[element.active - 1].scale)
+                                        .to({x: 1.7, y: 1.7}, 700, 'Linear', true)
                                 .onComplete.add(() => {
                                     if (model.mobile) {
-                                        element.sprites[element.active - 1].scale.x = element.sprites[element.active - 1].scale.y = 1.5;
+                                        element.sprites[element.active - 1].scale.x
+                                            = element.sprites[element.active - 1].scale.y = 1.5;
                                     } else {
-                                        element.sprites[element.active - 1].scale.x = element.sprites[element.active - 1].scale.y = 1;
+                                        element.sprites[element.active - 1].scale.x
+                                            = element.sprites[element.active - 1].scale.y = 1;
                                     }
                                 });
                         }
@@ -180,7 +184,8 @@ export let view = (() => {
                 wheels.forEach((wheel, wheelIndex) => {
                     let elements = wheel.elements;
                     elements.forEach((element, elementIndex) => {
-                        let name = parseInt(element.sprites[element.active - 1].animations.currentAnim.name);
+                        let name = parseInt(element.sprites[element.active - 1]
+                                    .animations.currentAnim.name);
                         if (name == 10) {
                             if (wheelIndex > lastWheel) {
                                 lastWheel = wheelIndex;
@@ -229,9 +234,9 @@ export let view = (() => {
     let play = {
 
         WinSound: function() {
-            let winSound = Math.round(Math.random()) ? soundController.sounds.lineWin : soundController.sounds.lineWin2;
-                winSound.addMarker('win', 0, 1, 1, false);
-                winSound.play('win');
+            let winSound = Math.round(Math.random())
+            ? soundController.sounds.playSound('lineWin', 1000)
+            : soundController.sounds.playSound('lineWin2', 1000);
             return winSound;
         }
 

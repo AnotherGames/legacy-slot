@@ -14,7 +14,7 @@ export let request = (() => {
     }
 
     const mode = {
-        normal: 'zomnorm10',
+        normal: 'zombiefs2',
         fsBonus: 'zombiefs2'
     };
 

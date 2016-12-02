@@ -21,7 +21,7 @@ export let controller = (() => {
         closePanel: function () {
             if (model.state('autoplayPanel') === 'close') return;
 
-            soundController.sounds.button.play();
+            soundController.sounds.playSound('buttonClick');
             if (model.state('autoplayPanel') === 'open') {
                 view.hide.Panel({});
             }

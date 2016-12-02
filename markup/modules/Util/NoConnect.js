@@ -257,7 +257,7 @@ export let noConnect = {
         if (model.state('fs')) {
             return this._Roll.fs.scatter;
         }
-        return this._Roll.goFS;
+        return this._Roll.win;
     },
 
     Ready: {

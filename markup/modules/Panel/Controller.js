@@ -69,7 +69,7 @@ export let controller = (() => {
         spin: function() {
             if (model.state('buttons:locked')) return;
 
-            soundController.sounds.button.play();
+            soundController.sounds.playSound('buttonClick');
             if (!model.state('autoplay:panelClosed')) {
                 model.state('autoplay:panelClosed', true);
                 view.hide.autoButton({});
@@ -92,7 +92,7 @@ export let controller = (() => {
             || model.state('roll:progress')
             || model.state('buttons:locked')) return;
 
-            soundController.sounds.button.play();
+            soundController.sounds.playSound('buttonClick');
 
             if (model.state('autoplay:panelClosed') && !model.data('remainAutoCount')) {
                 model.state('autoplay:panelClosed', false);
@@ -109,7 +109,7 @@ export let controller = (() => {
             if(model.state('buttons:locked')
             || model.state('autoplay:end') == false) return;
 
-            soundController.sounds.button.play();
+            soundController.sounds.playSound('buttonClick');
             model.changeBet({toMax: true});
         },
 
@@ -118,7 +118,7 @@ export let controller = (() => {
             || model.state('roll:progress')
             || model.state('autoplay:start')) return;
 
-            soundController.sounds.button.play();
+            soundController.sounds.playSound('buttonClick');
 
             let game = model.el('game');
             let infoRules = view.show.info({});
@@ -198,22 +198,22 @@ export let controller = (() => {
         },
 
         betPlus: function() {
-            soundController.sounds.button.play();
+            soundController.sounds.playSound('buttonClick');
             model.changeBet({up: true});
         },
 
         betMinus: function() {
-            soundController.sounds.button.play();
+            soundController.sounds.playSound('buttonClick');
             model.changeBet({down: true});
         },
 
         coinsPlus: function() {
-            soundController.sounds.button.play();
+            soundController.sounds.playSound('buttonClick');
             model.changeCoin({up: true});
         },
 
         coinsMinus: function() {
-            soundController.sounds.button.play();
+            soundController.sounds.playSound('buttonClick');
             model.changeCoin({down: true});
         },
 

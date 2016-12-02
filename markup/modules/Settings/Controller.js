@@ -10,17 +10,23 @@ export let controller = (function () {
             let soundButton = model.el('soundButton');
             if (this.value == 0) {
                 soundButton.frameName = 'soundOff.png';
-                soundController.lastVolume = soundController.volume * 100;
             } else {
                 soundButton.frameName = 'soundOn.png';
             }
-            soundController.volume = this.value;
+            soundController.sounds.changeVolume(this.value);
         });
         $('#checkSound').on('change', function () {
-            soundController.isSound = this.checked;
+            model.state('sound', this.checked);
+            console.log(this.checked);
         });
         $('#checkMusic').on('change', function () {
-            soundController.isMusic = this.checked;
+            if(model.state('music')){
+                soundController.music.stopMusic('fon');
+                model.state('music', false)
+            } else {
+                soundController.music.playMusic('fon');
+                model.state('music', true)
+            }
         });
         $('#fastSpin').on('change', function () {
             model.state('fastRoll', this.checked);
