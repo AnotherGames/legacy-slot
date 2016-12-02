@@ -57,7 +57,7 @@ export let controller = (() => {
 
         game.time.events.add(1400, () => {
             if (model.state('autoplay:end')
-            && model.state('fsEnd')
+            && model.state('fs:end')
             && !model.state('roll:progress')) {
                 oneAfterAnother();
             }

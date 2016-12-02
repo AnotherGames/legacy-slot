@@ -10,64 +10,36 @@ export let view = (() => {
         groups: function ({
             game = model.el('game')
         }) {
-            game.bgContainer = game.add.group();
-            model.el('bgContainer', game.bgContainer);
-            model.group('bg', game.bgContainer);
-
-            game.mainContainer = game.add.group();
-            model.el('mainContainer', game.mainContainer);
-            model.group('main', game.mainContainer);
-
-            game.buttonsContainer = game.add.group();
-            model.group('buttons', game.buttonsContainer);
-
-            game.panelContainer = game.add.group();
-            model.group('panel', game.panelContainer);
-
-            game.balanceContainer = game.add.group();
-            model.el('balanceContainer', game.balanceContainer);
-
-            game.menuContainer = game.add.group();
-            model.el('menuContainer', game.menuContainer);
-
-            game.footerContainer = game.add.group();
-            model.group('footer', game.footerContainer);
-
-            game.balanceCashContainer = game.add.group();
-            model.group('balanceCash', game.balanceCashContainer);
-
-            game.balanceCoinContainer = game.add.group();
-            model.group('balanceCoin', game.balanceCoinContainer);
-
-            game.fsContainer = game.add.group();
-            model.group('fs', game.fsContainer);
-
-            game.popupContainer = game.add.group();
-            model.group('popup', game.popupContainer);
-
-            game.transitionContainer = game.add.group();
-            model.group('transition', game.transitionContainer);
+            model.group('bg', game.add.group());
+            model.group('main', game.add.group());
+            model.group('buttons', game.add.group());
+            model.group('panel', game.add.group());
+            model.group('balanceContainer', game.add.group());
+            model.group('menuContainer', game.add.group());
+            model.group('footer', game.add.group());
+            model.group('balanceCash', game.add.group());
+            model.group('balanceCoin', game.add.group());
+            model.group('fs', game.add.group());
+            model.group('popup', game.add.group());
+            model.group('transition', game.add.group());
         }
     };
 
     let draw = {
         mainBG: function ({
-            game = model.el('game')
+            game = model.el('game'),
+            container = model.group('bg')
         }) {
             let animBG = game.add.spine(
-                game.world.centerX,        // X positon
-                game.world.centerY,        // Y position
-                'animBG'     // the key of the object in cache
+                game.world.centerX,
+                game.world.centerY,
+                'animBG'
             );
-            animBG.setAnimationByName(
-                0,          // Track index
-                '2',     // Animation's name
-                true        // If the animation should loop or not
-            );
-            game.bgContainer.add(animBG);
+            animBG.setAnimationByName(0, '2', true);
+            container.add(animBG);
             model.el('animMainBG', animBG);
 
-            let mainBG = game.add.sprite(0, 0, 'fsBG', null, game.bgContainer);
+            let mainBG = game.add.sprite(0, 0, 'fsBG', null, container);
             model.el('mainBG', mainBG);
 
             if (model.state('isAnimBG')) {
@@ -75,34 +47,31 @@ export let view = (() => {
             } else {
                 animBG.visible = false;
                 for (let i = 0; i < 5; i++) {
-                    transitionView.addCloud({container: model.group('bg')});
+                    transitionView.addCloud({ container });
                 }
             }
         },
 
         mainContainer: function ({
-            game = model.el('game')
+            game = model.el('game'),
+            container = model.group('main')
         }) {
-            let mainGroup = game.mainContainer;
-
-            let gameMachine = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachine', null, mainGroup);
+            let gameMachine = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachine', null, container);
             gameMachine.anchor.set(0.5);
             model.el('gameMachine', gameMachine);
         },
 
         machineContainer: function ({
             game = model.el('game'),
-            mainGroup = game.mainContainer
+            container = model.group('main')
         }) {
-            let machineGroup = mainGroup.machineContainer = game.add.group();
+            let machineGroup = game.add.group();
+            container.addAt(machineGroup, 1);
             model.group('machine', machineGroup);
-            mainGroup.addAt(machineGroup, 1);
 
-            game.winTopContainer = game.add.group();
-            model.group('winTop', game.winTopContainer);
-            mainGroup.addAt(game.winTopContainer, 2);
-
-            // machineGroup.position.set(mainGroup.width / 2 + config[model.res].machine.x, mainGroup.height / 2);
+            let winTop = game.add.group();
+            container.addAt(winTop, 2);
+            model.group('winTop', winTop);
 
             machineGroup.glistaLightContainer = game.add.group();
             model.group('glistaLight', machineGroup.glistaLightContainer);
@@ -136,15 +105,16 @@ export let view = (() => {
             game = model.el('game')
         }) {
             let darkness = game.add.graphics();
-            darkness.beginFill(0x000000);
-            darkness.drawRect(0, 0, game.width, game.height);
+                darkness.beginFill(0x000000);
+                darkness.drawRect(0, 0, game.width, game.height);
             return game.add.tween(darkness).to( { alpha: 0 }, 1500, 'Linear', true);
         },
 
-        Zombie(start) {
-            if (!start) start = 2;
-            const game = model.el('game');
-            const fsContainer = model.group('fs');
+        Zombie(multi) {
+            multi = multi || 2;
+
+            let game = model.el('game');
+            let fsContainer = model.group('fs');
             let x, y, scale;
 
             if (model.mobile) {
@@ -162,36 +132,36 @@ export let view = (() => {
                     x,
                     y
                 },
-                multi: start
+                multi
             });
 
             let brain = model.el('flyingBrain');
-            if (start == 7) {
+            if (multi == 7) {
                 brain.Up(() => {
                     zombie.Up();
                 });
             }
 
-            zombie.char.scale.x = zombie.char.scale.y = scale;
+            zombie.char.scale.set(scale);
             fsContainer.add(zombie.char);
             model.el('zombie', zombie);
         },
 
         fsCandle: function({
+            game = model.el('game'),
+            container = model.group('fs'),
             x = 35,
-            y = 480,
-            container = model.group('fs')
+            y = 480
         }) {
-            const game = model.el('game');
-            const candle = game.add.sprite(x, y, 'candle', null, container);
-            candle.animations.add('burn');
-            candle.animations.play('burn', 12, true);
+            let candle = game.add.sprite(x, y, 'candle', null, container);
+                candle.animations.add('burn');
+                candle.animations.play('burn', 12, true);
             return candle;
         },
 
         Brain() {
-            const game = model.el('game');
-            const fsContainer = model.group('fs');
+            let game = model.el('game');
+            let fsContainer = model.group('fs');
             let x, y, scale;
 
             if (model.mobile) {
@@ -211,17 +181,16 @@ export let view = (() => {
                 }
             });
 
-            brain.char.scale.x = brain.char.scale.y = scale;
+            brain.char.scale.set(scale);
             fsContainer.add(brain.char);
-            console.log('fsContainer', fsContainer);
             model.el('flyingBrain', brain);
         },
 
         Multi: function({
-            start = 2,
-            container = model.group('panel')
+            game = model.el('game'),
+            container = model.group('panel'),
+            start = 2
         }) {
-            const game = model.el('game');
             let x, y;
             if (model.mobile) {
                 x = 125;
@@ -238,39 +207,39 @@ export let view = (() => {
                 'numbers',
                 `multi${start}.png`,
                 container);
-            fsMulti.anchor.set(0.5);
+                fsMulti.anchor.set(0.5);
             model.el('fsMulti', fsMulti);
             return fsMulti;
         },
 
         Count: function({
+            game = model.el('game'),
+            container = model.group('panel'),
             start = 15,
             fontDesktop = '80',
-            fontMobile = '50',
-            container = model.group('panel')
+            fontMobile = '50'
         }) {
-            const game = model.el('game');
             let x, y, font;
             if (model.mobile) {
                 x = 1183;
                 y = 68;
                 font = fontMobile;
-                const countBG = game.add.sprite(x, y - 5, 'fsTotalTable', null, container);
+                let countBG = game.add.sprite(x, y - 5, 'fsTotalTable', null, container);
                 countBG.anchor.set(0.5);
             } else {
                 x = 662;
                 y = 94;
                 font = fontDesktop;
             }
-            const fsCount = game.add.bitmapText(x, y, 'fsLevelNumbers', start, font, container);
-            fsCount.anchor.set(0.5)
-            model.el('fsCount', fsCount);
+            let fsCount = game.add.bitmapText(x, y, 'fsLevelNumbers', start, font, container);
+                fsCount.anchor.set(0.5)
+            model.el('fs:count', fsCount);
         },
 
         BrainLevel: function({
+            game = model.el('game'),
             container = model.group('panel')
         }) {
-            const game = model.el('game');
             let x, y;
             if (model.mobile) {
                 x = 350;
@@ -282,18 +251,18 @@ export let view = (() => {
                 y = 100;
             }
             let brainPanel = game.add.spine(x, y, 'mozgiCount');
-            brainPanel.setAnimationByName(0, 'w1.5', true);
-            brainPanel.visible = false;
+                brainPanel.setAnimationByName(0, 'w1.5', true);
+                brainPanel.visible = false;
             container.add(brainPanel);
             model.el('brainPanel', brainPanel);
         },
 
         CountPlus3: function({
             game = model.el('game'),
-            x = 0, // model.el('gameMachine').width / 2,
-            y = game.height / 5 * -1, // model.el('gameMachine').height / 3,
-            deltaY = 15,
-            container = model.group('main')
+            container = model.group('main'),
+            x = 0,
+            y = game.height / 5 * -1,
+            deltaY = 15
         }) {
             if (model.state('CountPlus3')) return;
             model.state('CountPlus3', true);
@@ -301,8 +270,8 @@ export let view = (() => {
             if (model.desktop) {
                 deltaY = 30;
             }
-            const plus3 = game.add.sprite(x, y - deltaY, 'plus3', null, container);
-            plus3.anchor.set(0.5);
+            let plus3 = game.add.sprite(x, y - deltaY, 'plus3', null, container);
+                plus3.anchor.set(0.5);
             model.el('plus3', plus3);
 
             let tweenY;
@@ -326,9 +295,9 @@ export let view = (() => {
         },
 
         _showBang: function ({
+            game = model.el('game'),
             container = model.group('panel')
         }) {
-            const game = model.el('game');
             let x, y;
             if (model.mobile) {
                 x = 1180;
@@ -339,8 +308,8 @@ export let view = (() => {
             }
             let fsCountBG = game.add.spine(x, y, 'fsCount');
             container.add(fsCountBG);
+                fsCountBG.setAnimationByName(0, 'w-0', false);
             model.el('fsCountBG', fsCountBG);
-            fsCountBG.setAnimationByName(0, 'w-0', false);
 
             game.time.events.add(500, () => {
                 fsCountBG.destroy();

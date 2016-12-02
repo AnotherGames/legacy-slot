@@ -44,10 +44,6 @@ export class Main {
         mainView.create.groups({});
     }
 
-    preload() {
-
-    }
-
     create() {
         let game = model.el('game');
 
@@ -65,10 +61,8 @@ export class Main {
         if (model.mobile) {
             // Рисуем футер
             footerController.initMobile();
-
             // Рисуем кнопки управления
             buttonsController.drawButtons();
-
             // Автоматически позиционируем основной контейнер
             this.positionMainContainer();
 
@@ -102,11 +96,6 @@ export class Main {
         // Первая темнота
         let darkness = mainView.draw.darkness({});
             this.add.tween(darkness).to( { alpha: 0 }, 1500, 'Linear', true);
-
-        // Обновляем время
-        setInterval(() => {
-            footerController.updateTime();
-        }, 5000);
 
         // Проверяем сохранненые сессии
         this.checkForSavedFS();
@@ -152,6 +141,8 @@ export class Main {
     }
 
     update() {
+        // Обновляем время
+        footerController.updateTime({});
         // Проигрываем анимацию
         model.el('game').frameAnims.forEach((anim) => {
             anim();

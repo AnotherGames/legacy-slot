@@ -16,10 +16,10 @@ import { controller as winController } from 'modules/Win/Controller';
 export let controller = (() => {
 
     function init(amount) {
-        if (model.state('fsEnd') === false) return;
+        if (model.state('fs:end') === false) return;
 
-        model.state('fsEnd', false);
-        model.data('fsCount', amount);
+        model.state('fs:end', false);
+        model.data('fs:count', amount);
         model.updateBalance({startFS: true});
 
         next();
@@ -28,7 +28,8 @@ export let controller = (() => {
     function next() {
         let rollData = model.data('rollResponse');
 
-        if (!model.state('fsEnd') && rollData.NextMode !== 'root') {
+        if(!model.state('fs:end')
+        && rollData.NextMode !== 'root') {
             controller.count({start: true});
             rollController.startRoll();
         }
@@ -43,28 +44,27 @@ export let controller = (() => {
         end
     }) {
         if (start) {
-            let newFsCount = model.data('fsCount');
+            let newFsCount = model.data('fs:count');
             newFsCount--;
-            model.data('fsCount', newFsCount);
-            model.el('fsCount').text = newFsCount;
+            model.data('fs:count', newFsCount);
+            model.el('fs:count').text = newFsCount;
         }
         if (end) {
-            model.data('fsCount', model.data('rollResponse').FreeSpinsLeft);
-            model.el('fsCount').text = model.data('rollResponse').FreeSpinsLeft;
+            model.data('fs:count', model.data('rollResponse').FreeSpinsLeft);
+            model.el('fs:count').text = model.data('rollResponse').FreeSpinsLeft;
         }
     }
 
     function stop() {
-        console.log('I am stoping FS!');
+        let game = model.el('game');
 
-        const game = model.el('game');
         game.time.events.add(1500, () => {
             soundController.music.fsFon.stop();
             transitionView.fsFinish();
         });
 
         model.state('buttons:locked', false);
-        model.state('fsEnd', true);
+        model.state('fs:end', true);
         model.state('fs', false);
         model.updateBalance({endFS: true});
         model.el('brainPanel').destroy();
@@ -117,7 +117,6 @@ export let controller = (() => {
             model.state('brainPanel', true);
         }
         if (levelABS === 0) {
-            // console.warn('levelABS', levelABS);
             brainSound.play();
             brainPanel.visible = true;
             brainPanel.setAnimationByName(0,'w3', false);
@@ -129,14 +128,12 @@ export let controller = (() => {
             });
         }
         if (levelABS === 1){
-            // console.warn('levelABS', levelABS);
             brainSound.play();
             brainPanel.visible = true;
             brainPanel.setAnimationByName(0,'w1', false);
             brainPanel.addAnimationByName(0,'w1.5', true);
         }
         if (levelABS === 2){
-            // console.warn('levelABS', levelABS);
             brainSound.play();
             brainPanel.visible = true;
             brainPanel.setAnimationByName(0,'w2', false);
@@ -161,107 +158,107 @@ export class FS {
 
     init() {
         console.info('FS State!');
-        const game = model.el('game');
-        soundController.init({sound: model.state('sound'), volume: model.state('volume'), music: model.state('music')});
+        let game = model.el('game');
 
-        if (model.data('savedFS')) {
-            let saved = model.data('savedFS');
-            this.fsCount = saved.fsCount;
-            this.fsMulti = saved.fsMulti;
-            this.fsLevel = saved.fsLevel;
-            model.data('savedFS', null);
-            model.data('fsMulti', this.fsMulti);
-        } else {
-            this.fsCount = 15;
-            this.fsMulti = 2;
-            this.fsLevel = 0;
-            model.data('fsMulti', 2);
-        }
+        // Инициализируем звуки
+        soundController.init({
+            sound: model.state('sound'),
+            volume: model.state('volume'),
+            music: model.state('music')
+        });
+
+        // Проверим сохраненную сессию
+        this.checkSavedFS();
 
         // массив в который записываются анимации для проигрывания
         game.frameAnims = [];
         game.spriteAnims = [];
 
+        // При выходе из вкладки анимации будут останавливаться
         game.stage.disableVisibilityChange = false;
 
         model.state('fs', true);
 
-
+        // Создаем контейнеры
         fsView.create.groups({});
     }
 
     create() {
-        const game = model.el('game');
+        let game = model.el('game');
 
+        // Играем фоновую музыку
         this.playFonMusic();
 
+        // Отрисовуем основной контейнер
         fsView.draw.mainBG({});
         fsView.draw.mainContainer({});
         fsView.draw.machineContainer({});
 
+        // Инициализируем крутки
         rollController.init();
 
         if (model.mobile) {
+            // Рисуем футер
             footerController.initMobile();
+            // Отрисовуем баланс
             balanceController.initFSMobile();
 
-            game.mainContainer.x = model.data('mainXRight');
-            game.mainContainer.y = game.world.centerY + config[model.res].mainContainer.y;
+            // Автоматически позиционируем основной контейнер
+            this.positionMainContainer();
         } else {    // Desktop
             footerController.initDesktop();
 
-            game.mainContainer.x = game.width - game.mainContainer.width / 2;
-            game.mainContainer.y = game.world.centerY + config[model.res].mainContainer.y;
+            // Автоматически позиционируем основной контейнер
+            this.positionMainContainer();
 
-            settingsController.initDesktopSettings(game);
+            // Рисуем кнопки управления
             panelController.drawFsPanel();
+            // Отрисовуем баланс
             balanceController.initFSDesktop();
         }
 
+        // Добавляем маску
         fsView.draw.machineMask({});
 
+        // Добавляем Мозги на экран
         fsView.draw.Brain();
+        // Добавляем Зомби на экран
         fsView.draw.Zombie(this.fsMulti);
+        // Добавляем свечки
+        this.positionCandles();
 
-
-        let time = game.rnd.integerInRange(10, 70);
-        if (model.desktop) {
-            let candle1 = fsView.draw.fsCandle({});
-            candle1.scale.set(0.8);
-            game.time.events.add(time, () => {
-                let candle2 = fsView.draw.fsCandle({x: 62, y: 500});
-                candle2.scale.set(0.7);
-                let candle3 = fsView.draw.fsCandle({x: 372, y: 440});
-            });
-        } else {
-            let candle1 = fsView.draw.fsCandle({x: -12, y: 315});
-            candle1.scale.set(0.8);
-            game.time.events.add(time, () => {
-                let candle2 = fsView.draw.fsCandle({x: 5, y: 330});
-                candle2.scale.set(0.7);
-                let candle3 = fsView.draw.fsCandle({x: 164, y: 292});
-            });
-        }
-
+        // Рисуем множитель
         fsView.draw.Multi({
             start: this.fsMulti
         });
+        // Рисуем счетчик спинов
         fsView.draw.Count({
             start: this.fsCount
         });
+        // Рисуем счетчик мозгов
         fsView.draw.BrainLevel({});
+        // Если сохранненая сессия, то переключаем счетчик мозгов
         if (this.fsLevel > 0) {
             controller.searchBrains({
                 startLevel: this.fsLevel
             })
         }
 
-        // PreAnimation
+        // Первая темнота
         fsView.draw.darkness({});
 
+        // Запускаем Фри Спины
         game.time.events.add(1000, () => {
-            footerController.updateTime({});
             controller.init(this.fsCount);
+        });
+    }
+
+    update() {
+        // Обновляем время
+        footerController.updateTime({});
+        // Проигрываем анимацию
+        model.el('game').frameAnims.forEach((anim) => {
+            anim();
         });
     }
 
@@ -293,11 +290,48 @@ export class FS {
         this.game.frameAnims.push(anim);
     }
 
-    update() {
-        const game = model.el('game');
-        game.frameAnims.forEach((anim) => {
-            anim();
-        });
+    positionMainContainer() {
+        let game = model.el('game');
+        model.group('main').x = game.width - model.group('main').width / 2;
+        model.group('main').y = game.world.centerY + config[model.res].mainContainer.y;
+    }
+
+    checkSavedFS() {
+        if (model.data('savedFS')) {
+            let saved = model.data('savedFS');
+            this.fsCount = saved.fsCount;
+            this.fsMulti = saved.fsMulti;
+            this.fsLevel = saved.fsLevel;
+            model.data('savedFS', null);
+            model.data('fsMulti', this.fsMulti);
+        } else {
+            this.fsCount = 15;
+            this.fsMulti = 2;
+            this.fsLevel = 0;
+            model.data('fsMulti', 2);
+        }
+    }
+
+    positionCandles() {
+        let game = model.el('game');
+        let time = game.rnd.integerInRange(10, 70);
+        if (model.desktop) {
+            let candle1 = fsView.draw.fsCandle({});
+                candle1.scale.set(0.8);
+            game.time.events.add(time, () => {
+                let candle2 = fsView.draw.fsCandle({x: 62, y: 500});
+                    candle2.scale.set(0.7);
+                let candle3 = fsView.draw.fsCandle({x: 372, y: 440});
+            });
+        } else {
+            let candle1 = fsView.draw.fsCandle({x: -12, y: 315});
+                candle1.scale.set(0.8);
+            game.time.events.add(time, () => {
+                let candle2 = fsView.draw.fsCandle({x: 5, y: 330});
+                    candle2.scale.set(0.7);
+                let candle3 = fsView.draw.fsCandle({x: 164, y: 292});
+            });
+        }
     }
 
 };

@@ -192,7 +192,6 @@ export let view = (() => {
         if (model.mobile) {
             winCount.scale.setTo(0.8, 0.8);
         }
-        console.log(winCount);
         model.el('winCount', winCount);
 
         const skull = game.add.sprite(game.width / 2,
@@ -276,6 +275,7 @@ export let view = (() => {
             _addCoin(container)
         });
     }
+
     function _coinsTween() {
         const game = model.el('game');
         let coinsContainer = game.add.group();
@@ -308,7 +308,6 @@ export let view = (() => {
     }
 
     function _fsFinishInput() {
-        console.log('i am finishing fs');
         const transitionBG = model.el('transitionBG');
         transitionBG.inputEnabled = true;
         transitionBG.input.priorityID = 2;

@@ -243,7 +243,7 @@ export let controller = (() => {
         let time = (rollResponse.WinLines.length) ? 1000 : 0;
 
         game.time.events.add(time, () => {
-            if (model.state('fsEnd')) return;
+            if (model.state('fs:end')) return;
             fsController.next();
         });
 
