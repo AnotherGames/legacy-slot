@@ -32,7 +32,7 @@ export let view = (() => {
 
     function drawLogo() {
         const game = model.el('game');
-        let deltaY = 70;
+        let deltaY = 90;
         if (model.state('desktop')) {
             deltaY = 150;
         }
@@ -50,7 +50,7 @@ export let view = (() => {
         const game = model.el('game');
         let y = game.height * 0.8;
         if (model.state('mobile')) {
-            y = game.height * 0.7;
+            y = game.height * 0.6;
         }
 
         let initPlay = game.add.sprite(game.world.centerX, y, 'text', 'play.png');

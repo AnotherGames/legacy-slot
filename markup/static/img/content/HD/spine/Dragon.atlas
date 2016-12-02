@@ -4,192 +4,227 @@ size: 2048,1024
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-Dragon/Porez/1
+Dragon/Porez/02-n-01
   rotate: false
-  xy: 216, 271
+  xy: 2, 654
+  size: 485, 368
+  orig: 485, 368
+  offset: 0, 0
+  index: -1
+Dragon/Porez/04-n-01
+  rotate: false
+  xy: 2, 284
+  size: 485, 368
+  orig: 485, 368
+  offset: 0, 0
+  index: -1
+Dragon/Porez/06-n-01
+  rotate: false
+  xy: 489, 654
+  size: 485, 368
+  orig: 485, 368
+  offset: 0, 0
+  index: -1
+Dragon/Porez/08-n-01
+  rotate: false
+  xy: 489, 284
+  size: 485, 368
+  orig: 485, 368
+  offset: 0, 0
+  index: -1
+Dragon/Porez/1
+  rotate: true
+  xy: 1632, 412
   size: 284, 135
   orig: 284, 135
   offset: 0, 0
   index: -1
 Dragon/Porez/DRG_0000_Layer-3
   rotate: true
-  xy: 276, 47
+  xy: 1178, 49
   size: 107, 149
   orig: 107, 149
   offset: 0, 0
   index: -1
 Dragon/Porez/DRG_0001_Layer-2
   rotate: true
-  xy: 1781, 900
+  xy: 944, 154
   size: 117, 223
   orig: 117, 223
   offset: 0, 0
   index: -1
 Dragon/Porez/DRG_0002_Layer-1
-  rotate: false
-  xy: 216, 408
+  rotate: true
+  xy: 497, 76
   size: 206, 325
   orig: 206, 325
   offset: 0, 0
   index: -1
 Dragon/Porez/DR_0000s_0000_ус
   rotate: true
-  xy: 2, 76
+  xy: 1769, 333
   size: 162, 272
   orig: 162, 272
   offset: 0, 0
   index: -1
 Dragon/Porez/DR_0000s_0001_Gradient-Map-1
   rotate: false
-  xy: 1410, 891
+  xy: 976, 273
   size: 369, 126
   orig: 369, 126
   offset: 0, 0
   index: -1
 Dragon/Porez/DR_0000s_0002_ус2
   rotate: true
-  xy: 1410, 703
+  xy: 1347, 231
   size: 186, 279
   orig: 186, 279
   offset: 0, 0
   index: -1
 Dragon/Porez/DR_0000s_0003_Layer-30
-  rotate: false
-  xy: 783, 687
+  rotate: true
+  xy: 1402, 698
   size: 324, 330
   orig: 324, 330
   offset: 0, 0
   index: -1
 Dragon/Porez/DR_0000s_0004_Layer-38
   rotate: false
-  xy: 790, 607
+  xy: 944, 74
   size: 232, 78
   orig: 232, 78
   offset: 0, 0
   index: -1
 Dragon/Porez/DR_0000s_0005_Layer-34
   rotate: false
-  xy: 2, 735
+  xy: 976, 740
   size: 424, 282
   orig: 424, 282
   offset: 0, 0
   index: -1
 Dragon/Porez/DR_0000s_0006_Layer-32
   rotate: true
-  xy: 161, 21
+  xy: 656, 21
   size: 53, 111
   orig: 53, 111
   offset: 0, 0
   index: -1
 Dragon/Porez/DR_0000s_0007_Layer-37
   rotate: false
-  xy: 424, 455
+  xy: 1769, 497
   size: 244, 223
   orig: 244, 223
   offset: 0, 0
   index: -1
 Dragon/Porez/DR_0000s_0008_Layer-39
   rotate: false
-  xy: 428, 680
+  xy: 976, 401
   size: 353, 337
   orig: 353, 337
   offset: 0, 0
   index: -1
 Dragon/Porez/DR_LAPA2_0001_Layer-35
   rotate: false
-  xy: 276, 156
+  xy: 1169, 158
   size: 146, 113
   orig: 146, 113
   offset: 0, 0
   index: -1
 Dragon/Porez/DR_LAPA2_0002_Layer-36
-  rotate: false
-  xy: 2, 240
+  rotate: true
+  xy: 2, 70
   size: 212, 493
   orig: 212, 493
   offset: 0, 0
   index: -1
 Dragon/Porez/DR_LAPA2_0003_Layer-37
-  rotate: false
-  xy: 790, 489
+  rotate: true
+  xy: 1628, 224
   size: 186, 116
   orig: 186, 116
   offset: 0, 0
   index: -1
 Dragon/Porez/DR_LAPA2_0004_Layer-38
   rotate: false
-  xy: 1109, 740
+  xy: 1331, 419
   size: 299, 277
   orig: 299, 277
   offset: 0, 0
   index: -1
 Dragon/Porez/DR_LAPA2_0005_Layer-46
-  rotate: false
-  xy: 1024, 627
+  rotate: true
+  xy: 2, 2
   size: 66, 58
   orig: 66, 58
   offset: 0, 0
   index: -1
 Dragon/Porez/DR_LAPA2_0006_Layer-39
   rotate: false
-  xy: 1278, 660
+  xy: 1426, 151
   size: 125, 78
   orig: 125, 78
   offset: 0, 0
   index: -1
 Dragon/Porez/DR_LAPA2_0007_Layer-47
-  rotate: false
-  xy: 682, 356
+  rotate: true
+  xy: 1426, 54
   size: 95, 107
   orig: 95, 107
   offset: 0, 0
   index: -1
 Dragon/Porez/DR_LAPA2_0008_Layer-45
   rotate: true
-  xy: 2, 2
+  xy: 497, 2
   size: 72, 157
   orig: 72, 157
   offset: 0, 0
   index: -1
 Dragon/Porez/DR_LAPA2_0009_Layer-40
   rotate: true
-  xy: 670, 465
+  xy: 824, 69
   size: 213, 118
   orig: 213, 118
   offset: 0, 0
   index: -1
 Dragon/Porez/DR_LAPA2_0010_Layer-44
   rotate: false
-  xy: 502, 290
+  xy: 1329, 66
   size: 95, 163
   orig: 95, 163
   offset: 0, 0
   index: -1
 Dragon/Porez/DR_LAPA2_0011_Layer-41
-  rotate: true
-  xy: 1691, 694
+  rotate: false
+  xy: 1746, 245
   size: 195, 86
   orig: 195, 86
   offset: 0, 0
   index: -1
 Dragon/Porez/DR_LAPA2_0012_Layer-43
-  rotate: false
-  xy: 599, 322
+  rotate: true
+  xy: 1915, 162
   size: 81, 131
   orig: 81, 131
   offset: 0, 0
   index: -1
 Dragon/Porez/DR_LAPA2_0013_Layer-42
   rotate: true
-  xy: 424, 159
+  xy: 1535, 39
   size: 110, 78
   orig: 110, 78
   offset: 0, 0
   index: -1
 Dragon/Porez/DR_LAPA2_0014_Layer-33
   rotate: false
-  xy: 1109, 658
+  xy: 1746, 163
   size: 167, 80
   orig: 167, 80
+  offset: 0, 0
+  index: -1
+For_Effects/E_0000_Layer-8
+  rotate: false
+  xy: 1734, 722
+  size: 300, 300
+  orig: 300, 300
   offset: 0, 0
   index: -1

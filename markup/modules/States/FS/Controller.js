@@ -191,11 +191,10 @@ export class FS {
         console.log('I am stoping FS!');
 
         const game = model.el('game');
-        game.time.events.remove(model.data('dragon:randomTimer'));
         let dragonFS = model.el('dragonFS');
         dragonFS.FlyToMain();
 
-        game.time.events.add(2000, () => {
+        game.time.events.add(3000, () => {
             sound.music.fsFon.stop();
                 transitionView.fsFinish();
         });
