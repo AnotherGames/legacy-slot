@@ -49,6 +49,7 @@ export class Boot {
             model.desktop = true;
             model.res = 'fullHD';
         } else {
+            // Это хак для фулскрина на iOS
             if (game.device.iOS) {
                 $('html, body').addClass('ios');
             }

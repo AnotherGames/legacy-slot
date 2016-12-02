@@ -2,20 +2,6 @@ import { model } from 'modules/Model/Model';
 
 export let view = (() => {
 
-    // Эти методы должны быть в sound view
-    function playMusic() {
-        const game = model.el('game');
-        let initSound = game.add.audio('initFon', 1, true);
-        model.sound('initSound', initSound);
-        return initSound.play();
-    }
-
-    // Эти методы должны быть в sound view
-    function stopMusic() {
-        let initSound = model.sound('initSound');
-        return initSound.stop();
-    }
-
     function drawBG() {
         const game = model.el('game');
         let initBG = game.add.sprite(0, 0, 'initBG');
@@ -81,8 +67,6 @@ export let view = (() => {
     }
 
     return {
-        playMusic,
-        stopMusic,
         drawBG,
         drawLogo,
         drawPlay,

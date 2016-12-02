@@ -140,14 +140,5 @@ export class Preload {
         } else {
             game.state.start('Main');
         }
-        // TODO: Нужно переходить на главный экран после окончания затемнения,
-        // но таким образом мы зависаем на состоянии Preload
-        // view.lastDarkness().onComplete.add(() => {
-        //     if (model.state('initScreen')) {
-            //     game.state.start('Init');
-            // } else {
-            //     game.state.start('Main');
-            // }
-        // });
     }
 }

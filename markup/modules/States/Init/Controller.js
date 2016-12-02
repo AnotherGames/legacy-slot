@@ -13,15 +13,9 @@ export class Init {
     }
 
     create() {
-        let settingsWidth = $('#settings').width();
-        let multiplay = window.innerWidth / settingsWidth * 0.8;
-        $('#settings').css('transform', 'translate(-50%, -50%) scale(' + multiplay + ',' + multiplay + ')');
 
-        $('.history__button').click((event) => {
-            $('.history').addClass('closed');
-        });
+        this.checkSettingsWidth();
 
-        // view.playMusic();
         view.drawBG();
         view.drawLogo();
 
@@ -34,35 +28,7 @@ export class Init {
                 view.playYoyoTween({});
             });
 
-
-        const game = model.el('game');
-        let soundContainer = game.add.group();
-        soundContainer.position.set(game.width - 500, game.height - 100);
-        let style = { font: "bold 42px Arial", fill: "#f3eba0"};
-        let textSound = game.add.text(0, 0, "Sound:", style, soundContainer);
-        this.styleOff = { font: "bold 42px Arial", fill: "#474747"};
-        this.textOff = game.add.text(170, 0, "Off", style, soundContainer);
-        this.textOff.setStyle(this.styleOff);
-        this.styleOn = { font: "bold 42px Arial", fill: "#b8ff31"};
-        this.textOn = game.add.text(350, 0, "On", style, soundContainer);
-        this.textOn.setStyle(this.styleOn);
-
-        let graphics = game.add.graphics(0, 0);
-        graphics.beginFill(0x6da600, 1);
-        graphics.drawRoundedRect(0, 0, 70, 30, 150);
-
-        let sprite = game.add.sprite(290, 25, graphics.generateTexture(), null, soundContainer);
-        sprite.anchor.set(0.5);
-        sprite.inputEnabled = true;
-        sprite.events.onInputDown.add(this.switchSound, this);
-        graphics.destroy();
-
-        let graphics2 = game.add.graphics(0, 0);
-        graphics2.beginFill(0xffffff, 1);
-        graphics2.drawCircle(0, 0, 30);
-        this.sprite2 = game.add.sprite(310, 25, graphics2.generateTexture(), null, soundContainer);
-        this.sprite2.anchor.set(0.5);
-        graphics2.destroy();
+        this.drawSoundTrigger();
 
         view.firstDarkness();
     }
@@ -93,14 +59,10 @@ export class Init {
         document.body.addEventListener('touchstart', () => {
             model.el('game').scale.startFullScreen();
         });
-        // window.addEventListener("orientationchange", function() {
-        //     console.log('game.refresh');
-        // });
 
         view.stopYoyoTween();
         view.lastDarkness()
             .onComplete.add(() => {
-                // view.stopMusic();
                 game.state.start('Main');
             });
     }
@@ -111,5 +73,42 @@ export class Init {
         if (_e.requestFullScreen) _e.requestFullScreen();
         else if (_e.mozRequestFullScreen) _e.mozRequestFullScreen();
         else if (_e.webkitRequestFullScreen) _e.webkitRequestFullScreen();
+    }
+
+    checkSettingsWidth() {
+        let settingsWidth = $('#settings').width();
+        let multiplay = window.innerWidth / settingsWidth * 0.8;
+        $('#settings').css('transform', 'translate(-50%, -50%) scale(' + multiplay + ',' + multiplay + ')');
+    }
+
+    drawSoundTrigger() {
+        const game = model.el('game');
+        let soundContainer = game.add.group();
+        soundContainer.position.set(game.width - 500, game.height - 100);
+        let style = { font: "bold 42px Arial", fill: "#f3eba0"};
+        let textSound = game.add.text(0, 0, "Sound:", style, soundContainer);
+        this.styleOff = { font: "bold 42px Arial", fill: "#474747"};
+        this.textOff = game.add.text(170, 0, "Off", style, soundContainer);
+        this.textOff.setStyle(this.styleOff);
+        this.styleOn = { font: "bold 42px Arial", fill: "#b8ff31"};
+        this.textOn = game.add.text(350, 0, "On", style, soundContainer);
+        this.textOn.setStyle(this.styleOn);
+
+        let graphics = game.add.graphics(0, 0);
+        graphics.beginFill(0x6da600, 1);
+        graphics.drawRoundedRect(0, 0, 70, 30, 150);
+
+        let sprite = game.add.sprite(290, 25, graphics.generateTexture(), null, soundContainer);
+        sprite.anchor.set(0.5);
+        sprite.inputEnabled = true;
+        sprite.events.onInputDown.add(this.switchSound, this);
+        graphics.destroy();
+
+        let graphics2 = game.add.graphics(0, 0);
+        graphics2.beginFill(0xffffff, 1);
+        graphics2.drawCircle(0, 0, 30);
+        this.sprite2 = game.add.sprite(310, 25, graphics2.generateTexture(), null, soundContainer);
+        this.sprite2.anchor.set(0.5);
+        graphics2.destroy();
     }
 }
