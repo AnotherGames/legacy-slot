@@ -27,11 +27,11 @@ export class Main {
         let game = model.el('game');
 
         // Инициализируем звуки
-        soundController.init({
-            sound: model.state('sound'),
-            volume: model.state('volume'),
-            music: model.state('music')
-        });
+        // soundController.init({
+        //     sound: model.state('sound'),
+        //     volume: model.state('volume'),
+        //     music: model.state('music')
+        // });
 
         // массив в который записываются анимации для проигрывания
         game.frameAnims = [];
@@ -48,7 +48,7 @@ export class Main {
         let game = model.el('game');
 
         // Играем фоновую музыку
-        soundController.music.fon.play();
+        // soundController.music.fon.play();
 
         // Отрисовуем основной контейнер
         mainView.draw.mainBG({});
