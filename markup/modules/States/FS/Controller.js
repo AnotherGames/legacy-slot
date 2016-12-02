@@ -59,7 +59,8 @@ export let controller = (() => {
         let game = model.el('game');
 
         game.time.events.add(1500, () => {
-            soundController.music.fsFon.stop();
+            // soundController.music.fsFon.stop();
+            soundController.music.stopMusic('fsFon')
             transitionView.fsFinish();
         });
 
@@ -85,7 +86,8 @@ export let controller = (() => {
                 zombie.Up(() => {
                     brain.Up(() => {
                         zombie.Up();
-                        soundController.sounds.zombie1.play();
+                        // soundController.sounds.zombie1.play();
+                        soundController.sounds.playSound('zombie1');
                     });
                 });
                 model.data('fsMulti', multiValue);
@@ -106,7 +108,7 @@ export let controller = (() => {
     function searchBrains({
         startLevel
     }) {
-        let brainSound = Math.round(Math.random()) ? soundController.sounds.brain1 : soundController.sounds.brain2;
+        // let brainSound = Math.round(Math.random()) ? soundController.sounds.brain1 : soundController.sounds.brain2;
 
         let levelValue = startLevel || model.data('rollResponse').FsBonus.Level;
         let levelABS = levelValue % 3;
@@ -117,7 +119,7 @@ export let controller = (() => {
             model.state('brainPanel', true);
         }
         if (levelABS === 0) {
-            brainSound.play();
+            playBrainSound()
             brainPanel.visible = true;
             brainPanel.setAnimationByName(0,'w3', false);
             brainPanel.addAnimationByName(0,'w4', false);
@@ -128,18 +130,24 @@ export let controller = (() => {
             });
         }
         if (levelABS === 1){
-            brainSound.play();
+            playBrainSound()
             brainPanel.visible = true;
             brainPanel.setAnimationByName(0,'w1', false);
             brainPanel.addAnimationByName(0,'w1.5', true);
         }
         if (levelABS === 2){
-            brainSound.play();
+            playBrainSound()
             brainPanel.visible = true;
             brainPanel.setAnimationByName(0,'w2', false);
             brainPanel.addAnimationByName(0,'w2.5', true);
         }
 
+    }
+
+    function playBrainSound(){
+      Math.round(Math.random())
+      ? soundController.sounds.playSound('brain1')
+      : soundController.sounds.playSound('brain2')
     }
 
     return {
@@ -161,11 +169,11 @@ export class FS {
         let game = model.el('game');
 
         // Инициализируем звуки
-        soundController.init({
-            sound: model.state('sound'),
-            volume: model.state('volume'),
-            music: model.state('music')
-        });
+        // soundController.init({
+        //     sound: model.state('sound'),
+        //     volume: model.state('volume'),
+        //     music: model.state('music')
+        // });
 
         // Проверим сохраненную сессию
         this.checkSavedFS();
@@ -265,8 +273,10 @@ export class FS {
     playFonMusic() {
         const game = model.el('game');
 
-        soundController.music.fsFon.volume = 0;
-        soundController.music.fsFon.play();
+        // soundController.music.fsFon.volume = 0;
+        // soundController.music.fsFon.play();
+        soundController.music.playMusic('fsFon');
+        soundController.music.changeMusicVolume('fsFon', 0)
 
         let timeLength = config.fadeinMusicTime;
         let _clock = game.time.create(true);
@@ -280,7 +290,8 @@ export class FS {
             if (progress > 1) {
                 progress = 1;
             }
-            soundController.music.fsFon.volume = progress;
+            // soundController.music.fsFon.volume = progress;
+            soundController.music.changeMusicVolume('fsFon', progress)
 
             if (progress === 1) {
                 game.frameAnims.splice(game.frameAnims.indexOf(anim), 1);

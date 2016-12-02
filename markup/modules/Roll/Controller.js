@@ -60,6 +60,7 @@ export let controller = (() => {
         // Выключаем управление с клавиатуры
         game.input.keyboard.enabled = false;
 
+
         // Лочим кнопки на время крутки
         if(!model.state('fs')){
           if(model.mobile) {
@@ -100,7 +101,8 @@ export let controller = (() => {
                 model.state('roll:fast', false);
 
                 // Играем звук кручения барабанов
-                _playRollSound();
+                // _playRollSound();
+                soundController.sounds.playSound('baraban');
 
                 // Расчитываем конечный экран
                 let wheels = model.el('wheels');
@@ -164,7 +166,7 @@ export let controller = (() => {
 
         // Отправляем запрос Ready
         request.send('Ready').then((data) => {
-
+            soundController.sounds.stopSound('baraban');
             // Обновляем баланс в конце крутки
             if (model.state('fs')) {
                 model.updateBalance({endFSRoll: true});
@@ -202,16 +204,16 @@ export let controller = (() => {
         }
     }
 
-    function _playRollSound() {
-        let duration;
-        if (model.state('fastRoll')) {
-            duration = config.wheel.roll.fastTime / 1000;
-        } else {
-            duration = config.wheel.roll.time / 1000;
-        }
-        soundController.sounds.baraban.addMarker('roll', 0, duration, 1, false);
-        soundController.sounds.baraban.play('roll');
-    }
+    // function _playRollSound() {
+    //     let duration;
+    //     if (model.state('fastRoll')) {
+    //         duration = config.wheel.roll.fastTime / 1000;
+    //     } else {
+    //         duration = config.wheel.roll.time / 1000;
+    //     }
+    //     // soundController.sounds.baraban.addMarker('roll', 0, duration, 1, false);
+    //     // soundController.sounds.baraban.play('roll');
+    // }
 
     function _convertArray(arr) {
         let result = Array(5);
