@@ -88,7 +88,7 @@ export let controller = (() => {
         },
 
         auto: function() {
-            if (model.state('autoplay:start')
+            if(model.state('autoplay:start')
             || model.state('roll:progress')
             || model.state('buttons:locked')) return;
 
@@ -106,8 +106,8 @@ export let controller = (() => {
         },
 
         maxBet: function() {
-            if (model.state('buttons:locked')) return;
-            if (model.state('autoplay:end') == false) return;
+            if(model.state('buttons:locked')
+            || model.state('autoplay:end') == false) return;
 
             soundController.sounds.button.play();
             model.changeBet({toMax: true});
@@ -221,7 +221,9 @@ export let controller = (() => {
             // Если у нас автоплей или идет крутка, то не должна работать
             // При нажатии должна закрыть панель
             //365 конечный икс кнопки автоплея при открытии, 370 взят с запасом
-            if (model.state('autoplay:start') || model.state('roll:progress')) return;
+            if (model.state('autoplay:start')
+            || model.state('roll:progress')) return;
+
             let autoButtonDesk = model.el('autoButtonDesk');
             const amount = this.amount;
             if (autoButtonDesk.x > 370) return;
