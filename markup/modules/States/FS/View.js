@@ -196,9 +196,6 @@ export let view = (() => {
             mask.pivot.set(elSize.width * 2.5, elSize.height * 1.5);
             machineGroup.mask = mask;
 
-            if (model.state('side') === 'right')
-                mask.x = model.data('mainXRight') - model.data('mainXLeft');
-
             model.el('mask', mask);
         },
 
