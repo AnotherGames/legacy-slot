@@ -59,7 +59,7 @@ export let controller = (() => {
             view.hide.Settings({});
             view.hide.Overlay({});
 
-            const mainContainer = model.el('mainContainer');
+            const mainContainer = model.group('main');
             const mask = model.el('mask');
             let xSide;
             if (model.state('gameSideLeft')) {

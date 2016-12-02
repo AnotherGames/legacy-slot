@@ -8,40 +8,17 @@ export let view = (() => {
         groups: function ({
             game = model.el('game')
         }) {
-            game.bgContainer = game.add.group();
-            model.el('bgContainer', game.bgContainer);
-            model.group('bg', game.bgContainer);
-
-            game.mainContainer = game.add.group();
-            model.el('mainContainer', game.mainContainer);
-            model.group('main', game.mainContainer);
-
-            game.buttonsContainer = game.add.group();
-            model.group('buttons', game.buttonsContainer);
-
-            game.panelContainer = game.add.group();
-            model.group('panel', game.panelContainer);
-
-            game.balanceContainer = game.add.group();
-            model.el('balanceContainer', game.balanceContainer);
-
-            game.menuContainer = game.add.group();
-            model.el('menuContainer', game.menuContainer);
-
-            game.footerContainer = game.add.group();
-            model.group('footer', game.footerContainer);
-
-            game.balanceCashContainer = game.add.group();
-            model.group('balanceCash', game.balanceCashContainer);
-
-            game.balanceCoinContainer = game.add.group();
-            model.group('balanceCoin', game.balanceCoinContainer);
-
-            game.popupContainer = game.add.group();
-            model.group('popup', game.popupContainer);
-
-            game.transitionContainer = game.add.group();
-            model.group('transition', game.transitionContainer);
+            model.group('bg', game.add.group());
+            model.group('main', game.add.group());
+            model.group('buttons', game.add.group());
+            model.group('panel', game.add.group());
+            model.group('balanceContainer', game.add.group());
+            model.group('menuContainer', game.add.group());
+            model.group('footer', game.add.group());
+            model.group('balanceCash', game.add.group());
+            model.group('balanceCoin', game.add.group());
+            model.group('popup', game.add.group());
+            model.group('transition', game.add.group());
         }
     };
 
@@ -50,16 +27,12 @@ export let view = (() => {
             game = model.el('game')
         }) {
             let animBG = game.add.spine(
-                game.world.centerX - 3,        // X positon
-                game.world.centerY,        // Y position
-                'animBG'     // the key of the object in cache
+                game.world.centerX - 3,
+                game.world.centerY,
+                'animBG'
             );
-            animBG.setAnimationByName(
-                0,          // Track index
-                '1',     // Animation's name
-                true        // If the animation should loop or not
-            );
-            game.bgContainer.add(animBG);
+            animBG.setAnimationByName(0, '1', true);
+            model.group('bg').add(animBG);
             model.el('animMainBG', animBG);
 
             let mainBG = game.add.sprite(0, 0, 'mainBG', null, game.bgContainer);
@@ -76,47 +49,46 @@ export let view = (() => {
         },
 
         mainContainer: function ({
-            game = model.el('game')
+            game = model.el('game'),
+            container = model.group('main')
         }) {
-            let mainGroup = game.mainContainer;
-
-            let gameBG = game.add.sprite(0, 0, 'gameBG', null, mainGroup);
-            gameBG.anchor.set(0.5);
+            let gameBG = game.add.sprite(0, 0, 'gameBG', null, container);
+                gameBG.anchor.set(0.5);
             model.el('gameBG', gameBG);
 
-            let gameMachine = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachine', null, mainGroup);
-            gameMachine.anchor.set(0.5);
+            let gameMachine = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachine', null, container);
+                gameMachine.anchor.set(0.5);
             model.el('gameMachine', gameMachine);
         },
 
         machineContainer: function ({
             game = model.el('game'),
-            mainGroup = game.mainContainer
+            container = model.group('main')
         }) {
-            let machineGroup = mainGroup.machineContainer = game.add.group();
-            model.el('machineContainer', machineGroup);
-            mainGroup.addAt(machineGroup, 1);
+            let machineGroup = game.add.group();
+            container.addAt(machineGroup, 1);
+            model.group('machine', machineGroup);
 
-            game.winTopContainer = game.add.group();
-            model.group('winTop', game.winTopContainer);
-            mainGroup.addAt(game.winTopContainer, 3);
+            let winTop = game.add.group();
+            container.addAt(winTop, 3);
+            model.group('winTop', winTop);
 
             machineGroup.glistaLightContainer = game.add.group();
-            model.el('glistaLightContainer', machineGroup.glistaLightContainer);
+            model.group('glistaLight', machineGroup.glistaLightContainer);
             machineGroup.add(machineGroup.glistaLightContainer);
 
             machineGroup.elementsContainer = game.add.group();
-            model.el('elementsContainer', machineGroup.elementsContainer);
+            model.group('elements', machineGroup.elementsContainer);
             machineGroup.add(machineGroup.elementsContainer);
 
             machineGroup.glistaContainer = game.add.group();
-            model.el('glistaContainer', machineGroup.glistaContainer);
+            model.group('glista', machineGroup.glistaContainer);
             machineGroup.add(machineGroup.glistaContainer);
         },
 
         machineMask: function ({
             game = model.el('game'),
-            machineGroup = model.el('machineContainer')
+            machineGroup = model.group('machine')
         }) {
             const elSize = config[model.res].elements;
             let mask = game.add.graphics();
@@ -137,8 +109,9 @@ export let view = (() => {
             mask.pivot.set(elSize.width * 2.5, elSize.height * 1.5);
             machineGroup.mask = mask;
 
-            if (!model.state('gameSideLeft'))
+            if (!model.state('gameSideLeft')) {
                 mask.x = model.data('mainXRight') - model.data('mainXLeft');
+            }
 
             model.el('mask', mask);
         },
@@ -147,29 +120,39 @@ export let view = (() => {
             game = model.el('game')
         }) {
             let darkness = game.add.graphics();
-            darkness.beginFill(0x000000);
-            darkness.drawRect(0, 0, game.width, game.height);
+                darkness.beginFill(0x000000);
+                darkness.drawRect(0, 0, game.width, game.height);
             return darkness;
         },
 
         showPopup: function ({
-            message = 'popup',
+            game = model.el('game'),
             container = model.group('popup'),
+            message = 'popup',
             font = 'normal 54px Arial',
             color = '#e8b075'
         }) {
-            console.log('i am showing popup');
-            const game = model.el('game');
-            const overlay = game.add.graphics(0, 0).beginFill(0x000000, 0.8).drawRect(0, 0, game.width, game.height);
-            container.add(overlay);
-            const popup = game.add.sprite(game.width / 2, game.height / 2, 'popup', null, container);
-            popup.anchor.set(0.5);
-            model.el('popup', popup);
-            const popupText = game.add.text(game.width / 2, game.height / 2, message, {font: font, fill: color, align: 'center', wordWrap: true, wordWrapWidth: popup.width - 80}, container);
-            popupText.anchor.set(0.5);
+            let overlay = game.add.graphics(0, 0, container)
+                .beginFill(0x000000, 0.8)
+                .drawRect(0, 0, game.width, game.height);
 
-            overlay.inputEnabled = true;
-            overlay.input.priorityID = 2;
+            let popup = game.add.sprite(
+                game.width / 2,
+                game.height / 2,
+                'popup',
+                null,
+                container);
+                popup.anchor.set(0.5);
+            model.el('popup', popup);
+
+            let popupText = game.add.text(
+                popup.x,
+                popup.y,
+                message,
+                {font: font, fill: color, align: 'center', wordWrap: true, wordWrapWidth: popup.width - 80},
+                container);
+                popupText.anchor.set(0.5);
+
             popup.inputEnabled = true;
             popup.input.priorityID = 3;
             popup.events.onInputDown.add(() => {
@@ -178,6 +161,9 @@ export let view = (() => {
                     window.location.reload();
                 }
             });
+
+            overlay.inputEnabled = true;
+            overlay.input.priorityID = 2;
             overlay.events.onInputDown.add(() => {
                 container.removeAll();
                 if (message === 'Your session is closed. Please click to restart') {

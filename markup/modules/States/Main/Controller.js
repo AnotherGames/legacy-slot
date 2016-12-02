@@ -24,15 +24,23 @@ export class Main {
 
     init() {
         console.info('Main State!');
-        const game = model.el('game');
+        let game = model.el('game');
 
-        soundController.init({sound: model.state('sound'), volume: model.state('volume'), music: model.state('music')});
+        // Инициализируем звуки
+        soundController.init({
+            sound: model.state('sound'),
+            volume: model.state('volume'),
+            music: model.state('music')
+        });
+
         // массив в который записываются анимации для проигрывания
         game.frameAnims = [];
         game.spriteAnims = [];
 
+        // При выходе из вкладки анимации будут останавливаться
         game.stage.disableVisibilityChange = false;
 
+        // Создаем контейнеры
         mainView.create.groups({});
     }
 
@@ -41,71 +49,76 @@ export class Main {
     }
 
     create() {
-        const game = model.el('game');
+        let game = model.el('game');
+
+        // Играем фоновую музыку
         soundController.music.fon.play();
 
+        // Отрисовуем основной контейнер
         mainView.draw.mainBG({});
         mainView.draw.mainContainer({});
         mainView.draw.machineContainer({});
 
+        // Инициализируем крутки
         rollController.init();
 
         if (model.mobile) {
+            // Рисуем футер
             footerController.initMobile();
+
+            // Рисуем кнопки управления
             buttonsController.drawButtons();
 
-            let mainXLeft = model.data('buttonsDelta') * 2 + game.mainContainer.width / 2;
-            let mainXRight = game.width - game.mainContainer.width - model.data('buttonsDelta') * 2 + game.mainContainer.width / 2;
-            model.data('mainXLeft', mainXLeft);
-            model.data('mainXRight', mainXRight);
+            // Автоматически позиционируем основной контейнер
+            this.positionMainContainer();
 
-            if (model.state('gameSideLeft')) {
-                game.mainContainer.x = mainXLeft;
-            } else {
-                game.mainContainer.x = mainXRight;
-            }
-
-            game.mainContainer.y = game.world.centerY + config[model.res].mainContainer.y;
-
+            // Отрисовуем баланс
             balanceController.initMobile();
+            // И меню
             mobileSettingsController.init({});
             mobileAutoplayController.init({});
             mobileSetBetController.init({});
         } else {    // Desktop
+            // Рисуем футер
             footerController.initDesktop();
 
-            game.mainContainer.x = game.world.centerX;
-            game.mainContainer.y = game.world.centerY + config[model.res].mainContainer.y;
+            // Автоматически позиционируем основной контейнер
+            this.positionMainContainer();
 
+            // Инициализируем десктопные сеттинги
             settingsController.initDesktopSettings(game);
+            // Рисуем кнопки управления
             panelController.drawButtons();
+            // Отрисовуем баланс
             balanceController.initDesktop();
         }
 
+        // Добавляем маску
         mainView.draw.machineMask({});
 
+        // Инициализируем управление клавиатурой
         this.initKeys();
 
-        // PreAnimation
+        // Первая темнота
         let darkness = mainView.draw.darkness({});
-        this.add.tween(darkness).to( { alpha: 0 }, 1500, 'Linear', true);
+            this.add.tween(darkness).to( { alpha: 0 }, 1500, 'Linear', true);
 
+        // Обновляем время
         setInterval(() => {
             footerController.updateTime();
-        }, 10000);
+        }, 5000);
 
-        if (model.data('savedFS')) {
-            game.state.start('FS');
-        }
-        if (model.data('remainAutoCount') && !model.state('autoStopWhenFS')) {
-            autoplayController.start(model.data('remainAutoCount'));
-            model.data('remainAutoCount', null);
-        }
+        // Проверяем сохранненые сессии
+        this.checkForSavedFS();
+
+        // Проверяем остались ли автокрутки
+        this.checkForRemainAutoplay();
 
         let lastTime = new Date().getTime();
         let fps = 1;
         let lowCount = 0;
 
+        // Проверка на ФПС (убрать и переделать!!!)
         let checkFPS = function () {
             if ( !model.state('isFirstAutoChangeAnimBG') ) return;
             if ( !model.state('isAnimBG') ) return;
@@ -139,11 +152,46 @@ export class Main {
     }
 
     update() {
-        footerController.updateTime({});
-        const game = model.el('game');
-        game.frameAnims.forEach((anim) => {
+        // Проигрываем анимацию
+        model.el('game').frameAnims.forEach((anim) => {
             anim();
         });
+    }
+
+    positionMainContainer() {
+        let game = model.el('game');
+        if (model.mobile) {
+            let mainXLeft = model.data('buttonsDelta') * 2 + model.group('main').width / 2;
+            let mainXRight = game.width - model.group('main').width -
+            model.data('buttonsDelta') * 2 + model.group('main').width / 2;
+
+            model.data('mainXLeft', mainXLeft);
+            model.data('mainXRight', mainXRight);
+
+            if (model.state('gameSideLeft')) {
+                model.group('main').x = mainXLeft;
+            } else {
+                model.group('main').x = mainXRight;
+            }
+
+            model.group('main').y = game.world.centerY + config[model.res].mainContainer.y;
+        } else {
+            model.group('main').x = game.world.centerX;
+            model.group('main').y = game.world.centerY + config[model.res].mainContainer.y;
+        }
+    }
+
+    checkForSavedFS() {
+        if (model.data('savedFS')) {
+            game.state.start('FS');
+        }
+    }
+
+    checkForRemainAutoplay() {
+        if (model.data('remainAutoCount') && !model.state('autoStopWhenFS')) {
+            autoplayController.start(model.data('remainAutoCount'));
+            model.data('remainAutoCount', null);
+        }
     }
 
     initKeys() {

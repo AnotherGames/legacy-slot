@@ -95,7 +95,7 @@ export let view = (() => {
             mainGroup = game.mainContainer
         }) {
             let machineGroup = mainGroup.machineContainer = game.add.group();
-            model.el('machineContainer', machineGroup);
+            model.group('machine', machineGroup);
             mainGroup.addAt(machineGroup, 1);
 
             game.winTopContainer = game.add.group();
@@ -105,21 +105,21 @@ export let view = (() => {
             // machineGroup.position.set(mainGroup.width / 2 + config[model.res].machine.x, mainGroup.height / 2);
 
             machineGroup.glistaLightContainer = game.add.group();
-            model.el('glistaLightContainer', machineGroup.glistaLightContainer);
+            model.group('glistaLight', machineGroup.glistaLightContainer);
             machineGroup.add(machineGroup.glistaLightContainer);
 
             machineGroup.elementsContainer = game.add.group();
-            model.el('elementsContainer', machineGroup.elementsContainer);
+            model.group('elements', machineGroup.elementsContainer);
             machineGroup.add(machineGroup.elementsContainer);
 
             machineGroup.glistaContainer = game.add.group();
-            model.el('glistaContainer', machineGroup.glistaContainer);
+            model.group('glista', machineGroup.glistaContainer);
             machineGroup.add(machineGroup.glistaContainer);
         },
 
         machineMask: function ({
             game = model.el('game'),
-            machineGroup = model.el('machineContainer')
+            machineGroup = model.group('machine')
         }) {
             const elSize = config[model.res].elements;
 

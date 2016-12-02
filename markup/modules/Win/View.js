@@ -119,8 +119,8 @@ export let view = (() => {
         WinGlista: function ({
             number,
             game = model.el('game'),
-            glistaLightContainer = model.el('glistaLightContainer'),
-            glistaContainer = model.el('glistaContainer'),
+            glistaLightContainer = model.group('glistaLight'),
+            glistaContainer = model.group('glista'),
             glistaFiredCounter = +model.data('glistaFiredCounter'),
             glistaDoneCounter = +model.data('glistaDoneCounter'),
             time = 1000

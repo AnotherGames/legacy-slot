@@ -16,7 +16,7 @@ export let controller = (() => {
 
     function init() {
         let game = model.el('game');
-        let elementsContainer = model.el('elementsContainer');
+        let elementsContainer = model.group('elements');
 
         let wheels = [];
         let elSize = config[model.res].elements;
