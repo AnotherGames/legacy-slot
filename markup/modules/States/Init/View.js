@@ -27,17 +27,20 @@ export let view = (() => {
         const game = model.el('game');
         let BGLogo = game.add.sprite(50, game.height * 0.85, 'logos');
         model.el('BGLogo', BGLogo);
-        return BGLogo; 
+        return BGLogo;
     }
 
     function drawLogo() {
         const game = model.el('game');
-        let deltaY = 50;
+        let deltaY = 70;
         if (model.state('desktop')) {
             deltaY = 150;
         }
         let initLogo = game.add.spine(game.world.centerX, game.world.centerY - deltaY, 'logo');
         initLogo.setAnimationByName(0, '1', true);
+        if (model.state('mobile')) {
+            initLogo.scale.set(0.9);
+        }
 
         model.el('initLogo', initLogo);
         return initLogo;
@@ -45,7 +48,12 @@ export let view = (() => {
 
     function drawPlay() {
         const game = model.el('game');
-        let initPlay = game.add.sprite(game.world.centerX, game.height * 0.8, 'text', 'play.png');
+        let y = game.height * 0.8;
+        if (model.state('mobile')) {
+            y = game.height * 0.7;
+        }
+
+        let initPlay = game.add.sprite(game.world.centerX, y, 'text', 'play.png');
             initPlay.anchor.set(0.5);
             initPlay.scale.setTo(0.1, 0.1);
         let initPlayTween = game.add.tween(initPlay.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true);

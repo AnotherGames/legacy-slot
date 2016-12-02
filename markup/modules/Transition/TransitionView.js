@@ -43,7 +43,7 @@ export let view = (() => {
         model.el('freeSpinsBG', freeSpinsBG);
 
         let freeSpinsCount = model.data('rollResponse').FreeSpinsLeft;
-        const freeSpinsLevel = game.add.bitmapText(game.width / 2 - 25, -400, 'numbersFont', freeSpinsCount, 120, transitionContainer);
+        const freeSpinsLevel = game.add.bitmapText(game.width / 2 - 15, -400, 'numbersFont', freeSpinsCount, 120, transitionContainer);
         freeSpinsLevel.align = 'center';
         freeSpinsLevel.anchor.set(0.5);
         model.el('freeSpinsLevel', freeSpinsLevel);
@@ -58,7 +58,7 @@ export let view = (() => {
         multiBG.scale.setTo(0.1, 0.1);
         model.el('multiBG', multiBG);
 
-        let delta = 20;
+        let delta = 25;
         if (model.state('desktop')) {
             delta = 50;
         }
@@ -80,7 +80,6 @@ export let view = (() => {
         continueText.scale.setTo(0.1, 0.1);
         model.el('continueText', continueText);
 
-
     }
 
     function _fsStartTween() {
@@ -93,7 +92,7 @@ export let view = (() => {
         const continueText = model.el('continueText');
         let delta = 160;
         if (model.state('mobile')) {
-            delta = 220;
+            delta = 215;
         }
 
 
@@ -224,7 +223,7 @@ export let view = (() => {
         winCount.align = 'center';
         winCount.anchor.set(0.5);
         if (model.state('mobile')) {
-            winCount.scale.setTo(0.8, 0.8);
+            winCount.scale.set(0.8);
         }
         console.log(winCount);
         model.el('winCount', winCount);

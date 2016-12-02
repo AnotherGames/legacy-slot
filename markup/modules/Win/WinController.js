@@ -28,7 +28,6 @@ export let controller = (() => {
         && model.state('FSMode')
         && winLines[0].Count == 0
         && winLines[0].Line == -1) {
-            // elementToEat();
             let dragonFS = model.el('dragonFS');
             dragonFS.Eat();
         }
@@ -139,37 +138,6 @@ export let controller = (() => {
         });
 
     }
-
-    // function elementToEat() {
-    //     let game = model.el('game');
-    //     let wh = app.model.el('wheels');
-    //     let number = game.rnd.integerInRange(0, 2);
-    //     let els = wh[game.rnd.integerInRange(0, 1)].elements;
-    //     let el = els[number];
-    //
-    //     let x;
-    //     if (model.state('desktop')) {
-    //         if (number == 0){
-    //             x = 1000;
-    //         } else if (number == 1) {
-    //             x = 800;
-    //         } else {
-    //             x = 600;
-    //         }
-    //     } else {
-    //         x = 600;
-    //     }
-    //
-    //     console.warn(x);
-    //     game.add.tween(el.group).to({x: x, alpha: 0}, 700, 'Linear', true);
-    //     game.add.tween(el.group.scale).to({x: 0.3, y: 0.3}, 500, 'Linear', true, 200)
-    //         .onComplete.add(() => {
-    //             el.group.x = 0;
-    //             el.group.alpha = 1;
-    //             el.group.scale.set(1.0);
-    //         });
-    //     console.warn(el.group.x);
-    // }
 
     events.on('roll:end', showWin);
     events.on('roll:start', cleanWin.bind(null, true));
