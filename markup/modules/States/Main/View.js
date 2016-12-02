@@ -93,20 +93,30 @@ export let view = (() => {
             gameMachine.anchor.set(0.5);
             model.el('gameMachine', gameMachine);
 
-            let deltaY = 70;
+        },
+
+        logo: function({
+            game = model.el('game'),
+            container = game.dragonContainer,
+            deltaY = -460
+        }) {
+
+            container.x = game.world.centerX;
+            container.y = game.world.centerY;
+
             if (model.state('mobile')) {
-                deltaY = 10;
+                if (model.state('side') === 'left') {
+                    container.x = model.data('mainXLeft');
+                } else {
+                    container.x = model.data('mainXRight');
+                }
+                console.log(container.x);
             }
-
-            let dragonContainer = game.dragonContainer;
-            dragonContainer.x = game.world.centerX;
-            dragonContainer.y = game.world.centerY;
-
             this.addDragon({});
-
-            let gameLogo = game.add.sprite(0, -550, 'gameLogo', null, dragonContainer);
-            gameLogo.anchor.set(0.5, 0);
+            let gameLogo = game.add.sprite(0, deltaY, 'gameLogo', null, container);
+            gameLogo.anchor.set(0.5);
             gameLogo.scale.set(0.9);
+
             model.el('gameLogo', gameLogo);
         },
 
@@ -116,13 +126,16 @@ export let view = (() => {
             let container = game.dragonContainer;
             let x, y;
             if (model.state('mobile')) {
-                x = -30;
-                y = 20;
+                x = -20;
+                y = 95;
             } else {
                 x = -30;
-                y = 20;
+                y = 25;
             }
             let dragon = new Dragon({position: {x, y}, container});
+            if (model.state('mobile')) {
+                dragon.char.scale.set(0.8);
+            }
             model.el('dragon', dragon);
         },
 

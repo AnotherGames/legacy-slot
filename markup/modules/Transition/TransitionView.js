@@ -32,6 +32,9 @@ export let view = (() => {
         sound.music.fon.stop();
         sound.music.startPerehod.play();
 
+        let gameLogo = model.el('gameLogo');
+        gameLogo.visible = false;
+
         const transitionBG = game.add.graphics(0, 0, transitionContainer).beginFill(0x000000, 0.9).drawRect(0, 0, game.width, game.height);
         model.el('transitionBG', transitionBG);
 
@@ -198,7 +201,7 @@ export let view = (() => {
         const game = model.el('game');
         const transitionContainer = model.group('transition');
         sound.music.fsFon.stop();
-        game.time.events.remove(model.data('zombieRandom'));
+
         sound.music.finishPerehod.play();
         if (model.data('fsMulti') === 7) {
             sound.sounds.zombie2.play();

@@ -52,7 +52,8 @@ export let controller = (() => {
             view.hide.Settings({});
             view.hide.Overlay({});
 
-            const mainContainer = model.el('mainContainer');
+            const mainContainer = model.group('main')
+            const dragonContainer = model.group('dragon');
             const mask = model.el('mask');
             let xSide;
             if (model.state('side') === 'left') {
@@ -61,6 +62,7 @@ export let controller = (() => {
 
                 xSide = model.data('buttonsXLeft');
                 game.add.tween(mainContainer).to( { x: model.data('mainXRight') }, time, 'Quart.easeOut', true);
+                game.add.tween(dragonContainer).to( { x: model.data('mainXRight') }, time, 'Quart.easeOut', true);
                 game.add.tween(mask).to( { x: model.data('mainXRight') - model.data('mainXLeft') }, time, 'Quart.easeOut', true);
             } else {
                 model.state('side', 'left');
@@ -68,6 +70,7 @@ export let controller = (() => {
 
                 xSide = model.data('buttonsXRight');
                 game.add.tween(mainContainer).to( { x: model.data('mainXLeft') }, time, 'Quart.easeOut', true);
+                game.add.tween(dragonContainer).to( { x: model.data('mainXLeft') }, time, 'Quart.easeOut', true);
                 game.add.tween(mask).to( { x: 0 }, time, 'Quart.easeOut', true);
             }
             // Change Side Buttons

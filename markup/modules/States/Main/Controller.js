@@ -48,8 +48,6 @@ export class Main {
         mainView.draw.mainContainer({});
         mainView.draw.machineContainer({});
         mainView.draw.lineNumbers({});
-
-
         rollController.init();
 
         if (model.state('mobile')) {
@@ -69,12 +67,14 @@ export class Main {
 
             game.mainContainer.y = game.world.centerY + config[model.state('res')].mainContainer.y;
 
+            mainView.draw.logo({deltaY: -290});
             balanceController.initMobile();
             mobileSettingsController.init({});
             mobileAutoplayController.init({});
             mobileSetBetController.init({});
         } else {    // Desktop
             footerController.initDesktop();
+            mainView.draw.logo({});
 
             game.mainContainer.x = game.world.centerX;
             game.mainContainer.y = game.world.centerY + config[model.state('res')].mainContainer.y;

@@ -72,6 +72,7 @@ export class FS {
         fsView.draw.mainBG({});
         fsView.draw.mainContainer({});
         fsView.draw.machineContainer({});
+        fsView.draw.addDragon({});
         fsView.draw.lineNumbers({});
         game.mainContainer.x = game.world.centerX;
         game.mainContainer.y = game.world.centerY + config[model.state('res')].mainContainer.y;
@@ -190,7 +191,11 @@ export class FS {
         console.log('I am stoping FS!');
 
         const game = model.el('game');
-        game.time.events.add(1500, () => {
+        game.time.events.remove(model.data('dragon:randomTimer'));
+        let dragonFS = model.el('dragonFS');
+        dragonFS.FlyToMain();
+
+        game.time.events.add(2000, () => {
             sound.music.fsFon.stop();
                 transitionView.fsFinish();
         });

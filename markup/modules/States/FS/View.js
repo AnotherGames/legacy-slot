@@ -1,5 +1,6 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
+import { Dragon } from 'modules/Class/Dragon';
 // import { Zombie } from 'modules/Class/Zombie';
 // import { Brain } from 'modules/Class/Brain';
 import { view as transitionView } from 'modules/Transition/TransitionView';
@@ -30,6 +31,9 @@ export let view = (() => {
             game.menuContainer = game.add.group();
             model.el('menuContainer', game.menuContainer);
 
+            game.dragonContainer = game.add.group();
+            model.group('dragon', game.dragonContainer);
+
             game.footerContainer = game.add.group();
             model.group('footer', game.footerContainer);
 
@@ -47,6 +51,7 @@ export let view = (() => {
 
             game.transitionContainer = game.add.group();
             model.group('transition', game.transitionContainer);
+
         }
     };
 
@@ -94,6 +99,26 @@ export let view = (() => {
             let gameLogo = game.add.sprite(0, -game.height / 2 + deltaY, 'gameLogo', null, mainGroup);
             gameLogo.anchor.set(0.5, 0);
             model.el('gameLogo', gameLogo);
+        },
+
+        addDragon: function ({
+            game = model.el('game')
+        }) {
+            let container = game.dragonContainer;
+            let x, y;
+            if (model.state('mobile')) {
+                x = 610;
+                y = 280;
+            } else {
+                x = 850;
+                y = 450;
+            }
+            let dragonFS = new Dragon({position: {x, y}, container});
+            dragonFS.IdleFS();
+            if (model.state('mobile')) {
+                dragonFS.char.scale.set(0.7);
+            }
+            model.el('dragonFS', dragonFS);
         },
 
         lineNumbers: function ({

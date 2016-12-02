@@ -179,7 +179,7 @@ export let controller = (() => {
     function _runNextFSIfExist() {
         const game = model.el('game');
         let rollResponse = model.data('rollResponse');
-        let time = (rollResponse.WinLines.length) ? 1000 : 0;
+        let time = (rollResponse.WinLines.length) ? 2000 : 0;
 
         game.time.events.add(time, () => {
             if (model.state('fsEnd')) return;
