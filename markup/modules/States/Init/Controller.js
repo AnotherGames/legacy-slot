@@ -35,20 +35,16 @@ export class Init {
     }
 
     switchSound() {
-        soundController.sounds.switchVolume
+
         let game = model.el('game');
         if (model.state('globalSound')) {
-            soundController.sounds.switchVolume()
-            // game.sound.volume = 0;
+            soundController.volume.switchVolume()
             this.sprite2.x = 270;
-            // model.state('volume', 0);
             this.textOff.setStyle(this.styleOn);
             this.textOn.setStyle(this.styleOff);
         } else {
-            soundController.sounds.switchVolume()
-            // game.sound.volume = 1;
+            soundController.volume.switchVolume()
             this.sprite2.x = 310;
-            // model.state('volume', 1);
             this.textOff.setStyle(this.styleOff);
             this.textOn.setStyle(this.styleOn);
         }

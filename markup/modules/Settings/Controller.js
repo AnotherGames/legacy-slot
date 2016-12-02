@@ -13,7 +13,8 @@ export let controller = (function () {
             } else {
                 soundButton.frameName = 'soundOn.png';
             }
-            soundController.sounds.changeVolume(this.value);
+            soundController.volume.changeVolume(this.value);
+            soundController.volume.setVolume(this.value);            
         });
         $('#checkSound').on('change', function () {
             model.state('sound', this.checked);

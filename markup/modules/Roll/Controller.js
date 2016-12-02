@@ -101,7 +101,6 @@ export let controller = (() => {
                 model.state('roll:fast', false);
 
                 // Играем звук кручения барабанов
-                // _playRollSound();
                 soundController.sounds.playSound('baraban');
 
                 // Расчитываем конечный экран
@@ -203,17 +202,6 @@ export let controller = (() => {
             game.input.keyboard.enabled = true;
         }
     }
-
-    // function _playRollSound() {
-    //     let duration;
-    //     if (model.state('fastRoll')) {
-    //         duration = config.wheel.roll.fastTime / 1000;
-    //     } else {
-    //         duration = config.wheel.roll.time / 1000;
-    //     }
-    //     // soundController.sounds.baraban.addMarker('roll', 0, duration, 1, false);
-    //     // soundController.sounds.baraban.play('roll');
-    // }
 
     function _convertArray(arr) {
         let result = Array(5);

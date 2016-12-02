@@ -134,7 +134,7 @@ export let controller = (() => {
         },
 
         soundButton: function() {
-            if (soundController.isSound || soundController.isMusic) {
+            if (model.state('globalSound')) {
                 handle.turnOffSound();
             } else {
                 handle.turnOnSound();
@@ -146,7 +146,8 @@ export let controller = (() => {
             let settingsSoundButton = model.el('settingsSoundButton');
             let settingsMusicButton = model.el('settingsMusicButton');
 
-            soundController.isSound = soundController.isMusic = false;
+            soundController.volume.switchVolume();
+
             soundButton.frameName = 'soundOut.png';
             settingsSoundButton.frameName = 'soundOff.png';
             settingsMusicButton.frameName = 'musicOff.png';
@@ -157,7 +158,8 @@ export let controller = (() => {
             let settingsSoundButton = model.el('settingsSoundButton');
             let settingsMusicButton = model.el('settingsMusicButton');
 
-            soundController.isSound = soundController.isMusic = true;
+            soundController.volume.switchVolume();
+
             soundButton.frameName = 'sound.png';
             settingsSoundButton.frameName = 'soundOn.png';
             settingsMusicButton.frameName = 'musicOn.png';

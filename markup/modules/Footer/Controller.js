@@ -51,7 +51,7 @@ export let controller = (() => {
             soundController.sounds.playSound('buttonClick');
 
             // Обновляем состояния чекбоксов в настройках
-            $('#volume').prop('value', soundController.volume * 100);
+            $('#volume').prop('value', game.sound.volume * 100);
             $('#checkSound').prop('checked', model.state('sound'));
             $('#checkMusic').prop('checked', model.state('music'));
             $('#fastSpin').prop('checked', model.state('fastRoll'));
@@ -78,23 +78,14 @@ export let controller = (() => {
         Sound: function () {
             let soundButton = model.el('soundButton');
             if (model.state('globalSound')){
+              model.state('globalSound', false)
                 soundButton.frameName = 'soundOff.png';
-                soundController.sounds.switchVolume()
+                soundController.volume.switchVolume()
             } else {
                 model.state('globalSound', true)
                 soundButton.frameName = 'sound.png';
-                soundController.sounds.switchVolume();
+                soundController.volume.switchVolume();
             }
-            // if (soundController.volume > 0) {
-            //     // Если были звуки - мы их вырубаем
-            //     soundButton.frameName = 'soundOff.png';
-            //     soundController.lastVolume = soundController.volume * 100;
-            //     soundController.volume = 0;
-            // } else {
-            //     // Если не было - включаем на последнюю сохраненную громкость
-            //     soundButton.frameName = 'soundOn.png';
-            //     soundController.volume = soundController.lastVolume;
-            // }
         },
 
         Fast: function () {

@@ -94,34 +94,28 @@ export let controller = (() => {
             let menuButtonSound = model.el('soundButton');
             let soundButton = model.el('settingsSoundButton');
 
-            if (soundController.isSound) {
+            if (model.state('sound')) {
                 soundButton.frameName = 'soundOff.png';
-                soundController.isSound = false;
-                if (!soundController.isMusic) {
-                    menuButtonSound.frameName = 'soundOut.png';
-                }
+                model.state('sound', false)
             } else {
                 soundButton.frameName = 'soundOn.png';
-                soundController.isSound = true;
-                menuButtonSound.frameName = 'sound.png';
+                model.state('sound', true)
                 soundController.sounds.playSound('buttonClick');
             }
+
         },
         changeMusic: function () {
-            let menuButtonSound = model.el('soundButton');
             let musicButton = model.el('settingsMusicButton');
 
             soundController.sounds.playSound('buttonClick');
-            if (soundController.isMusic) {
+            if (model.state('music')) {
                 musicButton.frameName = 'musicOff.png';
-                soundController.isMusic = false;
-                if (!soundController.isMusic) {
-                    menuButtonSound.frameName = 'soundOut.png';
-                }
+                model.state('music', false);
+                soundController.music.stopMusic('fon')
             } else {
                 musicButton.frameName = 'musicOn.png';
-                soundController.isMusic = true;
-                menuButtonSound.frameName = 'sound.png';
+                model.state('music', true);
+                soundController.music.playMusic('fon')
             }
         },
         changeFastSpin: function () {

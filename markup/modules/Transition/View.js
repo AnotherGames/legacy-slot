@@ -221,8 +221,7 @@ export let view = (() => {
         const game = model.el('game');
 
         soundController.music.playMusic('fsFon');
-        // soundController.music.changeMusicVolume('fsFon', 0);
-        model.el('fsFon').volume = 0;
+        soundController.music.changeMusicVolume('fsFon', 0);
 
         let timeLength = config.countMeterTime;
         let _clock = game.time.create(true);
