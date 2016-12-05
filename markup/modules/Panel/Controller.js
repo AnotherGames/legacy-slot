@@ -270,6 +270,11 @@ export let controller = (() => {
         let stopButtonDesk = model.el('stopButtonDesk');
             stopButtonDesk.frameName = 'stopOn.png';
             stopButtonDesk.freezeFrames = true
+
+            if(model.state('ready')){
+              view.unlockButtons();
+            }
+
             view.draw.removeCount();
         },
 
