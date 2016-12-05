@@ -3,8 +3,8 @@ import { config } from 'modules/Util/Config';
 import { Glista } from 'modules/Class/Glista';
 
 import { controller as soundController } from 'modules/Sound/Controller';
-import { controller as fsController } from 'modules/States/FS/Controller';
 import { controller as winController } from 'modules/Win/Controller';
+import { controller as fsController } from 'modules/States/FS/Controller';
 
 export let view = (() => {
 
@@ -18,10 +18,10 @@ export let view = (() => {
         }) {
             if (winTotalData === 0) return;
             let winTotal = game.add.sprite(0, 0, 'winTotal', null, container);
-            winTotal.anchor.set(0.5);
+                winTotal.anchor.set(0.5);
 
             let winTotalText = game.add.text(0, 5, winTotalData, style, container);
-            winTotalText.anchor.set(0.5);
+                winTotalText.anchor.set(0.5);
         },
 
         WinSplash: function ({
@@ -30,10 +30,9 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('winTop')
         }) {
+            let gameMachine = model.el('gameMachine');
             let winSplash = game.add.sprite(0, 0, 'win', null, container);
                 winSplash.anchor.set(0.5);
-
-                let gameMachine = model.el('gameMachine');
                 winSplash.x = config[model.res].win[number][ind].x - gameMachine.width / 2;
                 winSplash.y = config[model.res].win[number][ind].y - gameMachine.height / 2 - 25;
                 winSplash.animations.add('win', Phaser.Animation.generateFrameNames('Splash-Splash', 1, 14, '.png', 1), 15, false);
@@ -58,6 +57,7 @@ export let view = (() => {
             game = model.el('game')
         }) {
 
+            // Затемняем элементы
             if (alpha) {
                 wheels.forEach((wheel) => {
                     wheel.elements.forEach((element) => {
@@ -66,6 +66,7 @@ export let view = (() => {
                 });
             }
 
+            // Если есть линии
             if (number > 0) {
                 let line = model.data('lines')[number - 1];
 
@@ -77,42 +78,35 @@ export let view = (() => {
                         element.show();
                 }
 
+            // Если есть скаттеры либо мозги
             } else {
                 let lvlCounter = 0;
                 wheels.forEach((wheelObj) => {
-
                     wheelObj.elements.forEach((element) => {
-
-
-                        let elementName = parseInt(element.sprites[element.active - 1]
-                                            .animations.currentAnim.name);
-
+                        let elementName = parseInt(element.sprites[element.active - 1].animations.currentAnim.name);
+                        // Показываем выигрышные скаттеры
                         if (elementName == '10') {
                             element.win();
                             element.show();
-
-                            let game = model.el('game');
+                            // Очищаем поле вручную так как нет глисты которая чистит автоматом
                             game.time.events.add(1000, () => {
                                 winController.cleanWin();
                             });
 
                         }
+                        // Если выпали мозги на фри-спинах
                         if (elementName == '11') {
                             element.win();
+                            // Отыгрываем эффекты при выпадении мозгов
                             if(lvlCounter == 0){
                                 fsController.brain();
                                 lvlCounter++;
                             }
-                            game.add.tween(element.sprites[element.active - 1].scale)
-                                        .to({x: 1.7, y: 1.7}, 700, 'Linear', true)
+                            // Увеличиваем мозги
+                            game.add.tween(element.group.scale)
+                                .to({x: 1.7, y: 1.7}, 700, 'Linear', true)
                                 .onComplete.add(() => {
-                                    if (model.mobile) {
-                                        element.sprites[element.active - 1].scale.x
-                                            = element.sprites[element.active - 1].scale.y = 1.5;
-                                    } else {
-                                        element.sprites[element.active - 1].scale.x
-                                            = element.sprites[element.active - 1].scale.y = 1;
-                                    }
+                                    game.add.tween(element.group.scale).to({x: 1, y: 1}, 200, 'Linear', true);
                                 });
                         }
                     });
@@ -130,28 +124,30 @@ export let view = (() => {
             time = 1000
         }) {
             if (number < 0) return;
-
+            // Для каждой линии отрисовуем глисту
             let glista = new Glista({
                 game,
                 lightParent: glistaLightContainer,
                 parent: glistaContainer,
                 elSize: config[model.res].elements
             });
-
+            // Обновляем счетчик запущенных глист
             glistaFiredCounter++;
             model.data('glistaFiredCounter', glistaFiredCounter);
-
+            // Создаем массив координат для пробега глистой
             let glistaMas = [];
             let line = model.data('lines')[number - 1];
-            line.forEach((coord) => {
-                glistaMas.push(coord.Y);
-            });
+                line.forEach((coord) => {
+                    glistaMas.push(coord.Y);
+                });
 
+            // Запускаем глисту
             glista.start(glistaMas, time, () => {
+                // По окончании пути глиста удалится
                 glista.remove();
                 glistaDoneCounter++;
                 model.data('glistaDoneCounter', glistaDoneCounter);
-
+                // Если пришли все запущенные глисты, то очищаем выигрышный экран
                 if (glistaDoneCounter == glistaFiredCounter) {
                     winController.cleanWin();
                 }
@@ -172,18 +168,25 @@ export let view = (() => {
             let countValue = line.Count;
             let lineValue = line.Line;
             let currentLineY;
+            let x, y;
+            // Если обычная линия
             if (!scatter) {
                 currentLineY = model.data('lines')[lineValue - 1][countValue - 1].Y;
+                if (model.mobile) {
+                    x = 192 * (countValue - 0.5) + 105 - gameMachine.width / 2;
+                    y = 180 * (currentLineY + 0.5) + 135 - gameMachine.height / 2 - 25;
+                } else {
+                    x = 256 * (countValue - 0.5) + 140 - gameMachine.width / 2;
+                    y = 240 * (currentLineY + 0.5) + 180 - gameMachine.height / 2 - 25;
+                }
             }
-
-            let x, y;
+            // Рассчитываем если скаттер
             if (scatter) {
                 let lastWheel = 0;
                 let lastElement = 0;
                 let wheels = model.el('wheels');
                 wheels.forEach((wheel, wheelIndex) => {
-                    let elements = wheel.elements;
-                    elements.forEach((element, elementIndex) => {
+                    wheel.elements.forEach((element, elementIndex) => {
                         let name = parseInt(element.sprites[element.active - 1]
                                     .animations.currentAnim.name);
                         if (name == 10) {
@@ -194,7 +197,6 @@ export let view = (() => {
                         }
                     });
                 });
-
                 if (model.mobile) {
                     x = 192 * (lastWheel + 0.5) + 105 - gameMachine.width / 2;
                     y = 180 * (lastElement + 0.5) + 135 - gameMachine.height / 2 - 25;
@@ -204,16 +206,7 @@ export let view = (() => {
                 }
             }
 
-            if (!scatter) {
-                if (model.mobile) {
-                    x = 192 * (countValue - 0.5) + 105 - gameMachine.width / 2;
-                    y = 180 * (currentLineY + 0.5) + 135 - gameMachine.height / 2 - 25;
-                } else {
-                    x = 256 * (countValue - 0.5) + 140 - gameMachine.width / 2;
-                    y = 240 * (currentLineY + 0.5) + 180 - gameMachine.height / 2 - 25;
-                }
-            }
-
+            // Рисуем саму табличку и текст в зависимости от количества символов
             let winBG = game.add.sprite(x, y + 4, 'winLine', null, container);
                 winBG.anchor.set(0.5);
             let font;

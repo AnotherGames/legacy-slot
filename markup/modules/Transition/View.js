@@ -6,17 +6,20 @@ import { controller as soundController } from 'modules/Sound/Controller';
 export let view = (() => {
 
     function fsStart() {
-        const game = model.el('game');
+        let game = model.el('game');
+        // Запускаем затемнение
         let darkness = game.add.graphics();
-        darkness.beginFill(0x000000);
-        darkness.drawRect(0, 0, game.width, game.height);
+            darkness.beginFill(0x000000);
+            darkness.drawRect(0, 0, game.width, game.height);
         game.add.tween(darkness).to( { alpha: 0 }, 1500, 'Linear', true)
             .onComplete.add(() => {
                 darkness.destroy();
             }, this);
+        // Отрисовываем переходной экран
         _fsStartDraw();
         _fsStartTween();
         _fsStartInput();
+        // Автопереход если включен
         if (model.state('autoTransititon')) {
             game.time.events.add(config.autoTransitionTime, () => {
                 soundController.sounds.playSound('buttonClick');
@@ -27,79 +30,80 @@ export let view = (() => {
     }
 
     function _fsStartDraw() {
-        const game = model.el('game');
-        const transitionContainer = model.group('transition');
-
+        let game = model.el('game');
+        let transitionContainer = model.group('transition');
+        // Изменяем музыку
         soundController.music.stopMusic('fon');
         soundController.music.playMusic('startPerehod');
-
-        const transitionBG = game.add.sprite(0, 0, 'initBG', null, transitionContainer);
+        // Отрисовываем фон
+        let transitionBG = game.add.sprite(0, 0, 'initBG', null, transitionContainer);
         model.el('transitionBG', transitionBG);
-
-        const cloudContainer = game.add.group();
+        // Запускаем тучки
+        let cloudContainer = game.add.group();
         transitionContainer.add(cloudContainer);
         model.group('cloudContainer', cloudContainer);
         for (let i = 0; i < 5; i++) {
             addCloud({});
         }
-
-        const freeSpinsText = game.add.sprite(game.width / 2,
+        // Надпись Free Spins
+        let freeSpinsText = game.add.sprite(game.width / 2,
             -400,
             'text',
             'freeSpins.png',
             transitionContainer);
-        freeSpinsText.anchor.set(0.5);
+            freeSpinsText.anchor.set(0.5);
         model.el('freeSpinsText', freeSpinsText);
-
+        // Счетчик Фри-Спинов
         let freeSpinsCount = model.data('rollResponse').FreeSpinsLeft;
-        const freeSpinsLevel = game.add.bitmapText(game.width / 2, -200, 'numbersFont', freeSpinsCount, 120, transitionContainer);
-        freeSpinsLevel.align = 'center';
-        freeSpinsLevel.anchor.set(0.5);
+        let freeSpinsLevel = game.add.bitmapText(game.width / 2, -200, 'numbersFont', freeSpinsCount, 120, transitionContainer);
+            freeSpinsLevel.align = 'center';
+            freeSpinsLevel.anchor.set(0.5);
         model.el('freeSpinsLevel', freeSpinsLevel);
-
-        const axeBig = game.add.sprite(game.width / 2 + 350,
+        // Топоры
+        let axeBig = game.add.sprite(game.width / 2 + 350,
             game.world.height / 2,
             'axe',
             null,
             transitionContainer);
-        axeBig.anchor.set(0.5);
-        axeBig.scale.setTo(0.1, 0.1);
+            axeBig.anchor.set(0.5);
+            axeBig.scale.setTo(0.1, 0.1);
         model.el('axeBig', axeBig);
 
-        const axeSmall = game.add.sprite(game.width / 2 - 350,
+        let axeSmall = game.add.sprite(game.width / 2 - 350,
             game.world.height / 2 + 50,
             'axeSmall',
             null,
             transitionContainer);
-        axeSmall.anchor.set(0.5);
-        axeSmall.scale.setTo(0.1, 0.1);
+            axeSmall.anchor.set(0.5);
+            axeSmall.scale.setTo(0.1, 0.1);
         model.el('axeSmall', axeSmall);
-
-        const continueText = game.add.sprite(game.width / 2,
+        // Кнопка продолжить
+        let continueText = game.add.sprite(game.width / 2,
             game.world.height * 0.75,
             'text',
             'continue.png',
             transitionContainer);
-        continueText.anchor.set(0.5);
-        continueText.scale.setTo(0.1, 0.1);
+            continueText.anchor.set(0.5);
+            continueText.scale.setTo(0.1, 0.1);
         model.el('continueText', continueText);
-
 
     }
 
     function _fsStartTween() {
-        const game = model.el('game');
-        const freeSpinsText = model.el('freeSpinsText');
-        const freeSpinsLevel = model.el('freeSpinsLevel');
-        const axeBig = model.el('axeBig');
-        const axeSmall = model.el('axeSmall');
-        const continueText = model.el('continueText');
+        let game = model.el('game');
+        let freeSpinsText = model.el('freeSpinsText');
+        let freeSpinsLevel = model.el('freeSpinsLevel');
+        let axeBig = model.el('axeBig');
+        let axeSmall = model.el('axeSmall');
+        let continueText = model.el('continueText');
 
+        // Анимации появления
         game.add.tween(freeSpinsText).to({y: game.height * 0.2}, 1500, Phaser.Easing.Bounce.Out, true);
         game.add.tween(freeSpinsLevel).to({y: game.height / 2}, 1500, Phaser.Easing.Bounce.Out, true);
         game.add.tween(axeBig.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true);
         game.add.tween(axeSmall.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true);
         game.add.tween(continueText.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true)
+            // Болтание кнопки продолжить
             .onComplete.add(() => {
                 continueText.rotation = 0.1;
                 game.add.tween(continueText).to({rotation: -0.1}, 100, 'Linear', true, 0, 4, true)
@@ -110,10 +114,11 @@ export let view = (() => {
     }
 
     function _fsStartInput() {
-        const game = model.el('game');
-        const transitionBG = model.el('transitionBG');
-        transitionBG.inputEnabled = true;
-        transitionBG.input.priorityID = 2;
+        let game = model.el('game');
+        // При клике на фон будет переход на Фри-Спины
+        let transitionBG = model.el('transitionBG');
+            transitionBG.inputEnabled = true;
+            transitionBG.input.priorityID = 2;
         transitionBG.events.onInputDown.add(function () {
             soundController.sounds.playSound('buttonClick');
             soundController.music.stopMusic('startPerehod');
@@ -122,27 +127,30 @@ export let view = (() => {
     }
 
     function _fsStartHide() {
-        console.log('i am starting fs after timeout');
+        // Автоматический переход на Фри-Спины
         soundController.music.stopMusic('startPerehod');
         soundController.music.playMusic('fsFon');
-        const game = model.el('game');
+        let game = model.el('game');
         model.el('game').state.start('FS');
     }
 
     function fsFinish() {
-        const game = model.el('game');
-        game.input.keyboard.enabled = true;
+        let game = model.el('game');
+            game.input.keyboard.enabled = true;
+        // Темнота
         let darkness = game.add.graphics();
-        darkness.beginFill(0x000000);
-        darkness.drawRect(0, 0, game.width, game.height);
+            darkness.beginFill(0x000000);
+            darkness.drawRect(0, 0, game.width, game.height);
         game.add.tween(darkness).to( { alpha: 0 }, 1500, 'Linear', true)
             .onComplete.add(() => {
                 darkness.destroy();
             }, this);
+        // Отрисовка финишного экрана
         _fsFinishDraw();
         _fsFinishTween();
         _fsFinishInput();
         _coinsTween();
+        // Автопереход
         if (model.state('autoTransititon')) {
             game.time.events.add(config.autoTransitionTime, () => {
                 soundController.sounds.playSound('buttonClick');
@@ -153,24 +161,29 @@ export let view = (() => {
     }
 
     function _fsFinishDraw() {
-        const game = model.el('game');
-        const transitionContainer = model.group('transition');
+        let game = model.el('game');
+        let transitionContainer = model.group('transition');
+        // Изменяем музыку
         soundController.music.stopMusic('fsFon');
-        game.time.events.remove(model.data('zombie:randomTimer'));
         soundController.music.playMusic('finishPerehod');
+        // Обнуляем таймер проигрывания зомби
+        game.time.events.remove(model.data('zombie:randomTimer'));
         if (model.data('fsMulti') === 7) {
             soundController.sounds.playSound('zombie2');
         }
-        const transitionBG = game.add.sprite(0, 0, 'initBG', null, transitionContainer);
+        // Рисуем фон
+        let transitionBG = game.add.sprite(0, 0, 'initBG', null, transitionContainer);
         model.el('transitionBG', transitionBG);
 
-        const cloudContainer = game.add.group();
+        // Запускаем тучки
+        let cloudContainer = game.add.group();
         transitionContainer.add(cloudContainer);
         model.group('cloudContainer', cloudContainer);
         for (let i = 0; i < 5; i++) {
             addCloud({});
         }
 
+        // выбираем надпись для конечного экрна (Big Win --- Total Win)
         let winTextFrame;
         if (model.data('fsMulti') === 7) {
             winTextFrame = 'bigW.png';
@@ -178,7 +191,7 @@ export let view = (() => {
             winTextFrame = 'totalW.png';
         }
 
-        const winText = game.add.sprite(game.width / 2,
+        let winText = game.add.sprite(game.width / 2,
             -400,
             'text',
             winTextFrame,
@@ -186,29 +199,30 @@ export let view = (() => {
         winText.anchor.set(0.5);
         model.el('winText', winText);
 
-        const winCount = game.add.bitmapText(game.width / 2, -200, 'numbersFont', 0, 120, transitionContainer);
-        winCount.align = 'center';
-        winCount.anchor.set(0.5);
+        // Отрисовываем Выигрыш
+        let winCount = game.add.bitmapText(game.width / 2, -200, 'numbersFont', 0, 120, transitionContainer);
+            winCount.align = 'center';
+            winCount.anchor.set(0.5);
         if (model.mobile) {
             winCount.scale.setTo(0.8, 0.8);
         }
         model.el('winCount', winCount);
-
-        const skull = game.add.sprite(game.width / 2,
+        // Отрисовываем черепок
+        let skull = game.add.sprite(game.width / 2,
             game.world.height * 0.65,
             'skull',
             null,
             transitionContainer);
-        skull.anchor.set(0.5);
-        skull.scale.setTo(0.1, 0.1);
+            skull.anchor.set(0.5);
+            skull.scale.setTo(0.1, 0.1);
         model.el('skull', skull);
-
-        const continueText = game.add.sprite(game.width / 2,
+        // И кнопку продолжить
+        let continueText = game.add.sprite(game.width / 2,
             game.world.height * 0.85,
             'text',
             'continue.png',
             transitionContainer);
-        continueText.anchor.set(0.5);
+            continueText.anchor.set(0.5);
         if (model.mobile) {
             continueText.y = game.world.height * 0.8;
         }
@@ -216,9 +230,9 @@ export let view = (() => {
         model.el('continueText', continueText);
 
     }
-
+    // Накрутка выигрыша
     function _сountMeter(count, elem) {
-        const game = model.el('game');
+        let game = model.el('game');
 
         soundController.music.playMusic('fsFon');
         soundController.music.changeMusicVolume('fsFon', 0);
@@ -244,8 +258,9 @@ export let view = (() => {
         game.frameAnims.push(anim);
     }
 
+    // Монетки на победном экране
     function _addCoin(container) {
-        const game = model.el('game');
+        let game = model.el('game');
         if (container.y >= game.height * 5.7) return;
 
         let posX = game.rnd.integerInRange(game.width * 0.1, game.width * 0.9);
@@ -277,18 +292,18 @@ export let view = (() => {
     }
 
     function _coinsTween() {
-        const game = model.el('game');
+        let game = model.el('game');
         let coinsContainer = game.add.group();
         _addCoin(coinsContainer);
         game.add.tween(coinsContainer).to({y: game.height * 7}, 5000, 'Linear', true);
     }
 
     function _fsFinishTween() {
-        const game = model.el('game');
-        const winText = model.el('winText');
-        const winCount = model.el('winCount');
-        const skull = model.el('skull');
-        const continueText = model.el('continueText');
+        let game = model.el('game');
+        let winText = model.el('winText');
+        let winCount = model.el('winCount');
+        let skull = model.el('skull');
+        let continueText = model.el('continueText');
 
         game.add.tween(winText).to({y: game.height * 0.2}, 1500, Phaser.Easing.Bounce.Out, true)
             .onComplete.add(() => {
@@ -308,7 +323,7 @@ export let view = (() => {
     }
 
     function _fsFinishInput() {
-        const transitionBG = model.el('transitionBG');
+        let transitionBG = model.el('transitionBG');
         transitionBG.inputEnabled = true;
         transitionBG.input.priorityID = 2;
         transitionBG.events.onInputDown.add(function () {
@@ -322,7 +337,7 @@ export let view = (() => {
         console.log('i am finishing fs after timeout');
         soundController.music.stopMusic('finishPerehod');
         soundController.music.playMusic('fon');
-        const game = model.el('game');
+        let game = model.el('game');
         model.el('game').state.start('Main');
     }
 
@@ -330,10 +345,10 @@ export let view = (() => {
         x = model.el('game').rnd.integerInRange(0, model.el('game').width),
         container = model.group('cloudContainer')
     }) {
-        const game = model.el('game');
+        let game = model.el('game');
 
         let number = game.rnd.integerInRange(1, 4);
-        const cloud = game.add.sprite(0, 150, 'clouds', `cloud${number}.png`, container);
+        let cloud = game.add.sprite(0, 150, 'clouds', `cloud${number}.png`, container);
         cloud.anchor.set(0.5);
 
         let time = game.rnd.integerInRange(40, 60);

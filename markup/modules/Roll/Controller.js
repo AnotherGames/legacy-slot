@@ -61,20 +61,19 @@ export let controller = (() => {
         // Выключаем управление с клавиатуры
         game.input.keyboard.enabled = false;
 
-
         // Лочим кнопки на время крутки
         if(!model.state('fs')){
           if(model.mobile) {
             buttonsController.lockButtons();
           } else {
-            panelView.lockButtons(); 
+            panelView.lockButtons();
           }
         }
 
+        model.state('ready', false);
         // Отправляем запрос Roll
         request.send('Roll')
             .then((data) => {
-                model.state('ready', false);
 
                 // Выключаем срабатывание попапа на длинный Roll
                 game.time.events.remove(rollPopupTimer);

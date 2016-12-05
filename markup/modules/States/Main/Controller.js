@@ -84,7 +84,9 @@ export class Main {
         mainView.draw.machineMask({});
 
         // Инициализируем управление клавиатурой
-        this.initKeys();
+        if (model.desktop) {
+            this.initKeys();
+        }
 
         // Первая темнота
         let darkness = mainView.draw.darkness({});
