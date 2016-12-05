@@ -98,6 +98,7 @@ export let sound = {
         this.sounds.lineWin = game.add.audio('lineWin');
         this.sounds.lineWin2 = game.add.audio('lineWin2');
         this.sounds.dragon = game.add.audio('dragon');
+        this.sounds.dragonLaugh = game.add.audio('dragonLaugh');
 
         let keys = Object.keys(this.sounds);
         keys.forEach((key) => {
