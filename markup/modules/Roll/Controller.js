@@ -185,22 +185,22 @@ export let controller = (() => {
                 _runNextFSIfExist();
             }
 
+            // Убираем лок кнопок
+            if(!model.state('fs') && model.state('autoplay:end')){
+                if(model.mobile) {
+                    buttonsController.unlockButtons();
+                } else {
+                    panelView.unlockButtons();
+                }
+            }
+
+            // Если у нас не автоплей, то убираем и лок клавиатуры
+            if (model.state('autoplay:end')){
+                let game = model.el('game');
+                game.input.keyboard.enabled = true;
+            }
         });
 
-        // Убираем лок кнопок
-        if(!model.state('fs') && model.state('autoplay:end')){
-          if(model.mobile) {
-            buttonsController.unlockButtons();
-          } else {
-            panelView.unlockButtons();
-          }
-        }
-
-        // Если у нас не автоплей, то убираем и лок клавиатуры
-        if (model.state('autoplay:end')){
-            let game = model.el('game');
-            game.input.keyboard.enabled = true;
-        }
     }
 
     function _convertArray(arr) {
