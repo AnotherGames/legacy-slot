@@ -40,6 +40,7 @@ export class Main {
     create() {
         let game = model.el('game');
 
+        soundController.music.stopMusic('initFon');
         // Играем фоновую музыку
         soundController.music.playMusic('fon');
 

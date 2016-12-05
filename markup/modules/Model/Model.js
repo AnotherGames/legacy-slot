@@ -94,7 +94,7 @@ export let model = (() => {
         model.state('sound', true);
         model.state('volume', 1);
         model.state('music', true);
-        model.state('isAnimBG', false);
+        model.state('isAnimBG', true);
         model.state('infoPanelOpen', false);
         model.state('menuOpened', false);
         model.state('isFirstAutoChangeAnimBG', true);

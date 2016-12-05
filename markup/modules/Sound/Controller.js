@@ -73,7 +73,7 @@ export let controller = (() => {
                 model.el(music).resume();
             } else {
                 model.el(music).play();
-                model.el(music).fadeTo(5000, 1)
+                model.el(music).fadeTo(2000, 1)
             }
         },
 
