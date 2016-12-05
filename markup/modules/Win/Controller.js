@@ -118,6 +118,11 @@ export let controller = (() => {
     }
 
     function checkForFS() {
+        let game = model.el('game');
+        let data = model.data('rollResponse'),
+            mode = data.Mode,
+            nextMode = data.NextMode;
+
         if (mode == 'root' && nextMode == 'fsBonus') {
             // Лочим все кнопки
             model.state('buttons:locked', true);
