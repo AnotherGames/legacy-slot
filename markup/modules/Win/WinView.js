@@ -23,8 +23,13 @@ export let view = (() => {
             let winTotalText = game.add.text(0, -5, winTotalData, style, container);
             winTotalText.anchor.set(0.5);
 
+            let y = 250;
+            if (model.state('mobile')) {
+                y = 170;
+            }
+
             if (fs) {
-                let betBonus = game.add.sprite(9, 250, 'betBonus', null, container);
+                let betBonus = game.add.sprite(9, y, 'betBonus', null, container);
                     betBonus.anchor.set(0.5);
             }
         },
