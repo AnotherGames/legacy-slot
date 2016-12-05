@@ -59,16 +59,7 @@ export let controller = (() => {
         });
 
         // Выключаем управление с клавиатуры
-        game.input.keyboard.enabled = false;
-
-        // Лочим кнопки на время крутки
-        // if(!model.state('fs')){
-        //   if(model.mobile) {
-        //     buttonsController.lockButtons();
-        //   } else {
-        //     panelView.lockButtons();
-        //   }
-        // }
+        // game.input.keyboard.enabled = false;
 
         model.state('ready', false);
         // Отправляем запрос Roll

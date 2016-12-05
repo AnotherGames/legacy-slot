@@ -392,9 +392,9 @@ export let view = (() => {
                 stopButtonDesk.frameName = 'stop.png';
                 stopButtonDesk.freezeFrames = false
             let autoButtonDesk = model.el('autoButtonDesk');
-            autoButtonDesk.frameName = 'auto.png';
-            autoButtonDesk.alpha = 1;
-            autoButtonDesk.freezeFrames = false;
+                autoButtonDesk.frameName = 'auto.png';
+                autoButtonDesk.alpha = 1;
+                autoButtonDesk.freezeFrames = false;
         }
 
     }

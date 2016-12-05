@@ -79,6 +79,8 @@ export let controller = (() => {
                 view.hide.autoPanel({});
             }
 
+            let game = model.el('game');
+            game.input.keyboard.enabled = false;
             view.lockButtons();
             rollController.startRoll();
             rollController.fastRoll();
@@ -254,7 +256,9 @@ export let controller = (() => {
     let auto = {
 
         start: function(amount) {
+            let game = model.el('game');
             view.lockButtons();
+            game.input.keyboard.enabled = false;
             view.draw.autoCount({amount});
             handle.auto();
         },

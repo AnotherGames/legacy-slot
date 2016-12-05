@@ -185,27 +185,27 @@ export class Main {
         let game = model.el('game');
 
         let space = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-        space.onDown.add(() => {
+        space.onUp.add(() => {
             panelController.handle.spin();
         });
 
         let up = game.input.keyboard.addKey(Phaser.Keyboard.UP);
-        up.onDown.add(() => {
+        up.onUp.add(() => {
             model.changeCoin({up: true});
         });
 
         let down = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
-        down.onDown.add(() => {
+        down.onUp.add(() => {
             model.changeCoin({down: true});
         });
 
         let right = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
-        right.onDown.add(() => {
+        right.onUp.add(() => {
             model.changeBet({up: true});
         });
 
         let left = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
-        left.onDown.add(() => {
+        left.onUp.add(() => {
             model.changeBet({down: true});
         });
 
