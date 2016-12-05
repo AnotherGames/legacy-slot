@@ -14,23 +14,27 @@ export let controller = (function () {
                 soundButton.frameName = 'soundOn.png';
             }
             soundController.volume.changeVolume(this.value);
-            soundController.volume.setVolume(this.value);            
+            soundController.volume.setVolume(this.value);
         });
         $('#checkSound').on('change', function () {
             model.state('sound', this.checked);
-            console.log(this.checked);
         });
         $('#checkMusic').on('change', function () {
+            model.state('music', this.checked);
             if(model.state('music')){
-                soundController.music.stopMusic('fon');
-                model.state('music', false)
-            } else {
                 soundController.music.playMusic('fon');
-                model.state('music', true)
+            } else {
+                soundController.music.stopMusic('fon');
             }
         });
         $('#fastSpin').on('change', function () {
             model.state('fastRoll', this.checked);
+            let fastButton = model.el('fastButton');
+            if (model.state('fastRoll')) {
+                fastButton.frameName = 'fastSpinOff.png';
+            } else {
+                fastButton.frameName = 'fastSpin.png';
+            }
         });
         $('#isAnimations').on('change', function () {
             let isAnim = this.checked;
