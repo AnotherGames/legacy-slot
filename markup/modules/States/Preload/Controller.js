@@ -45,10 +45,11 @@ export class Preload {
         game.load.audio('finishPerehod', 'finishPerehod.mp3');
         game.load.audio('lineWin', 'lineWin.mp3');
         game.load.audio('lineWin2', 'lineWin2.mp3');
-        game.load.audio('mozgi1', 'mozgi1.mp3');
-        game.load.audio('mozgi2', 'mozgi2.mp3');
-        game.load.audio('zombie1', 'zombie1.mp3');
-        game.load.audio('zombie2', 'zombie2.mp3');
+        game.load.audio('dragon', 'dragon.mp3');
+        // game.load.audio('mozgi1', 'mozgi1.mp3');
+        // game.load.audio('mozgi2', 'mozgi2.mp3');
+        // game.load.audio('zombie1', 'zombie1.mp3');
+        // game.load.audio('zombie2', 'zombie2.mp3');
     }
 
     loadInitAssets() {
@@ -74,6 +75,7 @@ export class Preload {
         game.load.atlasJSONArray('infoMarker', 'other/infoMarker.png', 'other/infoMarker.json');
         game.load.image('winLine', 'win/winLineRect.png');
         game.load.image('winTotal', 'win/winTotalRect.png');
+        game.load.image('betBonus', 'win/betBonus.png');
         game.load.atlasJSONArray('lineNumbers', 'win/lineNumbers.png', 'win/lineNumbers.json');
         game.load.atlasJSONArray('multiNumbers', 'numbers/multiNumbers.png', 'numbers/multiNumbers.json');
         game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');

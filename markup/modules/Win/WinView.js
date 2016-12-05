@@ -10,16 +10,23 @@ export let view = (() => {
 
         TotalWin: function ({
             winTotalData,
+            fs = false,
             game = model.el('game'),
             container = model.group('winTop'),
             style = {font: '66px Helvetica, Arial', fill: '#fee73f', align: 'center', stroke: '#000000', strokeThickness: 3}
         }) {
             if (winTotalData === 0) return;
+
             let winTotal = game.add.sprite(9, 0, 'winTotal', null, container);
             winTotal.anchor.set(0.5);
 
             let winTotalText = game.add.text(0, -5, winTotalData, style, container);
             winTotalText.anchor.set(0.5);
+
+            if (fs) {
+                let betBonus = game.add.sprite(9, 250, 'betBonus', null, container);
+                    betBonus.anchor.set(0.5);
+            }
         },
 
         WinSplash: function ({
@@ -228,7 +235,7 @@ export let view = (() => {
 
         WinSound: function() {
             let winSound = Math.round(Math.random()) ? sound.sounds.lineWin : sound.sounds.lineWin2;
-                winSound.addMarker('win', 0, 1, 1, false);
+                winSound.addMarker('win', 0, 1.5, 1, false);
                 winSound.play('win');
             return winSound;
         }

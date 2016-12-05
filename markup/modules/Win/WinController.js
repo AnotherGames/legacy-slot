@@ -4,6 +4,7 @@ import { view } from 'modules/Win/WinView';
 import { Dragon } from 'modules/Class/Dragon';
 import { view as transitionView } from 'modules/Transition/TransitionView';
 import { keyboard } from 'modules/Keyboard/Keyboard';
+import { sound } from 'modules/Sound/Sound';
 
 export let controller = (() => {
 
@@ -29,6 +30,9 @@ export let controller = (() => {
         && winLines[0].Count == 0
         && winLines[0].Line == -1) {
             let dragonFS = model.el('dragonFS');
+            let dragonSound = sound.sounds.dragon.play();
+            dragonSound.addMarker('win', 0, 1.5, 1, false);
+            dragonSound.play('win');
             dragonFS.Eat();
         }
 
@@ -58,7 +62,11 @@ export let controller = (() => {
         }
 
         view.play.WinSound();
-        view.draw.TotalWin({winTotalData});
+        if (model.state('FSMode')) {
+            view.draw.TotalWin({winTotalData, fs: true});
+        } else {
+            view.draw.TotalWin({winTotalData});
+        }
 
         winLines.forEach((winLine) => {
             view.draw.WinNumber({number: winLine.Line});

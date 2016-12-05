@@ -26,8 +26,8 @@ export class Dragon {
         this.char.addAnimationByName(0, 'Transfer1', false);
     }
     Eat() {
-        console.log(this.game.rnd.integerInRange(2, 5));
-        this.char.setAnimationByName(0, 'FS_eat_' + this.game.rnd.integerInRange(2, 5), false);
+        // this.char.setAnimationByName(0, 'FS_eat_' + this.game.rnd.integerInRange(2, 5), false);
+        this.char.setAnimationByName(0, 'FS_eat_6', false);
         if (model.data('rollResponse').NextMode !== 'root') {
             this.char.addAnimationByName(0, 'FS_idle_1', false);
             if (this.nextAnim == 'FS_idle_2') {
