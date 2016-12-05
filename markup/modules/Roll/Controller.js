@@ -8,6 +8,7 @@ import { view as mainView } from 'modules/States/Main/View';
 import { controller as soundController } from 'modules/Sound/Controller';
 import { controller as autoplayController } from 'modules/Autoplay/Controller';
 import { controller as panelController } from 'modules/Panel/Controller';
+import { view as panelView } from 'modules/Panel/View';
 import { controller as buttonsController } from 'modules/Buttons/Controller';
 import { controller as winController } from 'modules/Win/Controller';
 import { controller as fsController } from 'modules/States/FS/Controller';
@@ -66,7 +67,7 @@ export let controller = (() => {
           if(model.mobile) {
             buttonsController.lockButtons();
           } else {
-            panelController.freezeButtons(); // Переделать на общее отключение кнопок
+            panelView.lockButtons(); 
           }
         }
 
@@ -192,7 +193,7 @@ export let controller = (() => {
           if(model.mobile) {
             buttonsController.unlockButtons();
           } else {
-            panelController.unfreezeButtons();
+            panelView.unlockButtons();
           }
         }
 
