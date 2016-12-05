@@ -259,6 +259,9 @@ export let controller = (() => {
         let coinsLevelPlus = model.el('autoButtonDesk');
             coinsLevelPlus.frameName = 'autoOn.png';
             coinsLevelPlus.freezeFrames = true
+            let spinButtonDesk = model.el('spinButtonDesk');
+            spinButtonDesk.frameName = 'spinOn.png';
+            spinButtonDesk.freezeFrames = true;
             view.draw.removeCount();
         },
 

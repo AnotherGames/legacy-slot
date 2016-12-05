@@ -358,11 +358,13 @@ export let view = (() => {
         if(model.state('autoplay:end')){
             let spinButtonDesk = model.el('spinButtonDesk');
             spinButtonDesk.frameName = 'spin.png';
-            spinButtonDesk.freezeFrames = true;
+            spinButtonDesk.freezeFrames = false;
             let autoButtonDesk = model.el('autoButtonDesk');
             autoButtonDesk.frameName = 'auto.png';
-            autoButtonDesk.freezeFrames = true;
+            autoButtonDesk.freezeFrames = false;
         }
+        // let coinsLevelPlus = model.el('autoButtonDesk');
+        //     coinsLevelPlus.freezeFrames = false;
     }
 
     return {
