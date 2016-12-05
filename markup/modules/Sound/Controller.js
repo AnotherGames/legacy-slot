@@ -78,6 +78,10 @@ export let controller = (() => {
         },
 
         stopMusic: function(music){
+            model.el(music).stop();
+        },
+
+        pauseMusic: function(music){
             model.el(music).pause();
         },
 

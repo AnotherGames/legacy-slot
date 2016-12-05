@@ -24,7 +24,7 @@ export let controller = (function () {
             if(model.state('music')){
                 soundController.music.playMusic('fon');
             } else {
-                soundController.music.stopMusic('fon');
+                soundController.music.pauseMusic('fon');
             }
         });
         $('#fastSpin').on('change', function () {

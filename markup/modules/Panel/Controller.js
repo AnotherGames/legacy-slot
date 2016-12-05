@@ -106,8 +106,9 @@ export let controller = (() => {
         },
 
         maxBet: function() {
-            if(model.state('buttons:locked')
-            || model.state('autoplay:end') == false) return;
+            if (model.state('buttons:locked')
+            || model.state('roll:progress')
+            || model.state('autoplay:start')) return;
 
             soundController.sounds.playSound('buttonClick');
             model.changeBet({toMax: true});
@@ -198,21 +199,33 @@ export let controller = (() => {
         },
 
         betPlus: function() {
+            if (model.state('buttons:locked')
+            || model.state('roll:progress')
+            || model.state('autoplay:start')) return;
             soundController.sounds.playSound('buttonClick');
             model.changeBet({up: true});
         },
 
         betMinus: function() {
+            if (model.state('buttons:locked')
+            || model.state('roll:progress')
+            || model.state('autoplay:start')) return;
             soundController.sounds.playSound('buttonClick');
             model.changeBet({down: true});
         },
 
         coinsPlus: function() {
+            if (model.state('buttons:locked')
+            || model.state('roll:progress')
+            || model.state('autoplay:start')) return;
             soundController.sounds.playSound('buttonClick');
             model.changeCoin({up: true});
         },
 
         coinsMinus: function() {
+            if (model.state('buttons:locked')
+            || model.state('roll:progress')
+            || model.state('autoplay:start')) return;
             soundController.sounds.playSound('buttonClick');
             model.changeCoin({down: true});
         },
@@ -238,12 +251,14 @@ export let controller = (() => {
 
         start: function(amount) {
             view.autoStartDesktop();
+            freezeButtons();
             view.draw.autoCount({amount});
             handle.auto();
         },
 
         stop: function() {
             view.autoStopDesktop();
+            unfreezeButtons();
             view.draw.removeCount();
         },
 
@@ -253,20 +268,50 @@ export let controller = (() => {
 
     };
 
-    function freezeInfo() {
-        if(model.state('autoplay:start')) return;
+    function freezeButtons() {
 
         let infoButtonDesk = model.el('infoButtonDesk');
             infoButtonDesk.frameName = 'infoOn.png';
             infoButtonDesk.freezeFrames = true;
+        let maxBetButtonDesk = model.el('maxBetButtonDesk');
+            maxBetButtonDesk.frameName = 'maxBetOn.png';
+            maxBetButtonDesk.freezeFrames = true;
+        let betLevelPlus = model.el('betLevelPlus');
+            betLevelPlus.frameName = 'plusOn.png';
+            betLevelPlus.freezeFrames = true;
+        let betLevelMinus = model.el('betLevelMinus');
+            betLevelMinus.frameName = 'minusOn.png';
+            betLevelMinus.freezeFrames = true;
+        let coinsLevelPlus = model.el('coinsLevelPlus');
+            coinsLevelPlus.frameName = 'plusOn.png';
+            coinsLevelPlus.freezeFrames = true
+        let coinsLevelMinus = model.el('coinsLevelMinus');
+            coinsLevelMinus.frameName = 'minusOn.png';
+            coinsLevelMinus.freezeFrames = true;
+
     }
 
-    function unfreezeInfo() {
+    function unfreezeButtons() {
         if(model.state('autoplay:start')) return;
 
         let infoButtonDesk = model.el('infoButtonDesk');
-        infoButtonDesk.frameName = 'info.png';
-        infoButtonDesk.freezeFrames = false;
+            infoButtonDesk.frameName = 'info.png';
+            infoButtonDesk.freezeFrames = false;
+        let maxBetButtonDesk = model.el('maxBetButtonDesk');
+            maxBetButtonDesk.frameName = 'maxBetOn.png';
+            maxBetButtonDesk.freezeFrames = true;
+        let betLevelPlus = model.el('betLevelPlus');
+            betLevelPlus.frameName = 'plus.png';
+            betLevelPlus.freezeFrames = true;
+        let betLevelMinus = model.el('betLevelMinus');
+            betLevelMinus.frameName = 'minus.png';
+            betLevelMinus.freezeFrames = true;
+        let coinsLevelPlus = model.el('coinsLevelPlus');
+            coinsLevelPlus.frameName = 'plus.png';
+            coinsLevelPlus.freezeFrames = true
+        let coinsLevelMinus = model.el('coinsLevelMinus');
+            coinsLevelMinus.frameName = 'minus.png';
+            coinsLevelMinus.freezeFrames = true;
     }
 
     return {
@@ -274,8 +319,8 @@ export let controller = (() => {
         drawFsPanel,
         auto,
         handle,
-        freezeInfo,
-        unfreezeInfo
+        freezeButtons,
+        unfreezeButtons
     };
 
 })();

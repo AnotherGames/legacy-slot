@@ -66,7 +66,7 @@ export let controller = (() => {
           if(model.mobile) {
             buttonsController.lockButtons();
           } else {
-            panelController.freezeInfo(); // Переделать на общее отключение кнопок
+            panelController.freezeButtons(); // Переделать на общее отключение кнопок
           }
         }
 
@@ -192,7 +192,7 @@ export let controller = (() => {
           if(model.mobile) {
             buttonsController.unlockButtons();
           } else {
-            panelController.unfreezeInfo();
+            panelController.unfreezeButtons();
           }
         }
 

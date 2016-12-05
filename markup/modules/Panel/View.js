@@ -303,20 +303,6 @@ export let view = (() => {
         let autoButtonDesk = model.el('autoButtonDesk');
             autoButtonDesk.frameName = 'autoEmpty.png';
             autoButtonDesk.freezeFrames = true;
-        let maxBetButtonDesk = model.el('maxBetButtonDesk');
-            maxBetButtonDesk.frameName = 'maxBetOn.png';
-            maxBetButtonDesk.freezeFrames = true;
-        let infoButtonDesk = model.el('infoButtonDesk');
-            infoButtonDesk.frameName = 'infoOn.png';
-            infoButtonDesk.freezeFrames = true;
-        let betLevelPlus = model.el('betLevelPlus');
-            betLevelPlus.visible = false;
-        let betLevelMinus = model.el('betLevelMinus');
-            betLevelMinus.visible = false;
-        let coinsLevelPlus = model.el('coinsLevelPlus');
-            coinsLevelPlus.visible = false;
-        let coinsLevelMinus = model.el('coinsLevelMinus');
-            coinsLevelMinus.visible = false;
     }
 
     function autoStopDesktop() {
@@ -326,20 +312,6 @@ export let view = (() => {
         let autoButtonDesk = model.el('autoButtonDesk');
             autoButtonDesk.frameName = 'auto.png';
             autoButtonDesk.freezeFrames = false;
-        let maxBetButtonDesk = model.el('maxBetButtonDesk');
-            maxBetButtonDesk.frameName = 'maxBet.png';
-            maxBetButtonDesk.freezeFrames = false;
-        let infoButtonDesk = model.el('infoButtonDesk');
-            infoButtonDesk.frameName = 'info.png';
-            infoButtonDesk.freezeFrames = false;
-        let betLevelPlus = model.el('betLevelPlus');
-            betLevelPlus.visible = true;
-        let betLevelMinus = model.el('betLevelMinus');
-            betLevelMinus.visible = true;
-        let coinsLevelPlus = model.el('coinsLevelPlus');
-            coinsLevelPlus.visible = true;
-        let coinsLevelMinus = model.el('coinsLevelMinus');
-            coinsLevelMinus.visible = true;
     };
 
     return {
