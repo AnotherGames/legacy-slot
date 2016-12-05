@@ -21,6 +21,9 @@ export let controller = (() => {
         let spinButtonDesk = view.draw.SpinButton({});
             spinButtonDesk.onInputDown.add(handle.spin);
 
+        let stopButtonDesk = view.draw.StopButton({});
+            stopButtonDesk.onInputDown.add(handle.stop);
+
         let autoButtonDesk = view.draw.AutoButton({});
             autoButtonDesk.onInputDown.add(handle.auto);
 
@@ -76,22 +79,23 @@ export let controller = (() => {
                 view.hide.autoPanel({});
             }
 
-            const spinButtonDesk = model.el('spinButtonDesk');
-            if (spinButtonDesk.frameName == 'stop.png') {
-
-                autoplayController.stop();
-                return;
-            }
-
+            view.lockButtons();
             rollController.startRoll();
             rollController.fastRoll();
+        },
+
+        stop: function() {
+            if (model.state('buttons:locked')) return;
+
+            soundController.sounds.playSound('buttonClick');
+            model.state('autoplay:panelClosed', true);
+            autoplayController.stop();
         },
 
         auto: function() {
             if(model.state('autoplay:start')
             || model.state('roll:progress')
             || model.state('buttons:locked')) return;
-
             soundController.sounds.playSound('buttonClick');
 
             if (model.state('autoplay:panelClosed') && !model.data('remainAutoCount')) {
@@ -256,12 +260,12 @@ export let controller = (() => {
         },
 
         stop: function() {
-        let coinsLevelPlus = model.el('autoButtonDesk');
-            coinsLevelPlus.frameName = 'autoOn.png';
-            coinsLevelPlus.freezeFrames = true
-            let spinButtonDesk = model.el('spinButtonDesk');
-            spinButtonDesk.frameName = 'spinOn.png';
-            spinButtonDesk.freezeFrames = true;
+        let autoButtonDesk = model.el('autoButtonDesk');
+            autoButtonDesk.frameName = 'autoOn.png';
+            autoButtonDesk.freezeFrames = true
+        let stopButtonDesk = model.el('stopButtonDesk');
+            stopButtonDesk.frameName = 'stopOn.png';
+            stopButtonDesk.freezeFrames = true
             view.draw.removeCount();
         },
 

@@ -97,6 +97,7 @@ export let controller = (() => {
             || spinButton.frameName === 'spinEmpty.png') return;
 
             soundController.sounds.playSound('buttonClick');
+            buttonsController.lockButtons();
 
             rollController.startRoll();
             rollController.fastRoll();

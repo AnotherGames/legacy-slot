@@ -62,13 +62,13 @@ export let controller = (() => {
         game.input.keyboard.enabled = false;
 
         // Лочим кнопки на время крутки
-        if(!model.state('fs')){
-          if(model.mobile) {
-            buttonsController.lockButtons();
-          } else {
-            panelView.lockButtons();
-          }
-        }
+        // if(!model.state('fs')){
+        //   if(model.mobile) {
+        //     buttonsController.lockButtons();
+        //   } else {
+        //     panelView.lockButtons();
+        //   }
+        // }
 
         model.state('ready', false);
         // Отправляем запрос Roll
@@ -188,7 +188,7 @@ export let controller = (() => {
         });
 
         // Убираем лок кнопок
-        if(!model.state('fs')){
+        if(!model.state('fs') && model.state('autoplay:end')){
           if(model.mobile) {
             buttonsController.unlockButtons();
           } else {
