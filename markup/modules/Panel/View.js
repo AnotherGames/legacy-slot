@@ -321,7 +321,7 @@ export let view = (() => {
                 spinButtonDesk.frameName = 'stop.png';
                 spinButtonDesk.freezeFrames = true;
             let autoButtonDesk = model.el('autoButtonDesk');
-                autoButtonDesk.frameName = 'autoEmpty.png';
+                autoButtonDesk.frameName = 'autoEmptyOn.png';
                 autoButtonDesk.freezeFrames = true;
         } else {
             let autoButtonDesk = model.el('autoButtonDesk');

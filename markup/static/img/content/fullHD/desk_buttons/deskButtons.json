@@ -2,7 +2,7 @@
 
 {
 	"filename": "auto.png",
-	"frame": {"x":1,"y":305,"w":100,"h":146},
+	"frame": {"x":193,"y":152,"w":100,"h":146},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":4,"w":100,"h":146},
@@ -10,7 +10,15 @@
 },
 {
 	"filename": "autoEmpty.png",
-	"frame": {"x":103,"y":305,"w":100,"h":146},
+	"frame": {"x":295,"y":152,"w":100,"h":146},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":4,"w":100,"h":146},
+	"sourceSize": {"w":100,"h":150}
+},
+{
+	"filename": "autoEmptyOn.png",
+	"frame": {"x":381,"y":1,"w":100,"h":146},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":4,"w":100,"h":146},
@@ -18,7 +26,7 @@
 },
 {
 	"filename": "autoOn.png",
-	"frame": {"x":381,"y":153,"w":100,"h":146},
+	"frame": {"x":397,"y":149,"w":100,"h":146},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":4,"w":100,"h":146},
@@ -26,7 +34,7 @@
 },
 {
 	"filename": "info.png",
-	"frame": {"x":385,"y":1,"w":45,"h":46},
+	"frame": {"x":295,"y":402,"w":45,"h":46},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":2,"y":3,"w":45,"h":46},
@@ -34,7 +42,7 @@
 },
 {
 	"filename": "infoOn.png",
-	"frame": {"x":432,"y":1,"w":45,"h":46},
+	"frame": {"x":333,"y":350,"w":45,"h":46},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":2,"y":3,"w":45,"h":46},
@@ -42,7 +50,7 @@
 },
 {
 	"filename": "maxBet.png",
-	"frame": {"x":381,"y":301,"w":100,"h":146},
+	"frame": {"x":397,"y":297,"w":100,"h":146},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":4,"w":100,"h":146},
@@ -50,7 +58,7 @@
 },
 {
 	"filename": "maxBetOn.png",
-	"frame": {"x":205,"y":304,"w":100,"h":146},
+	"frame": {"x":193,"y":300,"w":100,"h":146},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":4,"w":100,"h":146},
@@ -58,7 +66,7 @@
 },
 {
 	"filename": "minus.png",
-	"frame": {"x":385,"y":100,"w":36,"h":48},
+	"frame": {"x":333,"y":300,"w":36,"h":48},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":3,"y":2,"w":36,"h":48},
@@ -66,7 +74,7 @@
 },
 {
 	"filename": "minusOn.png",
-	"frame": {"x":423,"y":100,"w":36,"h":48},
+	"frame": {"x":193,"y":448,"w":36,"h":48},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":3,"y":2,"w":36,"h":48},
@@ -74,7 +82,7 @@
 },
 {
 	"filename": "plus.png",
-	"frame": {"x":385,"y":49,"w":36,"h":49},
+	"frame": {"x":295,"y":300,"w":36,"h":49},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":3,"y":1,"w":36,"h":49},
@@ -82,7 +90,7 @@
 },
 {
 	"filename": "plusOn.png",
-	"frame": {"x":423,"y":49,"w":36,"h":49},
+	"frame": {"x":295,"y":351,"w":36,"h":49},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":3,"y":1,"w":36,"h":49},
@@ -98,14 +106,6 @@
 },
 {
 	"filename": "spinOn.png",
-	"frame": {"x":193,"y":1,"w":190,"h":150},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":190,"h":150},
-	"sourceSize": {"w":190,"h":150}
-},
-{
-	"filename": "stop.png",
 	"frame": {"x":1,"y":153,"w":190,"h":150},
 	"rotated": false,
 	"trimmed": false,
@@ -113,8 +113,16 @@
 	"sourceSize": {"w":190,"h":150}
 },
 {
+	"filename": "stop.png",
+	"frame": {"x":1,"y":305,"w":190,"h":150},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":190,"h":150},
+	"sourceSize": {"w":190,"h":150}
+},
+{
 	"filename": "stopOn.png",
-	"frame": {"x":193,"y":153,"w":186,"h":149},
+	"frame": {"x":193,"y":1,"w":186,"h":149},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":3,"y":1,"w":186,"h":149},
@@ -125,8 +133,8 @@
 	"version": "1.0",
 	"image": "deskButtons.png",
 	"format": "RGBA8888",
-	"size": {"w":482,"h":452},
+	"size": {"w":512,"h":512},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:94b8cc959ecae233cad1b778870d3b6a:9d4a0fe908f4c230bd9208f8fb297d84:7216a24ceb66389c4ebee7eae85622d5$"
+	"smartupdate": "$TexturePacker:SmartUpdate:0cf12cd105b87360b906a555a2138d0a:625bf99b49c7a5da09f416d9c37c2aff:7216a24ceb66389c4ebee7eae85622d5$"
 }
 }
