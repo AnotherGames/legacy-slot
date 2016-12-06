@@ -292,7 +292,7 @@ export let view = (() => {
     let hide = {
         autoButton: function({
             game = model.el('game'),
-            finalX = 519,
+            finalX = 523,
             time = 350
         }) {
             let autoButtonDesk = model.el('autoButtonDesk');
@@ -305,7 +305,7 @@ export let view = (() => {
             time = 350
         }) {
             let autoDesktopContainer = model.group('autoDesktop');
-            return game.add.tween(autoDesktopContainer).to( { x: finalX }, time, 'Linear', true)
+            return game.add.tween(autoDesktopContainer).to( { x: finalX + 5 }, time, 'Linear', true)
         }
     }
 
@@ -341,7 +341,7 @@ export let view = (() => {
             let stopButtonDesk = model.el('stopButtonDesk');
                 stopButtonDesk.visible = true;
             let autoButtonDesk = model.el('autoButtonDesk');
-                autoButtonDesk.frameName = 'autoEmptyOn.png';
+                autoButtonDesk.frameName = 'autoEmpty.png';
                 autoButtonDesk.alpha = 0.5;
                 autoButtonDesk.freezeFrames = true;
         } else {
