@@ -1,8 +1,8 @@
 import { model } from 'modules/Model/Model';
-import { view } from 'modules/Menu/Autoplay/View';
+import { view } from 'modules/Menu/Autoplay/MenuAutoplayView';
 
-import { controller as soundController } from 'modules/Sound/Controller';
-import { controller as autoplayController } from 'modules/Autoplay/Controller';
+import { controller as soundController } from 'modules/Sound/SoundController';
+import { controller as autoplayController } from 'modules/Autoplay/AutoplayController';
 
 export let controller = (() => {
 

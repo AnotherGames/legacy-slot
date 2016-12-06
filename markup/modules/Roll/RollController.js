@@ -3,15 +3,15 @@ import { config } from 'modules/Util/Config';
 import { request } from 'modules/Util/Request';
 import { Wheel } from 'modules/Class/Wheel';
 
-import { view as mainView } from 'modules/States/Main/View';
+import { view as mainView } from 'modules/States/Main/MainView';
 
-import { controller as soundController } from 'modules/Sound/Controller';
-import { controller as autoplayController } from 'modules/Autoplay/Controller';
-import { controller as panelController } from 'modules/Panel/Controller';
-import { view as panelView } from 'modules/Panel/View';
-import { controller as buttonsController } from 'modules/Buttons/Controller';
-import { controller as winController } from 'modules/Win/Controller';
-import { controller as fsController } from 'modules/States/FS/Controller';
+import { controller as soundController } from 'modules/Sound/SoundController';
+import { controller as autoplayController } from 'modules/Autoplay/AutoplayController';
+import { controller as panelController } from 'modules/Panel/PanelController';
+import { view as panelView } from 'modules/Panel/PanelView';
+import { controller as buttonsController } from 'modules/Buttons/ButtonsController';
+import { controller as winController } from 'modules/Win/WinController';
+import { controller as fsController } from 'modules/States/FS/FSController';
 
 export let controller = (() => {
 

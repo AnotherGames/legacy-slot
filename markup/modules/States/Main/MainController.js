@@ -1,21 +1,21 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
 
-import { view as mainView } from 'modules/States/Main/View';
+import { view as mainView } from 'modules/States/Main/MainView';
 
-import { controller as soundController } from 'modules/Sound/Controller';
-import { controller as settingsController } from 'modules/Settings/Controller';
-import { controller as balanceController } from 'modules/Balance/Controller';
-import { controller as footerController } from 'modules/Footer/Controller';
-import { controller as panelController } from 'modules/Panel/Controller';
-import { controller as buttonsController } from 'modules/Buttons/Controller';
-import { controller as rollController } from 'modules/Roll/Controller';
-import { controller as winController } from 'modules/Win/Controller';
-import { controller as autoplayController } from 'modules/Autoplay/Controller';
-import { controller as mobileSettingsController } from 'modules/Menu/Settings/Controller';
-import { controller as mobileAutoplayController } from 'modules/Menu/Autoplay/Controller';
-import { controller as mobileSetBetController } from 'modules/Menu/SetBet/Controller';
-import { controller as fsController } from 'modules/States/FS/Controller';
+import { controller as soundController } from 'modules/Sound/SoundController';
+import { controller as settingsController } from 'modules/Settings/DesktopSettingsController';
+import { controller as balanceController } from 'modules/Balance/BalanceController';
+import { controller as footerController } from 'modules/Footer/FooterController';
+import { controller as panelController } from 'modules/Panel/PanelController';
+import { controller as buttonsController } from 'modules/Buttons/ButtonsController';
+import { controller as rollController } from 'modules/Roll/RollController';
+import { controller as winController } from 'modules/Win/WinController';
+import { controller as autoplayController } from 'modules/Autoplay/AutoplayController';
+import { controller as mobileSettingsController } from 'modules/Menu/Settings/MenuSettingsController';
+import { controller as mobileAutoplayController } from 'modules/Menu/Autoplay/MenuAutoplayController';
+import { controller as mobileSetBetController } from 'modules/Menu/SetBet/MenuSetBetController';
+import { controller as fsController } from 'modules/States/FS/FSController';
 
 export class Main {
     constructor(game) {

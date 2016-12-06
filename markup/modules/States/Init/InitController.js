@@ -1,7 +1,7 @@
 import { model } from 'modules/Model/Model';
-import { view } from 'modules/States/Init/View';
+import { view } from 'modules/States/Init/InitView';
 import { Element } from 'modules/Class/Element';
-import { controller as soundController} from 'modules/Sound/Controller';
+import { controller as soundController} from 'modules/Sound/SoundController';
 
 export class Init {
     constructor(game) {

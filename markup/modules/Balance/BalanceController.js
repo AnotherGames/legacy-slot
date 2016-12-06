@@ -1,6 +1,6 @@
 import { model } from 'modules/Model/Model';
 
-import { view } from 'modules/Balance/View';
+import { view } from 'modules/Balance/BalanceView';
 
 export let controller = (() => {
 

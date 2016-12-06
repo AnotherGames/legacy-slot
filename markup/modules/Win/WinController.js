@@ -1,9 +1,9 @@
 import { model } from 'modules/Model/Model';
 
-import { view } from 'modules/Win/View';
-import { view as transitionView } from 'modules/Transition/View';
+import { view } from 'modules/Win/WinView';
+import { view as transitionView } from 'modules/Transition/TransitionView';
 
-import { controller as autoplayController } from 'modules/Autoplay/Controller';
+import { controller as autoplayController } from 'modules/Autoplay/AutoplayController';
 
 export let controller = (() => {
 

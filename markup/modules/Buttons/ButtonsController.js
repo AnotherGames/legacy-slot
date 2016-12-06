@@ -1,13 +1,13 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
-import { view } from 'modules/Buttons/View';
+import { view } from 'modules/Buttons/ButtonsView';
 
-import { controller as rollController } from 'modules/Roll/Controller';
-import { controller as soundController } from 'modules/Sound/Controller';
-import { controller as autoplayController } from 'modules/Autoplay/Controller';
-import { controller as mobileSettingsController } from 'modules/Menu/Settings/Controller';
-import { controller as mobileAutoplayController } from 'modules/Menu/Autoplay/Controller';
-import { controller as mobileSetBetController } from 'modules/Menu/SetBet/Controller';
+import { controller as rollController } from 'modules/Roll/RollController';
+import { controller as soundController } from 'modules/Sound/SoundController';
+import { controller as autoplayController } from 'modules/Autoplay/AutoplayController';
+import { controller as mobileSettingsController } from 'modules/Menu/Settings/MenuSettingsController';
+import { controller as mobileAutoplayController } from 'modules/Menu/Autoplay/MenuAutoplayController';
+import { controller as mobileSetBetController } from 'modules/Menu/SetBet/MenuSetBetController';
 
 export let controller = (() => {
     let game;

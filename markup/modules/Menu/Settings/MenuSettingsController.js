@@ -1,10 +1,10 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
 
-import { view } from 'modules/Menu/Settings/View';
-import { view as mainView } from 'modules/States/Main/View';
+import { view } from 'modules/Menu/Settings/MenuSettingsView';
+import { view as mainView } from 'modules/States/Main/MainView';
 
-import { controller as soundController } from 'modules/Sound/Controller';
+import { controller as soundController } from 'modules/Sound/SoundController';
 
 export let controller = (() => {
 

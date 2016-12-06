@@ -1,5 +1,5 @@
 import { model } from 'modules/Model/Model';
-import { view } from 'modules/States/Preload/View';
+import { view } from 'modules/States/Preload/PreloadView';
 
 export class Preload {
     constructor(game) {

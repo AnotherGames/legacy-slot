@@ -1,9 +1,9 @@
 import { model } from 'modules/Model/Model';
 import { request } from 'modules/Util/Request';
 
-import { view } from 'modules/Footer/View';
+import { view } from 'modules/Footer/FooterView';
 
-import { controller as soundController } from 'modules/Sound/Controller';
+import { controller as soundController } from 'modules/Sound/SoundController';
 
 export let controller = (() => {
 

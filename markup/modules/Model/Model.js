@@ -1,5 +1,5 @@
-import { controller as balanceController } from 'modules/Balance/Controller';
-import { controller as setBetController } from 'modules/Menu/SetBet/Controller';
+import { controller as balanceController } from 'modules/Balance/BalanceController';
+import { controller as setBetController } from 'modules/Menu/SetBet/MenuSetBetController';
 
 export let model = (() => {
 

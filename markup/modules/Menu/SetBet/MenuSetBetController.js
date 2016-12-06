@@ -1,7 +1,7 @@
 import { model } from 'modules/Model/Model';
-import { view } from 'modules/Menu/SetBet/View';
+import { view } from 'modules/Menu/SetBet/MenuSetBetView';
 
-import { controller as soundController } from 'modules/Sound/Controller';
+import { controller as soundController } from 'modules/Sound/SoundController';
 
 export let controller = (() => {
 

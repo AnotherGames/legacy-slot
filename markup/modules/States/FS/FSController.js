@@ -1,17 +1,17 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
 
-import { view as fsView } from 'modules/States/FS/View';
-import { view as transitionView } from 'modules/Transition/View';
+import { view as fsView } from 'modules/States/FS/FSView';
+import { view as transitionView } from 'modules/Transition/TransitionView';
 
-import { controller as soundController } from 'modules/Sound/Controller';
-import { controller as settingsController } from 'modules/Settings/Controller';
-import { controller as balanceController } from 'modules/Balance/Controller';
-import { controller as footerController } from 'modules/Footer/Controller';
-import { controller as panelController } from 'modules/Panel/Controller';
-import { controller as buttonsController } from 'modules/Buttons/Controller';
-import { controller as rollController } from 'modules/Roll/Controller';
-import { controller as winController } from 'modules/Win/Controller';
+import { controller as soundController } from 'modules/Sound/SoundController';
+import { controller as settingsController } from 'modules/Settings/DesktopSettingsController';
+import { controller as balanceController } from 'modules/Balance/BalanceController';
+import { controller as footerController } from 'modules/Footer/FooterController';
+import { controller as panelController } from 'modules/Panel/PanelController';
+import { controller as buttonsController } from 'modules/Buttons/ButtonsController';
+import { controller as rollController } from 'modules/Roll/RollController';
+import { controller as winController } from 'modules/Win/WinController';
 
 export let controller = (() => {
 
