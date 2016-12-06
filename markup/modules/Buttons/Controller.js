@@ -97,7 +97,7 @@ export let controller = (() => {
             || spinButton.frameName === 'spinEmpty.png') return;
 
             soundController.sounds.playSound('buttonClick');
-            buttonsController.lockButtons();
+            lockButtons();
 
             rollController.startRoll();
             rollController.fastRoll();
@@ -111,6 +111,7 @@ export let controller = (() => {
 
             if (autoButton.frameName === 'stop.png') {
                 autoplayController.stop();
+                if (model.state('ready')) unlockButtons();
             } else {
                 mobileAutoplayController.handle.openPanel({});
             }
