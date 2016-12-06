@@ -160,7 +160,7 @@ export let controller = (() => {
             infoMarkers.forEach((elem) => {
                 elem.frameName = 'marker_off.png';
             });
-            if (counter > 6) {
+            if (counter > 4) {
                 counter = 0;
             } else {
                 counter++;
@@ -179,7 +179,7 @@ export let controller = (() => {
                 elem.frameName = 'marker_off.png';
             });
             if (counter < 1) {
-                counter = 7;
+                counter = 5;
             } else {
                 counter--;
                 infoMarkers[counter + 1].frameName = 'marker_off.png';
