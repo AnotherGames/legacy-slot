@@ -14,7 +14,7 @@ export let request = (() => {
     }
 
     const mode = {
-        normal: 'monsushi4',
+        normal: 'monsushi7',
         fsBonus: 'monsfs4'
     };
 
