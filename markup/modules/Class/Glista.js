@@ -50,17 +50,6 @@ export class Glista {
         this.isPlay = false;
         this.isRemove = false;
 
-        this.pointStartPos = {
-            x: this.elSize.width * -5,
-            y: 0
-        };
-
-        this.pointEndPos = {
-            x: this.elSize.width * 5,
-            y: 0
-        };
-
-
         this.sprites = [];
         this.light = [];
         for (let atlasInd = 1; atlasInd < 7; atlasInd++) {
@@ -132,28 +121,36 @@ export class Glista {
 
         if (this.direction < 0) {
             this.bezierPath = {
-                x: [this.pointEndPos.x],
-                y: [this.pointEndPos.y]
+                x: [this.elSize.width * 5],
+                y: [0]
             };
             for (let pathInd = path.length - 1; pathInd >= 0; pathInd--) {
                 if (typeof (path[pathInd]) !== 'number') continue;
                 this.bezierPath.x.push(this.pointPos[pathInd][ path[pathInd] ].x);
                 this.bezierPath.y.push(this.pointPos[pathInd][ path[pathInd] ].y);
             }
-            this.bezierPath.x.push(this.pointStartPos.x);
-            this.bezierPath.y.push(this.pointStartPos.y);
+            this.bezierPath.x.push(this.elSize.width * -3);
+            this.bezierPath.x.push(this.elSize.width * -4);
+            this.bezierPath.x.push(this.elSize.width * -5);
+            this.bezierPath.y.push(0);
+            this.bezierPath.y.push(0);
+            this.bezierPath.y.push(0);
         } else {
             this.bezierPath = {
-                x: [this.pointStartPos.x],
-                y: [this.pointStartPos.y]
+                x: [this.elSize.width * -5],
+                y: [0]
             };
             for (let pathInd = 0; pathInd < path.length; pathInd++) {
                 if (typeof (path[pathInd]) !== 'number') continue;
                 this.bezierPath.x.push(this.pointPos[pathInd][ path[pathInd] ].x);
                 this.bezierPath.y.push(this.pointPos[pathInd][ path[pathInd] ].y);
             }
-            this.bezierPath.x.push(this.pointEndPos.x);
-            this.bezierPath.y.push(this.pointEndPos.y);
+            this.bezierPath.x.push(this.elSize.width * 3);
+            this.bezierPath.x.push(this.elSize.width * 4);
+            this.bezierPath.x.push(this.elSize.width * 5);
+            this.bezierPath.y.push(0);
+            this.bezierPath.y.push(0);
+            this.bezierPath.y.push(0);
         }
 
         let nodes = [];
@@ -174,7 +171,8 @@ export class Glista {
         this._clock.start();
         this.timer = 0;
         this.progress = 0;
-        let margin = 0.045;
+        let startMargin = 0.035;
+        let margin;
 
 
         let anim = function () {
@@ -185,9 +183,9 @@ export class Glista {
             }
 
             if (_this.progress < 0.5) {
-                margin = 0.045 - 0.015 * _this.progress;
+                margin = startMargin - 0.015 * _this.progress;
             } else {
-                margin = 0.045 - 0.015 * (1 - _this.progress);
+                margin = startMargin - 0.015 * (1 - _this.progress);
             }
 
             for (let spriteInd = 0; spriteInd < 6; spriteInd++) {
