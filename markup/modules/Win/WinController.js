@@ -158,7 +158,7 @@ export let controller = (() => {
             model.data('startFSScreen', data.Screen);
             model.data('firstScreen', data.Screen);
             // Убираем управление с клавиатуры
-            game.input.keyboard.enabled = false;
+            // game.input.keyboard.enabled = false;
             // Запускаем переходной экран
             game.time.events.add(1500, () => {
                 transitionView.fsStart();

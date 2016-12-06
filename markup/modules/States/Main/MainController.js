@@ -187,7 +187,14 @@ export class Main {
 
         let space = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         space.onUp.add(() => {
-            panelController.handle.spin();
+            if ( model.state('transitionScreen') ) {
+                soundController.sounds.playSound('buttonClick');
+                soundController.music.stopMusic('startPerehod');
+                model.el('game').state.start('FS');
+                model.state('transitionScreen', false);
+            } else {
+                panelController.handle.spin();
+            }
         });
 
         let up = game.input.keyboard.addKey(Phaser.Keyboard.UP);

@@ -7,6 +7,7 @@ export let view = (() => {
 
     function fsStart() {
         let game = model.el('game');
+        model.state('transitionScreen', true);
         // Запускаем затемнение
         let darkness = game.add.graphics();
             darkness.beginFill(0x000000);
@@ -25,6 +26,7 @@ export let view = (() => {
                 soundController.sounds.playSound('buttonClick');
                 soundController.music.stopMusic('startPerehod');
                 model.el('game').state.start('FS');
+                model.state('transitionScreen', false);
             });
         }
     }
@@ -123,6 +125,7 @@ export let view = (() => {
             soundController.sounds.playSound('buttonClick');
             soundController.music.stopMusic('startPerehod');
             model.el('game').state.start('FS');
+            model.state('transitionScreen', false);
         });
     }
 
@@ -136,7 +139,13 @@ export let view = (() => {
 
     function fsFinish() {
         let game = model.el('game');
-            game.input.keyboard.enabled = true;
+        // game.input.keyboard.enabled = true;
+        let space = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+        space.onUp.add(() => {
+            soundController.sounds.playSound('buttonClick');
+            soundController.music.stopMusic('finishPerehod');
+            model.el('game').state.start('Main');
+        });
         // Темнота
         let darkness = game.add.graphics();
             darkness.beginFill(0x000000);
