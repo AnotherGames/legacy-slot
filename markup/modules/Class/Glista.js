@@ -63,8 +63,8 @@ export class Glista {
 
         this.sprites = [];
         this.light = [];
-        for (let atlasInd = 0; atlasInd < 6; atlasInd++) {
-            let sprite = this.game.add.sprite( atlasInd * -80, 0, 'glistaAtlas', 5 - atlasInd, param.parent);
+        for (let atlasInd = 0; atlasInd <= 5; atlasInd++) {
+            let sprite = this.game.add.sprite( atlasInd * -80, 0, 'glistaAtlas', `Bullet_${atlasInd}.png`, param.parent);
             sprite.anchor.set(0.7, 0.5);
             sprite.visible = false;
             this.sprites.push(sprite);

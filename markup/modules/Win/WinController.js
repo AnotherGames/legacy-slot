@@ -46,11 +46,33 @@ export let controller = (() => {
         });
     }
 
-    function cleanWin(cleanAlpha = false) {
+    function cleanWin(cleanAlpha = false, normalAnim = true) {
         let container = model.group('winTop');
         // Обнуляем счетчики глист
         model.data('glistaFiredCounter', 0);
         model.data('glistaDoneCounter', 0);
+
+        let leftArr = model.el('leftArr');
+        let rightArr = model.el('rightArr');
+
+        leftArr.forEach((el) => {
+            el.normal();
+        });
+
+        rightArr.forEach((el) => {
+            el.normal();
+        })
+
+        // Перевод в нормальную анимацию
+        if (normalAnim) {
+            let wheels = model.el('wheels');
+            wheels.forEach((wheel) => {
+                wheel.elements.forEach((element) => {
+                    element.normal();
+                });
+            });
+        }
+
         // Если нужно очистить элементы от прозрачности
         if (cleanAlpha) {
             let wheels = model.el('wheels');
@@ -84,18 +106,17 @@ export let controller = (() => {
         }
         let currentLine = winLines[index];
 
-
         if (currentLine) {
             // Если нормальная линия
             if (currentLine.Line > 0) {
                 model.state('axesPlaing', false);
                 view.draw.WinNumber({number: currentLine.Line});
-                view.draw.WinElements({number: currentLine.Line, amount: currentLine.Count, alpha: 0.5});
+                view.draw.WinElements({number: currentLine.Line, amount: currentLine.Count});
                 view.draw.WinGlista({number: currentLine.Line});
                 view.draw.WinLineTable({line: currentLine});
             // Если скаттеры
             } else {
-                view.draw.WinElements({number: currentLine.Line, amount: currentLine.Count, alpha: 0.5});
+                view.draw.WinElements({number: currentLine.Line, amount: currentLine.Count});
                 view.draw.WinLineTable({line: currentLine, scatter: true});
             }
         } else {

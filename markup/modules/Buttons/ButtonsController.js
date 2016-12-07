@@ -47,8 +47,8 @@ export let controller = (() => {
         let menuButton = model.el('menuButton');
 
         let spinButtonWidth = config[model.res].spinButtonWidth;
-        let buttonsDelta = (game.width - model.group('main').width - spinButtonWidth) / 4;
-        let xRight = 3 * buttonsDelta + model.group('main').width + (spinButtonWidth / 2);
+        let buttonsDelta = (game.width - model.el('gameMachine').width - spinButtonWidth) / 4;
+        let xRight = 3 * buttonsDelta + model.el('gameMachine').width + (spinButtonWidth / 2);
         let xLeft = buttonsDelta + spinButtonWidth / 2;
 
         model.data('spinButtonWidth', spinButtonWidth);
@@ -80,12 +80,13 @@ export let controller = (() => {
         let menuButton = model.el('menuButton');
 
         let buttonsDelta = model.data('buttonsDelta');
+        let buttonsDeltaY = buttonsDelta * 0.45;
         let spinButtonWidth = model.data('spinButtonWidth');
 
-        betButton.y = spinButton.y + spinButtonWidth / 2 + buttonsDelta + betButton.width / 2;
-        autoButton.y = spinButton.y - spinButtonWidth / 2 - buttonsDelta - autoButton.width / 2;
-        menuButton.y= autoButton.y - autoButton.width / 2 - buttonsDelta - menuButton.width / 2;
-        soundButton.y = betButton.y + betButton.width / 2 + buttonsDelta + soundButton.width / 2;
+        betButton.y = spinButton.y + spinButtonWidth / 2 + buttonsDeltaY + betButton.width / 2;
+        autoButton.y = spinButton.y - spinButtonWidth / 2 - buttonsDeltaY - autoButton.width / 2;
+        menuButton.y= autoButton.y - autoButton.width / 2 - buttonsDeltaY - menuButton.width / 2;
+        soundButton.y = betButton.y + betButton.width / 2 + buttonsDeltaY + soundButton.width / 2;
 
     }
 

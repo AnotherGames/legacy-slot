@@ -4,6 +4,8 @@ export let view = (() => {
 
     function drawBG() {
         const game = model.el('game');
+        let mainBGSky = game.add.sprite(0, 0, 'mainBGSky');
+        model.el('mainBGSky', mainBGSky);
         let initBG = game.add.sprite(0, 0, 'initBG');
         model.el('initBG', initBG);
         return initBG;

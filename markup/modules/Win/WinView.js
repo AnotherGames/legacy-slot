@@ -30,22 +30,36 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('winTop')
         }) {
-            let gameMachine = model.el('gameMachine');
-            let winSplash = game.add.sprite(0, 0, 'win', null, container);
-                winSplash.anchor.set(0.5);
-                winSplash.x = config[model.res].win[number][ind].x - gameMachine.width / 2;
-                winSplash.y = config[model.res].win[number][ind].y - gameMachine.height / 2 - 25;
-                winSplash.animations.add('win', Phaser.Animation.generateFrameNames('Splash-Splash', 1, 14, '.png', 1), 15, false);
-                winSplash.animations.play('win');
-                winSplash.animations.getAnimation('win').killOnComplete = true;
-            return winSplash;
+            let leftArr = model.el('leftArr');
+            let winSplash = leftArr.filter((el) => {
+                return el.name === number;
+            })[0];
+
+            winSplash.animations.add('win', Phaser.Animation.generateFrameNames('line_splash-' + number + '_', 1, 8, '.png', 1), 15, false);
+            winSplash.animations.play('win');
+            winSplash.animations.getAnimation('win').onComplete.add(() => {
+                winSplash.frameName = 'line_splash-' + number + '_8.png';
+            });
+
+
+            let rightArr = model.el('rightArr');
+            let winSplashRight = rightArr.filter((el) => {
+                return el.name === number;
+            })[0];
+
+            winSplashRight.animations.add('win', Phaser.Animation.generateFrameNames('line_splash-' + number + '_', 1, 8, '.png', 1), 15, false);
+            winSplashRight.animations.play('win');
+            winSplashRight.animations.getAnimation('win').onComplete.add(() => {
+                winSplashRight.frameName = 'line_splash-' + number + '_8.png';
+            });
+
         },
 
         WinNumber: function ({number}) {
             if (number < 0) return;
 
             draw.WinSplash({number, ind: 0});
-            draw.WinSplash({number, ind: 1});
+            // draw.WinSplash({number, ind: 1});
 
         },
 
@@ -76,6 +90,19 @@ export let view = (() => {
                     let element = wheel[coord];
                         element.win();
                         element.show();
+                        element.group.alpha = 1;
+                        element.group.scale.set(0.3);
+                        if (model.desktop) {
+                           game.add.tween(element.group.scale).to({x: 1.2,  y: 1.2}, 700, Phaser.Easing.Bounce.Out, true)
+                               .onComplete.add(() => {
+                                   game.add.tween(element.group.scale).to({x: 1.0,  y: 1.0}, 400, 'Linear', true)
+                               }, this);
+                        } else {
+                           game.add.tween(element.group.scale).to({x: 1.8,  y: 1.8}, 700, Phaser.Easing.Bounce.Out, true)
+                               .onComplete.add(() => {
+                                   game.add.tween(element.group.scale).to({x: 1.5,  y: 1.5}, 400, 'Linear', true)
+                               }, this);
+                        }
                 }
 
             // Если есть скаттеры либо мозги
@@ -88,6 +115,18 @@ export let view = (() => {
                         if (elementName == '10') {
                             element.win();
                             element.show();
+                            element.group.scale.set(0.3);
+                           if (model.desktop) {
+                               game.add.tween(element.group.scale).to({x: 1.2,  y: 1.2}, 700, Phaser.Easing.Bounce.Out, true)
+                                   .onComplete.add(() => {
+                                       game.add.tween(element.group.scale).to({x: 1.0,  y: 1.0}, 400, 'Linear', true)
+                                   }, this);
+                           } else {
+                               game.add.tween(element.group.scale).to({x: 1.7,  y: 1.7}, 700, Phaser.Easing.Bounce.Out, true)
+                                   .onComplete.add(() => {
+                                       game.add.tween(element.group.scale).to({x: 1.5,  y: 1.5}, 400, 'Linear', true)
+                                   }, this);
+                           }
                             // Очищаем поле вручную так как нет глисты которая чистит автоматом
                             game.time.events.add(1000, () => {
                                 winController.cleanWin();
@@ -177,7 +216,7 @@ export let view = (() => {
                     y = 180 * (currentLineY + 0.5) + 135 - gameMachine.height / 2 - 25;
                 } else {
                     x = 256 * (countValue - 0.5) + 140 - gameMachine.width / 2;
-                    y = 240 * (currentLineY + 0.5) + 180 - gameMachine.height / 2 - 25;
+                    y = 240 * (currentLineY + 0.5) + 170 - gameMachine.height / 2 - 25;
                 }
             }
             // Рассчитываем если скаттер
@@ -202,12 +241,12 @@ export let view = (() => {
                     y = 180 * (lastElement + 0.5) + 135 - gameMachine.height / 2 - 25;
                 } else {
                     x = 256 * (lastWheel + 0.5) + 140 - gameMachine.width / 2;
-                    y = 240 * (lastElement + 0.5) + 180 - gameMachine.height / 2 - 25;
+                    y = 240 * (lastElement + 0.5) + 170 - gameMachine.height / 2 - 25;
                 }
             }
 
             // Рисуем саму табличку и текст в зависимости от количества символов
-            let winBG = game.add.sprite(x, y + 4, 'winLine', null, container);
+            let winBG = game.add.sprite(x, y + 5, 'winLine', null, container);
                 winBG.anchor.set(0.5);
             let font;
             if (winValue > 999) {
@@ -217,7 +256,7 @@ export let view = (() => {
             } else {
                 font = '25px Arial, Helvetica';
             }
-            let text = game.add.text(x, y, winValue, {font: font, fill: '#9be20a'}, container);
+            let text = game.add.text(x, y + 7, winValue, {font: font, fill: '#9be20a'}, container);
                 text.anchor.set(0.5);
 
         }

@@ -27,7 +27,7 @@ export let controller = (() => {
     }
 
     function initMobile() {
-        view.draw.MobileFooter({});
+        view.draw.MobileFooter({alphaTop: 0.6, alphaBottom: 0.85});
         view.draw.Time({});
 
         let homeButton = view.draw.HomeButton({});
