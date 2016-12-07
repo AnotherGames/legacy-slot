@@ -84,8 +84,6 @@ export class Preload {
         if (model.mobile) {
             game.load.atlasJSONArray('mobileButtons', 'mobile_buttons/mobileButtons.png', 'mobile_buttons/mobileButtons.json');
         }
-        // all elements
-        game.load.atlasJSONArray('elements', 'elements/elements.png', 'elements/elements.json');
         // Glista
         game.load.image('ligthGlista', 'glista/lightGlista.png');
         game.load.atlasJSONArray('glistaAtlas', 'glista/glista.png', 'glista/glista.json');
