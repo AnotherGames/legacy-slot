@@ -58,6 +58,7 @@ export let controller = (() => {
             let xSide;
             if (model.state('side') === 'left') {
                 model.state('side', 'right');
+                localStorage['side'] = 'right';
                 model.el('settingsHandModeButton').frameName = 'handModeOn.png';
 
                 xSide = model.data('buttonsXLeft');
@@ -66,6 +67,7 @@ export let controller = (() => {
                 game.add.tween(mask).to( { x: model.data('mainXRight') - model.data('mainXLeft') }, time, 'Quart.easeOut', true);
             } else {
                 model.state('side', 'left');
+                localStorage['side'] = 'left';
                 model.el('settingsHandModeButton').frameName = 'handModeOff.png';
 
                 xSide = model.data('buttonsXRight');
@@ -124,9 +126,11 @@ export let controller = (() => {
             sound.sounds.button.play();
             if (model.state('fastRoll') === true) {
                 model.state('fastRoll', false);
+                localStorage['fastRoll'] = false;
                 fastSpinButton.frameName = 'fastSpinOff.png';
             } else {
                 model.state('fastRoll', true);
+                localStorage['fastRoll'] = true;
                 fastSpinButton.frameName = 'fastSpinOn.png';
             }
         },

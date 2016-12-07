@@ -23,10 +23,12 @@ export let settings = (function () {
         });
         $('#fastSpin').on('change', function () {
             model.state('fastRoll', this.checked);
+            localStorage['fastRoll'] = this.checked;
         });
         $('#isAnimations').on('change', function () {
             let isAnim = this.checked;
             model.state('isAnimations', isAnim);
+            localStorage['isAnimations'] = isAnim;
 
             game.spriteAnims.forEach((elem) => {
                 elem.sprite.animations.paused = !isAnim;
@@ -35,6 +37,7 @@ export let settings = (function () {
         $('#isAnimBG').on('change', function () {
             let isAnim = this.checked;
             model.state('isAnimBG', isAnim);
+            localStorage['isAnimBG'] = isAnim;
 
             let animMainBG = model.el('animMainBG');
             let mainBG = model.el('mainBG');
@@ -89,6 +92,7 @@ export let settings = (function () {
         });
         $('#optionAutoplay5').on('change', function () {
             model.state('autoTransititon', this.checked);
+            localStorage['autoTransititon'] = this.checked;
         });
         $('#btnHistory').on('click', function () {
             $('.history').removeClass('closed');

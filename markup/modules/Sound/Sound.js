@@ -27,6 +27,7 @@ export let sound = {
         if (_val === this.volume) return;
 
         model.state('volume', _val);
+        localStorage['volume'] = _val;
 
         this.game.sound.volume = _val;
     },
@@ -42,6 +43,7 @@ export let sound = {
         if (val === this.isMusic) return;
 
         model.state('music', val);
+        localStorage['music'] = val;
 
         let keys = Object.keys(this.music);
         keys.forEach((key) => {
@@ -60,6 +62,7 @@ export let sound = {
         if (val === this.isSound) return;
 
         model.state('sound', val);
+        localStorage['sound'] = val;
 
         let keys = Object.keys(this.sounds);
         keys.forEach((key) => {

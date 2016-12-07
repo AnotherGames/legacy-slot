@@ -69,21 +69,82 @@ export let model = (() => {
         model.data('firstScreen', initData.FirstScreen);
 
         model.state('initScreen', true);
-        model.state('fastRoll', false);
+
+        let fastRoll = false;
+        if (localStorage['fastRoll'] === undefined) {
+            localStorage['fastRoll'] = fastRoll;
+        } else {
+            fastRoll = localStorage['fastRoll'];
+        }
+        model.state('fastRoll', fastRoll);
+
         model.state('ready', true);
         model.state('firstFS', false);
-        model.state('side', 'left');
+
+        let side = 'left';
+        if (localStorage['side'] === undefined) {
+            localStorage['side'] = side;
+        } else {
+            side = localStorage['side'];
+        }
+        model.state('side', side);
+
         model.state('autoPanel', false);
-        model.state('autoTransititon', false);
-        model.state('isAnimations', true);
+
+        let autoTransititon = false;
+        if (localStorage['autoTransititon'] === undefined) {
+            localStorage['autoTransititon'] = autoTransititon;
+        } else {
+            autoTransititon = localStorage['autoTransititon'];
+        }
+        model.state('autoTransititon', autoTransititon);
+
+        let isAnimations = true;
+        if (localStorage['isAnimations'] === undefined) {
+            localStorage['isAnimations'] = isAnimations;
+        } else {
+            isAnimations = localStorage['isAnimations'];
+        }
+        model.state('isAnimations', isAnimations);
+
         model.state('autoEnd', true);
         model.state('fsEnd', true);
         model.state('FSMode', false);
-        model.state('sound', true);
-        model.state('volume', 1);
-        model.state('music', true);
+
+        let isSound = true;
+        if (localStorage['sound'] === undefined) {
+            localStorage['sound'] = isSound;
+        } else {
+            isSound = localStorage['sound'];
+        }
+        model.state('sound', isSound);
+
+        let volume = 1;
+        if (localStorage['volume'] === undefined) {
+            localStorage['volume'] = volume;
+        } else {
+            volume = localStorage['volume'];
+        }
+        model.state('volume', volume);
+
+        let music = true;
+        if (localStorage['music'] === undefined) {
+            localStorage['music'] = music;
+        } else {
+            music = localStorage['music'];
+        }
+        model.state('music', music);
+
         model.state('autoClosed', true);
+
+        let isAnimBG = true;
+        if (localStorage['isAnimBG'] === undefined) {
+            localStorage['isAnimBG'] = isAnimBG;
+        } else {
+            isAnimBG = localStorage['isAnimBG'];
+        }
         model.state('isAnimBG', true);
+
         model.state('autoPanel', false);
         model.state('infoPanelOpen', false);
         model.state('menuOpened', false);

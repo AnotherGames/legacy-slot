@@ -120,6 +120,7 @@ export class Main {
                         lowCount++;
                         if (lowCount > 3) {
                             model.state('isAnimBG', false);
+                            localStorage['isAnimBG'] = false;
                             let animMainBG = model.el('animMainBG');
                             let mainBG = model.el('mainBG');
 
