@@ -1,60 +1,68 @@
-{"frames": {
+{"frames": [
 
-"G_0000_6.png":
 {
-	"frame": {"x":1,"y":1,"w":289,"h":237},
+	"filename": "Bullet_0.png",
+	"frame": {"x":1,"y":1,"w":247,"h":105},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":289,"h":237},
-	"sourceSize": {"w":289,"h":237}
+	"spriteSourceSize": {"x":0,"y":0,"w":247,"h":105},
+	"sourceSize": {"w":247,"h":105}
 },
-"G_0001_5.png":
 {
-	"frame": {"x":1,"y":240,"w":289,"h":237},
+	"filename": "Bullet_1.png",
+	"frame": {"x":1,"y":108,"w":144,"h":84},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":289,"h":237},
-	"sourceSize": {"w":289,"h":237}
+	"spriteSourceSize": {"x":0,"y":0,"w":144,"h":84},
+	"sourceSize": {"w":144,"h":84}
 },
-"G_0002_4.png":
 {
-	"frame": {"x":292,"y":1,"w":289,"h":237},
+	"filename": "Bullet_2.png",
+	"frame": {"x":1,"y":194,"w":144,"h":76},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":289,"h":237},
-	"sourceSize": {"w":289,"h":237}
+	"spriteSourceSize": {"x":0,"y":0,"w":144,"h":76},
+	"sourceSize": {"w":144,"h":76}
 },
-"G_0003_3.png":
 {
-	"frame": {"x":292,"y":240,"w":289,"h":237},
+	"filename": "Bullet_3.png",
+	"frame": {"x":1,"y":272,"w":144,"h":68},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":289,"h":237},
-	"sourceSize": {"w":289,"h":237}
+	"spriteSourceSize": {"x":0,"y":0,"w":144,"h":68},
+	"sourceSize": {"w":144,"h":68}
 },
-"G_0004_2.png":
 {
-	"frame": {"x":583,"y":1,"w":289,"h":237},
+	"filename": "Bullet_4.png",
+	"frame": {"x":1,"y":342,"w":144,"h":58},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":289,"h":237},
-	"sourceSize": {"w":289,"h":237}
+	"spriteSourceSize": {"x":0,"y":0,"w":144,"h":58},
+	"sourceSize": {"w":144,"h":58}
 },
-"G_0005_1.png":
 {
-	"frame": {"x":583,"y":240,"w":289,"h":237},
+	"filename": "Bullet_5.png",
+	"frame": {"x":1,"y":402,"w":144,"h":44},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":289,"h":237},
-	"sourceSize": {"w":289,"h":237}
-}},
+	"spriteSourceSize": {"x":0,"y":0,"w":144,"h":44},
+	"sourceSize": {"w":144,"h":44}
+},
+{
+	"filename": "Bullet_6.png",
+	"frame": {"x":1,"y":448,"w":135,"h":27},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":135,"h":27},
+	"sourceSize": {"w":135,"h":27}
+}],
 "meta": {
 	"app": "http://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "glista.png",
 	"format": "RGBA8888",
-	"size": {"w":873,"h":478},
-	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:558aa5186dc2540cd933514072b2c627:c1cc341021e610a9872be123bec67a32:a154080e3d5f2529f8c63bd0ad9a68d5$"
+	"size": {"w":256,"h":512},
+	"scale": "0.4",
+	"smartupdate": "$TexturePacker:SmartUpdate:2f0b8e659fd250e574ac058aef5a2701:11d98f0e5d3776a8bd2e1f36daf2f940:86697a0589e803528f684a3ea309d93d$"
 }
 }
