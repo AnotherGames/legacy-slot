@@ -74,7 +74,12 @@ export let model = (() => {
         if (localStorage['fastRoll'] === undefined) {
             localStorage['fastRoll'] = fastRoll;
         } else {
-            fastRoll = localStorage['fastRoll'];
+            if (localStorage['fastRoll'] === 'true') {
+                fastRoll = true;
+            } else
+            if (localStorage['fastRoll'] === 'false') {
+                fastRoll = false;
+            }
         }
         model.state('fastRoll', fastRoll);
 
@@ -95,7 +100,12 @@ export let model = (() => {
         if (localStorage['autoTransititon'] === undefined) {
             localStorage['autoTransititon'] = autoTransititon;
         } else {
-            autoTransititon = localStorage['autoTransititon'];
+            if (localStorage['autoTransititon'] === 'true') {
+                autoTransititon = true;
+            } else
+            if (localStorage['autoTransititon'] === 'false') {
+                autoTransititon = false;
+            }
         }
         model.state('autoTransititon', autoTransititon);
 
@@ -103,7 +113,12 @@ export let model = (() => {
         if (localStorage['isAnimations'] === undefined) {
             localStorage['isAnimations'] = isAnimations;
         } else {
-            isAnimations = localStorage['isAnimations'];
+            if (localStorage['autoTransititon'] === 'true') {
+                autoTransititon = true;
+            } else
+            if (localStorage['autoTransititon'] === 'false') {
+                autoTransititon = false;
+            }
         }
         model.state('isAnimations', isAnimations);
 
@@ -115,7 +130,12 @@ export let model = (() => {
         if (localStorage['sound'] === undefined) {
             localStorage['sound'] = isSound;
         } else {
-            isSound = localStorage['sound'];
+            if (localStorage['sound'] === 'true') {
+                isSound = true;
+            } else
+            if (localStorage['sound'] === 'false') {
+                isSound = false;
+            }
         }
         model.state('sound', isSound);
 
@@ -131,7 +151,12 @@ export let model = (() => {
         if (localStorage['music'] === undefined) {
             localStorage['music'] = music;
         } else {
-            music = localStorage['music'];
+            if (localStorage['music'] === 'true') {
+                music = true;
+            } else
+            if (localStorage['music'] === 'false') {
+                music = false;
+            }
         }
         model.state('music', music);
 
@@ -141,9 +166,14 @@ export let model = (() => {
         if (localStorage['isAnimBG'] === undefined) {
             localStorage['isAnimBG'] = isAnimBG;
         } else {
-            isAnimBG = localStorage['isAnimBG'];
+            if (localStorage['isAnimBG'] === 'true') {
+                isAnimBG = true;
+            } else
+            if (localStorage['isAnimBG'] === 'false') {
+                isAnimBG = false;
+            }
         }
-        model.state('isAnimBG', true);
+        model.state('isAnimBG', isAnimBG);
 
         model.state('autoPanel', false);
         model.state('infoPanelOpen', false);
