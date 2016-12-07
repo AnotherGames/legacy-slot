@@ -186,17 +186,41 @@ export let view = (() => {
             coinSumValue = model.balance('coinSum'),
             betSumValue = model.balance('betSum')
         }) {
-
+            const game = model.el('game');
             let coinSum = model.el('coinSum'),
                 betSum = model.el('betSum');
-            coinSum.text = `${coinSumValue.toFixed(0)}`;
             betSum.text = `${betSumValue.toFixed(0)}`;
+
+            let currBalance = +coinSum.text;
+            let plusBalance = coinSumValue - currBalance;
+            let timeLength = 500;
+            let _clock = game.time.create(true);
+            _clock.add(timeLength, () => {}, this);
+            _clock.start();
+
+            let anim = function () {
+                let timer = timeLength - _clock.duration;
+                let progress = timer / timeLength;
+                if (progress > 1) {
+                    progress = 1;
+                }
+                let newBalance = currBalance + plusBalance * progress;
+                coinSum.text = `${newBalance.toFixed(0)}`;
+
+                if (progress === 1) {
+                    game.frameAnims.splice(game.frameAnims.indexOf(anim), 1);
+                    coinSum.text = `${coinSumValue.toFixed(0)}`;
+                }
+
+            };
+            game.frameAnims.push(anim);
 
             let coinSumText = model.el('coinSumText'),
                 betSumText = model.el('betSumText'),
                 balanceCoinContainer = model.group('balanceCoin');
 
 
+            coinSum.text = `${coinSumValue.toFixed(0)}`;
             _calcTextPosition([[coinSumText, coinSum], [betSumText, betSum]], balanceCoinContainer);
 
         },
@@ -207,19 +231,43 @@ export let view = (() => {
             betCashValue = model.balance('betCash'),
             winCashValue = model.balance('winCash')
         }) {
-
+            const game = model.el('game');
             let coinCash = model.el('coinCash'),
                 betCash = model.el('betCash'),
                 winCash = model.el('winCash');
-            coinCash.text = `${currencySymbol} ${coinCashValue.toFixed(2)}`;
             betCash.text = `${currencySymbol} ${betCashValue.toFixed(2)}`;
             winCash.text = `${currencySymbol} ${winCashValue.toFixed(2)}`;
+
+            let currBalance = +coinCash.text.substr(2);
+            let plusBalance = coinCashValue - currBalance;
+            let timeLength = 500;
+            let _clock = game.time.create(true);
+            _clock.add(timeLength, () => {}, this);
+            _clock.start();
+
+            let anim = function () {
+                let timer = timeLength - _clock.duration;
+                let progress = timer / timeLength;
+                if (progress > 1) {
+                    progress = 1;
+                }
+                let newBalance = currBalance + plusBalance * progress;
+                coinCash.text = `${currencySymbol} ${newBalance.toFixed(2)}`;
+
+                if (progress === 1) {
+                    game.frameAnims.splice(game.frameAnims.indexOf(anim), 1);
+                    coinCash.text = `${currencySymbol} ${coinCashValue.toFixed(2)}`;
+                }
+
+            };
+            game.frameAnims.push(anim);
 
             let coinCashText = model.el('coinCashText'),
                 betCashText = model.el('betCashText'),
                 winCashText = model.el('winCashText'),
                 balanceCashContainer = model.group('balanceCash');
 
+            coinCash.text = `${currencySymbol} ${coinCashValue.toFixed(2)}`;
             _calcTextPosition([[coinCashText, coinCash], [betCashText, betCash], [winCashText, winCash]], balanceCashContainer);
 
         },
@@ -230,17 +278,40 @@ export let view = (() => {
             coinValueAmount = model.balance('coinValue'),
             betValueAmount = model.balance('betValue'),
         }) {
-
+            const game = model.el('game');
             let coinSum = model.el('coinSum'),
                 betSum = model.el('betSum'),
                 coinValue = model.el('coinValue'),
                 betValue = model.el('betValue');
 
-            coinSum.text = `${coinSumValue.toFixed(0)}`;
+            // coinSum.text = `${coinSumValue.toFixed(0)}`;
             betSum.text = `${betSumValue.toFixed(0)}`;
             coinValue.text = `${coinValueAmount.toFixed(2)}`;
             betValue.text = `${betValueAmount}`;
 
+            let currBalance = +coinSum.text;
+            let plusBalance = coinSumValue - currBalance;
+            let timeLength = 500;
+            let _clock = game.time.create(true);
+            _clock.add(timeLength, () => {}, this);
+            _clock.start();
+
+            let anim = function () {
+                let timer = timeLength - _clock.duration;
+                let progress = timer / timeLength;
+                if (progress > 1) {
+                    progress = 1;
+                }
+                let newBalance = currBalance + plusBalance * progress;
+                coinSum.text = `${newBalance.toFixed(0)}`;
+
+                if (progress === 1) {
+                    game.frameAnims.splice(game.frameAnims.indexOf(anim), 1);
+                    coinSum.text = `${coinSumValue.toFixed(0)}`;
+                }
+
+            };
+            game.frameAnims.push(anim);
         },
 
         FSDesktopBalance: function({
