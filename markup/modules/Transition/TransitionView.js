@@ -1,6 +1,7 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
 
+import { controller as keyboardController } from 'modules/Keyboard/KeyboardController'
 import { controller as soundController } from 'modules/Sound/SoundController';
 
 export let view = (() => {
@@ -140,12 +141,7 @@ export let view = (() => {
     function fsFinish() {
         let game = model.el('game');
         // game.input.keyboard.enabled = true;
-        let space = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-        space.onUp.add(() => {
-            soundController.sounds.playSound('buttonClick');
-            soundController.music.stopMusic('finishPerehod');
-            model.el('game').state.start('Main');
-        });
+        keyboardController.initFsKey();
         // Темнота
         let darkness = game.add.graphics();
             darkness.beginFill(0x000000);

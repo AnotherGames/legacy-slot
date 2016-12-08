@@ -16,6 +16,7 @@ import { controller as mobileSettingsController } from 'modules/Menu/Settings/Me
 import { controller as mobileAutoplayController } from 'modules/Menu/Autoplay/MenuAutoplayController';
 import { controller as mobileSetBetController } from 'modules/Menu/SetBet/MenuSetBetController';
 import { controller as fsController } from 'modules/States/FS/FSController';
+import { controller as keyboardController } from 'modules/Keyboard/KeyboardController'
 
 export class Main {
     constructor(game) {
@@ -87,7 +88,7 @@ export class Main {
 
         // Инициализируем управление клавиатурой
         if (model.desktop) {
-            this.initKeys();
+            keyboardController.initMainKeys();
         }
 
         // Первая темнота

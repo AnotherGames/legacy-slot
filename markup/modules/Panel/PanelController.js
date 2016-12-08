@@ -9,7 +9,7 @@ export let controller = (() => {
 
     function drawButtons() {
         let game = model.el('game');
-
+        // game.input.onTap(() => {console.log('input');})
         view.draw.PanelBG({});
         view.draw.LinesNumber({});
         view.draw.AutoContainer({});
