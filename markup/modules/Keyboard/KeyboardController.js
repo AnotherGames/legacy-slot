@@ -49,7 +49,8 @@ export let controller = (() => {
 
     }
 
-    function iniFsKeys() {
+    function initFsKeys() {
+      let game = model.el('game');
         let space = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         space.onUp.add(() => {
             soundController.sounds.playSound('buttonClick');
@@ -60,7 +61,7 @@ export let controller = (() => {
 
     return {
         initMainKeys,
-        iniFsKeys
+        initFsKeys
     }
 
 })();
