@@ -56,7 +56,10 @@ export class Preload {
         game.load.image('mainBG', 'bg/mainBG.png');
         game.load.image('mainBGSky', 'bg/mainBGSky.png');
         game.load.image('zaglushka', 'bg/zaglushka.png');
-        game.load.atlasJSONArray('clouds', 'bg/clouds.png', 'bg/clouds.json');
+        // game.load.atlasJSONArray('clouds', 'bg/clouds.png', 'bg/clouds.json');
+        game.load.image('cloud', 'bg/cloud.png');
+        game.load.image('luchi', 'bg/luchi.png');
+        game.load.image('fonLine', 'bg/fonLine.png');
         game.load.atlasJSONArray('candle', 'bg/candle.png', 'bg/candle.json');
         game.load.image('gameMachine', 'game/gameMachine.png');
         game.load.image('gameBG', 'game/gameBG.png');
@@ -96,9 +99,10 @@ export class Preload {
     loadFSAssets() {
         const game = model.el('game');
         game.load.image('fsBG', 'bg/fsBG.png');
-        game.load.image('axe', 'fs/axe.png');
-        game.load.image('axeSmall', 'fs/axeSmall.png');
-        game.load.image('skull', 'fs/skull.png');
+        game.load.atlasJSONArray('baraban', 'fs/baraban.png', 'fs/baraban.json');
+        // game.load.image('axe', 'fs/axe.png');
+        // game.load.image('axeSmall', 'fs/axeSmall.png');
+        // game.load.image('skull', 'fs/skull.png');
         game.load.image('plus3', 'fs/plus3.png');
         if (model.mobile) {
             game.load.image('fsTotalTable', 'fs/fsTotalTable.png');

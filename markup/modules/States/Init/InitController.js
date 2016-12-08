@@ -2,6 +2,7 @@ import { model } from 'modules/Model/Model';
 import { view } from 'modules/States/Init/InitView';
 import { Element } from 'modules/Class/Element';
 import { controller as soundController} from 'modules/Sound/SoundController';
+import { view as transitionView} from 'modules/Transition/TransitionView';
 
 export class Init {
     constructor(game) {
@@ -15,11 +16,15 @@ export class Init {
     }
 
     create() {
+        let game = model.el('game');
 
         this.checkSettingsWidth();
 
         view.drawBG();
         view.drawLogo();
+        view.drawBaraban();
+
+        transitionView.addLines({container: game.add.group()});
 
         let initPlay = view.drawPlay();
             initPlay.inputEnabled = true;

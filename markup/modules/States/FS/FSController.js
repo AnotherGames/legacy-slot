@@ -79,26 +79,26 @@ export let controller = (() => {
         let brain = model.el('flyingBrain');
         let currMulti = model.data('fsMulti');
 
-        if (multiValue > currMulti) {
-            if (currMulti === 6) {
-                let zombie = model.el('zombie');
-                zombie.Up(() => {
-                    brain.Up(() => {
-                        zombie.Up();
-                        soundController.sounds.playSound('zombie1');
-                    });
-                });
-                model.data('fsMulti', multiValue);
-            } else {
-                model.el('zombie').Up();
-                model.data('fsMulti', multiValue);
-            }
-        }
+        // if (multiValue > currMulti) {
+        //     if (currMulti === 6) {
+        //         let zombie = model.el('zombie');
+        //         zombie.Up(() => {
+        //             brain.Up(() => {
+        //                 zombie.Up();
+        //                 soundController.sounds.playSound('zombie1');
+        //             });
+        //         });
+        //         model.data('fsMulti', multiValue);
+        //     } else {
+        //         model.el('zombie').Up();
+        //         model.data('fsMulti', multiValue);
+        //     }
+        // }
 
-        if (currMulti < 7) {
-            brain.Win();
-            searchBrains({});
-        }
+        // if (currMulti < 7) {
+        //     brain.Win();
+        //     searchBrains({});
+        // }
 
         fsView.draw.CountPlus3({});
     }
@@ -220,11 +220,11 @@ export class FS {
         fsView.draw.machineMask({});
 
         // Добавляем Мозги на экран
-        fsView.draw.Brain();
+        // fsView.draw.Brain();
         // Добавляем Зомби на экран
-        fsView.draw.Zombie(this.fsMulti);
+        // fsView.draw.Zombie(this.fsMulti);
         // Добавляем свечки
-        this.positionCandles();
+        // this.positionCandles();
 
         // Рисуем множитель
         fsView.draw.Multi({
