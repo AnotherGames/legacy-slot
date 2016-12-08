@@ -264,18 +264,20 @@ export let controller = (() => {
         },
 
         stop: function() {
-        let autoButtonDesk = model.el('autoButtonDesk');
-            autoButtonDesk.frameName = 'autoOn.png';
-            autoButtonDesk.freezeFrames = true
-        let stopButtonDesk = model.el('stopButtonDesk');
-            stopButtonDesk.frameName = 'stopOn.png';
-            stopButtonDesk.freezeFrames = true
+            let game = model.el('game');
+            let autoButtonDesk = model.el('autoButtonDesk');
+                autoButtonDesk.frameName = 'autoOn.png';
+                autoButtonDesk.freezeFrames = true
+            let stopButtonDesk = model.el('stopButtonDesk');
+                stopButtonDesk.frameName = 'stopOn.png';
+                stopButtonDesk.freezeFrames = true
 
-            if(model.state('ready')){
-              view.unlockButtons();
-            }
+                if(model.state('ready')){
+                    game.input.keyboard.enabled = true;
+                    view.unlockButtons();
+                }
 
-            view.draw.removeCount();
+                view.draw.removeCount();
         },
 
         change: function(count) {
