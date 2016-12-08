@@ -36,7 +36,8 @@ export class Init {
                 view.playYoyoTween({});
             });
 
-        if (!model.state('mobile')) {
+
+        if (!model.state('mobile')) { //deskot
             let soundContainer = game.add.group();
             soundContainer.position.set(game.width - 500, game.height - 100);
             let style = { font: "bold 42px Arial", fill: "#f3eba0"};
@@ -64,6 +65,10 @@ export class Init {
             this.sprite2 = game.add.sprite(310, 25, graphics2.generateTexture(), null, soundContainer);
             this.sprite2.anchor.set(0.5);
             graphics2.destroy();
+
+            if(model.state('volume') == 0) {
+                this.switchSound();
+            }
         }
 
         view.firstDarkness();
@@ -75,12 +80,14 @@ export class Init {
             game.sound.volume = 0;
             this.sprite2.x = 270;
             model.state('volume', 0);
+            localStorage['volume'] = 0;
             this.textOff.setStyle(this.styleOn);
             this.textOn.setStyle(this.styleOff);
         } else {
             game.sound.volume = 1;
             this.sprite2.x = 310;
             model.state('volume', 1);
+            localStorage['volume'] = 1;
             this.textOff.setStyle(this.styleOff);
             this.textOn.setStyle(this.styleOn);
         }

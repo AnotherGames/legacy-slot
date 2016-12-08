@@ -113,11 +113,11 @@ export let model = (() => {
         if (localStorage['isAnimations'] === undefined) {
             localStorage['isAnimations'] = isAnimations;
         } else {
-            if (localStorage['autoTransititon'] === 'true') {
-                autoTransititon = true;
+            if (localStorage['isAnimations'] === 'true') {
+                isAnimations = true;
             } else
-            if (localStorage['autoTransititon'] === 'false') {
-                autoTransititon = false;
+            if (localStorage['isAnimations'] === 'false') {
+                isAnimations = false;
             }
         }
         model.state('isAnimations', isAnimations);

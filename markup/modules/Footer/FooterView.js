@@ -93,7 +93,7 @@ export let view = (() => {
             const game = model.el('game');
             const soundButton = game.add.button(x, y, 'footerButtons', null, null, 'soundOn.png', 'sound.png', null, null, container);
             soundButton.anchor.set(0.5);
-            if (model.state('volume')) {
+            if (model.state('volume') > 0) {
                 soundButton.frameName = 'soundOn.png';
             } else {
                 soundButton.frameName = 'soundOff.png';

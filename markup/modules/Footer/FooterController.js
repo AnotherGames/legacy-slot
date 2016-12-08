@@ -46,7 +46,7 @@ export let controller = (() => {
             $('#isAnimations').prop('checked', model.state('isAnimations'));
             $('#isAnimBG').prop('checked', model.state('isAnimBG'));
             $('#optionAutoplay4').prop('checked', model.state('autoStopWhenFS'));
-            $('#optionAutoplay5').prop('checked', model.state('optionAutoplay5'));
+            $('#optionAutoplay5').prop('checked', model.state('autoTransititon'));
 
             $('#settings').removeClass('closed');
             $('#darkness').removeClass('closed');
