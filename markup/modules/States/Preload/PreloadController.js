@@ -60,6 +60,8 @@ export class Preload {
         game.load.image('cloud', 'bg/cloud.png');
         game.load.image('luchi', 'bg/luchi.png');
         game.load.image('fonLine', 'bg/fonLine.png');
+        game.load.image('gradient', 'bg/gradient.png');
+        game.load.atlasJSONArray('pole', 'bg/pole.png', 'bg/pole.json');
         game.load.atlasJSONArray('candle', 'bg/candle.png', 'bg/candle.json');
         game.load.image('gameMachine', 'game/gameMachine.png');
         game.load.image('gameBG', 'game/gameBG.png');

@@ -39,11 +39,23 @@ export let view = (() => {
             let mainBGSky = game.add.sprite(0, 0, 'mainBGSky', null, container);
             model.el('mainBGSky', mainBGSky);
 
+            let gradient = game.add.sprite(0, 0, 'gradient', null, container);
+            gradient.alpha = 0.1;
+            model.el('gradient', gradient);
+            game.add.tween(gradient).to({alpha: 0.9}, 50000, 'Linear', true, 0, -1, true);
+
+            for (let i = 0; i < 5; i++) {
+                transitionView.addCloud({container: model.group('bg')});
+            }
+
             let mainBG = game.add.sprite(0, 0, 'mainBG', null, container);
             model.el('mainBG', mainBG);
 
             let logoZaglushka = game.add.sprite(0, game.height * 0.84, 'zaglushka', null, container);
             model.el('logoZaglushka', logoZaglushka);
+
+            // let pole = game.add.sprite(0, game.height * 0.84, 'pole', null, container);
+            // model.el('pole', pole);
 
             // if (model.state('isAnimBG')) {
             //     mainBG.visible = false;
@@ -61,6 +73,7 @@ export let view = (() => {
         }) {
             let gameBG = game.add.sprite(0, 0, 'gameBG', null, container);
                 gameBG.anchor.set(0.5);
+                // gameBG.visible = false;
             model.el('gameBG', gameBG);
 
             let gameMachine = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachine', null, container);

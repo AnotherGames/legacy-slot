@@ -327,7 +327,7 @@ export let view = (() => {
 
     function addCloud({
         x = model.el('game').rnd.integerInRange(0, model.el('game').width),
-        container = model.group('cloudContainer')
+        container = model.group('bg')
     }) {
         let game = model.el('game');
         let random = game.rnd.integerInRange(3, 10);
@@ -340,7 +340,7 @@ export let view = (() => {
 
         let time = game.rnd.integerInRange(40, 60);
         let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
-        let delta;
+        // let delta;
         if (model.desktop) {
             cloud.y = cloud.y = cloud.y + game.rnd.integerInRange(0, 250);
         } else {
@@ -349,17 +349,19 @@ export let view = (() => {
         cloud.x = x;
 
         if (container === model.group('bg')){
-            if (side === 'left') {
-                cloud.x = -cloud.width;
-            } else {
-                cloud.x = game.width + cloud.width;
-            }
+            cloud.x = (side === 'left') ? -cloud.width : game.width + cloud.width;
+            // if (side === 'left') {
+            //     cloud.x = -cloud.width;
+            // } else {
+            //     cloud.x = game.width + cloud.width;
+            // }
         }
-        if (side === 'left') {
-            delta = game.width + cloud.width;
-        } else {
-            delta = -cloud.width;
-        }
+        let delta = (side === 'left') ? game.width + cloud.width : -cloud.width;
+        // if (side === 'left') {
+        //     delta = game.width + cloud.width;
+        // } else {
+        //     delta = -cloud.width;
+        // }
 
         game.add.tween(cloud).to({x: delta}, time * 1000, 'Linear', true)
             .onComplete.add(() => {
