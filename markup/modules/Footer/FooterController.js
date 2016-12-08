@@ -79,10 +79,12 @@ export let controller = (() => {
             let soundButton = model.el('soundButton');
             if (model.state('globalSound')){
               model.state('globalSound', false)
+              localStorage['globalSound'] = false;
                 soundButton.frameName = 'soundOff.png';
                 soundController.volume.switchVolume()
             } else {
                 model.state('globalSound', true)
+                localStorage['globalSound'] = true;
                 soundButton.frameName = 'sound.png';
                 soundController.volume.switchVolume();
             }
@@ -94,9 +96,11 @@ export let controller = (() => {
             // Ищменяем состояние fastRoll и меняем фрейм кнопки
             if (model.state('fastRoll')) {
                 model.state('fastRoll', false);
+                localStorage['globalSound'] = false;
                 fastButton.frameName = 'fastSpin.png';
             } else {
                 model.state('fastRoll', true);
+                localStorage['globalSound'] = true;
                 fastButton.frameName = 'fastSpinOff.png';
             }
         },

@@ -67,6 +67,7 @@ export let controller = (() => {
             if(!model.el(music)){
                 model.el(music, game.add.audio(music, 0, true));
             };
+
             if (!model.state('music')) return;
 
             if(model.el(music).paused){

@@ -43,6 +43,7 @@ export class Main {
 
         soundController.music.stopMusic('initFon');
         // Играем фоновую музыку
+
         soundController.music.playMusic('fon');
 
         // Отрисовуем основной контейнер
@@ -105,45 +106,52 @@ export class Main {
         let lowCount = 0;
 
         // Проверка на ФПС (убрать и переделать!!!)
-        let checkFPS = function () {
-            if ( !model.state('isFirstAutoChangeAnimBG') ) return;
-            if ( !model.state('isAnimBG') ) return;
-            if (lastTime + 1000 > new Date().getTime() ) {
-                fps++;
-            } else {
-                if (fps < 10) {
-                    console.log('FPS:', fps);
-                    lowCount++;
-                    if (lowCount > 3) {
-                        model.state('isAnimBG', false);
-                        let animMainBG = model.el('animMainBG');
-                        let mainBG = model.el('mainBG');
+        if (model.state('isFirstAutoChangeAnimBG')
+            && model.state('isAnimBG')
+        ) {
+            let lastTime = new Date().getTime();
+            let fps = 1;
+            let lowCount = 0;
 
-                        mainBG.visible = true;
-                        animMainBG.visible = false;
-
-                        model.state('isFirstAutoChangeAnimBG', false);
-                        console.log('Auto Change AnimBG.');
-                    }
+            let checkFPS = function () {
+                if (lastTime + 1000 > new Date().getTime() ) {
+                    fps++;
                 } else {
-                    if (lowCount > 0) {
-                        lowCount--;
+                    if (fps < 20) {
+                        console.log('FPS:', fps);
+                        lowCount++;
+                        if (lowCount > 3) {
+                            model.state('isAnimBG', false);
+                            localStorage['isAnimBG'] = false;
+                            let animMainBG = model.el('animMainBG');
+                            let mainBG = model.el('mainBG');
+
+                            mainBG.visible = true;
+                            animMainBG.visible = false;
+
+                            model.state('isFirstAutoChangeAnimBG', false);
+                            console.log('Auto Change AnimBG.');
+                        }
+                    } else {
+                        if (lowCount > 0) {
+                            lowCount--;
+                        }
                     }
+                    lastTime = new Date().getTime();
+                    fps = 1;
                 }
-                lastTime = new Date().getTime();
-                fps = 1;
-            }
-        };
-        game.frameAnims.push(checkFPS);
+            };
+            game.frameAnims.push(checkFPS);
+        }
+
     }
 
     update() {
-        // Обновляем время
-        footerController.updateTime({});
-        // Проигрываем анимацию
-        model.el('game').frameAnims.forEach((anim) => {
-            anim();
-        });
+      footerController.updateTime({});
+      const game = model.el('game');
+      game.frameAnims.forEach((anim) => {
+          anim();
+      });
     }
 
     positionMainContainer() {
