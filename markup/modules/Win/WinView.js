@@ -1,6 +1,7 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
 import { Glista } from 'modules/Class/Glista';
+import { Element } from 'modules/Class/Element';
 
 import { controller as soundController } from 'modules/Sound/SoundController';
 import { controller as winController } from 'modules/Win/WinController';
@@ -9,6 +10,29 @@ import { controller as fsController } from 'modules/States/FS/FSController';
 export let view = (() => {
 
     let draw = {
+
+        UpWinContainer: function ({
+            game = model.el('game'),
+            container = model.group('winUp')
+        }) {
+            let elSize = config[model.res].elements;
+            let upElements = [];
+            for (var i = 0; i < 5; i++) {
+                upElements.push([]);
+                for (var j = 0; j < 3; j++) {
+                    let el = new Element({
+                        container,
+                        position: {
+                            x: elSize.width * (i + 0.5 - 2.5),
+                            y: elSize.height * (j + 0.5 - 1.5)
+                        }
+                    });
+                    el.hide(0);
+                    upElements[i].push(el);
+                }
+            }
+            model.el('upElements', upElements);
+        },
 
         TotalWin: function ({
             winTotalData,
@@ -68,8 +92,17 @@ export let view = (() => {
             amount,
             alpha = false,
             wheels = model.el('wheels'),
+            upElements = model.el('upElements'),
             game = model.el('game')
         }) {
+
+            wheels.forEach((wheel, wheelIndex) => {
+                wheel.elements.forEach((element, elementIndex) => {
+                    element.hide(0);
+                    upElements[wheelIndex][elementIndex].show();
+                    upElements[wheelIndex][elementIndex].play(`${element.active}-n`)
+                });
+            });
 
             // Затемняем элементы
             if (alpha) {
@@ -85,9 +118,10 @@ export let view = (() => {
                 let line = model.data('lines')[number - 1];
 
                 for (let col = 0; col < amount; col++) {
-                    let wheel = wheels[col].elements;
+                    let wheelElements = wheels[col].elements;
+                    let upWheelElements = upElements[col];
                     let coord = line[col].Y;
-                    let element = wheel[coord];
+                    let element = upWheelElements[coord];
                         element.win();
                         element.show();
                         element.group.alpha = 1;
@@ -98,9 +132,9 @@ export let view = (() => {
                                    game.add.tween(element.group.scale).to({x: 1.0,  y: 1.0}, 400, 'Linear', true)
                                }, this);
                         } else {
-                           game.add.tween(element.group.scale).to({x: 1.8,  y: 1.8}, 700, Phaser.Easing.Bounce.Out, true)
+                           game.add.tween(element.group.scale).to({x: 1.5,  y: 1.5}, 700, Phaser.Easing.Bounce.Out, true)
                                .onComplete.add(() => {
-                                   game.add.tween(element.group.scale).to({x: 1.5,  y: 1.5}, 400, 'Linear', true)
+                                   game.add.tween(element.group.scale).to({x: 1,  y: 1}, 400, 'Linear', true)
                                }, this);
                         }
                 }
@@ -108,11 +142,12 @@ export let view = (() => {
             // Если есть скаттеры либо мозги
             } else {
                 let lvlCounter = 0;
-                wheels.forEach((wheelObj) => {
-                    wheelObj.elements.forEach((element) => {
-                        let elementName = parseInt(element.sprites[element.active - 1].animations.currentAnim.name);
+                wheels.forEach((wheelObj, wheelIndex) => {
+                    wheelObj.elements.forEach((wheelElement, elementIndex) => {
+                        let elementName = parseInt(wheelElement.sprites[wheelElement.active - 1].animations.currentAnim.name);
                         // Показываем выигрышные скаттеры
                         if (elementName == '10') {
+                            let element = upElements[wheelIndex][elementIndex];
                             element.win();
                             element.show();
                             element.group.scale.set(0.3);
@@ -122,9 +157,9 @@ export let view = (() => {
                                        game.add.tween(element.group.scale).to({x: 1.0,  y: 1.0}, 400, 'Linear', true)
                                    }, this);
                            } else {
-                               game.add.tween(element.group.scale).to({x: 1.7,  y: 1.7}, 700, Phaser.Easing.Bounce.Out, true)
+                               game.add.tween(element.group.scale).to({x: 1.5,  y: 1.5}, 700, Phaser.Easing.Bounce.Out, true)
                                    .onComplete.add(() => {
-                                       game.add.tween(element.group.scale).to({x: 1.5,  y: 1.5}, 400, 'Linear', true)
+                                       game.add.tween(element.group.scale).to({x: 1,  y: 1}, 400, 'Linear', true)
                                    }, this);
                            }
                             // Очищаем поле вручную так как нет глисты которая чистит автоматом

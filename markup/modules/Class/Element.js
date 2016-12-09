@@ -59,9 +59,9 @@ export class Element {
         this.play(`${this.active}-n`);
     }
 
-    hide() {
+    hide(alpha = 0.5) {
         // Делаем элемент полупрозрачным
-        this.activeSprite.alpha = 0.5;
+        this.activeSprite.alpha = alpha;
     }
 
     show() {

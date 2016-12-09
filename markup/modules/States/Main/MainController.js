@@ -2,6 +2,7 @@ import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
 
 import { view as mainView } from 'modules/States/Main/MainView';
+import { view as winView } from 'modules/Win/WinView';
 
 import { controller as soundController } from 'modules/Sound/SoundController';
 import { controller as settingsController } from 'modules/Settings/DesktopSettingsController';
@@ -50,8 +51,9 @@ export class Main {
         mainView.draw.mainBG({});
         mainView.draw.addPole({});
         mainView.draw.mainContainer({});
-        mainView.draw.lineNumbers({});
         mainView.draw.machineContainer({});
+        mainView.draw.lineNumbers({});
+        winView.draw.UpWinContainer({});
 
         // Инициализируем крутки
         rollController.init();

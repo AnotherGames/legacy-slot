@@ -108,7 +108,7 @@ export let view = (() => {
 
         lineNumbers: function ({
             game = model.el('game'),
-            container = model.group('main')
+            container = model.group('numbers')
         }) {
             let gameMachine = model.el('gameMachine');
 
@@ -192,7 +192,7 @@ export let view = (() => {
                .lineTo((line[3].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[3].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + 50)
                .lineTo((line[4].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[4].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + 50)
            return lineShape;
-       },
+        },
 
         machineContainer: function ({
             game = model.el('game'),
@@ -202,8 +202,16 @@ export let view = (() => {
             container.addAt(machineGroup, 1);
             model.group('machine', machineGroup);
 
+            let numbersContainer = game.add.group();
+            container.addAt(numbersContainer, 3);
+            model.group('numbers', numbersContainer);
+
+            let winUp = game.add.group();
+            container.addAt(winUp, 4);
+            model.group('winUp', winUp);
+
             let winTop = game.add.group();
-            container.addAt(winTop, 3);
+            container.addAt(winTop, 5);
             model.group('winTop', winTop);
 
             machineGroup.glistaLightContainer = game.add.group();

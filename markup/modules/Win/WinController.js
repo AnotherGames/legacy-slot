@@ -52,6 +52,20 @@ export let controller = (() => {
         model.data('glistaFiredCounter', 0);
         model.data('glistaDoneCounter', 0);
 
+        // Прячем верхний экран, показываем нижний
+        let upElements = model.el('upElements');
+        upElements.forEach((upWheel) => {
+            upWheel.forEach((upEl) => {
+                upEl.hide(0);
+            })
+        })
+        let wheels = model.el('wheels');
+        wheels.forEach((wheel) => {
+            wheel.elements.forEach((el) => {
+                el.show();
+            });
+        });
+
         let leftArr = model.el('leftArr');
         let rightArr = model.el('rightArr');
 
