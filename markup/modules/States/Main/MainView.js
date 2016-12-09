@@ -54,9 +54,6 @@ export let view = (() => {
             let logoZaglushka = game.add.sprite(0, game.height * 0.84, 'zaglushka', null, container);
             model.el('logoZaglushka', logoZaglushka);
 
-            // let pole = game.add.sprite(0, game.height * 0.84, 'pole', null, container);
-            // model.el('pole', pole);
-
             // if (model.state('isAnimBG')) {
             //     mainBG.visible = false;
             // } else {
@@ -67,13 +64,41 @@ export let view = (() => {
             // }
         },
 
+        addPole: function ({
+            game = model.el('game'),
+            container = model.group('bg')
+        }) {
+            let pole = game.add.sprite(0, game.height * 0.84, 'pole', null, container);
+            pole.scale.set(1.2);
+            model.el('pole', pole);
+            pole.animations.add('go');
+            pole.animations.play('go', 10, true);
+
+            let time = game.rnd.integerInRange(20, 35);
+            let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
+
+            pole.x = (side === 'left') ? -pole.width : game.width + pole.width;
+            let delta = (side === 'left') ? game.width + pole.width : -pole.width;
+            if (side === 'right') {
+                pole.width = -pole.width;
+            }
+
+            game.add.tween(pole).to({x: delta}, time * 1000, 'Linear', true)
+                .onComplete.add(() => {
+                    pole.destroy();
+                    game.time.events.add(3000, () => {
+                        this.addPole({});
+                    });
+                }, this);
+
+        },
+
         mainContainer: function ({
             game = model.el('game'),
             container = model.group('main')
         }) {
             let gameBG = game.add.sprite(0, 0, 'gameBG', null, container);
                 gameBG.anchor.set(0.5);
-                // gameBG.visible = false;
             model.el('gameBG', gameBG);
 
             let gameMachine = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachine', null, container);

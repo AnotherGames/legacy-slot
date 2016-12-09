@@ -350,18 +350,8 @@ export let view = (() => {
 
         if (container === model.group('bg')){
             cloud.x = (side === 'left') ? -cloud.width : game.width + cloud.width;
-            // if (side === 'left') {
-            //     cloud.x = -cloud.width;
-            // } else {
-            //     cloud.x = game.width + cloud.width;
-            // }
         }
         let delta = (side === 'left') ? game.width + cloud.width : -cloud.width;
-        // if (side === 'left') {
-        //     delta = game.width + cloud.width;
-        // } else {
-        //     delta = -cloud.width;
-        // }
 
         game.add.tween(cloud).to({x: delta}, time * 1000, 'Linear', true)
             .onComplete.add(() => {

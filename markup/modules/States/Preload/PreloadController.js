@@ -65,6 +65,7 @@ export class Preload {
         game.load.atlasJSONArray('candle', 'bg/candle.png', 'bg/candle.json');
         game.load.image('gameMachine', 'game/gameMachine.png');
         game.load.image('gameBG', 'game/gameBG.png');
+        game.load.image('gameBGfs', 'game/gameBGfs.png');
         game.load.image('gameShadow', 'game/gameShadow.png');
         game.load.image('popup', 'other/popup.png');
         game.load.image('closed', 'other/closed.png');
