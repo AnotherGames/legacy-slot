@@ -14,8 +14,10 @@ export let controller = (() => {
               if(game.sound.volume > 0){
                   game.sound.volume = 0;
                   model.state('globalSound', false)
+                  localStorage['globalSound'] = false;
               } else {
                   game.sound.volume = volume.getVolume();
+                  localStorage['globalSound'] = true;
                   model.state('globalSound', true)
               }
           },
@@ -32,13 +34,13 @@ export let controller = (() => {
     const sounds = {
 
         playSound: function(sound, duration = 0){
-            if(!model.state('sound')) return;
 
             let game = model.el('game');
             if(!model.el(sound)){
                 model.el(sound, game.add.audio(sound));
             };
 
+            if(!model.state('sound')) return;
             // this will remove multiplier clicking sounds
             // if(!model.el(sound).isPlaying){
             //     model.el(sound).play();

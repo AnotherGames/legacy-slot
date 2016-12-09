@@ -38,11 +38,15 @@ export class Init {
         this.drawSoundTrigger();
 
         view.firstDarkness();
+
+        if(!model.state('globalSound')){
+            this.sprite2.x = 270;
+            this.textOff.setStyle(this.styleOn);
+            this.textOn.setStyle(this.styleOff);
+        }
     }
 
     switchSound() {
-
-        let game = model.el('game');
         if (model.state('globalSound')) {
             soundController.volume.switchVolume()
             this.sprite2.x = 270;
