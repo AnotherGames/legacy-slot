@@ -1,6 +1,7 @@
 import { config } from '../../modules/Util/Config';
 import { Element } from '../../modules/Class/Element';
 import { model } from 'modules/Model/Model';
+import { checkParam } from 'modules/Util/CheckParam';
 
 export class Wheel {
     get elements() {
@@ -26,32 +27,52 @@ export class Wheel {
         currentScreen: Array
     }   */
     constructor(param) {
-        if (typeof (param) !== 'object') {
-            console.error('constructor: param is not object');
-            return;
-        }
-        if (param.game === undefined) {
-            console.error('constructor: param.game is undefined', param);
-            return;
-        }
-        if (param.parent === undefined) {
-            console.error('constructor: param.parent is undefined', param);
-            return;
-        }
-        if (typeof (param.position) !== 'object') {
-            console.error('constructor: param.position is undefined', param);
-            return;
-        }
+        if (!checkParam(param, {
+            game: {
+                class: Phaser.Game
+            },
+            parent: {
+                class: Phaser.Group
+            },
+            position: {
+                type: 'object'
+            },
+            elSize: {
+                type: 'object'
+            },
+            currentScreen: {}
+        }, 'Wheel module') ) return;
+        // if (typeof (param) !== 'object') {
+        //     console.error('constructor: param is not object');
+        //     return;
+        // }
+        // if (param.game === undefined) {
+        //     console.error('constructor: param.game is undefined', param);
+        //     return;
+        // }
+        // if (param.parent === undefined) {
+        //     console.error('constructor: param.parent is undefined', param);
+        //     return;
+        // }
+        // if (typeof (param.position) !== 'object') {
+        //     console.error('constructor: param.position is undefined', param);
+        //     return;
+        // }
+        // if (typeof (param.elSize) !== 'object') {
+        //     console.error('constructor: param.elSize is undefined', param);
+        //     return;
+        // }
+        // if (param.currentScreen === undefined) {
+        //     console.error('constructor: param.elSize is undefined', param);
+        //     return;
+        // }
+
         if (typeof (param.position.x) !== 'number') {
             console.error('constructor: param.position.x is undefined', param);
             return;
         }
         if (typeof (param.position.y) !== 'number') {
             console.error('constructor: param.position.y is undefined', param);
-            return;
-        }
-        if (typeof (param.elSize) !== 'object') {
-            console.error('constructor: param.elSize is undefined', param);
             return;
         }
         if (typeof (param.elSize.width) !== 'number') {
@@ -62,10 +83,7 @@ export class Wheel {
             console.error('constructor: param.elSize.height is undefined', param);
             return;
         }
-        if (param.currentScreen === undefined) {
-            console.error('constructor: param.elSize is undefined', param);
-            return;
-        }
+
         // инитим входящие параметры
         this.game = param.game;
         this.parent = param.parent;
