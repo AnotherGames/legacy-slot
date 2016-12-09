@@ -99,13 +99,12 @@ export let model = (() => {
         let gameSideLeft = (localStorage['gameSideLeft'] == 'false') ? false : true ;
         model.state('gameSideLeft', gameSideLeft);
 
-        let volume = (localStorage['volume'] == 'undefined') ? 100 : localStorage['volume'];
+        let volume = (localStorage['volume'] == 'undefined') ? 100 : +localStorage['volume'];
         soundController.volume.setVolume(volume);
 
         let globalSound = (localStorage['globalSound'] == 'false') ? false : true;
         model.state('globalSound', globalSound);
         (globalSound) ? soundController.volume.changeVolume(volume) : soundController.volume.changeVolume(0);
-
 
         model.state('initScreen', true);
         model.state('ready', true);
@@ -114,9 +113,6 @@ export let model = (() => {
         model.state('fs:end', true);
         model.state('transitionScreen', false);
         model.state('fs', false);
-        // model.state('sound', true);
-        // model.state('volume', 1);
-        // model.state('music', true);
         model.state('infoPanelOpen', false);
         model.state('menuOpened', false);
         model.state('isFirstAutoChangeAnimBG', true);
