@@ -127,7 +127,7 @@ export let view = (() => {
 
     function fsFinish() {
         let game = model.el('game');
-
+        // game.input.keyboard.enabled = true;
         keyboardController.initFsKeys();
         // Темнота
         let darkness = game.add.graphics();

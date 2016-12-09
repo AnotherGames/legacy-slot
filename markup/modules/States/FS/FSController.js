@@ -67,7 +67,7 @@ export let controller = (() => {
         model.state('fs:end', true);
         model.state('fs', false);
         model.updateBalance({endFS: true});
-        model.el('brainPanel').destroy();
+        // model.el('brainPanel').destroy();
     }
 
     function brain() {
@@ -76,8 +76,8 @@ export let controller = (() => {
         let multiValue = rollData.FsBonus.Multi;
 
         fsMulti.frameName = `multi${multiValue}.png`;
-        let brain = model.el('flyingBrain');
-        let currMulti = model.data('fsMulti');
+        // let brain = model.el('flyingBrain');
+        // let currMulti = model.data('fsMulti');
 
         // if (multiValue > currMulti) {
         //     if (currMulti === 6) {
@@ -263,7 +263,7 @@ export class FS {
 
     positionMainContainer() {
         let game = model.el('game');
-        model.group('main').x = game.width - model.group('main').width / 2;
+        model.group('main').x = (model.desktop) ? game.world.centerX : game.width - model.group('main').width / 2;
         model.group('main').y = game.world.centerY + config[model.res].mainContainer.y;
     }
 

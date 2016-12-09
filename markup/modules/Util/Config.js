@@ -16,7 +16,7 @@ export let config = {
         }
     },
     glista: {
-        time: 2000
+        time: 1500
     },
     fullHD: {
         mainContainer: {

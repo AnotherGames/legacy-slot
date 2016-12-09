@@ -57,15 +57,10 @@ export let controller = (() => {
 
         view.draw.PanelBG({
             x: model.group('main').x,
-            deltaY: -20,
             frameName: 'uiFS'
         });
         view.draw.LinesNumber({x: 55, y: 115});
-        view.draw.fsCandle({})
-            .scale.set(0.7);
-        game.time.events.add(time, () => {
-            view.draw.fsCandle({x: 878, y: 18});
-        });
+
     }
 
     const handle = {
