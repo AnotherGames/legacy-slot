@@ -8,7 +8,7 @@ export let controller = (function () {
     function initDesktopSettings(game) {
         $('#volume').on('input change', function () {
             let soundButton = model.el('soundButton');
-            if (this.value == 0) {
+            if (this.value === 0) {
                 soundButton.frameName = 'soundOff.png';
             } else {
                 soundButton.frameName = 'soundOn.png';
@@ -18,7 +18,7 @@ export let controller = (function () {
             localStorage['volume'] = this.value;
         });
         $('#checkSound').on('change', function () {
-          localStorage['sound'] = this.checked;
+            localStorage['sound'] = this.checked;
             model.state('sound', this.checked);
         });
         $('#checkMusic').on('change', function () {
@@ -50,7 +50,7 @@ export let controller = (function () {
         });
         $('#isAnimBG').on('change', function () {
             let isAnim = this.checked;
-            localStorage['isAnimBG'] = this.checked;
+            localStorage['isAnimBG'] = isAnim
             model.state('isAnimBG', isAnim);
 
             let animMainBG = model.el('animMainBG');
@@ -105,7 +105,7 @@ export let controller = (function () {
             console.log(this.id, this.checked);
         });
         $('#optionAutoplay5').on('change', function () {
-            localStorage['optionAutoplay5'] = this.checked;
+            localStorage['autoTransititon'] = this.checked;
             model.state('autoTransititon', this.checked);
         });
         $('#btnHistory').on('click', function () {

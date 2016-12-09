@@ -51,14 +51,14 @@ export let controller = (() => {
             soundController.sounds.playSound('buttonClick');
 
             // Обновляем состояния чекбоксов в настройках
-            $('#volume').prop('value', game.sound.volume * 100);
+            $('#volume').prop('value', soundController.volume.getVolume() * 100);
             $('#checkSound').prop('checked', model.state('sound'));
             $('#checkMusic').prop('checked', model.state('music'));
             $('#fastSpin').prop('checked', model.state('fastRoll'));
-            $('#isAnimations').prop('checked', model.state('isAnimations'));
+            // $('#isAnimations').prop('checked', model.state('isAnimations'));
             $('#isAnimBG').prop('checked', model.state('isAnimBG'));
             $('#optionAutoplay4').prop('checked', model.state('autoStopWhenFS'));
-            $('#optionAutoplay5').prop('checked', model.state('optionAutoplay5'));
+            $('#optionAutoplay5').prop('checked', model.state('autoTransititon'));
 
             // Открываем настройки
             $('#settings').removeClass('closed');
@@ -78,13 +78,9 @@ export let controller = (() => {
         Sound: function () {
             let soundButton = model.el('soundButton');
             if (model.state('globalSound')){
-              model.state('globalSound', false)
-              localStorage['globalSound'] = false;
                 soundButton.frameName = 'soundOff.png';
                 soundController.volume.switchVolume()
             } else {
-                model.state('globalSound', true)
-                localStorage['globalSound'] = true;
                 soundButton.frameName = 'sound.png';
                 soundController.volume.switchVolume();
             }
@@ -96,11 +92,11 @@ export let controller = (() => {
             // Ищменяем состояние fastRoll и меняем фрейм кнопки
             if (model.state('fastRoll')) {
                 model.state('fastRoll', false);
-                localStorage['globalSound'] = false;
+                localStorage['fastRoll'] = false;
                 fastButton.frameName = 'fastSpin.png';
             } else {
                 model.state('fastRoll', true);
-                localStorage['globalSound'] = true;
+                localStorage['fastRoll'] = true;
                 fastButton.frameName = 'fastSpinOff.png';
             }
         },

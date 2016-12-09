@@ -76,29 +76,43 @@ export let model = (() => {
         model.state('autoplay:cashUp', false);
         model.state('autoplay:cashDown', false);
         model.state('autoplay:cashRoll', false);
-        model.state('autoTransititon', false);
         model.state('autoplay:panelClosed', true);
         model.data('autoplay:count', 0);
         model.data('autoplay:startCash', 0);
 
-        let sound = (localStorage['sound']) ? localStorage['sound'] : true;
+
+        let autoTransititon = (localStorage['autoTransititon'] == 'false') ? false : true ;
+        model.state('autoTransititon', autoTransititon);
+
+        let sound = (localStorage['sound'] == 'false') ? false : true;
         model.state('sound', sound);
 
-        let music = (localStorage['music']) ? localStorage['music'] : true;
+        let music = (localStorage['music'] == 'false') ? false : true;
         model.state('music', music);
-        
-        let globalSound = (localStorage['globalSound']) ? localStorage['globalSound'] : true;
-        soundController.volume.setVolume(localStorage['volume']);
-        model.state('globalSound', globalSound);
 
-        model.state('fastRoll', false);
-        model.state('gameSideLeft', true);
+        let fastRoll = (localStorage['fastRoll'] == 'false') ? false : true ;
+        model.state('fastRoll', fastRoll);
+
+        let isAnimBG = (localStorage['isAnimBG'] == 'false') ? false : true ;
+        model.state('isAnimBG', isAnimBG);
+
+        let gameSideLeft = (localStorage['gameSideLeft'] == 'false') ? false : true ;
+        model.state('gameSideLeft', gameSideLeft);
+
+        let volume = (localStorage['volume'] == 'undefined') ? 100 : localStorage['volume'];
+        soundController.volume.setVolume(volume);
+
+        let globalSound = (localStorage['globalSound'] == 'false') ? false : true;
+        model.state('globalSound', globalSound);
+        (globalSound) ? soundController.volume.changeVolume(volume) : soundController.volume.changeVolume(0);
+
+
         model.state('initScreen', true);
-        model.state('isAnimBG', true);
         model.state('ready', true);
         model.state('firstFS', false);
         model.state('isAnimations', true);
         model.state('fs:end', true);
+        model.state('transitionScreen', false);
         model.state('fs', false);
         // model.state('sound', true);
         // model.state('volume', 1);
@@ -106,7 +120,6 @@ export let model = (() => {
         model.state('infoPanelOpen', false);
         model.state('menuOpened', false);
         model.state('isFirstAutoChangeAnimBG', true);
-        model.state('transitionScreen', false);
     }
 
     function initSettings(settings) {
