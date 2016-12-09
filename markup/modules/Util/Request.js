@@ -14,7 +14,7 @@ export let request = (() => {
     }
 
     const mode = {
-        normal: 'snailnorm2',
+        normal: 'snailnorm3',
         fsBonus: 'snailfs2'
     };
 

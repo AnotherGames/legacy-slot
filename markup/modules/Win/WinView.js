@@ -146,7 +146,7 @@ export let view = (() => {
                     wheelObj.elements.forEach((wheelElement, elementIndex) => {
                         let elementName = parseInt(wheelElement.sprites[wheelElement.active - 1].animations.currentAnim.name);
                         // Показываем выигрышные скаттеры
-                        if (elementName == '10') {
+                        if (elementName == '10' || elementName == '11') {
                             let element = upElements[wheelIndex][elementIndex];
                             element.win();
                             element.show();
@@ -170,18 +170,11 @@ export let view = (() => {
                         }
                         // Если выпали мозги на фри-спинах
                         if (elementName == '11') {
-                            element.win();
                             // Отыгрываем эффекты при выпадении мозгов
                             if(lvlCounter == 0){
                                 fsController.brain();
                                 lvlCounter++;
                             }
-                            // Увеличиваем мозги
-                            game.add.tween(element.group.scale)
-                                .to({x: 1.7, y: 1.7}, 700, 'Linear', true)
-                                .onComplete.add(() => {
-                                    game.add.tween(element.group.scale).to({x: 1, y: 1}, 200, 'Linear', true);
-                                });
                         }
                     });
                 });

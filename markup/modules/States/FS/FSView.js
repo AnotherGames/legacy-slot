@@ -41,8 +41,20 @@ export let view = (() => {
             let mainBGSky = game.add.sprite(0, 0, 'mainBGSky', null, container);
             model.el('mainBGSky', mainBGSky);
 
+            let gradient = game.add.sprite(0, 0, 'gradient', null, container);
+            gradient.alpha = 0.1;
+            model.el('gradient', gradient);
+            game.add.tween(gradient).to({alpha: 0.9}, 50000, 'Linear', true, 0, -1, true);
+
+            for (let i = 0; i < 5; i++) {
+                transitionView.addCloud({container: model.group('bg')});
+            }
+
             let mainBG = game.add.sprite(0, 0, 'fsBG', null, container);
             model.el('mainBG', mainBG);
+
+            let logoZaglushka = game.add.sprite(0, game.height * 0.84, 'zaglushka', null, container);
+            model.el('logoZaglushka', logoZaglushka);
 
             // if (model.state('isAnimBG')) {
             //     mainBG.visible = false;
@@ -99,7 +111,7 @@ export let view = (() => {
 
         lineNumbers: function ({
             game = model.el('game'),
-            container = model.group('main')
+            container = model.group('numbers')
         }) {
             let gameMachine = model.el('gameMachine');
 
@@ -137,8 +149,16 @@ export let view = (() => {
             container.addAt(machineGroup, 1);
             model.group('machine', machineGroup);
 
+            let numbersContainer = game.add.group();
+            container.addAt(numbersContainer, 3);
+            model.group('numbers', numbersContainer);
+
+            let winUp = game.add.group();
+            container.addAt(winUp, 4);
+            model.group('winUp', winUp);
+
             let winTop = game.add.group();
-            container.addAt(winTop, 2);
+            container.addAt(winTop, 5);
             model.group('winTop', winTop);
 
             machineGroup.glistaLightContainer = game.add.group();
@@ -284,8 +304,8 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('panel'),
             start = 15,
-            fontDesktop = '80',
-            fontMobile = '50'
+            fontDesktop = '80px Helvetica, Arial',
+            fontMobile = '50px Helvetica, Arial'
         }) {
             let x, y, font;
             if (model.mobile) {
@@ -295,13 +315,14 @@ export let view = (() => {
                 let countBG = game.add.sprite(x, y - 5, 'fsTotalTable', null, container);
                 countBG.anchor.set(0.5);
             } else {
-                x = 662;
-                y = 94;
+                x = 665;
+                y = 97;
                 font = fontDesktop;
             }
-            let fsCount = game.add.bitmapText(x, y, 'fsLevelNumbers', start, font, container);
+            // let fsCount = game.add.bitmapText(x, y, 'fsLevelNumbers', start, font, container);
+            let fsCount = game.add.text(x, y, start, {font: '80px Helvetica, Arial', fill: '#e8b075', align: 'center'}, container);
                 fsCount.anchor.set(0.5)
-            model.el('fs:count', fsCount);
+                model.el('fs:count', fsCount);
         },
 
         BrainLevel: function({
@@ -374,10 +395,20 @@ export let view = (() => {
                 x = 660;
                 y = 100;
             }
-            let fsCountBG = game.add.spine(x, y, 'fsCount');
-            container.add(fsCountBG);
-                fsCountBG.setAnimationByName(0, 'w-0', false);
-            model.el('fsCountBG', fsCountBG);
+            // let fsCountBG = game.add.spine(x, y, 'fsCount');
+            // container.add(fsCountBG);
+            //     fsCountBG.setAnimationByName(0, 'w-0', false);
+            // model.el('fsCountBG', fsCountBG);
+            let fsCountBG = game.add.sprite(x, y, 'fsCountBG', null, container);
+                fsCountBG.anchor.set(0.5);
+                fsCountBG.scale.set(1.2);
+                model.el('fsCountBG', fsCountBG);
+
+            // let fsCount = model.el('fsCount');
+                // container.swap(fsCount, fsCountBG);
+
+            fsCountBG.animations.add('bang');
+            fsCountBG.animations.play('bang', 12, false);
 
             game.time.events.add(500, () => {
                 fsCountBG.destroy();

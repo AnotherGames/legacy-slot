@@ -3,6 +3,7 @@ import { config } from 'modules/Util/Config';
 
 import { view as fsView } from 'modules/States/FS/FSView';
 import { view as transitionView } from 'modules/Transition/TransitionView';
+import { view as winView } from 'modules/Win/WinView';
 
 import { controller as soundController } from 'modules/Sound/SoundController';
 import { controller as settingsController } from 'modules/Settings/DesktopSettingsController';
@@ -76,6 +77,7 @@ export let controller = (() => {
         let multiValue = rollData.FsBonus.Multi;
 
         fsMulti.frameName = `multi${multiValue}.png`;
+        fsView.draw.CountPlus3({});
         // let brain = model.el('flyingBrain');
         // let currMulti = model.data('fsMulti');
 
@@ -100,7 +102,6 @@ export let controller = (() => {
         //     searchBrains({});
         // }
 
-        fsView.draw.CountPlus3({});
     }
 
     function searchBrains({
@@ -189,9 +190,11 @@ export class FS {
 
         // Отрисовуем основной контейнер
         fsView.draw.mainBG({});
+        fsView.draw.addPole({});
         fsView.draw.mainContainer({});
-        fsView.draw.lineNumbers({});
         fsView.draw.machineContainer({});
+        fsView.draw.lineNumbers({});
+        winView.draw.UpWinContainer({});
 
         // Инициализируем крутки
         rollController.init();
@@ -235,7 +238,7 @@ export class FS {
             start: this.fsCount
         });
         // Рисуем счетчик мозгов
-        fsView.draw.BrainLevel({});
+        // fsView.draw.BrainLevel({});
         // Если сохранненая сессия, то переключаем счетчик мозгов
         if (this.fsLevel > 0) {
             controller.searchBrains({

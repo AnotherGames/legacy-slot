@@ -169,6 +169,7 @@ export let view = (() => {
 
         let luchi = game.add.sprite(game.world.centerX, game.world.centerY + 150, 'luchi', null, transitionContainer);
         luchi.anchor.set(0.5);
+        model.el('luchi', luchi);
 
         let transitionBG = game.add.sprite(0, 0, 'initBG', null, transitionContainer);
         model.el('transitionBG', transitionBG);
@@ -392,7 +393,7 @@ export let view = (() => {
                 lineSprite.x = game.rnd.integerInRange(0, game.width);
                 lineSprite.alpha = game.rnd.integerInRange(3, 10) / 10;
                 let curX = lineSprite.x;
-                game.add.tween(lineSprite).to({x: game.rnd.integerInRange(curX - 8, curX + 8), alpha: lineSprite.alpha - 0.2}, 30, 'Linear', true, 0, 5, true);
+                game.add.tween(lineSprite).to({x: game.rnd.integerInRange(curX - 3, curX + 3), alpha: lineSprite.alpha - 0.2}, 30, 'Linear', true, 0, 5, true);
             });
         });
 
