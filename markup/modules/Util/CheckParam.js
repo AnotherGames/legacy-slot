@@ -3,12 +3,12 @@ let _checkAttr = function (param, attr, check, msg) {
         if (!attr.some(function (item) {
             return check(param, item);
         }) ) {
-            console.error(msg);
+            console.error('CheckParam', msg);
             return false;
         }
     } else
     if (!check(param, attr)) {
-        console.error(msg);
+        console.error('CheckParam', msg);
         return false;
     }
     return true;
@@ -31,26 +31,26 @@ export let checkParam = function (param, check, errorMsg) {
                     isCheck = _checkAttr(param[paramKey], check[paramKey].class, (_instance, _class) => {
                         if (_instance instanceof _class) return true;
                         else return false;
-                    }, { error: 'CheckParam: ('+paramKey+') class is incorrect.', msg: errorMsg, param});
+                    }, { error: '('+paramKey+') class is incorrect.', msg: errorMsg, param});
                     if (!isCheck) return false;
                     break;
                 case 'type':
                     isCheck = _checkAttr(param[paramKey], check[paramKey].type, (_param, _check) => {
                         if (typeof(_param) === _check.toLowerCase()) return true;
                         else return false;
-                    }, { error: 'CheckParam: ('+paramKey+') type is incorrect.', msg: errorMsg, param});
+                    }, { error: '('+paramKey+') type is incorrect.', msg: errorMsg, param});
                     if (!isCheck) return false;
                     break;
                 case 'attr':
                     for (let attrObjKey in check[paramKey].attr) {
                         if (!param[paramKey][attrObjKey]) {
-                            console.error('CheckParam: attribute ('+attrObjKey+') in ('+paramKey+') is undefined.', errorMsg, param);
+                            console.error('attribute ('+attrObjKey+') in ('+paramKey+') is undefined.', errorMsg, param);
                             return false;
                         }
                         isCheck = _checkAttr(param[paramKey][attrObjKey], check[paramKey].attr[attrObjKey], (_param, _check) => {
                             if (_param === _check) return true;
                             else return false;
-                        }, { error: 'CheckParam: attribute ('+attrObjKey+') in ('+paramKey+') is incorrect.', msg: errorMsg, param});
+                        }, { error: 'attribute ('+attrObjKey+') in ('+paramKey+') is incorrect.', msg: errorMsg, param});
                         if (!isCheck) return false;
                     }
                     break;
