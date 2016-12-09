@@ -60,7 +60,7 @@ export let view = (() => {
         }) {
             let soundButton = game.add.sprite(x, y, 'mobileButtons', 'sound.png', container);
                 soundButton.anchor.set(0.5);
-            if (!model.state('sound') && !model.state('music')) {
+            if (!model.state('globalSound')) {
                 soundButton.frameName = 'soundOut.png';
             }
             model.el('soundButton', soundButton);
