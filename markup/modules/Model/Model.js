@@ -99,7 +99,7 @@ export let model = (() => {
         let gameSideLeft = (localStorage['gameSideLeft'] == 'false') ? false : true ;
         model.state('gameSideLeft', gameSideLeft);
 
-        let volume = (localStorage['volume'] == 'undefined') ? 100 : localStorage['volume'];
+        let volume = (localStorage['volume'] == 'undefined') ? 100 : +localStorage['volume'];
         soundController.volume.setVolume(volume);
 
         let globalSound = (localStorage['globalSound'] == 'false') ? false : true;
