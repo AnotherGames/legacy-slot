@@ -103,7 +103,7 @@ export let controller = (() => {
             } else {
                 soundButton.frameName = 'soundOn.png';
                 model.state('sound', true)
-                localStorage['sound'] = false;
+                localStorage['sound'] = true;
             }
 
         },
@@ -119,7 +119,7 @@ export let controller = (() => {
             } else {
                 musicButton.frameName = 'musicOn.png';
                 model.state('music', true);
-                localStorage['music'] = false;
+                localStorage['music'] = true;
                 soundController.music.playMusic('fon')
             }
         },
