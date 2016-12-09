@@ -1,5 +1,6 @@
 import { controller as balanceController } from 'modules/Balance/BalanceController';
 import { controller as setBetController } from 'modules/Menu/SetBet/MenuSetBetController';
+import { controller as soundController } from 'modules/Sound/SoundController'
 
 export let model = (() => {
 
@@ -80,21 +81,28 @@ export let model = (() => {
         model.data('autoplay:count', 0);
         model.data('autoplay:startCash', 0);
 
-        model.state('sound', true);
-        model.state('music', true);
-        model.state('globalSound', true);
-        model.state('initScreen', true);
+        let sound = (localStorage['sound']) ? localStorage['sound'] : true;
+        model.state('sound', sound);
+
+        let music = (localStorage['music']) ? localStorage['music'] : true;
+        model.state('music', music);
+        
+        let globalSound = (localStorage['globalSound']) ? localStorage['globalSound'] : true;
+        soundController.volume.setVolume(localStorage['volume']);
+        model.state('globalSound', globalSound);
+
         model.state('fastRoll', false);
+        model.state('gameSideLeft', true);
+        model.state('initScreen', true);
+        model.state('isAnimBG', true);
         model.state('ready', true);
         model.state('firstFS', false);
-        model.state('gameSideLeft', true);
         model.state('isAnimations', true);
         model.state('fs:end', true);
         model.state('fs', false);
-        model.state('sound', true);
-        model.state('volume', 1);
-        model.state('music', true);
-        model.state('isAnimBG', true);
+        // model.state('sound', true);
+        // model.state('volume', 1);
+        // model.state('music', true);
         model.state('infoPanelOpen', false);
         model.state('menuOpened', false);
         model.state('isFirstAutoChangeAnimBG', true);

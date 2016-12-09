@@ -43,6 +43,7 @@ export class Main {
 
         soundController.music.stopMusic('initFon');
         // Играем фоновую музыку
+
         soundController.music.playMusic('fon');
 
         // Отрисовуем основной контейнер
@@ -140,12 +141,11 @@ export class Main {
     }
 
     update() {
-        // Обновляем время
-        footerController.updateTime({});
-        // Проигрываем анимацию
-        model.el('game').frameAnims.forEach((anim) => {
-            anim();
-        });
+      footerController.updateTime({});
+      const game = model.el('game');
+      game.frameAnims.forEach((anim) => {
+          anim();
+      });
     }
 
     positionMainContainer() {

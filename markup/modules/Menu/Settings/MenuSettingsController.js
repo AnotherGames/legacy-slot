@@ -64,6 +64,7 @@ export let controller = (() => {
             let xSide;
             if (model.state('gameSideLeft')) {
                 model.state('gameSideLeft', false);
+                localStorage['gameSideLeft'] = false;
                 model.el('settingsHandModeButton').frameName = 'handModeOn.png';
 
                 xSide = model.data('buttonsXLeft');
@@ -71,6 +72,7 @@ export let controller = (() => {
                 game.add.tween(mask).to( { x: model.data('mainXRight') - model.data('mainXLeft') }, time, 'Quart.easeOut', true);
             } else {
                 model.state('gameSideLeft', true);
+                localStorage['gameSideLeft'] = true;
                 model.el('settingsHandModeButton').frameName = 'handModeOff.png';
 
                 xSide = model.data('buttonsXRight');
@@ -97,10 +99,11 @@ export let controller = (() => {
             if (model.state('sound')) {
                 soundButton.frameName = 'soundOff.png';
                 model.state('sound', false)
+                localStorage['sound'] = false;
             } else {
                 soundButton.frameName = 'soundOn.png';
                 model.state('sound', true)
-                soundController.sounds.playSound('buttonClick');
+                localStorage['sound'] = false;
             }
 
         },
@@ -111,10 +114,12 @@ export let controller = (() => {
             if (model.state('music')) {
                 musicButton.frameName = 'musicOff.png';
                 model.state('music', false);
+                localStorage['music'] = false;
                 soundController.music.stopMusic('fon')
             } else {
                 musicButton.frameName = 'musicOn.png';
                 model.state('music', true);
+                localStorage['music'] = false;
                 soundController.music.playMusic('fon')
             }
         },
@@ -123,9 +128,11 @@ export let controller = (() => {
             soundController.sounds.playSound('buttonClick');
             if (model.state('fastRoll') === true) {
                 model.state('fastRoll', false);
+                localStorage['fastRoll'] = false;
                 fastSpinButton.frameName = 'fastSpinOff.png';
             } else {
                 model.state('fastRoll', true);
+                localStorage['fastRoll'] = false;
                 fastSpinButton.frameName = 'fastSpinOn.png';
             }
         },
