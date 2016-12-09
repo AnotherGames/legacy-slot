@@ -42,14 +42,6 @@ export let controller = (function () {
                 fastButton.frameName = 'fastSpin.png';
             }
         });
-        $('#isAnimations').on('change', function () {
-            let isAnim = this.checked;
-            model.state('isAnimations', isAnim);
-
-            game.spriteAnims.forEach((elem) => {
-                elem.sprite.animations.paused = !isAnim;
-            });
-        });
         $('#isAnimBG').on('change', function () {
             let isAnim = this.checked;
             localStorage['isAnimBG'] = isAnim

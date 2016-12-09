@@ -55,7 +55,6 @@ export let controller = (() => {
             $('#checkSound').prop('checked', model.state('sound'));
             $('#checkMusic').prop('checked', model.state('music'));
             $('#fastSpin').prop('checked', model.state('fastRoll'));
-            // $('#isAnimations').prop('checked', model.state('isAnimations'));
             $('#isAnimBG').prop('checked', model.state('isAnimBG'));
             $('#optionAutoplay4').prop('checked', model.state('autoStopWhenFS'));
             $('#optionAutoplay5').prop('checked', model.state('autoTransititon'));
