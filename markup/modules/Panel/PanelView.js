@@ -341,7 +341,7 @@ export let view = (() => {
             let stopButtonDesk = model.el('stopButtonDesk');
                 stopButtonDesk.visible = true;
             let autoButtonDesk = model.el('autoButtonDesk');
-                autoButtonDesk.frameName = 'autoEmptyOn.png';
+                autoButtonDesk.frameName = 'autoEmpty.png';
                 autoButtonDesk.alpha = 0.5;
                 autoButtonDesk.freezeFrames = true;
         } else {
