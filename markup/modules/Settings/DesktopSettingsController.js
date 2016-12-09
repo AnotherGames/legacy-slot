@@ -8,10 +8,12 @@ export let controller = (function () {
     function initDesktopSettings(game) {
         $('#volume').on('input change', function () {
             let soundButton = model.el('soundButton');
-            if (this.value === 0) {
+            if (this.value == 0) {
+                model.state('globalSound', false);
                 soundButton.frameName = 'soundOff.png';
             } else {
-                soundButton.frameName = 'soundOn.png';
+                model.state('globalSound', true);
+                soundButton.frameName = 'sound.png';
             }
             soundController.volume.changeVolume(this.value);
             soundController.volume.setVolume(this.value);
