@@ -61,7 +61,7 @@ export let controller = (() => {
         let dragonFS = model.el('dragonFS');
             dragonFS.FlyToMain();
 
-        game.time.events.add(1500, () => {
+        game.time.events.add(2500, () => {
             soundController.music.stopMusic('fsFon')
             transitionView.fsFinish();
         });
