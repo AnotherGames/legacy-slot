@@ -1,0 +1,125 @@
+
+skeleton.png
+size: 2048,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Potez/E_0007_Layer-1
+  rotate: false
+  xy: 1459, 112
+  size: 150, 150
+  orig: 150, 150
+  offset: 0, 0
+  index: -1
+Potez/cloud
+  rotate: false
+  xy: 1366, 768
+  size: 500, 250
+  orig: 500, 250
+  offset: 0, 0
+  index: -1
+Potez/cloud_2_r
+  rotate: false
+  xy: 1366, 516
+  size: 500, 250
+  orig: 500, 250
+  offset: 0, 0
+  index: -1
+Potez/cloud_r
+  rotate: false
+  xy: 1296, 264
+  size: 500, 250
+  orig: 500, 250
+  offset: 0, 0
+  index: -1
+Potez/fff
+  rotate: false
+  xy: 964, 549
+  size: 400, 469
+  orig: 400, 469
+  offset: 0, 0
+  index: -1
+Potez/z_0000_Layer-8
+  rotate: false
+  xy: 2, 2
+  size: 570, 474
+  orig: 570, 474
+  offset: 0, 0
+  index: -1
+Potez/z_0009_Layer-5
+  rotate: true
+  xy: 574, 38
+  size: 438, 337
+  orig: 438, 337
+  offset: 0, 0
+  index: -1
+Potez/z_0010_Layer-24-copy
+  rotate: false
+  xy: 913, 51
+  size: 212, 270
+  orig: 212, 270
+  offset: 0, 0
+  index: -1
+Potez/z_0011_Layer-3
+  rotate: false
+  xy: 1868, 540
+  size: 89, 115
+  orig: 89, 115
+  offset: 0, 0
+  index: -1
+Potez/z_0014_Rectangle-6
+  rotate: true
+  xy: 1611, 154
+  size: 108, 183
+  orig: 108, 183
+  offset: 0, 0
+  index: -1
+Potez/z_0015_Rectangle-4
+  rotate: true
+  xy: 1276, 121
+  size: 141, 181
+  orig: 141, 181
+  offset: 0, 0
+  index: -1
+Potez/z_0016_Layer-1
+  rotate: false
+  xy: 1940, 729
+  size: 86, 132
+  orig: 86, 132
+  offset: 0, 0
+  index: -1
+Potez/z_0017_Rectangle-3
+  rotate: false
+  xy: 1127, 103
+  size: 147, 218
+  orig: 147, 218
+  offset: 0, 0
+  index: -1
+Potez/z_0019_Rectangle-1
+  rotate: false
+  xy: 1940, 863
+  size: 99, 155
+  orig: 99, 155
+  offset: 0, 0
+  index: -1
+Potez/z_0021_Layer-7
+  rotate: false
+  xy: 964, 323
+  size: 330, 224
+  orig: 330, 224
+  offset: 0, 0
+  index: -1
+Potez/z_0022_Layer-4
+  rotate: false
+  xy: 1868, 657
+  size: 70, 361
+  orig: 70, 361
+  offset: 0, 0
+  index: -1
+Potez/z_0023_Layer-15-copy
+  rotate: false
+  xy: 2, 478
+  size: 960, 540
+  orig: 960, 540
+  offset: 0, 0
+  index: -1

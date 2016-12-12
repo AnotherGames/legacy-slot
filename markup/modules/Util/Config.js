@@ -2,12 +2,15 @@ export let config = {
     fadeinMusicTime: 5000,
     countMeterTime: 2500,
     autoTransitionTime: 10000,
+    symbolsCount: 10,
+    maxMulti: 7,
+    numOfInfoDots: 6,
     wheel: {
         roll: {
             time: 1500,
             fastTime: 800,
-            length: 30,
-            easingSeparation: 1,
+            length: 25,
+            easingSeparation: 0.9,
             deltaTime: 100,
             finishScreen: [2, 5, 7, 1, 4]
         }
@@ -47,6 +50,7 @@ export let config = {
         }
     },
     HD: {
+        spinButtonWidth: 173,
         mainContainer: {
             x: 0,
             y: -10

@@ -1,5 +1,5 @@
 import { model } from 'modules/Model/Model';
-import { sound } from 'modules/Sound/Sound';
+// import { sound } from 'modules/Sound/Sound';
 
 export class Dragon {
 
@@ -20,11 +20,11 @@ export class Dragon {
         this.char.setAnimationByName(0, 'N_idle_1', true);
     }
     FlyToFS() {
-        sound.sounds.dragonLaugh.play();
+        // sound.sounds.dragonLaugh.play();
         this.char.setAnimationByName(0, 'Goto_FS', false);
     }
     FlyToMain() {
-        sound.sounds.dragonLaugh.play();
+        // sound.sounds.dragonLaugh.play();
         this.char.setAnimationByName(0, 'FS_idle_end', false);
         this.char.addAnimationByName(0, 'Transfer1', false);
     }

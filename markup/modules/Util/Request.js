@@ -20,11 +20,10 @@ export let request = (() => {
 
     function send(name, options) {
         let url;
-        let params = getAllUrlParams();
-        console.log('Params form URL: ', params);
         switch (name) {
             case 'Initialise':
                 // Авторизация
+                let params = getAllUrlParams();
                 if (params.demo === 'true') {
                     name = `${name}Demo`;
                 }
@@ -53,8 +52,10 @@ export let request = (() => {
                 resolve(noConnect[name]);
             } else {
                 let func = function (res) {
+                    if (name =='Roll') {
+                        console.log(res);
+                    }
                     console.info(`Request: ${url}`);
-                    console.log('success', name, new Date(), res);
                     resolve(res);
                 };
                 $.ajax({

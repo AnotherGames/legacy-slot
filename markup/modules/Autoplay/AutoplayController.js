@@ -1,94 +1,103 @@
 import { model } from 'modules/Model/Model';
-import { events } from 'modules/Util/Events';
+
+import { controller as rollController } from 'modules/Roll/RollController';
+import { controller as panelController } from 'modules/Panel/PanelController';
+import { controller as buttonsController } from 'modules/Buttons/ButtonsController';
 
 export let controller = (() => {
 
-    function initAutoplay(amount) {
+    function start(count) {
 
-        console.log('I am initing autoPlay: ', amount);
+        // Ищменяем состояния автоплея
+        model.state('autoplay:start', true);
+        model.state('autoplay:end', false);
 
-        model.state('autoEnd', false);
-        model.data('autoCount', amount);
-        model.data('autoCashSumStart', model.balance('coinCash'));
+        model.data('autoplay:count', count);
+        model.data('autoplay:startCash', model.balance('coinCash'));
 
-        startAutoplay();
-    }
-
-
-
-    function startAutoplay() {
-
-        if (model.state('autoCashUp')) {
-            console.log('I am in cashUP');
-            if (model.balance('coinCash') - model.data('autoCashSumStart') > model.data('autoCashSumDelta')) {
-                console.warn('cashUP is stoping!');
-                events.trigger('autoplay:stop');
-                // model.data('autoCashSumDelta', null);
-                // model.state('autoCashUp', null);
-                return;
-            }
-        }
-
-        if (model.state('autoCashDown')) {
-            console.log('I am in cashDOWN');
-            console.log('CashStart: ', model.data('autoCashSumStart'));
-            console.log('CashSum: ', model.balance('coinCash'));
-            console.log('CashDelta: ', model.data('autoCashSumDelta'));
-            if (model.data('autoCashSumStart') - model.balance('coinCash') > model.data('autoCashSumDelta')) {
-                console.warn('cashDOWN is stoping!');
-                events.trigger('autoplay:stop');
-                // model.data('autoCashSumDelta', null);
-                // model.state('autoCashDown', null);
-                return;
-            }
-        }
-
-        if (model.state('autoCashLine')) {
-            if (model.balance('winCash') - model.data('autoCashLineDelta') > 0) {
-                events.trigger('autoplay:stop');
-                // model.data('autoCashLineDelta', null);
-                // model.state('autoCashLine', null);
-                return;
-            }
-        }
-
-        let autoCount = model.data('autoCount');
-        autoCount--;
-
-        if (!model.state('autoEnd')) {
-
-            events.trigger('roll:request');
-
-        }
-
-        if (autoCount > 0) {
-
-            model.data('autoCount', autoCount);
-            events.trigger('autoplay:count', autoCount);
-
+        // Переводим кнопки в режим автоигры
+        if (model.mobile) {
+            buttonsController.auto.start();
         } else {
+            panelController.auto.start();
+        }
 
-            events.trigger('autoplay:stop');
+        // Начинаем крутку
+        next();
+    }
 
+    function next() {
+
+        // Проверка тонких настроек автоплея
+        checkSettings();
+
+        // Начать следующую крутку
+        if (model.state('autoplay:start')) {
+            rollController.startRoll();
+        }
+
+        // Изменить счетчик автоплея
+        let autoplayCount = model.data('autoplay:count');
+        autoplayCount--;
+
+        // Если крутки остались
+        if (autoplayCount > 0) {
+            model.data('autoplay:count', autoplayCount);
+
+            // Изменяем счетчик автоплея
+            if (model.mobile) {
+                buttonsController.auto.change(autoplayCount);
+            } else {
+                panelController.auto.change(autoplayCount);
+            }
+        } else {
+            // Если счетчик меньше 0 выключаем автоплей
+            stop();
         }
     }
 
-    function stopAutoplay() {
+    function stop() {
 
-        console.log('I am stoping autoplay!');
+        // Изменяет состояния автоплея
+        model.state('autoplay:end', true);
+        model.state('autoplay:start', false);
 
-        model.state('autoEnd', true);
-
+        // Переводим кнопки в нормальный режим
+        if (model.mobile) {
+            buttonsController.auto.stop();
+        } else {
+            panelController.auto.stop();
+        }
     }
 
-    events.on('autoplay:init', initAutoplay);
-    events.on('autoplay:next', startAutoplay);
-    events.on('autoplay:stop', stopAutoplay);
+    function checkSettings() {
+
+        // Проверка на увеличение кеша
+        if (model.state('autoplay:cashUp')) {
+            if (model.balance('coinCash') - model.data('autoplay:startCash') > model.state('autoplay:cashDelta')) {
+                stop();
+            }
+        }
+
+        // Проверка на понижение кеша
+        if (model.state('autoplay:cashDown')) {
+            if (model.data('autoplay:startCash') - model.balance('coinCash') > model.state('autoplay:cashDelta')) {
+                stop();
+            }
+        }
+
+        // Проверка на максимальный выигрыш за одну крутку
+        if (model.state('autoplay:cashRoll')) {
+            if (model.balance('winCash') - model.state('autoplay:cashRollDelta') > 0) {
+                stop();
+            }
+        }
+    }
 
     return {
-        initAutoplay,
-        startAutoplay,
-        stopAutoplay
+        start,
+        next,
+        stop
     };
 
 })();

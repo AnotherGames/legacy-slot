@@ -1,7 +1,6 @@
-import { config } from '../../modules/Util/Config';
-import { Element } from '../../modules/Class/Element';
 import { model } from 'modules/Model/Model';
-import { checkParam } from 'modules/Util/CheckParam';
+import { config } from 'modules/Util/Config';
+import { Element } from 'modules/Class/Element';
 
 export class Wheel {
     get elements() {
@@ -27,52 +26,32 @@ export class Wheel {
         currentScreen: Array
     }   */
     constructor(param) {
-        if (!checkParam(param, {
-            game: {
-                class: Phaser.Game
-            },
-            parent: {
-                class: Phaser.Group
-            },
-            position: {
-                type: 'object'
-            },
-            elSize: {
-                type: 'object'
-            },
-            currentScreen: {}
-        }, 'Wheel module') ) return;
-        // if (typeof (param) !== 'object') {
-        //     console.error('constructor: param is not object');
-        //     return;
-        // }
-        // if (param.game === undefined) {
-        //     console.error('constructor: param.game is undefined', param);
-        //     return;
-        // }
-        // if (param.parent === undefined) {
-        //     console.error('constructor: param.parent is undefined', param);
-        //     return;
-        // }
-        // if (typeof (param.position) !== 'object') {
-        //     console.error('constructor: param.position is undefined', param);
-        //     return;
-        // }
-        // if (typeof (param.elSize) !== 'object') {
-        //     console.error('constructor: param.elSize is undefined', param);
-        //     return;
-        // }
-        // if (param.currentScreen === undefined) {
-        //     console.error('constructor: param.elSize is undefined', param);
-        //     return;
-        // }
-
+        if (typeof (param) !== 'object') {
+            console.error('constructor: param is not object');
+            return;
+        }
+        if (param.game === undefined) {
+            console.error('constructor: param.game is undefined', param);
+            return;
+        }
+        if (param.parent === undefined) {
+            console.error('constructor: param.parent is undefined', param);
+            return;
+        }
+        if (typeof (param.position) !== 'object') {
+            console.error('constructor: param.position is undefined', param);
+            return;
+        }
         if (typeof (param.position.x) !== 'number') {
             console.error('constructor: param.position.x is undefined', param);
             return;
         }
         if (typeof (param.position.y) !== 'number') {
             console.error('constructor: param.position.y is undefined', param);
+            return;
+        }
+        if (typeof (param.elSize) !== 'object') {
+            console.error('constructor: param.elSize is undefined', param);
             return;
         }
         if (typeof (param.elSize.width) !== 'number') {
@@ -83,7 +62,10 @@ export class Wheel {
             console.error('constructor: param.elSize.height is undefined', param);
             return;
         }
-
+        if (param.currentScreen === undefined) {
+            console.error('constructor: param.elSize is undefined', param);
+            return;
+        }
         // инитим входящие параметры
         this.game = param.game;
         this.parent = param.parent;
@@ -113,12 +95,11 @@ export class Wheel {
         this.items = [];
         for (let i = 0; i < 6; i++) {
             const elem = new Element({
-                game: this.game,
-                parent: this.container,
-                el: 1,
-                animation: 'n',
-                x: 0,
-                y: i * this.elSize.height * -1
+                container: this.container,
+                position: {
+                    x: 0,
+                    y: i * this.elSize.height * -1
+                }
             });
             this.items.push(elem);
             this.game.spriteAnims.push(elem);
@@ -352,7 +333,7 @@ export class Wheel {
         this._gotoMode();
 
         let rand;
-        if (model.state('FSMode')) {
+        if (model.state('fs')) {
             rand = this.game.rnd.integerInRange(1, 9);
         } else {
             rand = this.game.rnd.integerInRange(1, 10);
@@ -387,7 +368,7 @@ export class Wheel {
         this._gotoMode();
 
         let rand;
-        if (model.state('FSMode')) {
+        if (model.state('fs')) {
             rand = this.game.rnd.integerInRange(1, 11);
         } else {
             rand = this.game.rnd.integerInRange(1, 10);

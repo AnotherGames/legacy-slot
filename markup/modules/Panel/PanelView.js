@@ -8,8 +8,8 @@ export let view = (() => {
         PanelBG: function({
             game = model.el('game'),
             container = model.group('panel'),
-            x = game.world.centerX + config[model.state('res')].panelMargin.x,
-            y = model.el('gameMachine').height + config[model.state('res')].panelMargin.y,
+            x = game.world.centerX + config[model.res].panelMargin.x,
+            y = model.el('gameMachine').height + config[model.res].panelMargin.y,
             frameName = 'ui',
             deltaY = 0
         }) {
@@ -29,7 +29,7 @@ export let view = (() => {
             let autoDesktopContainer = game.add.group();
                 autoDesktopContainer.x = x;
                 autoDesktopContainer.y = y;
-                autoDesktopContainer.alpha = 0;
+                autoDesktopContainer.alpha = 1;
             model.group('autoDesktop', autoDesktopContainer);
             model.group('panel').add(autoDesktopContainer);
         },
@@ -44,6 +44,19 @@ export let view = (() => {
                 spinButtonDesk.anchor.set(0.5);
             model.el('spinButtonDesk', spinButtonDesk);
             return spinButtonDesk;
+        },
+
+        StopButton: function({
+            game = model.el('game'),
+            x = model.group('panel').width / 2,
+            y = 101,
+            container = model.group('panel')
+        }) {
+            let stopButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'stopOn.png', 'stop.png', 'stopOn.png', null, container);
+                stopButtonDesk.anchor.set(0.5);
+                stopButtonDesk.visible = false;
+            model.el('stopButtonDesk', stopButtonDesk);
+            return stopButtonDesk;
         },
 
         AutoButton: function({
@@ -104,12 +117,11 @@ export let view = (() => {
         LinesNumber: function({
             game = model.el('game'),
             container = model.group('panel'),
+            style = {font: 'normal 27px Helvetica, Arial', align: 'center', fill: '#e8b075'},
             x = 105,
             y = 116,
-            font = 'normal 27px Helvetica, Arial',
-            color = '#e8b075',
         }) {
-            let linesNumber = game.add.text(x, y, '10', {font: font, fill: color, align: 'center'}, container);
+            let linesNumber = game.add.text(x, y, '10', style, container);
             model.el('linesNumber', linesNumber);
             return linesNumber;
         },
@@ -181,16 +193,12 @@ export let view = (() => {
         autoCount: function({
             game = model.el('game'),
             container = model.group('panel'),
+            style = {font: '45px Arial, Helvetica', align: 'center', fill: '#fff'},
             amount = 10,
             x = 525,
             y = model.el('autoButtonDesk').y,
-            font = '45px Arial, Helvetica',
-            color = '#e5c14c'
         }) {
-            // if (amount >= 250) {
-            //     font = '40px Arial, Helvetica';
-            // }
-            let autoCount = game.add.text(x, y, amount, {font: font, fill: color, align: 'center'}, container);
+            let autoCount = game.add.text(x, y, amount, style, container);
                 autoCount.anchor.set(0.5);
                 autoCount.alpha = 0;
             model.el('autoCount', autoCount);
@@ -237,10 +245,7 @@ export let view = (() => {
             time = 350
         }) {
             let autoDesktopContainer = model.group('autoDesktop');
-            return game.add.tween(autoDesktopContainer).to( { x: finalX, alpha: 1 }, time, 'Linear', true)
-                .onComplete.add(() => {
-                    model.state('autoPanel', true);
-                });
+            return game.add.tween(autoDesktopContainer).to( { x: finalX }, time, 'Linear', true)
         },
 
         info: function({
@@ -254,10 +259,10 @@ export let view = (() => {
 
             let infoRules = game.add.sprite(x, y, 'info', '1_en.png', container);
                 infoRules.anchor.set(0.5);
-                infoRules.scale.set(1.2);
+                infoRules.scale.set(1.3);
             model.el('infoRules', infoRules);
 
-            let closed = game.add.sprite(game.width - 440, 200, 'closed', null, container);
+            let closed = game.add.sprite(game.width - 400, 200, 'closed', null, container);
             model.el('closed', closed);
 
             let arrowRight = game.add.sprite(game.width / 2 + 40, 780, 'ar', null, container);
@@ -267,7 +272,7 @@ export let view = (() => {
             model.el('arrowLeft', arrowLeft);
 
             let infoMarkers = [];
-            let infoMarker = game.add.sprite(game.width / 2 -100, 770, 'infoMarker', 'marker_on.png', container);
+            let infoMarker = game.add.sprite(game.width / 2 - 100, 770, 'infoMarker', 'marker_on.png', container);
                 infoMarker.name = 'infoMarker0';
                 infoMarkers.push(infoMarker);
 
@@ -300,61 +305,108 @@ export let view = (() => {
             finalX = 650,
             time = 350
         }) {
-            model.state('autoPanel', false);
             let autoDesktopContainer = model.group('autoDesktop');
-            return game.add.tween(autoDesktopContainer).to( { x: finalX, alpha: 0 }, time, 'Linear', true)
-                .onComplete.add(() => {
-                    model.state('autoPanel', false);
-                });
+            return game.add.tween(autoDesktopContainer).to( { x: finalX }, time, 'Linear', true)
         }
     }
 
-    function autoStartDesktop() {
-        let spinButtonDesk = model.el('spinButtonDesk');
-            spinButtonDesk.frameName = 'stop.png';
-            spinButtonDesk.freezeFrames = true;
-        let autoButtonDesk = model.el('autoButtonDesk');
-            autoButtonDesk.frameName = 'autoEmpty.png';
-            autoButtonDesk.freezeFrames = true;
+    function lockButtons() {
+
+        let infoButtonDesk = model.el('infoButtonDesk');
+            infoButtonDesk.frameName = 'info.png';
+            infoButtonDesk.freezeFrames = true;
+            infoButtonDesk.alpha = 0.5;
         let maxBetButtonDesk = model.el('maxBetButtonDesk');
-            maxBetButtonDesk.frameName = 'maxBetOn.png';
+            maxBetButtonDesk.frameName = 'maxBet.png';
             maxBetButtonDesk.freezeFrames = true;
+            maxBetButtonDesk.alpha = 0.5;
         let betLevelPlus = model.el('betLevelPlus');
-            betLevelPlus.visible = false;
+            betLevelPlus.frameName = 'plus.png';
+            betLevelPlus.freezeFrames = true;
+            betLevelPlus.alpha = 0.5;
         let betLevelMinus = model.el('betLevelMinus');
-            betLevelMinus.visible = false;
+            betLevelMinus.frameName = 'minus.png';
+            betLevelMinus.freezeFrames = true;
+            betLevelMinus.alpha = 0.5;
         let coinsLevelPlus = model.el('coinsLevelPlus');
-            coinsLevelPlus.visible = false;
+            coinsLevelPlus.frameName = 'plus.png';
+            coinsLevelPlus.freezeFrames = true
+            coinsLevelPlus.alpha = 0.5;
         let coinsLevelMinus = model.el('coinsLevelMinus');
-            coinsLevelMinus.visible = false;
+            coinsLevelMinus.frameName = 'minus.png';
+            coinsLevelMinus.freezeFrames = true;
+            coinsLevelMinus.alpha = 0.5;
+        if(model.state('autoplay:start')){
+            let spinButtonDesk = model.el('spinButtonDesk');
+                spinButtonDesk.visible = false;
+            let stopButtonDesk = model.el('stopButtonDesk');
+                stopButtonDesk.visible = true;
+            let autoButtonDesk = model.el('autoButtonDesk');
+                autoButtonDesk.frameName = 'autoEmpty.png';
+                // autoButtonDesk.frameName = 'autoEmptyOn.png';
+                autoButtonDesk.alpha = 0.5;
+                autoButtonDesk.freezeFrames = true;
+        } else {
+            let autoButtonDesk = model.el('autoButtonDesk');
+            autoButtonDesk.frameName = 'auto.png';
+            autoButtonDesk.alpha = 0.5;
+            autoButtonDesk.freezeFrames = true;
+        }
+
     }
 
-    function autoStopDesktop() {
-        let spinButtonDesk = model.el('spinButtonDesk');
-            spinButtonDesk.frameName = 'spin.png';
-            spinButtonDesk.freezeFrames = false;
-        let autoButtonDesk = model.el('autoButtonDesk');
-            autoButtonDesk.frameName = 'auto.png';
-            autoButtonDesk.freezeFrames = false;
+    function unlockButtons() {
+        if(model.state('autoplay:start')) return;
+
+        let infoButtonDesk = model.el('infoButtonDesk');
+            infoButtonDesk.frameName = 'info.png';
+            infoButtonDesk.freezeFrames = false;
+            infoButtonDesk.alpha = 1;
         let maxBetButtonDesk = model.el('maxBetButtonDesk');
             maxBetButtonDesk.frameName = 'maxBet.png';
             maxBetButtonDesk.freezeFrames = false;
+            maxBetButtonDesk.alpha = 1;
         let betLevelPlus = model.el('betLevelPlus');
-            betLevelPlus.visible = true;
+            betLevelPlus.frameName = 'plus.png';
+            betLevelPlus.freezeFrames = false;
+            betLevelPlus.alpha = 1;
         let betLevelMinus = model.el('betLevelMinus');
-            betLevelMinus.visible = true;
+            betLevelMinus.frameName = 'minus.png';
+            betLevelMinus.freezeFrames = false;
+            betLevelMinus.alpha = 1;
         let coinsLevelPlus = model.el('coinsLevelPlus');
-            coinsLevelPlus.visible = true;
+            coinsLevelPlus.frameName = 'plus.png';
+            coinsLevelPlus.freezeFrames = false
+            coinsLevelPlus.alpha = 1;
         let coinsLevelMinus = model.el('coinsLevelMinus');
-            coinsLevelMinus.visible = true;
-    };
+            coinsLevelMinus.frameName = 'minus.png';
+            coinsLevelMinus.freezeFrames = false;
+            coinsLevelMinus.alpha = 1;
+        let autoButtonDesk = model.el('autoButtonDesk');
+            autoButtonDesk.frameName = 'auto.png';
+            autoButtonDesk.freezeFrames = false;
+            autoButtonDesk.alpha = 1;
+        if(model.state('autoplay:end')){
+            let spinButtonDesk = model.el('spinButtonDesk');
+                spinButtonDesk.visible = true;
+            let stopButtonDesk = model.el('stopButtonDesk');
+                stopButtonDesk.visible = false;
+                stopButtonDesk.frameName = 'stop.png';
+                stopButtonDesk.freezeFrames = false
+            let autoButtonDesk = model.el('autoButtonDesk');
+                autoButtonDesk.frameName = 'auto.png';
+                autoButtonDesk.alpha = 1;
+                autoButtonDesk.freezeFrames = false;
+        }
+
+    }
 
     return {
         draw,
         show,
         hide,
-        autoStartDesktop,
-        autoStopDesktop
+        lockButtons,
+        unlockButtons
     };
 
 })();

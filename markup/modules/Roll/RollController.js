@@ -1,29 +1,31 @@
 import { model } from 'modules/Model/Model';
-import { events } from 'modules/Util/Events';
 import { config } from 'modules/Util/Config';
-import { popup } from 'modules/Util/Popup';
 import { request } from 'modules/Util/Request';
-import { sound } from 'modules/Sound/Sound';
 import { Wheel } from 'modules/Class/Wheel';
+
+import { view as mainView } from 'modules/States/Main/MainView';
+
+import { controller as soundController } from 'modules/Sound/SoundController';
+import { controller as autoplayController } from 'modules/Autoplay/AutoplayController';
+import { controller as panelController } from 'modules/Panel/PanelController';
+import { view as panelView } from 'modules/Panel/PanelView';
+import { controller as buttonsController } from 'modules/Buttons/ButtonsController';
+import { controller as winController } from 'modules/Win/WinController';
+import { controller as fsController } from 'modules/States/FS/FSController';
 
 export let controller = (() => {
 
     function init() {
-        const game = model.el('game');
-        const elementsContainer = model.el('elementsContainer');
+        let game = model.el('game');
+        let elementsContainer = model.group('elements');
 
         let wheels = [];
-        let elSize = config[model.state('res')].elements;
+        let elSize = config[model.res].elements;
 
-        let firstScreen;
-        if (model.data('startFSScreen') !== undefined && !model.state('FSMode') ) {
-            firstScreen = model.data('startFSScreen');
-            model.data('startFSScreen', undefined);
-        } else {
-            firstScreen = model.data('firstScreen');
-        }
-        let firstWheels = _convertArray(firstScreen);
+        // Восстановление экрана с которого мы ошли на Фри Спины
+        let firstWheels = checkFirstScreen();
 
+        // Заполняемм колеса элементами
         for (let i = 0; i < 5; i++) {
             wheels.push(new Wheel({
                 game,
@@ -41,45 +43,64 @@ export let controller = (() => {
     }
 
     function startRoll(options) {
+        // Если не было Ready - не крутим
         if (!model.state('ready')) return;
-        // model.state('lockedButtons', true);
-        let game = model.el('game');
+
+        // Если маленький баланс - не крутим, выкидываем попап
         if (!model.checkBalance()) {
-            console.warn('Not enought money!');
-            popup.showPopup({message: 'You have low balance on your account'});
+            mainView.draw.showPopup({message: 'You have low balance on your account'});
             return;
         }
-        model.state('ready', false);
+
+        // Если долго идет запрос (больше 4 сек) - выкидываем попап
+        let game = model.el('game');
         let rollPopupTimer = game.time.events.add(4000, () => {
-            popup.showPopup({message: 'You have weak Internet connection'});
+            mainView.draw.showPopup({message: 'You have weak Internet connection'});
         });
 
+        // Выключаем управление с клавиатуры
+        // game.input.keyboard.enabled = false;
+
+        model.state('ready', false);
+        // Отправляем запрос Roll
         request.send('Roll')
             .then((data) => {
 
+                // Выключаем срабатывание попапа на длинный Roll
                 game.time.events.remove(rollPopupTimer);
 
+                // Если есть ошибка закрытой сессии - выкидываем попап
                 if (data.ErrorMessage === 'SessionClosedOrNotOpened') {
-                    popup.showPopup({message: 'Your session is closed. Please click to restart'});
+                    mainView.draw.showPopup({message: 'Your session is closed. Please click to restart'});
                 }
 
-                events.trigger('roll:start');
+                // Очищаем выигрышный экран
+                winController.cleanWin(true);
+
+                // Записываем полученные данные
                 model.data('rollResponse', data);
 
-                if (model.state('FSMode')) {
+                // Обновляем баланс (забираем ставку)
+                if (model.state('fs')) {
                     model.updateBalance({startFSRoll: true});
                 } else {
                     model.updateBalance({startRoll: true});
                 }
 
+                // Выставляем состояния крутки на прогресс
                 model.state('roll:progress', true);
                 model.state('roll:fast', false);
 
-                _playRollSound();
+                // Играем звук кручения барабанов
+                soundController.sounds.playSound('baraban');
+                model.el('baraban').volume = 0.85;
 
+
+                // Расчитываем конечный экран
                 let wheels = model.el('wheels');
                 let finishScreen = _convertArray(data.Screen);
 
+                // Крутим колеса
                 wheels.forEach((wheel, columnIndex) => {
                     // Fast
                     if (model.state('fastRoll')) {
@@ -88,26 +109,39 @@ export let controller = (() => {
                     // Normal
                     game.time.events.add(columnIndex * config.wheel.roll.deltaTime, () => {
                         wheel.roll(finishScreen[columnIndex] || config.wheel.roll.finishScreen, {
-                            // TODO: для обычних круток используй параметры конфига.
-                            time: 1500,
-                            length: 25,
-                            easingSeparation: 0.9,
+                            time: config.wheel.roll.time,
+                            length: config.wheel.roll.length,
+                            easingSeparation: config.wheel.roll.easingSeparation,
                             callback
                         });
                     }, wheel);
 
                 });
 
+                // Когда все пять колес завершают движение - заканчиваем крутку и показываем выигрыш
                 let countFinish = 0;
                 function callback() {
                     ++countFinish;
                     if (countFinish === 5) {
-                        events.trigger('roll:end');
+                        endRoll();
+                        winController.showWin();
                     }
                 }
 
             })
             .catch((err) => {console.error(err)});
+    }
+
+    function checkFirstScreen() {
+        let firstScreen;
+        if (model.data('startFSScreen') !== undefined
+        && !model.state('fs') ) {
+            firstScreen = model.data('startFSScreen');
+            model.data('startFSScreen', undefined);
+        } else {
+            firstScreen = model.data('firstScreen');
+        }
+        return _convertArray(firstScreen);
     }
 
     function fastRoll() {
@@ -116,42 +150,50 @@ export let controller = (() => {
                 wheel.fast();
             });
             model.state('roll:fast', true);
-            console.log('i am doing fast roll');
         }
     }
 
     function endRoll() {
         if (model.state('ready')) return;
-        // model.state('lockedButtons', false);
-        request.send('Ready').then((data) => {
 
-            if (model.state('FSMode')) {
+        // Отправляем запрос Ready
+        request.send('Ready').then((data) => {
+            soundController.sounds.stopSound('baraban');
+            // Обновляем баланс в конце крутки
+            if (model.state('fs')) {
                 model.updateBalance({endFSRoll: true});
-                events.trigger('fs:count', {end: true});
+                fsController.count({end: true});
             } else {
                 model.updateBalance({endRoll: true});
             }
+
+            // Убираем состояния прогресса
             model.state('ready', true);
             model.state('roll:progress', false);
 
-            if (!model.state('FSMode')) {
+            // Запускаем следующую автокрутку (или ФС-крутку)
+            if (!model.state('fs')) {
                 _runNextAutoIfExist();
             } else {
                 _runNextFSIfExist();
             }
 
-        });
-    }
+            // Убираем лок кнопок
+            if(!model.state('fs') && model.state('autoplay:end')){
+                if(model.mobile) {
+                    buttonsController.unlockButtons();
+                } else {
+                    panelView.unlockButtons();
+                }
+            }
 
-    function _playRollSound() {
-        let duration;
-        if (model.state('fastRoll')) {
-            duration = config.wheel.roll.fastTime / 1000;
-        } else {
-            duration = config.wheel.roll.time / 1000;
-        }
-        sound.sounds.baraban.addMarker('roll', 0, duration, 1, false);
-        sound.sounds.baraban.play('roll');
+            // Если у нас не автоплей, то убираем и лок клавиатуры
+            if (model.state('autoplay:end')){
+                let game = model.el('game');
+                game.input.keyboard.enabled = true;
+            }
+        });
+
     }
 
     function _convertArray(arr) {
@@ -168,32 +210,33 @@ export let controller = (() => {
     function _runNextAutoIfExist() {
         const game = model.el('game');
         let rollResponse = model.data('rollResponse');
+        // Здесь определяется время через которое начнется следующая крутка: если не было выигрыша, то сразу, если был, то через секунду
         let time = (rollResponse.Balance.TotalWinCoins) ? 1000 : 0;
 
         game.time.events.add(time, () => {
-            if (model.state('autoEnd')) return;
-            events.trigger('autoplay:next');
+            if (model.state('autoplay:end')) return;
+            autoplayController.next()
         });
     }
 
     function _runNextFSIfExist() {
         const game = model.el('game');
         let rollResponse = model.data('rollResponse');
-        let time = (rollResponse.WinLines.length) ? 1500 : 0;
+        // Здесь определяется время через которое начнется следующая крутка: если не было выигрыша, то сразу, если был, то через секунду
+        let time = (rollResponse.WinLines.length) ? 1000 : 0;
 
         game.time.events.add(time, () => {
-            if (model.state('fsEnd')) return;
-            events.trigger('fs:next');
+            if (model.state('fs:end')) return;
+            fsController.next();
         });
 
     }
 
-    events.on('roll:request', startRoll);
-    events.on('roll:end', endRoll);
-    events.on('roll:fast', fastRoll);
-
     return {
-        init
+        init,
+        startRoll,
+        endRoll,
+        fastRoll
     };
 
 })();

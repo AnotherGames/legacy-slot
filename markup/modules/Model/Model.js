@@ -1,4 +1,6 @@
-import { events } from 'modules/Util/Events';
+import { controller as balanceController } from 'modules/Balance/BalanceController';
+import { controller as setBetController } from 'modules/Menu/SetBet/MenuSetBetController';
+import { controller as soundController } from 'modules/Sound/SoundController'
 
 export let model = (() => {
 
@@ -68,119 +70,56 @@ export let model = (() => {
         model.data('numberOfLines', initData.Lines.length);
         model.data('firstScreen', initData.FirstScreen);
 
-        model.state('initScreen', true);
+        // Autoplay States
+        model.state('autoplay:end', true);
+        model.state('autoplay:start', false);
+        model.state('autoplay:cashUp', false);
+        model.state('autoplay:cashDown', false);
+        model.state('autoplay:cashRoll', false);
+        model.state('autoplay:panelClosed', true);
+        model.data('autoplay:count', 0);
+        model.data('autoplay:startCash', 0);
 
-        let fastRoll = false;
-        if (localStorage['fastRoll'] === undefined) {
-            localStorage['fastRoll'] = fastRoll;
-        } else {
-            if (localStorage['fastRoll'] === 'true') {
-                fastRoll = true;
-            } else
-            if (localStorage['fastRoll'] === 'false') {
-                fastRoll = false;
-            }
-        }
-        model.state('fastRoll', fastRoll);
 
-        model.state('ready', true);
-        model.state('firstFS', false);
-
-        let side = 'left';
-        if (localStorage['side'] === undefined) {
-            localStorage['side'] = side;
-        } else {
-            side = localStorage['side'];
-        }
-        model.state('side', side);
-
-        model.state('autoPanel', false);
-
-        let autoTransititon = false;
-        if (localStorage['autoTransititon'] === undefined) {
-            localStorage['autoTransititon'] = autoTransititon;
-        } else {
-            if (localStorage['autoTransititon'] === 'true') {
-                autoTransititon = true;
-            } else
-            if (localStorage['autoTransititon'] === 'false') {
-                autoTransititon = false;
-            }
-        }
+        let autoTransititon = (localStorage['autoTransititon'] == 'false') ? false : true ;
         model.state('autoTransititon', autoTransititon);
 
-        let isAnimations = true;
-        if (localStorage['isAnimations'] === undefined) {
-            localStorage['isAnimations'] = isAnimations;
-        } else {
-            if (localStorage['isAnimations'] === 'true') {
-                isAnimations = true;
-            } else
-            if (localStorage['isAnimations'] === 'false') {
-                isAnimations = false;
-            }
-        }
-        model.state('isAnimations', isAnimations);
+        let sound = (localStorage['sound'] == 'false') ? false : true;
+        model.state('sound', sound);
 
-        model.state('autoEnd', true);
-        model.state('fsEnd', true);
-        model.state('FSMode', false);
-
-        let isSound = true;
-        if (localStorage['sound'] === undefined) {
-            localStorage['sound'] = isSound;
-        } else {
-            if (localStorage['sound'] === 'true') {
-                isSound = true;
-            } else
-            if (localStorage['sound'] === 'false') {
-                isSound = false;
-            }
-        }
-        model.state('sound', isSound);
-
-        let volume = 1;
-        if (localStorage['volume'] === undefined) {
-            localStorage['volume'] = volume;
-        } else {
-            volume = localStorage['volume'];
-        }
-        model.state('volume', volume);
-
-        let music = true;
-        if (localStorage['music'] === undefined) {
-            localStorage['music'] = music;
-        } else {
-            if (localStorage['music'] === 'true') {
-                music = true;
-            } else
-            if (localStorage['music'] === 'false') {
-                music = false;
-            }
-        }
+        let music = (localStorage['music'] == 'false') ? false : true;
         model.state('music', music);
 
-        model.state('autoClosed', true);
+        let fastRoll = (localStorage['fastRoll'] == 'false') ? false : true ;
+        model.state('fastRoll', fastRoll);
 
-        let isAnimBG = true;
-        if (localStorage['isAnimBG'] === undefined) {
-            localStorage['isAnimBG'] = isAnimBG;
-        } else {
-            if (localStorage['isAnimBG'] === 'true') {
-                isAnimBG = true;
-            } else
-            if (localStorage['isAnimBG'] === 'false') {
-                isAnimBG = false;
-            }
-        }
+        let isAnimBG = (localStorage['isAnimBG'] == 'false') ? false : true ;
         model.state('isAnimBG', isAnimBG);
 
-        model.state('autoPanel', false);
+        let gameSideLeft = (localStorage['gameSideLeft'] == 'false') ? false : true ;
+        model.state('gameSideLeft', gameSideLeft);
+
+        let volume = (localStorage['volume'] == 'undefined') ? 100 : +localStorage['volume'];
+        soundController.volume.setVolume(volume);
+
+        let globalSound = (localStorage['globalSound'] == 'false') ? false : true;
+        model.state('globalSound', globalSound);
+        (globalSound) ? soundController.volume.changeVolume(volume) : soundController.volume.changeVolume(0);
+
+
+        model.state('initScreen', true);
+        model.state('ready', true);
+        model.state('firstFS', false);
+        model.state('isAnimations', true);
+        model.state('fs:end', true);
+        model.state('transitionScreen', false);
+        model.state('fs', false);
+        // model.state('sound', true);
+        // model.state('volume', 1);
+        // model.state('music', true);
         model.state('infoPanelOpen', false);
         model.state('menuOpened', false);
         model.state('isFirstAutoChangeAnimBG', true);
-
-        events.trigger('model:states:init');
     }
 
     function initSettings(settings) {
@@ -189,19 +128,21 @@ export let model = (() => {
 
     function initSaved(saved) {
         if (!saved) return;
+
         let fsCount = +saved.RemainSpins + 1;
         let fsLevel = saved.Multiplier.MultiplierStep;
         let fsMulti = saved.Multiplier.MultiplierValue;
         let totalWin = saved.CurrentTotalWinCoins;
         let winCash = saved.CurrentTotalWinCents;
+
         model.balance('winCash', winCash / 100);
         model.balance('totalWin', totalWin);
+        model.data('rollResponse', {NextMode: 'fsBonus'});
         model.data('savedFS', {
             fsCount,
             fsLevel,
             fsMulti
         });
-        model.data('rollResponse', {NextMode: 'fsBonus'});
     }
 
     function initBalance(initData) {
@@ -224,8 +165,6 @@ export let model = (() => {
 
         model.balance('fsWin', 0);
         model.balance('totalWin', 0);
-
-        events.trigger('model:balance:init');
 
     }
 
@@ -297,8 +236,6 @@ export let model = (() => {
 
     function updateBalance({bet, coin, startRoll, endRoll, startFSRoll, endFSRoll, startFS, endFS}) {
 
-        // Добавить начало конец бонусного раунда
-
         if (bet) {
             let betValue = model.balance('betValue');
             let coinValue = model.balance('coinValue');
@@ -342,8 +279,6 @@ export let model = (() => {
         }
         if (endFS) {
             let endData = model.data('rollResponse').Balance;
-            // let newCoinSum = model.balance('coinSum') + model.balance('totalWin');
-            // let newCoinCash = (model.balance('coinCash') * 100 + model.balance('winCash') * 100) / 100;
             model.balance('coinSum', endData.ScoreCoins);
             model.balance('coinCash', endData.ScoreCents / 100);
             model.balance('fsWin', 0);
@@ -366,7 +301,11 @@ export let model = (() => {
             }
         }
 
-        events.trigger('model:balance:update');
+        if (model.mobile) {
+            setBetController.update.CoinValue({});
+            setBetController.update.BetValue({});
+        }
+        balanceController.updateBalance({});
 
     }
 

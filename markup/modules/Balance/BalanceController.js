@@ -1,12 +1,12 @@
 import { model } from 'modules/Model/Model';
-import { events } from 'modules/Util/Events';
+
 import { view } from 'modules/Balance/BalanceView';
 
 export let controller = (() => {
 
     function initMobile() {
         view.draw.CashBalance({});
-        view.draw.CoinBalance({});
+        view.draw.MobileBalance({});
     }
 
     function initDesktop() {
@@ -25,34 +25,33 @@ export let controller = (() => {
     }
 
     function updateBalance() {
-        if (model.state('FSMode')) {
-            if (model.state('mobile')) {
+        if (model.state('fs')) {
+            if (model.mobile) {
                 view.update.FSMobileBalance({});
                 view.update.CashBalance({});
             }
-            if (model.state('desktop')) {
+            if (model.desktop) {
                 view.update.FSDesktopBalance({});
                 view.update.CashBalance({});
             }
         } else {
-            if (model.state('mobile')) {
+            if (model.mobile) {
+                view.update.MobileBalance({});
                 view.update.CashBalance({});
-                view.update.CoinBalance({});
             }
-            if (model.state('desktop')) {
-                view.update.CashBalance({});
+            if (model.desktop) {
                 view.update.DesktopBalance({});
+                view.update.CashBalance({});
             }
         }
     }
-
-    events.on('model:balance:update', updateBalance);
 
     return {
         initMobile,
         initDesktop,
         initFSMobile,
-        initFSDesktop
+        initFSDesktop,
+        updateBalance
     };
 
 })();

@@ -1,0 +1,124 @@
+{"frames": [
+
+{
+	"filename": "Splash-Splash1.png",
+	"frame": {"x":550,"y":1,"w":130,"h":128},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":113,"y":113,"w":130,"h":128},
+	"sourceSize": {"w":355,"h":355}
+},
+{
+	"filename": "Splash-Splash2.png",
+	"frame": {"x":1,"y":389,"w":120,"h":120},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":117,"y":118,"w":120,"h":120},
+	"sourceSize": {"w":355,"h":355}
+},
+{
+	"filename": "Splash-Splash3.png",
+	"frame": {"x":234,"y":387,"w":111,"h":115},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":121,"y":119,"w":111,"h":115},
+	"sourceSize": {"w":355,"h":355}
+},
+{
+	"filename": "Splash-Splash4.png",
+	"frame": {"x":592,"y":131,"w":120,"h":132},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":116,"y":109,"w":120,"h":132},
+	"sourceSize": {"w":355,"h":355}
+},
+{
+	"filename": "Splash-Splash5.png",
+	"frame": {"x":456,"y":367,"w":127,"h":141},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":115,"y":103,"w":127,"h":141},
+	"sourceSize": {"w":355,"h":355}
+},
+{
+	"filename": "Splash-Splash6.png",
+	"frame": {"x":416,"y":1,"w":132,"h":159},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":112,"y":91,"w":132,"h":159},
+	"sourceSize": {"w":355,"h":355}
+},
+{
+	"filename": "Splash-Splash7.png",
+	"frame": {"x":123,"y":389,"w":109,"h":120},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":124,"y":116,"w":109,"h":120},
+	"sourceSize": {"w":355,"h":355}
+},
+{
+	"filename": "Splash-Splash8.png",
+	"frame": {"x":347,"y":387,"w":107,"h":119},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":126,"y":117,"w":107,"h":119},
+	"sourceSize": {"w":355,"h":355}
+},
+{
+	"filename": "Splash-Splash9.png",
+	"frame": {"x":585,"y":367,"w":129,"h":132},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":112,"y":111,"w":129,"h":132},
+	"sourceSize": {"w":355,"h":355}
+},
+{
+	"filename": "Splash-Splash10.png",
+	"frame": {"x":394,"y":185,"w":196,"h":180},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":79,"y":87,"w":196,"h":180},
+	"sourceSize": {"w":355,"h":355}
+},
+{
+	"filename": "Splash-Splash11.png",
+	"frame": {"x":1,"y":1,"w":206,"h":188},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":74,"y":81,"w":206,"h":188},
+	"sourceSize": {"w":355,"h":355}
+},
+{
+	"filename": "Splash-Splash12.png",
+	"frame": {"x":209,"y":1,"w":205,"h":182},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":77,"y":80,"w":205,"h":182},
+	"sourceSize": {"w":355,"h":355}
+},
+{
+	"filename": "Splash-Splash13.png",
+	"frame": {"x":1,"y":191,"w":196,"h":196},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":79,"y":80,"w":196,"h":196},
+	"sourceSize": {"w":355,"h":355}
+},
+{
+	"filename": "Splash-Splash14.png",
+	"frame": {"x":199,"y":191,"w":193,"h":194},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":79,"y":86,"w":193,"h":194},
+	"sourceSize": {"w":355,"h":355}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "win.png",
+	"format": "RGBA8888",
+	"size": {"w":715,"h":510},
+	"scale": "0.5",
+	"smartupdate": "$TexturePacker:SmartUpdate:044e4867169ae3ac867c1efe0e77169d:c964806d9d9964aa88dc98fe6bdf1101:af201d10f1e96039a614b9e1c3056e7a$"
+}
+}

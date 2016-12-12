@@ -1,0 +1,55 @@
+
+Brain.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+B-p/M_0000_Layer-38
+  rotate: true
+  xy: 2, 18
+  size: 236, 293
+  orig: 236, 293
+  offset: 0, 0
+  index: -1
+B-p/M_0001_Layer-37
+  rotate: false
+  xy: 499, 174
+  size: 118, 80
+  orig: 118, 80
+  offset: 0, 0
+  index: -1
+B-p/M_0002_Layer-36
+  rotate: true
+  xy: 619, 204
+  size: 50, 115
+  orig: 50, 115
+  offset: 0, 0
+  index: -1
+B-p/M_0003_Layer-39
+  rotate: false
+  xy: 297, 2
+  size: 61, 61
+  orig: 61, 61
+  offset: 0, 0
+  index: -1
+B-p/M_0004_Layer-40
+  rotate: false
+  xy: 360, 12
+  size: 44, 51
+  orig: 44, 51
+  offset: 0, 0
+  index: -1
+B-p/M_0005_Group-185-copy-4
+  rotate: false
+  xy: 297, 65
+  size: 200, 189
+  orig: 200, 189
+  offset: 0, 0
+  index: -1
+B-p/M_0006_Layer-36-copy
+  rotate: false
+  xy: 499, 80
+  size: 89, 92
+  orig: 89, 92
+  offset: 0, 0
+  index: -1

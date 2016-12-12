@@ -1,13 +1,15 @@
 import { model } from 'modules/Model/Model';
 import { view } from 'modules/Panel/PanelView';
-import { events } from 'modules/Util/Events';
-import { sound } from 'modules/Sound/Sound';
+
+import { controller as soundController } from 'modules/Sound/SoundController';
+import { controller as autoplayController } from 'modules/Autoplay/AutoplayController';
+import { controller as rollController } from 'modules/Roll/RollController';
 
 export let controller = (() => {
 
-    function init() {
+    function drawButtons() {
         let game = model.el('game');
-
+        // game.input.onTap(() => {console.log('input');})
         view.draw.PanelBG({});
         view.draw.LinesNumber({});
         view.draw.AutoContainer({});
@@ -18,6 +20,9 @@ export let controller = (() => {
 
         let spinButtonDesk = view.draw.SpinButton({});
             spinButtonDesk.onInputDown.add(handle.spin);
+
+        let stopButtonDesk = view.draw.StopButton({});
+            stopButtonDesk.onInputDown.add(handle.stop);
 
         let autoButtonDesk = view.draw.AutoButton({});
             autoButtonDesk.onInputDown.add(handle.auto);
@@ -46,75 +51,77 @@ export let controller = (() => {
 
     }
 
-    function initFS() {
+    function drawFsPanel() {
         let game = model.el('game');
 
         view.draw.PanelBG({
             frameName: 'uiFS'
         });
         view.draw.LinesNumber({x: 55, y: 118});
-
         let infoButtonDesk = view.draw.InfoButton({x: 42, y: 27});
             infoButtonDesk.onInputDown.add(handle.info);
-
-        // let candle1 = view.draw.fsCandle({});
-        //     candle1.scale.set(0.7);
-        //
-        // let time = game.rnd.integerInRange(10, 70);
-        // game.time.events.add(time, () => {
-        //     let candle2 = view.draw.fsCandle({x: 878, y: 18});
-        // });
     }
 
     const handle = {
         spin: function() {
-            if (model.state('lockedButtons')) return;
+            if (model.state('buttons:locked')) return;
 
-            sound.sounds.button.play();
-            if (!model.state('autoClosed')) {
-                model.state('autoClosed', true);
+            soundController.sounds.playSound('buttonClick');
+            if (!model.state('autoplay:panelClosed')) {
+                model.state('autoplay:panelClosed', true);
                 view.hide.autoButton({});
                 view.hide.autoPanel({});
             }
 
-            const spinButtonDesk = model.el('spinButtonDesk');
-            if (spinButtonDesk.frameName == 'stop.png') {
-                events.trigger('autoplay:stop');
-                return;
-            }
+            let game = model.el('game');
+            game.input.keyboard.enabled = false;
+            view.lockButtons();
+            rollController.startRoll();
+            rollController.fastRoll();
+        },
 
-            events.trigger('roll:request');
-            events.trigger('roll:fast');
+        stop: function() {
+            if (model.state('buttons:locked')) return;
+
+            soundController.sounds.playSound('buttonClick');
+            model.state('autoplay:panelClosed', true);
+            autoplayController.stop();
         },
 
         auto: function() {
-            if (!model.state('autoEnd') || model.state('roll:progress')) return;
-            if (model.state('lockedButtons')) return;
+            if(model.state('autoplay:start')
+            || model.state('roll:progress')
+            || model.state('buttons:locked')) return;
+            soundController.sounds.playSound('buttonClick');
 
-            sound.sounds.button.play();
-            if (model.state('autoClosed') && !model.data('remainAutoCount')) {
-                model.state('autoClosed', false);
+            if (model.state('autoplay:panelClosed') && !model.data('remainAutoCount')) {
+                model.state('autoplay:panelClosed', false);
                 view.show.autoButton({});
                 view.show.autoPanel({});
             } else {
-                model.state('autoClosed', true);
+                model.state('autoplay:panelClosed', true);
                 view.hide.autoButton({});
                 view.hide.autoPanel({});
             }
         },
 
         maxBet: function() {
-            if (model.state('lockedButtons')) return;
-            if (model.state('autoEnd') == false) return;
+            if (model.state('buttons:locked')
+            || model.state('roll:progress')
+            || model.state('autoplay:start')) return;
 
-            sound.sounds.button.play();
+            soundController.sounds.playSound('buttonClick');
             model.changeBet({toMax: true});
         },
 
         info: function() {
-            if(model.state('lockedButtons') || model.state('roll:progress') || !model.state('autoEnd')) return;
-            sound.sounds.button.play();
+            if(model.state('buttons:locked')
+            || model.state('roll:progress')
+            || model.state('autoplay:start')) return;
 
+            soundController.sounds.playSound('buttonClick');
+
+            let game = model.el('game');
             let infoRules = view.show.info({});
             let overlay = model.el('overlay');
             let closed = model.el('closed');
@@ -122,9 +129,11 @@ export let controller = (() => {
             let arrowRight = model.el('arrowRight');
             let arrowLeft = model.el('arrowLeft');
             let counter = 0;
+
             model.el('infoCounter', counter);
             model.state('infoPanelOpen', true);
 
+            game.input.keyboard.enabled = false;
             overlay.inputEnabled = true;
             overlay.input.priorityID = 2;
             infoRules.inputEnabled = true;
@@ -137,17 +146,17 @@ export let controller = (() => {
             arrowLeft.input.priorityID = 4;
 
             overlay.events.onInputDown.add(handle.closeInfo);
-
             closed.events.onInputDown.add(handle.closeInfo);
-
             arrowRight.events.onInputDown.add(handle.switchInfoRight);
-
             arrowLeft.events.onInputDown.add(handle.switchInfoLeft);
         },
 
         closeInfo: function () {
-            model.group('popup').removeAll();
+            let game = model.el('game');
             let counter = 0;
+
+            game.input.keyboard.enabled = true;
+            model.group('popup').removeAll();
             model.el('infoCounter', counter);
             model.state('infoPanelOpen', false);
         },
@@ -190,65 +199,91 @@ export let controller = (() => {
         },
 
         betPlus: function() {
-            sound.sounds.button.play();
+            if (model.state('buttons:locked')
+            || model.state('roll:progress')
+            || model.state('autoplay:start')) return;
+            soundController.sounds.playSound('buttonClick');
             model.changeBet({up: true});
         },
 
         betMinus: function() {
-            sound.sounds.button.play();
+            if (model.state('buttons:locked')
+            || model.state('roll:progress')
+            || model.state('autoplay:start')) return;
+            soundController.sounds.playSound('buttonClick');
             model.changeBet({down: true});
         },
 
         coinsPlus: function() {
-            sound.sounds.button.play();
+            if (model.state('buttons:locked')
+            || model.state('roll:progress')
+            || model.state('autoplay:start')) return;
+            soundController.sounds.playSound('buttonClick');
             model.changeCoin({up: true});
         },
 
         coinsMinus: function() {
-            sound.sounds.button.play();
+            if (model.state('buttons:locked')
+            || model.state('roll:progress')
+            || model.state('autoplay:start')) return;
+            soundController.sounds.playSound('buttonClick');
             model.changeCoin({down: true});
         },
 
         panelButton: function() {
-            if (!model.state('autoPanel')) return ;
-            if (!model.state('autoEnd') || model.state('roll:progress')) return;
+            // Если у нас автоплей или идет крутка, то не должна работать
+            // При нажатии должна закрыть панель
+            //365 конечный икс кнопки автоплея при открытии, 370 взят с запасом
+            if (model.state('autoplay:start')
+            || model.state('roll:progress')) return;
+
+            let autoButtonDesk = model.el('autoButtonDesk');
             const amount = this.amount;
-            events.trigger('autoplay:init', amount);
-            model.state('autoPanel', false);
+            if (autoButtonDesk.x > 370) return;
+            view.hide.autoButton({});
+            view.hide.autoPanel({});
+            autoplayController.start(amount);
         }
 
-    }
+    };
 
-    function autoStart(amount) {
-        if (model.state('mobile')) return;
+    let auto = {
 
-        view.autoStartDesktop();
-        view.draw.autoCount({amount});
-        handle.auto();
-    }
+        start: function(amount) {
+            let game = model.el('game');
+            view.lockButtons();
+            game.input.keyboard.enabled = false;
+            view.draw.autoCount({amount});
+            handle.auto();
+        },
 
-    function autoStop() {
-        if (model.state('mobile')) return;
+        stop: function() {
+            let game = model.el('game');
+            let autoButtonDesk = model.el('autoButtonDesk');
+                autoButtonDesk.frameName = 'auto.png';
+                autoButtonDesk.freezeFrames = true
+            let stopButtonDesk = model.el('stopButtonDesk');
+                stopButtonDesk.frameName = 'stop.png';
+                stopButtonDesk.freezeFrames = true
 
-        view.autoStopDesktop();
-        view.draw.removeCount();
-    }
+                if(model.state('ready')){
+                    game.input.keyboard.enabled = true;
+                    view.unlockButtons();
+                }
 
-    function autoChangeCount(count) {
-        if (model.state('mobile')) return;
+                view.draw.removeCount();
+        },
 
-        view.draw.updateCount({count});
-    }
+        change: function(count) {
+            view.draw.updateCount({count});
+        }
 
-    events.on('autoplay:init', autoStart);
-    events.on('autoplay:stop', autoStop);
-    events.on('autoplay:count', autoChangeCount);
+    };
 
     return {
-        init,
-        autoStart,
-        autoStop,
-        initFS,
+        drawButtons,
+        drawFsPanel,
+        auto,
         handle
     };
 
