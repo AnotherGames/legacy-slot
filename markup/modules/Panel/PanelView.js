@@ -262,7 +262,7 @@ export let view = (() => {
                 infoRules.scale.set(1.3);
             model.el('infoRules', infoRules);
 
-            let closed = game.add.sprite(game.width - 400, 200, 'closed', null, container);
+            let closed = game.add.sprite(game.width - 390, 200, 'closed', null, container);
             model.el('closed', closed);
 
             let arrowRight = game.add.sprite(game.width / 2 + 40, 780, 'ar', null, container);

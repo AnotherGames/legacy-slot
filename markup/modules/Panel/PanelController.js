@@ -9,7 +9,6 @@ export let controller = (() => {
 
     function drawButtons() {
         let game = model.el('game');
-        // game.input.onTap(() => {console.log('input');})
         view.draw.PanelBG({});
         view.draw.LinesNumber({});
         view.draw.AutoContainer({});
@@ -52,14 +51,10 @@ export let controller = (() => {
     }
 
     function drawFsPanel() {
-        let game = model.el('game');
-
         view.draw.PanelBG({
             frameName: 'uiFS'
         });
         view.draw.LinesNumber({x: 55, y: 118});
-        let infoButtonDesk = view.draw.InfoButton({x: 42, y: 27});
-            infoButtonDesk.onInputDown.add(handle.info);
     }
 
     const handle = {
@@ -153,11 +148,9 @@ export let controller = (() => {
 
         closeInfo: function () {
             let game = model.el('game');
-            let counter = 0;
 
             game.input.keyboard.enabled = true;
             model.group('popup').removeAll();
-            model.el('infoCounter', counter);
             model.state('infoPanelOpen', false);
         },
 

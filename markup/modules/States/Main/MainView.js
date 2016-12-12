@@ -71,7 +71,12 @@ export let view = (() => {
             container = model.group('dragon'),
             deltaY = -460
         }) {
-
+            let logoX;
+            if (model.mobile) {
+                logoX = 25;
+            } else {
+                logoX = 40;
+            }
             container.x = game.world.centerX;
             container.y = game.world.centerY;
 
@@ -83,7 +88,7 @@ export let view = (() => {
                 }
             }
             this.addDragon({});
-            let gameLogo = game.add.sprite(0, deltaY, 'gameLogo', null, container);
+            let gameLogo = game.add.sprite(logoX, deltaY, 'gameLogo', null, container);
                 gameLogo.anchor.set(0.5);
                 gameLogo.scale.set(0.9);
 
@@ -96,10 +101,10 @@ export let view = (() => {
         }) {
             let x, y;
             if (model.mobile) {
-                x = -20;
+                x = 15;
                 y = 95;
             } else {
-                x = -30;
+                x = 15;
                 y = 25;
             }
             let dragon = new Dragon({position: {x, y}, container});
@@ -125,7 +130,7 @@ export let view = (() => {
                 lineNumber.name = name;
                 lineNumber.anchor.set(0.5);
                 lineNumber.inputEnabled = true;
-                lineNumber.input.priorityID = 12;
+                lineNumber.input.priorityID = 2;
                 lineNumber.input.pixelPerfectOver = 1;
                 lineNumber.events.onInputOver.add(() => {
                     if (lineNumber.lineShape) {
@@ -136,7 +141,7 @@ export let view = (() => {
                         if (lineNumber.lineShape) {
                             lineNumber.lineShape.destroy();
                         }
-                    }, 1000);
+                    }, 10000);
                 });
 
                 lineNumber.events.onInputOut.add(() => {
@@ -160,7 +165,7 @@ export let view = (() => {
                 lineNumber.name = name;
                 lineNumber.anchor.set(0.5);
                 lineNumber.inputEnabled = true;
-                lineNumber.input.priorityID = 12;
+                lineNumber.input.priorityID = 2;
                 lineNumber.input.pixelPerfectOver = 1;
                 lineNumber.events.onInputOver.add(() => {
                     if (lineNumber.lineShape) {
@@ -171,7 +176,7 @@ export let view = (() => {
                         if (lineNumber.lineShape) {
                             lineNumber.lineShape.destroy();
                         }
-                    }, 1000);
+                    }, 10000);
                 });
 
                 lineNumber.events.onInputOut.add(() => {

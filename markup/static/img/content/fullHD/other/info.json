@@ -53,8 +53,8 @@
 	"version": "1.0",
 	"image": "info.png",
 	"format": "RGBA8888",
-	"size": {"w":2048,"h":2048},
+	"size": {"w":1946,"h":1545},
 	"scale": "0.6",
-	"smartupdate": "$TexturePacker:SmartUpdate:fe27dbe1b8606967e6aa734a08d49747:cad338fa667a60fbb47b22602951a881:da148eda8025a20028e3d0b9ca1572ba$"
+	"smartupdate": "$TexturePacker:SmartUpdate:acad7e6341a617346a4e204df5fdbccc:ac6e755825dee67225c777c294561313:da148eda8025a20028e3d0b9ca1572ba$"
 }
 }

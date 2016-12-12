@@ -1,7 +1,6 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
 import { Dragon } from 'modules/Class/Dragon';
-import { Brain } from 'modules/Class/Brain';
 import { view as transitionView } from 'modules/Transition/TransitionView';
 
 export let view = (() => {
