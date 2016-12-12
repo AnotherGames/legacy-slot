@@ -71,15 +71,25 @@ export let controller = (() => {
         // model.el('brainPanel').destroy();
     }
 
-    function brain() {
+    function bullet() {
+        let bulletCounter = 0;
+        bulletCounter++;
+        // let fsMulti = model.el('fsMulti');
         let rollData = model.data('rollResponse');
-        let fsMulti = model.el('fsMulti');
         let multiValue = rollData.FsBonus.Multi;
+        let currMulti = model.data('fsMulti');
+        console.warn('multiValue', multiValue);
+        console.warn('currMulti', currMulti);
+        console.warn('bulletCounter', bulletCounter);
 
-        fsMulti.frameName = `multi${multiValue}.png`;
         fsView.draw.CountPlus3({});
+        // fsMulti.frameName = `multi${multiValue}.png`;
         // let brain = model.el('flyingBrain');
-        // let currMulti = model.data('fsMulti');
+
+        if (multiValue > currMulti) {
+            fsView.draw.ShowMulti({number: multiValue});
+            model.data('fsMulti', multiValue);
+        }
 
         // if (multiValue > currMulti) {
         //     if (currMulti === 6) {
@@ -153,7 +163,7 @@ export let controller = (() => {
         next,
         count,
         stop,
-        brain
+        bullet
     };
 })();
 
@@ -229,6 +239,7 @@ export class FS {
         // Добавляем свечки
         // this.positionCandles();
 
+        fsView.draw.drum({});
         // Рисуем множитель
         fsView.draw.Multi({
             start: this.fsMulti
@@ -266,7 +277,8 @@ export class FS {
 
     positionMainContainer() {
         let game = model.el('game');
-        model.group('main').x = (model.desktop) ? game.world.centerX : game.width - model.group('main').width / 2;
+        // model.group('main').x = (model.desktop) ? game.world.centerX : game.width - model.group('main').width / 2;
+        model.group('main').x = game.world.centerX + 8;
         model.group('main').y = game.world.centerY + config[model.res].mainContainer.y;
     }
 

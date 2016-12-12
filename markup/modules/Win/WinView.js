@@ -171,10 +171,11 @@ export let view = (() => {
                         // Если выпали мозги на фри-спинах
                         if (elementName == '11') {
                             // Отыгрываем эффекты при выпадении мозгов
-                            if(lvlCounter == 0){
-                                fsController.brain();
+                            // if(lvlCounter == 0){
+                                fsController.bullet();
                                 lvlCounter++;
-                            }
+                                console.warn('lvlCounter', lvlCounter);
+                            // }
                         }
                     });
                 });

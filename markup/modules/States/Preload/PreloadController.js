@@ -102,6 +102,12 @@ export class Preload {
     loadFSAssets() {
         const game = model.el('game');
         game.load.image('fsBG', 'bg/fsBG.png');
+        game.load.image('x4', 'fs/x4.png');
+        game.load.image('x6', 'fs/x6.png');
+        game.load.image('x8', 'fs/x8.png');
+        game.load.image('bottleShadow', 'fs/bottleShadow.png');
+        game.load.image('aim', 'fs/pritsel.png');
+        game.load.atlasJSONArray('bottle', 'fs/bottle.png', 'fs/bottle.json');
         game.load.atlasJSONArray('baraban', 'fs/baraban.png', 'fs/baraban.json');
         game.load.atlasJSONArray('fsCountBG', 'fs/bang.png', 'fs/bang.json');
         // game.load.image('axe', 'fs/axe.png');
@@ -109,9 +115,12 @@ export class Preload {
         // game.load.image('skull', 'fs/skull.png');
         game.load.image('plus3', 'fs/plus3.png');
         if (model.mobile) {
-            game.load.image('fsTotalTable', 'fs/fsTotalTable.png');
-            game.load.image('multiRip', 'fs/multiRip.png');
-            game.load.image('multiTable', 'fs/multiTable.png');
+            game.load.image('drumBG', 'fs/fsDrumBG.png');
+            game.load.image('bottleBG', 'fs/shkaf.png');
+            // game.load.image('fsTotalTable', 'fs/fsTotalTable.png');
+            // game.load.image('multiRip', 'fs/multiRip.png');
+            // game.load.image('multiRip', 'fs/multiRip.png');
+            // game.load.image('multiTable', 'fs/multiTable.png');
         }
     }
 

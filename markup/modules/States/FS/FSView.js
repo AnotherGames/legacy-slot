@@ -198,106 +198,162 @@ export let view = (() => {
             return game.add.tween(darkness).to( { alpha: 0 }, 1500, 'Linear', true);
         },
 
-        Zombie(multi) {
-            multi = multi || 2;
+        // Zombie(multi) {
+        //     multi = multi || 2;
+        //
+        //     let game = model.el('game');
+        //     let fsContainer = model.group('fs');
+        //     let x, y, scale;
+        //
+        //     if (model.mobile) {
+        //         x = 120;
+        //         y = 440;
+        //         scale = 0.6;
+        //     } else {
+        //         x = 270;
+        //         y = 700;
+        //         scale = 1;
+        //     }
+        //
+        //     let zombie = new Zombie({
+        //         position: {
+        //             x,
+        //             y
+        //         },
+        //         multi
+        //     });
+        //
+        //     let brain = model.el('flyingBrain');
+        //     if (multi == 7) {
+        //         brain.Up(() => {
+        //             zombie.Up();
+        //         });
+        //     }
+        //
+        //     zombie.char.scale.set(scale);
+        //     fsContainer.add(zombie.char);
+        //     model.el('zombie', zombie);
+        // },
 
-            let game = model.el('game');
-            let fsContainer = model.group('fs');
-            let x, y, scale;
+        // fsCandle: function({
+        //     game = model.el('game'),
+        //     container = model.group('fs'),
+        //     x = 35,
+        //     y = 480
+        // }) {
+        //     let candle = game.add.sprite(x, y, 'candle', null, container);
+        //         candle.animations.add('burn');
+        //         candle.animations.play('burn', 12, true);
+        //     return candle;
+        // },
 
-            if (model.mobile) {
-                x = 120;
-                y = 440;
-                scale = 0.6;
-            } else {
-                x = 270;
-                y = 700;
-                scale = 1;
-            }
-
-            let zombie = new Zombie({
-                position: {
-                    x,
-                    y
-                },
-                multi
-            });
-
-            let brain = model.el('flyingBrain');
-            if (multi == 7) {
-                brain.Up(() => {
-                    zombie.Up();
-                });
-            }
-
-            zombie.char.scale.set(scale);
-            fsContainer.add(zombie.char);
-            model.el('zombie', zombie);
-        },
-
-        fsCandle: function({
-            game = model.el('game'),
-            container = model.group('fs'),
-            x = 35,
-            y = 480
-        }) {
-            let candle = game.add.sprite(x, y, 'candle', null, container);
-                candle.animations.add('burn');
-                candle.animations.play('burn', 12, true);
-            return candle;
-        },
-
-        Brain() {
-            let game = model.el('game');
-            let fsContainer = model.group('fs');
-            let x, y, scale;
-
-            if (model.mobile) {
-                x = 100;
-                y = 80;
-                scale = 0.8;
-            } else {
-                x = 200;
-                y = 120;
-                scale = 1;
-            }
-
-            let brain = new Brain({
-                position: {
-                    x,
-                    y
-                }
-            });
-
-            brain.char.scale.set(scale);
-            fsContainer.add(brain.char);
-            model.el('flyingBrain', brain);
-        },
+        // Brain() {
+        //     let game = model.el('game');
+        //     let fsContainer = model.group('fs');
+        //     let x, y, scale;
+        //
+        //     if (model.mobile) {
+        //         x = 100;
+        //         y = 80;
+        //         scale = 0.8;
+        //     } else {
+        //         x = 200;
+        //         y = 120;
+        //         scale = 1;
+        //     }
+        //
+        //     let brain = new Brain({
+        //         position: {
+        //             x,
+        //             y
+        //         }
+        //     });
+        //
+        //     brain.char.scale.set(scale);
+        //     fsContainer.add(brain.char);
+        //     model.el('flyingBrain', brain);
+        // },
 
         Multi: function({
             game = model.el('game'),
-            container = model.group('panel'),
-            start = 2
+            container = model.group('panel')
         }) {
-            let x, y;
-            if (model.mobile) {
-                x = 125;
-                y = 625;
-                let multiBG = game.add.sprite(x, y, 'multiRip', null, container);
-                    multiBG.anchor.set(0.5);
+
+            let x1, x2, x3, y1, y2, y3;
+            if (model.desktop) {
+                x1 = 800;
+                x2 = 880;
+                x3 = 960;
+                y1 = y2 = y3 = 100;
             } else {
-                x = 860;
-                y = 118;
+                let fsMultiBG = game.add.sprite(1215, 360, 'bottleBG', null, container);
+                    fsMultiBG.anchor.set(0.5);
+
+                x1 = x2 = x3 = 1215;
+                y1 = 190;
+                y2 = 350;
+                y3 = 515;
             }
-            const fsMulti = game.add.sprite(
-                x,
-                y,
-                'numbers',
-                `multi${start}.png`,
-                container);
-                fsMulti.anchor.set(0.5);
-            model.el('fsMulti', fsMulti);
-            return fsMulti;
+
+            let fsMulti4 = game.add.sprite(x1, y1, 'x4', null, container);
+                fsMulti4.anchor.set(0.5);
+                model.el('fsMulti4', fsMulti4);
+            let fsMulti6 = game.add.sprite(x2, y2, 'x6', null, container);
+                fsMulti6.anchor.set(0.5);
+                model.el('fsMulti6', fsMulti6);
+            let fsMulti8 = game.add.sprite(x3, y3, 'x8', null, container);
+                fsMulti8.anchor.set(0.5);
+                model.el('fsMulti8', fsMulti8);
+
+            fsMulti4.visible = false;
+            fsMulti6.visible = false;
+            fsMulti8.visible = false;
+
+            if (model.desktop) {
+                let bottleShadow4 = game.add.sprite(x1 + 20, y1 + 40, 'bottleShadow', null, container);
+                bottleShadow4.anchor.set(0.5);
+                model.el('bottleShadow4', bottleShadow4);
+                let bottleShadow6 = game.add.sprite(x2 + 20, y2 + 40, 'bottleShadow', null, container);
+                bottleShadow6.anchor.set(0.5);
+                model.el('bottleShadow6', bottleShadow6);
+                let bottleShadow8 = game.add.sprite(x3 + 20, y3 + 40, 'bottleShadow', null, container);
+                bottleShadow8.anchor.set(0.5);
+                model.el('bottleShadow8', bottleShadow8);
+            }
+
+            let fsBottle4 = game.add.sprite(x1, y1, 'bottle', 'Bottlebang-Bang0.png', container);
+                fsBottle4.anchor.set(0.5);
+                model.el('fsBottle4', fsBottle4);
+            let fsBottle6 = game.add.sprite(x2, y2, 'bottle', 'Bottlebang-Bang0.png', container);
+                fsBottle6.anchor.set(0.5);
+                model.el('fsBottle6', fsBottle6);
+            let fsBottle8 = game.add.sprite(x3, y3, 'bottle', 'Bottlebang-Bang0.png', container);
+                fsBottle8.anchor.set(0.5);
+                model.el('fsBottle8', fsBottle8);
+        },
+
+        ShowMulti: function({
+            game = model.el('game'),
+            container = model.group('panel'),
+            number = 4
+        }) {
+            let fsBottle = model.el(`fsBottle${number}`);
+            let fsMulti = model.el(`fsMulti${number}`);
+            let bottleShadow = model.el(`bottleShadow${number}`);
+
+            let aim = game.add.sprite(game.centerX, game.centerY, 'aim', null, container);
+                aim.anchor.set(0.5);
+                aim.scale.set(0.1);
+                model.el('aim', aim);
+
+            game.add.tween(aim.scale).to({x: 1.0, y: 1.0}, 1500, Phaser.Easing.Elastic.Out, true)
+            game.add.tween(aim).to({x: fsBottle.x, y: fsBottle.y}, 500, 'Linear', true, 1500)
+                .onComplete.add(() => {
+                    fsBottle.animations.add('bottleBang');
+                    fsBottle.animations.play('bottleBang', 12, false);
+                    fsMulti.visible = true;
+                    bottleShadow.visible = false;
+                });
         },
 
         Count: function({
@@ -305,46 +361,52 @@ export let view = (() => {
             container = model.group('panel'),
             start = 15,
             fontDesktop = '80px Helvetica, Arial',
-            fontMobile = '50px Helvetica, Arial'
+            fontMobile = '60px Helvetica, Arial'
         }) {
             let x, y, font;
             if (model.mobile) {
-                x = 1183;
-                y = 68;
+                x = 55;
+                y = 520;
                 font = fontMobile;
-                let countBG = game.add.sprite(x, y - 5, 'fsTotalTable', null, container);
-                countBG.anchor.set(0.5);
+                // let countBG = game.add.sprite(x, y - 5, 'fsTotalTable', null, container);
+                // countBG.anchor.set(0.5);
             } else {
-                x = 665;
-                y = 97;
+                x = 648;
+                y = 85;
                 font = fontDesktop;
             }
             // let fsCount = game.add.bitmapText(x, y, 'fsLevelNumbers', start, font, container);
-            let fsCount = game.add.text(x, y, start, {font: '80px Helvetica, Arial', fill: '#e8b075', align: 'center'}, container);
+
+            let fsCountBG = game.add.sprite(x, y, 'fsCountBG', 'fsTotalTable-Bang0.png', container);
+                fsCountBG.anchor.set(0.5);
+                if (model.desktop) {fsCountBG.scale.set(1.3)};
+                model.el('fsCountBG', fsCountBG);
+
+            let fsCount = game.add.text(x + 15, y + 17, start, {font: font, fill: '#e8b075', align: 'center'}, container);
                 fsCount.anchor.set(0.5)
                 model.el('fs:count', fsCount);
         },
 
-        BrainLevel: function({
-            game = model.el('game'),
-            container = model.group('panel')
-        }) {
-            let x, y;
-            if (model.mobile) {
-                x = 350;
-                y = 33;
-                let brainBG = game.add.sprite(x, y, 'multiTable', null, container);
-                    brainBG.anchor.set(0.5);
-            } else {
-                x = 437;
-                y = 100;
-            }
-            let brainPanel = game.add.spine(x, y, 'mozgiCount');
-                brainPanel.setAnimationByName(0, 'w1.5', true);
-                brainPanel.visible = false;
-            container.add(brainPanel);
-            model.el('brainPanel', brainPanel);
-        },
+        // BrainLevel: function({
+        //     game = model.el('game'),
+        //     container = model.group('panel')
+        // }) {
+        //     let x, y;
+        //     if (model.mobile) {
+        //         x = 350;
+        //         y = 33;
+        //         let brainBG = game.add.sprite(x, y, 'multiTable', null, container);
+        //             brainBG.anchor.set(0.5);
+        //     } else {
+        //         x = 437;
+        //         y = 100;
+        //     }
+        //     let brainPanel = game.add.spine(x, y, 'mozgiCount');
+        //         brainPanel.setAnimationByName(0, 'w1.5', true);
+        //         brainPanel.visible = false;
+        //     container.add(brainPanel);
+        //     model.el('brainPanel', brainPanel);
+        // },
 
         CountPlus3: function({
             game = model.el('game'),
@@ -361,6 +423,7 @@ export let view = (() => {
             }
             let plus3 = game.add.sprite(x, y - deltaY, 'plus3', null, container);
                 plus3.anchor.set(0.5);
+                plus3.scale.set(0.3);
             model.el('plus3', plus3);
 
             let tweenY;
@@ -369,13 +432,13 @@ export let view = (() => {
                 tweenX = plus3.x;
                 tweenY = 950;
             } else {
-                tweenX = 1180;
-                tweenY = 50;
+                tweenX = -450;
+                tweenY = 100;
             }
 
             game.add.tween(plus3.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true);
-            game.add.tween(plus3).to({x: tweenX, y: tweenY}, 300, 'Linear', true, 1000);
-            game.add.tween(plus3).to({alpha: 0}, 300, 'Linear', true, 1000)
+            game.add.tween(plus3).to({x: tweenX, y: tweenY}, 400, 'Linear', true, 1000);
+            game.add.tween(plus3).to({alpha: 0}, 200, 'Linear', true, 1200)
                 .onComplete.add(() => {
                     plus3.destroy();
                     model.state('CountPlus3', false);
@@ -387,32 +450,58 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('panel')
         }) {
-            let x, y;
-            if (model.mobile) {
-                x = 1180;
-                y = 105;
-            } else {
-                x = 660;
-                y = 100;
-            }
+            // let x, y;
+            // if (model.mobile) {
+            //     x = 1180;
+            //     y = 105;
+            // } else {
+            //     x = 660;
+            //     y = 100;
+            // }
             // let fsCountBG = game.add.spine(x, y, 'fsCount');
             // container.add(fsCountBG);
             //     fsCountBG.setAnimationByName(0, 'w-0', false);
             // model.el('fsCountBG', fsCountBG);
-            let fsCountBG = game.add.sprite(x, y, 'fsCountBG', null, container);
-                fsCountBG.anchor.set(0.5);
-                fsCountBG.scale.set(1.2);
-                model.el('fsCountBG', fsCountBG);
 
-            // let fsCount = model.el('fsCount');
-                // container.swap(fsCount, fsCountBG);
+            let fsCountBG = model.el('fsCountBG');
 
-            fsCountBG.animations.add('bang');
+            fsCountBG.animations.add('bang', [0, 1, 2, 3, 4, 0]);
             fsCountBG.animations.play('bang', 12, false);
 
-            game.time.events.add(500, () => {
-                fsCountBG.destroy();
-            });
+        },
+
+        drum: function ({
+            game = model.el('game'),
+            container = model.group('panel')
+        }) {
+            let x, y, deltaX, deltaY, scaleDrum, scaleBullet;
+            if (model.mobile) {
+                x = 72;
+                y = 335;
+                deltaX = -5;
+                deltaY = -127;
+                let drumBG = game.add.sprite(72, 280, 'drumBG', null, container);
+                drumBG.anchor.set(0.5);
+                drumBG.scale.set(0.95);
+                scaleDrum = 0.5;
+                scaleBullet = 0.6;
+            } else {
+                x = 495;
+                y = 100;
+                deltaX = 135;
+                deltaY = 15;
+                scaleDrum = 0.35;
+                scaleBullet = 0.45;
+            }
+            let drum = game.add.sprite(x, y, 'baraban', 'B-0.png', container);
+                drum.anchor.set(0.5);
+                drum.scale.set(scaleDrum);
+            model.el('drum', drum);
+
+            let bullet = game.add.sprite(x - deltaX, y + deltaY, '11', '11-n.png', container);
+                bullet.anchor.set(0.5);
+                bullet.scale.set(scaleBullet);
+            model.el('bullet', bullet);
         }
 
     };
