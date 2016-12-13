@@ -12,7 +12,10 @@ export class Init {
         let game = model.el('game');
             game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
             game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-            soundController.music.playMusic('initFon');
+            //Воспроивзодит музыку но сама музыка не играет если не сделать такой костыль
+            setTimeout(() => {
+              soundController.music.playMusic('initFon');
+            }, 100)
     }
 
     create() {
