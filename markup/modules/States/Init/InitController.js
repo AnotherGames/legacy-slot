@@ -13,9 +13,9 @@ export class Init {
             game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
             game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
             //Воспроивзодит музыку но сама музыка не играет если не сделать такой костыль
-            setTimeout(() => {
+            // setTimeout(() => {
               soundController.music.playMusic('initFon');
-            }, 100)
+            // }, 100)
     }
 
     create() {

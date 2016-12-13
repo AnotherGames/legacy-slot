@@ -341,14 +341,16 @@ export let view = (() => {
             let fsMulti = model.el(`fsMulti${number}`);
             let bottleShadow = model.el(`bottleShadow${number}`);
 
-            let aim = game.add.sprite(game.centerX, game.centerY, 'aim', null, container);
+            let aim = game.add.sprite(model.group('panel').width / 2, -400, 'aim', null, container);
                 aim.anchor.set(0.5);
                 aim.scale.set(0.1);
                 model.el('aim', aim);
 
             game.add.tween(aim.scale).to({x: 1.0, y: 1.0}, 1500, Phaser.Easing.Elastic.Out, true)
-            game.add.tween(aim).to({x: fsBottle.x, y: fsBottle.y}, 500, 'Linear', true, 1500)
+            game.add.tween(aim).to({x: fsBottle.x, y: fsBottle.y}, 700, 'Linear', true, 1500)
+            game.add.tween(aim.scale).to({x: 0.2, y: 0.2}, 700, 'Linear', true, 1500)
                 .onComplete.add(() => {
+                    aim.destroy();
                     fsBottle.animations.add('bottleBang');
                     fsBottle.animations.play('bottleBang', 12, false);
                     fsMulti.visible = true;
@@ -368,14 +370,11 @@ export let view = (() => {
                 x = 55;
                 y = 520;
                 font = fontMobile;
-                // let countBG = game.add.sprite(x, y - 5, 'fsTotalTable', null, container);
-                // countBG.anchor.set(0.5);
             } else {
                 x = 648;
                 y = 85;
                 font = fontDesktop;
             }
-            // let fsCount = game.add.bitmapText(x, y, 'fsLevelNumbers', start, font, container);
 
             let fsCountBG = game.add.sprite(x, y, 'fsCountBG', 'fsTotalTable-Bang0.png', container);
                 fsCountBG.anchor.set(0.5);
@@ -386,27 +385,6 @@ export let view = (() => {
                 fsCount.anchor.set(0.5)
                 model.el('fs:count', fsCount);
         },
-
-        // BrainLevel: function({
-        //     game = model.el('game'),
-        //     container = model.group('panel')
-        // }) {
-        //     let x, y;
-        //     if (model.mobile) {
-        //         x = 350;
-        //         y = 33;
-        //         let brainBG = game.add.sprite(x, y, 'multiTable', null, container);
-        //             brainBG.anchor.set(0.5);
-        //     } else {
-        //         x = 437;
-        //         y = 100;
-        //     }
-        //     let brainPanel = game.add.spine(x, y, 'mozgiCount');
-        //         brainPanel.setAnimationByName(0, 'w1.5', true);
-        //         brainPanel.visible = false;
-        //     container.add(brainPanel);
-        //     model.el('brainPanel', brainPanel);
-        // },
 
         CountPlus3: function({
             game = model.el('game'),
@@ -450,18 +428,6 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('panel')
         }) {
-            // let x, y;
-            // if (model.mobile) {
-            //     x = 1180;
-            //     y = 105;
-            // } else {
-            //     x = 660;
-            //     y = 100;
-            // }
-            // let fsCountBG = game.add.spine(x, y, 'fsCount');
-            // container.add(fsCountBG);
-            //     fsCountBG.setAnimationByName(0, 'w-0', false);
-            // model.el('fsCountBG', fsCountBG);
 
             let fsCountBG = model.el('fsCountBG');
 
@@ -502,6 +468,29 @@ export let view = (() => {
                 bullet.anchor.set(0.5);
                 bullet.scale.set(scaleBullet);
             model.el('bullet', bullet);
+        },
+
+        drumSpin: function ({
+            game = model.el('game'),
+            container = model.group('panel'),
+            number = 0
+        }) {
+            let bullet = model.el('bullet');
+            let win = Phaser.Animation.generateFrameNames(`11-w-`, 1, 10, '.png', 2);
+            bullet.animations.add('win');
+            bullet.animations.play('win', 12, false);
+
+            let drum = model.el('drum');
+            drum.frameName = 'BR-0.png';
+            game.time.events.add(400, () => {
+                drum.frameName = `B-${number}.png`;
+                if (number == 6){
+                    game.time.events.add(300, () => {
+                        drum.frameName = `B-0.png`;
+                    });
+                }
+            });
+
         }
 
     };

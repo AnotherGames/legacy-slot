@@ -173,8 +173,7 @@ export let view = (() => {
                             // Отыгрываем эффекты при выпадении мозгов
                             // if(lvlCounter == 0){
                                 fsController.bullet();
-                                lvlCounter++;
-                                console.warn('lvlCounter', lvlCounter);
+                                // lvlCounter++;
                             // }
                         }
                     });

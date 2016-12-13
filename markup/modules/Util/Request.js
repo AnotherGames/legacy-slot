@@ -15,7 +15,7 @@ export let request = (() => {
 
     const mode = {
         normal: 'snailnorm3',
-        fsBonus: 'snailfs2'
+        fsBonus: 'snailfs3'
     };
 
     function send(name, options) {

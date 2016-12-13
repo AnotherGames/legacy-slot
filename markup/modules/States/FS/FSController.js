@@ -71,10 +71,13 @@ export let controller = (() => {
         // model.el('brainPanel').destroy();
     }
 
+    let bulletCounter = 0;
     function bullet() {
-        let bulletCounter = 0;
         bulletCounter++;
-        // let fsMulti = model.el('fsMulti');
+        if (bulletCounter > 6) {
+            bulletCounter = 1
+        }
+
         let rollData = model.data('rollResponse');
         let multiValue = rollData.FsBonus.Multi;
         let currMulti = model.data('fsMulti');
@@ -83,34 +86,12 @@ export let controller = (() => {
         console.warn('bulletCounter', bulletCounter);
 
         fsView.draw.CountPlus3({});
-        // fsMulti.frameName = `multi${multiValue}.png`;
-        // let brain = model.el('flyingBrain');
+        fsView.draw.drumSpin({number: bulletCounter});
 
         if (multiValue > currMulti) {
             fsView.draw.ShowMulti({number: multiValue});
             model.data('fsMulti', multiValue);
         }
-
-        // if (multiValue > currMulti) {
-        //     if (currMulti === 6) {
-        //         let zombie = model.el('zombie');
-        //         zombie.Up(() => {
-        //             brain.Up(() => {
-        //                 zombie.Up();
-        //                 soundController.sounds.playSound('zombie1');
-        //             });
-        //         });
-        //         model.data('fsMulti', multiValue);
-        //     } else {
-        //         model.el('zombie').Up();
-        //         model.data('fsMulti', multiValue);
-        //     }
-        // }
-
-        // if (currMulti < 7) {
-        //     brain.Win();
-        //     searchBrains({});
-        // }
 
     }
 
