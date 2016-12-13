@@ -57,6 +57,5 @@ module.exports = {
         "staticFolderName": "static",
         "imagesFolderName": "img",
         "componentsFolderName": "modules"
-    },
-    "staticPrefix": "static/"
+    }
 };
