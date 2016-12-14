@@ -16,6 +16,8 @@ import { controller as winController } from 'modules/Win/WinController';
 
 export let controller = (() => {
 
+    let bulletCounter = 0;
+
     function init(amount) {
         if (model.state('fs:end') === false) return;
 
@@ -68,11 +70,10 @@ export let controller = (() => {
         model.state('fs:end', true);
         model.state('fs', false);
         model.updateBalance({endFS: true});
-        // model.el('brainPanel').destroy();
+        bulletCounter = 0;
     }
 
-    let bulletCounter = 0;
-    function bullet() {
+    function bullet(el) {
         bulletCounter++;
         if (bulletCounter > 6) {
             bulletCounter = 1
@@ -85,8 +86,12 @@ export let controller = (() => {
         console.warn('currMulti', currMulti);
         console.warn('bulletCounter', bulletCounter);
 
+        // Проигрываем анимации барабана и +3
         fsView.draw.CountPlus3({});
         fsView.draw.drumSpin({number: bulletCounter});
+        el.visible = true;
+
+        // Увеличиваем мульти(разбивание бутылки)
 
         if (multiValue > currMulti) {
             fsView.draw.ShowMulti({number: multiValue});
@@ -95,49 +100,11 @@ export let controller = (() => {
 
     }
 
-    function searchBrains({
-        startLevel
-    }) {
-
-        let levelValue = startLevel || model.data('rollResponse').FsBonus.Level;
-        let levelABS = levelValue % 3;
-        let brainPanel = model.el('brainPanel');
-        if (model.state('brainPanel') === false) {
-            fsView.draw.BrainLevel({});
-            brainPanel = model.el('brainPanel');
-            model.state('brainPanel', true);
-        }
-        if (levelABS === 0) {
-            playBrainSound();
-            brainPanel.visible = true;
-            brainPanel.setAnimationByName(0,'w3', false);
-            brainPanel.addAnimationByName(0,'w4', false);
-            const game = model.el('game');
-            game.time.events.add(1000, () => {
-                brainPanel.destroy();
-                model.state('brainPanel', false);
-            });
-        }
-        if (levelABS === 1){
-            playBrainSound();
-            brainPanel.visible = true;
-            brainPanel.setAnimationByName(0,'w1', false);
-            brainPanel.addAnimationByName(0,'w1.5', true);
-        }
-        if (levelABS === 2){
-            playBrainSound();
-            brainPanel.visible = true;
-            brainPanel.setAnimationByName(0,'w2', false);
-            brainPanel.addAnimationByName(0,'w2.5', true);
-        }
-
-    }
-
-    function playBrainSound(){
-      Math.round(Math.random())
-      ? soundController.sounds.playSound('mozgi1')
-      : soundController.sounds.playSound('mozgi2')
-    }
+    // function playBrainSound(){
+    //   Math.round(Math.random())
+    //   ? soundController.sounds.playSound('mozgi1')
+    //   : soundController.sounds.playSound('mozgi2')
+    // }
 
     return {
         init,
@@ -213,13 +180,7 @@ export class FS {
         // Добавляем маску
         fsView.draw.machineMask({});
 
-        // Добавляем Мозги на экран
-        // fsView.draw.Brain();
-        // Добавляем Зомби на экран
-        // fsView.draw.Zombie(this.fsMulti);
-        // Добавляем свечки
-        // this.positionCandles();
-
+        // Рисуем барабан
         fsView.draw.drum({});
         // Рисуем множитель
         fsView.draw.Multi({
@@ -229,8 +190,7 @@ export class FS {
         fsView.draw.Count({
             start: this.fsCount
         });
-        // Рисуем счетчик мозгов
-        // fsView.draw.BrainLevel({});
+
         // Если сохранненая сессия, то переключаем счетчик мозгов
         if (this.fsLevel > 0) {
             controller.searchBrains({
@@ -278,27 +238,5 @@ export class FS {
             model.data('fsMulti', 2);
         }
     }
-
-    // positionCandles() {
-    //     let game = model.el('game');
-    //     let time = game.rnd.integerInRange(10, 70);
-    //     if (model.desktop) {
-    //         let candle1 = fsView.draw.fsCandle({});
-    //             candle1.scale.set(0.8);
-    //         game.time.events.add(time, () => {
-    //             let candle2 = fsView.draw.fsCandle({x: 62, y: 500});
-    //                 candle2.scale.set(0.7);
-    //             let candle3 = fsView.draw.fsCandle({x: 372, y: 440});
-    //         });
-    //     } else {
-    //         let candle1 = fsView.draw.fsCandle({x: -12, y: 315});
-    //             candle1.scale.set(0.8);
-    //         game.time.events.add(time, () => {
-    //             let candle2 = fsView.draw.fsCandle({x: 5, y: 330});
-    //                 candle2.scale.set(0.7);
-    //             let candle3 = fsView.draw.fsCandle({x: 164, y: 292});
-    //         });
-    //     }
-    // }
 
 };

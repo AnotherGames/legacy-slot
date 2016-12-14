@@ -38,10 +38,8 @@ export class Preload {
         game.load.audio('finishPerehod', 'finishPerehod.mp3');
         game.load.audio('lineWin', 'lineWin.mp3');
         game.load.audio('lineWin2', 'lineWin2.mp3');
-        game.load.audio('mozgi1', 'mozgi1.mp3');
-        game.load.audio('mozgi2', 'mozgi2.mp3');
-        game.load.audio('zombie1', 'zombie1.mp3');
-        game.load.audio('zombie2', 'zombie2.mp3');
+        game.load.audio('bottleBang', 'bottleBang.mp3');
+
     }
 
     loadInitAssets() {
@@ -56,13 +54,12 @@ export class Preload {
         game.load.image('mainBG', 'bg/mainBG.png');
         game.load.image('mainBGSky', 'bg/mainBGSky.png');
         game.load.image('zaglushka', 'bg/zaglushka.png');
-        // game.load.atlasJSONArray('clouds', 'bg/clouds.png', 'bg/clouds.json');
         game.load.image('cloud', 'bg/cloud.png');
         game.load.image('luchi', 'bg/luchi.png');
         game.load.image('fonLine', 'bg/fonLine.png');
         game.load.image('gradient', 'bg/gradient.png');
         game.load.atlasJSONArray('pole', 'bg/pole.png', 'bg/pole.json');
-        game.load.atlasJSONArray('candle', 'bg/candle.png', 'bg/candle.json');
+        game.load.atlasJSONArray('bird', 'bg/bird.png', 'bg/bird.json');
         game.load.image('gameMachine', 'game/gameMachine.png');
         game.load.image('gameBG', 'game/gameBG.png');
         game.load.image('gameBGfs', 'game/gameBGfs.png');
@@ -110,17 +107,10 @@ export class Preload {
         game.load.atlasJSONArray('bottle', 'fs/bottle.png', 'fs/bottle.json');
         game.load.atlasJSONArray('baraban', 'fs/baraban.png', 'fs/baraban.json');
         game.load.atlasJSONArray('fsCountBG', 'fs/bang.png', 'fs/bang.json');
-        // game.load.image('axe', 'fs/axe.png');
-        // game.load.image('axeSmall', 'fs/axeSmall.png');
-        // game.load.image('skull', 'fs/skull.png');
         game.load.image('plus3', 'fs/plus3.png');
         if (model.mobile) {
             game.load.image('drumBG', 'fs/fsDrumBG.png');
             game.load.image('bottleBG', 'fs/shkaf.png');
-            // game.load.image('fsTotalTable', 'fs/fsTotalTable.png');
-            // game.load.image('multiRip', 'fs/multiRip.png');
-            // game.load.image('multiRip', 'fs/multiRip.png');
-            // game.load.image('multiTable', 'fs/multiTable.png');
         }
     }
 
@@ -129,7 +119,7 @@ export class Preload {
         // game.load.spine('animBG', 'skeleton/skeleton.json');
         // game.load.spine('Zombie', 'spine/Zomb.json');
         // game.load.spine('FlyingBrain', 'spine/Brain.json');
-        game.load.spine('mozgiCount', 'fs/mozgi.json');
+        // game.load.spine('mozgiCount', 'fs/mozgi.json');
         //game.load.spine('fsCount', 'fs/bang.json');
 
     }

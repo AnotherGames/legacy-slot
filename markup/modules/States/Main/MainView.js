@@ -27,14 +27,6 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('bg')
         }) {
-            // let animBG = game.add.spine(
-            //     game.world.centerX - 3,
-            //     game.world.centerY,
-            //     'animBG'
-            // );
-            // animBG.setAnimationByName(0, '1', true);
-            // model.group('bg').add(animBG);
-            // model.el('animMainBG', animBG);
 
             let mainBGSky = game.add.sprite(0, 0, 'mainBGSky', null, container);
             model.el('mainBGSky', mainBGSky);
@@ -51,17 +43,11 @@ export let view = (() => {
             let mainBG = game.add.sprite(0, 0, 'mainBG', null, container);
             model.el('mainBG', mainBG);
 
-            let logoZaglushka = game.add.sprite(0, game.height * 0.84, 'zaglushka', null, container);
+            let y = (model.desktop) ? game.height * 0.84 : game.height * 0.80;
+
+            let logoZaglushka = game.add.sprite(0, y, 'zaglushka', null, container);
             model.el('logoZaglushka', logoZaglushka);
 
-            // if (model.state('isAnimBG')) {
-            //     mainBG.visible = false;
-            // } else {
-            //     animBG.visible = false;
-            //     for (let i = 0; i < 5; i++) {
-            //         transitionView.addCloud({container: model.group('bg')});
-            //     }
-            // }
         },
 
         addPole: function ({

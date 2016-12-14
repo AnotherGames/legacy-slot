@@ -139,7 +139,7 @@ export let view = (() => {
                         }
                 }
 
-            // Если есть скаттеры либо мозги
+            // Если есть скаттеры либо элемент фриспинов
             } else {
                 let lvlCounter = 0;
                 wheels.forEach((wheelObj, wheelIndex) => {
@@ -148,6 +148,7 @@ export let view = (() => {
                         // Показываем выигрышные скаттеры
                         if (elementName == '10' || elementName == '11') {
                             let element = upElements[wheelIndex][elementIndex];
+
                             element.win();
                             element.show();
                             element.group.scale.set(0.3);
@@ -168,13 +169,27 @@ export let view = (() => {
                             });
 
                         }
-                        // Если выпали мозги на фри-спинах
+                        // Если выпали пули на фри-спинах
                         if (elementName == '11') {
-                            // Отыгрываем эффекты при выпадении мозгов
-                            // if(lvlCounter == 0){
-                                fsController.bullet();
-                                // lvlCounter++;
-                            // }
+
+                            // Делаем невидимой пулю на экране
+                            let element = upElements[wheelIndex][elementIndex];
+                            element.group.visible = false;
+
+                            // Создаем новыую пулю сверху и твиним ее
+                            let newBullet = game.add.sprite(element.group.x, element.group.y, '11', '11-n.png');
+                            newBullet.anchor.set(0.5);
+                            game.add.tween(newBullet).to({x: game.world.centerX, y: 700}, 500, 'Linear', true)
+                            // console.log(element.group.x, element.group.y);
+                            // game.add.tween(element.group.scale).to({x: 0.1,  y: 0.1}, 700, 'Linear', true)
+                                .onComplete.add(() => {
+                                    newBullet.destroy();
+                                })
+                            // Отыгрываем эффекты при выпадении пуль, передаем пулю с экрана чтобы сделать ее снова видимойы
+                            game.time.events.add(500, () => {
+                                fsController.bullet(element.group);
+                            });
+
                         }
                     });
                 });
@@ -294,10 +309,15 @@ export let view = (() => {
     let play = {
 
         WinSound: function() {
-            let winSound = Math.round(Math.random())
-            ? soundController.sounds.playSound('lineWin', 1000)
-            : soundController.sounds.playSound('lineWin2', 1000);
-            return winSound;
+            // let winSound = Math.round(Math.random())
+            // ? soundController.sounds.playSound('lineWin', 1000)
+            // : soundController.sounds.playSound('lineWin2', 1000);
+            // return winSound;
+            let game = model.el('game');
+            soundController.sounds.playSound('lineWin', 1000);
+            game.time.events.add(300, () => {
+                soundController.sounds.playSound('lineWin2', 1000);
+            });
         }
 
     };

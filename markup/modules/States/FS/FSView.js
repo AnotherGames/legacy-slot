@@ -1,7 +1,8 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
-import { Zombie } from 'modules/Class/Zombie';
-import { Brain } from 'modules/Class/Brain';
+// import { Zombie } from 'modules/Class/Zombie';
+// import { Brain } from 'modules/Class/Brain';
+import { controller as soundController } from 'modules/Sound/SoundController';
 import { view as transitionView } from 'modules/Transition/TransitionView';
 
 export let view = (() => {
@@ -198,82 +199,6 @@ export let view = (() => {
             return game.add.tween(darkness).to( { alpha: 0 }, 1500, 'Linear', true);
         },
 
-        // Zombie(multi) {
-        //     multi = multi || 2;
-        //
-        //     let game = model.el('game');
-        //     let fsContainer = model.group('fs');
-        //     let x, y, scale;
-        //
-        //     if (model.mobile) {
-        //         x = 120;
-        //         y = 440;
-        //         scale = 0.6;
-        //     } else {
-        //         x = 270;
-        //         y = 700;
-        //         scale = 1;
-        //     }
-        //
-        //     let zombie = new Zombie({
-        //         position: {
-        //             x,
-        //             y
-        //         },
-        //         multi
-        //     });
-        //
-        //     let brain = model.el('flyingBrain');
-        //     if (multi == 7) {
-        //         brain.Up(() => {
-        //             zombie.Up();
-        //         });
-        //     }
-        //
-        //     zombie.char.scale.set(scale);
-        //     fsContainer.add(zombie.char);
-        //     model.el('zombie', zombie);
-        // },
-
-        // fsCandle: function({
-        //     game = model.el('game'),
-        //     container = model.group('fs'),
-        //     x = 35,
-        //     y = 480
-        // }) {
-        //     let candle = game.add.sprite(x, y, 'candle', null, container);
-        //         candle.animations.add('burn');
-        //         candle.animations.play('burn', 12, true);
-        //     return candle;
-        // },
-
-        // Brain() {
-        //     let game = model.el('game');
-        //     let fsContainer = model.group('fs');
-        //     let x, y, scale;
-        //
-        //     if (model.mobile) {
-        //         x = 100;
-        //         y = 80;
-        //         scale = 0.8;
-        //     } else {
-        //         x = 200;
-        //         y = 120;
-        //         scale = 1;
-        //     }
-        //
-        //     let brain = new Brain({
-        //         position: {
-        //             x,
-        //             y
-        //         }
-        //     });
-        //
-        //     brain.char.scale.set(scale);
-        //     fsContainer.add(brain.char);
-        //     model.el('flyingBrain', brain);
-        // },
-
         Multi: function({
             game = model.el('game'),
             container = model.group('panel')
@@ -341,20 +266,27 @@ export let view = (() => {
             let fsMulti = model.el(`fsMulti${number}`);
             let bottleShadow = model.el(`bottleShadow${number}`);
 
-            let aim = game.add.sprite(model.group('panel').width / 2, -400, 'aim', null, container);
+            let x = (model.desktop) ? model.group('panel').width / 2 : model.group('panel').width / 2 - 100;
+            let y = (model.desktop) ? -400 : 300;
+
+            let aim = game.add.sprite(x, y, 'aim', null, container);
                 aim.anchor.set(0.5);
                 aim.scale.set(0.1);
                 model.el('aim', aim);
 
-            game.add.tween(aim.scale).to({x: 1.0, y: 1.0}, 1500, Phaser.Easing.Elastic.Out, true)
-            game.add.tween(aim).to({x: fsBottle.x, y: fsBottle.y}, 700, 'Linear', true, 1500)
-            game.add.tween(aim.scale).to({x: 0.2, y: 0.2}, 700, 'Linear', true, 1500)
+            game.add.tween(aim.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true)
+            game.add.tween(aim).to({x: fsBottle.x, y: fsBottle.y}, 500, 'Linear', true, 1000)
+            game.add.tween(aim.scale).to({x: 0.2, y: 0.2}, 500, 'Linear', true, 1000)
                 .onComplete.add(() => {
                     aim.destroy();
+                    soundController.sounds.playSound('bottleBang', 1000);
+                    soundController.sounds.playSound('bottleBang', 1000);
                     fsBottle.animations.add('bottleBang');
                     fsBottle.animations.play('bottleBang', 12, false);
                     fsMulti.visible = true;
-                    bottleShadow.visible = false;
+                    if (model.desktop) {
+                        bottleShadow.visible = false;
+                    }
                 });
         },
 
@@ -414,9 +346,9 @@ export let view = (() => {
                 tweenY = 100;
             }
 
-            game.add.tween(plus3.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true);
-            game.add.tween(plus3).to({x: tweenX, y: tweenY}, 400, 'Linear', true, 1000);
-            game.add.tween(plus3).to({alpha: 0}, 200, 'Linear', true, 1200)
+            game.add.tween(plus3.scale).to({x: 1.0, y: 1.0}, 500, Phaser.Easing.Elastic.Out, true);
+            game.add.tween(plus3).to({x: tweenX, y: tweenY}, 400, 'Linear', true, 500);
+            game.add.tween(plus3).to({alpha: 0}, 200, 'Linear', true, 700)
                 .onComplete.add(() => {
                     plus3.destroy();
                     model.state('CountPlus3', false);
@@ -428,9 +360,7 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('panel')
         }) {
-
             let fsCountBG = model.el('fsCountBG');
-
             fsCountBG.animations.add('bang', [0, 1, 2, 3, 4, 0]);
             fsCountBG.animations.play('bang', 12, false);
 
@@ -477,8 +407,9 @@ export let view = (() => {
         }) {
             let bullet = model.el('bullet');
             let win = Phaser.Animation.generateFrameNames(`11-w-`, 1, 10, '.png', 2);
-            bullet.animations.add('win');
-            bullet.animations.play('win', 12, false);
+            let bulletAnim = bullet.animations.add('win');
+            bulletAnim.onComplete.add(() => {bullet.frameName = '11-n.png'}, this);
+            bulletAnim.play('win', 10);
 
             let drum = model.el('drum');
             drum.frameName = 'BR-0.png';
