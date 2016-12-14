@@ -101,7 +101,7 @@ export let model = (() => {
 
         let volume = 100;
         if(model.desktop){
-          volume = (localStorage['volume'] == 'undefined') ? 100 : +localStorage['volume'];
+          volume = (typeof localStorage['volume'] == 'undefined') ? 100 : +localStorage['volume'];
         }
         soundController.volume.setVolume(volume);
 
