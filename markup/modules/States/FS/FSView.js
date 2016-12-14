@@ -407,9 +407,9 @@ export let view = (() => {
         }) {
             let bullet = model.el('bullet');
             let win = Phaser.Animation.generateFrameNames(`11-w-`, 1, 10, '.png', 2);
-            let bulletAnim = bullet.animations.add('win');
+            let bulletAnim = bullet.animations.add('win', win);
             bulletAnim.onComplete.add(() => {bullet.frameName = '11-n.png'}, this);
-            bulletAnim.play('win', 10);
+            bulletAnim.play(12);
 
             let drum = model.el('drum');
             drum.frameName = 'BR-0.png';
