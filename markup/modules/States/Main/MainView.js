@@ -79,6 +79,42 @@ export let view = (() => {
 
         },
 
+        addBird: function ({
+            game = model.el('game'),
+            container = model.group('bg')
+        }) {
+            let bird = game.add.sprite(game.width * 0.92, 265, 'bird', null, container);
+            bird.anchor.set(0.5);
+            model.el('bird', bird);
+
+            let birdAnim = bird.animations.add('idle', Phaser.Animation.generateFrameNames('idle1-', 0, 24, '.png', 2));
+            model.el('birdAnim', birdAnim);
+            let birdAnim2 = bird.animations.add('idle2', Phaser.Animation.generateFrameNames('idle2-', 0, 24, '.png', 2));
+            model.el('birdAnim2', birdAnim2);
+            let birdAnim3 = bird.animations.add('idle3', Phaser.Animation.generateFrameNames('idle3-', 0, 24, '.png', 2));
+            model.el('birdAnim3', birdAnim3);
+            birdAnim.play(15, true);
+            // let nextAnim = model.el('birdAnim2');
+            // model.el('nextAnim',  nextAnim);
+            this._nextBirdAnim({});
+
+        },
+
+        _nextBirdAnim: function ({
+            game = model.el('game'),
+            birdAnim = model.el('birdAnim')
+        }) {
+            game.time.events.add(5000, () => {
+            // Играем следующую случайную анимацию
+            let number = game.rnd.integerInRange(2, 3);
+            let nextAnim = model.el(`birdAnim${number}`);
+            nextAnim.play(15);
+            nextAnim.onComplete.add(() => {birdAnim.play(15, true)}, this);
+                // Запускаем таймер снова
+                this._nextBirdAnim({});
+            });
+        },
+
         mainContainer: function ({
             game = model.el('game'),
             container = model.group('main')
