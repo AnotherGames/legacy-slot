@@ -10,22 +10,24 @@ export let controller = (function () {
             let soundButton = model.el('soundButton');
             if (this.value == 0) {
                 model.state('globalSound', false);
+                model.cookie('globalSound', false);
                 soundButton.frameName = 'soundOff.png';
             } else {
                 model.state('globalSound', true);
+                model.cookie('globalSound', true);
                 soundButton.frameName = 'sound.png';
             }
             soundController.volume.changeVolume(this.value);
             soundController.volume.setVolume(this.value);
-            localStorage['volume'] = this.value;
+            model.cookie('volume', this.value);
         });
         $('#checkSound').on('change', function () {
-            localStorage['sound'] = this.checked;
+            model.cookie('sound', this.checked);
             model.state('sound', this.checked);
         });
         $('#checkMusic').on('change', function () {
             model.state('music', this.checked);
-            localStorage['music'] = this.checked;
+            model.cookie('music', this.checked);
             if(model.state('music')){
                 soundController.music.playMusic('fon');
             } else {
@@ -34,7 +36,7 @@ export let controller = (function () {
         });
         $('#fastSpin').on('change', function () {
             model.state('fastRoll', this.checked);
-            localStorage['fastRoll'] = this.checked;
+            model.cookie('fastRoll', this.checked);
             let fastButton = model.el('fastButton');
             if (model.state('fastRoll')) {
                 fastButton.frameName = 'fastSpinOff.png';
@@ -52,7 +54,7 @@ export let controller = (function () {
         });
         $('#isAnimBG').on('change', function () {
             let isAnim = this.checked;
-            localStorage['isAnimBG'] = isAnim
+            model.cookie('isAnimBG', isAnim);
             model.state('isAnimBG', isAnim);
 
             let animMainBG = model.el('animMainBG');
@@ -107,7 +109,7 @@ export let controller = (function () {
             console.log(this.id, this.checked);
         });
         $('#optionAutoplay5').on('change', function () {
-            localStorage['autoTransititon'] = this.checked;
+            model.cookie('autoTransititon', this.checked);
             model.state('autoTransititon', this.checked);
         });
         $('#btnHistory').on('click', function () {
