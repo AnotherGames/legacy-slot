@@ -71,18 +71,20 @@ export let controller = (() => {
             };
 
             if (!model.state('music')) return;
-            console.log("play " + music);
             if(model.sound(music).paused){
                 model.sound(music).resume();
             } else {
-                model.sound(music).play();
-                // model.sound(music).fadeIn(2000)
+                // model.sound(music).play();
+                setTimeout(() => {
+                    model.sound(music).fadeIn(2000)
+                })
             }
+            console.log("play " + music);
         },
 
         stopMusic: function(music){
-            console.log("stop " + music);
             model.sound(music).stop();
+            console.log("stop " + music);
         },
 
         pauseMusic: function(music){

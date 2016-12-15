@@ -64,7 +64,6 @@ export let controller = (() => {
         });
 
         game.time.events.add(2500, () => {
-            soundController.music.stopMusic('fsFon')
             transitionView.fsFinish();
         });
 
