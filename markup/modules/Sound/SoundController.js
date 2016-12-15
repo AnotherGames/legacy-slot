@@ -58,6 +58,10 @@ export let controller = (() => {
             if(!model.state('sound')) return;
 
             model.sound(sound).stop();
+        },
+
+        changeSoundVolume: function(sound, value){
+            model.sound(sound).volume = value;
         }
 
     };
