@@ -245,7 +245,8 @@ export let view = (() => {
     let play = {
 
         WinSound: function() {
-            let winSound = Math.round(Math.random())
+            let game = model.el('game');
+            let winSound = game.rnd.integerInRange(0,1)
             ? soundController.sounds.playSound('lineWin', 1000)
             : soundController.sounds.playSound('lineWin2', 1000);
             return winSound;
