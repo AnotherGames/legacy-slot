@@ -50,7 +50,6 @@ export class Main {
         // Отрисовуем основной контейнер
         mainView.draw.mainBG({});
         mainView.draw.addPole({});
-        mainView.draw.addBird({});
         mainView.draw.mainContainer({});
         mainView.draw.machineContainer({});
         mainView.draw.lineNumbers({});
@@ -77,6 +76,8 @@ export class Main {
             // Рисуем футер
             footerController.initDesktop();
 
+            mainView.draw.addBird({});
+            mainView.draw.addTable({});
             // Автоматически позиционируем основной контейнер
             this.positionMainContainer();
 

@@ -94,8 +94,6 @@ export let view = (() => {
             let birdAnim3 = bird.animations.add('idle3', Phaser.Animation.generateFrameNames('idle3-', 0, 24, '.png', 2));
             model.el('birdAnim3', birdAnim3);
             birdAnim.play(15, true);
-            // let nextAnim = model.el('birdAnim2');
-            // model.el('nextAnim',  nextAnim);
             this._nextBirdAnim({});
 
         },
@@ -104,7 +102,7 @@ export let view = (() => {
             game = model.el('game'),
             birdAnim = model.el('birdAnim')
         }) {
-            game.time.events.add(5000, () => {
+            game.time.events.add(10000, () => {
             // Играем следующую случайную анимацию
             let number = game.rnd.integerInRange(2, 3);
             let nextAnim = model.el(`birdAnim${number}`);
@@ -113,6 +111,19 @@ export let view = (() => {
                 // Запускаем таймер снова
                 this._nextBirdAnim({});
             });
+        },
+
+        addTable: function ({
+            game = model.el('game'),
+            container = model.group('bg')
+        }) {
+            let table = game.add.sprite(game.width * 0.86, 493, 'table', null, container);
+            table.anchor.set(0.5);
+            model.el('table', table);
+
+            let tableAnim = table.animations.add('idle', Phaser.Animation.generateFrameNames('skeleton-animation_', 0, 27, '.png', 1));
+            tableAnim.play(12, true);
+
         },
 
         mainContainer: function ({

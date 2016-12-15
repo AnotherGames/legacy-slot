@@ -60,6 +60,12 @@ export class Preload {
         game.load.image('gradient', 'bg/gradient.png');
         game.load.atlasJSONArray('pole', 'bg/pole.png', 'bg/pole.json');
         game.load.atlasJSONArray('bird', 'bg/bird.png', 'bg/bird.json');
+        game.load.atlasJSONArray('cow1', 'bg/cow1.png', 'bg/cow1.json');
+        game.load.atlasJSONArray('cow2', 'bg/cow2.png', 'bg/cow2.json');
+        game.load.atlasJSONArray('cow3', 'bg/cow3.png', 'bg/cow3.json');
+        game.load.atlasJSONArray('cowboy', 'bg/cowboy.png', 'bg/cowboy.json');
+        game.load.atlasJSONArray('red_indian', 'bg/red_indian.png', 'bg/red_indian.json');
+        game.load.atlasJSONArray('table', 'bg/table.png', 'bg/table.json');
         game.load.image('gameMachine', 'game/gameMachine.png');
         game.load.image('gameBG', 'game/gameBG.png');
         game.load.image('gameBGfs', 'game/gameBGfs.png');

@@ -96,6 +96,71 @@ export let view = (() => {
 
         },
 
+        addCows: function ({
+            game = model.el('game'),
+            container = model.group('bg'),
+            side = 'left'
+        }) {
+            let cowContainer = game.add.group();
+            container.add(cowContainer);
+
+            let cow1 = game.add.sprite(-50, 10, 'cow1', null, cowContainer);
+            let cow2 = game.add.sprite(-150, 15, 'cow3', null, cowContainer);
+            let cow3 = game.add.sprite(-250, 20, 'cow3', null, cowContainer);
+            let cow4 = game.add.sprite(-120, 10, 'cow1', null, cowContainer);
+            let cow0 = game.add.sprite(-300, 20, 'cow2', null, cowContainer);
+
+            let cowboy = game.add.sprite(0, 0, 'cowboy', null, container);
+            let red_indian = game.add.sprite(0, 0, 'red_indian', null, container);
+
+            let time = game.rnd.integerInRange(55, 70);
+
+            cowContainer.x = (side === 'left') ? -cowContainer.width : game.width + cowContainer.width;
+            cowContainer.y = game.rnd.integerInRange(720, 870);
+            let delta = (side === 'left') ? game.width + cowContainer.width : -cowContainer.width;
+            if (side === 'left') {
+                cowContainer.width = -cowContainer.width;
+            }
+
+            cowboy.x = (side === 'left') ? -cowboy.width : game.width + cowboy.width;
+            cowboy.y = cowContainer.y;
+            if (side === 'left') {
+                cowboy.width = -cowboy.width;
+            }
+
+            red_indian.x = (side === 'left') ? -red_indian.width - 300 : game.width + red_indian.width + 300;
+            red_indian.y = cowContainer.y;
+            if (side === 'left') {
+                red_indian.width = -red_indian.width;
+            }
+
+            let animArr = [];
+            let cow0Anim = cow0.animations.add('idle', Phaser.Animation.generateFrameNames('cow-2-walk2_', 0, 14, '.png', 1));
+            let cow1Anim = cow1.animations.add('idle1', Phaser.Animation.generateFrameNames('cow-1-walk1_', 0, 14, '.png', 1));
+            let cow2Anim = cow2.animations.add('idle2', Phaser.Animation.generateFrameNames('cow-3-walk3_', 0, 14, '.png', 1));
+            let cow3Anim = cow3.animations.add('idle3', Phaser.Animation.generateFrameNames('cow-3-walk3_', 0, 14, '.png', 1));
+            let cow4Anim = cow4.animations.add('idle4', Phaser.Animation.generateFrameNames('cow-1-walk1_', 0, 14, '.png', 1));
+            let cowboyAnim = cowboy.animations.add('idle5', Phaser.Animation.generateFrameNames('cowboi-animation_', 0, 14, '.png', 1));
+            let red_indianAnim = red_indian.animations.add('idle6', Phaser.Animation.generateFrameNames('indeets-walk_', 0, 14, '.png', 1));
+            animArr.push(cow0Anim, cow1Anim, cow2Anim, cow3Anim, cow4Anim, cowboyAnim, red_indianAnim);
+            animArr.forEach((anim) => {
+                anim.play(12, true);
+            });
+
+            game.add.tween(cowContainer).to({x: delta}, time * 1000, 'Linear', true, 0);
+            game.add.tween(cowboy).to({x: delta}, time * 1000, 'Linear', true, 3000);
+            game.add.tween(red_indian).to({x: delta}, time * 1000, 'Linear', true, 6000)
+                .onComplete.add(() => {
+                    cowContainer.destroy();
+                    cowboy.destroy();
+                    red_indian.destroy();
+                    game.time.events.add(2000, () => {
+                        this.addCows({});
+                    });
+                }, this);
+
+        },
+
         mainContainer: function ({
             game = model.el('game'),
             container = model.group('main')
@@ -103,6 +168,7 @@ export let view = (() => {
 
             let gameBGfs = game.add.sprite(0, 0, 'gameBGfs', null, container);
                 gameBGfs.anchor.set(0.5);
+                gameBGfs.visible = false;
                 model.el('gameBGfs', gameBGfs);
 
             let gameMachine = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachine', null, container);

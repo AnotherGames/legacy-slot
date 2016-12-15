@@ -146,9 +146,8 @@ export class FS {
         // Играем фоновую музыку
         soundController.music.playMusic('fsFon');
 
-        // Отрисовуем основной контейнер
         fsView.draw.mainBG({});
-        fsView.draw.addPole({});
+        // Отрисовуем основной контейнер
         fsView.draw.mainContainer({});
         fsView.draw.machineContainer({});
         fsView.draw.lineNumbers({});
@@ -158,6 +157,7 @@ export class FS {
         rollController.init();
 
         if (model.mobile) {
+            fsView.draw.addPole({});
             // Рисуем футер
             footerController.initMobile();
             // Отрисовуем баланс
@@ -166,6 +166,12 @@ export class FS {
             // Автоматически позиционируем основной контейнер
             this.positionMainContainer();
         } else {    // Desktop
+            let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
+            fsView.draw.addCows({side: side});
+            game.time.events.add(25000, () => {
+                fsView.draw.addCows({side: side});
+            });
+
             footerController.initDesktop();
 
             // Автоматически позиционируем основной контейнер
