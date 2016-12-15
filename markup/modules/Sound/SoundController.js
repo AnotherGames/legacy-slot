@@ -67,7 +67,7 @@ export let controller = (() => {
         playMusic: function(music){
             let game = model.el('game');
             if(!model.sound(music)){
-                model.sound(music, game.add.audio(music, 1, true));
+                model.sound(music, game.add.audio(music));
             };
 
             if (!model.state('music')) return;
@@ -76,8 +76,8 @@ export let controller = (() => {
             } else {
                 // model.sound(music).play();
                 setTimeout(() => {
-                    model.sound(music).fadeIn(2000)
-                })
+                    model.sound(music).fadeIn(2000, true);
+                },100)
             }
             console.log("play " + music);
         },
