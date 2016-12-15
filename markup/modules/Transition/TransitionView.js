@@ -219,9 +219,6 @@ export let view = (() => {
     function _сountMeter(count, elem) {
         let game = model.el('game');
 
-        soundController.music.playMusic('fsFon');
-        soundController.music.changeMusicVolume('fsFon', 0);
-
         let timeLength = config.countMeterTime;
         let _clock = game.time.create(true);
         _clock.add(timeLength, () => {}, this);
