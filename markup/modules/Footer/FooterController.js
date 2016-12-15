@@ -91,11 +91,11 @@ export let controller = (() => {
             // Ищменяем состояние fastRoll и меняем фрейм кнопки
             if (model.state('fastRoll')) {
                 model.state('fastRoll', false);
-                localStorage['fastRoll'] = false;
+                model.cookie('fastRoll', false);
                 fastButton.frameName = 'fastSpin.png';
             } else {
                 model.state('fastRoll', true);
-                localStorage['fastRoll'] = true;
+                model.cookie('fastRoll', true);
                 fastButton.frameName = 'fastSpinOff.png';
             }
         },

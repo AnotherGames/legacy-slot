@@ -13,12 +13,12 @@ export let controller = (() => {
               let game = model.el('game');
               if(game.sound.volume > 0){
                   game.sound.volume = 0;
-                  model.state('globalSound', false)
-                  localStorage['globalSound'] = false;
+                  model.state('globalSound', false);
+                  model.cookie('globalSound', false);
               } else {
                   game.sound.volume = volume.getVolume();
-                  localStorage['globalSound'] = true;
-                  model.state('globalSound', true)
+                  model.state('globalSound', true);
+                  model.cookie('globalSound', true);
               }
           },
 
