@@ -5,6 +5,7 @@ import { view } from 'modules/Win/WinView';
 import { view as transitionView } from 'modules/Transition/TransitionView';
 
 import { controller as autoplayController } from 'modules/Autoplay/AutoplayController';
+import { controller as soundController } from 'modules/Sound/SoundController';
 
 export let controller = (() => {
 
@@ -30,9 +31,7 @@ export let controller = (() => {
         && winLines[0].Count == 0
         && winLines[0].Line == -1) {
             let dragonFS = model.el('dragonFS');
-            // let dragonSound = sound.sounds.dragon.play();
-            // dragonSound.addMarker('win', 0, 1.5, 1, false);
-            // dragonSound.play('win');
+            soundController.sounds.playSound('dragonEat', 1500);
             dragonFS.Eat();
         }
 

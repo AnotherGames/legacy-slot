@@ -38,7 +38,7 @@ export class Preload {
         game.load.audio('finishPerehod', 'finishPerehod.mp3');
         game.load.audio('lineWin', 'lineWin.mp3');
         game.load.audio('lineWin2', 'lineWin2.mp3');
-        game.load.audio('dragon', 'dragon.mp3');
+        game.load.audio('dragonEat', 'dragon.mp3');
         game.load.audio('dragonLaugh', 'dragonLaugh.mp3');
     }
 

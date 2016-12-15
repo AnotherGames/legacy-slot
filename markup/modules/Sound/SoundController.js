@@ -36,20 +36,20 @@ export let controller = (() => {
         playSound: function(sound, duration = 0){
 
             let game = model.el('game');
-            if(!model.el(sound)){
-                model.el(sound, game.add.audio(sound));
+            if(!model.sound(sound)){
+                model.sound(sound, game.add.audio(sound));
             };
 
             if(!model.state('sound')) return;
             // this will remove multiplier clicking sounds
-            // if(!model.el(sound).isPlaying){
-            //     model.el(sound).play();
+            // if(!model.sound(sound).isPlaying){
+            //     model.sound(sound).play();
             // };
-            model.el(sound).play();
+            model.sound(sound).play();
 
             if(duration > 0){
                 setTimeout(() => {
-                    model.el(sound).stop();
+                    model.sound(sound).stop();
                 }, duration)
             };
         },
@@ -57,7 +57,7 @@ export let controller = (() => {
         stopSound: function(sound){
             if(!model.state('sound')) return;
 
-            model.el(sound).stop();
+            model.sound(sound).stop();
         }
 
     };
@@ -66,29 +66,31 @@ export let controller = (() => {
 
         playMusic: function(music){
             let game = model.el('game');
-            if(!model.el(music)){
-                model.el(music, game.add.audio(music, 1, true));
+            if(!model.sound(music)){
+                model.sound(music, game.add.audio(music, 1, true));
             };
 
             if (!model.state('music')) return;
-            if(model.el(music).paused){
-                model.el(music).resume();
+            console.log("play " + music);
+            if(model.sound(music).paused){
+                model.sound(music).resume();
             } else {
-                model.el(music).play();
-                // model.el(music).fadeIn(2000)
+                model.sound(music).play();
+                // model.sound(music).fadeIn(2000)
             }
         },
 
         stopMusic: function(music){
-            model.el(music).stop();
+            console.log("stop " + music);
+            model.sound(music).stop();
         },
 
         pauseMusic: function(music){
-            model.el(music).pause();
+            model.sound(music).pause();
         },
 
         changeMusicVolume: function(music, value){
-            model.el(music).volume = value;
+            model.sound(music).volume = value;
         }
     };
 
