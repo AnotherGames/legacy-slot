@@ -317,11 +317,13 @@ export let model = (() => {
         }
         if (endFSRoll) {
             let endData = model.data('rollResponse');
-
             model.balance('fsWin', endData.Balance.TotalWinCoins);
             if (endData.FsBonus) {
                 model.balance('winCash', endData.FsBonus.TotalFSWinCents / 100);
                 model.balance('totalWin', endData.FsBonus.TotalFSWinCoins);
+            }
+            if (endData.NextMode == 'root') {
+                model.balance('winCash', (endData.FsBonus.TotalFSWinCents + endData.Balance.TotalWinCents) / 100);
             }
         }
 
