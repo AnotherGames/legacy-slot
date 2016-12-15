@@ -192,9 +192,9 @@ export let view = (() => {
         autoCount: function({
             game = model.el('game'),
             container = model.group('panel'),
-            style = {font: '45px Arial, Helvetica', align: 'center', fill: '#fff'},
+            style = {font: '45px Arial, Helvetica', fill: '#332206', align: 'center', stroke: '#000000', strokeThickness: 2},
             amount = 10,
-            x = 525,
+            x = 528,
             y = model.el('autoButtonDesk').y,
         }) {
             let autoCount = game.add.text(x, y, amount, style, container);

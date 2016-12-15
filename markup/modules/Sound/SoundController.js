@@ -76,7 +76,7 @@ export let controller = (() => {
             } else {
                 // model.sound(music).play();
                 setTimeout(() => {
-                    model.sound(music).fadeIn(2000)
+                    model.sound(music).fadeIn(2000, true);
                 })
             }
             console.log("play " + music);
