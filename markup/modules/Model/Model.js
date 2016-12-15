@@ -18,6 +18,30 @@ export let model = (() => {
             return obj[key];
         }
     }
+
+    function _getCookie(c_name,value,exdays){
+        if (typeof value != 'undefined') {
+            let exdate=new Date();
+            exdate.setDate(exdate.getDate() + exdays);
+
+            let c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+            document.cookie=c_name + "=" + c_value;
+        } else {
+            let i,x,y,ARRcookies=document.cookie.split(";");
+
+            for (i=0;i<ARRcookies.length;i++) {
+              x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
+              y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
+              x=x.replace(/^\s+|\s+$/g,"");
+
+                if (x==c_name) {
+                    return unescape(y);
+                }
+            }
+        }
+
+    }
+
     function data(key, value) {
         return _getData(key, value, _data);
     }
@@ -38,6 +62,9 @@ export let model = (() => {
     }
     function log() {
         console.log(_data, _balance, _state, _el, _group, _sound);
+    }
+    function cookie(c_name,value,exdays) {
+        return _getCookie(c_name,value,exdays);
     }
 
     function _checkCurrencySymbol(currency) {
@@ -80,32 +107,29 @@ export let model = (() => {
         model.data('autoplay:count', 0);
         model.data('autoplay:startCash', 0);
 
-
-        let autoTransititon = (localStorage['autoTransititon'] == 'false') ? false : true ;
+        //С правой стороны проверки значения, которые должны быть по умолчанию
+        let autoTransititon = (model.cookie('autoTransititon') == 'true') ? true : false ;
         model.state('autoTransititon', autoTransititon);
 
-        let sound = (localStorage['sound'] == 'false') ? false : true;
-        model.state('sound', sound);
-
-        let music = (localStorage['music'] == 'false') ? false : true;
-        model.state('music', music);
-
-        let fastRoll = (localStorage['fastRoll'] == 'false') ? false : true ;
+        let fastRoll = (model.cookie('fastRoll') == 'true') ? true : false ;
         model.state('fastRoll', fastRoll);
 
-        let isAnimBG = (localStorage['isAnimBG'] == 'false') ? false : true ;
+        let sound = (model.cookie('sound') == 'false') ? false : true;
+        model.state('sound', sound);
+
+        let music = (model.cookie('music') == 'false') ? false : true;
+        model.state('music', music);
+
+        let isAnimBG = (model.cookie('isAnimBG') == 'false') ? false : true ;
         model.state('isAnimBG', isAnimBG);
 
-        let gameSideLeft = (localStorage['gameSideLeft'] == 'false') ? false : true ;
+        let gameSideLeft = (model.cookie('gameSideLeft') == 'false') ? false : true ;
         model.state('gameSideLeft', gameSideLeft);
 
-        let volume = 100;
-        if(model.desktop){
-          volume = (typeof localStorage['volume'] == 'undefined') ? 100 : +localStorage['volume'];
-        }
+        let volume = (isFinite(+model.cookie('volume'))) ? Math.abs(model.cookie('volume')) : 100;
         soundController.volume.setVolume(volume);
 
-        let globalSound = (localStorage['globalSound'] == 'false') ? false : true;
+        let globalSound = (model.cookie('globalSound') == 'false') ? false : true;
         model.state('globalSound', globalSound);
         (globalSound) ? soundController.volume.changeVolume(volume) : soundController.volume.changeVolume(0);
 
@@ -320,6 +344,7 @@ export let model = (() => {
         el,
         sound,
         log,
+        cookie,
 
         initStates,
         initSettings,

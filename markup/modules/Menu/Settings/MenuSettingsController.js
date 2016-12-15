@@ -64,7 +64,7 @@ export let controller = (() => {
             let xSide;
             if (model.state('gameSideLeft')) {
                 model.state('gameSideLeft', false);
-                localStorage['gameSideLeft'] = false;
+                model.cookie('gameSideLeft', false);
                 model.el('settingsHandModeButton').frameName = 'handModeOn.png';
 
                 xSide = model.data('buttonsXLeft');
@@ -72,7 +72,7 @@ export let controller = (() => {
                 game.add.tween(mask).to( { x: model.data('mainXRight') - model.data('mainXLeft') }, time, 'Quart.easeOut', true);
             } else {
                 model.state('gameSideLeft', true);
-                localStorage['gameSideLeft'] = true;
+                model.cookie('gameSideLeft', true);
                 model.el('settingsHandModeButton').frameName = 'handModeOff.png';
 
                 xSide = model.data('buttonsXRight');
@@ -99,11 +99,11 @@ export let controller = (() => {
             if (model.state('sound')) {
                 soundButton.frameName = 'soundOff.png';
                 model.state('sound', false)
-                localStorage['sound'] = false;
+                model.cookie('sound', false);
             } else {
                 soundButton.frameName = 'soundOn.png';
                 model.state('sound', true)
-                localStorage['sound'] = true;
+                model.cookie('sound', true);
             }
 
         },
@@ -114,12 +114,12 @@ export let controller = (() => {
             if (model.state('music')) {
                 musicButton.frameName = 'musicOff.png';
                 model.state('music', false);
-                localStorage['music'] = false;
+                model.cookie('music', false);
                 soundController.music.stopMusic('fon')
             } else {
                 musicButton.frameName = 'musicOn.png';
                 model.state('music', true);
-                localStorage['music'] = true;
+                model.cookie('music', true);
                 soundController.music.playMusic('fon')
             }
         },
@@ -128,11 +128,11 @@ export let controller = (() => {
             soundController.sounds.playSound('buttonClick');
             if (model.state('fastRoll') === true) {
                 model.state('fastRoll', false);
-                localStorage['fastRoll'] = false;
+                model.cookie('fastRoll', false);
                 fastSpinButton.frameName = 'fastSpinOff.png';
             } else {
                 model.state('fastRoll', true);
-                localStorage['fastRoll'] = false;
+                model.cookie('fastRoll', true);
                 fastSpinButton.frameName = 'fastSpinOn.png';
             }
         },
