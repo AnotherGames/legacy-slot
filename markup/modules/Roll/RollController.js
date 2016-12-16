@@ -93,6 +93,7 @@ export let controller = (() => {
 
                 // Играем звук кручения барабанов
                 soundController.sounds.playSound('baraban');
+                soundController.sounds.changeSoundVolume('baraban', 60);
 
                 // Расчитываем конечный экран
                 let wheels = model.el('wheels');
