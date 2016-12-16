@@ -336,7 +336,6 @@ export let view = (() => {
             }
 
             let fsBottle4 = game.add.sprite(x, y, 'bottle', 'Bottlebang-Bang0.png', container);
-            console.log(x,y,deltaX,deltaY);
                 fsBottle4.anchor.set(0.5);
             model.el('fsBottle4', fsBottle4);
             let fsBottle6 = game.add.sprite(x + deltaX, y + deltaY, 'bottle', 'Bottlebang-Bang0.png', container);
@@ -406,7 +405,7 @@ export let view = (() => {
                 if (model.desktop) {fsCountBG.scale.set(1.3)};
                 model.el('fsCountBG', fsCountBG);
 
-            let fsCount = game.add.text(x + 15, y + 17, start, {font: font, fill: '#e8b075', align: 'center'}, container);
+            let fsCount = game.add.text(x + 13, y + 13, start, {font: font, fill: '#e8b075', align: 'center'}, container);
                 fsCount.anchor.set(0.5)
                 model.el('fs:count', fsCount);
         },
