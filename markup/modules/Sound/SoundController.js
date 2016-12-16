@@ -34,7 +34,6 @@ export let controller = (() => {
     const sounds = {
 
         playSound: function(sound, duration = 0){
-
             let game = model.el('game');
             if(!model.sound(sound)){
                 model.sound(sound, game.add.audio(sound));
@@ -56,7 +55,6 @@ export let controller = (() => {
 
         stopSound: function(sound){
             if(!model.state('sound')) return;
-
             model.sound(sound).stop();
         },
 
@@ -75,20 +73,18 @@ export let controller = (() => {
             };
 
             if (!model.state('music')) return;
-            if(model.sound(music).paused){
-                model.sound(music).resume();
+            let currMusic = model.sound(music);
+            if(currMusic.paused){
+                currMusic.resume();
             } else {
-                // model.sound(music).play();
-                setTimeout(() => {
-                    model.sound(music).fadeIn(2000, true);
-                },100)
+                currMusic.onDecoded.add(() => {
+                    currMusic.fadeIn(2000, true)
+                });
             }
-            console.log("play " + music);
         },
 
         stopMusic: function(music){
             model.sound(music).stop();
-            console.log("stop " + music);
         },
 
         pauseMusic: function(music){
