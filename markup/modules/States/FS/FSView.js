@@ -83,7 +83,7 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('bg')
         }) {
-            soundController.music.playSound('cows');
+            soundController.sounds.playSound('cows');
 
             let cowContainer = game.add.group();
             container.add(cowContainer);
@@ -139,7 +139,7 @@ export let view = (() => {
                     cowContainer.destroy();
                     cowboy.destroy();
                     red_indian.destroy();
-                    soundController.music.stopSound('cows');
+                    soundController.sounds.stopSound('cows');
                     game.time.events.add(3000, () => {
                         this.addCows({});
                     });
