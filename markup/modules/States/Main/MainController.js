@@ -50,6 +50,7 @@ export class Main {
         // Отрисовуем основной контейнер
         mainView.draw.mainBG({});
         mainView.draw.addPole({});
+        mainView.draw.addSkull({});
         mainView.draw.mainContainer({});
         mainView.draw.machineContainer({});
         mainView.draw.lineNumbers({});

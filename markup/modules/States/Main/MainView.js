@@ -31,10 +31,12 @@ export let view = (() => {
             let mainBGSky = game.add.sprite(0, 0, 'mainBGSky', null, container);
             model.el('mainBGSky', mainBGSky);
 
-            let gradient = game.add.sprite(0, 0, 'gradient', null, container);
-            gradient.alpha = 0.1;
-            model.el('gradient', gradient);
-            game.add.tween(gradient).to({alpha: 0.9}, 50000, 'Linear', true, 0, -1, true);
+            // let mainBGSky = game.add.tileSprite(0, 0, game.width, game.height, 'sky', null, container);
+
+            // let gradient = game.add.sprite(0, 0, 'gradient', null, container);
+            // gradient.alpha = 0.1;
+            // model.el('gradient', gradient);
+            // game.add.tween(gradient).to({alpha: 0.9}, 50000, 'Linear', true, 0, -1, true);
 
             for (let i = 0; i < 5; i++) {
                 transitionView.addCloud({container: model.group('bg')});
@@ -54,7 +56,7 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('bg')
         }) {
-            let pole = game.add.sprite(0, game.height * 0.84, 'pole', null, container);
+            let pole = game.add.sprite(0, game.height * 0.85, 'pole', null, container);
             pole.scale.set(1.2);
             model.el('pole', pole);
             pole.animations.add('go');
@@ -81,22 +83,28 @@ export let view = (() => {
 
         addBird: function ({
             game = model.el('game'),
-            container = model.group('bg')
+            container = model.group('bg'),
+            bird = game.add.sprite(game.width * 0.92, 265, 'bird', null, container),
+            animName1 = 'idle1-',
+            animName2 = 'idle2-',
+            animName3 = 'idle3-'
         }) {
-            let bird = game.add.sprite(game.width * 0.92, 265, 'bird', null, container);
             bird.anchor.set(0.5);
+            bird.inputEnabled = true;
+            bird.events.onInputDown.add(this._flyBird);
             model.el('bird', bird);
 
-            let birdAnim = bird.animations.add('idle', Phaser.Animation.generateFrameNames('idle1-', 0, 24, '.png', 2));
+            let birdAnim = bird.animations.add('idle', Phaser.Animation.generateFrameNames(animName1, 0, 24, '.png', 2));
             model.el('birdAnim', birdAnim);
-            let birdAnim2 = bird.animations.add('idle2', Phaser.Animation.generateFrameNames('idle2-', 0, 24, '.png', 2));
+            let birdAnim2 = bird.animations.add('idle2', Phaser.Animation.generateFrameNames(animName2, 0, 24, '.png', 2));
             model.el('birdAnim2', birdAnim2);
-            let birdAnim3 = bird.animations.add('idle3', Phaser.Animation.generateFrameNames('idle3-', 0, 24, '.png', 2));
+            let birdAnim3 = bird.animations.add('idle3', Phaser.Animation.generateFrameNames(animName3, 0, 24, '.png', 2));
             model.el('birdAnim3', birdAnim3);
             birdAnim.play(15, true);
             this._nextBirdAnim({});
 
         },
+
 
         _nextBirdAnim: function ({
             game = model.el('game'),
@@ -108,9 +116,29 @@ export let view = (() => {
             let nextAnim = model.el(`birdAnim${number}`);
             nextAnim.play(15);
             nextAnim.onComplete.add(() => {birdAnim.play(15, true)}, this);
-                // Запускаем таймер снова
-                this._nextBirdAnim({});
+            // Запускаем таймер снова
+            this._nextBirdAnim({});
             });
+        },
+
+        _flyBird: function () {
+            let game = model.el('game');
+            let bird = model.el('bird');
+            let container = model.group('bg');
+            bird.visible = false;
+            let birdFly = game.add.sprite(game.width * 0.92, 265, 'birdFly', 'fli100.png', container);
+            birdFly.anchor.set(0.5);
+            model.el('birdFly', birdFly);
+            let birdAnim = birdFly.animations.add('fly', Phaser.Animation.generateFrameNames('fli1', 0, 24, '.png', 2));
+            birdAnim.play(15);
+            // birdAnim.onComplete.add(() => {birdFly.visible = false}, this);
+            game.add.tween(birdFly).to({x: 170, y: 590}, 800, 'Linear', true, 500);
+                // .onComplete.add(() => {
+                //     game.time.events.add(500, () => {
+                //         birdFly.visible = false;
+                //         this.addBird({});
+                // });
+            //  });
         },
 
         addTable: function ({
@@ -126,12 +154,34 @@ export let view = (() => {
 
         },
 
+        addSkull: function ({
+            game = model.el('game'),
+            container = model.group('bg')
+        }) {
+            let skull = game.add.sprite(game.width * 0.1, game.height * 0.8, 'skull', 'Scull-1_0.png', container);
+            skull.anchor.set(0.5);
+            skull.scale.set(0.7);
+            model.el('skull', skull);
+
+            game.time.events.add(15000, () => {
+                let skullAnim = skull.animations.add('idle');
+                skullAnim.play(12);
+                skullAnim.onComplete.add(() => {skull.frameName = 'Scull-1_0.png'}, this);
+                game.time.events.add(15000, () => {
+                    this.addSkull({});
+                });
+            })
+
+
+        },
+
         mainContainer: function ({
             game = model.el('game'),
             container = model.group('main')
         }) {
             let gameBG = game.add.sprite(0, 0, 'gameBG', null, container);
                 gameBG.anchor.set(0.5);
+                gameBG.visible = false;
             model.el('gameBG', gameBG);
 
             let gameMachine = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachine', null, container);
