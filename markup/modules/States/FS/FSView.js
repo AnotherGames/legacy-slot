@@ -270,57 +270,82 @@ export let view = (() => {
             container = model.group('panel')
         }) {
 
-            let x1, x2, x3, y1, y2, y3;
+            let x, y, deltaX = 0, deltaY = 0;
             if (model.desktop) {
-                x1 = 800;
-                x2 = 880;
-                x3 = 960;
-                y1 = y2 = y3 = 100;
+                x = 800;
+                y = 100;
+                deltaX = 80;
             } else {
                 let fsMultiBG = game.add.sprite(1215, 360, 'bottleBG', null, container);
                     fsMultiBG.anchor.set(0.5);
 
-                x1 = x2 = x3 = 1215;
-                y1 = 190;
-                y2 = 350;
-                y3 = 515;
+                x = 1220;
+                y = 190;
+                deltaY = 165;
             }
 
-            let fsMulti4 = game.add.sprite(x1, y1, 'x4', null, container);
-                fsMulti4.anchor.set(0.5);
-                model.el('fsMulti4', fsMulti4);
-            let fsMulti6 = game.add.sprite(x2, y2, 'x6', null, container);
-                fsMulti6.anchor.set(0.5);
-                model.el('fsMulti6', fsMulti6);
-            let fsMulti8 = game.add.sprite(x3, y3, 'x8', null, container);
-                fsMulti8.anchor.set(0.5);
-                model.el('fsMulti8', fsMulti8);
+            draw._drawFsMulti(x, y, deltaX, deltaY);
+            draw._drawBottle(x, y, deltaX, deltaY);
+        },
 
-            fsMulti4.visible = false;
-            fsMulti6.visible = false;
-            fsMulti8.visible = false;
+        _drawFsMulti: function(x, y, deltaX, deltaY){
+            let game = model.el('game');
+            let container = model.group('panel');
+
+            let fsMulti4 = game.add.sprite(x - 5, y, 'x4', null, container);
+                fsMulti4.anchor.set(0.5);
+                fsMulti4.visible = false;
+                model.el('fsMulti4', fsMulti4);
+            let fsMulti6 = game.add.sprite(x + deltaX - 5, y + deltaY, 'x6', null, container);
+                fsMulti6.anchor.set(0.5);
+                fsMulti6.visible = false;
+                model.el('fsMulti6', fsMulti6);
+            let fsMulti8 = game.add.sprite(x + 2 * deltaX - 5, y + 2 * deltaY, 'x8', null, container);
+                fsMulti8.anchor.set(0.5);
+                fsMulti8.visible = false;
+                model.el('fsMulti8', fsMulti8);
+        },
+
+        _drawBottle: function(x, y, deltaX, deltaY){
+            let game = model.el('game');
+            let container = model.group('panel');
 
             if (model.desktop) {
-                let bottleShadow4 = game.add.sprite(x1 + 20, y1 + 40, 'bottleShadow', null, container);
-                bottleShadow4.anchor.set(0.5);
+                let bottleShadow4 = game.add.image(x + 20, y + 40, 'bottleShadow', null, container);
+                    bottleShadow4.anchor.set(0.5);
                 model.el('bottleShadow4', bottleShadow4);
-                let bottleShadow6 = game.add.sprite(x2 + 20, y2 + 40, 'bottleShadow', null, container);
-                bottleShadow6.anchor.set(0.5);
+                let bottleShadow6 = game.add.image(x + deltaX + 20, y + deltaY + 40, 'bottleShadow', null, container);
+                    bottleShadow6.anchor.set(0.5);
                 model.el('bottleShadow6', bottleShadow6);
-                let bottleShadow8 = game.add.sprite(x3 + 20, y3 + 40, 'bottleShadow', null, container);
-                bottleShadow8.anchor.set(0.5);
+                let bottleShadow8 = game.add.image(x + 2 * deltaX + 20, y + 2 * deltaY + 40, 'bottleShadow', null, container);
+                    bottleShadow8.anchor.set(0.5);
                 model.el('bottleShadow8', bottleShadow8);
+
+                let brokenBottleShadow4 = game.add.image(x + 20, y + 40, 'brokenBottleShadow', null, container);
+                    brokenBottleShadow4.anchor.set(0.5);
+                    brokenBottleShadow4.visible = false;
+                model.el('brokenBottleShadow4', brokenBottleShadow4);
+                let brokenBottleShadow6 = game.add.image(x + deltaX + 20, y + deltaY + 40, 'brokenBottleShadow', null, container);
+                    brokenBottleShadow6.anchor.set(0.5);
+                    brokenBottleShadow6.visible = false;
+                model.el('brokenBottleShadow6', brokenBottleShadow6);
+                let brokenBottleShadow8 = game.add.image(x + 2 * deltaX + 20, y + 2 * deltaY + 40, 'brokenBottleShadow', null, container);
+                    brokenBottleShadow8.anchor.set(0.5);
+                    brokenBottleShadow8.visible = false;
+                model.el('brokenBottleShadow8', brokenBottleShadow8);
             }
 
-            let fsBottle4 = game.add.sprite(x1, y1, 'bottle', 'Bottlebang-Bang0.png', container);
+            let fsBottle4 = game.add.sprite(x, y, 'bottle', 'Bottlebang-Bang0.png', container);
+            console.log(x,y,deltaX,deltaY);
                 fsBottle4.anchor.set(0.5);
-                model.el('fsBottle4', fsBottle4);
-            let fsBottle6 = game.add.sprite(x2, y2, 'bottle', 'Bottlebang-Bang0.png', container);
+            model.el('fsBottle4', fsBottle4);
+            let fsBottle6 = game.add.sprite(x + deltaX, y + deltaY, 'bottle', 'Bottlebang-Bang0.png', container);
                 fsBottle6.anchor.set(0.5);
-                model.el('fsBottle6', fsBottle6);
-            let fsBottle8 = game.add.sprite(x3, y3, 'bottle', 'Bottlebang-Bang0.png', container);
+            model.el('fsBottle6', fsBottle6);
+            let fsBottle8 = game.add.sprite(x + 2 * deltaX, y + 2 * deltaY, 'bottle', 'Bottlebang-Bang0.png', container);
                 fsBottle8.anchor.set(0.5);
-                model.el('fsBottle8', fsBottle8);
+            model.el('fsBottle8', fsBottle8);
+
         },
 
         ShowMulti: function({
@@ -331,6 +356,7 @@ export let view = (() => {
             let fsBottle = model.el(`fsBottle${number}`);
             let fsMulti = model.el(`fsMulti${number}`);
             let bottleShadow = model.el(`bottleShadow${number}`);
+            let brokenBottleShadow = model.el(`brokenBottleShadow${number}`);
 
             let x = (model.desktop) ? model.group('panel').width / 2 : model.group('panel').width / 2 - 100;
             let y = (model.desktop) ? -400 : 300;
@@ -346,12 +372,13 @@ export let view = (() => {
                 .onComplete.add(() => {
                     aim.destroy();
                     soundController.sounds.playSound('bottleBang', 1000);
-                    soundController.sounds.playSound('bottleBang', 1000);
+                    // soundController.sounds.playSound('bottleBang', 1000);
                     fsBottle.animations.add('bottleBang');
                     fsBottle.animations.play('bottleBang', 12, false);
                     fsMulti.visible = true;
                     if (model.desktop) {
                         bottleShadow.visible = false;
+                        brokenBottleShadow.visible = true;
                     }
                 });
         },
