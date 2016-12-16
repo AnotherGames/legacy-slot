@@ -323,7 +323,7 @@ export let view = (() => {
                 popup.x,
                 popup.y,
                 message,
-                {font: font, fill: color, align: 'center', wordWrap: true, wordWrapWidth: popup.width - 80},
+                {font: font, fill: color, align: 'center', wordWrap: true, wordWrapWidth: popup.width - 80, stroke: '#000000', strokeThickness: 3},
                 container);
                 popupText.anchor.set(0.5);
 

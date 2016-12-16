@@ -164,14 +164,14 @@ export let view = (() => {
             soundController.sounds.playSound('zombie2');
         }
         // Рисуем фон
-        let transitionBGSky = game.add.sprite(0, 0, 'mainBGSky', null, transitionContainer);
+        let transitionBGSky = game.add.sprite(0, 0, 'transitionSky', null, transitionContainer);
         model.el('transitionBGSky', transitionBGSky);
 
-        let luchi = game.add.sprite(game.world.centerX, game.world.centerY + 150, 'luchi', null, transitionContainer);
-        luchi.anchor.set(0.5);
-        model.el('luchi', luchi);
+        let sun = game.add.sprite(game.world.centerX, game.world.centerY, 'sun', null, transitionContainer);
+        sun.anchor.set(0.5);
+        model.el('sun', sun);
 
-        let transitionBG = game.add.sprite(0, 0, 'initBG', null, transitionContainer);
+        let transitionBG = game.add.sprite(0, 0, 'transitionBG', null, transitionContainer);
         model.el('transitionBG', transitionBG);
 
         // выбираем надпись для конечного экрна (Big Win --- Total Win)
@@ -284,10 +284,10 @@ export let view = (() => {
         let game = model.el('game');
         let winText = model.el('winText');
         let winCount = model.el('winCount');
-        let luchi = model.el('luchi');
+        let sun = model.el('sun');
         let continueText = model.el('continueText');
 
-        game.add.tween(luchi).to({rotation: 2 * Math.PI, alpha: 0.1}, 30000, 'Linear', true, 0, -1, true);
+        game.add.tween(sun).to({y: sun.y + 500}, 20000, 'Linear', true);
         game.add.tween(winText).to({y: game.height * 0.2}, 1500, Phaser.Easing.Bounce.Out, true)
             .onComplete.add(() => {
                 let winCountValue = model.data('rollResponse').FsBonus.TotalFSWinCoins + model.data('rollResponse').Balance.TotalWinCoins;

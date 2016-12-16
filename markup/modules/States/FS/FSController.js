@@ -166,11 +166,7 @@ export class FS {
             // Автоматически позиционируем основной контейнер
             this.positionMainContainer();
         } else {    // Desktop
-            let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
-            fsView.draw.addCows({side: side});
-            game.time.events.add(25000, () => {
-                fsView.draw.addCows({side: side});
-            });
+            fsView.draw.addCows({});
 
             footerController.initDesktop();
 

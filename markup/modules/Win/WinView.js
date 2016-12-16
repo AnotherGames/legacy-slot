@@ -179,9 +179,9 @@ export let view = (() => {
                             let bulletX = bullet.group.x;
                             let bulletY = bullet.group.y;
 
-                            // TODO Конечные координаты лучше брать из конфига, потому что они будут разные для разных версий
-                            // TODO Пули уходят под панель инструментов
-                            game.add.tween(bullet.group).to({x: 0, y: 500, alpha: 0.3}, 500, 'Linear', true);
+                            let x = (model.desktop) ? 0 : -550;
+                            let y = (model.desktop) ? 500 : -50;
+                            game.add.tween(bullet.group).to({x: x, y: y, alpha: 0.3}, 500, 'Linear', true);
                             game.add.tween(bullet.group.scale).to({x: 0.2, y: 0.2}, 500, 'Linear', true)
                                 .onComplete.add(() => {
                                     console.log('I am bullet: ', bulletX, bulletY);

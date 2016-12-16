@@ -1,7 +1,5 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
-// import { Zombie } from 'modules/Class/Zombie';
-// import { Brain } from 'modules/Class/Brain';
 import { controller as soundController } from 'modules/Sound/SoundController';
 import { view as transitionView } from 'modules/Transition/TransitionView';
 
@@ -12,9 +10,9 @@ export let view = (() => {
             game = model.el('game')
         }) {
             model.group('bg', game.add.group());
+            model.group('panel', game.add.group());
             model.group('main', game.add.group());
             model.group('buttons', game.add.group());
-            model.group('panel', game.add.group());
             model.group('balanceContainer', game.add.group());
             model.group('menuContainer', game.add.group());
             model.group('footer', game.add.group());
@@ -31,14 +29,7 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('bg')
         }) {
-            // let animBG = game.add.spine(
-            //     game.world.centerX,
-            //     game.world.centerY,
-            //     'animBG'
-            // );
-            // animBG.setAnimationByName(0, '2', true);
-            // container.add(animBG);
-            // model.el('animMainBG', animBG);
+
             let mainBGSky = game.add.sprite(0, 0, 'mainBGSky', null, container);
             model.el('mainBGSky', mainBGSky);
 
@@ -57,14 +48,6 @@ export let view = (() => {
             let logoZaglushka = game.add.sprite(0, game.height * 0.84, 'zaglushka', null, container);
             model.el('logoZaglushka', logoZaglushka);
 
-            // if (model.state('isAnimBG')) {
-            //     mainBG.visible = false;
-            // } else {
-            //     animBG.visible = false;
-            //     for (let i = 0; i < 5; i++) {
-            //         transitionView.addCloud({ container });
-            //     }
-            // }
         },
 
         addPole: function ({
@@ -98,9 +81,10 @@ export let view = (() => {
 
         addCows: function ({
             game = model.el('game'),
-            container = model.group('bg'),
-            side = 'left'
+            container = model.group('bg')
         }) {
+            soundController.music.playSound('cows');
+
             let cowContainer = game.add.group();
             container.add(cowContainer);
 
@@ -114,6 +98,7 @@ export let view = (() => {
             let red_indian = game.add.sprite(0, 0, 'red_indian', null, container);
 
             let time = game.rnd.integerInRange(55, 70);
+            let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
 
             cowContainer.x = (side === 'left') ? -cowContainer.width : game.width + cowContainer.width;
             cowContainer.y = game.rnd.integerInRange(720, 870);
@@ -154,7 +139,8 @@ export let view = (() => {
                     cowContainer.destroy();
                     cowboy.destroy();
                     red_indian.destroy();
-                    game.time.events.add(2000, () => {
+                    soundController.music.stopSound('cows');
+                    game.time.events.add(3000, () => {
                         this.addCows({});
                     });
                 }, this);
@@ -166,9 +152,9 @@ export let view = (() => {
             container = model.group('main')
         }) {
 
-            let gameBGfs = game.add.sprite(0, 0, 'gameBGfs', null, container);
+            let gameBGfs = game.add.sprite(0, 2, 'gameBGfs', null, container);
                 gameBGfs.anchor.set(0.5);
-                gameBGfs.visible = false;
+                // gameBGfs.visible = false;
                 model.el('gameBGfs', gameBGfs);
 
             let gameMachine = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachine', null, container);
