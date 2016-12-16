@@ -159,7 +159,7 @@ export let view = (() => {
                 lineNumber.anchor.set(0.5);
 
                 lineNumber.inputEnabled = true;
-                lineNumber.input.priorityID = 12;
+                lineNumber.input.priorityID = 2;
                 lineNumber.input.pixelPerfectOver = 1;
                 lineNumber.events.onInputOver.add(() => {
                 if (lineNumber.lineShape) {
@@ -192,7 +192,7 @@ export let view = (() => {
                 lineNumber.anchor.set(0.5);
 
                 lineNumber.inputEnabled = true;
-                lineNumber.input.priorityID = 12;
+                lineNumber.input.priorityID = 2;
                 lineNumber.input.pixelPerfectOver = 1;
                 lineNumber.events.onInputOver.add(() => {
                 if (lineNumber.lineShape) {
