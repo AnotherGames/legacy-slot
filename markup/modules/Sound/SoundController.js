@@ -59,7 +59,7 @@ export let controller = (() => {
         },
 
         changeSoundVolume: function(sound, value){
-            model.sound(sound).volume = value;
+            model.sound(sound).volume = value / 100;
         }
     };
 
@@ -76,9 +76,13 @@ export let controller = (() => {
             if(currMusic.paused){
                 currMusic.resume();
             } else {
-                currMusic.onDecoded.add(() => {
-                    currMusic.fadeIn(2000, true)
-                });
+                if (currMusic.isDecoded){
+                    currMusic.play();
+                } else {
+                    currMusic.onDecoded.add(() => {
+                        currMusic.fadeIn(2000, true)
+                    });
+                }
             }
         },
 
