@@ -371,6 +371,7 @@ export let view = (() => {
                 .onComplete.add(() => {
                     aim.destroy();
                     soundController.sounds.playSound('bottleBang', 1000);
+                    soundController.sounds.changeSoundVolume('bottleBang', 1000);
                     // soundController.sounds.playSound('bottleBang', 1000);
                     fsBottle.animations.add('bottleBang');
                     fsBottle.animations.play('bottleBang', 12, false);
@@ -389,14 +390,18 @@ export let view = (() => {
             fontDesktop = '80px Helvetica, Arial',
             fontMobile = '60px Helvetica, Arial'
         }) {
-            let x, y, font;
+            let x, y, countX, countY, font;
             if (model.mobile) {
                 x = 55;
                 y = 520;
+                countX = 13;
+                countY = 13;
                 font = fontMobile;
             } else {
                 x = 648;
                 y = 85;
+                countX = 15;
+                countY = 17;
                 font = fontDesktop;
             }
 
@@ -405,7 +410,7 @@ export let view = (() => {
                 if (model.desktop) {fsCountBG.scale.set(1.3)};
                 model.el('fsCountBG', fsCountBG);
 
-            let fsCount = game.add.text(x + 13, y + 13, start, {font: font, fill: '#e8b075', align: 'center'}, container);
+            let fsCount = game.add.text(x + countX, y + countY, start, {font: font, fill: '#e8b075', align: 'center'}, container);
                 fsCount.anchor.set(0.5)
                 model.el('fs:count', fsCount);
         },
