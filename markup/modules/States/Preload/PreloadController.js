@@ -113,8 +113,6 @@ export class Preload {
         game.load.image('x4', 'fs/x4.png');
         game.load.image('x6', 'fs/x6.png');
         game.load.image('x8', 'fs/x8.png');
-        game.load.image('bottleShadow', 'fs/bottleShadow.png');
-        game.load.image('brokenBottleShadow', 'fs/brokenBottleShadow.png');
         game.load.image('aim', 'fs/pritsel.png');
         game.load.atlasJSONArray('bottle', 'fs/bottle.png', 'fs/bottle.json');
         game.load.atlasJSONArray('baraban', 'fs/baraban.png', 'fs/baraban.json');
@@ -123,6 +121,9 @@ export class Preload {
         if (model.mobile) {
             game.load.image('drumBG', 'fs/fsDrumBG.png');
             game.load.image('bottleBG', 'fs/shkaf.png');
+        } else {
+            game.load.image('bottleShadow', 'fs/bottleShadow.png');
+            game.load.image('brokenBottleShadow', 'fs/brokenBottleShadow.png');
         }
     }
 
