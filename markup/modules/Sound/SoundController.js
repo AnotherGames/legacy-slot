@@ -69,7 +69,7 @@ export let controller = (() => {
         playMusic: function(music){
             let game = model.el('game');
             if(!model.sound(music)){
-                model.sound(music, game.add.audio(music));
+                model.sound(music, game.add.audio(music, 1, true));
             };
 
             if (!model.state('music')) return;
