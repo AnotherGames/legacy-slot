@@ -51,7 +51,7 @@ export let controller = (() => {
             soundController.sounds.playSound('buttonClick');
 
             // Обновляем состояния чекбоксов в настройках
-            $('#volume').prop('value', soundController.volume.getVolume() * 100);
+            $('#volume').prop('value', (model.state('globalSound')) ? soundController.volume.getVolume() * 100 : 0);
             $('#checkSound').prop('checked', model.state('sound'));
             $('#checkMusic').prop('checked', model.state('music'));
             $('#fastSpin').prop('checked', model.state('fastRoll'));
