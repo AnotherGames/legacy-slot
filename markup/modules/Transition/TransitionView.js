@@ -168,7 +168,7 @@ export let view = (() => {
         let transitionBGSky = game.add.sprite(0, 0, 'transitionSky', null, transitionContainer);
         model.el('transitionBGSky', transitionBGSky);
 
-        let sun = game.add.sprite(game.world.centerX, game.world.centerY, 'sun', null, transitionContainer);
+        let sun = game.add.sprite(game.world.centerX * 1.05, game.world.centerY, 'sun', null, transitionContainer);
         sun.anchor.set(0.5);
         model.el('sun', sun);
 
