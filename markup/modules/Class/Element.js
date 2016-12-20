@@ -31,7 +31,7 @@ export class Element {
         this.activeSprite.animations.play('1-n');
     }
 
-    play(animation) {
+    play(animation, fps = 15, loop = false) {
         // Если спрайт уже проигрывает нужную нам анимацию, то мы ничего не будем делать чтобы анимация не прыгала
         if (this.activeSprite.animations.currentAnim.name === animation) return;
 
@@ -42,7 +42,7 @@ export class Element {
         this.active = parseInt(animation);
         this.activeSprite = this.sprites[this.active - 1];
         this.activeSprite.visible = true;
-        this.activeSprite.animations.play(animation);
+        this.activeSprite.animations.play(animation, loop);
     }
 
     win() {

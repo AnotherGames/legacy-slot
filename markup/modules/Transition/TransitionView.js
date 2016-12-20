@@ -142,6 +142,7 @@ export let view = (() => {
         _fsFinishTween();
         _fsFinishInput();
         // _coinsTween();
+        model.state('maxFsMultiplier', false);
         // Автопереход
         if (model.state('autoTransititon')) {
             game.time.events.add(config.autoTransitionTime, () => {

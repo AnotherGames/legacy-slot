@@ -355,7 +355,6 @@ export let view = (() => {
                 model.el('aim', aim);
 
             game.add.tween(aim.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true)
-            console.log(fsBottle.x);
             game.add.tween(aim).to({x: fsBottle.x, y: fsBottle.y}, 500, 'Linear', true, 1000)
             game.add.tween(aim.scale).to({x: 0.2, y: 0.2}, 500, 'Linear', true, 1000)
                 .onComplete.add(() => {
@@ -463,8 +462,8 @@ export let view = (() => {
                 deltaX = -2;
                 deltaY = -130;
                 let drumBG = game.add.sprite(72, 280, 'drumBG', null, container);
-                drumBG.anchor.set(0.5);
-                drumBG.scale.set(0.95);
+                    drumBG.anchor.set(0.5);
+                    drumBG.scale.set(0.95);
                 scaleDrum = 0.5;
                 scaleBullet = 0.6;
             } else {
@@ -491,22 +490,30 @@ export let view = (() => {
             container = model.group('panel'),
             number = 0
         }) {
+            let rollData = model.data('rollResponse');
+            let multiValue = rollData.FsBonus.Multi;
             let bullet = model.el('bullet');
-            let win = Phaser.Animation.generateFrameNames(`11-w-`, 1, 10, '.png', 2);
-            let bulletAnim = bullet.animations.add('win', win);
-            bulletAnim.onComplete.add(() => {bullet.frameName = '11-n.png'}, this);
-            bulletAnim.play(12);
-
             let drum = model.el('drum');
-            drum.frameName = 'BR-0.png';
-            game.time.events.add(400, () => {
-                drum.frameName = `B-${number}.png`;
-                if (number == 6){
-                    game.time.events.add(300, () => {
-                        drum.frameName = `B-0.png`;
-                    });
-                }
-            });
+
+            let bulletAnim = bullet.animations.add('win', win);
+            let win = Phaser.Animation.generateFrameNames(`11-w-`, 1, 10, '.png', 2);
+
+            //Если достигнут максимальный множитель то анимация пули и барабана зацикливается
+            if (multiValue == 8) {
+                drum.frameName = 'B-6.png';
+                bulletAnim.onComplete.removeAll();
+                game.add.tween(drum).to({rotation: 2 * Math.PI}, 3000, 'Linear', true, 0, -1);
+                bulletAnim.play(12, true);
+                model.state('maxFsMultiplier', true)
+            } else {
+                bulletAnim.onComplete.add(() => {bullet.frameName = '11-n.png'}, this);
+                game.add.tween(model.el('drum')).to({rotation: 2 * Math.PI * 4}, 500, Phaser.Easing.Exponential.Out, true, 0, 0)
+                .onComplete.add(()=> {
+                    drum.frameName = `B-${number}.png`;
+                    drum.rotation = 0;
+                    bulletAnim.play(12);
+                });
+            }
 
         }
 

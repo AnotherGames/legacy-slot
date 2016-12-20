@@ -16,8 +16,6 @@ import { controller as winController } from 'modules/Win/WinController';
 
 export let controller = (() => {
 
-    let bulletCounter = 0;
-
     function init(amount) {
         if (model.state('fs:end') === false) return;
 
@@ -70,41 +68,32 @@ export let controller = (() => {
         model.state('fs:end', true);
         model.state('fs', false);
         model.updateBalance({endFS: true});
-        bulletCounter = 0;
+        // bulletCounter = 0;
     }
 
     function bullet(el) {
-        bulletCounter++;
-        if (bulletCounter > 6) {
-            bulletCounter = 1
-        }
+        // Проигрываем анимации барабана и +3
+        fsView.draw.CountPlus3({});
+
+        //если максимальный множитель достигнут то возвращаемся
+        if(model.state('maxFsMultiplier')) return;
 
         let rollData = model.data('rollResponse');
         let multiValue = rollData.FsBonus.Multi;
+        let bulletCounter = rollData.FsBonus.Level % 6;
         let currMulti = model.data('fsMulti');
-        console.warn('multiValue', multiValue);
-        console.warn('currMulti', currMulti);
-        console.warn('bulletCounter', bulletCounter);
 
-        // Проигрываем анимации барабана и +3
-        fsView.draw.CountPlus3({});
+        //Увеличиваем количество пуль в барабане
         fsView.draw.drumSpin({number: bulletCounter});
         el.visible = true;
 
         // Увеличиваем мульти(разбивание бутылки)
-
         if (multiValue > currMulti) {
             fsView.draw.ShowMulti({number: multiValue});
             model.data('fsMulti', multiValue);
         }
 
     }
-
-    // function playBrainSound(){
-    //   Math.round(Math.random())
-    //   ? soundController.sounds.playSound('mozgi1')
-    //   : soundController.sounds.playSound('mozgi2')
-    // }
 
     return {
         init,

@@ -143,6 +143,7 @@ export let model = (() => {
         model.state('infoPanelOpen', false);
         model.state('menuOpened', false);
         model.state('isFirstAutoChangeAnimBG', true);
+        model.state('maxFsMultiplier', false);
     }
 
     function initSettings(settings) {
