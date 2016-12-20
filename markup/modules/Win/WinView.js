@@ -184,11 +184,11 @@ export let view = (() => {
                             game.add.tween(bullet.group).to({x: x, y: y, alpha: 0.3}, 500, 'Linear', true);
                             game.add.tween(bullet.group.scale).to({x: 0.2, y: 0.2}, 500, 'Linear', true)
                                 .onComplete.add(() => {
-                                    console.log('I am bullet: ', bulletX, bulletY);
+                                    bullet.group.alpha = 0;
                                     bullet.group.x = bulletX;
                                     bullet.group.y = bulletY;
-                                    bullet.group.alpha = 1;
-                                    bullet.group.scale.set(1);
+                                    game.add.tween(bullet.group).to({alpha: 1}, 400, 'Linear', true);
+                                    game.add.tween(bullet.group.scale).to({x: 1, y: 1}, 400, 'Linear', true)
                                     bullet.normal();
                                     fsController.bullet(bullet.group);
                                 });
