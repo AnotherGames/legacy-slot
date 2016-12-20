@@ -91,29 +91,10 @@ export let view = (() => {
             machineGroup = model.group('machine')
         }) {
             const elSize = config[model.res].elements;
-            let mask = game.add.graphics();
-            mask.beginFill(0x000000);
 
-            let maskX;
-            if (model.mobile) {
-                maskX = model.data('mainXLeft');
-            } else {
-                maskX = game.world.centerX;
-            }
-
-            mask.drawRect(
-                maskX,
-                game.world.centerY + config[model.res].mainContainer.y,
-                elSize.width * 5,
-                elSize.height * 3);
-            mask.pivot.set(elSize.width * 2.5, elSize.height * 1.5);
-            machineGroup.mask = mask;
-
-            if (!model.state('gameSideLeft')) {
-                mask.x = model.data('mainXRight') - model.data('mainXLeft');
-            }
-
-            model.el('mask', mask);
+            let someGraphic = game.add.graphics(-elSize.width * 2.5, -elSize.height * 1.5, machineGroup);
+                someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5, elSize.height * 3);
+            machineGroup.mask = someGraphic;
         },
 
         darkness: function ({
