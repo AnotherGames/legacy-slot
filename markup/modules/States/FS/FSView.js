@@ -388,7 +388,7 @@ export let view = (() => {
             } else {
                 x = 648;
                 y = 85;
-                countX = 15;
+                countX = 17;
                 countY = 17;
                 font = fontDesktop;
             }
