@@ -9,6 +9,12 @@ export class Preload {
     init() {
         const game = model.el('game');
         game.add.plugin(Fabrique.Plugins.Spine);
+        if (!game.device.iOS) {
+            game.scale.pageAlignHorizontally = true;
+            game.scale.windowConstraints = {bottom: 'visual', right: 'visual'};
+            game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+            game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+        }
     }
 
     preload() {
