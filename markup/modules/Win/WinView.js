@@ -291,7 +291,7 @@ export let view = (() => {
             }
 
             // Рисуем саму табличку и текст в зависимости от количества символов
-            let winBG = game.add.sprite(x, y + 5, 'winLine', null, container);
+            let winBG = game.add.sprite(x - 8, y + 5, 'winLine', null, container);
                 winBG.anchor.set(0.5);
             let font;
             if (winValue > 999) {
@@ -301,7 +301,7 @@ export let view = (() => {
             } else {
                 font = '25px Arial, Helvetica';
             }
-            let text = game.add.text(x, y + 7, winValue, {font: font, fill: '#9be20a'}, container);
+            let text = game.add.text(x - 5, y + 9, winValue, {font: font, fill: '#9be20a'}, container);
                 text.anchor.set(0.5);
 
         }
