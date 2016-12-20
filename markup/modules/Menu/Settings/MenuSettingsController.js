@@ -60,7 +60,6 @@ export let controller = (() => {
             view.hide.Overlay({});
 
             const mainContainer = model.group('main');
-            const mask = model.el('mask');
             let xSide;
             if (model.state('gameSideLeft')) {
                 model.state('gameSideLeft', false);
@@ -69,7 +68,6 @@ export let controller = (() => {
 
                 xSide = model.data('buttonsXLeft');
                 game.add.tween(mainContainer).to( { x: model.data('mainXRight') }, time, 'Quart.easeOut', true);
-                game.add.tween(mask).to( { x: model.data('mainXRight') - model.data('mainXLeft') }, time, 'Quart.easeOut', true);
             } else {
                 model.state('gameSideLeft', true);
                 model.cookie('gameSideLeft', true);
@@ -77,7 +75,6 @@ export let controller = (() => {
 
                 xSide = model.data('buttonsXRight');
                 game.add.tween(mainContainer).to( { x: model.data('mainXLeft') }, time, 'Quart.easeOut', true);
-                game.add.tween(mask).to( { x: 0 }, time, 'Quart.easeOut', true);
             }
             // Change Side Buttons
             let spinButton = model.el('spinButton');
