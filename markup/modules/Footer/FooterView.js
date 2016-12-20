@@ -54,7 +54,7 @@ export let view = (() => {
                 );
             model.el('footerBottom', footerBottom);
 
-            model.data('footerBottomCenterY', game.height - heightBottom / 2);
+            model.data('footerBottomCenterY', game.height - heightBottom / 2 + 4);
         },
 
         HomeButton: function ({
