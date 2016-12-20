@@ -145,7 +145,7 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('bg')
         }) {
-            let table = game.add.sprite(game.width * 0.86, 493, 'table', null, container);
+            let table = game.add.sprite(game.width * 0.855, 500, 'table', null, container);
             table.anchor.set(0.5);
             model.el('table', table);
 
@@ -232,7 +232,7 @@ export let view = (() => {
 
             for (let i = 1; i < 11; i++) {
                 let name = i;
-                let lineNumber = game.add.sprite(config[model.res].win[i][1].x - gameMachine.width / 2,
+                let lineNumber = game.add.sprite(config[model.res].win[i][1].x - gameMachine.width / 2 - 8,
                     config[model.res].win[i][0].y - gameMachine.height / 2 - 40,
                     'lineNumbers',
                     'line_splash-' + i +'_0.png',

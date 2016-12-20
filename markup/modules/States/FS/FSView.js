@@ -185,12 +185,13 @@ export let view = (() => {
 
             for (let i = 1; i < 11; i++) {
                 let name = i;
-                let lineNumber = game.add.sprite(config[model.res].win[i][1].x - gameMachine.width / 2, config[model.res].win[i][0].y - gameMachine.height / 2 - 40, 'lineNumbers', 'line_splash-' + i +'_0.png', container);
+                let lineNumber = game.add.sprite(config[model.res].win[i][1].x - gameMachine.width / 2 - 8, config[model.res].win[i][0].y - gameMachine.height / 2 - 40, 'lineNumbers', 'line_splash-' + i +'_0.png', container);
                 lineNumber.normal = function() {lineNumber.frameName = 'line_splash-' + name + '_0.png'};
                 lineNumber.name = name;
                 lineNumber.anchor.set(0.5);
                 rightArr.push(lineNumber);
             }
+
             model.el('rightArr', rightArr);
         },
 
@@ -297,25 +298,27 @@ export let view = (() => {
             let container = model.group('panel');
 
             if (model.desktop) {
-                let bottleShadow4 = game.add.image(x + 20, y + 40, 'bottleShadow', null, container);
+                let corrX = 20, corrY = 50;
+
+                let bottleShadow4 = game.add.image(x + corrX, y + corrY, 'bottleShadow', null, container);
                     bottleShadow4.anchor.set(0.5);
                 model.el('bottleShadow4', bottleShadow4);
-                let bottleShadow6 = game.add.image(x + deltaX + 20, y + deltaY + 40, 'bottleShadow', null, container);
+                let bottleShadow6 = game.add.image(x + deltaX + corrX, y + deltaY + corrY, 'bottleShadow', null, container);
                     bottleShadow6.anchor.set(0.5);
                 model.el('bottleShadow6', bottleShadow6);
-                let bottleShadow8 = game.add.image(x + 2 * deltaX + 20, y + 2 * deltaY + 40, 'bottleShadow', null, container);
+                let bottleShadow8 = game.add.image(x + 2 * deltaX + corrX, y + 2 * deltaY + corrY, 'bottleShadow', null, container);
                     bottleShadow8.anchor.set(0.5);
                 model.el('bottleShadow8', bottleShadow8);
 
-                let brokenBottleShadow4 = game.add.image(x + 20, y + 40, 'brokenBottleShadow', null, container);
+                let brokenBottleShadow4 = game.add.image(x + corrX, y + corrY, 'brokenBottleShadow', null, container);
                     brokenBottleShadow4.anchor.set(0.5);
                     brokenBottleShadow4.visible = false;
                 model.el('brokenBottleShadow4', brokenBottleShadow4);
-                let brokenBottleShadow6 = game.add.image(x + deltaX + 20, y + deltaY + 40, 'brokenBottleShadow', null, container);
+                let brokenBottleShadow6 = game.add.image(x + deltaX + corrX, y + deltaY + corrY, 'brokenBottleShadow', null, container);
                     brokenBottleShadow6.anchor.set(0.5);
                     brokenBottleShadow6.visible = false;
                 model.el('brokenBottleShadow6', brokenBottleShadow6);
-                let brokenBottleShadow8 = game.add.image(x + 2 * deltaX + 20, y + 2 * deltaY + 40, 'brokenBottleShadow', null, container);
+                let brokenBottleShadow8 = game.add.image(x + 2 * deltaX + corrX, y + 2 * deltaY + corrY, 'brokenBottleShadow', null, container);
                     brokenBottleShadow8.anchor.set(0.5);
                     brokenBottleShadow8.visible = false;
                 model.el('brokenBottleShadow8', brokenBottleShadow8);
@@ -352,13 +355,13 @@ export let view = (() => {
                 model.el('aim', aim);
 
             game.add.tween(aim.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true)
+            console.log(fsBottle.x);
             game.add.tween(aim).to({x: fsBottle.x, y: fsBottle.y}, 500, 'Linear', true, 1000)
             game.add.tween(aim.scale).to({x: 0.2, y: 0.2}, 500, 'Linear', true, 1000)
                 .onComplete.add(() => {
                     aim.destroy();
-                    soundController.sounds.playSound('bottleBang', 1000);
-                    soundController.sounds.changeSoundVolume('bottleBang', 1000);
-                    // soundController.sounds.playSound('bottleBang', 1000);
+                    soundController.sounds.playSound('bottleBangSound', 1000);
+                    soundController.sounds.changeSoundVolume('bottleBangSound', 1000);
                     fsBottle.animations.add('bottleBang');
                     fsBottle.animations.play('bottleBang', 12, false);
                     fsMulti.visible = true;
@@ -457,8 +460,8 @@ export let view = (() => {
             if (model.mobile) {
                 x = 72;
                 y = 335;
-                deltaX = -5;
-                deltaY = -127;
+                deltaX = -2;
+                deltaY = -130;
                 let drumBG = game.add.sprite(72, 280, 'drumBG', null, container);
                 drumBG.anchor.set(0.5);
                 drumBG.scale.set(0.95);
