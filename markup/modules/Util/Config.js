@@ -7,9 +7,9 @@ export let config = {
     numOfInfoDots: 6,
     wheel: {
         roll: {
-            time: 1500,
-            fastTime: 800,
-            length: 25,
+            time: 1800,
+            fastTime: 1000,
+            length: 40,
             easingSeparation: 0.9,
             deltaTime: 100,
             finishScreen: [2, 5, 7, 1, 4]

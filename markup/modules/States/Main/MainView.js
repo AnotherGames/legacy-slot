@@ -275,6 +275,7 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('popup'),
             message = 'popup',
+            reload = false,
             font = 'normal 54px Arial',
             color = '#e8b075'
         }) {
@@ -302,8 +303,8 @@ export let view = (() => {
             popup.inputEnabled = true;
             popup.input.priorityID = 3;
             popup.events.onInputDown.add(() => {
-                container.removeAll();
-                if (message === 'Your session is closed. Please click to restart') {
+                // container.removeAll();
+                if (reload) {
                     window.location.reload();
                 }
             });
@@ -311,8 +312,8 @@ export let view = (() => {
             overlay.inputEnabled = true;
             overlay.input.priorityID = 2;
             overlay.events.onInputDown.add(() => {
-                container.removeAll();
-                if (message === 'Your session is closed. Please click to restart') {
+                // container.removeAll();
+                if (reload) {
                     window.location.reload();
                 }
             });

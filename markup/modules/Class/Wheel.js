@@ -157,6 +157,9 @@ export class Wheel {
 
         this._gotoPlay = true;
     }
+    setNewFinishScreen(newScreen) {
+        this.finishScreen = newScreen;
+    }
     paused() {
         if (this.mode === 'idle') return;
         if (this.mode === 'paused') return;
