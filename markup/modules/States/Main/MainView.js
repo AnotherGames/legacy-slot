@@ -361,8 +361,8 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('popup'),
             message = 'popup',
-            font = 'normal 54px Arial',
-            color = '#e8b075'
+            font = 'normal 45px Arial',
+            color = '#c28531'
         }) {
             let overlay = game.add.graphics(0, 0, container)
                 .beginFill(0x000000, 0.8)
@@ -378,10 +378,10 @@ export let view = (() => {
             model.el('popup', popup);
 
             let popupText = game.add.text(
-                popup.x,
+                popup.x - 40,
                 popup.y,
                 message,
-                {font: font, fill: color, align: 'center', wordWrap: true, wordWrapWidth: popup.width - 80, stroke: '#000000', strokeThickness: 3},
+                {font: font, fill: color, align: 'center', wordWrap: true, wordWrapWidth: 380, stroke: '#000000', strokeThickness: 3},
                 container);
                 popupText.anchor.set(0.5);
 
