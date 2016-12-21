@@ -72,6 +72,7 @@ export let controller = (() => {
     }
 
     function bullet(el) {
+        let game = model.el('game');
         // Проигрываем анимации барабана и +3
         fsView.draw.CountPlus3({});
 
@@ -91,6 +92,15 @@ export let controller = (() => {
         if (multiValue > currMulti) {
             fsView.draw.ShowMulti({number: multiValue});
             model.data('fsMulti', multiValue);
+            let timer = model.el('fsTimer');
+            game.time.events.remove(timer);
+
+            let fsTimer = game.time.events.add(3000, () => {
+                if (model.state('fs:end')) return;
+                controller.next();
+            });
+
+            model.el('fsTimer', fsTimer);
         }
 
     }
