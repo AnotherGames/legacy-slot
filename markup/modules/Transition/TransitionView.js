@@ -35,6 +35,7 @@ export let view = (() => {
     function _fsStartDraw() {
         let game = model.el('game');
         let transitionContainer = model.group('transition');
+        game.camera.flash(0x000000, 777)
         // Изменяем музыку
         soundController.music.stopMusic('fon');
         soundController.music.playMusic('startPerehod');
@@ -156,6 +157,7 @@ export let view = (() => {
     function _fsFinishDraw() {
         let game = model.el('game');
         let transitionContainer = model.group('transition');
+        game.camera.flash(0x000000, 777)
         // Изменяем музыку
         soundController.music.stopMusic('fsFon');
         soundController.music.playMusic('finishPerehod');

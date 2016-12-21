@@ -141,6 +141,7 @@ export class FS {
 
     create() {
         let game = model.el('game');
+        game.camera.flash(0x000000, 777)
 
         // Играем фоновую музыку
         soundController.music.stopMusic('startPerehod');

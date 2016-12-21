@@ -41,6 +41,8 @@ export class Main {
 
     create() {
         let game = model.el('game');
+        game.camera.flash(0x000000, 777)
+        
         soundController.music.stopMusic('finishPerehod');
         soundController.music.stopMusic('initFon');
         // Играем фоновую музыку
