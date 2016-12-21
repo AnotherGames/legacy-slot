@@ -95,11 +95,13 @@ export let view = (() => {
             model.el('bird', bird);
 
             let birdAnim = bird.animations.add('idle', Phaser.Animation.generateFrameNames(animName1, 0, 24, '.png', 2));
-            model.el('birdAnim', birdAnim);
             let birdAnim2 = bird.animations.add('idle2', Phaser.Animation.generateFrameNames(animName2, 0, 24, '.png', 2));
-            model.el('birdAnim2', birdAnim2);
             let birdAnim3 = bird.animations.add('idle3', Phaser.Animation.generateFrameNames(animName3, 0, 24, '.png', 2));
+
+            model.el('birdAnim', birdAnim);
+            model.el('birdAnim2', birdAnim2);
             model.el('birdAnim3', birdAnim3);
+
             birdAnim.play(15, true);
             this._nextBirdAnim({});
 
@@ -110,28 +112,34 @@ export let view = (() => {
             birdAnim = model.el('birdAnim')
         }) {
             game.time.events.add(10000, () => {
-            // Играем следующую случайную анимацию
-            let number = game.rnd.integerInRange(2, 3);
-            let nextAnim = model.el(`birdAnim${number}`);
-            nextAnim.play(15);
-            nextAnim.onComplete.add(() => {birdAnim.play(15, true)}, this);
-            // Запускаем таймер снова
-            this._nextBirdAnim({});
+                // Играем следующую случайную анимацию
+                let number = game.rnd.integerInRange(2, 3);
+                let nextAnim = model.el(`birdAnim${number}`);
+                nextAnim.play(15);
+                nextAnim.onComplete.add(() => {birdAnim.play(15, true)}, this);
+                // Запускаем таймер снова
+                this._nextBirdAnim({});
             });
         },
 
         _flyBird: function () {
             let game = model.el('game');
-            let bird = model.el('bird');
             let container = model.group('bg');
-            bird.visible = false;
+            let bird = model.el('bird');
+                bird.visible = false;
+
             let birdFly = game.add.sprite(game.width * 0.92, 265, 'birdFly', 'fli100.png', container);
-            birdFly.anchor.set(0.5);
+                birdFly.anchor.set(0.5);
             model.el('birdFly', birdFly);
-            let birdAnim = birdFly.animations.add('fly', Phaser.Animation.generateFrameNames('fli1', 0, 24, '.png', 2));
-            birdAnim.play(15);
-            // birdAnim.onComplete.add(() => {birdFly.visible = false}, this);
-            game.add.tween(birdFly).to({x: 170, y: 590}, 800, 'Linear', true, 500);
+            let flyAnim = birdFly.animations.add('fly', Phaser.Animation.generateFrameNames('fli1', 0, 24, '.png', 2));
+                flyAnim.play(15);
+            game.add.tween(birdFly).to({x: 170, y: 590}, 800, 'Linear', true, 500)
+                .onComplete.add(() => {
+                    birdFly.visible = false;
+                    draw.addBird({
+                        bird: game.add.sprite(170, 590, 'bird', null, container),
+                    });
+                }, this);
                 // .onComplete.add(() => {
                 //     game.time.events.add(500, () => {
                 //         birdFly.visible = false;
