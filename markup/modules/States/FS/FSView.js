@@ -336,6 +336,75 @@ export let view = (() => {
 
         },
 
+        addBangs: function ({
+            sprite
+        }) {
+            // Взрыв для бутылки
+            let game = model.el('game');
+            let bangs = [];
+            for (let i = 0; i < 5; i++) {
+                let bang = game.add.sprite(game.rnd.integerInRange(sprite.worldPosition.x - 50, sprite.worldPosition.x + 50),
+                game.rnd.integerInRange(sprite.worldPosition.y-50, sprite.worldPosition.y + 50),
+                'bigBang');
+                bang.scale.set(game.rnd.integerInRange(8, 20) / 100);
+                bang.anchor.set(0.5);
+                bang.angle = game.rnd.integerInRange(-10, 10);
+                bang.alpha = 0;
+                bangs.push(bang);
+            }
+            return bangs;
+        },
+
+        addAim: function ({
+            sprite,
+            callback
+        }) {
+            let game = model.el('game');
+
+            let x = (model.desktop) ? game.width / 2 : model.group('panel').width / 2 - 100;
+            let y = (model.desktop) ? game.height / 2 - 100 : 300;
+
+            let aim = game.add.sprite(x, y, 'aim');
+                aim.anchor.set(0.5);
+                aim.scale.set(0.1);
+            model.el('aim', aim);
+            game.add.tween(aim.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true)
+            game.add.tween(aim).to({x: sprite.worldPosition.x, y: sprite.worldPosition.y}, 500, 'Linear', true, 1000)
+                .onComplete.add(() => {
+                    game.add.tween(aim.scale).to({x: 0.2, y: 0.2}, 500, 'Linear', true)
+                        .onComplete.add(() => {
+                            draw.showBottleBangs({
+                                callback,
+                                sprite
+                            });
+                        });
+                });
+        },
+
+        showBottleBangs: function ({callback, sprite}) {
+            let game = model.el('game');
+            let bangs = draw.addBangs({
+                sprite
+            });
+            let bangDestroyCounter = 0;
+            bangs.forEach((bang, index) => {
+                game.time.events.add(150 * index, () => {
+                    soundController.sound.playSound({sound: 'lineWin'})
+                    game.add.tween(bang).to({alpha: 1}, 150, 'Linear', true)
+                        .onComplete.add(() => {
+                            game.add.tween(bang).to({alpha: 0}, 150, 'Linear', true)
+                                .onComplete.add(() => {
+                                    bangDestroyCounter++;
+                                    if (bangDestroyCounter == bangs.length) {
+                                        callback();
+                                    }
+                                    bang.destroy();
+                                })
+                        });
+                });
+            });
+        },
+
         ShowMulti: function({
             game = model.el('game'),
             container = model.group('panel'),
@@ -346,29 +415,27 @@ export let view = (() => {
             let bottleShadow = model.el(`bottleShadow${number}`);
             let brokenBottleShadow = model.el(`brokenBottleShadow${number}`);
 
-            let x = (model.desktop) ? model.group('panel').width / 2 : model.group('panel').width / 2 - 100;
-            let y = (model.desktop) ? -400 : 300;
-
-            let aim = game.add.sprite(x, y, 'aim', null, container);
-                aim.anchor.set(0.5);
-                aim.scale.set(0.1);
-                model.el('aim', aim);
-
-            game.add.tween(aim.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true)
-            game.add.tween(aim).to({x: fsBottle.x, y: fsBottle.y}, 500, 'Linear', true, 1000)
-            game.add.tween(aim.scale).to({x: 0.2, y: 0.2}, 500, 'Linear', true, 1000)
-                .onComplete.add(() => {
-                    aim.destroy();
+            draw.addAim({
+                sprite: fsBottle,
+                callback: () => {
                     soundController.sound.playSound({sound: 'bottleBangSound', duration: 1000});
                     soundController.sound.changeSoundVolume('bottleBangSound', 1000);
+
+                    let aim = model.el('aim');
+                    aim.destroy();
+
                     fsBottle.animations.add('bottleBang');
                     fsBottle.animations.play('bottleBang', 12, false);
                     fsMulti.visible = true;
+
                     if (model.desktop) {
                         bottleShadow.visible = false;
                         brokenBottleShadow.visible = true;
                     }
-                });
+
+                }
+            })
+
         },
 
         Count: function({
@@ -512,16 +579,15 @@ export let view = (() => {
             if (multiValue == 8) {
                 drum.frameName = 'B-6.png';
                 game.add.tween(drum).to({rotation: 2 * Math.PI}, 3000, 'Linear', true, 0, -1);
-                bulletAnim.onComplete.removeAll();
                 bulletAnim.play(12, true);
                 model.state('maxFsMultiplier', true)
             } else {
                 bulletAnim.onComplete.add(() => {bullet.frameName = '11-n.png'}, this);
+                bulletAnim.play(12);
                 game.add.tween(model.el('drum')).to({rotation: 2 * Math.PI * 4}, 500, Phaser.Easing.Exponential.Out, true, 0, 0)
                 .onComplete.add(()=> {
                     drum.frameName = `B-${number}.png`;
                     drum.rotation = 0;
-                    bulletAnim.play(12);
                 });
             }
 
