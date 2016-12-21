@@ -93,7 +93,7 @@ export let controller = (() => {
         },
 
         stopMusic: function(music){
-            if(typeof model.state(music) == 'undefined') return;
+            if(typeof model.sound(music) == 'undefined') return;
             model.sound(music).fadeOut(2000);
         },
 
