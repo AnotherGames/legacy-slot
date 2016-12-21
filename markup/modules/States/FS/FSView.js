@@ -415,6 +415,10 @@ export let view = (() => {
             let bottleShadow = model.el(`bottleShadow${number}`);
             let brokenBottleShadow = model.el(`brokenBottleShadow${number}`);
 
+            let fsMultiBig = game.add.sprite(game.width / 2, game.height / 2, `x${number}.png`);
+            fsMultiBig.anchor.set(0.5);
+            fsMultiBig.alpha = 0;
+
             draw.addAim({
                 sprite: fsBottle,
                 callback: () => {
@@ -427,11 +431,17 @@ export let view = (() => {
                     fsBottle.animations.add('bottleBang');
                     fsBottle.animations.play('bottleBang', 12, false);
                     fsMulti.visible = true;
+                    game.add.tween(fsMultiBig.scale).to({x: 2.5, y: 2.5}, 300, 'Linear', true);
+                    game.add.tween(fsMultiBig).to({alpha: 1}, 300, 'Linear', true)
+                        .onComplete.add(() => {
+                            fsMultiBig.destroy();
+                        })
 
                     if (model.desktop) {
                         bottleShadow.visible = false;
                         brokenBottleShadow.visible = true;
                     }
+
 
                 }
             })
