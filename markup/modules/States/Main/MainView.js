@@ -87,12 +87,14 @@ export let view = (() => {
             bird = game.add.sprite(game.width * 0.92, 265, 'bird', null, container),
             animName1 = 'idle1-',
             animName2 = 'idle2-',
-            animName3 = 'idle3-'
+            animName3 = 'idle3-',
+            side = 'right'
         }) {
             bird.anchor.set(0.5);
             bird.inputEnabled = true;
-            bird.events.onInputDown.add(this._flyBird);
+            bird.events.onInputDown.add(draw._flyBird);
             model.el('bird', bird);
+            model.el('sideBird', side);
 
             let birdAnim = bird.animations.add('idle', Phaser.Animation.generateFrameNames(animName1, 0, 24, '.png', 2));
             let birdAnim2 = bird.animations.add('idle2', Phaser.Animation.generateFrameNames(animName2, 0, 24, '.png', 2));
@@ -111,7 +113,7 @@ export let view = (() => {
             game = model.el('game'),
             birdAnim = model.el('birdAnim')
         }) {
-            game.time.events.add(10000, () => {
+            let timer = game.time.events.add(10000, () => {
                 // Играем следующую случайную анимацию
                 let number = game.rnd.integerInRange(2, 3);
                 let nextAnim = model.el(`birdAnim${number}`);
@@ -120,6 +122,7 @@ export let view = (() => {
                 // Запускаем таймер снова
                 this._nextBirdAnim({});
             });
+            model.el('timer', timer);
         },
 
         _flyBird: function () {
@@ -127,25 +130,40 @@ export let view = (() => {
             let container = model.group('bg');
             let bird = model.el('bird');
                 bird.visible = false;
+            let sideBird = model.el('sideBird');
+            let timer = model.el('timer');
+            game.time.events.remove(timer);
 
-            let birdFly = game.add.sprite(game.width * 0.92, 265, 'birdFly', 'fli100.png', container);
-                birdFly.anchor.set(0.5);
-            model.el('birdFly', birdFly);
-            let flyAnim = birdFly.animations.add('fly', Phaser.Animation.generateFrameNames('fli1', 0, 24, '.png', 2));
-                flyAnim.play(15);
-            game.add.tween(birdFly).to({x: 170, y: 590}, 800, 'Linear', true, 500)
+            let birdFly, flyAnim;
+            if (sideBird === 'left') {
+                birdFly = game.add.sprite(130, 590, 'birdFly', 'fli200.png', container);
+                    model.el('birdFly', birdFly);
+                    birdFly.anchor.set(0.5);
+                flyAnim = birdFly.animations.add('fly', Phaser.Animation.generateFrameNames('fli2', 0, 24, '.png', 2));
+                    flyAnim.play(15);
+                game.add.tween(birdFly).to({x: -400, y: 590}, 1000, Phaser.Easing.Circular.InOut, true, 500)
+                .onComplete.add(() => {
+                    birdFly.visible = false;
+                    draw.addBird({});
+                }, this);
+            } else {
+                birdFly = game.add.sprite(game.width * 0.92, 265, 'birdFly', 'fli100.png', container);
+                    model.el('birdFly', birdFly);
+                    birdFly.anchor.set(0.5);
+                flyAnim = birdFly.animations.add('fly', Phaser.Animation.generateFrameNames('fli1', 0, 24, '.png', 2));
+                    flyAnim.play(15);
+                game.add.tween(birdFly).to({x: 130, y: 590}, 1000, Phaser.Easing.Circular.InOut, true, 500)
                 .onComplete.add(() => {
                     birdFly.visible = false;
                     draw.addBird({
-                        bird: game.add.sprite(170, 590, 'bird', null, container),
+                        bird: game.add.sprite(130, 590, 'bird2', null, container),
+                        animName1: 'idle1-2-',
+                        animName2: 'idle2-2-',
+                        animName3: 'idle3-2-',
+                        side: 'left'
                     });
                 }, this);
-                // .onComplete.add(() => {
-                //     game.time.events.add(500, () => {
-                //         birdFly.visible = false;
-                //         this.addBird({});
-                // });
-            //  });
+            }
         },
 
         addTable: function ({
@@ -191,7 +209,6 @@ export let view = (() => {
         }) {
             let gameBG = game.add.sprite(0, 0, 'gameBG', null, container);
                 gameBG.anchor.set(0.5);
-                gameBG.visible = false;
             model.el('gameBG', gameBG);
 
             let gameMachine = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachine', null, container);
