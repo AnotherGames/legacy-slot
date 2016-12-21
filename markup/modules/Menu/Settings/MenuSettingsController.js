@@ -39,7 +39,7 @@ export let controller = (() => {
         closeSettings: function () {
             if (model.state('settings') === 'close') return;
 
-            soundController.sounds.playSound('buttonClick');
+            soundController.sound.playSound({sound : 'buttonClick'});
             if (model.state('settings') === 'rules') {
                 view.hide.Rules({});
             }
@@ -107,7 +107,7 @@ export let controller = (() => {
         changeMusic: function () {
             let musicButton = model.el('settingsMusicButton');
 
-            soundController.sounds.playSound('buttonClick');
+            soundController.sound.playSound({sound : 'buttonClick'});
             if (model.state('music')) {
                 musicButton.frameName = 'musicOff.png';
                 model.state('music', false);
@@ -122,7 +122,7 @@ export let controller = (() => {
         },
         changeFastSpin: function () {
             let fastSpinButton = model.el('settingsFastSpinButton');
-            soundController.sounds.playSound('buttonClick');
+            soundController.sound.playSound({sound : 'buttonClick'});
             if (model.state('fastRoll') === true) {
                 model.state('fastRoll', false);
                 model.cookie('fastRoll', false);
@@ -190,7 +190,7 @@ export let controller = (() => {
             model.el('infoCounter', counter);
         },
         showHistory: function () {
-            soundController.sounds.playSound('buttonClick');
+            soundController.sound.playSound({sound : 'buttonClick'});
         }
     };
 

@@ -92,7 +92,8 @@ export let controller = (() => {
                 model.state('roll:fast', false);
 
                 // Играем звук кручения барабанов
-                soundController.sounds.playSound('baraban');
+                soundController.sound.playSound({sound: 'baraban', fade: 500});
+                soundController.sound.changeSoundVolume('baraban', 60);
 
                 // Расчитываем конечный экран
                 let wheels = model.el('wheels');
@@ -156,7 +157,7 @@ export let controller = (() => {
 
         // Отправляем запрос Ready
         request.send('Ready').then((data) => {
-            soundController.sounds.stopSound('baraban');
+            soundController.sound.stopSound('baraban');
             // Обновляем баланс в конце крутки
             if (model.state('fs')) {
                 model.updateBalance({endFSRoll: true});

@@ -48,7 +48,7 @@ export let controller = (() => {
             // Выключаем управление с клавиатуры
             game.input.keyboard.enabled = false;
 
-            soundController.sounds.playSound('buttonClick');
+            soundController.sound.playSound({sound : 'buttonClick'});
 
             // Обновляем состояния чекбоксов в настройках
             $('#volume').prop('value', (model.state('globalSound')) ? soundController.volume.getVolume() * 100 : 0);
@@ -86,7 +86,7 @@ export let controller = (() => {
         },
 
         Fast: function () {
-            soundController.sounds.playSound('buttonClick');
+            soundController.sound.playSound({sound : 'buttonClick'});
             let fastButton = model.el('fastButton');
             // Ищменяем состояние fastRoll и меняем фрейм кнопки
             if (model.state('fastRoll')) {
@@ -101,7 +101,7 @@ export let controller = (() => {
         },
 
         Home: function () {
-            soundController.sounds.playSound('buttonClick');
+            soundController.sound.playSound({sound : 'buttonClick'});
             // Отправляем запрос Logout
             request.send('Logout')
                 .then((response) => {

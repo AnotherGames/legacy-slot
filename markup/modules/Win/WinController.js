@@ -31,7 +31,7 @@ export let controller = (() => {
         && winLines[0].Count == 0
         && winLines[0].Line == -1) {
             let dragonFS = model.el('dragonFS');
-            soundController.sounds.playSound('dragonEat', 1500);
+            soundController.sound.playSound({sound: 'dragonEat', duration: 1500});
             dragonFS.Eat();
         }
 

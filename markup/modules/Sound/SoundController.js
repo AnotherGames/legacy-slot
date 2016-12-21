@@ -31,9 +31,13 @@ export let controller = (() => {
           }
     };
 
-    const sounds = {
+    const sound = {
 
-        playSound: function(sound, duration = 0){
+        playSound: function({
+            sound,
+            duration = 0,
+            fade = 1
+        }){
             let game = model.el('game');
             if(!model.sound(sound)){
                 model.sound(sound, game.add.audio(sound));
@@ -44,7 +48,8 @@ export let controller = (() => {
             // if(!model.sound(sound).isPlaying){
             //     model.sound(sound).play();
             // };
-            model.sound(sound).play();
+            // model.sound(sound).play();
+            model.sound(sound).fadeIn(fade);
 
             if(duration > 0){
                 setTimeout(() => {
@@ -54,7 +59,7 @@ export let controller = (() => {
         },
 
         stopSound: function(sound){
-            if(!model.state('sound')) return;
+            if(!model.state('sound') || typeof model.sound(sound) == 'undefined') return;
             model.sound(sound).stop();
         },
 
@@ -78,17 +83,18 @@ export let controller = (() => {
                 currMusic.resume();
             } else {
                 if (currMusic.isDecoded){
-                    currMusic.play();
+                    currMusic.fadeIn(3000, true)
                 } else {
                     currMusic.onDecoded.add(() => {
-                        currMusic.fadeIn(2000, true)
+                        currMusic.fadeIn(3000, true)
                     });
                 }
             }
         },
 
         stopMusic: function(music){
-            model.sound(music).stop();
+            if(typeof model.state(music) == 'undefined') return;
+            model.sound(music).fadeOut(2000);
         },
 
         pauseMusic: function(music){
@@ -101,7 +107,7 @@ export let controller = (() => {
     };
 
     return {
-        sounds,
+        sound,
         music,
         volume
     }

@@ -20,11 +20,11 @@ export class Dragon {
         this.char.setAnimationByName(0, 'N_idle_1', true);
     }
     FlyToFS() {
-        soundController.sounds.playSound('dragonLaugh');
+        soundController.sound.playSound({sound: 'dragonLaugh'});
         this.char.setAnimationByName(0, 'Goto_FS', false);
     }
     FlyToMain() {
-        soundController.sounds.playSound('dragonLaugh');
+        soundController.sound.playSound({sound: 'dragonLaugh'});
         this.char.setAnimationByName(0, 'FS_idle_end', false);
         this.char.addAnimationByName(0, 'Transfer1', false);
     }
