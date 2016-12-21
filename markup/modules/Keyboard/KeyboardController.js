@@ -10,7 +10,7 @@ export let controller = (() => {
         let space = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         space.onUp.add(() => {
             if ( model.state('transitionScreen') ) {
-                soundController.sounds.playSound('buttonClick');
+                soundController.sound.playSound({sound : 'buttonClick'});
                 soundController.music.stopMusic('startPerehod');
                 model.el('game').state.start('FS');
                 model.state('transitionScreen', false);
@@ -53,7 +53,7 @@ export let controller = (() => {
       let game = model.el('game');
         let space = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         space.onUp.add(() => {
-            soundController.sounds.playSound('buttonClick');
+            soundController.sound.playSound({sound : 'buttonClick'});
             soundController.music.stopMusic('finishPerehod');
             model.el('game').state.start('Main');
         });

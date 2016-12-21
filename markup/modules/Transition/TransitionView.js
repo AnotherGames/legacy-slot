@@ -24,7 +24,7 @@ export let view = (() => {
         // Автопереход если включен
         if (model.state('autoTransititon')) {
             game.time.events.add(config.autoTransitionTime, () => {
-                soundController.sounds.playSound('buttonClick');
+                soundController.sound.playSound({sound : 'buttonClick'});
                 soundController.music.stopMusic('startPerehod');
                 model.el('game').state.start('FS');
                 model.state('transitionScreen', false);
@@ -123,7 +123,7 @@ export let view = (() => {
             transitionBG.inputEnabled = true;
             transitionBG.input.priorityID = 2;
         transitionBG.events.onInputDown.add(function () {
-            soundController.sounds.playSound('buttonClick');
+            soundController.sound.playSound({sound : 'buttonClick'});
             soundController.music.stopMusic('startPerehod');
             model.el('game').state.start('FS');
             model.state('transitionScreen', false);
@@ -158,7 +158,7 @@ export let view = (() => {
         // Автопереход
         if (model.state('autoTransititon')) {
             game.time.events.add(config.autoTransitionTime, () => {
-                soundController.sounds.playSound('buttonClick');
+                soundController.sound.playSound({sound : 'buttonClick'});
                 soundController.music.stopMusic('finishPerehod');
                 model.el('game').state.start('Main');
             });
@@ -329,7 +329,7 @@ export let view = (() => {
         transitionBG.inputEnabled = true;
         transitionBG.input.priorityID = 2;
         transitionBG.events.onInputDown.add(function () {
-            soundController.sounds.playSound('buttonClick');
+            soundController.sound.playSound({sound : 'buttonClick'});
             soundController.music.stopMusic('finishPerehod');
             model.el('game').state.start('Main');
         });

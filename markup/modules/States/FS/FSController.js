@@ -85,7 +85,7 @@ export let controller = (() => {
                 zombie.Up(() => {
                     brain.Up(() => {
                         zombie.Up();
-                        soundController.sounds.playSound('zombie1');
+                        soundController.sound.playSound({sound: 'zombie1'});
                     });
                 });
                 model.data('fsMulti', multiValue);
@@ -142,9 +142,11 @@ export let controller = (() => {
     }
 
     function playBrainSound(){
-      Math.round(Math.random())
-      ? soundController.sounds.playSound('mozgi1')
-      : soundController.sounds.playSound('mozgi2')
+      if (Math.round(Math.random())){
+          soundController.sound.playSound({sound: 'mozgi2'})
+      } else {
+          soundController.sound.playSound({sound: 'mozgi1'})
+      }
     }
 
     return {
@@ -185,6 +187,7 @@ export class FS {
         let game = model.el('game');
 
         // Играем фоновую музыку
+        soundController.music.stopMusic('startPerehod');
         soundController.music.playMusic('fsFon');
 
         // Отрисовуем основной контейнер

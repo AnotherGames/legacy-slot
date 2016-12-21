@@ -68,7 +68,7 @@ export class Zombie {
 
     randomAnim() {
         let zombieRandomTimer = this.game.time.events.add(10000, () => {
-            soundController.sounds.playSound('zombie1');
+            soundController.sound.playSound({sound: 'zombie1'});
             ++this.switcher;
             // Играем следующую случайную анимацию
             this.char.setAnimationByName(0, 'win' + (this.switcher % 4), false);
