@@ -124,7 +124,7 @@ export class Preload {
         game.load.image('x8', 'fs/x8.png');
         game.load.image('aim', 'fs/pritsel.png');
         game.load.atlasJSONArray('bottle', 'fs/bottle.png', 'fs/bottle.json');
-        game.load.atlasJSONArray('bang', 'fs/bang.png', 'fs/bang.json');
+        game.load.atlasJSONArray('bigBang', 'fs/bigBang.png', 'fs/bigBang.json');
         game.load.atlasJSONArray('baraban', 'fs/baraban.png', 'fs/baraban.json');
         game.load.atlasJSONArray('fsCountBG', 'fs/bang.png', 'fs/bang.json');
         game.load.image('plus3', 'fs/plus3.png');
