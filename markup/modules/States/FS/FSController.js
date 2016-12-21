@@ -133,6 +133,7 @@ export class FS {
         let game = model.el('game');
 
         // Играем фоновую музыку
+        soundController.music.stopMusic('startPerehod');
         soundController.music.playMusic('fsFon');
 
         fsView.draw.mainBG({});

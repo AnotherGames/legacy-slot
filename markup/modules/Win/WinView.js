@@ -312,13 +312,13 @@ export let view = (() => {
 
         WinSound: function() {
             // let winSound = Math.round(Math.random())
-            // ? soundController.sounds.playSound('lineWin', 1000)
-            // : soundController.sounds.playSound('lineWin2', 1000);
+            // ? soundController.sound.playSound('lineWin', 1000)
+            // : soundController.sound.playSound('lineWin2', 1000);
             // return winSound;
             let game = model.el('game');
-            soundController.sounds.playSound('lineWin', 1000);
+            soundController.sound.playSound({sound: 'lineWin', duration: 1000});
             game.time.events.add(300, () => {
-                soundController.sounds.playSound('lineWin2', 1000);
+                soundController.sound.playSound({sound: 'lineWin2', duration: 1000});
             });
         }
 
