@@ -1,4 +1,5 @@
 import { model } from 'modules/Model/Model';
+import { config } from 'modules/Util/Config';
 
 export let view = (() => {
 
@@ -253,7 +254,7 @@ export let view = (() => {
             x = model.el('game').world.centerX,
             y = model.el('game').world.centerY,
         }) {
-            let overlay = game.add.graphics(0, 0, container).beginFill(0x000000, 0.8).drawRect(0, 0, game.width, game.height);
+            let overlay = game.add.graphics(0, 0, container).beginFill(0x000000, 0.7).drawRect(0, 0, game.width, game.height);
             model.el('overlay', overlay);
 
             let infoRules = game.add.sprite(x, y, 'info', '1_en.png', container);
@@ -261,7 +262,7 @@ export let view = (() => {
                 infoRules.scale.set(1.3);
             model.el('infoRules', infoRules);
 
-            let closed = game.add.sprite(infoRules.width + 260, infoRules.height - (infoRules.height - 180), 'closed', null, container);
+            let closed = game.add.sprite(game.width - 410, 210, 'closed', null, container);
             model.el('closed', closed);
 
             let arrowRight = game.add.sprite(game.width / 2 + 60, infoRules.height + 160, 'ar', null, container);
@@ -271,11 +272,11 @@ export let view = (() => {
             model.el('arrowLeft', arrowLeft);
 
             let infoMarkers = [];
-            let infoMarker = game.add.sprite(game.width / 2 - 80, infoRules.height + 130, 'infoMarker', 'marker_on.png', container);
+            let infoMarker = game.add.sprite(game.width / 2 - 60, infoRules.height + 130, 'infoMarker', 'marker_on.png', container);
                 infoMarker.name = 'infoMarker0';
                 infoMarkers.push(infoMarker);
 
-            for (let i = 1; i < 8; i++) {
+            for (let i = 1; i < config.numOfInfoDots; i++) {
                 let name = 'infoMarker' + i;
                 let counter = i;
                 let marker = game.add.sprite(infoMarker.x, infoRules.height + 130, 'infoMarker', 'marker_off.png', container);

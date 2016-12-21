@@ -4,7 +4,7 @@ export let config = {
     autoTransitionTime: 10000,
     symbolsCount: 11,
     maxMulti: 7,
-    numOfInfoDots: 8,
+    numOfInfoDots: 7,
     wheel: {
         roll: {
             time: 1500,

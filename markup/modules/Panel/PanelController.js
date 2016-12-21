@@ -1,4 +1,5 @@
 import { model } from 'modules/Model/Model';
+import { config } from 'modules/Util/Config';
 import { view } from 'modules/Panel/PanelView';
 
 import { controller as soundController } from 'modules/Sound/SoundController';
@@ -170,7 +171,7 @@ export let controller = (() => {
             infoMarkers.forEach((elem) => {
                 elem.frameName = 'marker_off.png';
             });
-            if (counter > 6) {
+            if (counter > config.numOfInfoDots - 2) {
                 counter = 0;
             } else {
                 counter++;
@@ -189,7 +190,7 @@ export let controller = (() => {
                 elem.frameName = 'marker_off.png';
             });
             if (counter < 1) {
-                counter = 7;
+                counter = config.numOfInfoDots - 1;
             } else {
                 counter--;
                 infoMarkers[counter + 1].frameName = 'marker_off.png';

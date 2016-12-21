@@ -62,7 +62,7 @@ export class Preload {
         game.load.image('transitionBG', 'bg/transitionBG.png');
         game.load.image('transitionSky', 'bg/transitionSky.png');
         game.load.image('mainBGSky', 'bg/mainBGSky.png');
-        game.load.image('sky', 'bg/sky.png');
+        // game.load.image('sky', 'bg/sky.png');
         game.load.image('zaglushka', 'bg/zaglushka.png');
         game.load.image('gradient', 'bg/gradient.png');
         //BG Anim
@@ -74,6 +74,7 @@ export class Preload {
         game.load.atlasJSONArray('pole', 'bg/pole.png', 'bg/pole.json');
         if (model.desktop) {
             game.load.atlasJSONArray('bird', 'bg/bird.png', 'bg/bird.json');
+            game.load.atlasJSONArray('bird2', 'bg/bird2.png', 'bg/bird2.json');
             game.load.atlasJSONArray('birdFly', 'bg/birdFly.png', 'bg/birdFly.json');
             game.load.atlasJSONArray('cow1', 'bg/cow1.png', 'bg/cow1.json');
             game.load.atlasJSONArray('cow2', 'bg/cow2.png', 'bg/cow2.json');
@@ -123,6 +124,7 @@ export class Preload {
         game.load.image('x8', 'fs/x8.png');
         game.load.image('aim', 'fs/pritsel.png');
         game.load.atlasJSONArray('bottle', 'fs/bottle.png', 'fs/bottle.json');
+        game.load.atlasJSONArray('bang', 'fs/bang.png', 'fs/bang.json');
         game.load.atlasJSONArray('baraban', 'fs/baraban.png', 'fs/baraban.json');
         game.load.atlasJSONArray('fsCountBG', 'fs/bang.png', 'fs/bang.json');
         game.load.image('plus3', 'fs/plus3.png');
