@@ -416,26 +416,36 @@ export let view = (() => {
             if (model.desktop) {
                 deltaY = 30;
             }
-            let plus3 = game.add.sprite(x, y - deltaY, 'plus3', null, container);
+
+            let plus3Group = game.add.group(container);
+                plus3Group.scale.set(0.3);
+                plus3Group.x = x;
+                plus3Group.y = y - deltaY;
+
+            let circle = game.add.graphics(0, 0, plus3Group);
+                circle.beginFill(0x000000, 0.6).drawCircle(0, 0, 200);
+            let plus3 = game.add.sprite(0, 0, 'plus3', null, plus3Group);
                 plus3.anchor.set(0.5);
-                plus3.scale.set(0.3);
             model.el('plus3', plus3);
+
+            console.log('Plus 3: ', plus3Group, container);
 
             let tweenY;
             let tweenX;
+
             if(model.desktop) {
-                tweenX = plus3.x;
+                tweenX = plus3Group.x;
                 tweenY = 950;
             } else {
                 tweenX = -450;
                 tweenY = 100;
             }
 
-            game.add.tween(plus3.scale).to({x: 1.0, y: 1.0}, 500, Phaser.Easing.Elastic.Out, true);
-            game.add.tween(plus3).to({x: tweenX, y: tweenY}, 400, 'Linear', true, 500);
-            game.add.tween(plus3).to({alpha: 0}, 200, 'Linear', true, 700)
+            game.add.tween(plus3Group.scale).to({x: 1.0, y: 1.0}, 500, Phaser.Easing.Elastic.Out, true);
+            game.add.tween(plus3Group).to({x: tweenX, y: tweenY}, 400, 'Linear', true, 500);
+            game.add.tween(plus3Group).to({alpha: 0}, 200, 'Linear', true, 700)
                 .onComplete.add(() => {
-                    plus3.destroy();
+                    plus3Group.destroy();
                     model.state('CountPlus3', false);
                     view.draw._showBang({});
                 }, this);
