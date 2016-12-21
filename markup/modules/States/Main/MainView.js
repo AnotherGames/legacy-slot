@@ -162,16 +162,19 @@ export let view = (() => {
             skull.scale.set(0.7);
             model.el('skull', skull);
 
-            game.time.events.add(15000, () => {
-                let skullAnim = skull.animations.add('idle');
+            game.time.events.add(15000 * Math.random(), () => {
+                draw.animSkull(skull);
+            });
+        },
+
+        animSkull: function (skull) {
+            let game = model.el('game');
+            let skullAnim = skull.animations.add('idle');
                 skullAnim.play(12);
                 skullAnim.onComplete.add(() => {skull.frameName = 'Scull-1_0.png'}, this);
-                game.time.events.add(15000, () => {
-                    this.addSkull({});
-                });
-            })
-
-
+            game.time.events.add(15000 * Math.random(), () => {
+                draw.animSkull(skull);
+            });
         },
 
         mainContainer: function ({
