@@ -59,7 +59,7 @@ export let controller = (() => {
         },
 
         stopSound: function(sound){
-            if(!model.state('sound') || typeof model.sound(music) == 'undefined') return;
+            if(!model.state('sound') || typeof model.sound(sound) == 'undefined') return;
             model.sound(sound).stop();
         },
 
