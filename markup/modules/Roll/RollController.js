@@ -224,10 +224,12 @@ export let controller = (() => {
         // Здесь определяется время через которое начнется следующая крутка: если не было выигрыша, то сразу, если был, то через секунду
         let time = (rollResponse.WinLines.length) ? 1000 : 0;
 
-        game.time.events.add(time, () => {
+        let fsTimer = game.time.events.add(time, () => {
             if (model.state('fs:end')) return;
             fsController.next();
         });
+
+        model.el('fsTimer', fsTimer);
 
     }
 
