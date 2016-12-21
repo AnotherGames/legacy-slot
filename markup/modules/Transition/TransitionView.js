@@ -24,7 +24,7 @@ export let view = (() => {
         // Автопереход если включен
         if (model.state('autoTransititon')) {
             game.time.events.add(config.autoTransitionTime, () => {
-                soundController.sounds.playSound('buttonClick');
+                soundController.sound.playSound({sound : 'buttonClick'});
                 soundController.music.stopMusic('startPerehod');
                 model.el('game').state.start('FS');
                 model.state('transitionScreen', false);
@@ -110,7 +110,7 @@ export let view = (() => {
             transitionBG.inputEnabled = true;
             transitionBG.input.priorityID = 2;
         transitionBG.events.onInputDown.add(function () {
-            soundController.sounds.playSound('buttonClick');
+            soundController.sound.playSound({sound : 'buttonClick'});
             soundController.music.stopMusic('startPerehod');
             model.el('game').state.start('FS');
             model.state('transitionScreen', false);
@@ -146,7 +146,7 @@ export let view = (() => {
         // Автопереход
         if (model.state('autoTransititon')) {
             game.time.events.add(config.autoTransitionTime, () => {
-                soundController.sounds.playSound('buttonClick');
+                soundController.sound.playSound({sound : 'buttonClick'});
                 soundController.music.stopMusic('finishPerehod');
                 model.el('game').state.start('Main');
             });
@@ -159,11 +159,7 @@ export let view = (() => {
         // Изменяем музыку
         soundController.music.stopMusic('fsFon');
         soundController.music.playMusic('finishPerehod');
-        // Обнуляем таймер проигрывания зомби
-        game.time.events.remove(model.data('zombie:randomTimer'));
-        if (model.data('fsMulti') === 7) {
-            soundController.sounds.playSound('zombie2');
-        }
+
         // Рисуем фон
         let transitionBGSky = game.add.sprite(0, 0, 'transitionSky', null, transitionContainer);
         model.el('transitionBGSky', transitionBGSky);
@@ -177,7 +173,7 @@ export let view = (() => {
 
         // выбираем надпись для конечного экрна (Big Win --- Total Win)
         let winTextFrame;
-        if (model.data('fsMulti') === 7) {
+        if (model.data('fsMulti') === 8) {
             winTextFrame = 'bigW.png';
         } else {
             winTextFrame = 'totalW.png';
@@ -310,7 +306,7 @@ export let view = (() => {
         transitionBG.inputEnabled = true;
         transitionBG.input.priorityID = 2;
         transitionBG.events.onInputDown.add(function () {
-            soundController.sounds.playSound('buttonClick');
+            soundController.sound.playSound({sound : 'buttonClick'});
             soundController.music.stopMusic('finishPerehod');
             model.el('game').state.start('Main');
         });

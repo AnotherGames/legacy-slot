@@ -83,7 +83,7 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('bg')
         }) {
-            soundController.sounds.playSound('cows');
+            soundController.sound.playSound({sound: 'cows'});
 
             let cowContainer = game.add.group();
             container.add(cowContainer);
@@ -139,7 +139,7 @@ export let view = (() => {
                     cowContainer.destroy();
                     cowboy.destroy();
                     red_indian.destroy();
-                    soundController.sounds.stopSound('cows');
+                    soundController.sound.stopSound('cows');
                     game.time.events.add(3000, () => {
                         this.addCows({});
                     });
@@ -359,8 +359,8 @@ export let view = (() => {
             game.add.tween(aim.scale).to({x: 0.2, y: 0.2}, 500, 'Linear', true, 1000)
                 .onComplete.add(() => {
                     aim.destroy();
-                    soundController.sounds.playSound('bottleBangSound', 1000);
-                    soundController.sounds.changeSoundVolume('bottleBangSound', 1000);
+                    soundController.sound.playSound({sound: 'bottleBangSound', duration: 1000});
+                    soundController.sound.changeSoundVolume('bottleBangSound', 1000);
                     fsBottle.animations.add('bottleBang');
                     fsBottle.animations.play('bottleBang', 12, false);
                     fsMulti.visible = true;
@@ -501,8 +501,8 @@ export let view = (() => {
             //Если достигнут максимальный множитель то анимация пули и барабана зацикливается
             if (multiValue == 8) {
                 drum.frameName = 'B-6.png';
-                bulletAnim.onComplete.removeAll();
                 game.add.tween(drum).to({rotation: 2 * Math.PI}, 3000, 'Linear', true, 0, -1);
+                bulletAnim.onComplete.removeAll();
                 bulletAnim.play(12, true);
                 model.state('maxFsMultiplier', true)
             } else {

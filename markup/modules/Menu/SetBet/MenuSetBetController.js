@@ -17,7 +17,7 @@ export let controller = (() => {
         closePanel: function () {
             if (model.state('setbetPanel') === 'close') return;
 
-            soundController.sounds.playSound('buttonClick');
+            soundController.sound.playSound({sound : 'buttonClick'});
             if (model.state('setbetPanel') === 'open') {
                 view.hide.Panel({});
             }
@@ -26,23 +26,23 @@ export let controller = (() => {
             model.state('setbetPanel', 'close');
         },
         maxBet: function () {
-            soundController.sounds.playSound('buttonClick');
+            soundController.sound.playSound({sound : 'buttonClick'});
             model.changeBet({toMax: true});
         },
         betLevelPlus: function () {
-            soundController.sounds.playSound('buttonClick');
+            soundController.sound.playSound({sound : 'buttonClick'});
             model.changeBet({up: true});
         },
         betLevelMinus: function () {
-            soundController.sounds.playSound('buttonClick');
+            soundController.sound.playSound({sound : 'buttonClick'});
             model.changeBet({down: true});
         },
         coinPlus: function () {
-            soundController.sounds.playSound('buttonClick');
+            soundController.sound.playSound({sound : 'buttonClick'});
             model.changeCoin({up: true});
         },
         coinMinus: function () {
-            soundController.sounds.playSound('buttonClick');
+            soundController.sound.playSound({sound : 'buttonClick'});
             model.changeCoin({down: true});
         }
     };
