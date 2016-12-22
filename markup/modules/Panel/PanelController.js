@@ -15,11 +15,23 @@ export let controller = (() => {
         view.draw.AutoContainer({});
         view.draw.AutoPanel({}).forEach((panelButton) => {
             panelButton.inputEnabled = true;
-            panelButton.events.onInputDown.add(handle.panelButton, panelButton);
+            panelButton.events.onInputUp.add(handle.panelButton, panelButton);
+            panelButton.events.onInputOver.add(()=>{
+                panelButton.events.onInputUp.active = true;
+            }, panelButton);
+            panelButton.events.onInputOut.add(()=>{
+                panelButton.events.onInputUp.active = false;
+            }, panelButton);
         });
 
         let spinButtonDesk = view.draw.SpinButton({});
-            spinButtonDesk.onInputDown.add(handle.spin);
+        spinButtonDesk.events.onInputUp.add(handle.spin);
+        spinButtonDesk.events.onInputOver.add(()=>{
+            spinButtonDesk.events.onInputUp.active = true;
+        });
+        spinButtonDesk.events.onInputOut.add(()=>{
+            spinButtonDesk.events.onInputUp.active = false;
+        });
 
         let stopButtonDesk = view.draw.StopButton({});
             stopButtonDesk.onInputDown.add(handle.stop);
