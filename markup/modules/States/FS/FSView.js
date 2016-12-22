@@ -54,11 +54,11 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('bg')
         }) {
-            let pole = game.add.sprite(0, game.height * 0.84, 'pole', null, container);
-            pole.scale.set(1.2);
+            let pole = game.add.spine(50, game.height * 0.95, 'pole');
+            pole.setAnimationByName(1, '1', true);
+            model.group('bg').add(pole);
+            pole.scale.set(0.5);
             model.el('pole', pole);
-            pole.animations.add('go');
-            pole.animations.play('go', 10, true);
 
             let time = game.rnd.integerInRange(20, 35);
             let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
@@ -415,7 +415,7 @@ export let view = (() => {
             let bottleShadow = model.el(`bottleShadow${number}`);
             let brokenBottleShadow = model.el(`brokenBottleShadow${number}`);
 
-            let fsMultiBig = game.add.sprite(game.width / 2, game.height / 2, `x${number}.png`);
+            let fsMultiBig = game.add.sprite(game.width / 2, game.height / 2, `x${number}`);
             fsMultiBig.anchor.set(0.5);
             fsMultiBig.alpha = 0;
 
@@ -431,8 +431,8 @@ export let view = (() => {
                     fsBottle.animations.add('bottleBang');
                     fsBottle.animations.play('bottleBang', 12, false);
                     fsMulti.visible = true;
-                    game.add.tween(fsMultiBig.scale).to({x: 2.5, y: 2.5}, 300, 'Linear', true);
-                    game.add.tween(fsMultiBig).to({alpha: 1}, 300, 'Linear', true)
+                    game.add.tween(fsMultiBig.scale).to({x: 3.5, y: 3.5}, 500, 'Linear', true);
+                    game.add.tween(fsMultiBig).to({alpha: 1}, 500, 'Linear', true)
                         .onComplete.add(() => {
                             fsMultiBig.destroy();
                         })
