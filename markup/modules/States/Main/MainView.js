@@ -56,11 +56,11 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('bg')
         }) {
-            let pole = game.add.sprite(0, game.height * 0.85, 'pole', null, container);
-            pole.scale.set(1.2);
+            let pole = game.add.spine(50, game.height * 0.95, 'pole');
+            pole.setAnimationByName(1, '1', true);
+            model.group('bg').add(pole);
+            pole.scale.set(0.5);
             model.el('pole', pole);
-            pole.animations.add('go');
-            pole.animations.play('go', 10, true);
 
             let time = game.rnd.integerInRange(20, 35);
             let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
@@ -84,11 +84,12 @@ export let view = (() => {
         addBird: function ({
             game = model.el('game'),
             container = model.group('bg'),
-            bird = game.add.sprite(game.width * 0.92, 265, 'bird', null, container),
+            bird = game.add.sprite(game.width * 0.92, 260, 'bird', null, container),
             animName1 = 'idle1-',
             animName2 = 'idle2-',
             animName3 = 'idle3-',
-            side = 'right'
+            side = 'right',
+            birdFly = game.add.sprite(game.width + 200, 160, 'birdFly', null, container),
         }) {
             bird.anchor.set(0.5);
             bird.inputEnabled = true;
@@ -104,6 +105,17 @@ export let view = (() => {
             model.el('birdAnim2', birdAnim2);
             model.el('birdAnim3', birdAnim3);
 
+            if (side === 'right') {
+                bird.visible = false;
+                birdFly.anchor.set(0.5);
+                let flyAnim = birdFly.animations.add('fly', Phaser.Animation.generateFrameNames('fli2', 0, 24, '.png', 2));
+                flyAnim.play(15);
+                game.add.tween(birdFly).to({x: game.width * 0.92, y: 260}, 500, 'Linear', true, 500)
+                    .onComplete.add(() =>{
+                        birdFly.destroy();
+                        bird.visible = true;
+                    })
+            }
             birdAnim.play(15, true);
             this._nextBirdAnim({});
 
