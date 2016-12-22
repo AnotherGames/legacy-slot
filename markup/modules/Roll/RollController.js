@@ -46,12 +46,6 @@ export let controller = (() => {
         // Если не было Ready - не крутим
         if (!model.state('ready')) return;
 
-        // Если маленький баланс - не крутим, выкидываем попап
-        if (!model.checkBalance()) {
-            mainView.draw.showPopup({message: 'You have low balance on your account'});
-            return;
-        }
-
         // Если долго идет запрос (больше 4 сек) - выкидываем попап
         let game = model.el('game');
         let rollPopupTimer = game.time.events.add(4000, () => {
@@ -128,7 +122,10 @@ export let controller = (() => {
                 }
 
             })
-            .catch((err) => {console.error(err)});
+            .catch((err) => {
+                mainView.draw.showPopup({message: 'You have weak Internet connection. Click to restart.'});
+                console.error(err)
+            });
     }
 
     function checkFirstScreen() {
@@ -191,6 +188,10 @@ export let controller = (() => {
                 let game = model.el('game');
                 game.input.keyboard.enabled = true;
             }
+        })
+        .catch((err) => {
+            mainView.draw.showPopup({message: 'You have weak Internet connection. Click to restart.'});
+            console.error(err)
         });
 
     }
