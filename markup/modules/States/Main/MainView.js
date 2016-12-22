@@ -111,7 +111,8 @@ export let view = (() => {
             container = model.group('popup'),
             message = 'popup',
             font = 'normal 54px Arial',
-            color = '#e8b075'
+            color = '#e8b075',
+            balance = false
         }) {
             let overlay = game.add.graphics(0, 0, container)
                 .beginFill(0x000000, 0.8)
@@ -137,19 +138,13 @@ export let view = (() => {
             popup.inputEnabled = true;
             popup.input.priorityID = 3;
             popup.events.onInputDown.add(() => {
-                container.removeAll();
-                if (message === 'Your session is closed. Please click to restart') {
-                    window.location.reload();
-                }
+                (!balance) ? window.location.reload() : container.removeAll();
             });
 
             overlay.inputEnabled = true;
             overlay.input.priorityID = 2;
             overlay.events.onInputDown.add(() => {
-                container.removeAll();
-                if (message === 'Your session is closed. Please click to restart') {
-                    window.location.reload();
-                }
+                (!balance) ? window.location.reload() : container.removeAll();
             });
         }
     };
