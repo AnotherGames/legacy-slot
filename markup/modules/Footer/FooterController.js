@@ -8,7 +8,7 @@ import { controller as soundController } from 'modules/Sound/SoundController';
 export let controller = (() => {
 
     function initDesktop() {
-        view.draw.DesktopFooter({});
+        // view.draw.DesktopFooter({});
         view.draw.Time({});
 
         let homeButton = view.draw.HomeButton({});

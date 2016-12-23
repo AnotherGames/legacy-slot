@@ -165,8 +165,8 @@ export let controller = (() => {
             model.data('startFSScreen', data.Screen);
             model.data('firstScreen', data.Screen);
 
-            let dragon = model.el('dragon');
-            dragon.FlyToFS();
+            // let dragon = model.el('dragon');
+            // dragon.FlyToFS();
 
             // Убираем управление с клавиатуры
             // game.input.keyboard.enabled = false;

@@ -2,7 +2,7 @@ export let config = {
     fadeinMusicTime: 5000,
     countMeterTime: 2500,
     autoTransitionTime: 10000,
-    symbolsCount: 10,
+    symbolsCount: 11,
     maxMulti: 7,
     numOfInfoDots: 6,
     wheel: {
@@ -29,7 +29,7 @@ export let config = {
         },
         panelMargin: {
             x: 4,
-            y: 43
+            y: 100
         },
         elements: {
             width: 256,

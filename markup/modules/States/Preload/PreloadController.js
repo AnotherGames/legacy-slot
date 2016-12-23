@@ -21,7 +21,7 @@ export class Preload {
         this.loadMainAssets();
         this.loadFSAssets();
         this.loadSpineAssets();
-        this.loadTest();
+        this.loadElements();
 
         game.load.onLoadComplete.add(this.hidePreloader);
     }
@@ -45,7 +45,7 @@ export class Preload {
     loadInitAssets() {
         const game = model.el('game');
         game.load.path = `static/img/content/${model.res}/`;
-        game.load.image('initBG', 'bg/initBG.png');
+        game.load.image('initBG', 'bg/mainBG.png');
         game.load.atlasJSONArray('text', 'text/text.png', 'text/text.json');
     }
 
@@ -53,8 +53,14 @@ export class Preload {
         const game = model.el('game');
         game.load.image('mainBG', 'bg/mainBG.png');
         game.load.image('logos', 'bg/logos.png');
-        game.load.image('sticks', 'bg/palki.png');
+        game.load.image('transitionBG', 'bg/transitionBG.png');
+        game.load.image('upperBG', 'bg/upperBG.png');
+        game.load.image('BG', 'bg/BG.png');
+        game.load.image('wind1', 'bg/wind1.png');
+        game.load.image('wind2', 'bg/wind2.png');
+        game.load.image('skyLogo', 'bg/skyLogo.png');
         game.load.image('gameMachine', 'game/gameMachine.png');
+        // game.load.image('sticks', 'bg/palki.png');
         game.load.image('gameBG', 'game/gameBG.png');
         game.load.image('gameLogo', 'game/gmLogo.png');
         game.load.image('gameShadow', 'game/gameShadow.png');
@@ -89,7 +95,7 @@ export class Preload {
 
     loadFSAssets() {
         const game = model.el('game');
-        game.load.image('fsBG', 'bg/fsBG.png');
+        game.load.image('fsBG', 'bg/mainBG.png');
         game.load.image('freeSpins', 'fs/freeSpins.png');
         game.load.image('multiplier', 'fs/multiplier.png');
         game.load.image('freeSpinsPanelFS', 'fs/freeSpinsPanelFS.png');
@@ -98,24 +104,26 @@ export class Preload {
 
     loadSpineAssets() {
         const game = model.el('game');
-        game.load.spine('animBG', 'spine/skeleton.json');
+        // game.load.spine('animBG', 'spine/skeleton.json');
         game.load.spine('logo', 'spine/logo.json');
         game.load.spine('dragon', 'spine/Dragon.json');
 
     }
 
-    loadTest() {
+    loadElements() {
         const game = model.el('game');
-        game.load.atlasJSONArray('1', 'elements/01.png', 'elements/01.json');
-        game.load.atlasJSONArray('2', 'elements/02.png', 'elements/02.json');
-        game.load.atlasJSONArray('3', 'elements/03.png', 'elements/03.json');
-        game.load.atlasJSONArray('4', 'elements/04.png', 'elements/04.json');
-        game.load.atlasJSONArray('5', 'elements/05.png', 'elements/05.json');
-        game.load.atlasJSONArray('6', 'elements/06.png', 'elements/06.json');
-        game.load.atlasJSONArray('7', 'elements/07.png', 'elements/07.json');
-        game.load.atlasJSONArray('8', 'elements/08.png', 'elements/08.json');
-        game.load.atlasJSONArray('9', 'elements/09.png', 'elements/09.json');
+        game.load.atlasJSONArray('bg', 'elements/bg.png', 'elements/bg.json');
+        game.load.atlasJSONArray('1', 'elements/1.png', 'elements/1.json');
+        game.load.atlasJSONArray('2', 'elements/2.png', 'elements/2.json');
+        game.load.atlasJSONArray('3', 'elements/3.png', 'elements/3.json');
+        game.load.atlasJSONArray('4', 'elements/4.png', 'elements/4.json');
+        game.load.atlasJSONArray('5', 'elements/5.png', 'elements/5.json');
+        game.load.atlasJSONArray('6', 'elements/6.png', 'elements/6.json');
+        game.load.atlasJSONArray('7', 'elements/7.png', 'elements/7.json');
+        game.load.atlasJSONArray('8', 'elements/8.png', 'elements/8.json');
+        game.load.atlasJSONArray('9', 'elements/9.png', 'elements/9.json');
         game.load.atlasJSONArray('10', 'elements/10.png', 'elements/10.json');
+        game.load.atlasJSONArray('11', 'elements/11.png', 'elements/11.json');
     }
 
     hidePreloader() {

@@ -6,12 +6,20 @@ export let view = (() => {
         const game = model.el('game');
         let initBG = game.add.sprite(0, 0, 'initBG');
         model.el('initBG', initBG);
+
+        let secondBG = game.add.sprite(0, 0, 'BG', null, model.group('bg'));
+        model.el('secondBG', secondBG);
+
+        let upperBG = game.add.sprite(0, 0, 'upperBG', null, model.group('bg'));
+        model.el('upperBG', upperBG);
+
         return initBG;
     }
 
     function drawBGLogo() {
         const game = model.el('game');
-        let BGLogo = game.add.sprite(50, game.height * 0.85, 'logos');
+        let BGLogo = game.add.sprite(game.world.width / 2, game.height * 0.85, 'logos');
+        BGLogo.anchor.set(0.5);
         model.el('BGLogo', BGLogo);
         return BGLogo;
     }

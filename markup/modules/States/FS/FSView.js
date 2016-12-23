@@ -30,23 +30,23 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('bg')
         }) {
-            let animBG = game.add.spine(
-                game.world.centerX,
-                game.world.centerY,
-                'animBG'
-            );
-            animBG.setAnimationByName(0, 'animation', true);
-            container.add(animBG);
-            model.el('animMainBG', animBG);
+            // let animBG = game.add.spine(
+            //     game.world.centerX,
+            //     game.world.centerY,
+            //     'animBG'
+            // );
+            // animBG.setAnimationByName(0, 'animation', true);
+            // container.add(animBG);
+            // model.el('animMainBG', animBG);
 
             let mainBG = game.add.sprite(0, 0, 'fsBG', null, container);
             model.el('mainBG', mainBG);
 
-            if (model.state('isAnimBG')) {
-                mainBG.visible = false;
-            } else {
-                animBG.visible = false;
-            }
+            // if (model.state('isAnimBG')) {
+            //     mainBG.visible = false;
+            // } else {
+            //     animBG.visible = false;
+            // }
         },
 
         mainContainer: function ({

@@ -10,7 +10,7 @@ export let controller = (() => {
     }
 
     function initDesktop() {
-        view.draw.CashBalance({});
+        // view.draw.CashBalance({});
         view.draw.DesktopBalance({});
     }
 
@@ -20,7 +20,7 @@ export let controller = (() => {
     }
 
     function initFSDesktop() {
-        view.draw.CashBalance({});
+        // view.draw.CashBalance({});
         view.draw.FSDesktopBalance({});
     }
 
@@ -32,16 +32,16 @@ export let controller = (() => {
             }
             if (model.desktop) {
                 view.update.FSDesktopBalance({});
-                view.update.CashBalance({});
+                // view.update.CashBalance({});
             }
         } else {
             if (model.mobile) {
                 view.update.MobileBalance({});
-                view.update.CashBalance({});
+                // /view.update.CashBalance({});
             }
             if (model.desktop) {
                 view.update.DesktopBalance({});
-                view.update.CashBalance({});
+                // view.update.CashBalance({});
             }
         }
     }

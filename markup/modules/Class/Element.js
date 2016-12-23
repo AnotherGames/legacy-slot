@@ -11,6 +11,14 @@ export class Element {
         this.group.x = position.x;
         this.group.y = position.y;
 
+        // Добавляем спрайт подложки
+        this.bg = game.add.sprite(0, 0, 'bg', 'bg1-01.png', this.group);
+        this.bg.anchor.set(0.5);
+
+        this.bg.animations.add(`bg-n`, ['bg1-01.png']);
+        this.bg.animations.add(`bg-b`, ['bg1-b.png']);
+        this.bg.animations.add(`bg-w`, Phaser.Animation.generateFrameNames(`bg3-`, 1, 30, '.png', 2));
+
         // Заполняем его спрайтами всех элементов (они будут расположенны друг на друге)
         this.sprites = [];
         for (let i = 1; i <= config.symbolsCount; i++) {
@@ -28,7 +36,7 @@ export class Element {
         this.active = 1;
         this.activeSprite = this.sprites[0];
         this.activeSprite.visible = true;
-        this.activeSprite.animations.play('1-n');
+        // this.activeSprite.animations.play('1-n');
     }
 
     play(animation) {
@@ -37,6 +45,16 @@ export class Element {
 
         // Делаем невидимым спрайт который раньше играл анимацию
         this.activeSprite.visible = false;
+
+        if (animation.indexOf('b') != -1) {
+            this.bg.animations.play('bg-b', 15, true);
+        }
+        if (animation.indexOf('n') != -1) {
+            this.bg.animations.play('bg-n', 15, true);
+        }
+        if (animation.indexOf('w') != -1) {
+            this.bg.animations.play('bg-w', 15, true);
+        }
 
         // Находим новый активный спрайт, делаем его видимым и запускаем нужную анимацию
         this.active = parseInt(animation);
@@ -68,34 +86,37 @@ export class Element {
     addSpriteAnimation(sprite, index) {
         switch (index) {
             case 1:
-                this.addAnimation(sprite, { el: 1, n: false, w: 16 });
+                this.addAnimation(sprite, { el: 1, n: false, w: 30 });
                 break;
             case 2:
-                this.addAnimation(sprite, { el: 2, n: 16, w: 16 });
+                this.addAnimation(sprite, { el: 2, n: 30, w: 30 });
                 break;
             case 3:
-                this.addAnimation(sprite, { el: 3, n: false, w: 16 });
+                this.addAnimation(sprite, { el: 3, n: false, w: 30 });
                 break;
             case 4:
-                this.addAnimation(sprite, { el: 4, n: 16, w: 16 });
+                this.addAnimation(sprite, { el: 4, n: 30, w: 30 });
                 break;
             case 5:
-                this.addAnimation(sprite, { el: 5, n: false, w: 16 });
+                this.addAnimation(sprite, { el: 5, n: false, w: 30 });
                 break;
             case 6:
-                this.addAnimation(sprite, { el: 6, n: 16, w: 16 });
+                this.addAnimation(sprite, { el: 6, n: 30, w: 30 });
                 break;
             case 7:
-                this.addAnimation(sprite, { el: 7, n: false, w: 16 });
+                this.addAnimation(sprite, { el: 7, n: false, w: 30 });
                 break;
             case 8:
-                this.addAnimation(sprite, { el: 8, n: 16, w: 16 });
+                this.addAnimation(sprite, { el: 8, n: 30, w: 30 });
                 break;
             case 9:
-                this.addAnimation(sprite, { el: 9, n: 16, w: 16 });
+                this.addAnimation(sprite, { el: 9, n: 30, w: 30 });
                 break;
             case 10:
-                this.addAnimation(sprite, { el: 10, n: 16, w: 16 });
+                this.addAnimation(sprite, { el: 10, n: 30, w: 30 });
+                break;
+            case 11:
+                this.addAnimation(sprite, { el: 11, n: 30, w: 20 });
                 break;
             default:
                 break;
@@ -104,16 +125,16 @@ export class Element {
 
     addAnimation(sprite, options) {
         let prefix;
-        if (options.el < 10) {
-            prefix = 0;
-        } else {
+        // if (options.el < 10) {
+            // prefix = 0;
+        // } else {
             prefix = '';
-        }
+        // }
         sprite.animations.add(`${options.el}-n`,
             options.n
             ? Phaser.Animation.generateFrameNames(`${prefix}${options.el}-n-`, 1, options.n, '.png', 2)
-            : [`${prefix}${options.el}-n-01.png`], 16, true);
-        sprite.animations.add(`${options.el}-b`, [`${prefix}${options.el}-b-01.png`], 16, true);
-        sprite.animations.add(`${options.el}-w`, Phaser.Animation.generateFrameNames(`${prefix}${options.el}-w-`, 1, options.w, '.png', 2), 16, false);
+            : [`${prefix}${options.el}-n.png`], 25, true);
+        sprite.animations.add(`${options.el}-b`, [`${prefix}${options.el}-b.png`], 25, true);
+        sprite.animations.add(`${options.el}-w`, Phaser.Animation.generateFrameNames(`${prefix}${options.el}-w-`, 1, options.w, '.png', 2), 25, false);
     }
 }

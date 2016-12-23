@@ -18,6 +18,7 @@ export class Init {
     }
 
     create() {
+        let game = model.el('game');
 
         this.checkSettingsWidth();
 
@@ -43,6 +44,7 @@ export class Init {
             this.textOff.setStyle(this.styleOn);
             this.textOn.setStyle(this.styleOff);
         }
+
     }
 
     switchSound() {

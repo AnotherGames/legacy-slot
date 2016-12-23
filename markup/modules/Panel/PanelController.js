@@ -10,7 +10,7 @@ export let controller = (() => {
     function drawButtons() {
         let game = model.el('game');
         view.draw.PanelBG({});
-        view.draw.LinesNumber({});
+        // view.draw.LinesNumber({});
         view.draw.AutoContainer({});
         view.draw.AutoPanel({}).forEach((panelButton) => {
             panelButton.inputEnabled = true;
@@ -41,8 +41,8 @@ export let controller = (() => {
         let maxBetButtonDesk = view.draw.MaxBetButton({});
             maxBetButtonDesk.onInputDown.add(handle.maxBet);
 
-        let infoButtonDesk = view.draw.InfoButton({});
-            infoButtonDesk.onInputDown.add(handle.info);
+        // let infoButtonDesk = view.draw.InfoButton({});
+        //     infoButtonDesk.onInputDown.add(handle.info);
 
         let betLevelPlus = view.draw.PlusButton({});
             betLevelPlus.onInputDown.add(handle.betPlus);
