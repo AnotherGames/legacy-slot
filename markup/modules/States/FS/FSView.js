@@ -86,6 +86,11 @@ export let view = (() => {
             soundController.sound.playSound({sound: 'cows'});
 
             let cowContainer = game.add.group();
+                cowContainer.inputEnableChildren = true;
+                cowContainer.onChildInputDown.add(()=>{
+                    soundController.sound.playSound({sound: 'moo', volume: 7})
+                })
+
             container.add(cowContainer);
 
             let cow1 = game.add.sprite(-50, 10, 'cow1', null, cowContainer);
@@ -96,6 +101,15 @@ export let view = (() => {
 
             let cowboy = game.add.sprite(0, 0, 'cowboy', null, container);
             let red_indian = game.add.sprite(0, 0, 'red_indian', null, container);
+
+            cowboy.inputEnabled = true;
+            cowboy.events.onInputDown.add(()=>{
+                soundController.sound.playSound({sound: 'whip', volume: 7})
+            });
+            red_indian.inputEnabled = true;
+            red_indian.events.onInputDown.add(()=>{
+                soundController.sound.playSound({sound: 'whip', volume: 7})
+            });
 
             let time = game.rnd.integerInRange(55, 70);
             let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';

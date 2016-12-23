@@ -86,8 +86,8 @@ export let controller = (() => {
                 model.state('roll:fast', false);
 
                 // Играем звук кручения барабанов
-                soundController.sound.playSound({sound: 'baraban', fade: 500});
-                soundController.sound.changeSoundVolume('baraban', 60);
+                soundController.sound.playSound({sound: 'baraban', fade: 500, volume: 0.6});
+                // soundController.sound.changeSoundVolume('baraban', 60);
 
                 // Расчитываем конечный экран
                 let wheels = model.el('wheels');

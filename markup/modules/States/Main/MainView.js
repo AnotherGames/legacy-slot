@@ -1,6 +1,7 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
 import { view as transitionView } from 'modules/Transition/TransitionView';
+import { controller as soundController } from 'modules/Sound/SoundController';
 
 export let view = (() => {
 
@@ -93,7 +94,10 @@ export let view = (() => {
         }) {
             bird.anchor.set(0.5);
             bird.inputEnabled = true;
-            bird.events.onInputDown.add(draw._flyBird);
+            bird.events.onInputDown.add(()=>{
+                draw._flyBird();
+                soundController.sound.playSound({sound: 'lineWin'});
+            });
             model.el('bird', bird);
             model.el('sideBird', side);
 
