@@ -94,6 +94,15 @@ export let view = (() => {
         }) {
             bird.anchor.set(0.5);
             bird.inputEnabled = true;
+            bird.input.priorityID = 1;
+            bird.input.pixelPerfectOver = true;
+            //TODO разобраться с этим извращенством
+            bird.events.onInputOver.add(()=>{
+                if(bird.input.isPixelPerfect()) bird.input.priorityID = 3;
+            })
+            bird.events.onInputOut.add(()=>{
+                bird.input.priorityID = 1;
+            })
             bird.events.onInputDown.add(()=>{
                 draw._flyBird();
                 soundController.sound.playSound({sound: 'lineWin'});
@@ -186,13 +195,14 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('bg')
         }) {
+            let counter = 0;
             let table = game.add.sprite(game.width * 0.855, 500, 'table', null, container);
             table.anchor.set(0.5);
+
             model.el('table', table);
 
             let tableAnim = table.animations.add('idle', Phaser.Animation.generateFrameNames('skeleton-animation_', 0, 27, '.png', 1));
             tableAnim.play(12, true);
-
         },
 
         addSkull: function ({
