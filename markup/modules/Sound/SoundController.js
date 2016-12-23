@@ -36,11 +36,14 @@ export let controller = (() => {
         playSound: function({
             sound,
             duration = 0,
-            fade = 1
+            fade = 0,
+            volume = 1,
+            //loop добавлен на будущее
+            loop = false
         }){
             let game = model.el('game');
             if(!model.sound(sound)){
-                model.sound(sound, game.add.audio(sound));
+                model.sound(sound, game.add.audio(sound, volume, false));
             };
 
             if(!model.state('sound')) return;
@@ -48,8 +51,11 @@ export let controller = (() => {
             // if(!model.sound(sound).isPlaying){
             //     model.sound(sound).play();
             // };
-            // model.sound(sound).play();
-            model.sound(sound).fadeIn(fade);
+            if(fade > 0){
+                model.sound(sound).fadeIn(fade);
+            } else {
+                model.sound(sound).play();
+            }
 
             if(duration > 0){
                 setTimeout(() => {
