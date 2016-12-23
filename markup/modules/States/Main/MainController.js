@@ -33,7 +33,7 @@ export class Main {
         game.spriteAnims = [];
 
         // При выходе из вкладки анимации будут останавливаться
-        game.stage.disableVisibilityChange = false;
+        game.stage.disableVisibilityChange = true;
 
         // Создаем контейнеры
         mainView.create.groups({});
@@ -42,7 +42,7 @@ export class Main {
     create() {
         let game = model.el('game');
         game.camera.flash(0x000000, 777)
-        
+
         soundController.music.stopMusic('finishPerehod');
         soundController.music.stopMusic('initFon');
         // Играем фоновую музыку

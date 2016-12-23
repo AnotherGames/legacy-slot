@@ -131,7 +131,7 @@ export class FS {
         game.spriteAnims = [];
 
         // При выходе из вкладки анимации будут останавливаться
-        game.stage.disableVisibilityChange = false;
+        game.stage.disableVisibilityChange = true;
 
         model.state('fs', true);
 
