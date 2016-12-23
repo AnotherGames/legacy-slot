@@ -25,29 +25,10 @@ canvas {
     -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
-.history {
-    z-index: 12;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    &__iframe {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-    }
-    &__button {
-        position: absolute;
-        top: 6px;
-        right: 3px;
-    }
-    &.closed {
-        display: none;
-    }
-}
-
 .closed {
     display: none;
 }
+
 #darkness {
     z-index: 10;
     position: absolute;
@@ -55,138 +36,256 @@ canvas {
     height: 100%;
     background: rgba(0, 0, 0, 0.3);
 }
+
+html, body {
+    background: black;
+}
+
+html .ios, body .ios {
+    height: 2500px;
+}
+
+#game {
+    background: black;
+}
+
+#game canvas {
+    width: 100%;
+}
+
+canvas {
+    display: block;
+    max-width: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.history {
+    z-index: 12;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.history__iframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.history__button {
+    position: absolute;
+    top: 6px;
+    right: 3px;
+}
+
+.history.closed {
+    display: none;
+}
+
+.closed {
+    display: none;
+}
+
+#darkness {
+    z-index: 10;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+}
+
 #settings {
     z-index: 11;
     position: absolute;
-    width: 90%;
+    width: 60%;
+    min-width: 700px;
     border: 1px rgba(151, 151, 151, 0.3) solid;
     border-radius: 3px;
     background: rgba(0, 0, 0, 0.9);
-    font-size: 36px;
+    font-size: calc(0.5vw + 10px);
     top: 50%;
     left: 50%;
+    -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     color: white;
     text-align: center;
 }
+
 #settings .section {
     float: left;
     width: calc(50% - 80px);
     padding: 0 40px;
     text-align: left;
 }
+
 #settings .title {
     background: rgba(255, 255, 255, 0.18);
-    padding: 18px 32px;
-    margin: 46px 0;
+    padding: 10px 0;
+    margin: 7px 0;
     border-radius: 5px;
-    font-size: 45px;
+    font-size: calc( 0.5vw + 10px);
+    text-align: center;
 }
+
 .volumeContainer {
-    padding: 31px 0 62px 0;
+    padding: 10px 0 20px 0;
 }
+
 .checkbox {
-  vertical-align: top;
-  margin: 0 3px 0 0;
+    vertical-align: top;
+    margin: 0 3px 0 0;
 }
-.checkbox + label {
-  cursor: pointer;
+
+.checkbox+label {
+    cursor: pointer;
 }
+
 .checkbox:not(checked) {
-  position: absolute;
-  opacity: 0;
+    position: absolute;
+    opacity: 0;
 }
-.checkbox:not(checked) + label {
-  position: relative;
-  padding: 0 0 0 110px;
+
+.checkbox:not(checked)+label {
+    display: inline-block;
+    position: relative;
+    padding: 0 0 0 90px;
+    width: 40%;
+    min-width: 195px;
+    margin-bottom: 10px;
 }
-.checkbox:not(checked) + label:before {
-  content: '';
-  position: absolute;
-  top: 0px;
-  left: 0;
-  width: 80px;
-  height: 36px;
-  border-radius: 17px;
-  background: #535353;
-  box-shadow: inset 0 2px 3px rgba(0,0,0,.2);
-}
-.checkbox:not(checked) + label:after {
+
+.checkbox:not(checked)+label:before {
     content: '';
     position: absolute;
-    top: 2px;
+    top: 0px;
+    left: 0;
+    width: calc(1vw + 60px);
+    height: calc(1vw + 10px);
+    border-radius: 17px;
+    background: #535353;
+    box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+.checkbox:not(checked)+label:after {
+    content: '';
+    position: absolute;
     left: 3px;
-    width: 32px;
-    height: 32px;
+    top: 0;
+    width: calc(1vw + 10px);
+    height: calc(1vw + 10px);
     border-radius: 100%;
     background: #FFF;
-    box-shadow: 0 2px 5px rgba(0,0,0,.3);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    -webkit-transition: all .2s;
     transition: all .2s;
 }
-.checkbox:checked + label:before {
-  background: #7ec710;
+
+.checkbox:checked+label:before {
+    background: #7ec710;
 }
-.checkbox:checked + label:after {
-  left: 47px;
+
+.checkbox:checked+label:after {
+    left: 47px;
 }
-.checkbox:focus + label:before {
-  box-shadow: 0 0 0 3px rgba(255,255,0,.5);
+
+.checkbox:focus+label:before {
+    box-shadow: 0 0 0 3px rgba(255, 255, 0, 0.5);
 }
+
 input[type=range] {
     -webkit-appearance: none;
+    -moz-appearance: none;
     appearance: none;
     border-radius: 8px;
     width: calc(100% - 410px);
     height: 14px;
-    background: rgba(126,199,16,1);
+    background: #7ec710;
+    min-width: 100px;
 }
+
 input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
     width: 32px;
     height: 32px;
     border-radius: 100%;
     background: #FFF;
-    box-shadow: 0 2px 5px rgba(0,0,0,.3);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
+
 .marginBottom {
-        margin-bottom: 25px;
+    margin-bottom: 15px;
 }
+
 .btnContainer {
     text-align: center;
 }
+
 button {
-    width: 200px;
-    height: 135px;
+    font-size: calc(0.4vw + 12px);
+    max-width: 200px;
+    min-width: 80px;
+    min-height: 30px;
+    width: 8vw;
+    height: 5vw;
+    max-height: 100px;
     margin: 0 10px;
     border: none;
     border-radius: 5px;
     padding: 10px;
 }
+
 #btnRules {
     background: #9d9f29;
 }
+
 #btnHistory {
     background: #559b21;
 }
+
 #settingsSave {
     background: white;
     color: black;
-    margin: 45px;
-    margin-top: 100px;
+    margin-bottom: 5px;
 }
+
 .voiceImg {
-    width: 80px;
-    margin: -17px 21px;
+    max-width: 80px;
+    display: none;
 }
+
 .marginLeft {
     margin-left: 45px;
 }
+
 .inputText {
     background: white;
     color: black;
-    width: 160px;
+    width: calc(55% - 90px);
+    min-width: 60px;
     text-align: center;
     border-radius: 12px;
+}
+
+#volume {
+    position: relative;
+    margin: 10px 60px;
+}
+
+#volume:before, #volume:after {
+    content: "";
     position: absolute;
-    right: 42px;
+    top: -5px;
+    width: 40px;
+    height: 40px;
+    background-repeat: no-repeat;
+}
+
+#volume:before {
+    left: -50px;
+    background-image:url(http://casino.bossgs.org/monstersushi/static/img/content/settings/soundMinus.png);
+}
+
+#volume:after {
+    right: -50px;
+    background-image:url(http://casino.bossgs.org/monstersushi/static/img/content/settings/soundPlus.png);
 }
