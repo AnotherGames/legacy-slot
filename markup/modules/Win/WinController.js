@@ -57,6 +57,7 @@ export let controller = (() => {
         upElements.forEach((upWheel) => {
             upWheel.forEach((upEl) => {
                 upEl.hide(0);
+                upEl.normal();
             })
         })
         let wheels = model.el('wheels');

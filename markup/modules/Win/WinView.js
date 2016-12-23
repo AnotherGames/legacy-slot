@@ -91,6 +91,7 @@ export let view = (() => {
             number,
             amount,
             alpha = false,
+            finalScale = (model.desktop) ? 1.2 : 1.5,
             wheels = model.el('wheels'),
             upElements = model.el('upElements'),
             game = model.el('game')
@@ -100,7 +101,7 @@ export let view = (() => {
                 wheel.elements.forEach((element, elementIndex) => {
                     element.hide(0);
                     upElements[wheelIndex][elementIndex].show();
-                    upElements[wheelIndex][elementIndex].play(`${element.active}-n`)
+                    upElements[wheelIndex][elementIndex].playIfNotWin(`${element.active}-n`);
                 });
             });
 
@@ -118,7 +119,6 @@ export let view = (() => {
                 let line = model.data('lines')[number - 1];
 
                 for (let col = 0; col < amount; col++) {
-                    let wheelElements = wheels[col].elements;
                     let upWheelElements = upElements[col];
                     let coord = line[col].Y;
                     let element = upWheelElements[coord];
@@ -126,43 +126,28 @@ export let view = (() => {
                         element.show();
                         element.group.alpha = 1;
                         element.group.scale.set(0.3);
-                        if (model.desktop) {
-                           game.add.tween(element.group.scale).to({x: 1.2,  y: 1.2}, 700, Phaser.Easing.Bounce.Out, true)
-                               .onComplete.add(() => {
-                                   game.add.tween(element.group.scale).to({x: 1.0,  y: 1.0}, 400, 'Linear', true)
-                               }, this);
-                        } else {
-                           game.add.tween(element.group.scale).to({x: 1.5,  y: 1.5}, 700, Phaser.Easing.Bounce.Out, true)
-                               .onComplete.add(() => {
-                                   game.add.tween(element.group.scale).to({x: 1,  y: 1}, 400, 'Linear', true)
-                               }, this);
-                        }
-                }
 
+                    game.add.tween(element.group.scale).to({x: finalScale,  y: finalScale}, 700, Phaser.Easing.Bounce.Out, true)
+                        .onComplete.add(() => {
+                            game.add.tween(element.group.scale).to({x: 1.0,  y: 1.0}, 400, 'Linear', true)
+                        }, this);
+                }
             // Если есть скаттеры либо элемент фриспинов
             } else {
-                let lvlCounter = 0;
                 wheels.forEach((wheelObj, wheelIndex) => {
                     wheelObj.elements.forEach((wheelElement, elementIndex) => {
                         let elementName = parseInt(wheelElement.sprites[wheelElement.active - 1].animations.currentAnim.name);
                         // Показываем выигрышные скаттеры
                         if (elementName == '10') {
                             let element = upElements[wheelIndex][elementIndex];
+                                element.win();
+                                element.show();
+                                element.group.scale.set(0.3);
 
-                            element.win();
-                            element.show();
-                            element.group.scale.set(0.3);
-                           if (model.desktop) {
-                               game.add.tween(element.group.scale).to({x: 1.2,  y: 1.2}, 700, Phaser.Easing.Bounce.Out, true)
-                                   .onComplete.add(() => {
-                                       game.add.tween(element.group.scale).to({x: 1.0,  y: 1.0}, 400, 'Linear', true)
-                                   }, this);
-                           } else {
-                               game.add.tween(element.group.scale).to({x: 1.5,  y: 1.5}, 700, Phaser.Easing.Bounce.Out, true)
-                                   .onComplete.add(() => {
-                                       game.add.tween(element.group.scale).to({x: 1,  y: 1}, 400, 'Linear', true)
-                                   }, this);
-                           }
+                            game.add.tween(element.group.scale).to({x: finalScale,  y: finalScale}, 700, Phaser.Easing.Bounce.Out, true)
+                                .onComplete.add(() => {
+                                    game.add.tween(element.group.scale).to({x: 1.0,  y: 1.0}, 400, 'Linear', true)
+                                }, this);
                             // Очищаем поле вручную так как нет глисты которая чистит автоматом
                             game.time.events.add(1000, () => {
                                 winController.cleanWin();

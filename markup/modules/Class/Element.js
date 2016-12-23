@@ -54,6 +54,11 @@ export class Element {
         });
     }
 
+    playIfNotWin(animation) {
+        if (this.activeSprite.animations.currentAnim.name.indexOf('w') != -1) return;
+        this.play(animation);
+    }
+
     normal() {
         // Проигрывам нормальную анимацию
         this.play(`${this.active}-n`);
