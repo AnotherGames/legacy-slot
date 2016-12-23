@@ -56,6 +56,7 @@ export class Main {
         mainView.draw.mainContainer({});
         mainView.draw.machineContainer({});
         mainView.draw.lineNumbers({});
+        mainView.draw.flyingSmoke({});
         winView.draw.UpWinContainer({});
 
         // Инициализируем крутки
