@@ -95,7 +95,7 @@ export let controller = (() => {
             let timer = model.el('fsTimer');
             game.time.events.remove(timer);
 
-            let fsTimer = game.time.events.add(3200, () => {
+            let fsTimer = game.time.events.add(3000, () => {
                 if (model.state('fs:end')) return;
                 controller.next();
             });
