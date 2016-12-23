@@ -11,7 +11,7 @@ export class Preload {
         game.add.plugin(Fabrique.Plugins.Spine);
         if (!game.device.iOS) {
             game.scale.pageAlignHorizontally = true;
-            game.scale.windowConstraints = {bottom: 'visual', right: 'visual'};
+            // game.scale.windowConstraints = {bottom: 'visual', right: 'visual'};
             game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
             game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
         }
