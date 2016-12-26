@@ -174,7 +174,7 @@ export let view = (() => {
         // Обнуляем таймер проигрывания зомби
         game.time.events.remove(model.data('zombie:randomTimer'));
         if (model.data('fsMulti') === 7) {
-            soundController.sounds.playSound('zombie2');
+            soundController.sound.playSound('zombie2');
         }
         // Рисуем фон
         let transitionBG = game.add.sprite(0, 0, 'initBG', null, transitionContainer);
