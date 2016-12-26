@@ -1,173 +1,132 @@
 
 skeleton.png
-size: 2048,2048
+size: 2048,512
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-Back/Porez/222_0000s_0000_Shape-6
+img1/ZZ_0000_CrazyNewYear
   rotate: false
-  xy: 2, 1010
-  size: 2000, 139
-  orig: 2000, 139
+  xy: 2, 294
+  size: 1023, 216
+  orig: 1023, 216
   offset: 0, 0
   index: -1
-Back/Porez/222_0000s_0001_Shape-5
-  rotate: false
-  xy: 2, 871
-  size: 2000, 137
-  orig: 2000, 137
-  offset: 0, 0
-  index: -1
-Back/Porez/222_0000s_0002_Shape-4-copy
-  rotate: false
-  xy: 2, 612
-  size: 2000, 126
-  orig: 2000, 126
-  offset: 0, 0
-  index: -1
-Back/Porez/222_0000s_0004_Shape-9
+img1/ZZ_0001_Toy-copy-5
   rotate: true
-  xy: 1967, 1648
-  size: 398, 33
-  orig: 398, 33
+  xy: 290, 2
+  size: 52, 89
+  orig: 52, 89
   offset: 0, 0
   index: -1
-Back/Porez/222_0000s_0005_Shape-8-copy
+img1/ZZ_0002_Toy-copy-7
   rotate: true
-  xy: 1924, 1220
-  size: 258, 50
-  orig: 258, 50
+  xy: 1433, 183
+  size: 28, 48
+  orig: 28, 48
   offset: 0, 0
   index: -1
-Back/Porez/222_0000s_0007_Shape-7
+img1/ZZ_0003_Toy-copy-6
   rotate: true
-  xy: 1936, 1480
-  size: 566, 29
-  orig: 566, 29
+  xy: 909, 244
+  size: 48, 83
+  orig: 48, 83
   offset: 0, 0
   index: -1
-Back/Porez/222_0000s_0008_Layer-81
-  rotate: false
-  xy: 2, 503
-  size: 1917, 107
-  orig: 1917, 107
-  offset: 0, 0
-  index: -1
-Back/Porez/222_0000s_0009_Shape-4
-  rotate: false
-  xy: 2, 740
-  size: 2000, 129
-  orig: 2000, 129
-  offset: 0, 0
-  index: -1
-Back/Porez/222_0000s_0010_Layer-80
-  rotate: false
-  xy: 2, 1151
-  size: 1920, 332
-  orig: 1920, 332
-  offset: 0, 0
-  index: -1
-Back/Porez/222_0001s_0000_Shape-10-copy
-  rotate: false
-  xy: 2, 47
-  size: 1461, 454
-  orig: 1461, 454
-  offset: 0, 0
-  index: -1
-Back/Porez/222_0001s_0001_Shape-10
-  rotate: false
-  xy: 2, 1485
-  size: 1932, 561
-  orig: 1932, 561
-  offset: 0, 0
-  index: -1
-Back/Porez/222_0004_volna
-  rotate: false
-  xy: 1084, 14
-  size: 203, 31
-  orig: 203, 31
-  offset: 0, 0
-  index: -1
-Back/Porez/222_0006_volna
+img1/ZZ_0004_Toy-copy-4
   rotate: true
-  xy: 1954, 365
-  size: 245, 46
-  orig: 245, 46
+  xy: 317, 71
+  size: 66, 114
+  orig: 66, 114
   offset: 0, 0
   index: -1
-Back/Porez/zz
-  rotate: true
-  xy: 2, 9
-  size: 36, 1080
-  orig: 36, 1080
-  offset: 0, 0
-  index: -1
-For_Effects/FF_0000_Layer-5
-  rotate: true
-  xy: 1465, 2
-  size: 499, 487
-  orig: 499, 487
-  offset: 0, 0
-  index: -1
-
-skeleton2.png
-size: 2048,2048
-format: RGBA8888
-filter: Linear,Linear
-repeat: none
-Back/Porez/222_0000_Layer-83
+img1/ZZ_0005_Layer-53-copy-2
   rotate: false
-  xy: 2, 1042
-  size: 1122, 530
-  orig: 1122, 530
+  xy: 1679, 390
+  size: 231, 53
+  orig: 231, 53
   offset: 0, 0
   index: -1
-Back/Porez/222_0001_Layer-84
+img1/ZZ_0006_Layer-53-copy-3
   rotate: false
-  xy: 2, 701
-  size: 995, 339
-  orig: 995, 339
+  xy: 317, 139
+  size: 286, 65
+  orig: 286, 65
   offset: 0, 0
   index: -1
-Back/Porez/222_0001s_0002_Ship
+img1/ZZ_0007_Layer-53-copy-2
+  rotate: false
+  xy: 2, 14
+  size: 286, 40
+  orig: 286, 40
+  offset: 0, 0
+  index: -1
+img1/ZZ_0008_Layer-53-copy
+  rotate: false
+  xy: 651, 239
+  size: 256, 53
+  orig: 256, 53
+  offset: 0, 0
+  index: -1
+img1/ZZ_0009_Group-2-copy
+  rotate: false
+  xy: 433, 72
+  size: 64, 65
+  orig: 64, 65
+  offset: 0, 0
+  index: -1
+img1/ZZ_0010_Layer-53
+  rotate: false
+  xy: 1679, 445
+  size: 304, 65
+  orig: 304, 65
+  offset: 0, 0
+  index: -1
+img1/ZZ_0011_Layer-50-copy-2
+  rotate: false
+  xy: 1679, 235
+  size: 74, 69
+  orig: 74, 69
+  offset: 0, 0
+  index: -1
+img1/ZZ_0012_Layer-50-copy
+  rotate: false
+  xy: 1679, 306
+  size: 88, 82
+  orig: 88, 82
+  offset: 0, 0
+  index: -1
+img1/ZZ_0013_Shape-4-copy-2
   rotate: true
-  xy: 1126, 1391
-  size: 181, 121
-  orig: 181, 121
+  xy: 317, 206
+  size: 86, 332
+  orig: 86, 332
   offset: 0, 0
   index: -1
-Back/Porez/222_0002_Layer-82
+img1/ZZ_0014_Group-189-copy-3
   rotate: false
-  xy: 2, 1574
-  size: 1285, 414
-  orig: 1285, 414
+  xy: 1912, 394
+  size: 70, 49
+  orig: 70, 49
   offset: 0, 0
   index: -1
-Back/Porez/222_0003_pagoda-161441_960_720
+img1/ZZ_0015_Group-12
+  rotate: false
+  xy: 1433, 213
+  size: 244, 297
+  orig: 244, 297
+  offset: 0, 0
+  index: -1
+img1/ZZ_0016_Layer-81
   rotate: true
-  xy: 1289, 1594
-  size: 394, 590
-  orig: 394, 590
+  xy: 2, 56
+  size: 236, 313
+  orig: 236, 313
   offset: 0, 0
   index: -1
-Back/Porez/222_0009_Layer-79
+img1/ss_0004_Layer-4
   rotate: false
-  xy: 2, 2
-  size: 330, 262
-  orig: 330, 262
-  offset: 0, 0
-  index: -1
-Back/Porez/222_0010_Shape-3
-  rotate: true
-  xy: 453, 345
-  size: 354, 455
-  orig: 354, 455
-  offset: 0, 0
-  index: -1
-For_Effects/FF_0003_Layer-2
-  rotate: false
-  xy: 2, 266
-  size: 449, 433
-  orig: 449, 433
+  xy: 1027, 175
+  size: 404, 335
+  orig: 404, 335
   offset: 0, 0
   index: -1

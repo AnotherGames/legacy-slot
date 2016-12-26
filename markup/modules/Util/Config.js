@@ -21,7 +21,7 @@ export let config = {
     fullHD: {
         mainContainer: {
             x: 0,
-            y: -80
+            y: -50
         },
         gameMachine: {
             x: 0,

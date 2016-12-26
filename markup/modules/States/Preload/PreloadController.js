@@ -58,10 +58,10 @@ export class Preload {
         game.load.image('BG', 'bg/BG.png');
         game.load.image('wind1', 'bg/wind1.png');
         game.load.image('wind2', 'bg/wind2.png');
-        game.load.image('skyLogo', 'bg/skyLogo.png');
         game.load.image('gameMachine', 'game/gameMachine.png');
         // game.load.image('sticks', 'bg/palki.png');
         game.load.image('gameBG', 'game/gameBG.png');
+        game.load.image('skyLogo', 'game/skyLogo.png');
         game.load.image('gameLogo', 'game/gmLogo.png');
         game.load.image('gameShadow', 'game/gameShadow.png');
         game.load.image('popup', 'other/popup.png');
@@ -75,6 +75,8 @@ export class Preload {
         game.load.image('winTotalFS', 'win/winTotalRectFS.png');
         game.load.image('betBonus', 'win/betBonus.png');
         game.load.atlasJSONArray('lineNumbers', 'win/lineNumbers.png', 'win/lineNumbers.json');
+        game.load.atlasJSONArray('splash', 'win/splash.png', 'win/splash.json');
+        game.load.image('ball', 'win/ball.png');
         game.load.atlasJSONArray('multiNumbers', 'numbers/multiNumbers.png', 'numbers/multiNumbers.json');
         game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
         game.load.atlasJSONArray('footerButtons', 'footer/footerButtons.png', 'footer/footerButtons.json');
@@ -105,8 +107,10 @@ export class Preload {
     loadSpineAssets() {
         const game = model.el('game');
         // game.load.spine('animBG', 'spine/skeleton.json');
-        game.load.spine('logo', 'spine/logo.json');
         game.load.spine('dragon', 'spine/Dragon.json');
+        game.load.spine('logo', 'spine/skeleton.json');
+        game.load.spine('tree', 'spine/iolka.json');
+        game.load.spine('krampus', 'spine/krampus.json');
 
     }
 

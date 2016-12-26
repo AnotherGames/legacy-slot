@@ -15,18 +15,18 @@ export let view = (() => {
             fs = false,
             game = model.el('game'),
             container = model.group('winTop'),
-            style = {font: '60px Helvetice, Arial', fill: '#e8b075', align: 'center'}
+            style = {font: '62px Helvetice, Arial', fill: '#fff', align: 'center', stroke: '#000000', strokeThickness: 2}
         }) {
             if (winTotalData === 0) return;
             if (fs) {
-                let winTotal = game.add.sprite(9, 0, 'winTotalFS', null, container);
+                let winTotal = game.add.sprite(6, 0, 'winTotalFS', null, container);
                     winTotal.anchor.set(0.5, 0.63);
             } else {
-                let winTotal = game.add.sprite(9, 0, 'winTotal', null, container);
+                let winTotal = game.add.sprite(6, 0, 'winTotal', null, container);
                     winTotal.anchor.set(0.5);
             }
 
-            let winTotalText = game.add.text(0, -5, winTotalData, style, container);
+            let winTotalText = game.add.text(0, 0, winTotalData, style, container);
                 winTotalText.anchor.set(0.5);
 
         },
@@ -38,26 +38,34 @@ export let view = (() => {
             container = model.group('winTop')
         }) {
             let leftArr = model.el('leftArr');
-            let winSplash = leftArr.filter((el) => {
+            let winNumber = leftArr.filter((el) => {
                 return el.name === number;
             })[0];
 
-            winSplash.animations.add('win', Phaser.Animation.generateFrameNames('line_splash-' + number + '_', 1, 12, '.png', 1), 15, false);
+            let winSplash = game.add.sprite(winNumber.x, winNumber.y, 'splash', null, container);
+            winSplash.anchor.set(0.5);
+            winSplash.animations.add('win', null, 15, false);
             winSplash.animations.play('win');
             winSplash.animations.getAnimation('win').onComplete.add(() => {
-                winSplash.frameName = 'line_splash-' + number + '_12.png';
+                // if (winNumber.frameName = 'line_splash-' + number + '_0.png') {
+                    winNumber.visible = true;
+                // };
             });
 
 
             let rightArr = model.el('rightArr');
-            let winSplashRight = rightArr.filter((el) => {
+            let winNumberRight = rightArr.filter((el) => {
                 return el.name === number;
             })[0];
 
-            winSplashRight.animations.add('win', Phaser.Animation.generateFrameNames('line_splash-' + number + '_', 1, 12, '.png', 1), 15, false);
+            let winSplashRight = game.add.sprite(winNumberRight.x, winNumberRight.y, 'splash', null, container);
+            winSplashRight.anchor.set(0.5);
+            winSplashRight.animations.add('win', null, 15, false);
             winSplashRight.animations.play('win');
             winSplashRight.animations.getAnimation('win').onComplete.add(() => {
-                winSplashRight.frameName = 'line_splash-' + number + '_12.png';
+                // if (winNumberRight.frameName = 'line_splash-' + number + '_0.png') {
+                    winNumberRight.visible = true;
+                // };
             });
         },
 
@@ -231,7 +239,7 @@ export let view = (() => {
             } else {
                 font = '25px Arial, Helvetica';
             }
-            let text = game.add.text(x, y, winValue, {font: font, fill: '#eacf16'}, container);
+            let text = game.add.text(x, y, winValue, {font: font, fill: '#fff'}, container);
                 text.anchor.set(0.5);
             if (model.mobile) {
                 winBG.scale.set(0.8);

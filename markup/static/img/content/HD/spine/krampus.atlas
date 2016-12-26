@@ -1,0 +1,90 @@
+
+krampus.png
+size: 2048,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Layer 107
+  rotate: false
+  xy: 2, 452
+  size: 740, 562
+  orig: 740, 562
+  offset: 0, 0
+  index: -1
+Layer 119
+  rotate: false
+  xy: 744, 633
+  size: 451, 381
+  orig: 451, 381
+  offset: 0, 0
+  index: -1
+Layer 120
+  rotate: false
+  xy: 1654, 631
+  size: 157, 133
+  orig: 157, 133
+  offset: 0, 0
+  index: -1
+Layer 121
+  rotate: true
+  xy: 744, 448
+  size: 183, 287
+  orig: 183, 287
+  offset: 0, 0
+  index: -1
+Layer 121 copy
+  rotate: false
+  xy: 1654, 766
+  size: 236, 248
+  orig: 236, 248
+  offset: 0, 0
+  index: -1
+Layer 122
+  rotate: true
+  xy: 1892, 766
+  size: 248, 154
+  orig: 248, 154
+  offset: 0, 0
+  index: -1
+Layer 123
+  rotate: true
+  xy: 1033, 399
+  size: 232, 133
+  orig: 232, 133
+  offset: 0, 0
+  index: -1
+Layer 124
+  rotate: false
+  xy: 2, 75
+  size: 638, 375
+  orig: 638, 375
+  offset: 0, 0
+  index: -1
+Layer 125
+  rotate: false
+  xy: 2, 2
+  size: 186, 71
+  orig: 186, 71
+  offset: 0, 0
+  index: -1
+Layer 126
+  rotate: false
+  xy: 1813, 674
+  size: 99, 90
+  orig: 99, 90
+  offset: 0, 0
+  index: -1
+Layer 127
+  rotate: false
+  xy: 642, 338
+  size: 97, 112
+  orig: 97, 112
+  offset: 0, 0
+  index: -1
+Layer 128
+  rotate: false
+  xy: 1197, 694
+  size: 455, 320
+  orig: 455, 320
+  offset: 0, 0
+  index: -1

@@ -64,7 +64,7 @@ export class Main {
             // Автоматически позиционируем основной контейнер
             this.positionMainContainer();
 
-            mainView.draw.logo({deltaY: -290});
+            mainView.draw.logo({});
             // Отрисовуем баланс
             balanceController.initMobile();
             // И меню

@@ -18,9 +18,9 @@ export let view = (() => {
             model.group('footer', game.add.group());
             model.group('balanceCash', game.add.group());
             model.group('balanceCoin', game.add.group());
+            model.group('logo', game.add.group());
             model.group('popup', game.add.group());
             model.group('transition', game.add.group());
-            model.group('dragon', game.add.group());
         }
     };
 
@@ -70,24 +70,24 @@ export let view = (() => {
                 gameMachine.visible = false;
             model.el('gameMachine', gameMachine);
 
-            let upperBG = game.add.sprite(0, 70, 'upperBG', null, container);
+            let upperBG = game.add.sprite(0, 50, 'upperBG', null, container);
                 upperBG.anchor.set(0.5);
             model.el('upperBG', upperBG);
         },
 
         logo: function({
             game = model.el('game'),
-            container = model.group('dragon'),
-            deltaY = -460
+            container = model.group('logo')
         }) {
-            let logoX;
-            if (model.mobile) {
-                logoX = 25;
-            } else {
-                logoX = 40;
-            }
+            // let logoX;
+            // if (model.mobile) {
+            //     logoX = 25;
+            // } else {
+            //     logoX = 30;
+            // }
             container.x = game.world.centerX;
             container.y = game.world.centerY;
+            let deltaY = (model.desktop) ? -460 : -310;
 
             if (model.mobile) {
                 if (model.state('gameSideLeft')) {
@@ -97,11 +97,14 @@ export let view = (() => {
                 }
             }
             // this.addDragon({});
-            let gameLogo = game.add.sprite(logoX, deltaY, 'gameLogo', null, container);
-                gameLogo.anchor.set(0.5);
-                gameLogo.scale.set(0.9);
+            let skyLogo = game.add.sprite(0, deltaY, 'skyLogo', null, container);
+            skyLogo.anchor.set(0.5);
+            model.el('skyLogo', skyLogo);
 
+            let gameLogo = game.add.sprite(25, deltaY, 'gameLogo', null, container);
+                gameLogo.anchor.set(0.5);
             model.el('gameLogo', gameLogo);
+
         },
 
         // addDragon: function ({
@@ -130,14 +133,22 @@ export let view = (() => {
             let gameMachine = model.el('gameMachine');
 
             let leftArr = [];
+            let leftArrBall = [];
             let rightArr = [];
+            let rightArrBall = [];
 
             for (let i = 1; i < 11; i++) {
                 let name = i;
-                let lineNumber = game.add.sprite(config[model.res].win[i][0].x - gameMachine.width / 2, config[model.res].win[i][0].y - gameMachine.height / 2 - 60, 'lineNumbers', 'line_splash-' + i +'_0.png', container);
-                lineNumber.normal = function() {lineNumber.frameName = 'line_splash-' + name + '_0.png'};
-                lineNumber.name = name;
+                let lineNumber = game.add.sprite(config[model.res].win[i][0].x - gameMachine.width / 2, config[model.res].win[i][0].y - gameMachine.height / 2 - 60, 'ball', null, container);
                 lineNumber.anchor.set(0.5);
+                lineNumber.name = name;
+
+                let lineNumberBig = game.add.sprite(config[model.res].win[i][0].x - gameMachine.width / 2, config[model.res].win[i][0].y - gameMachine.height / 2 - 60, 'lineNumbers', 'line_splash-' + i +'_0.png', container);
+                lineNumberBig.normal = function() {lineNumberBig.frameName = 'line_splash-' + name + '_0.png'};
+                lineNumberBig.name = name;
+                lineNumberBig.anchor.set(0.5);
+                lineNumberBig.visible = false;
+
                 lineNumber.inputEnabled = true;
                 lineNumber.input.priorityID = 2;
                 lineNumber.input.pixelPerfectOver = 1;
@@ -158,21 +169,26 @@ export let view = (() => {
                         lineNumber.lineShape.destroy();
                     }
                 });
-                leftArr.push(lineNumber);
+                leftArr.push(lineNumberBig);
+                leftArrBall.push(lineNumber);
             }
 
             model.el('leftArr', leftArr);
+            model.el('leftArrBall', leftArrBall);
 
 
             for (let i = 1; i < 11; i++) {
                 let name = i;
-                let lineNumber = game.add.sprite(
-                    config[model.res].win[i][1].x - gameMachine.width / 2,
-                    config[model.res].win[i][0].y - gameMachine.height / 2 - 60,
-                    'lineNumbers', 'line_splash-' + i +'_0.png', container);
-                lineNumber.normal = function() {lineNumber.frameName = 'line_splash-' + name + '_0.png'};
-                lineNumber.name = name;
+                let lineNumber = game.add.sprite(config[model.res].win[i][1].x - gameMachine.width / 2, config[model.res].win[i][1].y - gameMachine.height / 2 - 60, 'ball', null, container);
                 lineNumber.anchor.set(0.5);
+                lineNumber.name = name;
+
+                let lineNumberBig = game.add.sprite(config[model.res].win[i][1].x - gameMachine.width / 2, config[model.res].win[i][1].y - gameMachine.height / 2 - 60, 'lineNumbers', 'line_splash-' + i +'_0.png', container);
+                lineNumberBig.normal = function() {lineNumberBig.frameName = 'line_splash-' + name + '_0.png'};
+                lineNumberBig.name = name;
+                lineNumberBig.anchor.set(0.5);
+                lineNumberBig.visible = false;
+
                 lineNumber.inputEnabled = true;
                 lineNumber.input.priorityID = 2;
                 lineNumber.input.pixelPerfectOver = 1;
@@ -194,9 +210,11 @@ export let view = (() => {
                     }
                 });
 
-                rightArr.push(lineNumber);
+                rightArr.push(lineNumberBig);
+                rightArrBall.push(lineNumber);
             }
             model.el('rightArr', rightArr);
+            model.el('rightArrBall', rightArrBall);
         },
 
         lineShape: function(number) {
@@ -207,7 +225,7 @@ export let view = (() => {
             let lineShape = game.add.graphics(0, 0, container);
             lineShape
                 // .beginFill(0x000000)
-                .lineStyle(4, 0xfee73f, 0.8)
+                .lineStyle(4, 0xffffff, 0.8)
                 .moveTo((line[0].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[0].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + 50)
                 .lineTo((line[1].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[1].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + 50)
                 .lineTo((line[2].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[2].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + 50)
@@ -246,9 +264,10 @@ export let view = (() => {
             machineGroup = model.group('machine')
         }) {
             const elSize = config[model.res].elements;
+            let deltaY = (model.desktop) ? 32 : 18;
 
-            let someGraphic = game.add.graphics(-elSize.width * 2.5, -elSize.height * 1.5, machineGroup);
-                someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5, elSize.height * 3);
+            let someGraphic = game.add.graphics(-elSize.width * 2.5, -elSize.height * 1.5 - deltaY, machineGroup);
+                someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5, elSize.height * 3 + 100);
             machineGroup.mask = someGraphic;
         },
 

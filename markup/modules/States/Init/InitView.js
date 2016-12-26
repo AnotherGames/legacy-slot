@@ -26,16 +26,12 @@ export let view = (() => {
 
     function drawLogo() {
         const game = model.el('game');
-        let deltaY;
-        if (model.mobile) {
-            deltaY = 90;
-        } else {
-            deltaY = 150;
-        }
+        let deltaY = (model.desktop) ? 200 : 120;
+
         let initLogo = game.add.spine(game.world.centerX, game.world.centerY - deltaY, 'logo');
-        initLogo.setAnimationByName(0, '1', true);
+        initLogo.setAnimationByName(0, 'animation', true);
         if (model.mobile) {
-            initLogo.scale.set(0.9);
+            initLogo.scale.set(0.7);
         }
 
         model.el('initLogo', initLogo);
@@ -44,15 +40,26 @@ export let view = (() => {
 
     function drawPlay() {
         const game = model.el('game');
-        let y;
-        if (model.state('mobile')) {
-            y = game.height * 0.6;
-        } else {
-            y = game.height * 0.8;
-        }
+
+        let y = game.height * 0.6;
+        let deltaX1 = (model.desktop) ? 350 : 220;
+        let deltaX2 = (model.desktop) ? 230 : 150;
+
         let initPlay = game.add.sprite(game.world.centerX, y, 'text', 'play.png');
             initPlay.anchor.set(0.5);
             initPlay.scale.setTo(0.1, 0.1);
+
+        let wind1 = game.add.sprite(game.world.centerX - deltaX1, y + 30, 'wind1');
+            wind1.anchor.set(0.5);
+
+        let wind2 = game.add.sprite(game.world.centerX + deltaX2, y - 70, 'wind2');
+            wind1.anchor.set(0.5);
+
+        if (model.mobile) {
+            wind1.scale.set(0.7);
+            wind2.scale.set(0.7);
+        }
+
         let initPlayTween = game.add.tween(initPlay.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true);
         model.el('initPlay', initPlay);
         model.el('initPlayTween', initPlayTween);

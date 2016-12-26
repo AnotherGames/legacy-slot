@@ -11,10 +11,7 @@ export class Init {
         let game = model.el('game');
             game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
             game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-            //Воспроивзодит музыку но сама музыка не играет если не сделать такой костыль
-            // setTimeout(() => {
             soundController.music.playMusic('initFon');
-            // }, 100)
     }
 
     create() {
@@ -95,18 +92,23 @@ export class Init {
     drawSoundTrigger() {
         const game = model.el('game');
         let soundContainer = game.add.group();
-        soundContainer.position.set(game.width - 500, game.height - 100);
-        let style = { font: "bold 42px Arial", fill: "#f3eba0"};
+        soundContainer.position.set(game.width - 460, game.height - 100);
+
+        let background = game.add.graphics(0, 0);
+        background.beginFill(0x000000, 0.1);
+        background.drawRoundedRect(soundContainer.x - 30, soundContainer.y - 15, 470, 80, 40);
+
+        let style = { font: "bold 42px Arial", fill: "#0f607e"};
         let textSound = game.add.text(0, 0, "Sound:", style, soundContainer);
         this.styleOff = { font: "bold 42px Arial", fill: "#474747"};
         this.textOff = game.add.text(170, 0, "Off", style, soundContainer);
         this.textOff.setStyle(this.styleOff);
-        this.styleOn = { font: "bold 42px Arial", fill: "#b8ff31"};
+        this.styleOn = { font: "bold 42px Arial", fill: "#00b5da"};
         this.textOn = game.add.text(350, 0, "On", style, soundContainer);
         this.textOn.setStyle(this.styleOn);
 
         let graphics = game.add.graphics(0, 0);
-        graphics.beginFill(0x6da600, 1);
+        graphics.beginFill(0x0f607e, 1);
         graphics.drawRoundedRect(0, 0, 70, 30, 150);
 
         let sprite = game.add.sprite(290, 25, graphics.generateTexture(), null, soundContainer);
