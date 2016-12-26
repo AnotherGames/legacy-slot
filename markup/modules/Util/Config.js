@@ -28,7 +28,7 @@ export let config = {
             y: 0
         },
         panelMargin: {
-            x: 4,
+            x: -20,
             y: 100
         },
         elements: {

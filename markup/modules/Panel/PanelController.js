@@ -36,7 +36,7 @@ export let controller = (() => {
             stopButtonDesk.onInputDown.add(handle.stop);
 
         let autoButtonDesk = view.draw.AutoButton({});
-            autoButtonDesk.onInputDown.add(handle.auto);
+            // autoButtonDesk.onInputDown.add(handle.auto);
 
         let maxBetButtonDesk = view.draw.MaxBetButton({});
             maxBetButtonDesk.onInputDown.add(handle.maxBet);
@@ -52,11 +52,11 @@ export let controller = (() => {
             betLevelMinus.onInputDown.add(handle.betMinus);
             model.el('betLevelMinus', betLevelMinus);
 
-        let coinsLevelPlus = view.draw.PlusButton({x: 1107});
+        let coinsLevelPlus = view.draw.PlusButton({x: 760, y: 56});
             coinsLevelPlus.onInputDown.add(handle.coinsPlus);
             model.el('coinsLevelPlus', coinsLevelPlus);
 
-        let coinsLevelMinus = view.draw.MinusButton({x: 986});
+        let coinsLevelMinus = view.draw.MinusButton({x: 669, y: 57});
             coinsLevelMinus.onInputDown.add(handle.coinsMinus);
             model.el('coinsLevelMinus', coinsLevelMinus);
 

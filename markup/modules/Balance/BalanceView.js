@@ -97,17 +97,17 @@ export let view = (() => {
             betSumValue = model.balance('betSum'),
             coinValueAmount = model.balance('coinValue'),
             betValueAmount = model.balance('betValue'),
-            sumStyle = {font: '24px Helvetica, Arial', fill: '#e8b075', align: 'center'},
-            valueStyle = {font: '27px Helvetica, Arial', fill: '#e8b075', align: 'center'},
-            y = [53, 135],
-            x = [185, 245, 1070, 1185]
+            sumStyle = {font: '24px Helvetica, Arial', fill: '#fff', align: 'center'},
+            valueStyle = {font: '24px Helvetica, Arial', fill: '#fff', align: 'center'},
+            y = 79,
+            x = [150, 310, 727, 890]
         }) {
 
-            let coinSum = game.add.text(x[3], y[0], `${coinSumValue.toFixed(0)}`, sumStyle, container);
-            let betSum = game.add.text(x[0], y[0], `${betSumValue.toFixed(0)}`, sumStyle, container);
+            let coinSum = game.add.text(x[3], y, `${coinSumValue.toFixed(0)}`, sumStyle, container);
+            let betSum = game.add.text(x[0], y, `${betSumValue.toFixed(0)}`, sumStyle, container);
 
-            let coinValue = game.add.text(x[2], y[1], `${coinValueAmount}`, valueStyle, container);
-            let betValue = game.add.text(x[1], y[1], `${betValueAmount}`, valueStyle, container);
+            let coinValue = game.add.text(x[2], y, `${coinValueAmount}`, valueStyle, container);
+            let betValue = game.add.text(x[1], y, `${betValueAmount}`, valueStyle, container);
 
             model.el('coinSum', coinSum);
             model.el('betSum', betSum);

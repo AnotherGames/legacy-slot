@@ -36,7 +36,7 @@ export let view = (() => {
 
         SpinButton: function({
             game = model.el('game'),
-            x = model.group('panel').width / 2,
+            x = model.group('panel').width / 2 + 20,
             y = 60,
             container = model.group('panel')
         }) {
@@ -97,8 +97,8 @@ export let view = (() => {
         PlusButton: function({
             game = model.el('game'),
             container = model.group('panel'),
-            x = 273,
-            y = 108,
+            x = 344,
+            y = 57,
         }) {
             let plusButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'plusOn.png', 'plus.png', 'plusOn.png', null, container);
             return plusButtonDesk;
@@ -107,8 +107,8 @@ export let view = (() => {
         MinusButton: function({
             game = model.el('game'),
             container = model.group('panel'),
-            x = 175,
-            y = 108
+            x = 251,
+            y = 58
         }) {
             let minusButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'minusOn.png', 'minus.png', 'minusOn.png', null, container);
             return minusButtonDesk;
@@ -312,30 +312,30 @@ export let view = (() => {
 
     function lockButtons() {
 
-        let infoButtonDesk = model.el('infoButtonDesk');
-            infoButtonDesk.frameName = 'info.png';
-            infoButtonDesk.freezeFrames = true;
-            infoButtonDesk.alpha = 0.5;
+        // let infoButtonDesk = model.el('infoButtonDesk');
+        //     infoButtonDesk.frameName = 'info.png';
+        //     infoButtonDesk.freezeFrames = true;
+        //     infoButtonDesk.alpha = 0.5;
         let maxBetButtonDesk = model.el('maxBetButtonDesk');
-            maxBetButtonDesk.frameName = 'maxBet.png';
+            maxBetButtonDesk.frameName = 'maxBetFreeze.png';
             maxBetButtonDesk.freezeFrames = true;
-            maxBetButtonDesk.alpha = 0.5;
+            // maxBetButtonDesk.alpha = 0.5;
         let betLevelPlus = model.el('betLevelPlus');
-            betLevelPlus.frameName = 'plus.png';
+            betLevelPlus.frameName = 'plusFreeze.png';
             betLevelPlus.freezeFrames = true;
-            betLevelPlus.alpha = 0.5;
+            // betLevelPlus.alpha = 0.5;
         let betLevelMinus = model.el('betLevelMinus');
-            betLevelMinus.frameName = 'minus.png';
+            betLevelMinus.frameName = 'minusFreeze.png';
             betLevelMinus.freezeFrames = true;
-            betLevelMinus.alpha = 0.5;
+            // betLevelMinus.alpha = 0.5;
         let coinsLevelPlus = model.el('coinsLevelPlus');
-            coinsLevelPlus.frameName = 'plus.png';
+            coinsLevelPlus.frameName = 'plusFreeze.png';
             coinsLevelPlus.freezeFrames = true
-            coinsLevelPlus.alpha = 0.5;
+            // coinsLevelPlus.alpha = 0.5;
         let coinsLevelMinus = model.el('coinsLevelMinus');
-            coinsLevelMinus.frameName = 'minus.png';
+            coinsLevelMinus.frameName = 'minusFreeze.png';
             coinsLevelMinus.freezeFrames = true;
-            coinsLevelMinus.alpha = 0.5;
+            // coinsLevelMinus.alpha = 0.5;
         if(model.state('autoplay:start')){
             let spinButtonDesk = model.el('spinButtonDesk');
                 spinButtonDesk.visible = false;
@@ -348,8 +348,8 @@ export let view = (() => {
                 autoButtonDesk.freezeFrames = true;
         } else {
             let autoButtonDesk = model.el('autoButtonDesk');
-            autoButtonDesk.frameName = 'auto.png';
-            autoButtonDesk.alpha = 0.5;
+            autoButtonDesk.frameName = 'autoEmpty.png';
+            // autoButtonDesk.alpha = 0.5;
             autoButtonDesk.freezeFrames = true;
         }
 
@@ -358,10 +358,10 @@ export let view = (() => {
     function unlockButtons() {
         if(model.state('autoplay:start')) return;
 
-        let infoButtonDesk = model.el('infoButtonDesk');
-            infoButtonDesk.frameName = 'info.png';
-            infoButtonDesk.freezeFrames = false;
-            infoButtonDesk.alpha = 1;
+        // let infoButtonDesk = model.el('infoButtonDesk');
+        //     infoButtonDesk.frameName = 'info.png';
+        //     infoButtonDesk.freezeFrames = false;
+        //     infoButtonDesk.alpha = 1;
         let maxBetButtonDesk = model.el('maxBetButtonDesk');
             maxBetButtonDesk.frameName = 'maxBet.png';
             maxBetButtonDesk.freezeFrames = false;
