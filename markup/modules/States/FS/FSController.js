@@ -188,6 +188,8 @@ export class FS {
 
         // Играем фоновую музыку
         soundController.music.stopMusic('startPerehod');
+        soundController.music.stopMusic('fon');
+        soundController.music.stopMusic('initFon');
         soundController.music.playMusic('fsFon');
 
         // Отрисовуем основной контейнер
