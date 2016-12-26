@@ -44,6 +44,7 @@ export class Main {
         game.camera.flash(0x000000, 777)
 
         soundController.music.stopMusic('finishPerehod');
+        soundController.music.stopMusic('fsFon');
         soundController.music.stopMusic('initFon');
         // Играем фоновую музыку
 
