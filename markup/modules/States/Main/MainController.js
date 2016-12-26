@@ -41,6 +41,7 @@ export class Main {
     create() {
         let game = model.el('game');
         soundController.music.stopMusic('finishPerehod');
+        soundController.music.stopMusic('fsFon');
         soundController.music.stopMusic('initFon');
         // Играем фоновую музыку
 
