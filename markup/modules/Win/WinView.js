@@ -42,31 +42,37 @@ export let view = (() => {
                 return el.name === number;
             })[0];
 
+            // winNumber.visible = true
+            game.add.tween(winNumber).to({alpha: 1}, 300, 'Linear', true);
+
             let winSplash = game.add.sprite(winNumber.x, winNumber.y, 'splash', null, container);
             winSplash.anchor.set(0.5);
-            winSplash.animations.add('win', null, 15, false);
-            winSplash.animations.play('win');
-            winSplash.animations.getAnimation('win').onComplete.add(() => {
-                // if (winNumber.frameName = 'line_splash-' + number + '_0.png') {
-                    winNumber.visible = true;
-                // };
-            });
-
+            let winSplashAnim = winSplash.animations.add('win', null, 15, false);
+            winSplashAnim.play();
+            // winSplashAnim.onComplete.add(() => {winNumber.visible = true}, this);
+            // winSplash.animations.getAnimation('win').onComplete.add(() => {
+            //     // if (winNumber.frameName = 'line_splash-' + number + '_0.png') {
+            //         winNumber.visible = true;
+            //     // };
+            // });
 
             let rightArr = model.el('rightArr');
             let winNumberRight = rightArr.filter((el) => {
                 return el.name === number;
             })[0];
 
+            // winNumberRight.visible = true
+            game.add.tween(winNumberRight).to({alpha: 1}, 300, 'Linear', true);
+
             let winSplashRight = game.add.sprite(winNumberRight.x, winNumberRight.y, 'splash', null, container);
             winSplashRight.anchor.set(0.5);
             winSplashRight.animations.add('win', null, 15, false);
             winSplashRight.animations.play('win');
-            winSplashRight.animations.getAnimation('win').onComplete.add(() => {
-                // if (winNumberRight.frameName = 'line_splash-' + number + '_0.png') {
-                    winNumberRight.visible = true;
-                // };
-            });
+            // winSplashRight.animations.getAnimation('win').onComplete.add(() => {
+            //     // if (winNumberRight.frameName = 'line_splash-' + number + '_0.png') {
+            //         winNumberRight.visible = true;
+            //     // };
+            // });
         },
 
         WinNumber: function ({number}) {

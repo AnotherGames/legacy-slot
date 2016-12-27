@@ -87,9 +87,7 @@ export let view = (() => {
             let gameMachine = model.el('gameMachine');
 
             let leftArr = [];
-            let leftArrBall = [];
             let rightArr = [];
-            let rightArrBall = [];
 
             for (let i = 1; i < 11; i++) {
                 let name = i;
@@ -98,10 +96,10 @@ export let view = (() => {
                 lineNumber.name = name;
 
                 let lineNumberBig = game.add.sprite(config[model.res].win[i][0].x - gameMachine.width / 2, config[model.res].win[i][0].y - gameMachine.height / 2 - 60, 'lineNumbers', 'line_splash-' + i +'_0.png', container);
-                lineNumberBig.normal = function() {lineNumberBig.frameName = 'line_splash-' + name + '_0.png'};
+                lineNumberBig.normal = function() {game.add.tween(lineNumberBig).to({alpha: 0}, 300, 'Linear', true);};
                 lineNumberBig.name = name;
                 lineNumberBig.anchor.set(0.5);
-                lineNumberBig.visible = false;
+                lineNumberBig.alpha = 0;
 
                 lineNumber.inputEnabled = true;
                 lineNumber.input.priorityID = 2;
@@ -109,11 +107,14 @@ export let view = (() => {
                 lineNumber.events.onInputOver.add(() => {
                     if (lineNumber.lineShape) {
                         lineNumber.lineShape.destroy();
+                        lineNumberBig.alpha = 0;
                     }
                     lineNumber.lineShape = this.lineShape(lineNumber.name);
+                    lineNumberBig.alpha = 1;
                     setTimeout(() => {
                         if (lineNumber.lineShape) {
                             lineNumber.lineShape.destroy();
+                            lineNumberBig.alpha = 0;
                         }
                     }, 10000);
                 });
@@ -121,15 +122,14 @@ export let view = (() => {
                 lineNumber.events.onInputOut.add(() => {
                     if (lineNumber.lineShape) {
                         lineNumber.lineShape.destroy();
+                        lineNumberBig.alpha = 0;
                     }
                 });
                 leftArr.push(lineNumberBig);
-                leftArrBall.push(lineNumber);
+
             }
 
             model.el('leftArr', leftArr);
-            model.el('leftArrBall', leftArrBall);
-
 
             for (let i = 1; i < 11; i++) {
                 let name = i;
@@ -138,10 +138,10 @@ export let view = (() => {
                 lineNumber.name = name;
 
                 let lineNumberBig = game.add.sprite(config[model.res].win[i][1].x - gameMachine.width / 2, config[model.res].win[i][1].y - gameMachine.height / 2 - 60, 'lineNumbers', 'line_splash-' + i +'_0.png', container);
-                lineNumberBig.normal = function() {lineNumberBig.frameName = 'line_splash-' + name + '_0.png'};
+                lineNumberBig.normal = function() {game.add.tween(lineNumberBig).to({alpha: 0}, 300, 'Linear', true);};
                 lineNumberBig.name = name;
                 lineNumberBig.anchor.set(0.5);
-                lineNumberBig.visible = false;
+                lineNumberBig.alpha = 0;
 
                 lineNumber.inputEnabled = true;
                 lineNumber.input.priorityID = 2;
@@ -149,11 +149,14 @@ export let view = (() => {
                 lineNumber.events.onInputOver.add(() => {
                     if (lineNumber.lineShape) {
                         lineNumber.lineShape.destroy();
+                        lineNumberBig.alpha = 0;
                     }
                     lineNumber.lineShape = this.lineShape(lineNumber.name);
+                    lineNumberBig.alpha = 1;
                     setTimeout(() => {
                         if (lineNumber.lineShape) {
                             lineNumber.lineShape.destroy();
+                            lineNumberBig.alpha = 0;
                         }
                     }, 10000);
                 });
@@ -161,14 +164,15 @@ export let view = (() => {
                 lineNumber.events.onInputOut.add(() => {
                     if (lineNumber.lineShape) {
                         lineNumber.lineShape.destroy();
+                        lineNumberBig.alpha = 0;
                     }
                 });
 
                 rightArr.push(lineNumberBig);
-                rightArrBall.push(lineNumber);
+
             }
             model.el('rightArr', rightArr);
-            model.el('rightArrBall', rightArrBall);
+
         },
 
         lineShape: function(number) {
@@ -185,6 +189,7 @@ export let view = (() => {
                 .lineTo((line[2].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[2].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + 50)
                 .lineTo((line[3].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[3].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + 50)
                 .lineTo((line[4].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[4].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + 50)
+
             return lineShape;
         },
 

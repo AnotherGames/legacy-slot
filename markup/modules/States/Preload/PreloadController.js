@@ -56,6 +56,7 @@ export class Preload {
         game.load.image('transitionBG', 'bg/transitionBG.png');
         game.load.image('upperBG', 'bg/upperBG.png');
         game.load.image('BG', 'bg/BG.png');
+        game.load.image('snow', 'bg/snow.png');
         game.load.image('wind1', 'bg/wind1.png');
         game.load.image('wind2', 'bg/wind2.png');
         game.load.image('gameMachine', 'game/gameMachine.png');
