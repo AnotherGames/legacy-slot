@@ -48,7 +48,7 @@ export let controller = (() => {
         // Для каждой линии проигрываем символы, глисты и номерки
         winLines.forEach((winLine) => {
             view.draw.WinNumber({number: winLine.Line});
-            view.draw.WinElements({number: winLine.Line, amount: winLine.Count});
+            view.draw.WinElements({number: winLine.Line, amount: winLine.Count, symbol: winLine.Symbol});
             view.draw.WinGlista({number: winLine.Line});
         });
         // Запускаем таймер для показа линий одна за другой

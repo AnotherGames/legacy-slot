@@ -63,13 +63,17 @@ export class Element {
         this.activeSprite.animations.play(animation);
     }
 
-    win() {
+    win(infinite) {
         // Проигрывам выигрышную анимацию
-        this.play(`${this.active}-w`);
-        this.activeSprite.animations.currentAnim.onComplete.add(() => {
-            // После которой опять играем нормальную анимацию
-            this.play(`${this.active}-n`);
-        });
+        if (!infinite) {
+            this.play(`${this.active}-w`);
+            this.activeSprite.animations.currentAnim.onComplete.add(() => {
+                // После которой опять играем нормальную анимацию
+                this.play(`${this.active}-n`);
+            });
+        } else {
+            this.play(`${this.active}-w`, 15, true);
+        }
     }
 
     hide() {

@@ -1,5 +1,6 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
+import { request } from 'modules/Util/Request';
 import { Glista } from 'modules/Class/Glista';
 
 import { controller as soundController } from 'modules/Sound/SoundController';
@@ -86,6 +87,7 @@ export let view = (() => {
         WinElements: function ({
             number,
             amount,
+            symbol,
             alpha = false,
             wheels = model.el('wheels'),
             game = model.el('game')
@@ -122,8 +124,8 @@ export let view = (() => {
                 wheels.forEach((wheelObj) => {
                     wheelObj.elements.forEach((element) => {
                         let elementName = parseInt(element.sprites[element.active - 1].animations.currentAnim.name);
-                        // Показываем выигрышные скаттеры
-                        if (elementName == '10') {
+                        // Показываем выигрышные скаттеры (Крампус)
+                        if (elementName == '10' && symbol == '10') {
                             element.win();
                             element.group.scale.set(0.3);
                             game.add.tween(element.group.scale).to({x: 1.2,  y: 1.2}, 700, Phaser.Easing.Bounce.Out, true)
@@ -134,6 +136,42 @@ export let view = (() => {
                             game.time.events.add(1000, () => {
                                 winController.cleanWin();
                             });
+                        }
+                        // Показываем выигрышную коробку (Коробка)
+                        if (elementName == '11' && symbol == '11') {
+                            element.win(true);
+                            element.group.scale.set(0.3);
+                            game.add.tween(element.group.scale).to({x: 1.2,  y: 1.2}, 700, Phaser.Easing.Bounce.Out, true)
+                                .onComplete.add(() => {
+                                    game.add.tween(element.group.scale).to({x: 1.0,  y: 1.0}, 400, 'Linear', true)
+                                }, this);
+
+
+                                if (model.state('ready')) {
+                                    request.send('Roll').then((data) => {
+                                        let winCoins = data.Balance.TotalWinCoins;
+                                        let winCents = data.Balance.TotalWinCents;
+                                        request.send('Ready').then(() => {
+                                            // TODO: Написать тескт битмепом, типа +60
+                                            draw.TotalWin({
+                                                winTotalData: winCoins
+                                            });
+                                        });
+                                    });
+                                } else {
+                                    setTimeout(() => {
+                                        request.send('Roll').then((data) => {
+                                            let winCoins = data.Balance.TotalWinCoins;
+                                            let winCents = data.Balance.TotalWinCents;
+                                            request.send('Ready').then(() => {
+                                                draw.TotalWin({
+                                                    winTotalData: winCoins
+                                                });
+                                                model.updateBalance({endRoll: true});
+                                            });
+                                        });
+                                    }, 300);
+                                }
 
                         }
                     });
@@ -183,7 +221,6 @@ export let view = (() => {
 
             return glista;
         },
-
 
         WinLineTable: function({
             line,
