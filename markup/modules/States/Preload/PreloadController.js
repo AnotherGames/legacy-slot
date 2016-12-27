@@ -85,6 +85,7 @@ export class Preload {
             game.load.image('ui', 'game/UI.png');
             game.load.image('uiFS', 'game/UI_FS.png');
             game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
+            game.load.atlasJSONArray('deskButtonsAnim', 'desk_buttons/deskButtonsAnim.png', 'desk_buttons/deskButtonsAnim.json');
             game.load.image('autoSelect', 'desk_buttons/autoSelect.png');
         }
         if (model.mobile) {
