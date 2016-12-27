@@ -57,6 +57,8 @@ export class Preload {
         game.load.image('upperBG', 'bg/upperBG.png');
         game.load.image('BG', 'bg/BG.png');
         game.load.image('snow', 'bg/snow.png');
+        game.load.spritesheet('snowflakes', 'bg/snow2.png', 17, 17);
+        game.load.spritesheet('snowflakes_large', 'bg/snow3.png', 64, 64);
         game.load.image('wind1', 'bg/wind1.png');
         game.load.image('wind2', 'bg/wind2.png');
         game.load.image('gameMachine', 'game/gameMachine.png');
@@ -113,6 +115,7 @@ export class Preload {
         game.load.spine('logo', 'spine/skeleton.json');
         game.load.spine('tree', 'spine/iolka.json');
         game.load.spine('krampus', 'spine/krampus.json');
+        game.load.spine('stars', 'spine/stars.json');
 
     }
 

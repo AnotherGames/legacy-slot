@@ -49,6 +49,8 @@ export class Main {
 
         // Отрисовуем основной контейнер
         mainView.draw.mainBG({});
+        mainView.draw.addStars({});
+        mainView.draw.addSnow({});
         mainView.draw.mainContainer({});
         mainView.draw.machineContainer({});
         mainView.draw.lineNumbers({});

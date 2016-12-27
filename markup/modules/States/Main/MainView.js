@@ -80,6 +80,86 @@ export let view = (() => {
 
         },
 
+        addStars: function ({
+            game = model.el('game'),
+            container = model.group('bg')
+        }) {
+            let starsBG = game.add.spine(game.world.centerX, game.world.centerY, 'stars');
+            starsBG.setAnimationByName(0, 'animation', true);
+            if(model.mobile) {
+                starsBG.scale.set(0.6);
+            }
+            container.add(starsBG);
+
+            model.el('starsBG', starsBG);
+        },
+
+        //test
+        addEmitter: function ({
+            game = model.el('game'),
+            container = model.group('main')
+        }) {
+
+            let emitter = game.add.emitter(0, 0, 300);
+            // container.add(emitter);
+            emitter.makeParticles('snow');
+
+            emitter.setRotation(0, 0);
+            emitter.setAlpha(0.1, 1, 3000);
+            emitter.setScale(0.1, 0.5, 0.1, 0.5, 6000, Phaser.Easing.Quintic.Out);
+            emitter.gravity = 300;
+
+            emitter.start(false, 3000, 10);
+
+            emitter.emitX = 0;
+
+            game.add.tween(emitter).to( { emitX: game.width }, 1000, Phaser.Easing.Linear.None, true, 0, Number.MAX_VALUE, true);
+
+        },
+
+        addSnow: function ({
+            game = model.el('game'),
+            container = model.group('main')
+        }) {
+            let back_emitter = game.add.emitter(-500, -500, 600);
+                back_emitter.makeParticles('snowflakes', [0, 1, 2, 3, 4, 5]);
+                back_emitter.maxParticleScale = 0.6;
+                back_emitter.minParticleScale = 0.2;
+                back_emitter.setYSpeed(20, 100);
+                back_emitter.gravity = 0;
+                back_emitter.width = game.world.width * 1.5;
+                back_emitter.minRotation = 0;
+                back_emitter.maxRotation = 40;
+
+            let mid_emitter = game.add.emitter(-500, -500, 250);
+                mid_emitter.makeParticles('snowflakes', [0, 1, 2, 3, 4, 5]);
+                mid_emitter.maxParticleScale = 1.2;
+                mid_emitter.minParticleScale = 0.8;
+                mid_emitter.setYSpeed(50, 150);
+                mid_emitter.gravity = 0;
+                mid_emitter.width = game.world.width * 1.5;
+                mid_emitter.minRotation = 0;
+                mid_emitter.maxRotation = 40;
+
+            let front_emitter = game.add.emitter(-500, -500, 50);
+                front_emitter.makeParticles('snowflakes_large', [0, 1, 2, 3, 4, 5]);
+                front_emitter.maxParticleScale = 1;
+                front_emitter.minParticleScale = 0.5;
+                front_emitter.setYSpeed(100, 200);
+                front_emitter.gravity = 0;
+                front_emitter.width = game.world.width * 1.5;
+                front_emitter.minRotation = 0;
+                front_emitter.maxRotation = 40;
+
+            container.add(back_emitter);
+            container.add(mid_emitter);
+            container.add(front_emitter);
+
+            back_emitter.start(false, 14000, 20);
+            mid_emitter.start(false, 12000, 40);
+            front_emitter.start(false, 15000, 1000);
+        },
+
         lineNumbers: function ({
             game = model.el('game'),
             container = model.group('main')
