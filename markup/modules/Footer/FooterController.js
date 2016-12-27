@@ -75,7 +75,7 @@ export let controller = (() => {
                     game.add.tween(buttons[i]).to({
                             y: y,
                             alpha: 0
-                        }, 250, 'Linear', true)
+                        }, 250, Phaser.Easing.Back.Out, true)
                         .onComplete.add(() => {
                             buttons[i].visible = false;
                         });

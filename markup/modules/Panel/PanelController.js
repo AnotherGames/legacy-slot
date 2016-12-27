@@ -1,5 +1,6 @@
 import { model } from 'modules/Model/Model';
 import { view } from 'modules/Panel/PanelView';
+import { view as mainView } from 'modules/States/Main/MainView';
 
 import { controller as soundController } from 'modules/Sound/SoundController';
 import { controller as autoplayController } from 'modules/Autoplay/AutoplayController';
@@ -11,17 +12,7 @@ export let controller = (() => {
         let game = model.el('game');
         view.draw.PanelBG({});
         // view.draw.LinesNumber({});
-        view.draw.AutoContainer({});
-        view.draw.AutoPanel({}).forEach((panelButton) => {
-            panelButton.inputEnabled = true;
-            panelButton.events.onInputUp.add(handle.panelButton, panelButton);
-            panelButton.events.onInputOver.add(()=>{
-                panelButton.events.onInputUp.active = true;
-            }, panelButton);
-            panelButton.events.onInputOut.add(()=>{
-                panelButton.events.onInputUp.active = false;
-            }, panelButton);
-        });
+
 
         let spinButtonDesk = view.draw.SpinButton({});
             spinButtonDesk.events.onInputUp.add(handle.spin);
@@ -36,13 +27,23 @@ export let controller = (() => {
             stopButtonDesk.onInputDown.add(handle.stop);
 
         let autoButtonDesk = view.draw.AutoButton({});
-            // autoButtonDesk.onInputDown.add(handle.auto);
+            autoButtonDesk.onInputDown.add(handle.auto);
 
         let maxBetButtonDesk = view.draw.MaxBetButton({});
             maxBetButtonDesk.onInputDown.add(handle.maxBet);
 
-        // let infoButtonDesk = view.draw.InfoButton({});
-        //     infoButtonDesk.onInputDown.add(handle.info);
+            view.draw.AnimatedSpinButton({});
+            view.draw.AutoContainer({});
+            view.draw.AutoPanel({}).forEach((panelButton) => {
+                panelButton.inputEnabled = true;
+                panelButton.events.onInputUp.add(handle.panelButton, panelButton);
+                panelButton.events.onInputOver.add(()=>{
+                    panelButton.events.onInputUp.active = true;
+                }, panelButton);
+                panelButton.events.onInputOut.add(()=>{
+                    panelButton.events.onInputUp.active = false;
+                }, panelButton);
+            });
 
         let betLevelPlus = view.draw.PlusButton({});
             betLevelPlus.onInputDown.add(handle.betPlus);
@@ -77,12 +78,12 @@ export let controller = (() => {
             }
             if (model.state('buttons:locked')) return;
 
-            soundController.sound.playSound({sound : 'buttonClick'});
-            if (!model.state('autoplay:panelClosed')) {
-                model.state('autoplay:panelClosed', true);
-                view.hide.autoButton({});
-                view.hide.autoPanel({});
-            }
+            // soundController.sound.playSound({sound : 'buttonClick'});
+            // if (!model.state('autoplay:panelClosed')) {
+            //     model.state('autoplay:panelClosed', true);
+            //     view.hide.autoButton({});
+            //     view.hide.autoPanel({});
+            // }
 
             let game = model.el('game');
             game.input.keyboard.enabled = false;
@@ -104,15 +105,31 @@ export let controller = (() => {
             || model.state('roll:progress')
             || model.state('buttons:locked')) return;
             soundController.sound.playSound({sound : 'buttonClick'});
+            let animatedSpinButton = model.el('animatedSpinButton');
+            let spinButton = model.el('spinButtonDesk');
+            let autoDesktopContainer = model.el('autoDesktopContainer');
 
             if (model.state('autoplay:panelClosed') && !model.data('remainAutoCount')) {
                 model.state('autoplay:panelClosed', false);
-                view.show.autoButton({});
-                view.show.autoPanel({});
+                animatedSpinButton.visible = true;
+                spinButton.visible = false;
+                animatedSpinButton.animations.play('spinToPanel')
+                    .onComplete.add(()=>{
+                        autoDesktopContainer.visible = true;
+                        animatedSpinButton.frameName = 'button-2_4.png';
+                    });
+                // view.show.autoButton({});
+                // view.show.autoPanel({});
             } else {
                 model.state('autoplay:panelClosed', true);
-                view.hide.autoButton({});
-                view.hide.autoPanel({});
+                autoDesktopContainer.visible = false;
+                animatedSpinButton.animations.play('panelToStop')
+                    .onComplete.add(()=>{
+                        spinButton.visible = true;
+                        animatedSpinButton.visible = false;
+                    });
+                // view.hide.autoButton({});
+                // view.hide.autoPanel({});
             }
         },
 
@@ -170,9 +187,18 @@ export let controller = (() => {
 
             let autoButtonDesk = model.el('autoButtonDesk');
             const amount = this.amount;
-            if (autoButtonDesk.x > 370) return;
-            view.hide.autoButton({});
-            view.hide.autoPanel({});
+            // if (autoButtonDesk.x > 370) return;
+            // view.hide.autoButton({});
+            // view.hide.autoPanel({});
+            let stopButtonDesk = model.el('stopButtonDesk');
+            let animatedSpinButton = model.el('animatedSpinButton');
+
+
+                animatedSpinButton.animations.play('panelToStop')
+                    .onComplete.add(()=>{
+                        stopButtonDesk.visible = true
+                    })
+
             autoplayController.start(amount);
         }
 

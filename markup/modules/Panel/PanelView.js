@@ -29,9 +29,26 @@ export let view = (() => {
             let autoDesktopContainer = game.add.group();
                 autoDesktopContainer.x = x;
                 autoDesktopContainer.y = y;
-                // autoDesktopContainer.alpha = 1;
+                autoDesktopContainer.visible = false;
+
+            model.el('autoDesktopContainer', autoDesktopContainer)
             model.group('autoDesktop', autoDesktopContainer);
             model.group('panel').add(autoDesktopContainer);
+        },
+
+        AnimatedSpinButton: function({
+            game = model.el('game'),
+            x = model.group('panel').width / 2 + 20,
+            y = 65,
+            container = model.group('panel')
+        }) {
+            let animatedSpinButton = game.add.sprite(x, y, 'deskButtonsAnim', null, container);
+                animatedSpinButton.anchor.set(0.5);
+                animatedSpinButton.visible = false;
+                animatedSpinButton.animations.add(`spinToPanel`, Phaser.Animation.generateFrameNames(`button-1_`, 0, 22, '.png', 1), 120, false);
+                animatedSpinButton.animations.add(`panelToStop`, Phaser.Animation.generateFrameNames(`button-2_`, 0, 22, '.png', 1), 120, false);
+                animatedSpinButton.animations.add(`stopToSpin`, Phaser.Animation.generateFrameNames(`button-3_`, 0, 22, '.png', 1), 120, false);
+            model.el('animatedSpinButton', animatedSpinButton);
         },
 
         SpinButton: function({
@@ -42,7 +59,7 @@ export let view = (() => {
         }) {
             let spinButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'spinOn.png', 'spin.png', 'spinOn.png', null, container);
                 spinButtonDesk.anchor.set(0.5);
-                // spinButtonDesk.visible = false;
+                // spinButtonDesk.visible = true;
             model.el('spinButtonDesk', spinButtonDesk);
             return spinButtonDesk;
         },
@@ -56,6 +73,7 @@ export let view = (() => {
             let stopButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'stopOn.png', 'stop.png', 'stopOn.png', null, container);
                 stopButtonDesk.anchor.set(0.5);
                 stopButtonDesk.visible = false;
+                stopButtonDesk.visible.false;
             model.el('stopButtonDesk', stopButtonDesk);
             return stopButtonDesk;
         },
@@ -131,9 +149,9 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('autoDesktop')
         }) {
-            let autoplayBG = game.add.sprite(0, 0, 'autoSelect', null, container);
-                autoplayBG.anchor.set(0.5);
-            model.el('autoplayBG', autoplayBG);
+            // let autoplayBG = game.add.sprite(0, 0, 'autoSelect', null, container);
+            //     autoplayBG.anchor.set(0.5);
+            // model.el('autoplayBG', autoplayBG);
 
             let autoBG10 = this._AutoPanelItem({text: 10, x: -56, y: -39, width: 50, height: 30});
             let autoBG25 = this._AutoPanelItem({text: 25, x: 3, y: -39, width: 50, height: 30});
@@ -162,7 +180,7 @@ export let view = (() => {
             y = -62,
             width = 70,
             height = 37,
-            font = 'normal 24px Arial',
+            font = 'normal 22px Arial',
             color = '#e8b075',
             shadowColor = '#e8b075'
         }) {
@@ -247,6 +265,12 @@ export let view = (() => {
         }) {
             let autoDesktopContainer = model.group('autoDesktop');
             return game.add.tween(autoDesktopContainer).to( { x: finalX }, time, 'Linear', true)
+        },
+
+        spinButton: function({
+
+        }) {
+
         }
 
     }
@@ -268,6 +292,12 @@ export let view = (() => {
         }) {
             let autoDesktopContainer = model.group('autoDesktop');
             return game.add.tween(autoDesktopContainer).to( { x: finalX }, time, 'Linear', true)
+        },
+
+        spinButton: function({
+
+        }){
+
         }
     }
 
