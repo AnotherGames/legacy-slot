@@ -32,18 +32,23 @@ export let controller = (() => {
         let maxBetButtonDesk = view.draw.MaxBetButton({});
             maxBetButtonDesk.onInputDown.add(handle.maxBet);
 
-            view.draw.AnimatedSpinButton({});
-            view.draw.AutoContainer({});
-            view.draw.AutoPanel({}).forEach((panelButton) => {
-                panelButton.inputEnabled = true;
-                panelButton.events.onInputUp.add(handle.panelButton, panelButton);
-                panelButton.events.onInputOver.add(()=>{
-                    panelButton.events.onInputUp.active = true;
-                }, panelButton);
-                panelButton.events.onInputOut.add(()=>{
-                    panelButton.events.onInputUp.active = false;
-                }, panelButton);
-            });
+        if (model.desktop) {
+            let sugrob = game.add.sprite(model.group('panel').width / 2 + 20, 115, 'sugrob', null, model.group('panel'));
+            sugrob.anchor.set(0.5);
+        }
+
+        view.draw.AnimatedSpinButton({});
+        view.draw.AutoContainer({});
+        view.draw.AutoPanel({}).forEach((panelButton) => {
+            panelButton.inputEnabled = true;
+            panelButton.events.onInputUp.add(handle.panelButton, panelButton);
+            panelButton.events.onInputOver.add(()=>{
+                panelButton.events.onInputUp.active = true;
+            }, panelButton);
+            panelButton.events.onInputOut.add(()=>{
+                panelButton.events.onInputUp.active = false;
+            }, panelButton);
+        });
 
         let betLevelPlus = view.draw.PlusButton({});
             betLevelPlus.onInputDown.add(handle.betPlus);

@@ -52,6 +52,13 @@ export let view = (() => {
             let upperBG = game.add.sprite(0, 50, 'upperBG', null, container);
                 upperBG.anchor.set(0.5);
             model.el('upperBG', upperBG);
+
+            if (model.desktop) {
+                let el = game.add.sprite(520, 510, 'el', null, container);
+                el.anchor.set(0.5);
+                model.el('el', el);
+            }
+
         },
 
         logo: function({
@@ -306,7 +313,7 @@ export let view = (() => {
             let deltaY = (model.desktop) ? 32 : 18;
 
             let someGraphic = game.add.graphics(-elSize.width * 2.5, -elSize.height * 1.5 - deltaY, machineGroup);
-                someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5, elSize.height * 3 + 100);
+                someGraphic.beginFill(0xffffff).drawRect(-100, 0, elSize.width * 5 + 200, elSize.height * 3 + 100);
             machineGroup.mask = someGraphic;
         },
 

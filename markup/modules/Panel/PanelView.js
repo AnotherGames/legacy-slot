@@ -17,6 +17,9 @@ export let view = (() => {
             container.y = y;
             let panelBG = game.add.sprite(0, deltaY, frameName, null, container);
 
+            let convert = game.add.sprite(985, 77, 'convert', null, container);
+            convert.anchor.set(0.5);
+
             container.pivot.set(panelBG.width / 2, 0);
             return panelBG;
         },
@@ -61,6 +64,7 @@ export let view = (() => {
             let spinButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'spinOn.png', 'spin.png', 'spinOn.png', null, container);
                 spinButtonDesk.anchor.set(0.5);
             model.el('spinButtonDesk', spinButtonDesk);
+
             return spinButtonDesk;
         },
 

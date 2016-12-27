@@ -61,8 +61,9 @@ export class Preload {
         game.load.spritesheet('snowflakes_large', 'bg/snow3.png', 64, 64);
         game.load.image('wind1', 'bg/wind1.png');
         game.load.image('wind2', 'bg/wind2.png');
+        game.load.image('el', 'bg/el.png');
+        game.load.image('sugrob', 'bg/sugrob.png');
         game.load.image('gameMachine', 'game/gameMachine.png');
-        // game.load.image('sticks', 'bg/palki.png');
         game.load.image('gameBG', 'game/gameBG.png');
         game.load.image('skyLogo', 'game/skyLogo.png');
         game.load.image('gameLogo', 'game/gmLogo.png');
@@ -87,6 +88,7 @@ export class Preload {
         if (model.desktop) {
             game.load.image('ui', 'game/UI.png');
             game.load.image('uiFS', 'game/UI_FS.png');
+            game.load.image('convert', 'game/convert.png');
             game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
             game.load.atlasJSONArray('deskButtonsAnim', 'desk_buttons/deskButtonsAnim.png', 'desk_buttons/deskButtonsAnim.json');
             game.load.image('autoSelect', 'desk_buttons/autoSelect.png');
