@@ -258,6 +258,9 @@ export let view = (() => {
         let coinsLevelMinus = model.el('coinsLevelMinus');
             coinsLevelMinus.frameName = 'minusFreeze.png';
             coinsLevelMinus.freezeFrames = true;
+        let autoButtonDesk = model.el('autoButtonDesk');
+            autoButtonDesk.frameName = 'autoEmpty.png';
+            autoButtonDesk.freezeFrames = true;
 
     }
 
@@ -279,6 +282,9 @@ export let view = (() => {
         let coinsLevelMinus = model.el('coinsLevelMinus');
             coinsLevelMinus.frameName = 'minus.png';
             coinsLevelMinus.freezeFrames = false;
+        let autoButtonDesk = model.el('autoButtonDesk');
+            autoButtonDesk.frameName = 'auto.png';
+            autoButtonDesk.freezeFrames = false;
     }
 
     return {

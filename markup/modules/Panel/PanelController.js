@@ -98,11 +98,8 @@ export let controller = (() => {
             let animatedSpinButton = model.el('animatedSpinButton');
             let spinButton = model.el('spinButtonDesk');
             let stopButton = model.el('stopButtonDesk');
-            let autoButtonDesk = model.el('autoButtonDesk');
 
             model.state('spinInAnim', true);
-                autoButtonDesk.frameName = 'auto.png';
-                autoButtonDesk.freezeFrames = false;
                 stopButton.visible = false;
                 animatedSpinButton.visible = true;
                 animatedSpinButton.animations.play('stopToSpin')
@@ -204,12 +201,9 @@ export let controller = (() => {
             let stopButtonDesk = model.el('stopButtonDesk');
             let animatedSpinButton = model.el('animatedSpinButton');
             let autoDesktopContainer = model.el('autoDesktopContainer');
-            let autoButtonDesk = model.el('autoButtonDesk');
             const amount = this.amount;
 
                 model.state('spinInAnim', true);
-                autoButtonDesk.frameName = 'autoEmpty.png';
-                autoButtonDesk.freezeFrames = true;
                 autoDesktopContainer.visible = false;
                 animatedSpinButton.animations.play('panelToStop')
                     .onComplete.add(()=>{
