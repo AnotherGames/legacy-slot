@@ -57,10 +57,22 @@ export let view = (() => {
             model.data('footerBottomCenterY', game.height - heightBottom / 2 + 3);
         },
 
+        MenuButton: function ({
+            game = model.el('game'),
+            container = model.group('footer'),
+            x = 30,
+            y = model.el('game').height - 30
+        }) {
+            let menuButton = game.add.button(x, y, 'footerButtons', null, null, 'menuOn.png', 'menu.png', 'menuOn.png', null, container);
+            menuButton.anchor.set(0.5);
+            model.el('menuButton', menuButton);
+            return menuButton;
+        },
+
         HomeButton: function ({
             game = model.el('game'),
             container = model.group('footer'),
-            x = 25,
+            x = 30,
             y = model.el('game').height - 20
         }) {
             if (model.mobile) {
@@ -68,30 +80,20 @@ export let view = (() => {
             }
             let homeButton = game.add.button(x, y, 'footerButtons', null, null, 'homeOn.png', 'home.png', 'homeOn.png', null, container);
                 homeButton.anchor.set(0.5);
+                homeButton.visible = false;
             model.el('homeButton', homeButton);
             return homeButton;
-        },
-
-        MenuButton: function ({
-            game = model.el('game'),
-            container = model.group('footer'),
-            x = 75,
-            y = model.el('game').height - 20
-        }) {
-            let menuButton = game.add.button(x, y, 'footerButtons', null, null, 'menuOn.png', 'menu.png', 'menuOn.png', null, container);
-                menuButton.anchor.set(0.5);
-            model.el('menuButton', menuButton);
-            return menuButton;
         },
 
         SoundButton: function ({
             game = model.el('game'),
             container = model.group('footer'),
-            x = 125,
+            x = 30,
             y = model.el('game').height - 20
         }) {
             let soundButton = game.add.button(x, y, 'footerButtons', null, null, 'sound.png', null, null, null, container);
                 soundButton.anchor.set(0.5);
+                soundButton.visible = false;
             // Определяем начальный фрейм
             if (model.state('globalSound')) {
                 soundButton.frameName = 'sound.png';
@@ -102,15 +104,58 @@ export let view = (() => {
             return soundButton;
         },
 
+        InfoButton: function({
+            game = model.el('game'),
+            container = model.group('footer'),
+            x = 30,
+            y = model.el('game').height - 20
+        }) {
+            let infoButton = game.add.button(x, y, 'footerButtons', null, null, 'infoOn.png', 'info.png', 'infoOn.png', null, container);
+                infoButton.anchor.set(0.5);
+                infoButton.visible = false;
+
+            model.el('infoButton', infoButton);
+            return infoButton;
+        },
+
+        FullScreenButton: function({
+            game = model.el('game'),
+            container = model.group('footer'),
+            x = 30,
+            y = model.el('game').height - 20
+        }) {
+            let fullScreeButton = game.add.button(x, y, 'footerButtons', null, null, 'fullscreen.png', 'fullscreenOff.png', 'fullscreen.png', null, container);
+                fullScreeButton.anchor.set(0.5);
+                fullScreeButton.visible = false;
+
+            model.el('fullScreeButton', fullScreeButton);
+            return fullScreeButton;
+        },
+
+        SettingsButton: function({
+            game = model.el('game'),
+            container = model.group('footer'),
+            x = 30,
+            y = model.el('game').height - 20
+        }) {
+            let settingsButton = game.add.button(x, y, 'footerButtons', null, null, 'settingsOn.png', 'settings.png', 'settingsOn.png', null, container);
+                settingsButton.anchor.set(0.5);
+                settingsButton.visible = false;
+
+            model.el('settingsButton', settingsButton);
+            return settingsButton;
+        },
+
         FastButton: function ({
             game = model.el('game'),
             container = model.group('footer'),
-            x = 175,
+            x = 30,
             y = model.el('game').height - 20
         }) {
             let fastButton = game.add.button(x, y, 'footerButtons', null, null, null, 'fastSpin.png', null, null, container);
                 fastButton.anchor.set(0.5);
-            // Определяем начальный фрейм
+                fastButton.visible = false;
+
             if (model.state('fastRoll')) {
                 fastButton.frameName = 'fastSpinOff.png';
             } else {
@@ -164,6 +209,46 @@ export let view = (() => {
 
             model.el('footerTime', footerTime);
 
+        },
+
+        info: function({
+            game = model.el('game'),
+            container = model.group('popup'),
+            x = model.el('game').world.centerX,
+            y = model.el('game').world.centerY,
+        }) {
+            let overlay = game.add.graphics(0, 0, container).beginFill(0x000000, 0.8).drawRect(0, 0, game.width, game.height);
+            model.el('overlay', overlay);
+
+            let infoRules = game.add.sprite(x, y, 'info', '1_en.png', container);
+                infoRules.anchor.set(0.5);
+                infoRules.scale.set(1.3);
+            model.el('infoRules', infoRules);
+
+            let closed = game.add.sprite(game.width - 390, 200, 'closed', null, container);
+            model.el('closed', closed);
+
+            let arrowRight = game.add.sprite(game.width / 2 + 40, 780, 'ar', null, container);
+            model.el('arrowRight', arrowRight);
+
+            let arrowLeft = game.add.sprite(game.width / 2 - 180, 780, 'arLeft', null, container);
+            model.el('arrowLeft', arrowLeft);
+
+            let infoMarkers = [];
+            let infoMarker = game.add.sprite(game.width / 2 - 100, 770, 'infoMarker', 'marker_on.png', container);
+                infoMarker.name = 'infoMarker0';
+                infoMarkers.push(infoMarker);
+
+            for (let i = 1; i < 6; i++) {
+                let name = 'infoMarker' + i;
+                let counter = i;
+                let marker = game.add.sprite(infoMarker.x, 770, 'infoMarker', 'marker_off.png', container);
+                marker.name = name;
+                marker.x = marker.x + 30 * i;
+                infoMarkers.push(marker);
+            }
+            model.el('infoMarkers', infoMarkers);
+            return infoRules;
         }
 
     };

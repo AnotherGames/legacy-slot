@@ -28,32 +28,11 @@ export let view = (() => {
         mainBG: function ({
             game = model.el('game')
         }) {
-            // let animBG = game.add.spine(
-            //     game.world.centerX - 3,
-            //     game.world.centerY,
-            //     'animBG'
-            // );
-            // animBG.setAnimationByName(0, 'animation', true);
-            // model.group('bg').add(animBG);
-            // model.el('animMainBG', animBG);
-
             let mainBG = game.add.sprite(0, 0, 'mainBG', null, model.group('bg'));
             model.el('mainBG', mainBG);
 
             let secondBG = game.add.sprite(0, 0, 'BG', null, model.group('bg'));
             model.el('secondBG', secondBG);
-
-            // if (model.state('isAnimBG')) {
-            //     mainBG.visible = false;
-            // } else {
-            //     animBG.visible = false;
-            // }
-
-            // if (model.desktop) {
-            //     let sticks = game.add.sprite(300, game.height * 0.6, 'sticks', null, model.group('bg'));
-            //         sticks.anchor.set(0.5);
-            //     model.el('sticks', sticks);
-            // }
         },
 
         mainContainer: function ({
@@ -79,12 +58,6 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('logo')
         }) {
-            // let logoX;
-            // if (model.mobile) {
-            //     logoX = 25;
-            // } else {
-            //     logoX = 30;
-            // }
             container.x = game.world.centerX;
             container.y = game.world.centerY;
             let deltaY = (model.desktop) ? -460 : -310;
@@ -96,7 +69,7 @@ export let view = (() => {
                     container.x = model.data('mainXRight');
                 }
             }
-            // this.addDragon({});
+
             let skyLogo = game.add.sprite(0, deltaY, 'skyLogo', null, container);
             skyLogo.anchor.set(0.5);
             model.el('skyLogo', skyLogo);
@@ -106,25 +79,6 @@ export let view = (() => {
             model.el('gameLogo', gameLogo);
 
         },
-
-        // addDragon: function ({
-        //     game = model.el('game'),
-        //     container = model.group('dragon')
-        // }) {
-        //     let x, y;
-        //     if (model.mobile) {
-        //         x = 15;
-        //         y = 95;
-        //     } else {
-        //         x = 15;
-        //         y = 25;
-        //     }
-        //     let dragon = new Dragon({position: {x, y}, container});
-        //     if (model.mobile) {
-        //         dragon.char.scale.set(0.8);
-        //     }
-        //     model.el('dragon', dragon);
-        // },
 
         lineNumbers: function ({
             game = model.el('game'),

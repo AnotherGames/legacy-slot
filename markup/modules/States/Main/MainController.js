@@ -96,8 +96,8 @@ export class Main {
         }
 
         // Первая темнота
-        let darkness = mainView.draw.darkness({});
-            this.add.tween(darkness).to( { alpha: 0 }, 1500, 'Linear', true);
+        // let darkness = mainView.draw.darkness({});
+        //     this.add.tween(darkness).to( { alpha: 0 }, 1500, 'Linear', true);
 
         // Проверяем сохранненые сессии
         this.checkForSavedFS();
@@ -105,9 +105,9 @@ export class Main {
         // Проверяем остались ли автокрутки
         this.checkForRemainAutoplay();
 
-        let lastTime = new Date().getTime();
-        let fps = 1;
-        let lowCount = 0;
+        // let lastTime = new Date().getTime();
+        // let fps = 1;
+        // let lowCount = 0;
 
         // Проверка на ФПС (убрать и переделать!!!)
         // if (model.state('isFirstAutoChangeAnimBG')

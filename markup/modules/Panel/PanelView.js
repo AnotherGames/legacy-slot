@@ -23,13 +23,13 @@ export let view = (() => {
 
         AutoContainer: function({
             game = model.el('game'),
-            x = 650,
-            y = 100
+            x = model.group('panel').width / 2 + 20,
+            y = 65
         }) {
             let autoDesktopContainer = game.add.group();
                 autoDesktopContainer.x = x;
                 autoDesktopContainer.y = y;
-                autoDesktopContainer.alpha = 0;
+                // autoDesktopContainer.alpha = 1;
             model.group('autoDesktop', autoDesktopContainer);
             model.group('panel').add(autoDesktopContainer);
         },
@@ -42,6 +42,7 @@ export let view = (() => {
         }) {
             let spinButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'spinOn.png', 'spin.png', 'spinOn.png', null, container);
                 spinButtonDesk.anchor.set(0.5);
+                // spinButtonDesk.visible = false;
             model.el('spinButtonDesk', spinButtonDesk);
             return spinButtonDesk;
         },
@@ -134,12 +135,12 @@ export let view = (() => {
                 autoplayBG.anchor.set(0.5);
             model.el('autoplayBG', autoplayBG);
 
-            let autoBG10 = this._AutoPanelItem({});
-            let autoBG25 = this._AutoPanelItem({text: 25, x: -2, y: -62, width: 75, height: 37});
-            let autoBG50 = this._AutoPanelItem({text: 50, x: -80, y: -21, width: 70, height: 37});
-            let autoBG100 = this._AutoPanelItem({text: 100, x: -2, y: -21, width: 75, height: 37});
-            let autoBG250 = this._AutoPanelItem({text: 250, x: -80, y: 21, width: 70, height: 37});
-            let autoBG500 = this._AutoPanelItem({text: 500, x: -2, y: 21, width: 75, height: 37});
+            let autoBG10 = this._AutoPanelItem({text: 10, x: -56, y: -39, width: 50, height: 30});
+            let autoBG25 = this._AutoPanelItem({text: 25, x: 3, y: -39, width: 50, height: 30});
+            let autoBG50 = this._AutoPanelItem({text: 50, x: -56, y: -13, width: 50, height: 30});
+            let autoBG100 = this._AutoPanelItem({text: 100, x: 3, y: -13, width: 50, height: 30});
+            let autoBG250 = this._AutoPanelItem({text: 250, x: -56, y: 13, width: 50, height: 30});
+            let autoBG500 = this._AutoPanelItem({text: 500, x: 3, y: 13, width: 50, height: 30});
 
             model.el('autoBG10', autoBG10);
             model.el('autoBG25', autoBG25);
@@ -246,46 +247,6 @@ export let view = (() => {
         }) {
             let autoDesktopContainer = model.group('autoDesktop');
             return game.add.tween(autoDesktopContainer).to( { x: finalX }, time, 'Linear', true)
-        },
-
-        info: function({
-            game = model.el('game'),
-            container = model.group('popup'),
-            x = model.el('game').world.centerX,
-            y = model.el('game').world.centerY,
-        }) {
-            let overlay = game.add.graphics(0, 0, container).beginFill(0x000000, 0.8).drawRect(0, 0, game.width, game.height);
-            model.el('overlay', overlay);
-
-            let infoRules = game.add.sprite(x, y, 'info', '1_en.png', container);
-                infoRules.anchor.set(0.5);
-                infoRules.scale.set(1.3);
-            model.el('infoRules', infoRules);
-
-            let closed = game.add.sprite(game.width - 390, 200, 'closed', null, container);
-            model.el('closed', closed);
-
-            let arrowRight = game.add.sprite(game.width / 2 + 40, 780, 'ar', null, container);
-            model.el('arrowRight', arrowRight);
-
-            let arrowLeft = game.add.sprite(game.width / 2 - 180, 780, 'arLeft', null, container);
-            model.el('arrowLeft', arrowLeft);
-
-            let infoMarkers = [];
-            let infoMarker = game.add.sprite(game.width / 2 - 100, 770, 'infoMarker', 'marker_on.png', container);
-                infoMarker.name = 'infoMarker0';
-                infoMarkers.push(infoMarker);
-
-            for (let i = 1; i < 6; i++) {
-                let name = 'infoMarker' + i;
-                let counter = i;
-                let marker = game.add.sprite(infoMarker.x, 770, 'infoMarker', 'marker_off.png', container);
-                marker.name = name;
-                marker.x = marker.x + 30 * i;
-                infoMarkers.push(marker);
-            }
-            model.el('infoMarkers', infoMarkers);
-            return infoRules;
         }
 
     }

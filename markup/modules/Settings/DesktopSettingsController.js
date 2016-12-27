@@ -2,7 +2,7 @@ import { model } from 'modules/Model/Model';
 import { view as transitionView } from 'modules/Transition/TransitionView';
 
 import { controller as soundController } from 'modules/Sound/SoundController';
-import { controller as panelController } from 'modules/Panel/PanelController';
+import { controller as footerController } from 'modules/Footer/FooterController';
 
 export let controller = (function () {
     function initDesktopSettings(game) {
@@ -106,7 +106,7 @@ export let controller = (function () {
         });
         $('#btnRules').on('click', function () {
             console.log('btnRules');
-            panelController.handle.info();
+            footerController.handle.Info();
             $('#settings').addClass('closed');
             $('#darkness').addClass('closed');
             $('.history').addClass('closed');
