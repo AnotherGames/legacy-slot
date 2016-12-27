@@ -52,6 +52,13 @@ export let view = (() => {
             let upperBG = game.add.sprite(0, 50, 'upperBG', null, container);
                 upperBG.anchor.set(0.5);
             model.el('upperBG', upperBG);
+
+            if (model.desktop) {
+                let el = game.add.sprite(520, 510, 'el', null, container);
+                el.anchor.set(0.5);
+                model.el('el', el);
+            }
+
         },
 
         logo: function({
