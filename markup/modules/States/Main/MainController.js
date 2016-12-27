@@ -107,43 +107,43 @@ export class Main {
         let lowCount = 0;
 
         // Проверка на ФПС (убрать и переделать!!!)
-        if (model.state('isFirstAutoChangeAnimBG')
-            && model.state('isAnimBG')
-        ) {
-            let lastTime = new Date().getTime();
-            let fps = 1;
-            let lowCount = 0;
-
-            let checkFPS = function () {
-                if (lastTime + 1000 > new Date().getTime() ) {
-                    fps++;
-                } else {
-                    if (fps < 20) {
-                        console.log('FPS:', fps);
-                        lowCount++;
-                        if (lowCount > 3) {
-                            model.state('isAnimBG', false);
-                            model.cookie('isAnimBG', false);
-                            let animMainBG = model.el('animMainBG');
-                            let mainBG = model.el('mainBG');
-
-                            mainBG.visible = true;
-                            animMainBG.visible = false;
-
-                            model.state('isFirstAutoChangeAnimBG', false);
-                            console.log('Auto Change AnimBG.');
-                        }
-                    } else {
-                        if (lowCount > 0) {
-                            lowCount--;
-                        }
-                    }
-                    lastTime = new Date().getTime();
-                    fps = 1;
-                }
-            };
-            game.frameAnims.push(checkFPS);
-        }
+        // if (model.state('isFirstAutoChangeAnimBG')
+        //     && model.state('isAnimBG')
+        // ) {
+        //     let lastTime = new Date().getTime();
+        //     let fps = 1;
+        //     let lowCount = 0;
+        //
+        //     let checkFPS = function () {
+        //         if (lastTime + 1000 > new Date().getTime() ) {
+        //             fps++;
+        //         } else {
+        //             if (fps < 20) {
+        //                 console.log('FPS:', fps);
+        //                 lowCount++;
+        //                 if (lowCount > 3) {
+        //                     model.state('isAnimBG', false);
+        //                     model.cookie('isAnimBG', false);
+        //                     let animMainBG = model.el('animMainBG');
+        //                     let mainBG = model.el('mainBG');
+        //
+        //                     mainBG.visible = true;
+        //                     animMainBG.visible = false;
+        //
+        //                     model.state('isFirstAutoChangeAnimBG', false);
+        //                     console.log('Auto Change AnimBG.');
+        //                 }
+        //             } else {
+        //                 if (lowCount > 0) {
+        //                     lowCount--;
+        //                 }
+        //             }
+        //             lastTime = new Date().getTime();
+        //             fps = 1;
+        //         }
+        //     };
+        //     game.frameAnims.push(checkFPS);
+        // }
 
     }
 
