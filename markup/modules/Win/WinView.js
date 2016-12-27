@@ -19,6 +19,11 @@ export let view = (() => {
             style = {font: '62px Helvetice, Arial', fill: '#fff', align: 'center', stroke: '#000000', strokeThickness: 2}
         }) {
             if (winTotalData === 0) return;
+
+            if (model.state('balance') == 'cash') {
+                winTotalData = `${model.balance('currencySymbol')} ${(model.balance('coinValue') * winTotalData).toFixed(2)}`;
+            }
+
             if (fs) {
                 let winTotal = game.add.sprite(6, 0, 'winTotalFS', null, container);
                     winTotal.anchor.set(0.5, 0.63);
@@ -230,6 +235,9 @@ export let view = (() => {
         }) {
             let gameMachine = model.el('gameMachine');
             let winValue = line.Win;
+            if (model.state('balance') == 'cash') {
+                winValue = `${(model.balance('coinValue') * winValue).toFixed(2)}`;
+            }
             let countValue = line.Count;
             let lineValue = line.Line;
             let currentLineY;
@@ -279,6 +287,8 @@ export let view = (() => {
                 font = '15px Arial, Helvetica';
             } else if (winValue > 99) {
                 font = '18px Arial, Helvetica';
+            } else if (model.state('balance') == 'cash') {
+                font = '16px Arial, Helvetica';
             } else {
                 font = '25px Arial, Helvetica';
             }

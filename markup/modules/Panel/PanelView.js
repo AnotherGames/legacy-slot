@@ -1,6 +1,8 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
 
+import { controller as balanceController } from 'modules/Balance/BalanceController';
+
 export let view = (() => {
 
     let draw = {
@@ -19,6 +21,10 @@ export let view = (() => {
 
             let convert = game.add.sprite(985, 77, 'convert', null, container);
             convert.anchor.set(0.5);
+            convert.inputEnabled = true;
+            convert.events.onInputDown.add(() => {
+                balanceController.changeCoinsToCash();
+            });
 
             container.pivot.set(panelBG.width / 2, 0);
             return panelBG;
