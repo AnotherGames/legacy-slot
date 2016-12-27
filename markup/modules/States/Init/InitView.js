@@ -38,6 +38,18 @@ export let view = (() => {
         return initLogo;
     }
 
+    function addStars() {
+        let game = model.el('game');
+
+        let starsBG = game.add.spine(game.world.centerX, game.world.centerY, 'stars');
+        starsBG.setAnimationByName(0, 'animation', true);
+        if(model.mobile) {
+            starsBG.scale.set(0.6);
+        }
+
+        return starsBG;
+    }
+
     function drawPlay() {
         const game = model.el('game');
 
@@ -107,6 +119,7 @@ export let view = (() => {
         drawLogo,
         drawBGLogo,
         drawPlay,
+        addStars,
         playYoyoTween,
         stopYoyoTween,
         firstDarkness,

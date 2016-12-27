@@ -39,12 +39,12 @@ export let view = (() => {
         soundController.music.stopMusic('fon');
         soundController.music.playMusic('startPerehod');
         // Прячем лого
-        let gameLogo = model.el('gameLogo');
-            gameLogo.visible = false;
+        // let gameLogo = model.el('gameLogo');
+            // gameLogo.visible = false;
         // Отрисовываем фон
-        let transitionBG = game.add.graphics(0, 0, transitionContainer).beginFill(0x000000, 0.9).drawRect(0, 0, game.width, game.height);
+        let transitionBG = game.add.sprite(0, 0, 'transitionBG', null, transitionContainer);
         model.el('transitionBG', transitionBG);
-        let freeSpinsBG = game.add.sprite(game.width / 2, -400, 'freeSpins', null, transitionContainer);
+        let freeSpinsBG = game.add.sprite(game.width / 2, -400, 'text', 'fs.png', transitionContainer);
             freeSpinsBG.anchor.set(0.5);
         model.el('freeSpinsBG', freeSpinsBG);
         // Количество фри-спинов
@@ -57,7 +57,7 @@ export let view = (() => {
         }
         model.el('freeSpinsLevel', freeSpinsLevel);
         // Рисуем подложку для множителя
-        let multiBG = game.add.sprite(game.width / 2, game.height * 0.44, 'multiplier', null, transitionContainer);
+        let multiBG = game.add.sprite(game.width / 2, game.height * 0.2, 'text', 'multi.png', transitionContainer);
             multiBG.anchor.set(0.5);
             multiBG.alpha = 0;
             multiBG.scale.setTo(0.1, 0.1);
@@ -66,7 +66,8 @@ export let view = (() => {
         let delta = (model.desktop) ? 50 : 25;
         // Отрисовуем множитель
         let multiValue = model.data('rollResponse').NextMode.split('-')[1];
-        let multiLevel = game.add.sprite(game.width / 2, multiBG.y + delta, 'multiNumbers', `multi${multiValue}.png`, transitionContainer);
+        console.log(multiValue);
+        let multiLevel = game.add.bitmapText(game.width / 2 - 15, game.height * 0.5, 'numbersFont', 'x' + multiValue, 120, transitionContainer);;
             multiLevel.align = 'center';
             multiLevel.anchor.set(0.5);
             multiLevel.alpha = 0;
@@ -96,8 +97,8 @@ export let view = (() => {
         let delta = (model.mobile) ? 215 : 160;
 
         function _addFSBG(){
-            game.add.tween(freeSpinsBG).to({y: game.height * 0.44}, 1500, Phaser.Easing.Bounce.Out, true);
-            game.add.tween(freeSpinsLevel).to({y: freeSpinsBG.height / 2 + delta}, 1500, Phaser.Easing.Bounce.Out, true)
+            game.add.tween(freeSpinsBG).to({y: game.height * 0.2}, 1500, Phaser.Easing.Bounce.Out, true);
+            game.add.tween(freeSpinsLevel).to({y: game.height * 0.5}, 1500, Phaser.Easing.Bounce.Out, true)
                 .onComplete.add(() => {
                     _removeFSBG();
                 }, this);
@@ -115,7 +116,7 @@ export let view = (() => {
             game.add.tween(multiBG).to({alpha: 1}, 500, 'Linear', true);
             game.add.tween(multiLevel).to({alpha: 1}, 500, 'Linear', true);
             game.add.tween(multiBG.scale).to({x: 1.0, y: 1.0}, 1500, Phaser.Easing.Elastic.Out, true);
-            game.add.tween(multiLevel.scale).to({x: 1.6, y: 1.6}, 1500, Phaser.Easing.Elastic.Out, true)
+            game.add.tween(multiLevel.scale).to({x: 1.0, y: 1.0}, 1500, Phaser.Easing.Elastic.Out, true)
                 .onComplete.add(() => {
                     _removeMultiBG();
                 }, this);

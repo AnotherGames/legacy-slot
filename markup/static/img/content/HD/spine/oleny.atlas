@@ -1,0 +1,90 @@
+
+oleny.png
+size: 256,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+img/OO_0000_Layer-3
+  rotate: false
+  xy: 56, 2
+  size: 14, 12
+  orig: 14, 12
+  offset: 0, 0
+  index: -1
+img/OO_0001_Layer-2
+  rotate: false
+  xy: 237, 29
+  size: 17, 25
+  orig: 17, 25
+  offset: 0, 0
+  index: -1
+img/OO_0002_Layer-1
+  rotate: true
+  xy: 160, 14
+  size: 29, 36
+  orig: 29, 36
+  offset: 0, 0
+  index: -1
+img/OO_0003_Layer-7
+  rotate: false
+  xy: 72, 3
+  size: 12, 11
+  orig: 12, 11
+  offset: 0, 0
+  index: -1
+img/OO_0004_Layer-6
+  rotate: true
+  xy: 32, 3
+  size: 11, 22
+  orig: 11, 22
+  offset: 0, 0
+  index: -1
+img/OO_0005_Layer-5
+  rotate: false
+  xy: 2, 3
+  size: 28, 11
+  orig: 28, 11
+  offset: 0, 0
+  index: -1
+img/OO_0006_Layer-4
+  rotate: false
+  xy: 237, 5
+  size: 17, 22
+  orig: 17, 22
+  offset: 0, 0
+  index: -1
+img/OO_0007_Layer-9
+  rotate: false
+  xy: 160, 45
+  size: 39, 48
+  orig: 39, 48
+  offset: 0, 0
+  index: -1
+img/OO_0008_Layer-10
+  rotate: false
+  xy: 201, 20
+  size: 34, 34
+  orig: 34, 34
+  offset: 0, 0
+  index: -1
+img/OO_0009_Layer-8
+  rotate: false
+  xy: 201, 56
+  size: 44, 37
+  orig: 44, 37
+  offset: 0, 0
+  index: -1
+img/OO_0010_Layer-0-copy-2
+  rotate: false
+  xy: 160, 95
+  size: 86, 30
+  orig: 86, 30
+  offset: 0, 0
+  index: -1
+img/OO_0012_Layer-0
+  rotate: false
+  xy: 2, 16
+  size: 156, 109
+  orig: 156, 109
+  offset: 0, 0
+  index: -1

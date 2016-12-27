@@ -22,6 +22,7 @@ export class Init {
         view.drawBG();
         view.drawBGLogo();
         view.drawLogo();
+        view.addStars();
 
         let initPlay = view.drawPlay();
             initPlay.inputEnabled = true;

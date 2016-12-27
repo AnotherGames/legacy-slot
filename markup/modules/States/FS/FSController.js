@@ -117,9 +117,11 @@ export class FS {
 
         // Отрисовуем основной контейнер
         fsView.draw.mainBG({});
+        fsView.draw.addStars({});
+        fsView.draw.addSnow({});
         fsView.draw.mainContainer({});
         fsView.draw.machineContainer({});
-        fsView.draw.addDragon({});
+        // fsView.draw.addDragon({});
         fsView.draw.lineNumbers({});
 
         // Инициализируем крутки

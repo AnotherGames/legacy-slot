@@ -70,9 +70,10 @@ export let controller = (() => {
 
     function drawFsPanel() {
         view.draw.PanelBG({
-            frameName: 'uiFS'
+            frameName: 'uiFS',
+            deltaY: -40
         });
-        view.draw.LinesNumber({x: 55, y: 118});
+        // view.draw.LinesNumber({x: 55, y: 118});
     }
 
     const handle = {

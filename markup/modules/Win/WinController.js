@@ -30,9 +30,9 @@ export let controller = (() => {
         && model.state('fs')
         && winLines[0].Count == 0
         && winLines[0].Line == -1) {
-            let dragonFS = model.el('dragonFS');
+            // let dragonFS = model.el('dragonFS');
             soundController.sound.playSound({sound: 'dragonEat', duration: 1500});
-            dragonFS.Eat();
+            // dragonFS.Eat();
         }
 
         // Проверяем переход на Фри-Спины

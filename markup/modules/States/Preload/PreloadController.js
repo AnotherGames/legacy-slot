@@ -104,10 +104,10 @@ export class Preload {
     loadFSAssets() {
         const game = model.el('game');
         game.load.image('fsBG', 'bg/mainBG.png');
-        game.load.image('freeSpins', 'fs/freeSpins.png');
-        game.load.image('multiplier', 'fs/multiplier.png');
-        game.load.image('freeSpinsPanelFS', 'fs/freeSpinsPanelFS.png');
-        game.load.image('multiPanelFS', 'fs/multiPanelFS.png');
+        // game.load.image('freeSpins', 'fs/freeSpins.png');
+        // game.load.image('multiplier', 'fs/multiplier.png');
+        // game.load.image('freeSpinsPanelFS', 'fs/freeSpinsPanelFS.png');
+        // game.load.image('multiPanelFS', 'fs/multiPanelFS.png');
     }
 
     loadSpineAssets() {
@@ -118,7 +118,7 @@ export class Preload {
         game.load.spine('tree', 'spine/iolka.json');
         game.load.spine('krampus', 'spine/krampus.json');
         game.load.spine('stars', 'spine/stars.json');
-
+        game.load.spine('deers', 'spine/oleny.json');
     }
 
     loadElements() {
