@@ -133,7 +133,7 @@ export let model = (() => {
         model.state('globalSound', globalSound);
         (globalSound) ? soundController.volume.changeVolume(volume) : soundController.volume.changeVolume(0);
 
-
+        model.state('spinInAnim', false);
         model.state('initScreen', true);
         model.state('ready', true);
         model.state('firstFS', false);

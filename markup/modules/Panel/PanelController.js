@@ -84,13 +84,6 @@ export let controller = (() => {
             }
             if (model.state('buttons:locked')) return;
 
-            // soundController.sound.playSound({sound : 'buttonClick'});
-            // if (!model.state('autoplay:panelClosed')) {
-            //     model.state('autoplay:panelClosed', true);
-            //     view.hide.autoButton({});
-            //     view.hide.autoPanel({});
-            // }
-
             let game = model.el('game');
             game.input.keyboard.enabled = false;
             view.lockButtons();
@@ -103,13 +96,28 @@ export let controller = (() => {
 
             soundController.sound.playSound({sound : 'buttonClick'});
             model.state('autoplay:panelClosed', true);
-            autoplayController.stop();
+            let animatedSpinButton = model.el('animatedSpinButton');
+            let spinButton = model.el('spinButtonDesk');
+            let stopButton = model.el('stopButtonDesk');
+
+            model.state('spinInAnim', true);
+                stopButton.visible = false;
+                animatedSpinButton.visible = true;
+                animatedSpinButton.animations.play('stopToSpin')
+                    .onComplete.add(()=>{
+                        model.state('spinInAnim', false);
+                        animatedSpinButton.visible = false;
+                        spinButton.visible = true;
+                    });
+
+                autoplayController.stop();
         },
 
         auto: function() {
             if(model.state('autoplay:start')
             || model.state('roll:progress')
-            || model.state('buttons:locked')) return;
+            || model.state('buttons:locked')
+            || model.state('spinInAnim')) return;
             soundController.sound.playSound({sound : 'buttonClick'});
             let animatedSpinButton = model.el('animatedSpinButton');
             let spinButton = model.el('spinButtonDesk');
@@ -117,25 +125,25 @@ export let controller = (() => {
 
             if (model.state('autoplay:panelClosed') && !model.data('remainAutoCount')) {
                 model.state('autoplay:panelClosed', false);
+                model.state('spinInAnim', true);
                 animatedSpinButton.visible = true;
                 spinButton.visible = false;
                 animatedSpinButton.animations.play('spinToPanel')
                     .onComplete.add(()=>{
+                        model.state('spinInAnim', false);
                         autoDesktopContainer.visible = true;
                         animatedSpinButton.frameName = 'button-2_4.png';
                     });
-                // view.show.autoButton({});
-                // view.show.autoPanel({});
             } else {
                 model.state('autoplay:panelClosed', true);
+                model.state('spinInAnim', true);
                 autoDesktopContainer.visible = false;
-                animatedSpinButton.animations.play('panelToStop')
+                animatedSpinButton.animations.play('panelToSpin')
                     .onComplete.add(()=>{
+                        model.state('spinInAnim', false);
                         spinButton.visible = true;
                         animatedSpinButton.visible = false;
                     });
-                // view.hide.autoButton({});
-                // view.hide.autoPanel({});
             }
         },
 
@@ -187,25 +195,25 @@ export let controller = (() => {
             }
             // Если у нас автоплей или идет крутка, то не должна работать
             // При нажатии должна закрыть панель
-            //365 конечный икс кнопки автоплея при открытии, 370 взят с запасом
+
             if (model.state('autoplay:start')
             || model.state('roll:progress')) return;
 
-            let autoButtonDesk = model.el('autoButtonDesk');
-            const amount = this.amount;
-            // if (autoButtonDesk.x > 370) return;
-            // view.hide.autoButton({});
-            // view.hide.autoPanel({});
             let stopButtonDesk = model.el('stopButtonDesk');
             let animatedSpinButton = model.el('animatedSpinButton');
+            let autoDesktopContainer = model.el('autoDesktopContainer');
+            const amount = this.amount;
 
-
+                model.state('spinInAnim', true);
+                autoDesktopContainer.visible = false;
                 animatedSpinButton.animations.play('panelToStop')
                     .onComplete.add(()=>{
+                        model.state('spinInAnim', false);
+                        animatedSpinButton.visible = false
                         stopButtonDesk.visible = true
                     })
 
-            autoplayController.start(amount);
+                autoplayController.start(amount);
         }
 
     };

@@ -10,7 +10,10 @@ export let controller = (() => {
     }
 
     function initDesktop() {
-        // view.draw.CashBalance({});
+        model.state('balance', 'coins');
+        view.draw.CashBalance({
+            container: model.group('panel')
+        });
         view.draw.DesktopBalance({});
     }
 
@@ -24,6 +27,22 @@ export let controller = (() => {
         view.draw.FSDesktopBalance({});
     }
 
+    function changeCoinsToCash() {
+        if (model.state('balance') == 'cash') {
+            model.el('coinCash').visible = false;
+            model.el('betCash').visible = false;
+            model.el('coinSum').visible = true;
+            model.el('betSum').visible = true;
+            model.state('balance', 'coins');
+        } else {
+            model.el('coinSum').visible = false;
+            model.el('betSum').visible = false;
+            model.el('coinCash').visible = true;
+            model.el('betCash').visible = true;
+            model.state('balance', 'cash');
+        }
+    }
+
     function updateBalance() {
         if (model.state('fs')) {
             if (model.mobile) {
@@ -32,16 +51,16 @@ export let controller = (() => {
             }
             if (model.desktop) {
                 view.update.FSDesktopBalance({});
-                // view.update.CashBalance({});
+                view.update.CashBalance({});
             }
         } else {
             if (model.mobile) {
                 view.update.MobileBalance({});
-                // /view.update.CashBalance({});
+                view.update.CashBalance({});
             }
             if (model.desktop) {
                 view.update.DesktopBalance({});
-                // view.update.CashBalance({});
+                view.update.CashBalance({});
             }
         }
     }
@@ -51,7 +70,8 @@ export let controller = (() => {
         initDesktop,
         initFSMobile,
         initFSDesktop,
-        updateBalance
+        updateBalance,
+        changeCoinsToCash
     };
 
 })();
