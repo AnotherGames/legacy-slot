@@ -289,7 +289,8 @@ export let view = (() => {
             model.group('machine', machineGroup);
 
             let winTop = game.add.group();
-            container.addAt(winTop, 3);
+            // container.addAt(winTop, 3);
+            container.add(winTop);
             model.group('winTop', winTop);
 
             machineGroup.glistaLightContainer = game.add.group();

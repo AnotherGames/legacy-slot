@@ -16,7 +16,8 @@ export let view = (() => {
             fs = false,
             game = model.el('game'),
             container = model.group('winTop'),
-            style = {font: '62px Helvetice, Arial', fill: '#fff', align: 'center', stroke: '#000000', strokeThickness: 2}
+            style = {font: '62px Helvetice, Arial', fill: '#fff', align: 'center', stroke: '#000000', strokeThickness: 2},
+            style2 = {font: '28px Helvetice, Arial', fill: '#fff', align: 'center', stroke: '#000000', strokeThickness: 2}
         }) {
             if (winTotalData === 0) return;
 
@@ -34,6 +35,23 @@ export let view = (() => {
 
             let winTotalText = game.add.text(0, 0, winTotalData, style, container);
                 winTotalText.anchor.set(0.5);
+
+            // small table
+            if (!fs) {
+                let winTotalSmall = game.add.sprite(0, 600, 'deskButtons', 'win.png', container);
+                winTotalSmall.anchor.set(0.5);
+                winTotalSmall.alpha = 0;
+
+                let winTotalTextSmall = game.add.text(0, 620, winTotalData, style2, container);
+                winTotalTextSmall.anchor.set(0.5);
+                winTotalTextSmall.alpha = 0;
+
+                game.add.tween(winTotalSmall).to({alpha: 1, y: 400}, 300, 'Linear', true);
+                game.add.tween(winTotalTextSmall).to({alpha: 1, y: 420}, 300, 'Linear', true);
+
+                let spinButtonDesk = model.el('spinButtonDesk');
+                    spinButtonDesk.frameName = 'spinNaked.png';
+            }
 
         },
 
@@ -321,6 +339,8 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('winTop')
         }) {
+            let spinButtonDesk = model.el('spinButtonDesk');
+                spinButtonDesk.frameName = 'spin.png';
             return game.add.tween(container).to( { alpha: 0 }, 300, 'Linear', true);
         }
 
