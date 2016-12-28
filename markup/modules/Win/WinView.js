@@ -37,7 +37,7 @@ export let view = (() => {
                 winTotalText.anchor.set(0.5);
 
             // small table
-            if (!fs) {
+            if (!fs && model.desktop) {
                 let winTotalSmall = game.add.sprite(0, 450, 'deskButtons', 'win.png', container);
                 winTotalSmall.anchor.set(0.5);
                 winTotalSmall.alpha = 0;
