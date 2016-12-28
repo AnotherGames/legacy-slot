@@ -165,12 +165,12 @@ export let view = (() => {
             //     autoplayBG.anchor.set(0.5);
             // model.el('autoplayBG', autoplayBG);
 
-            let autoBG10 = this._AutoPanelItem({text: 10, x: -56, y: -36, width: 55, height: 26});
-            let autoBG25 = this._AutoPanelItem({text: 25, x: 3, y: -36, width: 55, height: 26});
-            let autoBG50 = this._AutoPanelItem({text: 50, x: -56, y: -10, width: 55, height: 24});
-            let autoBG100 = this._AutoPanelItem({text: 100, x: 3, y: -10, width: 55, height: 24});
-            let autoBG250 = this._AutoPanelItem({text: 250, x: -56, y: 16, width: 55, height: 26});
-            let autoBG500 = this._AutoPanelItem({text: 500, x: 3, y: 16, width: 55, height: 26});
+            let autoBG10 = this._AutoPanelItem({text: 10, x: -56, y: -34, width: 54, height: 24});
+            let autoBG25 = this._AutoPanelItem({text: 25, x: 2, y: -34, width: 60, height: 24});
+            let autoBG50 = this._AutoPanelItem({text: 50, x: -56, y: -8, width: 54, height: 22});
+            let autoBG100 = this._AutoPanelItem({text: 100, x: 2, y: -8, width: 60, height: 22});
+            let autoBG250 = this._AutoPanelItem({text: 250, x: -56, y: 16, width: 54, height: 24});
+            let autoBG500 = this._AutoPanelItem({text: 500, x: 2, y: 16, width: 60, height: 24});
 
             model.el('autoBG10', autoBG10);
             model.el('autoBG25', autoBG25);
