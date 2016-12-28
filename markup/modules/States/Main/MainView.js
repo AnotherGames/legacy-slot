@@ -173,28 +173,62 @@ export let view = (() => {
         }) {
 
             let deer = game.add.spine(50, game.height * 0.5, 'deer');
-            console.log(deer);
             deer.setAnimationByName(0, 'walk', true);
             model.group('bg').add(deer);
             deer.scale.set(0.5);
 
-            // let time = game.rnd.integerInRange(20, 35);
-            // let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
-            //
-            // deer.x = (side === 'left') ? -deer.width : game.width + deer.width;
-            // let delta = (side === 'left') ? game.width + deer.width : -deer.width;
-            // if (side === 'right') {
-            //     deer.width = -deer.width;
-            // }
-            //
-            // game.add.tween(deer).to({x: delta}, time * 1000, 'Linear', true)
-            // .onComplete.add(() => {
-            //     deer.destroy();
-            //     game.time.events.add(3000, () => {
-            //         this.addDeers({});
-            //     });
-            // }, this);
+            let time = game.rnd.integerInRange(20, 35);
+            let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
 
+            deer.x = (side === 'left') ? -deer.width : game.width + deer.width;
+            let delta = (side === 'left') ? game.width + deer.width : -deer.width;
+            if (side === 'right') {
+                deer.width = -deer.width;
+            }
+
+            game.add.tween(deer).to({x: delta}, time * 1000, 'Linear', true)
+            .onComplete.add(() => {
+                deer.destroy();
+                game.time.events.add(3000, () => {
+                    this.addDeers({});
+                });
+            }, this);
+
+        },
+
+        flyingSmoke: function({
+            game = model.el('game'),
+            container = model.group('bg'),
+            frame = 'smoke2',
+            x = 190,
+            y = 750,
+            speed = game.rnd.between(40000, 60000),
+            delay = game.rnd.between(1000, 20000),
+            scaleX = 1.0,
+            scaleY = 1.0,
+            pivotX = 145,
+            alpha = 0.65
+        }){
+            let smoke = game.add.sprite(x, y, frame, null, container);
+                smoke.pivot.set(pivotX, 872);
+                smoke.scale.set(0.01);
+                smoke.alpha = 0;
+
+            game.add.tween(smoke).to({alpha: alpha }, 3000, Phaser.Easing.Sinusoidal.InOut, true, delay);
+            game.add.tween(smoke.scale).to({y: scaleX, x: scaleY}, speed, Phaser.Easing.Sinusoidal.InOut, true, delay)
+            // game.add.tween(smoke).to({y: smoke.y / 2}, speed, Phaser.Easing.Sinusoidal.InOut, true, delay)
+                .onComplete.add(()=>{
+                    game.add.tween(smoke).to({alpha: 0}, speed / 3, Phaser.Easing.Quintic.In, true)
+                        .onComplete.add(()=>{
+                            smoke.destroy();
+                            if (frame === 'smoke2') {
+                                draw.flyingSmoke({});
+                            } else {
+                                draw.flyingSmoke({x: 30, y: 615, scaleX: 0.6, scaleY: 0.6, frame: 'smoke', pivotX: 234, alpha: 0.45});
+                            }
+                        })
+
+                });
         },
 
         lineNumbers: function ({

@@ -94,7 +94,7 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('panel'),
             x = model.el('spinButtonDesk').x + 92,
-            y = 63
+            y = 68
         }) {
             let autoButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'autoOn.png', 'auto.png', 'autoOn.png', null, container);
                 autoButtonDesk.anchor.set(0.5);
@@ -106,7 +106,7 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('panel'),
             x = model.el('spinButtonDesk').x - 92,
-            y = 63
+            y = 68
         }) {
             let maxBetButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'maxBetOn.png', 'maxBet.png', 'maxBetOn.png', null, container);
                 maxBetButtonDesk.anchor.set(0.5);
@@ -270,7 +270,7 @@ export let view = (() => {
             coinsLevelMinus.frameName = 'minusFreeze.png';
             coinsLevelMinus.freezeFrames = true;
         let autoButtonDesk = model.el('autoButtonDesk');
-            autoButtonDesk.frameName = 'autoEmpty.png';
+            autoButtonDesk.frameName = 'autoFreeze.png';
             autoButtonDesk.freezeFrames = true;
 
     }

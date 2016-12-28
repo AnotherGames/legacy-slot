@@ -52,10 +52,8 @@ export let view = (() => {
                 winTotalTextSmall.alpha = 0;
 
                 game.add.tween(winTotalSmall).to({alpha: 1, y: 400}, 300, 'Linear', true);
-                game.add.tween(winTotalTextSmall).to({alpha: 1, y: 420}, 300, 'Linear', true);
+                game.add.tween(winTotalTextSmall).to({alpha: 1, y: 410}, 300, 'Linear', true);
 
-                let spinButtonDesk = model.el('spinButtonDesk');
-                    spinButtonDesk.frameName = 'spinNaked.png';
             }
 
         },
@@ -344,8 +342,6 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('winTop')
         }) {
-            let spinButtonDesk = model.el('spinButtonDesk');
-                spinButtonDesk.frameName = 'spin.png';
             return game.add.tween(container).to( { alpha: 0 }, 300, 'Linear', true);
         }
 

@@ -56,6 +56,8 @@ export class Preload {
         game.load.image('transitionBG', 'bg/transitionBG.png');
         game.load.image('upperBG', 'bg/upperBG.png');
         game.load.image('BG', 'bg/BG.png');
+        game.load.image('smoke', 'bg/smoke.png');
+        game.load.image('smoke2', 'bg/smoke2.png');
         game.load.image('snow', 'bg/snow.png');
         game.load.spritesheet('snowflakes', 'bg/snow2.png', 17, 17);
         game.load.spritesheet('snowflakes_large', 'bg/snow3.png', 64, 64);

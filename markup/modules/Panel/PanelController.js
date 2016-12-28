@@ -33,7 +33,7 @@ export let controller = (() => {
             maxBetButtonDesk.onInputDown.add(handle.maxBet);
 
         if (model.desktop) {
-            let sugrob = game.add.sprite(model.group('panel').width / 2 + 20, 115, 'sugrob', null, model.group('panel'));
+            let sugrob = game.add.sprite(model.group('panel').width / 2 + 20, 120, 'sugrob', null, model.group('panel'));
             sugrob.anchor.set(0.5);
         }
 
