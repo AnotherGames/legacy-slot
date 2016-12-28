@@ -155,12 +155,8 @@ export let view = (() => {
             let fastButton = game.add.button(x, y, 'footerButtons', null, null, null, 'fastSpin.png', null, null, container);
                 fastButton.anchor.set(0.5);
                 fastButton.visible = false;
+                fastButton.frameName = (model.state('fastRoll')) ? 'fastSpinOff.png' : 'fastSpin.png';
 
-            if (model.state('fastRoll')) {
-                fastButton.frameName = 'fastSpinOff.png';
-            } else {
-                fastButton.frameName = 'fastSpin.png';
-            }
             model.el('fastButton', fastButton);
             return fastButton;
         },

@@ -9,7 +9,7 @@
 	"sourceSize": {"w":50,"h":50}
 },
 {
-	"filename": "fastSpin.png",
+	"filename": "fastSpinOff.png",
 	"frame": {"x":1,"y":53,"w":44,"h":44},
 	"rotated": false,
 	"trimmed": false,
@@ -17,7 +17,7 @@
 	"sourceSize": {"w":44,"h":44}
 },
 {
-	"filename": "fastSpinOff.png",
+	"filename": "fastSpin.png",
 	"frame": {"x":1,"y":99,"w":44,"h":44},
 	"rotated": false,
 	"trimmed": false,
