@@ -53,6 +53,7 @@ export class Main {
         mainView.draw.mainBG({});
         mainView.draw.addStars({});
         mainView.draw.addSnow({});
+        // mainView.draw.addDeers({});
         mainView.draw.mainContainer({});
         mainView.draw.machineContainer({});
         mainView.draw.lineNumbers({});

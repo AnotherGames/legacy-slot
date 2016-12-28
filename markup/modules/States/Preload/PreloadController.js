@@ -118,7 +118,7 @@ export class Preload {
         game.load.spine('tree', 'spine/iolka.json');
         game.load.spine('krampus', 'spine/krampus.json');
         game.load.spine('stars', 'spine/stars.json');
-        game.load.spine('deers', 'spine/oleny.json');
+        game.load.spine('deer', 'spine/oleny.json');
     }
 
     loadElements() {
