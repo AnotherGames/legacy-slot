@@ -1,5 +1,5 @@
 {
-"stars": { "hash": "/AxkEYhxJ3KkknFdR5i3Cmdjzyg", "spine": "3.5.46", "width": 1918, "height": 1101.18, "images": "" },
+"skeleton": { "hash": "/AxkEYhxJ3KkknFdR5i3Cmdjzyg", "spine": "3.5.46", "width": 1918, "height": 1101.18, "images": "" },
 "bones": [
 	{ "name": "root" },
 	{ "name": "M", "parent": "root", "x": 722.81, "y": 309.13 },

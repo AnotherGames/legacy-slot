@@ -167,6 +167,36 @@ export let view = (() => {
             front_emitter.start(false, 15000, 1000);
         },
 
+        addDeers: function ({
+            game = model.el('game'),
+            container = model.group('bg')
+        }) {
+
+            let deer = game.add.spine(50, game.height * 0.5, 'deer');
+            console.log(deer);
+            deer.setAnimationByName(0, 'walk', true);
+            model.group('bg').add(deer);
+            deer.scale.set(0.5);
+
+            // let time = game.rnd.integerInRange(20, 35);
+            // let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
+            //
+            // deer.x = (side === 'left') ? -deer.width : game.width + deer.width;
+            // let delta = (side === 'left') ? game.width + deer.width : -deer.width;
+            // if (side === 'right') {
+            //     deer.width = -deer.width;
+            // }
+            //
+            // game.add.tween(deer).to({x: delta}, time * 1000, 'Linear', true)
+            // .onComplete.add(() => {
+            //     deer.destroy();
+            //     game.time.events.add(3000, () => {
+            //         this.addDeers({});
+            //     });
+            // }, this);
+
+        },
+
         lineNumbers: function ({
             game = model.el('game'),
             container = model.group('main')

@@ -38,11 +38,16 @@ export let view = (() => {
 
             // small table
             if (!fs) {
-                let winTotalSmall = game.add.sprite(0, 600, 'deskButtons', 'win.png', container);
+                let winTotalSmall = game.add.sprite(0, 450, 'deskButtons', 'win.png', container);
                 winTotalSmall.anchor.set(0.5);
                 winTotalSmall.alpha = 0;
+                if (winTotalSmall.alpha = 0) {
+                    model.state('showSmallWin', true);
+                } else {
+                    model.state('showSmallWin', false);
+                }
 
-                let winTotalTextSmall = game.add.text(0, 620, winTotalData, style2, container);
+                let winTotalTextSmall = game.add.text(0, 470, winTotalData, style2, container);
                 winTotalTextSmall.anchor.set(0.5);
                 winTotalTextSmall.alpha = 0;
 
