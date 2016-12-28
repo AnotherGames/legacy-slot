@@ -63,7 +63,7 @@ export let view = (() => {
             pole.scale.set(0.5);
             model.el('pole', pole);
 
-            let time = game.rnd.integerInRange(20, 35);
+            let time = game.rnd.integerInRange(10, 14);
             let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
 
             pole.x = (side === 'left') ? -pole.width : game.width + pole.width;
@@ -75,7 +75,7 @@ export let view = (() => {
             game.add.tween(pole).to({x: delta}, time * 1000, 'Linear', true)
                 .onComplete.add(() => {
                     pole.destroy();
-                    game.time.events.add(3000, () => {
+                    game.time.events.add(6000, () => {
                         this.addPole({});
                     });
                 }, this);
