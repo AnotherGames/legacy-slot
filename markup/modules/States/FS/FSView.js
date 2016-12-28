@@ -517,8 +517,6 @@ export let view = (() => {
                 plus3.anchor.set(0.5);
             model.el('plus3', plus3);
 
-            console.log('Plus 3: ', plus3Group, container);
-
             let tweenY;
             let tweenX;
 
