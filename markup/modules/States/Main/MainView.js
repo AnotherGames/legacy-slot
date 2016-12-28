@@ -29,7 +29,7 @@ export let view = (() => {
             game = model.el('game')
         }) {
             let animBG = game.add.spine(
-                game.world.centerX - 3,
+                game.world.centerX,
                 game.world.centerY,
                 'animBG'
             );
