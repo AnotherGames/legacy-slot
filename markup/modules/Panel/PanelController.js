@@ -203,17 +203,18 @@ export let controller = (() => {
             let animatedSpinButton = model.el('animatedSpinButton');
             let autoDesktopContainer = model.el('autoDesktopContainer');
             const amount = this.amount;
+            this.alpha = 0;
 
-                model.state('spinInAnim', true);
-                autoDesktopContainer.visible = false;
-                animatedSpinButton.animations.play('panelToStop')
-                    .onComplete.add(()=>{
-                        model.state('spinInAnim', false);
-                        animatedSpinButton.visible = false
-                        stopButtonDesk.visible = true
-                    })
+            model.state('spinInAnim', true);
+            autoDesktopContainer.visible = false;
+            animatedSpinButton.animations.play('panelToStop')
+                .onComplete.add(()=>{
+                    model.state('spinInAnim', false);
+                    animatedSpinButton.visible = false
+                    stopButtonDesk.visible = true
+                })
 
-                autoplayController.start(amount);
+            autoplayController.start(amount);
         }
 
     };
