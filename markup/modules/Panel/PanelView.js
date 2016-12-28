@@ -190,9 +190,9 @@ export let view = (() => {
             y = -62,
             width = 70,
             height = 37,
-            font = 'normal 22px Arial',
-            color = '#e8b075',
-            shadowColor = '#e8b075'
+            font = 'normal 18px Arial',
+            color = '#dbebf9',
+            shadowColor = '#43abde'
         }) {
             let autoBG = game.add.graphics(0, 0, container).beginFill(0xffffff, 0.2).drawRect(0, 0, width, height);
                 autoBG.x = x;
@@ -222,14 +222,17 @@ export let view = (() => {
         autoCount: function({
             game = model.el('game'),
             container = model.group('panel'),
-            style = {font: '30px Arial, Helvetica', fill: '#ffffff', align: 'center', stroke: '#000000', strokeThickness: 2},
+            style = {font: '27px Arial, Helvetica', fill: '#f1f7fe', align: 'center'},
             amount = 10,
-            x = model.el('autoButtonDesk').x - 7,
-            y = model.el('autoButtonDesk').y + 7,
+            x = model.el('autoButtonDesk').x - 2,
+            y = model.el('autoButtonDesk').y + 5,
         }) {
+            let font = (amount > 100) ? '21px Arial, Helvetica' : '27px Arial, Helvetica';
+            style = {font: font, fill: '#f1f7fe', align: 'center'};
             let autoCount = game.add.text(x, y, amount, style, container);
                 autoCount.anchor.set(0.5);
                 autoCount.alpha = 0;
+
             model.el('autoCount', autoCount);
             game.add.tween(autoCount).to({alpha: 1}, 500, 'Linear', true, 200);
             return autoCount;
