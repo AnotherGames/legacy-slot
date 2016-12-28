@@ -97,13 +97,15 @@ export class FS {
         game.frameAnims = [];
         game.spriteAnims = [];
 
-        // При выходе из вкладки анимации будут останавливаться
-        game.stage.disableVisibilityChange = false;
 
         model.state('fs', true);
 
         // Создаем контейнеры
         fsView.create.groups({});
+
+        // При выходе из вкладки анимации будут останавливаться
+        game.stage.disableVisibilityChange = true;
+
     }
 
     create() {
@@ -164,6 +166,7 @@ export class FS {
         game.time.events.add(1000, () => {
             controller.init(this.fsCount);
         });
+
     }
 
     update() {

@@ -14,7 +14,32 @@ export class Init {
             //Воспроивзодит музыку но сама музыка не играет если не сделать такой костыль
             // setTimeout(() => {
             soundController.music.playMusic('initFon');
-            // }, 100)
+
+            // При выходе из вкладки анимации будут останавливаться
+            game.stage.disableVisibilityChange = true;
+            // Ставим игру на паузу при не активном окне браузера
+        let hidden, state, visibilityChange;
+        if (typeof document.hidden !== "undefined") {
+          hidden = "hidden";
+          visibilityChange = "visibilitychange";
+          state = "visibilityState";
+        } else if (typeof document.mozHidden !== "undefined") {
+          hidden = "mozHidden";
+          visibilityChange = "mozvisibilitychange";
+          state = "mozVisibilityState";
+        } else if (typeof document.msHidden !== "undefined") {
+          hidden = "msHidden";
+          visibilityChange = "msvisibilitychange";
+          state = "msVisibilityState";
+        } else if (typeof document.webkitHidden !== "undefined") {
+          hidden = "webkitHidden";
+          visibilityChange = "webkitvisibilitychange";
+          state = "webkitVisibilityState";
+        }
+        document.addEventListener(
+            visibilityChange,
+            ()=>{ game.paused = (game.paused) ? false : true }
+        );
     }
 
     create() {
