@@ -31,11 +31,13 @@ export class Main {
         game.frameAnims = [];
         game.spriteAnims = [];
 
-        // При выходе из вкладки анимации будут останавливаться
-        game.stage.disableVisibilityChange = false;
 
         // Создаем контейнеры
         mainView.create.groups({});
+
+        // При выходе из вкладки анимации будут останавливаться
+        game.stage.disableVisibilityChange = true;
+
     }
 
     create() {

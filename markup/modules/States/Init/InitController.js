@@ -12,6 +12,32 @@ export class Init {
             game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
             game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
             soundController.music.playMusic('initFon');
+
+            // При выходе из вкладки анимации будут останавливаться
+            game.stage.disableVisibilityChange = true;
+            // Ставим игру на паузу при не активном окне браузера
+        let hidden, state, visibilityChange;
+        if (typeof document.hidden !== "undefined") {
+          hidden = "hidden";
+          visibilityChange = "visibilitychange";
+          state = "visibilityState";
+        } else if (typeof document.mozHidden !== "undefined") {
+          hidden = "mozHidden";
+          visibilityChange = "mozvisibilitychange";
+          state = "mozVisibilityState";
+        } else if (typeof document.msHidden !== "undefined") {
+          hidden = "msHidden";
+          visibilityChange = "msvisibilitychange";
+          state = "msVisibilityState";
+        } else if (typeof document.webkitHidden !== "undefined") {
+          hidden = "webkitHidden";
+          visibilityChange = "webkitvisibilitychange";
+          state = "webkitVisibilityState";
+        }
+        document.addEventListener(
+            visibilityChange,
+            ()=>{ game.paused = (game.paused) ? false : true }
+        );
     }
 
     create() {
