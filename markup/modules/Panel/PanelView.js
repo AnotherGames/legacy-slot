@@ -69,6 +69,8 @@ export let view = (() => {
         }) {
             let spinButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'spinOn.png', 'spin.png', 'spinOn.png', null, container);
                 spinButtonDesk.anchor.set(0.5);
+                spinButtonDesk.visible = (model.data('remainAutoCount') > 0) ? false : true;
+
             model.el('spinButtonDesk', spinButtonDesk);
 
             return spinButtonDesk;
@@ -82,8 +84,8 @@ export let view = (() => {
         }) {
             let stopButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'stopOn.png', 'stop.png', 'stopOn.png', null, container);
                 stopButtonDesk.anchor.set(0.5);
-                stopButtonDesk.visible = false;
-                stopButtonDesk.visible.false;
+                stopButtonDesk.visible = (model.data('remainAutoCount') > 0) ? true : false;
+
             model.el('stopButtonDesk', stopButtonDesk);
             return stopButtonDesk;
         },
