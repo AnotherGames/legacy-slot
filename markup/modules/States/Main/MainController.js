@@ -31,7 +31,6 @@ export class Main {
         game.frameAnims = [];
         game.spriteAnims = [];
 
-        this.pi = 0;
         // Создаем контейнеры
         mainView.create.groups({});
 
@@ -167,19 +166,6 @@ export class Main {
         game.frameAnims.forEach((anim) => {
           anim();
         });
-
-        let deer = model.el('deer');
-        let path = model.data('path');
-
-        deer.x = path[this.pi].x;
-        deer.y = path[this.pi].y;
-        // deer.rotation = path[this.pi].angle;
-
-        this.pi += 5;
-
-        if (this.pi >= path.length) {
-            this.pi = 0;
-        }
     }
 
     positionMainContainer() {

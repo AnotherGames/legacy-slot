@@ -173,13 +173,19 @@ export let view = (() => {
         }) {
 
             let deer = game.add.spine(50, game.height * 0.5, 'deer');
-            deer.setAnimationByName(0, 'walk', true);
-            model.group('bg').add(deer);
-            deer.scale.set(0.5);
+                deer.setAnimationByName(0, 'walk', true);
+                deer.scale.set(0.5);
+
             model.el('deer', deer);
+            model.group('bg').add(deer);
 
             let time = game.rnd.integerInRange(20, 35);
             let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
+
+            // let emitter = game.add.emitter(0, 0, 100);
+            //     emitter.makeParticles('closed');
+            //     emitter.gravity = 200;
+            //     emitter.start(false, 2000, null, 0);
 
             // deer.x = (side === 'left') ? -deer.width : game.width + deer.width;
             // let delta = (side === 'left') ? game.width + deer.width : -deer.width;
@@ -187,46 +193,95 @@ export let view = (() => {
             //     deer.width = -deer.width;
             // }
 
-            // let bmd = game.add.bitmapData(game.width, game.height);
-            // bmd.addToWorld();
+            let pi = 0;
+            let path = draw.path({
+                coordX: [ -deer.width, game.width * 0.2, game.width * 0.4, game.width * 0.6, game.width * 0.8, game.width + deer.width],
+                coordY: [ 240, 240, 240, 240, 240, 240 ],
+                randomY : true
+            });
+            game.frameAnims.push(()=>{
+                deer.x = path[pi].x;
+                deer.y = path[pi].y;
+                deer.rotation = path[pi].angle;
+
+                // emitter.x = path[pi].x;
+                // emitter.y = path[pi].y;
+
+                pi += 5;
+
+                if (pi >= path.length) {
+                    path = draw.path({
+                        coordX: [ -deer.width, game.width * 0.2, game.width * 0.4, game.width * 0.6, game.width * 0.8, game.width + deer.width],
+                        coordY: [ 240, 240, 240, 240, 240, 240 ],
+                        randomY : true
+                    });
+                    pi = 0;
+                }
+            });
+
+        },
+
+        path: function({
+            game = model.el('game'),
+            coordX = [game.width],
+            coordY = [game.width],
+            randomY = false,
+            randomX = false,
+            rectPath = false
+        }){
+
+            if(rectPath){
+                let bmd = game.add.bitmapData(game.width, game.height);
+                bmd.addToWorld();
+            };
 
             let points = {
-                'x': [ -deer.width, game.width * 0.2, game.width * 0.4, game.width * 0.6, game.width * 0.8, game.width + deer.width],
-                'y': [ 240, 240, 240, 240, 240, 240 ]
+                'x': coordX,
+                'y': coordY
             };
 
             let py = points.y;
             let path = [];
-            let pi = 0;
             let x = 1 / game.width;
+            let ix = 0;
 
-            for (let i = 0; i < py.length; i++) {
-                py[i] = game.rnd.between(350, 850);
+            if(randomY){
+                for (let i = 0; i < py.length; i++) {
+                    py[i] = game.rnd.between(0, game.height);
+                }
+            }
+
+            if(randomX){
+                for (let i = 0; i < px.length; i++) {
+                    px[i] = game.rnd.between(0, game.width);
+                }
             }
 
             for (let i = 0; i <= 1; i += x) {
                 let px = game.math.bezierInterpolation(points.x, i);
                 let py= game.math.bezierInterpolation(points.y, i);
+                let node = {x: px, y: py, angle: 0};
 
-                path.push({ x: px, y: py });
+                if (ix > 0){
+                    node.angle = game.math.angleBetweenPoints(path[ix - 1], node);
+                }
+                path.push(node);
 
-                // bmd.rect(px, py, 1, 1, 'rgba(255, 255, 255, 1)');
+                ix++;
+
+                if(rectPath){
+                    bmd.rect(px, py, 1, 1, 'rgba(255, 255, 255, 1)');
+                }
             }
 
-            for (let p = 0; p < points.x.length; p++)
-            {
-                // bmd.rect(points.x[p]-3, points.y[p]-3, 6, 6, 'rgba(255, 0, 0, 1)');
+            if(rectPath){
+                for (let p = 0; p < points.x.length; p++)
+                {
+                    bmd.rect(points.x[p]-3, points.y[p]-3, 6, 6, 'rgba(255, 0, 0, 1)');
+                }
             }
 
-            model.data('path', path);
-
-            // game.add.tween(deer).to({x: delta}, time * 1000, 'Linear', true)
-            // .onComplete.add(() => {
-            //     deer.destroy();
-            //     game.time.events.add(3000, () => {
-            //         this.addDeers({});
-            //     });
-            // }, this);
+            return path;
 
         },
 
