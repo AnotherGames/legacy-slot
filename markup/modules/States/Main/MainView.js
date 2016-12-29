@@ -233,36 +233,19 @@ export let view = (() => {
         flyingSmoke: function({
             game = model.el('game'),
             container = model.group('bg'),
-            frame = 'smoke2',
-            x = 190,
-            y = 750,
-            speed = game.rnd.between(40000, 60000),
-            delay = game.rnd.between(1000, 20000),
-            scaleX = 1.0,
-            scaleY = 1.0,
-            pivotX = 145,
-            alpha = 0.65
+            x = (model.desktop) ? 190 : 53,
+            y = (model.desktop) ? 750 : 510,
+            animation = 2
         }){
-            let smoke = game.add.sprite(x, y, frame, null, container);
-                smoke.pivot.set(pivotX, 872);
-                smoke.scale.set(0.01);
-                smoke.alpha = 0;
 
-            game.add.tween(smoke).to({alpha: alpha }, 3000, Phaser.Easing.Sinusoidal.InOut, true, delay);
-            game.add.tween(smoke.scale).to({y: scaleX, x: scaleY}, speed, Phaser.Easing.Sinusoidal.InOut, true, delay)
-            // game.add.tween(smoke).to({y: smoke.y / 2}, speed, Phaser.Easing.Sinusoidal.InOut, true, delay)
-                .onComplete.add(()=>{
-                    game.add.tween(smoke).to({alpha: 0}, speed / 3, Phaser.Easing.Quintic.In, true)
-                        .onComplete.add(()=>{
-                            smoke.destroy();
-                            if (frame === 'smoke2') {
-                                draw.flyingSmoke({});
-                            } else {
-                                draw.flyingSmoke({x: 30, y: 615, scaleX: 0.6, scaleY: 0.6, frame: 'smoke', pivotX: 234, alpha: 0.45});
-                            }
-                        })
+            let smoke = game.add.spine(x, y, 'smoke');
+            smoke.setAnimationByName(0, animation, true);
+            model.group('bg').add(smoke);
+            smoke.scale.set(0.01);
+            model.el('smoke', smoke);
 
-                });
+            game.add.tween(smoke.scale).to({x: 0.6, y: 0.6}, 100000, 'Linear', true);
+
         },
 
         lineNumbers: function ({

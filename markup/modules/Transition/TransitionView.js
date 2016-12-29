@@ -208,7 +208,7 @@ export let view = (() => {
         soundController.music.playMusic('finishPerehod');
 
         // Рисуем фон
-        let transitionBG = game.add.graphics(0, 0, transitionContainer).beginFill(0x000000, 0.9).drawRect(0, 0, game.width, game.height);
+        let transitionBG = game.add.sprite(0, 0, 'transitionBG', null, transitionContainer);
         model.el('transitionBG', transitionBG);
 
         // выбираем надпись для конечного экрна (Big Win --- Total Win)

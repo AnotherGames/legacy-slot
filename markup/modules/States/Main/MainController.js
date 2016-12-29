@@ -53,10 +53,12 @@ export class Main {
         mainView.draw.mainBG({});
         mainView.draw.addStars({});
         mainView.draw.addSnow({});
-        mainView.draw.flyingSmoke({x: 30, y: 615, scaleX: 0.6, scaleY: 0.6, frame: 'smoke', pivotX: 234, alpha: 0.45});
-        game.time.events.add(5000, () => {
-            mainView.draw.flyingSmoke({});
-        });
+        mainView.draw.flyingSmoke({});
+        if (model.desktop) {
+            game.time.events.add(10000, () => {
+                mainView.draw.flyingSmoke({x: 30, y: 615, animation: 1});
+            });
+        }
         mainView.draw.addDeers({});
         mainView.draw.mainContainer({});
         mainView.draw.machineContainer({});

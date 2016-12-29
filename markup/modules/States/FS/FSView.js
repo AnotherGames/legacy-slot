@@ -47,7 +47,7 @@ export let view = (() => {
                 gameMachine.visible = false;
             model.el('gameMachine', gameMachine);
 
-            let deltaY = (model.mobile) ? 10 : 50;
+            let deltaY = (model.mobile) ? 10 : 70;
 
             let skyLogo = game.add.sprite(0, -game.height / 2 + deltaY + 70, 'skyLogo', null, container);
                 skyLogo.anchor.set(0.5);
@@ -61,11 +61,11 @@ export let view = (() => {
                 upperBG.anchor.set(0.5);
             model.el('upperBG', upperBG);
 
-            if (model.desktop) {
-                let el = game.add.sprite(520, 510, 'el', null, container);
-                el.anchor.set(0.5);
-                model.el('el', el);
-            }
+            // if (model.desktop) {
+            //     let el = game.add.sprite(520, 510, 'el', null, container);
+            //     el.anchor.set(0.5);
+            //     model.el('el', el);
+            // }
         },
 
         addStars: function ({
@@ -80,6 +80,24 @@ export let view = (() => {
             container.add(starsBG);
 
             model.el('starsBG', starsBG);
+        },
+
+        flyingSmoke: function({
+            game = model.el('game'),
+            container = model.group('bg'),
+            x = (model.desktop) ? 190 : 53,
+            y = (model.desktop) ? 750 : 510,
+            animation = 2
+        }){
+
+            let smoke = game.add.spine(x, y, 'smoke');
+            smoke.setAnimationByName(0, animation, true);
+            model.group('bg').add(smoke);
+            smoke.scale.set(0.01);
+            model.el('smoke', smoke);
+
+            game.add.tween(smoke.scale).to({x: 0.6, y: 0.6}, 100000, 'Linear', true);
+
         },
 
         addSnow: function ({
@@ -218,6 +236,24 @@ export let view = (() => {
             }
             model.el('rightArr', rightArr);
 
+        },
+
+        lineShape: function(number) {
+            let game = model.el('game');
+            let container = model.group('glistaLight');
+            let line = model.data('lines')[number - 1];
+            let elSize = config[model.res].elements;
+            let lineShape = game.add.graphics(0, 0, container);
+            lineShape
+                // .beginFill(0x000000)
+                .lineStyle(4, 0xffffff, 0.8)
+                .moveTo((line[0].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[0].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + 50)
+                .lineTo((line[1].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[1].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + 50)
+                .lineTo((line[2].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[2].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + 50)
+                .lineTo((line[3].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[3].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + 50)
+                .lineTo((line[4].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[4].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + 50)
+
+            return lineShape;
         },
 
         machineContainer: function ({

@@ -13,13 +13,15 @@ export let view = (() => {
             x = game.world.centerX + config[model.res].panelMargin.x,
             y = model.el('gameMachine').height + config[model.res].panelMargin.y,
             frameName = 'ui',
-            deltaY = 0
+            deltaY = 0,
+            convertX = 985,
+            convertY = 77
         }) {
             container.x = x;
             container.y = y;
             let panelBG = game.add.sprite(0, deltaY, frameName, null, container);
 
-            let convert = game.add.sprite(985, 77, 'convert', null, container);
+            let convert = game.add.sprite(convertX, convertY, 'convert', null, container);
             convert.anchor.set(0.5);
             convert.inputEnabled = true;
             convert.events.onInputDown.add(() => {

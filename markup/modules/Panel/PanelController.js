@@ -71,7 +71,9 @@ export let controller = (() => {
     function drawFsPanel() {
         view.draw.PanelBG({
             frameName: 'uiFS',
-            deltaY: -40
+            deltaY: -40,
+            convertX: 1180,
+            convertY: 95
         });
         // view.draw.LinesNumber({x: 55, y: 118});
     }

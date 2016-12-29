@@ -121,6 +121,12 @@ export class FS {
         fsView.draw.mainBG({});
         fsView.draw.addStars({});
         fsView.draw.addSnow({});
+        fsView.draw.flyingSmoke({});
+        if (model.desktop) {
+            game.time.events.add(10000, () => {
+                fsView.draw.flyingSmoke({x: 30, y: 615, animation: 1});
+            });
+        }
         fsView.draw.mainContainer({});
         fsView.draw.machineContainer({});
         // fsView.draw.addDragon({});

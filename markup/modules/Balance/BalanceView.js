@@ -41,16 +41,17 @@ export let view = (() => {
             coinCashValue = model.balance('coinCash'),
             betCashValue = model.balance('betCash'),
             winCashValue = model.balance('winCash'),
-            greyStyle = {font: '20px Helvetica, Arial', fill: '#888888', align: 'center'},
-            cashStyle = {font: '20px Helvetica, Arial', fill: '#ffffff', align: 'center'},
-            y = 79
+            greyStyle = {font: '22px Helvetica, Arial', fill: '#888888', align: 'center'},
+            cashStyle = {font: '22px Helvetica, Arial', fill: '#ffffff', align: 'center'},
+            y = (model.state('fs')) ? 97 : 79
         }) {
-
+            let x1 = (model.state('fs')) ? 1075 : 885;
+            let x2 = (model.state('fs')) ? 250 : 145;
             // let coinCashText = game.add.text(0, y, 'Cash: ', greyStyle, container);
             // let betCashText = game.add.text(0, y, 'Bet: ', greyStyle, container);
             // let winCashText = game.add.text(0, y, 'Win: ', greyStyle, container);
-            let coinCash = game.add.text(885, y, `${currencySymbol} ${coinCashValue.toFixed(2)}`, cashStyle, container);
-            let betCash = game.add.text(145, y, `${currencySymbol} ${betCashValue.toFixed(2)}`, cashStyle, container);
+            let coinCash = game.add.text(x1, y, `${currencySymbol} ${coinCashValue.toFixed(2)}`, cashStyle, container);
+            let betCash = game.add.text(x2, y, `${currencySymbol} ${betCashValue.toFixed(2)}`, cashStyle, container);
             if (model.state('balance') == 'coins') {
                 coinCash.visible = betCash.visible = false;
             }

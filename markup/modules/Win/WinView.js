@@ -25,13 +25,13 @@ export let view = (() => {
                 winTotalData = `${model.balance('currencySymbol')} ${(model.balance('coinValue') * winTotalData).toFixed(2)}`;
             }
 
-            if (fs) {
-                let winTotal = game.add.sprite(6, 0, 'winTotalFS', null, container);
-                    winTotal.anchor.set(0.5, 0.63);
-            } else {
+            // if (fs) {
+                // let winTotal = game.add.sprite(6, 0, 'winTotalFS', null, container);
+                    // winTotal.anchor.set(0.5, 0.63);
+            // } else {
                 let winTotal = game.add.sprite(6, 0, 'winTotal', null, container);
                     winTotal.anchor.set(0.5);
-            }
+            // }
 
             let winTotalText = game.add.text(0, 0, winTotalData, style, container);
                 winTotalText.anchor.set(0.5);

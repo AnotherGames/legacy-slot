@@ -56,8 +56,6 @@ export class Preload {
         game.load.image('transitionBG', 'bg/transitionBG.png');
         game.load.image('upperBG', 'bg/upperBG.png');
         game.load.image('BG', 'bg/BG.png');
-        game.load.image('smoke', 'bg/smoke.png');
-        game.load.image('smoke2', 'bg/smoke2.png');
         game.load.image('snow', 'bg/snow.png');
         game.load.spritesheet('snowflakes', 'bg/snow2.png', 17, 17);
         game.load.spritesheet('snowflakes_large', 'bg/snow3.png', 64, 64);
@@ -106,21 +104,17 @@ export class Preload {
     loadFSAssets() {
         const game = model.el('game');
         game.load.image('fsBG', 'bg/mainBG.png');
-        // game.load.image('freeSpins', 'fs/freeSpins.png');
-        // game.load.image('multiplier', 'fs/multiplier.png');
-        // game.load.image('freeSpinsPanelFS', 'fs/freeSpinsPanelFS.png');
-        // game.load.image('multiPanelFS', 'fs/multiPanelFS.png');
     }
 
     loadSpineAssets() {
         const game = model.el('game');
-        // game.load.spine('animBG', 'spine/skeleton.json');
         game.load.spine('dragon', 'spine/Dragon.json');
         game.load.spine('logo', 'spine/skeleton.json');
         game.load.spine('tree', 'spine/iolka.json');
         game.load.spine('krampus', 'spine/krampus.json');
         game.load.spine('stars', 'spine/stars.json');
         game.load.spine('deer', 'spine/oleny.json');
+        game.load.spine('smoke', 'spine/smoke.json');
     }
 
     loadElements() {
