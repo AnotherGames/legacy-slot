@@ -2,59 +2,59 @@
 
 {
 	"filename": "G_0001.png",
-	"frame": {"x":1,"y":307,"w":197,"h":171},
+	"frame": {"x":1,"y":1,"w":305,"h":182},
 	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":197,"h":171},
-	"sourceSize": {"w":197,"h":171}
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":0,"w":305,"h":182},
+	"sourceSize": {"w":306,"h":182}
 },
 {
 	"filename": "G_0002.png",
-	"frame": {"x":1,"y":635,"w":179,"h":235},
+	"frame": {"x":1,"y":185,"w":220,"h":166},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":179,"h":235},
-	"sourceSize": {"w":179,"h":235}
+	"spriteSourceSize": {"x":0,"y":0,"w":220,"h":166},
+	"sourceSize": {"w":220,"h":166}
 },
 {
 	"filename": "G_0003.png",
-	"frame": {"x":1,"y":133,"w":209,"h":172},
+	"frame": {"x":223,"y":317,"w":220,"h":131},
 	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":209,"h":172},
-	"sourceSize": {"w":209,"h":172}
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":0,"w":220,"h":131},
+	"sourceSize": {"w":221,"h":131}
 },
 {
 	"filename": "G_0004.png",
-	"frame": {"x":1,"y":480,"w":194,"h":153},
+	"frame": {"x":223,"y":185,"w":221,"h":130},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":194,"h":153},
-	"sourceSize": {"w":194,"h":153}
+	"spriteSourceSize": {"x":0,"y":0,"w":221,"h":130},
+	"sourceSize": {"w":221,"h":130}
 },
 {
 	"filename": "G_0005.png",
-	"frame": {"x":1,"y":872,"w":167,"h":142},
+	"frame": {"x":1,"y":353,"w":220,"h":132},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":167,"h":142},
-	"sourceSize": {"w":167,"h":142}
+	"spriteSourceSize": {"x":0,"y":0,"w":220,"h":132},
+	"sourceSize": {"w":220,"h":132}
 },
 {
 	"filename": "G_0006.png",
-	"frame": {"x":1,"y":1,"w":218,"h":130},
+	"frame": {"x":308,"y":1,"w":141,"h":78},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":218,"h":130},
-	"sourceSize": {"w":218,"h":130}
+	"spriteSourceSize": {"x":0,"y":0,"w":141,"h":78},
+	"sourceSize": {"w":141,"h":78}
 }],
 "meta": {
 	"app": "http://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "glista.png",
 	"format": "RGBA8888",
-	"size": {"w":220,"h":1015},
-	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:d01d691ac5a0f82fb7538bc156f74812:ec759f7ee7d50dddb603535d00f48d39:86697a0589e803528f684a3ea309d93d$"
+	"size": {"w":512,"h":512},
+	"scale": "0.66",
+	"smartupdate": "$TexturePacker:SmartUpdate:75fbb5ca75710d70b07f4b1aaadbc2f1:7a0833894df7cf722ed523d06877fad6:86697a0589e803528f684a3ea309d93d$"
 }
 }

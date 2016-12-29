@@ -449,8 +449,8 @@ export let view = (() => {
             const elSize = config[model.res].elements;
             let deltaY = (model.desktop) ? 32 : 18;
 
-            let someGraphic = game.add.graphics(-elSize.width * 2.5, -elSize.height * 1.5 - deltaY, machineGroup);
-                someGraphic.beginFill(0xffffff).drawRect(-100, 0, elSize.width * 5 + 200, elSize.height * 3 + 100);
+            let someGraphic = game.add.graphics(-game.width / 2, -elSize.height * 1.5 - deltaY, machineGroup);
+                someGraphic.beginFill(0xffffff).drawRect(0, 0, game.width, elSize.height * 3 + 100);
             machineGroup.mask = someGraphic;
         },
 

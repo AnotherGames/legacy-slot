@@ -5,7 +5,7 @@ import { view } from 'modules/Balance/BalanceView';
 export let controller = (() => {
 
     function initMobile() {
-        view.draw.CashBalance({});
+        view.draw.MobileCashBalance({});
         view.draw.MobileBalance({});
     }
 
@@ -18,7 +18,7 @@ export let controller = (() => {
     }
 
     function initFSMobile() {
-        view.draw.CashBalance({});
+        view.draw.MobileCashBalance({});
         view.draw.FSMobileBalance({});
     }
 

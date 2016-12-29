@@ -143,6 +143,28 @@ export let view = (() => {
             front_emitter.start(false, 15000, 1000);
         },
 
+        addKrampus: function ({
+            game = model.el('game'),
+            container = model.group('bg')
+        }) {
+            let krampus = game.add.spine(1000, 500, 'krampus');
+                krampus.setAnimationByName(1, `idle1`, true);
+                krampus.scale.set(-1, 1);
+            let iolka = game.add.spine(1000, 500, 'tree');
+            iolka.setAnimationByName(1, `idle1`, true);
+            let i = 1;
+            let someTimer = setInterval(() => {
+                iolka.setAnimationByName(1, `strike${i}`, true);
+                krampus.setAnimationByName(1, `strike${i}`, true);
+                i++;
+                if (i == 13) {
+                    clearTimeout(someTimer);
+                    iolka.setAnimationByName(1, `idle3`, true);
+                    krampus.setAnimationByName(1, `idle3`, true);
+                }
+            }, 1900);
+        },
+
         lineNumbers: function ({
             game = model.el('game'),
             container = model.group('main')
@@ -305,17 +327,24 @@ export let view = (() => {
             game = model.el('game'),
             machineGroup = model.group('machine')
         }) {
+            // const elSize = config[model.res].elements;
+            //
+            // let maskX = game.world.centerX;
+            //
+            // let mask = game.add.graphics();
+            //     mask.beginFill(0x000000);
+            //     mask.drawRect(maskX, game.world.centerY + config[model.res].mainContainer.y, elSize.width * 5, elSize.height * 3);
+            // mask.pivot.set(elSize.width * 2.5, elSize.height * 1.5);
+            //
+            // machineGroup.mask = mask;
+            // model.el('mask', mask);
+
             const elSize = config[model.res].elements;
+            let deltaY = (model.desktop) ? 32 : 18;
 
-            let maskX = game.world.centerX;
-
-            let mask = game.add.graphics();
-                mask.beginFill(0x000000);
-                mask.drawRect(maskX, game.world.centerY + config[model.res].mainContainer.y, elSize.width * 5, elSize.height * 3);
-            mask.pivot.set(elSize.width * 2.5, elSize.height * 1.5);
-
-            machineGroup.mask = mask;
-            model.el('mask', mask);
+            let someGraphic = game.add.graphics(-game.width / 2, -elSize.height * 1.5 - deltaY, machineGroup);
+                someGraphic.beginFill(0xffffff).drawRect(0, 0, game.width, elSize.height * 3 + 100);
+            machineGroup.mask = someGraphic;
         },
 
         darkness: function ({
@@ -335,14 +364,16 @@ export let view = (() => {
         }) {
             let x, y;
             if (model.mobile) {
-                x = 980;
-                y = 60;
+                x = game.width * 0.95;
+                y = 80;
             } else {
                 x = 710;
                 y = 115;
             }
-            // let multiBG = game.add.sprite(x, y, 'multiPanelFS', null, container);
-            // multiBG.anchor.set(0.5);
+            if (model.mobile) {
+                let multiBG = game.add.sprite(x, y, 'multiBG', null, container);
+                multiBG.anchor.set(0.5);
+            }
             const fsMulti = game.add.sprite(
                 x,
                 y + 5,
@@ -363,18 +394,20 @@ export let view = (() => {
         }) {
             let x, y, font, deltaY;
             if (model.mobile) {
-                x = 270;
-                y = 60;
+                x = game.width * 0.05;
+                y = 80;
                 font = fontMobile;
-                deltaY = 10;
+                deltaY = 15;
             } else {
                 x = 620;
                 y = 90;
                 font = fontDesktop;
                 deltaY = 10;
             }
-            // let countBG = game.add.sprite(x, y, 'freeSpinsPanelFS', null, container);
-                // countBG.anchor.set(0.5);
+            if (model.mobile) {
+                let countBG = game.add.sprite(x, y, 'freeSpinsBG', null, container);
+                countBG.anchor.set(0.5);
+            }
 
             let fsCount = game.add.bitmapText(x, y + deltaY, 'numbersFont', start, font, container);
                 fsCount.anchor.set(0.5)

@@ -104,6 +104,10 @@ export class Preload {
     loadFSAssets() {
         const game = model.el('game');
         game.load.image('fsBG', 'bg/mainBG.png');
+        if (model.mobile) {
+            game.load.image('freeSpinsBG', 'fs/freeSpinsBG.png');
+            game.load.image('multiBG', 'fs/multiBG.png');
+        }
     }
 
     loadSpineAssets() {
