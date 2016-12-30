@@ -129,7 +129,6 @@ export class FS {
         }
         fsView.draw.mainContainer({});
         fsView.draw.machineContainer({});
-        // fsView.draw.addDragon({});
         fsView.draw.lineNumbers({});
         fsView.draw.addKrampus({});
         // Инициализируем крутки

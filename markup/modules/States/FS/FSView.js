@@ -147,17 +147,25 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('bg')
         }) {
-            let krampus = game.add.spine(1000, 500, 'krampus');
+            let x = game.width * 0.52;
+            let y = (model.desktop) ? game.width * 0.52 : game.width * 0.3;
+            let scale = (model.desktop) ? 1 : 0.66;
+            let krampus = game.add.spine(x, y, 'krampus');
                 krampus.setAnimationByName(1, `idle1`, true);
-                krampus.scale.set(-1, 1);
-            let iolka = game.add.spine(1000, 500, 'tree');
-            iolka.setAnimationByName(1, `idle1`, true);
+                krampus.scale.set(scale * -1, scale);
+                krampus.z = 5;
+                console.log(krampus);
+
+            let iolka = game.add.spine(x, y, 'tree');
+                iolka.setAnimationByName(1, `idle1`, true);
+                iolka.scale.set(scale);
+
             let i = 1;
             let someTimer = setInterval(() => {
                 iolka.setAnimationByName(1, `strike${i}`, true);
                 krampus.setAnimationByName(1, `strike${i}`, true);
                 i++;
-                if (i == 13) {
+                if (i >= 13) {
                     clearTimeout(someTimer);
                     iolka.setAnimationByName(1, `idle3`, true);
                     krampus.setAnimationByName(1, `idle3`, true);
@@ -303,41 +311,10 @@ export let view = (() => {
             machineGroup.add(machineGroup.glistaContainer);
         },
 
-        // addDragon: function ({
-        //     game = model.el('game')
-        // }) {
-        //     let container = model.group('dragon');
-        //     let x, y;
-        //     if (model.mobile) {
-        //         x = 610;
-        //         y = 280;
-        //     } else {
-        //         x = 850;
-        //         y = 450;
-        //     }
-        //     let dragonFS = new Dragon({position: {x, y}, container});
-        //         dragonFS.IdleFS();
-        //     if (model.mobile) {
-        //         dragonFS.char.scale.set(0.7);
-        //     }
-        //     model.el('dragonFS', dragonFS);
-        // },
-
         machineMask: function ({
             game = model.el('game'),
             machineGroup = model.group('machine')
         }) {
-            // const elSize = config[model.res].elements;
-            //
-            // let maskX = game.world.centerX;
-            //
-            // let mask = game.add.graphics();
-            //     mask.beginFill(0x000000);
-            //     mask.drawRect(maskX, game.world.centerY + config[model.res].mainContainer.y, elSize.width * 5, elSize.height * 3);
-            // mask.pivot.set(elSize.width * 2.5, elSize.height * 1.5);
-            //
-            // machineGroup.mask = mask;
-            // model.el('mask', mask);
 
             const elSize = config[model.res].elements;
             let deltaY = (model.desktop) ? 32 : 18;

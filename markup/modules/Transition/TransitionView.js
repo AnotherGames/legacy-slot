@@ -66,7 +66,7 @@ export let view = (() => {
         let delta = (model.desktop) ? 50 : 25;
         // Отрисовуем множитель
         let multiValue = model.data('rollResponse').NextMode.split('-')[1];
-        console.log(multiValue);
+
         let multiLevel = game.add.bitmapText(game.width / 2 - 15, game.height * 0.5, 'numbersFont', 'x' + multiValue, 120, transitionContainer);;
             multiLevel.align = 'center';
             multiLevel.anchor.set(0.5);
