@@ -129,7 +129,7 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('main')
         }) {
-            let back_emitter = game.add.emitter(-500, -500, 60);
+            let back_emitter = game.add.emitter(-500, -500, 300);
                 back_emitter.makeParticles('snowflakes', [0, 1, 2, 3, 4, 5]);
                 back_emitter.maxParticleScale = 0.6;
                 back_emitter.minParticleScale = 0.2;
@@ -139,7 +139,7 @@ export let view = (() => {
                 back_emitter.minRotation = 0;
                 back_emitter.maxRotation = 40;
 
-            let mid_emitter = game.add.emitter(-500, -500, 25);
+            let mid_emitter = game.add.emitter(-500, -500, 125);
                 mid_emitter.makeParticles('snowflakes', [0, 1, 2, 3, 4, 5]);
                 mid_emitter.maxParticleScale = 1.2;
                 mid_emitter.minParticleScale = 0.8;
@@ -149,7 +149,7 @@ export let view = (() => {
                 mid_emitter.minRotation = 0;
                 mid_emitter.maxRotation = 40;
 
-            let front_emitter = game.add.emitter(-500, -500, 5);
+            let front_emitter = game.add.emitter(-500, -500, 25);
                 front_emitter.makeParticles('snowflakes_large', [0, 1, 2, 3, 4, 5]);
                 front_emitter.maxParticleScale = 1;
                 front_emitter.minParticleScale = 0.5;

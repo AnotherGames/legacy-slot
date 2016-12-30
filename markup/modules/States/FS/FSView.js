@@ -104,7 +104,7 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('main')
         }) {
-            let back_emitter = game.add.emitter(-500, -500, 600);
+            let back_emitter = game.add.emitter(-500, -500, 300);
                 back_emitter.makeParticles('snowflakes', [0, 1, 2, 3, 4, 5]);
                 back_emitter.maxParticleScale = 0.6;
                 back_emitter.minParticleScale = 0.2;
@@ -114,7 +114,7 @@ export let view = (() => {
                 back_emitter.minRotation = 0;
                 back_emitter.maxRotation = 40;
 
-            let mid_emitter = game.add.emitter(-500, -500, 250);
+            let mid_emitter = game.add.emitter(-500, -500, 125);
                 mid_emitter.makeParticles('snowflakes', [0, 1, 2, 3, 4, 5]);
                 mid_emitter.maxParticleScale = 1.2;
                 mid_emitter.minParticleScale = 0.8;
@@ -124,7 +124,7 @@ export let view = (() => {
                 mid_emitter.minRotation = 0;
                 mid_emitter.maxRotation = 40;
 
-            let front_emitter = game.add.emitter(-500, -500, 50);
+            let front_emitter = game.add.emitter(-500, -500, 25);
                 front_emitter.makeParticles('snowflakes_large', [0, 1, 2, 3, 4, 5]);
                 front_emitter.maxParticleScale = 1;
                 front_emitter.minParticleScale = 0.5;
@@ -148,7 +148,8 @@ export let view = (() => {
             container = model.group('bg')
         }) {
             let x = game.width * 0.52;
-            let y = (model.desktop) ? game.width * 0.52 : game.width * 0.3;
+            let y = game.height * 0.52;
+
             let scale = (model.desktop) ? 1 : 0.66;
             let krampus = game.add.spine(x, y, 'krampus');
                 krampus.setAnimationByName(1, `idle1`, true);
@@ -156,18 +157,18 @@ export let view = (() => {
                 krampus.z = 5;
                 console.log(krampus);
 
-            let iolka = game.add.spine(x, y, 'tree');
-                iolka.setAnimationByName(1, `idle1`, true);
-                iolka.scale.set(scale);
+            let newYearTree = game.add.spine(x, y, 'tree');
+                newYearTree.setAnimationByName(1, `idle1`, true);
+                newYearTree.scale.set(scale);
 
             let i = 1;
             let someTimer = setInterval(() => {
-                iolka.setAnimationByName(1, `strike${i}`, true);
+                newYearTree.setAnimationByName(1, `strike${i}`, true);
                 krampus.setAnimationByName(1, `strike${i}`, true);
                 i++;
                 if (i >= 13) {
                     clearTimeout(someTimer);
-                    iolka.setAnimationByName(1, `idle3`, true);
+                    newYearTree.setAnimationByName(1, `idle3`, true);
                     krampus.setAnimationByName(1, `idle3`, true);
                 }
             }, 1900);
