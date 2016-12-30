@@ -15,7 +15,10 @@ let motion = {
         randomSide = false,
         rectPath = false,
         scale = anim.scale,
-        speed = 1
+        speed = 1,
+        rotation = false,
+        name = 'motionClosed',
+        repeat = false
     }){
 
         if(randomSide){
@@ -24,51 +27,74 @@ let motion = {
                 anim.scale.set(scale.x, scaleY);
         }
 
-        let lastSide = side;
         let pi = 0;
-        let path = motion.calcPath({
+        let path = motion._calcPath({
             coordX: coordX,
             coordY: coordY,
             randomY : randomY,
-            side: side
+            side: side,
+            rotation: rotation
         });
 
-        game.frameAnims.push(()=>{
+        function addToFA(){
             anim.x = path[pi].x;
             anim.y = path[pi].y;
-            anim.rotation = path[pi].angle;
 
-            // emitter.x = path[pi].x;
-            // emitter.y = path[pi].y;
+            if(rotation){
+                anim.rotation = path[pi].angle;
+            }
+
             pi += speed;
 
             if (pi >= path.length) {
+                if(!repeat){
+                    motion.destroyPath({name: name});
+                }
                 if(randomSide){
                     side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
                     let scaleY = (side == 'left') ? scale.y : scale.y * -1;
                         anim.scale.set(scale.x, scaleY);
                 }
-                lastSide = side;
 
-                path = motion.calcPath({
+                path = motion._calcPath({
                     coordX: coordX,
                     coordY: coordY,
                     randomY : randomY,
-                    side: side
+                    side: side,
+                    rotation: rotation
                 });
                 pi = 0;
             }
-        });
+        }
+
+        addToFA.delName = name;
+        game.frameAnims.push(addToFA);
+        // motion.destroyPath({name: 'deer'})
+        // console.log(anim.name);
+        // console.log(game.frameAnims[0].delName);
+        // game.frameAnims.pop()
     },
 
-    calcPath: function({
+    destroyPath: function({
+        game = model.el('game'),
+        name = 'motionClosed'
+    }){
+        game.frameAnims.forEach((motion)=>{
+            if (name == motion.delName){
+                game.frameAnims.pop(motion.delName)
+            }
+        })
+    },
+
+    _calcPath: function({
         game = model.el('game'),
         coordX = [game.width],
         coordY = [game.height],
         randomY = false,
         randomX = false,
         side = 'left',
-        rectPath = false
+        rectPath = false,
+        rotation = false
     }){
 
         if(side == 'right'){
@@ -108,7 +134,7 @@ let motion = {
             let py= game.math.bezierInterpolation(points.y, i);
             let node = {x: px, y: py, angle: 0};
 
-            if (ix > 0){
+            if (ix > 0 && rotation){
                 node.angle = game.math.angleBetweenPoints(path[ix - 1], node);
             }
             path.push(node);

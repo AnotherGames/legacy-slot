@@ -129,7 +129,7 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('main')
         }) {
-            let back_emitter = game.add.emitter(-500, -500, 600);
+            let back_emitter = game.add.emitter(-500, -500, 60);
                 back_emitter.makeParticles('snowflakes', [0, 1, 2, 3, 4, 5]);
                 back_emitter.maxParticleScale = 0.6;
                 back_emitter.minParticleScale = 0.2;
@@ -139,7 +139,7 @@ export let view = (() => {
                 back_emitter.minRotation = 0;
                 back_emitter.maxRotation = 40;
 
-            let mid_emitter = game.add.emitter(-500, -500, 250);
+            let mid_emitter = game.add.emitter(-500, -500, 25);
                 mid_emitter.makeParticles('snowflakes', [0, 1, 2, 3, 4, 5]);
                 mid_emitter.maxParticleScale = 1.2;
                 mid_emitter.minParticleScale = 0.8;
@@ -149,7 +149,7 @@ export let view = (() => {
                 mid_emitter.minRotation = 0;
                 mid_emitter.maxRotation = 40;
 
-            let front_emitter = game.add.emitter(-500, -500, 50);
+            let front_emitter = game.add.emitter(-500, -500, 5);
                 front_emitter.makeParticles('snowflakes_large', [0, 1, 2, 3, 4, 5]);
                 front_emitter.maxParticleScale = 1;
                 front_emitter.minParticleScale = 0.5;
@@ -176,14 +176,19 @@ export let view = (() => {
             let deer = game.add.spine(50, game.height * 0.5, 'deer');
                 deer.setAnimationByName(0, 'walk', true);
                 deer.scale.set(0.5);
+                deer.name = 'deer'
 
             model.el('deer', deer);
             model.group('bg').add(deer);
 
             motionPath.motion.addPath({
+                name: 'deer',
                 randomY: true,
                 anim: deer,
-                speed: 5
+                speed: 5,
+                randomSide: true,
+                rotation: true,
+                repeat: true,
             })
 
         },
