@@ -110,6 +110,9 @@ export class Element {
             case 11:
                 this.addAnimation(sprite, { el: 11, n: false, w: 10 });
                 break;
+            case 12:
+                this.addAnimation(sprite, { el: 12, n: false, w: 10 });
+                break;
             default:
                 break;
 
@@ -120,16 +123,16 @@ export class Element {
         sprite.animations.add(`${options.el}-n`,
             // Если параметр options.n == false - то у нас будет только один кадр, в другом случае это будет количество кадров в анимации
             options.n
-            ? Phaser.Animation.generateFrameNames(`${options.el}-n-`, 1, options.n, '.png', 2)
-            : [`${options.el}-n.png`], 15, true);
+            ? Phaser.Animation.generateFrameNames(`${options.el}-n-`, 0, options.n, '.png', 2)
+            : [`${options.el}-n-00.png`], 15, true);
 
-        sprite.animations.add(`${options.el}-b`, [`${options.el}-b.png`], 15, true);
+        sprite.animations.add(`${options.el}-b`, [`${options.el}-b-00.png`], 15, true);
 
         sprite.animations.add(`${options.el}-w`,
             // Если параметр options.w == false - то у нас будет только один кадр, в другом случае это будет количество кадров в анимации
             options.w
-            ? Phaser.Animation.generateFrameNames(`${options.el}-w-`, 1, options.w, '.png', 2)
-            : [`${options.el}-w.png`], 15, true);
+            ? Phaser.Animation.generateFrameNames(`${options.el}-w-`, 0, options.w, '.png', 2)
+            : [`${options.el}-w-00.png`], 15, true);
             // Phaser.Animation.generateFrameNames(`${options.el}-w-`, 1, options.w, '.png', 2), 15, false);
     }
 }

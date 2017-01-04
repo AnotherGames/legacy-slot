@@ -160,6 +160,7 @@ export class Preload {
         game.load.atlasJSONArray('9', 'elements/9.png', 'elements/9.json');
         game.load.atlasJSONArray('10', 'elements/10.png', 'elements/10.json');
         game.load.atlasJSONArray('11', 'elements/11.png', 'elements/11.json');
+        game.load.atlasJSONArray('12', 'elements/12.png', 'elements/12.json');
     }
 
     hidePreloader() {
