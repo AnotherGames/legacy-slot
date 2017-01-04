@@ -9,7 +9,7 @@ export class Boot {
     init() {
         model.state('isNoConnect', false);
 
-        request.send('Initialise', 'fsBonus')
+        request.send('Initialise', 'normal')
             .then((initData) => {
                 model.initStates(initData);
                 model.initSettings(initData.Settings);
@@ -57,6 +57,8 @@ export class Boot {
             model.mobile = true;
             model.res = 'HD';
         }
+        game.scale.fullScreenScaleMode = Phaser.ScaleManager.USER_SCALE;
+        game.scale.setUserScale(1, 1);
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     }
 }
