@@ -83,7 +83,7 @@ export let controller = (() => {
             } else {
                 model.state('menuOpened', true)
                 let fullScreeButton = model.el('fullScreeButton');
-                fullScreeButton.frameName = (!window.screenTop && !window.screenY) ? 'fullscreenOff.png' : 'fullscreen.png';
+                fullScreeButton.frameName = (!window.screenTop && !window.screenY) ? 'fullscreen.png' : 'fullscreenOff.png';
 
                 let y = menuButton.y - 50;
                 for (let i = 0; i < 6; i++) {
@@ -191,7 +191,7 @@ export let controller = (() => {
             let fullScreeButton = model.el('fullScreeButton');
             if (!document.fullscreenElement && // alternative standard method
                 !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) { // current working methods
-                    fullScreeButton.frameName = 'fullscreen.png';
+                    fullScreeButton.frameName = 'fullscreenOff.png';
                 if (_e.requestFullscreen) {
                     _e.requestFullscreen();
                 } else if (_e.msRequestFullscreen) {
@@ -202,7 +202,7 @@ export let controller = (() => {
                     _e.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
                 }
             } else {
-                fullScreeButton.frameName = 'fullscreenOff.png';
+                fullScreeButton.frameName = 'fullscreen.png';
                 if (document.exitFullscreen) {
                     document.exitFullscreen();
                 } else if (document.msExitFullscreen) {
