@@ -2,7 +2,7 @@ export let config = {
     fadeinMusicTime: 5000,
     countMeterTime: 2500,
     autoTransitionTime: 10000,
-    symbolsCount: 11,
+    symbolsCount: 12,
     maxMulti: 7,
     numOfInfoDots: 7,
     wheel: {
@@ -21,7 +21,7 @@ export let config = {
     fullHD: {
         mainContainer: {
             x: 0,
-            y: -80
+            y: -70
         },
         gameMachine: {
             x: 0,

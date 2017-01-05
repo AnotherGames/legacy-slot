@@ -32,7 +32,7 @@ export let controller = (() => {
                 parent: elementsContainer,
                 position: {
                     x: (i - 2) * elSize.width,
-                    y: -elSize.height
+                    y: (model.desktop) ? -elSize.height + 35 : -elSize.height + 15
                 },
                 elSize,
                 currentScreen: firstWheels[i]

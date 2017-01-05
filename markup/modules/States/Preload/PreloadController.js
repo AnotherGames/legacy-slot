@@ -63,30 +63,32 @@ export class Preload {
         game.load.image('mainBG', 'bg/mainBG.png');
         game.load.image('transitionBG', 'bg/transitionBG.png');
         game.load.image('transitionSky', 'bg/transitionSky.png');
-        game.load.image('mainBGSky', 'bg/mainBGSky.png');
+        // game.load.image('mainBGSky', 'bg/mainBGSky.png');
         // game.load.image('sky', 'bg/sky.png');
-        game.load.image('zaglushka', 'bg/zaglushka.png');
-        game.load.image('gradient', 'bg/gradient.png');
+        // game.load.image('zaglushka', 'bg/zaglushka.png');
+        // game.load.image('gradient', 'bg/gradient.png');
         //BG Anim
         game.load.image('cloud', 'bg/cloud.png');
         game.load.image('sun', 'bg/sun.png');
-        game.load.image('luchi', 'bg/luchi.png');
-        game.load.image('fonLine', 'bg/fonLine.png');
-        game.load.atlasJSONArray('skull', 'bg/skull.png', 'bg/skull.json');
-        game.load.atlasJSONArray('pole', 'bg/pole.png', 'bg/pole.json');
-        if (model.desktop) {
-            game.load.atlasJSONArray('bird', 'bg/bird.png', 'bg/bird.json');
-            game.load.atlasJSONArray('bird2', 'bg/bird2.png', 'bg/bird2.json');
-            game.load.atlasJSONArray('birdFly', 'bg/birdFly.png', 'bg/birdFly.json');
-            game.load.atlasJSONArray('cow1', 'bg/cow1.png', 'bg/cow1.json');
-            game.load.atlasJSONArray('cow2', 'bg/cow2.png', 'bg/cow2.json');
-            game.load.atlasJSONArray('cow3', 'bg/cow3.png', 'bg/cow3.json');
-            game.load.atlasJSONArray('cowboy', 'bg/cowboy.png', 'bg/cowboy.json');
-            game.load.atlasJSONArray('red_indian', 'bg/red_indian.png', 'bg/red_indian.json');
-            game.load.atlasJSONArray('table', 'bg/table.png', 'bg/table.json');
-        }
+        // game.load.image('luchi', 'bg/luchi.png');
+        // game.load.image('fonLine', 'bg/fonLine.png');
+        // game.load.atlasJSONArray('skull', 'bg/skull.png', 'bg/skull.json');
+        // game.load.atlasJSONArray('pole', 'bg/pole.png', 'bg/pole.json');
+        // if (model.desktop) {
+        //     game.load.atlasJSONArray('bird', 'bg/bird.png', 'bg/bird.json');
+        //     game.load.atlasJSONArray('bird2', 'bg/bird2.png', 'bg/bird2.json');
+        //     game.load.atlasJSONArray('birdFly', 'bg/birdFly.png', 'bg/birdFly.json');
+        //     game.load.atlasJSONArray('cow1', 'bg/cow1.png', 'bg/cow1.json');
+        //     game.load.atlasJSONArray('cow2', 'bg/cow2.png', 'bg/cow2.json');
+        //     game.load.atlasJSONArray('cow3', 'bg/cow3.png', 'bg/cow3.json');
+        //     game.load.atlasJSONArray('cowboy', 'bg/cowboy.png', 'bg/cowboy.json');
+        //     game.load.atlasJSONArray('red_indian', 'bg/red_indian.png', 'bg/red_indian.json');
+        //     game.load.atlasJSONArray('table', 'bg/table.png', 'bg/table.json');
+        // }
         game.load.image('gameMachine', 'game/gameMachine.png');
         game.load.image('gameBG', 'game/gameBG.png');
+        game.load.image('gmRight', 'game/gmRight.png');
+        game.load.image('gmLeft', 'game/gmLeft.png');
         game.load.image('gameBGfs', 'game/gameBGfs.png');
         game.load.image('gameShadow', 'game/gameShadow.png');
         game.load.image('popup', 'other/popup.png');
@@ -97,8 +99,8 @@ export class Preload {
         game.load.image('arLeft', 'other/arLeft.png');
         game.load.atlasJSONArray('info', 'other/info.png', 'other/info.json');
         game.load.atlasJSONArray('infoMarker', 'other/infoMarker.png', 'other/infoMarker.json');
-        game.load.image('winLine', 'win/winLineRect.png');
-        game.load.image('winTotal', 'win/winTotalRect.png');
+        game.load.image('winLine', 'win/winLine.png');
+        game.load.image('winTotal', 'win/winTotal.png');
         game.load.atlasJSONArray('lineNumbers', 'win/lineNumbers.png', 'win/lineNumbers.json');
         game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
         game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
@@ -142,9 +144,11 @@ export class Preload {
 
     loadSpineAssets() {
         const game = model.el('game');
-        game.load.spine('pole', 'spine/p-pole.json');
-
-
+        // game.load.spine('pole', 'spine/p-pole.json');
+        game.load.spine('geisha', 'spine/Geisha.json');
+        game.load.spine('ninja', 'spine/Ninja.json');
+        game.load.spine('samurai', 'spine/Samurai.json');
+        game.load.spine('ronin', 'spine/Ronin.json');
     }
 
     loadTest() {

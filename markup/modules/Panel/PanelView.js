@@ -11,11 +11,11 @@ export let view = (() => {
             x = game.world.centerX,
             y = model.el('gameMachine').height,
             frameName = 'ui',
-            deltaY = 0
+            deltaY = -23
         }) {
             container.x = x;
             container.y = y;
-            const panelBG = game.add.sprite(0, deltaY, frameName, null, container);
+            const panelBG = game.add.sprite(1, deltaY, frameName, null, container);
 
             container.pivot.set(panelBG.width / 2, 0);
             return panelBG;
@@ -24,7 +24,7 @@ export let view = (() => {
         AutoContainer: function({
             game = model.el('game'),
             x = 650,
-            y = 98
+            y = 80
         }) {
             let autoDesktopContainer = game.add.group();
                 autoDesktopContainer.x = x;
@@ -37,7 +37,7 @@ export let view = (() => {
         SpinButton: function({
             game = model.el('game'),
             x = model.group('panel').width / 2,
-            y = 98,
+            y = 80,
             container = model.group('panel')
         }) {
             let spinButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'spinOn.png', 'spin.png', 'spinOn.png', null, container);
@@ -49,7 +49,7 @@ export let view = (() => {
         StopButton: function({
             game = model.el('game'),
             x = model.group('panel').width / 2,
-            y = 98,
+            y = 80,
             container = model.group('panel')
         }) {
             let stopButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'stopOn.png', 'stop.png', 'stopOn.png', null, container);
@@ -63,7 +63,7 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('panel'),
             x = model.el('spinButtonDesk').x - 137,
-            y = 98
+            y = 80
         }) {
             let autoButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'autoOn.png', 'auto.png', 'autoOn.png', null, container);
                 autoButtonDesk.anchor.set(0.5);
@@ -75,7 +75,7 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('panel'),
             x = model.el('spinButtonDesk').x + 137,
-            y = 98
+            y = 80
         }) {
             let maxBetButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'maxBetOn.png', 'maxBet.png', 'maxBetOn.png', null, container);
                 maxBetButtonDesk.anchor.set(0.5);
@@ -87,7 +87,7 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('panel'),
             x = model.group('panel').width - 115,
-            y = 105,
+            y = 85,
         }) {
             let infoButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'infoOn.png', 'info.png', 'infoOn.png', null, container);
             model.el('infoButtonDesk', infoButtonDesk);
@@ -97,8 +97,8 @@ export let view = (() => {
         PlusButton: function({
             game = model.el('game'),
             container = model.group('panel'),
-            x = 270,
-            y = 110,
+            x = 292,
+            y = 86,
         }) {
             let plusButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'plusOn.png', 'plus.png', 'plusOn.png', null, container);
             return plusButtonDesk;
@@ -107,8 +107,8 @@ export let view = (() => {
         MinusButton: function({
             game = model.el('game'),
             container = model.group('panel'),
-            x = 173,
-            y = 108
+            x = 191,
+            y = 86
         }) {
             let minusButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'minusOn.png', 'minus.png', 'minusOn.png', null, container);
             return minusButtonDesk;
@@ -118,8 +118,8 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('panel'),
             style = {font: 'normal 27px Helvetica, Arial', align: 'center', fill: '#e8b075'},
-            x = 85,
-            y = 116,
+            x = 103,
+            y = 94,
         }) {
             let linesNumber = game.add.text(x, y, '10', style, container);
             model.el('linesNumber', linesNumber);

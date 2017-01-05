@@ -30,23 +30,23 @@ export let view = (() => {
             container = model.group('bg')
         }) {
 
-            let mainBGSky = game.add.sprite(0, 0, 'mainBGSky', null, container);
-            model.el('mainBGSky', mainBGSky);
-
-            let gradient = game.add.sprite(0, 0, 'gradient', null, container);
-            gradient.alpha = 0.1;
-            model.el('gradient', gradient);
-            game.add.tween(gradient).to({alpha: 0.9}, 50000, 'Linear', true, 0, -1, true);
-
-            for (let i = 0; i < 5; i++) {
-                transitionView.addCloud({container: model.group('bg')});
-            }
+            // let mainBGSky = game.add.sprite(0, 0, 'mainBGSky', null, container);
+            // model.el('mainBGSky', mainBGSky);
+            //
+            // let gradient = game.add.sprite(0, 0, 'gradient', null, container);
+            // gradient.alpha = 0.1;
+            // model.el('gradient', gradient);
+            // game.add.tween(gradient).to({alpha: 0.9}, 50000, 'Linear', true, 0, -1, true);
+            //
+            // for (let i = 0; i < 5; i++) {
+            //     transitionView.addCloud({container: model.group('bg')});
+            // }
 
             let mainBG = game.add.sprite(0, 0, 'fsBG', null, container);
             model.el('mainBG', mainBG);
 
-            let logoZaglushka = game.add.sprite(0, game.height * 0.84, 'zaglushka', null, container);
-            model.el('logoZaglushka', logoZaglushka);
+            // let logoZaglushka = game.add.sprite(0, game.height * 0.84, 'zaglushka', null, container);
+            // model.el('logoZaglushka', logoZaglushka);
 
         },
 

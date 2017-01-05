@@ -162,7 +162,7 @@ export class FS {
         rollController.init();
 
         if (model.mobile) {
-            fsView.draw.addPole({});
+            // fsView.draw.addPole({});
             // Рисуем футер
             footerController.initMobile();
             // Отрисовуем баланс
@@ -171,7 +171,7 @@ export class FS {
             // Автоматически позиционируем основной контейнер
             this.positionMainContainer();
         } else {    // Desktop
-            fsView.draw.addCows({});
+            // fsView.draw.addCows({});
 
             footerController.initDesktop();
 

@@ -78,40 +78,40 @@ export class Element {
     addSpriteAnimation(sprite, index) {
         switch (index) {
             case 1:
-                this.addAnimation(sprite, { el: 1, n: false, w: 30 });
+                this.addAnimation(sprite, { el: 1, n: false, w: 29 });
                 break;
             case 2:
-                this.addAnimation(sprite, { el: 2, n: 30, w: 30 });
+                this.addAnimation(sprite, { el: 2, n: 29, w: 29 });
                 break;
             case 3:
-                this.addAnimation(sprite, { el: 3, n: false, w: 30 });
+                this.addAnimation(sprite, { el: 3, n: false, w: 29 });
                 break;
             case 4:
-                this.addAnimation(sprite, { el: 4, n: 30, w: 30 });
+                this.addAnimation(sprite, { el: 4, n: 29, w: 29 });
                 break;
             case 5:
-                this.addAnimation(sprite, { el: 5, n: false, w: 30 });
+                this.addAnimation(sprite, { el: 5, n: false, w: 29 });
                 break;
             case 6:
-                this.addAnimation(sprite, { el: 6, n: 30, w: 25 });
+                this.addAnimation(sprite, { el: 6, n: 29, w: 25 });
                 break;
             case 7:
-                this.addAnimation(sprite, { el: 7, n: false, w: 30 });
+                this.addAnimation(sprite, { el: 7, n: false, w: 29 });
                 break;
             case 8:
-                this.addAnimation(sprite, { el: 8, n: 30, w: 30 });
+                this.addAnimation(sprite, { el: 8, n: 29, w: 29 });
                 break;
             case 9:
-                this.addAnimation(sprite, { el: 9, n: false, w: 18 });
+                this.addAnimation(sprite, { el: 9, n: 29, w: 29 });
                 break;
             case 10:
-                this.addAnimation(sprite, { el: 10, n: false, w: 20 });
+                this.addAnimation(sprite, { el: 10, n: 29, w: 29 });
                 break;
             case 11:
-                this.addAnimation(sprite, { el: 11, n: false, w: 10 });
+                this.addAnimation(sprite, { el: 11, n: 29, w: 29 });
                 break;
             case 12:
-                this.addAnimation(sprite, { el: 12, n: false, w: 10 });
+                this.addAnimation(sprite, { el: 12, n: 29, w: 29 });
                 break;
             default:
                 break;
@@ -130,15 +130,15 @@ export class Element {
             // Если параметр options.n == false - то у нас будет только один кадр, в другом случае это будет количество кадров в анимации
             options.n
             ? Phaser.Animation.generateFrameNames(`${prefix}${options.el}-n-`, 0, options.n, '.png', 2)
-            : [`${prefix}${options.el}-n-00.png`], 15, true);
+            : [`${prefix}${options.el}-n-00.png`], 20, true);
 
-        sprite.animations.add(`${options.el}-b`, [`${prefix}${options.el}-b-00.png`], 15, true);
+        sprite.animations.add(`${options.el}-b`, [`${prefix}${options.el}-b-00.png`], 20, true);
 
         sprite.animations.add(`${options.el}-w`,
             // Если параметр options.w == false - то у нас будет только один кадр, в другом случае это будет количество кадров в анимации
             options.w
             ? Phaser.Animation.generateFrameNames(`${prefix}${options.el}-w-`, 0, options.w, '.png', 2)
-            : [`${prefix}${options.el}-w-00.png`], 15, true);
+            : [`${prefix}${options.el}-w-00.png`], 20, true);
             // Phaser.Animation.generateFrameNames(`${options.el}-w-`, 1, options.w, '.png', 2), 15, false);
     }
 }

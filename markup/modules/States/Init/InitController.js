@@ -49,9 +49,9 @@ export class Init {
 
         view.drawBG();
         view.drawLogo();
-        view.drawBaraban();
+        // view.drawBaraban();
 
-        transitionView.addLines({container: game.add.group()});
+        // transitionView.addLines({container: game.add.group()});
 
         let initPlay = view.drawPlay();
             initPlay.inputEnabled = true;
