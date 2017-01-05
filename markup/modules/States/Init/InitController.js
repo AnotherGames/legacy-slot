@@ -43,9 +43,7 @@ export class Init {
 
     create() {
         let game = model.el('game');
-        game.camera.flash(0x000000, 777)
-
-        this.checkSettingsWidth();
+        game.camera.flash(0x000000, 777);
 
         view.drawBG();
         view.drawLogo();
@@ -110,12 +108,6 @@ export class Init {
         if (_e.requestFullScreen) _e.requestFullScreen();
         else if (_e.mozRequestFullScreen) _e.mozRequestFullScreen();
         else if (_e.webkitRequestFullScreen) _e.webkitRequestFullScreen();
-    }
-
-    checkSettingsWidth() {
-        let settingsWidth = $('#settings').width();
-        let multiplay = window.innerWidth / settingsWidth * 0.8;
-        $('#settings').css('transform', 'translate(-50%, -50%) scale(' + multiplay + ',' + multiplay + ')');
     }
 
     drawSoundTrigger() {

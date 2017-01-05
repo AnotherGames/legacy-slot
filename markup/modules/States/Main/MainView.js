@@ -245,14 +245,17 @@ export let view = (() => {
 
             for (let i = 1; i < 11; i++) {
                 let name = i;
+                let sprite = (i < 10) ? 'plashka-0' + i +'-open_20.png' : 'plashka-' + i +'-open_20.png';
+
                 let lineNumber = game.add.sprite(config[model.res].win[i][0].x - gameMachine.width / 2,
                     config[model.res].win[i][0].y - gameMachine.height / 2 - 10,
                     'lineNumbers',
-                    'line_splash-' + i +'_0.png',
+                    sprite,
                     container);
                 lineNumber.normal = function() {lineNumber.frameName = 'line_splash-' + name + '_0.png'};
                 lineNumber.name = name;
                 lineNumber.anchor.set(0.5);
+                lineNumber.scale.set(-1, 1);
 
                 lineNumber.inputEnabled = true;
                 lineNumber.input.priorityID = 2;
@@ -278,10 +281,12 @@ export let view = (() => {
 
             for (let i = 1; i < 11; i++) {
                 let name = i;
+                let sprite = (i < 10) ? 'plashka-0' + i +'-open_20.png' : 'plashka-' + i +'-open_20.png';
+
                 let lineNumber = game.add.sprite(config[model.res].win[i][1].x - gameMachine.width / 2 - 8,
                     config[model.res].win[i][0].y - gameMachine.height / 2 - 10,
                     'lineNumbers',
-                    'line_splash-' + i +'_0.png',
+                    sprite,
                     container);
                 lineNumber.normal = function() {lineNumber.frameName = 'line_splash-' + name + '_0.png'};
                 lineNumber.name = name;
