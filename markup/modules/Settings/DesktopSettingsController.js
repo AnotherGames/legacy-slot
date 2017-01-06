@@ -18,8 +18,19 @@ export let controller = (function () {
                 soundButton.frameName = 'sound.png';
             }
             soundController.volume.changeVolume(this.value);
-            soundController.volume.setVolume(this.value);
-            model.cookie('volume', this.value);
+            if(this.value > 0){
+                soundController.volume.setVolume(this.value);
+                model.cookie('volume', this.value);
+            } else {
+                soundController.volume.setVolume(model.data('lastVolume'));
+                model.cookie('volume', model.data('lastVolume'));
+            }
+
+        });
+        $('#volume').on('mousedown', function () {
+            if (this.value > 0){
+                model.data('lastVolume', this.value)
+            }
         });
         $('#checkSound').on('change', function () {
             model.cookie('sound', this.checked);
