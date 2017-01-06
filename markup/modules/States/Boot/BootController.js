@@ -11,6 +11,7 @@ export class Boot {
 
         request.send('Initialise', 'normal')
             .then((initData) => {
+                console.log('Init: ', initData);
                 model.initStates(initData);
                 model.initSettings(initData.Settings);
                 model.initBalance(initData.Balance);

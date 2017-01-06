@@ -23,27 +23,36 @@ export let controller = (() => {
             nextMode = data.NextMode;
         // Если нет выигрыша - выходим
         if (winLines.length === 0) return;
+        // Записываем финишный экран на верхний слой
+        view.draw.copyFinishScreenToUpWheels({});
 
         // Проверяем переход на Фри-Спины
         checkForFS();
+        // Проверяем наличие бонуса сурикена
+        checkForBonus();
         // Играем звук выигрыша
         view.play.WinSound();
         // Рисуем табличку
         view.draw.TotalWin({winTotalData});
         // Для каждой линии проигрываем символы, глисты и номерки
+        let winElements = { number: [], amount: [] };
         winLines.forEach((winLine) => {
-            view.draw.WinNumber({number: winLine.Line});
-            view.draw.WinElements({number: winLine.Line, amount: winLine.Count});
+            // view.draw.WinNumber({number: winLine.Line});
+            winElements.number.push(winLine.Line);
+            winElements.amount.push(winLine.Count);
             view.draw.WinGlista({number: winLine.Line});
         });
+        view.draw.WinElements({number: winElements.number, amount: winElements.amount});
         // Запускаем таймер для показа линий одна за другой
-        game.time.events.add(1400, () => {
+        let oneAfterAnotherTimer = game.time.events.add(1400, () => {
             if(model.state('autoplay:end')
             && model.state('fs:end')
+            && !model.state('bonus')
             && !model.state('roll:progress')) {
                 oneAfterAnother();
             }
         });
+        model.data('oneAfterAnotherTimer', oneAfterAnotherTimer);
     }
 
     function cleanWin(cleanAlpha = false, normalAnim = true) {
@@ -53,8 +62,8 @@ export let controller = (() => {
         model.data('glistaDoneCounter', 0);
 
         // Прячем верхний экран, показываем нижний
-        let upElements = model.el('upElements');
-        upElements.forEach((upWheel) => {
+        let upWheels = model.el('upWheels');
+        upWheels.forEach((upWheel) => {
             upWheel.forEach((upEl) => {
                 upEl.hide(0);
                 upEl.normal();
@@ -125,13 +134,13 @@ export let controller = (() => {
             // Если нормальная линия
             if (currentLine.Line > 0) {
                 model.state('axesPlaing', false);
-                view.draw.WinNumber({number: currentLine.Line});
-                view.draw.WinElements({number: currentLine.Line, amount: currentLine.Count});
+                // view.draw.WinNumber({number: currentLine.Line});
+                view.draw.WinElements({number: [currentLine.Line], amount: [currentLine.Count]});
                 view.draw.WinGlista({number: currentLine.Line});
                 view.draw.WinLineTable({line: currentLine});
             // Если скаттеры
             } else {
-                view.draw.WinElements({number: currentLine.Line, amount: currentLine.Count});
+                view.draw.WinElements({number: [currentLine.Line], amount: [currentLine.Count]});
                 view.draw.WinLineTable({line: currentLine, scatter: true});
             }
         } else {
@@ -159,7 +168,7 @@ export let controller = (() => {
             mode = data.Mode,
             nextMode = data.NextMode;
 
-        if (mode == 'root' && nextMode == 'fsBonus') {
+        if (mode == 'root' && nextMode == 'fsBonus1') {
             // Лочим все кнопки
             model.state('buttons:locked', true);
             // Остонавливаем автоплей если был
@@ -178,6 +187,26 @@ export let controller = (() => {
             game.time.events.add(1500, () => {
                 transitionView.fsStart();
             });
+        }
+    }
+
+    function checkForBonus() {
+        let game = model.el('game');
+        let data = model.data('rollResponse'),
+            mode = data.Mode,
+            nextMode = data.NextMode;
+        if (mode == 'root' && nextMode.indexOf('shuriken') != -1) {
+            // Лочим все кнопки
+            model.state('buttons:locked', true);
+            // Остонавливаем автоплей если был
+            if (model.state('autoplay:start')) {
+                if (!model.state('autoStopWhenFS')) {
+                    model.data('remainAutoCount', model.data('autoplay:count'));
+                }
+                autoplayController.stop();
+            }
+            model.state('bonus', true);
+            console.log('I am in suriken bonus!');
         }
     }
 

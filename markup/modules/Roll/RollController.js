@@ -32,7 +32,7 @@ export let controller = (() => {
                 parent: elementsContainer,
                 position: {
                     x: (i - 2) * elSize.width,
-                    y: (model.desktop) ? -elSize.height + 35 : -elSize.height + 15
+                    y: (model.desktop) ? -elSize.height + 28 : -elSize.height + 15
                 },
                 elSize,
                 currentScreen: firstWheels[i]
@@ -92,6 +92,7 @@ export let controller = (() => {
                 // Расчитываем конечный экран
                 let wheels = model.el('wheels');
                 let finishScreen = _convertArray(data.Screen);
+                model.data('finishScreen', finishScreen);
 
                 // Крутим колеса
                 wheels.forEach((wheel, columnIndex) => {

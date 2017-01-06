@@ -18,6 +18,14 @@ export class Element {
             let sprite = game.add.sprite(0, 0, i, null, this.group);
                 sprite.anchor.set(0.5);
                 sprite.visible = false;
+
+            // Опустить немного человечков
+            if(i == 2
+            || i == 4
+            || i == 6
+            || i == 8) {
+                sprite.y += 10;
+            }
             this.sprites.push(sprite);
 
             // Каждому спрайту добавляем необходимые анимации
@@ -31,7 +39,7 @@ export class Element {
         this.activeSprite.animations.play('1-n');
     }
 
-    play(animation, fps = 15, loop = false) {
+    play(animation, loop = true, fps = 20) {
         // Если спрайт уже проигрывает нужную нам анимацию, то мы ничего не будем делать чтобы анимация не прыгала
         if (this.activeSprite.animations.currentAnim.name === animation) return;
 
@@ -42,12 +50,12 @@ export class Element {
         this.active = parseInt(animation);
         this.activeSprite = this.sprites[this.active - 1];
         this.activeSprite.visible = true;
-        this.activeSprite.animations.play(animation, loop);
+        this.activeSprite.animations.play(animation, fps, loop);
     }
 
-    win() {
+    win(loop = false) {
         // Проигрывам выигрышную анимацию
-        this.play(`${this.active}-w`);
+        this.play(`${this.active}-w`, loop, 30);
         this.activeSprite.animations.currentAnim.onComplete.add(() => {
             // После которой опять играем нормальную анимацию
             this.play(`${this.active}-n`);
@@ -66,12 +74,12 @@ export class Element {
 
     hide(alpha = 0.5) {
         // Делаем элемент полупрозрачным
-        this.activeSprite.alpha = alpha;
+        this.group.alpha = alpha;
     }
 
     show() {
         // Возращаем нормальное состояние
-        this.activeSprite.alpha = 1;
+        this.group.alpha = 1;
     }
 
     // Вспомогательные методы для добавления анимаций для спрайтов
@@ -111,7 +119,7 @@ export class Element {
                 this.addAnimation(sprite, { el: 11, n: 29, w: 29 });
                 break;
             case 12:
-                this.addAnimation(sprite, { el: 12, n: 29, w: 29 });
+                this.addAnimation(sprite, { el: 12, n: false, w: 29 });
                 break;
             default:
                 break;
@@ -130,15 +138,15 @@ export class Element {
             // Если параметр options.n == false - то у нас будет только один кадр, в другом случае это будет количество кадров в анимации
             options.n
             ? Phaser.Animation.generateFrameNames(`${prefix}${options.el}-n-`, 0, options.n, '.png', 2)
-            : [`${prefix}${options.el}-n-00.png`], 20, true);
+            : [`${prefix}${options.el}-n-00.png`], 20);
 
-        sprite.animations.add(`${options.el}-b`, [`${prefix}${options.el}-b-00.png`], 20, true);
+        sprite.animations.add(`${options.el}-b`, [`${prefix}${options.el}-b-00.png`], 20);
 
         sprite.animations.add(`${options.el}-w`,
             // Если параметр options.w == false - то у нас будет только один кадр, в другом случае это будет количество кадров в анимации
             options.w
             ? Phaser.Animation.generateFrameNames(`${prefix}${options.el}-w-`, 0, options.w, '.png', 2)
-            : [`${prefix}${options.el}-w-00.png`], 20, true);
+            : [`${prefix}${options.el}-w-00.png`], 20);
             // Phaser.Animation.generateFrameNames(`${options.el}-w-`, 1, options.w, '.png', 2), 15, false);
     }
 }
