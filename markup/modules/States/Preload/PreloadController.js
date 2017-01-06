@@ -119,6 +119,7 @@ export class Preload {
 
         // Glista
         game.load.image('ligthGlista', 'glista/lightGlista.png');
+        game.load.image('suriken', 'glista/suriken.png');
         game.load.atlasJSONArray('glistaAtlas', 'glista/glista.png', 'glista/glista.json');
     }
 

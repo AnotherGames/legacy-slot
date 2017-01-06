@@ -64,10 +64,13 @@ export class Glista {
         this.sprites = [];
         this.light = [];
         for (let atlasInd = 0; atlasInd <= 5; atlasInd++) {
-            let sprite = this.game.add.sprite( atlasInd * -80, 0, 'glistaAtlas', `Bullet_${atlasInd}.png`, param.parent);
-            sprite.anchor.set(0.7, 0.5);
+            let sprite = this.game.add.sprite( atlasInd * -80, 0, 'suriken', null, param.parent);
+            sprite.anchor.set(0.5, 0.5);
+            sprite.myDeltaY = this.game.rnd.integerInRange(-30, 30);
+            sprite.myScale = this.game.rnd.integerInRange(2, 8) / 10;
             sprite.visible = false;
             this.sprites.push(sprite);
+            this.game.add.tween(sprite).to({angle: 360}, this.game.rnd.integerInRange(50 * 6, 80 * 6), null, true, 0, -1);
 
             let lightSprite = this.game.add.sprite( atlasInd * -80, 0, 'ligthGlista', null, param.lightParent);
             lightSprite.scale.set(1.3 - 0.2 * atlasInd);
@@ -174,7 +177,7 @@ export class Glista {
         this._clock.start();
         this.timer = 0;
         this.progress = 0;
-        let margin = 0.03;
+        let margin = 0.04;
 
 
         let anim = function () {
@@ -185,9 +188,9 @@ export class Glista {
             }
 
             if (_this.progress < 0.5) {
-                margin = 0.03 - 0.015 * _this.progress;
+                margin = 0.04 - 0.015 * _this.progress;
             } else {
-                margin = 0.03 - 0.015 * (1 - _this.progress);
+                margin = 0.04 - 0.015 * (1 - _this.progress);
             }
 
             for (let spriteInd = 0; spriteInd < 6; spriteInd++) {
@@ -201,13 +204,14 @@ export class Glista {
                 let angle = _this.game.math.angleBetweenPoints(nodes[spriteInd], { x: px, y: py, angle: 0 });
                 nodes[spriteInd] = { x: px, y: py, angle: angle };
 
-                _this.sprites[spriteInd].position.set(px, py);
+                _this.sprites[spriteInd].position.set(px, py + _this.sprites[spriteInd].myDeltaY);
+                _this.sprites[spriteInd].scale.set(_this.sprites[spriteInd].myScale);
                 _this.light[spriteInd].position.set(px, py);
-                if (progress < 0.5) {
-                    _this.sprites[spriteInd].scale.set(1.2 - 1.2 * progress);
-                } else {
-                    _this.sprites[spriteInd].scale.set(1.2 * progress);
-                }
+                // if (progress < 0.5) {
+                //     _this.sprites[spriteInd].scale.set((1.2 - 1.2 * progress) * _this.sprites[spriteInd].myScale);
+                // } else {
+                //     _this.sprites[spriteInd].scale.set(1.2 * progress * _this.sprites[spriteInd].myScale);
+                // }
                 _this.sprites[spriteInd].rotation = angle;
             }
 
