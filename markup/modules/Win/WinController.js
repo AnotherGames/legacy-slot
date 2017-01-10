@@ -111,7 +111,7 @@ export let controller = (() => {
             .onComplete.add(() => {
                 container.removeAll();
                 container.alpha = 1;
-            });;
+            });
     }
 
     function oneAfterAnother() {

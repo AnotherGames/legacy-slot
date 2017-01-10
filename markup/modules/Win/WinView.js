@@ -267,7 +267,7 @@ export let view = (() => {
             glistaContainer = model.group('glista'),
             glistaFiredCounter = +model.data('glistaFiredCounter'),
             glistaDoneCounter = +model.data('glistaDoneCounter'),
-            time = 1100
+            time = 1000
         }) {
             if (number < 0) return;
             // Для каждой линии отрисовуем глисту
@@ -323,7 +323,7 @@ export let view = (() => {
                     y = 180 * (currentLineY + 0.5) + 135 - gameMachine.height / 2 - 25;
                 } else {
                     x = 256 * (countValue - 0.5) + 140 - gameMachine.width / 2;
-                    y = 240 * (currentLineY + 0.5) + 170 - gameMachine.height / 2 - 25;
+                    y = 240 * (currentLineY + 0.5) + 170 - gameMachine.height / 2;
                 }
             }
             // Рассчитываем если скаттер
@@ -363,8 +363,10 @@ export let view = (() => {
             } else {
                 font = '25px Arial, Helvetica';
             }
-            let text = game.add.text(x - 5, y + 9, winValue, {font: font, fill: '#9be20a'}, container);
+            let text = game.add.text(x - 7, y + 9, winValue, {font: font, fill: '#9be20a'}, container);
                 text.anchor.set(0.5);
+
+            console.log('I try to draw line number!', container);
 
         }
 
@@ -392,7 +394,7 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('winTop')
         }) {
-            return game.add.tween(container).to( { alpha: 0 }, 300, 'Linear', true);
+            return game.add.tween(container).to( { alpha: 0 }, 150, 'Linear', true);
         }
 
     };
