@@ -67,7 +67,7 @@ export class Glista {
             let sprite = this.game.add.sprite( atlasInd * -80, 0, 'suriken', null, param.parent);
             sprite.anchor.set(0.5, 0.5);
             sprite.myDeltaY = this.game.rnd.integerInRange(-30, 30);
-            sprite.myScale = this.game.rnd.integerInRange(2, 8) / 10;
+            sprite.myScale = this.game.rnd.integerInRange(2, 4) / 10;
             sprite.visible = false;
             this.sprites.push(sprite);
             this.game.add.tween(sprite).to({angle: 360}, this.game.rnd.integerInRange(50 * 6, 80 * 6), null, true, 0, -1);
