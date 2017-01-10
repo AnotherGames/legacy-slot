@@ -52,9 +52,6 @@ export let controller = (() => {
             mainView.draw.showPopup({message: 'You have weak Internet connection'});
         });
 
-        // Выключаем управление с клавиатуры
-        // game.input.keyboard.enabled = false;
-
         model.state('ready', false);
         // Отправляем запрос Roll
         request.send('Roll')
@@ -175,19 +172,16 @@ export let controller = (() => {
             }
 
             // Убираем лок кнопок
-            if(!model.state('fs') && model.state('autoplay:end')){
+            if(!model.state('fs') && model.state('autoplay:end') && !model.state('buttons:locked')){
+                let game = model.el('game');
                 if(model.mobile) {
                     buttonsController.unlockButtons();
                 } else {
+                    game.input.keyboard.enabled = true;
                     panelView.unlockButtons();
                 }
             }
 
-            // Если у нас не автоплей, то убираем и лок клавиатуры
-            if (model.state('autoplay:end')){
-                let game = model.el('game');
-                game.input.keyboard.enabled = true;
-            }
         })
         .catch((err) => {
             mainView.draw.showPopup({message: 'You have weak Internet connection. Click to restart.'});
