@@ -69,9 +69,10 @@ export let controller = (() => {
 
         view.draw.PanelBG({
             x: model.group('main').x,
+            deltaY: -35,
             frameName: 'uiFS'
         });
-        view.draw.LinesNumber({x: 55, y: 115});
+        view.draw.LinesNumber({x: 55, y: 85});
 
     }
 

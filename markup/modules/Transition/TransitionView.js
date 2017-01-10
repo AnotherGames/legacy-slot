@@ -184,7 +184,7 @@ export let view = (() => {
         winText.anchor.set(0.5);
         model.el('winText', winText);
 
-        addLines({});
+        // addLines({});
 
         // Отрисовываем Выигрыш
         let winCount = game.add.bitmapText(game.width / 2, -200, 'numbersFont', 0, 140, transitionContainer);

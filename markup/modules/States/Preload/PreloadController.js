@@ -63,8 +63,6 @@ export class Preload {
     loadMainAssets() {
         const game = model.el('game');
         game.load.image('mainBG', 'bg/mainBG.png');
-        game.load.image('transitionBG', 'bg/transitionBG.png');
-        game.load.image('transitionSky', 'bg/transitionSky.png');
         //BG Anim
         // game.load.image('cloud', 'bg/cloud.png');
         // game.load.image('sun', 'bg/sun.png');
@@ -120,7 +118,7 @@ export class Preload {
         game.load.atlasJSONArray('bottle', 'fs/bottle.png', 'fs/bottle.json');
         game.load.atlasJSONArray('bigBang', 'fs/bigBang.png', 'fs/bigBang.json');
         game.load.atlasJSONArray('baraban', 'fs/baraban.png', 'fs/baraban.json');
-        game.load.atlasJSONArray('fsCountBG', 'fs/bang.png', 'fs/bang.json');
+        game.load.image('fsCountBG', 'fs/fsCountBG.png');
         game.load.image('plus3', 'fs/plus3.png');
         if (model.mobile) {
             game.load.image('drumBG', 'fs/fsDrumBG.png');

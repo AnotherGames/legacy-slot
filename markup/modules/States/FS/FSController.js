@@ -188,7 +188,7 @@ export class FS {
         fsView.draw.machineMask({});
 
         // Рисуем барабан
-        fsView.draw.drum({});
+        // fsView.draw.drum({});
         // Рисуем множитель
         fsView.draw.Multi({
             start: this.fsMulti
@@ -228,7 +228,7 @@ export class FS {
         let game = model.el('game');
         // model.group('main').x = (model.desktop) ? game.world.centerX : game.width - model.group('main').width / 2;
         model.group('main').x = game.world.centerX + 8;
-        model.group('main').y = game.world.centerY + config[model.res].mainContainer.y;
+        model.group('main').y = game.world.centerY + config[model.res].mainContainer.y - 12;
     }
 
     checkSavedFS() {
