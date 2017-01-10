@@ -21,6 +21,7 @@ export let view = (() => {
         _fsStartDraw();
         _fsStartTween();
         _fsStartInput();
+        game.input.keyboard.enabled = true;
         // Автопереход если включен
         if (model.state('autoTransititon')) {
             game.time.events.add(config.autoTransitionTime, () => {
