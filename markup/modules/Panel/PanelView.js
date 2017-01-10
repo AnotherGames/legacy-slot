@@ -193,7 +193,7 @@ export let view = (() => {
         autoCount: function({
             game = model.el('game'),
             container = model.group('panel'),
-            style = {font: '45px Arial, Helvetica', fill: '#332206', align: 'center', stroke: '#000000', strokeThickness: 2},
+            style = {font: '45px Arial, Helvetica', align: 'center', stroke: '#000000', strokeThickness: 2},
             amount = 10,
             x = 528,
             y = model.el('autoButtonDesk').y,
@@ -202,6 +202,12 @@ export let view = (() => {
                 autoCount.anchor.set(0.5);
                 autoCount.alpha = 0;
             model.el('autoCount', autoCount);
+
+            let grd = autoCount.context.createLinearGradient(0, 0, 0, autoCount.canvas.height);
+            grd.addColorStop(0, '#fef900');
+            grd.addColorStop(1, '#f8a600');
+            autoCount.fill = grd;
+
             game.add.tween(autoCount).to({alpha: 1}, 500, 'Linear', true, 200);
             return autoCount;
         },

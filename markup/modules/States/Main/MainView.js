@@ -46,17 +46,15 @@ export let view = (() => {
                 gameMachine.anchor.set(0.5);
             model.el('gameMachine', gameMachine);
 
-            let x1 = (model.desktop) ? 760 : 570;
-            let x2 = (model.desktop) ? -760 : -570;
-            let y = (model.desktop) ? -370 : -280;
-
-            let gmRight = game.add.sprite(x1, y, 'gmRight', null, container);
+            if (model.desktop) {
+                let gmRight = game.add.sprite(730, -370, 'gmRight', null, container);
                 gmRight.anchor.set(0.5);
-            model.el('gmRight', gmRight);
+                model.el('gmRight', gmRight);
 
-            let gmLeft = game.add.sprite(x2, y, 'gmLeft', null, container);
+                let gmLeft = game.add.sprite(-730, -370, 'gmLeft', null, container);
                 gmLeft.anchor.set(0.5);
-            model.el('gmLeft', gmLeft);
+                model.el('gmLeft', gmLeft);
+            }
         },
 
         lineNumbers: function ({
@@ -87,21 +85,38 @@ export let view = (() => {
                 lineNumber.inputEnabled = true;
                 lineNumber.input.priorityID = 2;
                 // lineNumber.input.pixelPerfectOver = 1;
-                lineNumber.events.onInputOver.add(() => {
-                    if (lineNumber.lineShape) {
-                        lineNumber.animations.play('close');
-                        lineNumber.lineShape.destroy();
-                    }
-                    lineNumber.lineShape = this.lineShape(lineNumber.name);
-                    lineNumber.animations.play('win');
-                });
+                if (model.desktop) {
+                    lineNumber.events.onInputOver.add(() => {
+                        if (lineNumber.lineShape) {
+                            lineNumber.animations.play('close');
+                            lineNumber.lineShape.destroy();
+                        }
+                        lineNumber.lineShape = this.lineShape(lineNumber.name);
+                        lineNumber.animations.play('win');
+                    });
 
-                lineNumber.events.onInputOut.add(() => {
-                    if (lineNumber.lineShape) {
-                        lineNumber.animations.play('close');
-                        lineNumber.lineShape.destroy();
-                    }
-                });
+                    lineNumber.events.onInputOut.add(() => {
+                        if (lineNumber.lineShape) {
+                            lineNumber.animations.play('close');
+                            lineNumber.lineShape.destroy();
+                        }
+                    });
+                } else {
+                    lineNumber.events.onInputDown.add(() => {
+                        if (lineNumber.lineShape) {
+                            lineNumber.animations.play('close');
+                            lineNumber.lineShape.destroy();
+                        }
+                        lineNumber.lineShape = this.lineShape(lineNumber.name);
+                        lineNumber.animations.play('win');
+
+                        game.time.events.add(1000, () => {
+                            lineNumber.animations.play('close');
+                            lineNumber.lineShape.destroy();
+                        });
+                    });
+                }
+
                 leftArr.push(lineNumber);
             }
 
@@ -129,21 +144,38 @@ export let view = (() => {
                 lineNumber.inputEnabled = true;
                 lineNumber.input.priorityID = 2;
                 // lineNumber.input.pixelPerfectOver = 1;
-                lineNumber.events.onInputOver.add(() => {
-                    if (lineNumber.lineShape) {
-                        lineNumber.animations.play('close');
-                       lineNumber.lineShape.destroy();
-                    }
-                    lineNumber.lineShape = this.lineShape(lineNumber.name);
-                    lineNumber.animations.play('win');
-                });
+                if (model.desktop) {
+                    lineNumber.events.onInputOver.add(() => {
+                        if (lineNumber.lineShape) {
+                            lineNumber.animations.play('close');
+                            lineNumber.lineShape.destroy();
+                        }
+                        lineNumber.lineShape = this.lineShape(lineNumber.name);
+                        lineNumber.animations.play('win');
+                    });
 
-                lineNumber.events.onInputOut.add(() => {
-                    if (lineNumber.lineShape) {
-                        lineNumber.animations.play('close');
-                        lineNumber.lineShape.destroy();
-                    }
-                });
+                    lineNumber.events.onInputOut.add(() => {
+                        if (lineNumber.lineShape) {
+                            lineNumber.animations.play('close');
+                            lineNumber.lineShape.destroy();
+                        }
+                    });
+                } else {
+                    lineNumber.events.onInputDown.add(() => {
+                        if (lineNumber.lineShape) {
+                            lineNumber.animations.play('close');
+                            lineNumber.lineShape.destroy();
+                        }
+                        lineNumber.lineShape = this.lineShape(lineNumber.name);
+                        lineNumber.animations.play('win');
+
+                        game.time.events.add(1000, () => {
+                            lineNumber.animations.play('close');
+                            lineNumber.lineShape.destroy();
+                        });
+                    });
+                }
+
                 rightArr.push(lineNumber);
             }
             model.el('rightArr', rightArr);
@@ -155,13 +187,14 @@ export let view = (() => {
            let line = model.data('lines')[number - 1];
            let elSize = config[model.res].elements;
            let lineShape = game.add.graphics(0, 0, container);
+           let y = (model.desktop) ? 110 : 80;
            lineShape
-               .lineStyle(4, 0x332206, 0.8)
-               .moveTo((line[0].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[0].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + 50)
-               .lineTo((line[1].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[1].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + 50)
-               .lineTo((line[2].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[2].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + 50)
-               .lineTo((line[3].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[3].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + 50)
-               .lineTo((line[4].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[4].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + 50)
+               .lineStyle(4, 0xe1b249, 0.8)
+               .moveTo((line[0].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[0].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + y)
+               .lineTo((line[1].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[1].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + y)
+               .lineTo((line[2].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[2].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + y)
+               .lineTo((line[3].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[3].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + y)
+               .lineTo((line[4].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[4].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + y)
            return lineShape;
         },
 

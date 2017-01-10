@@ -39,13 +39,13 @@ export let view = (() => {
             winTotalData,
             game = model.el('game'),
             container = model.group('winTop'),
-            style = {font: '60px Helvetice, Arial', fill: '#e8b075', align: 'center'}
+            style = {font: '90px Helvetice, Arial', fill: '#e1b249', align: 'center', stroke: '#000000', strokeThickness: 2}
         }) {
             if (winTotalData === 0) return;
             let winTotal = game.add.sprite(0, 0, 'winTotal', null, container);
                 winTotal.anchor.set(0.5);
 
-            let winTotalText = game.add.text(0, 5, winTotalData, style, container);
+            let winTotalText = game.add.bitmapText(0, 25, 'numbersFont', winTotalData, 75, container);
                 winTotalText.anchor.set(0.5);
         },
 
@@ -115,90 +115,6 @@ export let view = (() => {
                 return;
             }
 
-            // wheels.forEach((wheel, wheelIndex) => {
-            //     wheel.elements.forEach((element, elementIndex) => {
-            //         element.hide(0);
-            //         upWheels[wheelIndex][elementIndex].show();
-            //         upWheels[wheelIndex][elementIndex].playIfNotWin(`${element.active}-n`);
-            //     });
-            // });
-            //
-            // // Затемняем элементы
-            // if (alpha) {
-            //     wheels.forEach((wheel) => {
-            //         wheel.elements.forEach((element) => {
-            //             element.hide();
-            //         });
-            //     });
-            // }
-            //
-            // // Если есть линии
-            // if (number > 0) {
-            //     let line = model.data('lines')[number - 1];
-            //
-            //     for (let col = 0; col < amount; col++) {
-            //         let upWheelElements = upWheels[col];
-            //         let coord = line[col].Y;
-            //         let element = upWheelElements[coord];
-            //             element.win();
-            //             element.show();
-            //             element.group.alpha = 1;
-            //             element.group.scale.set(0.3);
-            //
-            //         game.add.tween(element.group.scale).to({x: finalScale,  y: finalScale}, 700, Phaser.Easing.Bounce.Out, true)
-            //             .onComplete.add(() => {
-            //                 game.add.tween(element.group.scale).to({x: 1.0,  y: 1.0}, 400, 'Linear', true)
-            //             }, this);
-            //     }
-            // // Если есть скаттеры либо элемент фриспинов
-            // } else {
-            //     wheels.forEach((wheelObj, wheelIndex) => {
-            //         wheelObj.elements.forEach((wheelElement, elementIndex) => {
-            //             let elementName = parseInt(wheelElement.sprites[wheelElement.active - 1].animations.currentAnim.name);
-            //             // Показываем выигрышные скаттеры
-            //             if (elementName == '10') {
-            //                 let element = upWheels[wheelIndex][elementIndex];
-            //                     element.win();
-            //                     element.show();
-            //                     element.group.scale.set(0.3);
-            //
-            //                 game.add.tween(element.group.scale).to({x: finalScale,  y: finalScale}, 700, Phaser.Easing.Bounce.Out, true)
-            //                     .onComplete.add(() => {
-            //                         game.add.tween(element.group.scale).to({x: 1.0,  y: 1.0}, 400, 'Linear', true)
-            //                     }, this);
-            //                 // Очищаем поле вручную так как нет глисты которая чистит автоматом
-            //                 game.time.events.add(1000, () => {
-            //                     winController.cleanWin();
-            //                 });
-            //
-            //             }
-            //             // Если выпали пули на фри-спинах
-            //             if (elementName == '11') {
-            //
-            //                 // Берем пулю с верхнего экрана
-            //                 let bullet = upWheels[wheelIndex][elementIndex];
-            //                     bullet.win();
-            //                 // Записываем ее начальные координаты (нам нужно будет вернуть ее обратно)
-            //                 let bulletX = bullet.group.x;
-            //                 let bulletY = bullet.group.y;
-            //
-            //                 let x = (model.desktop) ? 0 : -550;
-            //                 let y = (model.desktop) ? 500 : -50;
-            //                 game.add.tween(bullet.group).to({x: x, y: y, alpha: 0.3}, 500, 'Linear', true);
-            //                 game.add.tween(bullet.group.scale).to({x: 0.2, y: 0.2}, 500, 'Linear', true)
-            //                     .onComplete.add(() => {
-            //                         bullet.group.alpha = 0;
-            //                         bullet.group.x = bulletX;
-            //                         bullet.group.y = bulletY;
-            //                         game.add.tween(bullet.group).to({alpha: 1}, 400, 'Linear', true);
-            //                         game.add.tween(bullet.group.scale).to({x: 1, y: 1}, 400, 'Linear', true)
-            //                         bullet.normal();
-            //                         fsController.bullet(bullet.group);
-            //                     });
-            //             }
-            //         });
-            //     });
-            // }
         },
 
         findElements: function({
@@ -357,10 +273,13 @@ export let view = (() => {
             } else {
                 font = '25px Arial, Helvetica';
             }
-            let text = game.add.text(x - 7, y + 9, winValue, {font: font, fill: '#9be20a'}, container);
+            let text = game.add.text(x - 7, y + 9, winValue, {font: font}, container);
                 text.anchor.set(0.5);
 
-            console.log('I try to draw line number!', container);
+            let grd = text.context.createLinearGradient(0, 0, 0, text.canvas.height);
+            grd.addColorStop(0, '#fef900');
+            grd.addColorStop(1, '#f8a600');
+            text.fill = grd;
 
         }
 

@@ -40,14 +40,8 @@ export let view = (() => {
         soundController.music.stopMusic('fon');
         soundController.music.playMusic('startPerehod');
         // Отрисовываем фон
-        let transitionBGSky = game.add.sprite(0, 0, 'mainBGSky', null, transitionContainer);
-        model.el('transitionBGSky', transitionBGSky);
 
-        let luchi = game.add.sprite(game.world.centerX, game.world.centerY + 150, 'luchi', null, transitionContainer);
-        luchi.anchor.set(0.5);
-        model.el('luchi', luchi);
-
-        let transitionBG = game.add.sprite(0, 0, 'initBG', null, transitionContainer);
+        let transitionBG = game.add.graphics(0, 0).beginFill(0x000000, 0.5).drawRect(0, 0, game.world.width, game.world.height);
         model.el('transitionBG', transitionBG);
 
         // Надпись Free Spins
@@ -59,7 +53,7 @@ export let view = (() => {
             freeSpinsText.anchor.set(0.5);
         model.el('freeSpinsText', freeSpinsText);
 
-        addLines({});
+        // addLines({});
         // Счетчик Фри-Спинов
         let freeSpinsCount = model.data('rollResponse').FreeSpinsLeft;
         let freeSpinsLevel = game.add.bitmapText(game.width / 2, -200, 'numbersFont', freeSpinsCount, 120, transitionContainer);

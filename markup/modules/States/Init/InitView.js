@@ -13,6 +13,13 @@ export let view = (() => {
     function drawLogo() {
         const game = model.el('game');
 
+        let initLogo = game.add.sprite(game.world.centerX, game.height * 0.4, 'initLogo');
+            initLogo.anchor.set(0.5);
+            initLogo.scale.set(0.7);
+
+        let initSuriken = game.add.sprite(game.width * 0.88, game.height * 0.8, 'initSuriken');
+            initSuriken.anchor.set(0.5);
+
         let ninja = game.add.spine(game.width * 0.33, game.height * 0.75, 'ninja');
             ninja.setAnimationByName(1, 'idle', true);
             ninja.scale.set(0.6);

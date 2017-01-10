@@ -55,6 +55,8 @@ export class Preload {
         const game = model.el('game');
         game.load.path = `static/img/content/${model.res}/`;
         game.load.image('initBG', 'bg/initBG.png');
+        game.load.image('initLogo', 'bg/initLogo.png');
+        game.load.image('initSuriken', 'bg/initSuriken.png');
         game.load.atlasJSONArray('text', 'text/text.png', 'text/text.json');
     }
 
@@ -63,28 +65,10 @@ export class Preload {
         game.load.image('mainBG', 'bg/mainBG.png');
         game.load.image('transitionBG', 'bg/transitionBG.png');
         game.load.image('transitionSky', 'bg/transitionSky.png');
-        // game.load.image('mainBGSky', 'bg/mainBGSky.png');
-        // game.load.image('sky', 'bg/sky.png');
-        // game.load.image('zaglushka', 'bg/zaglushka.png');
-        // game.load.image('gradient', 'bg/gradient.png');
         //BG Anim
         game.load.image('cloud', 'bg/cloud.png');
         game.load.image('sun', 'bg/sun.png');
-        // game.load.image('luchi', 'bg/luchi.png');
-        // game.load.image('fonLine', 'bg/fonLine.png');
-        // game.load.atlasJSONArray('skull', 'bg/skull.png', 'bg/skull.json');
-        // game.load.atlasJSONArray('pole', 'bg/pole.png', 'bg/pole.json');
-        // if (model.desktop) {
-        //     game.load.atlasJSONArray('bird', 'bg/bird.png', 'bg/bird.json');
-        //     game.load.atlasJSONArray('bird2', 'bg/bird2.png', 'bg/bird2.json');
-        //     game.load.atlasJSONArray('birdFly', 'bg/birdFly.png', 'bg/birdFly.json');
-        //     game.load.atlasJSONArray('cow1', 'bg/cow1.png', 'bg/cow1.json');
-        //     game.load.atlasJSONArray('cow2', 'bg/cow2.png', 'bg/cow2.json');
-        //     game.load.atlasJSONArray('cow3', 'bg/cow3.png', 'bg/cow3.json');
-        //     game.load.atlasJSONArray('cowboy', 'bg/cowboy.png', 'bg/cowboy.json');
-        //     game.load.atlasJSONArray('red_indian', 'bg/red_indian.png', 'bg/red_indian.json');
-        //     game.load.atlasJSONArray('table', 'bg/table.png', 'bg/table.json');
-        // }
+
         game.load.image('gameMachine', 'game/gameMachine.png');
         game.load.image('gameBG', 'game/gameBG.png');
         game.load.image('gmRight', 'game/gmRight.png');
