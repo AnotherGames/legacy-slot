@@ -229,14 +229,15 @@ export let controller = (() => {
                 console.log('Data is: ', data);
             })
             .then(() => {
-                return request.send('Ready').then(cb);
+                return request.send('Ready');
             })
             .then(() => {
                 i--;
-                if (i) {
+                if (i > 0) {
                     strikeShurikens(i)
                 } else {
                     model.state('buttons:locked', false);
+                    model.state('bonus', false);
                 }
             })
             .catch(() => {
