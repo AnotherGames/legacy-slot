@@ -13,6 +13,9 @@ export class Element {
 
         // Заполняем его спрайтами всех элементов (они будут расположенны друг на друге)
         this.sprites = [];
+        this.bg = game.add.sprite(0, 0, 'plaha', null, this.group);
+        this.bg.anchor.set(0.5);
+        this.bg.visible = false;
         for (let i = 1; i <= config.symbolsCount; i++) {
             // Создаем по спрайту для каждого символа и делаем их не видимыми
             let sprite = game.add.sprite(0, 0, i, null, this.group);
@@ -51,6 +54,14 @@ export class Element {
         this.activeSprite = this.sprites[this.active - 1];
         this.activeSprite.visible = true;
         this.activeSprite.animations.play(animation, fps, loop);
+        if(this.active == 2
+        || this.active == 4
+        || this.active == 6
+        || this.active == 8) {
+            this.bg.visible = true;
+        } else {
+            this.bg.visible = false;
+        }
     }
 
     win(loop = false) {
