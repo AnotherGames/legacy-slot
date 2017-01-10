@@ -179,7 +179,7 @@ export let controller = (() => {
             mode = data.Mode,
             nextMode = data.NextMode;
 
-        if (mode == 'root' && nextMode == 'fsBonus1') {
+        if (mode == 'root' && nextMode.indexOf('fsBonus') != -1 ) {
             // Лочим все кнопки
             model.state('buttons:locked', true);
             // Остонавливаем автоплей если был

@@ -22,19 +22,19 @@ export let view = (() => {
 
         let ninja = game.add.spine(game.width * 0.33, game.height * 0.75, 'ninja');
             ninja.setAnimationByName(1, 'idle', true);
-            ninja.scale.set(0.6);
+            (model.desktop) ? ninja.scale.set(0.6) : ninja.scale.set(0.4);
 
         let ronin = game.add.spine(game.width * 0.7, game.height * 0.76, 'ronin');
             ronin.setAnimationByName(1, 'idle', true);
-            ronin.scale.set(0.6);
+            (model.desktop) ? ronin.scale.set(0.6) : ronin.scale.set(0.4);
 
         let samurai = game.add.spine(game.width * 0.6, game.height * 0.75, 'samurai');
             samurai.setAnimationByName(1, 'idle', true);
-            samurai.scale.set(0.6);
+            (model.desktop) ? samurai.scale.set(0.6) : samurai.scale.set(0.4);
 
         let geisha = game.add.spine(game.width * 0.45, game.height * 0.87, 'geisha');
             geisha.setAnimationByName(1, 'idle', true);
-            geisha.scale.set(0.6);
+            (model.desktop) ? geisha.scale.set(0.6) : geisha.scale.set(0.4);
     }
 
     function drawPlay() {

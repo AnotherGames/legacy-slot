@@ -66,8 +66,8 @@ export class Preload {
         game.load.image('transitionBG', 'bg/transitionBG.png');
         game.load.image('transitionSky', 'bg/transitionSky.png');
         //BG Anim
-        game.load.image('cloud', 'bg/cloud.png');
-        game.load.image('sun', 'bg/sun.png');
+        // game.load.image('cloud', 'bg/cloud.png');
+        // game.load.image('sun', 'bg/sun.png');
         game.load.atlasJSONArray('lamp', 'bg/lamp.png', 'bg/lamp.json');
 
         game.load.image('gameMachine', 'game/gameMachine.png');
