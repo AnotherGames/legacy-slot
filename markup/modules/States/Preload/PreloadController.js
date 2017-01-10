@@ -68,6 +68,7 @@ export class Preload {
         //BG Anim
         game.load.image('cloud', 'bg/cloud.png');
         game.load.image('sun', 'bg/sun.png');
+        game.load.atlasJSONArray('lamp', 'bg/lamp.png', 'bg/lamp.json');
 
         game.load.image('gameMachine', 'game/gameMachine.png');
         game.load.image('gameBG', 'game/gameBG.png');

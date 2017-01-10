@@ -54,6 +54,21 @@ export let view = (() => {
                 let gmLeft = game.add.sprite(-730, -370, 'gmLeft', null, container);
                 gmLeft.anchor.set(0.5);
                 model.el('gmLeft', gmLeft);
+
+                let lamp1 = game.add.sprite(-750, -240, 'lamp', null, container);
+                lamp1.anchor.set(0.5);
+                lamp1.animations.add('move');
+                lamp1.animations.play('move', 15, true);
+                model.el('lamp1', lamp1);
+
+                let lamp2 = game.add.sprite(750, -240, 'lamp', null, container);
+                lamp2.anchor.set(0.5);
+                lamp2.scale.set(-1, 1);
+                lamp2.animations.add('move');
+                game.time.events.add(300, () => {
+                    lamp2.animations.play('move', 15, true);
+                })
+                model.el('lamp2', lamp2);
             }
         },
 
