@@ -68,7 +68,6 @@ export class Preload {
         //BG Anim
         // game.load.image('cloud', 'bg/cloud.png');
         // game.load.image('sun', 'bg/sun.png');
-        game.load.atlasJSONArray('lamp', 'bg/lamp.png', 'bg/lamp.json');
 
         game.load.image('gameMachine', 'game/gameMachine.png');
         game.load.image('gameBG', 'game/gameBG.png');
@@ -96,8 +95,9 @@ export class Preload {
         if (model.desktop) {
             game.load.image('ui', 'game/UI.png');
             game.load.image('uiFS', 'game/UI_FS.png');
-            game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
             game.load.image('autoSelect', 'desk_buttons/autoSelect.png');
+            game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
+            game.load.atlasJSONArray('lamp', 'bg/lamp.png', 'bg/lamp.json');
         }
         if (model.mobile) {
             game.load.atlasJSONArray('mobileButtons', 'mobile_buttons/mobileButtons.png', 'mobile_buttons/mobileButtons.json');
