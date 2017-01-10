@@ -1,4 +1,5 @@
 import { model } from 'modules/Model/Model';
+import { request } from 'modules/Util/Request';
 
 import { view } from 'modules/Win/WinView';
 import { view as transitionView } from 'modules/Transition/TransitionView';
@@ -28,8 +29,10 @@ export let controller = (() => {
 
         // Проверяем переход на Фри-Спины
         checkForFS();
+
         // Проверяем наличие бонуса сурикена
         checkForBonus();
+
         // Играем звук выигрыша
         view.play.WinSound();
         // Рисуем табличку
@@ -214,8 +217,31 @@ export let controller = (() => {
                 autoplayController.stop();
             }
             model.state('bonus', true);
-            console.log('I am in suriken bonus!');
+            let amountOFShurikens = +nextMode[8];
+            console.log('I am in suriken bonus!', amountOFShurikens);
+            strikeShurikens(amountOFShurikens);
         }
+    }
+
+    function strikeShurikens(i) {
+        request.send('Roll')
+            .then((data) => {
+                console.log('Data is: ', data);
+            })
+            .then(() => {
+                return request.send('Ready').then(cb);
+            })
+            .then(() => {
+                i--;
+                if (i) {
+                    strikeShurikens(i)
+                } else {
+                    model.state('buttons:locked', false);
+                }
+            })
+            .catch(() => {
+
+            });
     }
 
     return {
