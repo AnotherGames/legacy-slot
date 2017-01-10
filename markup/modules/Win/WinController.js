@@ -37,7 +37,7 @@ export let controller = (() => {
         // Для каждой линии проигрываем символы, глисты и номерки
         let winElements = { number: [], amount: [] };
         winLines.forEach((winLine) => {
-            // view.draw.WinNumber({number: winLine.Line});
+            view.draw.WinNumber({number: winLine.Line});
             winElements.number.push(winLine.Line);
             winElements.amount.push(winLine.Count);
             view.draw.WinGlista({number: winLine.Line});
@@ -80,11 +80,17 @@ export let controller = (() => {
         let rightArr = model.el('rightArr');
 
         leftArr.forEach((el) => {
-            el.normal();
+            if (el.openedTable) {
+                el.animations.play('close');
+                el.openedTable = false;
+            }
         });
 
         rightArr.forEach((el) => {
-            el.normal();
+            if (el.openedTable) {
+                el.animations.play('close');
+                el.openedTable = false;
+            }
         })
 
         // Перевод в нормальную анимацию
@@ -138,10 +144,12 @@ export let controller = (() => {
                 view.draw.WinElements({number: [currentLine.Line], amount: [currentLine.Count]});
                 view.draw.WinGlista({number: currentLine.Line});
                 view.draw.WinLineTable({line: currentLine});
+                view.draw.WinNumber({number: currentLine.Line});
             // Если скаттеры
             } else {
                 view.draw.WinElements({number: [currentLine.Line], amount: [currentLine.Count]});
                 view.draw.WinLineTable({line: currentLine, scatter: true});
+                view.draw.WinNumber({number: currentLine.Line});
             }
         } else {
             return;

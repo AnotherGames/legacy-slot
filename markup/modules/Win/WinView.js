@@ -55,28 +55,22 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('winTop')
         }) {
+
             let leftArr = model.el('leftArr');
-            let winSplash = leftArr.filter((el) => {
+            let rightArr = model.el('rightArr');
+
+            let winSplashLeft = leftArr.filter((el) => {
                 return el.name === number;
             })[0];
-
-            winSplash.animations.add('win', Phaser.Animation.generateFrameNames('line_splash-' + number + '_', 1, 8, '.png', 1), 15, false);
-            winSplash.animations.play('win');
-            winSplash.animations.getAnimation('win').onComplete.add(() => {
-                winSplash.frameName = 'line_splash-' + number + '_8.png';
-            });
-
-
-            let rightArr = model.el('rightArr');
             let winSplashRight = rightArr.filter((el) => {
                 return el.name === number;
             })[0];
 
-            winSplashRight.animations.add('win', Phaser.Animation.generateFrameNames('line_splash-' + number + '_', 1, 8, '.png', 1), 15, false);
+            winSplashLeft.animations.play('win');
             winSplashRight.animations.play('win');
-            winSplashRight.animations.getAnimation('win').onComplete.add(() => {
-                winSplashRight.frameName = 'line_splash-' + number + '_8.png';
-            });
+
+            winSplashLeft.openedTable = true;
+            winSplashRight.openedTable = true;
 
         },
 

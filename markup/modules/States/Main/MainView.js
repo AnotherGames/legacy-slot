@@ -69,31 +69,38 @@ export let view = (() => {
 
             for (let i = 1; i < 11; i++) {
                 let name = i;
-                let sprite = (i < 10) ? 'plashka2-0' + i +'-open_20.png' : 'plashka2-' + i +'-open_20.png';
+                let sprite = (i < 10) ? 'plashka2-0' + i +'-open_0.png' : 'plashka2-' + i +'-open_0.png';
+                let prefix = (i < 10) ? 'plashka2-0' : 'plashka2-';
 
                 let lineNumber = game.add.sprite(config[model.res].win[i][0].x - gameMachine.width / 2,
                     config[model.res].win[i][0].y - gameMachine.height / 2,
                     'lineNumbersLeft',
                     sprite,
                     container);
-                lineNumber.normal = function() {lineNumber.frameName = sprite};
+
                 lineNumber.name = name;
                 lineNumber.anchor.set(0.5);
 
+                lineNumber.animations.add('close', Phaser.Animation.generateFrameNames(prefix + i +'-open_', 19, 0, '.png', 1), 30, false);
+                lineNumber.animations.add('win', Phaser.Animation.generateFrameNames(prefix + i +'-open_', 0, 20, '.png', 1), 30, false);
+
                 lineNumber.inputEnabled = true;
                 lineNumber.input.priorityID = 2;
-                lineNumber.input.pixelPerfectOver = 1;
+                // lineNumber.input.pixelPerfectOver = 1;
                 lineNumber.events.onInputOver.add(() => {
-                if (lineNumber.lineShape) {
-                   lineNumber.lineShape.destroy();
-                }
-                lineNumber.lineShape = this.lineShape(lineNumber.name);
+                    if (lineNumber.lineShape) {
+                        lineNumber.animations.play('close');
+                        lineNumber.lineShape.destroy();
+                    }
+                    lineNumber.lineShape = this.lineShape(lineNumber.name);
+                    lineNumber.animations.play('win');
                 });
 
                 lineNumber.events.onInputOut.add(() => {
-                if (lineNumber.lineShape) {
-                   lineNumber.lineShape.destroy();
-                }
+                    if (lineNumber.lineShape) {
+                        lineNumber.animations.play('close');
+                        lineNumber.lineShape.destroy();
+                    }
                 });
                 leftArr.push(lineNumber);
             }
@@ -104,31 +111,38 @@ export let view = (() => {
 
             for (let i = 1; i < 11; i++) {
                 let name = i;
-                let sprite = (i < 10) ? 'plashka-0' + i +'-open_20.png' : 'plashka-' + i +'-open_20.png';
+                let sprite = (i < 10) ? 'plashka-0' + i +'-open_0.png' : 'plashka-' + i +'-open_0.png';
+                let prefix = (i < 10) ? 'plashka-0' : 'plashka-';
 
                 let lineNumber = game.add.sprite(config[model.res].win[i][1].x - gameMachine.width / 2 - 8,
                     config[model.res].win[i][0].y - gameMachine.height / 2,
                     'lineNumbers',
                     sprite,
                     container);
-                lineNumber.normal = function() {lineNumber.frameName = sprite};
+
                 lineNumber.name = name;
                 lineNumber.anchor.set(0.5);
 
+                lineNumber.animations.add('close', Phaser.Animation.generateFrameNames(prefix + i +'-open_', 19, 0, '.png', 1), 30, false);
+                lineNumber.animations.add('win', Phaser.Animation.generateFrameNames(prefix + i +'-open_', 0, 20, '.png', 1), 30, false);
+
                 lineNumber.inputEnabled = true;
                 lineNumber.input.priorityID = 2;
-                lineNumber.input.pixelPerfectOver = 1;
+                // lineNumber.input.pixelPerfectOver = 1;
                 lineNumber.events.onInputOver.add(() => {
-                if (lineNumber.lineShape) {
-                   lineNumber.lineShape.destroy();
-                }
-                lineNumber.lineShape = this.lineShape(lineNumber.name);
+                    if (lineNumber.lineShape) {
+                        lineNumber.animations.play('close');
+                       lineNumber.lineShape.destroy();
+                    }
+                    lineNumber.lineShape = this.lineShape(lineNumber.name);
+                    lineNumber.animations.play('win');
                 });
 
                 lineNumber.events.onInputOut.add(() => {
-                if (lineNumber.lineShape) {
-                   lineNumber.lineShape.destroy();
-                }
+                    if (lineNumber.lineShape) {
+                        lineNumber.animations.play('close');
+                        lineNumber.lineShape.destroy();
+                    }
                 });
                 rightArr.push(lineNumber);
             }
@@ -160,7 +174,7 @@ export let view = (() => {
             model.group('machine', machineGroup);
 
             let numbersContainer = game.add.group();
-            container.addAt(numbersContainer, 3);
+            container.addAt(numbersContainer, 0);
             model.group('numbers', numbersContainer);
 
             let winUp = game.add.group();
