@@ -124,12 +124,14 @@ export let view = (() => {
                         }
                         lineNumber.lineShape = this.lineShape(lineNumber.name);
                         lineNumber.animations.play('win');
-
-                        game.time.events.add(1000, () => {
+                    });
+                    lineNumber.events.onInputUp.add(()=>{
+                        // game.time.events.add(1000, () => {
                             lineNumber.animations.play('close');
                             lineNumber.lineShape.destroy();
-                        });
-                    });
+                        // });
+                    })
+
                 }
 
                 leftArr.push(lineNumber);
@@ -183,12 +185,13 @@ export let view = (() => {
                         }
                         lineNumber.lineShape = this.lineShape(lineNumber.name);
                         lineNumber.animations.play('win');
-
-                        game.time.events.add(1000, () => {
+                    });
+                    lineNumber.events.onInputUp.add(()=>{
+                        // game.time.events.add(1000, () => {
                             lineNumber.animations.play('close');
                             lineNumber.lineShape.destroy();
-                        });
-                    });
+                        // });
+                    })
                 }
 
                 rightArr.push(lineNumber);
