@@ -110,28 +110,14 @@ export class Preload {
     loadFSAssets() {
         const game = model.el('game');
         game.load.image('fsBG', 'bg/fsBG.png');
-        game.load.image('x4', 'fs/x4.png');
-        game.load.image('x6', 'fs/x6.png');
-        game.load.image('x8', 'fs/x8.png');
-        game.load.image('aim', 'fs/pritsel.png');
         game.load.image('transitionFS', 'fs/transitionFS.png');
-        game.load.atlasJSONArray('bottle', 'fs/bottle.png', 'fs/bottle.json');
-        game.load.atlasJSONArray('bigBang', 'fs/bigBang.png', 'fs/bigBang.json');
-        game.load.atlasJSONArray('baraban', 'fs/baraban.png', 'fs/baraban.json');
         game.load.image('fsCountBG', 'fs/fsCountBG.png');
-        game.load.image('plus3', 'fs/plus3.png');
-        if (model.mobile) {
-            game.load.image('drumBG', 'fs/fsDrumBG.png');
-            game.load.image('bottleBG', 'fs/shkaf.png');
-        } else {
-            game.load.image('bottleShadow', 'fs/bottleShadow.png');
-            game.load.image('brokenBottleShadow', 'fs/brokenBottleShadow.png');
-        }
+        // game.load.image('fsMultiBG', 'fs/fsMultiBG.png');
+        game.load.atlasJSONArray('fsMulti', 'fs/fsMulti.png', 'fs/fsMulti.json');
     }
 
     loadSpineAssets() {
         const game = model.el('game');
-        // game.load.spine('pole', 'spine/p-pole.json');
         game.load.spine('geisha', 'spine/Geisha.json');
         game.load.spine('ninja', 'spine/Ninja.json');
         game.load.spine('samurai', 'spine/Samurai.json');

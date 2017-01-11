@@ -162,7 +162,7 @@ export class FS {
         rollController.init();
 
         if (model.mobile) {
-            // fsView.draw.addPole({});
+
             // Рисуем футер
             footerController.initMobile();
             // Отрисовуем баланс
@@ -171,7 +171,6 @@ export class FS {
             // Автоматически позиционируем основной контейнер
             this.positionMainContainer();
         } else {    // Desktop
-            // fsView.draw.addCows({});
 
             footerController.initDesktop();
 
@@ -199,11 +198,11 @@ export class FS {
         });
 
         // Если сохранненая сессия, то переключаем счетчик мозгов
-        if (this.fsLevel > 0) {
-            controller.searchBrains({
-                startLevel: this.fsLevel
-            })
-        }
+        // if (this.fsLevel > 0) {
+        //     controller.searchBrains({
+        //         startLevel: this.fsLevel
+        //     })
+        // }
 
         // Первая темнота
         fsView.draw.darkness({});
@@ -240,7 +239,7 @@ export class FS {
             model.data('savedFS', null);
             model.data('fsMulti', this.fsMulti);
         } else {
-            this.fsCount = 15;
+            this.fsCount = model.data('rollResponse').FreeSpinsWin;
             this.fsMulti = 2;
             this.fsLevel = 0;
             model.data('fsMulti', 2);
