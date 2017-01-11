@@ -16,7 +16,7 @@ export let request = (() => {
     const mode = {
         // normal: 'chibi1',
         normal: 'chibiroot1',
-        fsBonus: 'snailfs3'
+        fsBonus: 'chibifs1'
     };
 
     function send(name, options) {
