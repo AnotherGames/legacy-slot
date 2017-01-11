@@ -113,8 +113,23 @@ export let controller = (() => {
             console.log(currMulti);
 
             if (multiValue > currMulti) {
+
+                let wheels = model.el('wheels');
+                let upWheels = model.el('upWheels');
+
+                wheels.forEach((wheel) => {
+                    wheel.elements.forEach((el) => {
+                        el.changeBG(multiValue);
+                    });
+                });
+                upWheels.forEach((upWheel) => {
+                    upWheel.forEach((upEl) => {
+                        upEl.changeBG(multiValue);
+                    });
+                });
                 fsView.draw.newMulti({number: multiValue});
                 model.data('fsMulti', multiValue);
+
             }
         }
 

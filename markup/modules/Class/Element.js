@@ -13,9 +13,23 @@ export class Element {
 
         // Заполняем его спрайтами всех элементов (они будут расположенны друг на друге)
         this.sprites = [];
-        this.bg = game.add.sprite(0, 0, 'plaha', null, this.group);
+        this.bgWood = game.add.sprite(0, 0, 'plaha', 'plaha-1.png', this.group);
+        this.bgBronze = game.add.sprite(0, 0, 'plaha', 'plaha-2.png', this.group);
+        this.bgSilver = game.add.sprite(0, 0, 'plaha', 'plaha-3.png', this.group);
+        this.bgGold = game.add.sprite(0, 0, 'plaha', 'plaha-4.png', this.group);
+        this.bg = this.bgWood;
+
         this.bg.anchor.set(0.5);
+        this.bgWood.anchor.set(0.5);
+        this.bgBronze.anchor.set(0.5);
+        this.bgSilver.anchor.set(0.5);
+        this.bgGold.anchor.set(0.5);
+
         this.bg.visible = false;
+        this.bgWood.visible = false;
+        this.bgBronze.visible = false;
+        this.bgSilver.visible = false;
+        this.bgGold.visible = false;
         for (let i = 1; i <= config.symbolsCount; i++) {
             // Создаем по спрайту для каждого символа и делаем их не видимыми
             let sprite = game.add.sprite(0, 0, i, null, this.group);
@@ -40,6 +54,45 @@ export class Element {
         this.activeSprite = this.sprites[0];
         this.activeSprite.visible = true;
         this.activeSprite.animations.play('1-n');
+    }
+
+    changeBG(multi) {
+        switch(multi) {
+            case 2:
+                this.bg = this.bgWood;
+                this.bgBronze.visible = false;
+                this.bgSilver.visible = false;
+                this.bgGold.visible = false;
+                break;
+            case 4:
+                this.bg = this.bgBronze;
+                this.bgWood.visible = false;
+                this.bgSilver.visible = false;
+                this.bgGold.visible = false;
+                break;
+            case 6:
+                this.bg = this.bgSilver;
+                this.bgWood.visible = false;
+                this.bgBronze.visible = false;
+                this.bgGold.visible = false;
+                break;
+            case 8:
+                this.bg = this.bgGold;
+                this.bgWood.visible = false;
+                this.bgBronze.visible = false;
+                this.bgSilver.visible = false;
+                break;
+            default:
+                break;
+        }
+        if(this.active == 2
+            || this.active == 4
+            || this.active == 6
+            || this.active == 8) {
+                this.bg.visible = true;
+            } else {
+                this.bg.visible = false;
+            }
     }
 
     play(animation, loop = true, fps = 20) {

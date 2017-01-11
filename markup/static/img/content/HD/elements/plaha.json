@@ -1,0 +1,44 @@
+{"frames": [
+
+{
+	"filename": "plaha-1.png",
+	"frame": {"x":154,"y":1,"w":149,"h":153},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":11,"y":7,"w":149,"h":153},
+	"sourceSize": {"w":165,"h":165}
+},
+{
+	"filename": "plaha-2.png",
+	"frame": {"x":1,"y":1,"w":151,"h":155},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":10,"y":6,"w":151,"h":155},
+	"sourceSize": {"w":165,"h":165}
+},
+{
+	"filename": "plaha-3.png",
+	"frame": {"x":1,"y":158,"w":151,"h":155},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":10,"y":6,"w":151,"h":155},
+	"sourceSize": {"w":165,"h":165}
+},
+{
+	"filename": "plaha-4.png",
+	"frame": {"x":1,"y":315,"w":151,"h":155},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":10,"y":6,"w":151,"h":155},
+	"sourceSize": {"w":165,"h":165}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "plaha.png",
+	"format": "RGBA8888",
+	"size": {"w":512,"h":512},
+	"scale": "0.75",
+	"smartupdate": "$TexturePacker:SmartUpdate:390b4cbb0282f7ab9a0e5e0b89a72992:2d1369c16ad2c487b65ada9ea470aea1:4f2fc3a039a96b1fc4f962ee2d129f06$"
+}
+}

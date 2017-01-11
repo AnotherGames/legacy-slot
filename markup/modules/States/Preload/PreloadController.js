@@ -74,8 +74,8 @@ export class Preload {
         game.load.image('gameBGfs', 'game/gameBGfs.png');
         game.load.image('gameShadow', 'game/gameShadow.png');
         game.load.image('popup', 'other/popup.png');
-        // game.load.image('smoke', 'other/smoke.png');
         game.load.image('aim', 'other/aim.png');
+        game.load.atlasJSONArray('shuriken', 'other/shuriken.png', 'other/shuriken.json');
         game.load.image('closed', 'other/closed.png');
         // game.load.image('transitionCoin', 'other/transitionCoin.png');
         game.load.image('ar', 'other/ar.png');
@@ -138,7 +138,7 @@ export class Preload {
         game.load.atlasJSONArray('10', 'elements/10.png', 'elements/10.json');
         game.load.atlasJSONArray('11', 'elements/11.png', 'elements/11.json');
         game.load.atlasJSONArray('12', 'elements/12.png', 'elements/12.json');
-        game.load.image('plaha', 'elements/plaha.png');
+        game.load.atlasJSONArray('plaha', 'elements/plaha.png', 'elements/plaha.json');
     }
 
     hidePreloader() {
