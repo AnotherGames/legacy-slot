@@ -283,7 +283,7 @@ export let view = (() => {
             let x, y;
             if (model.desktop) {
                 x = 890;
-                y = 85;
+                y = 75;
             } else {
                 x = 90;
                 y = 630;
@@ -291,9 +291,10 @@ export let view = (() => {
             let fsMultiBG = game.add.sprite(x, y, '11', '11-n-00.png', container);
             fsMultiBG.anchor.set(0.5);
             fsMultiBG.scale.set(1.4);
-            fsMultiBG.animations.add('move', Phaser.Animation.generateFrameNames('11-n-', 0, 29, '.png', 2), 20, true);
-            fsMultiBG.animations.add('win', Phaser.Animation.generateFrameNames('11-w-', 0, 29, '.png', 2), 20, true);
+            fsMultiBG.animations.add('move', Phaser.Animation.generateFrameNames('11-n-', 0, 29, '.png', 2), 20, false);
+            fsMultiBG.animations.add('win', Phaser.Animation.generateFrameNames('11-w-', 0, 29, '.png', 2), 20, false);
             // fsMultiBG.animations.play('move');
+            model.el('fsMultiBG', fsMultiBG);
 
             let fsMulti = game.add.sprite(x, y, 'fsMulti', 'x2.png', container);
             fsMulti.anchor.set(0.5);
@@ -304,47 +305,30 @@ export let view = (() => {
 
         },
 
-        //
-        // ShowMulti: function({
-        //     game = model.el('game'),
-        //     container = model.group('panel'),
-        //     number = 4
-        // }) {
-        //     let fsBottle = model.el(`fsBottle${number}`);
-        //     let fsMulti = model.el(`fsMulti${number}`);
-        //     let bottleShadow = model.el(`bottleShadow${number}`);
-        //     let brokenBottleShadow = model.el(`brokenBottleShadow${number}`);
-        //
-        //     // let fsMultiBig = game.add.sprite(game.width / 2, game.height / 2, `x${number}`);
-        //     // fsMultiBig.anchor.set(0.5);
-        //     // fsMultiBig.alpha = 0;
-        //
-        //     draw.addAim({
-        //         sprite: fsBottle,
-        //         callback: () => {
-        //             soundController.sound.playSound({sound: 'bottleBangSound', duration: 1000});
-        //             soundController.sound.changeSoundVolume('bottleBangSound', 1000);
-        //
-        //             let aim = model.el('aim');
-        //             aim.destroy();
-        //
-        //             fsBottle.animations.add('bottleBang');
-        //             fsBottle.animations.play('bottleBang', 12, false);
-        //             fsMulti.visible = true;
-        //             // game.add.tween(fsMultiBig.scale).to({x: 3.5, y: 3.5}, 500, 'Linear', true);
-        //             // game.add.tween(fsMultiBig).to({alpha: 1}, 500, 'Linear', true)
-        //             //     .onComplete.add(() => {
-        //             //         fsMultiBig.destroy();
-        //             //     })
-        //
-        //             if (model.desktop) {
-        //                 bottleShadow.visible = false;
-        //                 brokenBottleShadow.visible = true;
-        //             }
-        //         }
-        //     })
-        //
-        // },
+
+        newMulti: function({
+            game = model.el('game'),
+            container = model.group('panel'),
+            number = 4
+        }) {
+
+            let fsMultiBG = model.el('fsMultiBG');
+                fsMultiBG.animations.play('win');
+
+            // let ninja = model.el('ninja');
+            //     ninja.animations.play('win');
+            //     ninja.animations.play('move');
+
+            let fsMulti = model.el('fsMulti');
+
+            game.add.tween(fsMulti.scale)
+                .to({x: 1.5, y: 1.5}, 300, Phaser.Easing.Out, true)
+                .onComplete.add(() => {
+                    fsMulti.frameName = `x${number}.png`;
+                    game.add.tween(fsMulti.scale)
+                    .to({x: 1, y: 1}, 200, Phaser.Easing.In, true)
+                });
+        },
 
         Count: function({
             game = model.el('game'),
@@ -381,7 +365,9 @@ export let view = (() => {
                 let ninja = game.add.sprite(x - 200, y + 10, '4', '04-n-00.png', container);
                 ninja.anchor.set(0.5);
                 ninja.animations.add('move', Phaser.Animation.generateFrameNames('04-n-', 0, 29, '.png', 2), 20, true);
+                ninja.animations.add('win', Phaser.Animation.generateFrameNames('04-w-', 0, 29, '.png', 2), 20, false);
                 ninja.animations.play('move');
+                model.el('ninja', ninja);
             }
 
         }

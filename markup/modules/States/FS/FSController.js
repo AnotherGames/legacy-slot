@@ -71,46 +71,59 @@ export let controller = (() => {
         // bulletCounter = 0;
     }
 
-    function bullet(el) {
-        let game = model.el('game');
-        // Проигрываем анимации барабана и +3
-        fsView.draw.CountPlus3({});
+    // function bullet(el) {
+    //     let game = model.el('game');
+    //     // Проигрываем анимации барабана и +3
+    //     fsView.draw.CountPlus3({});
+    //
+    //     //если максимальный множитель достигнут то возвращаемся
+    //     if(model.state('maxFsMultiplier')) return;
+    //
+    //     let rollData = model.data('rollResponse');
+    //     let multiValue = rollData.FsBonus.Multi;
+    //     let bulletCounter = rollData.FsBonus.Level % 6;
+    //     let currMulti = model.data('fsMulti');
+    //
+    //     //Увеличиваем количество пуль в барабане
+    //     fsView.draw.drumSpin({number: bulletCounter});
+    //     el.visible = true;
+    //
+    //     // Увеличиваем мульти(разбивание бутылки)
+    //     if (multiValue > currMulti) {
+    //         fsView.draw.ShowMulti({number: multiValue});
+    //         model.data('fsMulti', multiValue);
+    //         let timer = model.el('fsTimer');
+    //         game.time.events.remove(timer);
+    //
+    //         let fsTimer = game.time.events.add(3000, () => {
+    //             if (model.state('fs:end')) return;
+    //             controller.next();
+    //         });
+    //
+    //         model.el('fsTimer', fsTimer);
+    //     }
 
-        //если максимальный множитель достигнут то возвращаемся
-        if(model.state('maxFsMultiplier')) return;
+        function changeMulti() {
 
-        let rollData = model.data('rollResponse');
-        let multiValue = rollData.FsBonus.Multi;
-        let bulletCounter = rollData.FsBonus.Level % 6;
-        let currMulti = model.data('fsMulti');
+            if(model.state('maxFsMultiplier')) return;
 
-        //Увеличиваем количество пуль в барабане
-        fsView.draw.drumSpin({number: bulletCounter});
-        el.visible = true;
+            let rollData = model.data('rollResponse');
+            let multiValue = rollData.FsBonus.Multi;
+            let currMulti = model.data('fsMulti');
+            console.log(currMulti);
 
-        // Увеличиваем мульти(разбивание бутылки)
-        if (multiValue > currMulti) {
-            fsView.draw.ShowMulti({number: multiValue});
-            model.data('fsMulti', multiValue);
-            let timer = model.el('fsTimer');
-            game.time.events.remove(timer);
-
-            let fsTimer = game.time.events.add(3000, () => {
-                if (model.state('fs:end')) return;
-                controller.next();
-            });
-
-            model.el('fsTimer', fsTimer);
+            if (multiValue > currMulti) {
+                fsView.draw.newMulti({number: multiValue});
+                model.data('fsMulti', multiValue);
+            }
         }
-
-    }
 
     return {
         init,
         next,
         count,
         stop,
-        bullet
+        changeMulti
     };
 })();
 

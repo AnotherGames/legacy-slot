@@ -5,6 +5,7 @@ import { view } from 'modules/Win/WinView';
 import { view as transitionView } from 'modules/Transition/TransitionView';
 
 import { controller as autoplayController } from 'modules/Autoplay/AutoplayController';
+import { controller as fsController } from 'modules/States/FS/FSController';
 
 export let controller = (() => {
 
@@ -24,6 +25,7 @@ export let controller = (() => {
             nextMode = data.NextMode;
         // Если нет выигрыша - выходим
         if (winLines.length === 0) return;
+
         // Записываем финишный экран на верхний слой
         view.draw.copyFinishScreenToUpWheels({});
 
@@ -40,6 +42,11 @@ export let controller = (() => {
         // Для каждой линии проигрываем символы, глисты и номерки
         let winElements = { number: [], amount: [] };
         winLines.forEach((winLine) => {
+            if(winLine.Line == -1
+            && winLine.Symbol == '11'
+            && model.state('fs')) {
+                fsController.changeMulti()
+            }
             view.draw.WinNumber({number: winLine.Line});
             winElements.number.push(winLine.Line);
             winElements.amount.push(winLine.Count);
