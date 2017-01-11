@@ -214,6 +214,8 @@ export let controller = (() => {
             mode = data.Mode,
             nextMode = data.NextMode;
         if (mode == 'root' && nextMode.indexOf('shuriken') != -1) {
+            let shurikenArray = [];
+            model.data('shurikenArray', shurikenArray);
             // Лочим все кнопки
             model.state('buttons:locked', true);
             // Остонавливаем автоплей если был
@@ -226,14 +228,15 @@ export let controller = (() => {
             model.state('bonus', true);
             let amountOFShurikens = +nextMode[8];
             console.log('I am in suriken bonus!', amountOFShurikens);
-            strikeShurikens(amountOFShurikens);
+            getShurikens(amountOFShurikens);
         }
     }
 
-    function strikeShurikens(i) {
+    function getShurikens(i) {
         request.send('Roll')
             .then((data) => {
                 console.log('Data is: ', data);
+                writeShurikenData(data);
             })
             .then(() => {
                 return request.send('Ready');
@@ -241,15 +244,60 @@ export let controller = (() => {
             .then(() => {
                 i--;
                 if (i > 0) {
-                    strikeShurikens(i)
+                    getShurikens(i)
                 } else {
-                    model.state('buttons:locked', false);
-                    model.state('bonus', false);
+                    fireAllShurikens();
                 }
             })
-            .catch(() => {
-
+            .catch((err) => {
+                console.error(err);
             });
+    }
+
+    function writeShurikenData(data) {
+        let shurikenArray = model.data('shurikenArray');
+        shurikenArray.push({
+            curValue: data.CurrentValue,
+            winCoins: data.Balance.TotalWinCoins
+        });
+    }
+
+    function fireAllShurikens() {
+        let shurikenArray = model.data('shurikenArray');
+        let aim = view.draw.Aim({});
+        shurikenArray.forEach((data, index) => {
+            setTimeout(() => {
+                fireShuriken(data);
+            }, 1000 * (index + 1));
+        });
+        console.log('This is array with data from shurikens: ', shurikenArray);
+    }
+
+    function fireShuriken(data) {
+        let game = model.el('game');
+        let container = model.group('shuriken');
+        // Играй анимацию сурикена
+        // Достань координаты попадания
+        // И подними из этой координаты выигришь
+        let x = game.world.centerX;
+        let y = game.world.centerY;
+        let winText = game.add.bitmapText(x, y, 'numbersFont', `+${data.winCoins}`, 80, container);
+            winText.align = 'center';
+            winText.anchor.set(0.5);
+            winText.scale.set(0.05);
+        game.add.tween(winText.scale)
+            .to({x: 1, y: 1}, 400, Phaser.Easing.Bounce.Out, true);
+        game.add.tween(winText)
+            .to({y: y - 500, alpha: 0}, 1000, 'Linear', true)
+            .onComplete.add(() => {
+                view.hide.Aim({});
+                model.state('buttons:locked', false);
+                model.state('bonus', false);
+            });
+    }
+
+    function closeAim() {
+
     }
 
     return {

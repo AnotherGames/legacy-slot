@@ -18,6 +18,7 @@ export let view = (() => {
             model.group('footer', game.add.group());
             model.group('balanceCash', game.add.group());
             model.group('balanceCoin', game.add.group());
+            model.group('shuriken', game.add.group());
             model.group('popup', game.add.group());
             model.group('transition', game.add.group());
         }

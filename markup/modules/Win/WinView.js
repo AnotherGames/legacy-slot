@@ -281,6 +281,20 @@ export let view = (() => {
             grd.addColorStop(1, '#f8a600');
             text.fill = grd;
 
+        },
+
+        Aim: function ({
+            game = model.el('game'),
+            container = model.group('shuriken')
+        }) {
+            let darkness = game.add.graphics(0, 0, container);
+                darkness.beginFill(0x000000, 0.7).drawRect(0, 0, game.world.width, game.world.height);
+            let aim = game.add.sprite(game.world.centerX, -600, 'aim', null, container);
+                aim.anchor.set(0.5);
+            model.el('aim', aim);
+            game.add.tween(aim)
+                .to({y: game.world.centerY - 150}, 800, Phaser.Easing.Bounce.Out, true);
+            return aim;
         }
 
     };
@@ -308,6 +322,21 @@ export let view = (() => {
             container = model.group('winTop')
         }) {
             return game.add.tween(container).to( { alpha: 0 }, 150, 'Linear', true);
+        },
+
+        Aim: function ({
+            game = model.el('game'),
+            container = model.group('shuriken')
+        }) {
+            let aim = model.el('aim');
+            game.add.tween(aim)
+                .to({y: -600}, 800, Phaser.Easing.Bounce.In, true);
+            game.add.tween(container)
+                .to({alpha: 0}, 1500, 'Linear', true)
+                .onComplete.add(() => {
+                    container.removeAll();
+                    container.alpha = 1;
+                });
         }
 
     };
