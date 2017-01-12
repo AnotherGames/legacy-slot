@@ -113,6 +113,7 @@ export class Preload {
         game.load.image('transitionFS', 'fs/transitionFS.png');
         game.load.image('fsCountBG', 'fs/fsCountBG.png');
         game.load.atlasJSONArray('fsMulti', 'fs/fsMulti.png', 'fs/fsMulti.json');
+        game.load.atlasJSONArray('fsMultiBig', 'fs/fsMultiBig.png', 'fs/fsMultiBig.json');
         if (model.desktop) {
             game.load.atlasJSONArray('star', 'fs/star.png', 'fs/star.json');
         }

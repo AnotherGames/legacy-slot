@@ -396,19 +396,28 @@ export let view = (() => {
             container = model.group('panel'),
             number = 4
         }) {
-
             let fsMultiBG = model.el('fsMultiBG');
-                fsMultiBG.animations.play('win');
+            fsMultiBG.animations.play('win');
 
             let fsMulti = model.el('fsMulti');
 
-            game.add.tween(fsMulti.scale)
-                .to({x: 1.5, y: 1.5}, 300, Phaser.Easing.Out, true)
+            let fsMultiBig = game.add.sprite(game.world.centerX, game.world.centerY, 'fsMultiBig', `x${number}.png`);
+                fsMultiBig.anchor.set(0.5);
+                fsMultiBig.scale.set(0.1);
+
+            game.add.tween(fsMultiBig.scale).to({x: 1.5, y: 1.5}, 500, Phaser.Easing.Bounce.Out, true);
+            game.add.tween(fsMultiBig.scale).to({x: 0.2, y: 0.2}, 500, Phaser.Easing.Elastic.Out, true, 500);
+            game.add.tween(fsMultiBig).to({x: game.width * 0.6, y: game.height * 0.9, alpha: 0}, 500, Phaser.Easing.Bounce.Out, true, 500)
                 .onComplete.add(() => {
-                    fsMulti.frameName = `x${number}.png`;
                     game.add.tween(fsMulti.scale)
-                    .to({x: 1, y: 1}, 200, Phaser.Easing.In, true)
+                    .to({x: 1.5, y: 1.5}, 300, Phaser.Easing.Out, true)
+                    .onComplete.add(() => {
+                        fsMulti.frameName = `x${number}.png`;
+                        game.add.tween(fsMulti.scale)
+                        .to({x: 1, y: 1}, 200, Phaser.Easing.In, true)
+                    });
                 });
+
 
             if (model.desktop) {
                 let ninja = model.el('ninja');
@@ -432,25 +441,25 @@ export let view = (() => {
 
                 if (number == 6) {
                     star.visible = true;
+                    bangAnim.play(20, false);
                     bangAnim.onUpdate.add(() => {
                         if (bangAnim.currentFrame.name === 'star-animation_12.png'){
                             ninja.visible = false;
                             samurai.visible = true;
                         }
                     });
-                    bangAnim.play(20, false);
                     bangAnim.onComplete.add(() => {star.visible = false});
                 }
 
                 if (number == 8) {
                     star.visible = true;
+                    bangAnim.play(20, false);
                     bangAnim.onUpdate.add(() => {
                         if (bangAnim.currentFrame.name === 'star-animation_12.png'){
                             samurai.visible = false;
                             geisha.visible = true;
                         }
                     });
-                    bangAnim.play(20, false);
                     bangAnim.onComplete.add(() => {star.visible = false});
                 }
             }

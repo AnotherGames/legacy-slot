@@ -75,6 +75,7 @@ export let controller = (() => {
 
         if(model.state('maxFsMultiplier')) return;
 
+        let game = model.el('game');
         let rollData = model.data('rollResponse');
         let multiValue = rollData.FsBonus.Multi;
         let currMulti = model.data('fsMulti');
@@ -84,6 +85,8 @@ export let controller = (() => {
 
             let wheels = model.el('wheels');
             let upWheels = model.el('upWheels');
+
+            // Меняем подложки элементов
 
             wheels.forEach((wheel) => {
                 wheel.items.forEach((el) => {
@@ -97,6 +100,18 @@ export let controller = (() => {
             });
             fsView.draw.newMulti({number: multiValue});
             model.data('fsMulti', multiValue);
+
+            // Увеличиваем время крутки
+
+            let timer = model.el('fsTimer');
+            game.time.events.remove(timer);
+
+            let fsTimer = game.time.events.add(2500, () => {
+                if (model.state('fs:end')) return;
+                controller.next();
+            });
+
+            model.el('fsTimer', fsTimer);
 
         }
     }
