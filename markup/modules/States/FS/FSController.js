@@ -103,35 +103,35 @@ export let controller = (() => {
     //         model.el('fsTimer', fsTimer);
     //     }
 
-        function changeMulti() {
+    function changeMulti() {
 
-            if(model.state('maxFsMultiplier')) return;
+        if(model.state('maxFsMultiplier')) return;
 
-            let rollData = model.data('rollResponse');
-            let multiValue = rollData.FsBonus.Multi;
-            let currMulti = model.data('fsMulti');
-            console.log(currMulti);
+        let rollData = model.data('rollResponse');
+        let multiValue = rollData.FsBonus.Multi;
+        let currMulti = model.data('fsMulti');
+        console.log(currMulti);
 
-            if (multiValue > currMulti) {
+        if (multiValue > currMulti) {
 
-                let wheels = model.el('wheels');
-                let upWheels = model.el('upWheels');
+            let wheels = model.el('wheels');
+            let upWheels = model.el('upWheels');
 
-                wheels.forEach((wheel) => {
-                    wheel.elements.forEach((el) => {
-                        el.changeBG(multiValue);
-                    });
+            wheels.forEach((wheel) => {
+                wheel.items.forEach((el) => {
+                    el.changeBG(multiValue);
                 });
-                upWheels.forEach((upWheel) => {
-                    upWheel.forEach((upEl) => {
-                        upEl.changeBG(multiValue);
-                    });
+            });
+            upWheels.forEach((upWheel) => {
+                upWheel.forEach((upEl) => {
+                    upEl.changeBG(multiValue);
                 });
-                fsView.draw.newMulti({number: multiValue});
-                model.data('fsMulti', multiValue);
+            });
+            fsView.draw.newMulti({number: multiValue});
+            model.data('fsMulti', multiValue);
 
-            }
         }
+    }
 
     return {
         init,
@@ -214,8 +214,6 @@ export class FS {
         // Добавляем маску
         fsView.draw.machineMask({});
 
-        // Рисуем барабан
-        // fsView.draw.drum({});
         // Рисуем множитель
         fsView.draw.Multi({
             start: this.fsMulti
@@ -224,6 +222,8 @@ export class FS {
         fsView.draw.Count({
             start: this.fsCount
         });
+
+        fsView.draw.Character({});
 
         // Если сохранненая сессия, то переключаем счетчик мозгов
         // if (this.fsLevel > 0) {

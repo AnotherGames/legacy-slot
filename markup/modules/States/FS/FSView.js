@@ -305,31 +305,6 @@ export let view = (() => {
 
         },
 
-
-        newMulti: function({
-            game = model.el('game'),
-            container = model.group('panel'),
-            number = 4
-        }) {
-
-            let fsMultiBG = model.el('fsMultiBG');
-                fsMultiBG.animations.play('win');
-
-            // let ninja = model.el('ninja');
-            //     ninja.animations.play('win');
-            //     ninja.animations.play('move');
-
-            let fsMulti = model.el('fsMulti');
-
-            game.add.tween(fsMulti.scale)
-                .to({x: 1.5, y: 1.5}, 300, Phaser.Easing.Out, true)
-                .onComplete.add(() => {
-                    fsMulti.frameName = `x${number}.png`;
-                    game.add.tween(fsMulti.scale)
-                    .to({x: 1, y: 1}, 200, Phaser.Easing.In, true)
-                });
-        },
-
         Count: function({
             game = model.el('game'),
             container = model.group('panel'),
@@ -361,13 +336,114 @@ export let view = (() => {
                 fsCount.anchor.set(0.5)
                 model.el('fs:count', fsCount);
 
+        },
+
+        Character: function({
+            game = model.el('game'),
+            container = model.group('panel'),
+        }) {
+
+            let x, y;
             if (model.desktop) {
+                x = 600;
+                y = 65;
+            } else {
+                x = game.width * 0.91;
+                y = 620;
+            }
+
+            if (model.desktop) {
+                let ronin = game.add.sprite(x - 200, y + 10, '2', '02-n-00.png', container);
+                ronin.anchor.set(0.5);
+                ronin.animations.add('move', Phaser.Animation.generateFrameNames('02-n-', 0, 29, '.png', 2), 20, true);
+                ronin.animations.add('win', Phaser.Animation.generateFrameNames('02-w-', 0, 29, '.png', 2), 20, false);
+                ronin.animations.play('move');
+                model.el('ronin', ronin);
+
                 let ninja = game.add.sprite(x - 200, y + 10, '4', '04-n-00.png', container);
                 ninja.anchor.set(0.5);
                 ninja.animations.add('move', Phaser.Animation.generateFrameNames('04-n-', 0, 29, '.png', 2), 20, true);
                 ninja.animations.add('win', Phaser.Animation.generateFrameNames('04-w-', 0, 29, '.png', 2), 20, false);
                 ninja.animations.play('move');
+                ninja.visible = false;
                 model.el('ninja', ninja);
+
+                let samurai = game.add.sprite(x - 200, y + 10, '6', '06-n-00.png', container);
+                samurai.anchor.set(0.5);
+                samurai.animations.add('move', Phaser.Animation.generateFrameNames('06-n-', 0, 29, '.png', 2), 20, true);
+                samurai.animations.add('win', Phaser.Animation.generateFrameNames('06-w-', 0, 29, '.png', 2), 20, false);
+                samurai.animations.play('move');
+                samurai.visible = false;
+                model.el('samurai', samurai);
+
+                let geisha = game.add.sprite(x - 200, y + 10, '8', '08-n-00.png', container);
+                geisha.anchor.set(0.5);
+                geisha.animations.add('move', Phaser.Animation.generateFrameNames('08-n-', 0, 29, '.png', 2), 20, true);
+                geisha.animations.add('win', Phaser.Animation.generateFrameNames('08-w-', 0, 29, '.png', 2), 20, false);
+                geisha.animations.play('move');
+                geisha.visible = false;
+                model.el('geisha', geisha);
+
+                let star = game.add.sprite(x - 200, y + 10, 'star', null, container);
+                star.anchor.set(0.5);
+                star.scale.set(1.7);
+                star.visible = false;
+                let bangAnim = star.animations.add('bang');
+                model.el('star', star);
+                model.el('bangAnim', bangAnim);
+            }
+        },
+
+        newMulti: function({
+            game = model.el('game'),
+            container = model.group('panel'),
+            number = 4
+        }) {
+
+            let fsMultiBG = model.el('fsMultiBG');
+                fsMultiBG.animations.play('win');
+
+            let fsMulti = model.el('fsMulti');
+
+            game.add.tween(fsMulti.scale)
+                .to({x: 1.5, y: 1.5}, 300, Phaser.Easing.Out, true)
+                .onComplete.add(() => {
+                    fsMulti.frameName = `x${number}.png`;
+                    game.add.tween(fsMulti.scale)
+                    .to({x: 1, y: 1}, 200, Phaser.Easing.In, true)
+                });
+
+            if (model.desktop) {
+                let ninja = model.el('ninja');
+                let ronin = model.el('ronin');
+                let samurai = model.el('samurai');
+                let geisha = model.el('geisha');
+                let star = model.el('star');
+                let bangAnim = model.el('bangAnim');
+
+                if (number == 4) {
+                    star.visible = true;
+                    ronin.visible = false;
+                    ninja.visible = true;
+                    bangAnim.play(20, false);
+                    bangAnim.onComplete.add(() => {star.visible = false});
+                }
+
+                if (number == 6) {
+                    star.visible = true;
+                    ninja.visible = false;
+                    samurai.visible = true;
+                    bangAnim.play(20, false);
+                    bangAnim.onComplete.add(() => {star.visible = false});
+                }
+
+                if (number == 8) {
+                    star.visible = true;
+                    samurai.visible = false;
+                    geisha.visible = true;
+                    bangAnim.play(20, false);
+                    bangAnim.onComplete.add(() => {star.visible = false});
+                }
             }
 
         }

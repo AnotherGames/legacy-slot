@@ -112,8 +112,10 @@ export class Preload {
         game.load.image('fsBG', 'bg/fsBG.png');
         game.load.image('transitionFS', 'fs/transitionFS.png');
         game.load.image('fsCountBG', 'fs/fsCountBG.png');
-        // game.load.image('fsMultiBG', 'fs/fsMultiBG.png');
         game.load.atlasJSONArray('fsMulti', 'fs/fsMulti.png', 'fs/fsMulti.json');
+        if (model.desktop) {
+            game.load.atlasJSONArray('star', 'fs/star.png', 'fs/star.json');
+        }
     }
 
     loadSpineAssets() {
