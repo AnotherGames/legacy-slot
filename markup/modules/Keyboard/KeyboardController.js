@@ -1,6 +1,7 @@
 import { model } from 'modules/Model/Model';
 import { controller as panelController} from 'modules/Panel/PanelController';
 import { controller as soundController} from 'modules/Sound/SoundController';
+import { view as transitionView} from 'modules/Transition/TransitionView';
 
 export let controller = (() => {
 
@@ -10,10 +11,7 @@ export let controller = (() => {
         let space = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         space.onUp.add(() => {
             if ( model.state('transitionScreen') ) {
-                soundController.sound.playSound({sound : 'buttonClick'});
-                soundController.music.stopMusic('startPerehod');
-                model.el('game').state.start('FS');
-                model.state('transitionScreen', false);
+                transitionView.transitionInFs();
             } else {
                 panelController.handle.spin();
             }
