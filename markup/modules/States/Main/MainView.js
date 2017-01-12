@@ -125,13 +125,11 @@ export let view = (() => {
                         }
                         lineNumber.lineShape = this.lineShape(lineNumber.name);
                         lineNumber.animations.play('win');
-                    });
-                    lineNumber.events.onInputUp.add(()=>{
-                        // game.time.events.add(1000, () => {
+                        game.time.events.add(4000, () => {
                             lineNumber.animations.play('close');
                             lineNumber.lineShape.destroy();
-                        // });
-                    })
+                        });
+                    });
 
                 }
 
@@ -186,13 +184,11 @@ export let view = (() => {
                         }
                         lineNumber.lineShape = this.lineShape(lineNumber.name);
                         lineNumber.animations.play('win');
-                    });
-                    lineNumber.events.onInputUp.add(()=>{
-                        // game.time.events.add(1000, () => {
+                        game.time.events.add(4000, () => {
                             lineNumber.animations.play('close');
                             lineNumber.lineShape.destroy();
-                        // });
-                    })
+                        });
+                    });
                 }
 
                 rightArr.push(lineNumber);
@@ -312,32 +308,6 @@ export let view = (() => {
             });
         },
 
-        flyingSmoke: function({
-            game = model.el('game'),
-            container = model.group('bg'),
-            x = game.width / 39,
-            y = game.height / 5.6,
-            speed = 60000,
-            delay = game.rnd.between(1000, 20000)
-
-        }){
-            let smoke = game.add.sprite(x, y, 'smoke', null, container);
-                smoke.anchor.set(0.5);
-                smoke.scale.set(0.1);
-                smoke.alpha = 0;
-
-            game.add.tween(smoke).to({alpha: 0.8 }, 300, Phaser.Easing.Sinusoidal.InOut, true, delay);
-            game.add.tween(smoke.scale).to({y: 1, x: 1}, speed, Phaser.Easing.Sinusoidal.InOut, true, delay);
-            game.add.tween(smoke).to({y: smoke.y / 2}, speed, Phaser.Easing.Sinusoidal.InOut, true, delay)
-                .onComplete.add(()=>{
-                    game.add.tween(smoke).to({y: -smoke.y, alpha: 0}, speed / 3, Phaser.Easing.Quintic.In, true)
-                        .onComplete.add(()=>{
-                            smoke.destroy();
-                            draw.flyingSmoke({});
-                        })
-
-                });
-        }
 
     };
 

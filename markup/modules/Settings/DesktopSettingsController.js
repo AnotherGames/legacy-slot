@@ -55,25 +55,6 @@ export let controller = (function () {
                 fastButton.frameName = 'fastSpin.png';
             }
         });
-        $('#isAnimBG').on('change', function () {
-            let isAnim = this.checked;
-            model.cookie('isAnimBG', isAnim);
-            model.state('isAnimBG', isAnim);
-
-            let animMainBG = model.el('animMainBG');
-            let mainBG = model.el('mainBG');
-
-            if (isAnim) {
-                animMainBG.visible = true;
-                mainBG.visible = false;
-            } else {
-                mainBG.visible = true;
-                animMainBG.visible = false;
-                for (let i = 0; i < 5; i++) {
-                    transitionView.addCloud({container: model.group('bg')});
-                }
-            }
-        });
         $('#optionAutoplay1').on('change', function () {
             console.log(this.id, this.checked);
             model.state('autoplay:cashRoll', this.checked);

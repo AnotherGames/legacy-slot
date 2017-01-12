@@ -187,8 +187,6 @@ export let view = (() => {
         winText.anchor.set(0.5);
         model.el('winText', winText);
 
-        // addLines({});
-
         // Отрисовываем Выигрыш
         let winCount = game.add.bitmapText(game.width / 2, game.height * 0.5, 'numbersFont', 0, 140, transitionContainer);
             winCount.align = 'center';
@@ -258,46 +256,6 @@ export let view = (() => {
         game.frameAnims.push(anim);
     }
 
-    // Монетки на победном экране
-    // function _addCoin(container) {
-    //     let game = model.el('game');
-    //     if (container.y >= game.height * 5.7) return;
-    //
-    //     let posX = game.rnd.integerInRange(game.width * 0.1, game.width * 0.9);
-    //     let coin = game.add.sprite(posX, container.y * -1 - 100, 'transitionCoin', null, container);
-    //     coin.anchor.set(0.5);
-    //     let scale = game.rnd.integerInRange(50, 100) / 75;
-    //     coin.scale.set(scale, scale);
-    //     let height = coin.height;
-    //     coin.height = game.rnd.integerInRange(height * 0.3, height);
-    //     let tween = game.add.tween(coin)
-    //         .to({rotation: 200}, 1000, 'Linear', true)
-    //         .start();
-    //     tween.onComplete.add(() => {
-    //         coin.destroy();
-    //     });
-    //     game.add.tween(coin)
-    //         .to({height: height}, 200, 'Linear')
-    //         .to({height: height * 0.2}, 100, 'Linear')
-    //         .to({height: height}, 200, 'Linear')
-    //         .to({height: height * 0.2}, 100, 'Linear')
-    //         .to({height: height}, 200, 'Linear')
-    //         .to({height: height * 0.2}, 100, 'Linear')
-    //         .to({height: height}, 200, 'Linear')
-    //         .start();
-    //
-    //     game.time.events.add(75, () => {
-    //         _addCoin(container)
-    //     });
-    // }
-    //
-    // function _coinsTween() {
-    //     let game = model.el('game');
-    //     let coinsContainer = game.add.group();
-    //     _addCoin(coinsContainer);
-    //     game.add.tween(coinsContainer).to({y: game.height * 7}, 5000, 'Linear', true);
-    // }
-
     function _fsFinishInput() {
         let transitionBG = model.el('transitionBG');
         transitionBG.inputEnabled = true;
@@ -317,87 +275,12 @@ export let view = (() => {
         model.el('game').state.start('Main');
     }
 
-    function addCloud({
-        x = model.el('game').rnd.integerInRange(0, model.el('game').width),
-        container = model.group('bg')
-    }) {
-        let game = model.el('game');
-        let random = game.rnd.integerInRange(3, 10);
 
-        // let number = game.rnd.integerInRange(1, 4);
-        // let cloud = game.add.sprite(0, 150, 'clouds', `cloud${number}.png`, container);
-        let cloud = game.add.sprite(0, 150, 'cloud', null, container);
-        cloud.anchor.set(0.5);
-        cloud.scale.set(random / 10);
-
-        let time = game.rnd.integerInRange(40, 60);
-        let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
-        // let delta;
-        if (model.desktop) {
-            cloud.y = cloud.y = cloud.y + game.rnd.integerInRange(0, 250);
-        } else {
-            cloud.y = cloud.y = cloud.y + game.rnd.integerInRange(0, 100);
-        }
-        cloud.x = x;
-
-        if (container === model.group('bg')){
-            cloud.x = (side === 'left') ? -cloud.width : game.width + cloud.width;
-        }
-        let delta = (side === 'left') ? game.width + cloud.width : -cloud.width;
-
-        game.add.tween(cloud).to({x: delta}, time * 1000, 'Linear', true)
-            .onComplete.add(() => {
-                cloud.destroy();
-                // if (container === model.group('bg') && model.state('isAnimations' == false)){
-                //     addCloud({container: model.group('bg')});
-                // }
-            }, this);
-
-    }
-
-    function addLines({
-        game = model.el('game'),
-        container = model.group('transition')
-    }) {
-        let linesArr = [];
-        let amount = Math.random() * 5 + 2;
-        for (let i = 0; i < amount; i++) {
-            let fonLine = game.add.sprite(game.rnd.integerInRange(0, game.width), 0, 'fonLine', null, container);
-                fonLine.alpha = game.rnd.integerInRange(3, 10) / 10;
-            linesArr.push(fonLine);
-        }
-
-        let fonLine2 = game.add.sprite(0, 0, 'fonLine', null, container);
-        fonLine2.alpha = 0.6;
-        game.add.tween(fonLine2).to({x: game.width}, 30000, 'Linear', true, 0, -1)
-
-        // передвигаем линии
-        moveLines(linesArr);
-
-    }
-
-    function moveLines(linesArr) {
-        let game = model.el('game');
-
-        linesArr.forEach((lineSprite) => {
-            game.time.events.add(game.rnd.integerInRange(20, 150), () => {
-                lineSprite.x = game.rnd.integerInRange(0, game.width);
-                lineSprite.alpha = game.rnd.integerInRange(3, 10) / 10;
-                let curX = lineSprite.x;
-                game.add.tween(lineSprite).to({x: game.rnd.integerInRange(curX - 3, curX + 3), alpha: lineSprite.alpha - 0.2}, 30, 'Linear', true, 0, 5, true);
-            });
-        });
-
-        game.time.events.add(game.rnd.integerInRange(500, 1000), () => {
-            moveLines(linesArr);
-        });
-    }
 
     return {
         fsStart,
-        fsFinish,
-        addCloud,
-        addLines
+        fsFinish
+
     }
 
 })();

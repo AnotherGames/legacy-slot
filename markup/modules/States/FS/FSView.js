@@ -129,13 +129,11 @@ export let view = (() => {
                         }
                         lineNumber.lineShape = this.lineShape(lineNumber.name);
                         lineNumber.animations.play('win');;
-                    });
-                    lineNumber.events.onInputUp.add(()=>{
-                        // game.time.events.add(1000, () => {
+                        game.time.events.add(4000, () => {
                             lineNumber.animations.play('close');
                             lineNumber.lineShape.destroy();
-                        // });
-                    })
+                        });
+                    });
 
                 }
 
@@ -190,13 +188,11 @@ export let view = (() => {
                         }
                         lineNumber.lineShape = this.lineShape(lineNumber.name);
                         lineNumber.animations.play('win');
-                    });
-                    lineNumber.events.onInputUp.add(()=>{
-                        // game.time.events.add(1000, () => {
+                        game.time.events.add(4000, () => {
                             lineNumber.animations.play('close');
                             lineNumber.lineShape.destroy();
-                        // });
-                    })
+                        });
+                    });
                 }
 
                 rightArr.push(lineNumber);
@@ -447,52 +443,6 @@ export let view = (() => {
             }
 
         }
-
-        // CountPlus3: function({
-        //     game = model.el('game'),
-        //     container = model.group('main'),
-        //     x = 0,
-        //     y = game.height / 5 * -1,
-        //     deltaY = 15
-        // }) {
-        //     if (model.state('CountPlus3')) return;
-        //     model.state('CountPlus3', true);
-        //
-        //     if (model.desktop) {
-        //         deltaY = 30;
-        //     }
-        //
-        //     let plus3Group = game.add.group(container);
-        //         plus3Group.scale.set(0.3);
-        //         plus3Group.x = x;
-        //         plus3Group.y = y - deltaY;
-        //
-        //     let circle = game.add.graphics(0, 0, plus3Group);
-        //         circle.beginFill(0x000000, 0.6).drawCircle(0, 0, 200);
-        //     let plus3 = game.add.sprite(0, 0, 'plus3', null, plus3Group);
-        //         plus3.anchor.set(0.5);
-        //     model.el('plus3', plus3);
-        //
-        //     let tweenY;
-        //     let tweenX;
-        //
-        //     if(model.desktop) {
-        //         tweenX = plus3Group.x;
-        //         tweenY = 950;
-        //     } else {
-        //         tweenX = -450;
-        //         tweenY = 100;
-        //     }
-        //
-        //     game.add.tween(plus3Group.scale).to({x: 1.0, y: 1.0}, 500, Phaser.Easing.Elastic.Out, true);
-        //     game.add.tween(plus3Group).to({x: tweenX, y: tweenY}, 400, 'Linear', true, 500);
-        //     game.add.tween(plus3Group).to({alpha: 0}, 200, 'Linear', true, 700)
-        //         .onComplete.add(() => {
-        //             plus3Group.destroy();
-        //             model.state('CountPlus3', false);
-        //             view.draw._showBang({});
-        //         }, this);
-        // },
 
     };
 
