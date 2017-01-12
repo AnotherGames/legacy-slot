@@ -13,11 +13,15 @@ export class Element {
 
         // Заполняем его спрайтами всех элементов (они будут расположенны друг на друге)
         this.sprites = [];
-        this.bgWood = game.add.sprite(0, 0, 'plaha', 'plaha-1.png', this.group);
-        this.bgBronze = game.add.sprite(0, 0, 'plaha', 'plaha-2.png', this.group);
-        this.bgSilver = game.add.sprite(0, 0, 'plaha', 'plaha-3.png', this.group);
-        this.bgGold = game.add.sprite(0, 0, 'plaha', 'plaha-4.png', this.group);
+        this.bgWood = game.add.sprite(0, 0, 'coin', '1-01.png', this.group);
+        this.bgBronze = game.add.sprite(0, 0, 'coin', '2-01.png', this.group);
+        this.bgSilver = game.add.sprite(0, 0, 'coin', '3-01.png', this.group);
+        this.bgGold = game.add.sprite(0, 0, 'coin', '3-12.png', this.group);
         this.bg = this.bgWood;
+
+        this.woodAnim = this.bgWood.animations.add('toBronze', Phaser.Animation.generateFrameNames('1-', 1, 12, '.png', 2));
+        this.bronzeAnim = this.bgBronze.animations.add('toSilver', Phaser.Animation.generateFrameNames('2-', 1, 12, '.png', 2));
+        this.silverAnim = this.bgSilver.animations.add('toGold', Phaser.Animation.generateFrameNames('3-', 1, 12, '.png', 2));
 
         this.bg.anchor.set(0.5);
         this.bgWood.anchor.set(0.5);
@@ -54,6 +58,23 @@ export class Element {
         this.activeSprite = this.sprites[0];
         this.activeSprite.visible = true;
         this.activeSprite.animations.play('1-n');
+    }
+
+    animBG(multi) {
+        if (multi == 4) {
+            this.woodAnim.play(20, false);
+            this.woodAnim.onComplete.add(() => {this.changeBG(multi)});
+        }
+
+        if (multi == 6) {
+            this.bronzeAnim.play(20, false);
+            this.bronzeAnim.onComplete.add(() => {this.changeBG(multi)});
+        }
+
+        if (multi == 8) {
+            this.silverAnim.play(20, false);
+            this.silverAnim.onComplete.add(() => {this.changeBG(multi)});
+        }
     }
 
     changeBG(multi) {

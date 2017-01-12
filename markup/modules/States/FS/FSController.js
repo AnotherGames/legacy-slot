@@ -59,7 +59,7 @@ export let controller = (() => {
     function stop() {
         let game = model.el('game');
 
-        game.time.events.add(1500, () => {
+        game.time.events.add(500, () => {
             soundController.music.stopMusic('fsFon')
             transitionView.fsFinish();
         });
@@ -87,12 +87,12 @@ export let controller = (() => {
 
             wheels.forEach((wheel) => {
                 wheel.items.forEach((el) => {
-                    el.changeBG(multiValue);
+                    el.animBG(multiValue);
                 });
             });
             upWheels.forEach((upWheel) => {
                 upWheel.forEach((upEl) => {
-                    upEl.changeBG(multiValue);
+                    upEl.animBG(multiValue);
                 });
             });
             fsView.draw.newMulti({number: multiValue});

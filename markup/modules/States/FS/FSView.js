@@ -385,6 +385,7 @@ export let view = (() => {
                 star.scale.set(1.7);
                 star.visible = false;
                 let bangAnim = star.animations.add('bang');
+                bangAnim.enableUpdate = true;
                 model.el('star', star);
                 model.el('bangAnim', bangAnim);
             }
@@ -419,24 +420,36 @@ export let view = (() => {
 
                 if (number == 4) {
                     star.visible = true;
-                    ronin.visible = false;
-                    ninja.visible = true;
                     bangAnim.play(20, false);
+                    bangAnim.onUpdate.add(() => {
+                        if (bangAnim.currentFrame.name === 'star-animation_12.png'){
+                            ronin.visible = false;
+                            ninja.visible = true;
+                        }
+                    });
                     bangAnim.onComplete.add(() => {star.visible = false});
                 }
 
                 if (number == 6) {
                     star.visible = true;
-                    ninja.visible = false;
-                    samurai.visible = true;
+                    bangAnim.onUpdate.add(() => {
+                        if (bangAnim.currentFrame.name === 'star-animation_12.png'){
+                            ninja.visible = false;
+                            samurai.visible = true;
+                        }
+                    });
                     bangAnim.play(20, false);
                     bangAnim.onComplete.add(() => {star.visible = false});
                 }
 
                 if (number == 8) {
                     star.visible = true;
-                    samurai.visible = false;
-                    geisha.visible = true;
+                    bangAnim.onUpdate.add(() => {
+                        if (bangAnim.currentFrame.name === 'star-animation_12.png'){
+                            samurai.visible = false;
+                            geisha.visible = true;
+                        }
+                    });
                     bangAnim.play(20, false);
                     bangAnim.onComplete.add(() => {star.visible = false});
                 }

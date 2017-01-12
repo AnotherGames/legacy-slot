@@ -77,7 +77,7 @@ export class Preload {
         game.load.image('aim', 'other/aim.png');
         game.load.atlasJSONArray('shuriken', 'other/shuriken.png', 'other/shuriken.json');
         game.load.image('closed', 'other/closed.png');
-        // game.load.image('transitionCoin', 'other/transitionCoin.png');
+        game.load.image('coinGold', 'other/coinGold.png');
         game.load.image('ar', 'other/ar.png');
         game.load.image('arLeft', 'other/arLeft.png');
         game.load.atlasJSONArray('info', 'other/info.png', 'other/info.json');
@@ -140,7 +140,7 @@ export class Preload {
         game.load.atlasJSONArray('10', 'elements/10.png', 'elements/10.json');
         game.load.atlasJSONArray('11', 'elements/11.png', 'elements/11.json');
         game.load.atlasJSONArray('12', 'elements/12.png', 'elements/12.json');
-        game.load.atlasJSONArray('plaha', 'elements/plaha.png', 'elements/plaha.json');
+        game.load.atlasJSONArray('coin', 'elements/coin.png', 'elements/coin.json');
     }
 
     hidePreloader() {

@@ -137,6 +137,7 @@ export let view = (() => {
         // Отрисовка финишного экрана
         _fsFinishDraw();
         _fsFinishTween();
+        _coinsTween();
         _fsFinishInput();
         // _coinsTween();
         model.state('maxFsMultiplier', false);
@@ -272,7 +273,46 @@ export let view = (() => {
         model.el('game').state.start('Main');
     }
 
+    function _addCoin(container) {
+        let game = model.el('game');
+        if (container.y >= game.height * 5.7) return;
 
+        let posX = game.rnd.integerInRange(game.width * 0.1, game.width * 0.9);
+        let coin = game.add.sprite(posX, container.y * -1 - 100, 'coinGold', null, container);
+        coin.anchor.set(0.5);
+        let scale = game.rnd.integerInRange(30, 70) / 100;
+        coin.scale.set(scale);
+        let height = coin.height;
+        coin.height = game.rnd.integerInRange(height * 0.3, height);
+        let tween = game.add.tween(coin)
+           .to({rotation: 200}, 1000, 'Linear', true)
+           .start();
+        tween.onComplete.add(() => {
+            coin.destroy();
+        });
+        game.add.tween(coin)
+            .to({height: height}, 200, 'Linear')
+            .to({height: height * 0.2}, 100, 'Linear')
+            .to({height: height}, 200, 'Linear')
+            .to({height: height * 0.2}, 100, 'Linear')
+            .to({height: height}, 200, 'Linear')
+            .to({height: height * 0.2}, 100, 'Linear')
+            .to({height: height}, 200, 'Linear')
+            .start();
+
+            game.time.events.add(50, () => {
+            _addCoin(container)
+        });
+    }
+
+    function _coinsTween() {
+        let game = model.el('game');
+        let container = model.group('transition');
+        let coinsContainer = game.add.group();
+        container.addAt(coinsContainer, 1);
+        _addCoin(coinsContainer);
+        game.add.tween(coinsContainer).to({y: game.height * 7}, 5000, 'Linear', true);
+    }
 
     return {
         fsStart,
