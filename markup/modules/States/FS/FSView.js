@@ -311,7 +311,7 @@ export let view = (() => {
             let x, y, countX, countY, font;
             if (model.desktop) {
                 x = 600;
-                y = 65;
+                y = 60;
                 countX = 65;
                 countY = 17;
                 font = fontDesktop;
@@ -328,9 +328,14 @@ export let view = (() => {
                 (model.desktop) ? fsCountBG.scale.set(0.9) : fsCountBG.scale.set(0.65);
                 model.el('fsCountBG', fsCountBG);
 
-            let fsCount = game.add.text(x + countX, y + countY, start, {font: font, fill: '#faef71', align: 'center'}, container);
+            let fsCount = game.add.text(x + countX, y + countY, start, {font: font, align: 'center'}, container);
                 fsCount.anchor.set(0.5)
                 model.el('fs:count', fsCount);
+
+                let grd = fsCount.context.createLinearGradient(0, 0, 0, fsCount.canvas.height);
+                grd.addColorStop(0, '#faef71');
+                grd.addColorStop(1, '#f8a600');
+                fsCount.fill = grd;
 
         },
 

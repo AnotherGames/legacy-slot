@@ -100,18 +100,6 @@ export let controller = (() => {
             fsView.draw.newMulti({number: multiValue});
             model.data('fsMulti', multiValue);
 
-            // Увеличиваем время крутки
-
-            let timer = model.el('fsTimer');
-            game.time.events.remove(timer);
-
-            let fsTimer = game.time.events.add(2500, () => {
-                if (model.state('fs:end')) return;
-                controller.next();
-            });
-
-            model.el('fsTimer', fsTimer);
-
         }
     }
 
