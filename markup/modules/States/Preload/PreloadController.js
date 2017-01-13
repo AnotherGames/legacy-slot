@@ -110,9 +110,9 @@ export class Preload {
         game.load.image('fsCountBG', 'fs/fsCountBG.png');
         game.load.atlasJSONArray('fsMulti', 'fs/fsMulti.png', 'fs/fsMulti.json');
         game.load.atlasJSONArray('fsMultiBig', 'fs/fsMultiBig.png', 'fs/fsMultiBig.json');
+        game.load.image('doorRight', 'bg/doorRight.png');
+        game.load.image('doorLeft', 'bg/doorLeft.png');
         if (model.desktop) {
-            game.load.image('doorRight', 'bg/doorRight.png');
-            game.load.image('doorLeft', 'bg/doorLeft.png');
             game.load.atlasJSONArray('star', 'fs/star.png', 'fs/star.json');
         }
     }
@@ -123,9 +123,8 @@ export class Preload {
         game.load.spine('ninja', 'spine/Ninja.json');
         game.load.spine('samurai', 'spine/Samurai.json');
         game.load.spine('ronin', 'spine/Ronin.json');
-        if (model.desktop) {
-            game.load.spine('shadows', 'spine/shadows.json');
-        }
+        game.load.spine('shadows', 'spine/shadows.json');
+
     }
 
     loadTest() {

@@ -33,16 +33,19 @@ export let view = (() => {
             let mainBG = game.add.sprite(0, 0, 'fsBG', null, container);
             model.el('mainBG', mainBG);
 
-            if (model.desktop) {
-                let shadows = game.add.spine(game.world.centerX, game.world.centerY, 'shadows');
-                container.add(shadows);
-                model.el('shadows', shadows);
+            let shadows = game.add.spine(game.world.centerX, game.world.centerY, 'shadows');
+            container.add(shadows);
+            model.el('shadows', shadows);
 
-                let doorRight = game.add.sprite(game.width * 0.94, 545, 'doorRight', null, container);
-                let doorLeft = game.add.sprite(110, 545, 'doorLeft', null, container);
-                doorRight.anchor.set(0.5);
-                doorLeft.anchor.set(0.5);
-            }
+            let xRight = (model.desktop) ? game.width * 0.94 : game.width * 0.94;
+            let xLeft = (model.desktop) ? 110 : 75;
+            let y = (model.desktop) ? 545 : 370;
+
+            let doorRight = game.add.sprite(xRight, y, 'doorRight', null, container);
+            let doorLeft = game.add.sprite(xLeft, y, 'doorLeft', null, container);
+            doorRight.anchor.set(0.5);
+            doorLeft.anchor.set(0.5);
+
 
         },
 
