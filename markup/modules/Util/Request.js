@@ -28,8 +28,8 @@ export let request = (() => {
                 if (params.demo === 'true') {
                     name = `${name}Demo`;
                 }
-                if (params.session) {
-                    url = `${serviceUrl}/_${name}/${params.session}/${mode[options]}`; // Вставил SessionID;
+                if (params.sid) {
+                    url = `${serviceUrl}/_${name}/${params.sid}/${mode[options]}`; // Вставил SessionID;
                 } else {
                     url = `${serviceUrl}/_${name}/${userID}/${casinoID}/${mode[options]}`;
                 }
