@@ -33,6 +33,42 @@ export let view = (() => {
             let mainBG = game.add.sprite(0, 0, 'fsBG', null, container);
             model.el('mainBG', mainBG);
 
+            let shadows = game.add.spine(game.world.centerX, game.world.centerY, 'shadows');
+            container.add(shadows);
+            model.el('shadows', shadows);
+
+            if (model.desktop) {
+                let doorRight = game.add.sprite(game.width * 0.94, 545, 'doorRight', null, container);
+                let doorLeft = game.add.sprite(110, 545, 'doorLeft', null, container);
+                doorRight.anchor.set(0.5);
+                doorLeft.anchor.set(0.5);
+            }
+
+        },
+
+        addShadows: function ({
+            game = model.el('game'),
+            container = model.group('bg')
+        }) {
+
+            let shadows = model.el('shadows');
+            shadows.visible = true;
+
+            let side = (game.rnd.integerInRange(0, 1)) ? 'left' : 'right';
+            if (side == 'right') {
+                shadows.scale.set(-1, 1);
+            }
+
+            let anim = game.rnd.integerInRange(1, 3);
+            shadows.setAnimationByName(1, anim, false);
+
+            game.time.events.add(8000, () => {
+                shadows.visible = false;
+                if (side == 'right') {
+                    shadows.scale.set(1, 1);
+                }
+                draw.addShadows({});
+            });
         },
 
         mainContainer: function ({

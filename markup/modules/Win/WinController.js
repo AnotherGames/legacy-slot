@@ -202,7 +202,7 @@ export let controller = (() => {
             // Убираем управление с клавиатуры
             game.input.keyboard.enabled = false;
             // Запускаем переходной экран
-            game.time.events.add(1500, () => {
+            game.time.events.add(800, () => {
                 transitionView.fsStart();
             });
         }

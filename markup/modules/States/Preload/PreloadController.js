@@ -63,10 +63,6 @@ export class Preload {
     loadMainAssets() {
         const game = model.el('game');
         game.load.image('mainBG', 'bg/mainBG.png');
-        //BG Anim
-        // game.load.image('cloud', 'bg/cloud.png');
-        // game.load.image('sun', 'bg/sun.png');
-
         game.load.image('gameMachine', 'game/gameMachine.png');
         game.load.image('gameBG', 'game/gameBG.png');
         game.load.image('gmRight', 'game/gmRight.png');
@@ -110,6 +106,8 @@ export class Preload {
     loadFSAssets() {
         const game = model.el('game');
         game.load.image('fsBG', 'bg/fsBG.png');
+        game.load.image('doorRight', 'bg/doorRight.png');
+        game.load.image('doorLeft', 'bg/doorLeft.png');
         game.load.image('transitionFS', 'fs/transitionFS.png');
         game.load.image('fsCountBG', 'fs/fsCountBG.png');
         game.load.atlasJSONArray('fsMulti', 'fs/fsMulti.png', 'fs/fsMulti.json');
@@ -125,6 +123,7 @@ export class Preload {
         game.load.spine('ninja', 'spine/Ninja.json');
         game.load.spine('samurai', 'spine/Samurai.json');
         game.load.spine('ronin', 'spine/Ronin.json');
+        game.load.spine('shadows', 'spine/shadows.json');
     }
 
     loadTest() {

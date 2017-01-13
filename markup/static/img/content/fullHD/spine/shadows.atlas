@@ -1,0 +1,216 @@
+
+shadows.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+BG_FS_B
+  rotate: false
+  xy: 2, 951
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+BG_Shadou2_0001_Layer-92
+  rotate: false
+  xy: 1924, 1778
+  size: 118, 253
+  orig: 118, 253
+  offset: 0, 0
+  index: -1
+BG_Shadou2_0002_Layer-93
+  rotate: true
+  xy: 1924, 1038
+  size: 85, 33
+  orig: 85, 33
+  offset: 0, 0
+  index: -1
+BG_Shadou2_0003_Layer-94
+  rotate: true
+  xy: 212, 394
+  size: 73, 36
+  orig: 73, 36
+  offset: 0, 0
+  index: -1
+BG_Shadou2_0004_Layer-95
+  rotate: false
+  xy: 1924, 1308
+  size: 90, 96
+  orig: 90, 96
+  offset: 0, 0
+  index: -1
+BG_Shadou2_0005_Layer-96
+  rotate: false
+  xy: 1924, 1214
+  size: 91, 92
+  orig: 91, 92
+  offset: 0, 0
+  index: -1
+BG_Shadou2_0006_Layer-97
+  rotate: false
+  xy: 1924, 1125
+  size: 55, 87
+  orig: 55, 87
+  offset: 0, 0
+  index: -1
+BG_Shadou2_0007_Layer-98
+  rotate: false
+  xy: 2, 454
+  size: 146, 123
+  orig: 146, 123
+  offset: 0, 0
+  index: -1
+BG_Shadou2_0008_Layer-99
+  rotate: false
+  xy: 304, 855
+  size: 193, 94
+  orig: 193, 94
+  offset: 0, 0
+  index: -1
+BG_Shadou2_0009_Layer-100-copy
+  rotate: true
+  xy: 1924, 1406
+  size: 126, 110
+  orig: 126, 110
+  offset: 0, 0
+  index: -1
+BG_Shadou2_0010_Layer-100
+  rotate: true
+  xy: 1924, 1668
+  size: 108, 122
+  orig: 108, 122
+  offset: 0, 0
+  index: -1
+BG_Shadou2_0011_Layer-101
+  rotate: false
+  xy: 844, 897
+  size: 66, 52
+  orig: 66, 52
+  offset: 0, 0
+  index: -1
+BG_Shadou2_0012_Layer-103
+  rotate: false
+  xy: 304, 724
+  size: 129, 129
+  orig: 129, 129
+  offset: 0, 0
+  index: -1
+BG_Shadou2_0013_Layer-102
+  rotate: false
+  xy: 1924, 1534
+  size: 115, 132
+  orig: 115, 132
+  offset: 0, 0
+  index: -1
+BG_Shadou2_0014_Layer-104
+  rotate: true
+  xy: 763, 904
+  size: 45, 79
+  orig: 45, 79
+  offset: 0, 0
+  index: -1
+E_0007_Layer-1
+  rotate: false
+  xy: 2, 649
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: -1
+NNJ_0001_Layer-105
+  rotate: false
+  xy: 2, 579
+  size: 266, 68
+  orig: 266, 68
+  offset: 0, 0
+  index: -1
+NNJ_0002_Layer-106
+  rotate: false
+  xy: 2, 77
+  size: 68, 86
+  orig: 68, 86
+  offset: 0, 0
+  index: -1
+NNJ_0003_Layer-107
+  rotate: false
+  xy: 435, 744
+  size: 60, 109
+  orig: 60, 109
+  offset: 0, 0
+  index: -1
+NNJ_0004_Layer-108
+  rotate: false
+  xy: 150, 469
+  size: 104, 108
+  orig: 104, 108
+  offset: 0, 0
+  index: -1
+NNJ_0005_Layer-109
+  rotate: true
+  xy: 2, 2
+  size: 73, 64
+  orig: 73, 64
+  offset: 0, 0
+  index: -1
+NNJ_0006_Layer-110
+  rotate: true
+  xy: 652, 891
+  size: 58, 109
+  orig: 58, 109
+  offset: 0, 0
+  index: -1
+NNJ_0007_Layer-111
+  rotate: false
+  xy: 150, 384
+  size: 60, 83
+  orig: 60, 83
+  offset: 0, 0
+  index: -1
+NNJ_0008_Layer-112
+  rotate: false
+  xy: 2, 165
+  size: 88, 133
+  orig: 88, 133
+  offset: 0, 0
+  index: -1
+NNJ_0009_Layer-113
+  rotate: false
+  xy: 2, 300
+  size: 95, 152
+  orig: 95, 152
+  offset: 0, 0
+  index: -1
+NNJ_0010_Layer-114
+  rotate: true
+  xy: 304, 655
+  size: 67, 109
+  orig: 67, 109
+  offset: 0, 0
+  index: -1
+NNJ_0011_Layer-115-copy
+  rotate: false
+  xy: 99, 312
+  size: 42, 41
+  orig: 42, 41
+  offset: 0, 0
+  index: -1
+NNJ_0012_Layer-115
+  rotate: true
+  xy: 499, 866
+  size: 83, 151
+  orig: 83, 151
+  offset: 0, 0
+  index: -1
+NNJ_0013_Layer-116
+  rotate: false
+  xy: 99, 355
+  size: 49, 97
+  orig: 49, 97
+  offset: 0, 0
+  index: -1
+NNJ_0014_Layer-117
+  rotate: false
+  xy: 912, 912
+  size: 68, 37
+  orig: 68, 37
+  offset: 0, 0
+  index: -1
