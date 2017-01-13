@@ -47,6 +47,9 @@ export class Element {
             || i == 8) {
                 sprite.y += 10;
             }
+            if(i == 12) {
+                sprite.x += 10;
+            }
             this.sprites.push(sprite);
 
             // Каждому спрайту добавляем необходимые анимации
@@ -138,12 +141,15 @@ export class Element {
         }
     }
 
-    win(loop = false) {
+    win(loop = false, cb) {
         // Проигрывам выигрышную анимацию
         this.play(`${this.active}-w`, loop, 30);
         this.activeSprite.animations.currentAnim.onComplete.add(() => {
             // После которой опять играем нормальную анимацию
             this.play(`${this.active}-n`);
+            if (cb) {
+                cb();
+            }
         });
     }
 

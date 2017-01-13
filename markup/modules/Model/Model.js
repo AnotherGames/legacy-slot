@@ -258,7 +258,7 @@ export let model = (() => {
 
     }
 
-    function updateBalance({bet, coin, startRoll, endRoll, startFSRoll, endFSRoll, startFS, endFS}) {
+    function updateBalance({bet, coin, startRoll, endRoll, startFSRoll, endFSRoll, startFS, endFS, bonus}) {
 
         if (bet) {
             let betValue = model.balance('betValue');
@@ -325,6 +325,22 @@ export let model = (() => {
             if (endData.NextMode == 'root') {
                 model.balance('winCash', (endData.FsBonus.TotalFSWinCents + endData.Balance.TotalWinCents) / 100);
             }
+        }
+        if (bonus) {
+            let bonusSum = model.data('bonusSum');
+            let bonusCashSum = model.data('bonusCashSum');
+
+            let winCash = model.balance('winCash');
+            let coinSum = model.balance('coinSum');
+            let coinCash = model.balance('coinCash');
+
+            let newWinCash = (winCash * 100 + bonusCashSum) / 100;
+            let newCoinSum = coinSum + bonusSum;
+            let newCoinCash = (coinCash * 100 + bonusCashSum) / 100;
+
+            model.balance('winCash', newWinCash);
+            model.balance('coinSum', newCoinSum);
+            model.balance('coinCash', newCoinCash);
         }
 
         if (model.mobile) {

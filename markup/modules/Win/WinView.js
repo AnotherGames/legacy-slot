@@ -221,6 +221,9 @@ export let view = (() => {
         }) {
             let gameMachine = model.el('gameMachine');
             let winValue = line.Win;
+            if (winValue == 0) {
+                return;
+            }
             let countValue = line.Count;
             let lineValue = line.Line;
             let currentLineY;
@@ -285,15 +288,18 @@ export let view = (() => {
 
         Aim: function ({
             game = model.el('game'),
-            container = model.group('shuriken')
+            container = model.group('aim')
         }) {
-            let darkness = game.add.graphics(0, 0, container);
+            let darkness = game.add.graphics(0, 0, model.group('bonusDarkness'));
                 darkness.beginFill(0x000000, 0.7).drawRect(0, 0, game.world.width, game.world.height);
-            let aim = game.add.sprite(game.world.centerX, -600, 'aim', null, container);
+            model.el('shurikenDarkness', darkness);
+
+            let aim = game.add.sprite(game.world.centerX, (model.desktop) ? (game.world.centerY - 150) : (game.world.centerY - 80), 'aim', null, container);
                 aim.anchor.set(0.5);
             model.el('aim', aim);
+
             game.add.tween(aim)
-                .to({y: game.world.centerY - 150}, 800, Phaser.Easing.Bounce.Out, true);
+                .from({y: -600}, 800, Phaser.Easing.Bounce.Out, true);
             return aim;
         }
 
@@ -326,16 +332,24 @@ export let view = (() => {
 
         Aim: function ({
             game = model.el('game'),
-            container = model.group('shuriken')
+            container = model.group('aim'),
+            shurikenDarkness = model.el('shurikenDarkness'),
+            cb = false
         }) {
-            let aim = model.el('aim');
-            game.add.tween(aim)
-                .to({y: -600}, 800, Phaser.Easing.Bounce.In, true);
             game.add.tween(container)
-                .to({alpha: 0}, 1500, 'Linear', true)
+                .to({y: -600}, 800, Phaser.Easing.Bounce.In, true)
                 .onComplete.add(() => {
+                    container.y = 0;
+                    if (cb) {
+                        cb();
+                    }
+                });
+
+            game.add.tween(shurikenDarkness)
+                .to({alpha: 0}, 800, 'Linear', true)
+                .onComplete.add(() => {
+                    shurikenDarkness.destroy();
                     container.removeAll();
-                    container.alpha = 1;
                 });
         }
 
