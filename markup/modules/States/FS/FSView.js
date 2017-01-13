@@ -405,9 +405,11 @@ export let view = (() => {
                 fsMultiBig.anchor.set(0.5);
                 fsMultiBig.scale.set(0.1);
 
+            let x  = (model.desktop) ? game.width * 0.6 : game.width * 0.1;
+
             game.add.tween(fsMultiBig.scale).to({x: 1.5, y: 1.5}, 500, Phaser.Easing.Bounce.Out, true);
-            game.add.tween(fsMultiBig.scale).to({x: 0.2, y: 0.2}, 500, Phaser.Easing.Elastic.Out, true, 500);
-            game.add.tween(fsMultiBig).to({x: game.width * 0.6, y: game.height * 0.9, alpha: 0}, 500, Phaser.Easing.Bounce.Out, true, 500)
+            game.add.tween(fsMultiBig.scale).to({x: 0.2, y: 0.2}, 700, Phaser.Easing.Elastic.Out, true, 500);
+            game.add.tween(fsMultiBig).to({x: x, y: game.height * 0.9, alpha: 0}, 700, Phaser.Easing.Bounce.Out, true, 500)
                 .onComplete.add(() => {
                     game.add.tween(fsMulti.scale)
                     .to({x: 1.5, y: 1.5}, 300, Phaser.Easing.Out, true)

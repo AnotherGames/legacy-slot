@@ -79,7 +79,6 @@ export let controller = (() => {
         let rollData = model.data('rollResponse');
         let multiValue = rollData.FsBonus.Multi;
         let currMulti = model.data('fsMulti');
-        console.log(currMulti);
 
         if (multiValue > currMulti) {
 
