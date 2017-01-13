@@ -141,35 +141,16 @@ export let controller = (() => {
         },
 
         soundButton: function() {
+            let soundButton = model.el('soundButton');
             if (model.state('globalSound')) {
-                handle.turnOffSound();
+                console.log('off');
+                soundController.volume.switchVolume();
+                soundButton.frameName = 'soundOut.png';
             } else {
-                handle.turnOnSound();
+                console.log('on');
+                soundController.volume.switchVolume();
+                soundButton.frameName = 'sound.png';
             }
-        },
-
-        turnOffSound: function() {
-            let soundButton = model.el('soundButton');
-            let settingsSoundButton = model.el('settingsSoundButton');
-            let settingsMusicButton = model.el('settingsMusicButton');
-
-            soundController.volume.switchVolume();
-
-            soundButton.frameName = 'soundOut.png';
-            settingsSoundButton.frameName = 'soundOff.png';
-            settingsMusicButton.frameName = 'musicOff.png';
-        },
-
-        turnOnSound: function() {
-            let soundButton = model.el('soundButton');
-            let settingsSoundButton = model.el('settingsSoundButton');
-            let settingsMusicButton = model.el('settingsMusicButton');
-
-            soundController.volume.switchVolume();
-
-            soundButton.frameName = 'sound.png';
-            settingsSoundButton.frameName = 'soundOn.png';
-            settingsMusicButton.frameName = 'musicOn.png';
         }
     };
 

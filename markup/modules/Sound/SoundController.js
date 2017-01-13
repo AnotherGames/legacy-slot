@@ -85,8 +85,10 @@ export let controller = (() => {
 
             if (!model.state('music')) return;
             let currMusic = model.sound(music);
-            if(currMusic.paused){
-                currMusic.resume();
+            // if(currMusic.paused){
+            if(currMusic.mute){
+                model.sound(music).mute = false;
+                // currMusic.restart();
             } else {
                 if (currMusic.isDecoded){
                     currMusic.fadeIn(3000, true)
@@ -104,7 +106,8 @@ export let controller = (() => {
         },
 
         pauseMusic: function(music){
-            model.sound(music).pause();
+            // model.sound(music).pause();
+            model.sound(music).mute = true;
         },
 
         changeMusicVolume: function(music, value){
