@@ -257,15 +257,6 @@ export let view = (() => {
             machineGroup.mask = someGraphic;
         },
 
-        darkness: function ({
-            game = model.el('game')
-        }) {
-            let darkness = game.add.graphics();
-                darkness.beginFill(0x000000);
-                darkness.drawRect(0, 0, game.width, game.height);
-            return darkness;
-        },
-
         showPopup: function ({
             game = model.el('game'),
             container = model.group('popup'),

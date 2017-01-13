@@ -43,7 +43,6 @@ export class Main {
 
     create() {
         let game = model.el('game');
-        game.camera.flash(0x000000, 777)
 
         soundController.music.stopMusic('finishPerehod');
         soundController.music.stopMusic('fsFon');
@@ -69,7 +68,6 @@ export class Main {
             buttonsController.drawButtons();
             // Автоматически позиционируем основной контейнер
             this.positionMainContainer();
-
             // Отрисовуем баланс
             balanceController.initMobile();
             // И меню
@@ -100,8 +98,7 @@ export class Main {
         }
 
         // Первая темнота
-        let darkness = mainView.draw.darkness({});
-            this.add.tween(darkness).to( { alpha: 0 }, 1500, 'Linear', true);
+        game.camera.flash(0x000000, 500)
 
         // Проверяем сохранненые сессии
         this.checkForSavedFS();

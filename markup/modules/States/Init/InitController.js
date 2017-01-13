@@ -43,7 +43,6 @@ export class Init {
 
     create() {
         let game = model.el('game');
-        game.camera.flash(0x000000, 777);
 
         view.drawBG();
         view.drawLogo();
@@ -59,7 +58,8 @@ export class Init {
 
         this.drawSoundTrigger();
 
-        view.firstDarkness();
+        // Выход из затемнения
+        game.camera.flash(0x000000, 500);
 
         if(!model.state('globalSound')){
             this.sprite2.x = 270;
@@ -86,17 +86,19 @@ export class Init {
         const game = model.el('game');
 
         if (model.mobile) game.scale.startFullScreen();
-        else this.fullScreen();
+        // else this.fullScreen();
 
         document.body.addEventListener('touchstart', () => {
             model.el('game').scale.startFullScreen();
         });
 
         view.stopYoyoTween();
-        view.lastDarkness()
-            .onComplete.add(() => {
-                game.state.start('Main');
-            });
+        game.camera.onFadeComplete.add(()=>{
+            game.state.start('Main');
+        })
+
+        game.camera.fade(0x000000, 500)
+
     }
 
     fullScreen(element) {

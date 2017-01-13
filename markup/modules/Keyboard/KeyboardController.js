@@ -50,11 +50,7 @@ export let controller = (() => {
     function initFsKeys() {
       let game = model.el('game');
         let space = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-        space.onUp.add(() => {
-            soundController.sound.playSound({sound : 'buttonClick'});
-            soundController.music.stopMusic('finishPerehod');
-            model.el('game').state.start('Main');
-        });
+        space.onUp.add(transitionView.transitionOutFs);
     }
 
     return {

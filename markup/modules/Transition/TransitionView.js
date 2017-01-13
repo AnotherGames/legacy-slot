@@ -10,13 +10,7 @@ export let view = (() => {
         let game = model.el('game');
         model.state('transitionScreen', true);
         // Запускаем затемнение
-        let darkness = game.add.graphics();
-            darkness.beginFill(0x000000);
-            darkness.drawRect(0, 0, game.width, game.height);
-        game.add.tween(darkness).to( { alpha: 0 }, 1500, 'Linear', true)
-            .onComplete.add(() => {
-                darkness.destroy();
-            }, this);
+        game.camera.flash(0x000000, 500)
         // Отрисовываем переходной экран
         _fsStartDraw();
         _fsStartTween();
@@ -31,7 +25,6 @@ export let view = (() => {
     function _fsStartDraw() {
         let game = model.el('game');
         let transitionContainer = model.group('transition');
-        game.camera.flash(0x000000, 777)
         // Изменяем музыку
         soundController.music.stopMusic('fon');
         soundController.music.playMusic('startPerehod');
@@ -114,26 +107,12 @@ export let view = (() => {
         model.state('transitionScreen', false);
     }
 
-    function _fsStartHide() {
-        // Автоматический переход на Фри-Спины
-        soundController.music.stopMusic('startPerehod');
-        soundController.music.playMusic('fsFon');
-        let game = model.el('game');
-        model.el('game').state.start('FS');
-    }
-
     function fsFinish() {
         let game = model.el('game');
         // game.input.keyboard.enabled = true;
         keyboardController.initFsKeys();
         // Темнота
-        let darkness = game.add.graphics();
-            darkness.beginFill(0x000000);
-            darkness.drawRect(0, 0, game.width, game.height);
-        game.add.tween(darkness).to( { alpha: 0 }, 1500, 'Linear', true)
-            .onComplete.add(() => {
-                darkness.destroy();
-            }, this);
+        game.camera.flash(0x000000, 500)
         // Отрисовка финишного экрана
         _fsFinishDraw();
         _fsFinishTween();
@@ -143,18 +122,19 @@ export let view = (() => {
         model.state('maxFsMultiplier', false);
         // Автопереход
         if (model.state('autoTransititon')) {
-            game.time.events.add(config.autoTransitionTime, () => {
-                soundController.sound.playSound({sound : 'buttonClick'});
-                soundController.music.stopMusic('finishPerehod');
-                model.el('game').state.start('Main');
-            });
+            game.time.events.add(config.autoTransitionTime, transitionOutFs);
         }
+    }
+
+    function transitionOutFs() {
+        soundController.sound.playSound({sound : 'buttonClick'});
+        soundController.music.stopMusic('finishPerehod');
+        model.el('game').state.start('Main');
     }
 
     function _fsFinishDraw() {
         let game = model.el('game');
         let transitionContainer = model.group('transition');
-        game.camera.flash(0x000000, 777)
         // Изменяем музыку
         soundController.music.stopMusic('fsFon');
         soundController.music.playMusic('finishPerehod');
@@ -265,14 +245,6 @@ export let view = (() => {
         });
     }
 
-    function _fsFinishHide() {
-        console.log('i am finishing fs after timeout');
-        soundController.music.stopMusic('finishPerehod');
-        soundController.music.playMusic('fon');
-        let game = model.el('game');
-        model.el('game').state.start('Main');
-    }
-
     function _addCoin(container) {
         let game = model.el('game');
         if (container.y >= game.height * 5.7) return;
@@ -317,7 +289,8 @@ export let view = (() => {
     return {
         fsStart,
         fsFinish,
-        transitionInFs
+        transitionInFs,
+        transitionOutFs
 
     }
 
