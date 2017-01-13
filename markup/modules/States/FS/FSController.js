@@ -151,9 +151,11 @@ export class FS {
         fsView.draw.mainBG({});
         // Отрисовуем основной контейнер
         fsView.draw.mainContainer({});
-        game.time.events.add(3000, () => {
-            fsView.draw.addShadows({});
-        });
+        if (model.desktop) {
+            game.time.events.add(3000, () => {
+                fsView.draw.addShadows({});
+            });
+        }
         fsView.draw.machineContainer({});
         fsView.draw.lineNumbers({});
         winView.draw.UpWinContainer({});
