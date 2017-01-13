@@ -90,7 +90,6 @@ export let controller = (() => {
             soundButton.x = xSide;
         },
         changeSound: function () {
-            let menuButtonSound = model.el('soundButton');
             let soundButton = model.el('settingsSoundButton');
 
             if (model.state('sound')) {
@@ -112,7 +111,7 @@ export let controller = (() => {
                 musicButton.frameName = 'musicOff.png';
                 model.state('music', false);
                 model.cookie('music', false);
-                soundController.music.stopMusic('fon')
+                soundController.music.pauseMusic('fon')
             } else {
                 musicButton.frameName = 'musicOn.png';
                 model.state('music', true);
