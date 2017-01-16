@@ -136,6 +136,7 @@ export let view = (() => {
                 .onComplete.add(()=>{
                     game.add.tween(lamp1).to({alpha: 1}, 200, 'Linear', true)
                 })
+                model.state(lamp1.name, false)
             }
 
             if ( model.state('rightLampDropped')){
@@ -144,6 +145,7 @@ export let view = (() => {
                 .onComplete.add(()=>{
                     game.add.tween(lamp2).to({alpha: 1}, 200, 'Linear', true)
                 })
+                model.state(lamp2.name, false)
             }
         },
 
