@@ -8,6 +8,7 @@ import { controller as autoplayController } from 'modules/Autoplay/AutoplayContr
 import { controller as fsController } from 'modules/States/FS/FSController';
 import { view as panelView } from 'modules/Panel/PanelView';
 import { view as buttonsView } from 'modules/Buttons/ButtonsView';
+import { view as mainView } from 'modules/States/Main/MainView';
 
 export let controller = (() => {
 
@@ -231,6 +232,7 @@ export let controller = (() => {
             let shurikens = findShurikens();
             let amountOFShurikens = +nextMode[8];
             let counter = 0;
+
             shurikens.forEach((el) => {
                 game.add.tween(el.group.scale)
                     .to({x: 1.8, y: 1.8}, 800, Phaser.Easing.Bounce.Out, true)
@@ -238,6 +240,8 @@ export let controller = (() => {
                         game.add.tween(el.group.scale)
                             .to({x: 1, y: 1}, 300, 'Linear', true)
                     });
+
+
                 el.win(false, () => {
                     counter++;
                     if (counter == 1) {
@@ -246,6 +250,7 @@ export let controller = (() => {
                     }
                 });
             });
+            if (model.desktop) mainView.draw.returnDroppedLamps();
         }
     }
 

@@ -49,28 +49,101 @@ export let view = (() => {
             model.el('gameMachine', gameMachine);
 
             if (model.desktop) {
-                let gmRight = game.add.sprite(730, -370, 'gmRight', null, container);
-                gmRight.anchor.set(0.5);
+                let gmRight = game.add.sprite(640, -338, 'gmRight', null, container);
+                    gmRight.pivot.set(14, 97);
                 model.el('gmRight', gmRight);
 
-                let gmLeft = game.add.sprite(-730, -370, 'gmLeft', null, container);
-                gmLeft.anchor.set(0.5);
+                let gmLeft = game.add.sprite(-633, -338, 'gmLeft', null, container);
+                    gmLeft.pivot.set(209, 97);
                 model.el('gmLeft', gmLeft);
 
                 let lamp1 = game.add.sprite(-750, -240, 'lamp', null, container);
-                lamp1.anchor.set(0.5);
-                lamp1.animations.add('move');
-                lamp1.animations.play('move', 15, true);
+                    lamp1.anchor.set(0.5);
+                    lamp1.animations.add('move');
+                    lamp1.animations.play('move', 15, true);
+                    lamp1.priorityID = 6;
+                    lamp1.name = 'leftLampDropped';
                 model.el('lamp1', lamp1);
+                model.state('leftLampDropped', false);
+                model.data('leftLampY', lamp1.y)
 
                 let lamp2 = game.add.sprite(750, -240, 'lamp', null, container);
-                lamp2.anchor.set(0.5);
-                lamp2.scale.set(-1, 1);
-                lamp2.animations.add('move');
+                    lamp2.anchor.set(0.5);
+                    lamp2.scale.set(-1, 1);
+                    lamp2.name = 'rightLampDropped'
+                    lamp2.animations.add('move');
                 game.time.events.add(300, () => {
                     lamp2.animations.play('move', 15, true);
                 })
                 model.el('lamp2', lamp2);
+                model.state('rightLampDropped', false);
+                model.data('rightLampY', lamp2.y)
+
+                draw.moveHornAndLamp(gmLeft, lamp1, -10);
+                draw.moveHornAndLamp(gmRight, lamp2, +10);
+
+                draw.dropLamp(lamp1);
+                draw.dropLamp(lamp2);
+            }
+        },
+
+        moveHornAndLamp: function(horn, lamp, angle){
+            let game = model.el('game');
+            let time = 100;
+            let lampfstY = lamp.y;
+            let lampendY = lamp.y + 20;
+
+            horn.inputEnabled = true;
+            horn.events.onInputDown.add(()=>{
+                game.add.tween(horn).to({angle: angle}, time, 'Linear', true)
+                if (model.state(lamp.name)) return;
+                game.add.tween(lamp).to({y: lampendY}, time, 'Linear', true)
+            })
+            horn.events.onInputUp.add(()=>{
+                game.add.tween(horn).to({angle: 0}, time, 'Linear', true)
+                if (model.state(lamp.name)) return;
+                game.add.tween(lamp).to({y: lampfstY}, time, 'Linear', true)
+            })
+        },
+
+        dropLamp: function(lamp){
+            let game = model.el('game');
+            let count = 0;
+
+            lamp.inputEnabled = true;
+            lamp.events.onInputDown.add(()=>{
+                if (count < 5){
+                    lamp.animations.stop();
+                    lamp.animations.frameName = 'FN-animation_45.png';
+                    lamp.animations.play('move', 15, true);
+                    count++
+                } else {
+                    game.add.tween(lamp).to({y: game.height + lamp.height}, 500, 'Linear', true)
+                    model.state(lamp.name, true)
+                    count = 0;
+                }
+            })
+        },
+
+        returnDroppedLamps(){
+            let game = model.el('game');
+            let lamp1 = model.el('lamp1')
+            let lamp2 = model.el('lamp2')
+
+            if ( model.state('leftLampDropped')){
+                lamp1.alpha = 0;
+                game.add.tween(lamp1).to({y: model.data('leftLampY')}, 10, 'Linear', true)
+                .onComplete.add(()=>{
+                    game.add.tween(lamp1).to({alpha: 1}, 200, 'Linear', true)
+                })
+            }
+
+            if ( model.state('rightLampDropped')){
+                lamp2.alpha = 0;
+                game.add.tween(lamp2).to({y: model.data('rightLampY')}, 10, 'Linear', true)
+                .onComplete.add(()=>{
+                    game.add.tween(lamp2).to({alpha: 1}, 200, 'Linear', true)
+                })
             }
         },
 
