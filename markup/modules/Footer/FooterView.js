@@ -87,7 +87,7 @@ export let view = (() => {
             x = 125,
             y = model.el('game').height - 15
         }) {
-            let soundButton = game.add.button(x, y, 'footerButtons', null, null, 'sound.png', null, null, container);
+            let soundButton = game.add.button(x, y, 'footerButtons', null, null, null, 'sound.png', null, null, container);
                 soundButton.anchor.set(0.5);
             // Определяем начальный фрейм
             if (model.state('globalSound')) {
