@@ -290,6 +290,9 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('aim')
         }) {
+
+            soundController.sound.playSound({sound : 'aim'});
+
             let darkness = game.add.graphics(0, 0, model.group('bonusDarkness'));
                 darkness.beginFill(0x000000, 0.7).drawRect(0, 0, game.world.width, game.world.height);
             model.el('shurikenDarkness', darkness);

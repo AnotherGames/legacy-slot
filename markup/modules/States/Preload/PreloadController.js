@@ -36,8 +36,6 @@ export class Preload {
         const game = model.el('game');
         game.load.path = 'static/img/content/sound/';
         game.load.audio('fon', 'ambient.mp3');
-        game.load.audio('moo', 'moo.mp3');
-        game.load.audio('whip', 'whip.mp3');
         game.load.audio('fsFon', 'fsAmbient.mp3');
         game.load.audio('initFon', 'logoAmbient.mp3');
         game.load.audio('baraban', 'baraban.mp3');
@@ -46,8 +44,7 @@ export class Preload {
         game.load.audio('finishPerehod', 'finishPerehod.mp3');
         game.load.audio('lineWin', 'lineWin.mp3');
         game.load.audio('lineWin2', 'lineWin2.mp3');
-        game.load.audio('bottleBangSound', 'bottleBang.mp3');
-        game.load.audio('cows', 'cows.mp3');
+        game.load.audio('aim', 'aim.mp3');
 
     }
 
