@@ -97,7 +97,7 @@ canvas {
 #settings {
     z-index: 11;
     position: absolute;
-    width: 60%;
+    width: 70%;
     min-width: 700px;
     border: 1px rgba(151, 151, 151, 0.3) solid;
     border-radius: 3px;
@@ -112,8 +112,8 @@ canvas {
 }
 
 #settings .section {
-    float: left;
-    width: calc(50% - 80px);
+    display:table-cell;
+    width: 48%;
     padding: 0 40px;
     text-align: left;
 }
@@ -125,6 +125,10 @@ canvas {
     border-radius: 5px;
     font-size: calc( 0.5vw + 10px);
     text-align: center;
+}
+
+input {
+    outline: none;
 }
 
 .volumeContainer {
@@ -148,9 +152,9 @@ canvas {
 .checkbox:not(checked)+label {
     display: inline-block;
     position: relative;
-    padding: 0 0 0 90px;
-    width: 40%;
-    min-width: 195px;
+    padding: 0 0 0 70px;
+    width: 50%;
+    // min-width: 150px;
     margin-bottom: 10px;
 }
 
@@ -159,12 +163,13 @@ canvas {
     position: absolute;
     top: 0px;
     left: 0;
-    width: calc(1vw + 60px);
+    width: calc(1vw + 40px);
     height: calc(1vw + 10px);
     border-radius: 17px;
     background: #535353;
     box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.2);
 }
+
 
 .checkbox:not(checked)+label:after {
     content: '';
@@ -185,7 +190,7 @@ canvas {
 }
 
 .checkbox:checked+label:after {
-    left: 47px;
+    left: 30px;
 }
 
 .checkbox:focus+label:before {
@@ -223,10 +228,10 @@ input[type=range]::-webkit-slider-thumb {
 button {
     font-size: calc(0.4vw + 12px);
     max-width: 200px;
-    min-width: 80px;
-    min-height: 30px;
-    width: 8vw;
-    height: 5vw;
+    min-width: 60px;
+    min-height: 40px;
+    width: 6vw;
+    height: 4vw;
     max-height: 100px;
     margin: 0 10px;
     border: none;
@@ -260,10 +265,11 @@ button {
 .inputText {
     background: white;
     color: black;
-    width: calc(55% - 90px);
-    min-width: 60px;
+    width: calc(55% - 120px);
+    min-width: 35px;
     text-align: center;
     border-radius: 12px;
+    vertical-align: top;
 }
 
 #volume {
@@ -289,3 +295,9 @@ button {
     right: -50px;
     background-image:url(http://casino.bossgs.org/monstersushi/static/img/content/settings/soundPlus.png);
 }
+
+// @media(max-width: 1200px){
+//     .inputText {
+//         width: calc(55% - 120px);
+//     }
+// }
