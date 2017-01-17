@@ -60,7 +60,10 @@ export let controller = (() => {
             view.hide.Overlay({});
 
             const mainContainer = model.group('main');
+            let dragon =  model.group('dragon');
+            let delta = model.data('mainXRight') - model.data('mainXLeft')
             let xSide;
+
             if (model.state('gameSideLeft')) {
                 model.state('gameSideLeft', false);
                 model.cookie('gameSideLeft', false);
@@ -68,6 +71,7 @@ export let controller = (() => {
 
                 xSide = model.data('buttonsXLeft');
                 game.add.tween(mainContainer).to( { x: model.data('mainXRight') }, time, 'Quart.easeOut', true);
+                game.add.tween(dragon).to( { x: dragon.x + delta }, time, 'Quart.easeOut', true);
             } else {
                 model.state('gameSideLeft', true);
                 model.cookie('gameSideLeft', true);
@@ -75,8 +79,13 @@ export let controller = (() => {
 
                 xSide = model.data('buttonsXRight');
                 game.add.tween(mainContainer).to( { x: model.data('mainXLeft') }, time, 'Quart.easeOut', true);
+                game.add.tween(dragon).to( { x: dragon.x - delta }, time, 'Quart.easeOut', true);
             }
-            // Change Side Buttons
+            handle.changeSideButtons(xSide);
+
+        },
+
+        changeSideButtons: function(xSide){
             let spinButton = model.el('spinButton');
             let autoButton = model.el('autoButton');
             let betButton = model.el('betButton');
@@ -89,6 +98,7 @@ export let controller = (() => {
             menuButton.x = xSide;
             soundButton.x = xSide;
         },
+
         changeSound: function () {
             let soundButton = model.el('settingsSoundButton');
 
