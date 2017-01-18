@@ -114,7 +114,6 @@ export let controller = (() => {
                     ++countFinish;
                     if (countFinish === 5) {
                         endRoll();
-                        winController.showWin();
                     }
                 }
 
@@ -148,7 +147,7 @@ export let controller = (() => {
 
     function endRoll() {
         if (model.state('ready')) return;
-        
+        // Отснавливаем проигрываение звука колес
         soundController.sound.stopSound('baraban');
 
         // Отправляем запрос Ready
