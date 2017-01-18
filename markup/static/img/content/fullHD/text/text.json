@@ -2,50 +2,66 @@
 
 {
 	"filename": "bigW.png",
-	"frame": {"x":1,"y":1,"w":991,"h":271},
+	"frame": {"x":1,"y":223,"w":930,"h":236},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":8,"y":19,"w":991,"h":271},
+	"spriteSourceSize": {"x":38,"y":37,"w":930,"h":236},
 	"sourceSize": {"w":1000,"h":300}
 },
 {
+	"filename": "bonus.png",
+	"frame": {"x":1,"y":778,"w":758,"h":227},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":21,"y":11,"w":758,"h":227},
+	"sourceSize": {"w":800,"h":250}
+},
+{
+	"filename": "coins.png",
+	"frame": {"x":784,"y":596,"w":204,"h":69},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":204,"h":69},
+	"sourceSize": {"w":204,"h":69}
+},
+{
 	"filename": "continue.png",
-	"frame": {"x":333,"y":889,"w":328,"h":171},
+	"frame": {"x":1,"y":1007,"w":394,"h":118},
 	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":2,"y":4,"w":328,"h":171},
-	"sourceSize": {"w":330,"h":178}
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":394,"h":118},
+	"sourceSize": {"w":394,"h":118}
 },
 {
-	"filename": "freeSpins.png",
-	"frame": {"x":1,"y":493,"w":900,"h":222},
+	"filename": "freespins.png",
+	"frame": {"x":1,"y":1,"w":973,"h":220},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":16,"w":900,"h":222},
-	"sourceSize": {"w":900,"h":250}
-},
-{
-	"filename": "logo.png",
-	"frame": {"x":1,"y":717,"w":855,"h":170},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":22,"y":17,"w":855,"h":170},
-	"sourceSize": {"w":900,"h":200}
+	"spriteSourceSize": {"x":12,"y":16,"w":973,"h":220},
+	"sourceSize": {"w":1000,"h":240}
 },
 {
 	"filename": "play.png",
-	"frame": {"x":1,"y":889,"w":330,"h":171},
+	"frame": {"x":397,"y":1007,"w":265,"h":80},
 	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":17,"y":13,"w":330,"h":171},
-	"sourceSize": {"w":350,"h":200}
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":265,"h":80},
+	"sourceSize": {"w":265,"h":80}
+},
+{
+	"filename": "topLevel.png",
+	"frame": {"x":1,"y":461,"w":868,"h":133},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":868,"h":133},
+	"sourceSize": {"w":868,"h":133}
 },
 {
 	"filename": "totalW.png",
-	"frame": {"x":1,"y":274,"w":920,"h":217},
+	"frame": {"x":1,"y":596,"w":781,"h":180},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":30,"y":41,"w":920,"h":217},
+	"spriteSourceSize": {"x":101,"y":59,"w":781,"h":180},
 	"sourceSize": {"w":1000,"h":300}
 }],
 "meta": {
@@ -55,6 +71,6 @@
 	"format": "RGBA8888",
 	"size": {"w":1024,"h":2048},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:de4116b54e918ae5ff785ebe57f0bba0:82815fd19a0a1252ba37d0bd71e838f4:a569396aede2f37d3ec322fe54e4aaf6$"
+	"smartupdate": "$TexturePacker:SmartUpdate:b53e45db2c6ed6be0abe7a417ef2d51e:0950829e3baa5fbb2c27b66d3e6eba22:a569396aede2f37d3ec322fe54e4aaf6$"
 }
 }
