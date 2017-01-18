@@ -30,134 +30,23 @@ export let view = (() => {
             container = model.group('bg')
         }) {
 
-            let mainBGSky = game.add.sprite(0, 0, 'mainBGSky', null, container);
-            model.el('mainBGSky', mainBGSky);
+            // let mainBGSky = game.add.sprite(0, 0, 'mainBGSky', null, container);
+            // model.el('mainBGSky', mainBGSky);
 
-            let gradient = game.add.sprite(0, 0, 'gradient', null, container);
-            gradient.alpha = 0.1;
-            model.el('gradient', gradient);
-            game.add.tween(gradient).to({alpha: 0.9}, 50000, 'Linear', true, 0, -1, true);
-
-            for (let i = 0; i < 5; i++) {
-                transitionView.addCloud({container: model.group('bg')});
-            }
+            // let gradient = game.add.sprite(0, 0, 'gradient', null, container);
+            // gradient.alpha = 0.1;
+            // model.el('gradient', gradient);
+            // game.add.tween(gradient).to({alpha: 0.9}, 50000, 'Linear', true, 0, -1, true);
+            //
+            // for (let i = 0; i < 5; i++) {
+            //     transitionView.addCloud({container: model.group('bg')});
+            // }
 
             let mainBG = game.add.sprite(0, 0, 'fsBG', null, container);
             model.el('mainBG', mainBG);
 
-            let logoZaglushka = game.add.sprite(0, game.height * 0.84, 'zaglushka', null, container);
-            model.el('logoZaglushka', logoZaglushka);
-
-        },
-
-        addPole: function ({
-            game = model.el('game'),
-            container = model.group('bg')
-        }) {
-            let pole = game.add.spine(50, game.height * 0.95, 'pole');
-            pole.setAnimationByName(1, '1', true);
-            model.group('bg').add(pole);
-            pole.scale.set(0.5);
-            model.el('pole', pole);
-
-            let time = game.rnd.integerInRange(20, 35);
-            let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
-
-            pole.x = (side === 'left') ? -pole.width : game.width + pole.width;
-            let delta = (side === 'left') ? game.width + pole.width : -pole.width;
-            if (side === 'right') {
-                pole.width = -pole.width;
-            }
-
-            game.add.tween(pole).to({x: delta}, time * 1000, 'Linear', true)
-                .onComplete.add(() => {
-                    pole.destroy();
-                    game.time.events.add(3000, () => {
-                        this.addPole({});
-                    });
-                }, this);
-
-        },
-
-        addCows: function ({
-            game = model.el('game'),
-            container = model.group('bg')
-        }) {
-            soundController.sound.playSound({sound: 'cows'});
-
-            let cowContainer = game.add.group();
-                cowContainer.inputEnableChildren = true;
-                cowContainer.onChildInputDown.add(()=>{
-                    soundController.sound.playSound({sound: 'moo', volume: 7})
-                })
-
-            container.add(cowContainer);
-
-            let cow1 = game.add.sprite(-50, 10, 'cow1', null, cowContainer);
-            let cow2 = game.add.sprite(-150, 15, 'cow3', null, cowContainer);
-            let cow3 = game.add.sprite(-250, 20, 'cow3', null, cowContainer);
-            let cow4 = game.add.sprite(-120, 10, 'cow1', null, cowContainer);
-            let cow0 = game.add.sprite(-300, 20, 'cow2', null, cowContainer);
-
-            let cowboy = game.add.sprite(0, 0, 'cowboy', null, container);
-            let red_indian = game.add.sprite(0, 0, 'red_indian', null, container);
-
-            cowboy.inputEnabled = true;
-            cowboy.events.onInputDown.add(()=>{
-                soundController.sound.playSound({sound: 'whip', volume: 7})
-            });
-            red_indian.inputEnabled = true;
-            red_indian.events.onInputDown.add(()=>{
-                soundController.sound.playSound({sound: 'whip', volume: 7})
-            });
-
-            let time = game.rnd.integerInRange(55, 70);
-            let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
-
-            cowContainer.x = (side === 'left') ? -cowContainer.width : game.width + cowContainer.width;
-            cowContainer.y = game.rnd.integerInRange(720, 870);
-            let delta = (side === 'left') ? game.width + cowContainer.width : -cowContainer.width;
-            if (side === 'left') {
-                cowContainer.width = -cowContainer.width;
-            }
-
-            cowboy.x = (side === 'left') ? -cowboy.width : game.width + cowboy.width;
-            cowboy.y = cowContainer.y;
-            if (side === 'left') {
-                cowboy.width = -cowboy.width;
-            }
-
-            red_indian.x = (side === 'left') ? -red_indian.width - 300 : game.width + red_indian.width + 300;
-            red_indian.y = cowContainer.y;
-            if (side === 'left') {
-                red_indian.width = -red_indian.width;
-            }
-
-            let animArr = [];
-            let cow0Anim = cow0.animations.add('idle', Phaser.Animation.generateFrameNames('cow-2-walk2_', 0, 14, '.png', 1));
-            let cow1Anim = cow1.animations.add('idle1', Phaser.Animation.generateFrameNames('cow-1-walk1_', 0, 14, '.png', 1));
-            let cow2Anim = cow2.animations.add('idle2', Phaser.Animation.generateFrameNames('cow-3-walk3_', 0, 14, '.png', 1));
-            let cow3Anim = cow3.animations.add('idle3', Phaser.Animation.generateFrameNames('cow-3-walk3_', 0, 14, '.png', 1));
-            let cow4Anim = cow4.animations.add('idle4', Phaser.Animation.generateFrameNames('cow-1-walk1_', 0, 14, '.png', 1));
-            let cowboyAnim = cowboy.animations.add('idle5', Phaser.Animation.generateFrameNames('cowboi-animation_', 0, 14, '.png', 1));
-            let red_indianAnim = red_indian.animations.add('idle6', Phaser.Animation.generateFrameNames('indeets-walk_', 0, 14, '.png', 1));
-            animArr.push(cow0Anim, cow1Anim, cow2Anim, cow3Anim, cow4Anim, cowboyAnim, red_indianAnim);
-            animArr.forEach((anim) => {
-                anim.play(12, true);
-            });
-
-            game.add.tween(cowContainer).to({x: delta}, time * 1000, 'Linear', true, 0);
-            game.add.tween(cowboy).to({x: delta}, time * 1000, 'Linear', true, 3000);
-            game.add.tween(red_indian).to({x: delta}, time * 1000, 'Linear', true, 6000)
-                .onComplete.add(() => {
-                    cowContainer.destroy();
-                    cowboy.destroy();
-                    red_indian.destroy();
-                    soundController.sound.stopSound('cows');
-                    game.time.events.add(3000, () => {
-                        this.addCows({});
-                    });
-                }, this);
+            // let logoZaglushka = game.add.sprite(0, game.height * 0.84, 'zaglushka', null, container);
+            // model.el('logoZaglushka', logoZaglushka);
 
         },
 
@@ -166,15 +55,125 @@ export let view = (() => {
             container = model.group('main')
         }) {
 
-            let gameBGfs = game.add.sprite(0, 2, 'gameBGfs', null, container);
-                gameBGfs.anchor.set(0.5);
-                // gameBGfs.visible = false;
-                model.el('gameBGfs', gameBGfs);
+            let gameMachineBG = game.add.sprite(0, 0, 'gameMachineBG', null, container);
+                gameMachineBG.anchor.set(0.5);
+            model.el('gameMachineBG', gameMachineBG);
 
             let gameMachine = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachine', null, container);
                 gameMachine.anchor.set(0.5);
                 model.el('gameMachine', gameMachine);
         },
+
+        // addPole: function ({
+        //     game = model.el('game'),
+        //     container = model.group('bg')
+        // }) {
+        //     let pole = game.add.spine(50, game.height * 0.95, 'pole');
+        //     pole.setAnimationByName(1, '1', true);
+        //     model.group('bg').add(pole);
+        //     pole.scale.set(0.5);
+        //     model.el('pole', pole);
+        //
+        //     let time = game.rnd.integerInRange(20, 35);
+        //     let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
+        //
+        //     pole.x = (side === 'left') ? -pole.width : game.width + pole.width;
+        //     let delta = (side === 'left') ? game.width + pole.width : -pole.width;
+        //     if (side === 'right') {
+        //         pole.width = -pole.width;
+        //     }
+        //
+        //     game.add.tween(pole).to({x: delta}, time * 1000, 'Linear', true)
+        //         .onComplete.add(() => {
+        //             pole.destroy();
+        //             game.time.events.add(3000, () => {
+        //                 this.addPole({});
+        //             });
+        //         }, this);
+        //
+        // },
+        //
+        // addCows: function ({
+        //     game = model.el('game'),
+        //     container = model.group('bg')
+        // }) {
+        //     soundController.sound.playSound({sound: 'cows'});
+        //
+        //     let cowContainer = game.add.group();
+        //         cowContainer.inputEnableChildren = true;
+        //         cowContainer.onChildInputDown.add(()=>{
+        //             soundController.sound.playSound({sound: 'moo', volume: 7})
+        //         })
+        //
+        //     container.add(cowContainer);
+        //
+        //     let cow1 = game.add.sprite(-50, 10, 'cow1', null, cowContainer);
+        //     let cow2 = game.add.sprite(-150, 15, 'cow3', null, cowContainer);
+        //     let cow3 = game.add.sprite(-250, 20, 'cow3', null, cowContainer);
+        //     let cow4 = game.add.sprite(-120, 10, 'cow1', null, cowContainer);
+        //     let cow0 = game.add.sprite(-300, 20, 'cow2', null, cowContainer);
+        //
+        //     let cowboy = game.add.sprite(0, 0, 'cowboy', null, container);
+        //     let red_indian = game.add.sprite(0, 0, 'red_indian', null, container);
+        //
+        //     cowboy.inputEnabled = true;
+        //     cowboy.events.onInputDown.add(()=>{
+        //         soundController.sound.playSound({sound: 'whip', volume: 7})
+        //     });
+        //     red_indian.inputEnabled = true;
+        //     red_indian.events.onInputDown.add(()=>{
+        //         soundController.sound.playSound({sound: 'whip', volume: 7})
+        //     });
+        //
+        //     let time = game.rnd.integerInRange(55, 70);
+        //     let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
+        //
+        //     cowContainer.x = (side === 'left') ? -cowContainer.width : game.width + cowContainer.width;
+        //     cowContainer.y = game.rnd.integerInRange(720, 870);
+        //     let delta = (side === 'left') ? game.width + cowContainer.width : -cowContainer.width;
+        //     if (side === 'left') {
+        //         cowContainer.width = -cowContainer.width;
+        //     }
+        //
+        //     cowboy.x = (side === 'left') ? -cowboy.width : game.width + cowboy.width;
+        //     cowboy.y = cowContainer.y;
+        //     if (side === 'left') {
+        //         cowboy.width = -cowboy.width;
+        //     }
+        //
+        //     red_indian.x = (side === 'left') ? -red_indian.width - 300 : game.width + red_indian.width + 300;
+        //     red_indian.y = cowContainer.y;
+        //     if (side === 'left') {
+        //         red_indian.width = -red_indian.width;
+        //     }
+        //
+        //     let animArr = [];
+        //     let cow0Anim = cow0.animations.add('idle', Phaser.Animation.generateFrameNames('cow-2-walk2_', 0, 14, '.png', 1));
+        //     let cow1Anim = cow1.animations.add('idle1', Phaser.Animation.generateFrameNames('cow-1-walk1_', 0, 14, '.png', 1));
+        //     let cow2Anim = cow2.animations.add('idle2', Phaser.Animation.generateFrameNames('cow-3-walk3_', 0, 14, '.png', 1));
+        //     let cow3Anim = cow3.animations.add('idle3', Phaser.Animation.generateFrameNames('cow-3-walk3_', 0, 14, '.png', 1));
+        //     let cow4Anim = cow4.animations.add('idle4', Phaser.Animation.generateFrameNames('cow-1-walk1_', 0, 14, '.png', 1));
+        //     let cowboyAnim = cowboy.animations.add('idle5', Phaser.Animation.generateFrameNames('cowboi-animation_', 0, 14, '.png', 1));
+        //     let red_indianAnim = red_indian.animations.add('idle6', Phaser.Animation.generateFrameNames('indeets-walk_', 0, 14, '.png', 1));
+        //     animArr.push(cow0Anim, cow1Anim, cow2Anim, cow3Anim, cow4Anim, cowboyAnim, red_indianAnim);
+        //     animArr.forEach((anim) => {
+        //         anim.play(12, true);
+        //     });
+        //
+        //     game.add.tween(cowContainer).to({x: delta}, time * 1000, 'Linear', true, 0);
+        //     game.add.tween(cowboy).to({x: delta}, time * 1000, 'Linear', true, 3000);
+        //     game.add.tween(red_indian).to({x: delta}, time * 1000, 'Linear', true, 6000)
+        //         .onComplete.add(() => {
+        //             cowContainer.destroy();
+        //             cowboy.destroy();
+        //             red_indian.destroy();
+        //             soundController.sound.stopSound('cows');
+        //             game.time.events.add(3000, () => {
+        //                 this.addCows({});
+        //             });
+        //         }, this);
+        //
+        // },
 
         machineContainer: function ({
             game = model.el('game'),
