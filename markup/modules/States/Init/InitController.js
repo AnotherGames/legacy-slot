@@ -66,32 +66,21 @@ export class Init {
 
         view.firstDarkness();
 
-        if(!model.state('globalSound')){
-            this.sprite2.x = 270;
-            this.textOff.setStyle(this.styleOn);
-            this.textOn.setStyle(this.styleOff);
-        }
+        if (!model.state('globalSound')) this.triggerSoundLeft();
     }
 
     switchSound() {
-        if (model.state('globalSound')) {
-            soundController.volume.switchVolume()
-            this.sprite2.x = 270;
-            this.textOff.setStyle(this.styleOn);
-            this.textOn.setStyle(this.styleOff);
-        } else {
-            soundController.volume.switchVolume()
-            this.sprite2.x = 310;
-            this.textOff.setStyle(this.styleOff);
-            this.textOn.setStyle(this.styleOn);
-        }
+        soundController.volume.switchVolume();
+
+        (model.state('globalSound')) ? this.triggerSoundRight() : this.triggerSoundLeft();
     }
 
     handlePlay() {
         const game = model.el('game');
 
-        if (model.mobile) game.scale.startFullScreen();
-        else this.fullScreen();
+        // if (model.mobile) game.scale.startFullScreen();
+        // else this.fullScreen();
+        game.scale.startFullScreen();
 
         document.body.addEventListener('touchstart', () => {
             model.el('game').scale.startFullScreen();
@@ -116,6 +105,18 @@ export class Init {
         let settingsWidth = $('#settings').width();
         let multiplay = window.innerWidth / settingsWidth * 0.8;
         $('#settings').css('transform', 'translate(-50%, -50%) scale(' + multiplay + ',' + multiplay + ')');
+    }
+
+    triggerSoundLeft() {
+        this.sprite2.x = 270;
+        this.textOff.setStyle(this.styleOn); 
+        this.textOn.setStyle(this.styleOff);
+    }
+
+    triggerSoundRight() {
+        this.sprite2.x = 310;
+        this.textOff.setStyle(this.styleOff);
+        this.textOn.setStyle(this.styleOn);
     }
 
     drawSoundTrigger() {
