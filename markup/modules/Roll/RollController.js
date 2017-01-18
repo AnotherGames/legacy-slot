@@ -148,11 +148,11 @@ export let controller = (() => {
 
     function endRoll() {
         if (model.state('ready')) return;
+        
+        soundController.sound.stopSound('baraban');
 
         // Отправляем запрос Ready
         request.send('Ready').then((data) => {
-            soundController.sound.stopSound('baraban');
-
             // Показываем выигришь
             winController.showWin();
 
