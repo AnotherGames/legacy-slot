@@ -61,52 +61,52 @@ export class Preload {
     loadMainAssets() {
         const game = model.el('game');
         game.load.image('mainBG', 'bg/mainBG.png');
-        game.load.image('transitionBG', 'bg/transitionBG.png');
-        game.load.image('transitionSky', 'bg/transitionSky.png');
-        game.load.image('mainBGSky', 'bg/mainBGSky.png');
+        game.load.image('transitionBG', 'bg/transitionBG1.png');
+        // game.load.image('transitionSky', 'bg/transitionSky.png');
+        // game.load.image('mainBGSky', 'bg/mainBGSky.png');
         // game.load.image('sky', 'bg/sky.png');
-        game.load.image('zaglushka', 'bg/zaglushka.png');
-        game.load.image('gradient', 'bg/gradient.png');
+        // game.load.image('zaglushka', 'bg/zaglushka.png');
+        // game.load.image('gradient', 'bg/gradient.png');
         //BG Anim
-        game.load.image('cloud', 'bg/cloud.png');
-        game.load.image('sun', 'bg/sun.png');
-        game.load.image('luchi', 'bg/luchi.png');
-        game.load.image('fonLine', 'bg/fonLine.png');
-        game.load.atlasJSONArray('skull', 'bg/skull.png', 'bg/skull.json');
-        game.load.atlasJSONArray('pole', 'bg/pole.png', 'bg/pole.json');
-        if (model.desktop) {
-            game.load.atlasJSONArray('bird', 'bg/bird.png', 'bg/bird.json');
-            game.load.atlasJSONArray('bird2', 'bg/bird2.png', 'bg/bird2.json');
-            game.load.atlasJSONArray('birdFly', 'bg/birdFly.png', 'bg/birdFly.json');
-            game.load.atlasJSONArray('cow1', 'bg/cow1.png', 'bg/cow1.json');
-            game.load.atlasJSONArray('cow2', 'bg/cow2.png', 'bg/cow2.json');
-            game.load.atlasJSONArray('cow3', 'bg/cow3.png', 'bg/cow3.json');
-            game.load.atlasJSONArray('cowboy', 'bg/cowboy.png', 'bg/cowboy.json');
-            game.load.atlasJSONArray('red_indian', 'bg/red_indian.png', 'bg/red_indian.json');
-            game.load.atlasJSONArray('table', 'bg/table.png', 'bg/table.json');
-        }
+        // game.load.image('cloud', 'bg/cloud.png');
+        // game.load.image('sun', 'bg/sun.png');
+        // game.load.image('luchi', 'bg/luchi.png');
+        // game.load.image('fonLine', 'bg/fonLine.png');
+        // game.load.atlasJSONArray('skull', 'bg/skull.png', 'bg/skull.json');
+        // game.load.atlasJSONArray('pole', 'bg/pole.png', 'bg/pole.json');
+        // if (model.desktop) {
+        //     game.load.atlasJSONArray('bird', 'bg/bird.png', 'bg/bird.json');
+        //     game.load.atlasJSONArray('bird2', 'bg/bird2.png', 'bg/bird2.json');
+        //     game.load.atlasJSONArray('birdFly', 'bg/birdFly.png', 'bg/birdFly.json');
+        //     game.load.atlasJSONArray('cow1', 'bg/cow1.png', 'bg/cow1.json');
+        //     game.load.atlasJSONArray('cow2', 'bg/cow2.png', 'bg/cow2.json');
+        //     game.load.atlasJSONArray('cow3', 'bg/cow3.png', 'bg/cow3.json');
+        //     game.load.atlasJSONArray('cowboy', 'bg/cowboy.png', 'bg/cowboy.json');
+        //     game.load.atlasJSONArray('red_indian', 'bg/red_indian.png', 'bg/red_indian.json');
+        //     game.load.atlasJSONArray('table', 'bg/table.png', 'bg/table.json');
+        // }
         game.load.image('gameMachine', 'game/gameMachine.png');
-        game.load.image('gameBG', 'game/gameBG.png');
-        game.load.image('gameBGfs', 'game/gameBGfs.png');
-        game.load.image('gameShadow', 'game/gameShadow.png');
+        game.load.image('gameMachineBG', 'game/gameMachineBG.png');
+        // game.load.image('gameShadow', 'game/gameShadow.png');
         game.load.image('popup', 'other/popup.png');
-        game.load.image('smoke', 'other/smoke.png');
+        // game.load.image('smoke', 'other/smoke.png');
         game.load.image('closed', 'other/closed.png');
         // game.load.image('transitionCoin', 'other/transitionCoin.png');
         game.load.image('ar', 'other/ar.png');
         game.load.image('arLeft', 'other/arLeft.png');
         game.load.atlasJSONArray('info', 'other/info.png', 'other/info.json');
         game.load.atlasJSONArray('infoMarker', 'other/infoMarker.png', 'other/infoMarker.json');
-        game.load.image('winLine', 'win/winLineRect.png');
-        game.load.image('winTotal', 'win/winTotalRect.png');
+        game.load.image('winLine', 'win/winNumber.png');
+        game.load.image('winTotal', 'win/winTable.png');
         game.load.atlasJSONArray('lineNumbers', 'win/lineNumbers.png', 'win/lineNumbers.json');
         game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
         game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
         game.load.atlasJSONArray('footerButtons', 'footer/footerButtons.png', 'footer/footerButtons.json');
         game.load.bitmapFont("numbersFont", "numbers/numbers.png", "numbers/numbers.xml");
+        game.load.bitmapFont("numbersFont2", "numbers/numbers2.png", "numbers/numbers2.xml");
         if (model.desktop) {
-            game.load.image('ui', 'game/UI.png');
-            game.load.image('uiFS', 'game/UI_FS.png');
+            // game.load.image('ui', 'game/UI.png');
+            // game.load.image('uiFS', 'game/UI_FS.png');
             game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
             game.load.image('autoSelect', 'desk_buttons/autoSelect.png');
         }

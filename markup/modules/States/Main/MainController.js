@@ -54,14 +54,14 @@ export class Main {
 
         // Отрисовуем основной контейнер
         mainView.draw.mainBG({});
-        mainView.draw.addPole({});
-        mainView.draw.addSkull({});
+        // mainView.draw.addPole({});
+        // mainView.draw.addSkull({});
         mainView.draw.mainContainer({});
         mainView.draw.machineContainer({});
         mainView.draw.lineNumbers({side: 'left'})
         mainView.draw.lineNumbers({side: 'right'})
         // mainView.draw.lineNumbers({});
-        mainView.draw.flyingSmoke({});
+        // mainView.draw.flyingSmoke({});
         winView.draw.UpWinContainer({});
 
         // Инициализируем крутки
@@ -85,8 +85,8 @@ export class Main {
             // Рисуем футер
             footerController.initDesktop();
 
-            mainView.draw.addBird({});
-            mainView.draw.addTable({});
+            // mainView.draw.addBird({});
+            // mainView.draw.addTable({});
             // Автоматически позиционируем основной контейнер
             this.positionMainContainer();
 

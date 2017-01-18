@@ -15,10 +15,9 @@ export let view = (() => {
         }) {
             container.x = x;
             container.y = y;
-            const panelBG = game.add.sprite(0, deltaY, frameName, null, container);
-
-            container.pivot.set(panelBG.width / 2, 0);
-            return panelBG;
+            container.pivot.set(model.el('gameMachine').width / 2, 0);
+            // const panelBG = game.add.sprite(0, deltaY, frameName, null, container);
+            // return panelBG;
         },
 
         AutoContainer: function({
@@ -36,8 +35,8 @@ export let view = (() => {
 
         SpinButton: function({
             game = model.el('game'),
-            x = model.group('panel').width / 2,
-            y = 98,
+            x = model.el('gameMachine').width / 2 + 3,
+            y = -75,
             container = model.group('panel')
         }) {
             let spinButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'spinOn.png', 'spin.png', 'spinOn.png', null, container);
@@ -62,8 +61,8 @@ export let view = (() => {
         AutoButton: function({
             game = model.el('game'),
             container = model.group('panel'),
-            x = model.el('spinButtonDesk').x - 137,
-            y = 98
+            x = model.el('spinButtonDesk').x - 170,
+            y = -90
         }) {
             let autoButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'autoOn.png', 'auto.png', 'autoOn.png', null, container);
                 autoButtonDesk.anchor.set(0.5);
@@ -74,8 +73,8 @@ export let view = (() => {
         MaxBetButton: function({
             game = model.el('game'),
             container = model.group('panel'),
-            x = model.el('spinButtonDesk').x + 137,
-            y = 98
+            x = model.el('spinButtonDesk').x + 170,
+            y = -90
         }) {
             let maxBetButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'maxBetOn.png', 'maxBet.png', 'maxBetOn.png', null, container);
                 maxBetButtonDesk.anchor.set(0.5);
@@ -86,8 +85,8 @@ export let view = (() => {
         InfoButton: function({
             game = model.el('game'),
             container = model.group('panel'),
-            x = model.group('panel').width - 115,
-            y = 105,
+            x = -170,
+            y = -70,
         }) {
             let infoButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'infoOn.png', 'info.png', 'infoOn.png', null, container);
             model.el('infoButtonDesk', infoButtonDesk);
@@ -97,8 +96,8 @@ export let view = (() => {
         PlusButton: function({
             game = model.el('game'),
             container = model.group('panel'),
-            x = 270,
-            y = 110,
+            x = 500,
+            y = -55,
         }) {
             let plusButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'plusOn.png', 'plus.png', 'plusOn.png', null, container);
             return plusButtonDesk;
@@ -107,8 +106,8 @@ export let view = (() => {
         MinusButton: function({
             game = model.el('game'),
             container = model.group('panel'),
-            x = 173,
-            y = 108
+            x = 375,
+            y = -55
         }) {
             let minusButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'minusOn.png', 'minus.png', 'minusOn.png', null, container);
             return minusButtonDesk;
