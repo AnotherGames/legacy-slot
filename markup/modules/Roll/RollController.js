@@ -148,14 +148,10 @@ export let controller = (() => {
 
     function endRoll() {
         if (model.state('ready')) return;
-        
-        soundController.sound.stopSound('baraban');
 
         // Отправляем запрос Ready
         request.send('Ready').then((data) => {
-            // Показываем выигришь
-            winController.showWin();
-
+            soundController.sound.stopSound('baraban');
             // Обновляем баланс в конце крутки
             if (model.state('fs')) {
                 model.updateBalance({endFSRoll: true});
