@@ -16,7 +16,8 @@ export class Init {
 
             // При выходе из вкладки анимации будут останавливаться
             game.stage.disableVisibilityChange = true;
-            // Ставим игру на паузу при не активном окне браузера
+
+        // Ставим игру на паузу при не активном окне браузера
         let hidden, state, visibilityChange;
         if (typeof document.hidden !== "undefined") {
           hidden = "hidden";
@@ -61,38 +62,28 @@ export class Init {
         // Выход из затемнения
         game.camera.flash(0x000000, 500);
 
-        if(!model.state('globalSound')){
-            this.sprite2.x = 270;
-            this.textOff.setStyle(this.styleOn);
-            this.textOn.setStyle(this.styleOff);
-        }
+        if (!model.state('globalSound')) this.triggerSoundLeft();
     }
 
     switchSound() {
-        if (model.state('globalSound')) {
-            soundController.volume.switchVolume()
-            this.sprite2.x = 270;
-            this.textOff.setStyle(this.styleOn);
-            this.textOn.setStyle(this.styleOff);
-        } else {
-            soundController.volume.switchVolume()
-            this.sprite2.x = 310;
-            this.textOff.setStyle(this.styleOff);
-            this.textOn.setStyle(this.styleOn);
-        }
+        soundController.volume.switchVolume();
+
+        (model.state('globalSound')) ? this.triggerSoundRight() : this.triggerSoundLeft();
     }
 
     handlePlay() {
         const game = model.el('game');
 
-        if (model.mobile) game.scale.startFullScreen();
-        else this.fullScreen();
+        // if (model.mobile) game.scale.startFullScreen();
+        // else this.fullScreen();
+        game.scale.startFullScreen();
 
         document.body.addEventListener('touchstart', () => {
             model.el('game').scale.startFullScreen();
         });
 
         view.stopYoyoTween();
+
         game.camera.onFadeComplete.add(()=>{
             game.state.start('Main');
         })
@@ -109,14 +100,26 @@ export class Init {
         else if (_e.webkitRequestFullScreen) _e.webkitRequestFullScreen();
     }
 
+    triggerSoundLeft() {
+        this.sprite2.x = 270;
+        this.textOff.setStyle(this.styleOn);
+        this.textOn.setStyle(this.styleOff);
+    }
+
+    triggerSoundRight() {
+        this.sprite2.x = 310;
+        this.textOff.setStyle(this.styleOff);
+        this.textOn.setStyle(this.styleOn);
+    }
+
     drawSoundTrigger() {
         const game = model.el('game');
         let soundContainer = game.add.group();
-        soundContainer.position.set(game.width - 460, game.height - 100);
+            soundContainer.position.set(game.width - 460, game.height - 100);
 
         let background = game.add.graphics(0, 0);
-        background.beginFill(0xffffff, 0.2);
-        background.drawRoundedRect(soundContainer.x - 30, soundContainer.y - 15, 470, 80, 40);
+            background.beginFill(0xffffff, 0.2);
+            background.drawRoundedRect(soundContainer.x - 30, soundContainer.y - 15, 470, 80, 40);
 
         let style = { font: "bold 42px Arial", fill: "#f3eba0"};
         let textSound = game.add.text(0, 0, "Sound:", style, soundContainer);
@@ -128,20 +131,22 @@ export class Init {
         this.textOn.setStyle(this.styleOn);
 
         let graphics = game.add.graphics(0, 0);
-        graphics.beginFill(0x6da600, 1);
-        graphics.drawRoundedRect(0, 0, 70, 30, 150);
+            graphics.beginFill(0x6da600, 1);
+            graphics.drawRoundedRect(0, 0, 70, 30, 150);
 
         let sprite = game.add.sprite(290, 25, graphics.generateTexture(), null, soundContainer);
-        sprite.anchor.set(0.5);
-        sprite.inputEnabled = true;
-        sprite.events.onInputDown.add(this.switchSound, this);
+            sprite.anchor.set(0.5);
+            sprite.inputEnabled = true;
+            sprite.events.onInputDown.add(this.switchSound, this);
         graphics.destroy();
 
         let graphics2 = game.add.graphics(0, 0);
-        graphics2.beginFill(0xffffff, 1);
-        graphics2.drawCircle(0, 0, 30);
+            graphics2.beginFill(0xffffff, 1);
+            graphics2.drawCircle(0, 0, 30);
+
         this.sprite2 = game.add.sprite(310, 25, graphics2.generateTexture(), null, soundContainer);
         this.sprite2.anchor.set(0.5);
+
         graphics2.destroy();
     }
 }

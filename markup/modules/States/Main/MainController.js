@@ -32,13 +32,11 @@ export class Main {
         game.frameAnims = [];
         game.spriteAnims = [];
 
-
         // Создаем контейнеры
         mainView.create.groups({});
 
         // При выходе из вкладки анимации будут останавливаться
         game.stage.disableVisibilityChange = true;
-
     }
 
     create() {
@@ -77,10 +75,8 @@ export class Main {
         } else {    // Desktop
             // Рисуем футер
             footerController.initDesktop();
-
             // Автоматически позиционируем основной контейнер
             this.positionMainContainer();
-
             // Инициализируем десктопные сеттинги
             settingsController.initDesktopSettings(game);
             // Рисуем кнопки управления
@@ -88,21 +84,16 @@ export class Main {
             // Отрисовуем баланс
             balanceController.initDesktop();
         }
-
         // Добавляем маску
         mainView.draw.machineMask({});
-
         // Инициализируем управление клавиатурой
         if (model.desktop) {
             keyboardController.initMainKeys();
         }
-
-        // Первая темнота
+        // Выход из темноты
         game.camera.flash(0x000000, 500)
-
         // Проверяем сохранненые сессии
         this.checkForSavedFS();
-
         // Проверяем остались ли автокрутки
         this.checkForRemainAutoplay();
     }
@@ -119,8 +110,8 @@ export class Main {
         let game = model.el('game');
         if (model.mobile) {
             let mainXLeft = model.data('buttonsDelta') * 2 + model.el('gameMachine').width / 2;
-            let mainXRight = game.width - model.el('gameMachine').width -
-            model.data('buttonsDelta') * 2 + model.el('gameMachine').width / 2;
+            let mainXRight = game.width - model.el('gameMachine').width
+                - model.data('buttonsDelta') * 2 + model.el('gameMachine').width / 2;
 
             model.data('mainXLeft', mainXLeft);
             model.data('mainXRight', mainXRight);

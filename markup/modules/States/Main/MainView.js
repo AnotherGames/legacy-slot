@@ -60,9 +60,8 @@ export let view = (() => {
                 let lamp1 = game.add.sprite(-750, -240, 'lamp', null, container);
                     lamp1.anchor.set(0.5);
                     lamp1.animations.add('move');
-                    lamp1.animations.play('move', 15, true);
-                    lamp1.priorityID = 6;
                     lamp1.name = 'leftLampDropped';
+                    lamp1.animations.play('move', 15, true);
                 model.el('lamp1', lamp1);
                 model.state('leftLampDropped', false);
                 model.data('leftLampY', lamp1.y)
@@ -70,8 +69,8 @@ export let view = (() => {
                 let lamp2 = game.add.sprite(750, -240, 'lamp', null, container);
                     lamp2.anchor.set(0.5);
                     lamp2.scale.set(-1, 1);
-                    lamp2.name = 'rightLampDropped'
                     lamp2.animations.add('move');
+                    lamp2.name = 'rightLampDropped'
                 game.time.events.add(300, () => {
                     lamp2.animations.play('move', 15, true);
                 })
@@ -112,7 +111,7 @@ export let view = (() => {
 
             lamp.inputEnabled = true;
             lamp.events.onInputDown.add(()=>{
-                if (count < 5){
+                if (count < 1){
                     lamp.animations.stop();
                     lamp.animations.frameName = 'FN-animation_45.png';
                     lamp.animations.play('move', 15, true);
