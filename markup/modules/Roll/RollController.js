@@ -114,7 +114,6 @@ export let controller = (() => {
                     ++countFinish;
                     if (countFinish === 5) {
                         endRoll();
-                        winController.showWin();
                     }
                 }
 
@@ -148,10 +147,11 @@ export let controller = (() => {
 
     function endRoll() {
         if (model.state('ready')) return;
+        soundController.sound.stopSound('baraban');
 
         // Отправляем запрос Ready
         request.send('Ready').then((data) => {
-            soundController.sound.stopSound('baraban');
+            winController.showWin();
             // Обновляем баланс в конце крутки
             if (model.state('fs')) {
                 model.updateBalance({endFSRoll: true});
