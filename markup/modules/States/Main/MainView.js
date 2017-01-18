@@ -237,52 +237,76 @@ export let view = (() => {
             model.el('gameMachine', gameMachine);
         },
 
-        lineNumbers: function({
+        lineNumbers: function ({
             game = model.el('game'),
-            container = model.group('numbers'),
-            gameMachine = model.el('gameMachine'),
-            side = 'left'
-        }){
-            let x = (side == 'right') ? gameMachine.right - 9 : gameMachine.left + 9;
-            let lineNumbersArr = [];
+            container = model.group('numbers')
+        }) {
+            let gameMachine = model.el('gameMachine');
+
+            let leftArr = [];
 
             for (let i = 1; i < 11; i++) {
-                let lineNumber = game.add.sprite(x, config[model.res].win[i][0].y - gameMachine.height / 2 - 40,
+                let name = i;
+                let lineNumber = game.add.sprite(config[model.res].win[i][0].x - gameMachine.width / 2,
+                    config[model.res].win[i][0].y - gameMachine.height / 2 - 40,
                     'lineNumbers',
                     'line_splash-' + i +'_0.png',
                     container);
-                lineNumber.normal = function() {lineNumber.frameName = 'line_splash-' + i + '_0.png'};
-                lineNumber.name = i;
+                lineNumber.normal = function() {lineNumber.frameName = 'line_splash-' + name + '_0.png'};
+                lineNumber.name = name;
                 lineNumber.anchor.set(0.5);
-
-                console.log(model.state('fs'));
-                if(model.state('fs')) {
-                    lineNumbersArr.push(lineNumber);
-                    continue;
-                }
 
                 lineNumber.inputEnabled = true;
                 lineNumber.input.priorityID = 2;
                 lineNumber.input.pixelPerfectOver = 1;
-
                 lineNumber.events.onInputOver.add(() => {
-                    if (lineNumber.lineShape) {
-                        lineNumber.lineShape.destroy();
-                    }
-
-                    lineNumber.lineShape = this.lineShape(lineNumber.name);
+                if (lineNumber.lineShape) {
+                   lineNumber.lineShape.destroy();
+                }
+                lineNumber.lineShape = this.lineShape(lineNumber.name);
                 });
 
                 lineNumber.events.onInputOut.add(() => {
-                    if (lineNumber.lineShape) {
-                        lineNumber.lineShape.destroy();
-                    }
+                if (lineNumber.lineShape) {
+                   lineNumber.lineShape.destroy();
+                }
                 });
-
-                lineNumbersArr.push(lineNumber);
+                leftArr.push(lineNumber);
             }
 
-            model.el(side + 'Arr', lineNumbersArr);
+            model.el('leftArr', leftArr);
+
+            let rightArr = [];
+
+            for (let i = 1; i < 11; i++) {
+                let name = i;
+                let lineNumber = game.add.sprite(config[model.res].win[i][1].x - gameMachine.width / 2 - 8,
+                    config[model.res].win[i][0].y - gameMachine.height / 2 - 40,
+                    'lineNumbers',
+                    'line_splash-' + i +'_0.png',
+                    container);
+                lineNumber.normal = function() {lineNumber.frameName = 'line_splash-' + name + '_0.png'};
+                lineNumber.name = name;
+                lineNumber.anchor.set(0.5);
+
+                lineNumber.inputEnabled = true;
+                lineNumber.input.priorityID = 2;
+                lineNumber.input.pixelPerfectOver = 1;
+                lineNumber.events.onInputOver.add(() => {
+                if (lineNumber.lineShape) {
+                   lineNumber.lineShape.destroy();
+                }
+                lineNumber.lineShape = this.lineShape(lineNumber.name);
+                });
+
+                lineNumber.events.onInputOut.add(() => {
+                if (lineNumber.lineShape) {
+                   lineNumber.lineShape.destroy();
+                }
+                });
+                rightArr.push(lineNumber);
+            }
+            model.el('rightArr', rightArr);
         },
 
         lineShape: function(number) {
@@ -291,14 +315,13 @@ export let view = (() => {
            let line = model.data('lines')[number - 1];
            let elSize = config[model.res].elements;
            let lineShape = game.add.graphics(0, 0, container);
-           let gameMachine = model.el('gameMachine');
            lineShape
                .lineStyle(4, 0x332206, 0.8)
-               .moveTo((line[0].X + 0.5) * elSize.width - gameMachine.width / 2 + 50, (line[0].Y + 0.5) * elSize.height - gameMachine.height / 2 + 50)
-               .lineTo((line[1].X + 0.5) * elSize.width - gameMachine.width / 2 + 50, (line[1].Y + 0.5) * elSize.height - gameMachine.height / 2 + 50)
-               .lineTo((line[2].X + 0.5) * elSize.width - gameMachine.width / 2 + 50, (line[2].Y + 0.5) * elSize.height - gameMachine.height / 2 + 50)
-               .lineTo((line[3].X + 0.5) * elSize.width - gameMachine.width / 2 + 50, (line[3].Y + 0.5) * elSize.height - gameMachine.height / 2 + 50)
-               .lineTo((line[4].X + 0.5) * elSize.width - gameMachine.width / 2 + 50, (line[4].Y + 0.5) * elSize.height - gameMachine.height / 2 + 50)
+               .moveTo((line[0].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[0].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + 50)
+               .lineTo((line[1].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[1].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + 50)
+               .lineTo((line[2].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[2].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + 50)
+               .lineTo((line[3].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[3].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + 50)
+               .lineTo((line[4].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[4].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + 50)
            return lineShape;
         },
 

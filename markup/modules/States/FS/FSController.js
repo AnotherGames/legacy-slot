@@ -4,7 +4,6 @@ import { config } from 'modules/Util/Config';
 import { view as fsView } from 'modules/States/FS/FSView';
 import { view as transitionView } from 'modules/Transition/TransitionView';
 import { view as winView } from 'modules/Win/WinView';
-import { view as mainView } from 'modules/States/Main/MainView';
 
 import { controller as soundController } from 'modules/Sound/SoundController';
 import { controller as settingsController } from 'modules/Settings/DesktopSettingsController';
@@ -156,8 +155,7 @@ export class FS {
         // Отрисовуем основной контейнер
         fsView.draw.mainContainer({});
         fsView.draw.machineContainer({});
-        mainView.draw.lineNumbers({side: 'left'})
-        mainView.draw.lineNumbers({side: 'right'})
+        fsView.draw.lineNumbers({});
         winView.draw.UpWinContainer({});
 
         // Инициализируем крутки
