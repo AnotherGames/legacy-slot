@@ -28,11 +28,8 @@ export let view = (() => {
         mainBG: function ({
             game = model.el('game')
         }) {
-            let animBG = game.add.spine(
-                game.world.centerX,
-                game.world.centerY,
-                'animBG'
-            );
+
+            let animBG = game.add.spine(game.world.centerX, game.world.centerY, 'animBG');
             animBG.setAnimationByName(0, 'animation', true);
             model.group('bg').add(animBG);
             model.el('animMainBG', animBG);
@@ -40,7 +37,7 @@ export let view = (() => {
             let mainBG = game.add.sprite(0, 0, 'mainBG', null, model.group('bg'));
             model.el('mainBG', mainBG);
 
-            if (model.state('isAnimBG')) {
+            if (model.state('isAnimBG') && model.desktop) {
                 mainBG.visible = false;
             } else {
                 animBG.visible = false;
