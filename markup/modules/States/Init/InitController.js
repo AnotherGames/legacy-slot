@@ -78,8 +78,6 @@ export class Init {
     handlePlay() {
         const game = model.el('game');
 
-        // if (model.mobile) game.scale.startFullScreen();
-        // else this.fullScreen();
         game.scale.startFullScreen();
 
         document.body.addEventListener('touchstart', () => {
@@ -93,12 +91,6 @@ export class Init {
             });
     }
 
-    fullScreen(element) {
-        let _e = element || document.querySelector('#game');
-
-        if (_e.requestFullScreen) _e.requestFullScreen();
-        else if (_e.mozRequestFullScreen) _e.mozRequestFullScreen();
-        else if (_e.webkitRequestFullScreen) _e.webkitRequestFullScreen();
     }
 
     checkSettingsWidth() {
