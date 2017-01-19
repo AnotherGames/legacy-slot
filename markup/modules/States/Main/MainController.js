@@ -58,8 +58,8 @@ export class Main {
         // mainView.draw.addSkull({});
         mainView.draw.mainContainer({});
         mainView.draw.machineContainer({});
-        mainView.draw.lineNumbers({side: 'left'})
-        mainView.draw.lineNumbers({side: 'right'})
+        mainView.draw.lineNumbers({});
+        // mainView.draw.lineNumbers({side: 'right'})
         // mainView.draw.lineNumbers({});
         // mainView.draw.flyingSmoke({});
         winView.draw.UpWinContainer({});

@@ -229,17 +229,19 @@ export let view = (() => {
             gameMachine = model.el('gameMachine'),
             side = 'left'
         }){
-            let x = (side == 'right') ? gameMachine.right - 9 : gameMachine.left + 9;
             let lineNumbersArr = [];
 
             for (let i = 1; i < 11; i++) {
-                let lineNumber = game.add.sprite(x, config[model.res].win[i][0].y - gameMachine.height / 2 - 40,
+                side = config[model.res].win[i][0].side;
+                let x = (side == 'right') ? gameMachine.right - 105 : gameMachine.left + 107;
+                let lineNumber = game.add.sprite(x, config[model.res].win[i][0].y - gameMachine.height / 2,
                     'lineNumbers',
                     'line_splash-' + i +'_0.png',
                     container);
                 lineNumber.normal = function() {lineNumber.frameName = 'line_splash-' + i + '_0.png'};
                 lineNumber.name = i;
                 lineNumber.anchor.set(0.5);
+                console.log(lineNumber.x, lineNumber.y);
 
                 // console.log(model.state('fs'));
                 if(model.state('fs')) {
@@ -279,7 +281,7 @@ export let view = (() => {
            let lineShape = game.add.graphics(0, 0, container);
            let gameMachine = model.el('gameMachine');
            lineShape
-               .lineStyle(4, 0x332206, 0.8)
+               .lineStyle(4, 0x188bb4, 0.8)
                .moveTo((line[0].X + 0.5) * elSize.width - gameMachine.width / 2 + 50, (line[0].Y + 0.5) * elSize.height - gameMachine.height / 2 + 50)
                .lineTo((line[1].X + 0.5) * elSize.width - gameMachine.width / 2 + 50, (line[1].Y + 0.5) * elSize.height - gameMachine.height / 2 + 50)
                .lineTo((line[2].X + 0.5) * elSize.width - gameMachine.width / 2 + 50, (line[2].Y + 0.5) * elSize.height - gameMachine.height / 2 + 50)
@@ -326,8 +328,9 @@ export let view = (() => {
             machineGroup = model.group('machine')
         }) {
             const elSize = config[model.res].elements;
+            let delta = (model.desktop) ? 60 : 0;
 
-            let someGraphic = game.add.graphics(-elSize.width * 2.5, -elSize.height * 1.5 + 60, machineGroup);
+            let someGraphic = game.add.graphics(-elSize.width * 2.5, -elSize.height * 1.5 + delta, machineGroup);
                 someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5, elSize.height * 3);
             machineGroup.mask = someGraphic;
         },

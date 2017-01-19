@@ -67,16 +67,16 @@ export let controller = (() => {
             });
         });
 
-        let leftArr = model.el('leftArr');
-        let rightArr = model.el('rightArr');
-
-        leftArr.forEach((el) => {
-            el.normal();
-        });
-
-        rightArr.forEach((el) => {
-            el.normal();
-        })
+        // let leftArr = model.el('leftArr');
+        // let rightArr = model.el('rightArr');
+        //
+        // leftArr.forEach((el) => {
+        //     el.normal();
+        // });
+        //
+        // rightArr.forEach((el) => {
+        //     el.normal();
+        // })
 
         // Перевод в нормальную анимацию
         if (normalAnim) {
