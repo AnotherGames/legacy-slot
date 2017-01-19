@@ -340,7 +340,7 @@ export let view = (() => {
             cb = false
         }) {
             game.add.tween(container)
-                .to({y: -600}, 800, Phaser.Easing.Bounce.In, true)
+                .to({y: -800}, 800, Phaser.Easing.Back.In, true)
                 .onComplete.add(() => {
                     container.y = 0;
                     if (cb) {

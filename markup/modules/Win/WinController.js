@@ -546,10 +546,6 @@ export let controller = (() => {
             });
     }
 
-    function closeAim() {
-
-    }
-
     return {
         showWin,
         cleanWin,
