@@ -2,7 +2,7 @@ export let config = {
     fadeinMusicTime: 5000,
     countMeterTime: 2500,
     autoTransitionTime: 10000,
-    symbolsCount: 11,
+    symbolsCount: 14,
     maxMulti: 7,
     numOfInfoDots: 7,
     wheel: {
@@ -75,16 +75,30 @@ export let config = {
         },
 
         win: {
-            '4': [{x: 10, y: 120}, {x: 990, y: 120}],
-            '2': [{x: 10, y: 170}, {x: 990, y: 170}],
-            '6': [{x: 10, y: 220}, {x: 990, y: 220}],
-            '9': [{x: 10, y: 270}, {x: 990, y: 270}],
-            '10': [{x: 10, y: 320}, {x: 990, y: 320}],
-            '1': [{x: 10, y: 370}, {x: 990, y: 370}],
-            '8': [{x: 10, y: 420}, {x: 990, y: 420}],
-            '7': [{x: 10, y: 470}, {x: 990, y: 470}],
-            '3': [{x: 10, y: 520}, {x: 990, y: 520}],
-            '5': [{x: 10, y: 570}, {x: 990, y: 570}]
+            '4': [{side: 'left', y: 252}],
+            '13': [{side: 'right', y: 252}],
+            '6': [{side: 'left', y: 297}],
+            '15': [{side: 'right', y: 297}],
+            '18': [{side: 'left', y: 342}],
+            '2': [{side: 'right', y: 342}],
+            '11': [{side: 'left', y: 387}],
+            '17': [{side: 'right', y: 387}],
+
+            '9': [{side: 'left', y: 495}],
+            '1': [{side: 'right', y: 500}],
+            '1': [{side: 'left', y: 540}],
+            '21': [{side: 'right', y: 550}],
+            '20': [{side: 'left', y: 585}],
+            '8': [{side: 'right', y: 590}],
+
+            '10': [{side: 'left', y: 735}],
+            '16': [{side: 'right', y: 735}],
+            '19': [{side: 'left', y: 780}],
+            '3': [{side: 'right', y: 780}],
+            '7': [{side: 'left', y: 825}],
+            '14': [{side: 'right', y: 825}],
+            '5': [{side: 'left', y: 870}],
+            '12': [{side: 'right', y: 870}]
         }
     }
 };

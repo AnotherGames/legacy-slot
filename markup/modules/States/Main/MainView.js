@@ -328,9 +328,8 @@ export let view = (() => {
             machineGroup = model.group('machine')
         }) {
             const elSize = config[model.res].elements;
-            let delta = (model.desktop) ? 60 : 0;
 
-            let someGraphic = game.add.graphics(-elSize.width * 2.5, -elSize.height * 1.5 + delta, machineGroup);
+            let someGraphic = game.add.graphics(-elSize.width * 2.5, -elSize.height * 1.5 + 50, machineGroup);
                 someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5, elSize.height * 3);
             machineGroup.mask = someGraphic;
         },

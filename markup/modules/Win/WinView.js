@@ -17,7 +17,6 @@ export let view = (() => {
         }) {
             let elSize = config[model.res].elements;
             let upElements = [];
-            let delta = (model.desktop) ? 60 : 0;
             for (var i = 0; i < 5; i++) {
                 upElements.push([]);
                 for (var j = 0; j < 3; j++) {
@@ -25,7 +24,7 @@ export let view = (() => {
                         container,
                         position: {
                             x: elSize.width * (i + 0.5 - 2.5),
-                            y: elSize.height * (j + 0.5 - 1.5) + delta
+                            y: elSize.height * (j + 0.5 - 1.5)
                         }
                     });
                     el.hide(0);

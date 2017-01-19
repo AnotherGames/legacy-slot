@@ -13,7 +13,11 @@ export class Element {
 
         // Заполняем его спрайтами всех элементов (они будут расположенны друг на друге)
         this.sprites = [];
+        // this.bg = game.add.sprite(0, 0, 'plaha', null, this.group);
+        // this.bg.anchor.set(0.5);
+        // this.bg.visible = false;
         for (let i = 1; i <= config.symbolsCount; i++) {
+
             // Создаем по спрайту для каждого символа и делаем их не видимыми
             let sprite = game.add.sprite(0, 0, i, null, this.group);
                 sprite.anchor.set(0.5);
@@ -78,37 +82,46 @@ export class Element {
     addSpriteAnimation(sprite, index) {
         switch (index) {
             case 1:
-                this.addAnimation(sprite, { el: 1, n: false, w: false });
+                this.addAnimation(sprite, { el: 1, n: false, w: 29 });
                 break;
             case 2:
-                this.addAnimation(sprite, { el: 2, n: 16, w: 15 });
+                this.addAnimation(sprite, { el: 2, n: 29, w: 29 });
                 break;
             case 3:
-                this.addAnimation(sprite, { el: 3, n: false, w: false });
+                this.addAnimation(sprite, { el: 3, n: false, w: 29 });
                 break;
             case 4:
-                this.addAnimation(sprite, { el: 4, n: 16, w: 15 });
+                this.addAnimation(sprite, { el: 4, n: 24, w: 24 });
                 break;
             case 5:
-                this.addAnimation(sprite, { el: 5, n: false, w: false });
+                this.addAnimation(sprite, { el: 5, n: false, w: 29 });
                 break;
             case 6:
-                this.addAnimation(sprite, { el: 6, n: 10, w: 25 });
+                this.addAnimation(sprite, { el: 6, n: 29, w: 29 });
                 break;
             case 7:
-                this.addAnimation(sprite, { el: 7, n: false, w: false });
+                this.addAnimation(sprite, { el: 7, n: false, w: 29 });
                 break;
             case 8:
-                this.addAnimation(sprite, { el: 8, n: 20, w: 22 });
+                this.addAnimation(sprite, { el: 8, n: 29, w: 29 });
                 break;
             case 9:
-                this.addAnimation(sprite, { el: 9, n: false, w: 18 });
+                this.addAnimation(sprite, { el: 9, n: 29, w: 29 });
                 break;
             case 10:
-                this.addAnimation(sprite, { el: 10, n: false, w: 20 });
+                this.addAnimation(sprite, { el: 10, n: false, w: 29 });
                 break;
             case 11:
-                this.addAnimation(sprite, { el: 11, n: false, w: 10 });
+                this.addDiverAnimation(sprite, { el: 11 });
+                break;
+            case 12:
+                this.addDiverAnimation(sprite, { el: 12 });
+                break;
+            case 13:
+                this.addDiverAnimation(sprite, { el: 13 });
+                break;
+            case 14:
+                this.addAnimation(sprite, { el: 14, n: false, w: 29 });
                 break;
             default:
                 break;
@@ -116,20 +129,33 @@ export class Element {
         }
     }
 
+    addDiverAnimation(sprite, options) {
+        sprite.animations.add(`${options.el}-n`, [`11`], 15, true);
+        sprite.animations.add(`${options.el}-b`, [`11`], 15, true);
+        sprite.animations.add(`${options.el}-w`, [`11`], 15, true);
+    }
+
     addAnimation(sprite, options) {
+        let prefix;
+        if (options.el < 10) {
+            prefix = 0;
+        } else {
+            prefix = '';
+        }
+
         sprite.animations.add(`${options.el}-n`,
             // Если параметр options.n == false - то у нас будет только один кадр, в другом случае это будет количество кадров в анимации
             options.n
-            ? Phaser.Animation.generateFrameNames(`${options.el}-n-`, 1, options.n, '.png', 2)
-            : [`${options.el}-n.png`], 15, true);
+            ? Phaser.Animation.generateFrameNames(`${prefix}${options.el}-n-`, 0, options.n, '.png', 2)
+            : [`${prefix}${options.el}-n-00.png`], 15, true);
 
-        sprite.animations.add(`${options.el}-b`, [`${options.el}-b.png`], 15, true);
+        sprite.animations.add(`${options.el}-b`, [`${prefix}${options.el}-b-00.png`], 15, true);
 
         sprite.animations.add(`${options.el}-w`,
             // Если параметр options.w == false - то у нас будет только один кадр, в другом случае это будет количество кадров в анимации
             options.w
-            ? Phaser.Animation.generateFrameNames(`${options.el}-w-`, 1, options.w, '.png', 2)
-            : [`${options.el}-w.png`], 15, true);
+            ? Phaser.Animation.generateFrameNames(`${prefix}${options.el}-w-`, 0, options.w, '.png', 2)
+            : [`${prefix}${options.el}-w-00.png`], 15, true);
             // Phaser.Animation.generateFrameNames(`${options.el}-w-`, 1, options.w, '.png', 2), 15, false);
     }
 }

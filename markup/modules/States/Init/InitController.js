@@ -62,6 +62,18 @@ export class Init {
 
         this.drawSoundTrigger();
 
+        // let testGroup = game.add.group();
+        //
+        // let testElement = new Element({
+        //     position: {
+        //         x: 100,
+        //         y: 200
+        //     },
+        //     container: testGroup
+        // });
+        //
+        // model.el('testEl', testElement);
+
         game.camera.flash(0x000000, 500)
 
         if (!model.state('globalSound')) this.triggerSoundLeft();

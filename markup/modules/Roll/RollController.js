@@ -24,7 +24,6 @@ export let controller = (() => {
 
         // Восстановление экрана с которого мы ошли на Фри Спины
         let firstWheels = checkFirstScreen();
-        let delta = (model.desktop) ? 60 : 0;
 
         // Заполняемм колеса элементами
         for (let i = 0; i < 5; i++) {
@@ -33,7 +32,7 @@ export let controller = (() => {
                 parent: elementsContainer,
                 position: {
                     x: (i - 2) * elSize.width,
-                    y: -elSize.height + delta
+                    y: -elSize.height
                 },
                 elSize,
                 currentScreen: firstWheels[i]
