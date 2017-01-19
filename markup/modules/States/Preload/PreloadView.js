@@ -35,20 +35,10 @@ export let view = (() => {
             .to({x: 0, y: 0}, 500, Phaser.Easing.In, true);
     }
 
-    function lastDarkness() {
-        const game = model.el('game');
-        let darkness = game.add.graphics(0, 0);
-            darkness.beginFill(0x000000, 0).drawRect(0, 0, game.world.width, game.world.height);
-        model.el('preloadDarkness', darkness);
-        return game.add.tween(darkness)
-            .to({alpha: 1}, 500, Phaser.Easing.In, true);
-    }
-
     return {
         drawPreloadBar,
         drawPreloadCoin,
         hideBar,
-        hideCoin,
-        lastDarkness
+        hideCoin
     }
 })();
