@@ -98,8 +98,7 @@ export class Main {
         }
 
         // Первая темнота
-        let darkness = mainView.draw.darkness({});
-            this.add.tween(darkness).to( { alpha: 0 }, 1500, 'Linear', true);
+        game.camera.flash(0x000000, 500)
 
         // Проверяем сохранненые сессии
         this.checkForSavedFS();

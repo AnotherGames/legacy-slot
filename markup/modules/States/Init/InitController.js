@@ -43,6 +43,7 @@ export class Init {
     }
 
     create() {
+        let game = model.el('game');
 
         this.checkSettingsWidth();
 
@@ -61,7 +62,7 @@ export class Init {
 
         this.drawSoundTrigger();
 
-        view.firstDarkness();
+        game.camera.flash(0x000000, 500)
 
         if(!model.state('globalSound')){
             this.sprite2.x = 270;
@@ -95,10 +96,11 @@ export class Init {
         });
 
         view.stopYoyoTween();
-        view.lastDarkness()
-            .onComplete.add(() => {
-                game.state.start('Main');
-            });
+
+        game.camera.onFadeComplete.add(()=>{
+            game.state.start('Main');
+        })
+        game.camera.fade(0x000000, 500)
     }
 
     fullScreen(element) {

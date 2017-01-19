@@ -10,13 +10,7 @@ export let view = (() => {
         let game = model.el('game');
         model.state('transitionScreen', true);
         // Запускаем затемнение
-        let darkness = game.add.graphics();
-            darkness.beginFill(0x000000);
-            darkness.drawRect(0, 0, game.width, game.height);
-        game.add.tween(darkness).to( { alpha: 0 }, 1500, 'Linear', true)
-            .onComplete.add(() => {
-                darkness.destroy();
-            }, this);
+        game.camera.flash(0x000000, 500);
         // Отрисовываем переходной экран
         _fsStartDraw();
         _fsStartTween();
@@ -179,13 +173,7 @@ export let view = (() => {
 
         keyboardController.initFsKeys();
         // Темнота
-        let darkness = game.add.graphics();
-            darkness.beginFill(0x000000);
-            darkness.drawRect(0, 0, game.width, game.height);
-        game.add.tween(darkness).to( { alpha: 0 }, 1500, 'Linear', true)
-            .onComplete.add(() => {
-                darkness.destroy();
-            }, this);
+        game.camera.flash(0x000000, 500)
         // Отрисовка финишного экрана
         _fsFinishDraw();
         _fsFinishTween();
