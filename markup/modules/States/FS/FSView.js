@@ -37,16 +37,10 @@ export let view = (() => {
             container.add(shadows);
             model.el('shadows', shadows);
 
-            let xRight = (model.desktop) ? game.width * 0.94 : game.width * 0.94;
-            let xLeft = (model.desktop) ? 110 : 75;
-            let y = (model.desktop) ? 545 : 370;
-
-            let doorRight = game.add.sprite(xRight, y, 'doorRight', null, container);
-            let doorLeft = game.add.sprite(xLeft, y, 'doorLeft', null, container);
+            let doorRight = game.add.sprite(game.width * 0.94, game.height * 0.515, 'doorRight', null, container);
+            let doorLeft = game.add.sprite(game.width * 0.06, game.height * 0.515, 'doorLeft', null, container);
             doorRight.anchor.set(0.5);
             doorLeft.anchor.set(0.5);
-
-
         },
 
         addShadows: function ({

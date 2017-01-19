@@ -128,7 +128,6 @@ export class FS {
         game.frameAnims = [];
         game.spriteAnims = [];
 
-
         model.state('fs', true);
 
         // Создаем контейнеры
@@ -142,10 +141,11 @@ export class FS {
     create() {
         let game = model.el('game');
 
-        // Играем фоновую музыку
         soundController.music.stopMusic('startPerehod');
         soundController.music.stopMusic('fon');
         soundController.music.stopMusic('initFon');
+
+        // Играем фоновую музыку
         soundController.music.playMusic('fsFon');
 
         fsView.draw.mainBG({});
