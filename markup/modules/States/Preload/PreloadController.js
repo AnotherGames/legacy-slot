@@ -132,7 +132,6 @@ export class Preload {
         const game = model.el('game');
         view.hideCoin();
         view.hideBar();
-        view.lastDarkness();
         if (model.state('initScreen')) {
             game.state.start('Init');
         } else {

@@ -250,7 +250,7 @@ export class FS {
         }
 
         // Первая темнота
-        fsView.draw.darkness({});
+        game.camera.flash(0x000000, 500);
 
         // Запускаем Фри Спины
         game.time.events.add(1000, () => {
