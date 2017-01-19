@@ -1,11 +1,16 @@
 // Common styles of the project
 
 html, body {
-    // height: 100%;
+    height: 100%;
     background: black;
     & .ios {
         height: 2500px; // Hack for iOS
     }
+}
+
+body {
+    display: flex;
+    align-items: center;
 }
 
 ::-webkit-scrollbar {
@@ -14,6 +19,8 @@ html, body {
 
 #game {
     background: black;
+    width: 100%;
+    max-height: 100%;
     & canvas {
         width: 100%;
     }
