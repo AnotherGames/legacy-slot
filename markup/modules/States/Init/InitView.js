@@ -75,20 +75,6 @@ export let view = (() => {
         clearInterval(model.el('initPlayInterval'));
     }
 
-    function firstDarkness() {
-        const game = model.el('game');
-        let darkness = game.add.graphics(0, 0);
-            darkness.beginFill(0x000000, 1).drawRect(0, 0, game.world.width, game.world.height);
-        model.el('initDarkness', darkness);
-        return game.add.tween(darkness)
-            .to({alpha: 0}, 500, Phaser.Easing.In, true);
-    }
-
-    function lastDarkness() {
-        const game = model.el('game');
-        return game.add.tween(model.el('initDarkness'))
-            .to( { alpha: 1 }, 500, 'Linear', true);
-    }
 
     return {
         drawBG,
@@ -96,8 +82,6 @@ export let view = (() => {
         drawPlay,
         drawBaraban,
         playYoyoTween,
-        stopYoyoTween,
-        firstDarkness,
-        lastDarkness
+        stopYoyoTween
     }
 })();

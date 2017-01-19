@@ -43,7 +43,7 @@ export class Main {
 
     create() {
         let game = model.el('game');
-        game.camera.flash(0x000000, 777)
+        game.camera.flash(0x000000, 500)
 
         soundController.music.stopMusic('finishPerehod');
         soundController.music.stopMusic('fsFon');
@@ -105,10 +105,6 @@ export class Main {
         if (model.desktop) {
             keyboardController.initMainKeys();
         }
-
-        // Первая темнота
-        let darkness = mainView.draw.darkness({});
-            this.add.tween(darkness).to( { alpha: 0 }, 1500, 'Linear', true);
 
         // Проверяем сохранненые сессии
         this.checkForSavedFS();

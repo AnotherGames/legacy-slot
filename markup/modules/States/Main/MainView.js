@@ -255,7 +255,6 @@ export let view = (() => {
                 lineNumber.name = i;
                 lineNumber.anchor.set(0.5);
 
-                console.log(model.state('fs'));
                 if(model.state('fs')) {
                     lineNumbersArr.push(lineNumber);
                     continue;
@@ -344,15 +343,6 @@ export let view = (() => {
             let someGraphic = game.add.graphics(-elSize.width * 2.5, -elSize.height * 1.5, machineGroup);
                 someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5, elSize.height * 3);
             machineGroup.mask = someGraphic;
-        },
-
-        darkness: function ({
-            game = model.el('game')
-        }) {
-            let darkness = game.add.graphics();
-                darkness.beginFill(0x000000);
-                darkness.drawRect(0, 0, game.width, game.height);
-            return darkness;
         },
 
         showPopup: function ({
