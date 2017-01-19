@@ -2,7 +2,7 @@ import { model } from 'modules/Model/Model';
 import { noConnect } from 'modules/Util/NoConnect';
 
 export let request = (() => {
-    const serviceUrl = 'http://gameservice.bossgs.org/devslotv2/SlotService.svc';
+    const serviceUrl = 'http://88.198.144.143/devslotv2/SlotService.svc';
     let casinoID = 1;
     let userID = 1;
 

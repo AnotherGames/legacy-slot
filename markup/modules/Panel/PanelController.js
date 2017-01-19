@@ -11,7 +11,7 @@ export let controller = (() => {
     function drawButtons() {
         let game = model.el('game');
         view.draw.PanelBG({});
-        view.draw.LinesNumber({});
+        // view.draw.LinesNumber({});
         view.draw.AutoContainer({});
         view.draw.AutoPanel({}).forEach((panelButton) => {
             panelButton.inputEnabled = true;
@@ -53,7 +53,7 @@ export let controller = (() => {
             betLevelMinus.onInputDown.add(handle.betMinus);
             model.el('betLevelMinus', betLevelMinus);
 
-        let coinsLevelPlus = view.draw.PlusButton({x: 1107});
+        let coinsLevelPlus = view.draw.PlusButton({x: 1109});
             coinsLevelPlus.onInputDown.add(handle.coinsPlus);
             model.el('coinsLevelPlus', coinsLevelPlus);
 
@@ -71,7 +71,7 @@ export let controller = (() => {
             x: model.group('main').x,
             frameName: 'uiFS'
         });
-        view.draw.LinesNumber({x: 55, y: 115});
+        // view.draw.LinesNumber({x: 55, y: 115});
 
     }
 
@@ -113,11 +113,11 @@ export let controller = (() => {
 
             if (model.state('autoplay:panelClosed') && !model.data('remainAutoCount')) {
                 model.state('autoplay:panelClosed', false);
-                view.show.autoButton({});
+                // view.show.autoButton({});
                 view.show.autoPanel({});
             } else {
                 model.state('autoplay:panelClosed', true);
-                view.hide.autoButton({});
+                // view.hide.autoButton({});
                 view.hide.autoPanel({});
             }
         },
@@ -260,8 +260,8 @@ export let controller = (() => {
 
             let autoButtonDesk = model.el('autoButtonDesk');
             const amount = this.amount;
-            if (autoButtonDesk.x > 370) return;
-            view.hide.autoButton({});
+            // if (autoButtonDesk.x > 370) return;
+            // view.hide.autoButton({});
             view.hide.autoPanel({});
             autoplayController.start(amount);
         }

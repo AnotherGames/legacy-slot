@@ -17,6 +17,7 @@ export let view = (() => {
         }) {
             let elSize = config[model.res].elements;
             let upElements = [];
+            let delta = (model.desktop) ? 60 : 0;
             for (var i = 0; i < 5; i++) {
                 upElements.push([]);
                 for (var j = 0; j < 3; j++) {
@@ -24,7 +25,7 @@ export let view = (() => {
                         container,
                         position: {
                             x: elSize.width * (i + 0.5 - 2.5),
-                            y: elSize.height * (j + 0.5 - 1.5)
+                            y: elSize.height * (j + 0.5 - 1.5) + delta
                         }
                     });
                     el.hide(0);
@@ -41,10 +42,11 @@ export let view = (() => {
             style = {font: '60px Helvetice, Arial', fill: '#e8b075', align: 'center'}
         }) {
             if (winTotalData === 0) return;
-            let winTotal = game.add.sprite(0, 0, 'winTotal', null, container);
+            let winTotal = game.add.sprite(0, 20, 'winTotal', null, container);
                 winTotal.anchor.set(0.5);
+                winTotal.scale.set(1.4);
 
-            let winTotalText = game.add.text(0, 5, winTotalData, style, container);
+            let winTotalText = game.add.bitmapText(0, 0, 'numbersFont2', winTotalData, 100, container);
                 winTotalText.anchor.set(0.5);
         },
 
@@ -66,16 +68,16 @@ export let view = (() => {
             });
 
 
-            let rightArr = model.el('rightArr');
-            let winSplashRight = rightArr.filter((el) => {
-                return el.name === number;
-            })[0];
-
-            winSplashRight.animations.add('win', Phaser.Animation.generateFrameNames('line_splash-' + number + '_', 1, 8, '.png', 1), 15, false);
-            winSplashRight.animations.play('win');
-            winSplashRight.animations.getAnimation('win').onComplete.add(() => {
-                winSplashRight.frameName = 'line_splash-' + number + '_8.png';
-            });
+            // let rightArr = model.el('rightArr');
+            // let winSplashRight = rightArr.filter((el) => {
+            //     return el.name === number;
+            // })[0];
+            //
+            // winSplashRight.animations.add('win', Phaser.Animation.generateFrameNames('line_splash-' + number + '_', 1, 8, '.png', 1), 15, false);
+            // winSplashRight.animations.play('win');
+            // winSplashRight.animations.getAnimation('win').onComplete.add(() => {
+            //     winSplashRight.frameName = 'line_splash-' + number + '_8.png';
+            // });
 
         },
 
@@ -245,8 +247,8 @@ export let view = (() => {
                     x = 192 * (countValue - 0.5) + 105 - gameMachine.width / 2;
                     y = 180 * (currentLineY + 0.5) + 135 - gameMachine.height / 2 - 25;
                 } else {
-                    x = 256 * (countValue - 0.5) + 140 - gameMachine.width / 2;
-                    y = 240 * (currentLineY + 0.5) + 170 - gameMachine.height / 2 - 25;
+                    x = 256 * (countValue - 0.5) + 200 - gameMachine.width / 2;
+                    y = 240 * (currentLineY + 0.5) + 300 - gameMachine.height / 2 - 25;
                 }
             }
             // Рассчитываем если скаттер
@@ -270,13 +272,13 @@ export let view = (() => {
                     x = 192 * (lastWheel + 0.5) + 105 - gameMachine.width / 2;
                     y = 180 * (lastElement + 0.5) + 135 - gameMachine.height / 2 - 25;
                 } else {
-                    x = 256 * (lastWheel + 0.5) + 140 - gameMachine.width / 2;
-                    y = 240 * (lastElement + 0.5) + 170 - gameMachine.height / 2 - 25;
+                    x = 256 * (lastWheel + 0.5) + 200 - gameMachine.width / 2;
+                    y = 240 * (lastElement + 0.5) + 310 - gameMachine.height / 2 - 25;
                 }
             }
 
             // Рисуем саму табличку и текст в зависимости от количества символов
-            let winBG = game.add.sprite(x - 8, y + 5, 'winLine', null, container);
+            let winBG = game.add.sprite(x, y, 'winLine', null, container);
                 winBG.anchor.set(0.5);
             let font;
             if (winValue > 999) {
@@ -286,7 +288,7 @@ export let view = (() => {
             } else {
                 font = '25px Arial, Helvetica';
             }
-            let text = game.add.text(x - 5, y + 9, winValue, {font: font, fill: '#9be20a'}, container);
+            let text = game.add.text(x, y + 2, winValue, {font: font, fill: '#fff'}, container);
                 text.anchor.set(0.5);
 
         }
