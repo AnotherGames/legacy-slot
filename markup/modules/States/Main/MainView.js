@@ -366,13 +366,13 @@ export let view = (() => {
             popup.inputEnabled = true;
             popup.input.priorityID = 3;
             popup.events.onInputDown.add(() => {
-                (!balance) ? window.location.reload() : container.removeAll();
+                (balance) ? container.removeAll() : window.location.reload();
             });
 
             overlay.inputEnabled = true;
             overlay.input.priorityID = 2;
             overlay.events.onInputDown.add(() => {
-                (!balance) ? window.location.reload() : container.removeAll();
+                (balance) ? container.removeAll() : window.location.reload();
             });
         },
 
