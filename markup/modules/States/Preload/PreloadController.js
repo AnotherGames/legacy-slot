@@ -89,7 +89,6 @@ export class Preload {
 
     loadFSAssets() {
         const game = model.el('game');
-        game.load.image('fsBG', 'bg/fsBG.png');
         game.load.image('freeSpins', 'fs/freeSpins.png');
         game.load.image('multiplier', 'fs/multiplier.png');
         game.load.image('freeSpinsPanelFS', 'fs/freeSpinsPanelFS.png');

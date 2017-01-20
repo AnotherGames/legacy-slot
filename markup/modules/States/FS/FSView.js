@@ -39,7 +39,7 @@ export let view = (() => {
             container.add(animBG);
             model.el('animMainBG', animBG);
 
-            let mainBG = game.add.sprite(0, 0, 'fsBG', null, container);
+            let mainBG = game.add.sprite(0, 0, 'mainBG', null, container);
             model.el('mainBG', mainBG);
 
             if (model.state('isAnimBG')) {
