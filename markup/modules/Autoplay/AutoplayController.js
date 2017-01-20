@@ -1,4 +1,5 @@
 import { model } from 'modules/Model/Model';
+import { view as mainView } from 'modules/States/Main/MainView';
 
 import { controller as rollController } from 'modules/Roll/RollController';
 import { controller as panelController } from 'modules/Panel/PanelController';
@@ -27,7 +28,11 @@ export let controller = (() => {
     }
 
     function next() {
-
+        if (!model.checkBalance()) {
+            mainView.draw.showPopup({message: 'You have low balance on your account', balance : true});
+            stop();
+            return;
+        }
         // Проверка тонких настроек автоплея
         checkSettings();
 
