@@ -27,10 +27,12 @@ export let view = (() => {
             game = model.el('game')
         }) {
             let animBG = game.add.spine(
-                game.world.centerX - 3,
+                game.world.centerX,
                 game.world.centerY,
                 'animBG'
             );
+            //убирает пиксельные полосы по бокам
+            animBG.scale.set(1.01)
             animBG.setAnimationByName(0, '1', true);
             model.group('bg').add(animBG);
             model.el('animMainBG', animBG);

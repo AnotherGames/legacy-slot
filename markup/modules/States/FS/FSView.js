@@ -35,6 +35,8 @@ export let view = (() => {
                 game.world.centerY,
                 'animBG'
             );
+            //убирает пиксельные полосы по бокам
+            animBG.scale.set(1.01)
             animBG.setAnimationByName(0, '2', true);
             container.add(animBG);
             model.el('animMainBG', animBG);
