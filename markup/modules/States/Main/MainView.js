@@ -246,7 +246,7 @@ export let view = (() => {
             message = 'popup',
             font = 'normal 54px Arial',
             color = '#e8b075',
-            balance = false
+            balance = true
         }) {
             let overlay = game.add.graphics(0, 0, container)
                 .beginFill(0x000000, 0.8)
@@ -272,13 +272,13 @@ export let view = (() => {
             popup.inputEnabled = true;
             popup.input.priorityID = 3;
             popup.events.onInputDown.add(() => {
-                (!balance) ? window.location.reload() : container.removeAll();
+                (balance) ? container.removeAll() : window.location.reload();
             });
 
             overlay.inputEnabled = true;
             overlay.input.priorityID = 2;
             overlay.events.onInputDown.add(() => {
-                (!balance) ? window.location.reload() : container.removeAll();
+                (balance) ? container.removeAll() : window.location.reload();
             });
         }
     };
