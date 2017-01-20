@@ -10,7 +10,6 @@ export let controller = (() => {
 
     function drawButtons() {
         let game = model.el('game');
-        // game.input.onTap(() => {console.log('input');})
         view.draw.PanelBG({});
         view.draw.LinesNumber({});
         view.draw.AutoContainer({});
@@ -255,7 +254,7 @@ export let controller = (() => {
 
         panelButton: function() {
             if (!model.checkBalance()) {
-                mainView.draw.showPopup({message: 'You have low balance on your account'});
+                mainView.draw.showPopup({message: 'You have low balance on your account', balance: true});
                 return;
             }
             // Если у нас автоплей или идет крутка, то не должна работать

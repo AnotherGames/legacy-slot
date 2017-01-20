@@ -8,7 +8,11 @@ import { controller as buttonsController } from 'modules/Buttons/ButtonsControll
 export let controller = (() => {
 
     function start(count) {
-
+        if (!model.checkBalance()) {
+            mainView.draw.showPopup({message: 'You have low balance on your account', balance : true});
+            stop();
+            return;
+        }
         // Ищменяем состояния автоплея
         model.state('autoplay:start', true);
         model.state('autoplay:end', false);
