@@ -7,7 +7,7 @@ export class Boot {
     }
 
     init() {
-        model.state('isNoConnect', false);
+        model.state('isNoConnect', true);
 
         request.send('Initialise', 'normal')
             .then((initData) => {

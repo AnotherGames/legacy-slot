@@ -192,7 +192,7 @@ export let controller = (() => {
 
         panelButton: function() {
             if (!model.checkBalance()) {
-                mainView.draw.showPopup({message: 'You have low balance on your account'});
+                mainView.draw.showPopup({message: 'You have low balance on your account', balance: true});
                 return;
             }
             // Если у нас автоплей или идет крутка, то не должна работать
