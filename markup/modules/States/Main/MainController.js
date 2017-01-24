@@ -32,7 +32,7 @@ export class Main {
         game.spriteAnims = [];
 
         // Создаем контейнеры
-        mainView.create.groups({});
+        mainView.draw.groups({});
 
         // При выходе из вкладки анимации будут останавливаться
         game.stage.disableVisibilityChange = true;

@@ -6,7 +6,8 @@ import { motionPath } from 'modules/Util/Motion';
 
 export let view = (() => {
 
-    let create = {
+    let draw = {
+        
         groups: function ({
             game = model.el('game')
         }) {
@@ -22,10 +23,8 @@ export let view = (() => {
             model.group('logo', game.add.group());
             model.group('popup', game.add.group());
             model.group('transition', game.add.group());
-        }
-    };
+        },
 
-    let draw = {
         mainBG: function ({
             game = model.el('game')
         }) {
@@ -184,7 +183,7 @@ export let view = (() => {
             motionPath.motion.addPath({
                 name: 'deer',
                 randomY: true,
-                anim: deer,
+                animation: deer,
                 speed: 5,
                 randomSide: true,
                 rotation: true,
@@ -406,7 +405,6 @@ export let view = (() => {
     };
 
     return {
-        create,
         draw
     };
 })();
