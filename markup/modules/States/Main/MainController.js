@@ -54,14 +54,10 @@ export class Main {
 
         // Отрисовуем основной контейнер
         mainView.draw.mainBG({});
-        // mainView.draw.addPole({});
-        // mainView.draw.addSkull({});
         mainView.draw.mainContainer({});
         mainView.draw.machineContainer({});
         mainView.draw.lineNumbers({});
-        // mainView.draw.lineNumbers({side: 'right'})
-        // mainView.draw.lineNumbers({});
-        // mainView.draw.flyingSmoke({});
+
         winView.draw.UpWinContainer({});
 
         // Инициализируем крутки
@@ -85,8 +81,6 @@ export class Main {
             // Рисуем футер
             footerController.initDesktop();
 
-            // mainView.draw.addBird({});
-            // mainView.draw.addTable({});
             // Автоматически позиционируем основной контейнер
             this.positionMainContainer();
 
@@ -127,9 +121,9 @@ export class Main {
     positionMainContainer() {
         let game = model.el('game');
         if (model.mobile) {
-            let mainXLeft = model.data('buttonsDelta') * 2 + model.el('gameMachine').width / 2;
-            let mainXRight = game.width - model.el('gameMachine').width -
-            model.data('buttonsDelta') * 2 + model.el('gameMachine').width / 2;
+            let mainXLeft = model.data('buttonsDelta') * 2 + (model.el('gameMachine').width - 165) / 2;
+            let mainXRight = game.width - (model.el('gameMachine').width - 165) -
+            model.data('buttonsDelta') * 2 + (model.el('gameMachine').width - 165) / 2;
 
             model.data('mainXLeft', mainXLeft);
             model.data('mainXRight', mainXRight);

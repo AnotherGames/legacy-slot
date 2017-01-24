@@ -17,6 +17,7 @@ export let view = (() => {
         }) {
             let elSize = config[model.res].elements;
             let upElements = [];
+            let deltaY = (model.desktop) ? 0 : 50;
             for (var i = 0; i < 5; i++) {
                 upElements.push([]);
                 for (var j = 0; j < 3; j++) {
@@ -24,7 +25,7 @@ export let view = (() => {
                         container,
                         position: {
                             x: elSize.width * (i + 0.5 - 2.5),
-                            y: elSize.height * (j + 0.5 - 1.5)
+                            y: elSize.height * (j + 0.5 - 1.5) - deltaY
                         }
                     });
                     el.hide(0);
@@ -37,8 +38,7 @@ export let view = (() => {
         TotalWin: function ({
             winTotalData,
             game = model.el('game'),
-            container = model.group('winTop'),
-            style = {font: '60px Helvetice, Arial', fill: '#e8b075', align: 'center'}
+            container = model.group('winTop')
         }) {
             if (winTotalData === 0) return;
             let winTotal = game.add.sprite(0, 20, 'winTotal', null, container);
@@ -51,19 +51,19 @@ export let view = (() => {
 
         WinSplash: function ({
             number,
-            ind,
+            // ind,
             game = model.el('game'),
             container = model.group('winTop')
         }) {
-            let leftArr = model.el('leftArr');
-            let winSplash = leftArr.filter((el) => {
+            let lineNumbersArr = model.el('lineNumbersArr');
+            let winSplash = lineNumbersArr.filter((el) => {
                 return el.name === number;
             })[0];
 
-            winSplash.animations.add('win', Phaser.Animation.generateFrameNames('line_splash-' + number + '_', 1, 8, '.png', 1), 15, false);
+            winSplash.visible = true;
             winSplash.animations.play('win');
             winSplash.animations.getAnimation('win').onComplete.add(() => {
-                winSplash.frameName = 'line_splash-' + number + '_8.png';
+                winSplash.visible = false;
             });
 
 
@@ -92,7 +92,7 @@ export let view = (() => {
             number,
             amount,
             alpha = false,
-            finalScale = (model.desktop) ? 1.2 : 1.5,
+            finalScale = (model.desktop) ? 1.2 : 1.3,
             wheels = model.el('wheels'),
             upElements = model.el('upElements'),
             game = model.el('game')
@@ -162,22 +162,22 @@ export let view = (() => {
                             let bullet = upElements[wheelIndex][elementIndex];
                                 bullet.win();
                             // Записываем ее начальные координаты (нам нужно будет вернуть ее обратно)
-                            let bulletX = bullet.group.x;
-                            let bulletY = bullet.group.y;
-
-                            let x = (model.desktop) ? 0 : -550;
-                            let y = (model.desktop) ? 500 : -50;
-                            game.add.tween(bullet.group).to({x: x, y: y, alpha: 0.3}, 500, 'Linear', true);
-                            game.add.tween(bullet.group.scale).to({x: 0.2, y: 0.2}, 500, 'Linear', true)
-                                .onComplete.add(() => {
-                                    bullet.group.alpha = 0;
-                                    bullet.group.x = bulletX;
-                                    bullet.group.y = bulletY;
-                                    game.add.tween(bullet.group).to({alpha: 1}, 400, 'Linear', true);
-                                    game.add.tween(bullet.group.scale).to({x: 1, y: 1}, 400, 'Linear', true)
-                                    bullet.normal();
-                                    fsController.bullet(bullet.group);
-                                });
+                            // let bulletX = bullet.group.x;
+                            // let bulletY = bullet.group.y;
+                            //
+                            // let x = (model.desktop) ? 0 : -550;
+                            // let y = (model.desktop) ? 500 : -50;
+                            // game.add.tween(bullet.group).to({x: x, y: y, alpha: 0.3}, 500, 'Linear', true);
+                            // game.add.tween(bullet.group.scale).to({x: 0.2, y: 0.2}, 500, 'Linear', true)
+                            //     .onComplete.add(() => {
+                            //         bullet.group.alpha = 0;
+                            //         bullet.group.x = bulletX;
+                            //         bullet.group.y = bulletY;
+                            //         game.add.tween(bullet.group).to({alpha: 1}, 400, 'Linear', true);
+                            //         game.add.tween(bullet.group.scale).to({x: 1, y: 1}, 400, 'Linear', true)
+                            //         bullet.normal();
+                            //         fsController.bullet(bullet.group);
+                            //     });
                         }
                     });
                 });
@@ -243,11 +243,11 @@ export let view = (() => {
             if (!scatter) {
                 currentLineY = model.data('lines')[lineValue - 1][countValue - 1].Y;
                 if (model.mobile) {
-                    x = 192 * (countValue - 0.5) + 105 - gameMachine.width / 2;
-                    y = 180 * (currentLineY + 0.5) + 135 - gameMachine.height / 2 - 25;
+                    x = 192 * (countValue - 0.5) + 165 - gameMachine.width / 2;
+                    y = 180 * (currentLineY + 0.5) + 125 - gameMachine.height / 2 - 25;
                 } else {
                     x = 256 * (countValue - 0.5) + 200 - gameMachine.width / 2;
-                    y = 240 * (currentLineY + 0.5) + 300 - gameMachine.height / 2 - 25;
+                    y = 240 * (currentLineY + 0.5) + 310 - gameMachine.height / 2 - 25;
                 }
             }
             // Рассчитываем если скаттер
@@ -268,8 +268,8 @@ export let view = (() => {
                     });
                 });
                 if (model.mobile) {
-                    x = 192 * (lastWheel + 0.5) + 105 - gameMachine.width / 2;
-                    y = 180 * (lastElement + 0.5) + 135 - gameMachine.height / 2 - 25;
+                    x = 192 * (lastWheel + 0.5) + 165 - gameMachine.width / 2;
+                    y = 180 * (lastElement + 0.5) + 125 - gameMachine.height / 2 - 25;
                 } else {
                     x = 256 * (lastWheel + 0.5) + 200 - gameMachine.width / 2;
                     y = 240 * (lastElement + 0.5) + 310 - gameMachine.height / 2 - 25;

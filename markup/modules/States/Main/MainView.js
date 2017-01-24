@@ -38,7 +38,8 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('main')
         }) {
-            let gameMachineBG = game.add.sprite(0, 45, 'gameMachineBG', null, container);
+            let deltaY = (model.desktop) ? 45 : -25;
+            let gameMachineBG = game.add.sprite(0, deltaY, 'gameMachineBG', null, container);
                 gameMachineBG.anchor.set(0.5);
             model.el('gameMachineBG', gameMachineBG);
 
@@ -223,54 +224,56 @@ export let view = (() => {
         //     });
         // },
 
-        lineNumbers: function({
+        lineNumbers: function ({
             game = model.el('game'),
             container = model.group('numbers'),
             gameMachine = model.el('gameMachine'),
             side = 'left'
-        }){
+        }) {
             let lineNumbersArr = [];
 
-            for (let i = 1; i < 11; i++) {
+            for (let i = 1; i < 22; i++) {
                 side = config[model.res].win[i][0].side;
-                let x = (side == 'right') ? gameMachine.right - 105 : gameMachine.left + 107;
+                let x = (side == 'right') ? gameMachine.right - 105 : gameMachine.left + 109;
                 let lineNumber = game.add.sprite(x, config[model.res].win[i][0].y - gameMachine.height / 2,
-                    'lineNumbers',
-                    'line_splash-' + i +'_0.png',
+                    'winSplash',
+                    'skeleton-animation_1.png',
                     container);
-                lineNumber.normal = function() {lineNumber.frameName = 'line_splash-' + i + '_0.png'};
+                // lineNumber.normal = function() {lineNumber.frameName = 'line_splash-' + i + '_0.png'};
                 lineNumber.name = i;
                 lineNumber.anchor.set(0.5);
-                console.log(lineNumber.x, lineNumber.y);
+                lineNumber.visible = false;
 
-                // console.log(model.state('fs'));
-                if(model.state('fs')) {
+                lineNumber.animations.add('win', Phaser.Animation.generateFrameNames('skeleton-animation_', 1, 14, '.png', 1), 20, false);
+
+                if (model.state('fs')) {
                     lineNumbersArr.push(lineNumber);
                     continue;
                 }
 
                 lineNumber.inputEnabled = true;
                 lineNumber.input.priorityID = 2;
-                lineNumber.input.pixelPerfectOver = 1;
+                lineNumber.hitArea = new Phaser.Circle(0, 0, 50);
 
                 lineNumber.events.onInputOver.add(() => {
-                    if (lineNumber.lineShape) {
-                        lineNumber.lineShape.destroy();
-                    }
-
-                    lineNumber.lineShape = this.lineShape(lineNumber.name);
+                    // console.log('i am here', i);
+                    // if (lineNumber.lineShape) {
+                    //     lineNumber.lineShape.destroy();
+                    // }
+                    //
+                    // lineNumber.lineShape = this.lineShape(lineNumber.name);
                 });
 
                 lineNumber.events.onInputOut.add(() => {
-                    if (lineNumber.lineShape) {
-                        lineNumber.lineShape.destroy();
-                    }
+                    // if (lineNumber.lineShape) {
+                    //     lineNumber.lineShape.destroy();
+                    // }
                 });
 
                 lineNumbersArr.push(lineNumber);
             }
 
-            model.el(side + 'Arr', lineNumbersArr);
+            model.el('lineNumbersArr', lineNumbersArr);
         },
 
         lineShape: function(number) {
@@ -328,8 +331,8 @@ export let view = (() => {
             machineGroup = model.group('machine')
         }) {
             const elSize = config[model.res].elements;
-
-            let someGraphic = game.add.graphics(-elSize.width * 2.5, -elSize.height * 1.5 + 50, machineGroup);
+            let deltaY = (model.desktop) ? 50 : -25;
+            let someGraphic = game.add.graphics(-elSize.width * 2.5, -elSize.height * 1.5 + deltaY, machineGroup);
                 someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5, elSize.height * 3);
             machineGroup.mask = someGraphic;
         },

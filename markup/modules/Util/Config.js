@@ -43,11 +43,10 @@ export let config = {
             '17': [{side: 'right', y: 387}],
 
             '9': [{side: 'left', y: 495}],
-            '1': [{side: 'right', y: 500}],
-            '1': [{side: 'left', y: 540}],
-            '21': [{side: 'right', y: 550}],
+            '1': [{side: 'left', y: 545}],
+            '21': [{side: 'right', y: 590}],
             '20': [{side: 'left', y: 585}],
-            '8': [{side: 'right', y: 590}],
+            '8': [{side: 'right', y: 640}],
 
             '10': [{side: 'left', y: 735}],
             '16': [{side: 'right', y: 735}],
@@ -75,30 +74,29 @@ export let config = {
         },
 
         win: {
-            '4': [{side: 'left', y: 252}],
-            '13': [{side: 'right', y: 252}],
-            '6': [{side: 'left', y: 297}],
-            '15': [{side: 'right', y: 297}],
-            '18': [{side: 'left', y: 342}],
-            '2': [{side: 'right', y: 342}],
-            '11': [{side: 'left', y: 387}],
-            '17': [{side: 'right', y: 387}],
+            '4': [{side: 'left', y: 68}],
+            '13': [{side: 'right', y: 68}],
+            '6': [{side: 'left', y: 103}],
+            '15': [{side: 'right', y: 103}],
+            '18': [{side: 'left', y: 138}],
+            '2': [{side: 'right', y: 138}],
+            '11': [{side: 'left', y: 173}],
+            '17': [{side: 'right', y: 173}],
 
-            '9': [{side: 'left', y: 495}],
-            '1': [{side: 'right', y: 500}],
-            '1': [{side: 'left', y: 540}],
-            '21': [{side: 'right', y: 550}],
-            '20': [{side: 'left', y: 585}],
-            '8': [{side: 'right', y: 590}],
+            '9': [{side: 'left', y: 250}],
+            '1': [{side: 'right', y: 285}],
+            '21': [{side: 'right', y: 320}],
+            '20': [{side: 'left', y: 320}],
+            '8': [{side: 'right', y: 355}],
 
-            '10': [{side: 'left', y: 735}],
-            '16': [{side: 'right', y: 735}],
-            '19': [{side: 'left', y: 780}],
-            '3': [{side: 'right', y: 780}],
-            '7': [{side: 'left', y: 825}],
-            '14': [{side: 'right', y: 825}],
-            '5': [{side: 'left', y: 870}],
-            '12': [{side: 'right', y: 870}]
+            '10': [{side: 'left', y: 435}],
+            '16': [{side: 'right', y: 435}],
+            '19': [{side: 'left', y: 470}],
+            '3': [{side: 'right', y: 470}],
+            '7': [{side: 'left', y: 505}],
+            '14': [{side: 'right', y: 505}],
+            '5': [{side: 'left', y: 540}],
+            '12': [{side: 'right', y: 540}]
         }
     }
 };

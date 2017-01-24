@@ -13,9 +13,17 @@ export class Element {
 
         // Заполняем его спрайтами всех элементов (они будут расположенны друг на друге)
         this.sprites = [];
-        // this.bg = game.add.sprite(0, 0, 'plaha', null, this.group);
-        // this.bg.anchor.set(0.5);
-        // this.bg.visible = false;
+        this.blueBG = game.add.sprite(0, 0, 'elementBackground1', 'Back01-n-00.png', this.group);
+        this.blueBG.anchor.set(0.5);
+        this.blueBG.animations.add('winBG', Phaser.Animation.generateFrameNames('Back01-w-', 0, 29, '.png', 2), 30, false);
+
+        this.goldBG = game.add.sprite(0, 0, 'elementBackground2', 'Back02-n-00.png', this.group);
+        this.goldBG.anchor.set(0.5);
+        this.goldBG.animations.add('winBG', Phaser.Animation.generateFrameNames('Back02-w-', 0, 29, '.png', 2), 30, false);
+        this.goldBG.visible = false;
+
+        this.bg = this.blueBG;
+
         for (let i = 1; i <= config.symbolsCount; i++) {
 
             // Создаем по спрайту для каждого символа и делаем их не видимыми
@@ -35,7 +43,7 @@ export class Element {
         this.activeSprite.animations.play('1-n');
     }
 
-    play(animation, fps = 15, loop = false) {
+    play(animation, loop = true, fps = 20) {
         // Если спрайт уже проигрывает нужную нам анимацию, то мы ничего не будем делать чтобы анимация не прыгала
         if (this.activeSprite.animations.currentAnim.name === animation) return;
 
@@ -46,15 +54,35 @@ export class Element {
         this.active = parseInt(animation);
         this.activeSprite = this.sprites[this.active - 1];
         this.activeSprite.visible = true;
-        this.activeSprite.animations.play(animation, loop);
+        if (this.active == 9) {
+            this.bg = this.goldBG;
+            this.goldBG.visible = true;
+            this.blueBG.visible = false;
+        } else {
+            this.bg = this.blueBG;
+            this.goldBG.visible = false;
+            this.blueBG.visible = true;
+        }
+        this.activeSprite.animations.play(animation, fps, loop);
     }
 
-    win() {
+    win(loop = false) {
         // Проигрывам выигрышную анимацию
-        this.play(`${this.active}-w`);
+        this.play(`${this.active}-w`, loop, 30);
+        if (this.bg == this.blueBG) {
+            this.blueBG.play('winBG');
+        } else {
+            this.goldBG.play('winBG');
+        }
         this.activeSprite.animations.currentAnim.onComplete.add(() => {
             // После которой опять играем нормальную анимацию
             this.play(`${this.active}-n`);
+
+            if (this.bg == this.blueBG) {
+                this.blueBG.frameName = 'Back01-n-00.png';
+            } else {
+                this.goldBG.frameName = 'Back02-n-00.png';
+            }
         });
     }
 
@@ -70,12 +98,14 @@ export class Element {
 
     hide(alpha = 0.5) {
         // Делаем элемент полупрозрачным
-        this.activeSprite.alpha = alpha;
+        // this.bg.alpha = alpha;
+        this.group.alpha = alpha;
     }
 
     show() {
         // Возращаем нормальное состояние
-        this.activeSprite.alpha = 1;
+        // this.bg.alpha = 1;
+        this.group.alpha = 1;
     }
 
     // Вспомогательные методы для добавления анимаций для спрайтов
@@ -130,9 +160,9 @@ export class Element {
     }
 
     addDiverAnimation(sprite, options) {
-        sprite.animations.add(`${options.el}-n`, [`11`], 15, true);
-        sprite.animations.add(`${options.el}-b`, [`11`], 15, true);
-        sprite.animations.add(`${options.el}-w`, [`11`], 15, true);
+        sprite.animations.add(`${options.el}-n`, [`11`], 15);
+        sprite.animations.add(`${options.el}-b`, [`11`], 15);
+        sprite.animations.add(`${options.el}-w`, [`11`], 15);
     }
 
     addAnimation(sprite, options) {
@@ -147,15 +177,15 @@ export class Element {
             // Если параметр options.n == false - то у нас будет только один кадр, в другом случае это будет количество кадров в анимации
             options.n
             ? Phaser.Animation.generateFrameNames(`${prefix}${options.el}-n-`, 0, options.n, '.png', 2)
-            : [`${prefix}${options.el}-n-00.png`], 15, true);
+            : [`${prefix}${options.el}-n-00.png`], 15);
 
-        sprite.animations.add(`${options.el}-b`, [`${prefix}${options.el}-b-00.png`], 15, true);
+        sprite.animations.add(`${options.el}-b`, [`${prefix}${options.el}-b-00.png`], 15);
 
         sprite.animations.add(`${options.el}-w`,
             // Если параметр options.w == false - то у нас будет только один кадр, в другом случае это будет количество кадров в анимации
             options.w
             ? Phaser.Animation.generateFrameNames(`${prefix}${options.el}-w-`, 0, options.w, '.png', 2)
-            : [`${prefix}${options.el}-w-00.png`], 15, true);
+            : [`${prefix}${options.el}-w-00.png`], 15);
             // Phaser.Animation.generateFrameNames(`${options.el}-w-`, 1, options.w, '.png', 2), 15, false);
     }
 }

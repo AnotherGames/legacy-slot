@@ -8,7 +8,7 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('buttons'),
             x = 0,
-            y = model.el('game').world.centerY
+            y = model.el('game').world.centerY - 25
         }) {
             let spinButton = game.add.sprite(x, y, 'mobileButtons', 'spin.png', container);
                 spinButton.anchor.set(0.5);
