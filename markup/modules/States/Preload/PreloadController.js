@@ -61,7 +61,8 @@ export class Preload {
     loadMainAssets() {
         const game = model.el('game');
         game.load.image('mainBG', 'bg/mainBG.png');
-        game.load.image('transitionBG', 'bg/transitionBG1.png');
+        game.load.image('transitionBG1', 'bg/transitionBG1.png');
+        game.load.image('transitionBG2', 'bg/transitionBG2.jpg');
         game.load.image('bubble', 'bg/bubble.png');
         game.load.image('gameMachine', 'game/gameMachine.png');
         game.load.image('gameMachineBG', 'game/gameMachineBG.png');

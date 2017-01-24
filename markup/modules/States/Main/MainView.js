@@ -239,7 +239,7 @@ export let view = (() => {
                     'winSplash',
                     'skeleton-animation_1.png',
                     container);
-                // lineNumber.normal = function() {lineNumber.frameName = 'line_splash-' + i + '_0.png'};
+
                 lineNumber.name = i;
                 lineNumber.anchor.set(0.5);
                 lineNumber.visible = false;
