@@ -20,9 +20,6 @@ import { controller as fsController } from 'modules/States/FS/FSController';
 import { controller as keyboardController } from 'modules/Keyboard/KeyboardController'
 
 export class Main {
-    constructor(game) {
-
-    }
 
     init() {
         console.info('Main State!');
@@ -43,7 +40,7 @@ export class Main {
 
     create() {
         let game = model.el('game');
-        game.camera.flash(0x000000, 777)
+        game.camera.flash(0x000000, 777);
 
         soundController.music.stopMusic('finishPerehod');
         soundController.music.stopMusic('fsFon');
@@ -56,6 +53,7 @@ export class Main {
         mainView.draw.mainBG({});
         mainView.draw.mainContainer({});
         mainView.draw.machineContainer({});
+        mainView.draw.machineMask({});
         mainView.draw.lineNumbers({});
 
         winView.draw.UpWinContainer({});
@@ -90,13 +88,7 @@ export class Main {
             panelController.drawButtons();
             // Отрисовуем баланс
             balanceController.initDesktop();
-        }
-
-        // Добавляем маску
-        mainView.draw.machineMask({});
-
-        // Инициализируем управление клавиатурой
-        if (model.desktop) {
+            // Инициализируем управление клавиатурой
             keyboardController.initMainKeys();
         }
 
@@ -112,9 +104,8 @@ export class Main {
 
     update() {
       footerController.updateTime({});
-      const game = model.el('game');
-      game.frameAnims.forEach((anim) => {
-          anim();
+      model.el('game').frameAnims.forEach((animation) => {
+          animation();
       });
     }
 
