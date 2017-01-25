@@ -23,6 +23,7 @@ export let controller = (() => {
             nextMode = data.NextMode;
         // Если нет выигрыша - выходим
         if (winLines.length === 0) return;
+        view.draw.copyFinishScreenToUpWheels({});
 
         // Проверяем переход на Фри-Спины
         checkForFS();
@@ -31,19 +32,25 @@ export let controller = (() => {
         // Рисуем табличку
         view.draw.TotalWin({winTotalData});
         // Для каждой линии проигрываем символы, глисты и номерки
+        let winElements = { number: [], amount: [] };
         winLines.forEach((winLine) => {
             view.draw.WinNumber({number: winLine.Line});
-            view.draw.WinElements({number: winLine.Line, amount: winLine.Count});
             view.draw.WinGlista({number: winLine.Line});
+            winElements.number.push(winLine.Line);
+            winElements.amount.push(winLine.Count);
         });
-        // Запускаем таймер для показа линий одна за другой
-        game.time.events.add(1400, () => {
-            if(model.state('autoplay:end')
-            && model.state('fs:end')
-            && !model.state('roll:progress')) {
-                oneAfterAnother();
-            }
-        });
+        view.draw.WinElements({number: winElements.number, amount: winElements.amount});
+
+        let oneAfterAnotherTimer = game.time.events.add(1400, () => { 
+            if(model.state('autoplay:end') 
+            && model.state('fs:end') 
+            &&!model.state('bonus') 
+            &&!model.state('roll:progress')) { 
+                oneAfterAnother(); 
+            } 
+        }); 
+        model.data('oneAfterAnotherTimer', oneAfterAnotherTimer); 
+
     }
 
     function cleanWin(cleanAlpha = false, normalAnim = true) {
@@ -53,8 +60,8 @@ export let controller = (() => {
         model.data('glistaDoneCounter', 0);
 
         // Прячем верхний экран, показываем нижний
-        let upElements = model.el('upElements');
-        upElements.forEach((upWheel) => {
+        let upWheels = model.el('upWheels');
+        upWheels.forEach((upWheel) => {
             upWheel.forEach((upEl) => {
                 upEl.hide(0);
                 upEl.normal();
@@ -66,17 +73,6 @@ export let controller = (() => {
                 el.show();
             });
         });
-
-        // let leftArr = model.el('leftArr');
-        // let rightArr = model.el('rightArr');
-        //
-        // leftArr.forEach((el) => {
-        //     el.normal();
-        // });
-        //
-        // rightArr.forEach((el) => {
-        //     el.normal();
-        // })
 
         // Перевод в нормальную анимацию
         if (normalAnim) {
@@ -125,14 +121,16 @@ export let controller = (() => {
             // Если нормальная линия
             if (currentLine.Line > 0) {
                 model.state('axesPlaing', false);
-                view.draw.WinNumber({number: currentLine.Line});
-                view.draw.WinElements({number: currentLine.Line, amount: currentLine.Count});
+                // view.draw.WinNumber({number: currentLine.Line});
+                view.draw.WinElements({number: [currentLine.Line], amount: [currentLine.Count]});
                 view.draw.WinGlista({number: currentLine.Line});
                 view.draw.WinLineTable({line: currentLine});
+                view.draw.WinNumber({number: currentLine.Line});
             // Если скаттеры
             } else {
-                view.draw.WinElements({number: currentLine.Line, amount: currentLine.Count});
+                view.draw.WinElements({number: [currentLine.Line], amount: [currentLine.Count]});
                 view.draw.WinLineTable({line: currentLine, scatter: true});
+                view.draw.WinNumber({number: currentLine.Line});
             }
         } else {
             return;

@@ -16,10 +16,10 @@ export let view = (() => {
             container = model.group('winUp')
         }) {
             let elSize = config[model.res].elements;
-            let upElements = [];
+            let upWheels = [];
             let deltaY = (model.desktop) ? 0 : 50;
             for (var i = 0; i < 5; i++) {
-                upElements.push([]);
+                upWheels.push([]);
                 for (var j = 0; j < 3; j++) {
                     let el = new Element({
                         container,
@@ -29,10 +29,10 @@ export let view = (() => {
                         }
                     });
                     el.hide(0);
-                    upElements[i].push(el);
+                    upWheels[i].push(el);
                 }
             }
-            model.el('upElements', upElements);
+            model.el('upWheels', upWheels);
         },
 
         TotalWin: function ({
@@ -92,96 +92,76 @@ export let view = (() => {
             number,
             amount,
             alpha = false,
-            finalScale = (model.desktop) ? 1.2 : 1.3,
+            finalScale = (model.desktop) ? 1.3 : 1.5,
             wheels = model.el('wheels'),
-            upElements = model.el('upElements'),
+            upWheels = model.el('upWheels'),
             game = model.el('game')
         }) {
 
-            wheels.forEach((wheel, wheelIndex) => {
-                wheel.elements.forEach((element, elementIndex) => {
-                    element.hide(0);
-                    upElements[wheelIndex][elementIndex].show();
-                    upElements[wheelIndex][elementIndex].playIfNotWin(`${element.active}-n`);
+            // Если нам нужно зажечь несколько линий элементов одновременно
+            if(typeof number == 'object'
+            || typeof amount == 'object') {
+                let winElements = draw.findElements({
+                    number,
+                    amount
                 });
+                model.el('winElements', winElements);
+                winElements.elements.forEach((el) => {
+                    el.hide(0);
+                });
+                winElements.upElements.forEach((upEl) => {
+                    upEl.show();
+                    upEl.win();
+                    draw.scaleJumping({
+                        el: upEl,
+                        start: 0.3,
+                        finish: finalScale
+                    });
+                });
+                return;
+            }
+
+        },
+
+        findElements: function({
+            number,
+            amount,
+            game = model.el('game')
+        }) {
+            let lines = model.data('lines');
+            let upWheels = model.el('upWheels');
+            let wheels = model.el('wheels').map((wheel) => {
+                return wheel.elements;
             });
+            let result = { upElements: [], elements: [] };
 
-            // Затемняем элементы
-            if (alpha) {
-                wheels.forEach((wheel) => {
-                    wheel.elements.forEach((element) => {
-                        element.hide();
-                    });
-                });
-            }
-
-            // Если есть линии
-            if (number > 0) {
-                let line = model.data('lines')[number - 1];
-
-                for (let col = 0; col < amount; col++) {
-                    let upWheelElements = upElements[col];
-                    let coord = line[col].Y;
-                    let element = upWheelElements[coord];
-                        element.win();
-                        element.show();
-                        element.group.alpha = 1;
-                        element.group.scale.set(0.3);
-
-                    game.add.tween(element.group.scale).to({x: finalScale,  y: finalScale}, 700, Phaser.Easing.Bounce.Out, true)
-                        .onComplete.add(() => {
-                            game.add.tween(element.group.scale).to({x: 1.0,  y: 1.0}, 400, 'Linear', true)
-                        }, this);
+            number.forEach((number, indx) => {
+                if (number != -1) {
+                    let curLine = lines[number - 1];
+                    for (let i = 0; i < amount[indx]; i++) {
+                        let curElement = wheels[i][curLine[i].Y];
+                        let curUpElement = upWheels[i][curLine[i].Y];
+                        result.upElements.push(curUpElement);
+                        result.elements.push(curElement);
+                    }
+                } else {
+                    game.time.events.remove(model.data('oneAfterAnotherTimer'));
                 }
-            // Если есть скаттеры либо элемент фриспинов
-            } else {
-                wheels.forEach((wheelObj, wheelIndex) => {
-                    wheelObj.elements.forEach((wheelElement, elementIndex) => {
-                        let elementName = parseInt(wheelElement.sprites[wheelElement.active - 1].animations.currentAnim.name);
-                        // Показываем выигрышные скаттеры
-                        if (elementName == '10') {
-                            let element = upElements[wheelIndex][elementIndex];
-                                element.win();
-                                element.show();
-                                element.group.scale.set(0.3);
+            });
+            return result;
+        },
 
-                            game.add.tween(element.group.scale).to({x: finalScale,  y: finalScale}, 700, Phaser.Easing.Bounce.Out, true)
-                                .onComplete.add(() => {
-                                    game.add.tween(element.group.scale).to({x: 1.0,  y: 1.0}, 400, 'Linear', true)
-                                }, this);
-                            // Очищаем поле вручную так как нет глисты которая чистит автоматом
-                            game.time.events.add(1000, () => {
-                                winController.cleanWin();
-                            });
-
-                        }
-                        // Если выпали пули на фри-спинах
-                        if (elementName == '11') {
-
-                            // Берем пулю с верхнего экрана
-                            let bullet = upElements[wheelIndex][elementIndex];
-                                bullet.win();
-                            // Записываем ее начальные координаты (нам нужно будет вернуть ее обратно)
-                            // let bulletX = bullet.group.x;
-                            // let bulletY = bullet.group.y;
-                            //
-                            // let x = (model.desktop) ? 0 : -550;
-                            // let y = (model.desktop) ? 500 : -50;
-                            // game.add.tween(bullet.group).to({x: x, y: y, alpha: 0.3}, 500, 'Linear', true);
-                            // game.add.tween(bullet.group.scale).to({x: 0.2, y: 0.2}, 500, 'Linear', true)
-                            //     .onComplete.add(() => {
-                            //         bullet.group.alpha = 0;
-                            //         bullet.group.x = bulletX;
-                            //         bullet.group.y = bulletY;
-                            //         game.add.tween(bullet.group).to({alpha: 1}, 400, 'Linear', true);
-                            //         game.add.tween(bullet.group.scale).to({x: 1, y: 1}, 400, 'Linear', true)
-                            //         bullet.normal();
-                            //         fsController.bullet(bullet.group);
-                            //     });
-                        }
-                    });
-                });
-            }
+        scaleJumping: function({
+            game = model.el('game'),
+            el,
+            start,
+            finish
+        }) {
+            el.group.scale.set(start);
+            game.add.tween(el.group.scale).to({x: finish,  y: finish}, 700, Phaser.Easing.Bounce.Out, true)
+                .onComplete.add(() => {
+                    game.add.tween(el.group.scale).to({x: 1.0,  y: 1.0}, 400, 'Linear', true)
+                }, this);
         },
 
         WinGlista: function ({
@@ -290,6 +270,18 @@ export let view = (() => {
             let text = game.add.text(x, y + 2, winValue, {font: font, fill: '#fff'}, container);
                 text.anchor.set(0.5);
 
+        },
+
+        copyFinishScreenToUpWheels: function ({
+            finishScreen = model.data('finishScreen'),
+            upWheels = model.el('upWheels')
+        }) {
+            upWheels.forEach((wheel, wheelIndex) => {
+                wheel.forEach((el, elIndex) => {
+                    let curEl = finishScreen[wheelIndex][elIndex + 1];
+                    el.play(`${curEl}-n`);
+                });
+            });
         }
 
     };
