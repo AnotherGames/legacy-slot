@@ -90,6 +90,7 @@ export let controller = (() => {
                 // Расчитываем конечный экран
                 let wheels = model.el('wheels');
                 let finishScreen = _convertArray(data.Screen);
+                model.data('finishScreen', finishScreen);
 
                 // Крутим колеса
                 wheels.forEach((wheel, columnIndex) => {
