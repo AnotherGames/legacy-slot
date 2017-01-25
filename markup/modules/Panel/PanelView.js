@@ -23,7 +23,7 @@ export let view = (() => {
         AutoContainer: function({
             game = model.el('game'),
             x = model.el('gameMachine').width / 2,
-            y = -100
+            y = -185
         }) {
             let autoDesktopContainer = game.add.group();
                 autoDesktopContainer.x = x;
@@ -270,7 +270,7 @@ export let view = (() => {
             time = 350
         }) {
             let autoButtonDesk = model.el('autoButtonDesk');
-            return game.add.tween(autoButtonDesk).to( { x: finalX }, time, 'Linear', true)
+            return game.add.tween(autoButtonDesk).to( { x: finalX }, time, 'Linear', true);
         },
 
         autoPanel: function({
@@ -280,7 +280,7 @@ export let view = (() => {
             time = 350
         }) {
             let autoDesktopContainer = model.group('autoDesktop');
-            return game.add.tween(autoDesktopContainer).to( { y: finalY, alpha: 1 }, time, 'Linear', true)
+            return game.add.tween(autoDesktopContainer).to( { alpha: 1 }, time, 'Linear', true);
         },
 
         info: function({
@@ -332,7 +332,7 @@ export let view = (() => {
             time = 350
         }) {
             let autoDesktopContainer = model.group('autoDesktop');
-            return game.add.tween(autoDesktopContainer).to( { y: finalY, alpha: 0 }, time, 'Linear', true)
+            return game.add.tween(autoDesktopContainer).to( { alpha: 0 }, time, 'Linear', true)
         }
     }
 
