@@ -43,10 +43,10 @@ export let config = {
             '17': [{side: 'right', y: 387}],
 
             '9': [{side: 'left', y: 495}],
-            '1': [{side: 'left', y: 545}],
+            '1': [{side: 'left', y: 543}],
             '21': [{side: 'right', y: 590}],
             '20': [{side: 'left', y: 585}],
-            '8': [{side: 'right', y: 640}],
+            '8': [{side: 'right', y: 637}],
 
             '10': [{side: 'left', y: 735}],
             '16': [{side: 'right', y: 735}],
@@ -54,7 +54,7 @@ export let config = {
             '3': [{side: 'right', y: 780}],
             '7': [{side: 'left', y: 825}],
             '14': [{side: 'right', y: 825}],
-            '5': [{side: 'left', y: 870}],
+            '5': [{side: 'left', y: 871}],
             '12': [{side: 'right', y: 870}]
         }
     },
@@ -83,7 +83,7 @@ export let config = {
             '11': [{side: 'left', y: 173}],
             '17': [{side: 'right', y: 173}],
 
-            '9': [{side: 'left', y: 250}],
+            '9': [{side: 'left', y: 252}],
             '1': [{side: 'right', y: 285}],
             '21': [{side: 'right', y: 320}],
             '20': [{side: 'left', y: 320}],

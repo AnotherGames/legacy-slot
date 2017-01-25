@@ -60,10 +60,14 @@ export class Preload {
 
     loadMainAssets() {
         const game = model.el('game');
+        game.load.spritesheet('bigFish', 'bonus/bigFish.png', 226, 182, 12);
         game.load.image('mainBG', 'bg/mainBG.png');
         game.load.image('transitionBG1', 'bg/transitionBG1.png');
         game.load.image('transitionBG2', 'bg/transitionBG2.jpg');
         game.load.image('bubble', 'bg/bubble.png');
+        game.load.spritesheet('fish', 'bg/fish.png', 103, 33, 12);
+        game.load.spritesheet('shark', 'bg/shark.png', 493, 188, 12);
+        game.load.image('eyeLight', 'bg/eyeLight.png');
         game.load.image('gameMachine', 'game/gameMachine.png');
         game.load.image('gameMachineBG', 'game/gameMachineBG.png');
         game.load.image('popup', 'other/popup.png');
@@ -97,6 +101,9 @@ export class Preload {
     loadFSAssets() {
         const game = model.el('game');
         game.load.image('fsBG', 'bg/fsBG.png');
+        game.load.image('octopusChar', 'bg/octopus.png');
+        game.load.image('diverChar', 'bg/diver.png');
+
         game.load.image('x4', 'fs/x4.png');
         game.load.image('x6', 'fs/x6.png');
         game.load.image('x8', 'fs/x8.png');
@@ -117,8 +124,7 @@ export class Preload {
 
     loadSpineAssets() {
         const game = model.el('game');
-        game.load.spine('pole', 'spine/p-pole.json');
-
+        game.load.spine('diverBig', 'spine/Vodolaz.json');
 
     }
 

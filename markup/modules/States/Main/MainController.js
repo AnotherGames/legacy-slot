@@ -55,6 +55,8 @@ export class Main {
         mainView.draw.machineContainer({});
         mainView.draw.machineMask({});
         mainView.draw.lineNumbers({});
+        mainView.draw.addBubbles({});
+        mainView.draw.addShark({});
 
         winView.draw.UpWinContainer({});
 

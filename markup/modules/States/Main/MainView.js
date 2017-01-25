@@ -48,6 +48,58 @@ export let view = (() => {
             model.el('gameMachine', gameMachine);
         },
 
+        addBubbles: function ({
+            game = model.el('game'),
+            container = model.group('bg')
+        }) {
+            let emitter = game.add.emitter(game.world.centerX, game.height + 200, 400);
+            container.add(emitter);
+            emitter.makeParticles('bubble');
+            emitter.width = game.width;
+
+            emitter.setRotation(0, 0);
+            emitter.setAlpha(0.1, 1, 3000);
+            emitter.minParticleScale = 0.1;
+            emitter.maxParticleScale = 0.4;
+            emitter.setYSpeed(20, 80);
+            emitter.gravity = -200;
+
+            emitter.start(false, 7000, 150);
+        },
+
+        addShark: function ({
+            game = model.el('game'),
+            container = model.group('bg')
+        }) {
+            let y = game.rnd.integerInRange(200, 600);
+            let shark = game.add.sprite(-500, y, 'shark', null, container);
+            shark.anchor.set(0.5);
+            if (model.mobile) {
+                shark.scale.set(0.6);
+            }
+            shark.animations.add('move');
+            shark.animations.play('move', 20, true);
+            model.el('shark', shark);
+
+            let time = game.rnd.integerInRange(10, 14);
+            let side = (game.rnd.sign() < 0) ? 'left' : 'right';
+            console.log(side);
+
+            shark.x = (side === 'left') ? -shark.width : game.width + shark.width;
+            let delta = (side === 'left') ? game.width + shark.width : -shark.width;
+            if (side === 'right') {
+                shark.width = -shark.width;
+            }
+
+            game.add.tween(shark).to({x: delta}, time * 1000, 'Linear', true)
+                .onComplete.add(() => {
+                    shark.destroy();
+                    game.time.events.add(6000, () => {
+                        this.addShark({});
+                    });
+                }, this);
+        },
+
         // addPole: function ({
         //     game = model.el('game'),
         //     container = model.group('bg')
@@ -231,13 +283,15 @@ export let view = (() => {
             side = 'left'
         }) {
             let lineNumbersArr = [];
+            let deltaYright = (model.desktop) ? 105 : 81;
+            let deltaYleft = (model.desktop) ? 109 : 83;
 
             for (let i = 1; i < 22; i++) {
                 side = config[model.res].win[i][0].side;
-                let x = (side == 'right') ? gameMachine.right - 105 : gameMachine.left + 109;
+                let x = (side == 'right') ? gameMachine.right - deltaYright : gameMachine.left + deltaYleft;
                 let lineNumber = game.add.sprite(x, config[model.res].win[i][0].y - gameMachine.height / 2,
                     'winSplash',
-                    'skeleton-animation_1.png',
+                    'skeleton-animation_5.png',
                     container);
 
                 lineNumber.name = i;
