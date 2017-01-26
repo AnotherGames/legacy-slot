@@ -41,15 +41,15 @@ export let controller = (() => {
         });
         view.draw.WinElements({number: winElements.number, amount: winElements.amount});
 
-        let oneAfterAnotherTimer = game.time.events.add(1400, () => { 
-            if(model.state('autoplay:end') 
-            && model.state('fs:end') 
-            &&!model.state('bonus') 
-            &&!model.state('roll:progress')) { 
-                oneAfterAnother(); 
-            } 
-        }); 
-        model.data('oneAfterAnotherTimer', oneAfterAnotherTimer); 
+        let oneAfterAnotherTimer = game.time.events.add(1400, () => {
+            if(model.state('autoplay:end')
+            && model.state('fs:end')
+            &&!model.state('bonus')
+            &&!model.state('roll:progress')) {
+                oneAfterAnother();
+            }
+        });
+        model.data('oneAfterAnotherTimer', oneAfterAnotherTimer);
 
     }
 
@@ -172,6 +172,14 @@ export let controller = (() => {
             model.data('firstScreen', data.Screen);
             // Убираем управление с клавиатуры
             game.input.keyboard.enabled = false;
+
+            let middleEl = view.hide.CroppedDiver({});
+            view.draw.Diver({
+                el: middleEl
+            });
+
+            // model.state('fs:end', false);
+
             // Запускаем переходной экран
             game.time.events.add(1500, () => {
                 transitionView.fsStart();

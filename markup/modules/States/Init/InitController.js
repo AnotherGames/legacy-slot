@@ -72,7 +72,6 @@ export class Init {
         //     container: testGroup
         // });
         //
-        // model.el('testEl', testElement);
 
         game.camera.flash(0x000000, 500);
 

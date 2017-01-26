@@ -282,6 +282,22 @@ export let view = (() => {
                     el.play(`${curEl}-n`);
                 });
             });
+        },
+
+        Diver: function({
+            game = model.el('game'),
+            el
+        }) {
+            let container = el.group.parent;
+            let diver = game.add.spine(0, el.group.y, 'diverBig');
+            if (model.mobile) {
+                diver.scale.set(0.75);
+            }
+            diver.pivot.x = 10;
+            diver.pivot.y = -380;
+            container.add(diver);
+            diver.setAnimationByName(1, '1', true);
+            model.el('diver', diver);
         }
 
     };
@@ -309,6 +325,26 @@ export let view = (() => {
             container = model.group('winTop')
         }) {
             return game.add.tween(container).to( { alpha: 0 }, 300, 'Linear', true);
+        },
+
+        CroppedDiver: function({
+            game = model.el('game'),
+            wheels = model.el('wheels')
+        }) {
+            let middleEl;
+            wheels.forEach((wheel) => {
+                wheel.elements.forEach((el) => {
+                    if(el.active == 11
+                    || el.active == 12
+                    || el.active == 13) {
+                        el.hide(0);
+                        if (el.active == 12) {
+                            middleEl = el;
+                        }
+                    }
+                });
+            });
+            return middleEl;
         }
 
     };

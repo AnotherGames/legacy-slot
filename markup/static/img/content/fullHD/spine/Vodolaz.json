@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "bGs5FfrzGa1jhdCXRde73msgt8k", "spine": "3.5.46", "width": 283.54, "height": 716.4, "images": "" },
+"skeleton": { "hash": "t2UCKf0pSHg7fyGYqFe4Yufeu4g", "spine": "3.5.46", "width": 283.54, "height": 716.4, "images": "" },
 "bones": [
 	{ "name": "root" },
 	{ "name": "bone", "parent": "root", "x": -3.54, "y": 366.25 },
@@ -143,7 +143,7 @@
 			"img/V2_0018_Layer-22": { "x": 24.5, "y": 13.01, "rotation": 149.24, "width": 104, "height": 73 }
 		},
 		"img/V2_0019_Layer-12": {
-			"img/V2_0019_Layer-12": { "x": 44.45, "y": 76.94, "width": 193, "height": 183 }
+			"img/V2_0019_Layer-12": { "x": 22.83, "y": 78.66, "width": 193, "height": 183 }
 		},
 		"img/V2_0020_Layer-2": {
 			"img/V2_0020_Layer-2": { "x": 42.32, "y": 315.42, "width": 258, "height": 687 }
