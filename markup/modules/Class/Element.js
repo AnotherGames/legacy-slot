@@ -63,7 +63,7 @@ export class Element {
             this.bg = this.goldBG;
             this.goldBG.visible = true;
             this.blueBG.visible = false;
-        } else if (this.active == 11 || this.active == 12 || this.active == 13) {
+        } else if (this.active == 10 || this.active == 11 || this.active == 12 || this.active == 13) {
             this.bg.visible = false;
         } else {
             this.bg = this.blueBG;
