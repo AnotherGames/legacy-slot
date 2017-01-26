@@ -60,10 +60,10 @@ export let view = (() => {
                 return el.name === number;
             })[0];
 
-            winSplash.visible = true;
+            winSplash.alpha = 1;
             winSplash.animations.play('win');
             winSplash.animations.getAnimation('win').onComplete.add(() => {
-                winSplash.visible = false;
+                winSplash.alpha = 0.05;
             });
 
 

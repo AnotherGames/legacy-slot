@@ -83,7 +83,6 @@ export let view = (() => {
 
             let time = game.rnd.integerInRange(10, 14);
             let side = (game.rnd.sign() < 0) ? 'left' : 'right';
-            console.log(side);
 
             shark.x = (side === 'left') ? -shark.width : game.width + shark.width;
             let delta = (side === 'left') ? game.width + shark.width : -shark.width;
@@ -296,7 +295,7 @@ export let view = (() => {
 
                 lineNumber.name = i;
                 lineNumber.anchor.set(0.5);
-                lineNumber.visible = false;
+                lineNumber.alpha = 0.05;
 
                 lineNumber.animations.add('win', Phaser.Animation.generateFrameNames('skeleton-animation_', 1, 14, '.png', 1), 20, false);
 
@@ -309,20 +308,32 @@ export let view = (() => {
                 lineNumber.input.priorityID = 2;
                 lineNumber.hitArea = new Phaser.Circle(0, 0, 50);
 
-                lineNumber.events.onInputOver.add(() => {
-                    // console.log('i am here', i);
-                    // if (lineNumber.lineShape) {
-                    //     lineNumber.lineShape.destroy();
-                    // }
-                    //
-                    // lineNumber.lineShape = this.lineShape(lineNumber.name);
-                });
+                if (model.desktop) {
+                    lineNumber.events.onInputOver.add(() => {
+                        if (lineNumber.lineShape) {
+                            lineNumber.lineShape.destroy();
+                        }
+                        lineNumber.lineShape = this.lineShape(lineNumber.name);
+                    });
 
-                lineNumber.events.onInputOut.add(() => {
-                    // if (lineNumber.lineShape) {
-                    //     lineNumber.lineShape.destroy();
-                    // }
-                });
+                    lineNumber.events.onInputOut.add(() => {
+                        if (lineNumber.lineShape) {
+                            lineNumber.lineShape.destroy();
+                        }
+                    });
+                } else {
+                    lineNumber.events.onInputDown.add(() => {
+                        if (lineNumber.lineShape) {
+                            lineNumber.lineShape.destroy();
+                        }
+                        lineNumber.lineShape = this.lineShape(lineNumber.name);
+                        game.time.events.add(1000, () => {
+                            if (lineNumber.lineShape) {
+                                lineNumber.lineShape.destroy();
+                            }
+                        });
+                    });
+                }
 
                 lineNumbersArr.push(lineNumber);
             }
@@ -337,13 +348,15 @@ export let view = (() => {
            let elSize = config[model.res].elements;
            let lineShape = game.add.graphics(0, 0, container);
            let gameMachine = model.el('gameMachine');
+           let deltaX = 150;
+           let deltaY = (model.desktop) ? 200 : 40;
            lineShape
                .lineStyle(4, 0x188bb4, 0.8)
-               .moveTo((line[0].X + 0.5) * elSize.width - gameMachine.width / 2 + 50, (line[0].Y + 0.5) * elSize.height - gameMachine.height / 2 + 50)
-               .lineTo((line[1].X + 0.5) * elSize.width - gameMachine.width / 2 + 50, (line[1].Y + 0.5) * elSize.height - gameMachine.height / 2 + 50)
-               .lineTo((line[2].X + 0.5) * elSize.width - gameMachine.width / 2 + 50, (line[2].Y + 0.5) * elSize.height - gameMachine.height / 2 + 50)
-               .lineTo((line[3].X + 0.5) * elSize.width - gameMachine.width / 2 + 50, (line[3].Y + 0.5) * elSize.height - gameMachine.height / 2 + 50)
-               .lineTo((line[4].X + 0.5) * elSize.width - gameMachine.width / 2 + 50, (line[4].Y + 0.5) * elSize.height - gameMachine.height / 2 + 50)
+               .moveTo((line[0].X + 0.5) * elSize.width - gameMachine.width / 2 + deltaX, (line[0].Y + 0.5) * elSize.height - gameMachine.height / 2 + deltaY)
+               .lineTo((line[1].X + 0.5) * elSize.width - gameMachine.width / 2 + deltaX, (line[1].Y + 0.5) * elSize.height - gameMachine.height / 2 + deltaY)
+               .lineTo((line[2].X + 0.5) * elSize.width - gameMachine.width / 2 + deltaX, (line[2].Y + 0.5) * elSize.height - gameMachine.height / 2 + deltaY)
+               .lineTo((line[3].X + 0.5) * elSize.width - gameMachine.width / 2 + deltaX, (line[3].Y + 0.5) * elSize.height - gameMachine.height / 2 + deltaY)
+               .lineTo((line[4].X + 0.5) * elSize.width - gameMachine.width / 2 + deltaX, (line[4].Y + 0.5) * elSize.height - gameMachine.height / 2 + deltaY)
            return lineShape;
         },
 
