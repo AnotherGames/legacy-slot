@@ -58,6 +58,8 @@ export class Element {
             this.bg = this.goldBG;
             this.goldBG.visible = true;
             this.blueBG.visible = false;
+        } else if (this.active == 11 || this.active == 12 || this.active == 13) {
+            this.bg.visible = false;
         } else {
             this.bg = this.blueBG;
             this.goldBG.visible = false;
@@ -160,9 +162,9 @@ export class Element {
     }
 
     addDiverAnimation(sprite, options) {
-        sprite.animations.add(`${options.el}-n`, [`11`], 15);
-        sprite.animations.add(`${options.el}-b`, [`11`], 15);
-        sprite.animations.add(`${options.el}-w`, [`11`], 15);
+        sprite.animations.add(`${options.el}-n`, [`${options.el}-n-00.png`]);
+        sprite.animations.add(`${options.el}-b`, [`${options.el}-n-00.png`]);
+        sprite.animations.add(`${options.el}-w`, [`${options.el}-n-00.png`]);
     }
 
     addAnimation(sprite, options) {
