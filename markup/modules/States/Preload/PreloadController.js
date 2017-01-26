@@ -101,8 +101,8 @@ export class Preload {
     loadFSAssets() {
         const game = model.el('game');
         game.load.image('fsBG', 'bg/fsBG.png');
-        game.load.image('octopusChar', 'bg/octopus.png');
-        game.load.image('diverChar', 'bg/diver.png');
+        game.load.image('octopusChar', 'fs/octopus.png');
+        game.load.image('diverChar', 'fs/diver.png');
 
         game.load.image('x4', 'fs/x4.png');
         game.load.image('x6', 'fs/x6.png');
@@ -140,9 +140,9 @@ export class Preload {
         game.load.atlasJSONArray('8', 'elements/8.png', 'elements/8.json');
         game.load.atlasJSONArray('9', 'elements/9.png', 'elements/9.json');
         game.load.atlasJSONArray('10', 'elements/10.png', 'elements/10.json');
-        game.load.image('11', 'elements/11-n-00.png');
-        game.load.image('12', 'elements/12-n-00.png');
-        game.load.image('13', 'elements/13-n-00.png');
+        game.load.atlasJSONArray('11', 'elements/11.png', 'elements/11.json');
+        game.load.atlasJSONArray('12', 'elements/12.png', 'elements/12.json');
+        game.load.atlasJSONArray('13', 'elements/13.png', 'elements/13.json');
         game.load.atlasJSONArray('14', 'elements/14.png', 'elements/14.json');
         game.load.atlasJSONArray('elementBackground1', 'elements/elementBackground1.png', 'elements/elementBackground1.json');
         game.load.atlasJSONArray('elementBackground2', 'elements/elementBackground2.png', 'elements/elementBackground2.json');

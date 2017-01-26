@@ -68,7 +68,7 @@ export class Glista {
             let sprite = this.game.add.sprite( atlasInd * -80, 0, 'bubble', null, param.parent);
             sprite.anchor.set(0.5);
             sprite.visible = false;
-            sprite.myDeltaY = this.game.rnd.integerInRange(10, 70);
+            sprite.myDeltaY = this.game.rnd.integerInRange(-30, 30) + (model.desktop) ? 40 : -10;
             sprite.myScale = this.game.rnd.integerInRange(1, 5) / (atlasInd + 5);
             this.sprites.push(sprite);
 

@@ -3,6 +3,7 @@ import { config } from 'modules/Util/Config';
 
 import { view as mainView } from 'modules/States/Main/MainView';
 import { view as winView } from 'modules/Win/WinView';
+import { view as transitionView } from 'modules/Transition/TransitionView';
 
 import { controller as soundController } from 'modules/Sound/SoundController';
 import { controller as settingsController } from 'modules/Settings/DesktopSettingsController';
@@ -57,6 +58,11 @@ export class Main {
         mainView.draw.lineNumbers({});
         mainView.draw.addBubbles({});
         mainView.draw.addShark({});
+
+        // Test
+        // game.time.events.add(3000, () => {
+        //     transitionView.fsStart({});
+        // });
 
         winView.draw.UpWinContainer({});
 

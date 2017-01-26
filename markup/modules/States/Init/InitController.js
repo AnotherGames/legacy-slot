@@ -74,7 +74,7 @@ export class Init {
         //
         // model.el('testEl', testElement);
 
-        game.camera.flash(0x000000, 500)
+        game.camera.flash(0x000000, 500);
 
         if (!model.state('globalSound')) this.triggerSoundLeft();
     }
