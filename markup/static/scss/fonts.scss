@@ -16,3 +16,10 @@
 // Var for using custom font
 $CustomFont: 'CustomFont', Helvetica, Arial, sans-serif;
 */
+
+@font-face {
+    font-family: 'Titania';
+    src: url('../img/content/titania.regular.ttf');
+    font-weight: 400;       // For normal width. It could has another value
+    font-style: normal;     // Also could has another value
+    }

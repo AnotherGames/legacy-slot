@@ -6,7 +6,7 @@
 	</pages>
 	<chars count="14">
 		<char id="48" x="0" y="0" width="260" height="272" xoffset="0" yoffset="-123" xadvance="261" /><!-- 0 -->
-		<char id="49" x="744" y="0" width="143" height="263" xoffset="58" yoffset="-122" xadvance="144" /><!-- 1 -->
+		<char id="49" x="744" y="0" width="143" height="263" xoffset="25" yoffset="-122" xadvance="144" /><!-- 1 -->
 		<char id="50" x="510" y="0" width="232" height="272" xoffset="14" yoffset="-122" xadvance="233" /><!-- 2 -->
 		<char id="51" x="497" y="548" width="234" height="271" xoffset="13" yoffset="-121" xadvance="235" /><!-- 3 -->
 		<char id="52" x="0" y="274" width="256" height="262" xoffset="2" yoffset="-122" xadvance="257" /><!-- 4 -->
