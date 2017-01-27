@@ -86,22 +86,22 @@ export let controller = (() => {
         let currMulti = model.data('fsMulti');
 
         //Увеличиваем количество пуль в барабане
-        fsView.draw.drumSpin({number: bulletCounter});
-        el.visible = true;
+        // fsView.draw.drumSpin({number: bulletCounter});
+        // el.visible = true;
 
         // Увеличиваем мульти(разбивание бутылки)
         if (multiValue > currMulti) {
-            fsView.draw.ShowMulti({number: multiValue});
-            model.data('fsMulti', multiValue);
-            let timer = model.el('fsTimer');
-            game.time.events.remove(timer);
-
-            let fsTimer = game.time.events.add(3000, () => {
-                if (model.state('fs:end')) return;
-                controller.next();
-            });
-
-            model.el('fsTimer', fsTimer);
+            // fsView.draw.ShowMulti({number: multiValue});
+            // model.data('fsMulti', multiValue);
+            // let timer = model.el('fsTimer');
+            // game.time.events.remove(timer);
+            //
+            // let fsTimer = game.time.events.add(3000, () => {
+            //     if (model.state('fs:end')) return;
+            //     controller.next();
+            // });
+            //
+            // model.el('fsTimer', fsTimer);
         }
 
     }
@@ -156,15 +156,20 @@ export class FS {
         // Отрисовуем основной контейнер
         fsView.draw.mainContainer({});
         fsView.draw.machineContainer({});
-        mainView.draw.lineNumbers({side: 'left'})
-        mainView.draw.lineNumbers({side: 'right'})
+        mainView.draw.lineNumbers({});
         winView.draw.UpWinContainer({});
+
+        // BG anim
+        mainView.draw.addBubbles({});
+        mainView.draw.addShark({});
+        game.time.events.add(6000, () => {
+            mainView.draw.addFishes({});
+        });
 
         // Инициализируем крутки
         rollController.init();
 
         if (model.mobile) {
-            // fsView.draw.addPole({});
             // Рисуем футер
             footerController.initMobile();
             // Отрисовуем баланс
@@ -173,7 +178,6 @@ export class FS {
             // Автоматически позиционируем основной контейнер
             this.positionMainContainer();
         } else {    // Desktop
-            // fsView.draw.addCows({});
 
             footerController.initDesktop();
 
@@ -190,7 +194,7 @@ export class FS {
         fsView.draw.machineMask({});
 
         // Рисуем барабан
-        fsView.draw.drum({});
+        // fsView.draw.drum({});
         // Рисуем множитель
         fsView.draw.Multi({
             start: this.fsMulti
@@ -201,11 +205,11 @@ export class FS {
         });
 
         // Если сохранненая сессия, то переключаем счетчик мозгов
-        if (this.fsLevel > 0) {
-            controller.searchBrains({
-                startLevel: this.fsLevel
-            })
-        }
+        // if (this.fsLevel > 0) {
+        //     controller.searchBrains({
+        //         startLevel: this.fsLevel
+        //     })
+        // }
 
         // Первая темнота
         game.camera.flash(0x000000, 500);

@@ -56,6 +56,9 @@ export class Main {
         mainView.draw.machineContainer({});
         mainView.draw.machineMask({});
         mainView.draw.lineNumbers({});
+        winView.draw.UpWinContainer({});
+
+        // BG anim
         mainView.draw.addBubbles({});
         mainView.draw.addShark({});
         game.time.events.add(6000, () => {
@@ -66,8 +69,6 @@ export class Main {
         // game.time.events.add(3000, () => {
         //     transitionView.fsStart({});
         // });
-
-        winView.draw.UpWinContainer({});
 
         // Инициализируем крутки
         rollController.init();
