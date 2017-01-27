@@ -58,6 +58,9 @@ export class Main {
         mainView.draw.lineNumbers({});
         mainView.draw.addBubbles({});
         mainView.draw.addShark({});
+        game.time.events.add(6000, () => {
+            mainView.draw.addFishes({});
+        });
 
         // Test
         // game.time.events.add(3000, () => {
