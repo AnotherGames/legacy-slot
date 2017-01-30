@@ -13,7 +13,8 @@
     "globals": {
         "tars": true,
         "Linear": true,
-        "Phaser": true
+        "Phaser": true,
+        "Fabrique": true
     },
 
     "extends": "eslint:recommended",
@@ -81,7 +82,7 @@
         "no-undefined": 2,
         "no-unused-expressions": 2,
         "no-unused-vars": [1, {"vars": "all", "args": "after-used"}],
-        "no-use-before-define": 2,
+        "no-use-before-define": 0,
         "no-with": 2,
         "quotes": [2, "single"],
         "radix": 2,
