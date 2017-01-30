@@ -138,7 +138,7 @@ export let view = (() => {
                         if (lineNumber.lineShape) {
                             lineNumber.lineShape.destroy();
                         }
-                    }, 10000);
+                    }, 4000);
                 });
 
                 lineNumber.events.onInputOut.add(() => {
@@ -173,7 +173,7 @@ export let view = (() => {
                         if (lineNumber.lineShape) {
                             lineNumber.lineShape.destroy();
                         }
-                    }, 10000);
+                    }, 4000);
                 });
 
                 lineNumber.events.onInputOut.add(() => {
