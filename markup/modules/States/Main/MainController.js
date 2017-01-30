@@ -12,13 +12,11 @@ import { controller as footerController } from 'modules/Footer/FooterController'
 import { controller as panelController } from 'modules/Panel/PanelController';
 import { controller as buttonsController } from 'modules/Buttons/ButtonsController';
 import { controller as rollController } from 'modules/Roll/RollController';
-import { controller as winController } from 'modules/Win/WinController';
 import { controller as autoplayController } from 'modules/Autoplay/AutoplayController';
 import { controller as mobileSettingsController } from 'modules/Menu/Settings/MenuSettingsController';
 import { controller as mobileAutoplayController } from 'modules/Menu/Autoplay/MenuAutoplayController';
 import { controller as mobileSetBetController } from 'modules/Menu/SetBet/MenuSetBetController';
-import { controller as fsController } from 'modules/States/FS/FSController';
-import { controller as keyboardController } from 'modules/Keyboard/KeyboardController'
+import { controller as keyboardController } from 'modules/Keyboard/KeyboardController';
 
 export class Main {
 
@@ -105,7 +103,7 @@ export class Main {
         }
 
         // Первая темнота
-        game.camera.flash(0x000000, 500)
+        game.camera.flash(0x000000, 500);
 
         // Проверяем сохранненые сессии
         this.checkForSavedFS();
@@ -115,10 +113,10 @@ export class Main {
     }
 
     update() {
-      footerController.updateTime({});
-      model.el('game').frameAnims.forEach((animation) => {
-          animation();
-      });
+        footerController.updateTime({});
+        model.el('game').frameAnims.forEach((animation) => {
+            animation();
+        });
     }
 
     positionMainContainer() {
@@ -145,6 +143,7 @@ export class Main {
     }
 
     checkForSavedFS() {
+        let game = model.el('game');
         if (model.data('savedFS')) {
             game.state.start('FS');
         }

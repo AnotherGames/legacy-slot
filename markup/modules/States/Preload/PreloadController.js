@@ -2,10 +2,6 @@ import { model } from 'modules/Model/Model';
 import { view } from 'modules/States/Preload/PreloadView';
 
 export class Preload {
-    constructor(game) {
-
-    }
-
     init() {
         const game = model.el('game');
         game.add.plugin(Fabrique.Plugins.Spine);

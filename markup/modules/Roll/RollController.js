@@ -4,11 +4,10 @@ import { request } from 'modules/Util/Request';
 import { Wheel } from 'modules/Class/Wheel';
 
 import { view as mainView } from 'modules/States/Main/MainView';
+import { view as panelView } from 'modules/Panel/PanelView';
 
 import { controller as soundController } from 'modules/Sound/SoundController';
 import { controller as autoplayController } from 'modules/Autoplay/AutoplayController';
-import { controller as panelController } from 'modules/Panel/PanelController';
-import { view as panelView } from 'modules/Panel/PanelView';
 import { controller as buttonsController } from 'modules/Buttons/ButtonsController';
 import { controller as winController } from 'modules/Win/WinController';
 import { controller as fsController } from 'modules/States/FS/FSController';
@@ -43,9 +42,11 @@ export let controller = (() => {
         model.el('wheels', wheels);
     }
 
-    function startRoll(options) {
+    function startRoll() {
         // Если не было Ready - не крутим
-        if (!model.state('ready')) return;
+        if (!model.state('ready')) {
+            return false;
+        }
 
         // Если долго идет запрос (больше 4 сек) - выкидываем попап
         let game = model.el('game');
@@ -122,17 +123,18 @@ export let controller = (() => {
             })
             .catch((err) => {
                 mainView.draw.showPopup({message: 'You have weak Internet connection. Click to restart.'});
-                console.error(err)
+                console.error(err);
             });
     }
 
     function checkFirstScreen() {
         let firstScreen;
-        if (model.data('startFSScreen') !== undefined
+        if (model.data('startFSScreen')
         && !model.state('fs') ) {
             firstScreen = model.data('startFSScreen');
-            model.data('startFSScreen', undefined);
+            model.data('startFSScreen', null);
         } else {
+            model.log();
             firstScreen = model.data('firstScreen');
         }
         return _convertArray(firstScreen);
@@ -148,11 +150,13 @@ export let controller = (() => {
     }
 
     function endRoll() {
-        if (model.state('ready')) return;
+        if (model.state('ready')) {
+            return false;
+        }
         soundController.sound.stopSound('baraban');
 
         // Отправляем запрос Ready
-        request.send('Ready').then((data) => {
+        request.send('Ready').then(() => {
             winController.showWin();
             // Обновляем баланс в конце крутки
             if (model.state('fs')) {
@@ -174,9 +178,9 @@ export let controller = (() => {
             }
 
             // Убираем лок кнопок
-            if(!model.state('fs') && model.state('autoplay:end') && !model.state('buttons:locked')){
+            if (!model.state('fs') && model.state('autoplay:end') && !model.state('buttons:locked')) {
                 let game = model.el('game');
-                if(model.mobile) {
+                if (model.mobile) {
                     buttonsController.unlockButtons();
                 } else {
                     game.input.keyboard.enabled = true;
@@ -187,14 +191,14 @@ export let controller = (() => {
         })
         .catch((err) => {
             mainView.draw.showPopup({message: 'You have weak Internet connection. Click to restart.'});
-            console.error(err)
+            console.error(err);
         });
 
     }
 
     function _convertArray(arr) {
         let result = Array(5);
-        arr.forEach((row, rowIndex) => {
+        arr.forEach((row) => {
             row.forEach((el, colIndex) => {
                 result[colIndex] = result[colIndex] || [];
                 result[colIndex].push(el);
@@ -210,8 +214,10 @@ export let controller = (() => {
         let time = (rollResponse.Balance.TotalWinCoins) ? 1000 : 0;
 
         game.time.events.add(time, () => {
-            if (model.state('autoplay:end')) return;
-            autoplayController.next()
+            if (model.state('autoplay:end')) {
+                return false;
+            }
+            autoplayController.next();
         });
     }
 
@@ -222,7 +228,9 @@ export let controller = (() => {
         let time = (rollResponse.WinLines.length) ? 1000 : 0;
 
         let fsTimer = game.time.events.add(time, () => {
-            if (model.state('fs:end')) return;
+            if (model.state('fs:end')) {
+                return false;
+            }
             fsController.next();
         });
 

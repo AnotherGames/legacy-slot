@@ -1,50 +1,37 @@
 import { model } from 'modules/Model/Model';
 import { view } from 'modules/States/Init/InitView';
-import { Element } from 'modules/Class/Element';
 import { controller as soundController} from 'modules/Sound/SoundController';
-import { view as transitionView} from 'modules/Transition/TransitionView';
 
 export class Init {
-    constructor(game) {
-
-    }
     init() {
         let game = model.el('game');
-            game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
-            game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-            soundController.music.playMusic('initFon');
+        game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+        game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        soundController.music.playMusic('initFon');
 
-            // При выходе из вкладки анимации будут останавливаться
-            game.stage.disableVisibilityChange = true;
-            // Ставим игру на паузу при не активном окне браузера
-        let hidden, state, visibilityChange;
-        if (typeof document.hidden !== "undefined") {
-          hidden = "hidden";
-          visibilityChange = "visibilitychange";
-          state = "visibilityState";
-        } else if (typeof document.mozHidden !== "undefined") {
-          hidden = "mozHidden";
-          visibilityChange = "mozvisibilitychange";
-          state = "mozVisibilityState";
-        } else if (typeof document.msHidden !== "undefined") {
-          hidden = "msHidden";
-          visibilityChange = "msvisibilitychange";
-          state = "msVisibilityState";
-        } else if (typeof document.webkitHidden !== "undefined") {
-          hidden = "webkitHidden";
-          visibilityChange = "webkitvisibilitychange";
-          state = "webkitVisibilityState";
+        // При выходе из вкладки анимации будут останавливаться
+        game.stage.disableVisibilityChange = true;
+        // Ставим игру на паузу при не активном окне браузера
+        let visibilityChange;
+        if (typeof document.hidden !== 'undefined') {
+            visibilityChange = 'visibilitychange';
+        } else if (typeof document.mozHidden !== 'undefined') {
+            visibilityChange = 'mozvisibilitychange';
+        } else if (typeof document.msHidden !== 'undefined') {
+            visibilityChange = 'msvisibilitychange';
+        } else if (typeof document.webkitHidden !== 'undefined') {
+            visibilityChange = 'webkitvisibilitychange';
         }
         document.addEventListener(
             visibilityChange,
-            ()=>{ game.paused = (game.paused) ? false : true }
+            () => game.paused
         );
     }
 
     create() {
         let game = model.el('game');
 
-        game.camera.flash(0x000000, 500)
+        game.camera.flash(0x000000, 500);
 
         this.checkSettingsWidth();
 
@@ -52,8 +39,8 @@ export class Init {
         // view.drawLogo();
 
         let initPlay = view.drawPlay();
-            initPlay.inputEnabled = true;
-            initPlay.events.onInputDown.add(this.handlePlay, this);
+        initPlay.inputEnabled = true;
+        initPlay.events.onInputDown.add(this.handlePlay, this);
 
         model.el('initPlayTween')
             .onComplete.add(() => {
@@ -62,26 +49,21 @@ export class Init {
 
         this.drawSoundTrigger();
 
-        // let testGroup = game.add.group();
-        //
-        // let testElement = new Element({
-        //     position: {
-        //         x: 100,
-        //         y: 200
-        //     },
-        //     container: testGroup
-        // });
-        //
-
         game.camera.flash(0x000000, 500);
 
-        if (!model.state('globalSound')) this.triggerSoundLeft();
+        if (!model.state('globalSound')) {
+            this.triggerSoundLeft();
+        }
     }
 
     switchSound() {
         soundController.volume.switchVolume();
 
-        (model.state('globalSound')) ? this.triggerSoundRight() : this.triggerSoundLeft();
+        if (model.state('globalSound')) {
+            this.triggerSoundRight();
+        } else {
+            this.triggerSoundLeft();
+        }
     }
 
     handlePlay() {
@@ -95,10 +77,10 @@ export class Init {
 
         view.stopYoyoTween();
 
-        game.camera.onFadeComplete.add(()=>{
+        game.camera.onFadeComplete.add(() => {
             game.state.start('Main');
-        })
-        game.camera.fade(0x000000, 500)
+        });
+        game.camera.fade(0x000000, 500);
     }
 
     checkSettingsWidth() {
@@ -128,13 +110,13 @@ export class Init {
         background.beginFill(0xffffff, 0.2);
         background.drawRoundedRect(soundContainer.x - 30, soundContainer.y - 15, 470, 80, 40);
 
-        let style = { font: "bold 42px Arial", fill: "#f3eba0"};
-        let textSound = game.add.text(0, 0, "Sound:", style, soundContainer);
-        this.styleOff = { font: "bold 42px Arial", fill: "#474747"};
-        this.textOff = game.add.text(170, 0, "Off", style, soundContainer);
+        let style = { font: 'bold 42px Arial', fill: '#f3eba0'};
+        game.add.text(0, 0, 'Sound:', style, soundContainer);
+        this.styleOff = { font: 'bold 42px Arial', fill: '#474747'};
+        this.textOff = game.add.text(170, 0, 'Off', style, soundContainer);
         this.textOff.setStyle(this.styleOff);
-        this.styleOn = { font: "bold 42px Arial", fill: "#b8ff31"};
-        this.textOn = game.add.text(350, 0, "On", style, soundContainer);
+        this.styleOn = { font: 'bold 42px Arial', fill: '#b8ff31'};
+        this.textOn = game.add.text(350, 0, 'On', style, soundContainer);
         this.textOn.setStyle(this.styleOn);
 
         let graphics = game.add.graphics(0, 0);
