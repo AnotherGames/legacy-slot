@@ -1,0 +1,167 @@
+
+sunken.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+button
+  rotate: false
+  xy: 283, 160
+  size: 37, 36
+  orig: 37, 36
+  offset: 0, 0
+  index: -1
+fon
+  rotate: false
+  xy: 283, 198
+  size: 139, 790
+  orig: 139, 790
+  offset: 0, 0
+  index: -1
+num/Untitled-1_0000_-15
+  rotate: false
+  xy: 72, 80
+  size: 70, 52
+  orig: 70, 52
+  offset: 0, 0
+  index: -1
+num/Untitled-1_0001_-14
+  rotate: false
+  xy: 709, 882
+  size: 70, 52
+  orig: 70, 52
+  offset: 0, 0
+  index: -1
+num/Untitled-1_0002_-13
+  rotate: false
+  xy: 781, 936
+  size: 70, 52
+  orig: 70, 52
+  offset: 0, 0
+  index: -1
+num/Untitled-1_0003_-12
+  rotate: false
+  xy: 72, 26
+  size: 70, 52
+  orig: 70, 52
+  offset: 0, 0
+  index: -1
+num/Untitled-1_0004_-11
+  rotate: false
+  xy: 709, 828
+  size: 70, 52
+  orig: 70, 52
+  offset: 0, 0
+  index: -1
+num/Untitled-1_0005_-10
+  rotate: false
+  xy: 781, 882
+  size: 70, 52
+  orig: 70, 52
+  offset: 0, 0
+  index: -1
+num/Untitled-1_0006_-9
+  rotate: false
+  xy: 853, 936
+  size: 70, 52
+  orig: 70, 52
+  offset: 0, 0
+  index: -1
+num/Untitled-1_0007_-8
+  rotate: false
+  xy: 709, 774
+  size: 70, 52
+  orig: 70, 52
+  offset: 0, 0
+  index: -1
+num/Untitled-1_0008_-7
+  rotate: false
+  xy: 781, 828
+  size: 70, 52
+  orig: 70, 52
+  offset: 0, 0
+  index: -1
+num/Untitled-1_0009_-6
+  rotate: false
+  xy: 853, 882
+  size: 70, 52
+  orig: 70, 52
+  offset: 0, 0
+  index: -1
+num/Untitled-1_0010_-5
+  rotate: false
+  xy: 925, 936
+  size: 70, 52
+  orig: 70, 52
+  offset: 0, 0
+  index: -1
+num/Untitled-1_0011_-4
+  rotate: false
+  xy: 709, 720
+  size: 70, 52
+  orig: 70, 52
+  offset: 0, 0
+  index: -1
+num/Untitled-1_0012_-3
+  rotate: false
+  xy: 781, 774
+  size: 70, 52
+  orig: 70, 52
+  offset: 0, 0
+  index: -1
+num/Untitled-1_0013_-2
+  rotate: false
+  xy: 853, 828
+  size: 70, 52
+  orig: 70, 52
+  offset: 0, 0
+  index: -1
+num/Untitled-1_0014_-1
+  rotate: false
+  xy: 709, 936
+  size: 70, 52
+  orig: 70, 52
+  offset: 0, 0
+  index: -1
+numbers
+  rotate: false
+  xy: 670, 264
+  size: 37, 724
+  orig: 37, 724
+  offset: 0, 0
+  index: -1
+ramka
+  rotate: false
+  xy: 2, 134
+  size: 184, 854
+  orig: 184, 854
+  offset: 0, 0
+  index: -1
+temnota
+  rotate: false
+  xy: 424, 215
+  size: 121, 773
+  orig: 121, 773
+  offset: 0, 0
+  index: -1
+temnota2
+  rotate: false
+  xy: 547, 215
+  size: 121, 773
+  orig: 121, 773
+  offset: 0, 0
+  index: -1
+verevka
+  rotate: false
+  xy: 188, 145
+  size: 93, 843
+  orig: 93, 843
+  offset: 0, 0
+  index: -1
+vodolaz
+  rotate: false
+  xy: 2, 2
+  size: 68, 130
+  orig: 68, 130
+  offset: 0, 0
+  index: -1

@@ -72,7 +72,7 @@ export let controller = (() => {
         // bulletCounter = 0;
     }
 
-    function bullet(el) {
+    function chestActions() {
         let game = model.el('game');
         // Проигрываем анимации барабана и +3
         fsView.draw.CountPlus3({});
@@ -81,27 +81,20 @@ export let controller = (() => {
         if(model.state('maxFsMultiplier')) return;
 
         let rollData = model.data('rollResponse');
+        let levelValue = rollData.FsBonus.Level;
+        let currLevel = model.data('fsLevel');
         let multiValue = rollData.FsBonus.Multi;
-        let bulletCounter = rollData.FsBonus.Level % 6;
         let currMulti = model.data('fsMulti');
-
-        //Увеличиваем количество пуль в барабане
-        // fsView.draw.drumSpin({number: bulletCounter});
-        // el.visible = true;
 
         // Увеличиваем мульти(разбивание бутылки)
         if (multiValue > currMulti) {
-            // fsView.draw.ShowMulti({number: multiValue});
-            // model.data('fsMulti', multiValue);
-            // let timer = model.el('fsTimer');
-            // game.time.events.remove(timer);
-            //
-            // let fsTimer = game.time.events.add(3000, () => {
-            //     if (model.state('fs:end')) return;
-            //     controller.next();
-            // });
-            //
-            // model.el('fsTimer', fsTimer);
+            fsView.draw.changeMulti({number: multiValue, animation: multiValue + ''});
+            model.data('fsMulti', multiValue);
+        }
+
+        if (levelValue > currLevel) {
+            fsView.draw.changeLevel({number: levelValue, animation: levelValue - 1 + ''});
+            model.data('fsLevel', levelValue);
         }
 
     }
@@ -111,7 +104,7 @@ export let controller = (() => {
         next,
         count,
         stop,
-        bullet
+        chestActions
     };
 })();
 
@@ -192,12 +185,13 @@ export class FS {
 
         // Добавляем маску
         fsView.draw.machineMask({});
-
-        // Рисуем барабан
-        // fsView.draw.drum({});
         // Рисуем множитель
         fsView.draw.Multi({
             start: this.fsMulti
+        });
+
+        fsView.draw.Level({
+            start: this.fsLevel
         });
         // Рисуем счетчик спинов
         fsView.draw.Count({
@@ -245,11 +239,13 @@ export class FS {
             this.fsLevel = saved.fsLevel;
             model.data('savedFS', null);
             model.data('fsMulti', this.fsMulti);
+            model.data('fsLevel', this.fsLevel);
         } else {
             this.fsCount = 15;
             this.fsMulti = 2;
             this.fsLevel = 0;
             model.data('fsMulti', 2);
+            model.data('fsLevel', 0);
         }
     }
 

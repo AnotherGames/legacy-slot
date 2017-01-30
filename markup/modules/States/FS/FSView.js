@@ -10,8 +10,8 @@ export let view = (() => {
             game = model.el('game')
         }) {
             model.group('bg', game.add.group());
-            model.group('panel', game.add.group());
             model.group('main', game.add.group());
+            model.group('panel', game.add.group());
             model.group('buttons', game.add.group());
             model.group('balanceContainer', game.add.group());
             model.group('menuContainer', game.add.group());
@@ -43,7 +43,9 @@ export let view = (() => {
                 gameMachineBG.anchor.set(0.5);
             model.el('gameMachineBG', gameMachineBG);
 
-            let gameMachine = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachine', null, container);
+            let gameMachineAsset = (model.desktop) ? 'gameMachineFS' : 'gameMachine';
+
+            let gameMachine = game.add.sprite(0, config[model.res].gameMachine.y, gameMachineAsset, null, container);
                 gameMachine.anchor.set(0.5);
             model.el('gameMachine', gameMachine);
         },
@@ -94,55 +96,151 @@ export let view = (() => {
 
         Multi: function({
             game = model.el('game'),
-            container = model.group('panel')
+            container = model.group('panel'),
+            start = 1,
+            fontDesktop = '70px Titania, Arial',
+            fontMobile = '50px Titania, Arial'
         }) {
 
-            let x, y, deltaX = 0, deltaY = 0;
+            let x, y, deltaX = 0, deltaY = 0, font;
             if (model.desktop) {
-                x = 800;
-                y = 100;
-                deltaX = 80;
+                x = 950;
+                y = -55;
+                font = fontDesktop;
             } else {
-                let fsMultiBG = game.add.sprite(1215, 360, 'bottleBG', null, container);
-                    fsMultiBG.anchor.set(0.5);
-
-                x = 1220;
-                y = 190;
-                deltaY = 165;
+                x = model.el('game').width / 2 + 140;
+                y = 610;
+                deltaY = 13,
+                font = fontMobile;
+                let fsMultiBG = game.add.sprite(x, y, 'fsMultiBG', null, container);
+                fsMultiBG.anchor.set(0.5);
             }
 
-            // draw._drawFsMulti(x, y, deltaX, deltaY);
-            // draw._drawBottle(x, y, deltaX, deltaY);
+            let fsMulti = game.add.text(x + deltaX, y + deltaY, start, {font: font, fill: '#ffffff', align: 'center', stroke: '#188bb4', strokeThickness: 5}, container);
+                fsMulti.anchor.set(0.5)
+                model.el('fsMulti', fsMulti);
+
+            draw._drawChest({});
+        },
+
+        _drawChest: function({
+            game = model.el('game'),
+            container = model.group('panel')
+        }) {
+            let x = (model.desktop) ? game.width * 0.82 : game.width * 0.95;
+            let y = (model.desktop) ? -450 : 370;
+            let chestFS = game.add.spine(x, y, 'chestFS');
+            container.add(chestFS);
+            if (model.mobile) {
+                chestFS.scale.set(0.6);
+            }
+            model.el('chestFS', chestFS);
+            chestFS.setAnimationByName(1, '1', false);
+            chestFS.addAnimationByName(1, '2', false);
+
+            game.add.tween(chestFS).to({y: chestFS.y + 10}, 3000, 'Linear', true, 0, -1, true);
+
+        },
+
+        changeMulti: function({
+            number = 1,
+            animation = '3'
+        }) {
+            let fsMulti = model.el('fsMulti');
+            fsMulti.text = number;
+            model.el('fsMulti', fsMulti);
+
+            let chestFS = model.el('chestFS');
+            chestFS.addAnimationByName(1, animation, false);
+        },
+
+        Level: function({
+            game = model.el('game'),
+            container = model.group('panel'),
+            start = 1,
+            fontDesktop = '70px Titania, Arial',
+            fontMobile = '50px Titania, Arial'
+        }) {
+
+            let x, y, deltaX = 0, deltaY = 0, font;
+            if (model.desktop) {
+                x = 590;
+                y = -55;
+                font = fontDesktop;
+            } else {
+                x = model.el('game').width / 2 - 120;
+                y = 610;
+                deltaY = 13,
+                font = fontMobile;
+                let fsLevelBG = game.add.sprite(x, y, 'fsLevelBG', null, container);
+                fsLevelBG.anchor.set(0.5);
+            }
+
+            let fsLevel = game.add.text(x + deltaX, y + deltaY, start, {font: font, fill: '#ffffff', align: 'center', stroke: '#188bb4', strokeThickness: 5}, container);
+                fsLevel.anchor.set(0.5)
+                model.el('fsLevel', fsLevel);
+
+            draw._drawDiver({});
+        },
+
+        _drawDiver: function({
+            game = model.el('game'),
+            container = model.group('panel')
+        }) {
+            let x = (model.desktop) ? -50 : 80;
+            let y = (model.desktop) ? -500 : 350;
+            let diverFS = game.add.spine(x, y, 'diverFS');
+            container.add(diverFS);
+            if (model.mobile) {
+                diverFS.scale.set(0.6);
+            }
+            model.el('diverFS', diverFS);
+            diverFS.setAnimationByName(1, 'start', false);
+
+            game.add.tween(diverFS).to({y: diverFS.y + 10}, 3000, 'Linear', true, 500, -1, true);
+
+        },
+
+        changeLevel: function({
+            number = 1,
+            animation = '0'
+        }) {
+            let fsLevel = model.el('fsLevel');
+            fsLevel.text = number;
+            model.el('fsLevel', fsLevel);
+
+            let diverFS = model.el('diverFS');
+            diverFS.addAnimationByName(1, animation, false);
         },
 
         Count: function({
             game = model.el('game'),
             container = model.group('panel'),
             start = 15,
-            fontDesktop = '80px Helvetica, Arial',
-            fontMobile = '60px Helvetica, Arial'
+            fontDesktop = '80px Titania, Arial',
+            fontMobile = '50px Titania, Arial'
         }) {
-            let x, y, countX, countY, font;
+            let x, y, deltaX, deltaY, font;
             if (model.mobile) {
-                x = 55;
-                y = 520;
-                countX = 13;
-                countY = 13;
+                x = model.el('game').width / 2;
+                y = 600;
+                deltaX = 13;
+                deltaY = 13;
                 font = fontMobile;
-            } else {
-                x = 648;
-                y = 85;
-                countX = 17;
-                countY = 17;
-                font = fontDesktop;
-            }
 
-            let fsCountBG = game.add.sprite(x, y, 'fsCountBG', 'fsTotalTable-Bang0.png', container);
+                let fsCountBG = game.add.sprite(x + 10, y, 'fsCountBG', null, container);
                 fsCountBG.anchor.set(0.5);
                 if (model.desktop) {fsCountBG.scale.set(1.3)};
                 model.el('fsCountBG', fsCountBG);
+            } else {
+                x = 767;
+                y = -75;
+                deltaX = 0;
+                deltaY = 0;
+                font = fontDesktop;
+            }
 
-            let fsCount = game.add.text(x + countX, y + countY, start, {font: font, fill: '#e8b075', align: 'center'}, container);
+            let fsCount = game.add.text(x + deltaX, y + deltaY, start, {font: font, fill: '#ffffff', align: 'center', stroke: '#188bb4', strokeThickness: 5}, container);
                 fsCount.anchor.set(0.5)
                 model.el('fs:count', fsCount);
         },
@@ -167,7 +265,7 @@ export let view = (() => {
                 plus3Group.y = y - deltaY;
 
             let circle = game.add.graphics(0, 0, plus3Group);
-                circle.beginFill(0x000000, 0.6).drawCircle(0, 0, 200);
+                circle.beginFill(0x000000, 0.3).drawCircle(0, 0, 200);
             let plus3 = game.add.sprite(0, 0, 'plus3', null, plus3Group);
                 plus3.anchor.set(0.5);
             model.el('plus3', plus3);
@@ -177,10 +275,10 @@ export let view = (() => {
 
             if(model.desktop) {
                 tweenX = plus3Group.x;
-                tweenY = 950;
+                tweenY = 900;
             } else {
-                tweenX = -450;
-                tweenY = 100;
+                tweenX = plus3Group.x;
+                tweenY = 650;
             }
 
             game.add.tween(plus3Group.scale).to({x: 1.0, y: 1.0}, 500, Phaser.Easing.Elastic.Out, true);
@@ -189,7 +287,6 @@ export let view = (() => {
                 .onComplete.add(() => {
                     plus3Group.destroy();
                     model.state('CountPlus3', false);
-                    view.draw._showBang({});
                 }, this);
         }
 

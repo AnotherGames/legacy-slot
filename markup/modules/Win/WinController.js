@@ -4,6 +4,7 @@ import { view } from 'modules/Win/WinView';
 import { view as transitionView } from 'modules/Transition/TransitionView';
 
 import { controller as autoplayController } from 'modules/Autoplay/AutoplayController';
+import { controller as fsController } from 'modules/States/FS/FSController';
 
 export let controller = (() => {
 
@@ -24,6 +25,8 @@ export let controller = (() => {
         // Если нет выигрыша - выходим
         if (winLines.length === 0) return;
         view.draw.copyFinishScreenToUpWheels({});
+
+        checkForChest(winLines);
 
         // Проверяем переход на Фри-Спины
         checkForFS();
@@ -185,6 +188,15 @@ export let controller = (() => {
                 transitionView.fsStart();
             });
         }
+    }
+
+    function checkForChest(winLines) {
+        winLines.forEach((winLine) => {
+            if (winLine.Line == -1 && winLine.Symbol == '14') {
+                console.warn('i am chest', winLine.Symbol);
+                fsController.chestActions();
+            }
+        });
     }
 
     return {

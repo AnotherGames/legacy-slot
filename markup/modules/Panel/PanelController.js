@@ -68,11 +68,7 @@ export let controller = (() => {
         let game = model.el('game');
         let time = game.rnd.integerInRange(10, 70);
 
-        view.draw.PanelBG({
-            x: model.group('main').x,
-            frameName: 'uiFS'
-        });
-        // view.draw.LinesNumber({x: 55, y: 115});
+        view.draw.PanelBG({});
 
     }
 

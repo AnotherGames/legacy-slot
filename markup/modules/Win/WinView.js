@@ -144,6 +144,21 @@ export let view = (() => {
                         result.upElements.push(curUpElement);
                         result.elements.push(curElement);
                     }
+                } else if (model.state('fs')) {
+                    wheels.forEach((wheel) => {
+                        wheel.forEach((element)=> {
+                            if (element.active == 14) {
+                                result.elements.push(element);
+                            }
+                        });
+                    });
+                    upWheels.forEach((upWheel) => {
+                        upWheel.forEach((element)=> {
+                            if (element.active == 14) {
+                                result.upElements.push(element);
+                            }
+                        });
+                    });
                 } else {
                     game.time.events.remove(model.data('oneAfterAnotherTimer'));
                 }

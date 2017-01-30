@@ -74,15 +74,14 @@ export class Preload {
         game.load.atlasJSONArray('infoMarker', 'other/infoMarker.png', 'other/infoMarker.json');
         game.load.image('winLine', 'win/winNumber.png');
         game.load.image('winTotal', 'win/winTable.png');
-        // game.load.atlasJSONArray('lineNumbers', 'win/lineNumbers.png', 'win/lineNumbers.json');
         game.load.atlasJSONArray('winSplash', 'win/splash.png', 'win/splash.json');
-        game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
         game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
         game.load.atlasJSONArray('footerButtons', 'footer/footerButtons.png', 'footer/footerButtons.json');
         game.load.bitmapFont('numbersFont', 'numbers/numbers.png', 'numbers/numbers.xml');
         game.load.bitmapFont('numbersFont2', 'numbers/numbers2.png', 'numbers/numbers2.xml');
         if (model.desktop) {
             game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
+            game.load.image('gameMachineFS', 'game/gameMachineFS.png');
             game.load.image('autoSelect', 'desk_buttons/autoSelect.png');
         }
         if (model.mobile) {
@@ -99,28 +98,35 @@ export class Preload {
         game.load.image('fsBG', 'bg/fsBG.png');
         game.load.image('octopusChar', 'fs/octopus.png');
         game.load.image('diverChar', 'fs/diver.png');
-
-        game.load.image('x4', 'fs/x4.png');
-        game.load.image('x6', 'fs/x6.png');
-        game.load.image('x8', 'fs/x8.png');
-        game.load.image('aim', 'fs/pritsel.png');
-        game.load.atlasJSONArray('bottle', 'fs/bottle.png', 'fs/bottle.json');
-        game.load.atlasJSONArray('bigBang', 'fs/bigBang.png', 'fs/bigBang.json');
-        game.load.atlasJSONArray('baraban', 'fs/baraban.png', 'fs/baraban.json');
-        game.load.atlasJSONArray('fsCountBG', 'fs/bang.png', 'fs/bang.json');
-        game.load.image('plus3', 'fs/plus3.png');
         if (model.mobile) {
-            game.load.image('drumBG', 'fs/fsDrumBG.png');
-            game.load.image('bottleBG', 'fs/shkaf.png');
-        } else {
-            game.load.image('bottleShadow', 'fs/bottleShadow.png');
-            game.load.image('brokenBottleShadow', 'fs/brokenBottleShadow.png');
+            game.load.image('fsCountBG', 'fs/fsCountBG.png');
+            game.load.image('fsLevelBG', 'fs/fsLevelBG.png');
+            game.load.image('fsMultiBG', 'fs/fsMultiBG.png');
         }
+
+        // game.load.image('x4', 'fs/x4.png');
+        // game.load.image('x6', 'fs/x6.png');
+        // game.load.image('x8', 'fs/x8.png');
+        // game.load.image('aim', 'fs/pritsel.png');
+        // game.load.atlasJSONArray('bottle', 'fs/bottle.png', 'fs/bottle.json');
+        // game.load.atlasJSONArray('bigBang', 'fs/bigBang.png', 'fs/bigBang.json');
+        // game.load.atlasJSONArray('baraban', 'fs/baraban.png', 'fs/baraban.json');
+        // game.load.atlasJSONArray('fsCountBG', 'fs/bang.png', 'fs/bang.json');
+        game.load.image('plus3', 'fs/plus3.png');
+        // if (model.mobile) {
+        //     game.load.image('drumBG', 'fs/fsDrumBG.png');
+        //     game.load.image('bottleBG', 'fs/shkaf.png');
+        // } else {
+        //     game.load.image('bottleShadow', 'fs/bottleShadow.png');
+        //     game.load.image('brokenBottleShadow', 'fs/brokenBottleShadow.png');
+        // }
     }
 
     loadSpineAssets() {
         const game = model.el('game');
         game.load.spine('diverBig', 'spine/Vodolaz.json');
+        game.load.spine('diverFS', 'spine/sunken.json');
+        game.load.spine('chestFS', 'spine/skeleton.json');
 
     }
 
