@@ -53,9 +53,22 @@ export let controller = (() => {
         space.onUp.add(transitionView.transitionOutFs);
     }
 
+    function initInitKeys() {
+      let game = model.el('game');
+        let space = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+        space.onUp.add(()=>{
+          game.camera.onFadeComplete.add(()=>{
+              game.state.start('Main');
+          })
+
+          game.camera.fade(0x000000, 500)
+        });
+    }
+
     return {
         initMainKeys,
-        initFsKeys
+        initFsKeys,
+        initInitKeys
     }
 
 })();
