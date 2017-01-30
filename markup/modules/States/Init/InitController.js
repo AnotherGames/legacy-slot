@@ -2,6 +2,8 @@ import { model } from 'modules/Model/Model';
 import { view } from 'modules/States/Init/InitView';
 import { Element } from 'modules/Class/Element';
 import { controller as soundController} from 'modules/Sound/SoundController';
+import { controller as keyboardController} from 'modules/keyboard/KeyboardController';
+import { view as transitionView} from 'modules/Transition/TransitionView';
 
 export class Init {
     constructor(game) {
@@ -47,6 +49,8 @@ export class Init {
         view.drawBGLogo();
         view.drawLogo();
         view.addStars();
+
+        if (model.desktop) keyboardController.initInitKeys();
 
         let initPlay = view.drawPlay();
             initPlay.inputEnabled = true;
