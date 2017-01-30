@@ -189,7 +189,7 @@ export let view = (() => {
                             lineNumber.lineShape.destroy();
                         }
                         lineNumber.lineShape = this.lineShape(lineNumber.name);
-                        game.time.events.add(1000, () => {
+                        game.time.events.add(4000, () => {
                             if (lineNumber.lineShape) {
                                 lineNumber.lineShape.destroy();
                             }
