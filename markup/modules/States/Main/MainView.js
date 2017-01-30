@@ -265,10 +265,11 @@ export let view = (() => {
                 lineNumber.input.pixelPerfectOver = 1;
 
                 lineNumber.events.onInputOver.add(() => {
+                  setTimeout(() => {
                     if (lineNumber.lineShape) {
                         lineNumber.lineShape.destroy();
                     }
-
+                  }, 4000);
                     lineNumber.lineShape = this.lineShape(lineNumber.name);
                 });
 
