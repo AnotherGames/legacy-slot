@@ -9,12 +9,12 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('panel'),
             x = game.world.centerX,
-            y = model.el('gameMachine').height - 20,
+            y = model.el('gameMachine').bottom +  model.el('gameMachine').height / 2 + 10,
             frameName = 'ui',
             deltaY = -23
         }) {
             container.x = x;
-            container.y = y;
+            container.top = y;
             const panelBG = game.add.sprite(1, deltaY, frameName, null, container);
 
             container.pivot.set(panelBG.width / 2, 0);
