@@ -50,7 +50,7 @@ export let view = (() => {
             let betCashText = game.add.text(0, y, 'Bet: ', greyStyle, container);
             let winCashText = game.add.text(0, y, 'Win: ', greyStyle, container);
             let coinCash = game.add.text(0, y, `${currencySymbol} ${coinCashValue.toFixed(2)}`, cashStyle, container);
-            let betCash = game.add.text(0, y, `${currencySymbol} ${betCashValue.toFixed(2)}`, cashStyle, container);
+            let betCash = game.add.text(0, y , `${currencySymbol} ${betCashValue.toFixed(2)}`, cashStyle, container);
             let winCash = game.add.text(0, y, `${currencySymbol} ${winCashValue.toFixed(2)}`, cashStyle, container);
 
             model.el('coinCashText', coinCashText);
@@ -158,7 +158,7 @@ export let view = (() => {
             betValueAmount = model.balance('betValue'),
             sumStyle = {font: '24px Titania, Arial', fill: '#ffffff', align: 'center'},
             valueStyle = {font: '27px Titania, Arial', fill: '#ffffff', align: 'center'},
-            y = [-125, 99, 133, 148],
+            y = [-115, 99, 133, 148],
             x = [260, 230, 250, 1315]
         }) {
 

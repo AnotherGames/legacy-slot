@@ -228,7 +228,7 @@ export class FS {
         let game = model.el('game');
         // model.group('main').x = (model.desktop) ? game.world.centerX : game.width - model.group('main').width / 2;
         model.group('main').x = game.world.centerX + 8;
-        model.group('main').y = game.world.centerY + config[model.res].mainContainer.y;
+        model.group('main').y = game.world.centerY + config[model.res].mainContainer.y - 10;
     }
 
     checkSavedFS() {

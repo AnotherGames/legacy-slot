@@ -9,7 +9,7 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('panel'),
             x = game.world.centerX,
-            y = model.el('gameMachine').height - 10,
+            y = model.el('gameMachine').height - ((model.state('fs')) ? 20 : 10),
             frameName = 'ui',
             deltaY = 0
         }) {

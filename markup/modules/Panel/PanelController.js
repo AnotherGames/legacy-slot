@@ -251,14 +251,11 @@ export let controller = (() => {
             }
             // Если у нас автоплей или идет крутка, то не должна работать
             // При нажатии должна закрыть панель
-            //365 конечный икс кнопки автоплея при открытии, 370 взят с запасом
             if (model.state('autoplay:start')
             || model.state('roll:progress')) return;
 
             let autoButtonDesk = model.el('autoButtonDesk');
             const amount = this.amount;
-            // if (autoButtonDesk.x > 370) return;
-            // view.hide.autoButton({});
             view.hide.autoPanel({});
             autoplayController.start(amount);
         }
