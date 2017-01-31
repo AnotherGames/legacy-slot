@@ -61,7 +61,7 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('footer'),
             x = 25,
-            y = model.el('game').height - 15
+            y = model.el('game').height - 20
         }) {
             let homeButton = game.add.button(x, y, 'footerButtons', null, null, 'homeOn.png', 'home.png', 'homeOn.png', null, container);
                 homeButton.anchor.set(0.5);
@@ -73,7 +73,7 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('footer'),
             x = 75,
-            y = model.el('game').height - 15
+            y = model.el('game').height - 20
         }) {
             let menuButton = game.add.button(x, y, 'footerButtons', null, null, 'menuOn.png', 'menu.png', 'menuOn.png', null, container);
                 menuButton.anchor.set(0.5);
@@ -85,7 +85,7 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('footer'),
             x = 125,
-            y = model.el('game').height - 15
+            y = model.el('game').height - 20
         }) {
             let soundButton = game.add.button(x, y, 'footerButtons', null, null, null, 'sound.png', null, null, container);
                 soundButton.anchor.set(0.5);
@@ -103,7 +103,7 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('footer'),
             x = 175,
-            y = model.el('game').height - 15
+            y = model.el('game').height - 20
         }) {
             let fastButton = game.add.button(x, y, 'footerButtons', null, null, null, 'fastSpin.png', null, null, container);
                 fastButton.anchor.set(0.5);
