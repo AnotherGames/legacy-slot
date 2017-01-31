@@ -105,10 +105,10 @@ export let view = (() => {
             let x, y, deltaX = 0, deltaY = 0, font;
             if (model.desktop) {
                 x = 950;
-                y = -55;
+                y = -57;
                 font = fontDesktop;
             } else {
-                x = model.el('game').width / 2 + 140;
+                x = model.el('game').width / 2 + 145;
                 y = 610;
                 deltaY = 13,
                 font = fontMobile;
@@ -116,9 +116,14 @@ export let view = (() => {
                 fsMultiBG.anchor.set(0.5);
             }
 
-            let fsMulti = game.add.text(x + deltaX, y + deltaY, start, {font: font, fill: '#ffffff', align: 'center', stroke: '#188bb4', strokeThickness: 5}, container);
-                fsMulti.anchor.set(0.5)
+            let fsMulti;
+            setTimeout(() => {
+                fsMulti = game.add.text(x + deltaX, y + deltaY, start, {font: font, fill: '#ffffff', align: 'center', stroke: '#188bb4', strokeThickness: 5}, container);
+                fsMulti.setShadow(5, 5, 'rgba(0, 0, 0, 0.7)', 8);
+                fsMulti.anchor.set(0.5);
                 model.el('fsMulti', fsMulti);
+            }, 300);
+
 
             draw._drawChest({});
         },
@@ -164,11 +169,11 @@ export let view = (() => {
 
             let x, y, deltaX = 0, deltaY = 0, font;
             if (model.desktop) {
-                x = 590;
-                y = -55;
+                x = 585;
+                y = -60;
                 font = fontDesktop;
             } else {
-                x = model.el('game').width / 2 - 120;
+                x = model.el('game').width / 2 - 115;
                 y = 610;
                 deltaY = 13,
                 font = fontMobile;
@@ -176,9 +181,14 @@ export let view = (() => {
                 fsLevelBG.anchor.set(0.5);
             }
 
-            let fsLevel = game.add.text(x + deltaX, y + deltaY, start, {font: font, fill: '#ffffff', align: 'center', stroke: '#188bb4', strokeThickness: 5}, container);
-                fsLevel.anchor.set(0.5)
+            let fsLevel;
+            setTimeout(() => {
+                fsLevel = game.add.text(x + deltaX, y + deltaY, start, {font: font, fill: '#ffffff', align: 'center', stroke: '#188bb4', strokeThickness: 5}, container);
+                fsLevel.setShadow(5, 5, 'rgba(0, 0, 0, 0.7)', 8);
+                fsLevel.anchor.set(0.5);
                 model.el('fsLevel', fsLevel);
+            }, 300);
+
 
             draw._drawDiver({});
         },
@@ -241,6 +251,7 @@ export let view = (() => {
             }
 
             let fsCount = game.add.text(x + deltaX, y + deltaY, start, {font: font, fill: '#ffffff', align: 'center', stroke: '#188bb4', strokeThickness: 5}, container);
+                fsCount.setShadow(5, 5, 'rgba(0, 0, 0, 0.7)', 8);
                 fsCount.anchor.set(0.5)
                 model.el('fs:count', fsCount);
         },
@@ -290,251 +301,6 @@ export let view = (() => {
                 }, this);
         }
 
-        // _drawFsMulti: function(x, y, deltaX, deltaY){
-        //     let game = model.el('game');
-        //     let container = model.group('panel');
-        //
-        //     let fsMulti4 = game.add.sprite(x - 5, y, 'x4', null, container);
-        //         fsMulti4.anchor.set(0.5);
-        //         fsMulti4.visible = false;
-        //         model.el('fsMulti4', fsMulti4);
-        //     let fsMulti6 = game.add.sprite(x + deltaX - 5, y + deltaY, 'x6', null, container);
-        //         fsMulti6.anchor.set(0.5);
-        //         fsMulti6.visible = false;
-        //         model.el('fsMulti6', fsMulti6);
-        //     let fsMulti8 = game.add.sprite(x + 2 * deltaX - 5, y + 2 * deltaY, 'x8', null, container);
-        //         fsMulti8.anchor.set(0.5);
-        //         fsMulti8.visible = false;
-        //         model.el('fsMulti8', fsMulti8);
-        // },
-        //
-        // _drawBottle: function(x, y, deltaX, deltaY){
-        //     let game = model.el('game');
-        //     let container = model.group('panel');
-        //
-        //     if (model.desktop) {
-        //         let corrX = 20, corrY = 50;
-        //
-        //         let bottleShadow4 = game.add.image(x + corrX, y + corrY, 'bottleShadow', null, container);
-        //             bottleShadow4.anchor.set(0.5);
-        //         model.el('bottleShadow4', bottleShadow4);
-        //         let bottleShadow6 = game.add.image(x + deltaX + corrX, y + deltaY + corrY, 'bottleShadow', null, container);
-        //             bottleShadow6.anchor.set(0.5);
-        //         model.el('bottleShadow6', bottleShadow6);
-        //         let bottleShadow8 = game.add.image(x + 2 * deltaX + corrX, y + 2 * deltaY + corrY, 'bottleShadow', null, container);
-        //             bottleShadow8.anchor.set(0.5);
-        //         model.el('bottleShadow8', bottleShadow8);
-        //
-        //         let brokenBottleShadow4 = game.add.image(x + corrX, y + corrY, 'brokenBottleShadow', null, container);
-        //             brokenBottleShadow4.anchor.set(0.5);
-        //             brokenBottleShadow4.visible = false;
-        //         model.el('brokenBottleShadow4', brokenBottleShadow4);
-        //         let brokenBottleShadow6 = game.add.image(x + deltaX + corrX, y + deltaY + corrY, 'brokenBottleShadow', null, container);
-        //             brokenBottleShadow6.anchor.set(0.5);
-        //             brokenBottleShadow6.visible = false;
-        //         model.el('brokenBottleShadow6', brokenBottleShadow6);
-        //         let brokenBottleShadow8 = game.add.image(x + 2 * deltaX + corrX, y + 2 * deltaY + corrY, 'brokenBottleShadow', null, container);
-        //             brokenBottleShadow8.anchor.set(0.5);
-        //             brokenBottleShadow8.visible = false;
-        //         model.el('brokenBottleShadow8', brokenBottleShadow8);
-        //     }
-        //
-        //     let fsBottle4 = game.add.sprite(x, y, 'bottle', 'Bottlebang-Bang0.png', container);
-        //         fsBottle4.anchor.set(0.5);
-        //     model.el('fsBottle4', fsBottle4);
-        //     let fsBottle6 = game.add.sprite(x + deltaX, y + deltaY, 'bottle', 'Bottlebang-Bang0.png', container);
-        //         fsBottle6.anchor.set(0.5);
-        //     model.el('fsBottle6', fsBottle6);
-        //     let fsBottle8 = game.add.sprite(x + 2 * deltaX, y + 2 * deltaY, 'bottle', 'Bottlebang-Bang0.png', container);
-        //         fsBottle8.anchor.set(0.5);
-        //     model.el('fsBottle8', fsBottle8);
-        //
-        // },
-        //
-        // addBangs: function ({
-        //     sprite
-        // }) {
-        //     // Взрыв для бутылки
-        //     let game = model.el('game');
-        //     let bangs = [];
-        //     for (let i = 0; i < 5; i++) {
-        //         let bang = game.add.sprite(game.rnd.integerInRange(sprite.worldPosition.x - 50, sprite.worldPosition.x + 50),
-        //         game.rnd.integerInRange(sprite.worldPosition.y-50, sprite.worldPosition.y + 50),
-        //         'bigBang');
-        //         bang.scale.set(game.rnd.integerInRange(8, 20) / 100);
-        //         bang.anchor.set(0.5);
-        //         bang.angle = game.rnd.integerInRange(-10, 10);
-        //         bang.alpha = 0;
-        //         bangs.push(bang);
-        //     }
-        //     return bangs;
-        // },
-        //
-        // addAim: function ({
-        //     sprite,
-        //     callback
-        // }) {
-        //     let game = model.el('game');
-        //
-        //     let x = (model.desktop) ? game.width / 2 : model.group('panel').width / 2 - 100;
-        //     let y = (model.desktop) ? game.height / 2 - 100 : 300;
-        //
-        //     let aim = game.add.sprite(x, y, 'aim');
-        //         aim.anchor.set(0.5);
-        //         aim.scale.set(0.1);
-        //     model.el('aim', aim);
-        //     game.add.tween(aim.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true)
-        //     game.add.tween(aim).to({x: sprite.worldPosition.x, y: sprite.worldPosition.y}, 500, 'Linear', true, 1000)
-        //         .onComplete.add(() => {
-        //             game.add.tween(aim.scale).to({x: 0.2, y: 0.2}, 500, 'Linear', true)
-        //                 .onComplete.add(() => {
-        //                     draw.showBottleBangs({
-        //                         callback,
-        //                         sprite
-        //                     });
-        //                 });
-        //         });
-        // },
-        //
-        // showBottleBangs: function ({callback, sprite}) {
-        //     let game = model.el('game');
-        //     let bangs = draw.addBangs({
-        //         sprite
-        //     });
-        //     let bangDestroyCounter = 0;
-        //     bangs.forEach((bang, index) => {
-        //         game.time.events.add(150 * index, () => {
-        //             soundController.sound.playSound({sound: 'lineWin'})
-        //             game.add.tween(bang).to({alpha: 1}, 150, 'Linear', true)
-        //                 .onComplete.add(() => {
-        //                     game.add.tween(bang).to({alpha: 0}, 150, 'Linear', true)
-        //                         .onComplete.add(() => {
-        //                             bangDestroyCounter++;
-        //                             if (bangDestroyCounter == bangs.length) {
-        //                                 callback();
-        //                             }
-        //                             bang.destroy();
-        //                         })
-        //                 });
-        //         });
-        //     });
-        // },
-        //
-        // ShowMulti: function({
-        //     game = model.el('game'),
-        //     container = model.group('panel'),
-        //     number = 4
-        // }) {
-        //     let fsBottle = model.el(`fsBottle${number}`);
-        //     let fsMulti = model.el(`fsMulti${number}`);
-        //     let bottleShadow = model.el(`bottleShadow${number}`);
-        //     let brokenBottleShadow = model.el(`brokenBottleShadow${number}`);
-        //
-        //     // let fsMultiBig = game.add.sprite(game.width / 2, game.height / 2, `x${number}`);
-        //     // fsMultiBig.anchor.set(0.5);
-        //     // fsMultiBig.alpha = 0;
-        //
-        //     draw.addAim({
-        //         sprite: fsBottle,
-        //         callback: () => {
-        //             soundController.sound.playSound({sound: 'bottleBangSound', duration: 1000});
-        //             soundController.sound.changeSoundVolume('bottleBangSound', 1000);
-        //
-        //             let aim = model.el('aim');
-        //             aim.destroy();
-        //
-        //             fsBottle.animations.add('bottleBang');
-        //             fsBottle.animations.play('bottleBang', 12, false);
-        //             fsMulti.visible = true;
-        //             // game.add.tween(fsMultiBig.scale).to({x: 3.5, y: 3.5}, 500, 'Linear', true);
-        //             // game.add.tween(fsMultiBig).to({alpha: 1}, 500, 'Linear', true)
-        //             //     .onComplete.add(() => {
-        //             //         fsMultiBig.destroy();
-        //             //     })
-        //
-        //             if (model.desktop) {
-        //                 bottleShadow.visible = false;
-        //                 brokenBottleShadow.visible = true;
-        //             }
-        //         }
-        //     })
-        //
-        // },
-
-        // _showBang: function ({
-        //     game = model.el('game'),
-        //     container = model.group('panel')
-        // }) {
-        //     let fsCountBG = model.el('fsCountBG');
-        //     fsCountBG.animations.add('bang', [0, 1, 2, 3, 4, 0]);
-        //     fsCountBG.animations.play('bang', 12, false);
-        //
-        // },
-        //
-        // drum: function ({
-        //     game = model.el('game'),
-        //     container = model.group('panel')
-        // }) {
-        //     let x, y, deltaX, deltaY, scaleDrum, scaleBullet;
-        //     if (model.mobile) {
-        //         x = 72;
-        //         y = 335;
-        //         deltaX = -2;
-        //         deltaY = -130;
-        //         let drumBG = game.add.sprite(72, 280, 'drumBG', null, container);
-        //             drumBG.anchor.set(0.5);
-        //             drumBG.scale.set(0.95);
-        //         scaleDrum = 0.5;
-        //         scaleBullet = 0.6;
-        //     } else {
-        //         x = 495;
-        //         y = 100;
-        //         deltaX = 135;
-        //         deltaY = 15;
-        //         scaleDrum = 0.35;
-        //         scaleBullet = 0.45;
-        //     }
-        //     let drum = game.add.sprite(x, y, 'baraban', 'B-0.png', container);
-        //         drum.anchor.set(0.5);
-        //         drum.scale.set(scaleDrum);
-        //     model.el('drum', drum);
-        //
-        //     let bullet = game.add.sprite(x - deltaX, y + deltaY, '11', '11-n.png', container);
-        //         bullet.anchor.set(0.5);
-        //         bullet.scale.set(scaleBullet);
-        //     model.el('bullet', bullet);
-        // },
-        //
-        // drumSpin: function ({
-        //     game = model.el('game'),
-        //     container = model.group('panel'),
-        //     number = 0
-        // }) {
-        //     let rollData = model.data('rollResponse');
-        //     let multiValue = rollData.FsBonus.Multi;
-        //     let bullet = model.el('bullet');
-        //     let drum = model.el('drum');
-        //
-        //     let bulletAnim = bullet.animations.add('win', win);
-        //     let win = Phaser.Animation.generateFrameNames(`11-w-`, 1, 10, '.png', 2);
-        //
-        //     //Если достигнут максимальный множитель то анимация пули и барабана зацикливается
-        //     if (multiValue == 8) {
-        //         drum.frameName = 'B-6.png';
-        //         game.add.tween(drum).to({rotation: 2 * Math.PI}, 3000, 'Linear', true, 0, -1);
-        //         bulletAnim.play(12, true);
-        //         model.state('maxFsMultiplier', true)
-        //     } else {
-        //         bulletAnim.onComplete.add(() => {bullet.frameName = '11-n.png'}, this);
-        //         bulletAnim.play(12);
-        //         game.add.tween(model.el('drum')).to({rotation: 2 * Math.PI * 4}, 500, Phaser.Easing.Exponential.Out, true, 0, 0)
-        //         .onComplete.add(()=> {
-        //             drum.frameName = `B-${number}.png`;
-        //             drum.rotation = 0;
-        //         });
-        //     }
-        //
-        // }
 
     };
 

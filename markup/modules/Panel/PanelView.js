@@ -192,12 +192,13 @@ export let view = (() => {
         autoCount: function({
             game = model.el('game'),
             container = model.group('panel'),
-            style = {font: '60px Arial, Helvetica', fill: '#fff', align: 'center', stroke: '#000000', strokeThickness: 2},
+            style = {font: '60px Titania, Helvetica', fill: '#fff', align: 'center', stroke: '#000000', strokeThickness: 2},
             amount = 10,
             x = model.el('spinButtonDesk').x,
             y = model.el('spinButtonDesk').y,
         }) {
-            let autoCount = game.add.text(x, y, amount, style, container);
+            let autoCount = game.add.text(x, y + 2, amount, style, container);
+                autoCount.setShadow(5, 5, 'rgba(0, 0, 0, 0.7)', 8);
                 autoCount.anchor.set(0.5);
                 autoCount.alpha = 0;
             model.el('autoCount', autoCount);
@@ -214,18 +215,6 @@ export let view = (() => {
         removeCount: function() {
             model.el('autoCount').destroy();
         },
-
-        // fsCandle: function({
-        //     game = model.el('game'),
-        //     container = model.group('panel'),
-        //     x = 513,
-        //     y = 95,
-        // }) {
-        //     let candle = game.add.sprite(x, y, 'candle', null, container);
-        //         candle.animations.add('burn');
-        //         candle.animations.play('burn', 12, true);
-        //     return candle;
-        // },
 
         _markers: function(container){
             let game = model.el('game');
