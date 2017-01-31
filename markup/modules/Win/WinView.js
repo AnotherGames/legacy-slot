@@ -76,10 +76,7 @@ export let view = (() => {
 
         WinNumber: function ({number}) {
             if (number < 0) return;
-
             draw.WinSplash({number, ind: 0});
-            // draw.WinSplash({number, ind: 1});
-
         },
 
         WinElements: function ({
@@ -129,9 +126,9 @@ export let view = (() => {
             });
             let result = { upElements: [], elements: [] };
 
-            number.forEach((number, indx) => {
-                if (number != -1) {
-                    let curLine = lines[number - 1];
+            number.forEach((curNumber, indx) => {
+                if (curNumber != -1) {
+                    let curLine = lines[curNumber - 1];
                     for (let i = 0; i < amount[indx]; i++) {
                         let curElement = wheels[i][curLine[i].Y];
                         let curUpElement = upWheels[i][curLine[i].Y];
