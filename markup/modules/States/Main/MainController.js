@@ -94,8 +94,11 @@ export class Main {
         game.camera.flash(0x000000, 500)
         // Проверяем сохранненые сессии
         this.checkForSavedFS();
+        
+        model.group('main').y = 450;
         // Проверяем остались ли автокрутки
         this.checkForRemainAutoplay();
+
     }
 
     update() {
@@ -104,6 +107,9 @@ export class Main {
       game.frameAnims.forEach((anim) => {
           anim();
       });
+
+      let fullScreeButton = model.el('fullScreeButton');
+          fullScreeButton.frameName = (game.scale.isFullScreen || window.innerHeight == screen.height) ? 'fullscreenOff.png' : 'fullscreen.png';
     }
 
     positionMainContainer() {
