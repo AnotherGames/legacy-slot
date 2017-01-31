@@ -155,8 +155,11 @@ export class Main {
           anim();
       });
 
-      let fullScreeButton = model.el('fullScreeButton');
-          fullScreeButton.frameName = (game.scale.isFullScreen || window.innerHeight == screen.height) ? 'fullscreenOff.png' : 'fullscreen.png';
+      if (model.desktop) {
+          let fullScreeButton = model.el('fullScreeButton');
+              fullScreeButton.frameName = (game.scale.isFullScreen || window.innerHeight == screen.height) ? 'fullscreenOff.png' : 'fullscreen.png';
+      }
+} 
     }
 
     positionMainContainer() {
