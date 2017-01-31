@@ -157,6 +157,7 @@ export let view = (() => {
 
             let chestFS = model.el('chestFS');
             chestFS.addAnimationByName(1, animation, false);
+            soundController.sound.playSound({sound: 'chestDown'});
         },
 
         Level: function({
@@ -221,6 +222,7 @@ export let view = (() => {
 
             let diverFS = model.el('diverFS');
             diverFS.addAnimationByName(1, animation, false);
+            soundController.sound.playSound({sound: 'diverDown'});
         },
 
         Count: function({

@@ -32,19 +32,24 @@ export class Preload {
         const game = model.el('game');
         game.load.path = 'static/img/content/sound/';
         game.load.audio('fon', 'ambient.mp3');
-        game.load.audio('moo', 'moo.mp3');
-        game.load.audio('whip', 'whip.mp3');
         game.load.audio('fsFon', 'fsAmbient.mp3');
+        game.load.audio('bonusFon', 'bonusAmbient.mp3');
         game.load.audio('initFon', 'logoAmbient.mp3');
-        game.load.audio('baraban', 'baraban.mp3');
+        game.load.audio('baraban', 'baraban1.mp3');
+        game.load.audio('baraban2', 'baraban2.wav');
         game.load.audio('buttonClick', 'buttonClick.mp3');
+        game.load.audio('spinClick', 'spinClick.wav');
         game.load.audio('startPerehod', 'startPerehod.mp3');
-        game.load.audio('finishPerehod', 'finishPerehod.mp3');
-        game.load.audio('lineWin', 'lineWin.mp3');
+        game.load.audio('finishPerehod', 'totalWin.mp3');
+        game.load.audio('lineWin', 'lineWin1.mp3');
         game.load.audio('lineWin2', 'lineWin2.mp3');
-        game.load.audio('bottleBangSound', 'bottleBang.mp3');
-        game.load.audio('cows', 'cows.mp3');
-
+        game.load.audio('illumBreak1', 'illumBreak01.mp3');
+        game.load.audio('illumBreak2', 'illumBreak02.mp3');
+        game.load.audio('illumBreak3', 'illumBreak03.mp3');
+        game.load.audio('illumFail', 'illumFail.mp3');
+        game.load.audio('illumWin', 'illumWin.mp3');
+        game.load.audio('chestDown', 'chestDown.mp3');
+        game.load.audio('diverDown', 'diverDown.mp3');
     }
 
     loadInitAssets() {
@@ -104,22 +109,8 @@ export class Preload {
             game.load.image('fsMultiBG', 'fs/fsMultiBG.png');
         }
 
-        // game.load.image('x4', 'fs/x4.png');
-        // game.load.image('x6', 'fs/x6.png');
-        // game.load.image('x8', 'fs/x8.png');
-        // game.load.image('aim', 'fs/pritsel.png');
-        // game.load.atlasJSONArray('bottle', 'fs/bottle.png', 'fs/bottle.json');
-        // game.load.atlasJSONArray('bigBang', 'fs/bigBang.png', 'fs/bigBang.json');
-        // game.load.atlasJSONArray('baraban', 'fs/baraban.png', 'fs/baraban.json');
-        // game.load.atlasJSONArray('fsCountBG', 'fs/bang.png', 'fs/bang.json');
         game.load.image('plus3', 'fs/plus3.png');
-        // if (model.mobile) {
-        //     game.load.image('drumBG', 'fs/fsDrumBG.png');
-        //     game.load.image('bottleBG', 'fs/shkaf.png');
-        // } else {
-        //     game.load.image('bottleShadow', 'fs/bottleShadow.png');
-        //     game.load.image('brokenBottleShadow', 'fs/brokenBottleShadow.png');
-        // }
+
     }
 
     loadSpineAssets() {

@@ -304,15 +304,11 @@ export let view = (() => {
     let play = {
 
         WinSound: function() {
-            // let winSound = Math.round(Math.random())
-            // ? soundController.sound.playSound('lineWin', 1000)
-            // : soundController.sound.playSound('lineWin2', 1000);
-            // return winSound;
-            let game = model.el('game');
-            soundController.sound.playSound({sound: 'lineWin', duration: 1000});
-            game.time.events.add(300, () => {
-                soundController.sound.playSound({sound: 'lineWin2', duration: 1000});
-            });
+            let winSound = Math.round(Math.random())
+            ? soundController.sound.playSound({sound: 'lineWin', duration: 1200})
+            : soundController.sound.playSound({sound: 'lineWin2', duration: 1200});
+            return winSound;
+
         }
 
     };
