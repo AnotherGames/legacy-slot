@@ -118,6 +118,7 @@ export class Preload {
         game.load.spine('diverBig', 'spine/Vodolaz.json');
         game.load.spine('diverFS', 'spine/sunken.json');
         game.load.spine('chestFS', 'spine/skeleton.json');
+        game.load.spine('ink', 'spine/ink.json');
 
     }
 
