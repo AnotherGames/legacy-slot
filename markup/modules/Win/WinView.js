@@ -41,11 +41,11 @@ export let view = (() => {
             container = model.group('winTop')
         }) {
             if (winTotalData === 0) return;
-            let winTotal = game.add.sprite(0, 20, 'winTotal', null, container);
+            let winTotal = game.add.sprite(0, (model.mobile) ? -30 : 20, 'winTotal', null, container);
                 winTotal.anchor.set(0.5);
                 winTotal.scale.set(1.4);
 
-            let winTotalText = game.add.bitmapText(0, 0, 'numbersFont2', winTotalData, 100, container);
+            let winTotalText = game.add.bitmapText(0, (model.mobile) ? -50 : 0, 'numbersFont2', winTotalData, 100, container);
                 winTotalText.anchor.set(0.5);
         },
 
@@ -65,27 +65,11 @@ export let view = (() => {
             winSplash.animations.getAnimation('win').onComplete.add(() => {
                 winSplash.alpha = 0.05;
             });
-
-
-            // let rightArr = model.el('rightArr');
-            // let winSplashRight = rightArr.filter((el) => {
-            //     return el.name === number;
-            // })[0];
-            //
-            // winSplashRight.animations.add('win', Phaser.Animation.generateFrameNames('line_splash-' + number + '_', 1, 8, '.png', 1), 15, false);
-            // winSplashRight.animations.play('win');
-            // winSplashRight.animations.getAnimation('win').onComplete.add(() => {
-            //     winSplashRight.frameName = 'line_splash-' + number + '_8.png';
-            // });
-
         },
 
         WinNumber: function ({number}) {
             if (number < 0) return;
-
             draw.WinSplash({number, ind: 0});
-            // draw.WinSplash({number, ind: 1});
-
         },
 
         WinElements: function ({
@@ -166,7 +150,7 @@ export let view = (() => {
             return result;
         },
 
-        scaleJumping: function({
+        scaleJumping: function ({
             game = model.el('game'),
             el,
             start,
@@ -202,9 +186,9 @@ export let view = (() => {
             // Создаем массив координат для пробега глистой
             let glistaMas = [];
             let line = model.data('lines')[number - 1];
-                line.forEach((coord) => {
-                    glistaMas.push(coord.Y);
-                });
+            line.forEach((coord) => {
+                glistaMas.push(coord.Y);
+            });
 
             // Запускаем глисту
             glista.start(glistaMas, time, () => {
@@ -222,7 +206,7 @@ export let view = (() => {
             return glista;
         },
 
-        WinLineTable: function({
+        WinLineTable: function ({
             line,
             scatter,
             container = model.group('winTop'),
@@ -282,7 +266,7 @@ export let view = (() => {
             } else {
                 font = '25px Arial, Helvetica';
             }
-            let text = game.add.text(x, y + 2, winValue, {font: font, fill: '#fff'}, container);
+            let text = game.add.text(x, y + 4, winValue, {font: font, fill: '#fff'}, container);
                 text.anchor.set(0.5);
 
         },
@@ -299,7 +283,7 @@ export let view = (() => {
             });
         },
 
-        Diver: function({
+        Diver: function ({
             game = model.el('game'),
             el
         }) {
