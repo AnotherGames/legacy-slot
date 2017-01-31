@@ -120,6 +120,19 @@ export let view = (() => {
             return fastButton;
         },
 
+        FullScreenButton: function({
+            game = model.el('game'),
+            container = model.group('footer'),
+            x = 225,
+            y = model.el('game').height - 20
+        }) {
+            let fullScreeButton = game.add.button(x, y, 'footerButtons', null, null, null, 'fullscreen.png', null, null, container);
+                fullScreeButton.anchor.set(0.5);
+
+            model.el('fullScreeButton', fullScreeButton);
+            return fullScreeButton;
+        },
+
         Time: function ({
             game = model.el('game'),
             container = model.group('footer'),
