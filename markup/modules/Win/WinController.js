@@ -233,16 +233,21 @@ export let controller = (() => {
             let amountOFShurikens = +nextMode[8];
             let counter = 0;
 
-            shurikens.forEach((el) => {
-                game.add.tween(el.group.scale)
+            shurikens.elements.forEach((el) => {
+                el.hide(0);
+            });
+
+            shurikens.upElements.forEach((upEl) => {
+                upEl.show();
+                game.add.tween(upEl.group.scale)
                     .to({x: 1.8, y: 1.8}, 800, Phaser.Easing.Bounce.Out, true)
                     .onComplete.add(() => {
-                        game.add.tween(el.group.scale)
+                        game.add.tween(upEl.group.scale)
                             .to({x: 1, y: 1}, 300, 'Linear', true)
                     });
 
 
-                el.win(false, () => {
+                upEl.win(false, () => {
                     counter++;
                     if (counter == 1) {
                         model.state('bonus', true);
@@ -255,12 +260,22 @@ export let controller = (() => {
     }
 
     function findShurikens() {
-        let result = [];
+        let result = {};
+        result.upElements = [];
+        result.elements = [];
         let wheels = model.el('wheels');
+        let upWheels = model.el('upWheels');
         wheels.forEach((wheel) => {
             wheel.elements.forEach((el) => {
                 if (el.active == 12) {
-                    result.push(el);
+                    result.elements.push(el);
+                }
+            });
+        });
+        upWheels.forEach((wheel) => {
+            wheel.forEach((el) => {
+                if (el.active == 12) {
+                    result.upElements.push(el);
                 }
             });
         });
