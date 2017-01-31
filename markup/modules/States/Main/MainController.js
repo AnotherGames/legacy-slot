@@ -108,7 +108,6 @@ export class Main {
         // Проверяем сохранненые сессии
         this.checkForSavedFS();
 
-        model.group('main').y = 450;
         // Проверяем остались ли автокрутки
         this.checkForRemainAutoplay();
     }
@@ -121,8 +120,11 @@ export class Main {
             animation();
         });
 
-      let fullScreeButton = model.el('fullScreeButton');
-          fullScreeButton.frameName = (game.scale.isFullScreen || window.innerHeight == screen.height) ? 'fullscreenOff.png' : 'fullscreen.png';
+        if (model.desktop) {
+            let fullScreeButton = model.el('fullScreeButton');
+                fullScreeButton.frameName = (game.scale.isFullScreen || window.innerHeight == screen.height) ? 'fullscreenOff.png' : 'fullscreen.png';
+        }
+
     }
 
     positionMainContainer() {
@@ -144,7 +146,8 @@ export class Main {
             model.group('main').y = game.world.centerY + config[model.res].mainContainer.y;
         } else {
             model.group('main').x = game.world.centerX;
-            model.group('main').y = game.world.centerY + config[model.res].mainContainer.y;
+            // model.group('main').y = game.world.centerY + config[model.res].mainContainer.y;
+            model.group('main').y = 450;
         }
     }
 
