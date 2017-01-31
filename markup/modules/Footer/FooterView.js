@@ -160,7 +160,7 @@ export let view = (() => {
 
             let footerTime = game.add.text(
                 0,
-                game.height - 12,
+                game.height - 17,
                 `${currentHour} : ${currentMinutes}`,
                 style,
                 container);

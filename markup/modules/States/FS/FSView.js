@@ -105,7 +105,7 @@ export let view = (() => {
             let x, y, deltaX = 0, deltaY = 0, font;
             if (model.desktop) {
                 x = 950;
-                y = -57;
+                y = -47;
                 font = fontDesktop;
             } else {
                 x = model.el('game').width / 2 + 145;
@@ -170,7 +170,7 @@ export let view = (() => {
             let x, y, deltaX = 0, deltaY = 0, font;
             if (model.desktop) {
                 x = 585;
-                y = -60;
+                y = -50;
                 font = fontDesktop;
             } else {
                 x = model.el('game').width / 2 - 115;
@@ -244,7 +244,7 @@ export let view = (() => {
                 model.el('fsCountBG', fsCountBG);
             } else {
                 x = 767;
-                y = -75;
+                y = -65;
                 deltaX = 0;
                 deltaY = 0;
                 font = fontDesktop;
