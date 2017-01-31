@@ -300,10 +300,10 @@ export let view = (() => {
 
             let infoRules = game.add.sprite(x, y, 'info', '1_en.png', container);
                 infoRules.anchor.set(0.5);
-                infoRules.scale.set(1.3);
+                infoRules.scale.set(1);
             model.el('infoRules', infoRules);
 
-            let closed = game.add.sprite(game.width - 410, 210, 'closed', null, container);
+            let closed = game.add.sprite(game.width - 350, 170, 'closed', null, container);
             model.el('closed', closed);
 
             let infoControllers = game.add.group();
@@ -311,7 +311,7 @@ export let view = (() => {
             draw._markers(infoControllers)
             draw._arrows(infoControllers)
 
-            infoControllers.y = infoRules.bottom - infoControllers.height / 2;
+            infoControllers.y = infoRules.bottom - infoControllers.height / 2 - 30;
             infoControllers.x = game.width / 2 - infoControllers.width / 2;
 
             container.add(infoControllers);

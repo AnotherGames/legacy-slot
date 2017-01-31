@@ -325,41 +325,32 @@ export let view = (() => {
                 '1_en.png',
                 container);
                 infoRules.anchor.set(0.5);
-                infoRules.scale.set(1.1);
+                infoRules.scale.set(1.6);
             model.el('infoRules', infoRules);
 
             let closed = game.add.sprite(
-                game.width - 180,
-                90,
+                game.width - 170,
+                80,
                 'closed',
                 null,
                 container);
             model.el('closed', closed);
 
-            let arrowRight = game.add.sprite(
-                game.width / 2 + 60,
-                infoRules.height + 40,
-                'ar',
-                null,
-                container);
-            model.el('arrowRight', arrowRight);
+            let infoControllers = game.add.group();
+            container.add(infoControllers);
 
-            let arrowLeft = game.add.sprite(
-                game.width / 2 - 100,
-                infoRules.height + 40,
-                'arLeft',
-                null,
-                container);
-            model.el('arrowLeft', arrowLeft);
+            infoControllers.x = game.width / 2 - infoControllers.width / 2 - 120;
+            infoControllers.y = infoRules.bottom - infoControllers.height / 2 - 80;
 
             let infoMarkers = [];
             let infoMarker = game.add.sprite(
-                game.width / 2 - 82,
-                infoRules.height + 20,
+                0,
+                0,
                 'infoMarker',
                 'marker_on.png',
-                container);
+                infoControllers);
                 infoMarker.name = 'infoMarker0';
+            infoMarker.anchor.set(0.5);
             infoMarkers.push(infoMarker);
 
             for (let i = 1; i < config.numOfInfoDots; i++) {
@@ -367,16 +358,36 @@ export let view = (() => {
                 let counter = i;
                 let marker = game.add.sprite(
                     infoMarker.x,
-                    infoRules.height + 20,
+                    0,
                     'infoMarker',
                     'marker_off.png',
-                    container);
+                    infoControllers);
                     marker.name = name;
                     marker.x = marker.x + 30 * i;
+                marker.anchor.set(0.5);
                 infoMarkers.push(marker);
             }
 
             model.el('infoMarkers', infoMarkers);
+
+            let arrowRight = game.add.sprite(
+                infoMarkers[infoMarkers.length-1].x,
+                55,
+                'ar',
+                null,
+                infoControllers);
+            arrowRight.anchor.set(0.5);
+            model.el('arrowRight', arrowRight);
+
+            let arrowLeft = game.add.sprite(
+                infoMarkers[0].x,
+                55,
+                'arLeft',
+                null,
+                infoControllers);
+            arrowLeft.anchor.set(0.5);
+            model.el('arrowLeft', arrowLeft);
+
             container.visible = false;
             return container;
         }
