@@ -108,15 +108,21 @@ export class Main {
         // Проверяем сохранненые сессии
         this.checkForSavedFS();
 
+        model.group('main').y = 450;
         // Проверяем остались ли автокрутки
         this.checkForRemainAutoplay();
     }
 
     update() {
+        let game = model.el('game');
+
         footerController.updateTime({});
-        model.el('game').frameAnims.forEach((animation) => {
+        game.frameAnims.forEach((animation) => {
             animation();
         });
+
+      let fullScreeButton = model.el('fullScreeButton');
+          fullScreeButton.frameName = (game.scale.isFullScreen || window.innerHeight == screen.height) ? 'fullscreenOff.png' : 'fullscreen.png';
     }
 
     positionMainContainer() {
