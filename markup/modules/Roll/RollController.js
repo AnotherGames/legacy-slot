@@ -83,7 +83,7 @@ export let controller = (() => {
                 model.state('roll:fast', false);
 
                 // Играем звук кручения барабанов
-                soundController.sound.playSound({sound: 'baraban', fade: 500, volume: 0.6});
+                soundController.sound.playSound({sound: 'baraban', volume: 0.3});
                 // soundController.sound.changeSoundVolume('baraban', 60);
 
                 // Расчитываем конечный экран
@@ -148,7 +148,7 @@ export let controller = (() => {
 
     function endRoll() {
         if (model.state('ready')) return;
-        
+
         soundController.sound.stopSound('baraban');
 
         // Отправляем запрос Ready

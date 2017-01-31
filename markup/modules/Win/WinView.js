@@ -301,6 +301,48 @@ export let view = (() => {
             game.add.tween(aim)
                 .from({y: -600}, 800, Phaser.Easing.Bounce.Out, true);
             return aim;
+        },
+
+        FireShuriken(data, index) {
+            let game = model.el('game');
+            let container = model.group('aim');
+
+            let x = config.coords[parseInt(data.curValue)][index].x;
+            let y = config.coords[parseInt(data.curValue)][index].y;
+            let scaleX = config.coords[parseInt(data.curValue)][index].scaleX;
+            let scaleY = config.coords[parseInt(data.curValue)][index].scaleY;
+            if (model.mobile) {
+                x *= 0.66;
+                y *= 0.66;
+                scaleX *= 0.66;
+                scaleY *= 0.66;
+            }
+            let leftSide = config.coords[parseInt(data.curValue)][index].left;
+
+            soundController.sound.playSound({sound: 'shurikenFly'});
+
+            // Играй анимацию сурикена
+            let shuriken = game.add.sprite(x, y, 'shuriken', null, container);
+                shuriken.anchor.set(0.5);
+                shuriken.scale.x = (leftSide) ? -scaleX : scaleX;
+                shuriken.scale.y = scaleY;
+                shuriken.angle = game.rnd.integerInRange(-30, 30);
+                shuriken.animations.add('win');
+                shuriken.animations.play('win', 30);
+            game.add.tween(shuriken.scale)
+                .from({x: 2.5, y: 2.5}, 400, 'Linear', true);
+            game.add.tween(shuriken)
+                .from({x: (leftSide) ? 0 : game.width}, 400, 'Linear', true)
+                .onComplete.add(() => {
+                    let winText = game.add.bitmapText(game.world.centerX, game.world.centerY, 'numbersFont', `+${data.winCoins}`, 80, container);
+                        winText.align = 'center';
+                        winText.anchor.set(0.5);
+                        winText.scale.set(0.05);
+                    game.add.tween(winText.scale)
+                        .to({x: 1, y: 1}, 700, Phaser.Easing.Bounce.Out, true);
+                    game.add.tween(winText)
+                        .to({y: game.world.centerY - 500, alpha: 0}, 2000, 'Linear', true);
+                });
         }
 
     };
@@ -308,15 +350,11 @@ export let view = (() => {
     let play = {
 
         WinSound: function() {
-            // let winSound = Math.round(Math.random())
-            // ? soundController.sound.playSound('lineWin', 1000)
-            // : soundController.sound.playSound('lineWin2', 1000);
-            // return winSound;
-            let game = model.el('game');
-            soundController.sound.playSound({sound: 'lineWin', duration: 1000});
-            game.time.events.add(300, () => {
-                soundController.sound.playSound({sound: 'lineWin2', duration: 1000});
-            });
+            let winSound = Math.round(Math.random())
+            ? soundController.sound.playSound({sound: 'lineWin', duration: 1200})
+            : soundController.sound.playSound({sound: 'lineWin2', duration: 1200});
+            return winSound;
+
         }
 
     };

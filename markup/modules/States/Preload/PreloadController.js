@@ -45,7 +45,12 @@ export class Preload {
         game.load.audio('lineWin', 'lineWin.mp3');
         game.load.audio('lineWin2', 'lineWin2.mp3');
         game.load.audio('aim', 'aim.mp3');
-
+        game.load.audio('coins', 'coins.mp3');
+        game.load.audio('shurikenFly', 'shurikenFly.mp3');
+        game.load.audio('bonusSword', 'bonusSword.mp3');
+        game.load.audio('changeChar', 'changeChar.mp3');
+        game.load.audio('wow', 'wow.mp3');
+        game.load.audio('numberRustle', 'numberRustle.mp3');
     }
 
     loadInitAssets() {

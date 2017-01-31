@@ -138,6 +138,8 @@ export let view = (() => {
         // Изменяем музыку
         soundController.music.stopMusic('fsFon');
         soundController.music.playMusic('finishPerehod');
+        soundController.sound.playSound({sound: 'coins'});
+        soundController.sound.playSound({sound: 'wow'});
 
         // Рисуем фон
         let transitionBG = game.add.graphics(0, 0).beginFill(0x000000, 0.9).drawRect(0, 0, game.world.width, game.world.height);
