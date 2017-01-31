@@ -334,7 +334,7 @@ export class Wheel {
 
         let rand;
         if (model.state('fs')) {
-            rand = this.game.rnd.integerInRange(1, 11);
+            rand = this.game.rnd.integerInRange(1, 10);
         } else {
             rand = this.game.rnd.integerInRange(1, 10);
         }
