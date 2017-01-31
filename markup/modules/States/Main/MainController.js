@@ -154,6 +154,9 @@ export class Main {
       game.frameAnims.forEach((anim) => {
           anim();
       });
+
+      let fullScreeButton = model.el('fullScreeButton');
+          fullScreeButton.frameName = (game.scale.isFullScreen || window.innerHeight == screen.height) ? 'fullscreenOff.png' : 'fullscreen.png';
     }
 
     positionMainContainer() {

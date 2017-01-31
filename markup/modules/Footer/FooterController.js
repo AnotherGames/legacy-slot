@@ -24,6 +24,10 @@ export let controller = (() => {
         let fastButton = view.draw.FastButton({});
             fastButton.freezeFrames = true;
             fastButton.onInputDown.add(handle.Fast);
+
+        let fullScreenButton = view.draw.FullScreenButton({});
+            fullScreenButton.onInputDown.add(handle.toggleFullScreen);
+            fullScreenButton.freezeFrames = true;
     }
 
     function initMobile() {
@@ -110,6 +114,16 @@ export let controller = (() => {
                 });
             // Возвращаемся на предыдущую страницу
             window.history.back();
+        },
+
+        toggleFullScreen: function() {
+            let game = model.el('game');
+
+            if (game.scale.isFullScreen) {
+                game.scale.stopFullScreen()
+            } else {
+                game.scale.startFullScreen()
+            }
         }
     };
 
