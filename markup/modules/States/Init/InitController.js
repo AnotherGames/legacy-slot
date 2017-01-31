@@ -26,7 +26,7 @@ export class Init {
         }
         document.addEventListener(
             visibilityChange,
-            () => game.paused
+            () => { game.paused = (game.paused) ? false : true } 
         );
     }
 
@@ -71,7 +71,7 @@ export class Init {
     handlePlay() {
         const game = model.el('game');
 
-        if(model.mobile) game.scale.startFullScreen(); 
+        if(model.mobile) game.scale.startFullScreen();
 
         document.body.addEventListener('touchstart', () => {
             model.el('game').scale.startFullScreen();
