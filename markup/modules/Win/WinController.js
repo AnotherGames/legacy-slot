@@ -30,6 +30,9 @@ export let controller = (() => {
 
         // Проверяем переход на Фри-Спины
         checkForFS();
+
+        // Проверяем переход на бонус с илюминаторами
+        checkForShipBonus();
         // Играем звук выигрыша
         view.play.WinSound();
         // Рисуем табличку
@@ -152,6 +155,36 @@ export let controller = (() => {
             oneAfterAnother();
         });
 
+    }
+
+    function checkForShipBonus() {
+        let game = model.el('game');
+        let data = model.data('rollResponse'),
+            mode = data.Mode,
+            nextMode = data.NextMode;
+
+        if (mode == 'root' && nextMode == 'shipBonus') {
+            // Лочим все кнопки
+            model.state('buttons:locked', true);
+            // Остонавливаем автоплей если был
+            if (model.state('autoplay:start')) {
+                if (!model.state('autoStopWhenFS')) {
+                    model.data('remainAutoCount', model.data('autoplay:count'));
+                }
+                autoplayController.stop();
+            }
+            // Записываем экран с которого вошли на Фри-Спины
+            model.data('startFSScreen', data.Screen);
+            model.data('firstScreen', data.Screen);
+            // Убираем управление с клавиатуры
+            game.input.keyboard.enabled = false;
+
+            // Запускаем переходной экран
+            game.time.events.add(1500, () => {
+                console.log('Запускаем переходной экран для бонусов!');
+                // transitionView.fsStart();
+            });
+        }
     }
 
     function checkForFS() {
