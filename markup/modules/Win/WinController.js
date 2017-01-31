@@ -336,7 +336,7 @@ export let controller = (() => {
 
         shurikenArray.forEach((data, index) => {
             setTimeout(() => {
-                fireShuriken(data, index);
+                view.draw.FireShuriken(data, index);
             }, 800 * (index + 1));
             totalSum += data.winCoins;
             bonusSum += data.winCoins;
@@ -363,209 +363,19 @@ export let controller = (() => {
     function fireAllSurikDemo(multi) {
         coords[multi].forEach((sur, ind) => {
             setTimeout(() => {
-                fireShuriken({
+                view.draw.FireShuriken({
                     curValue: multi
                 }, ind);
             }, 1000 * ind);
         });
     }
 
-    let coords = {
-        2: [
-            {
-                x: 640,
-                y: 515,
-                left: true,
-                scaleX: 0.8,
-                scaleY: 0.8
-            },
-            {
-                x: 780,
-                y: 700,
-                left: true,
-                scaleX: 0.7,
-                scaleY: 0.9
-            },
-            {
-                x: 1230,
-                y: 600,
-                left: false,
-                scaleX: 0.6,
-                scaleY: 0.7
-            },
-            {
-                x: 1250,
-                y: 400,
-                left: false,
-                scaleX: 0.9,
-                scaleY: 0.8
-            },
-            {
-                x: 860,
-                y: 200,
-                left: true,
-                scaleX: 1,
-                scaleY: 0.9
-            }
-        ],
-        4: [
-            {
-                x: 760,
-                y: 450,
-                left: true,
-                scaleX: 0.7,
-                scaleY: 0.9
-            },
-            {
-                x: 870,
-                y: 680,
-                left: true,
-                scaleX: 1,
-                scaleY: 1
-            },
-            {
-                x: 1160,
-                y: 520,
-                left: false,
-                scaleX: 0.7,
-                scaleY: 0.8
-            },
-            {
-                x: 1180,
-                y: 380,
-                left: false,
-                scaleX: 1,
-                scaleY: 0.8
-            },
-            {
-                x: 1050,
-                y: 270,
-                left: false,
-                scaleX: 1,
-                scaleY: 1
-            }
-        ],
-        6: [
-            {
-                x: 850,
-                y: 520,
-                left: true,
-                scaleX: 0.7,
-                scaleY: 0.7
-            },
-            {
-                x: 780,
-                y: 450,
-                left: true,
-                scaleX: 0.8,
-                scaleY: 0.8
-            },
-            {
-                x: 1070,
-                y: 450,
-                left: false,
-                scaleX: 0.5,
-                scaleY: 0.5
-            },
-            {
-                x: 880,
-                y: 360,
-                left: true,
-                scaleX: 0.9,
-                scaleY: 0.9
-            },
-            {
-                x: 1050,
-                y: 560,
-                left: false,
-                scaleX: 1,
-                scaleY: 1
-            }
-        ],
-        10: [
-            {
-                x: 920,
-                y: 500,
-                left: true,
-                scaleX: 0.5,
-                scaleY: 0.7
-            },
-            {
-                x: 930,
-                y: 440,
-                left: true,
-                scaleX: 0.5,
-                scaleY: 0.6
-            },
-            {
-                x: 1040,
-                y: 450,
-                left: false,
-                scaleX: 0.5,
-                scaleY: 0.5
-            },
-            {
-                x: 880,
-                y: 460,
-                left: true,
-                scaleX: 0.5,
-                scaleY: 0.4
-            },
-            {
-                x: 1050,
-                y: 520,
-                left: false,
-                scaleX: 1,
-                scaleY: 1
-            }
-        ]
-    }
 
-    function fireShuriken(data, index) {
-        let game = model.el('game');
-        let container = model.group('aim');
 
-        let x = coords[parseInt(data.curValue)][index].x;
-        let y = coords[parseInt(data.curValue)][index].y;
-        let scaleX = coords[parseInt(data.curValue)][index].scaleX;
-        let scaleY = coords[parseInt(data.curValue)][index].scaleY;
-        if (model.mobile) {
-            x *= 0.66;
-            y *= 0.66;
-            scaleX *= 0.66;
-            scaleY *= 0.66;
-        }
-        let leftSide = coords[parseInt(data.curValue)][index].left;
-
-        // Играй анимацию сурикена
-        let shuriken = game.add.sprite(x, y, 'shuriken', null, container);
-            shuriken.anchor.set(0.5);
-            shuriken.scale.x = (leftSide) ? -scaleX : scaleX;
-            shuriken.scale.y = scaleY;
-            shuriken.angle = game.rnd.integerInRange(-30, 30);
-            shuriken.animations.add('win');
-            shuriken.animations.play('win', 30);
-        game.add.tween(shuriken.scale)
-            .from({x: 2.5, y: 2.5}, 400, 'Linear', true);
-        game.add.tween(shuriken)
-            .from({x: (leftSide) ? 0 : game.width}, 400, 'Linear', true)
-            .onComplete.add(() => {
-                let winText = game.add.bitmapText(game.world.centerX, game.world.centerY, 'numbersFont', `+${data.winCoins}`, 80, container);
-                    winText.align = 'center';
-                    winText.anchor.set(0.5);
-                    winText.scale.set(0.05);
-                game.add.tween(winText.scale)
-                    .to({x: 1, y: 1}, 700, Phaser.Easing.Bounce.Out, true);
-                game.add.tween(winText)
-                    .to({y: game.world.centerY - 500, alpha: 0}, 2000, 'Linear', true);
-            });
-    }
 
     return {
         showWin,
-        cleanWin,
-        fireShuriken,
-        fireAllSurikDemo
+        cleanWin
     };
 
 })();
