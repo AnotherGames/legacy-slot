@@ -128,10 +128,13 @@ export class Preload {
         const game = model.el('game');
         game.load.image('bonusBG', 'bg/bonusBG.png');
         game.load.image('bonusBG2', 'bg/bonusBG2.png');
+        game.load.image('bonusBG3', 'bg/bonusBG3.png');
         game.load.spritesheet('bigFish', 'bonus/bigFish.png', 226, 182, 12);
+        game.load.spritesheet('chernila', 'bonus/chernila.png', 259, 185, 12);
         game.load.atlasJSONArray('bonusNumber', 'bonus/bonusNumber.png', 'bonus/bonusNumber.json');
         game.load.atlasJSONArray('illuminators', 'bonus/illuminators.png', 'bonus/illuminators.json');
         game.load.image('light', 'bonus/light.png');
+        game.load.image('octopus', 'bonus/octopus.png');
     }
 
     loadSpineAssets() {

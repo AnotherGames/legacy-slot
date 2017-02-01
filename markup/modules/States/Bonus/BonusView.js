@@ -9,8 +9,8 @@ export let view = (() => {
             game = model.el('game')
         }) {
             model.group('bg', game.add.group());
+            model.group('upperBG', game.add.group());
             model.group('main', game.add.group());
-            model.group('panel', game.add.group());
             model.group('buttons', game.add.group());
             model.group('balanceContainer', game.add.group());
             model.group('menuContainer', game.add.group());
@@ -33,9 +33,12 @@ export let view = (() => {
 
         upperBG: function ({
             game = model.el('game'),
-            container = model.group('bg')
+            container = model.group('upperBG')
         }) {
-            let upperBG = game.add.sprite(0, 0, 'bonusBG2', null, container);
+            let middleBG = game.add.sprite(0, 0, 'bonusBG2', null, container);
+            model.el('middleBG', middleBG);
+
+            let upperBG = game.add.sprite(0, 0, 'bonusBG3', null, container);
             model.el('upperBG', upperBG);
         },
 
@@ -67,7 +70,93 @@ export let view = (() => {
                 game.add.tween(topLight)
                     .to({alpha: game.rnd.integerInRange(40, 90) / 100}, game.rnd.integerInRange(3000, 5000), 'Linear', true, null, -1, true);
             }
+        },
+
+        showOctopus: function ({
+            game = model.el('game'),
+            container = model.group('bg')
+        }) {
+            let octopus = game.add.sprite(game.width * 0.68, game.height * 0.75, 'octopus', null, container);
+            octopus.anchor.set(0.5);
+            octopus.alpha = 0;
+
+            let inkSmall = game.add.sprite(game.width * 0.68, game.height * 0.75, 'chernila', null, container);
+            inkSmall.anchor.set(0.5);
+            inkSmall.scale.set(4.0);
+            if (model.mobile){
+                inkSmall.scale.set(2.0);
+            }
+            inkSmall.animations.add('move');
+            inkSmall.animations.play('move', 20, false);
+
+            game.add.tween(inkSmall).to({alpha: 0}, 1500, 'Linear', true, 500);
+            game.add.tween(octopus).to({alpha: 1}, 1500, 'Linear', true, 500);
+        },
+
+        showWin: function ({
+            game = model.el('game'),
+            container = model.group('bg'),
+            winTextFrame = 'totalW.png'
+        }) {
+
+            let winText = game.add.sprite(game.width / 2,
+                game.height * 0.2,
+                'text',
+                winTextFrame,
+                container);
+            winText.anchor.set(0.5);
+            winText.scale.set(0.1);
+            model.el('winText', winText);
+
+            // Отрисовываем Выигрыш
+            let winCount = game.add.bitmapText(game.width / 2, game.height / 2 - 50, 'numbersFont', '0', 120, container);
+                winCount.align = 'center';
+                winCount.anchor.set(0.5);
+                winCount.scale.set(0.1);
+            model.el('winCount', winCount);
+
+            draw._showWinTween({});
+        },
+
+        _showWinTween: function({
+            game = model.el('game'),
+            winText = model.el('winText'),
+            winCount = model.el('winCount')
+        }) {
+            let scaleX = (model.desktop) ? 1.0 : 0.7;
+            let scaleY = (model.desktop) ? 1.0 : 0.7;
+            game.add.tween(winText.scale).to({x: 1.0, y: 1.0}, 1500, Phaser.Easing.Bounce.Out, true)
+                .onComplete.add(() => {
+                    let winCountValue = model.data('bonusWinCoins');
+                    draw._сountMeter(winCountValue, winCount);
+                });
+            game.add.tween(winCount.scale).to({x: scaleX, y: scaleY}, 1500, Phaser.Easing.Bounce.Out, true);
+        },
+
+        _сountMeter: function(count, elem) {
+            let game = model.el('game');
+
+            let timeLength = config.countMeterTime;
+            let _clock = game.time.create(true);
+            _clock.add(timeLength, () => {}, this);
+            _clock.start();
+
+            let anim = function () {
+                let timer = timeLength - _clock.duration;
+                let progress = timer / timeLength;
+                if (progress > 1) {
+                    progress = 1;
+                }
+                elem.setText( parseInt(count * progress) );
+
+                if (progress === 1) {
+                    game.frameAnims.splice(game.frameAnims.indexOf(anim), 1);
+                }
+
+            };
+            game.frameAnims.push(anim);
         }
+
     };
 
 return {

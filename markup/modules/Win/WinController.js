@@ -183,7 +183,7 @@ export let controller = (() => {
             game.time.events.add(1500, () => {
                 let ink = game.add.spine(game.world.centerX, game.world.centerY, 'ink');
                 if (model.mobile) {
-                    ink.scale.set(0.6);
+                    ink.scale.set(0.8);
                 } else {
                     ink.scale.set(1.4);
                 }

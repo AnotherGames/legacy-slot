@@ -29,27 +29,48 @@ class Door {
 
         setTimeout(() => {
             this.lightBlinking();
-        }, this.deltaTime);
+        }, this.deltaTime + 1000);
     }
 
     win() {
         this.destroyed = true;
         this.game.add.tween(this.sprite)
-            .to({alpha: 0}, 500, 'Linear', true);
+            .to({alpha: 0}, 300, 'Linear', true);
+        this.table = this.game.add.sprite(this.x, this.y, 'bonusNumber', `x${parseInt(this.data.CurrentValue)}.png`);
+        this.table.anchor.set(0.6, 0.8);
+        this.table.alpha = 0;
+        this.table.angle = this.game.rnd.integerInRange(-15, 15);
+
+        if (model.mobile) {
+            this.table.scale.set(0.66);
+        }
+        this.game.add.tween(this.table)
+            .to({alpha: 1}, 500, 'Linear', true);
+        this.game.add.tween(this.table)
+            .from({y: this.table.y + 50}, 400, 'Linear', true);
+        model.group('bg').add(this.table);
     }
 
     fail() {
         this.destroyed = true;
-        this.game.add.tween(this.sprite)
-            .to({alpha: 1}, 500, 'Linear', true);
-        this.game.add.tween(this.sprite.scale)
-            .to({x: 1.8, y: 1.8}, 500, 'Linear', true);
-        console.log('I am failed!', this);
+        this.doors.forEach((door) => {
+            this.game.add.tween(door.sprite)
+                .to({alpha: 0}, 500, 'Linear', true);
+            if (door.table) {
+                this.game.add.tween(door.table)
+                    .to({alpha: 0}, 300, 'Linear', true);
+            }
+
+        });
+
     }
 
     lightBlinking() {
         if (!this.destroyed) {
-            this.game.add.tween(this.light).to({alpha: 0.6}, 800, 'Linear', true, 0, -1, true);
+            this.game.add.tween(this.light).to({alpha: 0.6}, 500, 'Linear', true, 0, 0, true);
+            setTimeout(() => {
+                this.lightBlinking();
+            }, 4000);
         }
     }
 
@@ -58,18 +79,21 @@ class Door {
 export class Bonus {
 
     init() {
+        this.game = model.el('game');
         this.doors = [];
+        model.data('bonusWinCoins', 0);
+        model.state('bonus', true);
         console.log('I am inited!');
 
         bonusView.create.groups({});
     }
 
     create() {
-        let game = model.el('game');
         bonusView.draw.mainBG({});
 
         for (let i = 0; i < 5; i++) {
             this.doors.push(new Door(config.illuminatorsCoords[i].x, config.illuminatorsCoords[i].y, this.doors, i + 1));
+            let blinkTimeout = this.game.rnd.integerInRange(2000, 3000);
         }
 
         mainView.draw.addBubbles({});
@@ -79,12 +103,19 @@ export class Bonus {
         bonusView.draw.upperBG({});
     }
 
+    update() {
+        model.el('game').frameAnims.forEach((anim) => {
+            anim();
+        });
+    }
+
 }
 function handleDoorClick() {
     if (this.destroyed) return;
     request.send('Roll')
         .then((data) => {
             this.data = data;
+            model.data('bonusWinCoins', model.data('bonusWinCoins') + data.Balance.TotalWinCoins);
             console.log(data);
         })
         .then(() => {
@@ -102,21 +133,26 @@ function handleDoorClick() {
                     this.win();
                     this.isWinPlayed = true;
                     if (this.data.BonusEnd) {
+                        // Переходной экран Big Win
+                        bonusView.draw.showWin({winTextFrame: 'bigW.png'});
                         setTimeout(() => {
-                            // Переходной экран Big Win
                             model.state('buttons:locked', false);
+                            model.state('bonus', false);
                             this.game.state.start('Main');
-                        }, 1500);
+                        }, 4000);
                     }
                 } else {
                     this.doors.forEach((door) => {
                         door.fail();
                     });
+                    bonusView.draw.showOctopus({});
+                    // Переходной экран Total Win
+                    bonusView.draw.showWin({});
                     setTimeout(() => {
-                        // Переходной экран Total Win
                         model.state('buttons:locked', false);
+                        model.state('bonus', false);
                         this.game.state.start('Main');
-                    }, 1500);
+                    }, 4000);
                 }
 
             }
