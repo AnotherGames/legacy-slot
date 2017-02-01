@@ -46,8 +46,6 @@ export class Init {
         let game = model.el('game');
         game.camera.flash(0x000000, 777)
 
-        this.checkSettingsWidth();
-
         view.drawBG();
         view.drawLogo();
         view.drawBaraban();
