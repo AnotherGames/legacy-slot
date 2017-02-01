@@ -269,6 +269,7 @@ export let view = (() => {
             time = 350
         }) {
             let autoDesktopContainer = model.group('autoDesktop');
+            autoDesktopContainer.visible = true;
             return game.add.tween(autoDesktopContainer).to( { alpha: 1 }, time, 'Linear', true);
         },
 
@@ -322,6 +323,9 @@ export let view = (() => {
         }) {
             let autoDesktopContainer = model.group('autoDesktop');
             return game.add.tween(autoDesktopContainer).to( { alpha: 0 }, time, 'Linear', true)
+                .onComplete.add(()=>{
+                    autoDesktopContainer.visible = false;
+                });
         }
     }
 
