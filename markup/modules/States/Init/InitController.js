@@ -47,8 +47,6 @@ export class Init {
     create() {
         let game = model.el('game');
 
-        this.checkSettingsWidth();
-
         view.drawBG();
         view.drawBGLogo();
         view.drawLogo();
@@ -104,12 +102,6 @@ export class Init {
             game.state.start('Main');
         })
         game.camera.fade(0x000000, 500)
-    }
-
-    checkSettingsWidth() {
-        let settingsWidth = $('#settings').width();
-        let multiplay = window.innerWidth / settingsWidth * 0.8;
-        $('#settings').css('transform', 'translate(-50%, -50%) scale(' + multiplay + ',' + multiplay + ')');
     }
 
     drawSoundTrigger() {
