@@ -1,5 +1,6 @@
 import { model } from 'modules/Model/Model';
 import { view } from 'modules/States/Preload/PreloadView';
+import { view as mainView } from 'modules/States/Main/MainView';
 
 export class Preload {
     init() {
@@ -15,8 +16,17 @@ export class Preload {
 
     preload() {
         const game = model.el('game');
+
+        model.group('popup', game.add.group());
+        $('#wait').addClass('closed');
+
         game.load.setPreloadSprite(view.drawPreloadBar());
         view.drawPreloadCoin();
+
+        model.state('loadError', false)
+        game.load.onFileError.add(()=>{
+            model.state('loadError', true)
+        })
 
         this.loadSounds();
         this.loadInitAssets();
@@ -71,7 +81,6 @@ export class Preload {
         game.load.image('eyeLight', 'bg/eyeLight.png');
         game.load.image('gameMachine', 'game/gameMachine.png');
         game.load.image('gameMachineBG', 'game/gameMachineBG.png');
-        game.load.image('popup', 'other/popup.png');
         game.load.image('closed', 'other/closed.png');
         game.load.image('ar', 'other/ar.png');
         game.load.image('arLeft', 'other/arLeft.png');
@@ -144,8 +153,13 @@ export class Preload {
 
     hidePreloader() {
         const game = model.el('game');
-        view.hideCoin();
         view.hideBar();
+        view.hideCoin();
+        if (model.state('loadError')) {
+            mainView.draw.showPopup({message: 'Connection problem'});
+            game.load.reset(true, true)
+            return;
+        }
         if (model.state('initScreen')) {
             game.state.start('Init');
         } else {
