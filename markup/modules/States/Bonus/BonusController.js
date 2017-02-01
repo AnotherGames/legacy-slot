@@ -1,26 +1,35 @@
 import { model } from 'modules/Model/Model';
 import { request } from 'modules/Util/Request';
+import { config } from 'modules/Util/Config';
 import { view as bonusView } from 'modules/States/Bonus/BonusView';
 import { view as mainView } from 'modules/States/Main/MainView';
 
 class Door {
-    constructor(x, y, arr) {
+    constructor(x, y, arr, index) {
         this.game = model.el('game');
 
-        this.x = x;
-        this.y = y;
+        this.x = (model.desktop) ? x : x * 2 / 3;
+        this.y = (model.desktop) ? y : y * 2 / 3;
         this.doors = arr;
+        this.deltaTime = 100 * index;
 
         this.destroyed = false;
         this.isWinPlayed = false;
 
-        this.sprite = this.game.add.graphics(x, y);
+        this.light = this.game.add.sprite(this.x, this.y, 'light')
+        this.light.anchor.set(0.5);
+        this.light.alpha = 0;
+        model.group('bg').add(this.light);
+
+        this.sprite = this.game.add.sprite(this.x, this.y, 'illuminators', `${index}.png`);
+        this.sprite.anchor.set(0.5);
         this.sprite.inputEnabled = true;
         this.sprite.events.onInputDown.add(handleDoorClick, this);
+        model.group('bg').add(this.sprite);
 
-        this.sprite.beginFill(0xFF0000);
-        this.sprite.drawRect(0, 0, 50, 50);
-
+        setTimeout(() => {
+            this.lightBlinking();
+        }, this.deltaTime);
     }
 
     win() {
@@ -28,6 +37,7 @@ class Door {
         this.game.add.tween(this.sprite)
             .to({alpha: 0}, 500, 'Linear', true);
     }
+
     fail() {
         this.destroyed = true;
         this.game.add.tween(this.sprite)
@@ -36,6 +46,13 @@ class Door {
             .to({x: 1.8, y: 1.8}, 500, 'Linear', true);
         console.log('I am failed!', this);
     }
+
+    lightBlinking() {
+        if (!this.destroyed) {
+            this.game.add.tween(this.light).to({alpha: 0.6}, 800, 'Linear', true, 0, -1, true);
+        }
+    }
+
 }
 
 export class Bonus {
@@ -49,16 +66,16 @@ export class Bonus {
 
     create() {
         let game = model.el('game');
+        bonusView.draw.mainBG({});
+
         for (let i = 0; i < 5; i++) {
-            this.doors.push(new Door(100 * i, 150 * i, this.doors));
+            this.doors.push(new Door(config.illuminatorsCoords[i].x, config.illuminatorsCoords[i].y, this.doors, i + 1));
         }
 
-        bonusView.draw.mainBG({});
         mainView.draw.addBubbles({});
         mainView.draw.addFishes({y1: (model.desktop) ? 650 : 400, y2: (model.desktop) ? 900 : 700});
         bonusView.draw.bigFish({});
         bonusView.draw.addLight({});
-        bonusView.draw.addIllum({});
         bonusView.draw.upperBG({});
     }
 

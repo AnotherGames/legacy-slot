@@ -67,15 +67,6 @@ export let view = (() => {
                 game.add.tween(topLight)
                     .to({alpha: game.rnd.integerInRange(40, 90) / 100}, game.rnd.integerInRange(3000, 5000), 'Linear', true, null, -1, true);
             }
-        },
-
-        addIllum: function ({
-            game = model.el('game'),
-            container = model.group('bg')
-        }) {
-            let illuminator = game.add.sprite(550, 380, 'illuminators', '1.png', container);
-            illuminator.anchor.set(0.5);
-            model.el('illuminator', illuminator);
         }
     };
 
