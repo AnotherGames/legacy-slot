@@ -18,6 +18,19 @@ body {
     display: none;
 }
 
+#wait {
+    position: absolute;
+    font-size: calc(3vw + 20px);
+    color: white;
+    width: 100%;
+    text-align: center;
+    animation: blinker 5s linear infinite;
+}
+
+@keyframes blinker {
+  50% { opacity: 0; }
+}
+
 #game {
     background: black;
     width: 100%;
@@ -114,7 +127,7 @@ body {
 #volume {
     position: relative;
     margin: 10px 60px;
-    
+
     &::before,
     &::after {
         content: "";

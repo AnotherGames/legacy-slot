@@ -15,6 +15,7 @@ export class Preload {
 
     preload() {
         const game = model.el('game');
+        $('#wait').addClass('closed');
         game.load.setPreloadSprite(view.drawPreloadBar());
         view.drawPreloadCoin();
 
