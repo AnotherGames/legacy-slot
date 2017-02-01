@@ -133,6 +133,8 @@ export let view = (() => {
                 autoplayBG.anchor.set(0.5);
             model.el('autoplayBG', autoplayBG);
 
+            container.visible = false;
+
             let autoBG10 = this._AutoPanelItem({});
             let autoBG25 = this._AutoPanelItem({text: 25, x: -140, y: -7, width: 63, height: 40});
             let autoBG50 = this._AutoPanelItem({text: 50, x: -80, y: -7, width: 68, height: 40});

@@ -25,14 +25,12 @@ export let view = (() => {
 
     function hideBar() {
         const game = model.el('game');
-        console.log('bar');
         return game.add.tween(model.el('preloadBar'))
             .to({alpha: 0}, 500, Phaser.Easing.In, true);
     }
 
     function hideCoin() {
         const game = model.el('game');
-        console.log('coin');
         return game.add.tween(model.el('preloadCoin').scale)
             .to({x: 0, y: 0}, 500, Phaser.Easing.In, true)
             .onComplete.add(()=>{
