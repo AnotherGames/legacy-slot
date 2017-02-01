@@ -189,7 +189,9 @@ export let controller = (() => {
                 }
                 model.el('ink', ink);
                 ink.setAnimationByName(1, '1', false);
-                console.log('Запускаем переходной экран для бонусов!');
+                setTimeout(() => {
+                    game.state.start('Bonus');
+                }, 2000);
                 // transitionView.fsStart();
             });
         }

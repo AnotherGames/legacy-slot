@@ -109,10 +109,10 @@ export let controller = (() => {
             // Отправляем запрос Logout
             request.send('Logout')
                 .then((response) => {
+                    // Возвращаемся на предыдущую страницу
+                    window.history.back();
                     console.log('Logout response:', response);
                 });
-            // Возвращаемся на предыдущую страницу
-            window.history.back();
         },
 
         toggleFullScreen: function() {
