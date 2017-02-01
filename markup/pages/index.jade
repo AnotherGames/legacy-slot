@@ -3,16 +3,17 @@ html
 
     head
         meta(charset="utf-8")
-        meta(http-equiv="x-ua-compatible", content="ie=edge")
         title Another Games - Slot
-        //- This make sence for mobile browsers. It means, that content has been optimized for mobile browsers
+
         meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1")
         meta(name="format-detection" content="telephone=no")
         meta(name="format-detection" content="address=no")
         meta(name="apple-mobile-web-app-capable" content="yes")
         meta(name="apple-mobile-web-app-status-bar-style" content="black-translucent")
-        meta(http-equiv="imagetoolbar" content="no")
         meta(name="HandheldFriendly" content="true")
+
+        meta(http-equiv="x-ua-compatible", content="ie=edge")
+        meta(http-equiv="imagetoolbar" content="no")
 
         link(href="%=static=%css/main%=hash=%%=min=%.css" rel="stylesheet")
 
@@ -39,12 +40,6 @@ html
                     .marginBottom
                         input#fastSpin.checkbox(type='checkbox')
                         label(for='fastSpin') Fast Spin
-                    //- .marginBottom
-                    //-    input#isAnimations.checkbox(type='checkbox')
-                    //-    label(for='isAnimations') Sprite animations
-                    //- .marginBottom
-                    //-     input#isAnimBG.checkbox(type='checkbox' checked="true")
-                    //-     label(for='isAnimBG') Background animations
                     .marginBottom
                         input#optionAutoplay5.checkbox(type='checkbox')
                         label(for='optionAutoplay5') Auto transition
@@ -68,11 +63,10 @@ html
                         label(for='optionAutoplay4') When entering Free Spins
                     .title Info
                     .btnContainer
-                        //- button#btnHistory History
                         button#btnRules Rules
                 button#settingsSave Save
 
-        script(src='https://cdnjs.cloudflare.com/ajax/libs/phaser/2.6.2/phaser.min.js')
         script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js')
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/phaser/2.6.2/phaser.min.js')
         script(src='%=static=%js/separate-js/phaser-spine.js')
         script(src='%=static=%js/main%=hash=%%=min=%.js')
