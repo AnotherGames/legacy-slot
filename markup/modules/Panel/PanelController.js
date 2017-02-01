@@ -83,7 +83,6 @@ export let controller = (() => {
             soundController.sound.playSound({sound : 'buttonClick'});
             if (!model.state('autoplay:panelClosed')) {
                 model.state('autoplay:panelClosed', true);
-                view.hide.autoButton({});
                 view.hide.autoPanel({});
             }
 
@@ -110,11 +109,9 @@ export let controller = (() => {
 
             if (model.state('autoplay:panelClosed') && !model.data('remainAutoCount')) {
                 model.state('autoplay:panelClosed', false);
-                // view.show.autoButton({});
                 view.show.autoPanel({});
             } else {
                 model.state('autoplay:panelClosed', true);
-                // view.hide.autoButton({});
                 view.hide.autoPanel({});
             }
         },
