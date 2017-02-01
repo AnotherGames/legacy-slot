@@ -2,9 +2,6 @@ import { model } from 'modules/Model/Model';
 import { request } from 'modules/Util/Request';
 
 export class Boot {
-    constructor(game) {
-
-    }
 
     init() {
         model.state('isNoConnect', false);
@@ -21,6 +18,12 @@ export class Boot {
             });
 
         this._checkDevice();
+        $(window).on('beforeunload', function () {
+            request.send('Logout')
+                .then((response) => {
+                    console.log('Logout response:', response);
+                });
+        });
     }
 
     preload() {
