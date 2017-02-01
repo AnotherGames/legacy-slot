@@ -1,0 +1,52 @@
+{"frames": [
+
+{
+	"filename": "1.png",
+	"frame": {"x":1,"y":1,"w":93,"h":93},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":93,"h":93},
+	"sourceSize": {"w":93,"h":93}
+},
+{
+	"filename": "2.png",
+	"frame": {"x":1,"y":96,"w":93,"h":93},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":93,"h":93},
+	"sourceSize": {"w":93,"h":93}
+},
+{
+	"filename": "3.png",
+	"frame": {"x":1,"y":191,"w":93,"h":93},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":93,"h":93},
+	"sourceSize": {"w":93,"h":93}
+},
+{
+	"filename": "4.png",
+	"frame": {"x":1,"y":286,"w":91,"h":90},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":91,"h":90},
+	"sourceSize": {"w":91,"h":90}
+},
+{
+	"filename": "5.png",
+	"frame": {"x":1,"y":378,"w":90,"h":89},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":90,"h":89},
+	"sourceSize": {"w":90,"h":89}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "illuminators.png",
+	"format": "RGBA8888",
+	"size": {"w":95,"h":468},
+	"scale": "0.66",
+	"smartupdate": "$TexturePacker:SmartUpdate:50e812ef9d6b516b4af0bf693ef9d995:64c59af7bba02b8a4d47fc6d7ecc518f:ee57e04e58ceed3458cca857e8680e40$"
+}
+}

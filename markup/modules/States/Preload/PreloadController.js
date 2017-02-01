@@ -32,6 +32,7 @@ export class Preload {
         this.loadInitAssets();
         this.loadMainAssets();
         this.loadFSAssets();
+        this.loadBonusAssets();
         this.loadSpineAssets();
         this.loadTest();
 
@@ -76,6 +77,7 @@ export class Preload {
         game.load.image('transitionBG1', 'bg/transitionBG1.png');
         game.load.image('transitionBG2', 'bg/transitionBG2.jpg');
         game.load.image('bubble', 'bg/bubble.png');
+        game.load.image('topLight', 'bg/topLight.png');
         game.load.spritesheet('fish', 'bg/fish.png', 103, 33, 12);
         game.load.spritesheet('shark', 'bg/shark.png', 493, 188, 12);
         game.load.image('eyeLight', 'bg/eyeLight.png');
@@ -120,6 +122,16 @@ export class Preload {
 
         game.load.image('plus3', 'fs/plus3.png');
 
+    }
+
+    loadBonusAssets() {
+        const game = model.el('game');
+        game.load.image('bonusBG', 'bg/bonusBG.png');
+        game.load.image('bonusBG2', 'bg/bonusBG2.png');
+        game.load.spritesheet('bigFish', 'bonus/bigFish.png', 226, 182, 12);
+        game.load.atlasJSONArray('bonusNumber', 'bonus/bonusNumber.png', 'bonus/bonusNumber.json');
+        game.load.atlasJSONArray('illuminators', 'bonus/illuminators.png', 'bonus/illuminators.json');
+        game.load.image('light', 'bonus/light.png');
     }
 
     loadSpineAssets() {

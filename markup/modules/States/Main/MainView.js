@@ -102,7 +102,9 @@ export let view = (() => {
 
         addFishes: function({
             game = model.el('game'),
-            container = model.group('bg')
+            container = model.group('bg'),
+            y1 = (model.desktop) ? 450 : 350,
+            y2 = (model.desktop) ? 700 : 600
         }) {
             let fishes = [];
             let side = (game.rnd.sign() < 0) ? 'left' : 'right';
@@ -110,7 +112,7 @@ export let view = (() => {
             for (let i = 0; i < game.rnd.integerInRange(5, 10); i++) {
 
                 let x = (side === 'left') ? game.rnd.integerInRange(430, 500) * -1: game.width + game.rnd.integerInRange(430, 500);
-                let y = (model.desktop) ? game.rnd.integerInRange(450, 700) : game.rnd.integerInRange(350, 600);
+                let y = game.rnd.integerInRange(y1, y2);
 
                 let fish = game.add.sprite(x, y, 'fish', null, container);
                 fish.anchor.set(0.5);
@@ -133,7 +135,11 @@ export let view = (() => {
                 }, this);
             });
             game.time.events.add(20000, () => {
-                this.addFishes({});
+                if (model.state('bonus')) {
+                    this.addFishes({y1: (model.desktop) ? 600 : 400, y2: (model.desktop) ? 900 : 700});
+                } else {
+                    this.addFishes({});
+                }
             });
         },
 
