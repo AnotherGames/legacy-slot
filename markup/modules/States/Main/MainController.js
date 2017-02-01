@@ -17,7 +17,7 @@ import { controller as mobileSettingsController } from 'modules/Menu/Settings/Me
 import { controller as mobileAutoplayController } from 'modules/Menu/Autoplay/MenuAutoplayController';
 import { controller as mobileSetBetController } from 'modules/Menu/SetBet/MenuSetBetController';
 import { controller as fsController } from 'modules/States/FS/FSController';
-import { controller as keyboardController } from 'modules/Keyboard/KeyboardController'
+import { controller as keyboardController } from 'modules/Keyboard/KeyboardController';
 
 export class Main {
     constructor(game) {
@@ -91,26 +91,26 @@ export class Main {
             keyboardController.initMainKeys();
         }
         // Выход из темноты
-        game.camera.flash(0x000000, 500)
+        game.camera.flash(0x000000, 500);
         // Проверяем сохранненые сессии
         this.checkForSavedFS();
-        
+
         // Проверяем остались ли автокрутки
         this.checkForRemainAutoplay();
 
     }
 
     update() {
-      footerController.updateTime({});
-      const game = model.el('game');
-      game.frameAnims.forEach((anim) => {
-          anim();
-      });
+        const game = model.el('game');
+        footerController.updateTime({});
+        game.frameAnims.forEach((anim) => {
+            anim();
+        });
 
-      if (model.desktop) {
+        if (model.desktop) {
         let fullScreeButton = model.el('fullScreeButton');
             fullScreeButton.frameName = (game.scale.isFullScreen || window.innerHeight == screen.height) ? 'fullscreenOff.png' : 'fullscreen.png';
-      }
+        }
     }
 
     positionMainContainer() {
@@ -138,6 +138,7 @@ export class Main {
     }
 
     checkForSavedFS() {
+        const game = model.el('game');
         if (model.data('savedFS')) {
             game.state.start('FS');
         }
