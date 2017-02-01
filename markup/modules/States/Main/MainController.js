@@ -150,6 +150,7 @@ export class Main {
     }
 
     checkForSavedFS() {
+        let game = model.el('game');
         if (model.data('savedFS')) {
             game.state.start('FS');
         }
