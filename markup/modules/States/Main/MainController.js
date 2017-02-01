@@ -120,7 +120,6 @@ export class Main {
           let fullScreeButton = model.el('fullScreeButton');
               fullScreeButton.frameName = (game.scale.isFullScreen || window.innerHeight == screen.height) ? 'fullscreenOff.png' : 'fullscreen.png';
       }
-} 
     }
 
     positionMainContainer() {
