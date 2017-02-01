@@ -1,11 +1,13 @@
 import { model } from 'modules/Model/Model';
+import { request } from 'modules/Util/Request';
 
 class Door {
-    constructor(x, y) {
+    constructor(x, y, arr) {
         this.game = model.el('game');
 
         this.x = x;
         this.y = y;
+        this.doors = arr;
 
         this.destroyed = false;
         this.isWinPlayed = false;
@@ -20,9 +22,17 @@ class Door {
     }
 
     win() {
-        console.log('I am win door!', this.sprite);
+        this.destroyed = true;
         this.game.add.tween(this.sprite)
             .to({alpha: 0}, 500, 'Linear', true);
+    }
+    fail() {
+        this.destroyed = true;
+        this.game.add.tween(this.sprite)
+            .to({alpha: 1}, 500, 'Linear', true);
+        this.game.add.tween(this.sprite.scale)
+            .to({x: 1.8, y: 1.8}, 500, 'Linear', true);
+        console.log('I am failed!', this);
     }
 }
 
@@ -35,21 +45,53 @@ export class Bonus {
 
     create() {
         for (let i = 0; i < 5; i++) {
-            this.doors.push(new Door(100 * i, 150 * i));
+            this.doors.push(new Door(100 * i, 150 * i, this.doors));
         }
     }
 
-    update() {
-        this.doors.forEach((door) => {
-            if (door.destroyed && !door.isWinPlayed) {
-                door.win();
-            }
-        });
-    }
-
-
 }
-    function handleDoorClick() {
-        this.win();
-        console.log('I am clicked!');
-    }
+function handleDoorClick() {
+    if (this.destroyed) return;
+    request.send('Roll')
+        .then((data) => {
+            this.data = data;
+            console.log(data);
+        })
+        .then(() => {
+            return request.send('Ready');
+        })
+        .then((readyData) => {
+            if (readyData.ErrorCode != 0) {
+                throw new Error(readyData.ErrorMessage);
+            }
+        })
+        .then(() => {
+            if (!this.isWinPlayed) {
+
+                if (this.data.CurrentValue != 'Exit') {
+                    this.win();
+                    this.isWinPlayed = true;
+                    if (this.data.BonusEnd) {
+                        setTimeout(() => {
+                            // Переходной экран Big Win
+                            model.state('buttons:locked', false);
+                            this.game.state.start('Main');
+                        }, 1500);
+                    }
+                } else {
+                    this.doors.forEach((door) => {
+                        door.fail();
+                    });
+                    setTimeout(() => {
+                        // Переходной экран Total Win
+                        model.state('buttons:locked', false);
+                        this.game.state.start('Main');
+                    }, 1500);
+                }
+
+            }
+        })
+        .catch((err) => {
+            console.error(err);
+        });
+}
