@@ -246,7 +246,7 @@ export let view = (() => {
             message = 'popup',
             font = 'normal 54px Arial',
             color = '#e8b075',
-            balance = true
+            balance = false
         }) {
             let overlay = game.add.graphics(0, 0, container)
                 .beginFill(0x000000, 0.8)
