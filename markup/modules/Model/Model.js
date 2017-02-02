@@ -336,7 +336,7 @@ export let model = (() => {
     }
 
     function checkBalance() {
-        return model.balance('coinSum') > model.balance('betSum');
+        return model.balance('coinSum') >= model.balance('betSum');
     }
 
     return {

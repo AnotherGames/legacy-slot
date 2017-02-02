@@ -91,10 +91,6 @@ export let controller = (() => {
 
     let handle = {
         spinButton: function () {
-            if (!model.checkBalance()) {
-                mainView.draw.showPopup({message: 'You have low balance on your account', balance : true});
-                return;
-            }
             let spinButton = model.el('spinButton');
 
             if (model.state('buttons:locked')
@@ -156,10 +152,6 @@ export let controller = (() => {
     let auto = {
 
         start: function(amount) {
-            if (!model.checkBalance()) {
-                mainView.draw.showPopup({message: 'You have low balance on your account', balance : true});
-                return;
-            }
             view.auto.Start();
             view.draw.autoCount({amount});
         },

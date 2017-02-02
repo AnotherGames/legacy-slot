@@ -2,9 +2,9 @@ import { model } from 'modules/Model/Model';
 import { noConnect } from 'modules/Util/NoConnect';
 
 export let request = (() => {
-    const serviceUrl = 'http://gameservice.bossgs.org/devslotv2/SlotService.svc';
-    let casinoID = 1;
-    let userID = 1;
+    const serviceUrl = 'https://gameservice1.bossgs.org/devslotv2/SlotService.svc';
+    let casinoID = 4;
+    let userID = 4;
 
     if (localStorage.getItem('userID')) {
         userID = localStorage.getItem('userID');

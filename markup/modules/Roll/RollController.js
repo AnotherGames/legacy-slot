@@ -46,81 +46,93 @@ export let controller = (() => {
         // Если не было Ready - не крутим
         if (!model.state('ready')) return;
 
-        // Если долго идет запрос (больше 4 сек) - выкидываем попап
         let game = model.el('game');
-        let rollPopupTimer = game.time.events.add(4000, () => {
-            mainView.draw.showPopup({message: 'You have weak Internet connection'});
-        });
 
         model.state('ready', false);
         // Отправляем запрос Roll
         request.send('Roll')
             .then((data) => {
+                // Если есть ошибка - выкидываем попап
+                if (data.ErrorCode) {
+                    console.log(data);
+                    if (data.ErrorCode == 8) {
+                        if (model.state('autoplay:start')){
+                            model.state('autoplay:panelClosed', true);
+                            autoplayController.stop();
+                        }
 
-                // Выключаем срабатывание попапа на длинный Roll
-                game.time.events.remove(rollPopupTimer);
+                        model.state('ready', true);
+                        model.state('roll:progress', false);
 
-                // Если есть ошибка закрытой сессии - выкидываем попап
-                if (data.ErrorMessage === 'SessionClosedOrNotOpened') {
-                    mainView.draw.showPopup({message: 'Your session is closed. Please click to restart'});
-                }
+                        if (model.mobile) {
+                            buttonsController.unlockButtons();
+                        } else {
+                            game.input.keyboard.enabled = true;
+                            panelView.unlockButtons();
+                        }
+                        mainView.draw.showPopup({message: data.ErrorMessage, balance: true});
+                        return;
+                    }
 
-                // Очищаем выигрышный экран
-                winController.cleanWin(true);
-
-                // Записываем полученные данные
-                model.data('rollResponse', data);
-
-                // Обновляем баланс (забираем ставку)
-                if (model.state('fs')) {
-                    model.updateBalance({startFSRoll: true});
+                    mainView.draw.showPopup({message: data.ErrorMessage});
+                    return;
                 } else {
-                    model.updateBalance({startRoll: true});
-                }
+                    // Очищаем выигрышный экран
+                    winController.cleanWin(true);
 
-                // Выставляем состояния крутки на прогресс
-                model.state('roll:progress', true);
-                model.state('roll:fast', false);
+                    // Записываем полученные данные
+                    model.data('rollResponse', data);
 
-                // Играем звук кручения барабанов
-                soundController.sound.playSound({sound: 'baraban', fade: 500});
-                soundController.sound.changeSoundVolume('baraban', 60);
-
-                // Расчитываем конечный экран
-                let wheels = model.el('wheels');
-                let finishScreen = _convertArray(data.Screen);
-
-                // Крутим колеса
-                wheels.forEach((wheel, columnIndex) => {
-                    // Fast
-                    if (model.state('fastRoll')) {
-                        wheel.fast();
+                    // Обновляем баланс (забираем ставку)
+                    if (model.state('fs')) {
+                        model.updateBalance({startFSRoll: true});
+                    } else {
+                        model.updateBalance({startRoll: true});
                     }
-                    // Normal
-                    game.time.events.add(columnIndex * config.wheel.roll.deltaTime, () => {
-                        wheel.roll(finishScreen[columnIndex] || config.wheel.roll.finishScreen, {
-                            time: config.wheel.roll.time,
-                            length: config.wheel.roll.length,
-                            easingSeparation: config.wheel.roll.easingSeparation,
-                            callback
-                        });
-                    }, wheel);
 
-                });
+                    // Выставляем состояния крутки на прогресс
+                    model.state('roll:progress', true);
+                    model.state('roll:fast', false);
 
-                // Когда все пять колес завершают движение - заканчиваем крутку и показываем выигрыш
-                let countFinish = 0;
-                function callback() {
-                    ++countFinish;
-                    if (countFinish === 5) {
-                        endRoll();
+                    // Играем звук кручения барабанов
+                    soundController.sound.playSound({sound: 'baraban', fade: 500});
+                    soundController.sound.changeSoundVolume('baraban', 60);
+
+                    // Расчитываем конечный экран
+                    let wheels = model.el('wheels');
+                    let finishScreen = _convertArray(data.Screen);
+
+                    // Крутим колеса
+                    wheels.forEach((wheel, columnIndex) => {
+                        // Fast
+                        if (model.state('fastRoll')) {
+                            wheel.fast();
+                        }
+                        // Normal
+                        game.time.events.add(columnIndex * config.wheel.roll.deltaTime, () => {
+                            wheel.roll(finishScreen[columnIndex] || config.wheel.roll.finishScreen, {
+                                time: config.wheel.roll.time,
+                                length: config.wheel.roll.length,
+                                easingSeparation: config.wheel.roll.easingSeparation,
+                                callback
+                            });
+                        }, wheel);
+
+                    });
+
+                    // Когда все пять колес завершают движение - заканчиваем крутку и показываем выигрыш
+                    let countFinish = 0;
+                    function callback() {
+                        ++countFinish;
+                        if (countFinish === 5) {
+                            endRoll();
+                        }
                     }
                 }
-
             })
             .catch((err) => {
-                mainView.draw.showPopup({message: 'You have weak Internet connection. Click to restart.'});
-                console.error(err)
+                if (err.status == 404) mainView.draw.showPopup({message: 'Connection problem. Click to restart'});
+                console.error(err);
             });
     }
 
@@ -187,8 +199,8 @@ export let controller = (() => {
 
         })
         .catch((err) => {
-            mainView.draw.showPopup({message: 'You have weak Internet connection. Click to restart.'});
-            console.error(err)
+            if (err.status == 404) mainView.draw.showPopup({message: 'Connection problem. Click to restart'});
+            console.error(err);
         });
 
     }
