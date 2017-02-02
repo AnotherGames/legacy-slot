@@ -54,7 +54,8 @@ export class Preload {
         game.load.audio('buttonClick', 'buttonClick.mp3');
         game.load.audio('spinClick', 'spinClick.wav');
         game.load.audio('startPerehod', 'startPerehod.mp3');
-        game.load.audio('finishPerehod', 'totalWin.mp3');
+        game.load.audio('finishPerehod', 'startPerehod.mp3');
+        game.load.audio('win', 'totalWin.mp3');
         game.load.audio('lineWin', 'lineWin1.mp3');
         game.load.audio('lineWin2', 'lineWin2.mp3');
         game.load.audio('illumBreak1', 'illumBreak01.mp3');

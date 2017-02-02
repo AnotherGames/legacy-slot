@@ -152,6 +152,7 @@ export let view = (() => {
         // Изменяем музыку
         soundController.music.stopMusic('fsFon');
         soundController.music.playMusic('finishPerehod');
+        soundController.sound.playSound({sound: 'win'});
 
         // Рисуем фон
         let transitionBG = game.add.sprite(0, 0, 'transitionBG2', null, transitionContainer);
@@ -159,7 +160,7 @@ export let view = (() => {
 
         // выбираем надпись для конечного экрна (Big Win --- Total Win)
         let winTextFrame;
-        if (model.data('fsMulti') === 8) {
+        if (model.data('fsMulti') === 7) {
             winTextFrame = 'bigW.png';
         } else {
             winTextFrame = 'totalW.png';
@@ -249,6 +250,7 @@ export let view = (() => {
         transitionBG.input.priorityID = 2;
         transitionBG.events.onInputDown.add(function () {
             soundController.sound.playSound({sound: 'buttonClick'});
+            soundController.sound.stopSound({sound: 'win'});
             soundController.music.stopMusic('finishPerehod');
             model.el('game').state.start('Main');
         });
@@ -256,8 +258,9 @@ export let view = (() => {
 
     function _fsFinishHide() {
         console.log('i am finishing fs after timeout');
+        soundController.sound.stopSound({sound: 'win'});
         soundController.music.stopMusic('finishPerehod');
-        soundController.music.playMusic('fon');
+        // soundController.music.playMusic('fon');
         let game = model.el('game');
         model.el('game').state.start('Main');
     }
