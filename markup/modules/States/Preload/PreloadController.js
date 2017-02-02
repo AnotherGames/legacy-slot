@@ -12,6 +12,9 @@ export class Preload {
             game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
             game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
         }
+
+        // При выходе из вкладки анимации будут останавливаться
+        game.stage.disableVisibilityChange = true;
     }
 
     preload() {
@@ -170,13 +173,15 @@ export class Preload {
 
     hidePreloader() {
         const game = model.el('game');
-        view.hideBar();
-        view.hideCoin();
         if (model.state('loadError')) {
+            model.el('preloadBar').visible = false;
+            model.el('preloadCoin').visible = false; 
             mainView.draw.showPopup({message: 'Connection problem'});
             game.load.reset(true, true)
             return;
         }
+        view.hideBar();
+        view.hideCoin();
         if (model.state('initScreen')) {
             game.state.start('Init');
         } else {

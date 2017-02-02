@@ -11,23 +11,8 @@ export class Init {
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         soundController.music.playMusic('initFon');
 
-        // При выходе из вкладки анимации будут останавливаться
-        game.stage.disableVisibilityChange = true;
-        // Ставим игру на паузу при не активном окне браузера
-        let visibilityChange;
-        if (typeof document.hidden !== 'undefined') {
-            visibilityChange = 'visibilitychange';
-        } else if (typeof document.mozHidden !== 'undefined') {
-            visibilityChange = 'mozvisibilitychange';
-        } else if (typeof document.msHidden !== 'undefined') {
-            visibilityChange = 'msvisibilitychange';
-        } else if (typeof document.webkitHidden !== 'undefined') {
-            visibilityChange = 'webkitvisibilitychange';
-        }
-        document.addEventListener(
-            visibilityChange,
-            () => { game.paused = (game.paused) ? false : true } 
-        );
+            // При выходе из вкладки анимации будут останавливаться
+            game.stage.disableVisibilityChange = true;
     }
 
     create() {
