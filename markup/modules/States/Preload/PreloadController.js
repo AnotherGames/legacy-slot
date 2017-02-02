@@ -15,6 +15,9 @@ export class Preload {
             // game.scale.windowConstraints = {bottom: 'visual', right: 'visual'};
             game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
             game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+
+            // При выходе из вкладки анимации будут останавливаться
+            game.stage.disableVisibilityChange = true;
         }
     }
 
