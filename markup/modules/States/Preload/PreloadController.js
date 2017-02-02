@@ -81,7 +81,9 @@ export class Preload {
         game.load.image('transitionBG1', 'bg/transitionBG1.png');
         game.load.image('transitionBG2', 'bg/transitionBG2.jpg');
         game.load.image('bubble', 'bg/bubble.png');
+        game.load.image('eyeLight', 'bg/eyeLight.png');
         game.load.image('topLight', 'bg/topLight.png');
+        game.load.spritesheet('labelLight', 'bg/labelLight.png', 617, 508, 3);
         game.load.spritesheet('fish', 'bg/fish.png', 103, 33, 12);
         game.load.spritesheet('shark', 'bg/shark.png', 493, 188, 12);
         game.load.image('eyeLight', 'bg/eyeLight.png');
@@ -176,7 +178,7 @@ export class Preload {
         const game = model.el('game');
         if (model.state('loadError')) {
             model.el('preloadBar').visible = false;
-            model.el('preloadCoin').visible = false; 
+            model.el('preloadCoin').visible = false;
             mainView.draw.showPopup({message: 'Connection problem'});
             game.load.reset(true, true)
             return;

@@ -46,6 +46,60 @@ export let view = (() => {
             let gameMachine = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachine', null, container);
                 gameMachine.anchor.set(0.5);
             model.el('gameMachine', gameMachine);
+
+
+        },
+
+        addLight: function ({
+            game = model.el('game'),
+            container = model.group('bg')
+        }) {
+            for (let i = 0; i < 3; i++) {
+                let topLight = game.add.sprite(0 - i * game.rnd.integerInRange(25, 35), 0 - i * game.rnd.integerInRange(15, 25), 'topLight', null, container);
+                topLight.alpha = game.rnd.integerInRange(0, 70) / 100;
+                game.add.tween(topLight)
+                    .to({alpha: game.rnd.integerInRange(30, 70) / 100}, game.rnd.integerInRange(3000, 5000), 'Linear', true, null, -1, true);
+            }
+        },
+
+        eyeLight: function ({
+            game = model.el('game'),
+            container = model.group('main')
+        }){
+            let eyeLight = game.add.sprite((model.desktop) ? -235: -135, (model.desktop) ? -373 : -320, 'eyeLight', null, container);
+                eyeLight.anchor.set(0.5);
+                eyeLight.alpha = 0;
+
+            game.add.tween(eyeLight).to({angle: 45, alpha: 1}, 300, 'Linear', true)
+                .onComplete.add(()=>{
+                    game.add.tween(eyeLight).to({alpha: 0}, 300, 'Linear', true);
+                    eyeLight.destroy();
+                    game.time.events.add(7000, () => {
+                        this.eyeLight({});
+                    });
+                });
+
+        },
+
+        labelLight: function ({
+            game = model.el('game'),
+            container = model.group('main')
+        }) {
+            let labelLight = game.add.sprite((model.desktop) ? -200: -290, (model.desktop) ? -360 : -310, 'labelLight', null, container);
+                labelLight.anchor.set(0.5);
+                labelLight.alpha = 0;
+                (model.desktop) ? labelLight.scale.set(0.15) : labelLight.scale.set(0.1);
+                labelLight.animations.add('move');
+                labelLight.animations.play('move', 20, false);
+
+            game.add.tween(labelLight).to({alpha: 1, x: labelLight.x + 400}, 500, 'Linear', true)
+                .onComplete.add(()=>{
+                    game.add.tween(labelLight).to({alpha: 0}, 300, 'Linear', true);
+                    labelLight.destroy();
+                    game.time.events.add(8000, () => {
+                        this.labelLight({});
+                    });
+                });
         },
 
         addBubbles: function ({

@@ -50,6 +50,7 @@ export class Main {
 
         // Отрисовуем основной контейнер
         mainView.draw.mainBG({});
+        mainView.draw.addLight({});
         mainView.draw.mainContainer({});
         mainView.draw.machineContainer({});
         mainView.draw.machineMask({});
@@ -59,8 +60,10 @@ export class Main {
         // BG anim
         mainView.draw.addBubbles({});
         mainView.draw.addShark({});
+        mainView.draw.eyeLight({});
         game.time.events.add(6000, () => {
             mainView.draw.addFishes({});
+            mainView.draw.labelLight({});
         });
 
         // Test
