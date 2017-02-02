@@ -73,6 +73,9 @@ export let controller = (() => {
                         mainView.draw.showPopup({message: data.ErrorMessage, balance: true});
                         return;
                     }
+                    
+                    mainView.draw.showPopup({message: data.ErrorMessage});
+                    return;
                 } else {
 
                     // Очищаем выигрышный экран
@@ -198,7 +201,7 @@ export let controller = (() => {
         })
         .catch((err) => {
             if (err.status == 404) mainView.draw.showPopup({message: 'Connection problem. Click to restart'});
-            console.error(err); 
+            console.error(err);
         });
 
     }
