@@ -7,6 +7,7 @@ import { controller as footerController } from 'modules/Footer/FooterController'
 import { view as balanceView } from 'modules/Balance/BalanceView';
 import { view as bonusView } from 'modules/States/Bonus/BonusView';
 import { view as mainView } from 'modules/States/Main/MainView';
+import { controller as soundController } from 'modules/Sound/SoundController';
 
 class Door {
     constructor(x, y, arr, index) {
@@ -37,6 +38,10 @@ class Door {
     }
 
     win() {
+        let rnd = this.game.rnd.integerInRange(1, 3);
+        soundController.sound.playSound({sound: `illumBreak${rnd}`});
+        soundController.sound.playSound({sound: 'illumWin', duration: 1200});
+
         this.destroyed = true;
         this.game.add.tween(this.sprite)
             .to({alpha: 0}, 300, 'Linear', true);
@@ -61,18 +66,33 @@ class Door {
         this.game.add.tween(this.table)
             .from({y: this.table.y + 50}, 400, 'Linear', true);
         model.group('bg').add(this.table);
+        model.group('bg').add(this.gold);
     }
 
     fail() {
         this.destroyed = true;
+
+        soundController.sound.playSound({sound: 'illumFail'});
+
         this.doors.forEach((door) => {
+            this.tentacle = this.game.add.sprite(door.x - 50, door.y + 5, 'tentacles');
+            this.tentacle.anchor.set(0.5);
+            this.tentacle.angle = this.game.rnd.integerInRange(-40, 40);
+            if (model.mobile) {
+                this.tentacle.scale.set(0.66);
+            }
+            model.group('bg').add(this.tentacle);
+            let tentacleShow = this.tentacle.animations.add('show', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17], 20, false);
+            let tentacleMove = this.tentacle.animations.add('move', [18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 19, 18], 20, true);
+            this.tentacle.animations.play('show');
+            tentacleShow.onComplete.add(() =>{this.tentacle.animations.play('move')}, this);
+
             this.game.add.tween(door.sprite)
                 .to({alpha: 0}, 500, 'Linear', true);
             if (door.table) {
                 this.game.add.tween(door.table)
                     .to({alpha: 0}, 300, 'Linear', true);
             }
-
         });
 
     }
@@ -100,9 +120,13 @@ export class Bonus {
         console.log('I am inited!');
 
         bonusView.create.groups({});
+
     }
 
     create() {
+        soundController.music.stopMusic('fon');
+        soundController.music.playMusic('bonusFon');
+
         bonusView.draw.mainBG({});
 
         for (let i = 0; i < 5; i++) {
@@ -158,11 +182,18 @@ function handleDoorClick() {
                     this.isWinPlayed = true;
                     if (this.data.BonusEnd) {
                         // Переходной экран Big Win
+                        soundController.sound.playSound({sound: 'illumWin'});
                         this.doors.forEach((door) => {
                             this.finalGold = this.game.add.spine(door.x, door.y, 'gold');
+                            if (model.mobile) {
+                                this.finalGold.scale.set(0.66);
+                            }
+                            model.group('bg').add(this.finalGold);
                             this.finalGold.setAnimationByName(1, '2', false);
                         });
+                        soundController.sound.playSound({sound: 'win'});
                         bonusView.draw.showWin({winTextFrame: 'bigW.png'});
+                        soundController.music.stopMusic('bonusFon');
                         setTimeout(() => {
                             model.state('buttons:locked', false);
                             model.state('bonus', false);
@@ -170,19 +201,17 @@ function handleDoorClick() {
                         }, 4000);
                     }
                 } else {
-                    this.doors.forEach((door) => {
-                        door.fail();
-                    });
+                    this.fail();
                     bonusView.draw.showOctopus({});
                     // Переходной экран Total Win
                     bonusView.draw.showWin({});
+                    soundController.music.stopMusic('bonusFon');
                     setTimeout(() => {
                         model.state('buttons:locked', false);
                         model.state('bonus', false);
                         this.game.state.start('Main');
                     }, 4000);
                 }
-
             }
         })
         .catch((err) => {

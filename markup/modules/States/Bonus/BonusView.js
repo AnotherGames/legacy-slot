@@ -109,7 +109,7 @@ export let view = (() => {
             model.el('winText', winText);
 
             // Отрисовываем Выигрыш
-            let winCount = game.add.bitmapText(game.width / 2, game.height / 2 - 50, 'numbersFont', '0', 120, container);
+            let winCount = game.add.bitmapText(game.width / 2, game.height / 2, 'numbersFont', '0', 120, container);
                 winCount.align = 'center';
                 winCount.anchor.set(0.5);
                 winCount.scale.set(0.1);
