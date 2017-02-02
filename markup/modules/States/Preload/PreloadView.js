@@ -32,7 +32,10 @@ export let view = (() => {
     function hideCoin() {
         const game = model.el('game');
         return game.add.tween(model.el('preloadCoin').scale)
-            .to({x: 0, y: 0}, 500, Phaser.Easing.In, true);
+            .to({x: 0, y: 0}, 500, Phaser.Easing.In, true)
+            .onComplete.add(()=>{
+                model.el('preloadCoin').visible = false;
+            });
     }
 
 

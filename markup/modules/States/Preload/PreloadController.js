@@ -1,5 +1,6 @@
 import { model } from 'modules/Model/Model';
 import { view } from 'modules/States/Preload/PreloadView';
+import { view as mainView } from 'modules/States/Main/MainView';
 
 export class Preload {
     constructor(game) {
@@ -19,8 +20,17 @@ export class Preload {
 
     preload() {
         const game = model.el('game');
+
+        model.group('popup', game.add.group());
+        $('#wait').addClass('closed');
+
         game.load.setPreloadSprite(view.drawPreloadBar());
         view.drawPreloadCoin();
+
+        model.state('loadError', false)
+        game.load.onFileError.add(()=>{
+            model.state('loadError', true)
+        })
 
         this.loadSounds();
         this.loadInitAssets();
@@ -71,7 +81,6 @@ export class Preload {
         game.load.image('gmLeft', 'game/gmLeft.png');
         game.load.image('gameBGfs', 'game/gameBGfs.png');
         game.load.image('gameShadow', 'game/gameShadow.png');
-        game.load.image('popup', 'other/popup.png');
         game.load.image('aim', 'other/aim.png');
         game.load.atlasJSONArray('shuriken', 'other/shuriken.png', 'other/shuriken.json');
         game.load.image('closed', 'other/closed.png');
@@ -148,8 +157,15 @@ export class Preload {
 
     hidePreloader() {
         const game = model.el('game');
-        view.hideCoin();
+        if (model.state('loadError')) {
+            model.el('preloadBar').visible = false;
+            model.el('preloadCoin').visible = false;
+            mainView.draw.showPopup({message: 'Connection problem. Click to restart.'});
+            game.load.reset(true, true)
+            return;
+        }
         view.hideBar();
+        view.hideCoin();
         if (model.state('initScreen')) {
             game.state.start('Init');
         } else {
