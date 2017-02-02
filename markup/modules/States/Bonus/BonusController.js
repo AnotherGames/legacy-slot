@@ -1,6 +1,10 @@
 import { model } from 'modules/Model/Model';
 import { request } from 'modules/Util/Request';
 import { config } from 'modules/Util/Config';
+
+import { controller as footerController } from 'modules/Footer/FooterController';
+
+import { view as balanceView } from 'modules/Balance/BalanceView';
 import { view as bonusView } from 'modules/States/Bonus/BonusView';
 import { view as mainView } from 'modules/States/Main/MainView';
 
@@ -111,12 +115,19 @@ export class Bonus {
         bonusView.draw.bigFish({});
         bonusView.draw.addLight({});
         bonusView.draw.upperBG({});
+
+        footerController.initDesktop();
+        balanceView.draw.CashBalance({});
     }
 
     update() {
         model.el('game').winAnims.forEach((anim) => {
             anim();
         });
+        if (model.desktop) {
+            let fullScreeButton = model.el('fullScreeButton');
+            fullScreeButton.frameName = (this.game.scale.isFullScreen || window.innerHeight == screen.height) ? 'fullscreenOff.png' : 'fullscreen.png';
+        }
     }
 
 }
