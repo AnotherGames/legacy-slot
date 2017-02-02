@@ -41,9 +41,17 @@ class Door {
         this.table.alpha = 0;
         this.table.angle = this.game.rnd.integerInRange(-15, 15);
 
+        this.gold = this.game.add.spine(this.x, this.y, 'gold');
+        this.gold.setAnimationByName(1, '1', false);
+        this.gold.alpha = 0;
+
         if (model.mobile) {
             this.table.scale.set(0.66);
+            this.gold.scale.set(0.66);
         }
+
+        this.game.add.tween(this.gold)
+            .to({alpha: 1}, 500, 'Linear', true);
         this.game.add.tween(this.table)
             .to({alpha: 1}, 500, 'Linear', true);
         this.game.add.tween(this.table)
@@ -80,9 +88,11 @@ export class Bonus {
 
     init() {
         this.game = model.el('game');
+        this.game.winAnims = [];
         this.doors = [];
         model.data('bonusWinCoins', 0);
         model.state('bonus', true);
+        model.state('bonusReady', true);
         console.log('I am inited!');
 
         bonusView.create.groups({});
@@ -104,7 +114,7 @@ export class Bonus {
     }
 
     update() {
-        model.el('game').frameAnims.forEach((anim) => {
+        model.el('game').winAnims.forEach((anim) => {
             anim();
         });
     }
@@ -112,8 +122,10 @@ export class Bonus {
 }
 function handleDoorClick() {
     if (this.destroyed) return;
+    if (!model.state('bonusReady')) return;
     request.send('Roll')
         .then((data) => {
+            model.state('bonusReady', false);
             this.data = data;
             model.data('bonusWinCoins', model.data('bonusWinCoins') + data.Balance.TotalWinCoins);
             console.log(data);
@@ -125,6 +137,7 @@ function handleDoorClick() {
             if (readyData.ErrorCode != 0) {
                 throw new Error(readyData.ErrorMessage);
             }
+            model.state('bonusReady', true);
         })
         .then(() => {
             if (!this.isWinPlayed) {
@@ -134,6 +147,10 @@ function handleDoorClick() {
                     this.isWinPlayed = true;
                     if (this.data.BonusEnd) {
                         // Переходной экран Big Win
+                        this.doors.forEach((door) => {
+                            this.finalGold = this.game.add.spine(door.x, door.y, 'gold');
+                            this.finalGold.setAnimationByName(1, '2', false);
+                        });
                         bonusView.draw.showWin({winTextFrame: 'bigW.png'});
                         setTimeout(() => {
                             model.state('buttons:locked', false);

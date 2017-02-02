@@ -150,11 +150,11 @@ export let view = (() => {
                 elem.setText( parseInt(count * progress) );
 
                 if (progress === 1) {
-                    game.frameAnims.splice(game.frameAnims.indexOf(anim), 1);
+                    game.winAnims.splice(game.winAnims.indexOf(anim), 1);
                 }
 
             };
-            game.frameAnims.push(anim);
+            game.winAnims.push(anim);
         }
 
     };

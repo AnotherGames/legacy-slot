@@ -131,6 +131,7 @@ export class Preload {
         game.load.image('bonusBG3', 'bg/bonusBG3.png');
         game.load.spritesheet('bigFish', 'bonus/bigFish.png', 226, 182, 12);
         game.load.spritesheet('chernila', 'bonus/chernila.png', 259, 185, 12);
+        game.load.spritesheet('tentacles', 'bonus/tentacle.png', 250, 200, 34);
         game.load.atlasJSONArray('bonusNumber', 'bonus/bonusNumber.png', 'bonus/bonusNumber.json');
         game.load.atlasJSONArray('illuminators', 'bonus/illuminators.png', 'bonus/illuminators.json');
         game.load.image('light', 'bonus/light.png');
@@ -143,6 +144,7 @@ export class Preload {
         game.load.spine('diverFS', 'spine/sunken.json');
         game.load.spine('chestFS', 'spine/skeleton.json');
         game.load.spine('ink', 'spine/ink.json');
+        game.load.spine('gold', 'spine/gold.json');
 
     }
 
