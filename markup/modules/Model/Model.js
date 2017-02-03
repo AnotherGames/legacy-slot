@@ -85,7 +85,7 @@ export let model = (() => {
                 return '₽ ';
                 break;
             default:
-                return Error('We have no such currency!');
+                return `${currency} `;
                 break;
         }
     }

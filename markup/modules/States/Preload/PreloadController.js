@@ -16,7 +16,7 @@ export class Preload {
             game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
             game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
         }
-        
+
         // При выходе из вкладки анимации будут останавливаться
         game.stage.disableVisibilityChange = true;
     }
@@ -141,7 +141,7 @@ export class Preload {
             model.el('preloadCoin').visible = false;
             mainView.draw.showPopup({message: 'Connection problem. Click to restart.'});
             game.load.reset(true, true)
-            return; s
+            return;
         }
         view.hideCoin();
         view.hideBar();
