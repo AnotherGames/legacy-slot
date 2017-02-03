@@ -135,7 +135,21 @@ export let view = (() => {
                         });
                     });
                 } else {
-                    game.time.events.remove(model.data('oneAfterAnotherTimer'));
+                    wheels.forEach((wheel) => {
+                        wheel.forEach((element) => {
+                            if (element.active == 10) {
+                                result.elements.push(element);
+                            }
+                        });
+                    });
+                    upWheels.forEach((upWheel) => {
+                        upWheel.forEach((element) => {
+                            if (element.active == 10) {
+                                result.upElements.push(element);
+                            }
+                        });
+                    });
+                    // game.time.events.remove(model.data('oneAfterAnotherTimer'));
                 }
             });
             return result;

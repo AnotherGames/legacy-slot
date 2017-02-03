@@ -130,7 +130,8 @@ export let controller = (() => {
             } else {
                 view.draw.WinElements({number: [currentLine.Line], amount: [currentLine.Count]});
                 view.draw.WinLineTable({line: currentLine, scatter: true});
-                view.draw.WinNumber({number: currentLine.Line});
+                setTimeout(cleanWin, 1000);
+                // view.draw.WinNumber({number: currentLine.Line});
             }
         } else {
             return;
@@ -230,7 +231,6 @@ export let controller = (() => {
     function checkForChest(winLines) {
         winLines.forEach((winLine) => {
             if (winLine.Line == -1 && winLine.Symbol == '14') {
-                console.warn('i am chest', winLine.Symbol);
                 fsController.chestActions();
             }
         });
