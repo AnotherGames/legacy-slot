@@ -2,7 +2,6 @@ import { model } from 'modules/Model/Model';
 import { view } from 'modules/States/Init/InitView';
 import { controller as soundController} from 'modules/Sound/SoundController';
 import { controller as keyboardController} from 'modules/keyboard/KeyboardController';
-import { view as transitionView} from 'modules/Transition/TransitionView';
 
 export class Init {
     init() {
@@ -11,8 +10,8 @@ export class Init {
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         soundController.music.playMusic('initFon');
 
-            // При выходе из вкладки анимации будут останавливаться
-            game.stage.disableVisibilityChange = true;
+        // При выходе из вкладки анимации будут останавливаться
+        game.stage.disableVisibilityChange = true;
     }
 
     create() {
@@ -56,7 +55,7 @@ export class Init {
     handlePlay() {
         const game = model.el('game');
 
-        if(model.mobile) game.scale.startFullScreen();
+        if (model.mobile) game.scale.startFullScreen();
 
         document.body.addEventListener('touchstart', () => {
             model.el('game').scale.startFullScreen();

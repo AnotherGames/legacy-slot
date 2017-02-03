@@ -28,13 +28,13 @@ export class Element {
 
             // Создаем по спрайту для каждого символа и делаем их не видимыми
             let sprite = game.add.sprite(0, 0, i, null, this.group);
-                sprite.anchor.set(0.5);
-                sprite.visible = false;
-                if(i == 11
-                || i == 12
-                || i == 13 ) {
-                    sprite.y += (model.desktop) ? 50 : 50 * 0.75;
-                }
+            sprite.anchor.set(0.5);
+            sprite.visible = false;
+            if (i == 11
+            || i == 12
+            || i == 13 ) {
+                sprite.y += (model.desktop) ? 50 : 50 * 0.75;
+            }
             this.sprites.push(sprite);
 
             // Каждому спрайту добавляем необходимые анимации
@@ -56,7 +56,7 @@ export class Element {
         this.activeSprite.visible = false;
 
         // Находим новый активный спрайт, делаем его видимым и запускаем нужную анимацию
-        this.active = parseInt(animation);
+        this.active = parseInt(animation, 10);
         this.activeSprite = this.sprites[this.active - 1];
         this.activeSprite.visible = true;
         if (this.active == 9) {

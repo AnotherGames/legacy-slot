@@ -21,7 +21,7 @@ class Door {
         this.destroyed = false;
         this.isWinPlayed = false;
 
-        this.light = this.game.add.sprite(this.x, this.y, 'light')
+        this.light = this.game.add.sprite(this.x, this.y, 'light');
         this.light.anchor.set(0.5);
         this.light.alpha = 0;
         model.group('bg').add(this.light);
@@ -45,7 +45,7 @@ class Door {
         this.destroyed = true;
         this.game.add.tween(this.sprite)
             .to({alpha: 0}, 300, 'Linear', true);
-        this.table = this.game.add.sprite(this.x, this.y, 'bonusNumber', `x${parseInt(this.data.CurrentValue)}.png`);
+        this.table = this.game.add.sprite(this.x, this.y, 'bonusNumber', `x${parseInt(this.data.CurrentValue, 10)}.png`);
         this.table.anchor.set(0.6, 0.8);
         this.table.alpha = 0;
         this.table.angle = this.game.rnd.integerInRange(-15, 15);
@@ -83,9 +83,11 @@ class Door {
             }
             model.group('bg').add(this.tentacle);
             let tentacleShow = this.tentacle.animations.add('show', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17], 20, false);
-            let tentacleMove = this.tentacle.animations.add('move', [18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 19, 18], 20, true);
+            this.tentacle.animations.add('move', [18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 19, 18], 20, true);
             this.tentacle.animations.play('show');
-            tentacleShow.onComplete.add(() =>{this.tentacle.animations.play('move')}, this);
+            tentacleShow.onComplete.add(() => {
+                this.tentacle.animations.play('move');
+            }, this);
 
             this.game.add.tween(door.sprite)
                 .to({alpha: 0}, 500, 'Linear', true);
@@ -131,7 +133,6 @@ export class Bonus {
 
         for (let i = 0; i < 5; i++) {
             this.doors.push(new Door(config.illuminatorsCoords[i].x, config.illuminatorsCoords[i].y, this.doors, i + 1));
-            let blinkTimeout = this.game.rnd.integerInRange(2000, 3000);
         }
 
         mainView.draw.addBubbles({});

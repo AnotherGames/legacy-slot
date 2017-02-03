@@ -59,7 +59,7 @@ export let controller = (() => {
                 if (data.ErrorCode) {
                     console.log(data);
                     if (data.ErrorCode == 8) {
-                        if (model.state('autoplay:start')){
+                        if (model.state('autoplay:start')) {
                             model.state('autoplay:panelClosed', true);
                             autoplayController.stop();
                         }
@@ -127,12 +127,12 @@ export let controller = (() => {
 
                     // Когда все пять колес завершают движение - заканчиваем крутку и показываем выигрыш
                     let countFinish = 0;
-                    function callback() {
+                    let callback = function () {
                         ++countFinish;
                         if (countFinish === 5) {
                             endRoll();
                         }
-                    }
+                    };
                 }
             })
             .catch((err) => {

@@ -5,22 +5,20 @@ import { Element } from 'modules/Class/Element';
 
 import { controller as soundController } from 'modules/Sound/SoundController';
 import { controller as winController } from 'modules/Win/WinController';
-import { controller as fsController } from 'modules/States/FS/FSController';
 
 export let view = (() => {
 
     let draw = {
 
         UpWinContainer: function ({
-            game = model.el('game'),
             container = model.group('winUp')
         }) {
             let elSize = config[model.res].elements;
             let upWheels = [];
             let deltaY = (model.desktop) ? 0 : 50;
-            for (var i = 0; i < 5; i++) {
+            for (let i = 0; i < 5; i++) {
                 upWheels.push([]);
-                for (var j = 0; j < 3; j++) {
+                for (let j = 0; j < 3; j++) {
                     let el = new Element({
                         container,
                         position: {
@@ -42,18 +40,15 @@ export let view = (() => {
         }) {
             if (winTotalData === 0) return;
             let winTotal = game.add.sprite(0, (model.mobile) ? -30 : 20, 'winTotal', null, container);
-                winTotal.anchor.set(0.5);
-                winTotal.scale.set(1.4);
+            winTotal.anchor.set(0.5);
+            winTotal.scale.set(1.4);
 
             let winTotalText = game.add.bitmapText(0, (model.mobile) ? -50 : 0, 'numbersFont2', winTotalData, 100, container);
-                winTotalText.anchor.set(0.5);
+            winTotalText.anchor.set(0.5);
         },
 
         WinSplash: function ({
-            number,
-            // ind,
-            game = model.el('game'),
-            container = model.group('winTop')
+            number
         }) {
             let lineNumbersArr = model.el('lineNumbersArr');
             let winSplash = lineNumbersArr.filter((el) => {
@@ -75,15 +70,11 @@ export let view = (() => {
         WinElements: function ({
             number,
             amount,
-            alpha = false,
-            finalScale = (model.desktop) ? 1.3 : 1.5,
-            wheels = model.el('wheels'),
-            upWheels = model.el('upWheels'),
-            game = model.el('game')
+            finalScale = (model.desktop) ? 1.3 : 1.5
         }) {
 
             // Если нам нужно зажечь несколько линий элементов одновременно
-            if(typeof number == 'object'
+            if (typeof number == 'object'
             || typeof amount == 'object') {
                 let winElements = draw.findElements({
                     number,
@@ -107,7 +98,7 @@ export let view = (() => {
 
         },
 
-        findElements: function({
+        findElements: function ({
             number,
             amount,
             game = model.el('game')
@@ -119,9 +110,9 @@ export let view = (() => {
             });
             let result = { upElements: [], elements: [] };
 
-            number.forEach((number, indx) => {
-                if (number != -1) {
-                    let curLine = lines[number - 1];
+            number.forEach((currentNumber, indx) => {
+                if (currentNumber != -1) {
+                    let curLine = lines[currentNumber - 1];
                     for (let i = 0; i < amount[indx]; i++) {
                         let curElement = wheels[i][curLine[i].Y];
                         let curUpElement = upWheels[i][curLine[i].Y];
@@ -130,14 +121,14 @@ export let view = (() => {
                     }
                 } else if (model.state('fs')) {
                     wheels.forEach((wheel) => {
-                        wheel.forEach((element)=> {
+                        wheel.forEach((element) => {
                             if (element.active == 14) {
                                 result.elements.push(element);
                             }
                         });
                     });
                     upWheels.forEach((upWheel) => {
-                        upWheel.forEach((element)=> {
+                        upWheel.forEach((element) => {
                             if (element.active == 14) {
                                 result.upElements.push(element);
                             }
@@ -157,9 +148,9 @@ export let view = (() => {
             finish
         }) {
             el.group.scale.set(start);
-            game.add.tween(el.group.scale).to({x: finish,  y: finish}, 700, Phaser.Easing.Bounce.Out, true)
+            game.add.tween(el.group.scale).to({x: finish, y: finish}, 700, Phaser.Easing.Bounce.Out, true)
                 .onComplete.add(() => {
-                    game.add.tween(el.group.scale).to({x: 1.0,  y: 1.0}, 400, 'Linear', true)
+                    game.add.tween(el.group.scale).to({x: 1.0, y: 1.0}, 400, 'Linear', true);
                 }, this);
         },
 
@@ -236,8 +227,7 @@ export let view = (() => {
                 let wheels = model.el('wheels');
                 wheels.forEach((wheel, wheelIndex) => {
                     wheel.elements.forEach((element, elementIndex) => {
-                        let name = parseInt(element.sprites[element.active - 1]
-                                    .animations.currentAnim.name);
+                        let name = parseInt(element.sprites[element.active - 1].animations.currentAnim.name, 10);
                         if (name == 10) {
                             if (wheelIndex > lastWheel) {
                                 lastWheel = wheelIndex;
@@ -257,7 +247,7 @@ export let view = (() => {
 
             // Рисуем саму табличку и текст в зависимости от количества символов
             let winBG = game.add.sprite(x, y, 'winLine', null, container);
-                winBG.anchor.set(0.5);
+            winBG.anchor.set(0.5);
             let font;
             if (winValue > 999) {
                 font = '15px Arial, Helvetica';
@@ -267,7 +257,7 @@ export let view = (() => {
                 font = '25px Arial, Helvetica';
             }
             let text = game.add.text(x, y + 4, winValue, {font: font, fill: '#fff'}, container);
-                text.anchor.set(0.5);
+            text.anchor.set(0.5);
 
         },
 
@@ -303,7 +293,7 @@ export let view = (() => {
 
     let play = {
 
-        WinSound: function() {
+        WinSound: function () {
             let winSound = Math.round(Math.random())
             ? soundController.sound.playSound({sound: 'lineWin', duration: 1200})
             : soundController.sound.playSound({sound: 'lineWin2', duration: 1200});
@@ -315,21 +305,20 @@ export let view = (() => {
 
     let hide = {
 
-        WinTop: function({
+        WinTop: function ({
             game = model.el('game'),
             container = model.group('winTop')
         }) {
             return game.add.tween(container).to( { alpha: 0 }, 300, 'Linear', true);
         },
 
-        CroppedDiver: function({
-            game = model.el('game'),
+        CroppedDiver: function ({
             wheels = model.el('wheels')
         }) {
             let middleEl;
             wheels.forEach((wheel) => {
                 wheel.elements.forEach((el) => {
-                    if(el.active == 11
+                    if (el.active == 11
                     || el.active == 12
                     || el.active == 13) {
                         el.hide(0);

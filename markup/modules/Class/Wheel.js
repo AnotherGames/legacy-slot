@@ -4,7 +4,7 @@ import { Element } from 'modules/Class/Element';
 
 export class Wheel {
     get elements() {
-        if (this.elSwitch === undefined) return;
+        if (typeof this.elSwitch === 'undefined') return;
 
         let elems = [];
         for (let i = 2; i < 5; i++) {
@@ -30,11 +30,11 @@ export class Wheel {
             console.error('constructor: param is not object');
             return;
         }
-        if (param.game === undefined) {
+        if (typeof param.game === 'undefined') {
             console.error('constructor: param.game is undefined', param);
             return;
         }
-        if (param.parent === undefined) {
+        if (typeof param.parent === 'undefined') {
             console.error('constructor: param.parent is undefined', param);
             return;
         }
@@ -62,7 +62,7 @@ export class Wheel {
             console.error('constructor: param.elSize.height is undefined', param);
             return;
         }
-        if (param.currentScreen === undefined) {
+        if (typeof param.currentScreen === 'undefined') {
             console.error('constructor: param.elSize is undefined', param);
             return;
         }
@@ -82,7 +82,7 @@ export class Wheel {
         this._wheelSpeed = 0;
         this._wheelStartPos = 0;
         this._wheelLastY = this.position.y;
-        Object.defineProperty(this, "wheelLastY", {
+        Object.defineProperty(this, 'wheelLastY', {
             set: function (val) {
                 this._wheelSpeed = val - this._wheelLastY;
                 this._wheelLastY = val;
@@ -119,7 +119,7 @@ export class Wheel {
     update(currElems = this.currentScreen) {
         this.wheelY = this._wheelLastY = this.container.y = this.position.y + this.elSize.height * 3;
 
-        if (this.elSwitch === undefined) {
+        if (typeof this.elSwitch === 'undefined') {
             for (let i = 0; i < 5; i++) {
                 this._upElement({
                     item: this.items[i],
@@ -183,7 +183,7 @@ export class Wheel {
 
         this.timer = this.timeLength * this.progress;
         this._clock.destroy();
-        this._clock = this.game.time.create(true)
+        this._clock = this.game.time.create(true);
         this._clock.add(this.timeLength - this.timer, () => {}, this);
         this._clock.start();
     }
@@ -193,7 +193,7 @@ export class Wheel {
             callback: Function
         }   */
     roll(finishScreen, param) {
-        if (finishScreen === undefined) {
+        if (typeof finishScreen === 'undefined') {
             console.error('roll: finishScreen is undefined');
             return;
         }
@@ -381,7 +381,7 @@ export class Wheel {
             anim = this.finishScreen[4 + this.rollLength] + '-n';
         }
 
-        let itemInd = (this.elSwitch < 0) ?  5 - (Math.abs(this.elSwitch + 1) % 6) : Math.abs(this.elSwitch) % 6;
+        let itemInd = (this.elSwitch < 0) ? 5 - (Math.abs(this.elSwitch + 1) % 6) : Math.abs(this.elSwitch) % 6;
         // anim = (itemInd + 1) + '-n';
         this._upElement({
             item: this.items[itemInd],

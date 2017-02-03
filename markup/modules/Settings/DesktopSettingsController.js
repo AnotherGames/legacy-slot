@@ -18,7 +18,7 @@ export let controller = (function () {
                 soundButton.frameName = 'sound.png';
             }
             soundController.volume.changeVolume(this.value);
-            if(this.value > 0){
+            if (this.value > 0) {
                 soundController.volume.setVolume(this.value);
                 model.cookie('volume', this.value);
             } else {
@@ -28,8 +28,8 @@ export let controller = (function () {
 
         });
         $('#volume').on('mousedown', function () {
-            if (this.value > 0){
-                model.data('lastVolume', this.value)
+            if (this.value > 0) {
+                model.data('lastVolume', this.value);
             }
         });
         $('#checkSound').on('change', function () {
@@ -39,7 +39,7 @@ export let controller = (function () {
         $('#checkMusic').on('change', function () {
             model.state('music', this.checked);
             model.cookie('music', this.checked);
-            if(model.state('music')){
+            if (model.state('music')) {
                 soundController.music.playMusic('fon');
             } else {
                 soundController.music.pauseMusic('fon');

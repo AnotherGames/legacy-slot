@@ -26,10 +26,10 @@ export class Preload {
         game.load.setPreloadSprite(view.drawPreloadBar());
         view.drawPreloadCoin();
 
-        model.state('loadError', false)
-        game.load.onFileError.add(()=>{
-            model.state('loadError', true)
-        })
+        model.state('loadError', false);
+        game.load.onFileError.add(() => {
+            model.state('loadError', true);
+        });
 
         this.loadSounds();
         this.loadInitAssets();
@@ -180,7 +180,7 @@ export class Preload {
             model.el('preloadBar').visible = false;
             model.el('preloadCoin').visible = false;
             mainView.draw.showPopup({message: 'Connection problem'});
-            game.load.reset(true, true)
+            game.load.reset(true, true);
             return;
         }
         view.hideBar();

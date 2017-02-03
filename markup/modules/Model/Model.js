@@ -1,6 +1,6 @@
 import { controller as balanceController } from 'modules/Balance/BalanceController';
 import { controller as setBetController } from 'modules/Menu/SetBet/MenuSetBetController';
-import { controller as soundController } from 'modules/Sound/SoundController'
+import { controller as soundController } from 'modules/Sound/SoundController';
 
 export let model = (() => {
 
@@ -19,22 +19,22 @@ export let model = (() => {
         }
     }
 
-    function _getCookie(c_name,value,exdays){
+    function _getCookie(cookieName, value, exdays) {
         if (typeof value != 'undefined') {
-            let exdate=new Date();
+            let exdate = new Date();
             exdate.setDate(exdate.getDate() + exdays);
 
-            let c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
-            document.cookie=c_name + "=" + c_value;
+            let cookieValue = escape(value) + ((exdays == null) ? '' : `; expires=${exdate.toUTCString()}`);
+            document.cookie = `${cookieName}=${cookieValue}`;
         } else {
-            let i,x,y,ARRcookies=document.cookie.split(";");
+            let i, x, y, ARRcookies = document.cookie.split(';');
 
-            for (i=0;i<ARRcookies.length;i++) {
-              x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
-              y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
-              x=x.replace(/^\s+|\s+$/g,"");
+            for (i = 0; i < ARRcookies.length; i++) {
+                x = ARRcookies[i].substr(0, ARRcookies[i].indexOf('='));
+                y = ARRcookies[i].substr(ARRcookies[i].indexOf('=') + 1);
+                x = x.replace(/^\s+|\s+$/g, '');
 
-                if (x==c_name) {
+                if (x == cookieName) {
                     return unescape(y);
                 }
             }
@@ -63,30 +63,24 @@ export let model = (() => {
     function log() {
         console.log(_data, _balance, _state, _el, _group, _sound);
     }
-    function cookie(c_name,value,exdays) {
-        return _getCookie(c_name,value,exdays);
+    function cookie(cookieName, cookieValue, exdays) {
+        return _getCookie(cookieName, cookieValue, exdays);
     }
 
     function _checkCurrencySymbol(currency) {
         switch (currency) {
             case 'USD':
                 return '$ ';
-                break;
             case 'cns':
                 return '$ ';
-                break;
             case 'EUR':
                 return '€ ';
-                break;
             case 'UAH':
                 return '₴ ';
-                break;
             case 'RUB':
                 return '₽ ';
-                break;
             default:
                 return `${currency} `;
-                break;
         }
     }
 
@@ -107,23 +101,23 @@ export let model = (() => {
         model.data('autoplay:count', 0);
         model.data('autoplay:startCash', 0);
 
-        //С правой стороны проверки значения, которые должны быть по умолчанию
-        let autoTransititon = (model.cookie('autoTransititon') == 'true') ? true : false ;
+        // С правой стороны проверки значения, которые должны быть по умолчанию
+        let autoTransititon = (model.cookie('autoTransititon') == 'true') ? true : false;
         model.state('autoTransititon', autoTransititon);
 
-        let fastRoll = (model.cookie('fastRoll') == 'true') ? true : false ;
+        let fastRoll = (model.cookie('fastRoll') == 'true') ? true : false;
         model.state('fastRoll', fastRoll);
 
-        let sound = (model.cookie('sound') == 'false') ? false : true;
-        model.state('sound', sound);
+        let soundValue = (model.cookie('sound') == 'false') ? false : true;
+        model.state('sound', soundValue);
 
         let music = (model.cookie('music') == 'false') ? false : true;
         model.state('music', music);
 
-        let isAnimBG = (model.cookie('isAnimBG') == 'false') ? false : true ;
+        let isAnimBG = (model.cookie('isAnimBG') == 'false') ? false : true;
         model.state('isAnimBG', isAnimBG);
 
-        let gameSideLeft = (model.cookie('gameSideLeft') == 'false') ? false : true ;
+        let gameSideLeft = (model.cookie('gameSideLeft') == 'false') ? false : true;
         model.state('gameSideLeft', gameSideLeft);
 
         let volume = (isFinite(+model.cookie('volume'))) ? Math.abs(model.cookie('volume')) : 100;
@@ -131,7 +125,11 @@ export let model = (() => {
 
         let globalSound = (model.cookie('globalSound') == 'false') ? false : true;
         model.state('globalSound', globalSound);
-        (globalSound) ? soundController.volume.changeVolume(volume) : soundController.volume.changeVolume(0);
+        if (globalSound) {
+            soundController.volume.changeVolume(volume);
+        } else {
+            soundController.volume.changeVolume(0);
+        }
 
         model.state('initScreen', true);
         model.state('ready', true);
@@ -146,7 +144,7 @@ export let model = (() => {
         model.state('maxFsMultiplier', false);
     }
 
-    function initSettings(settings) {
+    function initSettings() {
 
     }
 

@@ -64,7 +64,7 @@ export let view = (() => {
             y = model.el('game').height - 20
         }) {
             let homeButton = game.add.button(x, y, 'footerButtons', null, null, 'homeOn.png', 'home.png', 'homeOn.png', null, container);
-                homeButton.anchor.set(0.5);
+            homeButton.anchor.set(0.5);
             model.el('homeButton', homeButton);
             return homeButton;
         },
@@ -76,7 +76,7 @@ export let view = (() => {
             y = model.el('game').height - 20
         }) {
             let menuButton = game.add.button(x, y, 'footerButtons', null, null, 'menuOn.png', 'menu.png', 'menuOn.png', null, container);
-                menuButton.anchor.set(0.5);
+            menuButton.anchor.set(0.5);
             model.el('menuButton', menuButton);
             return menuButton;
         },
@@ -88,7 +88,7 @@ export let view = (() => {
             y = model.el('game').height - 20
         }) {
             let soundButton = game.add.button(x, y, 'footerButtons', null, null, 'sound.png', null, null, null, container);
-                soundButton.anchor.set(0.5);
+            soundButton.anchor.set(0.5);
             // Определяем начальный фрейм
             if (model.state('globalSound')) {
                 soundButton.frameName = 'sound.png';
@@ -106,7 +106,7 @@ export let view = (() => {
             y = model.el('game').height - 20
         }) {
             let fastButton = game.add.button(x, y, 'footerButtons', null, null, null, 'fastSpin.png', null, null, container);
-                fastButton.anchor.set(0.5);
+            fastButton.anchor.set(0.5);
             // Определяем начальный фрейм
             if (model.state('fastRoll')) {
                 fastButton.frameName = 'fastSpinOff.png';
@@ -117,14 +117,14 @@ export let view = (() => {
             return fastButton;
         },
 
-        FullScreenButton: function({
+        FullScreenButton: function ({
             game = model.el('game'),
             container = model.group('footer'),
             x = 225,
             y = model.el('game').height - 20
         }) {
             let fullScreeButton = game.add.button(x, y, 'footerButtons', null, null, null, 'fullscreen.png', null, null, container);
-                fullScreeButton.anchor.set(0.5);
+            fullScreeButton.anchor.set(0.5);
 
             model.el('fullScreeButton', fullScreeButton);
             return fullScreeButton;

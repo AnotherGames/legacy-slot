@@ -16,15 +16,15 @@ export class Glista {
             console.error('constructor: param is not object');
             return;
         }
-        if (param.game === undefined) {
+        if (typeof param.game === 'undefined') {
             console.error('constructor: param.game is undefined', param);
             return;
         }
-        if (param.lightParent === undefined) {
+        if (typeof param.lightParent === 'undefined') {
             console.error('constructor: param.parent is undefined', param);
             return;
         }
-        if (param.parent === undefined) {
+        if (typeof param.parent === 'undefined') {
             console.error('constructor: param.parent is undefined', param);
             return;
         }

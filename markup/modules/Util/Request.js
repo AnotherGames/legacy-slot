@@ -53,8 +53,8 @@ export let request = (() => {
                 resolve(noConnect[name]);
             } else {
                 let func = function (res) {
-                    if (name =='Roll') {
-                        console.log({res, date: new Date});
+                    if (name == 'Roll') {
+                        console.log({res, date: new Date()});
                     }
                     console.info(`Request: ${url}`);
                     resolve(res);
@@ -93,13 +93,13 @@ export let request = (() => {
 
                 // in case params look like: list[]=thing1&list[]=thing2
                 let paramNum = undefined;
-                let paramName = a[0].replace(/\[\d*\]/, function(v) {
+                let paramName = a[0].replace(/\[\d*\]/, function (v) {
                     paramNum = v.slice(1, -1);
                     return '';
                 });
 
                 // set parameter value (use 'true' if empty)
-                let paramValue = typeof(a[1]) === 'undefined' ? true : a[1];
+                let paramValue = typeof (a[1]) === 'undefined' ? true : a[1];
 
                 // (optional) keep case consistent
                 paramName = paramName.toLowerCase();

@@ -1,6 +1,5 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
-import { controller as soundController } from 'modules/Sound/SoundController';
 
 export let view = (() => {
 
@@ -50,7 +49,7 @@ export let view = (() => {
             let y = (model.desktop) ? 520 : 350;
             let bigFish = game.add.sprite(x, y, 'bigFish', null, container);
             bigFish.anchor.set(0.5);
-            if (model.mobile){
+            if (model.mobile) {
                 bigFish.scale.set(0.6);
             }
             bigFish.animations.add('move', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2]);
@@ -83,7 +82,7 @@ export let view = (() => {
             let inkSmall = game.add.sprite(game.width * 0.68, game.height * 0.75, 'chernila', null, container);
             inkSmall.anchor.set(0.5);
             inkSmall.scale.set(4.0);
-            if (model.mobile){
+            if (model.mobile) {
                 inkSmall.scale.set(2.0);
             }
             inkSmall.animations.add('move');
@@ -110,15 +109,15 @@ export let view = (() => {
 
             // Отрисовываем Выигрыш
             let winCount = game.add.bitmapText(game.width / 2, game.height / 2, 'numbersFont', '0', 120, container);
-                winCount.align = 'center';
-                winCount.anchor.set(0.5);
-                winCount.scale.set(0.1);
+            winCount.align = 'center';
+            winCount.anchor.set(0.5);
+            winCount.scale.set(0.1);
             model.el('winCount', winCount);
 
             draw._showWinTween({});
         },
 
-        _showWinTween: function({
+        _showWinTween: function ({
             game = model.el('game'),
             winText = model.el('winText'),
             winCount = model.el('winCount')
@@ -133,7 +132,7 @@ export let view = (() => {
             game.add.tween(winCount.scale).to({x: scaleX, y: scaleY}, 1500, Phaser.Easing.Bounce.Out, true);
         },
 
-        _сountMeter: function(count, elem) {
+        _сountMeter: function (count, elem) {
             let game = model.el('game');
 
             let timeLength = config.countMeterTime;
@@ -147,7 +146,7 @@ export let view = (() => {
                 if (progress > 1) {
                     progress = 1;
                 }
-                elem.setText( parseInt(count * progress) );
+                elem.setText( parseInt(count * progress, 10) );
 
                 if (progress === 1) {
                     game.winAnims.splice(game.winAnims.indexOf(anim), 1);
@@ -159,8 +158,8 @@ export let view = (() => {
 
     };
 
-return {
-    create,
-    draw
-};
+    return {
+        create,
+        draw
+    };
 })();

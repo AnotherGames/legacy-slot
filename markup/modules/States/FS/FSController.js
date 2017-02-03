@@ -7,13 +7,10 @@ import { view as winView } from 'modules/Win/WinView';
 import { view as mainView } from 'modules/States/Main/MainView';
 
 import { controller as soundController } from 'modules/Sound/SoundController';
-import { controller as settingsController } from 'modules/Settings/DesktopSettingsController';
 import { controller as balanceController } from 'modules/Balance/BalanceController';
 import { controller as footerController } from 'modules/Footer/FooterController';
 import { controller as panelController } from 'modules/Panel/PanelController';
-import { controller as buttonsController } from 'modules/Buttons/ButtonsController';
 import { controller as rollController } from 'modules/Roll/RollController';
-import { controller as winController } from 'modules/Win/WinController';
 
 export let controller = (() => {
 
@@ -30,7 +27,7 @@ export let controller = (() => {
     function next() {
         let rollData = model.data('rollResponse');
 
-        if(!model.state('fs:end')
+        if (!model.state('fs:end')
         && rollData.NextMode !== 'root') {
             controller.count({start: true});
             rollController.startRoll();
@@ -61,7 +58,7 @@ export let controller = (() => {
         let game = model.el('game');
 
         game.time.events.add(1500, () => {
-            soundController.music.stopMusic('fsFon')
+            soundController.music.stopMusic('fsFon');
             transitionView.fsFinish();
         });
 
@@ -73,12 +70,11 @@ export let controller = (() => {
     }
 
     function chestActions() {
-        let game = model.el('game');
         // Проигрываем анимации барабана и +3
         fsView.draw.CountPlus3({});
 
-        //если максимальный множитель достигнут то возвращаемся
-        if(model.state('maxFsMultiplier')) return;
+        // если максимальный множитель достигнут то возвращаемся
+        if (model.state('maxFsMultiplier')) return;
 
         let rollData = model.data('rollResponse');
         let levelValue = rollData.FsBonus.Level;
@@ -109,9 +105,6 @@ export let controller = (() => {
 })();
 
 export class FS {
-    constructor(game) {
-
-    }
 
     init() {
         console.info('FS State!');
@@ -137,7 +130,7 @@ export class FS {
 
     create() {
         let game = model.el('game');
-        game.camera.flash(0x000000, 777)
+        game.camera.flash(0x000000, 777);
 
         // Играем фоновую музыку
         soundController.music.stopMusic('startPerehod');
@@ -250,4 +243,4 @@ export class FS {
         }
     }
 
-};
+}

@@ -16,7 +16,7 @@ export let view = (() => {
                 'menuButtons',
                 'empty.png',
                 container);
-                button.anchor.set(0.5);
+            button.anchor.set(0.5);
 
             let buttonMargin = (container.width - button.width * 2.5) / 3;
             if (side === 'left') {
@@ -31,8 +31,8 @@ export let view = (() => {
                 text,
                 {font: 'bold 45px Arial', fill: '#90fd5a', align: 'center'},
                 container);
-                buttonText.anchor.set(0.5);
-                buttonText.setShadow(0, 0, '#90fd5a', 6);
+            buttonText.anchor.set(0.5);
+            buttonText.setShadow(0, 0, '#90fd5a', 6);
 
             return button;
         },
@@ -41,7 +41,7 @@ export let view = (() => {
             game = model.el('game')
         }) {
             let container = game.add.group();
-                container.x = game.world.width;
+            container.x = game.world.width;
             model.el('autoplayContainer', container);
             return container;
         },
@@ -54,8 +54,8 @@ export let view = (() => {
             let overlay = game.add.graphics(0, 0)
                 .beginFill(color)
                 .drawRect(0, 0, game.width, game.height);
-                overlay.alpha = alpha;
-                overlay.visible = false;
+            overlay.alpha = alpha;
+            overlay.visible = false;
             model.el('autoplayOverlay', overlay);
             return overlay;
         },
@@ -100,7 +100,7 @@ export let view = (() => {
                 text,
                 style,
                 container);
-                autoplayTitle.anchor.set(0.5);
+            autoplayTitle.anchor.set(0.5);
             model.el('autoplayTitle', autoplayTitle);
             return autoplayTitle;
         },
@@ -116,7 +116,7 @@ export let view = (() => {
                 'mobileButtons',
                 'return.png',
                 container);
-                backButton.anchor.set(0.5);
+            backButton.anchor.set(0.5);
             model.el('autoplayBackButton', backButton);
             return backButton;
         }
@@ -148,7 +148,7 @@ export let view = (() => {
             time = 700
         }) {
             let overlay = model.el('autoplayOverlay');
-                overlay.visible = true;
+            overlay.visible = true;
             return game.add.tween(overlay).to( { alpha: finalAlpha }, time, 'Quart.easeOut', true);
         }
     };
@@ -173,9 +173,9 @@ export let view = (() => {
         }) {
             let overlay = model.el('autoplayOverlay');
             let tween = game.add.tween(overlay).to( { alpha: 0 }, time, 'Quart.easeOut', true);
-                tween.onComplete.add(() => {
-                    model.el('autoplayOverlay').visible = false;
-                });
+            tween.onComplete.add(() => {
+                model.el('autoplayOverlay').visible = false;
+            });
             return tween;
         }
 

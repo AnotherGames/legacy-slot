@@ -16,24 +16,24 @@ export let controller = (() => {
         game = model.el('game');
 
         let spinButton = view.draw.SpinButton({});
-            spinButton.inputEnabled = true;
-            spinButton.events.onInputDown.add(handle.spinButton);
+        spinButton.inputEnabled = true;
+        spinButton.events.onInputDown.add(handle.spinButton);
 
         let autoButton = view.draw.AutoButton({});
-            autoButton.inputEnabled = true;
-            autoButton.events.onInputDown.add(handle.autoButton);
+        autoButton.inputEnabled = true;
+        autoButton.events.onInputDown.add(handle.autoButton);
 
         let betButton = view.draw.BetButton({});
-            betButton.inputEnabled = true;
-            betButton.events.onInputDown.add(handle.betButton);
+        betButton.inputEnabled = true;
+        betButton.events.onInputDown.add(handle.betButton);
 
         let menuButton = view.draw.MenuButton({});
-            menuButton.inputEnabled = true;
-            menuButton.events.onInputDown.add(handle.menuButton);
+        menuButton.inputEnabled = true;
+        menuButton.events.onInputDown.add(handle.menuButton);
 
         let soundButton = view.draw.SoundButton({});
-            soundButton.inputEnabled = true;
-            soundButton.events.onInputDown.add(handle.soundButton);
+        soundButton.inputEnabled = true;
+        soundButton.events.onInputDown.add(handle.soundButton);
 
         setButtonsX();
         setButtonsY();
@@ -97,18 +97,18 @@ export let controller = (() => {
             if (model.state('buttons:locked')
             || spinButton.frameName === 'spinEmpty.png') return;
 
-            soundController.sound.playSound({sound : 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
             lockButtons();
 
             rollController.startRoll();
             rollController.fastRoll();
         },
 
-        autoButton: function() {
+        autoButton: function () {
             if (model.state('buttons:locked')) return;
             let autoButton = model.el('autoButton');
 
-            soundController.sound.playSound({sound : 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
 
             if (autoButton.frameName === 'stop.png') {
                 autoplayController.stop();
@@ -118,25 +118,25 @@ export let controller = (() => {
             }
         },
 
-        betButton: function() {
+        betButton: function () {
             let betButton = model.el('betButton');
 
             if (model.state('buttons:locked')
             || betButton.frameName === 'setBetOut.png') return;
 
-            soundController.sound.playSound({sound : 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
             mobileSetBetController.handle.openPanel({});
         },
 
-        menuButton: function() {
+        menuButton: function () {
             if (model.state('buttons:locked')
             || model.state('roll:progress')) return;
 
-            soundController.sound.playSound({sound : 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
             mobileSettingsController.handle.openSettings({});
         },
 
-        soundButton: function() {
+        soundButton: function () {
             let soundButton = model.el('soundButton');
             if (model.state('globalSound')) {
                 console.log('off');
@@ -152,31 +152,31 @@ export let controller = (() => {
 
     let auto = {
 
-        start: function(amount) {
+        start: function (amount) {
             view.auto.Start();
             view.draw.autoCount({amount});
         },
 
-        stop: function() {
+        stop: function () {
             view.auto.Stop();
             view.draw.removeCount();
         },
 
-        change: function(count) {
+        change: function (count) {
             view.draw.updateCount({count});
         }
 
     };
 
     function lockButtons() {
-        if(model.desktop
+        if (model.desktop
         || model.state('autoplay:start')) return;
 
         view.draw.lockButtons();
     }
 
     function unlockButtons() {
-        if(model.desktop
+        if (model.desktop
         || model.state('autoplay:start')) return;
 
         view.draw.unlockButtons();

@@ -13,15 +13,11 @@ export let controller = (() => {
 
     function showWin() {
 
-        let game = model.el('game'),
-            mainContainer = model.group('main'),
-            winTopContainer = model.group('winTop');
+        let game = model.el('game');
 
         let data = model.data('rollResponse'),
             winTotalData = data.Balance.TotalWinCoins,
-            winLines = data.WinLines,
-            mode = data.Mode,
-            nextMode = data.NextMode;
+            winLines = data.WinLines;
         // Если нет выигрыша - выходим
         if (winLines.length === 0) return;
         view.draw.copyFinishScreenToUpWheels({});
@@ -48,10 +44,10 @@ export let controller = (() => {
         view.draw.WinElements({number: winElements.number, amount: winElements.amount});
 
         let oneAfterAnotherTimer = game.time.events.add(1400, () => {
-            if(model.state('autoplay:end')
+            if (model.state('autoplay:end')
             && model.state('fs:end')
-            &&!model.state('bonus')
-            &&!model.state('roll:progress')) {
+            && !model.state('bonus')
+            && !model.state('roll:progress')) {
                 oneAfterAnother();
             }
         });
@@ -71,8 +67,8 @@ export let controller = (() => {
             upWheel.forEach((upEl) => {
                 upEl.hide(0);
                 upEl.normal();
-            })
-        })
+            });
+        });
         let wheels = model.el('wheels');
         wheels.forEach((wheel) => {
             wheel.elements.forEach((el) => {
@@ -82,7 +78,6 @@ export let controller = (() => {
 
         // Перевод в нормальную анимацию
         if (normalAnim) {
-            let wheels = model.el('wheels');
             wheels.forEach((wheel) => {
                 wheel.elements.forEach((element) => {
                     element.normal();
@@ -92,7 +87,6 @@ export let controller = (() => {
 
         // Если нужно очистить элементы от прозрачности
         if (cleanAlpha) {
-            let wheels = model.el('wheels');
             wheels.forEach((wheel) => {
                 wheel.elements.forEach((element) => {
                     element.show();
@@ -104,7 +98,7 @@ export let controller = (() => {
             .onComplete.add(() => {
                 container.removeAll();
                 container.alpha = 1;
-            });;
+            });
     }
 
     function oneAfterAnother() {

@@ -3,7 +3,6 @@ import { config } from 'modules/Util/Config';
 
 import { view as mainView } from 'modules/States/Main/MainView';
 import { view as winView } from 'modules/Win/WinView';
-import { view as transitionView } from 'modules/Transition/TransitionView';
 
 import { controller as soundController } from 'modules/Sound/SoundController';
 import { controller as settingsController } from 'modules/Settings/DesktopSettingsController';
@@ -126,7 +125,7 @@ export class Main {
 
         if (model.desktop) {
             let fullScreeButton = model.el('fullScreeButton');
-                fullScreeButton.frameName = (game.scale.isFullScreen || window.innerHeight == screen.height) ? 'fullscreenOff.png' : 'fullscreen.png';
+            fullScreeButton.frameName = (game.scale.isFullScreen || window.innerHeight == screen.height) ? 'fullscreenOff.png' : 'fullscreen.png';
         }
 
     }

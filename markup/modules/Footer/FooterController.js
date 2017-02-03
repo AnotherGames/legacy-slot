@@ -12,22 +12,22 @@ export let controller = (() => {
         view.draw.Time({});
 
         let homeButton = view.draw.HomeButton({});
-            homeButton.onInputDown.add(handle.Home);
+        homeButton.onInputDown.add(handle.Home);
 
         let menuButton = view.draw.MenuButton({});
-            menuButton.onInputDown.add(handle.Menu);
+        menuButton.onInputDown.add(handle.Menu);
 
         let soundButton = view.draw.SoundButton({});
-            soundButton.freezeFrames = true;
-            soundButton.onInputDown.add(handle.Sound);
+        soundButton.freezeFrames = true;
+        soundButton.onInputDown.add(handle.Sound);
 
         let fastButton = view.draw.FastButton({});
-            fastButton.freezeFrames = true;
-            fastButton.onInputDown.add(handle.Fast);
+        fastButton.freezeFrames = true;
+        fastButton.onInputDown.add(handle.Fast);
 
         let fullScreenButton = view.draw.FullScreenButton({});
-            fullScreenButton.onInputDown.add(handle.toggleFullScreen);
-            fullScreenButton.freezeFrames = true;
+        fullScreenButton.onInputDown.add(handle.toggleFullScreen);
+        fullScreenButton.freezeFrames = true;
     }
 
     function initMobile() {
@@ -35,7 +35,7 @@ export let controller = (() => {
         view.draw.Time({});
 
         let homeButton = view.draw.HomeButton({});
-            homeButton.onInputDown.add(handle.Home);
+        homeButton.onInputDown.add(handle.Home);
     }
 
     function updateTime() {
@@ -52,7 +52,7 @@ export let controller = (() => {
             // Выключаем управление с клавиатуры
             game.input.keyboard.enabled = false;
 
-            soundController.sound.playSound({sound : 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
 
             // Обновляем состояния чекбоксов в настройках
             $('#volume').prop('value', (model.state('globalSound')) ? soundController.volume.getVolume() * 100 : 0);
@@ -80,9 +80,9 @@ export let controller = (() => {
 
         Sound: function () {
             let soundButton = model.el('soundButton');
-            if (model.state('globalSound')){
+            if (model.state('globalSound')) {
                 soundButton.frameName = 'soundOff.png';
-                soundController.volume.switchVolume()
+                soundController.volume.switchVolume();
             } else {
                 soundButton.frameName = 'sound.png';
                 soundController.volume.switchVolume();
@@ -90,7 +90,7 @@ export let controller = (() => {
         },
 
         Fast: function () {
-            soundController.sound.playSound({sound : 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
             let fastButton = model.el('fastButton');
             // Ищменяем состояние fastRoll и меняем фрейм кнопки
             if (model.state('fastRoll')) {
@@ -105,7 +105,7 @@ export let controller = (() => {
         },
 
         Home: function () {
-            soundController.sound.playSound({sound : 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
             // Отправляем запрос Logout
             request.send('Logout')
                 .then((response) => {
@@ -115,13 +115,13 @@ export let controller = (() => {
                 });
         },
 
-        toggleFullScreen: function() {
+        toggleFullScreen: function () {
             let game = model.el('game');
 
             if (game.scale.isFullScreen) {
-                game.scale.stopFullScreen()
+                game.scale.stopFullScreen();
             } else {
-                game.scale.startFullScreen()
+                game.scale.startFullScreen();
             }
         }
     };

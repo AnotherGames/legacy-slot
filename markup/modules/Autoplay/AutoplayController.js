@@ -1,5 +1,4 @@
 import { model } from 'modules/Model/Model';
-import { view as mainView } from 'modules/States/Main/MainView';
 
 import { controller as rollController } from 'modules/Roll/RollController';
 import { controller as panelController } from 'modules/Panel/PanelController';

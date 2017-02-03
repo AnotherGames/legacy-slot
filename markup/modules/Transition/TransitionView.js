@@ -1,7 +1,7 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
 
-import { controller as keyboardController } from 'modules/Keyboard/KeyboardController'
+import { controller as keyboardController } from 'modules/Keyboard/KeyboardController';
 import { controller as soundController } from 'modules/Sound/SoundController';
 
 export let view = (() => {
@@ -30,7 +30,7 @@ export let view = (() => {
     function _fsStartDraw() {
         let game = model.el('game');
         let transitionContainer = model.group('transition');
-        game.camera.flash(0x000000, 777)
+        game.camera.flash(0x000000, 777);
         // Изменяем музыку
         soundController.music.stopMusic('fon');
         soundController.music.playMusic('startPerehod');
@@ -41,16 +41,16 @@ export let view = (() => {
 
         // Надпись Free Spins
         let freeSpinsText = game.add.sprite(game.width / 2, game.height * 0.2, 'text', 'freespins.png', transitionContainer);
-            freeSpinsText.anchor.set(0.5);
-            freeSpinsText.scale.set(0.1);
+        freeSpinsText.anchor.set(0.5);
+        freeSpinsText.scale.set(0.1);
         model.el('freeSpinsText', freeSpinsText);
 
         // Счетчик Фри-Спинов
         let freeSpinsCount = model.data('rollResponse').FreeSpinsLeft;
         let freeSpinsLevel = game.add.bitmapText(game.width / 2, game.height / 2, 'numbersFont', freeSpinsCount, 120, transitionContainer);
-            freeSpinsLevel.align = 'center';
-            freeSpinsLevel.anchor.set(0.5);
-            freeSpinsLevel.scale.set(0.1);
+        freeSpinsLevel.align = 'center';
+        freeSpinsLevel.anchor.set(0.5);
+        freeSpinsLevel.scale.set(0.1);
         model.el('freeSpinsLevel', freeSpinsLevel);
 
         let diverChar = game.add.sprite(-800, game.height * 0.85, 'diverChar', null, transitionContainer);
@@ -69,8 +69,8 @@ export let view = (() => {
             'text',
             'continue.png',
             transitionContainer);
-            continueText.anchor.set(0.5);
-            continueText.scale.setTo(0.1, 0.1);
+        continueText.anchor.set(0.5);
+        continueText.scale.setTo(0.1, 0.1);
         model.el('continueText', continueText);
 
     }
@@ -102,11 +102,10 @@ export let view = (() => {
     }
 
     function _fsStartInput() {
-        let game = model.el('game');
         // При клике на фон будет переход на Фри-Спины
         let transitionBG = model.el('transitionBG');
-            transitionBG.inputEnabled = true;
-            transitionBG.input.priorityID = 2;
+        transitionBG.inputEnabled = true;
+        transitionBG.input.priorityID = 2;
         transitionBG.events.onInputDown.add(function () {
             soundController.sound.playSound({sound: 'buttonClick'});
             soundController.music.stopMusic('startPerehod');
@@ -119,7 +118,6 @@ export let view = (() => {
         // Автоматический переход на Фри-Спины
         soundController.music.stopMusic('startPerehod');
         soundController.music.playMusic('fsFon');
-        let game = model.el('game');
         model.el('game').state.start('FS');
     }
 
@@ -128,7 +126,7 @@ export let view = (() => {
         // game.input.keyboard.enabled = true;
         keyboardController.initFsKeys();
         // Темнота
-        game.camera.flash(0x000000, 500)
+        game.camera.flash(0x000000, 500);
         // Отрисовка финишного экрана
         _fsFinishDraw();
         _fsFinishTween();
@@ -148,7 +146,7 @@ export let view = (() => {
     function _fsFinishDraw() {
         let game = model.el('game');
         let transitionContainer = model.group('transition');
-        game.camera.flash(0x000000, 777)
+        game.camera.flash(0x000000, 777);
         // Изменяем музыку
         soundController.music.stopMusic('fsFon');
         soundController.music.playMusic('finishPerehod');
@@ -177,9 +175,9 @@ export let view = (() => {
 
         // Отрисовываем Выигрыш
         let winCount = game.add.bitmapText(game.width / 2, game.height / 2 - 50, 'numbersFont', '0', 120, transitionContainer);
-            winCount.align = 'center';
-            winCount.anchor.set(0.5);
-            winCount.scale.set(0.1);
+        winCount.align = 'center';
+        winCount.anchor.set(0.5);
+        winCount.scale.set(0.1);
         model.el('winCount', winCount);
 
         let diverChar = game.add.sprite(-800, game.height * 0.85, 'diverChar', null, transitionContainer);
@@ -204,7 +202,7 @@ export let view = (() => {
             'text',
             'continue.png',
             transitionContainer);
-            continueText.anchor.set(0.5);
+        continueText.anchor.set(0.5);
         if (model.mobile) {
             continueText.y = game.world.height * 0.85;
         }
@@ -261,7 +259,6 @@ export let view = (() => {
         soundController.sound.stopSound({sound: 'win'});
         soundController.music.stopMusic('finishPerehod');
         // soundController.music.playMusic('fon');
-        let game = model.el('game');
         model.el('game').state.start('Main');
     }
 
@@ -280,7 +277,7 @@ export let view = (() => {
             if (progress > 1) {
                 progress = 1;
             }
-            elem.setText( parseInt(count * progress) );
+            elem.setText( parseInt(count * progress, 10) );
 
             if (progress === 1) {
                 game.frameAnims.splice(game.frameAnims.indexOf(anim), 1);
@@ -290,88 +287,9 @@ export let view = (() => {
         game.frameAnims.push(anim);
     }
 
-    // Монетки на победном экране
-    // function _addCoin(container) {
-    //     let game = model.el('game');
-    //     if (container.y >= game.height * 5.7) return;
-    //
-    //     let posX = game.rnd.integerInRange(game.width * 0.1, game.width * 0.9);
-    //     let coin = game.add.sprite(posX, container.y * -1 - 100, 'transitionCoin', null, container);
-    //     coin.anchor.set(0.5);
-    //     let scale = game.rnd.integerInRange(50, 100) / 75;
-    //     coin.scale.set(scale, scale);
-    //     let height = coin.height;
-    //     coin.height = game.rnd.integerInRange(height * 0.3, height);
-    //     let tween = game.add.tween(coin)
-    //         .to({rotation: 200}, 1000, 'Linear', true)
-    //         .start();
-    //     tween.onComplete.add(() => {
-    //         coin.destroy();
-    //     });
-    //     game.add.tween(coin)
-    //         .to({height: height}, 200, 'Linear')
-    //         .to({height: height * 0.2}, 100, 'Linear')
-    //         .to({height: height}, 200, 'Linear')
-    //         .to({height: height * 0.2}, 100, 'Linear')
-    //         .to({height: height}, 200, 'Linear')
-    //         .to({height: height * 0.2}, 100, 'Linear')
-    //         .to({height: height}, 200, 'Linear')
-    //         .start();
-    //
-    //     game.time.events.add(75, () => {
-    //         _addCoin(container)
-    //     });
-    // }
-    //
-    // function _coinsTween() {
-    //     let game = model.el('game');
-    //     let coinsContainer = game.add.group();
-    //     _addCoin(coinsContainer);
-    //     game.add.tween(coinsContainer).to({y: game.height * 7}, 5000, 'Linear', true);
-    // }
-
-
-    // function addCloud({
-    //     x = model.el('game').rnd.integerInRange(0, model.el('game').width),
-    //     container = model.group('bg')
-    // }) {
-    //     let game = model.el('game');
-    //     let random = game.rnd.integerInRange(3, 10);
-    //
-    //     // let number = game.rnd.integerInRange(1, 4);
-    //     // let cloud = game.add.sprite(0, 150, 'clouds', `cloud${number}.png`, container);
-    //     let cloud = game.add.sprite(0, 150, 'cloud', null, container);
-    //     cloud.anchor.set(0.5);
-    //     cloud.scale.set(random / 10);
-    //
-    //     let time = game.rnd.integerInRange(40, 60);
-    //     let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
-    //     // let delta;
-    //     if (model.desktop) {
-    //         cloud.y = cloud.y = cloud.y + game.rnd.integerInRange(0, 250);
-    //     } else {
-    //         cloud.y = cloud.y = cloud.y + game.rnd.integerInRange(0, 100);
-    //     }
-    //     cloud.x = x;
-    //
-    //     if (container === model.group('bg')){
-    //         cloud.x = (side === 'left') ? -cloud.width : game.width + cloud.width;
-    //     }
-    //     let delta = (side === 'left') ? game.width + cloud.width : -cloud.width;
-    //
-    //     game.add.tween(cloud).to({x: delta}, time * 1000, 'Linear', true)
-    //         .onComplete.add(() => {
-    //             cloud.destroy();
-    //             // if (container === model.group('bg') && model.state('isAnimations' == false)){
-    //             //     addCloud({container: model.group('bg')});
-    //             // }
-    //         }, this);
-    //
-    // }
-
     return {
         fsStart,
         fsFinish
-    }
+    };
 
 })();

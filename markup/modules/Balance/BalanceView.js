@@ -15,7 +15,7 @@ export let view = (() => {
             totalWidth = numberOfd * d + numberOfD * D;
 
         els.forEach((frase, fraseInd) => {
-            frase.forEach((word, wordInd) => {
+            frase.forEach((word) => {
                 totalWidth += word.width;
                 if (fraseInd == 0) {
                     frase[0].x = frase[0].width / 2;
@@ -34,7 +34,7 @@ export let view = (() => {
 
     let draw = {
 
-        CashBalance: function({
+        CashBalance: function ({
             game = model.el('game'),
             container = model.group('balanceCash'),
             currencySymbol = model.balance('currencySymbol'),
@@ -50,7 +50,7 @@ export let view = (() => {
             let betCashText = game.add.text(0, y, 'Bet: ', greyStyle, container);
             let winCashText = game.add.text(0, y, 'Win: ', greyStyle, container);
             let coinCash = game.add.text(0, y, `${currencySymbol} ${coinCashValue.toFixed(2)}`, cashStyle, container);
-            let betCash = game.add.text(0, y , `${currencySymbol} ${betCashValue.toFixed(2)}`, cashStyle, container);
+            let betCash = game.add.text(0, y, `${currencySymbol} ${betCashValue.toFixed(2)}`, cashStyle, container);
             let winCash = game.add.text(0, y, `${currencySymbol} ${winCashValue.toFixed(2)}`, cashStyle, container);
 
             model.el('coinCashText', coinCashText);
@@ -65,7 +65,7 @@ export let view = (() => {
 
         },
 
-        MobileBalance: function({
+        MobileBalance: function ({
             game = model.el('game'),
             container = model.group('balanceCoin'),
             coinSumValue = model.balance('coinSum'),
@@ -90,7 +90,7 @@ export let view = (() => {
 
         },
 
-        DesktopBalance: function({
+        DesktopBalance: function ({
             game = model.el('game'),
             container = model.group('panel'),
             coinSumValue = model.balance('coinSum'),
@@ -115,7 +115,7 @@ export let view = (() => {
             betSum.setShadow(5, 5, 'rgba(0, 0, 0, 0.7)', 8);
             coinValue.setShadow(5, 5, 'rgba(0, 0, 0, 0.7)', 8);
             betValue.setShadow(5, 5, 'rgba(0, 0, 0, 0.7)', 8);
-68
+
             model.el('coinSum', coinSum);
             model.el('betSum', betSum);
             model.el('coinValue', coinValue);
@@ -125,7 +125,7 @@ export let view = (() => {
 
         },
 
-        FSMobileBalance: function({
+        FSMobileBalance: function ({
             game = model.el('game'),
             container = model.group('balanceCoin'),
             totalWinValue = model.balance('totalWin'),
@@ -149,7 +149,7 @@ export let view = (() => {
             _calcTextPosition([[totalWinText, totalWinSum], [winText, winSum]], container);
         },
 
-        FSDesktopBalance: function({
+        FSDesktopBalance: function ({
             game = model.el('game'),
             container = model.group('panel'),
             coinSumValue = model.balance('coinSum'),
@@ -168,8 +168,8 @@ export let view = (() => {
             let coinValue = game.add.text(x[2], y[3], `${coinValueAmount}`, valueStyle, container);
             let betValue = game.add.text(x[0], y[3], `${betValueAmount}`, valueStyle, container);
 
-            let winSum = game.add.text(x[0], y[3], `0`, sumStyle, container);
-            let totalWinSum = game.add.text(x[0], y[0], `0`, sumStyle, container);
+            let winSum = game.add.text(x[0], y[3], '0', sumStyle, container);
+            let totalWinSum = game.add.text(x[0], y[0], '0', sumStyle, container);
 
             model.el('coinSum', coinSum);
             model.el('betSum', betSum);
@@ -186,7 +186,7 @@ export let view = (() => {
 
     let update = {
 
-        CashBalance: function({
+        CashBalance: function ({
             container = model.group('balanceCash'),
             currencySymbol = model.balance('currencySymbol'),
             coinCashValue = model.balance('coinCash'),
@@ -233,7 +233,7 @@ export let view = (() => {
 
         },
 
-        MobileBalance: function({
+        MobileBalance: function ({
             container = model.group('balanceCoin'),
             coinSumValue = model.balance('coinSum'),
             betSumValue = model.balance('betSum')
@@ -276,7 +276,7 @@ export let view = (() => {
 
         },
 
-        DesktopBalance: function({
+        DesktopBalance: function ({
             coinSumValue = model.balance('coinSum'),
             betSumValue = model.balance('betSum'),
             coinValueAmount = model.balance('coinValue'),
@@ -319,7 +319,7 @@ export let view = (() => {
 
         },
 
-        FSMobileBalance: function({
+        FSMobileBalance: function ({
             winSumValue = model.balance('fsWin'),
             totalWinSumValue = model.balance('totalWin'),
             container = model.group('balanceCoin')
@@ -337,7 +337,7 @@ export let view = (() => {
 
         },
 
-        FSDesktopBalance: function({
+        FSDesktopBalance: function ({
             winSumValue = model.balance('fsWin'),
             totalWinSumValue = model.balance('totalWin')
         }) {
@@ -355,6 +355,6 @@ export let view = (() => {
     return {
         draw,
         update
-    }
+    };
 
 })();

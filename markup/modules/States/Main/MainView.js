@@ -1,7 +1,5 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
-import { view as transitionView } from 'modules/Transition/TransitionView';
-import { controller as soundController } from 'modules/Sound/SoundController';
 
 export let view = (() => {
 
@@ -40,11 +38,11 @@ export let view = (() => {
         }) {
             let deltaY = (model.desktop) ? 45 : -25;
             let gameMachineBG = game.add.sprite(0, deltaY, 'gameMachineBG', null, container);
-                gameMachineBG.anchor.set(0.5);
+            gameMachineBG.anchor.set(0.5);
             model.el('gameMachineBG', gameMachineBG);
 
             let gameMachine = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachine', null, container);
-                gameMachine.anchor.set(0.5);
+            gameMachine.anchor.set(0.5);
             model.el('gameMachine', gameMachine);
 
 
@@ -65,13 +63,13 @@ export let view = (() => {
         eyeLight: function ({
             game = model.el('game'),
             container = model.group('main')
-        }){
-            let eyeLight = game.add.sprite((model.desktop) ? -235: -135, (model.desktop) ? -373 : -320, 'eyeLight', null, container);
-                eyeLight.anchor.set(0.5);
-                eyeLight.alpha = 0;
+        }) {
+            let eyeLight = game.add.sprite((model.desktop) ? -235 : -135, (model.desktop) ? -373 : -320, 'eyeLight', null, container);
+            eyeLight.anchor.set(0.5);
+            eyeLight.alpha = 0;
 
             game.add.tween(eyeLight).to({angle: 45, alpha: 1}, 300, 'Linear', true)
-                .onComplete.add(()=>{
+                .onComplete.add(() => {
                     game.add.tween(eyeLight).to({alpha: 0}, 300, 'Linear', true);
                     eyeLight.destroy();
                     game.time.events.add(7000, () => {
@@ -85,15 +83,15 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('main')
         }) {
-            let labelLight = game.add.sprite((model.desktop) ? -200: -290, (model.desktop) ? -360 : -310, 'labelLight', null, container);
-                labelLight.anchor.set(0.5);
-                labelLight.alpha = 0;
-                (model.desktop) ? labelLight.scale.set(0.15) : labelLight.scale.set(0.1);
-                labelLight.animations.add('move');
-                labelLight.animations.play('move', 20, false);
+            let labelLight = game.add.sprite((model.desktop) ? -200 : -290, (model.desktop) ? -360 : -310, 'labelLight', null, container);
+            labelLight.anchor.set(0.5);
+            labelLight.alpha = 0;
+            (model.desktop) ? labelLight.scale.set(0.15) : labelLight.scale.set(0.1);
+            labelLight.animations.add('move');
+            labelLight.animations.play('move', 20, false);
 
             game.add.tween(labelLight).to({alpha: 1, x: labelLight.x + 400}, 500, 'Linear', true)
-                .onComplete.add(()=>{
+                .onComplete.add(() => {
                     game.add.tween(labelLight).to({alpha: 0}, 300, 'Linear', true);
                     labelLight.destroy();
                     game.time.events.add(8000, () => {
@@ -154,7 +152,7 @@ export let view = (() => {
 
         },
 
-        addFishes: function({
+        addFishes: function ({
             game = model.el('game'),
             container = model.group('bg'),
             y1 = (model.desktop) ? 450 : 350,
@@ -165,7 +163,7 @@ export let view = (() => {
 
             for (let i = 0; i < game.rnd.integerInRange(5, 10); i++) {
 
-                let x = (side === 'left') ? game.rnd.integerInRange(430, 500) * -1: game.width + game.rnd.integerInRange(430, 500);
+                let x = (side === 'left') ? game.rnd.integerInRange(430, 500) * -1 : game.width + game.rnd.integerInRange(430, 500);
                 let y = game.rnd.integerInRange(y1, y2);
 
                 let fish = game.add.sprite(x, y, 'fish', null, container);
@@ -180,7 +178,7 @@ export let view = (() => {
                 model.el('fish', fish);
                 fishes.push(fish);
             }
-            fishes.forEach((fish) =>{
+            fishes.forEach((fish) => {
                 let time = game.rnd.integerInRange(7, 9);
                 let deltaX = (side === 'left') ? game.width + 500 : -500;
                 game.add.tween(fish).to({x: deltaX}, time * 1000, 'Linear', true)
@@ -207,14 +205,14 @@ export let view = (() => {
 
             let rNumbY = (model.desktop) ?
                 [252, 297, 342, 387, 543, 590, 637, 735, 780, 825, 870] :
-                [68, 103, 138, 173, 285, 320, 355, 435, 470, 505, 540]
+                [68, 103, 138, 173, 285, 320, 355, 435, 470, 505, 540];
 
             let lNumbY = (model.desktop) ?
                 [252, 297, 342, 387, 495, 543, 585, 735, 780, 825, 871] :
-                [68, 103, 138, 173, 285, 320, 355, 435, 470, 505, 540]
+                [68, 103, 138, 173, 285, 320, 355, 435, 470, 505, 540];
 
-            let lNumbs = [4, 6, 18, 11, 9, 1, 20, 10, 19, 7, 5]
-            let rNumbs = [13, 15, 2, 17, 1, 21, 8, 16, 3, 14, 12]
+            let lNumbs = [4, 6, 18, 11, 9, 1, 20, 10, 19, 7, 5];
+            let rNumbs = [13, 15, 2, 17, 1, 21, 8, 16, 3, 14, 12];
 
             let deltaXright = (model.desktop) ? 105 : 81;
             let deltaXleft = (model.desktop) ? 109 : 83;
@@ -280,23 +278,23 @@ export let view = (() => {
             model.el('lineNumbersArr', model.el('lineNumbersArr').concat(lineNumbersArr));
         },
 
-        lineShape: function(number) {
-           let game = model.el('game');
-           let container = model.group('glistaLight');
-           let line = model.data('lines')[number - 1];
-           let elSize = config[model.res].elements;
-           let lineShape = game.add.graphics(0, 0, container);
-           let gameMachine = model.el('gameMachine');
-           let deltaX = 150;
-           let deltaY = (model.desktop) ? 200 : 40;
-           lineShape
+        lineShape: function (number) {
+            let game = model.el('game');
+            let container = model.group('glistaLight');
+            let line = model.data('lines')[number - 1];
+            let elSize = config[model.res].elements;
+            let lineShape = game.add.graphics(0, 0, container);
+            let gameMachine = model.el('gameMachine');
+            let deltaX = 150;
+            let deltaY = (model.desktop) ? 200 : 40;
+            lineShape
                .lineStyle(4, 0x188bb4, 0.8)
                .moveTo((line[0].X + 0.5) * elSize.width - gameMachine.width / 2 + deltaX, (line[0].Y + 0.5) * elSize.height - gameMachine.height / 2 + deltaY)
                .lineTo((line[1].X + 0.5) * elSize.width - gameMachine.width / 2 + deltaX, (line[1].Y + 0.5) * elSize.height - gameMachine.height / 2 + deltaY)
                .lineTo((line[2].X + 0.5) * elSize.width - gameMachine.width / 2 + deltaX, (line[2].Y + 0.5) * elSize.height - gameMachine.height / 2 + deltaY)
                .lineTo((line[3].X + 0.5) * elSize.width - gameMachine.width / 2 + deltaX, (line[3].Y + 0.5) * elSize.height - gameMachine.height / 2 + deltaY)
-               .lineTo((line[4].X + 0.5) * elSize.width - gameMachine.width / 2 + deltaX, (line[4].Y + 0.5) * elSize.height - gameMachine.height / 2 + deltaY)
-           return lineShape;
+               .lineTo((line[4].X + 0.5) * elSize.width - gameMachine.width / 2 + deltaX, (line[4].Y + 0.5) * elSize.height - gameMachine.height / 2 + deltaY);
+            return lineShape;
         },
 
         machineContainer: function ({
@@ -339,7 +337,7 @@ export let view = (() => {
             const elSize = config[model.res].elements;
             let deltaY = (model.desktop) ? 50 : -25;
             let someGraphic = game.add.graphics(-elSize.width * 2.5, -elSize.height * 1.5 + deltaY, machineGroup);
-                someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5, elSize.height * 3);
+            someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5, elSize.height * 3);
             machineGroup.mask = someGraphic;
         },
 
@@ -361,7 +359,7 @@ export let view = (() => {
                 'popup',
                 null,
                 container);
-                popup.anchor.set(0.5);
+            popup.anchor.set(0.5);
             model.el('popup', popup);
 
             let popupText = game.add.text(
@@ -370,7 +368,7 @@ export let view = (() => {
                 message,
                 {font: font, fill: color, align: 'center', wordWrap: true, wordWrapWidth: 380, stroke: '#000000', strokeThickness: 3},
                 container);
-                popupText.anchor.set(0.5);
+            popupText.anchor.set(0.5);
 
             popup.inputEnabled = true;
             popup.input.priorityID = 3;
