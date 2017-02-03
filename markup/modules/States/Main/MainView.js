@@ -205,8 +205,13 @@ export let view = (() => {
         }) {
             let lineNumbersArr = [];
 
-            let rNumbY = [252, 297, 342, 387, 543, 590, 637, 735, 780, 825, 870]
-            let lNumbY = [252, 297, 342, 387, 495, 543, 585, 735, 780, 825, 871]
+            let rNumbY = (model.desktop) ?
+                [252, 297, 342, 387, 543, 590, 637, 735, 780, 825, 870] :
+                [68, 103, 138, 173, 285, 320, 355, 435, 470, 505, 540]
+
+            let lNumbY = (model.desktop) ?
+                [252, 297, 342, 387, 495, 543, 585, 735, 780, 825, 871] :
+                [68, 103, 138, 173, 285, 320, 355, 435, 470, 505, 540]
 
             let lNumbs = [4, 6, 18, 11, 9, 1, 20, 10, 19, 7, 5]
             let rNumbs = [13, 15, 2, 17, 1, 21, 8, 16, 3, 14, 12]
@@ -268,9 +273,11 @@ export let view = (() => {
                 lineNumbersArr.push(lineNumber);
             }
 
-            let numbersArr = [];
-            model.el('lineNumbersArr', numbersArr);
-            model.el('lineNumbersArr', numbersArr.concat(lineNumbersArr));
+            if (!model.el('lineNumbersArr')) {
+                let numbersArr = [];
+                model.el('lineNumbersArr', numbersArr);
+            }
+            model.el('lineNumbersArr', model.el('lineNumbersArr').concat(lineNumbersArr));
         },
 
         lineShape: function(number) {
@@ -377,34 +384,6 @@ export let view = (() => {
                 (balance) ? container.removeAll() : window.location.reload();
             });
         }
-
-        // flyingSmoke: function({
-        //     game = model.el('game'),
-        //     container = model.group('bg'),
-        //     x = game.width / 39,
-        //     y = game.height / 5.6,
-        //     speed = 60000,
-        //     delay = game.rnd.between(1000, 20000)
-        // }){
-        //     let smoke = game.add.sprite(x, y, 'smoke', null, container);
-        //         smoke.anchor.set(0.5);
-        //         smoke.scale.set(0.1);
-        //         smoke.alpha = 0;
-        //
-        //     let scaleX = (model.desktop)? 1 : 0.6;
-        //     let scaleY = (model.desktop)? 1 : 0.6;
-        //     game.add.tween(smoke).to({alpha: 0.8 }, 300, Phaser.Easing.Sinusoidal.InOut, true, delay);
-        //     game.add.tween(smoke.scale).to({y: scaleX, x: scaleY}, speed, Phaser.Easing.Sinusoidal.InOut, true, delay)
-        //     game.add.tween(smoke).to({y: smoke.y / 2}, speed, Phaser.Easing.Sinusoidal.InOut, true, delay)
-        //         .onComplete.add(()=>{
-        //             game.add.tween(smoke).to({y: -smoke.y, alpha: 0}, speed / 3, Phaser.Easing.Quintic.In, true)
-        //                 .onComplete.add(()=>{
-        //                     smoke.destroy();
-        //                     draw.flyingSmoke({});
-        //                 })
-        //
-        //         });
-        // }
 
     };
 
