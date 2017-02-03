@@ -204,7 +204,7 @@ export let view = (() => {
             betCash.text = `${currencySymbol} ${betCashValue.toFixed(2)}`;
             winCash.text = `${currencySymbol} ${winCashValue.toFixed(2)}`;
 
-            let currBalance = +coinCash.text.substr(2);
+            let currBalance = +coinCash.text.split('  ')[1];
             let plusBalance = coinCashValue - currBalance;
             let timeLength = 500;
             let _clock = game.time.create(true);
