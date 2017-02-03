@@ -17,6 +17,9 @@ export class Init {
     create() {
         let game = model.el('game');
 
+        this.game.plugins.add(new Phaser.Plugin.SaveCPU(this));
+        // this.savecpu.init();
+
         game.camera.flash(0x000000, 500);
 
         view.drawBG();
