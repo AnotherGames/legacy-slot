@@ -158,9 +158,11 @@ export let view = (() => {
                 style = styleMobile;
             }
 
+            let timeHeight = (model.desktop) ? game.height - 17 : game.height - 11;
+
             let footerTime = game.add.text(
                 0,
-                game.height - 17,
+                timeHeight,
                 `${currentHour} : ${currentMinutes}`,
                 style,
                 container);
