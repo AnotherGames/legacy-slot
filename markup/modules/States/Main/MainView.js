@@ -204,18 +204,26 @@ export let view = (() => {
             side = 'left'
         }) {
             let lineNumbersArr = [];
-            let deltaYright = (model.desktop) ? 105 : 81;
-            let deltaYleft = (model.desktop) ? 109 : 83;
 
-            for (let i = 1; i < 22; i++) {
-                side = config[model.res].win[i][0].side;
-                let x = (side == 'right') ? gameMachine.right - deltaYright : gameMachine.left + deltaYleft;
-                let lineNumber = game.add.sprite(x, config[model.res].win[i][0].y - gameMachine.height / 2,
+            let rNumbY = [252, 297, 342, 387, 543, 590, 637, 735, 780, 825, 870]
+            let lNumbY = [252, 297, 342, 387, 495, 543, 585, 735, 780, 825, 871]
+
+            let lNumbs = [4, 6, 18, 11, 9, 1, 20, 10, 19, 7, 5]
+            let rNumbs = [13, 15, 2, 17, 1, 21, 8, 16, 3, 14, 12]
+
+            let deltaXright = (model.desktop) ? 105 : 81;
+            let deltaXleft = (model.desktop) ? 109 : 83;
+            let y = (side == 'right') ? rNumbY : lNumbY;
+            let x = (side == 'right') ? gameMachine.right - deltaXright : gameMachine.left + deltaXleft;
+            let sideNumbers = (side == 'right') ? rNumbs : lNumbs;
+
+            for (let i = 0; i < 11; i++) {
+                let lineNumber = game.add.sprite(x, y[i] - gameMachine.height / 2,
                     'winSplash',
                     'skeleton-animation_5.png',
                     container);
 
-                lineNumber.name = i;
+                lineNumber.name = sideNumbers[i];
                 lineNumber.anchor.set(0.5);
                 lineNumber.alpha = 0.05;
 
@@ -260,7 +268,9 @@ export let view = (() => {
                 lineNumbersArr.push(lineNumber);
             }
 
-            model.el('lineNumbersArr', lineNumbersArr);
+            let numbersArr = [];
+            model.el('lineNumbersArr', numbersArr);
+            model.el('lineNumbersArr', numbersArr.concat(lineNumbersArr));
         },
 
         lineShape: function(number) {
