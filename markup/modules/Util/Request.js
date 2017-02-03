@@ -2,7 +2,8 @@ import { model } from 'modules/Model/Model';
 import { noConnect } from 'modules/Util/NoConnect';
 
 export let request = (() => {
-    const serviceUrl = 'https://gameservice1.bossgs.org/devslotv2/SlotService.svc';
+    let serviceUrl;
+    // const serviceUrl = 'http://88.198.144.143/devslotv2/SlotService.svc';
     let casinoID = 1;
     let userID = 1;
 
@@ -26,13 +27,16 @@ export let request = (() => {
             case 'Initialise':
                 // Авторизация
                 let params = getAllUrlParams();
+                let currentMode = params.mode || mode[options];
+                let currentService = params.service || 'devslotv2';
+                serviceUrl = `http://88.198.144.143/${currentService}/SlotService.svc`;
                 if (params.demo === 'true') {
                     name = `${name}Demo`;
                 }
                 if (params.sid) {
-                    url = `${serviceUrl}/_${name}/${params.sid}/${mode[options]}`; // Вставил SessionID;
+                    url = `${serviceUrl}/_${name}/${params.sid}/${currentMode}`; // Вставил SessionID;
                 } else {
-                    url = `${serviceUrl}/_${name}/${userID}/${casinoID}/${mode[options]}`;
+                    url = `${serviceUrl}/_${name}/${userID}/${casinoID}/${currentMode}`;
                 }
                 break;
             case 'Roll':
