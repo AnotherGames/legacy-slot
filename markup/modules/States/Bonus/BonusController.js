@@ -141,7 +141,11 @@ export class Bonus {
         bonusView.draw.addLight({});
         bonusView.draw.upperBG({});
 
-        footerController.initDesktop();
+        if (model.desktop) {
+            footerController.initDesktop();
+        } else {
+            footerController.initMobile();
+        }
         balanceView.draw.CashBalance({});
     }
 
