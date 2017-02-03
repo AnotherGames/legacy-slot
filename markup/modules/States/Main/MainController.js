@@ -53,8 +53,7 @@ export class Main {
         mainView.draw.mainContainer({});
         mainView.draw.machineContainer({});
         mainView.draw.machineMask({});
-        mainView.draw.lineNumbers({side: 'left'});
-        mainView.draw.lineNumbers({side: 'right'});
+        mainView.draw.lineNumbers({});
         winView.draw.UpWinContainer({});
 
         // BG anim

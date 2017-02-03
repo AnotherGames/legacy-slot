@@ -142,8 +142,7 @@ export class FS {
         // Отрисовуем основной контейнер
         fsView.draw.mainContainer({});
         fsView.draw.machineContainer({});
-        mainView.draw.lineNumbers({side: 'left'});
-        mainView.draw.lineNumbers({side: 'right'});
+        mainView.draw.lineNumbers({});
         winView.draw.UpWinContainer({});
 
         // BG anim

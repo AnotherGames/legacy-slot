@@ -203,30 +203,24 @@ export let view = (() => {
         }) {
             let lineNumbersArr = [];
 
-            let rNumbY = (model.desktop) ?
-                [252, 297, 342, 387, 543, 590, 637, 735, 780, 825, 870] :
-                [68, 103, 138, 173, 285, 320, 355, 435, 470, 505, 540];
+            let y = (model.desktop) ?
+                [252, 297, 342, 387, 495, 543, 585, 735, 780, 825, 871, 252, 297, 342, 387, 543, 590, 637, 735, 780, 825, 870] :
+                [68, 103, 138, 173, 285, 320, 355, 435, 470, 505, 540, 68, 103, 138, 173, 285, 320, 355, 435, 470, 505, 540]
 
-            let lNumbY = (model.desktop) ?
-                [252, 297, 342, 387, 495, 543, 585, 735, 780, 825, 871] :
-                [68, 103, 138, 173, 285, 320, 355, 435, 470, 505, 540];
-
-            let lNumbs = [4, 6, 18, 11, 9, 1, 20, 10, 19, 7, 5];
-            let rNumbs = [13, 15, 2, 17, 1, 21, 8, 16, 3, 14, 12];
+            let numbs = [4, 6, 18, 11, 9, 1, 20, 10, 19, 7, 5, 13, 15, 2, 17, 1, 21, 8, 16, 3, 14, 12]
 
             let deltaXright = (model.desktop) ? 105 : 81;
             let deltaXleft = (model.desktop) ? 109 : 83;
-            let y = (side == 'right') ? rNumbY : lNumbY;
-            let x = (side == 'right') ? gameMachine.right - deltaXright : gameMachine.left + deltaXleft;
-            let sideNumbers = (side == 'right') ? rNumbs : lNumbs;
+            let x = gameMachine.left + deltaXleft;
 
-            for (let i = 0; i < 11; i++) {
+            for (let i = 0; i < 22; i++) {
+                if(i == 11) x = gameMachine.right - deltaXright;
                 let lineNumber = game.add.sprite(x, y[i] - gameMachine.height / 2,
                     'winSplash',
                     'skeleton-animation_5.png',
                     container);
 
-                lineNumber.name = sideNumbers[i];
+                lineNumber.name = numbs[i];
                 lineNumber.anchor.set(0.5);
                 lineNumber.alpha = 0.05;
 
@@ -271,11 +265,7 @@ export let view = (() => {
                 lineNumbersArr.push(lineNumber);
             }
 
-            if (!model.el('lineNumbersArr')) {
-                let numbersArr = [];
-                model.el('lineNumbersArr', numbersArr);
-            }
-            model.el('lineNumbersArr', model.el('lineNumbersArr').concat(lineNumbersArr));
+            model.el('lineNumbersArr', lineNumbersArr);
         },
 
         lineShape: function (number) {
