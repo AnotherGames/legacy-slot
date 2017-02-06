@@ -50,6 +50,7 @@ export class Element {
 
     play(animation, loop = true, fps = 20) {
         // Если спрайт уже проигрывает нужную нам анимацию, то мы ничего не будем делать чтобы анимация не прыгала
+        if (!this.activeSprite.animations.currentAnim) return;
         if (this.activeSprite.animations.currentAnim.name === animation) return;
 
         // Делаем невидимым спрайт который раньше играл анимацию

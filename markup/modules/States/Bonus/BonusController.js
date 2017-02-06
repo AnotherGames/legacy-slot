@@ -76,19 +76,22 @@ class Door {
         soundController.sound.playSound({ sound: 'illumFail' });
 
         this.doors.forEach((door) => {
-            this.tentacle = this.game.add.sprite(door.x - 50, door.y + 5, 'tentacles');
-            this.tentacle.anchor.set(0.5);
-            this.tentacle.angle = this.game.rnd.integerInRange(-40, 40);
+            door.tentacle = this.game.add.sprite(door.x - 50, door.y + 5, 'tentacles');
+            door.tentacle.anchor.set(0.5);
+            door.tentacle.angle = this.game.rnd.integerInRange(-40, 40);
+            console.log(door.tentacle.angle);
             if (model.mobile) {
-                this.tentacle.scale.set(0.66);
+                door.tentacle.scale.set(0.66);
+                door.tentacle.angle = this.game.rnd.integerInRange(-30, 30);
             }
-            model.group('bg').add(this.tentacle);
-            let tentacleShow = this.tentacle.animations.add('show', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17], 20, false);
-            this.tentacle.animations.add('move', [18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 19, 18], 20, true);
-            this.tentacle.animations.play('show');
+            model.group('bg').add(door.tentacle);
+
+            let tentacleShow = door.tentacle.animations.add('show', Phaser.Animation.generateFrameNames('tc1_', 0, 16, '.png', 2), 20, false);
+            door.tentacle.animations.add('move', Phaser.Animation.generateFrameNames('tc2_', 0, 16, '.png', 2), 20, true);
+            door.tentacle.animations.play('show');
             tentacleShow.onComplete.add(() => {
-                this.tentacle.animations.play('move');
-            }, this);
+                door.tentacle.animations.play('move');
+            }, door);
 
             this.game.add.tween(door.sprite)
                 .to({ alpha: 0 }, 500, 'Linear', true);

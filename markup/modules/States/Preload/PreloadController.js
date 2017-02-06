@@ -139,7 +139,7 @@ export class Preload {
         game.load.image('bonusBG3', 'bg/bonusBG3.png');
         game.load.spritesheet('bigFish', 'bonus/bigFish.png', 226, 182, 12);
         game.load.spritesheet('chernila', 'bonus/chernila.png', 259, 185, 12);
-        game.load.spritesheet('tentacles', 'bonus/tentacle.png', 250, 200, 34);
+        game.load.atlasJSONArray('tentacles', 'bonus/tentacles.png', 'bonus/tentacles.json');
         game.load.atlasJSONArray('bonusNumber', 'bonus/bonusNumber.png', 'bonus/bonusNumber.json');
         game.load.atlasJSONArray('illuminators', 'bonus/illuminators.png', 'bonus/illuminators.json');
         game.load.image('light', 'bonus/light.png');
