@@ -125,6 +125,7 @@ export let view = (() => {
         let game = model.el('game');
         // game.input.keyboard.enabled = true;
         keyboardController.initFsKeys();
+        model.state('buttons:locked', false);
         // Темнота
         game.camera.flash(0x000000, 500);
         // Отрисовка финишного экрана
