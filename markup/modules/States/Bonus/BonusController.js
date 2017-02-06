@@ -157,9 +157,13 @@ export class Bonus {
     }
 
     update() {
-        model.el('game').winAnims.forEach((anim) => {
+        let game = model.el('game');
+
+        footerController.updateTime({});
+        game.winAnims.forEach((anim) => {
             anim();
         });
+        
         if (model.desktop) {
             let fullScreeButton = model.el('fullScreeButton');
             fullScreeButton.frameName = (this.game.scale.isFullScreen || window.innerHeight == screen.height) ? 'fullscreenOff.png' : 'fullscreen.png';
@@ -175,16 +179,23 @@ function handleDoorClick() {
             model.state('bonusReady', false);
             this.data = data;
             model.data('bonusRollResponse', data);
+            if (data.ErrorCode) {
+                mainView.draw.showPopup({message: data.ErrorMessage});
+                return;
+            }
             model.data('bonusWinCoins', model.data('bonusWinCoins') + data.Balance.TotalWinCoins);
             console.log(data);
         })
         .then(() => {
+
             return request.send('Ready');
         })
         .then((readyData) => {
-            if (readyData.ErrorCode != 0) {
-                throw new Error(readyData.ErrorMessage);
+            if (readyData.ErrorCode) {
+                mainView.draw.showPopup({message: readyData.ErrorMessage});
+                return;
             }
+
             model.state('bonusReady', true);
         })
         .then(() => {
@@ -226,6 +237,7 @@ function handleDoorClick() {
             }
         })
         .catch((err) => {
+            if (err.status == 404) mainView.draw.showPopup({message: 'Connection problem. Click to restart'});
             console.error(err);
         });
 }
