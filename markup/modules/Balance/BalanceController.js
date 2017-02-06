@@ -40,6 +40,9 @@ export let controller = (() => {
                 view.update.FSDesktopBalance({});
                 view.update.CashBalance({});
             }
+        } else if (model.state('bonus')) {
+            view.update.FSMobileBalance({});
+            view.update.CashBalance({});
         } else {
             if (model.mobile) {
                 view.update.MobileBalance({});
