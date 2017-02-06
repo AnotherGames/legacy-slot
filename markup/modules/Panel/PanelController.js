@@ -255,6 +255,7 @@ export let controller = (() => {
             let autoButtonDesk = model.el('autoButtonDesk');
             const amount = this.amount;
             if (autoButtonDesk.x > 370) return;
+            model.state('autoplay:panelClosed', true);
             view.hide.autoButton({});
             view.hide.autoPanel({});
             autoplayController.start(amount);
