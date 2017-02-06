@@ -330,6 +330,8 @@ export let view = (() => {
             let totalWinSum = model.el('totalWinSum');
             let totalWinText = model.el('totalWinText');
 
+            if (!winSum || !totalWinSum) return;
+
             winSum.text = `${winSumValue}`;
             totalWinSum.text = `${totalWinSumValue}`;
 

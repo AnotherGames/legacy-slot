@@ -4,6 +4,7 @@ import { config } from 'modules/Util/Config';
 
 import { controller as footerController } from 'modules/Footer/FooterController';
 
+import { view as footerView } from 'modules/Footer/FooterView';
 import { view as balanceView } from 'modules/Balance/BalanceView';
 import { view as bonusView } from 'modules/States/Bonus/BonusView';
 import { view as mainView } from 'modules/States/Main/MainView';
@@ -39,12 +40,12 @@ class Door {
 
     win() {
         let rnd = this.game.rnd.integerInRange(1, 3);
-        soundController.sound.playSound({sound: `illumBreak${rnd}`});
-        soundController.sound.playSound({sound: 'illumWin', duration: 1200});
+        soundController.sound.playSound({ sound: `illumBreak${rnd}` });
+        soundController.sound.playSound({ sound: 'illumWin', duration: 1200 });
 
         this.destroyed = true;
         this.game.add.tween(this.sprite)
-            .to({alpha: 0}, 300, 'Linear', true);
+            .to({ alpha: 0 }, 300, 'Linear', true);
         this.table = this.game.add.sprite(this.x, this.y, 'bonusNumber', `x${parseInt(this.data.CurrentValue, 10)}.png`);
         this.table.anchor.set(0.6, 0.8);
         this.table.alpha = 0;
@@ -60,11 +61,11 @@ class Door {
         }
 
         this.game.add.tween(this.gold)
-            .to({alpha: 1}, 500, 'Linear', true);
+            .to({ alpha: 1 }, 500, 'Linear', true);
         this.game.add.tween(this.table)
-            .to({alpha: 1}, 500, 'Linear', true);
+            .to({ alpha: 1 }, 500, 'Linear', true);
         this.game.add.tween(this.table)
-            .from({y: this.table.y + 50}, 400, 'Linear', true);
+            .from({ y: this.table.y + 50 }, 400, 'Linear', true);
         model.group('bg').add(this.table);
         model.group('bg').add(this.gold);
     }
@@ -72,7 +73,7 @@ class Door {
     fail() {
         this.destroyed = true;
 
-        soundController.sound.playSound({sound: 'illumFail'});
+        soundController.sound.playSound({ sound: 'illumFail' });
 
         this.doors.forEach((door) => {
             this.tentacle = this.game.add.sprite(door.x - 50, door.y + 5, 'tentacles');
@@ -90,10 +91,10 @@ class Door {
             }, this);
 
             this.game.add.tween(door.sprite)
-                .to({alpha: 0}, 500, 'Linear', true);
+                .to({ alpha: 0 }, 500, 'Linear', true);
             if (door.table) {
                 this.game.add.tween(door.table)
-                    .to({alpha: 0}, 300, 'Linear', true);
+                    .to({ alpha: 0 }, 300, 'Linear', true);
             }
         });
 
@@ -101,7 +102,7 @@ class Door {
 
     lightBlinking() {
         if (!this.destroyed) {
-            this.game.add.tween(this.light).to({alpha: 0.6}, 500, 'Linear', true, 0, 0, true);
+            this.game.add.tween(this.light).to({ alpha: 0.6 }, 500, 'Linear', true, 0, 0, true);
             setTimeout(() => {
                 this.lightBlinking();
             }, 4000);
@@ -119,9 +120,9 @@ export class Bonus {
         model.data('bonusWinCoins', 0);
         model.state('bonus', true);
         model.state('bonusReady', true);
-        console.log('I am inited!');
 
         bonusView.create.groups({});
+        model.updateBalance({ startBonus: true });
 
     }
 
@@ -136,15 +137,18 @@ export class Bonus {
         }
 
         mainView.draw.addBubbles({});
-        mainView.draw.addFishes({y1: (model.desktop) ? 650 : 400, y2: (model.desktop) ? 900 : 700});
+        mainView.draw.addFishes({ y1: (model.desktop) ? 650 : 400, y2: (model.desktop) ? 900 : 700 });
         bonusView.draw.bigFish({});
         bonusView.draw.addLight({});
         bonusView.draw.upperBG({});
 
         if (model.desktop) {
             footerController.initDesktop();
+            footerView.draw.TopFooter({});
+            balanceView.draw.FSMobileBalance({});
         } else {
             footerController.initMobile();
+            balanceView.draw.FSMobileBalance({});
         }
         balanceView.draw.CashBalance({});
     }
@@ -167,6 +171,7 @@ function handleDoorClick() {
         .then((data) => {
             model.state('bonusReady', false);
             this.data = data;
+            model.data('bonusRollResponse', data);
             model.data('bonusWinCoins', model.data('bonusWinCoins') + data.Balance.TotalWinCoins);
             console.log(data);
         })
@@ -180,6 +185,7 @@ function handleDoorClick() {
             model.state('bonusReady', true);
         })
         .then(() => {
+            model.updateBalance({ startBonusRoll: true });
             if (!this.isWinPlayed) {
 
                 if (this.data.CurrentValue != 'Exit') {
@@ -187,7 +193,7 @@ function handleDoorClick() {
                     this.isWinPlayed = true;
                     if (this.data.BonusEnd) {
                         // Переходной экран Big Win
-                        soundController.sound.playSound({sound: 'illumWin'});
+                        soundController.sound.playSound({ sound: 'illumWin' });
                         this.doors.forEach((door) => {
                             this.finalGold = this.game.add.spine(door.x, door.y, 'gold');
                             if (model.mobile) {
@@ -196,30 +202,34 @@ function handleDoorClick() {
                             model.group('bg').add(this.finalGold);
                             this.finalGold.setAnimationByName(1, '2', false);
                         });
-                        soundController.sound.playSound({sound: 'win'});
-                        bonusView.draw.showWin({winTextFrame: 'bigW.png'});
+                        soundController.sound.playSound({ sound: 'win' });
+                        bonusView.draw.showWin({ winTextFrame: 'bigW.png' });
                         soundController.music.stopMusic('bonusFon');
                         setTimeout(() => {
-                            model.state('buttons:locked', false);
-                            model.state('bonus', false);
-                            this.game.state.start('Main');
-                        }, 4000);
+                            endBonus();
+                        }, 4500);
                     }
                 } else {
                     this.fail();
+                    this.isWinPlayed = true;
                     bonusView.draw.showOctopus({});
                     // Переходной экран Total Win
                     bonusView.draw.showWin({});
                     soundController.music.stopMusic('bonusFon');
                     setTimeout(() => {
-                        model.state('buttons:locked', false);
-                        model.state('bonus', false);
-                        this.game.state.start('Main');
-                    }, 4000);
+                        endBonus();
+                    }, 4500);
                 }
             }
         })
         .catch((err) => {
             console.error(err);
         });
+}
+
+function endBonus() {
+    model.updateBalance({ endBonus: true });
+    model.state('buttons:locked', false);
+    model.state('bonus', false);
+    model.el('game').state.start('Main');
 }

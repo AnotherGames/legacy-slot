@@ -4,6 +4,26 @@ export let view = (() => {
 
     let draw = {
 
+        TopFooter: function ({
+            game = model.el('game'),
+            container = model.group('footer'),
+            color = 0x000000,
+            heightTop = 40,
+            heightBottom = 30,
+            alphaTop = 0.25
+        }) {
+            let footerTop = game.add.graphics(0, 0, container)
+                .beginFill(color, alphaTop).drawRect(
+                    0,
+                    game.height - (heightTop + heightBottom),
+                    game.width,
+                    heightTop
+                );
+            model.el('footerTop', footerTop);
+            model.data('footerTopCenterY', game.height - (heightBottom + heightTop / 2));
+
+        },
+
         MobileFooter: function ({
             game = model.el('game'),
             container = model.group('footer'),
