@@ -241,11 +241,17 @@ export let view = (() => {
             let game = model.el('game');
             let infoMarkers = model.el('infoMarkers');
 
-            let arrowRight = game.add.sprite(infoMarkers[infoMarkers.length - 1].x, 85, 'ar', null, container);
+            let arrowRightBG = game.add.sprite(infoMarkers[infoMarkers.length - 1].x + 50, 85, 'arrowBG', null, container);
+            arrowRightBG.anchor.set(0.5);
+
+            let arrowLeftBG = game.add.sprite(infoMarkers[0].x - 50, 85, 'arrowBG', null, container);
+            arrowLeftBG.anchor.set(0.5);
+
+            let arrowRight = game.add.sprite(infoMarkers[infoMarkers.length - 1].x + 50, 85, 'ar', null, container);
             arrowRight.anchor.set(0.5);
             model.el('arrowRight', arrowRight);
 
-            let arrowLeft = game.add.sprite(infoMarkers[0].x, 85, 'arLeft', null, container);
+            let arrowLeft = game.add.sprite(infoMarkers[0].x - 50, 85, 'arLeft', null, container);
             arrowLeft.anchor.set(0.5);
             model.el('arrowLeft', arrowLeft);
         }
@@ -284,7 +290,11 @@ export let view = (() => {
             infoRules.scale.set(1.3);
             model.el('infoRules', infoRules);
 
-            let closed = game.add.sprite(game.width - 410, 210, 'closed', null, container);
+            let closeBG = game.add.sprite(game.width - 170, 125, 'closeBG', null, container);
+            closeBG.anchor.set(0.5);
+
+            let closed = game.add.sprite(game.width - 170, 120, 'closed', null, container);
+            closed.anchor.set(0.5);
             model.el('closed', closed);
 
             let infoControllers = game.add.group();
@@ -292,7 +302,7 @@ export let view = (() => {
             draw._markers(infoControllers);
             draw._arrows(infoControllers);
 
-            infoControllers.y = infoRules.bottom - infoControllers.height / 2;
+            infoControllers.y = infoRules.bottom - infoControllers.height / 2 - 50;
             infoControllers.x = game.width / 2 - infoControllers.width / 2;
 
             container.add(infoControllers);
