@@ -237,6 +237,7 @@ export let controller = (() => {
             || model.state('roll:progress')) return;
 
             const amount = this.amount;
+            model.state('autoplay:panelClosed', true);
             view.hide.autoPanel({});
             autoplayController.start(amount);
         }
