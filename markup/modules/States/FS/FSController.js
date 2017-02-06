@@ -65,7 +65,6 @@ export let controller = (() => {
             transitionView.fsFinish();
         });
 
-        model.state('buttons:locked', false);
         model.state('fs:end', true);
         model.state('fs', false);
         model.updateBalance({endFS: true});
@@ -218,12 +217,18 @@ export class FS {
     }
 
     update() {
+        const game = model.el('game'); 
         // Обновляем время
         footerController.updateTime({});
         // Проигрываем анимацию
         model.el('game').frameAnims.forEach((anim) => {
             anim();
         });
+
+        if (model.desktop) {
+            let fullScreeButton = model.el('fullScreeButton');
+                fullScreeButton.frameName = (game.scale.isFullScreen || window.innerHeight == screen.height) ? 'fullscreenOff.png' : 'fullscreen.png';
+        }
     }
 
     positionMainContainer() {
