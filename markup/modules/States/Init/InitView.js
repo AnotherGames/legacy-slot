@@ -4,7 +4,8 @@ export let view = (() => {
 
     function drawBG() {
         const game = model.el('game');
-        let initBG = game.add.sprite(0, 0, 'initBG');
+        // let initBG = game.add.sprite(0, 0, 'initBG');
+        let initBG = game.add.tileSprite(0, 0, game.width, game.height, 'gradientLine', null, model.group('bg'));
         model.el('initBG', initBG);
         return initBG;
     }
@@ -24,10 +25,13 @@ export let view = (() => {
         } else {
             deltaY = 150;
         }
-        let initLogo = game.add.spine(game.world.centerX, game.world.centerY - deltaY, 'logo');
-        initLogo.setAnimationByName(0, '1', true);
+        // let initLogo = game.add.spine(game.world.centerX, game.world.centerY - deltaY, 'logo');
+        // initLogo.setAnimationByName(0, '1', true);
+        let initLogo = game.add.sprite(game.world.centerX, game.world.centerY - deltaY, 'initLogo');
+        initLogo.anchor.set(0.5);
+
         if (model.mobile) {
-            initLogo.scale.set(0.9);
+            initLogo.scale.set(0.7);
         }
 
         model.el('initLogo', initLogo);

@@ -42,8 +42,8 @@ export let controller = (() => {
         let maxBetButtonDesk = view.draw.MaxBetButton({});
             maxBetButtonDesk.onInputDown.add(handle.maxBet);
 
-        let infoButtonDesk = view.draw.InfoButton({});
-            infoButtonDesk.onInputDown.add(handle.info);
+        // let infoButtonDesk = view.draw.InfoButton({});
+        //     infoButtonDesk.onInputDown.add(handle.info);
 
         let betLevelPlus = view.draw.PlusButton({});
             betLevelPlus.onInputDown.add(handle.betPlus);

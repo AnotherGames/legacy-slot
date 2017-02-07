@@ -10,7 +10,7 @@ export let view = (() => {
             container = model.group('panel'),
             x = game.world.centerX + config[model.res].panelMargin.x,
             y = model.el('gameMachine').height + config[model.res].panelMargin.y,
-            frameName = 'ui',
+            frameName = 'panel',
             deltaY = 0
         }) {
             container.x = x;

@@ -1,0 +1,36 @@
+{"frames": [
+
+{
+	"filename": "panelBGgreen.png",
+	"frame": {"x":1,"y":1,"w":1319,"h":145},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":1319,"h":145},
+	"sourceSize": {"w":1320,"h":146}
+},
+{
+	"filename": "panelBGorange.png",
+	"frame": {"x":1,"y":148,"w":1319,"h":145},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":1319,"h":145},
+	"sourceSize": {"w":1320,"h":146}
+},
+{
+	"filename": "panelBGred.png",
+	"frame": {"x":1,"y":295,"w":1319,"h":145},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":1319,"h":145},
+	"sourceSize": {"w":1320,"h":146}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "panelBG.png",
+	"format": "RGBA8888",
+	"size": {"w":2048,"h":512},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:a84412abdc7c15ef37a418b86dcffadd:bc8076bc8c6e00d71ca47bd5c9ac2d2b:453481959a8adb8ea5d15f31a64c1e4d$"
+}
+}
