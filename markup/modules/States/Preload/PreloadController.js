@@ -110,9 +110,6 @@ export class Preload {
             game.load.atlasJSONArray('mobileButtons', 'mobile_buttons/mobileButtons.png', 'mobile_buttons/mobileButtons.json');
         }
 
-        // Glista
-        game.load.image('ligthGlista', 'glista/lightGlista.png');
-        game.load.atlasJSONArray('glistaAtlas', 'glista/glista.png', 'glista/glista.json');
     }
 
     loadFSAssets() {
