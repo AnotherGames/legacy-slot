@@ -163,7 +163,7 @@ export class Bonus {
         game.winAnims.forEach((anim) => {
             anim();
         });
-        
+
         if (model.desktop) {
             let fullScreeButton = model.el('fullScreeButton');
             fullScreeButton.frameName = (this.game.scale.isFullScreen || window.innerHeight == screen.height) ? 'fullscreenOff.png' : 'fullscreen.png';
@@ -172,8 +172,7 @@ export class Bonus {
 
 }
 function handleDoorClick() {
-    if (this.destroyed) return;
-    if (!model.state('bonusReady')) return;
+    if (this.destroyed || model.state('doorFinish')|| !model.state('bonusReady')) return;
     request.send('Roll')
         .then((data) => {
             model.state('bonusReady', false);
@@ -224,6 +223,7 @@ function handleDoorClick() {
                         }, 4500);
                     }
                 } else {
+                    model.state('doorFinish', true);
                     this.fail();
                     this.isWinPlayed = true;
                     bonusView.draw.showOctopus({});
@@ -246,5 +246,6 @@ function endBonus() {
     model.updateBalance({ endBonus: true });
     model.state('buttons:locked', false);
     model.state('bonus', false);
+    model.state('doorFinish', false);
     model.el('game').state.start('Main');
 }

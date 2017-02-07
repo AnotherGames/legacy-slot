@@ -142,6 +142,7 @@ export let model = (() => {
         model.state('menuOpened', false);
         model.state('isFirstAutoChangeAnimBG', true);
         model.state('maxFsMultiplier', false);
+        model.state('doorFinish', false);
     }
 
     function initSettings() {
@@ -332,7 +333,7 @@ export let model = (() => {
         if (endBonus) {
             let newCoinSum = model.balance('coinSum') + model.balance('totalWin');
             model.balance('coinSum', newCoinSum);
-            
+
             let newCoinCash = (model.balance('coinCash') * 100 + model.balance('winCash') * 100) / 100;
             model.balance('coinCash', newCoinCash);
 
