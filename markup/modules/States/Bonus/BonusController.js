@@ -134,18 +134,17 @@ export class Bonus {
         soundController.music.playMusic('bonusFon');
 
         bonusView.draw.mainBG({});
+        bonusView.draw.bigFish({});
 
         for (let i = 0; i < 5; i++) {
             this.doors.push(new Door(config.illuminatorsCoords[i].x, config.illuminatorsCoords[i].y, this.doors, i + 1));
         }
 
-        mainView.draw.addBubbles({});
-        mainView.draw.addFishes({ y1: (model.desktop) ? 650 : 400, y2: (model.desktop) ? 900 : 700 });
-        bonusView.draw.bigFish({});
-        bonusView.draw.addLight({});
-        bonusView.draw.upperBG({});
-
         if (model.desktop) {
+            mainView.draw.addBubbles({});
+            mainView.draw.addFishes({ y1: 650, y2: 900 });
+            bonusView.draw.addLight({});
+            bonusView.draw.upperBG({});
             footerController.initDesktop();
             footerView.draw.TopFooter({});
             balanceView.draw.FSMobileBalance({});

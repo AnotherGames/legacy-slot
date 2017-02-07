@@ -129,7 +129,6 @@ export class FS {
 
     create() {
         let game = model.el('game');
-        game.camera.flash(0x000000, 777);
 
         // Играем фоновую музыку
         soundController.music.stopMusic('startPerehod');
@@ -143,13 +142,6 @@ export class FS {
         fsView.draw.machineContainer({});
         mainView.draw.lineNumbers({});
         winView.draw.UpWinContainer({});
-
-        // BG anim
-        mainView.draw.addBubbles({});
-        mainView.draw.addShark({});
-        game.time.events.add(6000, () => {
-            mainView.draw.addFishes({});
-        });
 
         // Инициализируем крутки
         rollController.init();
@@ -173,6 +165,12 @@ export class FS {
             panelController.drawFsPanel();
             // Отрисовуем баланс
             balanceController.initFSDesktop();
+            //BG animations
+            mainView.draw.addBubbles({});
+            mainView.draw.addShark({});
+            game.time.events.add(6000, () => {
+                mainView.draw.addFishes({});
+            });
         }
 
         // Добавляем маску
@@ -208,7 +206,7 @@ export class FS {
     }
 
     update() {
-        const game = model.el('game'); 
+        const game = model.el('game');
         // Обновляем время
         footerController.updateTime({});
         // Проигрываем анимацию

@@ -57,13 +57,9 @@ export class Main {
         winView.draw.UpWinContainer({});
 
         // BG anim
-        mainView.draw.addBubbles({});
-        mainView.draw.addShark({});
-        mainView.draw.eyeLight({});
-        game.time.events.add(6000, () => {
-            mainView.draw.addFishes({});
-            mainView.draw.labelLight({});
-        });
+        if (model.desktop){
+
+        }
 
         // Test
         // game.time.events.add(3000, () => {
@@ -102,6 +98,14 @@ export class Main {
             balanceController.initDesktop();
             // Инициализируем управление клавиатурой
             keyboardController.initMainKeys();
+            // BG animations
+            mainView.draw.addBubbles({});
+            mainView.draw.addShark({});
+            mainView.draw.eyeLight({});
+            game.time.events.add(6000, () => {
+                mainView.draw.addFishes({});
+                mainView.draw.labelLight({});
+            });
         }
 
         // Первая темнота
