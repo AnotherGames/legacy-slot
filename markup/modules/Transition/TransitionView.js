@@ -30,12 +30,11 @@ export let view = (() => {
     function _fsStartDraw() {
         let game = model.el('game');
         let transitionContainer = model.group('transition');
-        game.camera.flash(0x000000, 777);
         // Изменяем музыку
         soundController.music.stopMusic('fon');
         soundController.music.playMusic('startPerehod');
-        // Отрисовываем фон
 
+        // Отрисовываем фон
         let transitionBG = game.add.sprite(0, 0, 'transitionBG1', null, transitionContainer);
         model.el('transitionBG', transitionBG);
 

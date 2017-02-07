@@ -49,10 +49,8 @@ export class Preload {
         game.load.audio('fsFon', 'fsAmbient.mp3');
         game.load.audio('bonusFon', 'bonusAmbient.mp3');
         game.load.audio('initFon', 'logoAmbient.mp3');
-        game.load.audio('baraban', 'baraban1.mp3');
-        game.load.audio('baraban2', 'baraban2.wav');
+        game.load.audio('baraban', 'baraban.mp3');
         game.load.audio('buttonClick', 'buttonClick.mp3');
-        game.load.audio('spinClick', 'spinClick.wav');
         game.load.audio('startPerehod', 'startPerehod.mp3');
         game.load.audio('finishPerehod', 'startPerehod.mp3');
         game.load.audio('win', 'totalWin.mp3');

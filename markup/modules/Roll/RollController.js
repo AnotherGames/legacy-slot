@@ -98,14 +98,12 @@ export let controller = (() => {
                     model.state('roll:progress', true);
                     model.state('roll:fast', false);
 
-                    // Играем звук кручения барабанов
-
-                    soundController.sound.playSound({sound: 'baraban2', fade: 500, volume: 0.6});
-
                     // Расчитываем конечный экран
                     let wheels = model.el('wheels');
                     let finishScreen = _convertArray(data.Screen);
                     model.data('finishScreen', finishScreen);
+
+                    soundController.sound.playSound({sound:'baraban'})
 
                     // Крутим колеса
                     wheels.forEach((wheel, columnIndex) => {
@@ -167,7 +165,8 @@ export let controller = (() => {
         if (model.state('ready')) {
             return false;
         }
-        soundController.sound.stopSound('baraban2');
+
+        soundController.sound.stopSound('baraban');
 
         // Отправляем запрос Ready
         request.send('Ready').then(() => {
