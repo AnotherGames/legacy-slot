@@ -188,13 +188,6 @@ export class FS {
             start: this.fsCount
         });
 
-        // Если сохранненая сессия, то переключаем счетчик мозгов
-        // if (this.fsLevel > 0) {
-        //     controller.searchBrains({
-        //         startLevel: this.fsLevel
-        //     })
-        // }
-
         // Первая темнота
         game.camera.flash(0x000000, 500);
 
@@ -222,7 +215,6 @@ export class FS {
 
     positionMainContainer() {
         let game = model.el('game');
-        // model.group('main').x = (model.desktop) ? game.world.centerX : game.width - model.group('main').width / 2;
         model.group('main').x = game.world.centerX + 8;
         model.group('main').y = game.world.centerY + config[model.res].mainContainer.y - 10;
     }

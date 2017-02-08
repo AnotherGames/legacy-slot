@@ -49,22 +49,11 @@ export class Main {
 
         // Отрисовуем основной контейнер
         mainView.draw.mainBG({});
-        mainView.draw.addLight({});
         mainView.draw.mainContainer({});
         mainView.draw.machineContainer({});
         mainView.draw.machineMask({});
         mainView.draw.lineNumbers({});
         winView.draw.UpWinContainer({});
-
-        // BG anim
-        if (model.desktop){
-
-        }
-
-        // Test
-        // game.time.events.add(3000, () => {
-        //     transitionView.fsStart({});
-        // });
 
         // Инициализируем крутки
         rollController.init();
@@ -108,6 +97,7 @@ export class Main {
             });
         }
 
+        mainView.draw.addLight({});
         // Первая темнота
         game.camera.flash(0x000000, 500);
 
