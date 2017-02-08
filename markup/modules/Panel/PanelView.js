@@ -9,13 +9,14 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('panel'),
             x = game.world.centerX,
-            y = model.el('gameMachine').bottom +  model.el('gameMachine').height / 2 + 10,
-            frameName = 'ui',
-            deltaY = -23
+            y = model.el('gameMachine').bottom +  model.el('gameMachine').height / 2,
+            frameName = 'panel',
+            deltaY = 70
         }) {
             container.x = x;
             container.top = y;
-            const panelBG = game.add.sprite(1, deltaY, frameName, null, container);
+            const panelBG = game.add.sprite(1, deltaY, 'panelBG', 'panelBGgreen.png', container);
+            const panel = game.add.sprite(1, deltaY, frameName, null, container);
 
             container.pivot.set(panelBG.width / 2, 0);
             return panelBG;
@@ -343,10 +344,10 @@ export let view = (() => {
 
     function lockButtons() {
 
-        let infoButtonDesk = model.el('infoButtonDesk');
-            infoButtonDesk.frameName = 'info.png';
-            infoButtonDesk.freezeFrames = true;
-            infoButtonDesk.alpha = 0.5;
+        // let infoButtonDesk = model.el('infoButtonDesk');
+        //     infoButtonDesk.frameName = 'info.png';
+        //     infoButtonDesk.freezeFrames = true;
+        //     infoButtonDesk.alpha = 0.5;
         let maxBetButtonDesk = model.el('maxBetButtonDesk');
             maxBetButtonDesk.frameName = 'maxBet.png';
             maxBetButtonDesk.freezeFrames = true;
@@ -388,10 +389,10 @@ export let view = (() => {
     function unlockButtons() {
         if(model.state('autoplay:start')) return;
 
-        let infoButtonDesk = model.el('infoButtonDesk');
-            infoButtonDesk.frameName = 'info.png';
-            infoButtonDesk.freezeFrames = false;
-            infoButtonDesk.alpha = 1;
+        // let infoButtonDesk = model.el('infoButtonDesk');
+        //     infoButtonDesk.frameName = 'info.png';
+        //     infoButtonDesk.freezeFrames = false;
+        //     infoButtonDesk.alpha = 1;
         let maxBetButtonDesk = model.el('maxBetButtonDesk');
             maxBetButtonDesk.frameName = 'maxBet.png';
             maxBetButtonDesk.freezeFrames = false;

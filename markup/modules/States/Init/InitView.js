@@ -8,7 +8,7 @@ export let view = (() => {
         let initBG = game.add.tileSprite(0, 0, game.width, game.height, 'gradientLine');
         model.el('initBG', initBG);
 
-        let shine = game.add.sprite(game.world.centerX, game.world.centerY + 150, 'shine');
+        let shine = game.add.sprite(game.world.centerX, game.world.centerY, 'shine');
             shine.anchor.set(0.5);
         game.add.tween(shine).to({rotation: 2 * Math.PI, alpha: 0.1}, 30000, 'Linear', true, 0, -1, true);
 
@@ -18,10 +18,10 @@ export let view = (() => {
     function drawLogo() {
         const game = model.el('game');
 
-        let initLogo = game.add.sprite(game.world.centerX, game.height * 0.5, 'initLogo');
+        let initLogo = game.add.sprite(game.world.centerX, game.height * 0.3, 'initLogo');
             initLogo.anchor.set(0.5);
 
-        let logosSmall = game.add.sprite(game.width * 0.1, game.height * 0.85, 'logosSmall');
+        let logosSmall = game.add.sprite(game.width * 0.1, game.height * 0.93, 'logosSmall');
             logosSmall.anchor.set(0.5);
         //
         // let ninja = game.add.spine(game.width * 0.33, game.height * 0.75, 'ninja');

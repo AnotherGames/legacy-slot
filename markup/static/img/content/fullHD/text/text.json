@@ -1,7 +1,7 @@
 {"frames": [
 
 {
-	"filename": "bigwin.png",
+	"filename": "bigW.png",
 	"frame": {"x":1,"y":1,"w":1047,"h":219},
 	"rotated": false,
 	"trimmed": true,
@@ -17,7 +17,7 @@
 	"sourceSize": {"w":400,"h":70}
 },
 {
-	"filename": "Play.png",
+	"filename": "play.png",
 	"frame": {"x":1,"y":222,"w":283,"h":200},
 	"rotated": false,
 	"trimmed": true,
@@ -25,7 +25,7 @@
 	"sourceSize": {"w":300,"h":200}
 },
 {
-	"filename": "totalwin.png",
+	"filename": "totalW.png",
 	"frame": {"x":286,"y":222,"w":730,"h":141},
 	"rotated": false,
 	"trimmed": true,

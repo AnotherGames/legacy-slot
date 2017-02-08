@@ -87,7 +87,7 @@ export class Init {
             soundContainer.position.set(game.width - 460, game.height - 100);
 
         let background = game.add.graphics(0, 0);
-            background.beginFill(0xffffff, 0.2);
+            background.beginFill(0x000000, 0.1);
             background.drawRoundedRect(soundContainer.x - 30, soundContainer.y - 15, 470, 80, 40);
 
         let style = { font: "bold 42px Arial", fill: "#f3eba0"};

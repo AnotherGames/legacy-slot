@@ -69,8 +69,8 @@ export let view = (() => {
             winSplashLeft.animations.play('win');
             winSplashRight.animations.play('win');
 
-            winSplashLeft.openedTable = true;
-            winSplashRight.openedTable = true;
+            // winSplashLeft.openedTable = true;
+            // winSplashRight.openedTable = true;
 
         },
 
