@@ -31,8 +31,12 @@ export let view = (() => {
             container = model.group('bg')
         }) {
 
-            let mainBG = game.add.sprite(0, 0, 'mainBG', null, container);
+            let mainBG = game.add.tileSprite(0, 0, game.width, game.height, 'gradientLine');
             model.el('mainBG', mainBG);
+
+            let shine = game.add.sprite(game.world.centerX, game.world.centerY + 150, 'shine');
+                shine.anchor.set(0.5);
+            game.add.tween(shine).to({rotation: 2 * Math.PI, alpha: 0.1}, 30000, 'Linear', true, 0, -1, true);
 
         },
 
@@ -40,113 +44,117 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('main')
         }) {
-            let gameBG = game.add.sprite(0, 10, 'gameBG', null, container);
-                gameBG.anchor.set(0.5);
-            model.el('gameBG', gameBG);
+            // let gameBG = game.add.sprite(0, 10, 'gameBG', null, container);
+            //     gameBG.anchor.set(0.5);
+            // model.el('gameBG', gameBG);
 
             let gameMachine = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachine', null, container);
                 gameMachine.anchor.set(0.5);
             model.el('gameMachine', gameMachine);
 
-            if (model.desktop) {
-                let gmRight = game.add.sprite(640, -338, 'gmRight', null, container);
-                    gmRight.pivot.set(14, 97);
-                model.el('gmRight', gmRight);
+            let logoGM = game.add.sprite(0, config[model.res].gameMachine.y, 'logoGM', null, container);
+                logoGM.anchor.set(0.5);
+            model.el('logoGM', logoGM);
 
-                let gmLeft = game.add.sprite(-633, -338, 'gmLeft', null, container);
-                    gmLeft.pivot.set(209, 97);
-                model.el('gmLeft', gmLeft);
+            // if (model.desktop) {
+            //     let gmRight = game.add.sprite(640, -338, 'gmRight', null, container);
+            //         gmRight.pivot.set(14, 97);
+            //     model.el('gmRight', gmRight);
+            //
+            //     let gmLeft = game.add.sprite(-633, -338, 'gmLeft', null, container);
+            //         gmLeft.pivot.set(209, 97);
+            //     model.el('gmLeft', gmLeft);
+            //
+            //     let lamp1 = game.add.sprite(-750, -240, 'lamp', null, container);
+            //         lamp1.anchor.set(0.5);
+            //         lamp1.animations.add('move');
+            //         lamp1.name = 'leftLampDropped';
+            //         lamp1.animations.play('move', 15, true);
+            //     model.el('lamp1', lamp1);
+            //     model.state('leftLampDropped', false);
+            //     model.data('leftLampY', lamp1.y)
+            //
+            //     let lamp2 = game.add.sprite(750, -240, 'lamp', null, container);
+            //         lamp2.anchor.set(0.5);
+            //         lamp2.scale.set(-1, 1);
+            //         lamp2.animations.add('move');
+            //         lamp2.name = 'rightLampDropped'
+            //     game.time.events.add(300, () => {
+            //         lamp2.animations.play('move', 15, true);
+            //     })
+            //     model.el('lamp2', lamp2);
+            //     model.state('rightLampDropped', false);
+            //     model.data('rightLampY', lamp2.y)
 
-                let lamp1 = game.add.sprite(-750, -240, 'lamp', null, container);
-                    lamp1.anchor.set(0.5);
-                    lamp1.animations.add('move');
-                    lamp1.name = 'leftLampDropped';
-                    lamp1.animations.play('move', 15, true);
-                model.el('lamp1', lamp1);
-                model.state('leftLampDropped', false);
-                model.data('leftLampY', lamp1.y)
-
-                let lamp2 = game.add.sprite(750, -240, 'lamp', null, container);
-                    lamp2.anchor.set(0.5);
-                    lamp2.scale.set(-1, 1);
-                    lamp2.animations.add('move');
-                    lamp2.name = 'rightLampDropped'
-                game.time.events.add(300, () => {
-                    lamp2.animations.play('move', 15, true);
-                })
-                model.el('lamp2', lamp2);
-                model.state('rightLampDropped', false);
-                model.data('rightLampY', lamp2.y)
-
-                draw.moveHornAndLamp(gmLeft, lamp1, -10);
-                draw.moveHornAndLamp(gmRight, lamp2, +10);
-
-                draw.dropLamp(lamp1);
-                draw.dropLamp(lamp2);
-            }
+                // draw.moveHornAndLamp(gmLeft, lamp1, -10);
+                // draw.moveHornAndLamp(gmRight, lamp2, +10);
+                //
+                // draw.dropLamp(lamp1);
+                // draw.dropLamp(lamp2);
+            // }
         },
 
-        moveHornAndLamp: function(horn, lamp, angle){
-            let game = model.el('game');
-            let time = 100;
-            let lampfstY = lamp.y;
-            let lampendY = lamp.y + 20;
-
-            horn.inputEnabled = true;
-            horn.events.onInputDown.add(()=>{
-                game.add.tween(horn).to({angle: angle}, time, 'Linear', true)
-                if (model.state(lamp.name)) return;
-                game.add.tween(lamp).to({y: lampendY}, time, 'Linear', true)
-            })
-            horn.events.onInputUp.add(()=>{
-                game.add.tween(horn).to({angle: 0}, time, 'Linear', true)
-                if (model.state(lamp.name)) return;
-                game.add.tween(lamp).to({y: lampfstY}, time, 'Linear', true)
-            })
-        },
-
-        dropLamp: function(lamp){
-            let game = model.el('game');
-            let count = 0;
-
-            lamp.inputEnabled = true;
-            lamp.events.onInputDown.add(()=>{
-                if (count < 1){
-                    lamp.animations.stop();
-                    lamp.animations.frameName = 'FN-animation_45.png';
-                    lamp.animations.play('move', 15, true);
-                    count++
-                } else {
-                    game.add.tween(lamp).to({y: game.height + lamp.height}, 500, 'Linear', true)
-                    model.state(lamp.name, true)
-                    count = 0;
-                }
-            })
-        },
-
-        returnDroppedLamps(){
-            let game = model.el('game');
-            let lamp1 = model.el('lamp1')
-            let lamp2 = model.el('lamp2')
-
-            if ( model.state('leftLampDropped')){
-                lamp1.alpha = 0;
-                game.add.tween(lamp1).to({y: model.data('leftLampY')}, 10, 'Linear', true)
-                .onComplete.add(()=>{
-                    game.add.tween(lamp1).to({alpha: 1}, 200, 'Linear', true)
-                })
-                model.state(lamp1.name, false)
-            }
-
-            if ( model.state('rightLampDropped')){
-                lamp2.alpha = 0;
-                game.add.tween(lamp2).to({y: model.data('rightLampY')}, 10, 'Linear', true)
-                .onComplete.add(()=>{
-                    game.add.tween(lamp2).to({alpha: 1}, 200, 'Linear', true)
-                })
-                model.state(lamp2.name, false)
-            }
-        },
+        // moveHornAndLamp: function(horn, lamp, angle){
+        //     let game = model.el('game');
+        //     let time = 100;
+        //     let lampfstY = lamp.y;
+        //     let lampendY = lamp.y + 20;
+        //
+        //     horn.inputEnabled = true;
+        //     horn.events.onInputDown.add(()=>{
+        //         game.add.tween(horn).to({angle: angle}, time, 'Linear', true)
+        //         if (model.state(lamp.name)) return;
+        //         game.add.tween(lamp).to({y: lampendY}, time, 'Linear', true)
+        //     })
+        //     horn.events.onInputUp.add(()=>{
+        //         game.add.tween(horn).to({angle: 0}, time, 'Linear', true)
+        //         if (model.state(lamp.name)) return;
+        //         game.add.tween(lamp).to({y: lampfstY}, time, 'Linear', true)
+        //     })
+        // },
+        //
+        // dropLamp: function(lamp){
+        //     let game = model.el('game');
+        //     let count = 0;
+        //
+        //     lamp.inputEnabled = true;
+        //     lamp.events.onInputDown.add(()=>{
+        //         if (count < 1){
+        //             lamp.animations.stop();
+        //             lamp.animations.frameName = 'FN-animation_45.png';
+        //             lamp.animations.play('move', 15, true);
+        //             count++
+        //         } else {
+        //             game.add.tween(lamp).to({y: game.height + lamp.height}, 500, 'Linear', true)
+        //             model.state(lamp.name, true)
+        //             count = 0;
+        //         }
+        //     })
+        // },
+        //
+        // returnDroppedLamps(){
+        //     let game = model.el('game');
+        //     let lamp1 = model.el('lamp1')
+        //     let lamp2 = model.el('lamp2')
+        //
+        //     if ( model.state('leftLampDropped')){
+        //         lamp1.alpha = 0;
+        //         game.add.tween(lamp1).to({y: model.data('leftLampY')}, 10, 'Linear', true)
+        //         .onComplete.add(()=>{
+        //             game.add.tween(lamp1).to({alpha: 1}, 200, 'Linear', true)
+        //         })
+        //         model.state(lamp1.name, false)
+        //     }
+        //
+        //     if ( model.state('rightLampDropped')){
+        //         lamp2.alpha = 0;
+        //         game.add.tween(lamp2).to({y: model.data('rightLampY')}, 10, 'Linear', true)
+        //         .onComplete.add(()=>{
+        //             game.add.tween(lamp2).to({alpha: 1}, 200, 'Linear', true)
+        //         })
+        //         model.state(lamp2.name, false)
+        //     }
+        // },
 
         lineNumbers: function ({
             game = model.el('game'),
@@ -301,11 +309,11 @@ export let view = (() => {
             model.group('numbers', numbersContainer);
 
             let winUp = game.add.group();
-            container.addAt(winUp, 4);
+            container.addAt(winUp, 3);
             model.group('winUp', winUp);
 
             let winTop = game.add.group();
-            container.addAt(winTop, 5);
+            container.addAt(winTop, 4);
             model.group('winTop', winTop);
 
             machineGroup.glistaLightContainer = game.add.group();

@@ -35,7 +35,7 @@ export let controller = (() => {
         checkForFS();
 
         // Проверяем наличие бонуса сурикена
-        checkForBonus();
+        // checkForBonus();
 
         // Играем звук выигрыша
         view.play.WinSound();

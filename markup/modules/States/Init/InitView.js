@@ -5,36 +5,29 @@ export let view = (() => {
     function drawBG() {
         const game = model.el('game');
 
-        let initBG = game.add.sprite(0, 0, 'initBG');
+        let initBG = game.add.tileSprite(0, 0, game.width, game.height, 'gradientLine');
         model.el('initBG', initBG);
+
+        let shine = game.add.sprite(game.world.centerX, game.world.centerY + 150, 'shine');
+            shine.anchor.set(0.5);
+        game.add.tween(shine).to({rotation: 2 * Math.PI, alpha: 0.1}, 30000, 'Linear', true, 0, -1, true);
+
         return initBG;
     }
 
     function drawLogo() {
         const game = model.el('game');
 
-        let initLogo = game.add.sprite(game.world.centerX, game.height * 0.4, 'initLogo');
+        let initLogo = game.add.sprite(game.world.centerX, game.height * 0.5, 'initLogo');
             initLogo.anchor.set(0.5);
-            initLogo.scale.set(0.7);
 
-        let initSuriken = game.add.sprite(game.width * 0.88, game.height * 0.8, 'initSuriken');
-            initSuriken.anchor.set(0.5);
+        let logosSmall = game.add.sprite(game.width * 0.1, game.height * 0.85, 'logosSmall');
+            logosSmall.anchor.set(0.5);
+        //
+        // let ninja = game.add.spine(game.width * 0.33, game.height * 0.75, 'ninja');
+        //     ninja.setAnimationByName(1, 'idle', true);
+        //     (model.desktop) ? ninja.scale.set(0.6) : ninja.scale.set(0.4);
 
-        let ninja = game.add.spine(game.width * 0.33, game.height * 0.75, 'ninja');
-            ninja.setAnimationByName(1, 'idle', true);
-            (model.desktop) ? ninja.scale.set(0.6) : ninja.scale.set(0.4);
-
-        let ronin = game.add.spine(game.width * 0.7, game.height * 0.76, 'ronin');
-            ronin.setAnimationByName(1, 'idle', true);
-            (model.desktop) ? ronin.scale.set(0.6) : ronin.scale.set(0.4);
-
-        let samurai = game.add.spine(game.width * 0.6, game.height * 0.75, 'samurai');
-            samurai.setAnimationByName(1, 'idle', true);
-            (model.desktop) ? samurai.scale.set(0.6) : samurai.scale.set(0.4);
-
-        let geisha = game.add.spine(game.width * 0.45, game.height * 0.87, 'geisha');
-            geisha.setAnimationByName(1, 'idle', true);
-            (model.desktop) ? geisha.scale.set(0.6) : geisha.scale.set(0.4);
     }
 
     function drawPlay() {
