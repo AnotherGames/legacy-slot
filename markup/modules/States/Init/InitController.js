@@ -22,6 +22,8 @@ export class Init {
     create() {
         let game = model.el('game');
 
+        this.game.plugins.add(new Phaser.Plugin.SaveCPU(this));
+
         let initBG = view.drawBG();
         console.log(initBG);
         initBG.inputEnabled = true;
