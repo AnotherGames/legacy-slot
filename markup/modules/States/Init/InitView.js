@@ -7,10 +7,15 @@ export let view = (() => {
 
         let initBG = game.add.tileSprite(0, 0, game.width, game.height, 'gradientLine');
         model.el('initBG', initBG);
+        //
+        // let shine = game.add.sprite(game.world.centerX, game.world.centerY, 'shine');
+        //     shine.anchor.set(0.5);
+        // game.add.tween(shine).to({rotation: 2 * Math.PI, alpha: 0.1}, 30000, 'Linear', true, 0, -1, true);
 
-        let shine = game.add.sprite(game.world.centerX, game.world.centerY, 'shine');
-            shine.anchor.set(0.5);
-        game.add.tween(shine).to({rotation: 2 * Math.PI, alpha: 0.1}, 30000, 'Linear', true, 0, -1, true);
+        // let initBG = game.add.spine(0, 0, 'fon');
+        //     initBG.setAnimationByName(1, 'show', false);
+        //     initBG.addAnimationByName(1, 'move', true);
+        //     (model.desktop) ? initBG.scale.set(1.0) : initBG.scale.set(0.6);
 
         return initBG;
     }

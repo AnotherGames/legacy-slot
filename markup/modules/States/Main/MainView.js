@@ -16,6 +16,7 @@ export let view = (() => {
             model.group('balanceContainer', game.add.group());
             model.group('menuContainer', game.add.group());
             model.group('footer', game.add.group());
+            model.group('footerMenu', game.add.group());
             model.group('balanceCash', game.add.group());
             model.group('balanceCoin', game.add.group());
             model.group('bonusDarkness', game.add.group());
@@ -31,12 +32,17 @@ export let view = (() => {
             container = model.group('bg')
         }) {
 
-            let mainBG = game.add.tileSprite(0, 0, game.width, game.height, 'gradientLine', null, container);
-            model.el('mainBG', mainBG);
+            let initBG = game.add.spine(0, 0, 'fon');
+                initBG.setAnimationByName(1, 'show', false);
+                initBG.addAnimationByName(1, 'move', true);
+                (model.desktop) ? initBG.scale.set(1.0) : initBG.scale.set(0.6);
 
-            let shine = game.add.sprite(game.world.centerX, game.world.centerY, 'shine', null, container);
-                shine.anchor.set(0.5);
-            game.add.tween(shine).to({rotation: 2 * Math.PI, alpha: 0.1}, 30000, 'Linear', true, 0, -1, true);
+            // let mainBG = game.add.tileSprite(0, 0, game.width, game.height, 'gradientLine', null, container);
+            // model.el('mainBG', mainBG);
+
+            // let shine = game.add.sprite(game.world.centerX, game.world.centerY, 'shine', null, container);
+            //     shine.anchor.set(0.5);
+            // game.add.tween(shine).to({rotation: 2 * Math.PI, alpha: 0.1}, 30000, 'Linear', true, 0, -1, true);
 
         },
 
@@ -72,6 +78,8 @@ export let view = (() => {
                 game.add.tween(cloud).to({x: delta}, time * 1000, 'Linear', true, delay)
                     .onComplete.add(() => {
                         cloud.destroy();
+                        // game.time.events.add();
+                        draw.addCloud({});
                     }, this);
             }
 

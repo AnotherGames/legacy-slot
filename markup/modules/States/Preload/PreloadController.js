@@ -143,6 +143,8 @@ export class Preload {
 
     loadSpineAssets() {
         const game = model.el('game');
+        game.load.spine('bottle', 'spine/Bottle.json');
+        game.load.spine('fon', 'spine/Zastavka.json');
         // game.load.spine('geisha', 'spine/Geisha.json');
         // game.load.spine('ninja', 'spine/Ninja.json');
         // game.load.spine('samurai', 'spine/Samurai.json');

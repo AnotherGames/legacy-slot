@@ -57,7 +57,7 @@
 	"sourceSize": {"w":44,"h":44}
 },
 {
-	"filename": "info.png",
+	"filename": "infoOn.png",
 	"frame": {"x":47,"y":99,"w":44,"h":44},
 	"rotated": false,
 	"trimmed": false,
@@ -65,7 +65,7 @@
 	"sourceSize": {"w":44,"h":44}
 },
 {
-	"filename": "infoOn.png",
+	"filename": "info.png",
 	"frame": {"x":47,"y":145,"w":44,"h":44},
 	"rotated": false,
 	"trimmed": false,
@@ -89,7 +89,7 @@
 	"sourceSize": {"w":44,"h":44}
 },
 {
-	"filename": "settings.png",
+	"filename": "settingsOn.png",
 	"frame": {"x":145,"y":1,"w":44,"h":44},
 	"rotated": false,
 	"trimmed": false,
@@ -97,7 +97,7 @@
 	"sourceSize": {"w":44,"h":44}
 },
 {
-	"filename": "settingsOn.png",
+	"filename": "settings.png",
 	"frame": {"x":191,"y":1,"w":44,"h":44},
 	"rotated": false,
 	"trimmed": false,

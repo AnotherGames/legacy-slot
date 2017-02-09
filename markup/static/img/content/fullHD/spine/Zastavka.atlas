@@ -1,0 +1,132 @@
+
+Zastavka.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+img/L
+  rotate: false
+  xy: 2, 824
+  size: 1000, 134
+  orig: 1000, 134
+  offset: 0, 0
+  index: -1
+img/Logo_0000_N2
+  rotate: false
+  xy: 763, 453
+  size: 181, 142
+  orig: 181, 142
+  offset: 0, 0
+  index: -1
+img/Logo_0001_L
+  rotate: false
+  xy: 475, 435
+  size: 101, 189
+  orig: 101, 189
+  offset: 0, 0
+  index: -1
+img/Logo_0002_D
+  rotate: true
+  xy: 586, 597
+  size: 173, 189
+  orig: 173, 189
+  offset: 0, 0
+  index: -1
+img/Logo_0003_A2
+  rotate: true
+  xy: 336, 278
+  size: 152, 142
+  orig: 152, 142
+  offset: 0, 0
+  index: -1
+img/Logo_0004_D
+  rotate: true
+  xy: 777, 597
+  size: 173, 189
+  orig: 173, 189
+  offset: 0, 0
+  index: -1
+img/Logo_0005_A
+  rotate: false
+  xy: 480, 279
+  size: 152, 142
+  orig: 152, 142
+  offset: 0, 0
+  index: -1
+img/Logo_0006_Y
+  rotate: true
+  xy: 578, 423
+  size: 172, 183
+  orig: 172, 183
+  offset: 0, 0
+  index: -1
+img/Logo_0007_N
+  rotate: true
+  xy: 192, 229
+  size: 181, 142
+  orig: 181, 142
+  offset: 0, 0
+  index: -1
+img/Logo_0008_C
+  rotate: false
+  xy: 285, 432
+  size: 188, 192
+  orig: 188, 192
+  offset: 0, 0
+  index: -1
+img/Zastavka_CL_0000_Layer-21
+  rotate: false
+  xy: 769, 349
+  size: 88, 102
+  orig: 88, 102
+  offset: 0, 0
+  index: -1
+img/Zastavka_CL_0001_Layer-20
+  rotate: false
+  xy: 634, 274
+  size: 133, 147
+  orig: 133, 147
+  offset: 0, 0
+  index: -1
+img/Zastavka_CL_0003_Shape-2-copy-4
+  rotate: false
+  xy: 859, 363
+  size: 85, 88
+  orig: 85, 88
+  offset: 0, 0
+  index: -1
+img/Zastavka_CL_0006_Layer-18
+  rotate: false
+  xy: 2, 2
+  size: 166, 197
+  orig: 166, 197
+  offset: 0, 0
+  index: -1
+img/Zastavka_CL_0007_Layer-17
+  rotate: false
+  xy: 2, 201
+  size: 188, 209
+  orig: 188, 209
+  offset: 0, 0
+  index: -1
+img/Zastavka_CL_0008_Play
+  rotate: false
+  xy: 2, 412
+  size: 281, 212
+  orig: 281, 212
+  offset: 0, 0
+  index: -1
+img/Zastavka_CL_0009_Ellipse-11
+  rotate: false
+  xy: 2, 626
+  size: 582, 144
+  orig: 582, 144
+  offset: 0, 0
+  index: -1
+img/Zastavka_CL_0010_Layer-2
+  rotate: false
+  xy: 2, 772
+  size: 1020, 50
+  orig: 1020, 50
+  offset: 0, 0
+  index: -1

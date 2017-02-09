@@ -22,19 +22,23 @@ export class Init {
     create() {
         let game = model.el('game');
 
-        view.drawBG();
-        view.drawLogo();
+        let initBG = view.drawBG();
+        console.log(initBG);
+        initBG.inputEnabled = true;
+        initBG.events.onInputDown.add(this.handleBG, this);
+
+        // view.drawLogo();
 
         if (model.desktop) keyboardController.initInitKeys();
 
-        let initPlay = view.drawPlay();
-            initPlay.inputEnabled = true;
-            initPlay.events.onInputDown.add(this.handlePlay, this);
-
-        model.el('initPlayTween')
-            .onComplete.add(() => {
-                view.playYoyoTween({});
-            });
+        // let initPlay = view.drawPlay();
+        //     initPlay.inputEnabled = true;
+        //     initPlay.events.onInputDown.add(this.handlePlay, this);
+        //
+        // model.el('initPlayTween')
+        //     .onComplete.add(() => {
+        //         view.playYoyoTween({});
+        //     });
 
         this.drawSoundTrigger();
 
@@ -50,7 +54,7 @@ export class Init {
         (model.state('globalSound')) ? this.triggerSoundRight() : this.triggerSoundLeft();
     }
 
-    handlePlay() {
+    handleBG() {
         const game = model.el('game');
 
         if (model.mobile) game.scale.startFullScreen();
@@ -59,7 +63,7 @@ export class Init {
             model.el('game').scale.startFullScreen();
         });
 
-        view.stopYoyoTween();
+        // view.stopYoyoTween();
 
         game.camera.onFadeComplete.add(()=>{
             game.state.start('Main');
