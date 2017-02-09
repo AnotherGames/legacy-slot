@@ -21,6 +21,7 @@ export let view = (() => {
             model.group('bonusDarkness', game.add.group());
             model.group('aim', game.add.group());
             model.group('popup', game.add.group());
+            model.group('infoTable', game.add.group());
             model.group('transition', game.add.group());
         }
     };

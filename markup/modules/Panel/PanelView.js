@@ -153,6 +153,38 @@ export let view = (() => {
             return panelButtonsArr;
         },
 
+        info: function({
+            game = model.el('game'),
+            container = model.group('infoTable'),
+            x = model.el('game').world.centerX,
+            y = model.el('game').world.centerY,
+        }) {
+            model.group('infoTable').visible = false;
+            let overlay = game.add.graphics(0, 0, container).beginFill(0x000000, 0.7).drawRect(0, 0, game.width, game.height);
+            model.el('overlay', overlay);
+
+            let infoRules = game.add.sprite(x, y, 'info', '1_en.png', container);
+            infoRules.anchor.set(0.5);
+            infoRules.scale.set(1);
+
+            let closed = game.add.sprite(game.width - 350, 170, 'closed', null, container);
+            model.el('closed', closed);
+
+            let infoControllers = game.add.group();
+
+            draw._markers(infoControllers)
+            draw._arrows(infoControllers)
+
+            infoControllers.y = infoRules.bottom - infoControllers.height / 2 - 30;
+            infoControllers.x = game.width / 2 - infoControllers.width / 2;
+
+            container.add(infoControllers);
+            model.group('infoControllers', infoControllers);
+            model.el('infoRules', infoRules);
+
+            return infoRules;
+        },
+
         _AutoPanelItem: function({
             game = model.el('game'),
             container = model.group('autoDesktop'),
@@ -287,37 +319,8 @@ export let view = (() => {
         }) {
             let autoDesktopContainer = model.group('autoDesktop');
             return game.add.tween(autoDesktopContainer).to( { x: finalX }, time, 'Linear', true)
-        },
-
-        info: function({
-            game = model.el('game'),
-            container = model.group('popup'),
-            x = model.el('game').world.centerX,
-            y = model.el('game').world.centerY,
-        }) {
-            let overlay = game.add.graphics(0, 0, container).beginFill(0x000000, 0.7).drawRect(0, 0, game.width, game.height);
-            model.el('overlay', overlay);
-
-            let infoRules = game.add.sprite(x, y, 'info', '1_en.png', container);
-                infoRules.anchor.set(0.5);
-                infoRules.scale.set(1);
-            model.el('infoRules', infoRules);
-
-            let closed = game.add.sprite(game.width - 350, 170, 'closed', null, container);
-            model.el('closed', closed);
-
-            let infoControllers = game.add.group();
-
-            draw._markers(infoControllers)
-            draw._arrows(infoControllers)
-
-            infoControllers.y = infoRules.bottom - infoControllers.height / 2 - 30;
-            infoControllers.x = game.width / 2 - infoControllers.width / 2;
-
-            container.add(infoControllers);
-            model.group('infoControllers', infoControllers);
-            return infoRules;
         }
+
 
     }
 
