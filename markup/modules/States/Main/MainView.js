@@ -33,59 +33,51 @@ export let view = (() => {
         }) {
 
             let initBG = game.add.spine(0, 0, 'fon');
-                initBG.setAnimationByName(1, 'show', false);
-                initBG.addAnimationByName(1, 'move', true);
+                initBG.setAnimationByName(1, 'move', true);
                 (model.desktop) ? initBG.scale.set(1.0) : initBG.scale.set(0.6);
-
-            // let mainBG = game.add.tileSprite(0, 0, game.width, game.height, 'gradientLine', null, container);
-            // model.el('mainBG', mainBG);
-
-            // let shine = game.add.sprite(game.world.centerX, game.world.centerY, 'shine', null, container);
-            //     shine.anchor.set(0.5);
-            // game.add.tween(shine).to({rotation: 2 * Math.PI, alpha: 0.1}, 30000, 'Linear', true, 0, -1, true);
+                container.add(initBG);
 
         },
 
-        addCloud: function({
-            x = model.el('game').rnd.integerInRange(0, model.el('game').width),
-            container = model.group('bg')
-        }) {
-            let game = model.el('game');
-            let randomScale = game.rnd.integerInRange(3, 10);
-
-            for (let i = 0; i < 5; i++) {
-                let cloud = game.add.sprite(0, 150, 'cloud', null, container);
-                cloud.anchor.set(0.5);
-                cloud.angle = 40;
-                cloud.scale.set(randomScale / 10);
-
-                let time = game.rnd.integerInRange(50, 70);
-                let delay = game.rnd.integerInRange(500, 1500);
-                let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
-                console.log(side);
-                if (model.desktop) {
-                    cloud.y = cloud.y = cloud.y + game.rnd.integerInRange(20, 350) + 80;
-                } else {
-                    cloud.y = cloud.y = cloud.y + game.rnd.integerInRange(20, 250) + 50;
-                }
-                cloud.x = x;
-
-                if (container === model.group('bg')){
-                    cloud.x = (side === 'left') ? -cloud.width : game.width + cloud.width;
-                }
-                let delta = (side === 'left') ? game.width + cloud.width : -cloud.width;
-
-                game.add.tween(cloud).to({x: delta}, time * 1000, 'Linear', true, delay)
-                    .onComplete.add(() => {
-                        cloud.destroy();
-                        // game.time.events.add();
-                        draw.addCloud({});
-                    }, this);
-            }
-
-
-
-        },
+        // addCloud: function({
+        //     x = model.el('game').rnd.integerInRange(0, model.el('game').width),
+        //     container = model.group('bg')
+        // }) {
+        //     let game = model.el('game');
+        //     let randomScale = game.rnd.integerInRange(3, 10);
+        //
+        //     for (let i = 0; i < 5; i++) {
+        //         let cloud = game.add.sprite(0, 150, 'cloud', null, container);
+        //         cloud.anchor.set(0.5);
+        //         cloud.angle = 40;
+        //         cloud.scale.set(randomScale / 10);
+        //
+        //         let time = game.rnd.integerInRange(50, 70);
+        //         let delay = game.rnd.integerInRange(500, 1500);
+        //         let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
+        //         console.log(side);
+        //         if (model.desktop) {
+        //             cloud.y = cloud.y = cloud.y + game.rnd.integerInRange(20, 350) + 80;
+        //         } else {
+        //             cloud.y = cloud.y = cloud.y + game.rnd.integerInRange(20, 250) + 50;
+        //         }
+        //         cloud.x = x;
+        //
+        //         if (container === model.group('bg')){
+        //             cloud.x = (side === 'left') ? -cloud.width : game.width + cloud.width;
+        //         }
+        //         let delta = (side === 'left') ? game.width + cloud.width : -cloud.width;
+        //
+        //         game.add.tween(cloud).to({x: delta}, time * 1000, 'Linear', true, delay)
+        //             .onComplete.add(() => {
+        //                 cloud.destroy();
+        //                 game.time.events.add(5000, () => {
+        //                     draw.addCloud({});
+        //                 });
+        //             }, this);
+        //     }
+        //
+        // },
 
         mainContainer: function ({
             game = model.el('game'),
@@ -214,7 +206,7 @@ export let view = (() => {
             const elSize = config[model.res].elements;
 
             let someGraphic = game.add.graphics(-elSize.width * 2.5, -elSize.height * 1.5, machineGroup);
-                someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5, elSize.height * 3 + 18);
+                someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5, elSize.height * 3 + 12);
             machineGroup.mask = someGraphic;
         },
 

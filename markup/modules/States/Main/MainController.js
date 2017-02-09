@@ -52,7 +52,7 @@ export class Main {
         // Отрисовуем основной контейнер
         mainView.draw.mainBG({});
         // for (let i = 0; i < 5; i++) {
-            mainView.draw.addCloud({});
+            // mainView.draw.addCloud({});
         // }
         mainView.draw.mainContainer({});
         mainView.draw.machineContainer({});

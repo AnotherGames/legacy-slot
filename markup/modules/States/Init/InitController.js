@@ -25,13 +25,14 @@ export class Init {
         this.game.plugins.add(new Phaser.Plugin.SaveCPU(this));
 
         let initBG = view.drawBG();
-        console.log(initBG);
         initBG.inputEnabled = true;
-        initBG.events.onInputDown.add(this.handleBG, this);
+
+        game.canvas.onclick = this.handleBG.bind(this);
 
         // view.drawLogo();
 
         if (model.desktop) keyboardController.initInitKeys();
+        this.drawSoundTrigger();
 
         // let initPlay = view.drawPlay();
         //     initPlay.inputEnabled = true;
@@ -41,8 +42,6 @@ export class Init {
         //     .onComplete.add(() => {
         //         view.playYoyoTween({});
         //     });
-
-        this.drawSoundTrigger();
 
         // Выход из затемнения
         game.camera.flash(0x000000, 500);
@@ -67,6 +66,7 @@ export class Init {
 
         // view.stopYoyoTween();
 
+        game.canvas.onclick = null;
         game.camera.onFadeComplete.add(()=>{
             game.state.start('Main');
         })

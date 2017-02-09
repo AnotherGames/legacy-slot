@@ -115,6 +115,7 @@ export class Preload {
             game.load.atlasJSONArray('panelBG', 'game/panelBG.png', 'game/panelBG.json');
             game.load.image('autoSelect', 'desk_buttons/autoSelect.png');
             game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
+            game.load.atlasJSONArray('deskButtonsAnim', 'desk_buttons/deskButtonsAnim.png', 'desk_buttons/deskButtonsAnim.json');
             // game.load.atlasJSONArray('lamp', 'bg/lamp.png', 'bg/lamp.json');
         }
         if (model.mobile) {
