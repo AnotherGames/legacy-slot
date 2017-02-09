@@ -89,7 +89,6 @@ export class Preload {
         game.load.image('closed', 'other/closed.png');
         game.load.image('coinGold', 'other/coinGold.png');
         game.load.image('ar', 'other/ar.png');
-        game.load.image('arLeft', 'other/arLeft.png');
         game.load.atlasJSONArray('info', 'other/info.png', 'other/info.json');
         game.load.atlasJSONArray('infoMarker', 'other/infoMarker.png', 'other/infoMarker.json');
         game.load.image('winLine', 'win/winLine.png');
