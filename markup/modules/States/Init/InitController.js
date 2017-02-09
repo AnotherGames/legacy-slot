@@ -22,6 +22,7 @@ export class Init {
     create() {
         let game = model.el('game');
 
+        this.game.plugins.add(new Phaser.Plugin.SaveCPU(this));
         view.drawBG();
         view.drawLogo();
 
