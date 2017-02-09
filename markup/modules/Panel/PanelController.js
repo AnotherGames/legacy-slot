@@ -94,6 +94,7 @@ export let controller = (() => {
         auto: function () {
             if (model.state('autoplay:start')
             || model.state('roll:progress')
+            || model.state('panelInAnim') //проигрывается ли сейчас анимация закрытия/открытия панели
             || model.state('buttons:locked')) return;
             soundController.sound.playSound({sound: 'buttonClick'});
 

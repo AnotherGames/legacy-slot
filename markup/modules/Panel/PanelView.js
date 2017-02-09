@@ -21,7 +21,7 @@ export let view = (() => {
         AutoContainer: function ({
             game = model.el('game'),
             x = model.el('gameMachine').width / 2,
-            y = -185
+            y = -189
         }) {
             let autoDesktopContainer = game.add.group();
             autoDesktopContainer.x = x;
@@ -272,8 +272,12 @@ export let view = (() => {
             time = 350
         }) {
             let autoDesktopContainer = model.group('autoDesktop');
+            model.state('panelInAnim', true);
             autoDesktopContainer.visible = true;
-            return game.add.tween(autoDesktopContainer).to( { alpha: 1 }, time, 'Linear', true);
+            return game.add.tween(autoDesktopContainer).to( { alpha: 1 }, time, 'Linear', true)
+                .onComplete.add(() => {
+                    model.state('panelInAnim', false);
+                });
         },
 
         info: function ({
@@ -326,9 +330,11 @@ export let view = (() => {
             game = model.el('game'),
             time = 350
         }) {
+            model.state('panelInAnim', true);
             let autoDesktopContainer = model.group('autoDesktop');
             return game.add.tween(autoDesktopContainer).to( { alpha: 0 }, time, 'Linear', true)
                 .onComplete.add(() => {
+                    model.state('panelInAnim', false);
                     autoDesktopContainer.visible = false;
                 });
         }
