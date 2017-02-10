@@ -159,7 +159,8 @@ export let view = (() => {
             x = model.el('game').world.centerX,
             y = model.el('game').world.centerY,
         }) {
-            model.group('infoTable').visible = false;
+            container.visible = false;
+            container.alpha = 0; 
             let overlay = game.add.graphics(0, 0, container).beginFill(0x000000, 0.7).drawRect(0, 0, game.width, game.height);
             model.el('overlay', overlay);
 

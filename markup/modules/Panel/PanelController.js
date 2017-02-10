@@ -131,20 +131,7 @@ export let controller = (() => {
             model.changeBet({toMax: true});
         },
 
-        openInfo: function() {
-            if(model.state('buttons:locked')
-            || model.state('roll:progress')
-            || model.state('autoplay:start')) return;
-
-            soundController.sound.playSound({sound : 'buttonClick'});
-            model.state('infoPanelOpen', true);
-            let counter = 0;
-            model.el('infoCounter', counter);
-            model.group('infoTable').visible = true;
-        },
-
         info: function() {
-
             let game = model.el('game');
             let infoRules = model.el('infoRules')
             let overlay = model.el('overlay');
@@ -153,7 +140,6 @@ export let controller = (() => {
             let arrowRight = model.el('arrowRight');
             let arrowLeft = model.el('arrowLeft');
 
-            game.input.keyboard.enabled = false;
             overlay.inputEnabled = true;
             overlay.input.priorityID = 2;
             infoRules.inputEnabled = true;
@@ -171,14 +157,45 @@ export let controller = (() => {
             arrowLeft.events.onInputDown.add(handle.switchInfoLeft);
         },
 
-        closeInfo: function () {
+        openInfo: function() {
+            if(model.state('buttons:locked')
+            || model.state('roll:progress')
+            || model.state('isAnim:info')
+            || model.state('autoplay:start')) return;
+
             let game = model.el('game');
+
+            soundController.sound.playSound({sound : 'buttonClick'});
+            game.input.keyboard.enabled = false;
+
             let counter = 0;
+            model.el('infoCounter', counter);
+
+            let container = model.group('infoTable');
+            model.state('isAnim:info', true);
+            container.visible = true;
+            game.add.tween(container).to( { alpha: 1 }, 700, 'Quart.easeOut', true)
+                .onComplete.add(()=>{
+                    model.state('isAnim:info', false);
+                });
+        },
+
+        closeInfo: function () {
+            if (model.state('isAnim:info')) return;
+            let game = model.el('game');
 
             game.input.keyboard.enabled = true;
-            model.group('infoTable').visible = false;
+
+            let counter = 0;
             model.el('infoCounter', counter);
-            model.state('infoPanelOpen', false);
+
+            let container = model.group('infoTable');
+            model.state('isAnim:info', true);
+            game.add.tween(container).to( { alpha: 0 }, 700, 'Quart.easeOut', true)
+                .onComplete.add(()=>{
+                    container.visible = false;
+                    model.state('isAnim:info', false);
+                });
         },
 
         switchInfoRight: function () {

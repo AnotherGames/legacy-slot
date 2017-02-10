@@ -140,7 +140,6 @@ export let model = (() => {
         model.state('fs:end', true);
         model.state('transitionScreen', false);
         model.state('fs', false);
-        model.state('infoPanelOpen', false);
         model.state('menuOpened', false);
         model.state('isFirstAutoChangeAnimBG', true);
         model.state('maxFsMultiplier', false);
