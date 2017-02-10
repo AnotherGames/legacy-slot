@@ -137,12 +137,12 @@ export let view = (() => {
               game = model.el('game'),
               container = model.group('autoDesktop')
           }) {
-                let autoBG10 = this._AutoPanelItem({text: 10, x: -56, y: -34, width: 54, height: 24});
-                let autoBG25 = this._AutoPanelItem({text: 25, x: 2, y: -34, width: 60, height: 24});
-                let autoBG50 = this._AutoPanelItem({text: 50, x: -56, y: -8, width: 54, height: 22});
-                let autoBG100 = this._AutoPanelItem({text: 100, x: 2, y: -8, width: 60, height: 22});
-                let autoBG250 = this._AutoPanelItem({text: 250, x: -56, y: 16, width: 54, height: 24});
-                let autoBG500 = this._AutoPanelItem({text: 500, x: 2, y: 16, width: 60, height: 24});
+                let autoBG10 = this._AutoPanelItem({text: 10, x: -79, y: -47, width: 75, height: 30});
+                let autoBG25 = this._AutoPanelItem({text: 25, x: -3, y: -47, width: 80, height: 30});
+                let autoBG50 = this._AutoPanelItem({text: 50, x: -79, y: -14, width: 75, height: 30});
+                let autoBG100 = this._AutoPanelItem({text: 100, x: -3, y: -14, width: 80, height: 30});
+                let autoBG250 = this._AutoPanelItem({text: 250, x: -79, y: 18, width: 75, height: 30});
+                let autoBG500 = this._AutoPanelItem({text: 500, x: -3, y: 18, width: 83, height: 30});
 
                 model.el('autoBG10', autoBG10);
                 model.el('autoBG25', autoBG25);
@@ -164,7 +164,7 @@ export let view = (() => {
                 y = -62,
                 width = 70,
                 height = 37,
-                font = 'normal 18px Arial',
+                font = 'normal 24px Arial',
                 color = '#ffffff',
                 shadowColor = '#ffffff'
           }) {
@@ -212,8 +212,8 @@ export let view = (() => {
             model.el('autoCount', autoCount);
 
             let grd = autoCount.context.createLinearGradient(0, 0, 0, autoCount.canvas.height);
-            grd.addColorStop(0, '#fef900');
-            grd.addColorStop(1, '#f8a600');
+            grd.addColorStop(0, '#ffffff');
+            grd.addColorStop(1, '#eeeeee');
             autoCount.fill = grd;
 
             game.add.tween(autoCount).to({
@@ -301,7 +301,11 @@ export let view = (() => {
             coinsLevelMinus.frameName = 'minusFreeze.png';
             coinsLevelMinus.freezeFrames = true;
         let autoButtonDesk = model.el('autoButtonDesk');
-            autoButtonDesk.frameName = 'autoFreeze.png';
+            if (model.state('autoplay:start')) {
+                autoButtonDesk.frameName = 'autoCount.png';
+            } else {
+                autoButtonDesk.frameName = 'autoFreeze.png';
+            }
             autoButtonDesk.freezeFrames = true;
 
     }

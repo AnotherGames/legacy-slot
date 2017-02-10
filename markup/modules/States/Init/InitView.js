@@ -5,10 +5,10 @@ export let view = (() => {
     function drawBG() {
         const game = model.el('game');
 
-        let initBG = game.add.spine(0, 0, 'fon');
+        let initBG = game.add.spine(game.width / 2, game.height / 2, 'fon');
             initBG.setAnimationByName(1, 'show', false);
             initBG.addAnimationByName(1, 'move', true);
-            (model.desktop) ? initBG.scale.set(1.0) : initBG.scale.set(0.6);
+            (model.desktop) ? initBG.scale.set(1) : initBG.scale.set(0.6);
 
         return initBG;
     }

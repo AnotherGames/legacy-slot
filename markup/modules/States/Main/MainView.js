@@ -32,7 +32,7 @@ export let view = (() => {
             container = model.group('bg')
         }) {
 
-            let initBG = game.add.spine(0, 0, 'fon');
+            let initBG = game.add.spine(game.width / 2, game.height / 2, 'fon');
                 initBG.setAnimationByName(1, 'move', true);
                 (model.desktop) ? initBG.scale.set(1.0) : initBG.scale.set(0.6);
                 container.add(initBG);
