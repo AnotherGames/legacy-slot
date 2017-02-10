@@ -153,7 +153,8 @@ export let controller = (() => {
         next,
         count,
         stop,
-        brain
+        brain,
+        searchBrains
     };
 })();
 
@@ -259,7 +260,7 @@ export class FS {
     }
 
     update() {
-        const game = model.el('game'); 
+        const game = model.el('game');
         // Обновляем время
         footerController.updateTime({});
         // Проигрываем анимацию
