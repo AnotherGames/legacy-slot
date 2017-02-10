@@ -128,7 +128,6 @@ export let controller = (() => {
             let arrowRight = model.el('arrowRight');
             let arrowLeft = model.el('arrowLeft');
 
-            game.input.keyboard.enabled = false;
             overlay.inputEnabled = true;
             overlay.input.priorityID = 2;
             infoRules.inputEnabled = true;
