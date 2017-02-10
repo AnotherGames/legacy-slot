@@ -12,6 +12,8 @@ export let controller = (() => {
         view.draw.PanelBG({});
         // view.draw.LinesNumber({});
         view.draw.AutoContainer({});
+        view.draw.info({});
+        handle.info();
         view.draw.AutoPanel({}).forEach((panelButton) => {
             panelButton.inputEnabled = true;
             panelButton.events.onInputUp.add(handle.panelButton, panelButton);
@@ -42,7 +44,7 @@ export let controller = (() => {
         maxBetButtonDesk.onInputDown.add(handle.maxBet);
 
         let infoButtonDesk = view.draw.InfoButton({});
-        infoButtonDesk.onInputDown.add(handle.info);
+            infoButtonDesk.onInputDown.add(handle.openInfo);
 
         let betLevelPlus = view.draw.PlusButton({});
         betLevelPlus.onInputDown.add(handle.betPlus);
@@ -116,23 +118,26 @@ export let controller = (() => {
             model.changeBet({toMax: true});
         },
 
-        info: function () {
-            if (model.state('buttons:locked')
+        openInfo: function() {
+            if(model.state('buttons:locked')
             || model.state('roll:progress')
             || model.state('autoplay:start')) return;
 
-            soundController.sound.playSound({sound: 'buttonClick'});
+            soundController.sound.playSound({sound : 'buttonClick'});
+            model.state('infoPanelOpen', true);
+            let counter = 0;
+            model.el('infoCounter', counter);
+            model.group('infoTable').visible = true;
+        },
+
+        info: function() {
 
             let game = model.el('game');
-            let infoRules = view.show.info({});
+            let infoRules = model.el('infoRules')
             let overlay = model.el('overlay');
             let closed = model.el('closed');
             let arrowRight = model.el('arrowRight');
             let arrowLeft = model.el('arrowLeft');
-            let counter = 0;
-
-            model.el('infoCounter', counter);
-            model.state('infoPanelOpen', true);
 
             game.input.keyboard.enabled = false;
             overlay.inputEnabled = true;
@@ -157,7 +162,7 @@ export let controller = (() => {
             let counter = 0;
 
             game.input.keyboard.enabled = true;
-            model.group('popup').removeAll();
+            model.group('infoTable').visible = false;
             model.el('infoCounter', counter);
             model.state('infoPanelOpen', false);
         },

@@ -216,6 +216,41 @@ export let view = (() => {
             model.el('autoCount').destroy();
         },
 
+        info: function ({
+            game = model.el('game'),
+            container = model.group('infoTable'),
+            x = model.el('game').world.centerX,
+            y = model.el('game').world.centerY,
+        }) {
+            container.visible = false;
+            let overlay = game.add.graphics(0, 0, container).beginFill(0x000000, 0.7).drawRect(0, 0, game.width, game.height);
+            model.el('overlay', overlay);
+
+            let infoRules = game.add.sprite(x, y, 'info', '1_en.png', container);
+            infoRules.anchor.set(0.5);
+            infoRules.scale.set(1.3);
+            model.el('infoRules', infoRules);
+
+            let closeBG = game.add.sprite(game.width - 170, 125, 'closeBG', null, container);
+            closeBG.anchor.set(0.5);
+
+            let closed = game.add.sprite(game.width - 170, 120, 'closed', null, container);
+            closed.anchor.set(0.5);
+            model.el('closed', closed);
+
+            let infoControllers = game.add.group();
+
+            draw._markers(infoControllers);
+            draw._arrows(infoControllers);
+
+            infoControllers.y = infoRules.bottom - infoControllers.height / 2 - 50;
+            infoControllers.x = game.width / 2 - infoControllers.width / 2 + 50;
+
+            container.add(infoControllers);
+            model.group('infoControllers', infoControllers);
+            return infoRules;
+        },
+
         _markers: function (container) {
             let game = model.el('game');
 
@@ -251,8 +286,9 @@ export let view = (() => {
             arrowRight.anchor.set(0.5);
             model.el('arrowRight', arrowRight);
 
-            let arrowLeft = game.add.sprite(infoMarkers[0].x - 50, 85, 'arLeft', null, container);
+            let arrowLeft = game.add.sprite(infoMarkers[0].x - 50, 85, 'ar', null, container);
             arrowLeft.anchor.set(0.5);
+            arrowLeft.scale.set(-1, 1);
             model.el('arrowLeft', arrowLeft);
         }
     };
@@ -278,40 +314,6 @@ export let view = (() => {
                 .onComplete.add(() => {
                     model.state('panelInAnim', false);
                 });
-        },
-
-        info: function ({
-            game = model.el('game'),
-            container = model.group('popup'),
-            x = model.el('game').world.centerX,
-            y = model.el('game').world.centerY,
-        }) {
-            let overlay = game.add.graphics(0, 0, container).beginFill(0x000000, 0.7).drawRect(0, 0, game.width, game.height);
-            model.el('overlay', overlay);
-
-            let infoRules = game.add.sprite(x, y, 'info', '1_en.png', container);
-            infoRules.anchor.set(0.5);
-            infoRules.scale.set(1.3);
-            model.el('infoRules', infoRules);
-
-            let closeBG = game.add.sprite(game.width - 170, 125, 'closeBG', null, container);
-            closeBG.anchor.set(0.5);
-
-            let closed = game.add.sprite(game.width - 170, 120, 'closed', null, container);
-            closed.anchor.set(0.5);
-            model.el('closed', closed);
-
-            let infoControllers = game.add.group();
-
-            draw._markers(infoControllers);
-            draw._arrows(infoControllers);
-
-            infoControllers.y = infoRules.bottom - infoControllers.height / 2 - 50;
-            infoControllers.x = game.width / 2 - infoControllers.width / 2;
-
-            container.add(infoControllers);
-            model.group('infoControllers', infoControllers);
-            return infoRules;
         }
 
     };

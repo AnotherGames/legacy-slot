@@ -119,8 +119,7 @@ export let controller = (function () {
             $('.history').removeClass('closed');
         });
         $('#btnRules').on('click', function () {
-            console.log('btnRules');
-            panelController.handle.info();
+            panelController.handle.openInfo();
             $('#settings').addClass('closed');
             $('#darkness').addClass('closed');
             $('.history').addClass('closed');
