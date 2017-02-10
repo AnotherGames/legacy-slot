@@ -261,34 +261,16 @@ export let view = (() => {
             let arrowLeft = game.add.sprite(infoMarkers[0].x, 85, 'arLeft', null, container);
                 arrowLeft.anchor.set(0.5);
             model.el('arrowLeft', arrowLeft);
-        }
-    }
-
-    let show = {
-        autoButton: function({
-            game = model.el('game'),
-            finalX = 365,
-            time = 350
-        }) {
-            let autoButtonDesk = model.el('autoButtonDesk');
-            return game.add.tween(autoButtonDesk).to( { x: finalX }, time, 'Linear', true)
-        },
-
-        autoPanel: function({
-            game = model.el('game'),
-            finalX = 495,
-            time = 350
-        }) {
-            let autoDesktopContainer = model.group('autoDesktop');
-            return game.add.tween(autoDesktopContainer).to( { x: finalX }, time, 'Linear', true)
         },
 
         info: function({
             game = model.el('game'),
-            container = model.group('popup'),
+            container = model.group('infoTable'),
             x = model.el('game').world.centerX,
             y = model.el('game').world.centerY,
         }) {
+            container.alpha = 0;
+            container.visible = false;
             let overlay = game.add.graphics(0, 0, container).beginFill(0x000000, 0.7).drawRect(0, 0, game.width, game.height);
             model.el('overlay', overlay);
 
@@ -311,6 +293,26 @@ export let view = (() => {
             container.add(infoControllers);
             model.group('infoControllers', infoControllers);
             return infoRules;
+        }
+    }
+
+    let show = {
+        autoButton: function({
+            game = model.el('game'),
+            finalX = 365,
+            time = 350
+        }) {
+            let autoButtonDesk = model.el('autoButtonDesk');
+            return game.add.tween(autoButtonDesk).to( { x: finalX }, time, 'Linear', true)
+        },
+
+        autoPanel: function({
+            game = model.el('game'),
+            finalX = 495,
+            time = 350
+        }) {
+            let autoDesktopContainer = model.group('autoDesktop');
+            return game.add.tween(autoDesktopContainer).to( { x: finalX }, time, 'Linear', true)
         }
 
     }
