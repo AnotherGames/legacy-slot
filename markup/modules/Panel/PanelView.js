@@ -223,6 +223,7 @@ export let view = (() => {
             y = model.el('game').world.centerY,
         }) {
             container.visible = false;
+            container.alpha = 0;
             let overlay = game.add.graphics(0, 0, container).beginFill(0x000000, 0.7).drawRect(0, 0, game.width, game.height);
             model.el('overlay', overlay);
 

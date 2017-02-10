@@ -118,17 +118,6 @@ export let controller = (() => {
             model.changeBet({toMax: true});
         },
 
-        openInfo: function() {
-            if(model.state('buttons:locked')
-            || model.state('roll:progress')
-            || model.state('autoplay:start')) return;
-
-            soundController.sound.playSound({sound : 'buttonClick'});
-            model.state('infoPanelOpen', true);
-            let counter = 0;
-            model.el('infoCounter', counter);
-            model.group('infoTable').visible = true;
-        },
 
         info: function() {
 
@@ -157,14 +146,44 @@ export let controller = (() => {
             arrowLeft.events.onInputDown.add(handle.switchInfoLeft);
         },
 
+        openInfo: function() {
+            if(model.state('buttons:locked')
+            || model.state('roll:progress')
+            || model.state('isAnim:info')
+            || model.state('autoplay:start')) return;
+
+            let game = model.el('game');
+            model.state('infoPanelOpen', true);
+            soundController.sound.playSound({sound : 'buttonClick'});
+            let counter = 0;
+            model.el('infoCounter', counter);
+
+            let container = model.group('infoTable');
+            model.state('isAnim:info', true)
+            container.visible = true;
+            game.add.tween(container).to( { alpha: 1 }, 700, 'Quart.easeOut', true)
+                .onComplete.add(()=>{
+                    model.state('isAnim:info', false);
+                })
+        },
+
         closeInfo: function () {
+            if(model.state('isAnim:info')) return;
+
             let game = model.el('game');
             let counter = 0;
+            model.el('infoCounter', counter);
 
             game.input.keyboard.enabled = true;
-            model.group('infoTable').visible = false;
-            model.el('infoCounter', counter);
             model.state('infoPanelOpen', false);
+
+            let container = model.group('infoTable')
+            model.state('isAnim:info', true)
+            game.add.tween(container).to( { alpha: 0 }, 700, 'Quart.easeOut', true)
+                .onComplete.add(()=>{
+                    model.state('isAnim:info', false)
+                    container.visible = false;
+                })
         },
 
         switchInfoRight: function () {

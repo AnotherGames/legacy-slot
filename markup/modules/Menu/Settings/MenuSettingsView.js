@@ -329,8 +329,8 @@ export let view = (() => {
             model.el('infoRules', infoRules);
 
             let infoControllers = game.add.group();
-            infoControllers.y = infoRules.bottom - infoControllers.height / 2 - 70;
-            infoControllers.x = game.width / 2 - infoControllers.width / 2;
+            infoControllers.y = infoRules.bottom - infoControllers.height / 2 - 80;
+            infoControllers.x = game.width / 2 - infoControllers.width / 2 - 30;
             container.add(infoControllers);
 
             let infoMarkers = [];
@@ -389,14 +389,15 @@ export let view = (() => {
             let arrowLeft = game.add.sprite(
                 infoMarkers[0].x - 50,
                 55,
-                'arLeft',
+                'ar',
                 null,
                 infoControllers);
             arrowLeft.anchor.set(0.5);
-            arrowLeft.scale.set(0.8);
+            arrowLeft.scale.set(-0.8, 0.8);
             model.el('arrowLeft', arrowLeft);
 
             container.visible = false;
+            model.group('infoControllers', infoControllers);
             return container;
         }
 
