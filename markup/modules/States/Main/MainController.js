@@ -51,9 +51,6 @@ export class Main {
 
         // Отрисовуем основной контейнер
         mainView.draw.mainBG({});
-        // for (let i = 0; i < 5; i++) {
-            // mainView.draw.addCloud({});
-        // }
         mainView.draw.mainContainer({});
         mainView.draw.machineContainer({});
         mainView.draw.lineNumbers({side: 'left'})
@@ -64,6 +61,7 @@ export class Main {
         rollController.init();
 
         if (model.mobile) {
+            mainView.draw.addCloud({});
             // Рисуем футер
             footerController.initMobile();
             // Рисуем кнопки управления

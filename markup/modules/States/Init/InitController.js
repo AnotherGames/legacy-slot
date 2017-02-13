@@ -27,21 +27,24 @@ export class Init {
         let initBG = view.drawBG();
         initBG.inputEnabled = true;
 
-        game.canvas.onclick = this.handleBG.bind(this);
-
-        // view.drawLogo();
-
-        if (model.desktop) keyboardController.initInitKeys();
         this.drawSoundTrigger();
 
-        // let initPlay = view.drawPlay();
-        //     initPlay.inputEnabled = true;
-        //     initPlay.events.onInputDown.add(this.handlePlay, this);
-        //
-        // model.el('initPlayTween')
-        //     .onComplete.add(() => {
-        //         view.playYoyoTween({});
-        //     });
+        if (model.mobile) {
+            view.drawLogo();
+            view.drawPlay();
+            initBG.events.onInputDown.add(this.handleBG, this);
+
+            model.el('initPlayTween')
+                .onComplete.add(() => {
+                    view.playYoyoTween({});
+                });
+
+        }
+
+        if (model.desktop)  {
+            keyboardController.initInitKeys();
+            game.canvas.onclick = this.handleBG.bind(this);
+        }
 
         // Выход из затемнения
         game.camera.flash(0x000000, 500);
@@ -58,15 +61,17 @@ export class Init {
     handleBG() {
         const game = model.el('game');
 
-        if (model.mobile) game.scale.startFullScreen();
+        if (model.mobile) {
+            game.scale.startFullScreen();
 
-        document.body.addEventListener('touchstart', () => {
-            model.el('game').scale.startFullScreen();
-        });
-
-        // view.stopYoyoTween();
-
-        game.canvas.onclick = null;
+            document.body.addEventListener('touchstart', () => {
+                model.el('game').scale.startFullScreen();
+            });
+            view.stopYoyoTween();
+        }
+        if (model.desktop) {
+            game.canvas.onclick = null;
+        }
         game.camera.onFadeComplete.add(()=>{
             game.state.start('Main');
         })

@@ -31,53 +31,60 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('bg')
         }) {
+            let mainBG;
+            if (model.desktop) {
+                mainBG = game.add.spine(0, 0, 'fon');
+                    mainBG.setAnimationByName(1, 'move2', true);
+                    container.add(mainBG);
+            } else {
+                mainBG = game.add.tileSprite(0, 0, game.width, game.height, 'gradientLine', null, container);
 
-            let initBG = game.add.spine(game.width / 2, game.height / 2, 'fon');
-                initBG.setAnimationByName(1, 'move', true);
-                (model.desktop) ? initBG.scale.set(1.0) : initBG.scale.set(0.6);
-                container.add(initBG);
+                let luchi = game.add.sprite(game.world.centerX, game.world.centerY, 'shine', null, container);
+                luchi.anchor.set(0.5);
+                game.add.tween(luchi).to({rotation: 2 * Math.PI, alpha: 0.1}, 30000, 'Linear', true, 0, -1, true);
+            }
 
         },
 
-        // addCloud: function({
-        //     x = model.el('game').rnd.integerInRange(0, model.el('game').width),
-        //     container = model.group('bg')
-        // }) {
-        //     let game = model.el('game');
-        //     let randomScale = game.rnd.integerInRange(3, 10);
-        //
-        //     for (let i = 0; i < 5; i++) {
-        //         let cloud = game.add.sprite(0, 150, 'cloud', null, container);
-        //         cloud.anchor.set(0.5);
-        //         cloud.angle = 40;
-        //         cloud.scale.set(randomScale / 10);
-        //
-        //         let time = game.rnd.integerInRange(50, 70);
-        //         let delay = game.rnd.integerInRange(500, 1500);
-        //         let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
-        //         console.log(side);
-        //         if (model.desktop) {
-        //             cloud.y = cloud.y = cloud.y + game.rnd.integerInRange(20, 350) + 80;
-        //         } else {
-        //             cloud.y = cloud.y = cloud.y + game.rnd.integerInRange(20, 250) + 50;
-        //         }
-        //         cloud.x = x;
-        //
-        //         if (container === model.group('bg')){
-        //             cloud.x = (side === 'left') ? -cloud.width : game.width + cloud.width;
-        //         }
-        //         let delta = (side === 'left') ? game.width + cloud.width : -cloud.width;
-        //
-        //         game.add.tween(cloud).to({x: delta}, time * 1000, 'Linear', true, delay)
-        //             .onComplete.add(() => {
-        //                 cloud.destroy();
-        //                 game.time.events.add(5000, () => {
-        //                     draw.addCloud({});
-        //                 });
-        //             }, this);
-        //     }
-        //
-        // },
+        addCloud: function({
+            x = model.el('game').rnd.integerInRange(0, model.el('game').width),
+            container = model.group('bg')
+        }) {
+            let game = model.el('game');
+            let randomScale = game.rnd.integerInRange(3, 9);
+
+            for (let i = 0; i < 5; i++) {
+                let cloud = game.add.sprite(0, 150, 'cloud', null, container);
+                cloud.anchor.set(0.5);
+                cloud.angle = 40;
+                cloud.scale.set(randomScale / 10);
+
+                let time = game.rnd.integerInRange(30, 50);
+                let delay = game.rnd.integerInRange(500, 1500);
+                let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
+                console.log(side);
+                if (model.desktop) {
+                    cloud.y = cloud.y = cloud.y + game.rnd.integerInRange(20, 350) + 80;
+                } else {
+                    cloud.y = cloud.y = cloud.y + game.rnd.integerInRange(20, 250) + 50;
+                }
+                cloud.x = x;
+
+                if (container === model.group('bg')){
+                    cloud.x = (side === 'left') ? -cloud.width : game.width + cloud.width;
+                }
+                let delta = (side === 'left') ? game.width + cloud.width : -cloud.width;
+
+                game.add.tween(cloud).to({x: delta}, time * 1000, 'Linear', true, delay)
+                    .onComplete.add(() => {
+                        cloud.destroy();
+                    }, this);
+            }
+            game.time.events.add(20000, () => {
+                draw.addCloud({});
+            });
+
+        },
 
         mainContainer: function ({
             game = model.el('game'),
@@ -91,7 +98,7 @@ export let view = (() => {
                 gameMachine.anchor.set(0.5);
             model.el('gameMachine', gameMachine);
 
-            let logoGM = game.add.sprite(0, -model.el('gameMachine').height / 2 + 5, 'logoGM', null, container);
+            let logoGM = game.add.sprite(0, model.el('gameMachine').top, 'logoGM', null, container);
                 logoGM.anchor.set(0.5);
             model.el('logoGM', logoGM);
 
@@ -103,20 +110,21 @@ export let view = (() => {
             gameMachine = model.el('gameMachine'),
             side = 'left'
         }){
-            let x = (side == 'right') ? gameMachine.right - 9 : gameMachine.left + 9;
+            let x = (side == 'right') ? gameMachine.right - 11 : gameMachine.left + 11;
+            let deltaY = (model.desktop) ? 40 : 80;
             let lineNumbersArr = [];
 
-            for (let i = 1; i < 10; i++) {
-                let lineNumber = game.add.sprite(x, config[model.res].win[i][0].y - gameMachine.height / 2 - 40,
+            for (let i = 1; i < 11; i++) {
+                let lineNumber = game.add.sprite(x, config[model.res].win[i][0].y - gameMachine.height / 2 - deltaY,
                     'lineNumbers',
-                    'plashka-0' + i + '-open_0.png',
+                    'line-' + i + '-bang_0.png',
                     container);
-                // lineNumber.normal = function() {lineNumber.frameName = 'plashka-0' + i + '-open_0.png'};
                 lineNumber.name = i;
                 lineNumber.anchor.set(0.5);
-                lineNumber.animations.add('win', Phaser.Animation.generateFrameNames('plashka-0' + i + '-open_', 0, 20, '.png', 1), 15, false);
+                lineNumber.scale.set(1.4);
+                lineNumber.animations.add('win', Phaser.Animation.generateFrameNames('line-' + i + '-bang_', 0, 30, '.png', 1), 30, false);
                 lineNumber.animations.getAnimation('win').onComplete.add(() => {
-                    lineNumber.frameName = 'plashka-0' + i + '-open_0.png';
+                    lineNumber.frameName = 'line-' + i + '-bang_0.png';
                 });
 
                 if(model.state('fs')) {
@@ -175,7 +183,7 @@ export let view = (() => {
             model.group('machine', machineGroup);
 
             let numbersContainer = game.add.group();
-            container.addAt(numbersContainer, 0);
+            container.addAt(numbersContainer, 2);
             model.group('numbers', numbersContainer);
 
             let winUp = game.add.group();
@@ -204,9 +212,10 @@ export let view = (() => {
             machineGroup = model.group('machine')
         }) {
             const elSize = config[model.res].elements;
+            let deltaY = (model.desktop) ? 12 : 32;
 
             let someGraphic = game.add.graphics(-elSize.width * 2.5, -elSize.height * 1.5, machineGroup);
-                someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5, elSize.height * 3 + 12);
+                someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5, elSize.height * 3 - deltaY);
             machineGroup.mask = someGraphic;
         },
 
