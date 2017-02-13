@@ -44,30 +44,10 @@ class Door {
         soundController.sound.playSound({ sound: 'illumWin', duration: 1200 });
 
         this.destroyed = true;
-        this.game.add.tween(this.sprite)
-            .to({ alpha: 0 }, 300, 'Linear', true);
-        this.table = this.game.add.sprite(this.x, this.y, 'bonusNumber', `x${parseInt(this.data.CurrentValue, 10)}.png`);
-        this.table.anchor.set(0.6, 0.8);
-        this.table.alpha = 0;
-        this.table.angle = this.game.rnd.integerInRange(-15, 15);
 
-        this.gold = this.game.add.spine(this.x, this.y, 'gold');
-        this.gold.setAnimationByName(1, '1', false);
-        this.gold.alpha = 0;
-
-        if (model.mobile) {
-            this.table.scale.set(0.66);
-            this.gold.scale.set(0.66);
-        }
-
-        this.game.add.tween(this.gold)
-            .to({ alpha: 1 }, 500, 'Linear', true);
-        this.game.add.tween(this.table)
-            .to({ alpha: 1 }, 500, 'Linear', true);
-        this.game.add.tween(this.table)
-            .from({ y: this.table.y + 50 }, 400, 'Linear', true);
-        model.group('bg').add(this.table);
-        model.group('bg').add(this.gold);
+        this._playGold();
+        this._playGlassBoom();
+        this._playTable()
     }
 
     fail() {
@@ -79,7 +59,6 @@ class Door {
             door.tentacle = this.game.add.sprite(door.x - 50, door.y + 5, 'tentacles');
             door.tentacle.anchor.set(0.5);
             door.tentacle.angle = this.game.rnd.integerInRange(-40, 40);
-            console.log(door.tentacle.angle);
             if (model.mobile) {
                 door.tentacle.scale.set(0.66);
                 door.tentacle.angle = this.game.rnd.integerInRange(-30, 30);
@@ -110,6 +89,56 @@ class Door {
                 this.lightBlinking();
             }, 4000);
         }
+    }
+
+    _playGold() {
+        this.gold = this.game.add.sprite(this.x, this.y, 'coins', 'skeleton-2_01.png');
+        this.gold.animations.add('gold', Phaser.Animation.generateFrameNames('skeleton-2_', 1, 44, '.png', 2), 30, false)
+        this.gold.anchor.set(0.5, 0.1);
+        this.gold.alpha = 0;
+        if (model.desktop) this.gold.scale.set(1.5);
+
+        this.gold.play('gold')
+            .onComplete.add(()=>{
+                this.gold.alpha = 0;
+            });
+        this.game.add.tween(this.gold)
+            .to({ alpha: 1 }, 500, 'Linear', true);
+
+        model.group('bg').add(this.gold);
+    }
+
+    _playGlassBoom() {
+        this.glass = this.game.add.sprite(this.x, this.y, 'coins', 'skeleton-1_01.png');
+        this.glass.animations.add('glassBoom', Phaser.Animation.generateFrameNames('skeleton-1_', 1, 19, '.png', 2), 30, false)
+        this.glass.anchor.set(0.5);
+        this.glass.alpha = 0;
+
+
+        this.glass.play('glassBoom')
+            .onComplete.add(()=>{
+                this.glass.alpha = 0;
+            });
+        this.game.add.tween(this.glass)
+            .to({ alpha: 1 }, 500, 'Linear', true);
+
+        model.group('bg').add(this.glass);
+    }
+
+    _playTable() {
+        this.game.add.tween(this.sprite)
+            .to({ alpha: 0 }, 300, 'Linear', true);
+        this.table = this.game.add.sprite(this.x, this.y, 'bonusNumber', `x${parseInt(this.data.CurrentValue, 10)}.png`);
+        this.table.anchor.set(0.6, 0.8);
+        this.table.alpha = 0;
+        this.table.angle = this.game.rnd.integerInRange(-15, 15);
+        if (model.mobile) this.table.scale.set(0.66);
+
+        this.game.add.tween(this.table)
+            .to({ alpha: 1 }, 500, 'Linear', true);
+        this.game.add.tween(this.table)
+            .from({ y: this.table.y + 50 }, 400, 'Linear', true);
+        model.group('bg').add(this.table);
     }
 
 }
@@ -206,13 +235,19 @@ function handleDoorClick() {
                     if (this.data.BonusEnd) {
                         // Переходной экран Big Win
                         soundController.sound.playSound({ sound: 'illumWin' });
-                        this.doors.forEach((door) => {
-                            this.finalGold = this.game.add.spine(door.x, door.y, 'gold');
-                            if (model.mobile) {
-                                this.finalGold.scale.set(0.66);
-                            }
-                            model.group('bg').add(this.finalGold);
-                            this.finalGold.setAnimationByName(1, '2', false);
+                        this.doors.forEach((door) =>{
+                            door.finalGold = this.game.add.sprite(door.x, door.y, 'coins', 'skeleton-2_01.png');
+                            door.finalGold.animations.add('gold', Phaser.Animation.generateFrameNames('skeleton-2_', 1, 44, '.png', 2), 30, false)
+                            door.finalGold.anchor.set(0.5, 0.1);
+                            door.finalGold.alpha = 0;
+                            if (model.desktop) door.finalGold.scale.set(1.5);
+
+                            door.finalGold.play('gold')
+                                .onComplete.add(()=>{
+                                    door.finalGold.alpha = 0;
+                                });
+                            door.game.add.tween(door.finalGold)
+                                .to({ alpha: 1 }, 500, 'Linear', true);
                         });
                         soundController.sound.playSound({ sound: 'win' });
                         bonusView.draw.showWin({ winTextFrame: 'bigW.png' });

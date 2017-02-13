@@ -93,6 +93,7 @@ export class Preload {
         game.load.image('arrowBG', 'other/arrowBG.png');
         game.load.atlasJSONArray('info', 'other/info.png', 'other/info.json');
         game.load.atlasJSONArray('infoMarker', 'other/infoMarker.png', 'other/infoMarker.json');
+        game.load.atlasJSONArray('coins', 'bonus/coins.png', 'bonus/coins.json');
         game.load.image('winLine', 'win/winNumber.png');
         game.load.image('winTotal', 'win/winTable.png');
         game.load.atlasJSONArray('winSplash', 'win/splash.png', 'win/splash.json');
@@ -146,7 +147,6 @@ export class Preload {
         game.load.spine('diverFS', 'spine/sunken.json');
         game.load.spine('chestFS', 'spine/skeleton.json');
         game.load.spine('ink', 'spine/ink.json');
-        game.load.spine('gold', 'spine/gold.json');
 
     }
 

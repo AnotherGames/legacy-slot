@@ -20,8 +20,6 @@ export class Init {
         this.game.plugins.add(new Phaser.Plugin.SaveCPU(this));
         // this.savecpu.init();
 
-        game.camera.flash(0x000000, 500);
-
         view.drawBG();
         // view.drawLogo();
 
