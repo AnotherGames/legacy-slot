@@ -20,9 +20,9 @@ export let view = (() => {
             container.x = x;
             container.top = y;
             const panelBG = game.add.sprite(1, deltaY, 'panelBG', 'panelBGgreen.png', container);
-            const panel = game.add.sprite(1, deltaY, frameName, null, container);
+            const panel = game.add.sprite(40, deltaY, frameName, null, container);
 
-            let convert = game.add.sprite(60, 150, 'deskButtons', 'switcher.png', container);
+            let convert = game.add.sprite(80, 150, 'deskButtons', 'switcher.png', container);
             convert.anchor.set(0.5);
             convert.inputEnabled = true;
             convert.events.onInputDown.add(() => {
@@ -76,19 +76,6 @@ export let view = (() => {
             return spinButtonDesk;
         },
 
-        StopButton: function({
-            game = model.el('game'),
-            x = model.group('panel').width / 2,
-            y = 143,
-            container = model.group('panel')
-        }) {
-            let stopButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'stopOn.png', 'stop.png', 'stopOn.png', null, container);
-            stopButtonDesk.anchor.set(0.5);
-            stopButtonDesk.visible = false;
-            model.el('stopButtonDesk', stopButtonDesk);
-            return stopButtonDesk;
-        },
-
         AutoButton: function({
             game = model.el('game'),
             container = model.group('panel'),
@@ -113,10 +100,23 @@ export let view = (() => {
             return maxBetButtonDesk;
         },
 
+        StopButton: function({
+            game = model.el('game'),
+            x = model.group('panel').width / 2,
+            y = 143,
+            container = model.group('panel')
+        }) {
+            let stopButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'stopOn.png', 'stop.png', 'stopOn.png', null, container);
+            stopButtonDesk.anchor.set(0.5);
+            stopButtonDesk.visible = false;
+            model.el('stopButtonDesk', stopButtonDesk);
+            return stopButtonDesk;
+        },
+
         PlusButton: function({
             game = model.el('game'),
             container = model.group('panel'),
-            x = 383,
+            x = 423,
             y = 126,
         }) {
             let plusButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'plusOn.png', 'plus.png', 'plusOn.png', null, container);
@@ -126,7 +126,7 @@ export let view = (() => {
         MinusButton: function({
             game = model.el('game'),
             container = model.group('panel'),
-            x = 260,
+            x = 300,
             y = 126
         }) {
             let minusButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'minusOn.png', 'minus.png', 'minusOn.png', null, container);
