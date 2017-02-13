@@ -90,9 +90,12 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('main')
         }) {
-            // let gameBG = game.add.sprite(0, 10, 'gameBG', null, container);
-            //     gameBG.anchor.set(0.5);
-            // model.el('gameBG', gameBG);
+            const elSize = config[model.res].elements;
+            let deltaY = (model.desktop) ? 28 : 18;
+
+            let gameBG = game.add.graphics(-elSize.width * 2.5, -elSize.height * 1.5, container);
+                gameBG.beginFill(0x000000, 0.4).drawRect(0, 0, elSize.width * 5, elSize.height * 3 + deltaY);
+            model.el('gameBG', gameBG);
 
             let gameMachine = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachine', null, container);
                 gameMachine.anchor.set(0.5);
@@ -134,23 +137,34 @@ export let view = (() => {
 
                 lineNumber.inputEnabled = true;
                 lineNumber.input.priorityID = 2;
-                lineNumber.input.pixelPerfectOver = 1;
+                lineNumber.hitArea = new Phaser.Circle(0, 0, 50);
 
-                lineNumber.events.onInputOver.add(() => {
-                  setTimeout(() => {
-                    if (lineNumber.lineShape) {
-                        lineNumber.lineShape.destroy();
-                    }
-                  }, 4000);
-                    lineNumber.lineShape = this.lineShape(lineNumber.name);
-                });
+                if (model.desktop) {
+                    lineNumber.events.onInputOver.add(() => {
+                        if (lineNumber.lineShape) {
+                            lineNumber.lineShape.destroy();
+                        }
+                        lineNumber.lineShape = this.lineShape(lineNumber.name);
+                    });
 
-                lineNumber.events.onInputOut.add(() => {
-                    if (lineNumber.lineShape) {
-                        lineNumber.lineShape.destroy();
-                    }
-                });
-
+                    lineNumber.events.onInputOut.add(() => {
+                        if (lineNumber.lineShape) {
+                            lineNumber.lineShape.destroy();
+                        }
+                    });
+                } else {
+                    lineNumber.events.onInputDown.add(() => {
+                        if (lineNumber.lineShape) {
+                            lineNumber.lineShape.destroy();
+                        }
+                        lineNumber.lineShape = this.lineShape(lineNumber.name);
+                        game.time.events.add(4000, () => {
+                            if (lineNumber.lineShape) {
+                                lineNumber.lineShape.destroy();
+                            }
+                        });
+                    });
+                }
                 lineNumbersArr.push(lineNumber);
             }
 
@@ -163,9 +177,9 @@ export let view = (() => {
            let line = model.data('lines')[number - 1];
            let elSize = config[model.res].elements;
            let lineShape = game.add.graphics(0, 0, container);
-           let y = (model.desktop) ? 110 : 80;
+           let y = (model.desktop) ? 60 : 80;
            lineShape
-               .lineStyle(4, 0xe1b249, 0.8)
+               .lineStyle(4, 0xf48725, 0.8)
                .moveTo((line[0].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[0].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + y)
                .lineTo((line[1].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[1].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + y)
                .lineTo((line[2].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[2].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + y)
@@ -179,19 +193,19 @@ export let view = (() => {
             container = model.group('main')
         }) {
             let machineGroup = game.add.group();
-            container.addAt(machineGroup, 1);
+            container.addAt(machineGroup, 2);
             model.group('machine', machineGroup);
 
             let numbersContainer = game.add.group();
-            container.addAt(numbersContainer, 2);
+            container.addAt(numbersContainer, 3);
             model.group('numbers', numbersContainer);
 
             let winUp = game.add.group();
-            container.addAt(winUp, 3);
+            container.addAt(winUp, 4);
             model.group('winUp', winUp);
 
             let winTop = game.add.group();
-            container.addAt(winTop, 4);
+            container.addAt(winTop, 5);
             model.group('winTop', winTop);
 
             machineGroup.glistaLightContainer = game.add.group();

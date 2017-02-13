@@ -17,22 +17,27 @@ export let controller = (() => {
 
         let spinButton = view.draw.SpinButton({});
             spinButton.inputEnabled = true;
+            spinButton.input.priorityID = 3;
             spinButton.events.onInputDown.add(handle.spinButton);
 
         let autoButton = view.draw.AutoButton({});
             autoButton.inputEnabled = true;
+            autoButton.input.priorityID = 3;
             autoButton.events.onInputDown.add(handle.autoButton);
 
         let betButton = view.draw.BetButton({});
             betButton.inputEnabled = true;
+            betButton.input.priorityID = 3;
             betButton.events.onInputDown.add(handle.betButton);
 
         let menuButton = view.draw.MenuButton({});
             menuButton.inputEnabled = true;
+            menuButton.input.priorityID = 3;
             menuButton.events.onInputDown.add(handle.menuButton);
 
         let soundButton = view.draw.SoundButton({});
             soundButton.inputEnabled = true;
+            soundButton.input.priorityID = 3;
             soundButton.events.onInputDown.add(handle.soundButton);
 
         setButtonsX();
