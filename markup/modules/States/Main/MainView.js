@@ -91,7 +91,7 @@ export let view = (() => {
             container = model.group('main')
         }) {
             const elSize = config[model.res].elements;
-            let deltaY = (model.desktop) ? 28 : 18;
+            let deltaY = (model.desktop) ? 30 : 10;
 
             let gameBG = game.add.graphics(-elSize.width * 2.5, -elSize.height * 1.5, container);
                 gameBG.beginFill(0x000000, 0.4).drawRect(0, 0, elSize.width * 5, elSize.height * 3 + deltaY);
@@ -226,10 +226,10 @@ export let view = (() => {
             machineGroup = model.group('machine')
         }) {
             const elSize = config[model.res].elements;
-            let deltaY = (model.desktop) ? 12 : 32;
+            let deltaY = (model.desktop) ? 25 : 0;
 
             let someGraphic = game.add.graphics(-elSize.width * 2.5, -elSize.height * 1.5, machineGroup);
-                someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5, elSize.height * 3 - deltaY);
+                someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5, elSize.height * 3 + deltaY);
             machineGroup.mask = someGraphic;
         },
 

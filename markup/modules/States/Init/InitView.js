@@ -11,6 +11,10 @@ export let view = (() => {
             initBG = game.add.spine(0, 0, 'fon');
                 initBG.setAnimationByName(1, 'show', false);
                 initBG.addAnimationByName(1, 'move', true);
+
+                // let bottle = game.add.spine(game.world.centerX, game.world.centerY, 'bottle');
+                //     bottle.setAnimationByName(1, 'idle_n_g', true);
+                // model.el('bottle', bottle);
         } else {
             initBG = game.add.tileSprite(0, 0, game.width, game.height, 'gradientLine');
 

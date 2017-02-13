@@ -24,6 +24,22 @@ export let controller = (() => {
         view.draw.FSDesktopBalance({});
     }
 
+    function changeCoinsToCash() {
+        if (model.state('balance') == 'cash') {
+            model.el('coinCash').visible = false;
+            model.el('betCash').visible = false;
+            model.el('coinSum').visible = true;
+            model.el('betSum').visible = true;
+            model.state('balance', 'coins');
+        } else {
+            model.el('coinSum').visible = false;
+            model.el('betSum').visible = false;
+            model.el('coinCash').visible = true;
+            model.el('betCash').visible = true;
+            model.state('balance', 'cash');
+        }
+    }
+
     function updateBalance() {
         if (model.state('fs')) {
             if (model.mobile) {
@@ -51,7 +67,8 @@ export let controller = (() => {
         initDesktop,
         initFSMobile,
         initFSDesktop,
-        updateBalance
+        updateBalance,
+        changeCoinsToCash
     };
 
 })();

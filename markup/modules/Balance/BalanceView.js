@@ -100,11 +100,17 @@ export let view = (() => {
             sumStyle = {font: '27px Helvetica, Arial', fill: '#ffffff', align: 'center'},
             valueStyle = {font: '27px Helvetica, Arial', fill: '#ffffff', align: 'center'},
             y = 155,
-            x = [150, 340, 907, 1120]
+            x = [190, 380, 947, 1160]
         }) {
 
             let coinSum = game.add.text(x[3], y, `${coinSumValue.toFixed(0)}`, sumStyle, container);
             let betSum = game.add.text(x[0], y, `${betSumValue.toFixed(0)}`, sumStyle, container);
+
+
+            if (model.state('balance') == 'cash') {
+                coinSum.visible = betSum.visible = false;
+            }
+
 
             let coinValue = game.add.text(x[2], y, `${coinValueAmount}`, valueStyle, container);
             let betValue = game.add.text(x[1], y, `${betValueAmount}`, valueStyle, container);
