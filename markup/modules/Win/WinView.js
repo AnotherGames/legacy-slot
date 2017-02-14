@@ -69,9 +69,6 @@ export let view = (() => {
             winSplashLeft.animations.play('win');
             winSplashRight.animations.play('win');
 
-            // winSplashLeft.openedTable = true;
-            // winSplashRight.openedTable = true;
-
         },
 
         WinNumber: function ({number}) {
@@ -83,7 +80,7 @@ export let view = (() => {
             number,
             amount,
             alpha = false,
-            finalScale = (model.desktop) ? 1.3 : 1.5,
+            finalScale = (model.desktop) ? 1.1 : 1.2,
             wheels = model.el('wheels'),
             upWheels = model.el('upWheels'),
             game = model.el('game')

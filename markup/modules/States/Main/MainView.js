@@ -91,10 +91,10 @@ export let view = (() => {
             container = model.group('main')
         }) {
             const elSize = config[model.res].elements;
-            let deltaY = (model.desktop) ? 30 : 10;
+            let deltaY = (model.desktop) ? 20 : 10;
 
             let gameBG = game.add.graphics(-elSize.width * 2.5, -elSize.height * 1.5, container);
-                gameBG.beginFill(0x000000, 0.4).drawRect(0, 0, elSize.width * 5, elSize.height * 3 + deltaY);
+                gameBG.beginFill(0x000000, 0.6).drawRect(0, 0, elSize.width * 5, elSize.height * 3 + deltaY);
             model.el('gameBG', gameBG);
 
             let gameMachine = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachine', null, container);
@@ -114,7 +114,7 @@ export let view = (() => {
             side = 'left'
         }){
             let x = (side == 'right') ? gameMachine.right - 11 : gameMachine.left + 11;
-            let deltaY = (model.desktop) ? 40 : 80;
+            let deltaY = (model.desktop) ? 70 : 60;
             let lineNumbersArr = [];
 
             for (let i = 1; i < 11; i++) {
@@ -226,10 +226,10 @@ export let view = (() => {
             machineGroup = model.group('machine')
         }) {
             const elSize = config[model.res].elements;
-            let deltaY = (model.desktop) ? 25 : 0;
+            let deltaY = (model.desktop) ? 10 : 0;
 
-            let someGraphic = game.add.graphics(-elSize.width * 2.5, -elSize.height * 1.5, machineGroup);
-                someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5, elSize.height * 3 + deltaY);
+            let someGraphic = game.add.graphics(-elSize.width * 2.5, -elSize.height * 1.5 + deltaY, machineGroup);
+                someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5, elSize.height * 3);
             machineGroup.mask = someGraphic;
         },
 

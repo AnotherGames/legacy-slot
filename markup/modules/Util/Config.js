@@ -2,7 +2,7 @@ export let config = {
     fadeinMusicTime: 5000,
     countMeterTime: 2500,
     autoTransitionTime: 10000,
-    symbolsCount: 12,
+    symbolsCount: 20,
     maxMulti: 7,
     numOfInfoDots: 9,
     wheel: {
@@ -25,7 +25,7 @@ export let config = {
         },
         gameMachine: {
             x: 0,
-            y: 30
+            y: 10
         },
         elements: {
             width: 256,

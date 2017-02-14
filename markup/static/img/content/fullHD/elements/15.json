@@ -1,7 +1,7 @@
 {"frames": [
 
 {
-	"filename": "9-n-00.png",
+	"filename": "15-n-00.png",
 	"frame": {"x":1,"y":1,"w":111,"h":137},
 	"rotated": false,
 	"trimmed": true,
@@ -11,10 +11,10 @@
 "meta": {
 	"app": "http://www.codeandweb.com/texturepacker",
 	"version": "1.0",
-	"image": "9.png",
+	"image": "15.png",
 	"format": "RGBA8888",
-	"size": {"w":113,"h":139},
+	"size": {"w":128,"h":256},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:74dfe7e0263f8b189be8819b26375891:4bf4b56cd2ff3f0f43f09a7e253e4280:005cfeeecdb881bde464c140babce266$"
+	"smartupdate": "$TexturePacker:SmartUpdate:7a31522fe82e899d7f6f9c926d7365a0:8594e72142003d224508c66e4ca70abb:a3451ac6e1d84d9cec42d69886a3113e$"
 }
 }

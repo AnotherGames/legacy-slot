@@ -147,7 +147,15 @@ export class Preload {
         game.load.atlasJSONArray('10', 'elements/10.png', 'elements/10.json');
         game.load.atlasJSONArray('11', 'elements/11.png', 'elements/11.json');
         game.load.atlasJSONArray('12', 'elements/12.png', 'elements/12.json');
-        game.load.atlasJSONArray('coin', 'elements/coin.png', 'elements/coin.json');
+        game.load.atlasJSONArray('13', 'elements/13.png', 'elements/13.json');
+        game.load.atlasJSONArray('14', 'elements/14.png', 'elements/14.json');
+        game.load.atlasJSONArray('15', 'elements/15.png', 'elements/15.json');
+        game.load.atlasJSONArray('16', 'elements/16.png', 'elements/16.json');
+        game.load.atlasJSONArray('17', 'elements/17.png', 'elements/17.json');
+        game.load.atlasJSONArray('18', 'elements/18.png', 'elements/18.json');
+        game.load.atlasJSONArray('19', 'elements/19.png', 'elements/19.json');
+        game.load.atlasJSONArray('20', 'elements/20.png', 'elements/20.json');
+        // game.load.atlasJSONArray('coin', 'elements/coin.png', 'elements/coin.json');
     }
 
     hidePreloader() {

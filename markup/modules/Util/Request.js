@@ -15,9 +15,7 @@ export let request = (() => {
     }
 
     const mode = {
-        // normal: 'chibiroot1',
-        // normal: 'chibishu1',
-        normal: 'chibi2',
+        normal: 'candyland2',
         fsBonus: 'chibifs1'
     };
 

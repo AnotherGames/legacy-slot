@@ -185,7 +185,7 @@
 	"sourceSize": {"w":180,"h":130}
 },
 {
-	"filename": "switcher.png",
+	"filename": "switcherOn.png",
 	"frame": {"x":445,"y":400,"w":66,"h":70},
 	"rotated": false,
 	"trimmed": true,
@@ -193,7 +193,7 @@
 	"sourceSize": {"w":70,"h":70}
 },
 {
-	"filename": "switcher2.png",
+	"filename": "switcher.png",
 	"frame": {"x":83,"y":478,"w":70,"h":70},
 	"rotated": false,
 	"trimmed": false,

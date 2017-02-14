@@ -19,16 +19,14 @@ export class Element {
                 sprite.anchor.set(0.5);
                 sprite.visible = false;
 
-            // // Опустить немного человечков
-            // if(i == 2
+            // Опустить немного бутылку
+            // if (i == 2
             // || i == 4
             // || i == 6
             // || i == 8) {
             //     sprite.y += 10;
             // }
-            // if(i == 12) {
-            //     sprite.x += 10;
-            // }
+
             this.sprites.push(sprite);
 
             // Каждому спрайту добавляем необходимые анимации
@@ -116,15 +114,33 @@ export class Element {
             case 8:
                 this.addAnimation(sprite, { el: 8, n: 29, w: 29 });
                 break;
-            // case 10:
-            //     this.addBottleAnimation(index);
-            //     break;
-            // case 13:
-            //     this.addBottleAnimation(index);
-            //     break;
-            // case 16:
-            //     this.addBottleAnimation(index);
-            //     break;
+            case 9:
+                this.addBottleAnimation(sprite, { el: 9 });
+                break;
+            case 10:
+                this.addBottleAnimation(sprite, { el: 10 });
+                break;
+            case 11:
+                this.addBottleAnimation(sprite, { el: 11 });
+                break;
+            case 12:
+                this.addBottleAnimation(sprite, { el: 12 });
+                break;
+            case 13:
+                this.addBottleAnimation(sprite, { el: 13 });
+                break;
+            case 14:
+                this.addBottleAnimation(sprite, { el: 14 });
+                break;
+            case 15:
+                this.addBottleAnimation(sprite, { el: 15 });
+                break;
+            case 16:
+                this.addBottleAnimation(sprite, { el: 16 });
+                break;
+            case 17:
+                this.addBottleAnimation(sprite, { el: 17 });
+                break;
             case 18:
                 this.addAnimation(sprite, { el: 18, n: 29, w: 29 });
                 break;
@@ -138,6 +154,12 @@ export class Element {
                 break;
 
         }
+    }
+
+    addBottleAnimation(sprite, options) {
+        sprite.animations.add(`${options.el}-n`, [`${options.el}-n-00.png`]);
+        sprite.animations.add(`${options.el}-b`, [`${options.el}-n-00.png`]);
+        sprite.animations.add(`${options.el}-w`, [`${options.el}-n-00.png`]);
     }
 
     addAnimation(sprite, options) {

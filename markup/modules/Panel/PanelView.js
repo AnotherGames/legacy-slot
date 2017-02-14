@@ -1,9 +1,6 @@
-import {
-    model
-} from 'modules/Model/Model';
-import {
-    config
-} from 'modules/Util/Config';
+import { model } from 'modules/Model/Model';
+import { config } from 'modules/Util/Config';
+import { controller as balanceController } from 'modules/Balance/BalanceController';
 
 export let view = (() => {
 
@@ -22,11 +19,11 @@ export let view = (() => {
             const panelBG = game.add.sprite(1, deltaY, 'panelBG', 'panelBGgreen.png', container);
             const panel = game.add.sprite(40, deltaY, frameName, null, container);
 
-            let convert = game.add.sprite(80, 150, 'deskButtons', 'switcher.png', container);
+            let convert =game.add.button(80, 150, 'deskButtons', null, null, 'switcher.png', 'switcher.png', null, null, container);
             convert.anchor.set(0.5);
-            convert.inputEnabled = true;
             convert.events.onInputDown.add(() => {
-                // balanceController.changeCoinsToCash();
+                console.log('i am here');
+                balanceController.changeCoinsToCash();
             });
 
             container.pivot.set(panelBG.width / 2, 0);

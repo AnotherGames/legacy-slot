@@ -144,6 +144,7 @@ export let model = (() => {
         model.state('menuOpened', false);
         model.state('isFirstAutoChangeAnimBG', true);
         model.state('maxFsMultiplier', false);
+        model.state('balance', 'coins');
     }
 
     function initSettings(settings) {
