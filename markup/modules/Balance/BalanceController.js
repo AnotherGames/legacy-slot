@@ -29,18 +29,21 @@ export let controller = (() => {
     }
 
     function changeCoinsToCash() {
+        let convertSign = model.el('convertSign');
         if (model.state('balance') == 'cash') {
             model.el('coinCash').visible = false;
             model.el('betCash').visible = false;
             model.el('coinSum').visible = true;
             model.el('betSum').visible = true;
             model.state('balance', 'coins');
+            convertSign.frameName = 'switcher.png';
         } else {
             model.el('coinSum').visible = false;
             model.el('betSum').visible = false;
             model.el('coinCash').visible = true;
             model.el('betCash').visible = true;
             model.state('balance', 'cash');
+            convertSign.frameName = 'switcherOn.png';
         }
     }
 

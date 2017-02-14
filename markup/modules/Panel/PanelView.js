@@ -22,9 +22,10 @@ export let view = (() => {
             let convert =game.add.button(80, 150, 'deskButtons', null, null, 'switcher.png', 'switcher.png', null, null, container);
             convert.anchor.set(0.5);
             convert.events.onInputDown.add(() => {
-                console.log('i am here');
                 balanceController.changeCoinsToCash();
             });
+
+            model.el('convertSign', convert);
 
             container.pivot.set(panelBG.width / 2, 0);
             return panelBG;

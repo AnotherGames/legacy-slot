@@ -81,8 +81,11 @@ export class Preload {
         game.load.image('logoGM', 'game/logoGM.png');
         game.load.image('cloud', 'bg/cloud.png');
         game.load.image('shine', 'bg/shine.png');
-        game.load.image('aim', 'other/aim.png');
-        game.load.atlasJSONArray('shuriken', 'other/shuriken.png', 'other/shuriken.json');
+        game.load.image('confetti1', 'bg/confetti1.png');
+        game.load.image('confetti2', 'bg/confetti2.png');
+        game.load.image('confetti3', 'bg/confetti3.png');
+        // game.load.image('aim', 'other/aim.png');
+        // game.load.atlasJSONArray('shuriken', 'other/shuriken.png', 'other/shuriken.json');
         game.load.image('closed', 'other/closed.png');
         game.load.image('coinGold', 'other/coinGold.png');
         game.load.image('ar', 'other/ar.png');

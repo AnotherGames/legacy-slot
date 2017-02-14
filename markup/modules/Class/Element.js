@@ -37,7 +37,7 @@ export class Element {
         this.active = 1;
         this.activeSprite = this.sprites[0];
         this.activeSprite.visible = true;
-        this.activeSprite.animations.play('1-n');
+        this.activeSprite.animations.play('1-n', 20, true);
     }
 
     play(animation, loop = true, fps = 20) {

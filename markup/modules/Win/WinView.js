@@ -42,6 +42,11 @@ export let view = (() => {
             style = {font: '90px Helvetice, Arial', fill: '#e1b249', align: 'center', stroke: '#000000', strokeThickness: 2}
         }) {
             if (winTotalData === 0) return;
+
+            // if (model.state('balance') == 'cash') {
+            //     winTotalData = `${model.balance('currencySymbol')} ${(model.balance('coinValue') * winTotalData).toFixed(2)}`;
+            // }
+
             let winTotal = game.add.sprite(0, 0, 'winTotal', null, container);
                 winTotal.anchor.set(0.5);
 

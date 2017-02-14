@@ -86,6 +86,14 @@ export let view = (() => {
 
         },
 
+        addCConfetti: function ({
+            game = model.el('game'),
+            container = model.group('bg')
+        }) {
+            
+
+        },
+
         mainContainer: function ({
             game = model.el('game'),
             container = model.group('main')
