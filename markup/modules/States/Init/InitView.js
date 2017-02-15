@@ -8,7 +8,7 @@ export let view = (() => {
         let initBG;
 
         if (model.desktop) {
-            initBG = game.add.spine(0, 0, 'fon');
+            initBG = game.add.spine(game.world.centerX, game.world.centerY, 'fon');
                 initBG.setAnimationByName(1, 'show', false);
                 initBG.addAnimationByName(1, 'move', true);
 

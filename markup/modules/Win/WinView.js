@@ -50,8 +50,9 @@ export let view = (() => {
             let winTotal = game.add.sprite(0, 0, 'winTotal', null, container);
                 winTotal.anchor.set(0.5);
 
-            let winTotalText = game.add.bitmapText(0, 25, 'numbersFont', winTotalData, 75, container);
+            let winTotalText = game.add.bitmapText(40, 0, 'textOrange', winTotalData + '', 100, container);
                 winTotalText.anchor.set(0.5);
+                console.log(winTotalData);
         },
 
         WinSplash: function ({
@@ -235,7 +236,7 @@ export let view = (() => {
                     y = 180 * (currentLineY + 0.5) + 135 - gameMachine.height / 2 - 25;
                 } else {
                     x = 256 * (countValue - 0.5) + 140 - gameMachine.width / 2;
-                    y = 240 * (currentLineY + 0.5) + 170 - gameMachine.height / 2;
+                    y = 240 * (currentLineY + 0.5) + 140 - gameMachine.height / 2;
                 }
             }
             // Рассчитываем если скаттер
@@ -260,27 +261,27 @@ export let view = (() => {
                     y = 180 * (lastElement + 0.5) + 135 - gameMachine.height / 2 - 25;
                 } else {
                     x = 256 * (lastWheel + 0.5) + 140 - gameMachine.width / 2;
-                    y = 240 * (lastElement + 0.5) + 170 - gameMachine.height / 2 - 25;
+                    y = 240 * (lastElement + 0.5) + 140 - gameMachine.height / 2 - 25;
                 }
             }
 
             // Рисуем саму табличку и текст в зависимости от количества символов
-            let winBG = game.add.sprite(x - 8, y + 5, 'winLine', null, container);
+            let winBG = game.add.sprite(x - 5, y + 5, 'winLine', null, container);
                 winBG.anchor.set(0.5);
             let font;
             if (winValue > 999) {
-                font = '15px Arial, Helvetica';
+                font = '13px Arial, Helvetica';
             } else if (winValue > 99) {
-                font = '18px Arial, Helvetica';
+                font = '16px Arial, Helvetica';
             } else {
-                font = '25px Arial, Helvetica';
+                font = '22px Arial, Helvetica';
             }
-            let text = game.add.text(x - 7, y + 9, winValue, {font: font}, container);
+            let text = game.add.text(x - 5, y + 6, winValue, {font: font}, container);
                 text.anchor.set(0.5);
 
             let grd = text.context.createLinearGradient(0, 0, 0, text.canvas.height);
-            grd.addColorStop(0, '#fef900');
-            grd.addColorStop(1, '#f8a600');
+            grd.addColorStop(0, '#ffffff');
+            grd.addColorStop(1, '#eeeeee');
             text.fill = grd;
 
         },

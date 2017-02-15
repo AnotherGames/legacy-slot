@@ -19,8 +19,10 @@ export let view = (() => {
             const panelBG = game.add.sprite(1, deltaY, 'panelBG', 'panelBGgreen.png', container);
             const panel = game.add.sprite(40, deltaY, frameName, null, container);
 
-            let convert =game.add.button(80, 150, 'deskButtons', null, null, 'switcher.png', 'switcher.png', null, null, container);
+            // let convert =game.add.button(80, 150, 'deskButtons', null, null, 'switcher.png', 'switcher.png', null, null, container);
+            let convert = game.add.sprite(80, 150, 'switcher', 'switch1.png', container);
             convert.anchor.set(0.5);
+            convert.inputEnabled = true;
             convert.events.onInputDown.add(() => {
                 balanceController.changeCoinsToCash();
             });

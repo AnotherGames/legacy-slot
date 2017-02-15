@@ -33,9 +33,13 @@ export let view = (() => {
         }) {
             let mainBG;
             if (model.desktop) {
-                mainBG = game.add.spine(0, 0, 'fon');
-                    mainBG.setAnimationByName(1, 'move2', true);
+                mainBG = game.add.spine(game.world.centerX, game.world.centerY, 'fon');
+                    mainBG.setAnimationByName(0, 'move2', true);
                     container.add(mainBG);
+                model.el('mainBG', mainBG);
+                // game.time.events.add(7000, () => {
+                //     draw._lettersFall({});
+                // });
             } else {
                 mainBG = game.add.tileSprite(0, 0, game.width, game.height, 'gradientLine', null, container);
 
@@ -46,7 +50,50 @@ export let view = (() => {
 
         },
 
-        addCloud: function({
+        _lettersFall: function ({
+            game = model.el('game'),
+            container = model.group('bg')
+        }) {
+            console.log('letters fall');
+            let mainBG = model.el('mainBG');
+            console.log(mainBG);
+            mainBG.addAnimationByName(0, 'move5', false);
+            mainBG.addAnimationByName(0, 'move2', true);
+
+            let rnd = game.rnd.integerInRange(15, 20);
+            game.time.events.add(rnd * 1000, () => {
+                draw._lettersFall({});
+            });
+        },
+
+        addBalloons: function ({
+            game = model.el('game'),
+            container = model.group('bg')
+        }) {
+            let balloons = game.add.sprite(100, game.height + 500, 'balloons', null, container);
+            balloons.anchor.set(0.5);
+
+            let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
+            console.log(side);
+            let deltaX;
+            if (side == 'left') {
+                balloons.x = game.rnd.integerInRange(100, 400);
+                deltaX = balloons.x + 300;
+            } else {
+                let random = game.rnd.integerInRange(7, 9) / 10;
+                balloons.x = game.width * random;
+                deltaX = balloons.x - 300;
+            }
+
+            game.add.tween(balloons).to({y: -500, x: deltaX}, 10000, 'Linear', true);
+
+            let rnd = game.rnd.integerInRange(18, 23);
+            game.time.events.add(rnd * 1000, () => {
+                draw.addBalloons({});
+            });
+        },
+
+        addCloud: function ({
             x = model.el('game').rnd.integerInRange(0, model.el('game').width),
             container = model.group('bg')
         }) {
@@ -86,12 +133,69 @@ export let view = (() => {
 
         },
 
-        addCConfetti: function ({
-            game = model.el('game'),
-            container = model.group('bg')
-        }) {
-            
+        // addCConfetti: function ({
+        //     game = model.el('game'),
+        //     container = model.group('bg')
+        // }) {
+        //     let back_emitter = game.add.emitter(game.width / 2, -500, 100);
+        //         back_emitter.makeParticles('confetti1');
+        //         back_emitter.maxParticleScale = 0.6;
+        //         back_emitter.minParticleScale = 0.2;
+        //         back_emitter.setYSpeed(20, 100);
+        //         back_emitter.gravity = 0;
+        //         back_emitter.width = game.world.width * 1.5;
+        //         back_emitter.minRotation = -10;
+        //         back_emitter.maxRotation = 10;
+        //
+        //     let mid_emitter = game.add.emitter(game.width / 2, -500, 100);
+        //         mid_emitter.makeParticles('confetti2');
+        //         mid_emitter.maxParticleScale = 1.2;
+        //         mid_emitter.minParticleScale = 0.8;
+        //         mid_emitter.setYSpeed(50, 150);
+        //         mid_emitter.gravity = 5;
+        //         mid_emitter.width = game.world.width * 1.5;
+        //         mid_emitter.minRotation = -10;
+        //         mid_emitter.maxRotation = 10;
+        //
+        //     let front_emitter = game.add.emitter(game.width / 2, -500, 100);
+        //         front_emitter.makeParticles('confetti3');
+        //         front_emitter.maxParticleScale = 1;
+        //         front_emitter.minParticleScale = 0.5;
+        //         front_emitter.setYSpeed(100, 200);
+        //         front_emitter.gravity = 10;
+        //         front_emitter.width = game.world.width * 1.5;
+        //         front_emitter.minRotation = -10;
+        //         front_emitter.maxRotation = 10;
+        //
+        //     container.add(back_emitter);
+        //     container.add(mid_emitter);
+        //     container.add(front_emitter);
+        //
+        //     back_emitter.start(false, 20000, 1000);
+        //     mid_emitter.start(false, 25000, 1000);
+        //     front_emitter.start(false, 30000, 1000);
+        //
+        // },
 
+        addBurst ({
+                game = model.el('game'),
+                container = model.group('bg')
+        }) {
+            let emitter = game.add.emitter(game.world.centerX, game.world.centerY + 100, 20);
+            model.el('emitter', emitter);
+
+            emitter.makeParticles('trash', [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19], 100, true, true);
+            container.add(emitter);
+
+            emitter.minParticleSpeed.setTo(-1200, -1300);
+            emitter.maxParticleSpeed.setTo(1200, -1400);
+            emitter.minParticleScale = 0.4;
+            emitter.maxParticleScale = 0.8;
+            emitter.gravity = 150;
+            emitter.bounce.setTo(0.5, 0.5);
+            emitter.angularDrag = 30;
+
+            emitter.start(false, 3000, 100);
         },
 
         mainContainer: function ({

@@ -51,6 +51,9 @@ export class Main {
 
         // Отрисовуем основной контейнер
         mainView.draw.mainBG({});
+        mainView.draw.addBalloons({});
+        // mainView.draw.addCConfetti({});
+        // mainView.draw.addBurst({});
         mainView.draw.mainContainer({});
         mainView.draw.machineContainer({});
         mainView.draw.lineNumbers({side: 'left'})
@@ -112,6 +115,9 @@ export class Main {
         if (model.desktop) {
         let fullScreeButton = model.el('fullScreeButton');
             fullScreeButton.frameName = (game.scale.isFullScreen || window.innerHeight == screen.height) ? 'fullscreenOff.png' : 'fullscreen.png';
+        }
+        if (model.el('emitter')) {
+            game.physics.arcade.collide(model.el('emitter'));
         }
     }
 

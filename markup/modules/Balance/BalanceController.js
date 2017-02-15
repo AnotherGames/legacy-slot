@@ -29,6 +29,7 @@ export let controller = (() => {
     }
 
     function changeCoinsToCash() {
+        let game = model.el('game');
         let convertSign = model.el('convertSign');
         if (model.state('balance') == 'cash') {
             model.el('coinCash').visible = false;
@@ -36,14 +37,20 @@ export let controller = (() => {
             model.el('coinSum').visible = true;
             model.el('betSum').visible = true;
             model.state('balance', 'coins');
-            convertSign.frameName = 'switcher.png';
+            convertSign.frameName = 'switch4.png';
+            game.time.events.add(500, () => {
+                convertSign.frameName = 'switch1.png';
+            })
         } else {
             model.el('coinSum').visible = false;
             model.el('betSum').visible = false;
             model.el('coinCash').visible = true;
             model.el('betCash').visible = true;
             model.state('balance', 'cash');
-            convertSign.frameName = 'switcherOn.png';
+            convertSign.frameName = 'switch2.png';
+            game.time.events.add(500, () => {
+                convertSign.frameName = 'switch3.png';
+            })
         }
     }
 
