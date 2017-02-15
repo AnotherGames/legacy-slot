@@ -52,7 +52,9 @@ export class Main {
         // Отрисовуем основной контейнер
         mainView.draw.mainBG({});
         mainView.draw.addBalloons({});
-        // mainView.draw.addCConfetti({});
+        game.time.events.add(7000, () => {
+            mainView.draw.addConfetti({});
+        });
         // mainView.draw.addBurst({});
         mainView.draw.mainContainer({});
         mainView.draw.machineContainer({});

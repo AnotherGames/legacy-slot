@@ -74,7 +74,6 @@ export let view = (() => {
             balloons.anchor.set(0.5);
 
             let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
-            console.log(side);
             let deltaX;
             if (side == 'left') {
                 balloons.x = game.rnd.integerInRange(100, 400);
@@ -131,6 +130,33 @@ export let view = (() => {
                 draw.addCloud({});
             });
 
+        },
+
+        addConfetti: function ({
+            game = model.el('game'),
+            container = model.group('bg')
+        }) {
+            let i = game.rnd.integerInRange(1, 3);
+            let confetti = game.add.sprite(100, -500, `confetti${i}`, null, container);
+            confetti.anchor.set(0.5);
+
+            let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
+            let deltaX;
+            if (side == 'left') {
+                confetti.x = game.rnd.integerInRange(100, 600);
+                deltaX = confetti.x + 300;
+            } else {
+                let random = game.rnd.integerInRange(6, 9) / 10;
+                confetti.x = game.width * random;
+                deltaX = confetti.x - 300;
+            }
+
+            game.add.tween(confetti).to({y: game.height + 500, x: deltaX}, 10000, 'Linear', true, 2000);
+
+            let rnd = game.rnd.integerInRange(10, 15);
+            game.time.events.add(rnd * 1000, () => {
+                draw.addConfetti({});
+            });
         },
 
         // addCConfetti: function ({
