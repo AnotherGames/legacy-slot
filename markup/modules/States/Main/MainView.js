@@ -207,16 +207,16 @@ export let view = (() => {
 
             let y = (model.desktop) ?
                 [252, 297, 342, 387, 495, 543, 585, 735, 780, 825, 871, 252, 297, 342, 387, 543, 590, 637, 735, 780, 825, 870] :
-                [68, 103, 138, 173, 285, 320, 355, 435, 470, 505, 540, 68, 103, 138, 173, 285, 320, 355, 435, 470, 505, 540]
+                [68, 103, 138, 173, 285, 320, 355, 435, 470, 505, 540, 68, 103, 138, 173, 285, 320, 355, 435, 470, 505, 540];
 
-            let numbs = [4, 6, 18, 11, 9, 1, 20, 10, 19, 7, 5, 13, 15, 2, 17, 1, 21, 8, 16, 3, 14, 12]
+            let numbs = [4, 6, 18, 11, 9, 1, 20, 10, 19, 7, 5, 13, 15, 2, 17, 1, 21, 8, 16, 3, 14, 12];
 
             let deltaXright = (model.desktop) ? 105 : 81;
             let deltaXleft = (model.desktop) ? 109 : 83;
             let x = gameMachine.left + deltaXleft;
 
             for (let i = 0; i < 22; i++) {
-                if(i == 11) x = gameMachine.right - deltaXright;
+                if (i == 11) x = gameMachine.right - deltaXright;
                 let lineNumber = game.add.sprite(x, y[i] - gameMachine.height / 2,
                     'winSplash',
                     'skeleton-animation_5.png',

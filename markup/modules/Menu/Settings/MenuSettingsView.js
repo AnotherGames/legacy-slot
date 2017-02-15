@@ -1,5 +1,4 @@
 import { model } from 'modules/Model/Model';
-import { config } from 'modules/Util/Config';
 
 export let view = (() => {
 
@@ -17,7 +16,7 @@ export let view = (() => {
                 'menuButtons',
                 spriteName,
                 container);
-                button.anchor.set(0.5);
+            button.anchor.set(0.5);
 
             // Расчет отступа от края контенера
             let buttonMargin = (container.width - button.width * 2.5) / 3;
@@ -42,8 +41,8 @@ export let view = (() => {
                 'menuButtons',
                 spriteName,
                 container);
-                text.y += text.height;
-                text.anchor.set(0.5);
+            text.y += text.height;
+            text.anchor.set(0.5);
             return text;
         },
 
@@ -51,7 +50,7 @@ export let view = (() => {
             game = model.el('game')
         }) {
             let container = game.add.group();
-                container.x = game.world.width;
+            container.x = game.world.width;
             model.el('settingsContainer', container);
             return container;
         },
@@ -64,8 +63,8 @@ export let view = (() => {
             let overlay = game.add.graphics(0, 0)
                 .beginFill(color)
                 .drawRect(0, 0, game.width, game.height);
-                overlay.alpha = alpha;
-                overlay.visible = false;
+            overlay.alpha = alpha;
+            overlay.visible = false;
             model.el('settingsOverlay', overlay);
             return overlay;
         },
@@ -110,13 +109,12 @@ export let view = (() => {
                 text,
                 style,
                 container);
-                settingsTitle.anchor.set(0.5);
+            settingsTitle.anchor.set(0.5);
             model.el('settingsTitle', settingsTitle);
             return settingsTitle;
         },
 
         SoundButton: function ({
-            game = model.el('game'),
             container = model.el('settingsContainer'),
             heightPercentage = 0.2
         }) {
@@ -311,7 +309,7 @@ export let view = (() => {
                 'mobileButtons',
                 'return.png',
                 container);
-                backButton.anchor.set(0.5);
+            backButton.anchor.set(0.5);
             model.el('settingsBackButton', backButton);
             return backButton;
         }
@@ -343,7 +341,7 @@ export let view = (() => {
             time = 700
         }) {
             let overlay = model.el('settingsOverlay');
-                overlay.visible = true;
+            overlay.visible = true;
             return game.add.tween(overlay).to( { alpha: finalAlpha }, time, 'Quart.easeOut', true);
         }
     };
@@ -368,9 +366,9 @@ export let view = (() => {
         }) {
             let overlay = model.el('settingsOverlay');
             let tween = game.add.tween(overlay).to( { alpha: 0 }, time, 'Quart.easeOut', true);
-                tween.onComplete.add(() => {
-                    model.el('settingsOverlay').visible = false;
-                });
+            tween.onComplete.add(() => {
+                model.el('settingsOverlay').visible = false;
+            });
             return tween;
         }
 

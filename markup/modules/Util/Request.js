@@ -23,8 +23,8 @@ export let request = (() => {
     function send(name, options) {
         let url;
         switch (name) {
-            case 'Initialise':
-                // Авторизация
+            case 'Initialise': {
+            // Авторизация
                 let params = getAllUrlParams();
                 let currentMode = params.mode || mode[options];
                 let currentService = params.service || 'devslotv2';
@@ -37,19 +37,24 @@ export let request = (() => {
                 } else {
                     url = `${serviceUrl}/_${name}/${userID}/${casinoID}/${currentMode}`;
                 }
+            }
                 break;
-            case 'Roll':
+            case 'Roll': {
                 console.log('--------------');
                 url = `${serviceUrl}/_${name}/${model.data('sessionID')}/${model.balance('betValue')}/${model.balance('coinValue') * 100}`;
+            }
                 break;
-            case 'Ready':
+            case 'Ready': {
                 url = `${serviceUrl}/_${name}/${model.data('sessionID')}`;
+            }
                 break;
-            case 'Logout':
+            case 'Logout': {
                 url = `${serviceUrl}/_${name}/${model.data('sessionID')}`;
+            }
                 break;
-            default:
+            default: {
                 console.warn('We have no such request!');
+            }
                 break;
         }
         return new Promise(function (resolve, reject) {
@@ -119,15 +124,13 @@ export let request = (() => {
                     if (typeof paramNum === 'undefined') {
                         // put the value on the end of the array
                         obj[paramName].push(paramValue);
-                    }
-                    // if array index number specified...
-                    else {
+                        // if array index number specified...
+                    } else {
                         // put the value at that index number
                         obj[paramName][paramNum] = paramValue;
                     }
-                }
-                // if param name doesn't exist yet, set it
-                else {
+                    // if param name doesn't exist yet, set it
+                } else {
                     obj[paramName] = paramValue;
                 }
             }

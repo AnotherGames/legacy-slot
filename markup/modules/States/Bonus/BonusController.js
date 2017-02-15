@@ -40,20 +40,20 @@ class Door {
 
     win() {
         let rnd = this.game.rnd.integerInRange(1, 3);
-        soundController.sound.playSound({ sound: `illumBreak${rnd}` });
-        soundController.sound.playSound({ sound: 'illumWin', duration: 1200 });
+        soundController.sound.playSound({ currentSound: `illumBreak${rnd}` });
+        soundController.sound.playSound({ currentSound: 'illumWin', duration: 1200 });
 
         this.destroyed = true;
 
         this._playGold();
         this._playGlassBoom();
-        this._playTable()
+        this._playTable();
     }
 
     fail() {
         this.destroyed = true;
 
-        soundController.sound.playSound({ sound: 'illumFail' });
+        soundController.sound.playSound({ currentSound: 'illumFail' });
 
         this.doors.forEach((door) => {
             door.tentacle = this.game.add.sprite(door.x - 50, door.y + 5, 'tentacles');
@@ -93,13 +93,13 @@ class Door {
 
     _playGold() {
         this.gold = this.game.add.sprite(this.x, this.y, 'coins', 'skeleton-2_01.png');
-        this.gold.animations.add('gold', Phaser.Animation.generateFrameNames('skeleton-2_', 1, 44, '.png', 2), 30, false)
+        this.gold.animations.add('gold', Phaser.Animation.generateFrameNames('skeleton-2_', 1, 44, '.png', 2), 30, false);
         this.gold.anchor.set(0.5, 0.1);
         this.gold.alpha = 0;
         if (model.desktop) this.gold.scale.set(1.5);
 
         this.gold.play('gold')
-            .onComplete.add(()=>{
+            .onComplete.add(() => {
                 this.gold.alpha = 0;
             });
         this.game.add.tween(this.gold)
@@ -110,13 +110,13 @@ class Door {
 
     _playGlassBoom() {
         this.glass = this.game.add.sprite(this.x, this.y, 'coins', 'skeleton-1_01.png');
-        this.glass.animations.add('glassBoom', Phaser.Animation.generateFrameNames('skeleton-1_', 1, 19, '.png', 2), 30, false)
+        this.glass.animations.add('glassBoom', Phaser.Animation.generateFrameNames('skeleton-1_', 1, 19, '.png', 2), 30, false);
         this.glass.anchor.set(0.5);
         this.glass.alpha = 0;
 
 
         this.glass.play('glassBoom')
-            .onComplete.add(()=>{
+            .onComplete.add(() => {
                 this.glass.alpha = 0;
             });
         this.game.add.tween(this.glass)
@@ -200,7 +200,7 @@ export class Bonus {
 
 }
 function handleDoorClick() {
-    if (this.destroyed || model.state('doorFinish')|| !model.state('bonusReady')) return;
+    if (this.destroyed || model.state('doorFinish') || !model.state('bonusReady')) return;
     request.send('Roll')
         .then((data) => {
             model.state('bonusReady', false);
@@ -234,22 +234,22 @@ function handleDoorClick() {
                     this.isWinPlayed = true;
                     if (this.data.BonusEnd) {
                         // Переходной экран Big Win
-                        soundController.sound.playSound({ sound: 'illumWin' });
-                        this.doors.forEach((door) =>{
+                        soundController.sound.playSound({ currentSound: 'illumWin' });
+                        this.doors.forEach((door) => {
                             door.finalGold = this.game.add.sprite(door.x, door.y, 'coins', 'skeleton-2_01.png');
-                            door.finalGold.animations.add('gold', Phaser.Animation.generateFrameNames('skeleton-2_', 1, 44, '.png', 2), 30, false)
+                            door.finalGold.animations.add('gold', Phaser.Animation.generateFrameNames('skeleton-2_', 1, 44, '.png', 2), 30, false);
                             door.finalGold.anchor.set(0.5, 0.1);
                             door.finalGold.alpha = 0;
                             if (model.desktop) door.finalGold.scale.set(1.5);
 
                             door.finalGold.play('gold')
-                                .onComplete.add(()=>{
+                                .onComplete.add(() => {
                                     door.finalGold.alpha = 0;
                                 });
                             door.game.add.tween(door.finalGold)
                                 .to({ alpha: 1 }, 500, 'Linear', true);
                         });
-                        soundController.sound.playSound({ sound: 'win' });
+                        soundController.sound.playSound({ currentSound: 'win' });
                         bonusView.draw.showWin({ winTextFrame: 'bigW.png' });
                         soundController.music.stopMusic('bonusFon');
                         setTimeout(() => {

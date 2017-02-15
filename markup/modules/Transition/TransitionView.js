@@ -19,7 +19,7 @@ export let view = (() => {
         // Автопереход если включен
         if (model.state('autoTransititon')) {
             game.time.events.add(config.autoTransitionTime, () => {
-                soundController.sound.playSound({sound: 'buttonClick'});
+                soundController.sound.playSound({currentSound: 'buttonClick'});
                 soundController.music.stopMusic('startPerehod');
                 model.el('game').state.start('FS');
                 model.state('transitionScreen', false);
@@ -106,18 +106,11 @@ export let view = (() => {
         transitionBG.inputEnabled = true;
         transitionBG.input.priorityID = 2;
         transitionBG.events.onInputDown.add(function () {
-            soundController.sound.playSound({sound: 'buttonClick'});
+            soundController.sound.playSound({currentSound: 'buttonClick'});
             soundController.music.stopMusic('startPerehod');
             model.el('game').state.start('FS');
             model.state('transitionScreen', false);
         });
-    }
-
-    function _fsStartHide() {
-        // Автоматический переход на Фри-Спины
-        soundController.music.stopMusic('startPerehod');
-        soundController.music.playMusic('fsFon');
-        model.el('game').state.start('FS');
     }
 
     function fsFinish() {
@@ -136,7 +129,7 @@ export let view = (() => {
         // Автопереход
         if (model.state('autoTransititon')) {
             game.time.events.add(config.autoTransitionTime, () => {
-                soundController.sound.playSound({sound: 'buttonClick'});
+                soundController.sound.playSound({currentSound: 'buttonClick'});
                 soundController.music.stopMusic('finishPerehod');
                 model.el('game').state.start('Main');
             });
@@ -150,7 +143,7 @@ export let view = (() => {
         // Изменяем музыку
         soundController.music.stopMusic('fsFon');
         soundController.music.playMusic('finishPerehod');
-        soundController.sound.playSound({sound: 'win'});
+        soundController.sound.playSound({currentSound: 'win'});
 
         // Рисуем фон
         let transitionBG = game.add.sprite(0, 0, 'transitionBG2', null, transitionContainer);
@@ -247,19 +240,11 @@ export let view = (() => {
         transitionBG.inputEnabled = true;
         transitionBG.input.priorityID = 2;
         transitionBG.events.onInputDown.add(function () {
-            soundController.sound.playSound({sound: 'buttonClick'});
-            soundController.sound.stopSound({sound: 'win'});
+            soundController.sound.playSound({currentSound: 'buttonClick'});
+            soundController.sound.stopSound({currentSound: 'win'});
             soundController.music.stopMusic('finishPerehod');
             model.el('game').state.start('Main');
         });
-    }
-
-    function _fsFinishHide() {
-        console.log('i am finishing fs after timeout');
-        soundController.sound.stopSound({sound: 'win'});
-        soundController.music.stopMusic('finishPerehod');
-        // soundController.music.playMusic('fon');
-        model.el('game').state.start('Main');
     }
 
     // Накрутка выигрыша

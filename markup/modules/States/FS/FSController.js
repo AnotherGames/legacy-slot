@@ -165,7 +165,7 @@ export class FS {
             panelController.drawFsPanel();
             // Отрисовуем баланс
             balanceController.initFSDesktop();
-            //BG animations
+            // BG animations
             mainView.draw.addBubbles({});
             mainView.draw.addShark({});
             game.time.events.add(6000, () => {
@@ -209,7 +209,7 @@ export class FS {
 
         if (model.desktop) {
             let fullScreeButton = model.el('fullScreeButton');
-                fullScreeButton.frameName = (game.scale.isFullScreen || window.innerHeight == screen.height) ? 'fullscreenOff.png' : 'fullscreen.png';
+            fullScreeButton.frameName = (game.scale.isFullScreen || window.innerHeight == screen.height) ? 'fullscreenOff.png' : 'fullscreen.png';
         }
     }
 

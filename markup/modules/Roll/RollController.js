@@ -103,7 +103,7 @@ export let controller = (() => {
                     let finishScreen = _convertArray(data.Screen);
                     model.data('finishScreen', finishScreen);
 
-                    soundController.sound.playSound({sound:'baraban'})
+                    soundController.sound.playSound({currentSound: 'baraban'});
 
                     // Крутим колеса
                     wheels.forEach((wheel, columnIndex) => {

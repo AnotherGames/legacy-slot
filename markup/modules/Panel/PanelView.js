@@ -1,5 +1,4 @@
 import { model } from 'modules/Model/Model';
-import { config } from 'modules/Util/Config';
 
 export let view = (() => {
 
@@ -238,8 +237,8 @@ export let view = (() => {
             model.el('infoTable', infoTable);
 
             let closeButton = game.add.sprite(game.width - 170, 120, 'closeButton', null, container);
-                closeButton.right = infoTableBg.right + 3;
-                closeButton.top = infoTableBg.top + 3;
+            closeButton.right = infoTableBg.right + 3;
+            closeButton.top = infoTableBg.top + 3;
             model.el('closeButton', closeButton);
 
             let infoControllers = game.add.group();
@@ -259,7 +258,7 @@ export let view = (() => {
 
             let infoMarkers = [];
             let infoMarker = game.add.sprite(60, 0, 'infoMarker', 'marker_on.png', container);
-            let numberOfInfoImages = game.cache._cache.image.infoTable.frameData._frames.length
+            let numberOfInfoImages = game.cache._cache.image.infoTable.frameData._frames.length;
             infoMarker.anchor.set(0.5);
             infoMarker.name = 'infoMarker0';
             infoMarkers.push(infoMarker);
