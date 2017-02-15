@@ -43,30 +43,30 @@ export let view = (() => {
             doorLeft.anchor.set(0.5);
         },
 
-        addShadows: function ({
-            game = model.el('game'),
-            container = model.group('bg')
-        }) {
-
-            let shadows = model.el('shadows');
-            shadows.visible = true;
-
-            let side = (game.rnd.integerInRange(0, 1)) ? 'left' : 'right';
-            if (side == 'right') {
-                shadows.scale.set(-1, 1);
-            }
-
-            let anim = game.rnd.integerInRange(1, 3);
-            shadows.setAnimationByName(1, anim, false);
-
-            game.time.events.add(8000, () => {
-                shadows.visible = false;
-                if (side == 'right') {
-                    shadows.scale.set(1, 1);
-                }
-                draw.addShadows({});
-            });
-        },
+        // addShadows: function ({
+        //     game = model.el('game'),
+        //     container = model.group('bg')
+        // }) {
+        //
+        //     let shadows = model.el('shadows');
+        //     shadows.visible = true;
+        //
+        //     let side = (game.rnd.integerInRange(0, 1)) ? 'left' : 'right';
+        //     if (side == 'right') {
+        //         shadows.scale.set(-1, 1);
+        //     }
+        //
+        //     let anim = game.rnd.integerInRange(1, 3);
+        //     shadows.setAnimationByName(1, anim, false);
+        //
+        //     game.time.events.add(8000, () => {
+        //         shadows.visible = false;
+        //         if (side == 'right') {
+        //             shadows.scale.set(1, 1);
+        //         }
+        //         draw.addShadows({});
+        //     });
+        // },
 
         mainContainer: function ({
             game = model.el('game'),

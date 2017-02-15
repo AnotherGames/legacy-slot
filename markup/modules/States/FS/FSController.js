@@ -4,6 +4,7 @@ import { config } from 'modules/Util/Config';
 import { view as fsView } from 'modules/States/FS/FSView';
 import { view as transitionView } from 'modules/Transition/TransitionView';
 import { view as winView } from 'modules/Win/WinView';
+import { view as mainView } from 'modules/States/Main/mainView';
 
 import { controller as soundController } from 'modules/Sound/SoundController';
 import { controller as settingsController } from 'modules/Settings/DesktopSettingsController';
@@ -147,14 +148,11 @@ export class FS {
         // Играем фоновую музыку
         soundController.music.playMusic('fsFon');
 
-        fsView.draw.mainBG({});
+        mainView.draw.mainBG({});
         // Отрисовуем основной контейнер
-        fsView.draw.mainContainer({});
-        game.time.events.add(3000, () => {
-            fsView.draw.addShadows({});
-        });
-        fsView.draw.machineContainer({});
-        fsView.draw.lineNumbers({});
+        mainView.draw.mainContainer({});
+        mainView.draw.machineContainer({});
+        mainView.draw.lineNumbers({});
         winView.draw.UpWinContainer({});
 
         // Инициализируем крутки
@@ -194,7 +192,7 @@ export class FS {
             start: this.fsCount
         });
 
-        fsView.draw.Character({});
+        // fsView.draw.Character({});
 
         // Первая темнота
         game.camera.flash(0x000000, 500)
@@ -207,7 +205,7 @@ export class FS {
     }
 
     update() {
-        const game = model.el('game'); 
+        const game = model.el('game');
         // Обновляем время
         footerController.updateTime({});
         // Проигрываем анимацию
