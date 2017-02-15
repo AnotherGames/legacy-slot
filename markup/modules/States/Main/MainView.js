@@ -72,6 +72,9 @@ export let view = (() => {
         }) {
             let balloons = game.add.sprite(100, game.height + 500, 'balloons', null, container);
             balloons.anchor.set(0.5);
+            if (model.mobile) {
+                balloons.scale.set(0.66);
+            }
 
             let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
             let deltaX;
@@ -139,6 +142,9 @@ export let view = (() => {
             let i = game.rnd.integerInRange(1, 3);
             let confetti = game.add.sprite(100, -500, `confetti${i}`, null, container);
             confetti.anchor.set(0.5);
+            if (model.mobile) {
+                confetti.scale.set(0.66);
+            }
 
             let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
             let deltaX;

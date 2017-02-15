@@ -1,0 +1,100 @@
+{"frames": [
+
+{
+	"filename": "Z_0015_Layer-8.png",
+	"frame": {"x":191,"y":1,"w":55,"h":152},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":55,"h":152},
+	"sourceSize": {"w":55,"h":152}
+},
+{
+	"filename": "Z_0016_Layer-7.png",
+	"frame": {"x":169,"y":279,"w":65,"h":131},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":65,"h":131},
+	"sourceSize": {"w":65,"h":131}
+},
+{
+	"filename": "Z_0017_Layer-6.png",
+	"frame": {"x":136,"y":516,"w":67,"h":113},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":67,"h":113},
+	"sourceSize": {"w":67,"h":113}
+},
+{
+	"filename": "Z_0018_Layer-5.png",
+	"frame": {"x":191,"y":155,"w":43,"h":122},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":43,"h":122},
+	"sourceSize": {"w":43,"h":122}
+},
+{
+	"filename": "Z_0019_Layer-4.png",
+	"frame": {"x":205,"y":516,"w":46,"h":92},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":46,"h":92},
+	"sourceSize": {"w":46,"h":92}
+},
+{
+	"filename": "Z_0020_Layer-3-copy-3.png",
+	"frame": {"x":1,"y":411,"w":122,"h":191},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":122,"h":191},
+	"sourceSize": {"w":122,"h":191}
+},
+{
+	"filename": "Zastavka_CL_0000_Layer-21.png",
+	"frame": {"x":125,"y":412,"w":88,"h":102},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":102},
+	"sourceSize": {"w":88,"h":102}
+},
+{
+	"filename": "Zastavka_CL_0001_Layer-20.png",
+	"frame": {"x":1,"y":604,"w":133,"h":147},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":147},
+	"sourceSize": {"w":133,"h":147}
+},
+{
+	"filename": "Zastavka_CL_0003_Shape-2-copy-4.png",
+	"frame": {"x":136,"y":631,"w":85,"h":88},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":88},
+	"sourceSize": {"w":85,"h":88}
+},
+{
+	"filename": "Zastavka_CL_0006_Layer-18.png",
+	"frame": {"x":1,"y":212,"w":166,"h":197},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":166,"h":197},
+	"sourceSize": {"w":166,"h":197}
+},
+{
+	"filename": "Zastavka_CL_0007_Layer-17.png",
+	"frame": {"x":1,"y":1,"w":188,"h":209},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":188,"h":209},
+	"sourceSize": {"w":188,"h":209}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "trash.png",
+	"format": "RGBA8888",
+	"size": {"w":252,"h":752},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:c86d73c630fab06efd4b93ed0595aba0:6e8cfc268bc0eef6aab068f42552c419:fed2d4d826b5ccc56796f850839e5048$"
+}
+}
