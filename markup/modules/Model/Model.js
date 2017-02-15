@@ -89,6 +89,9 @@ export let model = (() => {
         model.data('sessionID', initData.SessionID);
         model.data('lines', initData.Lines);
         model.data('numberOfLines', initData.Lines.length);
+        if (!initData.FirstScreen) {
+            throw new Error('First Init Error!!!');
+        }
         model.data('firstScreen', initData.FirstScreen);
 
         // Autoplay States

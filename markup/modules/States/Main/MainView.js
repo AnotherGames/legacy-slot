@@ -125,7 +125,8 @@ export let view = (() => {
             container = model.group('bg')
         }) {
             let y = (model.desktop) ? game.rnd.integerInRange(150, 400) : game.rnd.integerInRange(100, 300);
-            let shark = game.add.sprite(-500, y, 'shark', null, container);
+            let shark = game.add.sprite(-500, y, 'shark');
+            container.addAt(shark, 1);
             shark.anchor.set(0.5);
             if (model.mobile) {
                 shark.scale.set(0.6);
