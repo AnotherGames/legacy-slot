@@ -81,9 +81,11 @@ export class Preload {
         game.load.image('logoGM', 'game/logoGM.png');
         game.load.image('cloud', 'bg/cloud.png');
         game.load.image('shine', 'bg/shine.png');
+        game.load.image('balloons', 'bg/balloons.png');
         game.load.image('confetti1', 'bg/confetti1.png');
         game.load.image('confetti2', 'bg/confetti2.png');
         game.load.image('confetti3', 'bg/confetti3.png');
+        game.load.atlasJSONArray('trash', 'bg/trash.png', 'bg/trash.json');
         // game.load.image('aim', 'other/aim.png');
         // game.load.atlasJSONArray('shuriken', 'other/shuriken.png', 'other/shuriken.json');
         game.load.image('closed', 'other/closed.png');
@@ -107,6 +109,7 @@ export class Preload {
             game.load.image('autoSelect', 'desk_buttons/autoSelect.png');
             game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
             game.load.atlasJSONArray('deskButtonsAnim', 'desk_buttons/deskButtonsAnim.png', 'desk_buttons/deskButtonsAnim.json');
+            game.load.atlasJSONArray('switcher', 'desk_buttons/switcher.png', 'desk_buttons/switcher.json');
         }
         if (model.mobile) {
             game.load.atlasJSONArray('mobileButtons', 'mobile_buttons/mobileButtons.png', 'mobile_buttons/mobileButtons.json');
