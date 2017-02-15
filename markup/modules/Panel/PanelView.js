@@ -227,29 +227,31 @@ export let view = (() => {
             let overlay = game.add.graphics(0, 0, container).beginFill(0x000000, 0.7).drawRect(0, 0, game.width, game.height);
             model.el('overlay', overlay);
 
-            let infoRules = game.add.sprite(x, y, 'info', '1_en.png', container);
-            infoRules.anchor.set(0.5);
-            infoRules.scale.set(1.3);
-            model.el('infoRules', infoRules);
+            let infoTableBg = game.add.sprite(x, y, 'infoTableBg', null, container);
+            infoTableBg.anchor.set(0.5);
+            infoTableBg.scale.set((model.desktop) ? 1.3 : 1);
+            model.el('infoTableBg', infoTableBg);
 
-            let closeBG = game.add.sprite(game.width - 170, 125, 'closeBG', null, container);
-            closeBG.anchor.set(0.5);
+            let infoTable = game.add.sprite(x, y, 'infoTable', '1_en.png', container);
+            infoTable.anchor.set(0.5);
+            infoTableBg.scale.set((model.desktop) ? 1.3 : 1);
+            model.el('infoTable', infoTable);
 
-            let closed = game.add.sprite(game.width - 170, 120, 'closed', null, container);
-            closed.anchor.set(0.5);
-            model.el('closed', closed);
+            let closeButton = game.add.sprite(game.width - 170, 120, 'closeButton', null, container);
+                closeButton.right = infoTableBg.right + 3;
+                closeButton.top = infoTableBg.top + 3;
+            model.el('closeButton', closeButton);
 
             let infoControllers = game.add.group();
 
             draw._markers(infoControllers);
             draw._arrows(infoControllers);
 
-            infoControllers.y = infoRules.bottom - infoControllers.height / 2 - 50;
+            infoControllers.y = infoTableBg.bottom - infoControllers.height / 2 - 30;
             infoControllers.x = game.width / 2 - infoControllers.width / 2 + 50;
 
             container.add(infoControllers);
             model.group('infoControllers', infoControllers);
-            return infoRules;
         },
 
         _markers: function (container) {
@@ -257,11 +259,12 @@ export let view = (() => {
 
             let infoMarkers = [];
             let infoMarker = game.add.sprite(60, 0, 'infoMarker', 'marker_on.png', container);
+            let numberOfInfoImages = game.cache._cache.image.infoTable.frameData._frames.length
             infoMarker.anchor.set(0.5);
             infoMarker.name = 'infoMarker0';
             infoMarkers.push(infoMarker);
 
-            for (let i = 1; i < config.numOfInfoDots; i++) {
+            for (let i = 1; i < numberOfInfoImages; i++) {
                 let name = 'infoMarker' + i;
                 let marker = game.add.sprite(infoMarker.x, 0, 'infoMarker', 'marker_off.png', container);
                 marker.name = name;
@@ -277,17 +280,11 @@ export let view = (() => {
             let game = model.el('game');
             let infoMarkers = model.el('infoMarkers');
 
-            let arrowRightBG = game.add.sprite(infoMarkers[infoMarkers.length - 1].x + 50, 85, 'arrowBG', null, container);
-            arrowRightBG.anchor.set(0.5);
-
-            let arrowLeftBG = game.add.sprite(infoMarkers[0].x - 50, 85, 'arrowBG', null, container);
-            arrowLeftBG.anchor.set(0.5);
-
-            let arrowRight = game.add.sprite(infoMarkers[infoMarkers.length - 1].x + 50, 85, 'ar', null, container);
+            let arrowRight = game.add.sprite(infoMarkers[infoMarkers.length - 1].x + 50, 85, 'arrow', null, container);
             arrowRight.anchor.set(0.5);
             model.el('arrowRight', arrowRight);
 
-            let arrowLeft = game.add.sprite(infoMarkers[0].x - 50, 85, 'ar', null, container);
+            let arrowLeft = game.add.sprite(infoMarkers[0].x - 50, 85, 'arrow', null, container);
             arrowLeft.anchor.set(0.5);
             arrowLeft.scale.set(-1, 1);
             model.el('arrowLeft', arrowLeft);

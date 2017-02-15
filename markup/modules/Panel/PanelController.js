@@ -122,25 +122,25 @@ export let controller = (() => {
         info: function() {
 
             let game = model.el('game');
-            let infoRules = model.el('infoRules')
+            let infoTable = model.el('infoTable')
             let overlay = model.el('overlay');
-            let closed = model.el('closed');
+            let closeButton = model.el('closeButton');
             let arrowRight = model.el('arrowRight');
             let arrowLeft = model.el('arrowLeft');
 
             overlay.inputEnabled = true;
             overlay.input.priorityID = 2;
-            infoRules.inputEnabled = true;
-            infoRules.input.priorityID = 3;
-            closed.inputEnabled = true;
-            closed.input.priorityID = 4;
+            infoTable.inputEnabled = true;
+            infoTable.input.priorityID = 3;
+            closeButton.inputEnabled = true;
+            closeButton.input.priorityID = 4;
             arrowRight.inputEnabled = true;
             arrowRight.input.priorityID = 4;
             arrowLeft.inputEnabled = true;
             arrowLeft.input.priorityID = 4;
 
             overlay.events.onInputDown.add(handle.closeInfo);
-            closed.events.onInputDown.add(handle.closeInfo);
+            closeButton.events.onInputDown.add(handle.closeInfo);
             arrowRight.events.onInputDown.add(handle.switchInfoRight);
             arrowLeft.events.onInputDown.add(handle.switchInfoLeft);
         },
@@ -151,13 +151,23 @@ export let controller = (() => {
             || model.state('isAnim:info')
             || model.state('autoplay:start')) return;
 
+
+            let infoTable = model.el('infoTable');
+            let infoMarkers = model.el('infoMarkers');
             let game = model.el('game');
+            let counter = 1;
+            let container = model.group('infoTable');
+
             model.state('infoPanelOpen', true);
             soundController.sound.playSound({sound : 'buttonClick'});
-            let counter = 0;
             model.el('infoCounter', counter);
 
-            let container = model.group('infoTable');
+            infoMarkers.forEach((elem) => {
+                elem.frameName = 'marker_off.png';
+            });
+            infoMarkers[counter - 1].frameName = 'marker_on.png';
+            infoTable.frameName = `${counter}_en.png`;
+
             model.state('isAnim:info', true)
             container.visible = true;
             game.add.tween(container).to( { alpha: 1 }, 700, 'Quart.easeOut', true)
@@ -170,7 +180,7 @@ export let controller = (() => {
             if(model.state('isAnim:info')) return;
 
             let game = model.el('game');
-            let counter = 0;
+            let counter = 1;
             model.el('infoCounter', counter);
 
             game.input.keyboard.enabled = true;
@@ -186,40 +196,47 @@ export let controller = (() => {
         },
 
         switchInfoRight: function () {
-            let infoRules = model.el('infoRules');
             let counter = model.el('infoCounter');
+            let infoTable = model.el('infoTable');
             let infoMarkers = model.el('infoMarkers');
+            let game = model.el('game');
+            let numberOfInfoImages = game.cache._cache.image.infoTable.frameData._frames.length;
 
             infoMarkers.forEach((elem) => {
                 elem.frameName = 'marker_off.png';
             });
-            if (counter > config.numOfInfoDots - 2) {
-                counter = 0;
+
+            if (counter >= numberOfInfoImages) {
+                counter = 1;
             } else {
                 counter++;
             }
             model.el('infoCounter', counter);
-            infoMarkers[counter].frameName = 'marker_on.png';
-            infoRules.frameName = `${counter + 1}_en.png`;
+
+            infoMarkers[counter - 1].frameName = 'marker_on.png';
+            infoTable.frameName = `${counter}_en.png`;
         },
 
         switchInfoLeft: function () {
-            let infoRules = model.el('infoRules');
+            let infoTable = model.el('infoTable');
             let counter = model.el('infoCounter');
             let infoMarkers = model.el('infoMarkers');
+            let game = model.el('game');
+            let numberOfInfoImages = game.cache._cache.image.infoTable.frameData._frames.length;
 
             infoMarkers.forEach((elem) => {
                 elem.frameName = 'marker_off.png';
             });
-            if (counter < 1) {
-                counter = config.numOfInfoDots - 1;
+
+            if (counter <= 1) {
+                counter = numberOfInfoImages;
             } else {
                 counter--;
-                infoMarkers[counter + 1].frameName = 'marker_off.png';
             }
             model.el('infoCounter', counter);
-            infoMarkers[counter].frameName = 'marker_on.png';
-            infoRules.frameName = `${counter + 1}_en.png`;
+
+            infoMarkers[counter - 1].frameName = 'marker_on.png';
+            infoTable.frameName = `${counter}_en.png`;
         },
 
         betPlus: function () {

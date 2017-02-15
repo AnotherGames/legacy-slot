@@ -314,91 +314,6 @@ export let view = (() => {
                 backButton.anchor.set(0.5);
             model.el('settingsBackButton', backButton);
             return backButton;
-        },
-
-        RulesScreen: function (container) {
-            let game = model.el('game');
-            let infoRules = game.add.sprite(
-                game.world.centerX,
-                game.world.centerY,
-                'info',
-                '1_en.png',
-                container);
-                infoRules.anchor.set(0.5);
-                infoRules.scale.set(0.8);
-            model.el('infoRules', infoRules);
-
-            let infoControllers = game.add.group();
-            infoControllers.y = infoRules.bottom - infoControllers.height / 2 - 80;
-            infoControllers.x = game.width / 2 - infoControllers.width / 2 - 30;
-            container.add(infoControllers);
-
-            let infoMarkers = [];
-            let infoMarker = game.add.sprite(
-                0,
-                0,
-                'infoMarker',
-                'marker_on.png',
-                infoControllers);
-                infoMarker.name = 'infoMarker0';
-                infoMarker.anchor.set(0.5);
-            infoMarkers.push(infoMarker);
-
-            for (let i = 1; i < config.numOfInfoDots; i++) {
-                let name = 'infoMarker' + i;
-                let counter = i;
-                let marker = game.add.sprite(
-                    infoMarker.x,
-                    0,
-                    'infoMarker',
-                    'marker_off.png',
-                    infoControllers);
-                    marker.name = name;
-                    marker.x = marker.x + 30 * i;
-                    marker.anchor.set(0.5);
-                infoMarkers.push(marker);
-            }
-
-            model.el('infoMarkers', infoMarkers);
-
-            let closeBG = game.add.sprite(game.width - 170, 120, 'closeBG', null, container);
-            closeBG.anchor.set(0.5);
-
-            let closed = game.add.sprite(game.width - 170, 120, 'closed', null, container);
-            closed.anchor.set(0.5);
-            model.el('closed', closed);
-
-            let arrowRightBG = game.add.sprite(infoMarkers[infoMarkers.length - 1].x + 50, 55, 'arrowBG', null, infoControllers);
-            arrowRightBG.anchor.set(0.5);
-            arrowRightBG.scale.set(0.8);
-
-            let arrowLeftBG = game.add.sprite(infoMarkers[0].x - 50, 55, 'arrowBG', null, infoControllers);
-            arrowLeftBG.anchor.set(0.5);
-            arrowLeftBG.scale.set(0.8);
-
-            let arrowRight = game.add.sprite(
-                infoMarkers[infoMarkers.length - 1].x + 50,
-                55,
-                'ar',
-                null,
-                infoControllers);
-            arrowRight.anchor.set(0.5);
-            arrowRight.scale.set(0.8);
-            model.el('arrowRight', arrowRight);
-
-            let arrowLeft = game.add.sprite(
-                infoMarkers[0].x - 50,
-                55,
-                'ar',
-                null,
-                infoControllers);
-            arrowLeft.anchor.set(0.5);
-            arrowLeft.scale.set(-0.8, 0.8);
-            model.el('arrowLeft', arrowLeft);
-
-            container.visible = false;
-            model.group('infoControllers', infoControllers);
-            return container;
         }
 
     };
@@ -430,15 +345,6 @@ export let view = (() => {
             let overlay = model.el('settingsOverlay');
                 overlay.visible = true;
             return game.add.tween(overlay).to( { alpha: finalAlpha }, time, 'Quart.easeOut', true);
-        },
-
-        Rules: function ({
-            game = model.el('game'),
-            time = 700
-        }) {
-            let container = model.group('info');
-                container.visible = true;
-            return game.add.tween(container).to( { alpha: 1 }, time, 'Quart.easeOut', true);
         }
     };
 
@@ -464,18 +370,6 @@ export let view = (() => {
             let tween = game.add.tween(overlay).to( { alpha: 0 }, time, 'Quart.easeOut', true);
                 tween.onComplete.add(() => {
                     model.el('settingsOverlay').visible = false;
-                });
-            return tween;
-        },
-
-        Rules: function ({
-            game = model.el('game'),
-            time = 700
-        }) {
-            let container = model.group('info');
-            let tween = game.add.tween(container).to( { alpha: 0 }, time, 'Quart.easeOut', true);
-                tween.onComplete.add(() => {
-                    container.visible = false;
                 });
             return tween;
         }
