@@ -16,15 +16,22 @@ export let view = (() => {
 
         els.forEach((frase, fraseInd) => {
             frase.forEach((word) => {
-                totalWidth += word.width;
-                if (fraseInd == 0) {
-                    frase[0].x = frase[0].width / 2;
-                    frase[1].x = frase[0].x + frase[0].width / 2 + d + frase[1].width / 2;
-                } else {
-                    let prevWord = els[fraseInd - 1][1];
-                    frase[0].x = prevWord.x + prevWord.width / 2 + D + frase[0].width / 2;
-                    frase[1].x = frase[0].x + frase[0].width / 2 + d + frase[1].width / 2;
+                if (!word) return;
+
+                try {
+                    totalWidth += word.width;
+                    if (fraseInd == 0) {
+                        frase[0].x = frase[0].width / 2;
+                        frase[1].x = frase[0].x + frase[0].width / 2 + d + frase[1].width / 2;
+                    } else {
+                        let prevWord = els[fraseInd - 1][1];
+                        frase[0].x = prevWord.x + prevWord.width / 2 + D + frase[0].width / 2;
+                        frase[1].x = frase[0].x + frase[0].width / 2 + d + frase[1].width / 2;
+                    }
+                } catch (err) {
+                    throw new Error('Some error in balance text width calculation');
                 }
+
             });
         });
 
