@@ -182,6 +182,8 @@ export class Bonus {
             balanceView.draw.FSMobileBalance({});
         }
         balanceView.draw.CashBalance({});
+
+        this.addFullScreen();
     }
 
     update() {
@@ -196,6 +198,20 @@ export class Bonus {
             let fullScreeButton = model.el('fullScreeButton');
             fullScreeButton.frameName = (this.game.scale.isFullScreen || window.innerHeight == screen.height) ? 'fullscreenOff.png' : 'fullscreen.png';
         }
+
+        if (model.mobile && !game.device.iOS) {
+            (game.scale.isFullScreen) ? $('#fakeButton').addClass('closed') : $('#fakeButton').removeClass('closed');
+        }
+    }
+
+    addFullScreen() {
+        let fakeButton = document.querySelector('#fakeButton');
+        fakeButton.addEventListener('click', this.fullScreen);
+    }
+
+    fullScreen() {
+        let game = model.el('game');
+        game.scale.startFullScreen();
     }
 
 }

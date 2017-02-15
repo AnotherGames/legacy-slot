@@ -26,8 +26,15 @@ export class Init {
         if (model.desktop) keyboardController.initInitKeys();
 
         let initPlay = view.drawPlay();
-        initPlay.inputEnabled = true;
-        initPlay.events.onInputDown.add(this.handlePlay, this);
+
+        if (model.mobile && !game.device.iOS) {
+            let fakeButton = document.querySelector('#fakeButton');
+            $('#fakeButton').removeClass('closed');
+            fakeButton.addEventListener('click', this.handlePlay);
+        } else {
+            initPlay.inputEnabled = true;
+            initPlay.events.onInputDown.add(this.handlePlay, this);
+        }
 
         model.el('initPlayTween')
             .onComplete.add(() => {
@@ -41,6 +48,8 @@ export class Init {
         if (!model.state('globalSound')) {
             this.triggerSoundLeft();
         }
+
+        // this.addFullScreen();
     }
 
     switchSound() {
@@ -58,16 +67,22 @@ export class Init {
 
         if (model.mobile) game.scale.startFullScreen();
 
-        document.body.addEventListener('touchstart', () => {
-            model.el('game').scale.startFullScreen();
-        });
-
         view.stopYoyoTween();
 
         game.camera.onFadeComplete.add(() => {
             game.state.start('Main');
         });
         game.camera.fade(0x000000, 500);
+    }
+
+    addFullScreen() {
+        let fakeButton = document.querySelector('#fakeButton');
+        fakeButton.addEventListener('click', this.fullScreen);
+    }
+
+    fullScreen() {
+        let game = model.el('game');
+        game.scale.startFullScreen();
     }
 
     triggerSoundLeft() {
