@@ -4,6 +4,8 @@ import { config } from 'modules/Util/Config';
 import { controller as keyboardController } from 'modules/Keyboard/KeyboardController'
 import { controller as soundController } from 'modules/Sound/SoundController';
 
+import { view as mainView } from 'modules/States/Main/MainView';
+
 export let view = (() => {
 
     function fsStart() {
@@ -14,12 +16,12 @@ export let view = (() => {
         // Отрисовываем переходной экран
         _fsStartDraw();
         _fsStartTween();
-        _fsStartInput();
+        // _fsStartInput();
         game.input.keyboard.enabled = true;
         // Автопереход если включен
-        if (model.state('autoTransititon')) {
+        // if (model.state('autoTransititon')) {
             game.time.events.add(config.autoTransitionTime, transitionInFs);
-        }
+        // }
     }
 
     function _fsStartDraw() {
@@ -30,65 +32,54 @@ export let view = (() => {
         soundController.music.playMusic('startPerehod');
         // Отрисовываем фон
 
-        let transitionBG = game.add.graphics(0, 0).beginFill(0x000000, 0.9).drawRect(0, 0, game.world.width, game.world.height);
-        transitionContainer.add(transitionBG);
-        model.el('transitionBG', transitionBG);
+        // let transitionBG = game.add.graphics(0, 0).beginFill(0x000000, 0.9).drawRect(0, 0, game.world.width, game.world.height);
+        // transitionContainer.add(transitionBG);
+        // model.el('transitionBG', transitionBG);
 
-        let freeSpinsBG = game.add.sprite(game.world.centerX, game.height * 0.37, 'transitionFS', null, transitionContainer);
-        freeSpinsBG.anchor.set(0.5);
-        freeSpinsBG.scale.set(0.1);
-        model.el('freeSpinsBG', freeSpinsBG);
+        let boy = game.add.spine(game.width * 0.15, game.height * 0.7, 'boy');
+            boy.setAnimationByName(0, 'S2-newone', false);
+            boy.addAnimationByName(0, 'S2-idle', true);
+            (model.desktop) ? boy.scale.set(0.5) : boy.scale.set(0.3);
+            transitionContainer.add(boy);
+        model.el('boy', boy);
 
-        // Надпись Free Spins
-        let freeSpinsText = game.add.sprite(game.width / 2,
-            -400,
-            'text',
-            'freeSpins.png',
-            transitionContainer);
+        // let freeSpinsCount = model.data('rollResponse').FreeSpinsLeft;
+        let freeSpinsText = game.add.bitmapText(game.width * 0.17, game.height * 0.20, 'textGreen', 'you win' + ' ', 90, transitionContainer);
             freeSpinsText.anchor.set(0.5);
+            freeSpinsText.scale.set(0.1);
+            freeSpinsText.alpha = 0;
         model.el('freeSpinsText', freeSpinsText);
 
-        // Счетчик Фри-Спинов
-        let freeSpinsCount = model.data('rollResponse').FreeSpinsLeft;
-        let freeSpinsLevel = game.add.bitmapText(game.width / 2, game.height / 2, 'numbersFont', freeSpinsCount, 140, transitionContainer);
-            freeSpinsLevel.align = 'center';
-            freeSpinsLevel.anchor.set(0.5);
-            freeSpinsLevel.scale.set(0.1);
-        model.el('freeSpinsLevel', freeSpinsLevel);
+        let freeSpinsText2 = game.add.bitmapText(game.width * 0.17, game.height * 0.33, 'textOrange', '+15', 120, transitionContainer);
+            freeSpinsText2.anchor.set(0.5);
+            freeSpinsText2.scale.set(0.1);
+            freeSpinsText2.alpha = 0;
+        model.el('freeSpinsText2', freeSpinsText2);
 
-        // Кнопка продолжить
-        let continueText = game.add.sprite(game.width / 2,
-            -200,
-            'text',
-            'continue.png',
-            transitionContainer);
-            continueText.anchor.set(0.5);
-        model.el('continueText', continueText);
+        let freeSpinsText3 = game.add.bitmapText(game.width * 0.17, game.height * 0.45, 'textGreen', 'free spins', 90, transitionContainer);
+            freeSpinsText3.anchor.set(0.5);
+            freeSpinsText3.scale.set(0.1);
+            freeSpinsText3.alpha = 0;
+        model.el('freeSpinsText3', freeSpinsText3);
 
     }
 
     function _fsStartTween() {
         let game = model.el('game');
         let freeSpinsText = model.el('freeSpinsText');
-        let freeSpinsLevel = model.el('freeSpinsLevel');
-        let freeSpinsBG = model.el('freeSpinsBG');
-        let continueText = model.el('continueText');
+        let freeSpinsText2 = model.el('freeSpinsText2');
+        let freeSpinsText3 = model.el('freeSpinsText3');
         let scaleX = (model.desktop) ? 1.0 : 0.7;
         let scaleY = (model.desktop) ? 1.0 : 0.7;
 
         // Анимации появления
-        game.add.tween(freeSpinsLevel.scale).to({x: scaleX, y: scaleY}, 1500, Phaser.Easing.Elastic.Out, true);
-        game.add.tween(freeSpinsBG.scale).to({x: scaleX, y: scaleY}, 1500, Phaser.Easing.Elastic.Out, true);
-        game.add.tween(freeSpinsText).to({y: game.height * 0.2}, 1500, Phaser.Easing.Bounce.Out, true, 1500);
-        game.add.tween(continueText).to({y: game.height * 0.8}, 1500, Phaser.Easing.Bounce.Out, true, 1500)
-            // Болтание кнопки продолжить
-            .onComplete.add(() => {
-                continueText.rotation = 0.1;
-                game.add.tween(continueText).to({rotation: -0.1}, 100, 'Linear', true, 0, 4, true)
-                    .onComplete.add(() => {
-                        continueText.rotation = 0;
-                    }, this);
-            }, this);
+        game.add.tween(freeSpinsText).to({alpha: 1}, 500, 'Linear', true, 700);
+        game.add.tween(freeSpinsText2).to({alpha: 1}, 500, 'Linear', true, 700);
+        game.add.tween(freeSpinsText3).to({alpha: 1}, 500, 'Linear', true, 700);
+        game.add.tween(freeSpinsText.scale).to({x: scaleX, y: scaleY}, 1000, Phaser.Easing.Elastic.Out, true, 700);
+        game.add.tween(freeSpinsText2.scale).to({x: scaleX, y: scaleY}, 1000, Phaser.Easing.Elastic.Out, true, 700);
+        game.add.tween(freeSpinsText3.scale).to({x: scaleX, y: scaleY}, 1000, Phaser.Easing.Elastic.Out, true, 700);
+
     }
 
     function _fsStartInput() {
@@ -117,14 +108,14 @@ export let view = (() => {
         // Отрисовка финишного экрана
         _fsFinishDraw();
         _fsFinishTween();
-        _coinsTween();
+        // _coinsTween();
         _fsFinishInput();
         // _coinsTween();
         model.state('maxFsMultiplier', false);
         // Автопереход
-        if (model.state('autoTransititon')) {
-            game.time.events.add(config.autoTransitionTime, transitionOutFs);
-        }
+        // if (model.state('autoTransititon')) {
+            game.time.events.add(config.autoTransitionTime + 1000, transitionOutFs);
+        // }
     }
 
     function transitionOutFs() {
@@ -143,14 +134,11 @@ export let view = (() => {
         soundController.sound.playSound({sound: 'wow'});
 
         // Рисуем фон
-        let transitionBG = game.add.graphics(0, 0).beginFill(0x000000, 0.9).drawRect(0, 0, game.world.width, game.world.height);
+        let transitionBG = game.add.graphics(0, 0).beginFill(0x000000, 0.8).drawRect(0, 0, game.world.width, game.world.height);
         transitionContainer.add(transitionBG);
         model.el('transitionBG', transitionBG);
 
-        let winBG = game.add.sprite(game.world.centerX, game.height * 0.37, 'transitionFS', null, transitionContainer);
-        winBG.anchor.set(0.5);
-        winBG.scale.set(0.1);
-        model.el('winBG', winBG);
+        mainView.draw.addBurst({container: transitionContainer});
 
         // выбираем надпись для конечного экрна (Big Win --- Total Win)
         let winTextFrame;
@@ -160,29 +148,20 @@ export let view = (() => {
             winTextFrame = 'totalW.png';
         }
 
-        let winText = game.add.sprite(game.width / 2,
-            -400,
-            'text',
-            winTextFrame,
-            transitionContainer);
-        winText.anchor.set(0.5);
+        let winText = game.add.sprite(game.width / 2, -400, 'text', winTextFrame, transitionContainer);
+            winText.anchor.set(0.5);
         model.el('winText', winText);
 
         // Отрисовываем Выигрыш
-        let winCount = game.add.bitmapText(game.width / 2, game.height * 0.5, 'numbersFont', 0, 140, transitionContainer);
+        let winCount = game.add.bitmapText(game.width / 2, -200, 'textOrange', '0', 140, transitionContainer);
             winCount.align = 'center';
             winCount.anchor.set(0.5);
-            winCount.scale.set(0.1);
         model.el('winCount', winCount);
 
         // И кнопку продолжить
-        let continueText = game.add.sprite(game.width / 2,
-            -200,
-            'text',
-            'continue.png',
-            transitionContainer);
-            continueText.anchor.set(0.5);
-        model.el('continueText', continueText);
+        // let continueText = game.add.sprite(game.width / 2, -200, 'text', 'continue.png', transitionContainer);
+        //     continueText.anchor.set(0.5);
+        // model.el('continueText', continueText);
 
     }
 
@@ -190,26 +169,26 @@ export let view = (() => {
         let game = model.el('game');
         let winText = model.el('winText');
         let winCount = model.el('winCount');
-        let winBG = model.el('winBG');
-        let continueText = model.el('continueText');
+        // let winBG = model.el('winBG');
+        // let continueText = model.el('continueText');
         let scaleX = (model.desktop) ? 1.0 : 0.7;
         let scaleY = (model.desktop) ? 1.0 : 0.7;
 
         game.add.tween(winText).to({y: game.height * 0.2}, 1500, Phaser.Easing.Bounce.Out, true)
             .onComplete.add(() => {
-                let winCountValue = model.data('rollResponse').FsBonus.TotalFSWinCoins + model.data('rollResponse').Balance.TotalWinCoins;
-                _сountMeter(winCountValue, winCount);
+                // let winCountValue = model.data('rollResponse').FsBonus.TotalFSWinCoins + model.data('rollResponse').Balance.TotalWinCoins;
+                // _сountMeter(winCountValue, winCount);
             });
-        game.add.tween(winCount.scale).to({x: scaleX, y: scaleY}, 1500, Phaser.Easing.Elastic.Out, true);
-        game.add.tween(winBG.scale).to({x: scaleX, y: scaleY}, 1500, Phaser.Easing.Elastic.Out, true);
-        game.add.tween(continueText).to({y: game.height * 0.85}, 1500, Phaser.Easing.Bounce.Out, true)
-            .onComplete.add(() => {
-                continueText.rotation = 0.1;
-                game.add.tween(continueText).to({rotation: -0.1}, 100, 'Linear', true, 0, 4, true)
-                    .onComplete.add(() => {
-                        continueText.rotation = 0;
-                    }, this);
-            }, this);
+        game.add.tween(winCount).to({y: game.height * 0.4}, 1500, Phaser.Easing.Bounce.Out, true);
+        // game.add.tween(winBG.scale).to({x: scaleX, y: scaleY}, 1500, Phaser.Easing.Elastic.Out, true);
+        // game.add.tween(continueText).to({y: game.height * 0.85}, 1500, Phaser.Easing.Bounce.Out, true)
+        //     .onComplete.add(() => {
+        //         continueText.rotation = 0.1;
+        //         game.add.tween(continueText).to({rotation: -0.1}, 100, 'Linear', true, 0, 4, true)
+        //             .onComplete.add(() => {
+        //                 continueText.rotation = 0;
+        //             }, this);
+        //     }, this);
     }
 
     // Накрутка выигрыша
