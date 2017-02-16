@@ -237,8 +237,11 @@ export let view = (() => {
             const elSize = config[model.res].elements;
             let deltaY = (model.desktop) ? 20 : 10;
 
-            let gameBG = game.add.graphics(-elSize.width * 2.5, -elSize.height * 1.5, container);
-                gameBG.beginFill(0x000000, 0.6).drawRect(0, 0, elSize.width * 5, elSize.height * 3 + deltaY);
+            // let gameBG = game.add.graphics(-elSize.width * 2.5, -elSize.height * 1.5, container);
+            //     gameBG.beginFill(0x000000, 0.6).drawRect(0, 0, elSize.width * 5, elSize.height * 3 + deltaY);
+            // model.el('gameBG', gameBG);
+            let gameBG = game.add.sprite(0, config[model.res].gameMachine.y, 'gameBG', null, container);
+                gameBG.anchor.set(0.5);
             model.el('gameBG', gameBG);
 
             let gameMachine = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachine', null, container);

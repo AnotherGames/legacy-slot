@@ -78,6 +78,7 @@ export class Preload {
     loadMainAssets() {
         const game = model.el('game');
         game.load.image('gameMachine', 'game/gameMachine.png');
+        game.load.image('gameBG', 'game/gameBG.png');
         game.load.image('logoGM', 'game/logoGM.png');
         game.load.image('cloud', 'bg/cloud.png');
         game.load.image('shine', 'bg/shine.png');
