@@ -199,10 +199,11 @@ export class FS {
             start: this.fsCount
         });
 
-        // Если сохранненая сессия, то переключаем счетчик мозгов
+        // Если сохранненая сессия, то переключаем счетчик пуль
         if (this.fsLevel > 0) {
-            controller.searchBrains({
-                startLevel: this.fsLevel
+            fsView.draw.drumSpin({
+                number: this.fsLevel % 6,
+                multiValue: this.fsMulti
             })
         }
 
@@ -217,7 +218,7 @@ export class FS {
     }
 
     update() {
-        const game = model.el('game'); 
+        const game = model.el('game');
         // Обновляем время
         footerController.updateTime({});
         // Проигрываем анимацию

@@ -542,28 +542,29 @@ export let view = (() => {
 
         drumSpin: function ({
             game = model.el('game'),
-            container = model.group('panel'),
-            number = 0
+            number = 0,
+            multiValue = model.data('rollResponse').FsBonus.Multi
         }) {
-            let rollData = model.data('rollResponse');
-            let multiValue = rollData.FsBonus.Multi;
+
             let bullet = model.el('bullet');
             let drum = model.el('drum');
 
+            let win = Phaser.Animation.generateFrameNames('11-w-', 1, 10, '.png', 2);
             let bulletAnim = bullet.animations.add('win', win);
-            let win = Phaser.Animation.generateFrameNames(`11-w-`, 1, 10, '.png', 2);
 
-            //Если достигнут максимальный множитель то анимация пули и барабана зацикливается
-            if (multiValue == 8) {
+            // Если достигнут максимальный множитель то анимация пули и барабана зацикливается
+            if (multiValue === 8) {
                 drum.frameName = 'B-6.png';
                 game.add.tween(drum).to({rotation: 2 * Math.PI}, 3000, 'Linear', true, 0, -1);
                 bulletAnim.play(12, true);
-                model.state('maxFsMultiplier', true)
+                model.state('maxFsMultiplier', true);
             } else {
-                bulletAnim.onComplete.add(() => {bullet.frameName = '11-n.png'}, this);
+                bulletAnim.onComplete.add(() => {
+                    bullet.frameName = '11-n.png';
+                }, this);
                 bulletAnim.play(12);
                 game.add.tween(model.el('drum')).to({rotation: 2 * Math.PI * 4}, 500, Phaser.Easing.Exponential.Out, true, 0, 0)
-                .onComplete.add(()=> {
+                .onComplete.add(() => {
                     drum.frameName = `B-${number}.png`;
                     drum.rotation = 0;
                 });
