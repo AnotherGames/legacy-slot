@@ -203,7 +203,7 @@ export let view = (() => {
 
             let infoTable = game.add.sprite(x, y, 'infoTable', '1_en.png', container);
             infoTable.anchor.set(0.5);
-            infoTableBg.scale.set((model.desktop) ? 1.3 : 1);
+            infoTable.scale.set((model.desktop) ? 1.3 : 1);
             model.el('infoTable', infoTable);
 
             let closeButton = game.add.sprite(game.width - 170, 120, 'closeButton', null, container);
