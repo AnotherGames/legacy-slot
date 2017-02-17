@@ -39,7 +39,8 @@ export let view = (() => {
             winTotalData,
             game = model.el('game'),
             container = model.group('winTop'),
-            style = {font: '90px Helvetice, Arial', fill: '#e1b249', align: 'center', stroke: '#000000', strokeThickness: 2}
+            style = {font: '90px Helvetice, Arial', fill: '#e1b249', align: 'center', stroke: '#000000', strokeThickness: 2},
+            style2 = {font: '40px Helvetice, Arial', fill: '#ffffff', align: 'center', stroke: '#000000', strokeThickness: 2}
         }) {
             if (winTotalData === 0) return;
 
@@ -53,6 +54,27 @@ export let view = (() => {
             let winTotalText = game.add.bitmapText(40, 0, 'textOrange', winTotalData + '', 100, container);
                 winTotalText.anchor.set(0.5);
                 console.log(winTotalData);
+
+            // small table
+            if (!model.state('fs') && model.desktop) {
+                let winTotalSmall = game.add.sprite(0, 450, 'deskButtons', 'win.png', container);
+                winTotalSmall.anchor.set(0.5);
+                winTotalSmall.alpha = 0;
+                if (winTotalSmall.alpha = 0) {
+                    model.state('showSmallWin', true);
+                } else {
+                    model.state('showSmallWin', false);
+                }
+
+                let winTotalTextSmall = game.add.text(0, 470, winTotalData, style2, container);
+                winTotalTextSmall.anchor.set(0.5);
+                winTotalTextSmall.alpha = 0;
+
+                game.add.tween(winTotalSmall).to({alpha: 1, y: 360}, 300, 'Linear', true);
+                game.add.tween(winTotalTextSmall).to({alpha: 1, y: 370}, 300, 'Linear', true);
+
+            }
+
         },
 
         WinSplash: function ({
@@ -86,7 +108,7 @@ export let view = (() => {
             number,
             amount,
             alpha = false,
-            finalScale = (model.desktop) ? 1.1 : 1.2,
+            finalScale = (model.desktop) ? 1.2 : 1.2,
             wheels = model.el('wheels'),
             upWheels = model.el('upWheels'),
             game = model.el('game')
@@ -106,11 +128,11 @@ export let view = (() => {
                 winElements.upElements.forEach((upEl) => {
                     upEl.show();
                     upEl.win();
-                    draw.scaleJumping({
-                        el: upEl,
-                        start: 0.3,
-                        finish: finalScale
-                    });
+                    // draw.scaleJumping({
+                    //     el: upEl,
+                    //     start: 0.3,
+                    //     finish: finalScale
+                    // });
                 });
                 return;
             }

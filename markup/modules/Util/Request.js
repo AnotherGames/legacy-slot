@@ -15,8 +15,8 @@ export let request = (() => {
     }
 
     const mode = {
-        normal: 'candyland2',
-        fsBonus: 'chibifs1'
+        normal: 'candyland3',
+        fsBonus: 'candyfs1'
     };
 
     function send(name, options) {

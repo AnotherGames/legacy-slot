@@ -35,7 +35,7 @@ export let view = (() => {
 
         AutoContainer: function({
             game = model.el('game'),
-            x = model.group('panel').width / 2,
+            x = model.group('panel').width / 2 - 20,
             y = 143
         }) {
             let autoDesktopContainer = game.add.group();
@@ -50,7 +50,7 @@ export let view = (() => {
 
         AnimatedSpinButton: function({
             game = model.el('game'),
-            x = model.group('panel').width / 2,
+            x = model.group('panel').width / 2 - 20,
             y = 143,
             container = model.group('panel')
         }) {
@@ -66,7 +66,7 @@ export let view = (() => {
 
         SpinButton: function({
             game = model.el('game'),
-            x = model.group('panel').width / 2,
+            x = model.group('panel').width / 2 - 20,
             y = 143,
             container = model.group('panel')
         }) {
@@ -102,7 +102,7 @@ export let view = (() => {
 
         StopButton: function({
             game = model.el('game'),
-            x = model.group('panel').width / 2,
+            x = model.group('panel').width / 2 - 20,
             y = 143,
             container = model.group('panel')
         }) {
