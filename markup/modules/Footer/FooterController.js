@@ -33,8 +33,8 @@ export let controller = (() => {
         fullScreenButton.freezeFrames = true;
 
 
-        let menuButton = view.draw.MenuButton({});
-        menuButton.onInputDown.add(handle.Menu);
+        // let menuButton = view.draw.MenuButton({});
+        // menuButton.onInputDown.add(handle.Menu);
 
     }
 
@@ -54,55 +54,55 @@ export let controller = (() => {
     }
 
     const handle = {
-        Menu: function() {
-            if (model.state('buttons:locked')
-            ||  model.state('roll:progress')
-            ||  model.state('isAnim:menu')
-            ||  model.state('autoplay:start')) return;
-
-            let game = model.el('game');
-            let footerButtons = model.group('footerMenu');
-            let buttons = footerButtons.children;
-            let menuButton = model.el('menuButton');
-
-            if (model.state('menuOpened')) {
-                model.state('menuOpened', false)
-                model.state('isAnim:menu', true)
-                let y = menuButton.y;
-                for (let i = 0; i < buttons.length; i++) {
-                    buttons[i].inputEnabled = false;
-                    game.add.tween(buttons[i]).to({
-                            y: y,
-                            alpha: 0
-                        }, 250, Phaser.Easing.Back.Out, true)
-                        .onComplete.add(() => {
-                            model.state('isAnim:menu', false)
-                            buttons[i].visible = false;
-                        });
-                }
-            } else {
-                model.state('menuOpened', true)
-                let fullScreeButton = model.el('fullScreeButton');
-                fullScreeButton.frameName = (!window.screenTop && !window.screenY) ? 'fullscreen.png' : 'fullscreenOff.png';
-
-                let y = menuButton.y - 50;
-                model.state('isAnim:menu', true)
-                for (let i = 0; i < buttons.length; i++) {
-                    buttons[i].alpha = 0;
-                    game.add.tween(buttons[i]).to({
-                        y: y,
-                        alpha: 1
-                    }, 250, 'Linear', true)
-                    .onComplete.add(()=>{
-                        model.state('isAnim:menu', false)
-                        buttons[i].inputEnabled = true;
-                    });
-                    buttons[i].visible = true;
-                    y -= 50;
-                }
-            }
-
-        },
+        // Menu: function() {
+        //     if (model.state('buttons:locked')
+        //     ||  model.state('roll:progress')
+        //     ||  model.state('isAnim:menu')
+        //     ||  model.state('autoplay:start')) return;
+        //
+        //     let game = model.el('game');
+        //     let footerButtons = model.group('footerMenu');
+        //     let buttons = footerButtons.children;
+        //     let menuButton = model.el('menuButton');
+        //
+        //     if (model.state('menuOpened')) {
+        //         model.state('menuOpened', false)
+        //         model.state('isAnim:menu', true)
+        //         let y = menuButton.y;
+        //         for (let i = 0; i < buttons.length; i++) {
+        //             buttons[i].inputEnabled = false;
+        //             game.add.tween(buttons[i]).to({
+        //                     y: y,
+        //                     alpha: 0
+        //                 }, 250, Phaser.Easing.Back.Out, true)
+        //                 .onComplete.add(() => {
+        //                     model.state('isAnim:menu', false)
+        //                     buttons[i].visible = false;
+        //                 });
+        //         }
+        //     } else {
+        //         model.state('menuOpened', true)
+        //         let fullScreeButton = model.el('fullScreeButton');
+        //         fullScreeButton.frameName = (!window.screenTop && !window.screenY) ? 'fullscreen.png' : 'fullscreenOff.png';
+        //
+        //         let y = menuButton.y - 50;
+        //         model.state('isAnim:menu', true)
+        //         for (let i = 0; i < buttons.length; i++) {
+        //             buttons[i].alpha = 0;
+        //             game.add.tween(buttons[i]).to({
+        //                 y: y,
+        //                 alpha: 1
+        //             }, 250, 'Linear', true)
+        //             .onComplete.add(()=>{
+        //                 model.state('isAnim:menu', false)
+        //                 buttons[i].inputEnabled = true;
+        //             });
+        //             buttons[i].visible = true;
+        //             y -= 50;
+        //         }
+        //     }
+        //
+        // },
         Setting: function() {
             if (model.state('buttons:locked') ||
                 model.state('roll:progress') ||
