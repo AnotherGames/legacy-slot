@@ -7,31 +7,31 @@ import { view as winView } from 'modules/Win/WinView';
 import { view as mainView } from 'modules/States/Main/MainView';
 
 import { controller as soundController } from 'modules/Sound/SoundController';
-import { controller as settingsController } from 'modules/Settings/DesktopSettingsController';
 import { controller as balanceController } from 'modules/Balance/BalanceController';
 import { controller as footerController } from 'modules/Footer/FooterController';
 import { controller as panelController } from 'modules/Panel/PanelController';
-import { controller as buttonsController } from 'modules/Buttons/ButtonsController';
 import { controller as rollController } from 'modules/Roll/RollController';
-import { controller as winController } from 'modules/Win/WinController';
 
 export let controller = (() => {
 
-    function init(amount) {
-        if (model.state('fs:end') === false) return;
+    function stop() {
+        let game = model.el('game');
 
-        model.state('fs:end', false);
-        model.data('fs:count', amount);
-        model.updateBalance({startFS: true});
+        game.time.events.add(1500, () => {
+            soundController.music.stopMusic('fsFon');
+            transitionView.fsFinish();
+        });
 
-        next();
+        model.state('fs:end', true);
+        model.state('fs', false);
+        model.updateBalance({endFS: true});
+        // bulletCounter = 0;
     }
 
     function next() {
         let rollData = model.data('rollResponse');
 
-        if(!model.state('fs:end')
-        && rollData.NextMode !== 'root') {
+        if (!model.state('fs:end') && rollData.NextMode !== 'root') {
             controller.count({start: true});
             rollController.startRoll();
         }
@@ -39,6 +39,18 @@ export let controller = (() => {
         if (rollData.NextMode === 'root') {
             stop();
         }
+    }
+
+    function init(amount) {
+        if (model.state('fs:end') === false) {
+            return;
+        }
+
+        model.state('fs:end', false);
+        model.data('fs:count', amount);
+        model.updateBalance({startFS: true});
+
+        next();
     }
 
     function count({
@@ -57,34 +69,22 @@ export let controller = (() => {
         }
     }
 
-    function stop() {
-        let game = model.el('game');
-
-        game.time.events.add(1500, () => {
-            soundController.music.stopMusic('fsFon')
-            transitionView.fsFinish();
-        });
-
-        model.state('fs:end', true);
-        model.state('fs', false);
-        model.updateBalance({endFS: true});
-        // bulletCounter = 0;
-    }
-
     function bullet(el) {
         let game = model.el('game');
         // Проигрываем анимации барабана и +3
         fsView.draw.CountPlus3({});
 
-        //если максимальный множитель достигнут то возвращаемся
-        if(model.state('maxFsMultiplier')) return;
+        // если максимальный множитель достигнут то возвращаемся
+        if (model.state('maxFsMultiplier')) {
+            return;
+        }
 
         let rollData = model.data('rollResponse');
         let multiValue = rollData.FsBonus.Multi;
         let bulletCounter = rollData.FsBonus.Level % 6;
         let currMulti = model.data('fsMulti');
 
-        //Увеличиваем количество пуль в барабане
+        // Увеличиваем количество пуль в барабане
         fsView.draw.drumSpin({number: bulletCounter});
         el.visible = true;
 
@@ -96,7 +96,9 @@ export let controller = (() => {
             game.time.events.remove(timer);
 
             let fsTimer = game.time.events.add(3000, () => {
-                if (model.state('fs:end')) return;
+                if (model.state('fs:end')) {
+                    return;
+                }
                 controller.next();
             });
 
@@ -130,7 +132,6 @@ export class FS {
         game.frameAnims = [];
         game.spriteAnims = [];
 
-
         model.state('fs', true);
 
         // Создаем контейнеры
@@ -143,7 +144,6 @@ export class FS {
 
     create() {
         let game = model.el('game');
-        game.camera.flash(0x000000, 777)
 
         // Играем фоновую музыку
         soundController.music.stopMusic('startPerehod');
@@ -155,8 +155,8 @@ export class FS {
         // Отрисовуем основной контейнер
         fsView.draw.mainContainer({});
         fsView.draw.machineContainer({});
-        mainView.draw.lineNumbers({side: 'left'})
-        mainView.draw.lineNumbers({side: 'right'})
+        mainView.draw.lineNumbers({side: 'left'});
+        mainView.draw.lineNumbers({side: 'right'});
         winView.draw.UpWinContainer({});
 
         // Инициализируем крутки
@@ -201,14 +201,11 @@ export class FS {
 
         // Если сохранненая сессия, то переключаем счетчик пуль
         if (this.fsLevel > 0) {
-            fsView.draw.drumSpin({
-                number: this.fsLevel % 6,
-                multiValue: this.fsMulti
-            })
+            this.drawRecoveredPanel();
         }
 
         // Первая темнота
-        game.camera.flash(0x000000, 500)
+        game.camera.flash(0x000000, 500);
 
         // Запускаем Фри Спины
         game.time.events.add(1000, () => {
@@ -228,7 +225,7 @@ export class FS {
 
         if (model.desktop) {
             let fullScreeButton = model.el('fullScreeButton');
-                fullScreeButton.frameName = (game.scale.isFullScreen || window.innerHeight == screen.height) ? 'fullscreenOff.png' : 'fullscreen.png';
+            fullScreeButton.frameName = (game.scale.isFullScreen || window.innerHeight === screen.height) ? 'fullscreenOff.png' : 'fullscreen.png';
         }
     }
 
@@ -237,6 +234,21 @@ export class FS {
         // model.group('main').x = (model.desktop) ? game.world.centerX : game.width - model.group('main').width / 2;
         model.group('main').x = game.world.centerX + 8;
         model.group('main').y = game.world.centerY + config[model.res].mainContainer.y;
+    }
+
+    drawRecoveredPanel() {
+        fsView.draw.drumSpin({
+            number: this.fsLevel % 6,
+            multiValue: this.fsMulti
+        });
+
+        switch (model.data('fsMulti')) {
+            case 8: fsView.draw.recoverBottles(8);
+            case 6: fsView.draw.recoverBottles(6);
+            case 4: fsView.draw.recoverBottles(4);
+                break;
+            default: return;
+        }
     }
 
     checkSavedFS() {
@@ -255,4 +267,4 @@ export class FS {
         }
     }
 
-};
+}

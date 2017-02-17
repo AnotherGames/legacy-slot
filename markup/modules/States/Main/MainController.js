@@ -11,13 +11,11 @@ import { controller as footerController } from 'modules/Footer/FooterController'
 import { controller as panelController } from 'modules/Panel/PanelController';
 import { controller as buttonsController } from 'modules/Buttons/ButtonsController';
 import { controller as rollController } from 'modules/Roll/RollController';
-import { controller as winController } from 'modules/Win/WinController';
 import { controller as autoplayController } from 'modules/Autoplay/AutoplayController';
 import { controller as mobileSettingsController } from 'modules/Menu/Settings/MenuSettingsController';
 import { controller as mobileAutoplayController } from 'modules/Menu/Autoplay/MenuAutoplayController';
 import { controller as mobileSetBetController } from 'modules/Menu/SetBet/MenuSetBetController';
-import { controller as fsController } from 'modules/States/FS/FSController';
-import { controller as keyboardController } from 'modules/Keyboard/KeyboardController'
+import { controller as keyboardController } from 'modules/Keyboard/KeyboardController';
 
 export class Main {
     constructor(game) {
@@ -43,7 +41,7 @@ export class Main {
 
     create() {
         let game = model.el('game');
-        game.camera.flash(0x000000, 500)
+        game.camera.flash(0x000000, 500);
 
         soundController.music.stopMusic('finishPerehod');
         soundController.music.stopMusic('fsFon');
@@ -58,8 +56,8 @@ export class Main {
         mainView.draw.addSkull({});
         mainView.draw.mainContainer({});
         mainView.draw.machineContainer({});
-        mainView.draw.lineNumbers({side: 'left'})
-        mainView.draw.lineNumbers({side: 'right'})
+        mainView.draw.lineNumbers({side: 'left'});
+        mainView.draw.lineNumbers({side: 'right'});
         // mainView.draw.lineNumbers({});
         mainView.draw.flyingSmoke({});
         winView.draw.UpWinContainer({});
@@ -107,23 +105,23 @@ export class Main {
         }
 
         // Проверяем сохранненые сессии
-        this.checkForSavedFS();
+        // this.checkForSavedFS();
 
         // Проверяем остались ли автокрутки
         this.checkForRemainAutoplay();
     }
 
     update() {
-      footerController.updateTime({});
-      const game = model.el('game');
-      game.frameAnims.forEach((anim) => {
-          anim();
-      });
+        footerController.updateTime({});
+        const game = model.el('game');
+        game.frameAnims.forEach((anim) => {
+            anim();
+        });
 
-      if (model.desktop) {
-          let fullScreeButton = model.el('fullScreeButton');
-              fullScreeButton.frameName = (game.scale.isFullScreen || window.innerHeight == screen.height) ? 'fullscreenOff.png' : 'fullscreen.png';
-      }
+        if (model.desktop) {
+            let fullScreeButton = model.el('fullScreeButton');
+            fullScreeButton.frameName = (game.scale.isFullScreen || window.innerHeight === screen.height) ? 'fullscreenOff.png' : 'fullscreen.png';
+        }
     }
 
     positionMainContainer() {
@@ -149,12 +147,12 @@ export class Main {
         }
     }
 
-    checkForSavedFS() {
-        let game = model.el('game');
-        if (model.data('savedFS')) {
-            game.state.start('FS');
-        }
-    }
+    // checkForSavedFS() {
+    //     let game = model.el('game');
+    //     if (model.data('savedFS')) {
+    //         game.state.start('FS');
+    //     }
+    // }
 
     checkForRemainAutoplay() {
         if (model.data('remainAutoCount') && !model.state('autoStopWhenFS')) {

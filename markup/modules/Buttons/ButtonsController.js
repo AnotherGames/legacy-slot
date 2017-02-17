@@ -12,32 +12,106 @@ import { controller as mobileSetBetController } from 'modules/Menu/SetBet/MenuSe
 export let controller = (() => {
     let game;
 
-    function drawButtons() {
-        game = model.el('game');
+    function lockButtons() {
+        if (model.desktop || model.state('autoplay:start')) {
+            return;
+        }
 
-        let spinButton = view.draw.SpinButton({});
-            spinButton.inputEnabled = true;
-            spinButton.events.onInputDown.add(handle.spinButton);
-
-        let autoButton = view.draw.AutoButton({});
-            autoButton.inputEnabled = true;
-            autoButton.events.onInputDown.add(handle.autoButton);
-
-        let betButton = view.draw.BetButton({});
-            betButton.inputEnabled = true;
-            betButton.events.onInputDown.add(handle.betButton);
-
-        let menuButton = view.draw.MenuButton({});
-            menuButton.inputEnabled = true;
-            menuButton.events.onInputDown.add(handle.menuButton);
-
-        let soundButton = view.draw.SoundButton({});
-            soundButton.inputEnabled = true;
-            soundButton.events.onInputDown.add(handle.soundButton);
-
-        setButtonsX();
-        setButtonsY();
+        view.draw.lockButtons();
     }
+
+    function unlockButtons() {
+        if (model.desktop || model.state('autoplay:start')) {
+            return;
+        }
+
+        view.draw.unlockButtons();
+    }
+
+    let auto = {
+
+        start: function (amount) {
+            view.auto.Start();
+            view.draw.autoCount({amount});
+        },
+
+        stop: function () {
+            view.auto.Stop();
+            view.draw.removeCount();
+        },
+
+        change: function (count) {
+            view.draw.updateCount({count});
+        }
+
+    };
+
+    let handle = {
+        spinButton: function () {
+            let spinButton = model.el('spinButton');
+
+            if (model.state('buttons:locked') || spinButton.frameName === 'spinEmpty.png') {
+                return;
+            }
+
+            soundController.sound.playSound({sound: 'buttonClick'});
+            lockButtons();
+
+            rollController.startRoll();
+            rollController.fastRoll();
+        },
+
+        autoButton: function () {
+            if (model.state('buttons:locked')) {
+                return;
+            }
+            let autoButton = model.el('autoButton');
+
+            soundController.sound.playSound({sound: 'buttonClick'});
+
+            if (autoButton.frameName === 'stop.png') {
+                autoplayController.stop();
+                if (model.state('ready')) {
+                    unlockButtons();
+                }
+            } else {
+                mobileAutoplayController.handle.openPanel({});
+            }
+        },
+
+        betButton: function () {
+            let betButton = model.el('betButton');
+
+            if (model.state('buttons:locked') || betButton.frameName === 'setBetOut.png') {
+                return;
+            }
+
+            soundController.sound.playSound({sound: 'buttonClick'});
+            mobileSetBetController.handle.openPanel({});
+        },
+
+        menuButton: function () {
+            if (model.state('buttons:locked') || model.state('roll:progress')) {
+                return;
+            }
+
+            soundController.sound.playSound({sound: 'buttonClick'});
+            mobileSettingsController.handle.openSettings({});
+        },
+
+        soundButton: function () {
+            let soundButton = model.el('soundButton');
+            if (model.state('globalSound')) {
+                console.log('off');
+                soundController.volume.switchVolume();
+                soundButton.frameName = 'soundOut.png';
+            } else {
+                console.log('on');
+                soundController.volume.switchVolume();
+                soundButton.frameName = 'sound.png';
+            }
+        }
+    };
 
     function setButtonsX() {
         let spinButton = model.el('spinButton');
@@ -85,101 +159,36 @@ export let controller = (() => {
 
         betButton.y = spinButton.y + spinButtonWidth / 2 + buttonsDeltaY + betButton.width / 2;
         autoButton.y = spinButton.y - spinButtonWidth / 2 - buttonsDeltaY - autoButton.width / 2;
-        menuButton.y= autoButton.y - autoButton.width / 2 - buttonsDeltaY - menuButton.width / 2;
+        menuButton.y = autoButton.y - autoButton.width / 2 - buttonsDeltaY - menuButton.width / 2;
         soundButton.y = betButton.y + betButton.width / 2 + buttonsDeltaY + soundButton.width / 2;
 
     }
 
-    let handle = {
-        spinButton: function () {
-            let spinButton = model.el('spinButton');
+    function drawButtons() {
+        game = model.el('game');
 
-            if (model.state('buttons:locked')
-            || spinButton.frameName === 'spinEmpty.png') return;
+        let spinButton = view.draw.SpinButton({});
+        spinButton.inputEnabled = true;
+        spinButton.events.onInputDown.add(handle.spinButton);
 
-            soundController.sound.playSound({sound : 'buttonClick'});
-            lockButtons();
+        let autoButton = view.draw.AutoButton({});
+        autoButton.inputEnabled = true;
+        autoButton.events.onInputDown.add(handle.autoButton);
 
-            rollController.startRoll();
-            rollController.fastRoll();
-        },
+        let betButton = view.draw.BetButton({});
+        betButton.inputEnabled = true;
+        betButton.events.onInputDown.add(handle.betButton);
 
-        autoButton: function() {
-            if (model.state('buttons:locked')) return;
-            let autoButton = model.el('autoButton');
+        let menuButton = view.draw.MenuButton({});
+        menuButton.inputEnabled = true;
+        menuButton.events.onInputDown.add(handle.menuButton);
 
-            soundController.sound.playSound({sound : 'buttonClick'});
+        let soundButton = view.draw.SoundButton({});
+        soundButton.inputEnabled = true;
+        soundButton.events.onInputDown.add(handle.soundButton);
 
-            if (autoButton.frameName === 'stop.png') {
-                autoplayController.stop();
-                if (model.state('ready')) unlockButtons();
-            } else {
-                mobileAutoplayController.handle.openPanel({});
-            }
-        },
-
-        betButton: function() {
-            let betButton = model.el('betButton');
-
-            if (model.state('buttons:locked')
-            || betButton.frameName === 'setBetOut.png') return;
-
-            soundController.sound.playSound({sound : 'buttonClick'});
-            mobileSetBetController.handle.openPanel({});
-        },
-
-        menuButton: function() {
-            if (model.state('buttons:locked')
-            || model.state('roll:progress')) return;
-
-            soundController.sound.playSound({sound : 'buttonClick'});
-            mobileSettingsController.handle.openSettings({});
-        },
-
-        soundButton: function() {
-            let soundButton = model.el('soundButton');
-            if (model.state('globalSound')) {
-                console.log('off');
-                soundController.volume.switchVolume();
-                soundButton.frameName = 'soundOut.png';
-            } else {
-                console.log('on');
-                soundController.volume.switchVolume();
-                soundButton.frameName = 'sound.png';
-            }
-        }
-    };
-
-    let auto = {
-
-        start: function(amount) {
-            view.auto.Start();
-            view.draw.autoCount({amount});
-        },
-
-        stop: function() {
-            view.auto.Stop();
-            view.draw.removeCount();
-        },
-
-        change: function(count) {
-            view.draw.updateCount({count});
-        }
-
-    };
-
-    function lockButtons() {
-        if(model.desktop
-        || model.state('autoplay:start')) return;
-
-        view.draw.lockButtons();
-    }
-
-    function unlockButtons() {
-        if(model.desktop
-        || model.state('autoplay:start')) return;
-
-        view.draw.unlockButtons();
+        setButtonsX();
+        setButtonsY();
     }
 
     return {

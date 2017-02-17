@@ -2,7 +2,6 @@ import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
 
 import { view } from 'modules/Menu/Settings/MenuSettingsView';
-import { view as mainView } from 'modules/States/Main/MainView';
 
 import { controller as soundController } from 'modules/Sound/SoundController';
 
@@ -24,22 +23,26 @@ export let controller = (() => {
         touchRules: function () {
             touchX = game.input.mouse.input.x;
 
-            document.addEventListener("touchend", handle._touchEnd, false);
+            document.addEventListener('touchend', handle._touchEnd, false);
         },
         openSettings: function () {
-            if(model.state('buttons:locked')
+            if (model.state('buttons:locked')
             || model.state('roll:progress')
             || model.state('autoplay:start')
-            || model.state('settings') === 'open') return;
+            || model.state('settings') === 'open') {
+                return;
+            }
 
             model.state('settings', 'open');
             view.show.Settings({});
             view.show.Overlay({});
         },
         closeSettings: function () {
-            if (model.state('settings') === 'close') return;
+            if (model.state('settings') === 'close') {
+                return;
+            }
 
-            soundController.sound.playSound({sound : 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
             if (model.state('settings') === 'rules') {
                 view.hide.Rules({});
             }
@@ -51,7 +54,9 @@ export let controller = (() => {
             model.state('settings', 'close');
         },
         handMode: function () {
-            if (model.state('settings') === 'close') return;
+            if (model.state('settings') === 'close') {
+                return;
+            }
 
             model.state('settings', 'close');
             const time = 700;
@@ -94,11 +99,11 @@ export let controller = (() => {
 
             if (model.state('sound')) {
                 soundButton.frameName = 'soundOff.png';
-                model.state('sound', false)
+                model.state('sound', false);
                 model.cookie('sound', false);
             } else {
                 soundButton.frameName = 'soundOn.png';
-                model.state('sound', true)
+                model.state('sound', true);
                 model.cookie('sound', true);
             }
 
@@ -106,22 +111,22 @@ export let controller = (() => {
         changeMusic: function () {
             let musicButton = model.el('settingsMusicButton');
 
-            soundController.sound.playSound({sound : 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
             if (model.state('music')) {
                 musicButton.frameName = 'musicOff.png';
                 model.state('music', false);
                 model.cookie('music', false);
-                soundController.music.pauseMusic('fon')
+                soundController.music.pauseMusic('fon');
             } else {
                 musicButton.frameName = 'musicOn.png';
                 model.state('music', true);
                 model.cookie('music', true);
-                soundController.music.playMusic('fon')
+                soundController.music.playMusic('fon');
             }
         },
         changeFastSpin: function () {
             let fastSpinButton = model.el('settingsFastSpinButton');
-            soundController.sound.playSound({sound : 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
             if (model.state('fastRoll') === true) {
                 model.state('fastRoll', false);
                 model.cookie('fastRoll', false);
@@ -133,7 +138,9 @@ export let controller = (() => {
             }
         },
         openRules: function () {
-            if (model.state('settings') === 'rules') return;
+            if (model.state('settings') === 'rules') {
+                return;
+            }
 
             model.state('settings', 'rules');
             view.hide.Settings({});
@@ -142,7 +149,9 @@ export let controller = (() => {
             model.el('infoCounter', counter);
         },
         closeRules: function () {
-            if (model.state('settings') === 'close') return;
+            if (model.state('settings') === 'close') {
+                return;
+            }
 
             model.state('settings', 'close');
             view.hide.Rules({});
@@ -189,7 +198,7 @@ export let controller = (() => {
             model.el('infoCounter', counter);
         },
         showHistory: function () {
-            soundController.sound.playSound({sound : 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
         }
     };
 
@@ -197,59 +206,59 @@ export let controller = (() => {
         game = model.el('game');
 
         let overlay = view.draw.Overlay({});
-            overlay.inputEnabled = true;
-            overlay.input.priorityID = 10;
-            overlay.events.onInputDown.add(handle.closeSettings);
+        overlay.inputEnabled = true;
+        overlay.input.priorityID = 10;
+        overlay.events.onInputDown.add(handle.closeSettings);
 
         view.draw.Container({});
 
         let bg = view.draw.BG({});
-            bg.inputEnabled = true;
-            bg.input.priorityID = 11;
+        bg.inputEnabled = true;
+        bg.input.priorityID = 11;
 
         view.draw.Border({});
         view.draw.Title({});
 
         let soundButton = view.draw.SoundButton({});
-            soundButton.inputEnabled = true;
-            soundButton.input.priorityID = 12;
-            soundButton.events.onInputDown.add(handle.changeSound);
+        soundButton.inputEnabled = true;
+        soundButton.input.priorityID = 12;
+        soundButton.events.onInputDown.add(handle.changeSound);
         view.draw.SoundButtonText({});
 
         let musicButton = view.draw.MusicButton({});
-            musicButton.inputEnabled = true;
-            musicButton.input.priorityID = 12;
-            musicButton.events.onInputDown.add(handle.changeMusic);
+        musicButton.inputEnabled = true;
+        musicButton.input.priorityID = 12;
+        musicButton.events.onInputDown.add(handle.changeMusic);
         view.draw.MusicButtonText({});
 
         let fastSpinButton = view.draw.FastSpinButton({});
-            fastSpinButton.inputEnabled = true;
-            fastSpinButton.input.priorityID = 12;
-            fastSpinButton.events.onInputDown.add(handle.changeFastSpin);
+        fastSpinButton.inputEnabled = true;
+        fastSpinButton.input.priorityID = 12;
+        fastSpinButton.events.onInputDown.add(handle.changeFastSpin);
         view.draw.FastSpinButtonText({});
 
         let handModeButton = view.draw.HandModeButton({});
-            handModeButton.inputEnabled = true;
-            handModeButton.input.priorityID = 12;
-            handModeButton.events.onInputDown.add(handle.handMode);
+        handModeButton.inputEnabled = true;
+        handModeButton.input.priorityID = 12;
+        handModeButton.events.onInputDown.add(handle.handMode);
         view.draw.HandModeButtonText({});
 
         let rulesButton = view.draw.RulesButton({});
-            rulesButton.inputEnabled = true;
-            rulesButton.input.priorityID = 12;
-            rulesButton.events.onInputDown.add(handle.openRules);
+        rulesButton.inputEnabled = true;
+        rulesButton.input.priorityID = 12;
+        rulesButton.events.onInputDown.add(handle.openRules);
         view.draw.RulesButtonText({});
 
         let historyButton = view.draw.HistoryButton({});
-            historyButton.inputEnabled = true;
-            historyButton.input.priorityID = 12;
-            historyButton.events.onInputDown.add(handle.showHistory);
+        historyButton.inputEnabled = true;
+        historyButton.input.priorityID = 12;
+        historyButton.events.onInputDown.add(handle.showHistory);
         view.draw.HistoryButtonText({});
 
         let backButton = view.draw.BackButton({});
-            backButton.inputEnabled = true;
-            backButton.input.priorityID = 12;
-            backButton.events.onInputDown.add(handle.closeSettings);
+        backButton.inputEnabled = true;
+        backButton.input.priorityID = 12;
+        backButton.events.onInputDown.add(handle.closeSettings);
 
 
         let infoContainer = game.add.group();
@@ -260,8 +269,6 @@ export let controller = (() => {
         let closed = model.el('closed');
         let arrowRight = model.el('arrowRight');
         let arrowLeft = model.el('arrowLeft');
-        let infoMarkers = model.el('infoMarkers');
-        let counter = 0;
 
         infoRules.inputEnabled = true;
         closed.inputEnabled = true;

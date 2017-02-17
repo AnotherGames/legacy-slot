@@ -18,8 +18,8 @@ export let view = (() => {
     function drawLogo() {
         const game = model.el('game');
         let initLogo = game.add.sprite(game.world.centerX, game.world.centerY * 0.4, 'text', 'logo.png');
-            initLogo.anchor.set(0.5);
-            initLogo.scale.setTo(0.1, 0.1);
+        initLogo.anchor.set(0.5);
+        initLogo.scale.setTo(0.1, 0.1);
         game.add.tween(initLogo.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true);
         model.el('initLogo', initLogo);
         return initLogo;
@@ -36,7 +36,7 @@ export let view = (() => {
 
         let deltaY = (model.desktop) ? 180 : 160;
         let initBaraban = game.add.sprite(game.world.centerX, game.world.centerY + deltaY, 'baraban', 'B-6.png');
-            initBaraban.anchor.set(0.5);
+        initBaraban.anchor.set(0.5);
         game.add.tween(initBaraban).to({rotation: 2 * Math.PI}, 6000, 'Linear', true, 0, -1);
         model.el('initBaraban', initBaraban);
         return initBaraban;
@@ -44,10 +44,10 @@ export let view = (() => {
 
     function drawPlay() {
         const game = model.el('game');
-        let deltaY = (model.desktop) ? 100: 60;
+        let deltaY = (model.desktop) ? 100 : 60;
         let initPlay = game.add.sprite(game.world.centerX, game.world.centerY - deltaY, 'text', 'play.png');
-            initPlay.anchor.set(0.5);
-            initPlay.scale.setTo(0.1, 0.1);
+        initPlay.anchor.set(0.5);
+        initPlay.scale.setTo(0.1, 0.1);
         let initPlayTween = game.add.tween(initPlay.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true);
         model.el('initPlay', initPlay);
         model.el('initPlayTween', initPlayTween);
@@ -83,5 +83,5 @@ export let view = (() => {
         drawBaraban,
         playYoyoTween,
         stopYoyoTween
-    }
+    };
 })();

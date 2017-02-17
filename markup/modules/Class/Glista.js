@@ -93,7 +93,9 @@ export class Glista {
         *callback: Function
     */
     start(path, time = config.glista.time, callback) {
-        if (this.isPlay) return;
+        if (this.isPlay) {
+            return;
+        }
         if (this.isRemove) {
             console.warn('start: Glista is remove.');
             return;
@@ -136,7 +138,9 @@ export class Glista {
                 y: [this.pointEndPos.y]
             };
             for (let pathInd = path.length - 1; pathInd >= 0; pathInd--) {
-                if (typeof (path[pathInd]) !== 'number') continue;
+                if (typeof (path[pathInd]) !== 'number') {
+                    continue;
+                }
                 this.bezierPath.x.push(this.pointPos[pathInd][ path[pathInd] ].x);
                 this.bezierPath.y.push(this.pointPos[pathInd][ path[pathInd] ].y);
             }
@@ -148,7 +152,9 @@ export class Glista {
                 y: [this.pointStartPos.y]
             };
             for (let pathInd = 0; pathInd < path.length; pathInd++) {
-                if (typeof (path[pathInd]) !== 'number') continue;
+                if (typeof (path[pathInd]) !== 'number') {
+                    continue;
+                }
                 this.bezierPath.x.push(this.pointPos[pathInd][ path[pathInd] ].x);
                 this.bezierPath.y.push(this.pointPos[pathInd][ path[pathInd] ].y);
             }

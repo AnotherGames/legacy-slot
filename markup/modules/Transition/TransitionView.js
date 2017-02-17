@@ -1,36 +1,52 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
 
-import { controller as keyboardController } from 'modules/Keyboard/KeyboardController'
+import { controller as keyboardController } from 'modules/Keyboard/KeyboardController';
 import { controller as soundController } from 'modules/Sound/SoundController';
 
 export let view = (() => {
 
-    function fsStart() {
+    function moveLines(linesArr) {
         let game = model.el('game');
-        model.state('transitionScreen', true);
-        // Запускаем затемнение
-        game.camera.flash(0x000000, 500)
-        // Отрисовываем переходной экран
-        _fsStartDraw();
-        _fsStartTween();
-        _fsStartInput();
-        game.input.keyboard.enabled = true;
-        // Автопереход если включен
-        if (model.state('autoTransititon')) {
-            game.time.events.add(config.autoTransitionTime, () => {
-                soundController.sound.playSound({sound : 'buttonClick'});
-                soundController.music.stopMusic('startPerehod');
-                model.el('game').state.start('FS');
-                model.state('transitionScreen', false);
+
+        linesArr.forEach((lineSprite) => {
+            game.time.events.add(game.rnd.integerInRange(20, 150), () => {
+                lineSprite.x = game.rnd.integerInRange(0, game.width);
+                lineSprite.alpha = game.rnd.integerInRange(3, 10) / 10;
+                let curX = lineSprite.x;
+                game.add.tween(lineSprite).to({x: game.rnd.integerInRange(curX - 3, curX + 3), alpha: lineSprite.alpha - 0.2}, 30, 'Linear', true, 0, 5, true);
             });
+        });
+
+        game.time.events.add(game.rnd.integerInRange(500, 1000), () => {
+            moveLines(linesArr);
+        });
+    }
+
+    function addLines({
+        game = model.el('game'),
+        container = model.group('transition')
+    }) {
+        let linesArr = [];
+        let amount = Math.random() * 5 + 2;
+        for (let i = 0; i < amount; i++) {
+            let fonLine = game.add.sprite(game.rnd.integerInRange(0, game.width), 0, 'fonLine', null, container);
+            fonLine.alpha = game.rnd.integerInRange(3, 10) / 10;
+            linesArr.push(fonLine);
         }
+
+        let fonLine2 = game.add.sprite(0, 0, 'fonLine', null, container);
+        fonLine2.alpha = 0.6;
+        game.add.tween(fonLine2).to({x: game.width}, 30000, 'Linear', true, 0, -1);
+
+        // передвигаем линии
+        moveLines(linesArr);
+
     }
 
     function _fsStartDraw() {
         let game = model.el('game');
         let transitionContainer = model.group('transition');
-        game.camera.flash(0x000000, 777)
         // Изменяем музыку
         soundController.music.stopMusic('fon');
         soundController.music.playMusic('startPerehod');
@@ -51,18 +67,18 @@ export let view = (() => {
             'text',
             'freeSpins.png',
             transitionContainer);
-            freeSpinsText.anchor.set(0.5);
+        freeSpinsText.anchor.set(0.5);
         model.el('freeSpinsText', freeSpinsText);
 
         addLines({});
         // Счетчик Фри-Спинов
         let freeSpinsCount = model.data('rollResponse').FreeSpinsLeft;
         let freeSpinsLevel = game.add.bitmapText(game.width / 2, -200, 'numbersFont', freeSpinsCount, 120, transitionContainer);
-            freeSpinsLevel.align = 'center';
-            freeSpinsLevel.anchor.set(0.5);
-            if (model.mobile) {
-                freeSpinsLevel.scale.set(0.7);
-            }
+        freeSpinsLevel.align = 'center';
+        freeSpinsLevel.anchor.set(0.5);
+        if (model.mobile) {
+            freeSpinsLevel.scale.set(0.7);
+        }
         model.el('freeSpinsLevel', freeSpinsLevel);
 
         // Кнопка продолжить
@@ -71,8 +87,8 @@ export let view = (() => {
             'text',
             'continue.png',
             transitionContainer);
-            continueText.anchor.set(0.5);
-            continueText.scale.setTo(0.1, 0.1);
+        continueText.anchor.set(0.5);
+        continueText.scale.setTo(0.1, 0.1);
         model.el('continueText', continueText);
 
     }
@@ -100,54 +116,21 @@ export let view = (() => {
     }
 
     function _fsStartInput() {
-        let game = model.el('game');
         // При клике на фон будет переход на Фри-Спины
         let transitionBG = model.el('transitionBG');
-            transitionBG.inputEnabled = true;
-            transitionBG.input.priorityID = 2;
+        transitionBG.inputEnabled = true;
+        transitionBG.input.priorityID = 2;
         transitionBG.events.onInputDown.add(function () {
-            soundController.sound.playSound({sound : 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
             soundController.music.stopMusic('startPerehod');
             model.el('game').state.start('FS');
             model.state('transitionScreen', false);
         });
     }
 
-    function _fsStartHide() {
-        // Автоматический переход на Фри-Спины
-        soundController.music.stopMusic('startPerehod');
-        soundController.music.playMusic('fsFon');
-        let game = model.el('game');
-        model.el('game').state.start('FS');
-    }
-
-    function fsFinish() {
-        let game = model.el('game');
-        // game.input.keyboard.enabled = true;
-        keyboardController.initFsKeys();
-        model.state('buttons:locked', false);
-        // Темнота
-        game.camera.flash(0x000000, 500)
-        // Отрисовка финишного экрана
-        _fsFinishDraw();
-        _fsFinishTween();
-        _fsFinishInput();
-        // _coinsTween();
-        model.state('maxFsMultiplier', false);
-        // Автопереход
-        if (model.state('autoTransititon')) {
-            game.time.events.add(config.autoTransitionTime, () => {
-                soundController.sound.playSound({sound : 'buttonClick'});
-                soundController.music.stopMusic('finishPerehod');
-                model.el('game').state.start('Main');
-            });
-        }
-    }
-
     function _fsFinishDraw() {
         let game = model.el('game');
         let transitionContainer = model.group('transition');
-        game.camera.flash(0x000000, 777)
         // Изменяем музыку
         soundController.music.stopMusic('fsFon');
         soundController.music.playMusic('finishPerehod');
@@ -183,8 +166,8 @@ export let view = (() => {
 
         // Отрисовываем Выигрыш
         let winCount = game.add.bitmapText(game.width / 2, -200, 'numbersFont', 0, 120, transitionContainer);
-            winCount.align = 'center';
-            winCount.anchor.set(0.5);
+        winCount.align = 'center';
+        winCount.anchor.set(0.5);
         if (model.mobile) {
             winCount.scale.set(0.7);
         }
@@ -196,7 +179,7 @@ export let view = (() => {
             'text',
             'continue.png',
             transitionContainer);
-            continueText.anchor.set(0.5);
+        continueText.anchor.set(0.5);
         if (model.mobile) {
             continueText.y = game.world.height * 0.85;
         }
@@ -204,6 +187,8 @@ export let view = (() => {
         model.el('continueText', continueText);
 
     }
+
+
     // Накрутка выигрыша
     function _сountMeter(count, elem) {
         let game = model.el('game');
@@ -228,46 +213,6 @@ export let view = (() => {
         };
         game.frameAnims.push(anim);
     }
-
-    // Монетки на победном экране
-    // function _addCoin(container) {
-    //     let game = model.el('game');
-    //     if (container.y >= game.height * 5.7) return;
-    //
-    //     let posX = game.rnd.integerInRange(game.width * 0.1, game.width * 0.9);
-    //     let coin = game.add.sprite(posX, container.y * -1 - 100, 'transitionCoin', null, container);
-    //     coin.anchor.set(0.5);
-    //     let scale = game.rnd.integerInRange(50, 100) / 75;
-    //     coin.scale.set(scale, scale);
-    //     let height = coin.height;
-    //     coin.height = game.rnd.integerInRange(height * 0.3, height);
-    //     let tween = game.add.tween(coin)
-    //         .to({rotation: 200}, 1000, 'Linear', true)
-    //         .start();
-    //     tween.onComplete.add(() => {
-    //         coin.destroy();
-    //     });
-    //     game.add.tween(coin)
-    //         .to({height: height}, 200, 'Linear')
-    //         .to({height: height * 0.2}, 100, 'Linear')
-    //         .to({height: height}, 200, 'Linear')
-    //         .to({height: height * 0.2}, 100, 'Linear')
-    //         .to({height: height}, 200, 'Linear')
-    //         .to({height: height * 0.2}, 100, 'Linear')
-    //         .to({height: height}, 200, 'Linear')
-    //         .start();
-    //
-    //     game.time.events.add(75, () => {
-    //         _addCoin(container)
-    //     });
-    // }
-    //
-    // function _coinsTween() {
-    //     let game = model.el('game');
-    //     let coinsContainer = game.add.group();
-    //     _addCoin(coinsContainer);
-    //     game.add.tween(coinsContainer).to({y: game.height * 7}, 5000, 'Linear', true);
-    // }
 
     function _fsFinishTween() {
         let game = model.el('game');
@@ -298,18 +243,54 @@ export let view = (() => {
         transitionBG.inputEnabled = true;
         transitionBG.input.priorityID = 2;
         transitionBG.events.onInputDown.add(function () {
-            soundController.sound.playSound({sound : 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
             soundController.music.stopMusic('finishPerehod');
             model.el('game').state.start('Main');
         });
     }
 
-    function _fsFinishHide() {
-        console.log('i am finishing fs after timeout');
-        soundController.music.stopMusic('finishPerehod');
-        soundController.music.playMusic('fon');
+    function fsStart() {
         let game = model.el('game');
-        model.el('game').state.start('Main');
+        model.state('transitionScreen', true);
+        // Запускаем затемнение
+        game.camera.flash(0x000000, 500);
+        // Отрисовываем переходной экран
+        _fsStartDraw();
+        _fsStartTween();
+        _fsStartInput();
+        game.input.keyboard.enabled = true;
+        // Автопереход если включен
+        if (model.state('autoTransititon')) {
+            game.time.events.add(config.autoTransitionTime, () => {
+                soundController.sound.playSound({sound: 'buttonClick'});
+                soundController.music.stopMusic('startPerehod');
+                model.el('game').state.start('FS');
+                model.state('transitionScreen', false);
+            });
+        }
+    }
+
+    function fsFinish() {
+        let game = model.el('game');
+        // game.input.keyboard.enabled = true;
+        keyboardController.initFsKeys();
+        model.state('buttons:locked', false);
+        // Темнота
+        game.camera.flash(0x000000, 500);
+        // Отрисовка финишного экрана
+        _fsFinishDraw();
+        _fsFinishTween();
+        _fsFinishInput();
+        // _coinsTween();
+        model.state('maxFsMultiplier', false);
+        // Автопереход
+        if (model.state('autoTransititon')) {
+            game.time.events.add(config.autoTransitionTime, () => {
+                soundController.sound.playSound({sound: 'buttonClick'});
+                soundController.music.stopMusic('finishPerehod');
+                model.el('game').state.start('Main');
+            });
+        }
     }
 
     function addCloud({
@@ -335,7 +316,7 @@ export let view = (() => {
         }
         cloud.x = x;
 
-        if (container === model.group('bg')){
+        if (container === model.group('bg')) {
             cloud.x = (side === 'left') ? -cloud.width : game.width + cloud.width;
         }
         let delta = (side === 'left') ? game.width + cloud.width : -cloud.width;
@@ -350,49 +331,15 @@ export let view = (() => {
 
     }
 
-    function addLines({
-        game = model.el('game'),
-        container = model.group('transition')
-    }) {
-        let linesArr = [];
-        let amount = Math.random() * 5 + 2;
-        for (let i = 0; i < amount; i++) {
-            let fonLine = game.add.sprite(game.rnd.integerInRange(0, game.width), 0, 'fonLine', null, container);
-                fonLine.alpha = game.rnd.integerInRange(3, 10) / 10;
-            linesArr.push(fonLine);
-        }
 
-        let fonLine2 = game.add.sprite(0, 0, 'fonLine', null, container);
-        fonLine2.alpha = 0.6;
-        game.add.tween(fonLine2).to({x: game.width}, 30000, 'Linear', true, 0, -1)
 
-        // передвигаем линии
-        moveLines(linesArr);
 
-    }
-
-    function moveLines(linesArr) {
-        let game = model.el('game');
-
-        linesArr.forEach((lineSprite) => {
-            game.time.events.add(game.rnd.integerInRange(20, 150), () => {
-                lineSprite.x = game.rnd.integerInRange(0, game.width);
-                lineSprite.alpha = game.rnd.integerInRange(3, 10) / 10;
-                let curX = lineSprite.x;
-                game.add.tween(lineSprite).to({x: game.rnd.integerInRange(curX - 3, curX + 3), alpha: lineSprite.alpha - 0.2}, 30, 'Linear', true, 0, 5, true);
-            });
-        });
-
-        game.time.events.add(game.rnd.integerInRange(500, 1000), () => {
-            moveLines(linesArr);
-        });
-    }
 
     return {
         fsStart,
         fsFinish,
         addCloud,
         addLines
-    }
+    };
 
 })();

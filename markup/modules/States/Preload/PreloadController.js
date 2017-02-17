@@ -29,10 +29,10 @@ export class Preload {
         game.load.setPreloadSprite(view.drawPreloadBar());
         view.drawPreloadCoin();
 
-        model.state('loadError', false)
-        game.load.onFileError.add(()=>{
-            model.state('loadError', true)
-        })
+        model.state('loadError', false);
+        game.load.onFileError.add(() => {
+            model.state('loadError', true);
+        });
 
         this.loadSounds();
         this.loadInitAssets();
@@ -79,7 +79,7 @@ export class Preload {
         // game.load.image('sky', 'bg/sky.png');
         game.load.image('zaglushka', 'bg/zaglushka.png');
         game.load.image('gradient', 'bg/gradient.png');
-        //BG Anim
+        // BG Anim
         game.load.image('cloud', 'bg/cloud.png');
         game.load.image('sun', 'bg/sun.png');
         game.load.image('luchi', 'bg/luchi.png');
@@ -114,7 +114,7 @@ export class Preload {
         game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
         game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
         game.load.atlasJSONArray('footerButtons', 'footer/footerButtons.png', 'footer/footerButtons.json');
-        game.load.bitmapFont("numbersFont", "numbers/numbers.png", "numbers/numbers.xml");
+        game.load.bitmapFont('numbersFont', 'numbers/numbers.png', 'numbers/numbers.xml');
         if (model.desktop) {
             game.load.image('ui', 'game/UI.png');
             game.load.image('uiFS', 'game/UI_FS.png');
@@ -179,7 +179,7 @@ export class Preload {
             model.el('preloadBar').visible = false;
             model.el('preloadCoin').visible = false;
             mainView.draw.showPopup({message: 'Connection problem. Click to restart.'});
-            game.load.reset(true, true)
+            game.load.reset(true, true);
             return;
         }
         view.hideCoin();

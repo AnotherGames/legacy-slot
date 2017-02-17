@@ -4,7 +4,9 @@ import { Element } from 'modules/Class/Element';
 
 export class Wheel {
     get elements() {
-        if (this.elSwitch === undefined) return;
+        if (this.elSwitch === undefined) {
+            return;
+        }
 
         let elems = [];
         for (let i = 2; i < 5; i++) {
@@ -82,7 +84,7 @@ export class Wheel {
         this._wheelSpeed = 0;
         this._wheelStartPos = 0;
         this._wheelLastY = this.position.y;
-        Object.defineProperty(this, "wheelLastY", {
+        Object.defineProperty(this, 'wheelLastY', {
             set: function (val) {
                 this._wheelSpeed = val - this._wheelLastY;
                 this._wheelLastY = val;
@@ -147,7 +149,9 @@ export class Wheel {
         this._wheelStartPos = 0;
     }
     play() {
-        if (this.mode === 'roll') return;
+        if (this.mode === 'roll') {
+            return;
+        }
 
         if (this.mode === 'paused') {
             this._clock.resume();
@@ -158,8 +162,12 @@ export class Wheel {
         this._gotoPlay = true;
     }
     paused() {
-        if (this.mode === 'idle') return;
-        if (this.mode === 'paused') return;
+        if (this.mode === 'idle') {
+            return;
+        }
+        if (this.mode === 'paused') {
+            return;
+        }
 
         this._gotoPaused = true;
     }
@@ -169,21 +177,27 @@ export class Wheel {
         this._wheelStartPos = 0;
     }
     loop() {
-        if (this.mode !== 'roll') return;
+        if (this.mode !== 'roll') {
+            return;
+        }
 
         this._gotoLoop = true;
     }
     fast() {
         // TODO: добавить проверку на режим fastSpin
-        if (this.isFast) return;
+        if (this.isFast) {
+            return;
+        }
         this.isFast = true;
 
-        if (this.mode === 'idle') return;
+        if (this.mode === 'idle') {
+            return;
+        }
         this.timeLength = config.wheel.roll.fastTime;
 
         this.timer = this.timeLength * this.progress;
         this._clock.destroy();
-        this._clock = this.game.time.create(true)
+        this._clock = this.game.time.create(true);
         this._clock.add(this.timeLength - this.timer, () => {}, this);
         this._clock.start();
     }
@@ -291,9 +305,13 @@ export class Wheel {
         this.game.frameAnims.push(anim);
     }
     _easingBackInOut(k) {
-        if (k > 1) k = 1;
+        if (k > 1) {
+            k = 1;
+        }
         let s = this.easingSeparation;
-        if ( ( k *= 2 ) < 1 ) return 0.5 * ( k * k * ( ( s + 1 ) * k - s ) );
+        if ( ( k *= 2 ) < 1 ) {
+            return 0.5 * ( k * k * ( ( s + 1 ) * k - s ) );
+        }
         return 0.5 * ( ( k -= 2 ) * k * ( ( s + 1 ) * k + s ) + 2 );
     }
     _gotoMode() {
@@ -326,9 +344,13 @@ export class Wheel {
         }
     }
     _elemGotoSwitchTop() {
-        if (this.container.y < this.wheelY) return;
+        if (this.container.y < this.wheelY) {
+            return;
+        }
 
-        if (this.mode === 'roll') --this.rollLength;
+        if (this.mode === 'roll') {
+            --this.rollLength;
+        }
 
         this._gotoMode();
 
@@ -361,9 +383,13 @@ export class Wheel {
         this._elemGotoSwitchTop();
     }
     _elemGotoSwitchBottom() {
-        if (this.container.y > this.wheelY - this.elSize.height * 2) return;
+        if (this.container.y > this.wheelY - this.elSize.height * 2) {
+            return;
+        }
 
-        if (this.mode === 'roll') ++this.rollLength;
+        if (this.mode === 'roll') {
+            ++this.rollLength;
+        }
 
         this._gotoMode();
 
@@ -381,7 +407,7 @@ export class Wheel {
             anim = this.finishScreen[4 + this.rollLength] + '-n';
         }
 
-        let itemInd = (this.elSwitch < 0) ?  5 - (Math.abs(this.elSwitch + 1) % 6) : Math.abs(this.elSwitch) % 6;
+        let itemInd = (this.elSwitch < 0) ? 5 - (Math.abs(this.elSwitch + 1) % 6) : Math.abs(this.elSwitch) % 6;
         // anim = (itemInd + 1) + '-n';
         this._upElement({
             item: this.items[itemInd],

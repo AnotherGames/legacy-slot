@@ -1,6 +1,6 @@
 import { controller as balanceController } from 'modules/Balance/BalanceController';
 import { controller as setBetController } from 'modules/Menu/SetBet/MenuSetBetController';
-import { controller as soundController } from 'modules/Sound/SoundController'
+import { controller as soundController } from 'modules/Sound/SoundController';
 
 export let model = (() => {
 

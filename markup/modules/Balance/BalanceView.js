@@ -17,7 +17,7 @@ export let view = (() => {
         els.forEach((frase, fraseInd) => {
             frase.forEach((word, wordInd) => {
                 totalWidth += word.width;
-                if (fraseInd == 0) {
+                if (fraseInd === 0) {
                     frase[0].x = frase[0].width / 2;
                     frase[1].x = frase[0].x + frase[0].width / 2 + d + frase[1].width / 2;
                 } else {
@@ -34,7 +34,7 @@ export let view = (() => {
 
     let draw = {
 
-        CashBalance: function({
+        CashBalance: function ({
             game = model.el('game'),
             container = model.group('balanceCash'),
             currencySymbol = model.balance('currencySymbol'),
@@ -65,7 +65,7 @@ export let view = (() => {
 
         },
 
-        MobileBalance: function({
+        MobileBalance: function ({
             game = model.el('game'),
             container = model.group('balanceCoin'),
             coinSumValue = model.balance('coinSum'),
@@ -90,7 +90,7 @@ export let view = (() => {
 
         },
 
-        DesktopBalance: function({
+        DesktopBalance: function ({
             game = model.el('game'),
             container = model.group('panel'),
             coinSumValue = model.balance('coinSum'),
@@ -118,7 +118,7 @@ export let view = (() => {
 
         },
 
-        FSMobileBalance: function({
+        FSMobileBalance: function ({
             game = model.el('game'),
             container = model.group('balanceCoin'),
             totalWinValue = model.balance('totalWin'),
@@ -142,7 +142,7 @@ export let view = (() => {
             _calcTextPosition([[totalWinText, totalWinSum], [winText, winSum]], container);
         },
 
-        FSDesktopBalance: function({
+        FSDesktopBalance: function ({
             game = model.el('game'),
             container = model.group('panel'),
             coinSumValue = model.balance('coinSum'),
@@ -161,8 +161,8 @@ export let view = (() => {
             let coinValue = game.add.text(x[2], y[2], `${coinValueAmount}`, valueStyle, container);
             let betValue = game.add.text(x[0], y[2], `${betValueAmount}`, valueStyle, container);
 
-            let winSum = game.add.text(x[3], y[0], `0`, sumStyle, container);
-            let totalWinSum = game.add.text(x[3], y[1], `0`, sumStyle, container);
+            let winSum = game.add.text(x[3], y[0], '0', sumStyle, container);
+            let totalWinSum = game.add.text(x[3], y[1], '0', sumStyle, container);
 
             model.el('coinSum', coinSum);
             model.el('betSum', betSum);
@@ -179,7 +179,7 @@ export let view = (() => {
 
     let update = {
 
-        CashBalance: function({
+        CashBalance: function ({
             container = model.group('balanceCash'),
             currencySymbol = model.balance('currencySymbol'),
             coinCashValue = model.balance('coinCash'),
@@ -226,7 +226,7 @@ export let view = (() => {
 
         },
 
-        MobileBalance: function({
+        MobileBalance: function ({
             container = model.group('balanceCoin'),
             coinSumValue = model.balance('coinSum'),
             betSumValue = model.balance('betSum')
@@ -269,7 +269,7 @@ export let view = (() => {
 
         },
 
-        DesktopBalance: function({
+        DesktopBalance: function ({
             coinSumValue = model.balance('coinSum'),
             betSumValue = model.balance('betSum'),
             coinValueAmount = model.balance('coinValue'),
@@ -312,7 +312,7 @@ export let view = (() => {
 
         },
 
-        FSMobileBalance: function({
+        FSMobileBalance: function ({
             winSumValue = model.balance('fsWin'),
             totalWinSumValue = model.balance('totalWin'),
             container = model.group('balanceCoin')
@@ -330,7 +330,7 @@ export let view = (() => {
 
         },
 
-        FSDesktopBalance: function({
+        FSDesktopBalance: function ({
             winSumValue = model.balance('fsWin'),
             totalWinSumValue = model.balance('totalWin')
         }) {
@@ -348,6 +348,6 @@ export let view = (() => {
     return {
         draw,
         update
-    }
+    };
 
 })();

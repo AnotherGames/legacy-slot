@@ -8,7 +8,7 @@ export let controller = (function () {
     function initDesktopSettings(game) {
         $('#volume').on('input change', function () {
             let soundButton = model.el('soundButton');
-            if (this.value == 0) {
+            if (this.value === 0) {
                 model.state('globalSound', false);
                 model.cookie('globalSound', false);
                 soundButton.frameName = 'soundOff.png';
@@ -28,7 +28,7 @@ export let controller = (function () {
 
         });
         $('#volume').on('mousedown', function () {
-            if (this.value > 0){
+            if (this.value > 0) {
                 model.data('lastVolume', this.value)
             }
         });

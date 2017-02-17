@@ -13,7 +13,7 @@ export let view = (() => {
                 'menuButtons',
                 'maxBet.png',
                 container);
-                maxBetButton.anchor.set(0.5);
+            maxBetButton.anchor.set(0.5);
             return maxBetButton;
         },
 
@@ -27,7 +27,7 @@ export let view = (() => {
                 'menuButtons',
                 'betLevelText.png',
                 container);
-                betLevelText.anchor.set(0.5);
+            betLevelText.anchor.set(0.5);
             return betLevelText;
         },
 
@@ -41,7 +41,7 @@ export let view = (() => {
                 'menuButtons',
                 'empty.png',
                 container);
-                betBG.anchor.set(0.5);
+            betBG.anchor.set(0.5);
             model.el('setbetPanelBetBG', betBG);
             return betBG;
         },
@@ -58,8 +58,8 @@ export let view = (() => {
                 value,
                 {font: 'bold 60px Arial', fill: '#90fd5a', align: 'center'},
                 container);
-                betLevelValue.setShadow(0, 0, '#90fd5a', 8);
-                betLevelValue.anchor.set(0.5);
+            betLevelValue.setShadow(0, 0, '#90fd5a', 8);
+            betLevelValue.anchor.set(0.5);
             model.el('setbetPanelBetLevelValue', betLevelValue);
             return betLevelValue;
         },
@@ -77,7 +77,7 @@ export let view = (() => {
                 'menuButtons',
                 'plus.png',
                 container);
-                betPlus.anchor.set(0.5);
+            betPlus.anchor.set(0.5);
             return betPlus;
         },
 
@@ -94,7 +94,7 @@ export let view = (() => {
                 'menuButtons',
                 'minus.png',
                 container);
-                betMinus.anchor.set(0.5);
+            betMinus.anchor.set(0.5);
             return betMinus;
         },
 
@@ -108,7 +108,7 @@ export let view = (() => {
                 'menuButtons',
                 'coinValueText.png',
                 container);
-                coinValue.anchor.set(0.5);
+            coinValue.anchor.set(0.5);
         },
 
         coinBG: function ({
@@ -121,7 +121,7 @@ export let view = (() => {
                 'menuButtons',
                 'empty.png',
                 container);
-                coinBG.anchor.set(0.5);
+            coinBG.anchor.set(0.5);
             model.el('setbetPanelCoinBG', coinBG);
             return coinBG;
         },
@@ -138,8 +138,8 @@ export let view = (() => {
                 value,
                 {font: 'bold 35px Arial', fill: '#90fd5a', align: 'center'},
                 container);
-                coinText.anchor.set(0.5);
-                coinText.setShadow(0, 0, '#90fd5a', 8);
+            coinText.anchor.set(0.5);
+            coinText.setShadow(0, 0, '#90fd5a', 8);
             model.el('setbetPanelCoinValue', coinText);
             return coinText;
         },
@@ -157,7 +157,7 @@ export let view = (() => {
                 'menuButtons',
                 'plus.png',
                 container);
-                betPlus.anchor.set(0.5);
+            betPlus.anchor.set(0.5);
             return betPlus;
         },
 
@@ -174,7 +174,7 @@ export let view = (() => {
                 'menuButtons',
                 'minus.png',
                 container);
-                betMinus.anchor.set(0.5);
+            betMinus.anchor.set(0.5);
             return betMinus;
         },
 
@@ -182,7 +182,7 @@ export let view = (() => {
             game = model.el('game')
         }) {
             let container = game.add.group();
-                container.x = game.world.width;
+            container.x = game.world.width;
             model.el('setbetContainer', container);
             return container;
         },
@@ -195,8 +195,8 @@ export let view = (() => {
             let overlay = game.add.graphics(0, 0)
                 .beginFill(color)
                 .drawRect(0, 0, game.width, game.height);
-                overlay.alpha = alpha;
-                overlay.visible = false;
+            overlay.alpha = alpha;
+            overlay.visible = false;
             model.el('setbetOverlay', overlay);
             return overlay;
         },
@@ -241,7 +241,7 @@ export let view = (() => {
                 text,
                 style,
                 container);
-                setbetTitle.anchor.set(0.5);
+            setbetTitle.anchor.set(0.5);
             model.el('setbetTitle', setbetTitle);
             return setbetTitle;
         },
@@ -257,7 +257,7 @@ export let view = (() => {
                 'mobileButtons',
                 'return.png',
                 container);
-                backButton.anchor.set(0.5);
+            backButton.anchor.set(0.5);
             model.el('setbetBackButton', backButton);
             return backButton;
         }
@@ -301,7 +301,7 @@ export let view = (() => {
             time = 700
         }) {
             let overlay = model.el('setbetOverlay');
-                overlay.visible = true;
+            overlay.visible = true;
             return game.add.tween(overlay).to( { alpha: finalAlpha }, time, 'Quart.easeOut', true);
         }
     };
@@ -326,9 +326,9 @@ export let view = (() => {
         }) {
             let overlay = model.el('setbetOverlay');
             let tween = game.add.tween(overlay).to( { alpha: 0 }, time, 'Quart.easeOut', true);
-                tween.onComplete.add(() => {
-                    model.el('setbetOverlay').visible = false;
-                });
+            tween.onComplete.add(() => {
+                model.el('setbetOverlay').visible = false;
+            });
             return tween;
         }
 

@@ -19,7 +19,7 @@ export let view = (() => {
             model.group('balanceCash', game.add.group());
             model.group('balanceCoin', game.add.group());
             model.group('popup', game.add.group());
-            model.group('infoTable', game.add.group());  
+            model.group('infoTable', game.add.group());
             model.group('transition', game.add.group());
         }
     };
@@ -50,8 +50,7 @@ export let view = (() => {
         },
 
         addPole: function ({
-            game = model.el('game'),
-            container = model.group('bg')
+            game = model.el('game')
         }) {
             let pole = game.add.spine(50, game.height * 0.95, 'pole');
             pole.setAnimationByName(1, '1', true);
@@ -92,14 +91,16 @@ export let view = (() => {
             bird.inputEnabled = true;
             bird.input.priorityID = 1;
             bird.input.pixelPerfectOver = true;
-            //TODO разобраться с этим извращенством
-            bird.events.onInputOver.add(()=>{
-                if(bird.input.isPixelPerfect()) bird.input.priorityID = 3;
-            })
-            bird.events.onInputOut.add(()=>{
+            // TODO разобраться с этим извращенством
+            bird.events.onInputOver.add(() => {
+                if (bird.input.isPixelPerfect()) {
+                    bird.input.priorityID = 3;
+                }
+            });
+            bird.events.onInputOut.add(() => {
                 bird.input.priorityID = 1;
-            })
-            bird.events.onInputDown.add(()=>{
+            });
+            bird.events.onInputDown.add(() => {
                 draw._flyBird();
                 soundController.sound.playSound({sound: 'lineWin'});
             });
@@ -120,10 +121,10 @@ export let view = (() => {
                 let flyAnim = birdFly.animations.add('fly', Phaser.Animation.generateFrameNames('fli2', 0, 24, '.png', 2));
                 flyAnim.play(15);
                 game.add.tween(birdFly).to({x: game.width * 0.92, y: 260}, 500, 'Linear', true, 500)
-                    .onComplete.add(() =>{
+                    .onComplete.add(() => {
                         birdFly.destroy();
                         bird.visible = true;
-                    })
+                    });
             }
             birdAnim.play(15, true);
             this._nextBirdAnim({});
@@ -139,7 +140,9 @@ export let view = (() => {
                 let number = game.rnd.integerInRange(2, 3);
                 let nextAnim = model.el(`birdAnim${number}`);
                 nextAnim.play(15);
-                nextAnim.onComplete.add(() => {birdAnim.play(15, true)}, this);
+                nextAnim.onComplete.add(() => {
+                    birdAnim.play(15, true);
+                }, this);
                 // Запускаем таймер снова
                 this._nextBirdAnim({});
             });
@@ -150,7 +153,7 @@ export let view = (() => {
             let game = model.el('game');
             let container = model.group('bg');
             let bird = model.el('bird');
-                bird.visible = false;
+            bird.visible = false;
             let sideBird = model.el('sideBird');
             let timer = model.el('timer');
             game.time.events.remove(timer);
@@ -158,10 +161,10 @@ export let view = (() => {
             let birdFly, flyAnim;
             if (sideBird === 'left') {
                 birdFly = game.add.sprite(130, 590, 'birdFly', 'fli200.png', container);
-                    model.el('birdFly', birdFly);
-                    birdFly.anchor.set(0.5);
+                model.el('birdFly', birdFly);
+                birdFly.anchor.set(0.5);
                 flyAnim = birdFly.animations.add('fly', Phaser.Animation.generateFrameNames('fli2', 0, 24, '.png', 2));
-                    flyAnim.play(15);
+                flyAnim.play(15);
                 game.add.tween(birdFly).to({x: -400, y: 590}, 1000, Phaser.Easing.Circular.InOut, true, 500)
                 .onComplete.add(() => {
                     birdFly.visible = false;
@@ -169,10 +172,10 @@ export let view = (() => {
                 }, this);
             } else {
                 birdFly = game.add.sprite(game.width * 0.92, 265, 'birdFly', 'fli100.png', container);
-                    model.el('birdFly', birdFly);
-                    birdFly.anchor.set(0.5);
+                model.el('birdFly', birdFly);
+                birdFly.anchor.set(0.5);
                 flyAnim = birdFly.animations.add('fly', Phaser.Animation.generateFrameNames('fli1', 0, 24, '.png', 2));
-                    flyAnim.play(15);
+                flyAnim.play(15);
                 game.add.tween(birdFly).to({x: 130, y: 590}, 1000, Phaser.Easing.Circular.InOut, true, 500)
                 .onComplete.add(() => {
                     birdFly.visible = false;
@@ -191,7 +194,6 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('bg')
         }) {
-            let counter = 0;
             let table = game.add.sprite(game.width * 0.855, 500, 'table', null, container);
             table.anchor.set(0.5);
 
@@ -218,8 +220,10 @@ export let view = (() => {
         animSkull: function (skull) {
             let game = model.el('game');
             let skullAnim = skull.animations.add('idle');
-                skullAnim.play(12);
-                skullAnim.onComplete.add(() => {skull.frameName = 'Scull-1_0.png'}, this);
+            skullAnim.play(12);
+            skullAnim.onComplete.add(() => {
+                skull.frameName = 'Scull-1_0.png';
+            }, this);
             game.time.events.add(15000 * Math.random(), () => {
                 draw.animSkull(skull);
             });
@@ -230,33 +234,35 @@ export let view = (() => {
             container = model.group('main')
         }) {
             let gameBG = game.add.sprite(0, 0, 'gameBG', null, container);
-                gameBG.anchor.set(0.5);
+            gameBG.anchor.set(0.5);
             model.el('gameBG', gameBG);
 
             let gameMachine = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachine', null, container);
-                gameMachine.anchor.set(0.5);
+            gameMachine.anchor.set(0.5);
             model.el('gameMachine', gameMachine);
         },
 
-        lineNumbers: function({
+        lineNumbers: function ({
             game = model.el('game'),
             container = model.group('numbers'),
             gameMachine = model.el('gameMachine'),
             side = 'left'
-        }){
-            let x = (side == 'right') ? gameMachine.right - 9 : gameMachine.left + 9;
+        }) {
+            let x = (side === 'right') ? gameMachine.right - 9 : gameMachine.left + 9;
             let lineNumbersArr = [];
 
             for (let i = 1; i < 11; i++) {
                 let lineNumber = game.add.sprite(x, config[model.res].win[i][0].y - gameMachine.height / 2 - 40,
                     'lineNumbers',
-                    'line_splash-' + i +'_0.png',
+                    'line_splash-' + i + '_0.png',
                     container);
-                lineNumber.normal = function() {lineNumber.frameName = 'line_splash-' + i + '_0.png'};
+                lineNumber.normal = function () {
+                    lineNumber.frameName = 'line_splash-' + i + '_0.png';
+                };
                 lineNumber.name = i;
                 lineNumber.anchor.set(0.5);
 
-                if(model.state('fs')) {
+                if (model.state('fs')) {
                     lineNumbersArr.push(lineNumber);
                     continue;
                 }
@@ -266,11 +272,11 @@ export let view = (() => {
                 lineNumber.input.pixelPerfectOver = 1;
 
                 lineNumber.events.onInputOver.add(() => {
-                  setTimeout(() => {
-                    if (lineNumber.lineShape) {
-                        lineNumber.lineShape.destroy();
-                    }
-                  }, 4000);
+                    setTimeout(() => {
+                        if (lineNumber.lineShape) {
+                            lineNumber.lineShape.destroy();
+                        }
+                    }, 4000);
                     lineNumber.lineShape = this.lineShape(lineNumber.name);
                 });
 
@@ -286,21 +292,21 @@ export let view = (() => {
             model.el(side + 'Arr', lineNumbersArr);
         },
 
-        lineShape: function(number) {
-           let game = model.el('game');
-           let container = model.group('glistaLight');
-           let line = model.data('lines')[number - 1];
-           let elSize = config[model.res].elements;
-           let lineShape = game.add.graphics(0, 0, container);
-           let gameMachine = model.el('gameMachine');
-           lineShape
+        lineShape: function (number) {
+            let game = model.el('game');
+            let container = model.group('glistaLight');
+            let line = model.data('lines')[number - 1];
+            let elSize = config[model.res].elements;
+            let lineShape = game.add.graphics(0, 0, container);
+            let gameMachine = model.el('gameMachine');
+            lineShape
                .lineStyle(4, 0x332206, 0.8)
                .moveTo((line[0].X + 0.5) * elSize.width - gameMachine.width / 2 + 50, (line[0].Y + 0.5) * elSize.height - gameMachine.height / 2 + 50)
                .lineTo((line[1].X + 0.5) * elSize.width - gameMachine.width / 2 + 50, (line[1].Y + 0.5) * elSize.height - gameMachine.height / 2 + 50)
                .lineTo((line[2].X + 0.5) * elSize.width - gameMachine.width / 2 + 50, (line[2].Y + 0.5) * elSize.height - gameMachine.height / 2 + 50)
                .lineTo((line[3].X + 0.5) * elSize.width - gameMachine.width / 2 + 50, (line[3].Y + 0.5) * elSize.height - gameMachine.height / 2 + 50)
-               .lineTo((line[4].X + 0.5) * elSize.width - gameMachine.width / 2 + 50, (line[4].Y + 0.5) * elSize.height - gameMachine.height / 2 + 50)
-           return lineShape;
+               .lineTo((line[4].X + 0.5) * elSize.width - gameMachine.width / 2 + 50, (line[4].Y + 0.5) * elSize.height - gameMachine.height / 2 + 50);
+            return lineShape;
         },
 
         machineContainer: function ({
@@ -343,7 +349,7 @@ export let view = (() => {
             const elSize = config[model.res].elements;
 
             let someGraphic = game.add.graphics(-elSize.width * 2.5, -elSize.height * 1.5, machineGroup);
-                someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5, elSize.height * 3);
+            someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5, elSize.height * 3);
             machineGroup.mask = someGraphic;
         },
 
@@ -365,7 +371,7 @@ export let view = (() => {
                 'popup',
                 null,
                 container);
-                popup.anchor.set(0.5);
+            popup.anchor.set(0.5);
             model.el('popup', popup);
 
             let popupText = game.add.text(
@@ -374,7 +380,7 @@ export let view = (() => {
                 message,
                 {font: font, fill: color, align: 'center', wordWrap: true, wordWrapWidth: 380, stroke: '#000000', strokeThickness: 3},
                 container);
-                popupText.anchor.set(0.5);
+            popupText.anchor.set(0.5);
 
             popup.inputEnabled = true;
             popup.input.priorityID = 3;
@@ -389,30 +395,30 @@ export let view = (() => {
             });
         },
 
-        flyingSmoke: function({
+        flyingSmoke: function ({
             game = model.el('game'),
             container = model.group('bg'),
             x = game.width / 39,
             y = game.height / 5.6,
             speed = 60000,
             delay = game.rnd.between(1000, 20000)
-        }){
+        }) {
             let smoke = game.add.sprite(x, y, 'smoke', null, container);
-                smoke.anchor.set(0.5);
-                smoke.scale.set(0.1);
-                smoke.alpha = 0;
+            smoke.anchor.set(0.5);
+            smoke.scale.set(0.1);
+            smoke.alpha = 0;
 
-            let scaleX = (model.desktop)? 1 : 0.6;
-            let scaleY = (model.desktop)? 1 : 0.6;
+            let scaleX = (model.desktop) ? 1 : 0.6;
+            let scaleY = (model.desktop) ? 1 : 0.6;
             game.add.tween(smoke).to({alpha: 0.8 }, 300, Phaser.Easing.Sinusoidal.InOut, true, delay);
-            game.add.tween(smoke.scale).to({y: scaleX, x: scaleY}, speed, Phaser.Easing.Sinusoidal.InOut, true, delay)
+            game.add.tween(smoke.scale).to({y: scaleX, x: scaleY}, speed, Phaser.Easing.Sinusoidal.InOut, true, delay);
             game.add.tween(smoke).to({y: smoke.y / 2}, speed, Phaser.Easing.Sinusoidal.InOut, true, delay)
-                .onComplete.add(()=>{
+                .onComplete.add(() => {
                     game.add.tween(smoke).to({y: -smoke.y, alpha: 0}, speed / 3, Phaser.Easing.Quintic.In, true)
-                        .onComplete.add(()=>{
+                        .onComplete.add(() => {
                             smoke.destroy();
                             draw.flyingSmoke({});
-                        })
+                        });
 
                 });
         }

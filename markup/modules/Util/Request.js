@@ -22,7 +22,7 @@ export let request = (() => {
     function send(name, options) {
         let url;
         switch (name) {
-            case 'Initialise':
+            case 'Initialise': {
                 // Авторизация
                 let params = getAllUrlParams();
                 let currentMode = params.mode || mode[options];
@@ -36,6 +36,7 @@ export let request = (() => {
                 } else {
                     url = `${serviceUrl}/_${name}/${userID}/${casinoID}/${currentMode}`;
                 }
+            }
                 break;
             case 'Roll':
                 console.log('--------------');
@@ -56,8 +57,8 @@ export let request = (() => {
                 resolve(noConnect[name]);
             } else {
                 let func = function (res) {
-                    if (name =='Roll') {
-                        console.log({res, date: new Date});
+                    if (name === 'Roll') {
+                        console.log({res, date: new Date()});
                     }
                     console.info(`Request: ${url}`);
                     resolve(res);
@@ -96,13 +97,13 @@ export let request = (() => {
 
                 // in case params look like: list[]=thing1&list[]=thing2
                 let paramNum = undefined;
-                let paramName = a[0].replace(/\[\d*\]/, function(v) {
+                let paramName = a[0].replace(/\[\d*\]/, function (v) {
                     paramNum = v.slice(1, -1);
                     return '';
                 });
 
                 // set parameter value (use 'true' if empty)
-                let paramValue = typeof(a[1]) === 'undefined' ? true : a[1];
+                let paramValue = typeof (a[1]) === 'undefined' ? true : a[1];
 
                 // (optional) keep case consistent
                 paramName = paramName.toLowerCase();
@@ -118,15 +119,13 @@ export let request = (() => {
                     if (typeof paramNum === 'undefined') {
                         // put the value on the end of the array
                         obj[paramName].push(paramValue);
-                    }
-                    // if array index number specified...
-                    else {
+                        // if array index number specified...
+                    } else {
                         // put the value at that index number
                         obj[paramName][paramNum] = paramValue;
                     }
-                }
-                // if param name doesn't exist yet, set it
-                else {
+                    // if param name doesn't exist yet, set it
+                } else {
                     obj[paramName] = paramValue;
                 }
             }

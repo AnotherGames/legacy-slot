@@ -16,8 +16,8 @@ export class Element {
         for (let i = 1; i <= config.symbolsCount; i++) {
             // Создаем по спрайту для каждого символа и делаем их не видимыми
             let sprite = game.add.sprite(0, 0, i, null, this.group);
-                sprite.anchor.set(0.5);
-                sprite.visible = false;
+            sprite.anchor.set(0.5);
+            sprite.visible = false;
             this.sprites.push(sprite);
 
             // Каждому спрайту добавляем необходимые анимации
@@ -33,7 +33,9 @@ export class Element {
 
     play(animation, fps = 15, loop = false) {
         // Если спрайт уже проигрывает нужную нам анимацию, то мы ничего не будем делать чтобы анимация не прыгала
-        if (this.activeSprite.animations.currentAnim.name === animation) return;
+        if (this.activeSprite.animations.currentAnim.name === animation) {
+            return;
+        }
 
         // Делаем невидимым спрайт который раньше играл анимацию
         this.activeSprite.visible = false;
@@ -55,7 +57,9 @@ export class Element {
     }
 
     playIfNotWin(animation) {
-        if (this.activeSprite.animations.currentAnim.name.indexOf('w') != -1) return;
+        if (this.activeSprite.animations.currentAnim.name.indexOf('w') !== -1) {
+            return;
+        }
         this.play(animation);
     }
 
