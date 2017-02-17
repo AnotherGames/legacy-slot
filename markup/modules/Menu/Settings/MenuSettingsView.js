@@ -316,82 +316,6 @@ export let view = (() => {
             return backButton;
         },
 
-        RulesScreen: function (container) {
-            let game = model.el('game');
-            let infoRules = game.add.sprite(
-                game.world.centerX,
-                game.world.centerY,
-                'info',
-                '1_en.png',
-                container);
-                infoRules.anchor.set(0.5);
-                infoRules.scale.set(1.6);
-            model.el('infoRules', infoRules);
-
-            let closed = game.add.sprite(
-                game.width - 170,
-                80,
-                'closed',
-                null,
-                container);
-            model.el('closed', closed);
-
-            let infoControllers = game.add.group();
-            container.add(infoControllers);
-
-            infoControllers.x = game.width / 2 - infoControllers.width / 2 - 120;
-            infoControllers.y = infoRules.bottom - infoControllers.height / 2 - 80;
-
-            let infoMarkers = [];
-            let infoMarker = game.add.sprite(
-                0,
-                0,
-                'infoMarker',
-                'marker_on.png',
-                infoControllers);
-                infoMarker.name = 'infoMarker0';
-            infoMarker.anchor.set(0.5);
-            infoMarkers.push(infoMarker);
-
-            for (let i = 1; i < config.numOfInfoDots; i++) {
-                let name = 'infoMarker' + i;
-                let counter = i;
-                let marker = game.add.sprite(
-                    infoMarker.x,
-                    0,
-                    'infoMarker',
-                    'marker_off.png',
-                    infoControllers);
-                    marker.name = name;
-                    marker.x = marker.x + 30 * i;
-                marker.anchor.set(0.5);
-                infoMarkers.push(marker);
-            }
-
-            model.el('infoMarkers', infoMarkers);
-
-            let arrowRight = game.add.sprite(
-                infoMarkers[infoMarkers.length-1].x,
-                55,
-                'ar',
-                null,
-                infoControllers);
-            arrowRight.anchor.set(0.5);
-            model.el('arrowRight', arrowRight);
-
-            let arrowLeft = game.add.sprite(
-                infoMarkers[0].x,
-                55,
-                'arLeft',
-                null,
-                infoControllers);
-            arrowLeft.anchor.set(0.5);
-            model.el('arrowLeft', arrowLeft);
-
-            container.visible = false;
-            return container;
-        }
-
     };
 
     let show = {
@@ -422,15 +346,6 @@ export let view = (() => {
                 overlay.visible = true;
             return game.add.tween(overlay).to( { alpha: finalAlpha }, time, 'Quart.easeOut', true);
         },
-
-        Rules: function ({
-            game = model.el('game'),
-            time = 700
-        }) {
-            let container = model.group('info');
-                container.visible = true;
-            return game.add.tween(container).to( { alpha: 1 }, time, 'Quart.easeOut', true);
-        }
     };
 
     let hide = {
@@ -458,18 +373,6 @@ export let view = (() => {
                 });
             return tween;
         },
-
-        Rules: function ({
-            game = model.el('game'),
-            time = 700
-        }) {
-            let container = model.group('info');
-            let tween = game.add.tween(container).to( { alpha: 0 }, time, 'Quart.easeOut', true);
-                tween.onComplete.add(() => {
-                    container.visible = false;
-                });
-            return tween;
-        }
 
     };
 
