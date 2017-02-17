@@ -88,22 +88,16 @@ export let controller = (() => {
             });
         });
 
-        let leftArr = model.el('leftArr');
-        let rightArr = model.el('rightArr');
+        let leftLineArr = model.el('leftLineArr');
+        let rightLineArr = model.el('rightLineArr');
 
-        leftArr.forEach((el) => {
-            if (el.openedTable) {
-                el.animations.play('close');
-                el.openedTable = false;
-            }
+        leftLineArr.forEach((el) => {
+            el.visible = true;
         });
 
-        rightArr.forEach((el) => {
-            if (el.openedTable) {
-                el.animations.play('close');
-                el.openedTable = false;
-            }
-        })
+        rightLineArr.forEach((el) => {
+            el.visible = true; 
+        });
 
         // Перевод в нормальную анимацию
         if (normalAnim) {

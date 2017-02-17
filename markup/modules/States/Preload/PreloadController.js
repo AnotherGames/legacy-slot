@@ -98,6 +98,7 @@ export class Preload {
         game.load.image('winLine', 'win/winLine.png');
         game.load.image('winTotal', 'win/winTotal.png');
         game.load.atlasJSONArray('lineNumbers', 'win/lineNumbers.png', 'win/lineNumbers.json');
+        game.load.atlasJSONArray('winNumbers', 'win/winNumbers.png', 'win/winNumbers.json');
         game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
         game.load.atlasJSONArray('footerButtons', 'footer/footerButtons.png', 'footer/footerButtons.json');
         game.load.bitmapFont("numbersFont", "numbers/numbers.png", "numbers/numbers.xml");
@@ -136,8 +137,10 @@ export class Preload {
     loadSpineAssets() {
         const game = model.el('game');
         game.load.spine('bottle', 'spine/Bottle.json');
-        game.load.spine('fon', 'spine/Zastavka.json');
         game.load.spine('boy', 'spine/boy.json');
+        if (model.desktop) {
+            game.load.spine('fon', 'spine/Zastavka.json');
+        }
 
     }
 

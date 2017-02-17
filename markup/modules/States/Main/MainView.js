@@ -263,22 +263,34 @@ export let view = (() => {
             let x = (side == 'right') ? gameMachine.right - 11 : gameMachine.left + 11;
             let deltaY = (model.desktop) ? 70 : 60;
             let lineNumbersArr = [];
+            let winNumbersArr = [];
 
             for (let i = 1; i < 11; i++) {
                 let lineNumber = game.add.sprite(x, config[model.res].win[i][0].y - gameMachine.height / 2 - deltaY,
                     'lineNumbers',
-                    'line-' + i + '-bang_0.png',
+                    'line_' + i + '.png',
                     container);
                 lineNumber.name = i;
                 lineNumber.anchor.set(0.5);
-                lineNumber.scale.set(1.4);
-                lineNumber.animations.add('win', Phaser.Animation.generateFrameNames('line-' + i + '-bang_', 0, 30, '.png', 1), 30, false);
-                lineNumber.animations.getAnimation('win').onComplete.add(() => {
-                    lineNumber.frameName = 'line-' + i + '-bang_0.png';
+
+                let winNumber = game.add.sprite(x, config[model.res].win[i][0].y - gameMachine.height / 2 - deltaY,
+                    'winNumbers',
+                    'line-' + i + '-bang_0.png',
+                    container);
+                winNumber.name = i;
+                winNumber.anchor.set(0.5);
+                winNumber.scale.set(1.4);
+                winNumber.visible = false;
+
+                winNumber.animations.add('win', Phaser.Animation.generateFrameNames('line-' + i + '-bang_', 0, 30, '.png', 1), 30, false);
+                winNumber.animations.getAnimation('win').onComplete.add(() => {
+                    winNumber.frameName = 'line-' + i + '-bang_0.png';
+                    winNumber.visible = false;
                 });
 
                 if(model.state('fs')) {
                     lineNumbersArr.push(lineNumber);
+                    winNumbersArr.push(winNumber);
                     continue;
                 }
 
@@ -289,33 +301,41 @@ export let view = (() => {
                 if (model.desktop) {
                     lineNumber.events.onInputOver.add(() => {
                         if (lineNumber.lineShape) {
+                            lineNumber.frameName = 'line_' + lineNumber.name + '.png',
                             lineNumber.lineShape.destroy();
                         }
+                        lineNumber.frameName = 'line_big_' + lineNumber.name + '.png',
                         lineNumber.lineShape = this.lineShape(lineNumber.name);
                     });
 
                     lineNumber.events.onInputOut.add(() => {
                         if (lineNumber.lineShape) {
+                            lineNumber.frameName = 'line_' + lineNumber.name + '.png',
                             lineNumber.lineShape.destroy();
                         }
                     });
                 } else {
                     lineNumber.events.onInputDown.add(() => {
                         if (lineNumber.lineShape) {
+                            lineNumber.frameName = 'line_' + lineNumber.name + '.png',
                             lineNumber.lineShape.destroy();
                         }
+                        lineNumber.frameName = 'line_big_' + lineNumber.name + '.png',
                         lineNumber.lineShape = this.lineShape(lineNumber.name);
-                        game.time.events.add(4000, () => {
+                        game.time.events.add(1500, () => {
                             if (lineNumber.lineShape) {
+                                lineNumber.frameName = 'line_' + lineNumber.name + '.png',
                                 lineNumber.lineShape.destroy();
                             }
                         });
                     });
                 }
                 lineNumbersArr.push(lineNumber);
+                winNumbersArr.push(winNumber);
             }
 
-            model.el(side + 'Arr', lineNumbersArr);
+            model.el(side + 'LineArr', lineNumbersArr);
+            model.el(side + 'WinArr', winNumbersArr);
         },
 
         lineShape: function(number) {
@@ -324,7 +344,7 @@ export let view = (() => {
            let line = model.data('lines')[number - 1];
            let elSize = config[model.res].elements;
            let lineShape = game.add.graphics(0, 0, container);
-           let y = (model.desktop) ? 60 : 80;
+           let y = (model.desktop) ? 60 : 30;
            lineShape
                .lineStyle(4, 0xf48725, 0.8)
                .moveTo((line[0].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[0].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + y)

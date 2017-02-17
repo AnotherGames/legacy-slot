@@ -84,15 +84,31 @@ export let view = (() => {
             container = model.group('winTop')
         }) {
 
-            let leftArr = model.el('leftArr');
-            let rightArr = model.el('rightArr');
+            let leftLineArr = model.el('leftLineArr');
+            let rightLineArr = model.el('rightLineArr');
 
-            let winSplashLeft = leftArr.filter((el) => {
+            let lineNumberLeft = leftLineArr.filter((el) => {
                 return el.name === number;
             })[0];
-            let winSplashRight = rightArr.filter((el) => {
+            let lineNumberRight = rightLineArr.filter((el) => {
                 return el.name === number;
             })[0];
+
+            lineNumberLeft.visible = false;
+            lineNumberRight.visible = false;
+
+            let leftWinArr = model.el('leftWinArr');
+            let rightWinArr = model.el('rightWinArr');
+
+            let winSplashLeft = leftWinArr.filter((el) => {
+                return el.name === number;
+            })[0];
+            let winSplashRight = rightWinArr.filter((el) => {
+                return el.name === number;
+            })[0];
+
+            winSplashLeft.visible = true;
+            winSplashRight.visible = true;
 
             winSplashLeft.animations.play('win');
             winSplashRight.animations.play('win');
