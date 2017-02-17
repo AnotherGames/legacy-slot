@@ -41,7 +41,7 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('footer'),
             color = 0x000000,
-            heightBottom = 50,
+            heightBottom = 40,
             alphaBottom = 0.7
         }) {
 
@@ -66,25 +66,38 @@ export let view = (() => {
             if (model.mobile) {
                 y = model.el('game').height - 17;
             }
-            let homeButton = game.add.button(x, y, 'footerButtons', null, null, 'homeOn.png', 'home.png', 'homeOn.png', null, container);
+            let homeButton = game.add.button(x, y, 'footerButtons', null, null, null, 'home.png', null, null, container);
             homeButton.anchor.set(0.5);
-            // homeButton.visible = false;
+
             model.el('homeButton', homeButton);
             return homeButton;
         },
 
-        SoundButton: function({
+        FullScreenButton: function({
             game = model.el('game'),
             container = model.group('footerMenu'),
             x = 80,
             y = model.el('game').height - 20
         }) {
-            let soundButton = game.add.button(x, y, 'footerButtons', null, null, 'sound.png', null, null, null, container);
+            let fullScreeButton = game.add.button(x, y, 'footerButtons', null, null, null, 'fullScreenOn.png', null, null, container);
+            fullScreeButton.anchor.set(0.5);
+
+            model.el('fullScreeButton', fullScreeButton);
+            return fullScreeButton;
+        },
+
+        SoundButton: function({
+            game = model.el('game'),
+            container = model.group('footerMenu'),
+            x = 130,
+            y = model.el('game').height - 20
+        }) {
+            let soundButton = game.add.button(x, y, 'footerButtons', null, null, null, 'soundOn.png', null, null, container);
             soundButton.anchor.set(0.5);
-            // soundButton.visible = false;
+
             // Определяем начальный фрейм
             if (model.state('globalSound')) {
-                soundButton.frameName = 'sound.png';
+                soundButton.frameName = 'soundOn.png';
             } else {
                 soundButton.frameName = 'soundOff.png';
             }
@@ -92,44 +105,15 @@ export let view = (() => {
             return soundButton;
         },
 
-        FullScreenButton: function({
-            game = model.el('game'),
-            container = model.group('footerMenu'),
-            x = 130,
-            y = model.el('game').height - 20
-        }) {
-            let fullScreeButton = game.add.button(x, y, 'footerButtons', null, null, 'fullscreen.png', 'fullscreenOff.png', 'fullscreen.png', null, container);
-            fullScreeButton.anchor.set(0.5);
-            // fullScreeButton.visible = false;
-
-            model.el('fullScreeButton', fullScreeButton);
-            return fullScreeButton;
-        },
-
-        SettingsButton: function({
+        FastButton: function({
             game = model.el('game'),
             container = model.group('footerMenu'),
             x = 180,
             y = model.el('game').height - 20
         }) {
-            let settingsButton = game.add.button(x, y, 'footerButtons', null, null, 'settingsOn.png', 'settings.png', 'settingsOn.png', null, container);
-            settingsButton.anchor.set(0.5);
-            // settingsButton.visible = false;
-
-            model.el('settingsButton', settingsButton);
-            return settingsButton;
-        },
-
-        FastButton: function({
-            game = model.el('game'),
-            container = model.group('footerMenu'),
-            x = 230,
-            y = model.el('game').height - 20
-        }) {
-            let fastButton = game.add.button(x, y, 'footerButtons', null, null, null, 'fastSpin.png', null, null, container);
+            let fastButton = game.add.button(x, y, 'footerButtons', null, null, null, 'fastSpinOff.png', null, null, container);
             fastButton.anchor.set(0.5);
-            // fastButton.visible = false;
-            fastButton.frameName = (model.state('fastRoll')) ? 'fastSpinOff.png' : 'fastSpin.png';
+            fastButton.frameName = (model.state('fastRoll')) ? 'fastSpinOff.png' : 'fastSpinOn.png';
 
             model.el('fastButton', fastButton);
             return fastButton;
@@ -138,15 +122,27 @@ export let view = (() => {
         InfoButton: function({
             game = model.el('game'),
             container = model.group('footerMenu'),
-            x = 280,
+            x = 230,
             y = model.el('game').height - 20
         }) {
-            let infoButton = game.add.button(x, y, 'footerButtons', null, null, 'infoOn.png', 'info.png', 'infoOn.png', null, container);
+            let infoButton = game.add.button(x, y, 'footerButtons', null, null, null, 'info.png', null, null, container);
             infoButton.anchor.set(0.5);
-            // infoButton.visible = false;
 
             model.el('infoButton', infoButton);
             return infoButton;
+        },
+
+        SettingsButton: function({
+            game = model.el('game'),
+            container = model.group('footerMenu'),
+            x = 280,
+            y = model.el('game').height - 20
+        }) {
+            let settingsButton = game.add.button(x, y, 'footerButtons', null, null, null, 'settings.png', null, null, container);
+            settingsButton.anchor.set(0.5);
+
+            model.el('settingsButton', settingsButton);
+            return settingsButton;
         },
 
         _markers: function (container) {

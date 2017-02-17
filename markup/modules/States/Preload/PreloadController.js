@@ -135,6 +135,8 @@ export class Preload {
         const game = model.el('game');
         game.load.spine('bottle', 'spine/Bottle.json');
         game.load.spine('boy', 'spine/boy.json');
+        game.load.spine('cat', 'spine/cat.json');
+        game.load.spine('gun', 'spine/gun.json');
         if (model.desktop) {
             game.load.spine('fon', 'spine/Zastavka.json');
         }

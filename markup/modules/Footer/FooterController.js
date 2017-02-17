@@ -95,7 +95,7 @@ export let controller = (() => {
                 soundButton.frameName = 'soundOff.png';
                 soundController.volume.switchVolume()
             } else {
-                soundButton.frameName = 'sound.png';
+                soundButton.frameName = 'soundOn.png';
                 soundController.volume.switchVolume();
             }
         },
@@ -109,7 +109,7 @@ export let controller = (() => {
             if (model.state('fastRoll')) {
                 model.state('fastRoll', false);
                 model.cookie('fastRoll', false);
-                fastButton.frameName = 'fastSpin.png';
+                fastButton.frameName = 'fastSpinOn.png';
             } else {
                 model.state('fastRoll', true);
                 model.cookie('fastRoll', true);
@@ -178,7 +178,7 @@ export let controller = (() => {
             let container = model.group('infoTable');
 
             model.state('infoPanelOpen', true);
-            soundController.sound.playSound({currentSound: 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
             model.el('infoCounter', counter);
 
             infoMarkers.forEach((elem) => {
