@@ -10,6 +10,8 @@ export let controller = (() => {
     function initDesktop() {
         view.draw.DesktopFooter({});
         view.draw.Time({});
+        view.draw.info({});
+        handle.info();
 
         let homeButton = view.draw.HomeButton({});
         homeButton.onInputDown.add(handle.Home);
@@ -18,7 +20,7 @@ export let controller = (() => {
         settingsButton.onInputDown.add(handle.Setting);
 
         let infoButton = view.draw.InfoButton({});
-        infoButton.onInputDown.add(handle.Info);
+        infoButton.onInputDown.add(handle.openInfo);
 
         let soundButton = view.draw.SoundButton({});
         soundButton.freezeFrames = true;
@@ -31,10 +33,6 @@ export let controller = (() => {
         let fullScreenButton = view.draw.FullScreenButton({});
         fullScreenButton.onInputDown.add(handle.toggleFullScreen);
         fullScreenButton.freezeFrames = true;
-
-
-        // let menuButton = view.draw.MenuButton({});
-        // menuButton.onInputDown.add(handle.Menu);
 
     }
 
@@ -54,55 +52,6 @@ export let controller = (() => {
     }
 
     const handle = {
-        // Menu: function() {
-        //     if (model.state('buttons:locked')
-        //     ||  model.state('roll:progress')
-        //     ||  model.state('isAnim:menu')
-        //     ||  model.state('autoplay:start')) return;
-        //
-        //     let game = model.el('game');
-        //     let footerButtons = model.group('footerMenu');
-        //     let buttons = footerButtons.children;
-        //     let menuButton = model.el('menuButton');
-        //
-        //     if (model.state('menuOpened')) {
-        //         model.state('menuOpened', false)
-        //         model.state('isAnim:menu', true)
-        //         let y = menuButton.y;
-        //         for (let i = 0; i < buttons.length; i++) {
-        //             buttons[i].inputEnabled = false;
-        //             game.add.tween(buttons[i]).to({
-        //                     y: y,
-        //                     alpha: 0
-        //                 }, 250, Phaser.Easing.Back.Out, true)
-        //                 .onComplete.add(() => {
-        //                     model.state('isAnim:menu', false)
-        //                     buttons[i].visible = false;
-        //                 });
-        //         }
-        //     } else {
-        //         model.state('menuOpened', true)
-        //         let fullScreeButton = model.el('fullScreeButton');
-        //         fullScreeButton.frameName = (!window.screenTop && !window.screenY) ? 'fullscreen.png' : 'fullscreenOff.png';
-        //
-        //         let y = menuButton.y - 50;
-        //         model.state('isAnim:menu', true)
-        //         for (let i = 0; i < buttons.length; i++) {
-        //             buttons[i].alpha = 0;
-        //             game.add.tween(buttons[i]).to({
-        //                 y: y,
-        //                 alpha: 1
-        //             }, 250, 'Linear', true)
-        //             .onComplete.add(()=>{
-        //                 model.state('isAnim:menu', false)
-        //                 buttons[i].inputEnabled = true;
-        //             });
-        //             buttons[i].visible = true;
-        //             y -= 50;
-        //         }
-        //     }
-        //
-        // },
         Setting: function() {
             if (model.state('buttons:locked') ||
                 model.state('roll:progress') ||
@@ -191,95 +140,130 @@ export let controller = (() => {
             }
         },
 
-        Info: function() {
-            if(model.state('buttons:locked')
-            || model.state('roll:progress')
-            || model.state('autoplay:start')) return;
-
-            soundController.sound.playSound({sound : 'buttonClick'});
-
-            let game = model.el('game');
-            let infoRules = panelView.show.info({});
+        info: function () {
+            let infoTable = model.el('infoTable');
             let overlay = model.el('overlay');
-            let closed = model.el('closed');
-            let infoMarkers = model.el('infoMarkers');
+            let closeButton = model.el('closeButton');
             let arrowRight = model.el('arrowRight');
             let arrowLeft = model.el('arrowLeft');
-            let counter = 0;
 
-            model.el('infoCounter', counter);
-            model.state('infoPanelOpen', true);
-
-            game.input.keyboard.enabled = false;
             overlay.inputEnabled = true;
             overlay.input.priorityID = 2;
-            infoRules.inputEnabled = true;
-            infoRules.input.priorityID = 3;
-            closed.inputEnabled = true;
-            closed.input.priorityID = 4;
+            infoTable.inputEnabled = true;
+            infoTable.input.priorityID = 3;
+            closeButton.inputEnabled = true;
+            closeButton.input.priorityID = 4;
             arrowRight.inputEnabled = true;
             arrowRight.input.priorityID = 4;
             arrowLeft.inputEnabled = true;
             arrowLeft.input.priorityID = 4;
 
             overlay.events.onInputDown.add(handle.closeInfo);
-            closed.events.onInputDown.add(handle.closeInfo);
+            closeButton.events.onInputDown.add(handle.closeInfo);
             arrowRight.events.onInputDown.add(handle.switchInfoRight);
             arrowLeft.events.onInputDown.add(handle.switchInfoLeft);
         },
 
-        closeInfo: function () {
-            let game = model.el('game');
-            let counter = 0;
+        openInfo: function () {
+            if (model.state('buttons:locked')
+            || model.state('roll:progress')
+            || model.state('isAnim:info')
+            || model.state('autoplay:start')) return;
 
-            game.input.keyboard.enabled = true;
-            model.group('popup').removeAll();
-            model.el('infoCounter', counter);
-            model.state('infoPanelOpen', false);
-        },
 
-        switchInfoRight: function () {
-            let infoRules = model.el('infoRules');
-            let counter = model.el('infoCounter');
+            let infoTable = model.el('infoTable');
             let infoMarkers = model.el('infoMarkers');
+            let game = model.el('game');
+            let counter = 1;
+            let container = model.group('infoTable');
+
+            model.state('infoPanelOpen', true);
+            soundController.sound.playSound({currentSound: 'buttonClick'});
+            model.el('infoCounter', counter);
 
             infoMarkers.forEach((elem) => {
                 elem.frameName = 'marker_off.png';
             });
-            if (counter > config.numOfInfoDots - 2) {
-                counter = 0;
+            infoMarkers[counter - 1].frameName = 'marker_on.png';
+            infoTable.frameName = `${counter}_en.png`;
+
+            model.state('isAnim:info', true);
+            container.visible = true;
+            game.add.tween(container).to( { alpha: 1 }, 700, 'Quart.easeOut', true)
+                .onComplete.add( () => {
+                    model.state('isAnim:info', false);
+                });
+        },
+
+        closeInfo: function () {
+            if (model.state('isAnim:info')) return;
+
+            let game = model.el('game');
+            let counter = 1;
+            model.el('infoCounter', counter);
+
+            game.input.keyboard.enabled = true;
+            model.state('infoPanelOpen', false);
+
+            let container = model.group('infoTable');
+            model.state('isAnim:info', true);
+            game.add.tween(container).to( { alpha: 0 }, 700, 'Quart.easeOut', true)
+                .onComplete.add( () => {
+                    model.state('isAnim:info', false);
+                    container.visible = false;
+                });
+        },
+
+        switchInfoRight: function () {
+            let counter = model.el('infoCounter');
+            let infoTable = model.el('infoTable');
+            let infoMarkers = model.el('infoMarkers');
+            let game = model.el('game');
+            let numberOfInfoImages = game.cache._cache.image.infoTable.frameData._frames.length;
+
+            infoMarkers.forEach((elem) => {
+                elem.frameName = 'marker_off.png';
+            });
+
+            if (counter >= numberOfInfoImages) {
+                counter = 1;
             } else {
                 counter++;
             }
             model.el('infoCounter', counter);
-            infoMarkers[counter].frameName = 'marker_on.png';
-            infoRules.frameName = `${counter + 1}_en.png`;
+
+            infoMarkers[counter - 1].frameName = 'marker_on.png';
+            infoTable.frameName = `${counter}_en.png`;
         },
 
         switchInfoLeft: function () {
-            let infoRules = model.el('infoRules');
+            let infoTable = model.el('infoTable');
             let counter = model.el('infoCounter');
             let infoMarkers = model.el('infoMarkers');
+            let game = model.el('game');
+            let numberOfInfoImages = game.cache._cache.image.infoTable.frameData._frames.length;
 
             infoMarkers.forEach((elem) => {
                 elem.frameName = 'marker_off.png';
             });
-            if (counter < 1) {
-                counter = config.numOfInfoDots - 1;
+
+            if (counter <= 1) {
+                counter = numberOfInfoImages;
             } else {
                 counter--;
-                infoMarkers[counter + 1].frameName = 'marker_off.png';
             }
             model.el('infoCounter', counter);
-            infoMarkers[counter].frameName = 'marker_on.png';
-            infoRules.frameName = `${counter + 1}_en.png`;
-        }
+
+            infoMarkers[counter - 1].frameName = 'marker_on.png';
+            infoTable.frameName = `${counter}_en.png`;
+        },
     };
 
     return {
         initDesktop,
         initMobile,
-        updateTime
+        updateTime,
+        handle
     };
 
 })();
