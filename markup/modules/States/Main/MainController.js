@@ -3,7 +3,6 @@ import { config } from 'modules/Util/Config';
 
 import { view as mainView } from 'modules/States/Main/MainView';
 import { view as winView } from 'modules/Win/WinView';
-import { view as transitionView } from 'modules/Transition/TransitionView';
 
 import { controller as soundController } from 'modules/Sound/SoundController';
 import { controller as settingsController } from 'modules/Settings/DesktopSettingsController';
@@ -12,12 +11,10 @@ import { controller as footerController } from 'modules/Footer/FooterController'
 import { controller as panelController } from 'modules/Panel/PanelController';
 import { controller as buttonsController } from 'modules/Buttons/ButtonsController';
 import { controller as rollController } from 'modules/Roll/RollController';
-import { controller as winController } from 'modules/Win/WinController';
 import { controller as autoplayController } from 'modules/Autoplay/AutoplayController';
 import { controller as mobileSettingsController } from 'modules/Menu/Settings/MenuSettingsController';
 import { controller as mobileAutoplayController } from 'modules/Menu/Autoplay/MenuAutoplayController';
 import { controller as mobileSetBetController } from 'modules/Menu/SetBet/MenuSetBetController';
-import { controller as fsController } from 'modules/States/FS/FSController';
 import { controller as keyboardController } from 'modules/Keyboard/KeyboardController';
 
 export class Main {
@@ -43,6 +40,9 @@ export class Main {
     create() {
         let game = model.el('game');
 
+        // Выход из темноты
+        game.camera.flash(0x000000, 500);
+
         soundController.music.stopMusic('finishPerehod');
         soundController.music.stopMusic('fsFon');
         soundController.music.stopMusic('initFon');
@@ -59,8 +59,8 @@ export class Main {
         // mainView.draw.addBurst({});
         mainView.draw.mainContainer({});
         mainView.draw.machineContainer({});
-        mainView.draw.lineNumbers({side: 'left'})
-        mainView.draw.lineNumbers({side: 'right'})
+        mainView.draw.lineNumbers({side: 'left'});
+        mainView.draw.lineNumbers({side: 'right'});
         winView.draw.UpWinContainer({});
 
         // Инициализируем крутки
@@ -98,10 +98,6 @@ export class Main {
         if (model.desktop) {
             keyboardController.initMainKeys();
         }
-        // Выход из темноты
-        game.camera.flash(0x000000, 500);
-        // Проверяем сохранненые сессии
-        this.checkForSavedFS();
 
         // Проверяем остались ли автокрутки
         this.checkForRemainAutoplay();
@@ -116,8 +112,8 @@ export class Main {
         });
 
         if (model.desktop) {
-        let fullScreeButton = model.el('fullScreeButton');
-            fullScreeButton.frameName = (game.scale.isFullScreen || window.innerHeight == screen.height) ? 'fullScreenOn.png' : 'fullScreenOff.png';
+            let fullScreeButton = model.el('fullScreeButton');
+            fullScreeButton.frameName = (game.scale.isFullScreen || window.innerHeight === screen.height) ? 'fullScreenOn.png' : 'fullScreenOff.png';
         }
         if (model.el('emitter')) {
             game.physics.arcade.collide(model.el('emitter'));
@@ -145,13 +141,6 @@ export class Main {
             model.group('main').x = game.world.centerX;
             // model.group('main').y = game.world.centerY + config[model.res].mainContainer.y;
             model.group('main').y = 450;
-        }
-    }
-
-    checkForSavedFS() {
-        const game = model.el('game');
-        if (model.data('savedFS')) {
-            game.state.start('FS');
         }
     }
 

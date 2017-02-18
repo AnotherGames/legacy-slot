@@ -72,11 +72,15 @@ export class Init {
         if (model.desktop) {
             game.canvas.onclick = null;
         }
-        game.camera.onFadeComplete.add(()=>{
-            game.state.start('Main');
-        })
+        game.camera.onFadeComplete.add(() => {
+            if (model.data('savedFS')) {
+                game.state.start('FS');
+            } else {
+                game.state.start('Main');
+            }
+        });
 
-        game.camera.fade(0x000000, 500)
+        game.camera.fade(0x000000, 500);
 
     }
 
