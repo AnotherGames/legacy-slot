@@ -156,10 +156,6 @@ export class Preload {
         }
         view.hideCoin();
         view.hideBar();
-        if (model.state('initScreen')) {
-            game.state.start('Init');
-        } else {
-            game.state.start('Main');
-        }
+        game.state.start('Init');
     }
 }
