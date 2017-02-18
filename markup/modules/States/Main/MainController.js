@@ -92,8 +92,6 @@ export class Main {
         }
         // Выход из темноты
         game.camera.flash(0x000000, 500);
-        // Проверяем сохранненые сессии
-        this.checkForSavedFS();
 
         // Проверяем остались ли автокрутки
         this.checkForRemainAutoplay();
@@ -134,13 +132,6 @@ export class Main {
             model.group('main').x = game.world.centerX;
             // model.group('main').y = game.world.centerY + config[model.res].mainContainer.y;
             model.group('main').y = 450;
-        }
-    }
-
-    checkForSavedFS() {
-        const game = model.el('game');
-        if (model.data('savedFS')) {
-            game.state.start('FS');
         }
     }
 

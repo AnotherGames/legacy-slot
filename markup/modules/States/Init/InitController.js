@@ -63,7 +63,11 @@ export class Init {
         view.stopYoyoTween();
 
         game.camera.onFadeComplete.add(()=>{
-            game.state.start('Main');
+            if (model.data('savedFS')) {
+                game.state.start('FS');
+            } else {
+                game.state.start('Main');
+            }
         })
 
         game.camera.fade(0x000000, 500)
