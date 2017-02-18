@@ -1,9 +1,7 @@
 import { model } from 'modules/Model/Model';
 import { view } from 'modules/States/Init/InitView';
-import { Element } from 'modules/Class/Element';
 import { controller as soundController} from 'modules/Sound/SoundController';
 import { controller as keyboardController} from 'modules/keyboard/KeyboardController';
-import { view as transitionView} from 'modules/Transition/TransitionView';
 
 export class Init {
     constructor(game) {
@@ -11,28 +9,32 @@ export class Init {
     }
     init() {
         let game = model.el('game');
-            game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
-            game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-            //Воспроивзодит музыку но сама музыка не играет если не сделать такой костыль
-            // setTimeout(() => {
-            soundController.music.playMusic('initFon');
+        game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+        game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        // Воспроивзодит музыку но сама музыка не играет если не сделать такой костыль
+        // setTimeout(() => {
+        soundController.music.playMusic('initFon');
 
-            // При выходе из вкладки анимации будут останавливаться
-            game.stage.disableVisibilityChange = true;
+        // При выходе из вкладки анимации будут останавливаться
+        game.stage.disableVisibilityChange = true;
     }
 
     create() {
         let game = model.el('game');
 
+        game.camera.flash(0x000000, 500);
+
         view.drawBG();
         view.drawBGLogo();
         view.drawLogo();
 
-        if (model.desktop) keyboardController.initInitKeys();
+        if (model.desktop) {
+            keyboardController.initInitKeys();
+        }
 
         let initPlay = view.drawPlay();
-            initPlay.inputEnabled = true;
-            initPlay.events.onInputDown.add(this.handlePlay, this);
+        initPlay.inputEnabled = true;
+        initPlay.events.onInputDown.add(this.handlePlay, this);
 
         model.el('initPlayTween')
             .onComplete.add(() => {
@@ -41,9 +43,8 @@ export class Init {
 
         this.drawSoundTrigger();
 
-        game.camera.flash(0x000000, 500)
 
-        if(!model.state('globalSound')){
+        if (!model.state('globalSound')) {
             this.sprite2.x = 270;
             this.textOff.setStyle(this.styleOn);
             this.textOn.setStyle(this.styleOff);
@@ -52,12 +53,12 @@ export class Init {
 
     switchSound() {
         if (model.state('globalSound')) {
-            soundController.volume.switchVolume()
+            soundController.volume.switchVolume();
             this.sprite2.x = 270;
             this.textOff.setStyle(this.styleOn);
             this.textOn.setStyle(this.styleOff);
         } else {
-            soundController.volume.switchVolume()
+            soundController.volume.switchVolume();
             this.sprite2.x = 310;
             this.textOff.setStyle(this.styleOff);
             this.textOn.setStyle(this.styleOn);
@@ -67,7 +68,9 @@ export class Init {
     handlePlay() {
         const game = model.el('game');
 
-        if(model.mobile) game.scale.startFullScreen();
+        if (model.mobile) {
+            game.scale.startFullScreen();
+        }
 
         document.body.addEventListener('touchstart', () => {
             model.el('game').scale.startFullScreen();
@@ -75,23 +78,26 @@ export class Init {
 
         view.stopYoyoTween();
 
-        game.camera.onFadeComplete.add(()=>{
-            game.state.start('Main');
-        })
-        game.camera.fade(0x000000, 500)
+        game.camera.onFadeComplete.add(() => {
+            if (model.data('savedFS')) {
+                game.state.start('FS');
+            } else {
+                game.state.start('Main');
+            }
+        });
+        game.camera.fade(0x000000, 500);
     }
 
     drawSoundTrigger() {
         const game = model.el('game');
         let soundContainer = game.add.group();
         soundContainer.position.set(game.width - 500, game.height - 100);
-        let style = { font: "bold 42px Arial", fill: "#f3eba0"};
-        let textSound = game.add.text(0, 0, "Sound:", style, soundContainer);
-        this.styleOff = { font: "bold 42px Arial", fill: "#474747"};
-        this.textOff = game.add.text(170, 0, "Off", style, soundContainer);
+        let style = { font: 'bold 42px Arial', fill: '#f3eba0'};
+        this.styleOff = { font: 'bold 42px Arial', fill: '#474747'};
+        this.textOff = game.add.text(170, 0, 'Off', style, soundContainer);
         this.textOff.setStyle(this.styleOff);
-        this.styleOn = { font: "bold 42px Arial", fill: "#b8ff31"};
-        this.textOn = game.add.text(350, 0, "On", style, soundContainer);
+        this.styleOn = { font: 'bold 42px Arial', fill: '#b8ff31'};
+        this.textOn = game.add.text(350, 0, 'On', style, soundContainer);
         this.textOn.setStyle(this.styleOn);
 
         let graphics = game.add.graphics(0, 0);
