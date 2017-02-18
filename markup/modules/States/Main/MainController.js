@@ -38,7 +38,9 @@ export class Main {
 
     create() {
         let game = model.el('game');
-        game.camera.flash(0x000000, 777);
+
+        // Первая темнота
+        game.camera.flash(0x000000, 500);
 
         soundController.music.stopMusic('finishPerehod');
         soundController.music.stopMusic('fsFon');
@@ -98,11 +100,6 @@ export class Main {
         }
 
         mainView.draw.addLight({});
-        // Первая темнота
-        game.camera.flash(0x000000, 500);
-
-        // Проверяем сохранненые сессии
-        this.checkForSavedFS();
 
         // Проверяем остались ли автокрутки
         this.checkForRemainAutoplay();
@@ -161,13 +158,6 @@ export class Main {
     fullScreen() {
         let game = model.el('game');
         game.scale.startFullScreen();
-    }
-
-    checkForSavedFS() {
-        let game = model.el('game');
-        if (model.data('savedFS')) {
-            game.state.start('FS');
-        }
     }
 
     checkForRemainAutoplay() {
