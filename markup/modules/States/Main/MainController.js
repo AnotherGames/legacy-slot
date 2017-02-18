@@ -10,13 +10,11 @@ import { controller as footerController } from 'modules/Footer/FooterController'
 import { controller as panelController } from 'modules/Panel/PanelController';
 import { controller as buttonsController } from 'modules/Buttons/ButtonsController';
 import { controller as rollController } from 'modules/Roll/RollController';
-import { controller as winController } from 'modules/Win/WinController';
 import { controller as autoplayController } from 'modules/Autoplay/AutoplayController';
 import { controller as mobileSettingsController } from 'modules/Menu/Settings/MenuSettingsController';
 import { controller as mobileAutoplayController } from 'modules/Menu/Autoplay/MenuAutoplayController';
 import { controller as mobileSetBetController } from 'modules/Menu/SetBet/MenuSetBetController';
-import { controller as fsController } from 'modules/States/FS/FSController';
-import { controller as keyboardController } from 'modules/Keyboard/KeyboardController'
+import { controller as keyboardController } from 'modules/Keyboard/KeyboardController';
 
 export class Main {
     constructor(game) {
@@ -95,31 +93,23 @@ export class Main {
         }
 
         // Первая темнота
-        game.camera.flash(0x000000, 500)
-
-        // Проверяем сохранненые сессии
-        this.checkForSavedFS();
+        game.camera.flash(0x000000, 500);
 
         // Проверяем остались ли автокрутки
         this.checkForRemainAutoplay();
-
-        let lastTime = new Date().getTime();
-        let fps = 1;
-        let lowCount = 0;
-
     }
 
     update() {
-      footerController.updateTime({});
-      const game = model.el('game');
-      game.frameAnims.forEach((anim) => {
-          anim();
-      });
+        footerController.updateTime({});
+        const game = model.el('game');
+        game.frameAnims.forEach((anim) => {
+            anim();
+        });
 
-      if (model.desktop) {
-          let fullScreeButton = model.el('fullScreeButton');
-              fullScreeButton.frameName = (game.scale.isFullScreen || window.innerHeight == screen.height) ? 'fullscreenOff.png' : 'fullscreen.png';
-      }
+        if (model.desktop) {
+            let fullScreeButton = model.el('fullScreeButton');
+            fullScreeButton.frameName = (game.scale.isFullScreen || window.innerHeight === screen.height) ? 'fullscreenOff.png' : 'fullscreen.png';
+        }
     }
 
     positionMainContainer() {
@@ -142,13 +132,6 @@ export class Main {
         } else {
             model.group('main').x = game.world.centerX;
             model.group('main').y = game.world.centerY + config[model.res].mainContainer.y;
-        }
-    }
-
-    checkForSavedFS() {
-        let game = model.el('game');
-        if (model.data('savedFS')) {
-            game.state.start('FS');
         }
     }
 
