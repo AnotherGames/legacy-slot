@@ -204,6 +204,26 @@ export let view = (() => {
             model.el('autoCount').destroy();
         },
 
+        InfoButton: function ({
+            game = model.el('game'),
+            container = model.group('panel'),
+            x = 50,
+            y = model.el('game').height - 100
+        }) {
+            let infoButton = game.add.button(x, y, 'deskButtons', null, null, null, 'info.png', null, null);
+            infoButton.anchor.set(0.5);
+
+            infoButton.onInputOver.add(() => {
+                infoButton.scale.set(1.2);
+            });
+            infoButton.onInputOut.add(() => {
+                infoButton.scale.set(1);
+            });
+
+            model.el('infoButton', infoButton);
+            return infoButton;
+        },
+
         info: function ({
             game = model.el('game'),
             container = model.group('infoTable'),

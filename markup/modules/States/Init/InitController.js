@@ -49,7 +49,7 @@ export class Init {
             this.triggerSoundLeft();
         }
 
-        // this.addFullScreen();
+        this.addFullScreen();
     }
 
     switchSound() {
