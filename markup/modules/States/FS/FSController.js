@@ -156,7 +156,7 @@ export class FS {
             this.positionMainContainer();
         } else {    // Desktop
 
-            footerController.initDesktop();
+            footerController.initFsDesktop();
 
             // Автоматически позиционируем основной контейнер
             this.positionMainContainer();

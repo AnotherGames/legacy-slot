@@ -76,7 +76,7 @@ export class Main {
             mobileSetBetController.init({});
         } else {    // Desktop
             // Рисуем футер
-            footerController.initDesktop();
+            footerController.initMainDesktop();
 
             // Автоматически позиционируем основной контейнер
             this.positionMainContainer();

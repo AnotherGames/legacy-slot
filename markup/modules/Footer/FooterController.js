@@ -7,7 +7,7 @@ import { controller as soundController } from 'modules/Sound/SoundController';
 
 export let controller = (() => {
 
-    function initDesktop() {
+    function initMainDesktop() {
         view.draw.DesktopFooter({});
         view.draw.Time({});
         view.draw.info({});
@@ -22,6 +22,38 @@ export let controller = (() => {
 
         let infoButton = view.draw.InfoButton({});
         infoButton.onInputDown.add(handle.openInfo);
+
+        let soundButton = view.draw.SoundButton({});
+        soundButton.freezeFrames = true;
+        soundButton.onInputDown.add(handle.Sound);
+
+        let fastButton = view.draw.FastButton({});
+        fastButton.freezeFrames = true;
+        fastButton.onInputDown.add(handle.Fast);
+
+        let fullScreenButton = view.draw.FullScreenButton({});
+        fullScreenButton.onInputDown.add(handle.toggleFullScreen);
+        fullScreenButton.freezeFrames = true;
+
+        let footerMenu = model.group('footerMenu').children;
+        footerMenu.forEach((elem) => {
+            elem.onInputOver.add(() => {
+                elem.scale.set(1.4);
+            });
+            elem.onInputOut.add(() => {
+                elem.scale.set(1);
+            });
+        });
+
+        model.group('footer').add(model.group('footerMenu'));
+    }
+
+    function initFsDesktop() {
+        view.draw.DesktopFooter({});
+        view.draw.Time({});
+
+        let homeButton = view.draw.HomeButton({});
+        homeButton.onInputDown.add(handle.Home);
 
         let soundButton = view.draw.SoundButton({});
         soundButton.freezeFrames = true;
@@ -278,7 +310,8 @@ export let controller = (() => {
     };
 
     return {
-        initDesktop,
+        initMainDesktop,
+        initFsDesktop,
         initMobile,
         updateTime,
         handle

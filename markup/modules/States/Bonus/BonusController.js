@@ -174,7 +174,7 @@ export class Bonus {
             mainView.draw.addFishes({ y1: 650, y2: 900 });
             bonusView.draw.addLight({});
             bonusView.draw.upperBG({});
-            footerController.initDesktop();
+            footerController.initFsDesktop();
             footerView.draw.TopFooter({});
             balanceView.draw.FSMobileBalance({});
         } else {
