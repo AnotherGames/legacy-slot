@@ -18,6 +18,7 @@ export let view = (() => {
             model.group('balanceCoin', game.add.group());
             model.group('popup', game.add.group());
             model.group('transition', game.add.group());
+            model.group('infoTable', game.add.group());
         }
     };
 
@@ -124,11 +125,10 @@ export let view = (() => {
         }) {
             let scaleX = (model.desktop) ? 1.0 : 0.7;
             let scaleY = (model.desktop) ? 1.0 : 0.7;
-            game.add.tween(winText.scale).to({x: 1.0, y: 1.0}, 1500, Phaser.Easing.Bounce.Out, true)
-                .onComplete.add(() => {
-                    let winCountValue = model.data('bonusWinCoins');
-                    draw._сountMeter(winCountValue, winCount);
-                });
+            game.add.tween(winText.scale).to({x: 1.0, y: 1.0}, 1500, Phaser.Easing.Bounce.Out, true);
+            let winCountValue = model.data('bonusWinCoins');
+            draw._сountMeter(winCountValue, winCount);
+
             game.add.tween(winCount.scale).to({x: scaleX, y: scaleY}, 1500, Phaser.Easing.Bounce.Out, true);
         },
 
