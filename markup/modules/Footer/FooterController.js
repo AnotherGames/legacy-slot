@@ -10,12 +10,18 @@ export let controller = (() => {
     function initDesktop() {
         view.draw.DesktopFooter({});
         view.draw.Time({});
+        view.draw.info({});
+        // Развешиваем ивенты на кнопки в инфо
+        handle.info();
 
         let homeButton = view.draw.HomeButton({});
         homeButton.onInputDown.add(handle.Home);
 
-        let menuButton = view.draw.MenuButton({});
-        menuButton.onInputDown.add(handle.Menu);
+        let settingsButton = view.draw.SettingsButton({});
+        settingsButton.onInputDown.add(handle.Setting);
+
+        let infoButton = view.draw.InfoButton({});
+        infoButton.onInputDown.add(handle.openInfo);
 
         let soundButton = view.draw.SoundButton({});
         soundButton.freezeFrames = true;
@@ -28,6 +34,18 @@ export let controller = (() => {
         let fullScreenButton = view.draw.FullScreenButton({});
         fullScreenButton.onInputDown.add(handle.toggleFullScreen);
         fullScreenButton.freezeFrames = true;
+
+        let footerMenu = model.group('footerMenu').children;
+        footerMenu.forEach((elem) => {
+            elem.onInputOver.add(() => {
+                elem.scale.set(1.4);
+            });
+            elem.onInputOut.add(() => {
+                elem.scale.set(1);
+            });
+        });
+
+        model.group('footer').add(model.group('footerMenu'));
     }
 
     function initMobile() {
@@ -36,6 +54,8 @@ export let controller = (() => {
 
         let homeButton = view.draw.HomeButton({});
         homeButton.onInputDown.add(handle.Home);
+
+        model.group('footer').add(model.group('footerMenu'));
     }
 
     function updateTime() {
@@ -43,7 +63,7 @@ export let controller = (() => {
     }
 
     const handle = {
-        Menu: function () {
+        Setting: function () {
             if (model.state('buttons:locked')
             || model.state('roll:progress')
             || model.state('autoplay:start')) return;
@@ -51,6 +71,13 @@ export let controller = (() => {
             let game = model.el('game');
             // Выключаем управление с клавиатуры
             game.input.keyboard.enabled = false;
+
+            // костыль на баг с зависанием кнопки после открытия области поверъ нее
+            if (model.desktop) {
+                model.el('settingsButton').destroy();
+                let settingsButton = view.draw.SettingsButton({});
+                settingsButton.onInputDown.add(handle.Setting);
+            }
 
             soundController.sound.playSound({currentSound: 'buttonClick'});
 
@@ -84,7 +111,7 @@ export let controller = (() => {
                 soundButton.frameName = 'soundOff.png';
                 soundController.volume.switchVolume();
             } else {
-                soundButton.frameName = 'sound.png';
+                soundButton.frameName = 'soundOn.png';
                 soundController.volume.switchVolume();
             }
         },
@@ -96,7 +123,7 @@ export let controller = (() => {
             if (model.state('fastRoll')) {
                 model.state('fastRoll', false);
                 model.cookie('fastRoll', false);
-                fastButton.frameName = 'fastSpin.png';
+                fastButton.frameName = 'fastSpinOn.png';
             } else {
                 model.state('fastRoll', true);
                 model.cookie('fastRoll', true);
@@ -123,13 +150,138 @@ export let controller = (() => {
             } else {
                 game.scale.startFullScreen();
             }
-        }
+        },
+
+        info: function () {
+            let infoTable = model.el('infoTable');
+            let overlay = model.el('overlay');
+            let closeButton = model.el('closeButton');
+            let arrowRight = model.el('arrowRight');
+            let arrowLeft = model.el('arrowLeft');
+
+            overlay.inputEnabled = true;
+            overlay.input.priorityID = 2;
+            infoTable.inputEnabled = true;
+            infoTable.input.priorityID = 3;
+            closeButton.inputEnabled = true;
+            closeButton.input.priorityID = 4;
+            arrowRight.inputEnabled = true;
+            arrowRight.input.priorityID = 4;
+            arrowLeft.inputEnabled = true;
+            arrowLeft.input.priorityID = 4;
+
+            overlay.events.onInputDown.add(handle.closeInfo);
+            closeButton.events.onInputDown.add(handle.closeInfo);
+            arrowRight.events.onInputDown.add(handle.switchInfoRight);
+            arrowLeft.events.onInputDown.add(handle.switchInfoLeft);
+        },
+
+        openInfo: function () {
+            if (model.state('buttons:locked')
+            || model.state('roll:progress')
+            || model.state('isAnim:info')
+            || model.state('autoplay:start')) return;
+
+            // костыль на баг с зависанием кнопки после открытия области поверъ нее
+            if (model.desktop) {
+                model.el('infoButton').destroy();
+                let infoButton = view.draw.InfoButton({});
+                infoButton.onInputDown.add(handle.openInfo);
+            }
+
+            let infoTable = model.el('infoTable');
+            let infoMarkers = model.el('infoMarkers');
+            let game = model.el('game');
+            let counter = 1;
+            let container = model.group('infoTable');
+
+            model.state('infoPanelOpen', true);
+            soundController.sound.playSound({currentSound: 'buttonClick'});
+            model.el('infoCounter', counter);
+
+            infoMarkers.forEach((elem) => {
+                elem.frameName = 'marker_off.png';
+            });
+            infoMarkers[counter - 1].frameName = 'marker_on.png';
+            infoTable.frameName = `${counter}_en.png`;
+
+            model.state('isAnim:info', true);
+            container.visible = true;
+            game.add.tween(container).to( { alpha: 1 }, 700, 'Quart.easeOut', true)
+                .onComplete.add( () => {
+                    model.state('isAnim:info', false);
+                });
+        },
+
+        closeInfo: function () {
+            if (model.state('isAnim:info')) return;
+
+            let game = model.el('game');
+            let counter = 1;
+            model.el('infoCounter', counter);
+
+            game.input.keyboard.enabled = true;
+            model.state('infoPanelOpen', false);
+
+            let container = model.group('infoTable');
+            model.state('isAnim:info', true);
+            game.add.tween(container).to( { alpha: 0 }, 700, 'Quart.easeOut', true)
+                .onComplete.add( () => {
+                    model.state('isAnim:info', false);
+                    container.visible = false;
+                });
+        },
+
+        switchInfoRight: function () {
+            let counter = model.el('infoCounter');
+            let infoTable = model.el('infoTable');
+            let infoMarkers = model.el('infoMarkers');
+            let game = model.el('game');
+            let numberOfInfoImages = game.cache._cache.image.infoTable.frameData._frames.length;
+
+            infoMarkers.forEach((elem) => {
+                elem.frameName = 'marker_off.png';
+            });
+
+            if (counter >= numberOfInfoImages) {
+                counter = 1;
+            } else {
+                counter++;
+            }
+            model.el('infoCounter', counter);
+
+            infoMarkers[counter - 1].frameName = 'marker_on.png';
+            infoTable.frameName = `${counter}_en.png`;
+        },
+
+        switchInfoLeft: function () {
+            let infoTable = model.el('infoTable');
+            let counter = model.el('infoCounter');
+            let infoMarkers = model.el('infoMarkers');
+            let game = model.el('game');
+            let numberOfInfoImages = game.cache._cache.image.infoTable.frameData._frames.length;
+
+            infoMarkers.forEach((elem) => {
+                elem.frameName = 'marker_off.png';
+            });
+
+            if (counter <= 1) {
+                counter = numberOfInfoImages;
+            } else {
+                counter--;
+            }
+            model.el('infoCounter', counter);
+
+            infoMarkers[counter - 1].frameName = 'marker_on.png';
+            infoTable.frameName = `${counter}_en.png`;
+        },
     };
 
     return {
         initDesktop,
         initMobile,
-        updateTime
+        updateTime,
+        handle
     };
 
 })();

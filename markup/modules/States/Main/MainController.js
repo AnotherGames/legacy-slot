@@ -117,7 +117,7 @@ export class Main {
 
         if (model.desktop) {
             let fullScreeButton = model.el('fullScreeButton');
-            fullScreeButton.frameName = (game.scale.isFullScreen || window.innerHeight == screen.height) ? 'fullscreenOff.png' : 'fullscreen.png';
+            fullScreeButton.frameName = (game.scale.isFullScreen || window.innerHeight == screen.height) ? 'fullScreenOff.png' : 'fullScreenOn.png';
         }
 
         if (model.mobile && !game.device.iOS) {

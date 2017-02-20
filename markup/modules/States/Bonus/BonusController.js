@@ -196,7 +196,7 @@ export class Bonus {
 
         if (model.desktop) {
             let fullScreeButton = model.el('fullScreeButton');
-            fullScreeButton.frameName = (this.game.scale.isFullScreen || window.innerHeight == screen.height) ? 'fullscreenOff.png' : 'fullscreen.png';
+            fullScreeButton.frameName = (this.game.scale.isFullScreen || window.innerHeight == screen.height) ? 'fullScreenOff.png' : 'fullScreenOn.png';
         }
 
         if (model.mobile && !game.device.iOS) {

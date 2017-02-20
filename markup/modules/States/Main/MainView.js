@@ -19,6 +19,7 @@ export let view = (() => {
             model.group('popup', game.add.group());
             model.group('infoTable', game.add.group());
             model.group('transition', game.add.group());
+            model.group('footerMenu', game.add.group());
         }
     };
 
