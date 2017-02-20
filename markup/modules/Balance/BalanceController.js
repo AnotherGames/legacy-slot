@@ -12,12 +12,15 @@ export let controller = (() => {
     function initDesktop() {
         view.draw.CashBalance({});
         view.draw.DesktopBalance({});
-        setTimeout(() => {
-            model.changeBet({up: true});
-            model.changeBet({down: true});
-            model.changeCoin({up: true});
-            model.changeCoin({down: true});
-        }, 200);
+        if (model.state('fontNotLoaded')) {
+            setTimeout(() => {
+                model.changeBet({up: true});
+                model.changeBet({down: true});
+                model.changeCoin({up: true});
+                model.changeCoin({down: true});
+            }, 200);
+            model.state('fontNotLoaded', false);
+        }
     }
 
     function initFSMobile() {

@@ -143,6 +143,7 @@ export let model = (() => {
         model.state('isFirstAutoChangeAnimBG', true);
         model.state('maxFsMultiplier', false);
         model.state('doorFinish', false);
+        model.state('fontNotLoaded', true);
     }
 
     function initSettings() {
