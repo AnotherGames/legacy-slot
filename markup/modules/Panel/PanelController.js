@@ -11,9 +11,6 @@ export let controller = (() => {
         view.draw.PanelBG({});
         // view.draw.LinesNumber({});
         view.draw.AutoContainer({});
-        view.draw.info({});
-        // Развешиваем ивенты на кнопки в инфо
-        handle.initInfo();
 
         view.draw.AutoPanel({}).forEach((panelButton) => {
             panelButton.inputEnabled = true;
@@ -38,9 +35,6 @@ export let controller = (() => {
         let stopButtonDesk = view.draw.StopButton({});
         stopButtonDesk.onInputDown.add(handle.stop);
 
-        let infoButton = view.draw.InfoButton({});
-        infoButton.onInputDown.add(handle.openInfo);
-
         let autoButtonDesk = view.draw.AutoButton({});
         autoButtonDesk.onInputDown.add(handle.auto);
 
@@ -63,6 +57,14 @@ export let controller = (() => {
         coinsLevelMinus.onInputDown.add(handle.coinsMinus);
         model.el('coinsLevelMinus', coinsLevelMinus);
 
+    }
+
+    function drawInfoButton() {
+        view.draw.info({});
+        // Развешиваем ивенты на кнопки в инфо
+        handle.initInfo();
+        let infoButton = view.draw.InfoButton({x: 50, y: model.el('game').height - 100});
+        infoButton.onInputDown.add(handle.openInfo);
     }
 
     function drawFsPanel() {
@@ -325,6 +327,7 @@ export let controller = (() => {
     return {
         drawButtons,
         drawFsPanel,
+        drawInfoButton,
         auto,
         handle
     };

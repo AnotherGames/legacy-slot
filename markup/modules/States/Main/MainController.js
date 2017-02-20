@@ -85,6 +85,7 @@ export class Main {
             settingsController.initDesktopSettings(game);
             // Рисуем кнопки управления
             panelController.drawButtons();
+            panelController.drawInfoButton();
             // Отрисовуем баланс
             balanceController.initDesktop();
             // Инициализируем управление клавиатурой

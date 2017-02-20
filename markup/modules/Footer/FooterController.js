@@ -11,7 +11,6 @@ export let controller = (() => {
         view.draw.DesktopFooter({});
         view.draw.Time({});
 
-
         let homeButton = view.draw.HomeButton({x: 30});
         homeButton.onInputDown.add(handle.Home);
 
@@ -50,15 +49,15 @@ export let controller = (() => {
         let homeButton = view.draw.HomeButton({x: 30});
         homeButton.onInputDown.add(handle.Home);
 
-        let soundButton = view.draw.SoundButton({x: 130});
+        let soundButton = view.draw.SoundButton({x: 80});
         soundButton.freezeFrames = true;
         soundButton.onInputDown.add(handle.Sound);
 
-        let fastButton = view.draw.FastButton({x: 180});
+        let fastButton = view.draw.FastButton({x: 130});
         fastButton.freezeFrames = true;
         fastButton.onInputDown.add(handle.Fast);
 
-        let fullScreenButton = view.draw.FullScreenButton({x: 230});
+        let fullScreenButton = view.draw.FullScreenButton({x: 180});
         fullScreenButton.onInputDown.add(handle.toggleFullScreen);
         fullScreenButton.freezeFrames = true;
 
@@ -102,7 +101,7 @@ export let controller = (() => {
             // костыль на баг с зависанием кнопки после открытия области поверъ нее
             if (model.desktop) {
                 model.el('settingsButton').destroy();
-                let settingsButton = view.draw.SettingsButton({});
+                let settingsButton = view.draw.SettingsButton({x: 80});
                 settingsButton.onInputDown.add(handle.Setting);
             }
 
