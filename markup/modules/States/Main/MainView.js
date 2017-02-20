@@ -20,8 +20,9 @@ export let view = (() => {
             model.group('balanceCash', game.add.group());
             model.group('balanceCoin', game.add.group());
             model.group('bonusDarkness', game.add.group());
-            model.group('infoTable', game.add.group());
+            model.group('aim', game.add.group());
             model.group('popup', game.add.group());
+            model.group('infoTable', game.add.group());
             model.group('transition', game.add.group());
         }
     };
@@ -363,17 +364,17 @@ export let view = (() => {
             container.addAt(machineGroup, 2);
             model.group('machine', machineGroup);
 
-            let numbersContainer = game.add.group();
-            container.addAt(numbersContainer, 3);
-            model.group('numbers', numbersContainer);
-
             let winUp = game.add.group();
-            container.addAt(winUp, 4);
+            container.addAt(winUp, 3);
             model.group('winUp', winUp);
 
             let winTop = game.add.group();
-            container.addAt(winTop, 5);
+            container.addAt(winTop, 4);
             model.group('winTop', winTop);
+
+            let numbersContainer = game.add.group();
+            container.addAt(numbersContainer, 5);
+            model.group('numbers', numbersContainer);
 
             machineGroup.glistaLightContainer = game.add.group();
             model.group('glistaLight', machineGroup.glistaLightContainer);

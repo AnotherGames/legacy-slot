@@ -13,9 +13,19 @@ export class Element {
 
         // Заполняем его спрайтами всех элементов (они будут расположенны друг на друге)
         this.sprites = [];
-        for (let i = 1; i <= config.symbolsCount; i++) {
+        for (let i = 1; i <= 21; i++) {
+            let fakeIndex;
             // Создаем по спрайту для каждого символа и делаем их не видимыми
-            let sprite = game.add.sprite(0, 0, i, null, this.group);
+            if (i >= 9 && i <= 11) {
+                fakeIndex = 18;
+            } else if (i >= 12 && i <= 14) {
+                fakeIndex = 19;
+            } else if (i >= 15 && i <= 17 || i == 21) {
+                fakeIndex = 20;
+            } else {
+                fakeIndex = i;
+            }
+            let sprite = game.add.sprite(0, 0, fakeIndex, null, this.group);
                 sprite.anchor.set(0.5);
                 sprite.visible = false;
 
@@ -115,31 +125,31 @@ export class Element {
                 this.addAnimation(sprite, { el: 8, n: 29, w: 29 });
                 break;
             case 9:
-                this.addBottleAnimation(sprite, { el: 9 });
+                this.addBottleAnimation(sprite, { el: 9, n: 29, w: 29 });
                 break;
             case 10:
-                this.addBottleAnimation(sprite, { el: 10 });
+                this.addBottleAnimation(sprite, { el: 10, n: 29, w: 29 });
                 break;
             case 11:
-                this.addBottleAnimation(sprite, { el: 11 });
+                this.addBottleAnimation(sprite, { el: 11, n: 29, w: 29 });
                 break;
             case 12:
-                this.addBottleAnimation(sprite, { el: 12 });
+                this.addBottleAnimation(sprite, { el: 12, n: 29, w: 29 });
                 break;
             case 13:
-                this.addBottleAnimation(sprite, { el: 13 });
+                this.addBottleAnimation(sprite, { el: 13, n: 29, w: 29 });
                 break;
             case 14:
-                this.addBottleAnimation(sprite, { el: 14 });
+                this.addBottleAnimation(sprite, { el: 14, n: 29, w: 29 });
                 break;
             case 15:
-                this.addBottleAnimation(sprite, { el: 15 });
+                this.addBottleAnimation(sprite, { el: 15, n: 29, w: 29 });
                 break;
             case 16:
-                this.addBottleAnimation(sprite, { el: 16 });
+                this.addBottleAnimation(sprite, { el: 16, n: 29, w: 29 });
                 break;
             case 17:
-                this.addBottleAnimation(sprite, { el: 17 });
+                this.addBottleAnimation(sprite, { el: 17, n: 29, w: 29 });
                 break;
             case 18:
                 this.addAnimation(sprite, { el: 18, n: 29, w: 29 });
@@ -150,6 +160,9 @@ export class Element {
             case 20:
                 this.addAnimation(sprite, { el: 20, n: 29, w: 29 });
                 break;
+            case 21:
+                this.addBottleAnimation(sprite, { el: 21, n: 29, w: 29 });
+                break;
             default:
                 break;
 
@@ -157,9 +170,21 @@ export class Element {
     }
 
     addBottleAnimation(sprite, options) {
-        sprite.animations.add(`${options.el}-n`, [`${options.el}-n-00.png`]);
-        sprite.animations.add(`${options.el}-b`, [`${options.el}-n-00.png`]);
-        sprite.animations.add(`${options.el}-w`, [`${options.el}-n-00.png`]);
+        if (options.el >= 9 && options.el <= 11) {
+            sprite.animations.add(`${options.el}-n`, Phaser.Animation.generateFrameNames(`18-n-`, 0, options.n, '.png', 2));
+            sprite.animations.add(`${options.el}-b`, [`18-b-00.png`]);
+            sprite.animations.add(`${options.el}-w`, Phaser.Animation.generateFrameNames(`18-w-`, 0, options.w, '.png', 2));
+        }
+        if (options.el >= 12 && options.el <= 14) {
+            sprite.animations.add(`${options.el}-n`, Phaser.Animation.generateFrameNames(`19-n-`, 0, options.n, '.png', 2));
+            sprite.animations.add(`${options.el}-b`, [`19-b-00.png`]);
+            sprite.animations.add(`${options.el}-w`, Phaser.Animation.generateFrameNames(`19-w-`, 0, options.w, '.png', 2));
+        }
+        if (options.el >= 15 && options.el <= 17 || options.el == 21) {
+            sprite.animations.add(`${options.el}-n`, Phaser.Animation.generateFrameNames(`20-n-`, 0, options.n, '.png', 2));
+            sprite.animations.add(`${options.el}-b`, [`20-b-00.png`]);
+            sprite.animations.add(`${options.el}-w`, Phaser.Animation.generateFrameNames(`20-w-`, 0, options.w, '.png', 2));
+        }
     }
 
     addAnimation(sprite, options) {

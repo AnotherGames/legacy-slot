@@ -20,6 +20,7 @@ export let view = (() => {
             model.group('balanceCoin', game.add.group());
             model.group('fs', game.add.group());
             model.group('popup', game.add.group());
+            model.group('infoTable', game.add.group());
             model.group('transition', game.add.group());
         }
     };

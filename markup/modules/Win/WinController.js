@@ -28,6 +28,7 @@ export let controller = (() => {
             nextMode = data.NextMode;
         // Если нет выигрыша - выходим
         if (winLines.length === 0) return;
+
         // Записываем финишный экран на верхний слой
         view.draw.copyFinishScreenToUpWheels({});
 
@@ -96,7 +97,7 @@ export let controller = (() => {
         });
 
         rightLineArr.forEach((el) => {
-            el.visible = true; 
+            el.visible = true;
         });
 
         // Перевод в нормальную анимацию
@@ -183,8 +184,12 @@ export let controller = (() => {
             nextMode = data.NextMode;
 
         if (mode == 'root' && nextMode.indexOf('fsBonus') != -1 ) {
+
+            let fsLevelNumber = nextMode[7];
+            addBigBottleToStage(fsLevelNumber);
+
             // Лочим все кнопки
-            model.state('buttons:locked', true);
+            // model.state('buttons:locked', true);
             // Остонавливаем автоплей если был
             if (model.state('autoplay:start')) {
                 model.data('remainAutoCount', model.data('autoplay:count'));
@@ -196,176 +201,166 @@ export let controller = (() => {
             // Убираем управление с клавиатуры
             game.input.keyboard.enabled = false;
             // Запускаем переходной экран
-            game.time.events.add(800, () => {
-                transitionView.fsStart();
-            });
+            // game.time.events.add(800, () => {
+            //     transitionView.fsStart();
+            // });
         }
     }
 
-    function checkForBonus() {
+    function addBigBottleToStage(fsLevelNumber) {
         let game = model.el('game');
-        let data = model.data('rollResponse'),
-            mode = data.Mode,
-            nextMode = data.NextMode;
-        if (mode == 'root' && nextMode.indexOf('shuriken') != -1) {
+        let container = model.group('winUp');
+        let bottleContainer = game.add.group();
+        let bottle1, bottle2, bottle3;
+        let bottleBG1, bottleBG2, bottleBG3;
 
-            let shurikenArray = [];
-            model.data('shurikenArray', shurikenArray);
-
-            // Лочим все кнопки
-            model.state('buttons:locked', true);
-
-            // Остонавливаем автоплей если был
-            if (model.state('autoplay:start')) {
-                if (!model.state('autoStopWhenFS')) {
-                    model.data('remainAutoCount', model.data('autoplay:count'));
-                }
-                autoplayController.stop();
-            }
-
-            let shurikens = findShurikens();
-            let amountOFShurikens = +nextMode[8];
-            let counter = 0;
-
-            shurikens.elements.forEach((el) => {
-                el.hide(0);
-            });
-
-            shurikens.upElements.forEach((upEl) => {
-                upEl.show();
-                game.add.tween(upEl.group.scale)
-                    .to({x: 1.8, y: 1.8}, 800, Phaser.Easing.Bounce.Out, true)
-                    .onComplete.add(() => {
-                        game.add.tween(upEl.group.scale)
-                            .to({x: 1, y: 1}, 300, 'Linear', true)
-                    });
-
-
-                upEl.win(false, () => {
-                    counter++;
-                    if (counter == 1) {
-                        model.state('bonus', true);
-                        getShurikens(amountOFShurikens);
-                    }
-                });
-            });
-            if (model.desktop) mainView.draw.returnDroppedLamps();
-        }
-    }
-
-    function findShurikens() {
-        let result = {};
-        result.upElements = [];
-        result.elements = [];
         let wheels = model.el('wheels');
         let upWheels = model.el('upWheels');
-        wheels.forEach((wheel) => {
-            wheel.elements.forEach((el) => {
-                if (el.active == 12) {
-                    result.elements.push(el);
-                }
-            });
-        });
-        upWheels.forEach((wheel) => {
-            wheel.forEach((el) => {
-                if (el.active == 12) {
-                    result.upElements.push(el);
-                }
-            });
-        });
-        return result;
-    }
+        let x = (model.desktop) ? 512 : 384;
 
-    function getShurikens(i) {
-        request.send('Roll')
-            .then((data) => {
-                console.log('Data is: ', data);
-                writeShurikenData(data);
-                request.send('Ready')
-                .then(() => {
-                    i--;
-                    if (i > 0) {
-                        getShurikens(i)
-                    } else {
-                        fireAllShurikens();
-                    }
-                });
-            })
-            .catch((err) => {
-                console.error(err);
-            });
-    }
+        switch (+fsLevelNumber) {
+            case 1:
+                bottleBG1 = addBottleBG(bottleContainer, wheels[0].elements[1]);
+                bottleBG1.x = -x;
+                bottle1 = game.add.spine(-x, 70, 'bottle');
+                playBottleAnim(bottle1, wheels[0].elements[1]);
+                upWheels.containers[0].visible = false;
+                game.add.tween(wheels[0].container).to({alpha: 0}, 1000, 'Linear', true);
+                break;
+            case 2:
+                bottleBG1 = addBottleBG(bottleContainer, wheels[2].elements[1]);
+                bottleBG1.x = 0;
+                bottle1 = game.add.spine(0, 70, 'bottle');
+                playBottleAnim(bottle1, wheels[2].elements[1]);
+                upWheels.containers[2].visible = false;
+                game.add.tween(wheels[2].container).to({alpha: 0}, 1000, 'Linear', true);
+                break;
+            case 3:
+                bottleBG1 = addBottleBG(bottleContainer, wheels[4].elements[1]);
+                bottleBG1.x = x;
+                bottle1 = game.add.spine(x, 70, 'bottle');
+                playBottleAnim(bottle1, wheels[4].elements[1]);
+                upWheels.containers[4].visible = false;
+                game.add.tween(wheels[4].container).to({alpha: 0}, 1000, 'Linear', true);
+                break;
+            case 4:
+                bottleBG1 = addBottleBG(bottleContainer, wheels[0].elements[1]);
+                bottleBG2 = addBottleBG(bottleContainer, wheels[2].elements[1]);
+                bottleBG1.x = -x;
+                bottleBG2.x = 0;
+                bottle1 = game.add.spine(-x, 70, 'bottle');
+                bottle2 = game.add.spine(0, 70, 'bottle');
+                playBottleAnim(bottle1, wheels[0].elements[1]);
+                playBottleAnim(bottle2, wheels[2].elements[1]);
+                upWheels.containers[0].visible = false;
+                upWheels.containers[2].visible = false;
+                game.add.tween(wheels[0].container).to({alpha: 0}, 1000, 'Linear', true);
+                game.add.tween(wheels[2].container).to({alpha: 0}, 1000, 'Linear', true);
+                break;
+            case 5:
+                bottleBG1 = addBottleBG(bottleContainer, wheels[2].elements[1]);
+                bottleBG2 = addBottleBG(bottleContainer, wheels[4].elements[1]);
+                bottleBG1.x = 0;
+                bottleBG2.x = x;
+                bottle1 = game.add.spine(0, 70, 'bottle');
+                bottle2 = game.add.spine(x, 70, 'bottle');
+                playBottleAnim(bottle1, wheels[2].elements[1]);
+                playBottleAnim(bottle2, wheels[4].elements[1]);
+                upWheels.containers[2].visible = false;
+                upWheels.containers[4].visible = false;
+                game.add.tween(wheels[2].container).to({alpha: 0}, 1000, 'Linear', true);
+                game.add.tween(wheels[4].container).to({alpha: 0}, 1000, 'Linear', true);
+                break;
+            case 6:
+                bottleBG1 = addBottleBG(bottleContainer, wheels[0].elements[1]);
+                bottleBG2 = addBottleBG(bottleContainer, wheels[4].elements[1]);
+                bottleBG1.x = -x;
+                bottleBG2.x = x;
+                bottle1 = game.add.spine(-x, 70, 'bottle');
+                bottle2 = game.add.spine(x, 70, 'bottle');
+                playBottleAnim(bottle1, wheels[0].elements[1]);
+                playBottleAnim(bottle2, wheels[4].elements[1]);
+                upWheels.containers[0].visible = false;
+                upWheels.containers[4].visible = false;
+                game.add.tween(wheels[0].container).to({alpha: 0}, 1000, 'Linear', true);
+                game.add.tween(wheels[4].container).to({alpha: 0}, 1000, 'Linear', true);
+                break;
+            case 7:
+                bottleBG1 = addBottleBG(bottleContainer, wheels[0].elements[1]);
+                bottleBG2 = addBottleBG(bottleContainer, wheels[2].elements[1]);
+                bottleBG3 = addBottleBG(bottleContainer, wheels[4].elements[1]);
+                bottleBG1.x = -x;
+                bottleBG2.x = 0;
+                bottleBG3.x = x;
+                bottle1 = game.add.spine(-x, 70, 'bottle');
+                bottle2 = game.add.spine(0, 70, 'bottle');
+                bottle3 = game.add.spine(x, 70, 'bottle');
+                playBottleAnim(bottle1, wheels[0].elements[1]);
+                playBottleAnim(bottle2, wheels[2].elements[1]);
+                playBottleAnim(bottle3, wheels[4].elements[1]);
+                upWheels.containers[0].visible = false;
+                upWheels.containers[2].visible = false;
+                upWheels.containers[4].visible = false;
+                game.add.tween(wheels[0].container).to({alpha: 0}, 1000, 'Linear', true);
+                game.add.tween(wheels[2].container).to({alpha: 0}, 1000, 'Linear', true);
+                game.add.tween(wheels[4].container).to({alpha: 0}, 1000, 'Linear', true);
+                break;
+            default:
 
-    function writeShurikenData(data) {
-        let shurikenArray = model.data('shurikenArray');
-        shurikenArray.push({
-            curValue: data.CurrentValue,
-            winCoins: data.Balance.TotalWinCoins,
-            winCents: data.Balance.TotalWinCents
-        });
-    }
-
-    function finishShurikens(totalSum) {
-        view.draw.TotalWin({
-            winTotalData: totalSum
-        });
-        model.updateBalance({
-            bonus: true
-        });
-        if (model.data('remainAutoCount')) {
-            let count = model.data('remainAutoCount');
-            setTimeout(() => {
-                autoplayController.start(count);
-            }, 800);
-            model.data('remainAutoCount', null);
         }
+        bottleContainer.add(bottle1);
+        if (bottle2) {
+            bottleContainer.add(bottle2);
+        }
+        if (bottle3) {
+            bottleContainer.add(bottle3);
+        }
+        bottleContainer.alpha = 0;
+
+        game.add.tween(bottleContainer).to({alpha: 1}, 1000, 'Linear', true);
+        container.addAt(bottleContainer, 0);
+
     }
 
-    function fireAllShurikens() {
+    function addBottleBG(container, element) {
+        let bottleBG;
         let game = model.el('game');
-        let shurikenArray = model.data('shurikenArray');
-        let aim = view.draw.Aim({});
-        let bonusSum = 0, bonusCashSum = 0;
-        let totalSum = model.data('rollResponse').Balance.TotalWinCoins;
-
-        shurikenArray.forEach((data, index) => {
-            setTimeout(() => {
-                view.draw.FireShuriken(data, index);
-            }, 800 * (index + 1));
-            totalSum += data.winCoins;
-            bonusSum += data.winCoins;
-            bonusCashSum += data.winCents;
-        });
-        model.data('bonusSum', bonusSum);
-        model.data('bonusCashSum', bonusCashSum);
-
-        setTimeout(() => {
-            model.state('buttons:locked', false);
-            model.state('bonus', false);
-            view.hide.Aim({
-                cb: finishShurikens.bind(null, totalSum)
-            });
-            game.input.keyboard.enabled = true;
-            if (model.desktop) {
-                panelView.unlockButtons({});
-            } else {
-                buttonsView.draw.unlockButtons({});
-            }
-        }, 800 * shurikenArray.length + 2000);
+        let y = (model.desktop) ? 12 : 2;
+        if (element.active == 10) {
+            bottleBG = game.add.sprite(0, y, 'green', null, container);
+        }
+        if (element.active == 13) {
+            bottleBG = game.add.sprite(0, y, 'red', null, container);
+        }
+        if (element.active == 16) {
+            bottleBG = game.add.sprite(0, y, 'orange', null, container);
+        }
+        bottleBG.anchor.set(0.5);
+        model.el('bottleBG', bottleBG);
+        return bottleBG;
     }
 
-    function fireAllSurikDemo(multi) {
-        coords[multi].forEach((sur, ind) => {
-            setTimeout(() => {
-                view.draw.FireShuriken({
-                    curValue: multi
-                }, ind);
-            }, 1000 * ind);
-        });
+    function playBottleAnim(bottle, element) {
+        if (model.mobile) {
+            bottle.scale.set(0.75);
+        }
+        if (element.active == 10) {
+            bottle.setAnimationByName(0, 'idle_n_g', false);
+            bottle.addAnimationByName(0, 'open_g', false);
+            bottle.addAnimationByName(0, 'idle_n_g', true);
+        }
+        if (element.active == 13) {
+            bottle.setAnimationByName(0, 'idle_n_r', false);
+            bottle.addAnimationByName(0, 'open_r', false);
+            bottle.addAnimationByName(0, 'idle_n_r', true);
+        }
+        if (element.active == 16) {
+            bottle.setAnimationByName(0, 'idle_n_y', false);
+            bottle.addAnimationByName(0, 'open_y', false);
+            bottle.addAnimationByName(0, 'idle_n_y', true);
+        }
+
     }
-
-
-
 
     return {
         showWin,

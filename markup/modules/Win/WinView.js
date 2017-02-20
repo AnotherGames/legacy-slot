@@ -17,12 +17,14 @@ export let view = (() => {
         }) {
             let elSize = config[model.res].elements;
             let upWheels = [];
+            upWheels.containers = [];
             let deltaY = (model.desktop) ? 28 : 15;
             for (var i = 0; i < 5; i++) {
                 upWheels.push([]);
+                let currentContainer = game.add.group();
                 for (var j = 0; j < 3; j++) {
                     let el = new Element({
-                        container,
+                        container: currentContainer,
                         position: {
                             x: elSize.width * (i + 0.5 - 2.5),
                             y: elSize.height * (j + 0.5 - 1.5) + deltaY
@@ -31,6 +33,8 @@ export let view = (() => {
                     el.hide(0);
                     upWheels[i].push(el);
                 }
+                upWheels.containers.push(currentContainer);
+                container.add(currentContainer);
             }
             model.el('upWheels', upWheels);
         },

@@ -38,7 +38,6 @@ export class Init {
                 .onComplete.add(() => {
                     view.playYoyoTween({});
                 });
-
         }
 
         if (model.desktop)  {
