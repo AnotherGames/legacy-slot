@@ -27,9 +27,11 @@ export class Init {
 
         let initPlay = view.drawPlay();
 
+        model.state('outInitState', false);
         if (model.mobile && !game.device.iOS) {
             let fakeButton = document.querySelector('#fakeButton');
             $('#fakeButton').removeClass('closed');
+            fakeButton.addEventListener('click', this.fullScreen);
             fakeButton.addEventListener('click', this.handlePlay);
         } else {
             initPlay.inputEnabled = true;
@@ -49,7 +51,6 @@ export class Init {
             this.triggerSoundLeft();
         }
 
-        this.addFullScreen();
     }
 
     switchSound() {
@@ -63,12 +64,17 @@ export class Init {
     }
 
     handlePlay() {
+        if (model.state('outInitState')) {
+            return;
+        }
         const game = model.el('game');
 
 
         if (model.mobile) game.scale.startFullScreen();
 
         view.stopYoyoTween();
+        let fakeButton = document.querySelector('#fakeButton');
+        fakeButton.removeEventListener('click', this.handlePlay);
 
         game.camera.onFadeComplete.add(() => {
             if (model.data('savedFS')) {
@@ -77,14 +83,8 @@ export class Init {
                 game.state.start('Main');
             }
         });
+        model.state('outInitState', true);
         game.camera.fade(0x000000, 500);
-        let fakeButton = document.querySelector('#fakeButton');
-        fakeButton.removeEventListener('click', this.handlePlay.bind(this));
-    }
-
-    addFullScreen() {
-        let fakeButton = document.querySelector('#fakeButton');
-        fakeButton.addEventListener('click', this.fullScreen);
     }
 
     fullScreen() {
