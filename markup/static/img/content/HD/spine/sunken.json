@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "EqxhPXKWLGxapg5oq9VOV5BVLdE", "spine": "3.5.46", "width": 200.56, "height": 854, "images": "" },
+"skeleton": { "hash": "fhcC6c+wO954gEzyeCNUANYmvm0", "spine": "3.5.46", "width": 223.37, "height": 854, "images": "" },
 "bones": [
 	{ "name": "root" },
 	{ "name": "Verevka", "parent": "root", "y": 425.63, "scaleX": 0.67, "scaleY": 0.138 },
@@ -46,27 +46,27 @@
 	{ "name": "num/Untitled-1_0013_-2", "bone": "buttons", "attachment": "num/Untitled-1_0013_-2" },
 	{ "name": "num/Untitled-1_0014_-1", "bone": "buttons", "attachment": "num/Untitled-1_0014_-1" },
 	{ "name": "Sunduk", "bone": "root", "attachment": "Sunduk" },
-	{ "name": "Sunduk5", "bone": "root", "attachment": "Sunduk" },
-	{ "name": "Sunduk4", "bone": "root", "attachment": "Sunduk" },
 	{ "name": "Sunduk2", "bone": "root", "attachment": "Sunduk" },
-	{ "name": "Sunduk3", "bone": "root", "attachment": "Sunduk" }
+	{ "name": "Sunduk3", "bone": "root", "attachment": "Sunduk" },
+	{ "name": "Sunduk4", "bone": "root", "attachment": "Sunduk" },
+	{ "name": "Sunduk5", "bone": "root", "attachment": "Sunduk" }
 ],
 "skins": {
 	"default": {
 		"Sunduk": {
-			"Sunduk": { "x": 78.4, "y": -336.73, "width": 100, "height": 100 }
+			"Sunduk": { "x": 79.81, "y": 99.93, "width": 70, "height": 70 }
 		},
 		"Sunduk2": {
-			"Sunduk": { "x": 78.4, "y": -40.11, "width": 100, "height": 100 }
+			"Sunduk": { "x": 79.81, "y": -44.06, "width": 70, "height": 70 }
 		},
 		"Sunduk3": {
-			"Sunduk": { "x": 78.4, "y": 253.65, "width": 100, "height": 100 }
+			"Sunduk": { "x": 79.81, "y": -193.64, "width": 70, "height": 70 }
 		},
 		"Sunduk4": {
-			"Sunduk": { "x": 78.4, "y": 102.69, "width": 100, "height": 100 }
+			"Sunduk": { "x": 79.81, "y": -337.53, "width": 70, "height": 70 }
 		},
 		"Sunduk5": {
-			"Sunduk": { "x": 78.4, "y": -189.71, "width": 100, "height": 100 }
+			"Sunduk": { "x": 79.81, "y": 252.25, "width": 70, "height": 70 }
 		},
 		"button": {
 			"button": { "x": -68.61, "y": 347.71, "width": 37, "height": 36 }
