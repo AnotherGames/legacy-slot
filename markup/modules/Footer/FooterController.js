@@ -1,39 +1,49 @@
 import { model } from 'modules/Model/Model';
 import { request } from 'modules/Util/Request';
-import { config } from 'modules/Util/Config';
 import { view } from 'modules/Footer/FooterView';
 import { controller as soundController } from 'modules/Sound/SoundController';
-import { view as panelView } from 'modules/Panel/PanelView';
 
 export let controller = (() => {
 
     function initDesktop() {
         view.draw.DesktopFooter({});
         view.draw.Time({});
-        view.draw.info({});
-        handle.info();
 
-        let homeButton = view.draw.HomeButton({});
+        let homeButton = view.draw.HomeButton({x: 30});
         homeButton.onInputDown.add(handle.Home);
 
-        let settingsButton = view.draw.SettingsButton({});
-        settingsButton.onInputDown.add(handle.Setting);
-
-        let infoButton = view.draw.InfoButton({});
-        infoButton.onInputDown.add(handle.openInfo);
-
-        let soundButton = view.draw.SoundButton({});
+        let soundButton = view.draw.SoundButton({x: 130});
         soundButton.freezeFrames = true;
         soundButton.onInputDown.add(handle.Sound);
 
-        let fastButton = view.draw.FastButton({});
+        let fastButton = view.draw.FastButton({x: 180});
         fastButton.freezeFrames = true;
         fastButton.onInputDown.add(handle.Fast);
 
-        let fullScreenButton = view.draw.FullScreenButton({});
+        let fullScreenButton = view.draw.FullScreenButton({x: 230});
         fullScreenButton.onInputDown.add(handle.toggleFullScreen);
         fullScreenButton.freezeFrames = true;
 
+        let footerMenu = model.group('footerMenu').children;
+        footerMenu.forEach((elem) => {
+            elem.onInputOver.add(() => {
+                elem.scale.set(1.4);
+            });
+            elem.onInputOut.add(() => {
+                elem.scale.set(1);
+            });
+        });
+    }
+
+    function initSettingInfoButtons() {
+        view.draw.info({});
+        handle.info();
+
+        let infoButton = view.draw.InfoButton({x: 50, y: model.el('game').height - 100});
+        infoButton.onInputDown.add(handle.openInfo);
+
+        let settingsButton = view.draw.SettingsButton({x: 80});
+        settingsButton.onInputDown.add(handle.Setting);
     }
 
     function initMobile() {
@@ -52,14 +62,22 @@ export let controller = (() => {
     }
 
     const handle = {
-        Setting: function() {
-            if (model.state('buttons:locked') ||
-                model.state('roll:progress') ||
-                model.state('autoplay:start')) return;
+        Setting: function () {
+            if (model.state('buttons:locked')
+            || model.state('roll:progress')
+            || model.state('autoplay:start')) {
+                return;
+            }
 
             let game = model.el('game');
             // Выключаем управление с клавиатуры
             game.input.keyboard.enabled = false;
+
+            // после нажатия кнопки и открытия поверх нее меню, она зависает до перовго наведения
+            // костыль чтоб исправить это
+            model.el('settingsButton').destroy();
+            let settingsButton = view.draw.SettingsButton({x: 80});
+            settingsButton.onInputDown.add(handle.Setting);
 
             soundController.sound.playSound({
                 sound: 'buttonClick'
@@ -79,7 +97,7 @@ export let controller = (() => {
             $('#darkness').removeClass('closed');
 
             // при клике на оверлей закрываем настройки
-            $('#darkness').on('click', function() {
+            $('#darkness').on('click', function () {
                 // Включаем управление с клавиатуры
                 game.input.keyboard.enabled = true;
                 $('#settings').addClass('closed');
@@ -89,18 +107,18 @@ export let controller = (() => {
             });
         },
 
-        Sound: function() {
+        Sound: function () {
             let soundButton = model.el('soundButton');
             if (model.state('globalSound')) {
                 soundButton.frameName = 'soundOff.png';
-                soundController.volume.switchVolume()
+                soundController.volume.switchVolume();
             } else {
                 soundButton.frameName = 'soundOn.png';
                 soundController.volume.switchVolume();
             }
         },
 
-        Fast: function() {
+        Fast: function () {
             soundController.sound.playSound({
                 sound: 'buttonClick'
             });
@@ -117,7 +135,7 @@ export let controller = (() => {
             }
         },
 
-        Home: function() {
+        Home: function () {
             soundController.sound.playSound({
                 sound: 'buttonClick'
             });
@@ -130,13 +148,13 @@ export let controller = (() => {
                 });
         },
 
-        toggleFullScreen: function() {
+        toggleFullScreen: function () {
             let game = model.el('game');
 
             if (game.scale.isFullScreen) {
-                game.scale.stopFullScreen()
+                game.scale.stopFullScreen();
             } else {
-                game.scale.startFullScreen()
+                game.scale.startFullScreen();
             }
         },
 
@@ -168,14 +186,21 @@ export let controller = (() => {
             if (model.state('buttons:locked')
             || model.state('roll:progress')
             || model.state('isAnim:info')
-            || model.state('autoplay:start')) return;
-
+            || model.state('autoplay:start')) {
+                return;
+            }
 
             let infoTable = model.el('infoTable');
             let infoMarkers = model.el('infoMarkers');
             let game = model.el('game');
             let counter = 1;
             let container = model.group('infoTable');
+
+            // после нажатия кнопки и открытия поверх нее меню, она зависает до перовго наведения
+            // костыль чтоб исправить это
+            model.el('infoButton').destroy();
+            let infoButton = view.draw.InfoButton({x: 50, y: model.el('game').height - 100});
+            infoButton.onInputDown.add(handle.openInfo);
 
             model.state('infoPanelOpen', true);
             soundController.sound.playSound({sound: 'buttonClick'});
@@ -196,7 +221,9 @@ export let controller = (() => {
         },
 
         closeInfo: function () {
-            if (model.state('isAnim:info')) return;
+            if (model.state('isAnim:info')) {
+                return;
+            }
 
             let game = model.el('game');
             let counter = 1;
@@ -261,6 +288,7 @@ export let controller = (() => {
 
     return {
         initDesktop,
+        initSettingInfoButtons,
         initMobile,
         updateTime,
         handle

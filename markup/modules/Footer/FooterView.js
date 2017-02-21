@@ -37,7 +37,7 @@ export let view = (() => {
 
         },
 
-        DesktopFooter: function({
+        DesktopFooter: function ({
             game = model.el('game'),
             container = model.group('footer'),
             color = 0x000000,
@@ -57,7 +57,7 @@ export let view = (() => {
             model.data('footerBottomCenterY', game.height - heightBottom / 2 + 3);
         },
 
-        HomeButton: function({
+        HomeButton: function ({
             game = model.el('game'),
             container = model.group('footerMenu'),
             x = 30,
@@ -73,7 +73,7 @@ export let view = (() => {
             return homeButton;
         },
 
-        FullScreenButton: function({
+        FullScreenButton: function ({
             game = model.el('game'),
             container = model.group('footerMenu'),
             x = 80,
@@ -86,7 +86,7 @@ export let view = (() => {
             return fullScreeButton;
         },
 
-        SoundButton: function({
+        SoundButton: function ({
             game = model.el('game'),
             container = model.group('footerMenu'),
             x = 130,
@@ -105,7 +105,7 @@ export let view = (() => {
             return soundButton;
         },
 
-        FastButton: function({
+        FastButton: function ({
             game = model.el('game'),
             container = model.group('footerMenu'),
             x = 180,
@@ -119,7 +119,7 @@ export let view = (() => {
             return fastButton;
         },
 
-        InfoButton: function({
+        InfoButton: function ({
             game = model.el('game'),
             container = model.group('footerMenu'),
             x = 230,
@@ -128,11 +128,18 @@ export let view = (() => {
             let infoButton = game.add.button(x, y, 'footerButtons', null, null, null, 'info.png', null, null, container);
             infoButton.anchor.set(0.5);
 
+            infoButton.onInputOver.add(() => {
+                infoButton.scale.set(1.4);
+            });
+            infoButton.onInputOut.add(() => {
+                infoButton.scale.set(1);
+            });
+
             model.el('infoButton', infoButton);
             return infoButton;
         },
 
-        SettingsButton: function({
+        SettingsButton: function ({
             game = model.el('game'),
             container = model.group('footerMenu'),
             x = 280,
@@ -140,6 +147,13 @@ export let view = (() => {
         }) {
             let settingsButton = game.add.button(x, y, 'footerButtons', null, null, null, 'settings.png', null, null, container);
             settingsButton.anchor.set(0.5);
+
+            settingsButton.onInputOver.add(() => {
+                settingsButton.scale.set(1.4);
+            });
+            settingsButton.onInputOut.add(() => {
+                settingsButton.scale.set(1);
+            });
 
             model.el('settingsButton', settingsButton);
             return settingsButton;
