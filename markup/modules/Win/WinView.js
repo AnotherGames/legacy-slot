@@ -11,7 +11,7 @@ export let view = (() => {
 
     let draw = {
 
-        UpWinContainer: function ({
+        UpWinContainer: function({
             game = model.el('game'),
             container = model.group('winUp')
         }) {
@@ -39,12 +39,24 @@ export let view = (() => {
             model.el('upWheels', upWheels);
         },
 
-        TotalWin: function ({
+        TotalWin: function({
             winTotalData,
             game = model.el('game'),
             container = model.group('winTop'),
-            style = {font: '90px Helvetice, Arial', fill: '#e1b249', align: 'center', stroke: '#000000', strokeThickness: 2},
-            style2 = {font: '40px Helvetice, Arial', fill: '#ffffff', align: 'center', stroke: '#000000', strokeThickness: 2}
+            style = {
+                font: '90px Helvetice, Arial',
+                fill: '#e1b249',
+                align: 'center',
+                stroke: '#000000',
+                strokeThickness: 2
+            },
+            style2 = {
+                font: '40px Helvetice, Arial',
+                fill: '#ffffff',
+                align: 'center',
+                stroke: '#000000',
+                strokeThickness: 2
+            }
         }) {
             if (winTotalData === 0) return;
 
@@ -53,11 +65,10 @@ export let view = (() => {
             // }
 
             let winTotal = game.add.sprite(0, 0, 'winTotal', null, container);
-                winTotal.anchor.set(0.5);
+            winTotal.anchor.set(0.5);
 
             let winTotalText = game.add.bitmapText(40, 0, 'textOrange', winTotalData + '', 100, container);
-                winTotalText.anchor.set(0.5);
-                console.log(winTotalData);
+            winTotalText.anchor.set(0.5);
 
             // small table
             if (!model.state('fs') && model.desktop) {
@@ -74,14 +85,20 @@ export let view = (() => {
                 winTotalTextSmall.anchor.set(0.5);
                 winTotalTextSmall.alpha = 0;
 
-                game.add.tween(winTotalSmall).to({alpha: 1, y: 360}, 300, 'Linear', true);
-                game.add.tween(winTotalTextSmall).to({alpha: 1, y: 370}, 300, 'Linear', true);
+                game.add.tween(winTotalSmall).to({
+                    alpha: 1,
+                    y: 360
+                }, 300, 'Linear', true);
+                game.add.tween(winTotalTextSmall).to({
+                    alpha: 1,
+                    y: 370
+                }, 300, 'Linear', true);
 
             }
 
         },
 
-        WinSplash: function ({
+        WinSplash: function({
             number,
             ind,
             game = model.el('game'),
@@ -119,12 +136,17 @@ export let view = (() => {
 
         },
 
-        WinNumber: function ({number}) {
+        WinNumber: function({
+            number
+        }) {
             if (number < 0) return;
-            draw.WinSplash({number, ind: 0});
+            draw.WinSplash({
+                number,
+                ind: 0
+            });
         },
 
-        WinElements: function ({
+        WinElements: function({
             number,
             amount,
             alpha = false,
@@ -135,8 +157,8 @@ export let view = (() => {
         }) {
 
             // Если нам нужно зажечь несколько линий элементов одновременно
-            if(typeof number == 'object'
-            || typeof amount == 'object') {
+            if (typeof number == 'object' ||
+                typeof amount == 'object') {
                 let winElements = draw.findElements({
                     number,
                     amount
@@ -169,7 +191,10 @@ export let view = (() => {
             let wheels = model.el('wheels').map((wheel) => {
                 return wheel.elements;
             });
-            let result = { upElements: [], elements: [] };
+            let result = {
+                upElements: [],
+                elements: []
+            };
 
             number.forEach((curNumber, indx) => {
                 if (curNumber != -1) {
@@ -194,13 +219,19 @@ export let view = (() => {
             finish
         }) {
             el.group.scale.set(start);
-            game.add.tween(el.group.scale).to({x: finish,  y: finish}, 700, Phaser.Easing.Bounce.Out, true)
+            game.add.tween(el.group.scale).to({
+                    x: finish,
+                    y: finish
+                }, 700, Phaser.Easing.Bounce.Out, true)
                 .onComplete.add(() => {
-                    game.add.tween(el.group.scale).to({x: 1.0,  y: 1.0}, 400, 'Linear', true)
+                    game.add.tween(el.group.scale).to({
+                        x: 1.0,
+                        y: 1.0
+                    }, 400, 'Linear', true)
                 }, this);
         },
 
-        copyFinishScreenToUpWheels: function ({
+        copyFinishScreenToUpWheels: function({
             finishScreen = model.data('finishScreen'),
             upWheels = model.el('upWheels')
         }) {
@@ -212,7 +243,7 @@ export let view = (() => {
             });
         },
 
-        WinGlista: function ({
+        WinGlista: function({
             number,
             game = model.el('game'),
             glistaLightContainer = model.group('glistaLight'),
@@ -235,9 +266,9 @@ export let view = (() => {
             // Создаем массив координат для пробега глистой
             let glistaMas = [];
             let line = model.data('lines')[number - 1];
-                line.forEach((coord) => {
-                    glistaMas.push(coord.Y);
-                });
+            line.forEach((coord) => {
+                glistaMas.push(coord.Y);
+            });
 
             // Запускаем глисту
             glista.start(glistaMas, time, () => {
@@ -289,7 +320,7 @@ export let view = (() => {
                 wheels.forEach((wheel, wheelIndex) => {
                     wheel.elements.forEach((element, elementIndex) => {
                         let name = parseInt(element.sprites[element.active - 1]
-                                    .animations.currentAnim.name);
+                            .animations.currentAnim.name);
                         if (name == 10) {
                             if (wheelIndex > lastWheel) {
                                 lastWheel = wheelIndex;
@@ -309,7 +340,7 @@ export let view = (() => {
 
             // Рисуем саму табличку и текст в зависимости от количества символов
             let winBG = game.add.sprite(x - 5, y + 5, 'winLine', null, container);
-                winBG.anchor.set(0.5);
+            winBG.anchor.set(0.5);
             let font;
             if (winValue > 999) {
                 font = '13px Arial, Helvetica';
@@ -318,8 +349,10 @@ export let view = (() => {
             } else {
                 font = '22px Arial, Helvetica';
             }
-            let text = game.add.text(x - 5, y + 6, winValue, {font: font}, container);
-                text.anchor.set(0.5);
+            let text = game.add.text(x - 5, y + 6, winValue, {
+                font: font
+            }, container);
+            text.anchor.set(0.5);
 
             let grd = text.context.createLinearGradient(0, 0, 0, text.canvas.height);
             grd.addColorStop(0, '#ffffff');
@@ -328,66 +361,324 @@ export let view = (() => {
 
         },
 
-        Aim: function ({
-            game = model.el('game'),
-            container = model.group('aim')
-        }) {
+        addBigBottleToStage: function(fsLevelNumber) {
+            let game = model.el('game');
+            let wheels = model.el('wheels');
+            let container = model.group('winUp');
 
-            soundController.sound.playSound({sound : 'aim'});
+            let bottle1, bottle2, bottle3;
+            let bottleBG1, bottleBG2, bottleBG3;
+            let bottleContainer1, bottleContainer2, bottleContainer3;
 
-            let darkness = game.add.graphics(0, 0, model.group('bonusDarkness'));
-                darkness.beginFill(0x000000, 0.7).drawRect(0, 0, game.world.width, game.world.height);
-            model.el('shurikenDarkness', darkness);
+            let x = (model.desktop) ? 512 : 384;
 
-            let aim = game.add.sprite(game.world.centerX, (model.desktop) ? (game.world.centerY - 150) : (game.world.centerY - 80), 'aim', null, container);
-                aim.anchor.set(0.5);
-            model.el('aim', aim);
+            switch (+fsLevelNumber) {
+                case 1:
+                    bottleContainer1 = draw.addBottleContainer(+fsLevelNumber).bottleContainer1;
+                    bottleBG1 = draw.addBottleBG(bottleContainer1, wheels[0].elements[1]);
 
-            game.add.tween(aim)
-                .from({y: -600}, 800, Phaser.Easing.Bounce.Out, true);
-            return aim;
+                    bottle1 = game.add.spine(0, 70, 'bottle');
+                    draw.playBottleAnim(bottle1, wheels[0].elements[1]);
+
+                    draw.hideWheels([0]);
+                    break;
+
+                case 2:
+                    bottleContainer1 = draw.addBottleContainer(+fsLevelNumber).bottleContainer1;
+                    bottleBG1 = draw.addBottleBG(bottleContainer1, wheels[2].elements[1]);
+
+                    bottle1 = game.add.spine(0, 70, 'bottle');
+                    draw.playBottleAnim(bottle1, wheels[2].elements[1]);
+
+                    draw.hideWheels([2]);
+                    break;
+                case 3:
+                    bottleContainer1 = draw.addBottleContainer(+fsLevelNumber).bottleContainer1;
+                    bottleBG1 = draw.addBottleBG(bottleContainer1, wheels[4].elements[1]);
+
+                    bottle1 = game.add.spine(0, 70, 'bottle');
+                    draw.playBottleAnim(bottle1, wheels[4].elements[1]);
+
+                    draw.hideWheels([4]);
+                    break;
+                case 4:
+                    bottleContainer1 = draw.addBottleContainer(+fsLevelNumber).bottleContainer1;
+                    bottleContainer2 = draw.addBottleContainer(+fsLevelNumber).bottleContainer2;
+
+                    bottleBG1 = draw.addBottleBG(bottleContainer1, wheels[0].elements[1]);
+                    bottleBG2 = draw.addBottleBG(bottleContainer2, wheels[2].elements[1]);
+
+                    bottle1 = game.add.spine(0, 70, 'bottle');
+                    bottle2 = game.add.spine(0, 70, 'bottle');
+
+                    draw.playBottleAnim(bottle1, wheels[0].elements[1]);
+                    draw.playBottleAnim(bottle2, wheels[2].elements[1]);
+
+                    draw.hideWheels([0, 2]);
+                    break;
+                case 5:
+                    bottleContainer1 = draw.addBottleContainer(+fsLevelNumber).bottleContainer1;
+                    bottleContainer2 = draw.addBottleContainer(+fsLevelNumber).bottleContainer2;
+                    bottleBG1 = draw.addBottleBG(bottleContainer1, wheels[2].elements[1]);
+                    bottleBG2 = draw.addBottleBG(bottleContainer2, wheels[4].elements[1]);
+
+                    bottle1 = game.add.spine(0, 70, 'bottle');
+                    bottle2 = game.add.spine(0, 70, 'bottle');
+                    draw.playBottleAnim(bottle1, wheels[2].elements[1]);
+                    draw.playBottleAnim(bottle2, wheels[4].elements[1]);
+
+                    draw.hideWheels([2, 4]);
+                    break;
+                case 6:
+                    bottleContainer1 = draw.addBottleContainer(+fsLevelNumber).bottleContainer1;
+                    bottleContainer2 = draw.addBottleContainer(+fsLevelNumber).bottleContainer2;
+                    bottleBG1 = draw.addBottleBG(bottleContainer1, wheels[0].elements[1]);
+                    bottleBG2 = draw.addBottleBG(bottleContainer2, wheels[4].elements[1]);
+
+                    bottle1 = game.add.spine(0, 70, 'bottle');
+                    bottle2 = game.add.spine(0, 70, 'bottle');
+                    draw.playBottleAnim(bottle1, wheels[0].elements[1]);
+                    draw.playBottleAnim(bottle2, wheels[4].elements[1]);
+
+                    draw.hideWheels([0, 4]);
+                    break;
+                case 7:
+                    bottleContainer1 = draw.addBottleContainer(+fsLevelNumber).bottleContainer1;
+                    bottleContainer2 = draw.addBottleContainer(+fsLevelNumber).bottleContainer2;
+                    bottleContainer3 = draw.addBottleContainer(+fsLevelNumber).bottleContainer3;
+                    bottleBG1 = draw.addBottleBG(bottleContainer1, wheels[0].elements[1]);
+                    bottleBG2 = draw.addBottleBG(bottleContainer2, wheels[2].elements[1]);
+                    bottleBG3 = draw.addBottleBG(bottleContainer3, wheels[4].elements[1]);
+
+                    bottle1 = game.add.spine(0, 70, 'bottle');
+                    bottle2 = game.add.spine(0, 70, 'bottle');
+                    bottle3 = game.add.spine(0, 70, 'bottle');
+                    draw.playBottleAnim(bottle1, wheels[0].elements[1]);
+                    draw.playBottleAnim(bottle2, wheels[2].elements[1]);
+                    draw.playBottleAnim(bottle3, wheels[4].elements[1]);
+
+                    draw.hideWheels([0, 2, 4]);
+                    break;
+                default:
+
+            }
+            if (bottle1) {
+                bottleContainer1.add(bottle1);
+                bottleContainer1.alpha = 0;
+                game.add.tween(bottleContainer1).to({
+                    alpha: 1
+                }, 1000, 'Linear', true);
+                container.addAt(bottleContainer1, 0);
+
+                draw.addBubbles({
+                    bottle: bottleBG1,
+                    container: bottleContainer1
+                });
+            }
+
+            if (bottle2) {
+                bottleContainer2.add(bottle2);
+                bottleContainer2.alpha = 0;
+                game.add.tween(bottleContainer2).to({
+                    alpha: 1
+                }, 1000, 'Linear', true);
+                container.addAt(bottleContainer2, 1);
+
+                draw.addBubbles({
+                    bottle: bottleBG2,
+                    container: bottleContainer2
+                });
+            }
+            if (bottle3) {
+                bottleContainer3.add(bottle3);
+                bottleContainer3.alpha = 0;
+                game.add.tween(bottleContainer3).to({
+                    alpha: 1
+                }, 1000, 'Linear', true);
+                container.addAt(bottleContainer3, 2);
+
+                draw.addBubbles({
+                    bottle: bottleBG3,
+                    container: bottleContainer3
+                });
+            }
+
         },
 
-        FireShuriken(data, index) {
+        hideWheels: function(array) {
             let game = model.el('game');
-            let container = model.group('aim');
+            let wheels = model.el('wheels');
+            let upWheels = model.el('upWheels');
+            array.forEach((item) => {
+                upWheels.containers[item].visible = false;
+                game.add.tween(wheels[item].container).to({
+                    alpha: 0
+                }, 1000, 'Linear', true);
+            });
+        },
 
-            let x = config.coords[parseInt(data.curValue)][index].x;
-            let y = config.coords[parseInt(data.curValue)][index].y;
-            let scaleX = config.coords[parseInt(data.curValue)][index].scaleX;
-            let scaleY = config.coords[parseInt(data.curValue)][index].scaleY;
-            if (model.mobile) {
-                x *= 0.66;
-                y *= 0.66;
-                scaleX *= 0.66;
-                scaleY *= 0.66;
+        addBottleContainer: function(fsLevelNumber) {
+
+            let bottleContainer1, bottleContainer2, bottleContainer3;
+            let x = (model.desktop) ? 512 : 384;
+
+            switch (+fsLevelNumber) {
+                case 1:
+                    bottleContainer1 = draw.createBottleContainer(-x);
+
+                    return {
+                        bottleContainer1
+                    };
+                    break;
+                case 2:
+                    bottleContainer1 = draw.createBottleContainer(0);
+
+                    return {
+                        bottleContainer1
+                    };
+                    break;
+                case 3:
+                    bottleContainer1 = draw.createBottleContainer(x);
+
+                    return {
+                        bottleContainer1
+                    };
+                    break;
+
+                case 4:
+                    bottleContainer1 = draw.createBottleContainer(-x);
+                    bottleContainer2 = draw.createBottleContainer(0);
+
+                    return {
+                        bottleContainer1,
+                        bottleContainer2
+                    };
+                    break;
+
+                case 5:
+                    bottleContainer1 = draw.createBottleContainer(0);
+                    bottleContainer2 = draw.createBottleContainer(x);
+
+                    return {
+                        bottleContainer1,
+                        bottleContainer2
+                    };
+                    break;
+
+                case 6:
+                    bottleContainer1 = draw.createBottleContainer(-x);
+                    bottleContainer2 = draw.createBottleContainer(x);
+
+                    return {
+                        bottleContainer1,
+                        bottleContainer2
+                    };
+                    break;
+
+                case 7:
+                    bottleContainer1 = draw.createBottleContainer(-x);
+                    bottleContainer2 = draw.createBottleContainer(0);
+                    bottleContainer3 = draw.createBottleContainer(x);
+
+                    return {
+                        bottleContainer1,
+                        bottleContainer2,
+                        bottleContainer3
+                    };
+                    break;
+
+                default:
             }
-            let leftSide = config.coords[parseInt(data.curValue)][index].left;
+        },
 
-            soundController.sound.playSound({sound: 'shurikenFly'});
+        createBottleContainer: function(x) {
+            let game = model.el('game');
+            let deltaY = (model.desktop) ? 10 : 0;
+            let elSize = config[model.res].elements;
+            let bottleContainer = game.add.group();
 
-            // Играй анимацию сурикена
-            let shuriken = game.add.sprite(x, y, 'shuriken', null, container);
-                shuriken.anchor.set(0.5);
-                shuriken.scale.x = (leftSide) ? -scaleX : scaleX;
-                shuriken.scale.y = scaleY;
-                shuriken.angle = game.rnd.integerInRange(-30, 30);
-                shuriken.animations.add('win');
-                shuriken.animations.play('win', 30);
-            game.add.tween(shuriken.scale)
-                .from({x: 2.5, y: 2.5}, 400, 'Linear', true);
-            game.add.tween(shuriken)
-                .from({x: (leftSide) ? 0 : game.width}, 400, 'Linear', true)
-                .onComplete.add(() => {
-                    let winText = game.add.bitmapText(game.world.centerX, game.world.centerY, 'numbersFont', `+${data.winCoins}`, 80, container);
-                        winText.align = 'center';
-                        winText.anchor.set(0.5);
-                        winText.scale.set(0.05);
-                    game.add.tween(winText.scale)
-                        .to({x: 1, y: 1}, 700, Phaser.Easing.Bounce.Out, true);
-                    game.add.tween(winText)
-                        .to({y: game.world.centerY - 500, alpha: 0}, 2000, 'Linear', true);
-                });
+            let someGraphic = game.add.graphics(-elSize.width * 0.5, -elSize.height * 1.5 + deltaY, bottleContainer);
+            someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 1, elSize.height * 3);
+
+            bottleContainer.mask = someGraphic;
+            bottleContainer.x = x;
+
+            return bottleContainer
+        },
+
+        addBottleBG: function(container, element) {
+            let bottleBG;
+            let game = model.el('game');
+            let y = (model.desktop) ? 12 : 2;
+            if (element.active == 10) {
+                bottleBG = game.add.sprite(0, y, 'green', null, container);
+            }
+            if (element.active == 13) {
+                bottleBG = game.add.sprite(0, y, 'red', null, container);
+            }
+            if (element.active == 16) {
+                bottleBG = game.add.sprite(0, y, 'orange', null, container);
+            }
+            bottleBG.anchor.set(0.5);
+            return bottleBG;
+        },
+
+        addBubbles: function({
+            game = model.el('game'),
+            container = model.group('bottle'),
+            bottle = model.el('bottleBG')
+        }) {
+            let bottleBG = model.el('bottleBG');
+            let emitter = game.add.emitter(bottle.x, game.height, 1800);
+            container.addAt(emitter, 2);
+            emitter.makeParticles('bubble');
+            emitter.width = bottle.width;
+            // console.log(container);
+
+            emitter.setRotation(0, 0);
+            emitter.setAlpha(0.1, 1, 3000);
+            emitter.minParticleScale = 0.1;
+            emitter.maxParticleScale = 0.4;
+            emitter.setYSpeed(20, 60);
+            emitter.gravity = -200;
+
+            emitter.start(false, 7000, 10);
+
+            let emitter2 = game.add.emitter(bottle.x, game.height, 1000);
+            container.addAt(emitter2, 4);
+            emitter2.makeParticles('bubble');
+            emitter2.width = bottle.width;
+
+            emitter2.setRotation(0, 0);
+            emitter2.setAlpha(0.1, 1, 3000);
+            emitter2.minParticleScale = 0.3;
+            emitter2.maxParticleScale = 0.6;
+            emitter2.setYSpeed(10, 30);
+            emitter2.gravity = -200;
+
+            emitter2.start(false, 7000, 50);
+        },
+
+        playBottleAnim: function(bottle, element) {
+            if (model.mobile) {
+                bottle.scale.set(0.75);
+            }
+            if (element.active == 10) {
+                bottle.setAnimationByName(0, 'idle_n_g', false);
+                bottle.addAnimationByName(0, 'open_g', false);
+                bottle.addAnimationByName(0, 'idle_n_g', true);
+            }
+            if (element.active == 13) {
+                bottle.setAnimationByName(0, 'idle_n_r', false);
+                bottle.addAnimationByName(0, 'open_r', false);
+                bottle.addAnimationByName(0, 'idle_n_r', true);
+            }
+            if (element.active == 16) {
+                bottle.setAnimationByName(0, 'idle_n_y', false);
+                bottle.addAnimationByName(0, 'open_y', false);
+                bottle.addAnimationByName(0, 'idle_n_y', true);
+            }
+
         }
 
     };
@@ -395,9 +686,15 @@ export let view = (() => {
     let play = {
 
         WinSound: function() {
-            let winSound = Math.round(Math.random())
-            ? soundController.sound.playSound({sound: 'lineWin', duration: 1200})
-            : soundController.sound.playSound({sound: 'lineWin2', duration: 1200});
+            let winSound = Math.round(Math.random()) ?
+                soundController.sound.playSound({
+                    sound: 'lineWin',
+                    duration: 1200
+                }) :
+                soundController.sound.playSound({
+                    sound: 'lineWin2',
+                    duration: 1200
+                });
             return winSound;
 
         }
@@ -410,17 +707,21 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('winTop')
         }) {
-            return game.add.tween(container).to( { alpha: 0 }, 150, 'Linear', true);
+            return game.add.tween(container).to({
+                alpha: 0
+            }, 150, 'Linear', true);
         },
 
-        Aim: function ({
+        Aim: function({
             game = model.el('game'),
             container = model.group('aim'),
             shurikenDarkness = model.el('shurikenDarkness'),
             cb = false
         }) {
             game.add.tween(container)
-                .to({y: -800}, 800, Phaser.Easing.Back.In, true)
+                .to({
+                    y: -800
+                }, 800, Phaser.Easing.Back.In, true)
                 .onComplete.add(() => {
                     container.y = 0;
                     if (cb) {
@@ -429,7 +730,9 @@ export let view = (() => {
                 });
 
             game.add.tween(shurikenDarkness)
-                .to({alpha: 0}, 800, 'Linear', true)
+                .to({
+                    alpha: 0
+                }, 800, 'Linear', true)
                 .onComplete.add(() => {
                     shurikenDarkness.destroy();
                     container.removeAll();

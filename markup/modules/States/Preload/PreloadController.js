@@ -85,6 +85,7 @@ export class Preload {
         game.load.image('green', 'bg/green.png');
         game.load.image('orange', 'bg/orange.png');
         game.load.image('red', 'bg/red.png');
+        game.load.image('bubble', 'bg/bubble.png');
         game.load.image('balloons', 'bg/balloons.png');
         game.load.image('confetti1', 'bg/confetti1.png');
         game.load.image('confetti2', 'bg/confetti2.png');

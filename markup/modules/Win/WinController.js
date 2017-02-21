@@ -1,5 +1,6 @@
 import { model } from 'modules/Model/Model';
 import { request } from 'modules/Util/Request';
+import { config } from 'modules/Util/Config';
 
 import { view } from 'modules/Win/WinView';
 import { view as transitionView } from 'modules/Transition/TransitionView';
@@ -186,7 +187,7 @@ export let controller = (() => {
         if (mode == 'root' && nextMode.indexOf('fsBonus') != -1 ) {
 
             let fsLevelNumber = nextMode[7];
-            addBigBottleToStage(fsLevelNumber);
+            view.draw.addBigBottleToStage(fsLevelNumber);
 
             // Лочим все кнопки
             // model.state('buttons:locked', true);
@@ -205,161 +206,6 @@ export let controller = (() => {
             //     transitionView.fsStart();
             // });
         }
-    }
-
-    function addBigBottleToStage(fsLevelNumber) {
-        let game = model.el('game');
-        let container = model.group('winUp');
-        let bottleContainer = game.add.group();
-        let bottle1, bottle2, bottle3;
-        let bottleBG1, bottleBG2, bottleBG3;
-
-        let wheels = model.el('wheels');
-        let upWheels = model.el('upWheels');
-        let x = (model.desktop) ? 512 : 384;
-
-        switch (+fsLevelNumber) {
-            case 1:
-                bottleBG1 = addBottleBG(bottleContainer, wheels[0].elements[1]);
-                bottleBG1.x = -x;
-                bottle1 = game.add.spine(-x, 70, 'bottle');
-                playBottleAnim(bottle1, wheels[0].elements[1]);
-                upWheels.containers[0].visible = false;
-                game.add.tween(wheels[0].container).to({alpha: 0}, 1000, 'Linear', true);
-                break;
-            case 2:
-                bottleBG1 = addBottleBG(bottleContainer, wheels[2].elements[1]);
-                bottleBG1.x = 0;
-                bottle1 = game.add.spine(0, 70, 'bottle');
-                playBottleAnim(bottle1, wheels[2].elements[1]);
-                upWheels.containers[2].visible = false;
-                game.add.tween(wheels[2].container).to({alpha: 0}, 1000, 'Linear', true);
-                break;
-            case 3:
-                bottleBG1 = addBottleBG(bottleContainer, wheels[4].elements[1]);
-                bottleBG1.x = x;
-                bottle1 = game.add.spine(x, 70, 'bottle');
-                playBottleAnim(bottle1, wheels[4].elements[1]);
-                upWheels.containers[4].visible = false;
-                game.add.tween(wheels[4].container).to({alpha: 0}, 1000, 'Linear', true);
-                break;
-            case 4:
-                bottleBG1 = addBottleBG(bottleContainer, wheels[0].elements[1]);
-                bottleBG2 = addBottleBG(bottleContainer, wheels[2].elements[1]);
-                bottleBG1.x = -x;
-                bottleBG2.x = 0;
-                bottle1 = game.add.spine(-x, 70, 'bottle');
-                bottle2 = game.add.spine(0, 70, 'bottle');
-                playBottleAnim(bottle1, wheels[0].elements[1]);
-                playBottleAnim(bottle2, wheels[2].elements[1]);
-                upWheels.containers[0].visible = false;
-                upWheels.containers[2].visible = false;
-                game.add.tween(wheels[0].container).to({alpha: 0}, 1000, 'Linear', true);
-                game.add.tween(wheels[2].container).to({alpha: 0}, 1000, 'Linear', true);
-                break;
-            case 5:
-                bottleBG1 = addBottleBG(bottleContainer, wheels[2].elements[1]);
-                bottleBG2 = addBottleBG(bottleContainer, wheels[4].elements[1]);
-                bottleBG1.x = 0;
-                bottleBG2.x = x;
-                bottle1 = game.add.spine(0, 70, 'bottle');
-                bottle2 = game.add.spine(x, 70, 'bottle');
-                playBottleAnim(bottle1, wheels[2].elements[1]);
-                playBottleAnim(bottle2, wheels[4].elements[1]);
-                upWheels.containers[2].visible = false;
-                upWheels.containers[4].visible = false;
-                game.add.tween(wheels[2].container).to({alpha: 0}, 1000, 'Linear', true);
-                game.add.tween(wheels[4].container).to({alpha: 0}, 1000, 'Linear', true);
-                break;
-            case 6:
-                bottleBG1 = addBottleBG(bottleContainer, wheels[0].elements[1]);
-                bottleBG2 = addBottleBG(bottleContainer, wheels[4].elements[1]);
-                bottleBG1.x = -x;
-                bottleBG2.x = x;
-                bottle1 = game.add.spine(-x, 70, 'bottle');
-                bottle2 = game.add.spine(x, 70, 'bottle');
-                playBottleAnim(bottle1, wheels[0].elements[1]);
-                playBottleAnim(bottle2, wheels[4].elements[1]);
-                upWheels.containers[0].visible = false;
-                upWheels.containers[4].visible = false;
-                game.add.tween(wheels[0].container).to({alpha: 0}, 1000, 'Linear', true);
-                game.add.tween(wheels[4].container).to({alpha: 0}, 1000, 'Linear', true);
-                break;
-            case 7:
-                bottleBG1 = addBottleBG(bottleContainer, wheels[0].elements[1]);
-                bottleBG2 = addBottleBG(bottleContainer, wheels[2].elements[1]);
-                bottleBG3 = addBottleBG(bottleContainer, wheels[4].elements[1]);
-                bottleBG1.x = -x;
-                bottleBG2.x = 0;
-                bottleBG3.x = x;
-                bottle1 = game.add.spine(-x, 70, 'bottle');
-                bottle2 = game.add.spine(0, 70, 'bottle');
-                bottle3 = game.add.spine(x, 70, 'bottle');
-                playBottleAnim(bottle1, wheels[0].elements[1]);
-                playBottleAnim(bottle2, wheels[2].elements[1]);
-                playBottleAnim(bottle3, wheels[4].elements[1]);
-                upWheels.containers[0].visible = false;
-                upWheels.containers[2].visible = false;
-                upWheels.containers[4].visible = false;
-                game.add.tween(wheels[0].container).to({alpha: 0}, 1000, 'Linear', true);
-                game.add.tween(wheels[2].container).to({alpha: 0}, 1000, 'Linear', true);
-                game.add.tween(wheels[4].container).to({alpha: 0}, 1000, 'Linear', true);
-                break;
-            default:
-
-        }
-        bottleContainer.add(bottle1);
-        if (bottle2) {
-            bottleContainer.add(bottle2);
-        }
-        if (bottle3) {
-            bottleContainer.add(bottle3);
-        }
-        bottleContainer.alpha = 0;
-
-        game.add.tween(bottleContainer).to({alpha: 1}, 1000, 'Linear', true);
-        container.addAt(bottleContainer, 0);
-
-    }
-
-    function addBottleBG(container, element) {
-        let bottleBG;
-        let game = model.el('game');
-        let y = (model.desktop) ? 12 : 2;
-        if (element.active == 10) {
-            bottleBG = game.add.sprite(0, y, 'green', null, container);
-        }
-        if (element.active == 13) {
-            bottleBG = game.add.sprite(0, y, 'red', null, container);
-        }
-        if (element.active == 16) {
-            bottleBG = game.add.sprite(0, y, 'orange', null, container);
-        }
-        bottleBG.anchor.set(0.5);
-        model.el('bottleBG', bottleBG);
-        return bottleBG;
-    }
-
-    function playBottleAnim(bottle, element) {
-        if (model.mobile) {
-            bottle.scale.set(0.75);
-        }
-        if (element.active == 10) {
-            bottle.setAnimationByName(0, 'idle_n_g', false);
-            bottle.addAnimationByName(0, 'open_g', false);
-            bottle.addAnimationByName(0, 'idle_n_g', true);
-        }
-        if (element.active == 13) {
-            bottle.setAnimationByName(0, 'idle_n_r', false);
-            bottle.addAnimationByName(0, 'open_r', false);
-            bottle.addAnimationByName(0, 'idle_n_r', true);
-        }
-        if (element.active == 16) {
-            bottle.setAnimationByName(0, 'idle_n_y', false);
-            bottle.addAnimationByName(0, 'open_y', false);
-            bottle.addAnimationByName(0, 'idle_n_y', true);
-        }
-
     }
 
     return {
