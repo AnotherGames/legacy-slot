@@ -65,6 +65,7 @@ export class Init {
     handlePlay() {
         const game = model.el('game');
 
+
         if (model.mobile) game.scale.startFullScreen();
 
         view.stopYoyoTween();
@@ -77,6 +78,8 @@ export class Init {
             }
         });
         game.camera.fade(0x000000, 500);
+        let fakeButton = document.querySelector('#fakeButton');
+        fakeButton.removeEventListener('click', this.handlePlay.bind(this));
     }
 
     addFullScreen() {

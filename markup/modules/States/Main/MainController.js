@@ -104,8 +104,6 @@ export class Main {
 
         // Проверяем остались ли автокрутки
         this.checkForRemainAutoplay();
-
-        this.addFullScreen();
     }
 
     update() {
@@ -149,16 +147,6 @@ export class Main {
             // model.group('main').y = game.world.centerY + config[model.res].mainContainer.y;
             model.group('main').y = 450;
         }
-    }
-
-    addFullScreen() {
-        let fakeButton = document.querySelector('#fakeButton');
-        fakeButton.addEventListener('click', this.fullScreen);
-    }
-
-    fullScreen() {
-        let game = model.el('game');
-        game.scale.startFullScreen();
     }
 
     checkForRemainAutoplay() {
