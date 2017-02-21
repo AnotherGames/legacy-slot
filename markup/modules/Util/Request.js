@@ -27,7 +27,7 @@ export let request = (() => {
             // Авторизация
                 let params = getAllUrlParams();
                 let currentMode = params.mode || mode[options];
-                let currentService = params.service || 'devslotv2';
+                let currentService = params.service || 'netent';
                 serviceUrl = `http://88.198.144.143/${currentService}/SlotService.svc`;
                 if (params.demo === 'true') {
                     name = `${name}Demo`;
@@ -35,7 +35,7 @@ export let request = (() => {
                 if (params.sid) {
                     url = `${serviceUrl}/_${name}/${params.sid}/${currentMode}`; // Вставил SessionID;
                 } else {
-                    url = `${serviceUrl}/_${name}/${userID}/${casinoID}/${currentMode}`;
+                    url = `${serviceUrl}/_${name}/dev_${Math.round(Math.random() * 100000)}/${currentMode}`;
                 }
             }
                 break;
