@@ -51,87 +51,159 @@ export let controller = (() => {
         let game = model.el('game');
 
         model.state('ready', false);
+
+        let wheels = model.el('wheels');
+        let finishScreen = _convertArray(model.data('firstScreen'));
+        model.data('finishScreen', finishScreen);
+
+        soundController.sound.playSound({ currentSound: 'baraban' });
+
+        let countFinish = 0;
+        let callback = function () {
+            ++countFinish;
+            if (countFinish === 5) {
+                endRoll();
+            }
+        };
+
+        winController.cleanWin();
+
+        // Крутим колеса
+        wheels.forEach((wheel, columnIndex) => {
+            wheel._isRollRequestComplete = false;
+            // Fast
+            if (model.state('fastRoll')) {
+                wheel.fast();
+            }
+            // Normal
+            game.time.events.add(columnIndex * config.wheel.roll.deltaTime, () => {
+                wheel.roll([1, 1, 1, 1, 1], {
+                    time: config.wheel.roll.time,
+                    length: config.wheel.roll.length,
+                    easingSeparation: config.wheel.roll.easingSeparation,
+                    callback
+                });
+            }, wheel);
+        });
+
+        // Обновляем баланс (забираем ставку)
+        if (model.state('fs')) {
+            model.updateBalance({ startFSRoll: true });
+        } else {
+            model.updateBalance({ startRoll: true });
+        }
+
+        // Выставляем состояния крутки на прогресс
+        model.state('roll:progress', true);
+        model.state('roll:fast', false);
+
+        setTimeout(() => {
+            wheels.forEach((wheel, index) => {
+                if (!wheel._isRollRequestComplete) {
+                    wheel.loop();
+                }
+            });
+        }, 500);
+
+        setTimeout(() => {
+            wheels.forEach((wheel) => {
+                if (wheel._isRollRequestComplete) {
+                    wheel.play();
+                }
+            });
+        }, 2000);
+
+
         // Отправляем запрос Roll
         request.send('Roll')
             .then((data) => {
 
+                let newFinishScreen = _convertArray(data.Screen);
+                model.data('finishScreen', newFinishScreen);
+
+                model.data('rollResponse', data);
+
+                wheels.forEach((wheel, index) => {
+                    wheel.setFinishScreen(newFinishScreen[index]);
+                });
+
                 // Если есть ошибка - выкидываем попап
-                if (data.ErrorCode) {
-                    console.log(data);
-                    if (data.ErrorCode == 8) {
-                        if (model.state('autoplay:start')) {
-                            model.state('autoplay:panelClosed', true);
-                            autoplayController.stop();
-                        }
+                // if (data.ErrorCode) {
+                //     console.log(data);
+                //     if (data.ErrorCode == 8) {
+                //         if (model.state('autoplay:start')) {
+                //             model.state('autoplay:panelClosed', true);
+                //             autoplayController.stop();
+                //         }
 
-                        model.state('ready', true);
-                        model.state('roll:progress', false);
+                //         model.state('ready', true);
+                //         model.state('roll:progress', false);
 
-                        if (model.mobile) {
-                            buttonsController.unlockButtons();
-                        } else {
-                            game.input.keyboard.enabled = true;
-                            panelView.unlockButtons();
-                        }
-                        mainView.draw.showPopup({message: data.ErrorMessage, balance: true});
-                        return;
-                    }
+                //         if (model.mobile) {
+                //             buttonsController.unlockButtons();
+                //         } else {
+                //             game.input.keyboard.enabled = true;
+                //             panelView.unlockButtons();
+                //         }
+                //         mainView.draw.showPopup({message: data.ErrorMessage, balance: true});
+                //         return;
+                //     }
 
-                    mainView.draw.showPopup({message: data.ErrorMessage});
-                    return;
-                } else {
+                //     mainView.draw.showPopup({message: data.ErrorMessage});
+                //     return;
+                // } else {
 
-                    // Очищаем выигрышный экран
-                    winController.cleanWin();
+                //     // Очищаем выигрышный экран
+                //     winController.cleanWin();
 
-                    // Записываем полученные данные
-                    model.data('rollResponse', data);
+                //     // Записываем полученные данные
+                //     model.data('rollResponse', data);
 
-                    // Обновляем баланс (забираем ставку)
-                    if (model.state('fs')) {
-                        model.updateBalance({startFSRoll: true});
-                    } else {
-                        model.updateBalance({startRoll: true});
-                    }
+                    // // Обновляем баланс (забираем ставку)
+                    // if (model.state('fs')) {
+                    //     model.updateBalance({startFSRoll: true});
+                    // } else {
+                    //     model.updateBalance({startRoll: true});
+                    // }
 
-                    // Выставляем состояния крутки на прогресс
-                    model.state('roll:progress', true);
-                    model.state('roll:fast', false);
+                    // // Выставляем состояния крутки на прогресс
+                    // model.state('roll:progress', true);
+                    // model.state('roll:fast', false);
 
-                    // Расчитываем конечный экран
-                    let wheels = model.el('wheels');
-                    let finishScreen = _convertArray(data.Screen);
-                    model.data('finishScreen', finishScreen);
+                //     // Расчитываем конечный экран
+                //     let wheels = model.el('wheels');
+                //     let finishScreen = _convertArray(data.Screen);
+                //     model.data('finishScreen', finishScreen);
 
-                    soundController.sound.playSound({currentSound: 'baraban'});
+                //     soundController.sound.playSound({currentSound: 'baraban'});
 
-                    // Крутим колеса
-                    wheels.forEach((wheel, columnIndex) => {
-                        // Fast
-                        if (model.state('fastRoll')) {
-                            wheel.fast();
-                        }
-                        // Normal
-                        game.time.events.add(columnIndex * config.wheel.roll.deltaTime, () => {
-                            wheel.roll(finishScreen[columnIndex] || config.wheel.roll.finishScreen, {
-                                time: config.wheel.roll.time,
-                                length: config.wheel.roll.length,
-                                easingSeparation: config.wheel.roll.easingSeparation,
-                                callback
-                            });
-                        }, wheel);
+                //     // Крутим колеса
+                //     // wheels.forEach((wheel, columnIndex) => {
+                //     //     // Fast
+                //     //     if (model.state('fastRoll')) {
+                //     //         wheel.fast();
+                //     //     }
+                //     //     // Normal
+                //     //     game.time.events.add(columnIndex * config.wheel.roll.deltaTime, () => {
+                //     //         wheel.roll(finishScreen[columnIndex] || config.wheel.roll.finishScreen, {
+                //     //             time: config.wheel.roll.time,
+                //     //             length: config.wheel.roll.length,
+                //     //             easingSeparation: config.wheel.roll.easingSeparation,
+                //     //             callback
+                //     //         });
+                //     //     }, wheel);
 
-                    });
+                //     // });
 
-                    // Когда все пять колес завершают движение - заканчиваем крутку и показываем выигрыш
-                    let countFinish = 0;
-                    let callback = function () {
-                        ++countFinish;
-                        if (countFinish === 5) {
-                            endRoll();
-                        }
-                    };
-                }
+                    // // Когда все пять колес завершают движение - заканчиваем крутку и показываем выигрыш
+                    // let countFinish = 0;
+                    // let callback = function () {
+                    //     ++countFinish;
+                    //     if (countFinish === 5) {
+                    //         endRoll();
+                    //     }
+                    // };
+                // }
             })
             .catch((err) => {
                 if (err.status == 404) mainView.draw.showPopup({message: 'Connection problem. Click to restart'});
@@ -162,6 +234,7 @@ export let controller = (() => {
     }
 
     function endRoll() {
+
         if (model.state('ready')) {
             return false;
         }
@@ -169,7 +242,7 @@ export let controller = (() => {
         soundController.sound.stopSound('baraban');
 
         // Отправляем запрос Ready
-        request.send('Ready').then(() => {
+        // request.send('Ready').then(() => {
             winController.showWin();
             // Обновляем баланс в конце крутки
             if (model.state('fs')) {
@@ -201,11 +274,11 @@ export let controller = (() => {
                 }
             }
 
-        })
-        .catch((err) => {
-            mainView.draw.showPopup({message: 'You have weak Internet connection. Click to restart.'});
-            console.error(err);
-        });
+        // })
+        // .catch((err) => {
+        //     mainView.draw.showPopup({message: 'You have weak Internet connection. Click to restart.'});
+        //     console.error(err);
+        // });
 
     }
 

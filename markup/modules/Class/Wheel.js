@@ -82,6 +82,7 @@ export class Wheel {
         this._wheelSpeed = 0;
         this._wheelStartPos = 0;
         this._wheelLastY = this.position.y;
+        this._isRollRequestComplete = false;
         Object.defineProperty(this, 'wheelLastY', {
             set: function (val) {
                 this._wheelSpeed = val - this._wheelLastY;
@@ -146,6 +147,10 @@ export class Wheel {
         this._loopLengthY = 0;
         this._wheelStartPos = 0;
     }
+    setFinishScreen(newFinishScreen) {
+        this.finishScreen = newFinishScreen;
+        this._isRollRequestComplete = true;
+    }
     play() {
         if (this.mode === 'roll') return;
 
@@ -205,7 +210,9 @@ export class Wheel {
         this.timeLength = config.wheel.roll.time;
         this.easingSeparation = config.wheel.roll.easingSeparation;
         this.rollLength = config.wheel.roll.length;
-        this.currentScreen = this.finishScreen = finishScreen;
+        if (!this._isRollRequestComplete) {
+            this.currentScreen = this.finishScreen = finishScreen;
+        }
 
         if (typeof (param) === 'object') {
             if (typeof (param.time) === 'number') {
