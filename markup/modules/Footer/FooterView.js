@@ -239,12 +239,12 @@ export let view = (() => {
             styleDesktop = {
                 font: '18px Helvetica, Arial',
                 align: 'center',
-                fill: '#e8b075'
+                fill: '#ffffff'
             },
             styleMobile = {
                 font: '22px Helvetica, Arial',
                 align: 'center',
-                fill: '#e8b075'
+                fill: '#ffffff'
             }
         }) {
             let currentHour = new Date().getHours();
@@ -271,7 +271,7 @@ export let view = (() => {
 
             let footerTime = game.add.text(
                 0,
-                game.height - 18,
+                game.height - 15,
                 `${currentHour} : ${currentMinutes}`,
                 style,
                 container);

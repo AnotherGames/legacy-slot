@@ -12,22 +12,27 @@ export let view = (() => {
             x = game.world.centerX,
             y = model.el('gameMachine').bottom + model.el('gameMachine').height / 2,
             frameName = 'panel',
-            deltaY = 70
+            deltaY = 70,
+            deltaX = 40
         }) {
             container.x = x;
             container.top = y;
             const panelBG = game.add.sprite(1, deltaY, 'panelBG', 'panelBGgreen.png', container);
-            const panel = game.add.sprite(40, deltaY, frameName, null, container);
+            const panel = game.add.sprite(deltaX, deltaY, frameName, null, container);
 
-            // let convert =game.add.button(80, 150, 'deskButtons', null, null, 'switcher.png', 'switcher.png', null, null, container);
-            let convert = game.add.sprite(80, 150, 'switcher', 'switch1.png', container);
-            convert.anchor.set(0.5);
-            convert.inputEnabled = true;
-            convert.events.onInputDown.add(() => {
-                balanceController.changeCoinsToCash();
-            });
+            if (!model.state('fs')) {
+                let convert = game.add.sprite(80, 150, 'switcher', 'switch1.png', container);
+                convert.anchor.set(0.5);
+                convert.inputEnabled = true;
+                convert.events.onInputDown.add(() => {
+                    balanceController.changeCoinsToCash();
+                });
 
-            model.el('convertSign', convert);
+                model.el('convertSign', convert);
+            } else {
+                container.alpha = 0;
+                container.y = -500;
+            }
 
             container.pivot.set(panelBG.width / 2, 0);
             return panelBG;
@@ -255,6 +260,12 @@ export let view = (() => {
             return game.add.tween(autoDesktopContainer).to({
                 x: finalX
             }, time, 'Linear', true)
+        },
+        showPanelFS: function({
+            game = model.el('game'),
+        }) {
+            let panelGroup = model.group('panelFS');
+            game.add.tween(panelGroup).to({y: model.el('gameMachine').bottom + model.el('gameMachine').height / 2, alpha: 1}, 1000, 'Linear', true);
         }
 
     }
@@ -280,6 +291,12 @@ export let view = (() => {
             return game.add.tween(autoDesktopContainer).to({
                 x: finalX + 5
             }, time, 'Linear', true)
+        },
+        dropPaneltoFS: function({
+            game = model.el('game'),
+        }) {
+            let panelGroup = model.group('panel');
+            game.add.tween(panelGroup).to({y: game.height + 500, alpha: 0}, 1000, 'Linear', true);
         }
     }
 

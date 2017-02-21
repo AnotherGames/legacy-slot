@@ -12,6 +12,7 @@ export let view = (() => {
             model.group('bg', game.add.group());
             model.group('main', game.add.group());
             model.group('panel', game.add.group());
+            model.group('panelFS', game.add.group());
             model.group('buttons', game.add.group());
             model.group('balanceContainer', game.add.group());
             model.group('menuContainer', game.add.group());

@@ -185,7 +185,7 @@ export let view = (() => {
 
         FSDesktopBalance: function({
             game = model.el('game'),
-            container = model.group('panel'),
+            container = model.group('panelFS'),
             coinSumValue = model.balance('coinSum'),
             betSumValue = model.balance('betSum'),
             coinValueAmount = model.balance('coinValue'),
@@ -193,17 +193,17 @@ export let view = (() => {
             sumStyle = {font: '24px Helvetica, Arial', fill: '#e8b075', align: 'center'},
             valueStyle = {font: '27px Helvetica, Arial', fill: '#ffffff', align: 'center'},
             y = 155,
-            x = [154, 230, 250, 1212]
+            x = [130, 265, 395, 865, 1000, 1155]
         }) {
 
-            let coinSum = game.add.text(x[3], y, `${coinSumValue.toFixed(0)}`, valueStyle, container);
-            let betSum = game.add.text(x[1], y, `${betSumValue.toFixed(0)}`, valueStyle, container);
+            let coinSum = game.add.text(x[5], y, `${coinSumValue.toFixed(0)}`, valueStyle, container);
+            let betSum = game.add.text(x[0], y, `${betSumValue.toFixed(0)}`, valueStyle, container);
 
             let coinValue = game.add.text(x[2], y, `${coinValueAmount}`, valueStyle, container);
-            let betValue = game.add.text(x[0], y, `${betValueAmount}`, valueStyle, container);
+            let betValue = game.add.text(x[1], y, `${betValueAmount}`, valueStyle, container);
 
             let winSum = game.add.text(x[3], y, `0`, valueStyle, container);
-            let totalWinSum = game.add.text(x[3], y, `0`, valueStyle, container);
+            let totalWinSum = game.add.text(x[4], y, `0`, valueStyle, container);
 
             model.el('coinSum', coinSum);
             model.el('betSum', betSum);

@@ -55,6 +55,7 @@ export class Main {
         mainView.draw.addBalloons({});
         game.time.events.add(7000, () => {
             mainView.draw.addConfetti({});
+            panelController.drawFsPanel();
         });
         // mainView.draw.addBurst({});
         mainView.draw.mainContainer({});

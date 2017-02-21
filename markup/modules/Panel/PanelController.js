@@ -3,6 +3,7 @@ import { config } from 'modules/Util/Config';
 import { view } from 'modules/Panel/PanelView';
 import { view as mainView } from 'modules/States/Main/MainView';
 
+import { controller as balanceController } from 'modules/Balance/BalanceController';
 import { controller as soundController } from 'modules/Sound/SoundController';
 import { controller as autoplayController } from 'modules/Autoplay/AutoplayController';
 import { controller as rollController } from 'modules/Roll/RollController';
@@ -63,12 +64,19 @@ export let controller = (() => {
 
     function drawFsPanel() {
         let game = model.el('game');
-        let time = game.rnd.integerInRange(10, 70);
 
-        view.draw.PanelBG({
-            frameName: 'panelFS'
-        });
-        // view.draw.LinesNumber({x: 55, y: 85});
+        if (model.desktop) {
+            view.hide.dropPaneltoFS({});
+
+            view.draw.PanelBG({
+                frameName: 'panelFS',
+                container: model.group('panelFS'),
+                deltaX: 0
+            });
+            balanceController.initFSDesktop();
+        } else{
+            balanceController.initFSMobile();
+        }
 
     }
 
