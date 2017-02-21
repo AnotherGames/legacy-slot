@@ -53,7 +53,7 @@ class Door {
     fail() {
         this.destroyed = true;
 
-        soundController.sound.playSound({ currentSound: 'illumFail' });
+        soundController.sound.playSound({ currentSound: 'illumFail', soundVolume: 3 });
 
         this.doors.forEach((door) => {
             door.tentacle = this.game.add.sprite(door.x - 50, door.y + 5, 'tentacles');
