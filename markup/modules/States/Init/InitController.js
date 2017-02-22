@@ -27,12 +27,13 @@ export class Init {
 
         let initPlay = view.drawPlay();
 
-        model.state('outInitState', false);
+        this.stateHandler = this.handlePlay.bind(this);
+
         if (model.mobile && !game.device.iOS) {
             let fakeButton = document.querySelector('#fakeButton');
             $('#fakeButton').removeClass('closed');
             fakeButton.addEventListener('click', this.fullScreen);
-            fakeButton.addEventListener('click', this.handlePlay);
+            fakeButton.addEventListener('click', this.stateHandler);
         } else {
             initPlay.inputEnabled = true;
             initPlay.events.onInputDown.add(this.handlePlay, this);
@@ -64,9 +65,6 @@ export class Init {
     }
 
     handlePlay() {
-        if (model.state('outInitState')) {
-            return;
-        }
         const game = model.el('game');
 
 
@@ -74,7 +72,7 @@ export class Init {
 
         view.stopYoyoTween();
         let fakeButton = document.querySelector('#fakeButton');
-        fakeButton.removeEventListener('click', this.handlePlay);
+        fakeButton.removeEventListener('click', this.stateHandler);
 
         game.camera.onFadeComplete.add(() => {
             if (model.data('savedFS')) {
@@ -83,7 +81,7 @@ export class Init {
                 game.state.start('Main');
             }
         });
-        model.state('outInitState', true);
+
         game.camera.fade(0x000000, 500);
     }
 
