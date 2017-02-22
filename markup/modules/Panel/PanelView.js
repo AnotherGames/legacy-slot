@@ -358,25 +358,20 @@ export let view = (() => {
         settingsButton.alpha = 0.5;
 
         let maxBetButtonDesk = model.el('maxBetButtonDesk');
-        maxBetButtonDesk.frameName = 'maxBet.png';
+        maxBetButtonDesk.frameName = 'maxBetClose.png';
         maxBetButtonDesk.freezeFrames = true;
-        maxBetButtonDesk.alpha = 0.5;
         let betLevelPlus = model.el('betLevelPlus');
-        betLevelPlus.frameName = 'plus.png';
+        betLevelPlus.frameName = 'close.png';
         betLevelPlus.freezeFrames = true;
-        betLevelPlus.alpha = 0.5;
         let betLevelMinus = model.el('betLevelMinus');
-        betLevelMinus.frameName = 'minus.png';
+        betLevelMinus.frameName = 'close.png';
         betLevelMinus.freezeFrames = true;
-        betLevelMinus.alpha = 0.5;
         let coinsLevelPlus = model.el('coinsLevelPlus');
-        coinsLevelPlus.frameName = 'plus.png';
+        coinsLevelPlus.frameName = 'close.png';
         coinsLevelPlus.freezeFrames = true;
-        coinsLevelPlus.alpha = 0.5;
         let coinsLevelMinus = model.el('coinsLevelMinus');
-        coinsLevelMinus.frameName = 'minus.png';
+        coinsLevelMinus.frameName = 'close.png';
         coinsLevelMinus.freezeFrames = true;
-        coinsLevelMinus.alpha = 0.5;
         if (model.state('autoplay:start')) {
             let spinButtonDesk = model.el('spinButtonDesk');
             spinButtonDesk.visible = false;
@@ -387,8 +382,7 @@ export let view = (() => {
             autoButtonDesk.freezeFrames = true;
         } else {
             let autoButtonDesk = model.el('autoButtonDesk');
-            autoButtonDesk.frameName = 'auto.png';
-            autoButtonDesk.alpha = 0.5;
+            autoButtonDesk.frameName = 'autoClose.png';
             autoButtonDesk.freezeFrames = true;
         }
 
@@ -407,27 +401,21 @@ export let view = (() => {
         let maxBetButtonDesk = model.el('maxBetButtonDesk');
         maxBetButtonDesk.frameName = 'maxBet.png';
         maxBetButtonDesk.freezeFrames = false;
-        maxBetButtonDesk.alpha = 1;
         let betLevelPlus = model.el('betLevelPlus');
         betLevelPlus.frameName = 'plus.png';
         betLevelPlus.freezeFrames = false;
-        betLevelPlus.alpha = 1;
         let betLevelMinus = model.el('betLevelMinus');
         betLevelMinus.frameName = 'minus.png';
         betLevelMinus.freezeFrames = false;
-        betLevelMinus.alpha = 1;
         let coinsLevelPlus = model.el('coinsLevelPlus');
         coinsLevelPlus.frameName = 'plus.png';
         coinsLevelPlus.freezeFrames = false;
-        coinsLevelPlus.alpha = 1;
         let coinsLevelMinus = model.el('coinsLevelMinus');
         coinsLevelMinus.frameName = 'minus.png';
         coinsLevelMinus.freezeFrames = false;
-        coinsLevelMinus.alpha = 1;
         let autoButtonDesk = model.el('autoButtonDesk');
         autoButtonDesk.frameName = 'auto.png';
         autoButtonDesk.freezeFrames = false;
-        autoButtonDesk.alpha = 1;
         if (model.state('autoplay:end')) {
             let spinButtonDesk = model.el('spinButtonDesk');
             spinButtonDesk.visible = true;
@@ -435,8 +423,7 @@ export let view = (() => {
             stopButtonDesk.visible = false;
             stopButtonDesk.frameName = 'stop.png';
             stopButtonDesk.freezeFrames = false;
-            // autoButtonDesk.frameName = 'auto.png';
-            // autoButtonDesk.alpha = 1;
+
             autoButtonDesk.visible = true;
             autoButtonDesk.freezeFrames = false;
         }
