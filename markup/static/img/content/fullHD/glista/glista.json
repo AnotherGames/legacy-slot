@@ -1,68 +1,260 @@
 {"frames": [
 
 {
-	"filename": "Bullet_0.png",
-	"frame": {"x":1,"y":1,"w":247,"h":105},
+	"filename": "rocket-fli_0.png",
+	"frame": {"x":1230,"y":737,"w":379,"h":388},
 	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":247,"h":105},
-	"sourceSize": {"w":247,"h":105}
+	"trimmed": true,
+	"spriteSourceSize": {"x":31,"y":34,"w":379,"h":388},
+	"sourceSize": {"w":438,"h":447}
 },
 {
-	"filename": "Bullet_1.png",
-	"frame": {"x":1,"y":108,"w":144,"h":84},
+	"filename": "rocket-fli_1.png",
+	"frame": {"x":740,"y":1054,"w":352,"h":359},
 	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":144,"h":84},
-	"sourceSize": {"w":144,"h":84}
+	"trimmed": true,
+	"spriteSourceSize": {"x":46,"y":49,"w":352,"h":359},
+	"sourceSize": {"w":438,"h":447}
 },
 {
-	"filename": "Bullet_2.png",
-	"frame": {"x":1,"y":194,"w":144,"h":76},
+	"filename": "rocket-fli_2.png",
+	"frame": {"x":1240,"y":1675,"w":337,"h":331},
 	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":144,"h":76},
-	"sourceSize": {"w":144,"h":76}
+	"trimmed": true,
+	"spriteSourceSize": {"x":60,"y":63,"w":337,"h":331},
+	"sourceSize": {"w":438,"h":447}
 },
 {
-	"filename": "Bullet_3.png",
-	"frame": {"x":1,"y":272,"w":144,"h":68},
+	"filename": "rocket-fli_3.png",
+	"frame": {"x":1639,"y":518,"w":321,"h":302},
 	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":144,"h":68},
-	"sourceSize": {"w":144,"h":68}
+	"trimmed": true,
+	"spriteSourceSize": {"x":75,"y":78,"w":321,"h":302},
+	"sourceSize": {"w":438,"h":447}
 },
 {
-	"filename": "Bullet_4.png",
-	"frame": {"x":1,"y":342,"w":144,"h":58},
+	"filename": "rocket-fli_4.png",
+	"frame": {"x":1647,"y":1,"w":306,"h":275},
 	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":144,"h":58},
-	"sourceSize": {"w":144,"h":58}
+	"trimmed": true,
+	"spriteSourceSize": {"x":89,"y":92,"w":306,"h":275},
+	"sourceSize": {"w":438,"h":447}
 },
 {
-	"filename": "Bullet_5.png",
-	"frame": {"x":1,"y":402,"w":144,"h":44},
+	"filename": "rocket-fli_5.png",
+	"frame": {"x":1,"y":1765,"w":291,"h":246},
 	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":144,"h":44},
-	"sourceSize": {"w":144,"h":44}
+	"trimmed": true,
+	"spriteSourceSize": {"x":104,"y":107,"w":291,"h":246},
+	"sourceSize": {"w":438,"h":447}
 },
 {
-	"filename": "Bullet_6.png",
-	"frame": {"x":1,"y":448,"w":135,"h":27},
+	"filename": "rocket-fli_6.png",
+	"frame": {"x":963,"y":1765,"w":275,"h":219},
 	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":135,"h":27},
-	"sourceSize": {"w":135,"h":27}
+	"trimmed": true,
+	"spriteSourceSize": {"x":118,"y":121,"w":275,"h":219},
+	"sourceSize": {"w":438,"h":447}
+},
+{
+	"filename": "rocket-fli_7.png",
+	"frame": {"x":1068,"y":1481,"w":260,"h":192},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":132,"y":135,"w":260,"h":192},
+	"sourceSize": {"w":438,"h":447}
+},
+{
+	"filename": "rocket-fli_8.png",
+	"frame": {"x":1647,"y":278,"w":295,"h":238},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":96,"y":113,"w":295,"h":238},
+	"sourceSize": {"w":438,"h":447}
+},
+{
+	"filename": "rocket-fli_9.png",
+	"frame": {"x":1579,"y":1430,"w":333,"h":288},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":59,"y":88,"w":333,"h":288},
+	"sourceSize": {"w":438,"h":447}
+},
+{
+	"filename": "rocket-fli_10.png",
+	"frame": {"x":1250,"y":1,"w":395,"h":337},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":22,"y":63,"w":395,"h":337},
+	"sourceSize": {"w":438,"h":447}
+},
+{
+	"filename": "rocket-fli_11.png",
+	"frame": {"x":845,"y":415,"w":383,"h":324},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":28,"y":68,"w":383,"h":324},
+	"sourceSize": {"w":438,"h":447}
+},
+{
+	"filename": "rocket-fli_12.png",
+	"frame": {"x":810,"y":741,"w":373,"h":311},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":33,"y":74,"w":373,"h":311},
+	"sourceSize": {"w":438,"h":447}
+},
+{
+	"filename": "rocket-fli_13.png",
+	"frame": {"x":1,"y":821,"w":363,"h":298},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":39,"y":79,"w":363,"h":298},
+	"sourceSize": {"w":438,"h":447}
+},
+{
+	"filename": "rocket-fli_14.png",
+	"frame": {"x":362,"y":1153,"w":352,"h":285},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":45,"y":85,"w":352,"h":285},
+	"sourceSize": {"w":438,"h":447}
+},
+{
+	"filename": "rocket-fli_15.png",
+	"frame": {"x":1611,"y":822,"w":346,"h":272},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":91,"w":346,"h":272},
+	"sourceSize": {"w":438,"h":447}
+},
+{
+	"filename": "rocket-fli_16.png",
+	"frame": {"x":1,"y":1487,"w":342,"h":259},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":57,"y":96,"w":342,"h":259},
+	"sourceSize": {"w":438,"h":447}
+},
+{
+	"filename": "rocket-fli_17.png",
+	"frame": {"x":294,"y":1765,"w":335,"h":245},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":64,"y":102,"w":335,"h":245},
+	"sourceSize": {"w":438,"h":447}
+},
+{
+	"filename": "rocket-fli_18.png",
+	"frame": {"x":631,"y":1765,"w":330,"h":231},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":70,"y":108,"w":330,"h":231},
+	"sourceSize": {"w":438,"h":447}
+},
+{
+	"filename": "rocket-fli_19.png",
+	"frame": {"x":374,"y":818,"w":364,"h":333},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":38,"y":58,"w":364,"h":333},
+	"sourceSize": {"w":438,"h":447}
+},
+{
+	"filename": "rocket-fli_20.png",
+	"frame": {"x":1,"y":1,"w":426,"h":436},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":6,"y":7,"w":426,"h":436},
+	"sourceSize": {"w":438,"h":447}
+},
+{
+	"filename": "rocket-fli_21.png",
+	"frame": {"x":429,"y":1,"w":414,"h":425},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":12,"y":11,"w":414,"h":425},
+	"sourceSize": {"w":438,"h":447}
+},
+{
+	"filename": "rocket-fli_22.png",
+	"frame": {"x":845,"y":1,"w":403,"h":412},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":18,"y":16,"w":403,"h":412},
+	"sourceSize": {"w":438,"h":447}
+},
+{
+	"filename": "rocket-fli_23.png",
+	"frame": {"x":1250,"y":340,"w":387,"h":395},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":26,"y":25,"w":387,"h":395},
+	"sourceSize": {"w":438,"h":447}
+},
+{
+	"filename": "rocket-fli_24.png",
+	"frame": {"x":1,"y":439,"w":371,"h":380},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":35,"y":33,"w":371,"h":380},
+	"sourceSize": {"w":438,"h":447}
+},
+{
+	"filename": "rocket-fli_25.png",
+	"frame": {"x":1,"y":1121,"w":359,"h":364},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":43,"y":42,"w":359,"h":364},
+	"sourceSize": {"w":438,"h":447}
+},
+{
+	"filename": "rocket-fli_26.png",
+	"frame": {"x":716,"y":1415,"w":350,"h":348},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":51,"y":50,"w":350,"h":348},
+	"sourceSize": {"w":438,"h":447}
+},
+{
+	"filename": "rocket-fli_27.png",
+	"frame": {"x":1611,"y":1096,"w":342,"h":332},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":59,"y":59,"w":342,"h":332},
+	"sourceSize": {"w":438,"h":447}
+},
+{
+	"filename": "rocket-fli_28.png",
+	"frame": {"x":362,"y":1440,"w":332,"h":317},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":68,"y":67,"w":332,"h":317},
+	"sourceSize": {"w":438,"h":447}
+},
+{
+	"filename": "rocket-fli_29.png",
+	"frame": {"x":1094,"y":1127,"w":350,"h":352},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":49,"y":51,"w":350,"h":352},
+	"sourceSize": {"w":438,"h":447}
+},
+{
+	"filename": "rocket-fli_30.png",
+	"frame": {"x":429,"y":428,"w":379,"h":388},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":31,"y":34,"w":379,"h":388},
+	"sourceSize": {"w":438,"h":447}
 }],
 "meta": {
 	"app": "http://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "glista.png",
 	"format": "RGBA8888",
-	"size": {"w":256,"h":512},
-	"scale": "0.4",
-	"smartupdate": "$TexturePacker:SmartUpdate:2f0b8e659fd250e574ac058aef5a2701:11d98f0e5d3776a8bd2e1f36daf2f940:86697a0589e803528f684a3ea309d93d$"
+	"size": {"w":1961,"h":2012},
+	"scale": "0.8",
+	"smartupdate": "$TexturePacker:SmartUpdate:df6ffa4092f94e3700e4f6bfe6e2f86c:a1df4f14efa911f66965f7bf6df3c2db:86697a0589e803528f684a3ea309d93d$"
 }
 }

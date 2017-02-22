@@ -81,3 +81,16 @@ Bottle/Splash_01
   orig: 450, 408
   offset: 0, 0
   index: -1
+
+Bottle2.png
+size: 256,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Effects/Circle
+  rotate: false
+  xy: 2, 2
+  size: 150, 150
+  orig: 150, 150
+  offset: 0, 0
+  index: -1

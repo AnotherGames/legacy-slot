@@ -77,6 +77,8 @@ export let controller = (() => {
         } else{
             balanceController.initFSMobile();
         }
+        view.draw.FsLevelAndMulti({});
+        view.draw.changeLevelAndMulti({});
 
     }
 

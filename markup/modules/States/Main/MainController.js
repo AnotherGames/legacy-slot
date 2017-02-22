@@ -53,7 +53,7 @@ export class Main {
         // Отрисовуем основной контейнер
         mainView.draw.mainBG({});
         mainView.draw.addBalloons({});
-        game.time.events.add(7000, () => {
+        game.time.events.add(5000, () => {
             mainView.draw.addConfetti({});
             panelController.drawFsPanel();
         });

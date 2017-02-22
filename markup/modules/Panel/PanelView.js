@@ -38,6 +38,34 @@ export let view = (() => {
             return panelBG;
         },
 
+        FsLevelAndMulti: function({
+            game = model.el('game'),
+            container = model.group('panelFS'),
+            start = 15,
+            fontDesktop = '80px CustomFont, Arial',
+            fontMobile = '60px CustomFont, Arial'
+        }) {
+            let fsCountBG = game.add.sprite(container.width / 2 - 30, 150, 'fsCountBG', null, container);
+                fsCountBG.anchor.set(0.5);
+
+            let font = (model.desktop) ? fontDesktop : fontMobile;
+
+            let fsCount = game.add.text(fsCountBG.x - 60, fsCountBG.y - 15, start, {font: font, align: 'center'}, container);
+                fsCount.anchor.set(0.5)
+                model.el('fs:count', fsCount);
+
+                let grd = fsCount.context.createLinearGradient(0, 0, 0, fsCount.canvas.height);
+                grd.addColorStop(0, '#ffffff');
+                grd.addColorStop(1, '#eeeeee');
+                fsCount.fill = grd;
+        },
+
+        changeLevelAndMulti: function({
+            fsCount = model.el('fsCount')
+        }) {
+            fsCount = 10;
+        },
+
         AutoContainer: function({
             game = model.el('game'),
             x = model.group('panel').width / 2 - 20,
