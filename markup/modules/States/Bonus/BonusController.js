@@ -33,9 +33,7 @@ class Door {
         this.sprite.events.onInputDown.add(handleDoorClick, this);
         model.group('bg').add(this.sprite);
 
-        setTimeout(() => {
-            this.lightBlinking();
-        }, this.deltaTime + 1000);
+        this.lightBlinking(1000);
     }
 
     win() {
@@ -82,13 +80,17 @@ class Door {
 
     }
 
-    lightBlinking() {
-        if (!this.destroyed) {
-            this.game.add.tween(this.light).to({ alpha: 0.6 }, 500, 'Linear', true, 0, 0, true);
-            setTimeout(() => {
-                this.lightBlinking();
-            }, 4000);
-        }
+    lightBlinking(delay = 0) {
+        let game = model.el('game');
+        game.time.events.add(delay, () => {
+            if (this.destroyed || model.state('doorFinish')) {
+                return;
+            }
+            this.game.add.tween(this.light).to({ alpha: 0.6 }, 500, 'Linear', true, 0, 0, true)
+            .onComplete.add(()=>{
+                this.lightBlinking(4000);
+            })
+        });
     }
 
     _playGold() {
