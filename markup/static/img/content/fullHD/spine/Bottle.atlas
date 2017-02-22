@@ -69,7 +69,7 @@ Bottle/Lights_03
   index: -1
 Bottle/Smoke_2
   rotate: true
-  xy: 570, 2
+  xy: 672, 2
   size: 100, 78
   orig: 100, 78
   offset: 0, 0
@@ -81,16 +81,10 @@ Bottle/Splash_01
   orig: 450, 408
   offset: 0, 0
   index: -1
-
-Bottle2.png
-size: 256,256
-format: RGBA8888
-filter: Linear,Linear
-repeat: none
 Effects/Circle
   rotate: false
-  xy: 2, 2
-  size: 150, 150
-  orig: 150, 150
+  xy: 570, 2
+  size: 100, 100
+  orig: 100, 100
   offset: 0, 0
   index: -1
