@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "fhcC6c+wO954gEzyeCNUANYmvm0", "spine": "3.5.46", "width": 223.37, "height": 854, "images": "" },
+"skeleton": { "hash": "5rrN+V85kxynQh19QoAzPv7DmCo", "spine": "3.5.46", "width": 236.46, "height": 854, "images": "" },
 "bones": [
 	{ "name": "root" },
 	{ "name": "Verevka", "parent": "root", "y": 425.63, "scaleX": 0.67, "scaleY": 0.138 },
@@ -49,12 +49,20 @@
 	{ "name": "Sunduk2", "bone": "root", "attachment": "Sunduk" },
 	{ "name": "Sunduk3", "bone": "root", "attachment": "Sunduk" },
 	{ "name": "Sunduk4", "bone": "root", "attachment": "Sunduk" },
-	{ "name": "Sunduk5", "bone": "root", "attachment": "Sunduk" }
+	{ "name": "Sunduk5", "bone": "root", "attachment": "Sunduk" },
+	{ "name": "Sunduk6", "bone": "root", "color": "ffffff00", "attachment": "Sunduk2" },
+	{ "name": "Sunduk7", "bone": "root", "color": "ffffff00", "attachment": "Sunduk2" },
+	{ "name": "Sunduk8", "bone": "root", "color": "ffffff00", "attachment": "Sunduk2" },
+	{ "name": "Sunduk10", "bone": "root", "color": "ffffff00", "attachment": "Sunduk2" },
+	{ "name": "Sunduk9", "bone": "root", "color": "ffffff00", "attachment": "Sunduk2" }
 ],
 "skins": {
 	"default": {
 		"Sunduk": {
 			"Sunduk": { "x": 79.81, "y": 99.93, "width": 70, "height": 70 }
+		},
+		"Sunduk10": {
+			"Sunduk2": { "x": 77.9, "y": -191.44, "width": 100, "height": 100 }
 		},
 		"Sunduk2": {
 			"Sunduk": { "x": 79.81, "y": -44.06, "width": 70, "height": 70 }
@@ -67,6 +75,18 @@
 		},
 		"Sunduk5": {
 			"Sunduk": { "x": 79.81, "y": 252.25, "width": 70, "height": 70 }
+		},
+		"Sunduk6": {
+			"Sunduk2": { "x": 77.9, "y": 254.18, "width": 100, "height": 100 }
+		},
+		"Sunduk7": {
+			"Sunduk2": { "x": 77.9, "y": 102.38, "width": 100, "height": 100 }
+		},
+		"Sunduk8": {
+			"Sunduk2": { "x": 77.9, "y": -335.35, "width": 100, "height": 100 }
+		},
+		"Sunduk9": {
+			"Sunduk2": { "x": 77.9, "y": -41.56, "width": 100, "height": 100 }
 		},
 		"button": {
 			"button": { "x": -68.61, "y": 347.71, "width": 37, "height": 36 }
@@ -184,6 +204,56 @@
 "animations": {
 	"0": {
 		"slots": {
+			"Sunduk": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk2": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk3": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk4": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk5": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk6": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"Sunduk7": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"Sunduk8": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"Sunduk9": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"Sunduk10": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
 			"button": {
 				"color": [
 					{ "time": 0, "color": "ffffff00" },
@@ -420,6 +490,56 @@
 	},
 	"1": {
 		"slots": {
+			"Sunduk": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk2": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk3": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk4": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk5": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk6": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"Sunduk7": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"Sunduk8": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"Sunduk9": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"Sunduk10": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
 			"button": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -656,6 +776,57 @@
 	},
 	"2": {
 		"slots": {
+			"Sunduk": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk2": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk3": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk4": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk5": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk6": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" },
+					{ "time": 0.3333, "color": "ffffffff" }
+				]
+			},
+			"Sunduk7": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"Sunduk8": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"Sunduk9": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"Sunduk10": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
 			"button": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -892,6 +1063,56 @@
 	},
 	"3": {
 		"slots": {
+			"Sunduk": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk2": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk3": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk4": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk5": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk6": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk7": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"Sunduk8": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"Sunduk9": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"Sunduk10": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
 			"button": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -1128,6 +1349,31 @@
 	},
 	"4": {
 		"slots": {
+			"Sunduk6": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk7": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"Sunduk8": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"Sunduk9": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"Sunduk10": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
 			"button": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -1364,6 +1610,32 @@
 	},
 	"5": {
 		"slots": {
+			"Sunduk6": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk7": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" },
+					{ "time": 0.3333, "color": "ffffffff" }
+				]
+			},
+			"Sunduk8": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"Sunduk9": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"Sunduk10": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
 			"button": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -1600,6 +1872,31 @@
 	},
 	"6": {
 		"slots": {
+			"Sunduk6": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk7": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk8": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"Sunduk9": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"Sunduk10": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
 			"button": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -1836,6 +2133,31 @@
 	},
 	"7": {
 		"slots": {
+			"Sunduk6": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk7": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk8": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"Sunduk9": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"Sunduk10": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
 			"button": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -2072,6 +2394,32 @@
 	},
 	"8": {
 		"slots": {
+			"Sunduk6": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk7": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk8": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"Sunduk9": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" },
+					{ "time": 0.3333, "color": "ffffffff" }
+				]
+			},
+			"Sunduk10": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
 			"button": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -2308,6 +2656,31 @@
 	},
 	"9": {
 		"slots": {
+			"Sunduk6": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk7": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk8": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"Sunduk9": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk10": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
 			"button": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -2544,6 +2917,31 @@
 	},
 	"10": {
 		"slots": {
+			"Sunduk6": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk7": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk8": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"Sunduk9": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk10": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
 			"button": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -2780,6 +3178,32 @@
 	},
 	"11": {
 		"slots": {
+			"Sunduk6": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk7": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk8": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"Sunduk9": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk10": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" },
+					{ "time": 0.3333, "color": "ffffffff" }
+				]
+			},
 			"button": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -3016,6 +3440,31 @@
 	},
 	"12": {
 		"slots": {
+			"Sunduk6": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk7": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk8": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"Sunduk9": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk10": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
 			"button": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -3252,6 +3701,31 @@
 	},
 	"13": {
 		"slots": {
+			"Sunduk6": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk7": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk8": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"Sunduk9": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk10": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
 			"button": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -3488,6 +3962,32 @@
 	},
 	"14": {
 		"slots": {
+			"Sunduk6": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk7": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk8": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" },
+					{ "time": 0.3333, "color": "ffffffff" }
+				]
+			},
+			"Sunduk9": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"Sunduk10": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
 			"button": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
