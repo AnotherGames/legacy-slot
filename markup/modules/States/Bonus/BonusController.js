@@ -154,7 +154,6 @@ export class Bonus {
         model.state('bonusReady', true);
 
         bonusView.create.groups({});
-        model.updateBalance({ startBonus: true });
 
     }
 
@@ -181,6 +180,7 @@ export class Bonus {
             footerController.initMobile();
             balanceView.draw.FSMobileBalance({});
         }
+        model.updateBalance({ startBonus: true });
         balanceView.draw.CashBalance({});
 
     }
