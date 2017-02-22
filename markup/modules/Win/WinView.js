@@ -664,19 +664,19 @@ export let view = (() => {
                 bottle.scale.set(0.75);
             }
             if (element.active == 10) {
-                bottle.setAnimationByName(0, 'idle_n_g', false);
+                bottle.setAnimationByName(0, 'bang1_g', false);
                 bottle.addAnimationByName(0, 'open_g', false);
-                bottle.addAnimationByName(0, 'idle_n_g', true);
+                bottle.addAnimationByName(0, 'pena_idle_g', true);
             }
             if (element.active == 13) {
-                bottle.setAnimationByName(0, 'idle_n_r', false);
+                bottle.setAnimationByName(0, 'bang1_r', false);
                 bottle.addAnimationByName(0, 'open_r', false);
-                bottle.addAnimationByName(0, 'idle_n_r', true);
+                bottle.addAnimationByName(0, 'pena_idle_r', true);
             }
             if (element.active == 16) {
-                bottle.setAnimationByName(0, 'idle_n_y', false);
+                bottle.setAnimationByName(0, 'bang1_y', false);
                 bottle.addAnimationByName(0, 'open_y', false);
-                bottle.addAnimationByName(0, 'idle_n_y', true);
+                bottle.addAnimationByName(0, 'pena_idle_y', true);
             }
 
         }

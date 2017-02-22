@@ -82,9 +82,9 @@ export class Preload {
         game.load.image('logoGM', 'game/logoGM.png');
         game.load.image('cloud', 'bg/cloud.png');
         game.load.image('shine', 'bg/shine.png');
-        game.load.image('green', 'bg/green.png');
-        game.load.image('orange', 'bg/orange.png');
-        game.load.image('red', 'bg/red.png');
+        game.load.image('green', 'bg/f-green.png');
+        game.load.image('orange', 'bg/f-orange.png');
+        game.load.image('red', 'bg/f-red.png');
         game.load.image('bubble', 'bg/bubble.png');
         game.load.image('balloons', 'bg/balloons.png');
         game.load.image('confetti1', 'bg/confetti1.png');
@@ -108,7 +108,8 @@ export class Preload {
         if (model.desktop) {
             game.load.image('panel', 'game/panel.png');
             game.load.image('panelFS', 'game/panelFS.png');
-            game.load.atlasJSONArray('panelBG', 'game/panelBG.png', 'game/panelBG.json');
+            game.load.image('panelBGgreen', 'game/panelBGgreen.png');
+            game.load.image('panelBGred', 'game/panelBGred.png');
             game.load.image('autoSelect', 'desk_buttons/autoSelect.png');
             game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
             game.load.atlasJSONArray('deskButtonsAnim', 'desk_buttons/deskButtonsAnim.png', 'desk_buttons/deskButtonsAnim.json');
@@ -121,7 +122,8 @@ export class Preload {
         // Glista
         game.load.image('ligthGlista', 'glista/lightGlista.png');
         game.load.image('suriken', 'glista/suriken.png');
-        game.load.atlasJSONArray('glistaAtlas', 'glista/glista.png', 'glista/glista.json');
+        game.load.atlasJSONArray('glista', 'glista/glista.png', 'glista/glista.json');
+        game.load.atlasJSONArray('stars', 'glista/stars.png', 'glista/stars.json');
     }
 
     loadFSAssets() {

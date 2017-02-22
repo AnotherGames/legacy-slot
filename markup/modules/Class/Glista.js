@@ -63,14 +63,22 @@ export class Glista {
 
         this.sprites = [];
         this.light = [];
-        for (let atlasInd = 0; atlasInd <= 5; atlasInd++) {
-            let sprite = this.game.add.sprite( atlasInd * -80, 0, 'suriken', null, param.parent);
+        for (let atlasInd = 0; atlasInd <= 10; atlasInd++) {
+            let sprite;
+            if (atlasInd == 0) {
+                sprite = this.game.add.sprite( atlasInd * -80, 0, 'glista', 'rocket-fli_0.png', param.parent);
+                sprite.myScale = 0.5;
+                sprite.animations.add('play', Phaser.Animation.generateFrameNames('rocket-fli_', 0, 30, '.png', 1), 30, false);
+                sprite.animations.play('play');
+            } else {
+                sprite = this.game.add.sprite( atlasInd * -80, 0, 'stars', `star_${this.game.rnd.integerInRange(0, 6)}.png`, param.parent);
+                sprite.myScale = this.game.rnd.integerInRange(2, 4) / 10;
+                this.game.add.tween(sprite).to({angle: 360}, this.game.rnd.integerInRange(50 * 6, 80 * 6), null, true, 0, -1);
+            }
             sprite.anchor.set(0.5, 0.5);
             sprite.myDeltaY = this.game.rnd.integerInRange(-30, 30);
-            sprite.myScale = this.game.rnd.integerInRange(2, 4) / 10;
             sprite.visible = false;
             this.sprites.push(sprite);
-            this.game.add.tween(sprite).to({angle: 360}, this.game.rnd.integerInRange(50 * 6, 80 * 6), null, true, 0, -1);
 
             let lightSprite = this.game.add.sprite( atlasInd * -80, 0, 'ligthGlista', null, param.lightParent);
             lightSprite.scale.set(1.3 - 0.2 * atlasInd);
@@ -81,7 +89,7 @@ export class Glista {
 
         this.pointPos = [];
 
-        for (let columInd = 0; columInd < 5; columInd++) {
+        for (let columInd = 0; columInd < 10; columInd++) {
             this.pointPos[columInd] = [];
             for (let rowInd = 0; rowInd < 3; rowInd++) {
                 this.pointPos[columInd][rowInd] = {
@@ -161,7 +169,7 @@ export class Glista {
 
         let nodes = [];
 
-        for (let spriteInd = 0; spriteInd < 6; spriteInd++) {
+        for (let spriteInd = 0; spriteInd < 11; spriteInd++) {
             this.sprites[spriteInd].visible = true;
             this.sprites[spriteInd].position.set(this.bezierPath.x[0], this.bezierPath.y[0]);
             this.sprites[spriteInd].rotation = 0;
@@ -219,7 +227,7 @@ export class Glista {
                 _this.isPlay = false;
                 _this.game.frameAnims.splice(_this.game.frameAnims.indexOf(anim), 1);
 
-                for (let spriteInd = 0; spriteInd < 6; spriteInd++) {
+                for (let spriteInd = 0; spriteInd < 11; spriteInd++) {
                     _this.sprites[spriteInd].visible = false;
                     _this.light[spriteInd].visible = false;
                 }

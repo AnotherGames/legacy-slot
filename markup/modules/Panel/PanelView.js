@@ -12,12 +12,13 @@ export let view = (() => {
             x = game.world.centerX,
             y = model.el('gameMachine').bottom + model.el('gameMachine').height / 2,
             frameName = 'panel',
+            framePanelBG = 'panelBGgreen',
             deltaY = 70,
             deltaX = 40
         }) {
             container.x = x;
             container.top = y;
-            const panelBG = game.add.sprite(1, deltaY, 'panelBG', 'panelBGgreen.png', container);
+            const panelBG = game.add.sprite(1, deltaY, framePanelBG, null, container);
             const panel = game.add.sprite(deltaX, deltaY, frameName, null, container);
 
             if (!model.state('fs')) {
@@ -41,16 +42,17 @@ export let view = (() => {
         FsLevelAndMulti: function({
             game = model.el('game'),
             container = model.group('panelFS'),
-            start = 15,
-            fontDesktop = '80px CustomFont, Arial',
-            fontMobile = '60px CustomFont, Arial'
+            startLevel = 15,
+            startMulti = 'x2',
+            fontDesktop = '80px Cooper, Arial',
+            fontMobile = '60px Cooper, Arial'
         }) {
             let fsCountBG = game.add.sprite(container.width / 2 - 30, 150, 'fsCountBG', null, container);
                 fsCountBG.anchor.set(0.5);
 
             let font = (model.desktop) ? fontDesktop : fontMobile;
 
-            let fsCount = game.add.text(fsCountBG.x - 60, fsCountBG.y - 15, start, {font: font, align: 'center'}, container);
+            let fsCount = game.add.text(fsCountBG.x - 100, fsCountBG.y - 20, startLevel, {font: font, align: 'center'}, container);
                 fsCount.anchor.set(0.5)
                 model.el('fs:count', fsCount);
 
@@ -58,12 +60,21 @@ export let view = (() => {
                 grd.addColorStop(0, '#ffffff');
                 grd.addColorStop(1, '#eeeeee');
                 fsCount.fill = grd;
+
+            let fsMulti = game.add.text(fsCountBG.x + 100, fsCountBG.y + 20, startMulti, {font: font, align: 'center', fill: '#ffffff'}, container);
+                fsMulti.anchor.set(0.5)
+                model.el('fs:multi', fsMulti);
         },
 
         changeLevelAndMulti: function({
-            fsCount = model.el('fsCount')
+            fsCount = model.el('fs:count'),
+            fsMulti = model.el('fs:multi'),
         }) {
-            fsCount = 10;
+            setTimeout(() => {
+                fsCount.text = '10';
+                fsMulti.text = 'x3';
+            }, 500);
+            console.log(fsCount, fsMulti);
         },
 
         AutoContainer: function({

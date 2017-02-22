@@ -52,10 +52,14 @@ export class Main {
 
         // Отрисовуем основной контейнер
         mainView.draw.mainBG({});
+        if (model.mobile) {
+            mainView.draw.addCloud({});
+        }
         mainView.draw.addBalloons({});
+        mainView.draw.addCat({});
         game.time.events.add(5000, () => {
             mainView.draw.addConfetti({});
-            panelController.drawFsPanel();
+            // panelController.drawFsPanel();
         });
         // mainView.draw.addBurst({});
         mainView.draw.mainContainer({});
@@ -68,7 +72,6 @@ export class Main {
         rollController.init();
 
         if (model.mobile) {
-            mainView.draw.addCloud({});
             // Рисуем футер
             footerController.initMobile();
             // Рисуем кнопки управления

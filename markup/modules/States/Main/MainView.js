@@ -42,6 +42,7 @@ export let view = (() => {
                 // game.time.events.add(7000, () => {
                 //     draw._lettersFall({});
                 // });
+
             } else {
                 mainBG = game.add.tileSprite(0, 0, game.width, game.height, 'gradientLine', null, container);
 
@@ -89,7 +90,10 @@ export let view = (() => {
                 deltaX = balloons.x - 300;
             }
 
-            game.add.tween(balloons).to({y: -500, x: deltaX}, 10000, 'Linear', true);
+            game.add.tween(balloons).to({y: -500, x: deltaX}, 10000, 'Linear', true)
+                .onComplete.add(() => {
+                    balloons.destroy();
+                }, this);
 
             let rnd = game.rnd.integerInRange(18, 23);
             game.time.events.add(rnd * 1000, () => {
@@ -159,12 +163,54 @@ export let view = (() => {
                 deltaX = confetti.x - 300;
             }
 
-            game.add.tween(confetti).to({y: game.height + 500, x: deltaX}, 10000, 'Linear', true, 2000);
+            game.add.tween(confetti).to({y: game.height + 500, x: deltaX}, 10000, 'Linear', true, 2000)
+                .onComplete.add(() => {
+                    confetti.destroy();
+                }, this);
 
             let rnd = game.rnd.integerInRange(10, 15);
             game.time.events.add(rnd * 1000, () => {
                 draw.addConfetti({});
             });
+        },
+
+        addCat: function({
+            game = model.el('game'),
+            container = model.group('bg')
+        }) {
+            let i = game.rnd.integerInRange(3, 9) / 10;
+            let cat = game.add.spine(0, game.height * i, 'cat');
+            container.add(cat);
+            if (model.mobile) {
+                cat.scale.set(0.66);
+            }
+            cat.setAnimationByName(0, 'run', true);
+
+            let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
+            let delay = game.rnd.integerInRange(3000, 9000);
+            let deltaX, deltaX2;
+
+            if (side == 'left') {
+                cat.x = -500;
+                deltaX = game.width * 0.05;
+                deltaX2 = game.width + 500;
+            } else {
+                cat.x = game.width + 500;
+                deltaX = game.width * 0.95;
+                deltaX2 = -500;
+                cat.scale.set(-1, 1);
+            }
+
+            game.add.tween(cat).to({x: deltaX}, 10000, 'Linear', true, delay)
+                .onComplete.add(() => {
+                    cat.setAnimationByName(0, 'sp', false);
+                    cat.addAnimationByName(0, 'run', true);
+                    game.add.tween(cat).to({x: deltaX2}, 10000, 'Linear', true, delay)
+                        .onComplete.add(() => {
+                            cat.destroy();
+                            draw.addCat({});
+                        }, this);
+                }, this);
         },
 
         // addCConfetti: function ({
@@ -397,8 +443,8 @@ export let view = (() => {
             const elSize = config[model.res].elements;
             let deltaY = (model.desktop) ? 10 : 0;
 
-            let someGraphic = game.add.graphics(-elSize.width * 2.5, -elSize.height * 1.5 + deltaY, machineGroup);
-                someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5, elSize.height * 3);
+            let someGraphic = game.add.graphics(-elSize.width * 2.5 - 500, -elSize.height * 1.5 + deltaY, machineGroup);
+                someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5 + 1500, elSize.height * 3);
             machineGroup.mask = someGraphic;
         },
 

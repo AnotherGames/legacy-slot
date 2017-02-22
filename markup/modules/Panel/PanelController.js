@@ -70,6 +70,7 @@ export let controller = (() => {
 
             view.draw.PanelBG({
                 frameName: 'panelFS',
+                framePanelBG: 'panelBGred',
                 container: model.group('panelFS'),
                 deltaX: 0
             });
