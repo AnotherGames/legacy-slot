@@ -206,11 +206,11 @@ export let view = (() => {
 
         InfoButton: function ({
             game = model.el('game'),
-            container = model.group('panel'),
+            container = model.group('footer'),
             x = 50,
             y = model.el('game').height - 100
         }) {
-            let infoButton = game.add.button(x, y, 'deskButtons', null, null, null, 'info.png', null, null);
+            let infoButton = game.add.button(x, y, 'deskButtons', null, null, null, 'info.png', null, null, container);
             infoButton.anchor.set(0.5);
 
             infoButton.onInputOver.add(() => {
