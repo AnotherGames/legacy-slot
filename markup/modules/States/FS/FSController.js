@@ -71,44 +71,44 @@ export let controller = (() => {
     }
 
 
-    function changeMulti() {
-
-        if(model.state('maxFsMultiplier')) return;
-
-        let game = model.el('game');
-        let rollData = model.data('rollResponse');
-        let multiValue = rollData.FsBonus.Multi;
-        let currMulti = model.data('fsMulti');
-
-        if (multiValue > currMulti) {
-
-            let wheels = model.el('wheels');
-            let upWheels = model.el('upWheels');
-
-            // Меняем подложки элементов
-
-            wheels.forEach((wheel) => {
-                wheel.items.forEach((el) => {
-                    el.animBG(multiValue);
-                });
-            });
-            upWheels.forEach((upWheel) => {
-                upWheel.forEach((upEl) => {
-                    upEl.animBG(multiValue);
-                });
-            });
-            fsView.draw.newMulti({number: multiValue});
-            model.data('fsMulti', multiValue);
-
-        }
+    // function changeMulti() {
+    //
+    //     if(model.state('maxFsMultiplier')) return;
+    //
+    //     let game = model.el('game');
+    //     let rollData = model.data('rollResponse');
+    //     let multiValue = rollData.FsBonus.Multi;
+    //     let currMulti = model.data('fsMulti');
+    //
+    //     if (multiValue > currMulti) {
+    //
+    //         let wheels = model.el('wheels');
+    //         let upWheels = model.el('upWheels');
+    //
+    //         // Меняем подложки элементов
+    //
+    //         wheels.forEach((wheel) => {
+    //             wheel.items.forEach((el) => {
+    //                 el.animBG(multiValue);
+    //             });
+    //         });
+    //         upWheels.forEach((upWheel) => {
+    //             upWheel.forEach((upEl) => {
+    //                 upEl.animBG(multiValue);
+    //             });
+    //         });
+    //         fsView.draw.newMulti({number: multiValue});
+    //         model.data('fsMulti', multiValue);
+    //
+    //     }
     }
 
     return {
         init,
         next,
         count,
-        stop,
-        changeMulti
+        stop
+        // changeMulti
     };
 })();
 

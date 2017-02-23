@@ -6,6 +6,7 @@ import { view } from 'modules/Win/WinView';
 import { view as transitionView } from 'modules/Transition/TransitionView';
 
 import { controller as autoplayController } from 'modules/Autoplay/AutoplayController';
+import { controller as panelController } from 'modules/Panel/PanelController';
 import { controller as fsController } from 'modules/States/FS/FSController';
 import { view as panelView } from 'modules/Panel/PanelView';
 import { view as buttonsView } from 'modules/Buttons/ButtonsView';
@@ -189,22 +190,33 @@ export let controller = (() => {
             let fsLevelNumber = nextMode[7];
             view.draw.addBigBottleToStage(fsLevelNumber);
 
-            // Лочим все кнопки
-            // model.state('buttons:locked', true);
             // Остонавливаем автоплей если был
             if (model.state('autoplay:start')) {
                 model.data('remainAutoCount', model.data('autoplay:count'));
                 autoplayController.stop();
             }
-            // Записываем экран с которого вошли на Фри-Спины
-            model.data('startFSScreen', data.Screen);
-            model.data('firstScreen', data.Screen);
+
+            model.state('fs', true);
+
+            // Лочим все кнопки
+            model.state('buttons:locked', true);
             // Убираем управление с клавиатуры
             game.input.keyboard.enabled = false;
-            // Запускаем переходной экран
+
+            // Изменяем панель на FS
+            panelController.drawFsPanel();
+
+            fsController.init(10);
+
+            // Персонаж объявляет количество фриспинов
             // game.time.events.add(800, () => {
-            //     transitionView.fsStart();
+                transitionView.fsStart();
             // });
+
+            // Записываем экран с которого вошли на Фри-Спины
+            // model.data('startFSScreen', data.Screen);
+            // model.data('firstScreen', data.Screen);
+            // Запускаем переходной экран
         }
     }
 

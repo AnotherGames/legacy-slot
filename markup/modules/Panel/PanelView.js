@@ -70,8 +70,9 @@ export let view = (() => {
             fsCount = model.el('fs:count'),
             fsMulti = model.el('fs:multi'),
         }) {
+            let freeSpinsCount = model.data('rollResponse').FreeSpinsLeft;
             setTimeout(() => {
-                fsCount.text = '10';
+                fsCount.text = freeSpinsCount;
                 fsMulti.text = 'x3';
             }, 500);
             console.log(fsCount, fsMulti);

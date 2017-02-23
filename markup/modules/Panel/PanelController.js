@@ -74,6 +74,8 @@ export let controller = (() => {
                 container: model.group('panelFS'),
                 deltaX: 0
             });
+
+            view.show.showPanelFS({});
             balanceController.initFSDesktop();
         } else{
             balanceController.initFSMobile();

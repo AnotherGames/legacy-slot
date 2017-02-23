@@ -43,14 +43,14 @@ export let view = (() => {
             transitionContainer.add(boy);
         model.el('boy', boy);
 
-        // let freeSpinsCount = model.data('rollResponse').FreeSpinsLeft;
+        let freeSpinsCount = model.data('rollResponse').FreeSpinsLeft;
         let freeSpinsText = game.add.bitmapText(game.width * 0.17, game.height * 0.20, 'textGreen', 'you win' + ' ', 90, transitionContainer);
             freeSpinsText.anchor.set(0.5);
             freeSpinsText.scale.set(0.1);
             freeSpinsText.alpha = 0;
         model.el('freeSpinsText', freeSpinsText);
 
-        let freeSpinsText2 = game.add.bitmapText(game.width * 0.17, game.height * 0.33, 'textOrange', '+15', 120, transitionContainer);
+        let freeSpinsText2 = game.add.bitmapText(game.width * 0.17, game.height * 0.33, 'textOrange', '+' + freeSpinsCount, 120, transitionContainer);
             freeSpinsText2.anchor.set(0.5);
             freeSpinsText2.scale.set(0.1);
             freeSpinsText2.alpha = 0;
@@ -94,7 +94,7 @@ export let view = (() => {
     function transitionInFs() {
         soundController.sound.playSound({sound : 'buttonClick'});
         soundController.music.stopMusic('startPerehod');
-        model.el('game').state.start('FS');
+        // model.el('game').state.start('FS');
         model.state('transitionScreen', false);
     }
 
@@ -121,7 +121,7 @@ export let view = (() => {
     function transitionOutFs() {
         soundController.sound.playSound({sound : 'buttonClick'});
         soundController.music.stopMusic('finishPerehod');
-        model.el('game').state.start('Main');
+        // model.el('game').state.start('Main');
     }
 
     function _fsFinishDraw() {
@@ -223,7 +223,7 @@ export let view = (() => {
         transitionBG.events.onInputDown.add(function () {
             soundController.sound.playSound({sound : 'buttonClick'});
             soundController.music.stopMusic('finishPerehod');
-            model.el('game').state.start('Main');
+            // model.el('game').state.start('Main');
         });
     }
 
