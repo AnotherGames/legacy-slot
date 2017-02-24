@@ -87,13 +87,12 @@ export let view = (() => {
     // }
 
     function transitionInFs() {
-        // soundController.sound.playSound({sound : 'buttonClick'});
-        // model.el('game').state.start('FS');
         soundController.music.stopMusic('startPerehod');
         model.state('transitionScreen', false);
         let transitionContainer = model.group('transition');
         transitionContainer.removeAll();
     }
+
 
     function fsFinish() {
         let game = model.el('game');
@@ -111,14 +110,6 @@ export let view = (() => {
         // if (model.state('autoTransititon')) {
             game.time.events.add(config.autoTransitionTime + 2000, transitionOutFs);
         // }
-    }
-
-    function transitionOutFs() {
-        // model.el('game').state.start('Main');
-        // soundController.sound.playSound({sound : 'buttonClick'});
-        soundController.music.stopMusic('finishPerehod');
-        let transitionContainer = model.group('transition');
-        transitionContainer.removeAll();
     }
 
     function _fsFinishDraw() {
@@ -142,19 +133,12 @@ export let view = (() => {
             winTextFrame = 'totalW.png';
         }
 
-        let winText = game.add.sprite(game.width / 2, -400, 'text', winTextFrame, transitionContainer);
-            winText.anchor.set(0.5);
-        model.el('winText', winText);
-
-        // Отрисовываем Выигрыш
-        let winCount = game.add.bitmapText(game.width / 2, -200, 'textOrange', '0', 140, transitionContainer);
-            winCount.align = 'center';
-            winCount.anchor.set(0.5);
-        model.el('winCount', winCount);
-
         let gun = game.add.spine(game.width / 2, game.height, 'gun');
-        gun.setAnimationByName(0, '1', false);
         transitionContainer.add(gun);
+        if (model.mobile) {
+            gun.scale.set(0.6);
+        }
+        gun.setAnimationByName(0, '1', false);
         game.time.events.add(1500, () => {
             mainView.draw.addBurst({container: transitionContainer});
         });
@@ -164,6 +148,16 @@ export let view = (() => {
         game.time.events.add(3500, () => {
             mainView.draw.addBurst({container: transitionContainer});
         });
+
+        let winText = game.add.sprite(game.width / 2, -400, 'text', winTextFrame);
+            winText.anchor.set(0.5);
+        model.el('winText', winText);
+
+        // Отрисовываем Выигрыш
+        let winCount = game.add.bitmapText(game.width / 2, -200, 'textOrange', '0', 180);
+            winCount.align = 'center';
+            winCount.anchor.set(0.5);
+        model.el('winCount', winCount);
 
         // И кнопку продолжить
         // let continueText = game.add.sprite(game.width / 2, -200, 'text', 'continue.png', transitionContainer);
@@ -195,6 +189,16 @@ export let view = (() => {
         //                 continueText.rotation = 0;
         //             }, this);
         //     }, this);
+    }
+
+    function transitionOutFs() {
+        let winText = model.el('winText');
+        let winCount = model.el('winCount');
+        winText.destroy();
+        winCount.destroy();
+        soundController.music.stopMusic('finishPerehod');
+        let transitionContainer = model.group('transition');
+        transitionContainer.removeAll();
     }
 
     // Накрутка выигрыша

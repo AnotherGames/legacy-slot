@@ -10,7 +10,6 @@ export let controller = (() => {
     }
 
     function initDesktop() {
-        console.log(' ia m here');
         view.draw.CashBalance({
             container: model.group('panel')
         });

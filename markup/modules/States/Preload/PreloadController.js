@@ -57,13 +57,11 @@ export class Preload {
         game.load.audio('finishPerehod', 'finishPerehod.mp3');
         game.load.audio('lineWin', 'lineWin.mp3');
         game.load.audio('lineWin2', 'lineWin2.mp3');
-        game.load.audio('aim', 'aim.mp3');
-        game.load.audio('coins', 'coins.mp3');
-        game.load.audio('shurikenFly', 'shurikenFly.mp3');
-        game.load.audio('bonusSword', 'bonusSword.mp3');
-        game.load.audio('changeChar', 'changeChar.mp3');
-        game.load.audio('wow', 'wow.mp3');
-        game.load.audio('numberRustle', 'numberRustle.mp3');
+        game.load.audio('cat', 'cat.mp3');
+        game.load.audio('gun', 'gun.mp3');
+        game.load.audio('gaz', 'gaz.mp3');
+        game.load.audio('burstConfetti', 'burstConfetti.mp3');
+
     }
 
     loadInitAssets() {

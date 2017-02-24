@@ -36,7 +36,7 @@ export let view = (() => {
             let mainBG;
             if (model.desktop) {
                 mainBG = game.add.spine(game.world.centerX, game.world.centerY, 'fon');
-                    mainBG.setAnimationByName(0, 'move4', true);
+                    mainBG.setAnimationByName(0, 'move2', true);
                     container.add(mainBG);
                 model.el('mainBG', mainBG);
 
@@ -48,6 +48,15 @@ export let view = (() => {
                 game.add.tween(luchi).to({rotation: 2 * Math.PI, alpha: 0.1}, 30000, 'Linear', true, 0, -1, true);
             }
 
+        },
+
+        changeBG: function ({
+            game = model.el('game'),
+            container = model.group('bg'),
+            index = 4
+        }) {
+            let mainBG = model.el('mainBG');
+            mainBG.setAnimationByName(0, 'move' + index, true);
         },
 
         addBalloons: function ({
@@ -219,22 +228,27 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('bg')
         }) {
-            let emitter = game.add.emitter(game.world.centerX, game.world.centerY + 100, 20);
-            model.el('emitter', emitter);
+            let emitterTrash = game.add.emitter(game.world.centerX, game.world.centerY + 100, 20);
+            model.el('emitterTrash', emitterTrash);
 
-            emitter.makeParticles('trash', [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19], 100, true, true);
-            container.add(emitter);
+            emitterTrash.makeParticles('trash', [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19], 100, true, true);
+            container.add(emitterTrash);
 
-            emitter.minParticleSpeed.setTo(-1200, -1300);
-            emitter.maxParticleSpeed.setTo(1200, -1400);
-            emitter.minParticleScale = 0.4;
-            emitter.maxParticleScale = 0.8;
-            emitter.gravity = 150;
-            emitter.bounce.setTo(0.5, 0.5);
-            emitter.angularDrag = 30;
+            emitterTrash.minParticleSpeed.setTo(-1200, -1300);
+            emitterTrash.maxParticleSpeed.setTo(1200, -1400);
+            emitterTrash.minParticleScale = 0.4;
+            emitterTrash.maxParticleScale = 0.8;
+            emitterTrash.gravity = 150;
+            emitterTrash.bounce.setTo(0.5, 0.5);
+            emitterTrash.angularDrag = 30;
 
-            emitter.start(false, 3000, 100);
+            emitterTrash.start(false, 3000, 100);
 
+        },
+
+        removeTrash: function() {
+            let emitterTrash = model.el('emitterTrash');
+            emitterTrash.destroy();
         },
 
         mainContainer: function ({

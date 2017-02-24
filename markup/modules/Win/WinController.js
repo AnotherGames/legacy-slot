@@ -4,13 +4,13 @@ import { config } from 'modules/Util/Config';
 
 import { view } from 'modules/Win/WinView';
 import { view as transitionView } from 'modules/Transition/TransitionView';
+import { view as mainView } from 'modules/States/Main/MainView';
+import { view as buttonsView } from 'modules/Buttons/ButtonsView';
+import { view as panelView } from 'modules/Panel/PanelView';
 
 import { controller as autoplayController } from 'modules/Autoplay/AutoplayController';
 import { controller as panelController } from 'modules/Panel/PanelController';
 import { controller as fsController } from 'modules/States/FS/FSController';
-import { view as panelView } from 'modules/Panel/PanelView';
-import { view as buttonsView } from 'modules/Buttons/ButtonsView';
-import { view as mainView } from 'modules/States/Main/MainView';
 
 export let controller = (() => {
 
@@ -197,7 +197,6 @@ export let controller = (() => {
             }
 
             model.state('fs', true);
-
             // Лочим все кнопки
             model.state('buttons:locked', true);
             // Убираем управление с клавиатуры
@@ -209,14 +208,15 @@ export let controller = (() => {
             fsController.init(10);
 
             // Персонаж объявляет количество фриспинов
-            // game.time.events.add(800, () => {
+            game.time.events.add(500, () => {
                 transitionView.fsStart();
-            // });
+                if (model.desktop) {
+                    mainView.draw.changeBG({});
+                } else {
+                    mainView.draw.addTrash({});
+                }
+            });
 
-            // Записываем экран с которого вошли на Фри-Спины
-            // model.data('startFSScreen', data.Screen);
-            // model.data('firstScreen', data.Screen);
-            // Запускаем переходной экран
         }
     }
 

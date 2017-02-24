@@ -71,6 +71,11 @@ export let controller = (() => {
         game.time.events.add(500, () => {
             soundController.music.stopMusic('fsFon')
             transitionView.fsFinish();
+            if (model.desktop) {
+                mainView.draw.changeBG({index: 2});
+            } else {
+                mainView.draw.removeTrash({});
+            }
         });
 
     }

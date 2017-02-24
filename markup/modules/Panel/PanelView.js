@@ -45,14 +45,26 @@ export let view = (() => {
             startLevel = 15,
             startMulti = 'x2',
             fontDesktop = '80px Cooper, Arial',
-            fontMobile = '60px Cooper, Arial'
+            fontMobile = '40px Cooper, Arial',
+            x = container.width / 2 - 30,
+            y = 150
         }) {
-            let fsCountBG = game.add.sprite(container.width / 2 - 30, 150, 'fsCountBG', null, container);
+            if (model.mobile) {
+                y = game.height * 0.83;
+                if (model.state('gameSideLeft')) {
+                    x = game.world.centerX - 80;
+                } else {
+                    x = game.world.centerX + 90;
+                }
+            }
+            let fsCountBG = game.add.sprite(x, y, 'fsCountBG', null, container);
                 fsCountBG.anchor.set(0.5);
 
             let font = (model.desktop) ? fontDesktop : fontMobile;
+            let deltaX = (model.desktop) ? 97 : 65;
+            let deltaY = (model.desktop) ? 20 : 15;
 
-            let fsCount = game.add.text(fsCountBG.x - 100, fsCountBG.y - 20, startLevel, {font: font, align: 'center'}, container);
+            let fsCount = game.add.text(fsCountBG.x - deltaX, fsCountBG.y - deltaY, startLevel, {font: font, align: 'center'}, container);
                 fsCount.anchor.set(0.5)
                 model.el('fs:count', fsCount);
 
@@ -61,7 +73,7 @@ export let view = (() => {
                 grd.addColorStop(1, '#eeeeee');
                 fsCount.fill = grd;
 
-            let fsMulti = game.add.text(fsCountBG.x + 100, fsCountBG.y + 20, startMulti, {font: font, align: 'center', fill: '#ffffff'}, container);
+            let fsMulti = game.add.text(fsCountBG.x + deltaX, fsCountBG.y + deltaY, startMulti, {font: font, align: 'center', fill: '#ffffff'}, container);
                 fsMulti.anchor.set(0.5)
                 model.el('fs:multi', fsMulti);
         },

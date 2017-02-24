@@ -78,6 +78,10 @@ export let controller = (() => {
             view.show.showPanelFS({});
             balanceController.initFSDesktop();
         } else{
+            let container = model.group('balanceCoin');
+            let container2 = model.group('balanceCash');
+            container.removeAll();
+            container2.removeAll();
             balanceController.initFSMobile();
         }
         view.draw.FsLevelAndMulti({});
@@ -99,6 +103,12 @@ export let controller = (() => {
             drawButtons();
             balanceController.initDesktop();
         } else{
+            let container = model.group('balanceCoin');
+            let container2 = model.group('balanceCash');
+            let container3 = model.group('panelFS');
+            container.removeAll();
+            container2.removeAll();
+            container3.removeAll();
             balanceController.initMobile();
         }
     }

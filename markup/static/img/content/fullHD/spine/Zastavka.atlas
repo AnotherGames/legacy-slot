@@ -1,173 +1,173 @@
 
 Zastavka.png
-size: 1024,1024
+size: 2048,512
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 img/L
   rotate: false
-  xy: 2, 881
+  xy: 2, 367
   size: 1000, 134
   orig: 1000, 134
   offset: 0, 0
   index: -1
 img/Logo_0000_N2
   rotate: false
-  xy: 763, 510
+  xy: 960, 9
   size: 181, 142
   orig: 181, 142
   offset: 0, 0
   index: -1
 img/Logo_0001_L
   rotate: false
-  xy: 475, 492
+  xy: 475, 30
   size: 101, 189
   orig: 101, 189
   offset: 0, 0
   index: -1
 img/Logo_0002_D
   rotate: true
-  xy: 586, 654
+  xy: 578, 24
   size: 173, 189
   orig: 173, 189
   offset: 0, 0
   index: -1
 img/Logo_0003_A2
   rotate: false
-  xy: 763, 366
+  xy: 1380, 307
   size: 152, 142
   orig: 152, 142
   offset: 0, 0
   index: -1
 img/Logo_0004_D
   rotate: true
-  xy: 777, 654
+  xy: 769, 2
   size: 173, 189
   orig: 173, 189
   offset: 0, 0
   index: -1
 img/Logo_0005_A
   rotate: false
-  xy: 460, 336
+  xy: 1534, 307
   size: 152, 142
   orig: 152, 142
   offset: 0, 0
   index: -1
 img/Logo_0006_Y
   rotate: true
-  xy: 578, 480
+  xy: 979, 153
   size: 172, 183
   orig: 172, 183
   offset: 0, 0
   index: -1
 img/Logo_0007_N
-  rotate: true
-  xy: 316, 306
+  rotate: false
+  xy: 1197, 307
   size: 181, 142
   orig: 181, 142
   offset: 0, 0
   index: -1
 img/Logo_0008_C
-  rotate: false
-  xy: 285, 489
+  rotate: true
+  xy: 785, 177
   size: 188, 192
   orig: 188, 192
   offset: 0, 0
   index: -1
 img/Z_0015_Layer-8
   rotate: true
-  xy: 2, 2
+  xy: 1837, 394
   size: 55, 152
   orig: 55, 152
   offset: 0, 0
   index: -1
 img/Z_0016_Layer-7
   rotate: true
-  xy: 316, 239
+  xy: 1837, 327
   size: 65, 131
   orig: 65, 131
   offset: 0, 0
   index: -1
 img/Z_0017_Layer-6
   rotate: true
-  xy: 460, 267
+  xy: 1254, 238
   size: 67, 113
   orig: 67, 113
   offset: 0, 0
   index: -1
 img/Z_0018_Layer-5
-  rotate: false
-  xy: 968, 705
+  rotate: true
+  xy: 1369, 262
   size: 43, 122
   orig: 43, 122
   offset: 0, 0
   index: -1
 img/Z_0019_Layer-4
-  rotate: true
-  xy: 917, 358
+  rotate: false
+  xy: 1254, 144
   size: 46, 92
   orig: 46, 92
   offset: 0, 0
   index: -1
 img/Z_0020_Layer-3-copy-3
-  rotate: false
-  xy: 192, 276
+  rotate: true
+  xy: 1004, 327
   size: 122, 191
   orig: 122, 191
   offset: 0, 0
   index: -1
 img/Zastavka_CL_0000_Layer-21
   rotate: false
-  xy: 917, 406
+  xy: 1164, 203
   size: 88, 102
   orig: 88, 102
   offset: 0, 0
   index: -1
 img/Zastavka_CL_0001_Layer-20
   rotate: true
-  xy: 614, 345
+  xy: 1688, 316
   size: 133, 147
   orig: 133, 147
   offset: 0, 0
   index: -1
 img/Zastavka_CL_0003_Shape-2-copy-4
-  rotate: false
-  xy: 170, 168
+  rotate: true
+  xy: 1164, 116
   size: 85, 88
   orig: 85, 88
   offset: 0, 0
   index: -1
 img/Zastavka_CL_0006_Layer-18
-  rotate: false
-  xy: 2, 59
+  rotate: true
+  xy: 586, 199
   size: 166, 197
   orig: 166, 197
   offset: 0, 0
   index: -1
 img/Zastavka_CL_0007_Layer-17
   rotate: false
-  xy: 2, 258
+  xy: 285, 10
   size: 188, 209
   orig: 188, 209
   offset: 0, 0
   index: -1
 img/Zastavka_CL_0008_Play
   rotate: false
-  xy: 2, 469
+  xy: 2, 7
   size: 281, 212
   orig: 281, 212
   offset: 0, 0
   index: -1
 img/Zastavka_CL_0009_Ellipse-11
   rotate: false
-  xy: 2, 683
+  xy: 2, 221
   size: 582, 144
   orig: 582, 144
   offset: 0, 0
   index: -1
 img/Zastavka_CL_0010_Layer-2
   rotate: false
-  xy: 2, 829
+  xy: 1004, 451
   size: 1020, 50
   orig: 1020, 50
   offset: 0, 0
