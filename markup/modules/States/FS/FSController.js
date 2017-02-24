@@ -60,14 +60,19 @@ export let controller = (() => {
     function stop() {
         let game = model.el('game');
 
+        model.state('fs:end', true);
+        model.state('fs', false);
+        model.updateBalance({endFS: true});
+        model.state('buttons:locked', false);
+
+        panelController.drawMainPanel();
+        winView.draw.hideBottle();
+
         game.time.events.add(500, () => {
             soundController.music.stopMusic('fsFon')
             transitionView.fsFinish();
         });
 
-        model.state('fs:end', true);
-        model.state('fs', false);
-        model.updateBalance({endFS: true});
     }
 
 
@@ -101,7 +106,7 @@ export let controller = (() => {
     //         model.data('fsMulti', multiValue);
     //
     //     }
-    }
+// }
 
     return {
         init,

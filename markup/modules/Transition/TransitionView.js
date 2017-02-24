@@ -16,7 +16,7 @@ export let view = (() => {
         // Отрисовываем переходной экран
         _fsStartDraw();
         _fsStartTween();
-        // _fsStartInput();
+
         game.input.keyboard.enabled = true;
         // Автопереход если включен
         // if (model.state('autoTransititon')) {
@@ -30,11 +30,6 @@ export let view = (() => {
         // Изменяем музыку
         soundController.music.stopMusic('fon');
         soundController.music.playMusic('startPerehod');
-        // Отрисовываем фон
-
-        // let transitionBG = game.add.graphics(0, 0).beginFill(0x000000, 0.9).drawRect(0, 0, game.world.width, game.world.height);
-        // transitionContainer.add(transitionBG);
-        // model.el('transitionBG', transitionBG);
 
         let boy = game.add.spine(game.width * 0.15, game.height * 0.7, 'boy');
             boy.setAnimationByName(0, 'S2-newone', false);
@@ -82,20 +77,22 @@ export let view = (() => {
 
     }
 
-    function _fsStartInput() {
-        let game = model.el('game');
-        // При клике на фон будет переход на Фри-Спины
-        let transitionBG = model.el('transitionBG');
-            transitionBG.inputEnabled = true;
-            transitionBG.input.priorityID = 2;
-        transitionBG.events.onInputDown.add(transitionInFs);
-    }
+    // function _fsStartInput() {
+    //     let game = model.el('game');
+    //     // При клике на фон будет переход на Фри-Спины
+    //     let transitionBG = model.el('transitionBG');
+    //         transitionBG.inputEnabled = true;
+    //         transitionBG.input.priorityID = 2;
+    //     transitionBG.events.onInputDown.add(transitionInFs);
+    // }
 
     function transitionInFs() {
-        soundController.sound.playSound({sound : 'buttonClick'});
-        soundController.music.stopMusic('startPerehod');
+        // soundController.sound.playSound({sound : 'buttonClick'});
         // model.el('game').state.start('FS');
+        soundController.music.stopMusic('startPerehod');
         model.state('transitionScreen', false);
+        let transitionContainer = model.group('transition');
+        transitionContainer.removeAll();
     }
 
     function fsFinish() {
@@ -108,20 +105,20 @@ export let view = (() => {
         // Отрисовка финишного экрана
         _fsFinishDraw();
         _fsFinishTween();
-        // _coinsTween();
-        _fsFinishInput();
-        // _coinsTween();
+
         model.state('maxFsMultiplier', false);
         // Автопереход
         // if (model.state('autoTransititon')) {
-            game.time.events.add(config.autoTransitionTime + 1000, transitionOutFs);
+            game.time.events.add(config.autoTransitionTime + 2000, transitionOutFs);
         // }
     }
 
     function transitionOutFs() {
-        soundController.sound.playSound({sound : 'buttonClick'});
-        soundController.music.stopMusic('finishPerehod');
         // model.el('game').state.start('Main');
+        // soundController.sound.playSound({sound : 'buttonClick'});
+        soundController.music.stopMusic('finishPerehod');
+        let transitionContainer = model.group('transition');
+        transitionContainer.removeAll();
     }
 
     function _fsFinishDraw() {
@@ -130,15 +127,12 @@ export let view = (() => {
         // Изменяем музыку
         soundController.music.stopMusic('fsFon');
         soundController.music.playMusic('finishPerehod');
-        soundController.sound.playSound({sound: 'coins'});
-        soundController.sound.playSound({sound: 'wow'});
 
         // Рисуем фон
         let transitionBG = game.add.graphics(0, 0).beginFill(0x000000, 0.8).drawRect(0, 0, game.world.width, game.world.height);
         transitionContainer.add(transitionBG);
         model.el('transitionBG', transitionBG);
 
-        mainView.draw.addBurst({container: transitionContainer});
 
         // выбираем надпись для конечного экрна (Big Win --- Total Win)
         let winTextFrame;
@@ -158,6 +152,19 @@ export let view = (() => {
             winCount.anchor.set(0.5);
         model.el('winCount', winCount);
 
+        let gun = game.add.spine(game.width / 2, game.height, 'gun');
+        gun.setAnimationByName(0, '1', false);
+        transitionContainer.add(gun);
+        game.time.events.add(1500, () => {
+            mainView.draw.addBurst({container: transitionContainer});
+        });
+        game.time.events.add(2500, () => {
+            mainView.draw.addBurst({container: transitionContainer});
+        });
+        game.time.events.add(3500, () => {
+            mainView.draw.addBurst({container: transitionContainer});
+        });
+
         // И кнопку продолжить
         // let continueText = game.add.sprite(game.width / 2, -200, 'text', 'continue.png', transitionContainer);
         //     continueText.anchor.set(0.5);
@@ -167,17 +174,16 @@ export let view = (() => {
 
     function _fsFinishTween() {
         let game = model.el('game');
+        let transitionContainer = model.group('transition');
         let winText = model.el('winText');
         let winCount = model.el('winCount');
-        // let winBG = model.el('winBG');
-        // let continueText = model.el('continueText');
         let scaleX = (model.desktop) ? 1.0 : 0.7;
         let scaleY = (model.desktop) ? 1.0 : 0.7;
 
         game.add.tween(winText).to({y: game.height * 0.2}, 1500, Phaser.Easing.Bounce.Out, true)
             .onComplete.add(() => {
-                // let winCountValue = model.data('rollResponse').FsBonus.TotalFSWinCoins + model.data('rollResponse').Balance.TotalWinCoins;
-                // _сountMeter(winCountValue, winCount);
+                let winCountValue = model.data('rollResponse').FsBonus.TotalFSWinCoins + model.data('rollResponse').Balance.TotalWinCoins;
+                _сountMeter(winCountValue, winCount);
             });
         game.add.tween(winCount).to({y: game.height * 0.4}, 1500, Phaser.Easing.Bounce.Out, true);
         // game.add.tween(winBG.scale).to({x: scaleX, y: scaleY}, 1500, Phaser.Easing.Elastic.Out, true);
@@ -216,64 +222,22 @@ export let view = (() => {
         game.frameAnims.push(anim);
     }
 
-    function _fsFinishInput() {
-        let transitionBG = model.el('transitionBG');
-        transitionBG.inputEnabled = true;
-        transitionBG.input.priorityID = 2;
-        transitionBG.events.onInputDown.add(function () {
-            soundController.sound.playSound({sound : 'buttonClick'});
-            soundController.music.stopMusic('finishPerehod');
-            // model.el('game').state.start('Main');
-        });
-    }
-
-    function _addCoin(container) {
-        let game = model.el('game');
-        if (container.y >= game.height * 5.7) return;
-
-        let posX = game.rnd.integerInRange(game.width * 0.1, game.width * 0.9);
-        let coin = game.add.sprite(posX, container.y * -1 - 100, 'coinGold', null, container);
-        coin.anchor.set(0.5);
-        let scale = game.rnd.integerInRange(30, 70) / 100;
-        coin.scale.set(scale);
-        let height = coin.height;
-        coin.height = game.rnd.integerInRange(height * 0.3, height);
-        let tween = game.add.tween(coin)
-           .to({rotation: 200}, 1000, 'Linear', true)
-           .start();
-        tween.onComplete.add(() => {
-            coin.destroy();
-        });
-        game.add.tween(coin)
-            .to({height: height}, 200, 'Linear')
-            .to({height: height * 0.2}, 100, 'Linear')
-            .to({height: height}, 200, 'Linear')
-            .to({height: height * 0.2}, 100, 'Linear')
-            .to({height: height}, 200, 'Linear')
-            .to({height: height * 0.2}, 100, 'Linear')
-            .to({height: height}, 200, 'Linear')
-            .start();
-
-            game.time.events.add(50, () => {
-            _addCoin(container)
-        });
-    }
-
-    function _coinsTween() {
-        let game = model.el('game');
-        let container = model.group('transition');
-        let coinsContainer = game.add.group();
-        container.addAt(coinsContainer, 1);
-        _addCoin(coinsContainer);
-        game.add.tween(coinsContainer).to({y: game.height * 7}, 5000, 'Linear', true);
-    }
+    // function _fsFinishInput() {
+    //     let transitionBG = model.el('transitionBG');
+    //     transitionBG.inputEnabled = true;
+    //     transitionBG.input.priorityID = 2;
+    //     transitionBG.events.onInputDown.add(function () {
+    //         soundController.sound.playSound({sound : 'buttonClick'});
+    //         soundController.music.stopMusic('finishPerehod');
+    //         // model.el('game').state.start('Main');
+    //     });
+    // }
 
     return {
         fsStart,
         fsFinish,
         transitionInFs,
         transitionOutFs
-
     }
 
 })();

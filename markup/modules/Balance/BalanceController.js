@@ -10,6 +10,7 @@ export let controller = (() => {
     }
 
     function initDesktop() {
+        console.log(' ia m here');
         view.draw.CashBalance({
             container: model.group('panel')
         });
@@ -23,7 +24,7 @@ export let controller = (() => {
 
     function initFSDesktop() {
         view.draw.CashBalance({
-            container: model.group('panel')
+            container: model.group('panelFS')
         });
         view.draw.FSDesktopBalance({});
     }

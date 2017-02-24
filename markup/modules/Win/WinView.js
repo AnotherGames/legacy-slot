@@ -464,6 +464,7 @@ export let view = (() => {
             }
             if (bottle1) {
                 bottleContainer1.add(bottle1);
+                model.el('bottleContainer1', bottleContainer1);
                 bottleContainer1.alpha = 0;
                 game.add.tween(bottleContainer1).to({
                     alpha: 1
@@ -478,6 +479,7 @@ export let view = (() => {
 
             if (bottle2) {
                 bottleContainer2.add(bottle2);
+                model.el('bottleContainer2', bottleContainer2);
                 bottleContainer2.alpha = 0;
                 game.add.tween(bottleContainer2).to({
                     alpha: 1
@@ -491,6 +493,7 @@ export let view = (() => {
             }
             if (bottle3) {
                 bottleContainer3.add(bottle3);
+                model.el('bottleContainer3', bottleContainer3);
                 bottleContainer3.alpha = 0;
                 game.add.tween(bottleContainer3).to({
                     alpha: 1
@@ -679,6 +682,31 @@ export let view = (() => {
                 bottle.addAnimationByName(0, 'pena_idle_y', true);
             }
 
+        },
+
+        hideBottle: function() {
+            let bottleContainer1 = model.el('bottleContainer1');
+            let bottleContainer2 = model.el('bottleContainer2');
+            let bottleContainer3 = model.el('bottleContainer3');
+            bottleContainer1.removeAll();
+            if (bottleContainer2) {
+                bottleContainer2.removeAll();
+            }
+            if (bottleContainer3) {
+                bottleContainer3.removeAll();
+            }
+
+            let array = [0, 2, 4];
+
+            let game = model.el('game');
+            let wheels = model.el('wheels');
+            let upWheels = model.el('upWheels');
+            array.forEach((item) => {
+                upWheels.containers[item].visible = true;
+                game.add.tween(wheels[item].container).to({
+                    alpha: 1
+                }, 1000, 'Linear', true);
+            });
         }
 
     };

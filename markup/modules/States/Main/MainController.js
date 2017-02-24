@@ -3,6 +3,7 @@ import { config } from 'modules/Util/Config';
 
 import { view as mainView } from 'modules/States/Main/MainView';
 import { view as winView } from 'modules/Win/WinView';
+import { view as transitionView } from 'modules/Transition/TransitionView';
 
 import { controller as soundController } from 'modules/Sound/SoundController';
 import { controller as settingsController } from 'modules/Settings/DesktopSettingsController';
@@ -59,7 +60,7 @@ export class Main {
         mainView.draw.addCat({});
         game.time.events.add(5000, () => {
             mainView.draw.addConfetti({});
-            // panelController.drawFsPanel();
+            // transitionView.fsFinish();
         });
         // mainView.draw.addBurst({});
         mainView.draw.mainContainer({});

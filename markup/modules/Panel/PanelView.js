@@ -305,6 +305,15 @@ export let view = (() => {
             game = model.el('game'),
         }) {
             let panelGroup = model.group('panelFS');
+            panelGroup.y = - 500;
+            game.add.tween(panelGroup).to({y: model.el('gameMachine').bottom + model.el('gameMachine').height / 2, alpha: 1}, 1000, 'Linear', true);
+        },
+
+        showPanelMain: function({
+            game = model.el('game'),
+        }) {
+            let panelGroup = model.group('panel');
+            panelGroup.y = - 500;
             game.add.tween(panelGroup).to({y: model.el('gameMachine').bottom + model.el('gameMachine').height / 2, alpha: 1}, 1000, 'Linear', true);
         }
 
@@ -336,7 +345,20 @@ export let view = (() => {
             game = model.el('game'),
         }) {
             let panelGroup = model.group('panel');
-            game.add.tween(panelGroup).to({y: game.height + 500, alpha: 0}, 1000, 'Linear', true);
+            game.add.tween(panelGroup).to({y: game.height + 500, alpha: 0}, 1000, 'Linear', true)
+                .onComplete.add(() =>{
+                    panelGroup.removeAll();
+                }, this);
+        },
+
+        dropPaneltoMain: function({
+            game = model.el('game'),
+        }) {
+            let panelGroup = model.group('panelFS');
+            game.add.tween(panelGroup).to({y: game.height + 500, alpha: 0}, 1000, 'Linear', true)
+            .onComplete.add(() =>{
+                panelGroup.removeAll();
+            }, this);
         }
     }
 

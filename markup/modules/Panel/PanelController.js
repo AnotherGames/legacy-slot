@@ -85,6 +85,24 @@ export let controller = (() => {
 
     }
 
+    function drawMainPanel() {
+        if (model.desktop) {
+            view.hide.dropPaneltoMain({});
+
+            view.draw.PanelBG({
+                frameName: 'panel',
+                framePanelBG: 'panelBGgreen',
+                container: model.group('panel')
+            });
+
+            view.show.showPanelMain({});
+            drawButtons();
+            balanceController.initDesktop();
+        } else{
+            balanceController.initMobile();
+        }
+    }
+
     const handle = {
         spin: function() {
             if (!model.checkBalance()) {
@@ -267,6 +285,7 @@ export let controller = (() => {
     return {
         drawButtons,
         drawFsPanel,
+        drawMainPanel,
         auto,
         handle
     };
