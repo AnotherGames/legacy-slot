@@ -184,12 +184,13 @@ export let view = (() => {
         let scaleX = (model.desktop) ? 1.0 : 0.7;
         let scaleY = (model.desktop) ? 1.0 : 0.7;
 
-        game.add.tween(winText).to({y: game.height * 0.2}, 1500, Phaser.Easing.Bounce.Out, true)
+        game.add.tween(transitionContainer).to({alpha: 1}, 500, 'Linear', true);
+        game.add.tween(winCount).to({y: game.height * 0.4}, 1500, Phaser.Easing.Bounce.Out, true, 500);
+        game.add.tween(winText).to({y: game.height * 0.2}, 1500, Phaser.Easing.Bounce.Out, true, 500)
             .onComplete.add(() => {
                 let winCountValue = model.data('rollResponse').FsBonus.TotalFSWinCoins + model.data('rollResponse').Balance.TotalWinCoins;
                 _сountMeter(winCountValue, winCount);
             });
-        game.add.tween(winCount).to({y: game.height * 0.4}, 1500, Phaser.Easing.Bounce.Out, true);
 
         // game.add.tween(continueText).to({y: game.height * 0.85}, 1500, Phaser.Easing.Bounce.Out, true)
         //     .onComplete.add(() => {

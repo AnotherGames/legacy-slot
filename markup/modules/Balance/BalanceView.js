@@ -43,7 +43,7 @@ export let view = (() => {
             winCashValue = model.balance('winCash'),
             greyStyle = {font: '22px Helvetica, Arial', fill: '#888888', align: 'center'},
             cashStyle = {font: '27px Helvetica, Arial', fill: '#ffffff', align: 'center'},
-               y = (model.state('fs')) ? 97 : 155
+            y = (model.state('fs')) ? 97 : 155
         }) {
 
             let x1 = (model.state('fs')) ? 1075 : 1160;
@@ -60,8 +60,37 @@ export let view = (() => {
 
             _setAnchorInCenter([coinCash, betCash]);
 
-            // _setAnchorInCenter([coinCashText, coinCash, betCashText, betCash, winCashText, winCash]);
-            // _calcTextPosition([[coinCashText, coinCash], [betCashText, betCash], [winCashText, winCash]], container);
+        },
+
+        FooterCashBalance: function({
+            game = model.el('game'),
+            container = model.group('balanceCash'),
+            currencySymbol = model.balance('currencySymbol'),
+            coinCashValue = model.balance('coinCash'),
+            betCashValue = model.balance('betCash'),
+            winCashValue = model.balance('winCash'),
+            greyStyle = {font: '20px Helvetica, Arial', fill: '#888888', align: 'center'},
+            cashStyle = {font: '20px Helvetica, Arial', fill: '#ffffff', align: 'center'},
+            y = game.height * 0.985
+        }) {
+
+            let coinCashText = game.add.text(0, y, 'Cash: ', greyStyle, container);
+            let betCashText = game.add.text(0, y, 'Bet: ', greyStyle, container);
+            let winCashText = game.add.text(0, y, 'Win: ', greyStyle, container);
+            let coinCashFooter = game.add.text(885, y, `${currencySymbol} ${coinCashValue.toFixed(2)}`, cashStyle, container);
+            let betCashFooter = game.add.text(145, y, `${currencySymbol} ${betCashValue.toFixed(2)}`, cashStyle, container);
+            let winCashFooter = game.add.text(0, y, `${currencySymbol} ${winCashValue.toFixed(2)}`, cashStyle, container);
+
+            model.el('coinCashText', coinCashText);
+            model.el('betCashText', betCashText);
+            model.el('winCashText', winCashText);
+            model.el('coinCashFooter', coinCashFooter);
+            model.el('betCashFooter', betCashFooter);
+            model.el('winCashFooter', winCashFooter);
+
+            _setAnchorInCenter([coinCashFooter, betCashFooter]);
+            _setAnchorInCenter([coinCashText, coinCashFooter, betCashText, betCashFooter, winCashText, winCashFooter]);
+            _calcTextPosition([[coinCashText, coinCashFooter], [betCashText, betCashFooter], [winCashText, winCashFooter]], container);
 
         },
 
@@ -82,9 +111,6 @@ export let view = (() => {
             let winCashText = game.add.text(0, y, 'Win: ', greyStyle, container);
             let coinCash = game.add.text(885, y, `${currencySymbol} ${coinCashValue.toFixed(2)}`, cashStyle, container);
             let betCash = game.add.text(145, y, `${currencySymbol} ${betCashValue.toFixed(2)}`, cashStyle, container);
-            // if (model.state('balance') == 'coins') {
-            //     coinCash.visible = betCash.visible = false;
-            // }
             let winCash = game.add.text(0, y, `${currencySymbol} ${winCashValue.toFixed(2)}`, cashStyle, container);
 
             model.el('coinCashText', coinCashText);
@@ -264,6 +290,54 @@ export let view = (() => {
 
             // coinCash.text = `${currencySymbol} ${coinCashValue.toFixed(2)}`;
             // _calcTextPosition([[coinCashText, coinCash], [betCashText, betCash], [winCashText, winCash]], container);
+
+        },
+
+        FooterBalance: function({
+            container = model.group('balanceCash'),
+            currencySymbol = model.balance('currencySymbol'),
+            coinCashValue = model.balance('coinCash'),
+            betCashValue = model.balance('betCash'),
+            winCashValue = model.balance('winCash')
+        }) {
+
+            let game = model.el('game');
+            let coinCashFooter = model.el('coinCashFooter');
+            let betCashFooter = model.el('betCashFooter');
+            let winCashFooter = model.el('winCashFooter');
+            let coinCashText = model.el('coinCashText');
+            let betCashText = model.el('betCashText');
+            let winCashText = model.el('winCashText');
+
+            betCashFooter.text = `${currencySymbol} ${betCashValue.toFixed(2)}`;
+            winCashFooter.text = `${currencySymbol} ${winCashValue.toFixed(2)}`;
+
+            let currBalance = +coinCashFooter.text.split('  ')[1];
+            let plusBalance = coinCashValue - currBalance;
+            let timeLength = 500;
+            let _clock = game.time.create(true);
+            _clock.add(timeLength, () => {}, this);
+            _clock.start();
+
+            let anim = function () {
+                let timer = timeLength - _clock.duration;
+                let progress = timer / timeLength;
+                if (progress > 1) {
+                    progress = 1;
+                }
+                let newBalance = currBalance + plusBalance * progress;
+                coinCashFooter.text = `${currencySymbol} ${newBalance.toFixed(2)}`;
+
+                if (progress === 1) {
+                    game.frameAnims.splice(game.frameAnims.indexOf(anim), 1);
+                    coinCashFooter.text = `${currencySymbol} ${coinCashValue.toFixed(2)}`;
+                }
+
+            };
+            game.frameAnims.push(anim);
+
+            coinCashFooter.text = `${currencySymbol} ${coinCashValue.toFixed(2)}`;
+            _calcTextPosition([[coinCashText, coinCashFooter], [betCashText, betCashFooter], [winCashText, winCashFooter]], container);
 
         },
 

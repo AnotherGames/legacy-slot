@@ -13,6 +13,7 @@ export let controller = (() => {
         view.draw.CashBalance({
             container: model.group('panel')
         });
+        view.draw.FooterCashBalance({});
         view.draw.DesktopBalance({});
     }
 
@@ -25,6 +26,7 @@ export let controller = (() => {
         view.draw.CashBalance({
             container: model.group('panelFS')
         });
+        view.draw.FooterCashBalance({});
         view.draw.FSDesktopBalance({});
     }
 
@@ -63,6 +65,7 @@ export let controller = (() => {
             if (model.desktop) {
                 view.update.FSDesktopBalance({});
                 view.update.CashBalance({});
+                view.update.FooterBalance({});
             }
         } else {
             if (model.mobile) {
@@ -72,6 +75,7 @@ export let controller = (() => {
             if (model.desktop) {
                 view.update.DesktopBalance({});
                 view.update.CashBalance({});
+                view.update.FooterBalance({});
             }
         }
     }

@@ -91,6 +91,8 @@ export let controller = (() => {
             default:
         }
 
+        let container2 = model.group('balanceCash');
+        container2.removeAll();
         if (model.desktop) {
             view.hide.dropPaneltoFS({});
 
@@ -105,17 +107,18 @@ export let controller = (() => {
             balanceController.initFSDesktop();
         } else{
             let container = model.group('balanceCoin');
-            let container2 = model.group('balanceCash');
             container.removeAll();
-            container2.removeAll();
             balanceController.initFSMobile();
         }
+
         view.draw.FsLevelAndMulti({});
         view.draw.changeLevelAndMulti({});
 
     }
 
     function drawMainPanel() {
+        let container2 = model.group('balanceCash');
+        container2.removeAll();
         if (model.desktop) {
             view.hide.dropPaneltoMain({});
 
@@ -129,10 +132,8 @@ export let controller = (() => {
             balanceController.initDesktop();
         } else{
             let container = model.group('balanceCoin');
-            let container2 = model.group('balanceCash');
             let container3 = model.group('panelFS');
             container.removeAll();
-            container2.removeAll();
             container3.removeAll();
             balanceController.initMobile();
         }
