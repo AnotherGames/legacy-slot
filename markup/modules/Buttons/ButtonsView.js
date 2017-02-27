@@ -98,6 +98,7 @@ export let view = (() => {
             model.el('betButton').frameName = 'setBetOut.png';
             model.el('menuButton').frameName = 'menuOut.png';
             model.el('autoButton').frameName = 'autoOut.png';
+            model.el('spinButton').frameName = 'spinOut.png';
         },
 
         unlockButtons: function() {
@@ -107,6 +108,7 @@ export let view = (() => {
             model.el('betButton').frameName = 'setBet.png';
             model.el('menuButton').frameName = 'menu.png';
             model.el('autoButton').frameName = 'auto.png';
+            model.el('spinButton').frameName = 'spin.png';
         }
 
     };

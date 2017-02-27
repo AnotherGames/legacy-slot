@@ -107,7 +107,7 @@ export let view = (() => {
                 let time = game.rnd.integerInRange(30, 50);
                 let delay = game.rnd.integerInRange(500, 1500);
                 let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
-                console.log(side);
+                // console.log(side);
                 if (model.desktop) {
                     cloud.y = cloud.y = cloud.y + game.rnd.integerInRange(20, 350) + 80;
                 } else {
@@ -177,7 +177,8 @@ export let view = (() => {
             cat.setAnimationByName(0, 'run', true);
 
             let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
-            let delay = game.rnd.integerInRange(3000, 9000);
+            let delay = game.rnd.integerInRange(5000, 12000);
+            let delay2 = game.rnd.integerInRange(3000, 6000);
             let deltaX, deltaX2;
 
             if (side == 'left') {
@@ -195,7 +196,8 @@ export let view = (() => {
                 .onComplete.add(() => {
                     cat.setAnimationByName(0, 'sp', false);
                     cat.addAnimationByName(0, 'run', true);
-                    game.add.tween(cat).to({x: deltaX2}, 10000, 'Linear', true, delay)
+                    soundController.sound.playSound({sound: 'cat'});
+                    game.add.tween(cat).to({x: deltaX2}, 10000, 'Linear', true, delay2)
                         .onComplete.add(() => {
                             cat.destroy();
                             draw.addCat({});

@@ -10,6 +10,7 @@ import { view as panelView } from 'modules/Panel/PanelView';
 
 import { controller as autoplayController } from 'modules/Autoplay/AutoplayController';
 import { controller as panelController } from 'modules/Panel/PanelController';
+import { controller as buttonsController } from 'modules/Buttons/ButtonsController';
 import { controller as fsController } from 'modules/States/FS/FSController';
 
 export let controller = (() => {
@@ -199,11 +200,14 @@ export let controller = (() => {
             model.state('fs', true);
             // Лочим все кнопки
             model.state('buttons:locked', true);
+            if (model.mobile) {
+                buttonsController.lockButtons();
+            }
             // Убираем управление с клавиатуры
             game.input.keyboard.enabled = false;
 
             // Изменяем панель на FS
-            panelController.drawFsPanel();
+            panelController.drawFsPanel(fsLevelNumber);
 
             fsController.init(10);
 

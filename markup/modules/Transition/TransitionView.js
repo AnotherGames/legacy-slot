@@ -29,7 +29,7 @@ export let view = (() => {
         let transitionContainer = model.group('transition');
         // Изменяем музыку
         soundController.music.stopMusic('fon');
-        soundController.music.playMusic('startPerehod');
+        soundController.sound.playSound({sound: 'startPerehod'});
 
         let boy = game.add.spine(game.width * 0.15, game.height * 0.7, 'boy');
             boy.setAnimationByName(0, 'S2-newone', false);
@@ -87,7 +87,8 @@ export let view = (() => {
     // }
 
     function transitionInFs() {
-        soundController.music.stopMusic('startPerehod');
+        soundController.sound.stopSound({sound: 'startPerehod'});
+        soundController.music.playMusic('fsFon');
         model.state('transitionScreen', false);
         let transitionContainer = model.group('transition');
         transitionContainer.removeAll();
@@ -108,7 +109,7 @@ export let view = (() => {
         model.state('maxFsMultiplier', false);
         // Автопереход
         // if (model.state('autoTransititon')) {
-            game.time.events.add(config.autoTransitionTime + 2000, transitionOutFs);
+            game.time.events.add(config.autoTransitionTime + 4000, transitionOutFs);
         // }
     }
 
@@ -117,7 +118,7 @@ export let view = (() => {
         let transitionContainer = model.group('transition');
         // Изменяем музыку
         soundController.music.stopMusic('fsFon');
-        soundController.music.playMusic('finishPerehod');
+        soundController.sound.playSound({sound: 'finishPerehod'});
 
         // Рисуем фон
         let transitionBG = game.add.graphics(0, 0).beginFill(0x000000, 0.8).drawRect(0, 0, game.world.width, game.world.height);
@@ -140,12 +141,18 @@ export let view = (() => {
         }
         gun.setAnimationByName(0, '1', false);
         game.time.events.add(1500, () => {
+            soundController.sound.playSound({sound: 'gun'});
+            soundController.sound.playSound({sound: 'burstConfetti'});
             mainView.draw.addBurst({container: transitionContainer});
         });
         game.time.events.add(2500, () => {
+            soundController.sound.playSound({sound: 'gun'});
+            soundController.sound.playSound({sound: 'burstConfetti'});
             mainView.draw.addBurst({container: transitionContainer});
         });
         game.time.events.add(3500, () => {
+            soundController.sound.playSound({sound: 'gun'});
+            soundController.sound.playSound({sound: 'burstConfetti'});
             mainView.draw.addBurst({container: transitionContainer});
         });
 
@@ -180,7 +187,7 @@ export let view = (() => {
                 _сountMeter(winCountValue, winCount);
             });
         game.add.tween(winCount).to({y: game.height * 0.4}, 1500, Phaser.Easing.Bounce.Out, true);
-        // game.add.tween(winBG.scale).to({x: scaleX, y: scaleY}, 1500, Phaser.Easing.Elastic.Out, true);
+
         // game.add.tween(continueText).to({y: game.height * 0.85}, 1500, Phaser.Easing.Bounce.Out, true)
         //     .onComplete.add(() => {
         //         continueText.rotation = 0.1;
@@ -196,7 +203,7 @@ export let view = (() => {
         let winCount = model.el('winCount');
         winText.destroy();
         winCount.destroy();
-        soundController.music.stopMusic('finishPerehod');
+        soundController.sound.stopSound({sound: 'finishPerehod'});
         let transitionContainer = model.group('transition');
         transitionContainer.removeAll();
     }

@@ -68,50 +68,19 @@ export let controller = (() => {
         panelController.drawMainPanel();
         winView.draw.hideBottle();
 
-        game.time.events.add(500, () => {
-            soundController.music.stopMusic('fsFon')
-            transitionView.fsFinish();
-            if (model.desktop) {
-                mainView.draw.changeBG({index: 2});
-            } else {
-                mainView.draw.removeTrash({});
-            }
+        transitionView.fsFinish();
+        if (model.desktop) {
+            mainView.draw.changeBG({index: 2});
+        } else {
+            mainView.draw.removeTrash({});
+            buttonsController.unlockButtons();
+        }
+        game.time.events.add(6000, () => {
+            soundController.music.stopMusic('fsFon');
+            soundController.music.playMusic('fon');
         });
 
     }
-
-
-    // function changeMulti() {
-    //
-    //     if(model.state('maxFsMultiplier')) return;
-    //
-    //     let game = model.el('game');
-    //     let rollData = model.data('rollResponse');
-    //     let multiValue = rollData.FsBonus.Multi;
-    //     let currMulti = model.data('fsMulti');
-    //
-    //     if (multiValue > currMulti) {
-    //
-    //         let wheels = model.el('wheels');
-    //         let upWheels = model.el('upWheels');
-    //
-    //         // Меняем подложки элементов
-    //
-    //         wheels.forEach((wheel) => {
-    //             wheel.items.forEach((el) => {
-    //                 el.animBG(multiValue);
-    //             });
-    //         });
-    //         upWheels.forEach((upWheel) => {
-    //             upWheel.forEach((upEl) => {
-    //                 upEl.animBG(multiValue);
-    //             });
-    //         });
-    //         fsView.draw.newMulti({number: multiValue});
-    //         model.data('fsMulti', multiValue);
-    //
-    //     }
-// }
 
     return {
         init,

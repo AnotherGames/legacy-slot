@@ -1,0 +1,76 @@
+{"frames": [
+
+{
+	"filename": "panelBGgreen.png",
+	"frame": {"x":1,"y":1,"w":1319,"h":145},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":1319,"h":145},
+	"sourceSize": {"w":1320,"h":146}
+},
+{
+	"filename": "panelGreen.png",
+	"frame": {"x":1,"y":148,"w":1319,"h":145},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":1319,"h":145},
+	"sourceSize": {"w":1320,"h":146}
+},
+{
+	"filename": "panelGreenOrange.png",
+	"frame": {"x":1,"y":295,"w":1319,"h":145},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":1319,"h":145},
+	"sourceSize": {"w":1320,"h":146}
+},
+{
+	"filename": "panelGreenRed.png",
+	"frame": {"x":1,"y":442,"w":1319,"h":145},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":1319,"h":145},
+	"sourceSize": {"w":1320,"h":146}
+},
+{
+	"filename": "panelGreenRedOrange.png",
+	"frame": {"x":1,"y":589,"w":1319,"h":145},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":1319,"h":145},
+	"sourceSize": {"w":1320,"h":146}
+},
+{
+	"filename": "panelOrange.png",
+	"frame": {"x":1,"y":736,"w":1319,"h":145},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":1319,"h":145},
+	"sourceSize": {"w":1320,"h":146}
+},
+{
+	"filename": "panelRed.png",
+	"frame": {"x":1,"y":883,"w":1319,"h":145},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":1319,"h":145},
+	"sourceSize": {"w":1320,"h":146}
+},
+{
+	"filename": "panelRedOrange.png",
+	"frame": {"x":1,"y":1030,"w":1319,"h":145},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":1319,"h":145},
+	"sourceSize": {"w":1320,"h":146}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "panelBG.png",
+	"format": "RGBA8888",
+	"size": {"w":2048,"h":2048},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:f516fbf25e92855695952591ad54f55d:8ac75066aa8bfbe304c71e3365034de6:453481959a8adb8ea5d15f31a64c1e4d$"
+}
+}

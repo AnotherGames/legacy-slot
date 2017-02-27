@@ -193,7 +193,7 @@ export let view = (() => {
             sumStyle = {font: '24px Helvetica, Arial', fill: '#e8b075', align: 'center'},
             valueStyle = {font: '27px Helvetica, Arial', fill: '#ffffff', align: 'center'},
             y = 155,
-            x = [130, 265, 395, 865, 1000, 1155]
+            x = [170, 305, 435, 905, 1040, 1195]
         }) {
 
             let coinSum = game.add.text(x[5], y, `${coinSumValue.toFixed(0)}`, valueStyle, container);

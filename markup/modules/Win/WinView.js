@@ -470,6 +470,7 @@ export let view = (() => {
                     alpha: 1
                 }, 1000, 'Linear', true);
                 container.addAt(bottleContainer1, 0);
+                soundController.sound.playSound({sound: 'gaz'});
 
                 draw.addBubbles({
                     bottle: bottleBG1,
@@ -485,6 +486,7 @@ export let view = (() => {
                     alpha: 1
                 }, 1000, 'Linear', true);
                 container.addAt(bottleContainer2, 1);
+                soundController.sound.playSound({sound: 'gaz'});
 
                 draw.addBubbles({
                     bottle: bottleBG2,
@@ -499,6 +501,7 @@ export let view = (() => {
                     alpha: 1
                 }, 1000, 'Linear', true);
                 container.addAt(bottleContainer3, 2);
+                soundController.sound.playSound({sound: 'gaz'});
 
                 draw.addBubbles({
                     bottle: bottleBG3,

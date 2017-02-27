@@ -1,7 +1,7 @@
 export let config = {
     fadeinMusicTime: 5000,
     countMeterTime: 2500,
-    autoTransitionTime: 5000,
+    autoTransitionTime: 3000,
     symbolsCount: 20,
     maxMulti: 7,
     wheel: {

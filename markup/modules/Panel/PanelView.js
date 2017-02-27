@@ -12,16 +12,16 @@ export let view = (() => {
             x = game.world.centerX,
             y = model.el('gameMachine').bottom + model.el('gameMachine').height / 2,
             frameName = 'panel',
-            framePanelBG = 'panelBGgreen',
+            framePanelBG = 'panelBGgreen.png',
             deltaY = 70,
             deltaX = 40
         }) {
             container.x = x;
             container.top = y;
-            const panelBG = game.add.sprite(1, deltaY, framePanelBG, null, container);
-            const panel = game.add.sprite(deltaX, deltaY, frameName, null, container);
+            let panelBG = game.add.sprite(1, deltaY, 'panelBG', framePanelBG, container);
 
             if (!model.state('fs')) {
+                let panel = game.add.sprite(deltaX, deltaY, frameName, null, container);
                 let convert = game.add.sprite(80, 150, 'switcher', 'switch1.png', container);
                 convert.anchor.set(0.5);
                 convert.inputEnabled = true;
@@ -46,7 +46,7 @@ export let view = (() => {
             startMulti = 'x2',
             fontDesktop = '80px Cooper, Arial',
             fontMobile = '40px Cooper, Arial',
-            x = container.width / 2 - 30,
+            x = container.width / 2 + 10,
             y = 150
         }) {
             if (model.mobile) {

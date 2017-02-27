@@ -105,9 +105,7 @@ export class Preload {
         game.load.bitmapFont("textGreen", "text/text2.png", "text/text2.xml");
         if (model.desktop) {
             game.load.image('panel', 'game/panel.png');
-            game.load.image('panelFS', 'game/panelFS.png');
-            game.load.image('panelBGgreen', 'game/panelBGgreen.png');
-            game.load.image('panelBGred', 'game/panelBGred.png');
+            game.load.atlasJSONArray('panelBG', 'game/panelBG.png', 'game/panelBG.json');
             game.load.image('autoSelect', 'desk_buttons/autoSelect.png');
             game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
             game.load.atlasJSONArray('deskButtonsAnim', 'desk_buttons/deskButtonsAnim.png', 'desk_buttons/deskButtonsAnim.json');
