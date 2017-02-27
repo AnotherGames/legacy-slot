@@ -19,9 +19,7 @@ export let view = (() => {
 
         game.input.keyboard.enabled = true;
         // Автопереход если включен
-        // if (model.state('autoTransititon')) {
-            game.time.events.add(config.autoTransitionTime, transitionInFs);
-        // }
+        game.time.events.add(config.autoTransitionTime, transitionInFs);
     }
 
     function _fsStartDraw() {
@@ -31,49 +29,46 @@ export let view = (() => {
         soundController.music.stopMusic('fon');
         soundController.sound.playSound({sound: 'startPerehod'});
 
-        let boy = game.add.spine(game.width * 0.15, game.height * 0.7, 'boy');
+        let boyContainer = game.add.group();
+        transitionContainer.add(boyContainer);
+
+        let boy = game.add.spine(game.width * 0.11, game.height * 0.7, 'boy');
             boy.setAnimationByName(0, 'S2-newone', false);
             boy.addAnimationByName(0, 'S2-idle', true);
-            (model.desktop) ? boy.scale.set(0.5) : boy.scale.set(0.3);
-            transitionContainer.add(boy);
+            (model.desktop) ? boy.scale.set(0.4) : boy.scale.set(0.25);
+            boyContainer.add(boy);
         model.el('boy', boy);
 
+        let fsWinText = game.add.sprite(game.width * 0.13, game.height * 0.445, 'fsWinText', null, boyContainer);
+            fsWinText.anchor.set(0.5);
+            fsWinText.scale.set(0.1);
+            fsWinText.alpha = 0;
+        model.el('fsWinText', fsWinText);
+
         let freeSpinsCount = model.data('rollResponse').FreeSpinsLeft;
-        let freeSpinsText = game.add.bitmapText(game.width * 0.17, game.height * 0.20, 'textGreen', 'you win' + ' ', 90, transitionContainer);
+        let freeSpinsText = game.add.bitmapText(game.width * 0.13, game.height * 0.45, 'textOrange', '+' + freeSpinsCount, 70, boyContainer);
             freeSpinsText.anchor.set(0.5);
             freeSpinsText.scale.set(0.1);
             freeSpinsText.alpha = 0;
         model.el('freeSpinsText', freeSpinsText);
 
-        let freeSpinsText2 = game.add.bitmapText(game.width * 0.17, game.height * 0.33, 'textOrange', '+' + freeSpinsCount, 120, transitionContainer);
-            freeSpinsText2.anchor.set(0.5);
-            freeSpinsText2.scale.set(0.1);
-            freeSpinsText2.alpha = 0;
-        model.el('freeSpinsText2', freeSpinsText2);
-
-        let freeSpinsText3 = game.add.bitmapText(game.width * 0.17, game.height * 0.45, 'textGreen', 'free spins', 90, transitionContainer);
-            freeSpinsText3.anchor.set(0.5);
-            freeSpinsText3.scale.set(0.1);
-            freeSpinsText3.alpha = 0;
-        model.el('freeSpinsText3', freeSpinsText3);
-
+        model.group('boy', boyContainer);
+        console.log(boyContainer);
     }
 
     function _fsStartTween() {
         let game = model.el('game');
         let freeSpinsText = model.el('freeSpinsText');
-        let freeSpinsText2 = model.el('freeSpinsText2');
-        let freeSpinsText3 = model.el('freeSpinsText3');
+        let fsWinText = model.el('fsWinText');
+        let boyContainer = model.group('boy');
         let scaleX = (model.desktop) ? 1.0 : 0.7;
         let scaleY = (model.desktop) ? 1.0 : 0.7;
 
         // Анимации появления
+        game.add.tween(fsWinText).to({alpha: 1}, 500, 'Linear', true, 700);
         game.add.tween(freeSpinsText).to({alpha: 1}, 500, 'Linear', true, 700);
-        game.add.tween(freeSpinsText2).to({alpha: 1}, 500, 'Linear', true, 700);
-        game.add.tween(freeSpinsText3).to({alpha: 1}, 500, 'Linear', true, 700);
         game.add.tween(freeSpinsText.scale).to({x: scaleX, y: scaleY}, 1000, Phaser.Easing.Elastic.Out, true, 700);
-        game.add.tween(freeSpinsText2.scale).to({x: scaleX, y: scaleY}, 1000, Phaser.Easing.Elastic.Out, true, 700);
-        game.add.tween(freeSpinsText3.scale).to({x: scaleX, y: scaleY}, 1000, Phaser.Easing.Elastic.Out, true, 700);
+        game.add.tween(fsWinText.scale).to({x: scaleX, y: scaleY}, 1000, Phaser.Easing.Elastic.Out, true, 700);
 
     }
 
@@ -90,8 +85,18 @@ export let view = (() => {
         soundController.sound.stopSound({sound: 'startPerehod'});
         soundController.music.playMusic('fsFon');
         model.state('transitionScreen', false);
+
+        let game = model.el('game');
         let transitionContainer = model.group('transition');
-        transitionContainer.removeAll();
+        let boy = model.el('boy');
+        let freeSpinsText = model.el('freeSpinsText');
+        let fsWinText = model.el('fsWinText');
+        let boyContainer = model.group('boy');
+
+        game.add.tween(boyContainer.scale).to({x: 0.1, y: 0.1}, 500, 'Linear', true)
+            .onComplete.add(() => {
+                transitionContainer.removeAll();
+            }, this);
     }
 
 
@@ -108,9 +113,7 @@ export let view = (() => {
 
         model.state('maxFsMultiplier', false);
         // Автопереход
-        // if (model.state('autoTransititon')) {
-            game.time.events.add(config.autoTransitionTime + 4000, transitionOutFs);
-        // }
+        game.time.events.add(config.autoTransitionTime + 4000, transitionOutFs);
     }
 
     function _fsFinishDraw() {
@@ -199,13 +202,17 @@ export let view = (() => {
     }
 
     function transitionOutFs() {
+        let game = model.el('game');
         let winText = model.el('winText');
         let winCount = model.el('winCount');
-        winText.destroy();
-        winCount.destroy();
         soundController.sound.stopSound({sound: 'finishPerehod'});
         let transitionContainer = model.group('transition');
-        transitionContainer.removeAll();
+        game.add.tween(transitionContainer).to({alpha: 0}, 500, 'Linear', true)
+            .onComplete.add(() => {
+                transitionContainer.removeAll();
+                winText.destroy();
+                winCount.destroy();
+            }, this);
     }
 
     // Накрутка выигрыша

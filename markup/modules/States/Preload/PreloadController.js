@@ -124,6 +124,7 @@ export class Preload {
     loadFSAssets() {
         const game = model.el('game');
         game.load.image('fsCountBG', 'fs/fsCountBG.png');
+        game.load.image('fsWinText', 'fs/fsWinText.png');
     }
 
     loadSpineAssets() {

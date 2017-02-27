@@ -472,10 +472,12 @@ export let view = (() => {
                 container.addAt(bottleContainer1, 0);
                 soundController.sound.playSound({sound: 'gaz'});
 
-                draw.addBubbles({
-                    bottle: bottleBG1,
-                    container: bottleContainer1
-                });
+                if (model.desktop) {
+                    draw.addBubbles({
+                        bottle: bottleBG1,
+                        container: bottleContainer1
+                    });
+                }
             }
 
             if (bottle2) {
@@ -488,11 +490,14 @@ export let view = (() => {
                 container.addAt(bottleContainer2, 1);
                 soundController.sound.playSound({sound: 'gaz'});
 
-                draw.addBubbles({
-                    bottle: bottleBG2,
-                    container: bottleContainer2
-                });
+                if (model.desktop) {
+                    draw.addBubbles({
+                        bottle: bottleBG1,
+                        container: bottleContainer1
+                    });
+                }
             }
+
             if (bottle3) {
                 bottleContainer3.add(bottle3);
                 model.el('bottleContainer3', bottleContainer3);
@@ -503,10 +508,12 @@ export let view = (() => {
                 container.addAt(bottleContainer3, 2);
                 soundController.sound.playSound({sound: 'gaz'});
 
-                draw.addBubbles({
-                    bottle: bottleBG3,
-                    container: bottleContainer3
-                });
+                if (model.desktop) {
+                    draw.addBubbles({
+                        bottle: bottleBG1,
+                        container: bottleContainer1
+                    });
+                }
             }
 
         },

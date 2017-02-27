@@ -223,7 +223,9 @@ export let view = (() => {
             emitter.bounce.setTo(0.5, 0.5);
             emitter.angularDrag = 30;
 
-            emitter.start(true, 0, null, 200, true);
+            let emitterFrequency = (model.desktop) ? 200 : 40;
+
+            emitter.start(true, 0, null, emitterFrequency, true);
         },
 
         addTrash: function ({
@@ -244,7 +246,7 @@ export let view = (() => {
             emitterTrash.bounce.setTo(0.5, 0.5);
             emitterTrash.angularDrag = 30;
 
-            emitterTrash.start(false, 3000, 100);
+            emitterTrash.start(false, 3000, 60);
 
         },
 
