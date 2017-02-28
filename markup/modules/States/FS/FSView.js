@@ -38,7 +38,7 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('main')
         }) {
-            let deltaY = (model.desktop) ? 45 : -25;
+            let deltaY = (model.desktop) ? 50 : -25;
             let gameMachineBG = game.add.sprite(0, deltaY, 'gameMachineBG', null, container);
             gameMachineBG.anchor.set(0.5);
             model.el('gameMachineBG', gameMachineBG);
