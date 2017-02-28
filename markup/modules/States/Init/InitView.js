@@ -12,9 +12,6 @@ export let view = (() => {
                 initBG.setAnimationByName(0, 'show', false);
                 initBG.addAnimationByName(0, 'move', true);
 
-                // let cat = game.add.spine(game.world.centerX, game.world.centerY, 'cat');
-                // cat.setAnimationByName(0, 'sp', true);
-
         } else {
             initBG = game.add.tileSprite(0, 0, game.width, game.height, 'gradientLine');
 

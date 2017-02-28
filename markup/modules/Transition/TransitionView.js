@@ -53,7 +53,6 @@ export let view = (() => {
         model.el('freeSpinsText', freeSpinsText);
 
         model.group('boy', boyContainer);
-        console.log(boyContainer);
     }
 
     function _fsStartTween() {

@@ -60,39 +60,33 @@ export let view = (() => {
         }) {
             if (winTotalData === 0) return;
 
-            // if (model.state('balance') == 'cash') {
-            //     winTotalData = `${model.balance('currencySymbol')} ${(model.balance('coinValue') * winTotalData).toFixed(2)}`;
-            // }
+            if (model.state('balance') == 'cash') {
+                winTotalData = `${model.balance('currencySymbol')} ${(model.balance('coinValue') * winTotalData).toFixed(2)}`;
+            }
 
             let winTotal = game.add.sprite(0, 0, 'winTotal', null, container);
             winTotal.anchor.set(0.5);
 
-            let winTotalText = game.add.bitmapText(40, 0, 'textOrange', winTotalData + '', 100, container);
+            let winTotalText = game.add.bitmapText(40, 0, 'textOrange', winTotalData + '', 90, container);
             winTotalText.anchor.set(0.5);
 
             // small table
             if (!model.state('fs') && model.desktop) {
-                let winTotalSmall = game.add.sprite(0, 450, 'deskButtons', 'win.png', container);
+                let winTotalSmall = game.add.sprite(model.group('panel').width / 2 - 20, 150, 'deskButtons', 'win.png');
                 winTotalSmall.anchor.set(0.5);
                 winTotalSmall.alpha = 0;
-                if (winTotalSmall.alpha = 0) {
-                    model.state('showSmallWin', true);
-                } else {
-                    model.state('showSmallWin', false);
-                }
+                model.group('panel').addAt(winTotalSmall, 5);
 
-                let winTotalTextSmall = game.add.text(0, 470, winTotalData, style2, container);
+                let winTotalTextSmall = game.add.text(model.group('panel').width / 2 - 20, 170, winTotalData, style2);
                 winTotalTextSmall.anchor.set(0.5);
                 winTotalTextSmall.alpha = 0;
+                model.group('panel').addAt(winTotalTextSmall, 6);
 
-                game.add.tween(winTotalSmall).to({
-                    alpha: 1,
-                    y: 360
-                }, 300, 'Linear', true);
-                game.add.tween(winTotalTextSmall).to({
-                    alpha: 1,
-                    y: 370
-                }, 300, 'Linear', true);
+                model.el('winTotalSmall', winTotalSmall);
+                model.el('winTotalTextSmall', winTotalTextSmall);
+
+                game.add.tween(winTotalSmall).to({ alpha: 1, y: 50 }, 300, 'Linear', true);
+                game.add.tween(winTotalTextSmall).to({ alpha: 1, y: 65 }, 300, 'Linear', true);
 
             }
 

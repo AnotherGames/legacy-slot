@@ -43,7 +43,7 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('panelFS'),
             startLevel = 15,
-            startMulti = 'x2',
+            startMulti = 'x3',
             fontDesktop = '80px Cooper, Arial',
             fontMobile = '40px Cooper, Arial',
             x = container.width / 2 + 10,
@@ -85,7 +85,7 @@ export let view = (() => {
             let freeSpinsCount = model.data('rollResponse').FreeSpinsLeft;
             setTimeout(() => {
                 fsCount.text = freeSpinsCount;
-                fsMulti.text = 'x3';
+                fsMulti.text = 'x2';
             }, 500);
             console.log(fsCount, fsMulti);
         },
@@ -130,6 +130,7 @@ export let view = (() => {
             let spinButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'spinOn.png', 'spin.png', 'spinOn.png', null, container);
             spinButtonDesk.anchor.set(0.5);
             model.el('spinButtonDesk', spinButtonDesk);
+
             return spinButtonDesk;
         },
 

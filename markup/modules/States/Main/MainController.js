@@ -60,7 +60,6 @@ export class Main {
         mainView.draw.addCat({});
         game.time.events.add(5000, () => {
             mainView.draw.addConfetti({});
-            // transitionView.fsFinish();
         });
         // mainView.draw.addBurst({});
         mainView.draw.mainContainer({});

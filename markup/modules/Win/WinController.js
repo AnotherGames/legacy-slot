@@ -73,6 +73,7 @@ export let controller = (() => {
 
     function cleanWin(cleanAlpha = false, normalAnim = true) {
         let container = model.group('winTop');
+        let game = model.el('game');
         // Обнуляем счетчики глист
         model.data('glistaFiredCounter', 0);
         model.data('glistaDoneCounter', 0);
@@ -92,6 +93,8 @@ export let controller = (() => {
             });
         });
 
+        // Показываем обычные номера линий
+
         let leftLineArr = model.el('leftLineArr');
         let rightLineArr = model.el('rightLineArr');
 
@@ -102,6 +105,15 @@ export let controller = (() => {
         rightLineArr.forEach((el) => {
             el.visible = true;
         });
+
+        // Прячем маленькую таблицу Win
+
+        if (model.el('winTotalSmall')) {
+            let winTotalSmall = model.el('winTotalSmall');
+            let winTotalTextSmall = model.el('winTotalTextSmall');
+            game.add.tween(winTotalSmall).to({ alpha: 0, y: 150 }, 300, 'Linear', true);
+            game.add.tween(winTotalTextSmall).to({ alpha: 0, y: 170 }, 300, 'Linear', true);
+        }
 
         // Перевод в нормальную анимацию
         if (normalAnim) {
