@@ -202,7 +202,9 @@ export let view = (() => {
                 .onComplete.add(() => {
                     cat.setAnimationByName(0, 'sp', false);
                     cat.addAnimationByName(0, 'run', true);
-                    soundController.sound.playSound({sound: 'cat'});
+                    if (!model.state('fs')) {
+                        soundController.sound.playSound({sound: 'cat'});
+                    }
                     game.add.tween(cat).to({x: deltaX2}, 10000, 'Linear', true, delay2)
                         .onComplete.add(() => {
                             cat.destroy();
@@ -245,7 +247,6 @@ export let view = (() => {
             }
 
             cat2.animations.play('fast');
-            soundController.sound.playSound({sound: 'cat'});
             game.add.tween(cat2).to({x: deltaX, y: game.height * h}, 2500, 'Linear', true, delay)
                 .onComplete.add(() => {
                     cat2.destroy();
