@@ -121,12 +121,6 @@ export let controller = (() => {
         container2.removeAll();
         if (model.desktop) {
             view.hide.dropPaneltoMain({});
-
-            view.draw.PanelBG({
-                frameName: 'panel',
-                container: model.group('panel')
-            });
-
             view.show.showPanelMain({});
             drawButtons();
             balanceController.initDesktop();

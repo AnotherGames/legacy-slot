@@ -226,6 +226,7 @@ export let controller = (() => {
             // Персонаж объявляет количество фриспинов
             game.time.events.add(500, () => {
                 transitionView.fsStart();
+                mainView.draw.addCat2({});
                 if (model.desktop) {
                     mainView.draw.changeBG({});
                 } else {

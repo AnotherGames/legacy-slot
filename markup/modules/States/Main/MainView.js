@@ -174,10 +174,16 @@ export let view = (() => {
             if (model.mobile) {
                 cat.scale.set(0.66);
             }
+            if (model.state('fs')) {
+                cat.alpha = 0;
+            } else {
+                cat.alpha = 1;
+            }
             cat.setAnimationByName(0, 'run', true);
+            model.el('cat', cat);
 
             let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
-            let delay = game.rnd.integerInRange(5000, 12000);
+            let delay = game.rnd.integerInRange(5000, 10000);
             let delay2 = game.rnd.integerInRange(3000, 6000);
             let deltaX, deltaX2;
 
@@ -200,8 +206,52 @@ export let view = (() => {
                     game.add.tween(cat).to({x: deltaX2}, 10000, 'Linear', true, delay2)
                         .onComplete.add(() => {
                             cat.destroy();
-                            draw.addCat({});
+                            // if (!model.state('fs')) {
+                                draw.addCat({});
+                            // }
                         }, this);
+                }, this);
+        },
+
+        addCat2: function({
+            game = model.el('game'),
+            container = model.group('bg')
+        }) {
+            if (model.el('cat')) {
+                let cat = model.el('cat');
+                game.add.tween(cat).to({alpha: 0, y: -500}, 1500, 'Linear', true);
+            }
+
+            let i = game.rnd.integerInRange(3, 8) / 10;
+            let h = game.rnd.integerInRange(3, 8) / 10;
+            let cat2 = game.add.sprite(0, game.height * i, 'cat2', null, container);
+            if (model.mobile) {
+                cat2.scale.set(0.66);
+            }
+            cat2.animations.add('slow', Phaser.Animation.generateFrameNames('skeleton-slow_', 0, 30, '.png', 1), 20, true);
+            cat2.animations.add('fast', Phaser.Animation.generateFrameNames('skeleton-fast_', 0, 30, '.png', 1), 20, true);
+
+            let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
+            let delay = game.rnd.integerInRange(1000, 2500);
+            let deltaX;
+
+            if (side == 'left') {
+                cat2.x = -500;
+                deltaX = game.width + 500;
+            } else {
+                cat2.x = game.width + 500;
+                deltaX = -500;
+                cat2.scale.set(-1, 1);
+            }
+
+            cat2.animations.play('fast');
+            soundController.sound.playSound({sound: 'cat'});
+            game.add.tween(cat2).to({x: deltaX, y: game.height * h}, 2500, 'Linear', true, delay)
+                .onComplete.add(() => {
+                    cat2.destroy();
+                    if (model.state('fs')) {
+                        draw.addCat2({});
+                    }
                 }, this);
         },
 

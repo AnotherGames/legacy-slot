@@ -47,10 +47,10 @@ export let view = (() => {
             fontDesktop = '80px Cooper, Arial',
             fontMobile = '40px Cooper, Arial',
             x = container.width / 2 + 10,
-            y = 150
+            y = 160
         }) {
             if (model.mobile) {
-                y = game.height * 0.83;
+                y = game.height * 0.85;
                 if (model.state('gameSideLeft')) {
                     x = game.world.centerX - 80;
                 } else {
@@ -59,12 +59,15 @@ export let view = (() => {
             }
             let fsCountBG = game.add.sprite(x, y, 'fsCountBG', null, container);
                 fsCountBG.anchor.set(0.5);
+                fsCountBG.animations.add('start');
+                fsCountBG.animations.play('start', 15, true);
 
             let font = (model.desktop) ? fontDesktop : fontMobile;
-            let deltaX = (model.desktop) ? 97 : 65;
-            let deltaY = (model.desktop) ? 20 : 15;
+            let deltaX = (model.desktop) ? 97 : 60;
+            let deltaY1 = (model.desktop) ? 40 : 20;
+            let deltaY2 = (model.desktop) ? 10 : 5;
 
-            let fsCount = game.add.text(fsCountBG.x - deltaX, fsCountBG.y - deltaY, startLevel, {font: font, align: 'center'}, container);
+            let fsCount = game.add.text(fsCountBG.x - deltaX, fsCountBG.y - deltaY1, startLevel, {font: font, align: 'center'}, container);
                 fsCount.anchor.set(0.5)
                 model.el('fs:count', fsCount);
 
@@ -73,7 +76,7 @@ export let view = (() => {
                 grd.addColorStop(1, '#eeeeee');
                 fsCount.fill = grd;
 
-            let fsMulti = game.add.text(fsCountBG.x + deltaX, fsCountBG.y + deltaY, startMulti, {font: font, align: 'center', fill: '#ffffff'}, container);
+            let fsMulti = game.add.text(fsCountBG.x + deltaX, fsCountBG.y + deltaY2, startMulti, {font: font, align: 'center', fill: '#ffffff'}, container);
                 fsMulti.anchor.set(0.5)
                 model.el('fs:multi', fsMulti);
         },
@@ -246,7 +249,7 @@ export let view = (() => {
                     {font: font, fill: color, align: 'center'},
                     container);
                     autoText.anchor.set(0.5);
-                    autoText.setShadow(0, 0, shadowColor, 2);
+                    // autoText.setShadow(0, 0, shadowColor, 2);
 
             return autoBG;
         },

@@ -89,6 +89,7 @@ export class Preload {
         game.load.image('confetti2', 'bg/confetti2.png');
         game.load.image('confetti3', 'bg/confetti3.png');
         game.load.atlasJSONArray('trash', 'bg/trash.png', 'bg/trash.json');
+        game.load.atlasJSONArray('cat2', 'bg/cat2.png', 'bg/cat2.json');
         game.load.image('closeButton', 'other/closeButton.png');
         game.load.image('arrow', 'other/arrow.png');
         game.load.image('infoTableBg', 'other/infoTableBg.png');
@@ -123,7 +124,7 @@ export class Preload {
 
     loadFSAssets() {
         const game = model.el('game');
-        game.load.image('fsCountBG', 'fs/fsCountBG.png');
+        game.load.atlasJSONArray('fsCountBG', 'fs/fsCountBG.png', 'fs/fsCountBG.json');
         game.load.image('fsWinText', 'fs/fsWinText.png');
     }
 
