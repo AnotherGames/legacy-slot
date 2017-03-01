@@ -80,26 +80,48 @@ export let controller = (() => {
         let currMulti = model.data('fsMulti');
 
         if (multiValue > currMulti) {
-
-            let wheels = model.el('wheels');
-            let upWheels = model.el('upWheels');
-
-            // Меняем подложки элементов
-
-            wheels.forEach((wheel) => {
-                wheel.items.forEach((el) => {
-                    el.animBG(multiValue);
-                });
-            });
-            upWheels.forEach((upWheel) => {
-                upWheel.forEach((upEl) => {
-                    upEl.animBG(multiValue);
-                });
-            });
-            fsView.draw.newMulti({number: multiValue});
-            model.data('fsMulti', multiValue);
-
+            changeMultiBackground(multiValue)
         }
+    }
+
+    function recoverSession(multi) {
+        let wheels = model.el('wheels');
+        let upWheels = model.el('upWheels');
+
+        // Меняем подложки элементов
+
+        wheels.forEach((wheel) => {
+            wheel.items.forEach((el) => {
+                el.changeBG(multi);
+            });
+        });
+        upWheels.forEach((upWheel) => {
+            upWheel.forEach((upEl) => {
+                upEl.changeBG(multi);
+            });
+        });
+        fsView.draw.newMulti({number: multi});
+        model.data('fsMulti', multi);
+    }
+
+    function changeMultiBackground(multi) {
+        let wheels = model.el('wheels');
+        let upWheels = model.el('upWheels');
+
+        // Меняем подложки элементов
+
+        wheels.forEach((wheel) => {
+            wheel.items.forEach((el) => {
+                el.animBG(multi);
+            });
+        });
+        upWheels.forEach((upWheel) => {
+            upWheel.forEach((upEl) => {
+                upEl.animBG(multi);
+            });
+        });
+        fsView.draw.newMulti({number: multi});
+        model.data('fsMulti', multi);
     }
 
     return {
@@ -107,7 +129,9 @@ export let controller = (() => {
         next,
         count,
         stop,
-        changeMulti
+        changeMulti,
+        recoverSession,
+        changeMultiBackground
     };
 })();
 
@@ -197,7 +221,11 @@ export class FS {
         fsView.draw.Character({});
 
         // Первая темнота
-        game.camera.flash(0x000000, 500)
+        game.camera.flash(0x000000, 500);
+
+        if(model.data('fsMulti') > 2){
+            controller.recoverSession(model.data('fsMulti'));
+        }
 
         // Запускаем Фри Спины
         game.time.events.add(1000, () => {
@@ -207,7 +235,7 @@ export class FS {
     }
 
     update() {
-        const game = model.el('game'); 
+        const game = model.el('game');
         // Обновляем время
         footerController.updateTime({});
         // Проигрываем анимацию
