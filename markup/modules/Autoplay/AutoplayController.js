@@ -60,6 +60,8 @@ export let controller = (() => {
         // Изменяет состояния автоплея
         model.state('autoplay:end', true);
         model.state('autoplay:start', false);
+        model.state('autoplay:panelClosed', true);
+        model.data('remainAutoCount', null);
 
         // Переводим кнопки в нормальный режим
         if (model.mobile) {

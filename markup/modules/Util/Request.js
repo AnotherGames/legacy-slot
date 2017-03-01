@@ -15,7 +15,7 @@ export let request = (() => {
     }
 
     const mode = {
-        normal: 'candyland4',
+        normal: 'candyland5',
         fsBonus: 'candyfs1'
     };
 
