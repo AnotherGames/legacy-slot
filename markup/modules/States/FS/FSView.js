@@ -21,6 +21,7 @@ export let view = (() => {
             model.group('popup', game.add.group());
             model.group('transition', game.add.group());
             model.group('infoTable', game.add.group());
+            model.group('footerMenu', game.add.group());
         }
     };
 
@@ -117,11 +118,13 @@ export let view = (() => {
             }
 
             let fsMulti;
+            fsMulti = game.add.text(x + deltaX, y + deltaY, start, {font: font, fill: '#ffffff', align: 'center', stroke: '#188bb4', strokeThickness: 5}, container);
+            fsMulti.setShadow(5, 5, 'rgba(0, 0, 0, 0.7)', 8);
+            fsMulti.anchor.set(0.5);
+            model.el('fsMulti', fsMulti);
             setTimeout(() => {
-                fsMulti = game.add.text(x + deltaX, y + deltaY, start, {font: font, fill: '#ffffff', align: 'center', stroke: '#188bb4', strokeThickness: 5}, container);
-                fsMulti.setShadow(5, 5, 'rgba(0, 0, 0, 0.7)', 8);
-                fsMulti.anchor.set(0.5);
-                model.el('fsMulti', fsMulti);
+                fsMulti.text = 2;
+                fsMulti.text = start;
             }, 300);
 
 
@@ -183,11 +186,13 @@ export let view = (() => {
             }
 
             let fsLevel;
-            setTimeout(() => {
                 fsLevel = game.add.text(x + deltaX, y + deltaY, start, {font: font, fill: '#ffffff', align: 'center', stroke: '#188bb4', strokeThickness: 5}, container);
                 fsLevel.setShadow(5, 5, 'rgba(0, 0, 0, 0.7)', 8);
                 fsLevel.anchor.set(0.5);
                 model.el('fsLevel', fsLevel);
+            setTimeout(() => {
+                fsLevel.text = 2;
+                fsLevel.text = start;
             }, 300);
 
 

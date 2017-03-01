@@ -62,16 +62,19 @@ export class Wheel {
             console.error('constructor: param.elSize.height is undefined', param);
             return;
         }
-        if (typeof param.currentScreen === 'undefined') {
-            console.error('constructor: param.elSize is undefined', param);
-            return;
+
+        this.randomScreen = [];
+        for(let i = 0; i < 5; i++){
+            this.randomScreen[i] = Math.round(Math.random() * (8 - 1) + 1)
         }
         // инитим входящие параметры
+
         this.game = param.game;
         this.parent = param.parent;
         this.position = param.position;
         this.elSize = param.elSize;
-        this.currentScreen = param.currentScreen;
+        this.currentScreen = param.currentScreen ? param.currentScreen : this.randomScreen;
+
         // инитим внутрение параметры
         this.mode = 'idle';
         this.isFast = false;

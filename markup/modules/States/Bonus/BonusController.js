@@ -45,7 +45,7 @@ class Door {
 
         this._playGold();
         this._playGlassBoom();
-        this._playTable();
+        this._playTable(parseInt(this.data.CurrentValue, 10));
     }
 
     fail() {
@@ -127,10 +127,10 @@ class Door {
         model.group('bg').add(this.glass);
     }
 
-    _playTable() {
+    _playTable(value) {
         this.game.add.tween(this.sprite)
             .to({ alpha: 0 }, 300, 'Linear', true);
-        this.table = this.game.add.sprite(this.x, this.y, 'bonusNumber', `x${parseInt(this.data.CurrentValue, 10)}.png`);
+        this.table = this.game.add.sprite(this.x, this.y, 'bonusNumber', `x${value}.png`);
         this.table.anchor.set(0.6, 0.8);
         this.table.alpha = 0;
         this.table.angle = this.game.rnd.integerInRange(-15, 15);
@@ -151,6 +151,10 @@ export class Bonus {
         this.game = model.el('game');
         this.game.winAnims = [];
         this.doors = [];
+
+        this.game.frameAnims = [];
+        this.game.spriteAnims = [];
+
         model.data('bonusWinCoins', 0);
         model.state('bonus', true);
         model.state('bonusReady', true);
@@ -170,6 +174,8 @@ export class Bonus {
             this.doors.push(new Door(config.illuminatorsCoords[i].x, config.illuminatorsCoords[i].y, this.doors, i + 1));
         }
 
+        model.el('doors', this.doors);
+
         if (model.desktop) {
             mainView.draw.addBubbles({});
             mainView.draw.addFishes({ y1: 650, y2: 900 });
@@ -182,8 +188,12 @@ export class Bonus {
             footerController.initMobile();
             balanceView.draw.FSMobileBalance({});
         }
-        model.updateBalance({ startBonus: true });
         balanceView.draw.CashBalance({});
+        model.updateBalance({ startBonus: true });
+
+        if(model.data('savedFS')){
+            this.drawRecoveredPanel();
+        }
 
     }
 
@@ -203,6 +213,18 @@ export class Bonus {
         if (model.mobile && !game.device.iOS) {
             (game.scale.isFullScreen) ? $('#fakeButton').addClass('closed') : $('#fakeButton').removeClass('closed');
         }
+    }
+
+    drawRecoveredPanel() {
+        let saved = model.data('savedFS').doorsValue;
+        for(let i = 0; i < saved.length; i++) {
+            let door = this.doors[i];
+            door.destroyed = true;
+            door._playGold();
+            door._playGlassBoom();
+            door._playTable(+saved[i].substring(1));
+        }
+        model.data('savedFS', null);
     }
 
 }
@@ -282,6 +304,7 @@ function handleDoorClick() {
             console.error(err);
         });
 }
+
 
 function endBonus() {
     model.updateBalance({ endBonus: true });

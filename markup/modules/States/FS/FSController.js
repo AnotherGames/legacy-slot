@@ -183,6 +183,10 @@ export class FS {
         fsView.draw.Level({
             start: this.fsLevel
         });
+
+        if(model.data('fsLevel') > 0) {
+            this.drawRecoveredPanel();
+        }
         // Рисуем счетчик спинов
         fsView.draw.Count({
             start: this.fsCount
@@ -195,6 +199,8 @@ export class FS {
         game.time.events.add(1000, () => {
             controller.init(this.fsCount);
         });
+
+
     }
 
     update() {
@@ -228,9 +234,9 @@ export class FS {
             this.fsCount = saved.fsCount;
             this.fsMulti = saved.fsMulti;
             this.fsLevel = saved.fsLevel;
-            model.data('savedFS', null);
             model.data('fsMulti', this.fsMulti);
             model.data('fsLevel', this.fsLevel);
+            model.data('savedFS', null);
         } else {
             this.fsCount = 15;
             this.fsMulti = 2;
@@ -238,6 +244,16 @@ export class FS {
             model.data('fsMulti', 2);
             model.data('fsLevel', 0);
         }
+    }
+
+    drawRecoveredPanel() {
+        let multi = model.data('fsMulti');
+        let level = model.data('fsLevel');
+
+        for(let i = 2; i < multi; i++){
+            _FSView.view.draw.changeMulti({ number: i + 1, animation: i + 1 + '' });
+        }
+        fsView.draw.changeLevel({number: level, animation: level - 1 + ''});
     }
 
 }
