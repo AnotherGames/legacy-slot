@@ -14,17 +14,18 @@ export let controller = (() => {
         let game = model.el('game');
         view.draw.PanelBG({});
         view.draw.AnimatedSpinButton({});
-            view.draw.AutoContainer({});
-            view.draw.AutoPanel({}).forEach((panelButton) => {
-                panelButton.inputEnabled = true;
-                panelButton.events.onInputUp.add(handle.panelButton, panelButton);
-                panelButton.events.onInputOver.add(()=>{
-                    panelButton.events.onInputUp.active = true;
-                }, panelButton);
-                panelButton.events.onInputOut.add(()=>{
-                    panelButton.events.onInputUp.active = false;
-                }, panelButton);
-            });
+        view.draw.LinesNumber({});
+        view.draw.AutoContainer({});
+        view.draw.AutoPanel({}).forEach((panelButton) => {
+            panelButton.inputEnabled = true;
+            panelButton.events.onInputUp.add(handle.panelButton, panelButton);
+            panelButton.events.onInputOver.add(()=>{
+                panelButton.events.onInputUp.active = true;
+            }, panelButton);
+            panelButton.events.onInputOut.add(()=>{
+                panelButton.events.onInputUp.active = false;
+            }, panelButton);
+        });
 
         let spinButtonDesk = view.draw.SpinButton({});
         spinButtonDesk.events.onInputUp.add(handle.spin);
@@ -52,11 +53,11 @@ export let controller = (() => {
             betLevelMinus.onInputDown.add(handle.betMinus);
             model.el('betLevelMinus', betLevelMinus);
 
-        let coinsLevelPlus = view.draw.PlusButton({x: 984});
+        let coinsLevelPlus = view.draw.PlusButton({x: 1112});
             coinsLevelPlus.onInputDown.add(handle.coinsPlus);
             model.el('coinsLevelPlus', coinsLevelPlus);
 
-        let coinsLevelMinus = view.draw.MinusButton({x: 864});
+        let coinsLevelMinus = view.draw.MinusButton({x: 984});
             coinsLevelMinus.onInputDown.add(handle.coinsMinus);
             model.el('coinsLevelMinus', coinsLevelMinus);
 

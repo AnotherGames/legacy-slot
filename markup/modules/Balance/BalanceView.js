@@ -159,19 +159,19 @@ export let view = (() => {
             betValueAmount = model.balance('betValue'),
             sumStyle = {font: '27px Helvetica, Arial', fill: '#ffffff', align: 'center'},
             valueStyle = {font: '27px Helvetica, Arial', fill: '#ffffff', align: 'center'},
-            y = 155,
-            x = [190, 380, 947, 1160]
+            y = [130, 212],
+            x = [180, 245, 1070, 1185]
         }) {
 
-            let coinSum = game.add.text(x[3], y, `${coinSumValue.toFixed(0)}`, sumStyle, container);
-            let betSum = game.add.text(x[0], y, `${betSumValue.toFixed(0)}`, sumStyle, container);
+            let coinSum = game.add.text(x[3], y[0], `${coinSumValue.toFixed(0)}`, sumStyle, container);
+            let betSum = game.add.text(x[0], y[0], `${betSumValue.toFixed(0)}`, sumStyle, container);
 
             if (model.state('balance') == 'cash') {
                 coinSum.visible = betSum.visible = false;
             }
 
-            let coinValue = game.add.text(x[2], y, `${coinValueAmount}`, valueStyle, container);
-            let betValue = game.add.text(x[1], y, `${betValueAmount}`, valueStyle, container);
+            let coinValue = game.add.text(x[2], y[1], `${coinValueAmount}`, valueStyle, container);
+            let betValue = game.add.text(x[1], y[1], `${betValueAmount}`, valueStyle, container);
 
             model.el('coinSum', coinSum);
             model.el('betSum', betSum);

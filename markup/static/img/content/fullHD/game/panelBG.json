@@ -2,15 +2,15 @@
 
 {
 	"filename": "panelBGgreen.png",
-	"frame": {"x":1,"y":1,"w":1319,"h":145},
+	"frame": {"x":1,"y":1,"w":1320,"h":198},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":1,"y":1,"w":1319,"h":145},
-	"sourceSize": {"w":1320,"h":146}
+	"spriteSourceSize": {"x":0,"y":2,"w":1320,"h":198},
+	"sourceSize": {"w":1320,"h":200}
 },
 {
 	"filename": "panelGreen.png",
-	"frame": {"x":1,"y":148,"w":1319,"h":145},
+	"frame": {"x":1,"y":201,"w":1319,"h":145},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":1,"y":1,"w":1319,"h":145},
@@ -18,7 +18,7 @@
 },
 {
 	"filename": "panelGreenOrange.png",
-	"frame": {"x":1,"y":295,"w":1319,"h":145},
+	"frame": {"x":1,"y":348,"w":1319,"h":145},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":1,"y":1,"w":1319,"h":145},
@@ -26,7 +26,7 @@
 },
 {
 	"filename": "panelGreenRed.png",
-	"frame": {"x":1,"y":442,"w":1319,"h":145},
+	"frame": {"x":1,"y":495,"w":1319,"h":145},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":1,"y":1,"w":1319,"h":145},
@@ -34,7 +34,7 @@
 },
 {
 	"filename": "panelGreenRedOrange.png",
-	"frame": {"x":1,"y":589,"w":1319,"h":145},
+	"frame": {"x":1,"y":642,"w":1319,"h":145},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":1,"y":1,"w":1319,"h":145},
@@ -42,7 +42,7 @@
 },
 {
 	"filename": "panelOrange.png",
-	"frame": {"x":1,"y":736,"w":1319,"h":145},
+	"frame": {"x":1,"y":789,"w":1319,"h":145},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":1,"y":1,"w":1319,"h":145},
@@ -50,7 +50,7 @@
 },
 {
 	"filename": "panelRed.png",
-	"frame": {"x":1,"y":883,"w":1319,"h":145},
+	"frame": {"x":1,"y":936,"w":1319,"h":145},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":1,"y":1,"w":1319,"h":145},
@@ -58,7 +58,7 @@
 },
 {
 	"filename": "panelRedOrange.png",
-	"frame": {"x":1,"y":1030,"w":1319,"h":145},
+	"frame": {"x":1,"y":1083,"w":1319,"h":145},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":1,"y":1,"w":1319,"h":145},
@@ -71,6 +71,6 @@
 	"format": "RGBA8888",
 	"size": {"w":2048,"h":2048},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:f516fbf25e92855695952591ad54f55d:8ac75066aa8bfbe304c71e3365034de6:453481959a8adb8ea5d15f31a64c1e4d$"
+	"smartupdate": "$TexturePacker:SmartUpdate:b58681a2c364832a92d96bf7c098a65e:e1f607afc6debf8042cfc54fcb2ea522:453481959a8adb8ea5d15f31a64c1e4d$"
 }
 }
