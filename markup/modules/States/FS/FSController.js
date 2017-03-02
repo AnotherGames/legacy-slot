@@ -12,6 +12,7 @@ import { controller as panelController } from 'modules/Panel/PanelController';
 import { controller as buttonsController } from 'modules/Buttons/ButtonsController';
 import { controller as rollController } from 'modules/Roll/RollController';
 import { controller as winController } from 'modules/Win/WinController';
+import { controller as mobileSetBetController } from 'modules/Menu/SetBet/MenuSetBetController';
 
 export let controller = (() => {
 
@@ -64,8 +65,8 @@ export let controller = (() => {
         });
 
         model.state('fs:end', true);
-        model.state('fs', false);
         model.updateBalance({endFS: true});
+        model.state('fs', false);
         model.el('brainPanel').destroy();
     }
 
@@ -207,7 +208,7 @@ export class FS {
             footerController.initMobile();
             // Отрисовуем баланс
             balanceController.initFSMobile();
-
+            mobileSetBetController.init({});
             // Автоматически позиционируем основной контейнер
             this.positionMainContainer();
         } else {    // Desktop
