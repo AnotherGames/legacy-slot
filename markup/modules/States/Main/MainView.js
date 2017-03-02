@@ -313,9 +313,6 @@ export let view = (() => {
             const elSize = config[model.res].elements;
             let deltaY = (model.desktop) ? 20 : 10;
 
-            // let gameBG = game.add.graphics(-elSize.width * 2.5, -elSize.height * 1.5, container);
-            //     gameBG.beginFill(0x000000, 0.6).drawRect(0, 0, elSize.width * 5, elSize.height * 3 + deltaY);
-            // model.el('gameBG', gameBG);
             let gameBG = game.add.sprite(0, config[model.res].gameMachine.y, 'gameBG', null, container);
                 gameBG.anchor.set(0.5);
             model.el('gameBG', gameBG);
@@ -488,15 +485,6 @@ export let view = (() => {
                 .beginFill(0x000000, 0.8)
                 .drawRect(0, 0, game.width, game.height);
 
-            // let popup = game.add.sprite(
-            //     game.width / 2,
-            //     game.height / 2,
-            //     'popup',
-            //     null,
-            //     container);
-            //     popup.anchor.set(0.5);
-            // model.el('popup', popup);
-
             let boy = game.add.spine(game.width * 0.3, game.height * 0.7, 'boy');
                 boy.setAnimationByName(0, 'S4-newone', false);
                 boy.addAnimationByName(0, 'S4-idle', true);
@@ -519,20 +507,6 @@ export let view = (() => {
             let scaleY = (model.desktop) ? 1.0 : 0.7;
             game.add.tween(popupText).to({alpha: 1}, 500, 'Linear', true, 700);
             game.add.tween(popupText.scale).to({x: scaleX, y: scaleY}, 1000, Phaser.Easing.Elastic.Out, true, 700);
-
-            // let popupText = game.add.text(
-            //     popup.x - 40,
-            //     popup.y,
-            //     message,
-            //     {font: font, fill: color, align: 'center', wordWrap: true, wordWrapWidth: 380, stroke: '#000000', strokeThickness: 3},
-            //     container);
-            //     popupText.anchor.set(0.5);
-
-            // popup.inputEnabled = true;
-            // popup.input.priorityID = 3;
-            // popup.events.onInputDown.add(() => {
-            //     (balance) ? container.removeAll() : window.location.reload();
-            // });
 
             overlay.inputEnabled = true;
             overlay.input.priorityID = 2;

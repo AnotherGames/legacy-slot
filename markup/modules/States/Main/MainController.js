@@ -6,6 +6,7 @@ import { view as winView } from 'modules/Win/WinView';
 import { view as transitionView } from 'modules/Transition/TransitionView';
 
 import { controller as soundController } from 'modules/Sound/SoundController';
+import { controller as winController } from 'modules/Win/WinController';
 import { controller as settingsController } from 'modules/Settings/DesktopSettingsController';
 import { controller as balanceController } from 'modules/Balance/BalanceController';
 import { controller as footerController } from 'modules/Footer/FooterController';
@@ -106,6 +107,11 @@ export class Main {
 
         // Проверяем остались ли автокрутки
         this.checkForRemainAutoplay();
+
+        if(model.data('savedFS')) {
+            let saved = model.data('savedFS');
+            winController.drawFsState(saved.Level, saved.fsCount);
+        }
 
     }
 

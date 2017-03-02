@@ -38,9 +38,6 @@ export let controller = (() => {
         // Проверяем переход на Фри-Спины
         checkForFS();
 
-        // Проверяем наличие бонуса сурикена
-        // checkForBonus();
-
         // Играем звук выигрыша
         view.play.WinSound();
         // Рисуем табличку
@@ -194,52 +191,58 @@ export let controller = (() => {
 
     function checkForFS() {
         let game = model.el('game');
-        let data = model.data('rollResponse'),
-            mode = data.Mode,
-            nextMode = data.NextMode;
+        let data = model.data('rollResponse');
+        let mode = data.Mode;
+        let nextMode = data.NextMode;
 
         if (mode == 'root' && nextMode.indexOf('fsBonus') != -1 ) {
-
-            let fsLevelNumber = nextMode[7];
-            view.draw.addBigBottleToStage(fsLevelNumber);
-
-            // Остонавливаем автоплей если был
-            if (model.state('autoplay:start')) {
-                model.data('remainAutoCount', model.data('autoplay:count'));
-                autoplayController.stop();
-            }
-
-            model.state('fs', true);
-            // Лочим все кнопки
-            model.state('buttons:locked', true);
-            if (model.mobile) {
-                buttonsController.lockButtons();
-            }
-            // Убираем управление с клавиатуры
-            game.input.keyboard.enabled = false;
-
-            // Изменяем панель на FS
-            panelController.drawFsPanel(fsLevelNumber);
-
-            fsController.init(10);
-
-            // Персонаж объявляет количество фриспинов
-            game.time.events.add(500, () => {
-                transitionView.fsStart();
-                mainView.draw.addCat2({});
-                if (model.desktop) {
-                    mainView.draw.changeBG({});
-                } else {
-                    mainView.draw.addTrash({});
-                }
-            });
-
+            let fsBonusLevel = nextMode[7];
+            view.drawFsState(fsBonusLevel, fsBonusLevel);
         }
     }
 
+    function drawFsState(fsLevelNumber, numberOfSpins) {
+        let game = model.el('game');
+
+        view.draw.addBigBottleToStage(fsLevelNumber);
+
+        // Остонавливаем автоплей если был
+        if (model.state('autoplay:start')) {
+            model.data('remainAutoCount', model.data('autoplay:count'));
+            autoplayController.stop();
+        }
+
+        model.state('fs', true);
+        // Лочим все кнопки
+        model.state('buttons:locked', true);
+        if (model.mobile) {
+            buttonsController.lockButtons();
+        }
+        // Убираем управление с клавиатуры
+        game.input.keyboard.enabled = false;
+
+        // Изменяем панель на FS
+        panelController.drawFsPanel(numberOfSpins);
+
+        fsController.init(10);
+
+        // Персонаж объявляет количество фриспинов
+        game.time.events.add(500, () => {
+            transitionView.fsStart();
+            mainView.draw.addCat2({});
+            if (model.desktop) {
+                mainView.draw.changeBG({});
+            } else {
+                mainView.draw.addTrash({});
+            }
+        });
+    }
+
+
     return {
         showWin,
-        cleanWin
+        cleanWin,
+        drawFsState
     };
 
 })();
