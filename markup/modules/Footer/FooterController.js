@@ -39,7 +39,7 @@ export let controller = (() => {
         view.draw.info({});
         handle.info();
 
-        let infoButton = view.draw.InfoButton({x: 50, y: model.el('game').height - 100});
+        let infoButton = view.draw.InfoButton({x: 1525, y: model.el('game').height - 100});
         infoButton.onInputDown.add(handle.openInfo);
 
         let settingsButton = view.draw.SettingsButton({x: 80});

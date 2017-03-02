@@ -180,12 +180,6 @@ export let controller = (() => {
             let animatedSpinButton = model.el('animatedSpinButton');
             let spinButton = model.el('spinButtonDesk');
             let autoDesktopContainer = model.el('autoDesktopContainer');
-            console.log(model.state('autoplay:start'));
-            console.log(model.state('roll:progress'));
-            console.log(model.state('buttons:locked'));
-            console.log(model.state('spinInAnim'));
-            console.log(model.state('autoplay:panelClosed'));
-            console.log(model.data('remainAutoCount'));
 
             if (model.state('autoplay:panelClosed') && !model.data('remainAutoCount')) {
                 model.state('autoplay:panelClosed', false);
@@ -196,7 +190,7 @@ export let controller = (() => {
                     .onComplete.add(()=>{
                         model.state('spinInAnim', false);
                         autoDesktopContainer.visible = true;
-                        animatedSpinButton.frameName = 'button-2_4.png';
+                        animatedSpinButton.frameName = 'button-1_30.png';
                     });
             } else {
                 model.state('autoplay:panelClosed', true);
