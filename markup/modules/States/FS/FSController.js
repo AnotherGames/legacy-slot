@@ -11,6 +11,7 @@ import { controller as balanceController } from 'modules/Balance/BalanceControll
 import { controller as footerController } from 'modules/Footer/FooterController';
 import { controller as panelController } from 'modules/Panel/PanelController';
 import { controller as rollController } from 'modules/Roll/RollController';
+import { controller as mobileSetBetController } from 'modules/Menu/SetBet/MenuSetBetController';
 
 export let controller = (() => {
 
@@ -63,8 +64,8 @@ export let controller = (() => {
         });
 
         model.state('fs:end', true);
-        model.state('fs', false);
         model.updateBalance({endFS: true});
+        model.state('fs', false);
         // bulletCounter = 0;
     }
 
@@ -151,7 +152,7 @@ export class FS {
             footerController.initMobile();
             // Отрисовуем баланс
             balanceController.initFSMobile();
-
+            mobileSetBetController.init({});
             // Автоматически позиционируем основной контейнер
             this.positionMainContainer();
         } else {    // Desktop
@@ -251,7 +252,7 @@ export class FS {
         let level = model.data('fsLevel');
 
         for(let i = 2; i < multi; i++){
-            _FSView.view.draw.changeMulti({ number: i + 1, animation: i + 1 + '' });
+            fsView.draw.changeMulti({ number: i + 1, animation: i + 1 + '' });
         }
         fsView.draw.changeLevel({number: level, animation: level - 1 + ''});
     }
