@@ -69,6 +69,8 @@ export class Preload {
         const game = model.el('game');
         game.load.path = `static/img/content/${model.res}/`;
         game.load.image('initBG', 'bg/initBG.png');
+        game.load.image('play', 'preloader/play.png');
+        game.load.image('logo', 'bg/logo.png');
         game.load.atlasJSONArray('text', 'text/text.png', 'text/text.json');
     }
 
@@ -84,9 +86,10 @@ export class Preload {
         game.load.spritesheet('labelLight', 'bg/labelLight.png', 617, 508, 3);
         game.load.spritesheet('fish', 'bg/fish.png', 103, 33, 12);
         game.load.spritesheet('shark', 'bg/shark.png', 493, 188, 12);
-        game.load.image('eyeLight', 'bg/eyeLight.png');
+        // game.load.image('eyeLight', 'bg/eyeLight.png');
         game.load.image('gameMachine', 'game/gameMachine.png');
         game.load.image('gameMachineBG', 'game/gameMachineBG.png');
+        game.load.image('logoGM', 'game/logoGM.png');
         game.load.image('closeButton', 'other/closeButton.png');
         game.load.image('arrow', 'other/arrow.png');
         game.load.image('infoTableBg', 'other/infoTableBg.png');
@@ -101,6 +104,7 @@ export class Preload {
         game.load.bitmapFont('numbersFont', 'numbers/numbers.png', 'numbers/numbers.xml');
         game.load.bitmapFont('numbersFont2', 'numbers/numbers2.png', 'numbers/numbers2.xml');
         if (model.desktop) {
+            game.load.image('panelBG', 'game/panelBG.png');
             game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
             game.load.image('gameMachineFS', 'game/gameMachineFS.png');
             game.load.image('autoSelect', 'desk_buttons/autoSelect.png');
@@ -120,6 +124,8 @@ export class Preload {
             game.load.image('fsCountBG', 'fs/fsCountBG.png');
             game.load.image('fsLevelBG', 'fs/fsLevelBG.png');
             game.load.image('fsMultiBG', 'fs/fsMultiBG.png');
+        } else {
+            game.load.image('panelBGfs', 'game/panelBGfs.png');
         }
 
         game.load.image('plus3', 'fs/plus3.png');

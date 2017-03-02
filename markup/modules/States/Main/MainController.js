@@ -92,12 +92,12 @@ export class Main {
             keyboardController.initMainKeys();
             // BG animations
             mainView.draw.addBubbles({});
-            mainView.draw.addShark({});
-            mainView.draw.eyeLight({});
-            game.time.events.add(6000, () => {
-                mainView.draw.addFishes({});
-                mainView.draw.labelLight({});
-            });
+            // mainView.draw.addShark({});
+            // mainView.draw.eyeLight({});
+            // game.time.events.add(6000, () => {
+            //     mainView.draw.addFishes({});
+            //     mainView.draw.labelLight({});
+            // });
         }
 
         mainView.draw.addLight({});

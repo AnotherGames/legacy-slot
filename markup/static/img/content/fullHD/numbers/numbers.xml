@@ -1,24 +1,26 @@
 <font>
-	<info face="numbers" size="150" />
-	<common lineHeight="150" scaleW="945" scaleH="821" pages="1" />
+	<info face="Y:\1.2_Game Online\Texturepacker\calipso\originals
+umbers-export" size="80" />
+	<common lineHeight="80" scaleW="1119" scaleH="959" pages="1" />
 	<pages>
-		<page id="0" file="numbers.png" />
+		<page id="0" file="Y:\1.2_Game Online\Texturepacker\calipso\originals
+umbers-export.png" />
 	</pages>
 	<chars count="14">
-		<char id="48" x="0" y="0" width="260" height="272" xoffset="0" yoffset="-123" xadvance="261" /><!-- 0 -->
-		<char id="49" x="744" y="0" width="143" height="263" xoffset="25" yoffset="-122" xadvance="144" /><!-- 1 -->
-		<char id="50" x="510" y="0" width="232" height="272" xoffset="14" yoffset="-122" xadvance="233" /><!-- 2 -->
-		<char id="51" x="497" y="548" width="234" height="271" xoffset="13" yoffset="-121" xadvance="235" /><!-- 3 -->
-		<char id="52" x="0" y="274" width="256" height="262" xoffset="2" yoffset="-122" xadvance="257" /><!-- 4 -->
-		<char id="53" x="497" y="274" width="238" height="272" xoffset="11" yoffset="-121" xadvance="239" /><!-- 5 -->
-		<char id="54" x="262" y="0" width="246" height="272" xoffset="7" yoffset="-121" xadvance="247" /><!-- 6 -->
-		<char id="55" x="733" y="548" width="210" height="265" xoffset="25" yoffset="-120" xadvance="211" /><!-- 7 -->
-		<char id="56" x="249" y="538" width="246" height="273" xoffset="7" yoffset="-121" xadvance="247" /><!-- 8 -->
-		<char id="57" x="0" y="538" width="247" height="273" xoffset="6" yoffset="-119" xadvance="248" /><!-- 9 -->
-		<char id="120" x="737" y="274" width="185" height="185" xoffset="37" yoffset="-77" xadvance="186" /><!-- x -->
-		<char id="43" x="258" y="274" width="219" height="220" xoffset="20" yoffset="-98" xadvance="220" /><!-- + -->
-		<char id="32" x="0" y="0" width="0" height="0" xoffset="0" yoffset="0" xadvance="40" /><!--   -->
-		<char id="9" x="0" y="0" width="0" height="0" xoffset="0" yoffset="0" xadvance="400" /><!-- 	 -->
+		<char id="48" x="0" y="0" width="306" height="318" xoffset="0" yoffset="-238" xadvance="307" /><!-- 0 -->
+		<char id="49" x="872" y="0" width="172" height="310" xoffset="0" yoffset="-231" xadvance="173" /><!-- 1 -->
+		<char id="50" x="597" y="0" width="274" height="319" xoffset="0" yoffset="-239" xadvance="275" /><!-- 2 -->
+		<char id="51" x="586" y="640" width="275" height="318" xoffset="0" yoffset="-238" xadvance="276" /><!-- 3 -->
+		<char id="52" x="0" y="319" width="301" height="306" xoffset="0" yoffset="-232" xadvance="302" /><!-- 4 -->
+		<char id="53" x="586" y="321" width="280" height="318" xoffset="0" yoffset="-237" xadvance="281" /><!-- 5 -->
+		<char id="54" x="293" y="626" width="292" height="319" xoffset="0" yoffset="-235" xadvance="293" /><!-- 6 -->
+		<char id="55" x="867" y="320" width="247" height="312" xoffset="0" yoffset="-235" xadvance="248" /><!-- 7 -->
+		<char id="56" x="307" y="0" width="289" height="320" xoffset="0" yoffset="-239" xadvance="290" /><!-- 8 -->
+		<char id="57" x="0" y="626" width="292" height="321" xoffset="0" yoffset="-238" xadvance="293" /><!-- 9 -->
+		<char id="120" x="302" y="321" width="260" height="245" xoffset="0" yoffset="-202" xadvance="261" /><!-- x -->
+		<char id="43" x="862" y="640" width="256" height="256" xoffset="0" yoffset="-203" xadvance="257" /><!-- + -->
+		<char id="32" x="0" y="0" width="0" height="0" xoffset="0" yoffset="0" xadvance="20" /><!--   -->
+		<char id="9" x="0" y="0" width="0" height="0" xoffset="0" yoffset="0" xadvance="160" /><!-- 	 -->
 	</chars>
 	<kernings count="0">
 	</kernings>

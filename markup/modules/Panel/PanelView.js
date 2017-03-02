@@ -8,13 +8,18 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('panel'),
             x = game.world.centerX,
-            y = model.el('gameMachine').height - ((model.state('fs')) ? 20 : 10)
+            y = model.el('gameMachine').height - ((model.state('fs')) ? 20 : 10),
+            frameName = 'panelBG',
+            deltaY = -60
         }) {
             container.x = x;
             container.y = y;
-            container.pivot.set(model.el('gameMachine').width / 2, 0);
-            // const panelBG = game.add.sprite(0, deltaY, frameName, null, container);
-            // return panelBG;
+            // container.pivot.set(model.el('gameMachine').width / 2, 0);
+            let panelBG = game.add.sprite(0, deltaY, frameName, null, container);
+            panelBG.anchor.set(0.5);
+            window.panelBG = panelBG;
+            console.log(container, panelBG);
+            return panelBG;
         },
 
         AutoContainer: function ({
@@ -32,8 +37,8 @@ export let view = (() => {
 
         SpinButton: function ({
             game = model.el('game'),
-            x = model.el('gameMachine').width / 2 + 3,
-            y = -75,
+            x = 0,
+            y = -80,
             container = model.group('panel')
         }) {
             let spinButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'spinOn.png', 'spin.png', 'spinOn.png', null, container);
@@ -44,8 +49,8 @@ export let view = (() => {
 
         StopButton: function ({
             game = model.el('game'),
-            x = model.el('spinButtonDesk').x - 170,
-            y = -90,
+            x = 0,
+            y = -80,
             container = model.group('panel')
         }) {
             let stopButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'stopOn.png', 'stop.png', 'stopOn.png', null, container);
@@ -58,8 +63,8 @@ export let view = (() => {
         AutoButton: function ({
             game = model.el('game'),
             container = model.group('panel'),
-            x = model.el('spinButtonDesk').x - 170,
-            y = -90
+            x = model.el('spinButtonDesk').x - 225,
+            y = -100
         }) {
             let autoButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'autoOn.png', 'auto.png', 'autoOn.png', null, container);
             autoButtonDesk.anchor.set(0.5);
@@ -70,8 +75,8 @@ export let view = (() => {
         MaxBetButton: function ({
             game = model.el('game'),
             container = model.group('panel'),
-            x = model.el('spinButtonDesk').x + 170,
-            y = -90
+            x = model.el('spinButtonDesk').x + 220,
+            y = -100
         }) {
             let maxBetButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'maxBetOn.png', 'maxBet.png', 'maxBetOn.png', null, container);
             maxBetButtonDesk.anchor.set(0.5);
@@ -82,20 +87,20 @@ export let view = (() => {
         PlusButton: function ({
             game = model.el('game'),
             container = model.group('panel'),
-            x = 500,
-            y = -55,
+            x = -120,
+            y = -50,
         }) {
-            let plusButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'plusOn.png', 'plus.png', 'plusOn.png', null, container);
+            let plusButtonDesk = game.add.button(x, y, 'deskButtons', null, null, null, 'plus.png', null, null, container);
             return plusButtonDesk;
         },
 
         MinusButton: function ({
             game = model.el('game'),
             container = model.group('panel'),
-            x = 375,
-            y = -55
+            x = -220,
+            y = -50
         }) {
-            let minusButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'minusOn.png', 'minus.png', 'minusOn.png', null, container);
+            let minusButtonDesk = game.add.button(x, y, 'deskButtons', null, null, null, 'minus.png', null, null, container);
             return minusButtonDesk;
         },
 
@@ -115,18 +120,18 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('autoDesktop')
         }) {
-            let autoplayBG = game.add.sprite(0, 0, 'autoSelect', null, container);
-            autoplayBG.anchor.set(0.5);
-            model.el('autoplayBG', autoplayBG);
+            // let autoplayBG = game.add.sprite(0, 0, 'autoSelect', null, container);
+            // autoplayBG.anchor.set(0.5);
+            // model.el('autoplayBG', autoplayBG);
 
             container.visible = false;
 
             let autoBG10 = this._AutoPanelItem({});
-            let autoBG25 = this._AutoPanelItem({text: 25, x: -140, y: -7, width: 63, height: 40});
-            let autoBG50 = this._AutoPanelItem({text: 50, x: -80, y: -7, width: 68, height: 40});
-            let autoBG100 = this._AutoPanelItem({text: 100, x: -15, y: -7, width: 75, height: 40});
-            let autoBG250 = this._AutoPanelItem({text: 250, x: 60, y: -7, width: 70, height: 40});
-            let autoBG500 = this._AutoPanelItem({text: 500, x: 125, y: -7, width: 68, height: 40});
+            let autoBG25 = this._AutoPanelItem({text: 25, x: -1220, y: 75});
+            let autoBG50 = this._AutoPanelItem({text: 50, x: -1165, y: 45});
+            let autoBG100 = this._AutoPanelItem({text: 100, x: -1110, y: 15});
+            let autoBG250 = this._AutoPanelItem({text: 250, x: -1050, y: -5});
+            let autoBG500 = this._AutoPanelItem({text: 500, x: -990, y: -18});
 
             model.el('autoBG10', autoBG10);
             model.el('autoBG25', autoBG25);
@@ -146,23 +151,23 @@ export let view = (() => {
             text = 10,
             x = -200,
             y = -7,
-            width = 65,
-            height = 40,
             font = 'normal 24px Arial',
             color = '#fff',
             shadowColor = '#fff'
         }) {
-            let autoBG = game.add.graphics(0, 0, container).beginFill(0xffffff, 0.2).drawRect(0, 0, width, height);
-            autoBG.x = x;
-            autoBG.y = y - 8;
+            let autoBG = game.add.sprite(x, y, 'deskButtons', 'autoSelect.png', container);
             autoBG.amount = text;
-            autoBG.alpha = 0;
             autoBG.inputEnabled = true;
+            model.el('autoBG',autoBG);
+
             autoBG.events.onInputOver.add(function () {
-                autoBG.alpha = 1;
+                autoBG.frameName = 'autoSelectOn.png';
             });
             autoBG.events.onInputOut.add(function () {
-                autoBG.alpha = 0;
+                autoBG.frameName = 'autoSelect.png';
+            });
+            autoBG.events.onInputDown.add(function () {
+                autoBG.frameName = 'autoSelectOn.png';
             });
 
             let autoText = game.add.text(
@@ -172,7 +177,7 @@ export let view = (() => {
                 {font: font, fill: color, align: 'center'},
                 container);
             autoText.anchor.set(0.5);
-            autoText.setShadow(0, 0, shadowColor, 2);
+            // autoText.setShadow(0, 0, shadowColor, 2);
 
             return autoBG;
         },
@@ -180,15 +185,16 @@ export let view = (() => {
         autoCount: function ({
             game = model.el('game'),
             container = model.group('panel'),
-            style = {font: '60px Titania, Helvetica', fill: '#fff', align: 'center', stroke: '#000000', strokeThickness: 2},
+            style = {font: '30px Titania', fill: '#fff', align: 'center', stroke: '#000000', strokeThickness: 2},
             amount = 10,
-            x = model.el('spinButtonDesk').x,
-            y = model.el('spinButtonDesk').y,
+            x = model.el('autoButtonDesk').x,
+            y = model.el('autoButtonDesk').y,
         }) {
             let autoCount = game.add.text(x, y + 2, amount, style, container);
-            autoCount.setShadow(5, 5, 'rgba(0, 0, 0, 0.7)', 8);
+            // autoCount.setShadow(5, 5, 'rgba(0, 0, 0, 0.7)', 8);
             autoCount.anchor.set(0.5);
             autoCount.alpha = 0;
+            autoCount.angle = -12;
             model.el('autoCount', autoCount);
             game.add.tween(autoCount).to({alpha: 1}, 500, 'Linear', true, 200);
             return autoCount;
@@ -340,6 +346,8 @@ export let view = (() => {
         }) {
             model.state('panelInAnim', true);
             let autoDesktopContainer = model.group('autoDesktop');
+            let autoBG = model.el('autoBG');
+            autoBG.frameName = 'autoSelect.png';
             return game.add.tween(autoDesktopContainer).to( { alpha: 0 }, time, 'Linear', true)
                 .onComplete.add(() => {
                     model.state('panelInAnim', false);
@@ -358,19 +366,24 @@ export let view = (() => {
         settingsButton.alpha = 0.5;
 
         let maxBetButtonDesk = model.el('maxBetButtonDesk');
-        maxBetButtonDesk.frameName = 'maxBetClose.png';
+        // maxBetButtonDesk.frameName = 'maxBetClose.png';
+        maxBetButtonDesk.alpha = 0.5;
         maxBetButtonDesk.freezeFrames = true;
         let betLevelPlus = model.el('betLevelPlus');
-        betLevelPlus.frameName = 'close.png';
+        // betLevelPlus.frameName = 'close.png';
+        betLevelPlus.alpha = 0.5;
         betLevelPlus.freezeFrames = true;
         let betLevelMinus = model.el('betLevelMinus');
-        betLevelMinus.frameName = 'close.png';
+        // betLevelMinus.frameName = 'close.png';
+        betLevelMinus.alpha = 0.5;
         betLevelMinus.freezeFrames = true;
         let coinsLevelPlus = model.el('coinsLevelPlus');
-        coinsLevelPlus.frameName = 'close.png';
+        // coinsLevelPlus.frameName = 'close.png';
+        coinsLevelPlus.alpha = 0.5;
         coinsLevelPlus.freezeFrames = true;
         let coinsLevelMinus = model.el('coinsLevelMinus');
-        coinsLevelMinus.frameName = 'close.png';
+        // coinsLevelMinus.frameName = 'close.png';
+        coinsLevelMinus.alpha = 0.5;
         coinsLevelMinus.freezeFrames = true;
         if (model.state('autoplay:start')) {
             let spinButtonDesk = model.el('spinButtonDesk');
@@ -378,7 +391,7 @@ export let view = (() => {
             let stopButtonDesk = model.el('stopButtonDesk');
             stopButtonDesk.visible = true;
             let autoButtonDesk = model.el('autoButtonDesk');
-            autoButtonDesk.visible = false;
+            autoButtonDesk.frameName = 'autoClose.png';
             autoButtonDesk.freezeFrames = true;
         } else {
             let autoButtonDesk = model.el('autoButtonDesk');
@@ -399,20 +412,26 @@ export let view = (() => {
         settingsButton.alpha = 1;
 
         let maxBetButtonDesk = model.el('maxBetButtonDesk');
-        maxBetButtonDesk.frameName = 'maxBet.png';
+        // maxBetButtonDesk.frameName = 'maxBet.png';
+        maxBetButtonDesk.alpha = 1;
         maxBetButtonDesk.freezeFrames = false;
         let betLevelPlus = model.el('betLevelPlus');
-        betLevelPlus.frameName = 'plus.png';
+        // betLevelPlus.frameName = 'plus.png';
+        betLevelPlus.alpha = 1;
         betLevelPlus.freezeFrames = false;
         let betLevelMinus = model.el('betLevelMinus');
-        betLevelMinus.frameName = 'minus.png';
+        // betLevelMinus.frameName = 'minus.png';
+        betLevelMinus.alpha = 1;
         betLevelMinus.freezeFrames = false;
         let coinsLevelPlus = model.el('coinsLevelPlus');
-        coinsLevelPlus.frameName = 'plus.png';
+        // coinsLevelPlus.frameName = 'plus.png';
+        coinsLevelPlus.alpha = 1;
         coinsLevelPlus.freezeFrames = false;
         let coinsLevelMinus = model.el('coinsLevelMinus');
-        coinsLevelMinus.frameName = 'minus.png';
+        // coinsLevelMinus.frameName = 'minus.png';
+        coinsLevelMinus.alpha = 1;
         coinsLevelMinus.freezeFrames = false;
+
         let autoButtonDesk = model.el('autoButtonDesk');
         autoButtonDesk.frameName = 'auto.png';
         autoButtonDesk.freezeFrames = false;

@@ -39,12 +39,13 @@ export let view = (() => {
             container = model.group('main')
         }) {
             let deltaY = (model.desktop) ? 50 : -25;
-            let gameMachineBG = game.add.sprite(0, deltaY, 'gameMachineBG', null, container);
-            gameMachineBG.anchor.set(0.5);
-            model.el('gameMachineBG', gameMachineBG);
+            // let gameMachineBG = game.add.sprite(0, deltaY, 'gameMachineBG', null, container);
+            // gameMachineBG.anchor.set(0.5);
+            // model.el('gameMachineBG', gameMachineBG);
 
             let gameMachine = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachine', null, container);
             gameMachine.anchor.set(0.5);
+            gameMachine.alpha = 0;
             model.el('gameMachine', gameMachine);
 
 
@@ -299,15 +300,15 @@ export let view = (() => {
             model.group('machine', machineGroup);
 
             let numbersContainer = game.add.group();
-            container.addAt(numbersContainer, 3);
+            container.addAt(numbersContainer, 2);
             model.group('numbers', numbersContainer);
 
             let winUp = game.add.group();
-            container.addAt(winUp, 4);
+            container.addAt(winUp, 3);
             model.group('winUp', winUp);
 
             let winTop = game.add.group();
-            container.addAt(winTop, 5);
+            container.addAt(winTop, 4);
             model.group('winTop', winTop);
 
             machineGroup.glistaLightContainer = game.add.group();

@@ -21,7 +21,7 @@ export class Init {
         // this.savecpu.init();
 
         view.drawBG();
-        // view.drawLogo();
+        view.drawLogo();
 
         if (model.desktop) keyboardController.initInitKeys();
 
@@ -116,17 +116,17 @@ export class Init {
         background.beginFill(0xffffff, 0.2);
         background.drawRoundedRect(soundContainer.x - 30, soundContainer.y - 15, 470, 80, 40);
 
-        let style = { font: 'bold 42px Arial', fill: '#f3eba0'};
+        let style = { font: 'bold 42px Arial', fill: '#ffffff'};
         game.add.text(0, 0, 'Sound:', style, soundContainer);
         this.styleOff = { font: 'bold 42px Arial', fill: '#474747'};
         this.textOff = game.add.text(170, 0, 'Off', style, soundContainer);
         this.textOff.setStyle(this.styleOff);
-        this.styleOn = { font: 'bold 42px Arial', fill: '#b8ff31'};
+        this.styleOn = { font: 'bold 42px Arial', fill: '#2db6e8'};
         this.textOn = game.add.text(350, 0, 'On', style, soundContainer);
         this.textOn.setStyle(this.styleOn);
 
         let graphics = game.add.graphics(0, 0);
-        graphics.beginFill(0x6da600, 1);
+        graphics.beginFill(0x2798c1, 1);
         graphics.drawRoundedRect(0, 0, 70, 30, 150);
 
         let sprite = game.add.sprite(290, 25, graphics.generateTexture(), null, soundContainer);

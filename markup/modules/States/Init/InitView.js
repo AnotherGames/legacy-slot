@@ -12,7 +12,7 @@ export let view = (() => {
 
     function drawLogo() {
         const game = model.el('game');
-        let initLogo = game.add.sprite(game.world.centerX, game.world.centerY * 0.4, 'text', 'logo.png');
+        let initLogo = game.add.sprite(game.world.centerX, game.world.centerY * 0.7, 'logo');
         initLogo.anchor.set(0.5);
         initLogo.scale.setTo(0.1, 0.1);
         game.add.tween(initLogo.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true);
@@ -22,7 +22,7 @@ export let view = (() => {
 
     function drawPlay() {
         const game = model.el('game');
-        let initPlay = game.add.sprite(game.world.centerX, game.height * 0.75, 'text', 'play.png');
+        let initPlay = game.add.sprite(game.world.centerX, game.height * 0.75, 'play');
         initPlay.anchor.set(0.5);
         initPlay.scale.setTo(0.1, 0.1);
         let initPlayTween = game.add.tween(initPlay.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true);
