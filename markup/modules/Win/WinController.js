@@ -197,7 +197,7 @@ export let controller = (() => {
 
         if (mode == 'root' && nextMode.indexOf('fsBonus') != -1 ) {
             let fsBonusLevel = nextMode[7];
-            view.drawFsState(fsBonusLevel, fsBonusLevel);
+            drawFsState(fsBonusLevel, fsBonusLevel);
         }
     }
 
