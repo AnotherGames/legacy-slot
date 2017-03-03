@@ -126,7 +126,7 @@ export let view = (() => {
 
             container.visible = false;
 
-            let autoBG10 = this._AutoPanelItem({});
+            let autoBG10 = this._AutoPanelItem({x: -1275, y: 110});
             let autoBG25 = this._AutoPanelItem({text: 25, x: -1220, y: 75});
             let autoBG50 = this._AutoPanelItem({text: 50, x: -1165, y: 45});
             let autoBG100 = this._AutoPanelItem({text: 100, x: -1110, y: 15});
@@ -185,7 +185,7 @@ export let view = (() => {
         autoCount: function ({
             game = model.el('game'),
             container = model.group('panel'),
-            style = {font: '30px Titania', fill: '#fff', align: 'center', stroke: '#000000', strokeThickness: 2},
+            style = {font: '30px Titania', fill: '#fff', align: 'center'},
             amount = 10,
             x = model.el('autoButtonDesk').x,
             y = model.el('autoButtonDesk').y,

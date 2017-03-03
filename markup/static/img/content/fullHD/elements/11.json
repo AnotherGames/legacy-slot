@@ -2,10 +2,10 @@
 
 {
 	"filename": "11-n-00.png",
-	"frame": {"x":1,"y":1,"w":256,"h":240},
+	"frame": {"x":1,"y":1,"w":254,"h":215},
 	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":256,"h":240},
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":25,"w":254,"h":215},
 	"sourceSize": {"w":256,"h":240}
 }],
 "meta": {
@@ -13,8 +13,8 @@
 	"version": "1.0",
 	"image": "11.png",
 	"format": "RGBA8888",
-	"size": {"w":258,"h":242},
+	"size": {"w":256,"h":256},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:5d647bf9b431733bd2cebd2f01f093ab:ebc0599a835f85b39dc1d75ba52876cf:aaee697773d245ec0ff66c8d6aa83826$"
+	"smartupdate": "$TexturePacker:SmartUpdate:6565e486eb8028870304f0402497fc61:d83b6b3943626c4eaa74b2d764678d8c:aaee697773d245ec0ff66c8d6aa83826$"
 }
 }

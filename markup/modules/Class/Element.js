@@ -13,16 +13,10 @@ export class Element {
 
         // Заполняем его спрайтами всех элементов (они будут расположенны друг на друге)
         this.sprites = [];
-        this.blueBG = game.add.sprite(0, 0, 'elementBackground1', 'Back01-n-00.png', this.group);
-        this.blueBG.anchor.set(0.5);
-        this.blueBG.animations.add('winBG', Phaser.Animation.generateFrameNames('Back01-w-', 0, 29, '.png', 2), 30, false);
-
-        this.goldBG = game.add.sprite(0, 0, 'elementBackground2', 'Back02-n-00.png', this.group);
-        this.goldBG.anchor.set(0.5);
-        this.goldBG.animations.add('winBG', Phaser.Animation.generateFrameNames('Back02-w-', 0, 29, '.png', 2), 30, false);
-        this.goldBG.visible = false;
-
-        this.bg = this.blueBG;
+        this.bg = game.add.sprite(0, 0, 'elementBackground', 'f-n-00.png', this.group);
+        this.bg.anchor.set(0.5);
+        this.bg.animations.add('winBG', Phaser.Animation.generateFrameNames('f-w-', 0, 18, '.png', 2), 30, false);
+        this.bg.animations.add('normalBG', Phaser.Animation.generateFrameNames('f-n-', 0, 29, '.png', 2), 30, false);
 
         for (let i = 1; i <= config.symbolsCount; i++) {
 
@@ -60,16 +54,10 @@ export class Element {
         this.active = parseInt(animation, 10);
         this.activeSprite = this.sprites[this.active - 1];
         this.activeSprite.visible = true;
-        if (this.active == 9) {
-            this.bg = this.goldBG;
-            this.goldBG.visible = true;
-            this.blueBG.visible = false;
-        } else if (this.active == 10 || this.active == 11 || this.active == 12 || this.active == 13) {
+        if (this.active == 11 || this.active == 12 || this.active == 13) {
             this.bg.visible = false;
         } else {
-            this.bg = this.blueBG;
-            this.goldBG.visible = false;
-            this.blueBG.visible = true;
+            this.bg.visible = true;
         }
         this.activeSprite.animations.play(animation, fps, loop);
     }
@@ -77,20 +65,13 @@ export class Element {
     win(loop = false) {
         // Проигрывам выигрышную анимацию
         this.play(`${this.active}-w`, loop, 30);
-        if (this.bg == this.blueBG) {
-            this.blueBG.play('winBG');
-        } else {
-            this.goldBG.play('winBG');
-        }
+        this.bg.play('winBG');
+
         this.activeSprite.animations.currentAnim.onComplete.add(() => {
             // После которой опять играем нормальную анимацию
             this.play(`${this.active}-n`);
-
-            if (this.bg == this.blueBG) {
-                this.blueBG.frameName = 'Back01-n-00.png';
-            } else {
-                this.goldBG.frameName = 'Back02-n-00.png';
-            }
+            this.bg.play('normalBG');
+            // this.bg.frameName = 'f-n-00.png';
         });
     }
 
@@ -102,17 +83,16 @@ export class Element {
     normal() {
         // Проигрывам нормальную анимацию
         this.play(`${this.active}-n`);
+        this.bg.play('normalBG');
     }
 
     hide(alpha = 0.5) {
         // Делаем элемент полупрозрачным
-        // this.bg.alpha = alpha;
         this.group.alpha = alpha;
     }
 
     show() {
         // Возращаем нормальное состояние
-        // this.bg.alpha = 1;
         this.group.alpha = 1;
     }
 

@@ -83,14 +83,16 @@ export class Preload {
         game.load.image('transitionBG1', 'bg/transitionBG1.png');
         game.load.image('transitionBG2', 'bg/transitionBG2.jpg');
         game.load.image('bubble', 'bg/bubble.png');
-        game.load.image('eyeLight', 'bg/eyeLight.png');
+        // game.load.image('eyeLight', 'bg/eyeLight.png');
         game.load.image('topLight', 'bg/topLight.png');
-        game.load.spritesheet('labelLight', 'bg/labelLight.png', 617, 508, 3);
+        // game.load.spritesheet('labelLight', 'bg/labelLight.png', 617, 508, 3);
         game.load.spritesheet('fish', 'bg/fish.png', 103, 33, 12);
         game.load.spritesheet('shark', 'bg/shark.png', 493, 188, 12);
         // game.load.image('eyeLight', 'bg/eyeLight.png');
         game.load.image('gameMachine', 'game/gameMachine.png');
         game.load.image('gameMachineBG', 'game/gameMachineBG.png');
+        game.load.image('lineLeft', 'game/lineLeft.png');
+        game.load.image('lineRight', 'game/lineRight.png');
         game.load.image('logoGM', 'game/logoGM.png');
         game.load.image('closeButton', 'other/closeButton.png');
         game.load.image('arrow', 'other/arrow.png');
@@ -173,8 +175,8 @@ export class Preload {
         game.load.atlasJSONArray('12', 'elements/12.png', 'elements/12.json');
         game.load.atlasJSONArray('13', 'elements/13.png', 'elements/13.json');
         game.load.atlasJSONArray('14', 'elements/14.png', 'elements/14.json');
-        game.load.atlasJSONArray('elementBackground1', 'elements/elementBackground1.png', 'elements/elementBackground1.json');
-        game.load.atlasJSONArray('elementBackground2', 'elements/elementBackground2.png', 'elements/elementBackground2.json');
+        game.load.atlasJSONArray('elementBackground', 'elements/elementBackground.png', 'elements/elementBackground.json');
+        // game.load.atlasJSONArray('elementBackground2', 'elements/elementBackground2.png', 'elements/elementBackground2.json');
     }
 
     hidePreloader() {
