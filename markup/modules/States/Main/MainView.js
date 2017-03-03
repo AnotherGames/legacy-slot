@@ -1,5 +1,6 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
+import { motionPath } from 'modules/Util/Motion';
 import { view as transitionView } from 'modules/Transition/TransitionView';
 import { controller as soundController } from 'modules/Sound/SoundController';
 
@@ -185,7 +186,7 @@ export let view = (() => {
             let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
             let delay = game.rnd.integerInRange(5000, 10000);
             let delay2 = game.rnd.integerInRange(3000, 6000);
-            let rnd = game.rnd.integerInRange(1, 4);
+            let rnd = game.rnd.integerInRange(2, 4);
             let deltaX, deltaX2;
 
             if (side == 'left') {
@@ -226,33 +227,20 @@ export let view = (() => {
             let i = game.rnd.integerInRange(3, 8) / 10;
             let h = game.rnd.integerInRange(3, 8) / 10;
             let cat2 = game.add.sprite(0, game.height * i, 'cat2', null, container);
-            if (model.mobile) {
-                cat2.scale.set(0.66);
-            }
             cat2.animations.add('slow', Phaser.Animation.generateFrameNames('skeleton-slow_', 0, 30, '.png', 1), 30, true);
             cat2.animations.add('fast', Phaser.Animation.generateFrameNames('skeleton-fast_', 0, 30, '.png', 1), 120, true);
-
-            let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
-            let delay = game.rnd.integerInRange(1000, 2500);
-            let deltaX;
-
-            if (side == 'left') {
-                cat2.x = -500;
-                deltaX = game.width + 500;
-            } else {
-                cat2.x = game.width + 500;
-                deltaX = -500;
-                cat2.scale.set(-1, 1);
-            }
-
             cat2.animations.play('fast');
-            game.add.tween(cat2).to({x: deltaX, y: game.height * h}, 3000, 'Linear', true, delay)
-                .onComplete.add(() => {
-                    cat2.destroy();
-                    if (model.state('fs')) {
-                        draw.addCat2({});
-                    }
-                }, this);
+            model.el('cat2', cat2);
+
+            motionPath.motion.addPath({
+                name: 'cat2',
+                randomY: true,
+                anim: cat2,
+                speed: 10,
+                randomSide: true,
+                rotation: true,
+                repeat: true,
+            })
         },
 
         addBurst: function ({
@@ -282,10 +270,10 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('bg')
         }) {
-            let emitterTrash = game.add.emitter(game.world.centerX, game.world.centerY + 100, 20);
+            let emitterTrash = game.add.emitter(game.world.centerX, game.world.centerY + 100);
             model.el('emitterTrash', emitterTrash);
 
-            emitterTrash.makeParticles('trash', [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19], 100, true, true);
+            emitterTrash.makeParticles('trash', [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19], 50, true, true);
             container.add(emitterTrash);
 
             emitterTrash.minParticleSpeed.setTo(-1200, -1300);

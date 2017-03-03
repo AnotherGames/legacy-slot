@@ -651,7 +651,7 @@ export let view = (() => {
 
             emitter.start(false, 7000, 10);
 
-            let emitter2 = game.add.emitter(bottle.x, game.height, 1000);
+            let emitter2 = game.add.emitter(bottle.x, game.height, 100);
             container.addAt(emitter2, 4);
             emitter2.makeParticles('bubble');
             emitter2.width = bottle.width;
@@ -663,7 +663,7 @@ export let view = (() => {
             emitter2.setYSpeed(10, 30);
             emitter2.gravity = -200;
 
-            emitter2.start(false, 7000, 50);
+            emitter2.start(false, 7000, 60);
         },
 
         playBottleAnim: function(bottle, element) {

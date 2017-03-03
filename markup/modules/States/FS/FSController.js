@@ -1,5 +1,6 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
+import { motionPath } from 'modules/Util/Motion';
 
 import { view as fsView } from 'modules/States/FS/FSView';
 import { view as transitionView } from 'modules/Transition/TransitionView';
@@ -65,8 +66,9 @@ export let controller = (() => {
         model.updateBalance({endFS: true});
         model.state('buttons:locked', false);
 
-        panelController.drawMainPanel();
         winView.draw.hideBottle();
+        motionPath.motion.destroyPath({name: 'cat2'});
+        model.el('cat2').destroy();
 
         transitionView.fsFinish();
         if (model.desktop) {
@@ -76,6 +78,7 @@ export let controller = (() => {
             buttonsController.unlockButtons();
         }
         game.time.events.add(6000, () => {
+            panelController.drawMainPanel();
             soundController.music.stopMusic('fsFon');
             soundController.music.playMusic('fon');
         });

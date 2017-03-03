@@ -106,6 +106,7 @@ export let controller = (() => {
 
             view.show.showPanelFS({});
             balanceController.initFSDesktop();
+            model.el('infoButton').visible = false;
         } else{
             let container = model.group('balanceCoin');
             container.removeAll();
@@ -125,6 +126,7 @@ export let controller = (() => {
             view.show.showPanelMain({});
             drawButtons();
             balanceController.initDesktop();
+            model.el('infoButton').visible = true;
         } else{
             let container = model.group('balanceCoin');
             let container3 = model.group('panelFS');

@@ -279,7 +279,7 @@ export let view = (() => {
                 align: 'center'
             },
             amount = 10,
-            x = model.el('autoButtonDesk').x - 5,
+            x = model.el('autoButtonDesk').x + 5,
             y = model.el('autoButtonDesk').y + 5,
         }) {
             let autoCount = game.add.text(x, y, amount, style, container);
