@@ -134,7 +134,9 @@ export let controller = (() => {
                 }
             })
             .catch((err) => {
-                if (err.status == 404) mainView.draw.showPopup({message: 'Connection problem. Click to restart'});
+                if (err.status) {
+                    mainView.draw.showPopup({message: 'Connection problem. Click to restart'});
+                }
                 console.error(err);
             });
     }

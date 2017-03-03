@@ -40,6 +40,8 @@ export class Preload {
         this.loadTest();
 
         game.load.onLoadComplete.add(this.hidePreloader);
+
+        mainView.draw.initPopup();
     }
 
     loadSounds() {
@@ -180,6 +182,7 @@ export class Preload {
         if (model.state('loadError')) {
             model.el('preloadBar').visible = false;
             model.el('preloadCoin').visible = false;
+            mainView.draw.initPopup();
             mainView.draw.showPopup({message: 'Connection problem'});
             game.load.reset(true, true);
             return;
