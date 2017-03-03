@@ -7,7 +7,7 @@ export class Boot {
         model.state('isNoConnect', false);
         const game = model.el('game');
 
-        request.send('Initialise', 'fsBonus')
+        request.send('Initialise', 'normal')
             .then((initData) => {
                 console.log('Init: ', initData);
                 model.initStates(initData);

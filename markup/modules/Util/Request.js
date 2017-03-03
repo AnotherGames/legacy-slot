@@ -3,9 +3,7 @@ import { noConnect } from 'modules/Util/NoConnect';
 
 export let request = (() => {
     let serviceUrl;
-    // let randomId = Math.round(Math.random() * 100000);
-    let casinoID = 1;
-    let userID = 1;
+    let randomId = Math.round(Math.random() * 100000);
 
     if (localStorage.getItem('userID')) {
         userID = localStorage.getItem('userID');
@@ -26,18 +24,16 @@ export let request = (() => {
                 // Авторизация
                 let params = getAllUrlParams();
                 let currentMode = params.mode || mode[options];
-                // let currentService = params.service || 'interslotv2';
-                // serviceUrl = `https://intergameservice.bossgs.org/${currentService}/SlotService.svc`;
-                let currentService = params.service || 'devslotv2';
-                serviceUrl = `http://88.198.144.143/${currentService}/SlotService.svc`; 
+                let currentService = params.service || 'interslotv2';
+                serviceUrl = `https://intergameservice.bossgs.org/${currentService}/SlotService.svc`;
+
                 if (params.demo === 'true') {
                     name = `${name}Demo`;
                 }
                 if (params.sid) {
                     url = `${serviceUrl}/_${name}/${params.sid}/${currentMode}`; // Вставил SessionID;
                 } else {
-                    // url = `${serviceUrl}/_${name}/dev_${randomId}/${currentMode}`;
-                    url = `${serviceUrl}/_${name}/${userID}/${casinoID}/${currentMode}`;
+                    url = `${serviceUrl}/_${name}/dev_${randomId}/${currentMode}`;
                 }
                 break;
             case 'Roll':
