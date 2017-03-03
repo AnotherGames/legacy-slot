@@ -13,19 +13,7 @@ export let controller = (() => {
     function drawButtons() {
         let game = model.el('game');
         view.draw.PanelBG({});
-        view.draw.AnimatedSpinButton({});
         view.draw.LinesNumber({});
-        view.draw.AutoContainer({});
-        view.draw.AutoPanel({}).forEach((panelButton) => {
-            panelButton.inputEnabled = true;
-            panelButton.events.onInputUp.add(handle.panelButton, panelButton);
-            panelButton.events.onInputOver.add(()=>{
-                panelButton.events.onInputUp.active = true;
-            }, panelButton);
-            panelButton.events.onInputOut.add(()=>{
-                panelButton.events.onInputUp.active = false;
-            }, panelButton);
-        });
 
         let spinButtonDesk = view.draw.SpinButton({});
         spinButtonDesk.events.onInputUp.add(handle.spin);
@@ -61,6 +49,18 @@ export let controller = (() => {
             coinsLevelMinus.onInputDown.add(handle.coinsMinus);
             model.el('coinsLevelMinus', coinsLevelMinus);
 
+        view.draw.AnimatedSpinButton({});
+        view.draw.AutoContainer({});
+        view.draw.AutoPanel({}).forEach((panelButton) => {
+            panelButton.inputEnabled = true;
+            panelButton.events.onInputUp.add(handle.panelButton, panelButton);
+            panelButton.events.onInputOver.add(()=>{
+                panelButton.events.onInputUp.active = true;
+            }, panelButton);
+            panelButton.events.onInputOut.add(()=>{
+                panelButton.events.onInputUp.active = false;
+            }, panelButton);
+        });
     }
 
     function drawFsPanel(index) {
@@ -295,9 +295,6 @@ export let controller = (() => {
             let autoButtonDesk = model.el('autoButtonDesk');
                 autoButtonDesk.frameName = 'auto.png';
                 autoButtonDesk.freezeFrames = true
-            let stopButtonDesk = model.el('stopButtonDesk');
-                stopButtonDesk.frameName = 'stop.png';
-                stopButtonDesk.freezeFrames = true
 
                 if(model.state('ready')){
                     game.input.keyboard.enabled = true;

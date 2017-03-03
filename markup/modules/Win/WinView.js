@@ -75,12 +75,12 @@ export let view = (() => {
                 let winTotalSmall = game.add.sprite(model.group('panel').width / 2, 150, 'deskButtons', 'win.png');
                 winTotalSmall.anchor.set(0.5);
                 winTotalSmall.alpha = 0;
-                model.group('panel').addAt(winTotalSmall, 5);
+                model.group('panel').addAt(winTotalSmall, 2);
 
                 let winTotalTextSmall = game.add.text(model.group('panel').width / 2, 170, winTotalData, style2);
                 winTotalTextSmall.anchor.set(0.5);
                 winTotalTextSmall.alpha = 0;
-                model.group('panel').addAt(winTotalTextSmall, 6);
+                model.group('panel').addAt(winTotalTextSmall, 3);
 
                 model.el('winTotalSmall', winTotalSmall);
                 model.el('winTotalTextSmall', winTotalTextSmall);

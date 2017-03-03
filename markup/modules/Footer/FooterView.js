@@ -125,7 +125,7 @@ export let view = (() => {
             x = 230,
             y = model.el('game').height - 20
         }) {
-            let infoButton = game.add.button(x, y, 'footerButtons', null, null, null, 'info.png', null, null, container);
+            let infoButton = game.add.button(x, y, 'deskButtons', null, null, null, 'info.png', null, null, container);
             infoButton.anchor.set(0.5);
 
             infoButton.onInputOver.add(() => {
