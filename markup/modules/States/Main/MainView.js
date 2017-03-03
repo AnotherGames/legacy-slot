@@ -37,8 +37,8 @@ export let view = (() => {
             let mainBG;
             if (model.desktop) {
                 mainBG = game.add.spine(game.world.centerX, game.world.centerY, 'fon');
-                    mainBG.setAnimationByName(0, 'move2', true);
-                    container.add(mainBG);
+                mainBG.setAnimationByName(0, 'move2', true);
+                container.add(mainBG);
                 model.el('mainBG', mainBG);
 
             } else {
@@ -72,7 +72,7 @@ export let view = (() => {
 
             let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
             let deltaX;
-            if (side == 'left') {
+            if (side === 'left') {
                 balloons.x = game.rnd.integerInRange(100, 400);
                 deltaX = balloons.x + 300;
             } else {
@@ -116,7 +116,7 @@ export let view = (() => {
                 }
                 cloud.x = x;
 
-                if (container === model.group('bg')){
+                if (container === model.group('bg')) {
                     cloud.x = (side === 'left') ? -cloud.width : game.width + cloud.width;
                 }
                 let delta = (side === 'left') ? game.width + cloud.width : -cloud.width;
@@ -145,7 +145,7 @@ export let view = (() => {
 
             let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
             let deltaX;
-            if (side == 'left') {
+            if (side === 'left') {
                 confetti.x = game.rnd.integerInRange(100, 600);
                 deltaX = confetti.x + 300;
             } else {
@@ -165,7 +165,7 @@ export let view = (() => {
             });
         },
 
-        addCat: function({
+        addCat: function ({
             game = model.el('game'),
             container = model.group('bg')
         }) {
@@ -189,7 +189,7 @@ export let view = (() => {
             let rnd = game.rnd.integerInRange(2, 4);
             let deltaX, deltaX2;
 
-            if (side == 'left') {
+            if (side === 'left') {
                 cat.x = -500;
                 deltaX = game.width * 0.05;
                 deltaX2 = game.width + 500;
@@ -210,12 +210,12 @@ export let view = (() => {
                     game.add.tween(cat).to({x: deltaX2}, 10000, 'Linear', true, delay2)
                         .onComplete.add(() => {
                             cat.destroy();
-                                draw.addCat({});
+                            draw.addCat({});
                         }, this);
                 }, this);
         },
 
-        addCat2: function({
+        addCat2: function ({
             game = model.el('game'),
             container = model.group('bg')
         }) {
@@ -225,7 +225,6 @@ export let view = (() => {
             }
 
             let i = game.rnd.integerInRange(3, 8) / 10;
-            let h = game.rnd.integerInRange(3, 8) / 10;
             let cat2 = game.add.sprite(0, game.height * i, 'cat2', null, container);
             cat2.animations.add('slow', Phaser.Animation.generateFrameNames('skeleton-slow_', 0, 30, '.png', 1), 30, true);
             cat2.animations.add('fast', Phaser.Animation.generateFrameNames('skeleton-fast_', 0, 30, '.png', 1), 120, true);
@@ -240,7 +239,7 @@ export let view = (() => {
                 randomSide: true,
                 rotation: true,
                 repeat: true,
-            })
+            });
         },
 
         addBurst: function ({
@@ -250,7 +249,7 @@ export let view = (() => {
             let emitter = game.add.emitter(game.world.centerX, game.world.centerY + 100, 20);
             model.el('emitter', emitter);
 
-            emitter.makeParticles('trash', [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19], 500, true, false);
+            emitter.makeParticles('trash', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19], 500, true, false);
             container.add(emitter);
 
             emitter.minParticleSpeed.setTo(-1000, -5000);
@@ -273,7 +272,7 @@ export let view = (() => {
             let emitterTrash = game.add.emitter(game.world.centerX, game.world.centerY + 100);
             model.el('emitterTrash', emitterTrash);
 
-            emitterTrash.makeParticles('trash', [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19], 50, true, true);
+            emitterTrash.makeParticles('trash', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19], 50, true, true);
             container.add(emitterTrash);
 
             emitterTrash.minParticleSpeed.setTo(-1200, -1300);
@@ -288,7 +287,7 @@ export let view = (() => {
 
         },
 
-        removeTrash: function() {
+        removeTrash: function () {
             let emitterTrash = model.el('emitterTrash');
             emitterTrash.destroy();
         },
@@ -297,30 +296,27 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('main')
         }) {
-            const elSize = config[model.res].elements;
-            let deltaY = (model.desktop) ? 20 : 10;
-
             let gameBG = game.add.sprite(0, config[model.res].gameMachine.y, 'gameBG', null, container);
-                gameBG.anchor.set(0.5);
+            gameBG.anchor.set(0.5);
             model.el('gameBG', gameBG);
 
             let gameMachine = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachine', null, container);
-                gameMachine.anchor.set(0.5);
+            gameMachine.anchor.set(0.5);
             model.el('gameMachine', gameMachine);
 
             let logoGM = game.add.sprite(0, model.el('gameMachine').top, 'logoGM', null, container);
-                logoGM.anchor.set(0.5);
+            logoGM.anchor.set(0.5);
             model.el('logoGM', logoGM);
 
         },
 
-        lineNumbers: function({
+        lineNumbers: function ({
             game = model.el('game'),
             container = model.group('numbers'),
             gameMachine = model.el('gameMachine'),
             side = 'left'
-        }){
-            let x = (side == 'right') ? gameMachine.right - 11 : gameMachine.left + 11;
+        }) {
+            let x = (side === 'right') ? gameMachine.right - 11 : gameMachine.left + 11;
             let deltaY = (model.desktop) ? 70 : 60;
             let lineNumbersArr = [];
             let winNumbersArr = [];
@@ -348,7 +344,7 @@ export let view = (() => {
                     winNumber.visible = false;
                 });
 
-                if(model.state('fs')) {
+                if (model.state('fs')) {
                     lineNumbersArr.push(lineNumber);
                     winNumbersArr.push(winNumber);
                     continue;
@@ -361,30 +357,30 @@ export let view = (() => {
                 if (model.desktop) {
                     lineNumber.events.onInputOver.add(() => {
                         if (lineNumber.lineShape) {
-                            lineNumber.frameName = 'line_' + lineNumber.name + '.png',
+                            lineNumber.frameName = 'line_' + lineNumber.name + '.png';
                             lineNumber.lineShape.destroy();
                         }
-                        lineNumber.frameName = 'line_big_' + lineNumber.name + '.png',
+                        lineNumber.frameName = 'line_big_' + lineNumber.name + '.png';
                         lineNumber.lineShape = this.lineShape(lineNumber.name);
                     });
 
                     lineNumber.events.onInputOut.add(() => {
                         if (lineNumber.lineShape) {
-                            lineNumber.frameName = 'line_' + lineNumber.name + '.png',
+                            lineNumber.frameName = 'line_' + lineNumber.name + '.png';
                             lineNumber.lineShape.destroy();
                         }
                     });
                 } else {
                     lineNumber.events.onInputDown.add(() => {
                         if (lineNumber.lineShape) {
-                            lineNumber.frameName = 'line_' + lineNumber.name + '.png',
+                            lineNumber.frameName = 'line_' + lineNumber.name + '.png';
                             lineNumber.lineShape.destroy();
                         }
-                        lineNumber.frameName = 'line_big_' + lineNumber.name + '.png',
+                        lineNumber.frameName = 'line_big_' + lineNumber.name + '.png';
                         lineNumber.lineShape = this.lineShape(lineNumber.name);
                         game.time.events.add(1500, () => {
                             if (lineNumber.lineShape) {
-                                lineNumber.frameName = 'line_' + lineNumber.name + '.png',
+                                lineNumber.frameName = 'line_' + lineNumber.name + '.png';
                                 lineNumber.lineShape.destroy();
                             }
                         });
@@ -398,21 +394,21 @@ export let view = (() => {
             model.el(side + 'WinArr', winNumbersArr);
         },
 
-        lineShape: function(number) {
-           let game = model.el('game');
-           let container = model.group('glistaLight');
-           let line = model.data('lines')[number - 1];
-           let elSize = config[model.res].elements;
-           let lineShape = game.add.graphics(0, 0, container);
-           let y = (model.desktop) ? 50 : 30;
-           lineShape
+        lineShape: function (number) {
+            let game = model.el('game');
+            let container = model.group('glistaLight');
+            let line = model.data('lines')[number - 1];
+            let elSize = config[model.res].elements;
+            let lineShape = game.add.graphics(0, 0, container);
+            let y = (model.desktop) ? 50 : 30;
+            lineShape
                .lineStyle(4, 0xffffff, 0.8)
                .moveTo((line[0].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[0].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + y)
                .lineTo((line[1].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[1].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + y)
                .lineTo((line[2].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[2].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + y)
                .lineTo((line[3].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[3].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + y)
-               .lineTo((line[4].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[4].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + y)
-           return lineShape;
+               .lineTo((line[4].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[4].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + y);
+            return lineShape;
         },
 
         machineContainer: function ({
@@ -456,7 +452,7 @@ export let view = (() => {
             let deltaY = (model.desktop) ? 10 : 0;
 
             let someGraphic = game.add.graphics(-elSize.width * 2.5 - 500, -elSize.height * 1.5 + deltaY, machineGroup);
-                someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5 + 1500, elSize.height * 3);
+            someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5 + 1500, elSize.height * 3);
             machineGroup.mask = someGraphic;
         },
 
@@ -464,8 +460,6 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('popup'),
             message = 'popup',
-            font = 'normal 45px Arial',
-            color = '#c28531',
             balance = false
         }) {
             let overlay = game.add.graphics(0, 0, container)
@@ -473,21 +467,21 @@ export let view = (() => {
                 .drawRect(0, 0, game.width, game.height);
 
             let boy = game.add.spine(game.width * 0.3, game.height * 0.7, 'boy');
-                boy.setAnimationByName(0, 'S4-newone', false);
-                boy.addAnimationByName(0, 'S4-idle', true);
-                (model.desktop) ? boy.scale.set(0.5) : boy.scale.set(0.3);
-                container.add(boy);
+            boy.setAnimationByName(0, 'S4-newone', false);
+            boy.addAnimationByName(0, 'S4-idle', true);
+            (model.desktop) ? boy.scale.set(0.5) : boy.scale.set(0.3);
+            container.add(boy);
             model.el('boy', boy);
 
             let cleanMessage = message.toLowerCase();
             console.log(cleanMessage);
 
             let popupText = game.add.bitmapText(game.width * 0.32, game.height * 0.32, 'textGreen', cleanMessage, 60, container);
-                popupText.anchor.set(0.5);
-                popupText.maxWidth = 500;
-                popupText.align = 'center';
-                popupText.scale.set(0.1);
-                popupText.alpha = 0;
+            popupText.anchor.set(0.5);
+            popupText.maxWidth = 500;
+            popupText.align = 'center';
+            popupText.scale.set(0.1);
+            popupText.alpha = 0;
             model.el('popupText', popupText);
 
             let scaleX = (model.desktop) ? 1.0 : 0.7;

@@ -30,10 +30,10 @@ export class Preload {
         game.load.setPreloadSprite(view.drawPreloadBar());
         view.drawPreloadCoin();
 
-        model.state('loadError', false)
-        game.load.onFileError.add(()=>{
-            model.state('loadError', true)
-        })
+        model.state('loadError', false);
+        game.load.onFileError.add(() => {
+            model.state('loadError', true);
+        });
 
         this.loadSounds();
         this.loadInitAssets();
@@ -101,9 +101,9 @@ export class Preload {
         game.load.atlasJSONArray('winNumbers', 'win/winNumbers.png', 'win/winNumbers.json');
         game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
         game.load.atlasJSONArray('footerButtons', 'footer/footerButtons.png', 'footer/footerButtons.json');
-        game.load.bitmapFont("numbersFont", "numbers/numbers.png", "numbers/numbers.xml");
-        game.load.bitmapFont("textOrange", "text/text1.png", "text/text1.xml");
-        game.load.bitmapFont("textGreen", "text/text2.png", "text/text2.xml");
+        game.load.bitmapFont('numbersFont', 'numbers/numbers.png', 'numbers/numbers.xml');
+        game.load.bitmapFont('textOrange', 'text/text1.png', 'text/text1.xml');
+        game.load.bitmapFont('textGreen', 'text/text2.png', 'text/text2.xml');
         if (model.desktop) {
             game.load.image('panel', 'game/panel.png');
             game.load.atlasJSONArray('panelBG', 'game/panelBG.png', 'game/panelBG.json');
@@ -160,7 +160,7 @@ export class Preload {
             model.el('preloadBar').visible = false;
             model.el('preloadCoin').visible = false;
             mainView.draw.showPopup({message: 'Connection problem. Click to restart.'});
-            game.load.reset(true, true)
+            game.load.reset(true, true);
             return;
         }
         view.hideBar();

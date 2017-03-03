@@ -5,13 +5,12 @@ import { Element } from 'modules/Class/Element';
 
 import { controller as soundController } from 'modules/Sound/SoundController';
 import { controller as winController } from 'modules/Win/WinController';
-import { controller as fsController } from 'modules/States/FS/FSController';
 
 export let view = (() => {
 
     let draw = {
 
-        UpWinContainer: function({
+        UpWinContainer: function ({
             game = model.el('game'),
             container = model.group('winUp')
         }) {
@@ -19,10 +18,10 @@ export let view = (() => {
             let upWheels = [];
             upWheels.containers = [];
             let deltaY = (model.desktop) ? 28 : 15;
-            for (var i = 0; i < 5; i++) {
+            for (let i = 0; i < 5; i++) {
                 upWheels.push([]);
                 let currentContainer = game.add.group();
-                for (var j = 0; j < 3; j++) {
+                for (let j = 0; j < 3; j++) {
                     let el = new Element({
                         container: currentContainer,
                         position: {
@@ -39,7 +38,7 @@ export let view = (() => {
             model.el('upWheels', upWheels);
         },
 
-        TotalWin: function({
+        TotalWin: function ({
             winTotalData,
             game = model.el('game'),
             container = model.group('winTop'),
@@ -58,9 +57,10 @@ export let view = (() => {
                 strokeThickness: 2
             }
         }) {
-            if (winTotalData === 0) return;
-
-            if (model.state('balance') == 'cash') {
+            if (winTotalData === 0) {
+                return;
+            }
+            if (model.state('balance') === 'cash') {
                 winTotalData = `${model.balance('currencySymbol')} ${(model.balance('coinValue') * winTotalData).toFixed(2)}`;
             }
 
@@ -92,7 +92,7 @@ export let view = (() => {
 
         },
 
-        WinSplash: function({
+        WinSplash: function ({
             number,
             ind,
             game = model.el('game'),
@@ -130,7 +130,7 @@ export let view = (() => {
 
         },
 
-        WinNumber: function({
+        WinNumber: function ({
             number
         }) {
             if (number < 0) return;
@@ -140,14 +140,9 @@ export let view = (() => {
             });
         },
 
-        WinElements: function({
+        WinElements: function ({
             number,
-            amount,
-            alpha = false,
-            finalScale = (model.desktop) ? 1.2 : 1.2,
-            wheels = model.el('wheels'),
-            upWheels = model.el('upWheels'),
-            game = model.el('game')
+            amount
         }) {
 
             // Если нам нужно зажечь несколько линий элементов одновременно
@@ -164,18 +159,13 @@ export let view = (() => {
                 winElements.upElements.forEach((upEl) => {
                     upEl.show();
                     upEl.win();
-                    // draw.scaleJumping({
-                    //     el: upEl,
-                    //     start: 0.3,
-                    //     finish: finalScale
-                    // });
                 });
                 return;
             }
 
         },
 
-        findElements: function({
+        findElements: function ({
             number,
             amount,
             game = model.el('game')
@@ -191,7 +181,7 @@ export let view = (() => {
             };
 
             number.forEach((curNumber, indx) => {
-                if (curNumber != -1) {
+                if (curNumber !== -1) {
                     let curLine = lines[curNumber - 1];
                     for (let i = 0; i < amount[indx]; i++) {
                         let curElement = wheels[i][curLine[i].Y];
@@ -206,7 +196,7 @@ export let view = (() => {
             return result;
         },
 
-        scaleJumping: function({
+        scaleJumping: function ({
             game = model.el('game'),
             el,
             start,
@@ -214,18 +204,18 @@ export let view = (() => {
         }) {
             el.group.scale.set(start);
             game.add.tween(el.group.scale).to({
-                    x: finish,
-                    y: finish
-                }, 700, Phaser.Easing.Bounce.Out, true)
-                .onComplete.add(() => {
-                    game.add.tween(el.group.scale).to({
-                        x: 1.0,
-                        y: 1.0
-                    }, 400, 'Linear', true)
-                }, this);
+                x: finish,
+                y: finish
+            }, 700, Phaser.Easing.Bounce.Out, true)
+            .onComplete.add(() => {
+                game.add.tween(el.group.scale).to({
+                    x: 1.0,
+                    y: 1.0
+                }, 400, 'Linear', true);
+            }, this);
         },
 
-        copyFinishScreenToUpWheels: function({
+        copyFinishScreenToUpWheels: function ({
             finishScreen = model.data('finishScreen'),
             upWheels = model.el('upWheels')
         }) {
@@ -237,7 +227,7 @@ export let view = (() => {
             });
         },
 
-        WinGlista: function({
+        WinGlista: function ({
             number,
             game = model.el('game'),
             glistaLightContainer = model.group('glistaLight'),
@@ -246,7 +236,9 @@ export let view = (() => {
             glistaDoneCounter = +model.data('glistaDoneCounter'),
             time = 1000
         }) {
-            if (number < 0) return;
+            if (number < 0) {
+                return;
+            }
             // Для каждой линии отрисовуем глисту
             let glista = new Glista({
                 game,
@@ -271,7 +263,7 @@ export let view = (() => {
                 glistaDoneCounter++;
                 model.data('glistaDoneCounter', glistaDoneCounter);
                 // Если пришли все запущенные глисты, то очищаем выигрышный экран
-                if (glistaDoneCounter == glistaFiredCounter) {
+                if (glistaDoneCounter === glistaFiredCounter) {
                     winController.cleanWin();
                 }
 
@@ -280,7 +272,7 @@ export let view = (() => {
             return glista;
         },
 
-        WinLineTable: function({
+        WinLineTable: function ({
             line,
             scatter,
             container = model.group('winTop'),
@@ -288,7 +280,7 @@ export let view = (() => {
         }) {
             let gameMachine = model.el('gameMachine');
             let winValue = line.Win;
-            if (winValue == 0) {
+            if (winValue === 0) {
                 return;
             }
             let countValue = line.Count;
@@ -315,7 +307,7 @@ export let view = (() => {
                     wheel.elements.forEach((element, elementIndex) => {
                         let name = parseInt(element.sprites[element.active - 1]
                             .animations.currentAnim.name);
-                        if (name == 10) {
+                        if (name === 10) {
                             if (wheelIndex > lastWheel) {
                                 lastWheel = wheelIndex;
                                 lastElement = elementIndex;
@@ -355,7 +347,7 @@ export let view = (() => {
 
         },
 
-        addBigBottleToStage: function(fsLevelNumber) {
+        addBigBottleToStage: function (fsLevelNumber) {
             let game = model.el('game');
             let wheels = model.el('wheels');
             let container = model.group('winUp');
@@ -363,8 +355,6 @@ export let view = (() => {
             let bottle1, bottle2, bottle3;
             let bottleBG1, bottleBG2, bottleBG3;
             let bottleContainer1, bottleContainer2, bottleContainer3;
-
-            let x = (model.desktop) ? 512 : 384;
 
             switch (+fsLevelNumber) {
                 case 1:
@@ -512,7 +502,7 @@ export let view = (() => {
 
         },
 
-        hideWheels: function(array) {
+        hideWheels: function (array) {
             let game = model.el('game');
             let wheels = model.el('wheels');
             let upWheels = model.el('upWheels');
@@ -524,7 +514,7 @@ export let view = (() => {
             });
         },
 
-        addBottleContainer: function(fsLevelNumber) {
+        addBottleContainer: function (fsLevelNumber) {
 
             let bottleContainer1, bottleContainer2, bottleContainer3;
             let x = (model.desktop) ? 512 : 384;
@@ -536,22 +526,18 @@ export let view = (() => {
                     return {
                         bottleContainer1
                     };
-                    break;
                 case 2:
                     bottleContainer1 = draw.createBottleContainer(0);
 
                     return {
                         bottleContainer1
                     };
-                    break;
                 case 3:
                     bottleContainer1 = draw.createBottleContainer(x);
 
                     return {
                         bottleContainer1
                     };
-                    break;
-
                 case 4:
                     bottleContainer1 = draw.createBottleContainer(-x);
                     bottleContainer2 = draw.createBottleContainer(0);
@@ -560,8 +546,6 @@ export let view = (() => {
                         bottleContainer1,
                         bottleContainer2
                     };
-                    break;
-
                 case 5:
                     bottleContainer1 = draw.createBottleContainer(0);
                     bottleContainer2 = draw.createBottleContainer(x);
@@ -570,8 +554,6 @@ export let view = (() => {
                         bottleContainer1,
                         bottleContainer2
                     };
-                    break;
-
                 case 6:
                     bottleContainer1 = draw.createBottleContainer(-x);
                     bottleContainer2 = draw.createBottleContainer(x);
@@ -580,8 +562,6 @@ export let view = (() => {
                         bottleContainer1,
                         bottleContainer2
                     };
-                    break;
-
                 case 7:
                     bottleContainer1 = draw.createBottleContainer(-x);
                     bottleContainer2 = draw.createBottleContainer(0);
@@ -592,13 +572,11 @@ export let view = (() => {
                         bottleContainer2,
                         bottleContainer3
                     };
-                    break;
-
                 default:
             }
         },
 
-        createBottleContainer: function(x) {
+        createBottleContainer: function (x) {
             let game = model.el('game');
             let deltaY = (model.desktop) ? 10 : 0;
             let elSize = config[model.res].elements;
@@ -610,32 +588,31 @@ export let view = (() => {
             bottleContainer.mask = someGraphic;
             bottleContainer.x = x;
 
-            return bottleContainer
+            return bottleContainer;
         },
 
-        addBottleBG: function(container, element) {
+        addBottleBG: function (container, element) {
             let bottleBG;
             let game = model.el('game');
             let y = (model.desktop) ? 12 : 2;
-            if (element.active == 10) {
+            if (element.active === 10) {
                 bottleBG = game.add.sprite(0, y, 'green', null, container);
             }
-            if (element.active == 13) {
+            if (element.active === 13) {
                 bottleBG = game.add.sprite(0, y, 'red', null, container);
             }
-            if (element.active == 16) {
+            if (element.active === 16) {
                 bottleBG = game.add.sprite(0, y, 'orange', null, container);
             }
             bottleBG.anchor.set(0.5);
             return bottleBG;
         },
 
-        addBubbles: function({
+        addBubbles: function ({
             game = model.el('game'),
             container = model.group('bottle'),
             bottle = model.el('bottleBG')
         }) {
-            let bottleBG = model.el('bottleBG');
             let emitter = game.add.emitter(bottle.x, game.height, 1800);
             container.addAt(emitter, 2);
             emitter.makeParticles('bubble');
@@ -666,21 +643,21 @@ export let view = (() => {
             emitter2.start(false, 7000, 60);
         },
 
-        playBottleAnim: function(bottle, element) {
+        playBottleAnim: function (bottle, element) {
             if (model.mobile) {
                 bottle.scale.set(0.75);
             }
-            if (element.active == 10) {
+            if (element.active === 10) {
                 bottle.setAnimationByName(0, 'bang1_g', false);
                 bottle.addAnimationByName(0, 'open_g', false);
                 bottle.addAnimationByName(0, 'pena_idle_g', true);
             }
-            if (element.active == 13) {
+            if (element.active === 13) {
                 bottle.setAnimationByName(0, 'bang1_r', false);
                 bottle.addAnimationByName(0, 'open_r', false);
                 bottle.addAnimationByName(0, 'pena_idle_r', true);
             }
-            if (element.active == 16) {
+            if (element.active === 16) {
                 bottle.setAnimationByName(0, 'bang1_y', false);
                 bottle.addAnimationByName(0, 'open_y', false);
                 bottle.addAnimationByName(0, 'pena_idle_y', true);
@@ -688,7 +665,7 @@ export let view = (() => {
 
         },
 
-        hideBottle: function() {
+        hideBottle: function () {
             let bottleContainer1 = model.el('bottleContainer1');
             let bottleContainer2 = model.el('bottleContainer2');
             let bottleContainer3 = model.el('bottleContainer3');
@@ -717,7 +694,7 @@ export let view = (() => {
 
     let play = {
 
-        WinSound: function() {
+        WinSound: function () {
             let winSound = Math.round(Math.random()) ?
                 soundController.sound.playSound({
                     sound: 'lineWin',
@@ -735,7 +712,7 @@ export let view = (() => {
 
     let hide = {
 
-        WinTop: function({
+        WinTop: function ({
             game = model.el('game'),
             container = model.group('winTop')
         }) {
@@ -744,7 +721,7 @@ export let view = (() => {
             }, 150, 'Linear', true);
         },
 
-        Aim: function({
+        Aim: function ({
             game = model.el('game'),
             container = model.group('aim'),
             shurikenDarkness = model.el('shurikenDarkness'),

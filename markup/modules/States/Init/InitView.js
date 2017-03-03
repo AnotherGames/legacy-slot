@@ -9,8 +9,8 @@ export let view = (() => {
 
         if (model.desktop) {
             initBG = game.add.spine(game.world.centerX, game.world.centerY, 'fon');
-                initBG.setAnimationByName(0, 'show', false);
-                initBG.addAnimationByName(0, 'move', true);
+            initBG.setAnimationByName(0, 'show', false);
+            initBG.addAnimationByName(0, 'move', true);
 
         } else {
             initBG = game.add.tileSprite(0, 0, game.width, game.height, 'gradientLine');
@@ -21,7 +21,7 @@ export let view = (() => {
         }
 
         let logosSmall = game.add.sprite(game.width * 0.1, game.height * 0.93, 'logosSmall');
-            logosSmall.anchor.set(0.5);
+        logosSmall.anchor.set(0.5);
 
         return initBG;
     }
@@ -30,16 +30,15 @@ export let view = (() => {
         const game = model.el('game');
 
         let initLogo = game.add.sprite(game.world.centerX, game.height * 0.4, 'initLogo');
-            initLogo.anchor.set(0.5);
-            initLogo.scale.set(0.66);
+        initLogo.anchor.set(0.5);
+        initLogo.scale.set(0.66);
     }
 
     function drawPlay() {
         const game = model.el('game');
-        let deltaY = (model.desktop) ? 100: 60;
         let initPlay = game.add.sprite(game.world.centerX, game.height * 0.8, 'text', 'play.png');
-            initPlay.anchor.set(0.5);
-            initPlay.scale.setTo(0.1, 0.1);
+        initPlay.anchor.set(0.5);
+        initPlay.scale.setTo(0.1, 0.1);
         let initPlayTween = game.add.tween(initPlay.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true);
         model.el('initPlay', initPlay);
         model.el('initPlayTween', initPlayTween);
@@ -73,5 +72,5 @@ export let view = (() => {
         drawPlay,
         playYoyoTween,
         stopYoyoTween
-    }
+    };
 })();

@@ -5,13 +5,6 @@ export let request = (() => {
     let serviceUrl;
     let randomId = Math.round(Math.random() * 100000);
 
-    if (localStorage.getItem('userID')) {
-        userID = localStorage.getItem('userID');
-    }
-    if (localStorage.getItem('casinoID')) {
-        casinoID = localStorage.getItem('casinoID');
-    }
-
     const mode = {
         normal: 'candyland5',
         fsBonus: 'candyfs1'

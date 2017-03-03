@@ -1,9 +1,7 @@
 import { model } from 'modules/Model/Model';
 import { view } from 'modules/States/Init/InitView';
-import { Element } from 'modules/Class/Element';
 import { controller as soundController} from 'modules/Sound/SoundController';
 import { controller as keyboardController} from 'modules/keyboard/KeyboardController';
-import { view as transitionView} from 'modules/Transition/TransitionView';
 
 export class Init {
     constructor(game) {
@@ -11,12 +9,12 @@ export class Init {
     }
     init() {
         let game = model.el('game');
-            game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
-            game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-            soundController.music.playMusic('initFon');
+        game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+        game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        soundController.music.playMusic('initFon');
 
-            // При выходе из вкладки анимации будут останавливаться
-            game.stage.disableVisibilityChange = true;
+        // При выходе из вкладки анимации будут останавливаться
+        game.stage.disableVisibilityChange = true;
     }
 
     create() {
@@ -40,7 +38,7 @@ export class Init {
                 });
         }
 
-        if (model.desktop)  {
+        if (model.desktop) {
             keyboardController.initInitKeys();
             game.canvas.onclick = this.handleBG.bind(this);
         }
@@ -48,13 +46,19 @@ export class Init {
         // Выход из затемнения
         game.camera.flash(0x000000, 500);
 
-        if (!model.state('globalSound')) this.triggerSoundLeft();
+        if (!model.state('globalSound')) {
+            this.triggerSoundLeft();
+        }
     }
 
     switchSound() {
         soundController.volume.switchVolume();
 
-        (model.state('globalSound')) ? this.triggerSoundRight() : this.triggerSoundLeft();
+        if (model.state('globalSound')) {
+            this.triggerSoundRight();
+        } else {
+            this.triggerSoundLeft();
+        }
     }
 
     handleBG() {
@@ -72,7 +76,7 @@ export class Init {
             game.canvas.onclick = null;
         }
         game.camera.onFadeComplete.add(() => {
-                game.state.start('Main');
+            game.state.start('Main');
         });
 
         game.camera.fade(0x000000, 500);
@@ -94,34 +98,33 @@ export class Init {
     drawSoundTrigger() {
         const game = model.el('game');
         let soundContainer = game.add.group();
-            soundContainer.position.set(game.width - 460, game.height - 100);
+        soundContainer.position.set(game.width - 460, game.height - 100);
 
         let background = game.add.graphics(0, 0);
-            background.beginFill(0x000000, 0.1);
-            background.drawRoundedRect(soundContainer.x - 30, soundContainer.y - 15, 470, 80, 40);
+        background.beginFill(0x000000, 0.1);
+        background.drawRoundedRect(soundContainer.x - 30, soundContainer.y - 15, 470, 80, 40);
 
-        let style = { font: "bold 42px Arial", fill: "#f3eba0"};
-        let textSound = game.add.text(0, 0, "Sound:", style, soundContainer);
-        this.styleOff = { font: "bold 42px Arial", fill: "#474747"};
-        this.textOff = game.add.text(170, 0, "Off", style, soundContainer);
+        let style = { font: 'bold 42px Arial', fill: '#f3eba0'};
+        this.styleOff = { font: 'bold 42px Arial', fill: '#474747'};
+        this.textOff = game.add.text(170, 0, 'Off', style, soundContainer);
         this.textOff.setStyle(this.styleOff);
-        this.styleOn = { font: "bold 42px Arial", fill: "#b8ff31"};
-        this.textOn = game.add.text(350, 0, "On", style, soundContainer);
+        this.styleOn = { font: 'bold 42px Arial', fill: '#b8ff31'};
+        this.textOn = game.add.text(350, 0, 'On', style, soundContainer);
         this.textOn.setStyle(this.styleOn);
 
         let graphics = game.add.graphics(0, 0);
-            graphics.beginFill(0x6da600, 1);
-            graphics.drawRoundedRect(0, 0, 70, 30, 150);
+        graphics.beginFill(0x6da600, 1);
+        graphics.drawRoundedRect(0, 0, 70, 30, 150);
 
         let sprite = game.add.sprite(290, 25, graphics.generateTexture(), null, soundContainer);
-            sprite.anchor.set(0.5);
-            sprite.inputEnabled = true;
-            sprite.events.onInputDown.add(this.switchSound, this);
+        sprite.anchor.set(0.5);
+        sprite.inputEnabled = true;
+        sprite.events.onInputDown.add(this.switchSound, this);
         graphics.destroy();
 
         let graphics2 = game.add.graphics(0, 0);
-            graphics2.beginFill(0xffffff, 1);
-            graphics2.drawCircle(0, 0, 30);
+        graphics2.beginFill(0xffffff, 1);
+        graphics2.drawCircle(0, 0, 30);
 
         this.sprite2 = game.add.sprite(310, 25, graphics2.generateTexture(), null, soundContainer);
         this.sprite2.anchor.set(0.5);

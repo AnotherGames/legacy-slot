@@ -1,62 +1,16 @@
 import { model } from 'modules/Model/Model';
-import { config } from 'modules/Util/Config';
 import { motionPath } from 'modules/Util/Motion';
 
-import { view as fsView } from 'modules/States/FS/FSView';
 import { view as transitionView } from 'modules/Transition/TransitionView';
 import { view as winView } from 'modules/Win/WinView';
 import { view as mainView } from 'modules/States/Main/mainView';
 
 import { controller as soundController } from 'modules/Sound/SoundController';
-import { controller as settingsController } from 'modules/Settings/DesktopSettingsController';
-import { controller as balanceController } from 'modules/Balance/BalanceController';
-import { controller as footerController } from 'modules/Footer/FooterController';
 import { controller as panelController } from 'modules/Panel/PanelController';
 import { controller as buttonsController } from 'modules/Buttons/ButtonsController';
 import { controller as rollController } from 'modules/Roll/RollController';
-import { controller as winController } from 'modules/Win/WinController';
 
 export let controller = (() => {
-
-    function init(amount) {
-        if (model.state('fs:end') === false) return;
-
-        model.state('fs:end', false);
-        model.data('fs:count', amount);
-        model.updateBalance({startFS: true});
-
-        next();
-    }
-
-    function next() {
-        let rollData = model.data('rollResponse');
-
-        if(!model.state('fs:end')
-        && rollData.NextMode !== 'root') {
-            controller.count({start: true});
-            rollController.startRoll();
-        }
-
-        if (rollData.NextMode === 'root') {
-            stop();
-        }
-    }
-
-    function count({
-        start,
-        end
-    }) {
-        if (start) {
-            let newFsCount = model.data('fs:count');
-            newFsCount--;
-            model.data('fs:count', newFsCount);
-            model.el('fs:count').text = newFsCount;
-        }
-        if (end) {
-            model.data('fs:count', model.data('rollResponse').FreeSpinsLeft);
-            model.el('fs:count').text = model.data('rollResponse').FreeSpinsLeft;
-        }
-    }
 
     function stop() {
         let game = model.el('game');
@@ -82,7 +36,48 @@ export let controller = (() => {
             soundController.music.stopMusic('fsFon');
             soundController.music.playMusic('fon');
         });
+    }
 
+    function next() {
+        let rollData = model.data('rollResponse');
+
+        if (!model.state('fs:end')
+        && rollData.NextMode !== 'root') {
+            controller.count({start: true});
+            rollController.startRoll();
+        }
+
+        if (rollData.NextMode === 'root') {
+            stop();
+        }
+    }
+
+    function init(amount) {
+        if (model.state('fs:end') === false) {
+            return;
+        }
+
+        model.state('fs:end', false);
+        model.data('fs:count', amount);
+        model.updateBalance({startFS: true});
+
+        next();
+    }
+
+    function count({
+        start,
+        end
+    }) {
+        if (start) {
+            let newFsCount = model.data('fs:count');
+            newFsCount--;
+            model.data('fs:count', newFsCount);
+            model.el('fs:count').text = newFsCount;
+        }
+        if (end) {
+            model.data('fs:count', model.data('rollResponse').FreeSpinsLeft);
+            model.el('fs:count').text = model.data('rollResponse').FreeSpinsLeft;
+        }
     }
 
     return {
@@ -90,141 +85,5 @@ export let controller = (() => {
         next,
         count,
         stop
-        // changeMulti
     };
 })();
-
-export class FS {
-    constructor(game) {
-
-    }
-
-    init() {
-        console.info('FS State!');
-        let game = model.el('game');
-
-        // Проверим сохраненную сессию
-        this.checkSavedFS();
-
-        // массив в который записываются анимации для проигрывания
-        game.frameAnims = [];
-        game.spriteAnims = [];
-
-        model.state('fs', true);
-
-        // Создаем контейнеры
-        fsView.create.groups({});
-
-        // При выходе из вкладки анимации будут останавливаться
-        game.stage.disableVisibilityChange = true;
-
-    }
-
-    create() {
-        let game = model.el('game');
-
-        soundController.music.stopMusic('startPerehod');
-        soundController.music.stopMusic('fon');
-        soundController.music.stopMusic('initFon');
-
-        // Играем фоновую музыку
-        soundController.music.playMusic('fsFon');
-
-        mainView.draw.mainBG({});
-        // Отрисовуем основной контейнер
-        mainView.draw.mainContainer({});
-        mainView.draw.machineContainer({});
-        mainView.draw.lineNumbers({});
-        winView.draw.UpWinContainer({});
-
-        // Инициализируем крутки
-        rollController.init();
-
-        if (model.mobile) {
-
-            // Рисуем футер
-            footerController.initMobile();
-            // Отрисовуем баланс
-            balanceController.initFSMobile();
-
-            // Автоматически позиционируем основной контейнер
-            this.positionMainContainer();
-        } else {    // Desktop
-
-            footerController.initDesktop();
-
-            // Автоматически позиционируем основной контейнер
-            this.positionMainContainer();
-
-            // Рисуем кнопки управления
-            panelController.drawFsPanel();
-            // Отрисовуем баланс
-            balanceController.initFSDesktop();
-        }
-
-        // Добавляем маску
-        fsView.draw.machineMask({});
-
-        // Рисуем множитель
-        fsView.draw.Multi({
-            start: this.fsMulti
-        });
-        // Рисуем счетчик спинов
-        fsView.draw.Count({
-            start: this.fsCount
-        });
-
-        // fsView.draw.Character({});
-
-        // Первая темнота
-        game.camera.flash(0x000000, 500)
-
-        // Запускаем Фри Спины
-        game.time.events.add(1000, () => {
-            controller.init(this.fsCount);
-        });
-
-    }
-
-    update() {
-        const game = model.el('game');
-        // Обновляем время
-        footerController.updateTime({});
-        // Проигрываем анимацию
-        model.el('game').frameAnims.forEach((anim) => {
-            anim();
-        });
-
-        if (model.desktop) {
-            let fullScreeButton = model.el('fullScreeButton');
-                fullScreeButton.frameName = (game.scale.isFullScreen || window.innerHeight === screen.height) ? 'fullScreenOn.png' : 'fullScreenOff.png';
-        }
-        if (model.el('emitter')) {
-            game.physics.arcade.collide(model.el('emitter'));
-        }
-    }
-
-    positionMainContainer() {
-        let game = model.el('game');
-        // model.group('main').x = (model.desktop) ? game.world.centerX : game.width - model.group('main').width / 2;
-        model.group('main').x = game.world.centerX + 8;
-        model.group('main').y = game.world.centerY + config[model.res].mainContainer.y -32;
-    }
-
-    checkSavedFS() {
-        if (model.data('savedFS')) {
-            let saved = model.data('savedFS');
-            this.fsCount = saved.fsCount;
-            this.fsMulti = saved.fsMulti;
-            this.fsLevel = saved.fsLevel;
-            model.data('savedFS', null);
-            model.data('fsMulti', this.fsMulti);
-        } else {
-            this.fsCount = model.data('rollResponse').FreeSpinsWin;
-            this.fsMulti = 2;
-            this.fsLevel = 0;
-            model.data('fsMulti', 2);
-        }
-    }
-
-};
