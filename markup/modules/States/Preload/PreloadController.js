@@ -41,6 +41,8 @@ export class Preload {
         this.loadSpineAssets();
         this.loadTest();
 
+        mainView.draw.initPopup();
+
         game.load.onLoadComplete.add(this.hidePreloader);
     }
 

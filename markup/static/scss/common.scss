@@ -48,6 +48,38 @@ body:not(.ios) {
     background: rgba(0, 0, 0, 0.3);
 }
 
+#popup {
+    margin: 0;
+    z-index: 11;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#popup h2{
+    margin: 0;
+    position: absolute;
+    font: 3vw arial;
+    box-sizing: border-box;
+    padding: 0 10%;
+    width: 100%;
+}
+
+#popup img{
+    max-width: 100%;
+}
+
+#popup p{
+    margin: 0;
+    font: 1.5vw arial;
+    color: rgb(192, 192, 192);
+    position: absolute;
+    top: 80%;
+    width: 100%;
+    text-align: center;
+}
+
 #settings {
     display: flex;
     justify-content: space-around;
@@ -114,7 +146,7 @@ body:not(.ios) {
 #volume {
     position: relative;
     margin: 10px 60px;
-    
+
     &::before,
     &::after {
         content: "";
