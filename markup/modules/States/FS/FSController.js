@@ -168,10 +168,10 @@ export class FS {
             balanceController.initFSDesktop();
             // BG animations
             mainView.draw.addBubbles({});
-            mainView.draw.addShark({});
-            game.time.events.add(6000, () => {
-                mainView.draw.addFishes({});
-            });
+            // mainView.draw.addShark({});
+            // game.time.events.add(6000, () => {
+            //     mainView.draw.addFishes({});
+            // });
         }
 
         // Добавляем маску

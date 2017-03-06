@@ -68,7 +68,7 @@ export let controller = (() => {
     }
 
     function drawFsPanel() {
-        view.draw.PanelBG({});
+        view.draw.PanelBG({frameName: 'panelBGfs'});
     }
 
     const handle = {

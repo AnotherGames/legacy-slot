@@ -30,8 +30,11 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('bg')
         }) {
-            let mainBG = game.add.sprite(0, 0, 'fsBG', null, container);
+            let mainBG = game.add.sprite(0, 0, 'mainBG', null, container);
             model.el('mainBG', mainBG);
+
+            let transitionBG = game.add.graphics(0, 0, container).beginFill(0x000000, 0.7).drawRect(0, 0, game.width, game.height);
+            model.el('transitionBG', transitionBG);
 
         },
 
@@ -39,16 +42,23 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('main')
         }) {
-            let deltaY = (model.desktop) ? 50 : -25;
-            let gameMachineBG = game.add.sprite(0, deltaY, 'gameMachineBG', null, container);
-            gameMachineBG.anchor.set(0.5);
-            model.el('gameMachineBG', gameMachineBG);
-
-            let gameMachineAsset = (model.desktop) ? 'gameMachineFS' : 'gameMachine';
-
-            let gameMachine = game.add.sprite(0, config[model.res].gameMachine.y, gameMachineAsset, null, container);
+            let gameMachine = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachine', null, container);
             gameMachine.anchor.set(0.5);
+            gameMachine.alpha = 0;
             model.el('gameMachine', gameMachine);
+
+            let deltaX = (model.desktop) ? 106 : 81;
+            let deltaY = (model.desktop) ? 55 : 50;
+            let deltaY2 = (model.desktop) ? 37 : -18;
+
+            let logoGM = game.add.sprite(0, gameMachine.top + deltaY, 'logoGM', null, container);
+            logoGM.anchor.set(0.5);
+
+            let lineLeft = game.add.sprite(gameMachine.left + deltaX, config[model.res].gameMachine.y - deltaY2, 'lineLeft', null, container);
+            lineLeft.anchor.set(0.5);
+
+            let lineRight = game.add.sprite(gameMachine.right - deltaX, config[model.res].gameMachine.y - deltaY2, 'lineRight', null, container);
+            lineRight.anchor.set(0.5);
         },
 
         machineContainer: function ({
@@ -56,7 +66,7 @@ export let view = (() => {
             container = model.group('main')
         }) {
             let machineGroup = game.add.group();
-            container.addAt(machineGroup, 1);
+            container.addAt(machineGroup, 2);
             model.group('machine', machineGroup);
 
             let numbersContainer = game.add.group();
@@ -90,8 +100,8 @@ export let view = (() => {
         }) {
             const elSize = config[model.res].elements;
             let deltaY = (model.desktop) ? 50 : 25;
-            let someGraphic = game.add.graphics(-elSize.width * 2.5, -elSize.height * 1.5 + deltaY, machineGroup);
-            someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5, elSize.height * 3);
+            let someGraphic = game.add.graphics(-elSize.width * 2.5 - 250, -elSize.height * 1.5 + deltaY, machineGroup);
+            someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5 + 550, elSize.height * 3);
             machineGroup.mask = someGraphic;
         },
 
@@ -99,14 +109,14 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('panel'),
             start = 1,
-            fontDesktop = '70px Titania, Arial',
+            fontDesktop = '60px Titania, Arial',
             fontMobile = '50px Titania, Arial'
         }) {
 
             let x, y, deltaX = 0, deltaY = 0, font;
             if (model.desktop) {
-                x = 950;
-                y = -47;
+                x = 175;
+                y = -55;
                 font = fontDesktop;
             } else {
                 x = model.el('game').width / 2 + 145;
@@ -128,7 +138,7 @@ export let view = (() => {
             }, 300);
 
 
-            draw._drawChest({});
+            // draw._drawChest({});
         },
 
         _drawChest: function ({
@@ -167,14 +177,14 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('panel'),
             start = 1,
-            fontDesktop = '70px Titania, Arial',
+            fontDesktop = '60px Titania, Arial',
             fontMobile = '50px Titania, Arial'
         }) {
 
             let x, y, deltaX = 0, deltaY = 0, font;
             if (model.desktop) {
-                x = 585;
-                y = -50;
+                x = -175;
+                y = -55;
                 font = fontDesktop;
             } else {
                 x = model.el('game').width / 2 - 115;
@@ -187,7 +197,7 @@ export let view = (() => {
 
             let fsLevel;
                 fsLevel = game.add.text(x + deltaX, y + deltaY, start, {font: font, fill: '#ffffff', align: 'center', stroke: '#188bb4', strokeThickness: 5}, container);
-                fsLevel.setShadow(5, 5, 'rgba(0, 0, 0, 0.7)', 8);
+                // fsLevel.setShadow(5, 5, 'rgba(0, 0, 0, 0.7)', 8);
                 fsLevel.anchor.set(0.5);
                 model.el('fsLevel', fsLevel);
             setTimeout(() => {
@@ -196,7 +206,7 @@ export let view = (() => {
             }, 300);
 
 
-            draw._drawDiver({});
+            // draw._drawDiver({});
         },
 
         _drawDiver: function ({
@@ -252,15 +262,15 @@ export let view = (() => {
                 }
                 model.el('fsCountBG', fsCountBG);
             } else {
-                x = 767;
-                y = -65;
-                deltaX = 0;
+                x = 10;
+                y = -75;
+                deltaX = -15;
                 deltaY = 0;
                 font = fontDesktop;
             }
 
             let fsCount = game.add.text(x + deltaX, y + deltaY, start, {font: font, fill: '#ffffff', align: 'center', stroke: '#188bb4', strokeThickness: 5}, container);
-            fsCount.setShadow(5, 5, 'rgba(0, 0, 0, 0.7)', 8);
+            // fsCount.setShadow(5, 5, 'rgba(0, 0, 0, 0.7)', 8);
             fsCount.anchor.set(0.5);
             model.el('fs:count', fsCount);
         },
