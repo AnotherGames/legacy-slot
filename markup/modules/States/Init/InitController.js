@@ -1,9 +1,7 @@
 import { model } from 'modules/Model/Model';
 import { view } from 'modules/States/Init/InitView';
-import { Element } from 'modules/Class/Element';
 import { controller as soundController} from 'modules/Sound/SoundController';
 import { controller as keyboardController} from 'modules/keyboard/KeyboardController';
-import { view as transitionView} from 'modules/Transition/TransitionView';
 
 export class Init {
     constructor(game) {
@@ -11,16 +9,19 @@ export class Init {
     }
     init() {
         let game = model.el('game');
-            game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
-            game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-            soundController.music.playMusic('initFon');
+        game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+        game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        soundController.music.playMusic('initFon');
 
-            // При выходе из вкладки анимации будут останавливаться
-            game.stage.disableVisibilityChange = true;
+        // При выходе из вкладки анимации будут останавливаться
+        game.stage.disableVisibilityChange = true;
     }
 
     create() {
-        let game = model.el('game')
+        let game = model.el('game');
+
+        // Лочим 30 фпс
+        this.game.plugins.add(new Phaser.Plugin.SaveCPU(this));
 
         view.drawBG();
         view.drawLogo();
@@ -49,9 +50,9 @@ export class Init {
 
         this.drawSoundTrigger();
 
-        game.camera.flash(0x000000, 500)
+        game.camera.flash(0x000000, 500);
 
-        if(!model.state('globalSound')){
+        if (!model.state('globalSound')) {
             this.sprite2.x = 270;
             this.textOff.setStyle(this.styleOn);
             this.textOn.setStyle(this.styleOff);
@@ -60,12 +61,12 @@ export class Init {
 
     switchSound() {
         if (model.state('globalSound')) {
-            soundController.volume.switchVolume()
+            soundController.volume.switchVolume();
             this.sprite2.x = 270;
             this.textOff.setStyle(this.styleOn);
             this.textOn.setStyle(this.styleOff);
         } else {
-            soundController.volume.switchVolume()
+            soundController.volume.switchVolume();
             this.sprite2.x = 310;
             this.textOff.setStyle(this.styleOff);
             this.textOn.setStyle(this.styleOn);
