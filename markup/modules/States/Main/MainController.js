@@ -123,6 +123,19 @@ export class Main {
             (game.scale.isFullScreen) ? $('#fakeButton').addClass('closed') : $('#fakeButton').removeClass('closed');
         }
 
+        let wheels = model.el('wheels');
+
+        wheels.forEach((wheel) => {
+            wheel.elements[0].activeSprite.scale.set(1);
+            wheel.elements[1].activeSprite.scale.set(0.8);
+            wheel.elements[2].activeSprite.scale.set(0.6);
+
+            wheel.elements[0].bg.scale.set(1.25);
+            wheel.elements[1].bg.scale.set(1);
+            wheel.elements[2].bg.scale.set(0.8);
+        });
+
+
     }
 
     positionMainContainer() {

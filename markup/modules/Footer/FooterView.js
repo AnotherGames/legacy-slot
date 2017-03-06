@@ -162,8 +162,8 @@ export let view = (() => {
         Time: function ({
             game = model.el('game'),
             container = model.group('footer'),
-            styleDesktop = {font: '18px Helvetica, Arial', align: 'center', fill: '#e8b075'},
-            styleMobile = {font: '22px Helvetica, Arial', align: 'center', fill: '#e8b075'}
+            styleDesktop = {font: '18px Helvetica, Arial', align: 'center', fill: '#ffffff'},
+            styleMobile = {font: '22px Helvetica, Arial', align: 'center', fill: '#ffffff'}
         }) {
             let currentHour = new Date().getHours();
             let currentMinutes = new Date().getMinutes();

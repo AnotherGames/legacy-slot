@@ -15,6 +15,9 @@ export class Element {
         this.sprites = [];
         this.bg = game.add.sprite(0, 0, 'elementBackground', 'f-n-00.png', this.group);
         this.bg.anchor.set(0.5);
+        if (model.desktop) {
+            this.bg.scale.set(1.25);
+        }
         this.bg.animations.add('winBG', Phaser.Animation.generateFrameNames('f-w-', 0, 18, '.png', 2), 30, false);
         this.bg.animations.add('normalBG', Phaser.Animation.generateFrameNames('f-n-', 0, 29, '.png', 2), 30, false);
 
