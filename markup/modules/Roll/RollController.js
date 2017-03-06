@@ -73,7 +73,7 @@ export let controller = (() => {
                         mainView.draw.showPopup({message: data.ErrorMessage, balance: true});
                         return;
                     }
-                    
+
                     mainView.draw.showPopup({message: data.ErrorMessage});
                     return;
                 } else {
@@ -132,7 +132,9 @@ export let controller = (() => {
                 }
             })
             .catch((err) => {
-                if (err.status == 404) mainView.draw.showPopup({message: 'Connection problem. Click to restart'});
+                if (err.status) {
+                    mainView.draw.showPopup({message: 'Connection problem.'});
+                }
                 console.error(err);
             });
     }
