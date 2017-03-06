@@ -11,12 +11,12 @@ export class Init {
     }
     init() {
         let game = model.el('game');
-            game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
-            game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-            soundController.music.playMusic('initFon');
+        game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+        game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        soundController.music.playMusic('initFon');
 
-            // При выходе из вкладки анимации будут останавливаться
-            game.stage.disableVisibilityChange = true;
+        // При выходе из вкладки анимации будут останавливаться
+        game.stage.disableVisibilityChange = true;
     }
 
     create() {
@@ -29,8 +29,19 @@ export class Init {
         if (model.desktop) keyboardController.initInitKeys();
 
         let initPlay = view.drawPlay();
+
+        // Костыльный фулскрин
+        this.stateHandler = this.handlePlay.bind(this);
+
+        if (model.mobile && !game.device.iOS) {
+            let fakeButton = document.querySelector('#fakeButton');
+            $('#fakeButton').removeClass('closed');
+            fakeButton.addEventListener('click', this.fullScreen);
+            fakeButton.addEventListener('click', this.stateHandler);
+        } else {
             initPlay.inputEnabled = true;
             initPlay.events.onInputDown.add(this.handlePlay, this);
+        }
 
         model.el('initPlayTween')
             .onComplete.add(() => {
@@ -51,27 +62,27 @@ export class Init {
         (model.state('globalSound')) ? this.triggerSoundRight() : this.triggerSoundLeft();
     }
 
+    fullScreen() {
+        let game = model.el('game');
+        game.scale.startFullScreen();
+    }
+
     handlePlay() {
         const game = model.el('game');
 
-        if (model.mobile) game.scale.startFullScreen();
-
-        document.body.addEventListener('touchstart', () => {
-            model.el('game').scale.startFullScreen();
-        });
-
         view.stopYoyoTween();
+        let fakeButton = document.querySelector('#fakeButton');
+        fakeButton.removeEventListener('click', this.stateHandler);
 
-        game.camera.onFadeComplete.add(()=>{
+        game.camera.onFadeComplete.add(() => {
             if (model.data('savedFS')) {
                 game.state.start('FS');
             } else {
                 game.state.start('Main');
             }
-        })
+        });
 
-        game.camera.fade(0x000000, 500)
-
+        game.camera.fade(0x000000, 500);
     }
 
     triggerSoundLeft() {

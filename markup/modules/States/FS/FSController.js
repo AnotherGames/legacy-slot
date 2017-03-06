@@ -248,6 +248,10 @@ export class FS {
             let fullScreeButton = model.el('fullScreeButton');
                 fullScreeButton.frameName = (game.scale.isFullScreen || window.innerHeight == screen.height) ? 'fullscreenOff.png' : 'fullscreen.png';
         }
+
+        if (model.mobile && !game.device.iOS) {
+            (game.scale.isFullScreen) ? $('#fakeButton').addClass('closed') : $('#fakeButton').removeClass('closed');
+        }
     }
 
     positionMainContainer() {
