@@ -128,6 +128,10 @@ export class Main {
         if (model.el('emitter')) {
             game.physics.arcade.collide(model.el('emitter'));
         }
+
+        if (model.mobile && !game.device.iOS) {
+            (game.scale.isFullScreen) ? $('#fakeButton').addClass('closed') : $('#fakeButton').removeClass('closed');
+        }
     }
 
     positionMainContainer() {

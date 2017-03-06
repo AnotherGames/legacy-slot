@@ -6,168 +6,161 @@ filter: Linear,Linear
 repeat: none
 img/L
   rotate: false
-  xy: 2, 367
+  xy: 2, 359
   size: 1000, 134
   orig: 1000, 134
   offset: 0, 0
   index: -1
 img/Logo_0000_N2
   rotate: false
-  xy: 960, 9
+  xy: 766, 40
   size: 181, 142
   orig: 181, 142
   offset: 0, 0
   index: -1
 img/Logo_0001_L
-  rotate: false
-  xy: 475, 30
+  rotate: true
+  xy: 1688, 340
   size: 101, 189
   orig: 101, 189
   offset: 0, 0
   index: -1
 img/Logo_0002_D
   rotate: true
-  xy: 578, 24
+  xy: 586, 184
   size: 173, 189
   orig: 173, 189
   offset: 0, 0
   index: -1
 img/Logo_0003_A2
   rotate: false
-  xy: 1380, 307
+  xy: 1380, 299
   size: 152, 142
   orig: 152, 142
   offset: 0, 0
   index: -1
 img/Logo_0004_D
   rotate: true
-  xy: 769, 2
+  xy: 777, 184
   size: 173, 189
   orig: 173, 189
   offset: 0, 0
   index: -1
 img/Logo_0005_A
   rotate: false
-  xy: 1534, 307
+  xy: 1534, 299
   size: 152, 142
   orig: 152, 142
   offset: 0, 0
   index: -1
 img/Logo_0006_Y
   rotate: true
-  xy: 979, 153
+  xy: 581, 10
   size: 172, 183
   orig: 172, 183
   offset: 0, 0
   index: -1
 img/Logo_0007_N
   rotate: false
-  xy: 1197, 307
+  xy: 1197, 299
   size: 181, 142
   orig: 181, 142
   offset: 0, 0
   index: -1
 img/Logo_0008_C
-  rotate: true
-  xy: 785, 177
+  rotate: false
+  xy: 192, 19
   size: 188, 192
   orig: 188, 192
   offset: 0, 0
   index: -1
 img/Z_0015_Layer-8
   rotate: true
-  xy: 1837, 394
+  xy: 1688, 283
   size: 55, 152
   orig: 55, 152
   offset: 0, 0
   index: -1
 img/Z_0016_Layer-7
-  rotate: true
-  xy: 1837, 327
+  rotate: false
+  xy: 968, 186
   size: 65, 131
   orig: 65, 131
   offset: 0, 0
   index: -1
 img/Z_0017_Layer-6
-  rotate: true
-  xy: 1254, 238
+  rotate: false
+  xy: 1125, 204
   size: 67, 113
   orig: 67, 113
   offset: 0, 0
   index: -1
 img/Z_0018_Layer-5
   rotate: true
-  xy: 1369, 262
+  xy: 1281, 254
   size: 43, 122
   orig: 43, 122
   offset: 0, 0
   index: -1
 img/Z_0019_Layer-4
-  rotate: false
-  xy: 1254, 144
+  rotate: true
+  xy: 1281, 206
   size: 46, 92
   orig: 46, 92
   offset: 0, 0
   index: -1
 img/Z_0020_Layer-3-copy-3
   rotate: true
-  xy: 1004, 327
+  xy: 1004, 319
   size: 122, 191
   orig: 122, 191
   offset: 0, 0
   index: -1
 img/Zastavka_CL_0000_Layer-21
   rotate: false
-  xy: 1164, 203
+  xy: 1035, 215
   size: 88, 102
   orig: 88, 102
   offset: 0, 0
   index: -1
 img/Zastavka_CL_0001_Layer-20
   rotate: true
-  xy: 1688, 316
+  xy: 1879, 308
   size: 133, 147
   orig: 133, 147
   offset: 0, 0
   index: -1
 img/Zastavka_CL_0003_Shape-2-copy-4
-  rotate: true
-  xy: 1164, 116
+  rotate: false
+  xy: 1194, 209
   size: 85, 88
   orig: 85, 88
   offset: 0, 0
   index: -1
 img/Zastavka_CL_0006_Layer-18
   rotate: true
-  xy: 586, 199
+  xy: 382, 45
   size: 166, 197
   orig: 166, 197
   offset: 0, 0
   index: -1
 img/Zastavka_CL_0007_Layer-17
   rotate: false
-  xy: 285, 10
+  xy: 2, 2
   size: 188, 209
   orig: 188, 209
   offset: 0, 0
   index: -1
-img/Zastavka_CL_0008_Play
-  rotate: false
-  xy: 2, 7
-  size: 281, 212
-  orig: 281, 212
-  offset: 0, 0
-  index: -1
 img/Zastavka_CL_0009_Ellipse-11
   rotate: false
-  xy: 2, 221
+  xy: 2, 213
   size: 582, 144
   orig: 582, 144
   offset: 0, 0
   index: -1
 img/Zastavka_CL_0010_Layer-2
   rotate: false
-  xy: 1004, 451
+  xy: 1004, 443
   size: 1020, 50
   orig: 1020, 50
   offset: 0, 0

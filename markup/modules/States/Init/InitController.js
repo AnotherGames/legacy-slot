@@ -22,27 +22,34 @@ export class Init {
 
         this.game.plugins.add(new Phaser.Plugin.SaveCPU(this));
 
-        let initBG = view.drawBG();
-        initBG.inputEnabled = true;
+        view.drawBG();
+        let initPlay = view.drawPlay();
 
-        this.drawSoundTrigger();
+        // Костыльный фулскрин
+        this.stateHandler = this.handlePlay.bind(this);
 
-        if (model.mobile) {
-            view.drawLogo();
-            view.drawPlay();
-            initBG.events.onInputDown.add(this.handleBG, this);
-
-            model.el('initPlayTween')
-                .onComplete.add(() => {
-                    view.playYoyoTween({});
-                });
+        if (model.mobile && !game.device.iOS) {
+            let fakeButton = document.querySelector('#fakeButton');
+            $('#fakeButton').removeClass('closed');
+            fakeButton.addEventListener('click', this.fullScreen);
+            fakeButton.addEventListener('click', this.stateHandler);
+        } else {
+            initPlay.inputEnabled = true;
+            initPlay.events.onInputDown.add(this.handlePlay, this);
         }
+
+        model.el('initPlayTween')
+        .onComplete.add(() => {
+            view.playYoyoTween({});
+        });
 
         if (model.desktop) {
             keyboardController.initInitKeys();
-            game.canvas.onclick = this.handleBG.bind(this);
+        } else {
+            view.drawLogo();
         }
 
+        this.drawSoundTrigger();
         // Выход из затемнения
         game.camera.flash(0x000000, 500);
 
@@ -61,26 +68,26 @@ export class Init {
         }
     }
 
-    handleBG() {
+    fullScreen() {
+        let game = model.el('game');
+        game.scale.startFullScreen();
+    }
+    handlePlay() {
         const game = model.el('game');
 
-        if (model.mobile) {
-            game.scale.startFullScreen();
+        view.stopYoyoTween();
 
-            document.body.addEventListener('touchstart', () => {
-                model.el('game').scale.startFullScreen();
-            });
-            view.stopYoyoTween();
-        }
         if (model.desktop) {
             game.canvas.onclick = null;
         }
+
         game.camera.onFadeComplete.add(() => {
             game.state.start('Main');
         });
 
         game.camera.fade(0x000000, 500);
-
+        let fakeButton = document.querySelector('#fakeButton');
+        fakeButton.removeEventListener('click', this.stateHandler);
     }
 
     triggerSoundLeft() {
