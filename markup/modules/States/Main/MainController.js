@@ -3,6 +3,7 @@ import { config } from 'modules/Util/Config';
 
 import { view as mainView } from 'modules/States/Main/MainView';
 import { view as winView } from 'modules/Win/WinView';
+import { view as transitionView } from 'modules/Transition/TransitionView';
 
 import { controller as soundController } from 'modules/Sound/SoundController';
 import { controller as settingsController } from 'modules/Settings/DesktopSettingsController';
@@ -92,12 +93,7 @@ export class Main {
             keyboardController.initMainKeys();
             // BG animations
             mainView.draw.addBubbles({});
-            // mainView.draw.addShark({});
-            // mainView.draw.eyeLight({});
-            // game.time.events.add(6000, () => {
-            //     mainView.draw.addFishes({});
-            //     mainView.draw.labelLight({});
-            // });
+
         }
 
         mainView.draw.addLight({});
@@ -125,14 +121,30 @@ export class Main {
 
         let wheels = model.el('wheels');
 
-        wheels.forEach((wheel) => {
-            wheel.elements[0].activeSprite.scale.set(1);
-            wheel.elements[1].activeSprite.scale.set(0.8);
-            wheel.elements[2].activeSprite.scale.set(0.6);
+        let scale1 = (model.desktop) ? 1.25 : 0.95;
+        let scale2 = (model.desktop) ? 1.05 : 0.85;
+        let scale3 = (model.desktop) ? 0.85 : 0.7;
 
-            wheel.elements[0].bg.scale.set(1.25);
-            wheel.elements[1].bg.scale.set(1);
-            wheel.elements[2].bg.scale.set(0.8);
+        wheels.forEach((wheel) => {
+
+            let act = wheel.elements;
+            wheel.elements[0].activeSprite.scale.set(1);
+            wheel.elements[0].bg.scale.set(scale1);
+
+            if (act[1].active == 11 || act[1].active == 12 || act[1].active == 13) {
+                wheel.elements[1].activeSprite.scale.set(1);
+            } else {
+                wheel.elements[1].activeSprite.scale.set(0.85);
+                wheel.elements[1].bg.scale.set(scale2);
+            }
+
+            if (act[2].active == 11 || act[2].active == 12 || act[2].active == 13) {
+                wheel.elements[2].activeSprite.scale.set(1);
+            } else {
+                wheel.elements[2].activeSprite.scale.set(0.7);
+                wheel.elements[2].bg.scale.set(scale3);
+            }
+
         });
 
 

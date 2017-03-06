@@ -19,7 +19,7 @@ export class Element {
             this.bg.scale.set(1.25);
         }
         this.bg.animations.add('winBG', Phaser.Animation.generateFrameNames('f-w-', 0, 18, '.png', 2), 30, false);
-        this.bg.animations.add('normalBG', Phaser.Animation.generateFrameNames('f-n-', 0, 29, '.png', 2), 30, false);
+        this.bg.animations.add('normalBG', Phaser.Animation.generateFrameNames('f-n-', 0, 29, '.png', 2), 30, true);
 
         for (let i = 1; i <= config.symbolsCount; i++) {
 
@@ -43,6 +43,8 @@ export class Element {
         this.activeSprite = this.sprites[0];
         this.activeSprite.visible = true;
         this.activeSprite.animations.play('1-n');
+        this.bg.play('normalBG');
+
     }
 
     play(animation, loop = true, fps = 20) {
@@ -63,6 +65,7 @@ export class Element {
             this.bg.visible = true;
         }
         this.activeSprite.animations.play(animation, fps, loop);
+        this.bg.play('normalBG');
     }
 
     win(loop = false) {

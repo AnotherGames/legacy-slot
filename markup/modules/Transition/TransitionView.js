@@ -35,7 +35,8 @@ export let view = (() => {
         soundController.music.playMusic('startPerehod');
 
         // Отрисовываем фон
-        let transitionBG = game.add.sprite(0, 0, 'transitionBG1', null, transitionContainer);
+
+        let transitionBG = game.add.graphics(0, 0, transitionContainer).beginFill(0x000000, 0.8).drawRect(0, 0, game.width, game.height);
         model.el('transitionBG', transitionBG);
 
         // Надпись Free Spins
@@ -46,21 +47,11 @@ export let view = (() => {
 
         // Счетчик Фри-Спинов
         let freeSpinsCount = model.data('rollResponse').FreeSpinsLeft;
-        let freeSpinsLevel = game.add.bitmapText(game.width / 2, game.height / 2, 'numbersFont', freeSpinsCount, 120, transitionContainer);
+        let freeSpinsLevel = game.add.bitmapText(game.width / 2, game.height * 0.6, 'numbersFont', freeSpinsCount, 120, transitionContainer);
         freeSpinsLevel.align = 'center';
         freeSpinsLevel.anchor.set(0.5);
         freeSpinsLevel.scale.set(0.1);
         model.el('freeSpinsLevel', freeSpinsLevel);
-
-        let diverChar = game.add.sprite(-800, game.height * 0.85, 'diverChar', null, transitionContainer);
-        diverChar.anchor.set(0.5);
-        diverChar.angle = -60;
-        model.el('diverChar', diverChar);
-
-        let octopusChar = game.add.sprite(game.width + 800, game.height * 0.85, 'octopusChar', null, transitionContainer);
-        octopusChar.anchor.set(0.5);
-        octopusChar.angle = 60;
-        model.el('octopusChar', octopusChar);
 
         // Кнопка продолжить
         let continueText = game.add.sprite(game.width / 2,
@@ -79,17 +70,13 @@ export let view = (() => {
         let freeSpinsText = model.el('freeSpinsText');
         let freeSpinsLevel = model.el('freeSpinsLevel');
         let continueText = model.el('continueText');
-        let diverChar = model.el('diverChar');
-        let octopusChar = model.el('octopusChar');
-        let scaleX = (model.desktop) ? 1.0 : 0.7;
-        let scaleY = (model.desktop) ? 1.0 : 0.7;
+        let scaleX = (model.desktop) ? 0.6 : 0.3;
+        let scaleY = (model.desktop) ? 0.6 : 0.3;
 
         // Анимации появления
         game.add.tween(freeSpinsText.scale).to({x: 1.0, y: 1.0}, 1500, Phaser.Easing.Bounce.Out, true);
         game.add.tween(freeSpinsLevel.scale).to({x: scaleX, y: scaleY}, 1500, Phaser.Easing.Bounce.Out, true);
-        game.add.tween(continueText.scale).to({x: 1.0, y: 1.0}, 1500, Phaser.Easing.Bounce.Out, true);
-        game.add.tween(diverChar).to({x: game.width * 0.1, y: game.height * 0.55, angle: 0}, 500, Phaser.Easing.Cubic.Out, true, 1500);
-        game.add.tween(octopusChar).to({x: game.width * 0.82, y: game.height * 0.65, angle: 0}, 500, Phaser.Easing.Cubic.Out, true, 2000)
+        game.add.tween(continueText.scale).to({x: 1.0, y: 1.0}, 1500, Phaser.Easing.Bounce.Out, true)
             // Болтание кнопки продолжить
             .onComplete.add(() => {
                 continueText.rotation = 0.1;
@@ -146,7 +133,8 @@ export let view = (() => {
         soundController.sound.playSound({currentSound: 'win'});
 
         // Рисуем фон
-        let transitionBG = game.add.sprite(0, 0, 'transitionBG2', null, transitionContainer);
+
+        let transitionBG = game.add.graphics(0, 0, transitionContainer).beginFill(0x000000, 0.8).drawRect(0, 0, game.width, game.height);
         model.el('transitionBG', transitionBG);
 
         // выбираем надпись для конечного экрна (Big Win --- Total Win)
@@ -167,27 +155,11 @@ export let view = (() => {
         model.el('winText', winText);
 
         // Отрисовываем Выигрыш
-        let winCount = game.add.bitmapText(game.width / 2, game.height / 2 - 50, 'numbersFont', '0', 120, transitionContainer);
+        let winCount = game.add.bitmapText(game.width / 2, game.height * 0.6, 'numbersFont', '0', 120, transitionContainer);
         winCount.align = 'center';
         winCount.anchor.set(0.5);
         winCount.scale.set(0.1);
         model.el('winCount', winCount);
-
-        let diverChar = game.add.sprite(-800, game.height * 0.85, 'diverChar', null, transitionContainer);
-        diverChar.anchor.set(0.5);
-        diverChar.angle = -60;
-        model.el('diverChar', diverChar);
-
-        let octopusChar = game.add.sprite(game.width + 800, game.height * 0.85, 'octopusChar', null, transitionContainer);
-        octopusChar.anchor.set(0.5);
-        octopusChar.angle = 60;
-        model.el('octopusChar', octopusChar);
-
-        let treasureChest = game.add.sprite(game.width / 2, -400, '14', '14-n-00.png', transitionContainer);
-        treasureChest.anchor.set(0.5);
-        treasureChest.scale.set(1.8);
-        treasureChest.animations.add('open', Phaser.Animation.generateFrameNames('14-w-', 0, 29, '.png', 2), 20, false);
-        model.el('treasureChest', treasureChest);
 
         // И кнопку продолжить
         let continueText = game.add.sprite(game.width / 2,
@@ -209,23 +181,16 @@ export let view = (() => {
         let winText = model.el('winText');
         let winCount = model.el('winCount');
         let continueText = model.el('continueText');
-        let diverChar = model.el('diverChar');
-        let octopusChar = model.el('octopusChar');
-        let treasureChest = model.el('treasureChest');
-        let scaleX = (model.desktop) ? 1.0 : 0.7;
-        let scaleY = (model.desktop) ? 1.0 : 0.7;
+        let scaleX = (model.desktop) ? 0.6 : 0.3;
+        let scaleY = (model.desktop) ? 0.6 : 0.3;
 
         game.add.tween(winText.scale).to({x: 1.0, y: 1.0}, 1500, Phaser.Easing.Bounce.Out, true);
         let winCountValue = model.data('rollResponse').FsBonus.TotalFSWinCoins + model.data('rollResponse').Balance.TotalWinCoins;
         _сountMeter(winCountValue, winCount);
 
         game.add.tween(winCount.scale).to({x: scaleX, y: scaleY}, 1500, Phaser.Easing.Bounce.Out, true);
-        game.add.tween(continueText.scale).to({x: 1.0, y: 1.0}, 1500, Phaser.Easing.Bounce.Out, true);
-        game.add.tween(diverChar).to({x: game.width * 0.1, y: game.height * 0.55, angle: 0}, 500, Phaser.Easing.Cubic.Out, true, 1500);
-        game.add.tween(octopusChar).to({x: game.width * 0.82, y: game.height * 0.65, angle: 0}, 500, Phaser.Easing.Cubic.Out, true, 2000);
-        game.add.tween(treasureChest).to({y: game.height * 0.65}, 1000, Phaser.Easing.Elastic.Out, true, 2500)
+        game.add.tween(continueText.scale).to({x: 1.0, y: 1.0}, 1500, Phaser.Easing.Bounce.Out, true)
             .onComplete.add(() => {
-                treasureChest.animations.play('open');
                 continueText.rotation = 0.1;
                 game.add.tween(continueText).to({rotation: -0.1}, 100, 'Linear', true, 0, 4, true)
                     .onComplete.add(() => {

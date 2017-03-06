@@ -38,20 +38,23 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('main')
         }) {
-            let deltaY = (model.desktop) ? 55 : 50;
 
             let gameMachine = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachine', null, container);
             gameMachine.anchor.set(0.5);
             gameMachine.alpha = 0;
             model.el('gameMachine', gameMachine);
 
+            let deltaX = (model.desktop) ? 106 : 81;
+            let deltaY = (model.desktop) ? 55 : 50;
+            let deltaY2 = (model.desktop) ? 37 : -18;
+
             let logoGM = game.add.sprite(0, gameMachine.top + deltaY, 'logoGM', null, container);
             logoGM.anchor.set(0.5);
 
-            let lineLeft = game.add.sprite(gameMachine.left, config[model.res].gameMachine.y, 'lineLeft', null, container);
+            let lineLeft = game.add.sprite(gameMachine.left + deltaX, config[model.res].gameMachine.y - deltaY2, 'lineLeft', null, container);
             lineLeft.anchor.set(0.5);
 
-            let lineRight = game.add.sprite(gameMachine.right, config[model.res].gameMachine.y, 'lineRight', null, container);
+            let lineRight = game.add.sprite(gameMachine.right - deltaX, config[model.res].gameMachine.y - deltaY2, 'lineRight', null, container);
             lineRight.anchor.set(0.5);
         },
 
@@ -212,8 +215,8 @@ export let view = (() => {
             let lineNumbersArr = [];
 
             let y = (model.desktop) ?
-                [252, 297, 342, 387, 495, 543, 585, 735, 780, 825, 871, 252, 297, 342, 387, 543, 590, 637, 735, 780, 825, 870] :
-                [68, 103, 138, 173, 285, 320, 355, 435, 470, 505, 540, 68, 103, 138, 173, 285, 320, 355, 435, 470, 505, 540];
+                [252, 297, 342, 387, 495, 540, 585, 735, 780, 825, 871, 252, 297, 342, 387, 543, 590, 633, 735, 780, 825, 870] :
+                [90, 123, 158, 193, 273, 309, 340, 455, 490, 525, 560, 90, 123, 158, 193, 309, 344, 379, 455, 490, 525, 560];
 
             let numbs = [4, 6, 18, 11, 9, 1, 20, 10, 19, 7, 5, 13, 15, 2, 17, 1, 21, 8, 16, 3, 14, 12];
 
@@ -262,7 +265,7 @@ export let view = (() => {
                             lineNumber.lineShape.destroy();
                         }
                         lineNumber.lineShape = this.lineShape(lineNumber.name);
-                        game.time.events.add(4000, () => {
+                        game.time.events.add(1000, () => {
                             if (lineNumber.lineShape) {
                                 lineNumber.lineShape.destroy();
                             }
@@ -284,9 +287,9 @@ export let view = (() => {
             let lineShape = game.add.graphics(0, 0, container);
             let gameMachine = model.el('gameMachine');
             let deltaX = 150;
-            let deltaY = (model.desktop) ? 200 : 40;
+            let deltaY = (model.desktop) ? 200 : 80;
             lineShape
-               .lineStyle(4, 0x188bb4, 0.8)
+               .lineStyle(4, 0xeeeeee, 0.8)
                .moveTo((line[0].X + 0.5) * elSize.width - gameMachine.width / 2 + deltaX, (line[0].Y + 0.5) * elSize.height - gameMachine.height / 2 + deltaY)
                .lineTo((line[1].X + 0.5) * elSize.width - gameMachine.width / 2 + deltaX, (line[1].Y + 0.5) * elSize.height - gameMachine.height / 2 + deltaY)
                .lineTo((line[2].X + 0.5) * elSize.width - gameMachine.width / 2 + deltaX, (line[2].Y + 0.5) * elSize.height - gameMachine.height / 2 + deltaY)
@@ -333,9 +336,9 @@ export let view = (() => {
             machineGroup = model.group('machine')
         }) {
             const elSize = config[model.res].elements;
-            let deltaY = (model.desktop) ? 50 : -25;
-            let someGraphic = game.add.graphics(-elSize.width * 2.5, -elSize.height * 1.5 + deltaY, machineGroup);
-            someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5, elSize.height * 3);
+            let deltaY = (model.desktop) ? 50 : 25;
+            let someGraphic = game.add.graphics(-elSize.width * 2.5 - 250, -elSize.height * 1.5 + deltaY, machineGroup);
+            someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5 + 550, elSize.height * 3);
             machineGroup.mask = someGraphic;
         },
 
