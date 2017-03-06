@@ -456,47 +456,49 @@ export let view = (() => {
             machineGroup.mask = someGraphic;
         },
 
+
+        initPopup: function () {
+            let popup = document.querySelector('#popup');
+            popup.addEventListener('click', draw.closePopup);
+        },
+
         showPopup: function ({
-            game = model.el('game'),
-            container = model.group('popup'),
             message = 'popup',
             balance = false
         }) {
-            let overlay = game.add.graphics(0, 0, container)
-                .beginFill(0x000000, 0.8)
-                .drawRect(0, 0, game.width, game.height);
+            model.state('notReload', balance);
 
-            let boy = game.add.spine(game.width * 0.3, game.height * 0.7, 'boy');
-            boy.setAnimationByName(0, 'S4-newone', false);
-            boy.addAnimationByName(0, 'S4-idle', true);
-            (model.desktop) ? boy.scale.set(0.5) : boy.scale.set(0.3);
-            container.add(boy);
-            model.el('boy', boy);
+            let popup = document.querySelector('#popup');
+            let overlay = document.querySelector('#darkness');
+            let popupText = document.querySelector('#popup h2');
+            let popupBottomText = document.querySelector('#popup p');
+            let bottomText;
 
-            let cleanMessage = message.toLowerCase();
-            console.log(cleanMessage);
+            popup.classList.remove('closed');
+            overlay.classList.remove('closed');
 
-            let popupText = game.add.bitmapText(game.width * 0.32, game.height * 0.32, 'textGreen', cleanMessage, 60, container);
-            popupText.anchor.set(0.5);
-            popupText.maxWidth = 500;
-            popupText.align = 'center';
-            popupText.scale.set(0.1);
-            popupText.alpha = 0;
-            model.el('popupText', popupText);
+            popupText.innerHTML = message;
 
-            let scaleX = (model.desktop) ? 1.0 : 0.7;
-            let scaleY = (model.desktop) ? 1.0 : 0.7;
-            game.add.tween(popupText).to({alpha: 1}, 500, 'Linear', true, 700);
-            game.add.tween(popupText.scale).to({x: scaleX, y: scaleY}, 1000, Phaser.Easing.Elastic.Out, true, 700);
+            if (model.desktop) {
+                bottomText = `Click to ${(balance) ? 'close' : 'restart'}`;
+            } else {
+                bottomText = `Tap to ${(balance) ? 'close' : 'restart'}`;
+            }
 
-            overlay.inputEnabled = true;
-            overlay.input.priorityID = 2;
-            overlay.events.onInputDown.add(() => {
-                (balance) ? container.removeAll() : window.location.reload();
-            });
+            popupBottomText.innerHTML = bottomText;
         },
 
+        closePopup: function () {
+            if (model.state('notReload')) {
+                let popup = document.querySelector('#popup');
+                let overlay = document.querySelector('#darkness');
 
+                popup.classList.add('closed');
+                overlay.classList.add('closed');
+            } else {
+                window.location.reload();
+            }
+        }
     };
 
     return {
