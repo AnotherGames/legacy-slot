@@ -38,12 +38,15 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('main')
         }) {
-            let deltaY = (model.desktop) ? 50 : -25;
+            let deltaY = (model.desktop) ? 55 : 50;
 
             let gameMachine = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachine', null, container);
             gameMachine.anchor.set(0.5);
             gameMachine.alpha = 0;
             model.el('gameMachine', gameMachine);
+
+            let logoGM = game.add.sprite(0, gameMachine.top + deltaY, 'logoGM', null, container);
+            logoGM.anchor.set(0.5);
 
             let lineLeft = game.add.sprite(gameMachine.left, config[model.res].gameMachine.y, 'lineLeft', null, container);
             lineLeft.anchor.set(0.5);

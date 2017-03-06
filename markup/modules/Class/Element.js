@@ -27,11 +27,11 @@ export class Element {
             let sprite = game.add.sprite(0, 0, i, null, this.group);
             sprite.anchor.set(0.5);
             sprite.visible = false;
-            if (i == 11
-            || i == 12
-            || i == 13 ) {
-                sprite.y += (model.desktop) ? 50 : 50 * 0.75;
-            }
+            // if (i == 11
+            // || i == 12
+            // || i == 13 ) {
+            //     sprite.y += (model.desktop) ? 50 : 50 * 0.75;
+            // }
             this.sprites.push(sprite);
 
             // Каждому спрайту добавляем необходимые анимации
@@ -112,7 +112,7 @@ export class Element {
                 this.addAnimation(sprite, { el: 3, n: false, w: 29 });
                 break;
             case 4:
-                this.addAnimation(sprite, { el: 4, n: 24, w: 24 });
+                this.addAnimation(sprite, { el: 4, n: 29, w: 29 });
                 break;
             case 5:
                 this.addAnimation(sprite, { el: 5, n: false, w: 29 });
