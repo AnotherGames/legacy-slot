@@ -30,10 +30,10 @@ export class Preload {
         game.load.setPreloadSprite(view.drawPreloadBar());
         view.drawPreloadCoin();
 
-        model.state('loadError', false)
-        game.load.onFileError.add(()=>{
-            model.state('loadError', true)
-        })
+        model.state('loadError', false);
+        game.load.onFileError.add(() => {
+            model.state('loadError', true);
+        });
 
         this.loadSounds();
         this.loadInitAssets();
@@ -41,6 +41,8 @@ export class Preload {
         this.loadFSAssets();
         this.loadSpineAssets();
         this.loadTest();
+
+        mainView.draw.initPopup();
 
         game.load.onLoadComplete.add(this.hidePreloader);
     }

@@ -333,49 +333,49 @@ export let view = (() => {
             machineGroup.mask = someGraphic;
         },
 
-        showPopup: function ({
-            game = model.el('game'),
-            container = model.group('popup'),
-            message = 'popup',
-            font = 'normal 45px Arial',
-            color = '#c28531',
-            balance = false
-        }) {
-            let overlay = game.add.graphics(0, 0, container)
-                .beginFill(0x000000, 0.8)
-                .drawRect(0, 0, game.width, game.height);
 
-            let popup = game.add.sprite(
-                game.width / 2,
-                game.height / 2,
-                'popup',
-                null,
-                container);
-                popup.anchor.set(0.5);
-            model.el('popup', popup);
-
-            let popupText = game.add.text(
-                popup.x - 40,
-                popup.y,
-                message,
-                {font: font, fill: color, align: 'center', wordWrap: true, wordWrapWidth: 380, stroke: '#000000', strokeThickness: 3},
-                container);
-                popupText.anchor.set(0.5);
-
-            popup.inputEnabled = true;
-            popup.input.priorityID = 3;
-            popup.events.onInputDown.add(() => {
-                (balance) ? container.removeAll() : window.location.reload();
-            });
-
-            overlay.inputEnabled = true;
-            overlay.input.priorityID = 2;
-            overlay.events.onInputDown.add(() => {
-                (balance) ? container.removeAll() : window.location.reload();
-            });
+        initPopup: function () {
+            let popup = document.querySelector('#popup');
+            popup.addEventListener('click', draw.closePopup);
         },
 
+        showPopup: function ({
+            message = 'popup',
+            balance = false
+        }) {
+            model.state('notReload', balance);
 
+            let popup = document.querySelector('#popup');
+            let overlay = document.querySelector('#darkness');
+            let popupText = document.querySelector('#popup h2');
+            let popupBottomText = document.querySelector('#popup p');
+            let bottomText;
+
+            popup.classList.remove('closed');
+            overlay.classList.remove('closed');
+
+            popupText.innerHTML = message;
+
+            if (model.desktop) {
+                bottomText = `Click to ${(balance) ? 'close' : 'restart'}`;
+            } else {
+                bottomText = `Tap to ${(balance) ? 'close' : 'restart'}`;
+            }
+
+            popupBottomText.innerHTML = bottomText;
+        },
+
+        closePopup: function () {
+            if (model.state('notReload')) {
+                let popup = document.querySelector('#popup');
+                let overlay = document.querySelector('#darkness');
+
+                popup.classList.add('closed');
+                overlay.classList.add('closed');
+            } else {
+                window.location.reload();
+            }
+        }
     };
 
     return {
