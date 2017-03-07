@@ -214,8 +214,8 @@ export let controller = (() => {
             // Убираем управление с клавиатуры
             game.input.keyboard.enabled = false;
 
-            let middleEl = view.hide.CroppedDiver({});
-            view.draw.Diver({
+            let middleEl = view.hide.CroppedMermaid({});
+            view.draw.Mermaid({
                 el: middleEl
             });
 
@@ -231,7 +231,7 @@ export let controller = (() => {
     function checkForChest(winLines) {
         winLines.forEach((winLine) => {
             if (winLine.Line == -1 && winLine.Symbol == '14') {
-                fsController.chestActions();
+                fsController.fsMainActions();
             }
         });
     }

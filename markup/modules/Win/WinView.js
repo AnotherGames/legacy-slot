@@ -287,7 +287,7 @@ export let view = (() => {
             });
         },
 
-        Diver: function ({
+        Mermaid: function ({
             game = model.el('game'),
             el
         }) {
@@ -326,7 +326,7 @@ export let view = (() => {
             return game.add.tween(container).to( { alpha: 0 }, 300, 'Linear', true);
         },
 
-        CroppedDiver: function ({
+        CroppedMermaid: function ({
             wheels = model.el('wheels')
         }) {
             let middleEl;

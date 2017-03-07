@@ -124,7 +124,7 @@ export class Preload {
         game.load.image('fsBG', 'bg/fsBG.png');
         game.load.image('octopusChar', 'fs/octopus.png');
         game.load.image('diverChar', 'fs/diver.png');
-        game.load.image('shell', 'fs/shell.png');
+        game.load.atlasJSONArray('shell', 'fs/shell.png', 'fs/shell.json');
         if (model.mobile) {
             game.load.image('fsCountBG', 'fs/fsCountBG.png');
             game.load.image('fsLevelBG', 'fs/fsLevelBG.png');

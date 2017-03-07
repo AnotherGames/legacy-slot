@@ -69,7 +69,7 @@ export let controller = (() => {
         // bulletCounter = 0;
     }
 
-    function chestActions() {
+    function fsMainActions() {
         // Проигрываем анимации барабана и +3
         fsView.draw.CountPlus3({});
 
@@ -83,15 +83,15 @@ export let controller = (() => {
         let currMulti = model.data('fsMulti');
 
         // Увеличиваем мульти(разбивание бутылки)
-        if (multiValue > currMulti) {
-            fsView.draw.changeMulti({number: multiValue, animation: multiValue + ''});
-            model.data('fsMulti', multiValue);
-        }
+        // if (multiValue > currMulti) {
+        //     fsView.draw.changeMulti({number: multiValue, animation: multiValue + ''});
+        //     model.data('fsMulti', multiValue);
+        // }
 
-        if (levelValue > currLevel) {
-            fsView.draw.changeLevel({number: levelValue, animation: levelValue - 1 + ''});
-            model.data('fsLevel', levelValue);
-        }
+        // if (levelValue > currLevel) {
+        //     fsView.draw.changeLevel({number: levelValue, animation: levelValue - 1 + ''});
+        //     model.data('fsLevel', levelValue);
+        // }
 
     }
 
@@ -100,7 +100,7 @@ export let controller = (() => {
         next,
         count,
         stop,
-        chestActions
+        fsMainActions
     };
 })();
 
@@ -221,6 +221,35 @@ export class FS {
         if (model.mobile && !game.device.iOS) {
             (game.scale.isFullScreen) ? $('#fakeButton').addClass('closed') : $('#fakeButton').removeClass('closed');
         }
+
+        let wheels = model.el('wheels');
+
+        let scale1 = (model.desktop) ? 1.25 : 0.95;
+        let scale2 = (model.desktop) ? 1.05 : 0.85;
+        let scale3 = (model.desktop) ? 0.85 : 0.7;
+
+        wheels.forEach((wheel) => {
+
+            let act = wheel.elements;
+            wheel.elements[0].activeSprite.scale.set(1);
+            wheel.elements[0].bg.scale.set(scale1);
+
+            if (act[1].active == 11 || act[1].active == 12 || act[1].active == 13) {
+                wheel.elements[1].activeSprite.scale.set(1);
+            } else {
+                wheel.elements[1].activeSprite.scale.set(0.85);
+                wheel.elements[1].bg.scale.set(scale2);
+            }
+
+            if (act[2].active == 11 || act[2].active == 12 || act[2].active == 13) {
+                wheel.elements[2].activeSprite.scale.set(1);
+            } else {
+                wheel.elements[2].activeSprite.scale.set(0.7);
+                wheel.elements[2].bg.scale.set(scale3);
+            }
+
+        });
+
     }
 
     positionMainContainer() {
