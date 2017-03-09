@@ -15,7 +15,7 @@ export let view = (() => {
         }) {
             let elSize = config[model.res].elements;
             let upWheels = [];
-            let deltaY = (model.desktop) ? 0 : 50;
+            let deltaY = (model.desktop) ? 55 : 25;
             for (let i = 0; i < 5; i++) {
                 upWheels.push([]);
                 for (let j = 0; j < 3; j++) {
@@ -23,7 +23,7 @@ export let view = (() => {
                         container,
                         position: {
                             x: elSize.width * (i + 0.5 - 2.5),
-                            y: elSize.height * (j + 0.5 - 1.5) - deltaY
+                            y: elSize.height * (j + 0.5 - 1.5) + deltaY
                         }
                     });
                     el.hide(0);
@@ -87,6 +87,8 @@ export let view = (() => {
                 winElements.upElements.forEach((upEl) => {
                     upEl.show();
                     upEl.win();
+                    // взрыв шара
+                    // upEl.burstBubble();
                     draw.scaleJumping({
                         el: upEl,
                         start: 0.3,

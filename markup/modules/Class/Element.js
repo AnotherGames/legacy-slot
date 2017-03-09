@@ -20,6 +20,10 @@ export class Element {
         }
         this.bg.animations.add('winBG', Phaser.Animation.generateFrameNames('f-w-', 0, 18, '.png', 2), 30, false);
         this.bg.animations.add('normalBG', Phaser.Animation.generateFrameNames('f-n-', 0, 29, '.png', 2), 30, true);
+        // this.bg.animations.getAnimation('winBG').onComplete.add(() => {
+        //     this.bg.destroy();
+        // });
+        this.bg.isBursted = false;
 
         for (let i = 1; i <= config.symbolsCount; i++) {
 
@@ -62,7 +66,12 @@ export class Element {
         if (this.active == 11 || this.active == 12 || this.active == 13) {
             this.bg.visible = false;
         } else {
-            this.bg.visible = true;
+            // this.bg.isBanged -> return else -> normal flow
+            if (this.bg.isBursted) {
+                return;
+            } else {
+                this.bg.visible = true;
+            }
         }
         this.activeSprite.animations.play(animation, fps, loop);
         this.bg.play('normalBG');
@@ -71,12 +80,11 @@ export class Element {
     win(loop = false) {
         // Проигрывам выигрышную анимацию
         this.play(`${this.active}-w`, loop, 30);
-        this.bg.play('winBG');
 
         this.activeSprite.animations.currentAnim.onComplete.add(() => {
             // После которой опять играем нормальную анимацию
             this.play(`${this.active}-n`);
-            this.bg.play('normalBG');
+            // this.bg.play('normalBG');
             // this.bg.frameName = 'f-n-00.png';
         });
     }
@@ -89,7 +97,7 @@ export class Element {
     normal() {
         // Проигрывам нормальную анимацию
         this.play(`${this.active}-n`);
-        this.bg.play('normalBG');
+        // this.bg.play('normalBG');
     }
 
     hide(alpha = 0.5) {
@@ -100,6 +108,23 @@ export class Element {
     show() {
         // Возращаем нормальное состояние
         this.group.alpha = 1;
+        if (this.bg.isBursted) {
+            this.bg.visible = false;
+        }
+
+    }
+
+    burstBubble() {
+        this.bg.isBursted = true;
+        this.bg.play('winBG');
+        this.bg.animations.getAnimation('winBG').onComplete.add(() => {
+            this.bg.visible = false;
+        });
+    }
+
+    showBubble() {
+        this.bg.isBursted = false;
+        this.bg.visible = true;
     }
 
     // Вспомогательные методы для добавления анимаций для спрайтов

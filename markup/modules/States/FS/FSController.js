@@ -21,6 +21,8 @@ export let controller = (() => {
         model.state('fs:end', false);
         model.data('fs:count', amount);
         model.updateBalance({startFS: true});
+        let multiCounter = 0;
+        model.el('multiCounter', multiCounter);
 
         next();
     }
@@ -66,7 +68,7 @@ export let controller = (() => {
         model.state('fs:end', true);
         model.updateBalance({endFS: true});
         model.state('fs', false);
-        // bulletCounter = 0;
+
     }
 
     function fsMainActions() {
@@ -81,17 +83,21 @@ export let controller = (() => {
         let currLevel = model.data('fsLevel');
         let multiValue = rollData.FsBonus.Multi;
         let currMulti = model.data('fsMulti');
+        let multiCounter = model.el('multiCounter');
 
         // Увеличиваем мульти(разбивание бутылки)
-        // if (multiValue > currMulti) {
-        //     fsView.draw.changeMulti({number: multiValue, animation: multiValue + ''});
-        //     model.data('fsMulti', multiValue);
-        // }
+        if (multiValue > currMulti) {
+            multiCounter++;
+            console.warn(multiCounter);
+            fsView.draw.changeMulti({number: multiValue, counter: multiCounter});
+            model.data('fsMulti', multiValue);
+            model.el('multiCounter', multiCounter);
+        }
 
-        // if (levelValue > currLevel) {
-        //     fsView.draw.changeLevel({number: levelValue, animation: levelValue - 1 + ''});
-        //     model.data('fsLevel', levelValue);
-        // }
+        if (levelValue > currLevel) {
+            fsView.draw.changeLevel({number: levelValue, animation: levelValue - 1 + ''});
+            model.data('fsLevel', levelValue);
+        }
 
     }
 
