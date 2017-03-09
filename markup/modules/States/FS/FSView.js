@@ -149,57 +149,74 @@ export let view = (() => {
             container = model.group('panel')
         }) {
             let x = (model.desktop) ? 800 : 1200;
-            let y = (model.desktop) ? -300 : 450;
-            let deltaY = (model.desktop) ? 250 :  150;
+            let y = (model.desktop) ? -300 : 500;
+            let deltaY = (model.desktop) ? 250 :  170;
+
             let shell1 = game.add.sprite(x, y, 'shell', null, container);
             shell1.anchor.set(0.5);
 
             shell1.animations.add('idle', Phaser.Animation.generateFrameNames('s-idle-c', 0, 29, '.png', 2), 20, true);
-            shell1.animations.add('open', Phaser.Animation.generateFrameNames('s-o-', 0, 29, '.png', 2), 20, true);
-            shell1.animations.add('openIdle', Phaser.Animation.generateFrameNames('s-idle-c', 0, 29, '.png', 2), 20, true);
+            shell1.animations.add('open', Phaser.Animation.generateFrameNames('s-o-', 0, 29, '.png', 2), 20, false);
+            shell1.animations.add('openIdle', Phaser.Animation.generateFrameNames('s-idle-o', 0, 29, '.png', 2), 20, true);
             shell1.animations.play('idle');
-
-            // game.add.tween(shell1).to({y: shell1.y + 10}, 3000, 'Linear', true, 0, -1, true);
             model.el('shell1', shell1);
-            // if (model.mobile) {
-            //     shell1.scale.set(0.9);
-            // }
 
             let shell2 = game.add.sprite(x, y - deltaY, 'shell', null, container);
             shell2.anchor.set(0.5);
 
             shell2.animations.add('idle', Phaser.Animation.generateFrameNames('s-idle-c', 0, 29, '.png', 2), 20, true);
-            shell2.animations.add('open', Phaser.Animation.generateFrameNames('s-o-', 0, 29, '.png', 2), 20, true);
-            shell2.animations.add('openIdle', Phaser.Animation.generateFrameNames('s-idle-c', 0, 29, '.png', 2), 20, true);
-            shell2.animations.play('idle');
+            shell2.animations.add('open', Phaser.Animation.generateFrameNames('s-o-', 0, 29, '.png', 2), 20, false);
+            shell2.animations.add('openIdle', Phaser.Animation.generateFrameNames('s-idle-o', 0, 29, '.png', 2), 20, true);
+            game.time.events.add(500, () => {
+                shell2.animations.play('idle');
+            });
 
-            // game.add.tween(shell2).to({y: shell2.y + 10}, 3000, 'Linear', true, 0, -1, true);
             model.el('shell2', shell2);
 
             let shell3 = game.add.sprite(x, y - deltaY * 2, 'shell', null, container);
             shell3.anchor.set(0.5);
 
             shell3.animations.add('idle', Phaser.Animation.generateFrameNames('s-idle-c', 0, 29, '.png', 2), 20, true);
-            shell3.animations.add('open', Phaser.Animation.generateFrameNames('s-o-', 0, 29, '.png', 2), 20, true);
-            shell3.animations.add('openIdle', Phaser.Animation.generateFrameNames('s-idle-c', 0, 29, '.png', 2), 20, true);
-            shell3.animations.play('idle');
+            shell3.animations.add('open', Phaser.Animation.generateFrameNames('s-o-', 0, 29, '.png', 2), 20, false);
+            shell3.animations.add('openIdle', Phaser.Animation.generateFrameNames('s-idle-o', 0, 29, '.png', 2), 20, true);
+            game.time.events.add(500, () => {
+                shell3.animations.play('idle');
+            });
 
-            // game.add.tween(shell3).to({y: shell3.y + 10}, 3000, 'Linear', true, 0, -1, true);
             model.el('shell3', shell3);
 
+            if (model.mobile) {
+                shell1.scale.set(0.8);
+                shell2.scale.set(0.8);
+                shell3.scale.set(0.8);
+            }
         },
 
         changeMulti: function ({
             number = 1,
-            animation = '3'
+            counter = 1,
+            container = model.group('panel'),
+            game = model.el('game')
         }) {
             let fsMulti = model.el('fsMulti');
             fsMulti.text = number;
             model.el('fsMulti', fsMulti);
 
-            let chestFS = model.el('chestFS');
-            chestFS.addAnimationByName(1, animation, false);
-            soundController.sound.playSound({currentSound: 'chestDown'});
+            let shell= model.el(`shell${counter}`);
+            shell.animations.play('open');
+            shell.animations.getAnimation('open').onComplete.add(() => {
+                shell.animations.play('openIdle');
+            });
+
+            let fsMultiBig = game.add.sprite(shell.x, shell.y, 'multi', `x${number}.png`, container);
+            fsMultiBig.anchor.set(0.5);
+            fsMultiBig.alpha = 0;
+            game.add.tween(fsMultiBig).to({alpha: 1, y: fsMultiBig.y - 120}, 700, 'Linear', true)
+                .onComplete.add(() => {
+                    game.add.tween(fsMultiBig).to({y: shell.y - 30}, 400, Phaser.Easing.Back.Out, true);
+                }, this);
+
+            // soundController.sound.playSound({currentSound: 'chestDown'});
         },
 
         Level: function ({
@@ -268,9 +285,9 @@ export let view = (() => {
             fsLevel.text = number;
             model.el('fsLevel', fsLevel);
 
-            let diverFS = model.el('diverFS');
-            diverFS.addAnimationByName(1, animation, false);
-            soundController.sound.playSound({currentSound: 'diverDown'});
+            // let diverFS = model.el('diverFS');
+            // diverFS.addAnimationByName(1, animation, false);
+            // soundController.sound.playSound({currentSound: 'diverDown'});
         },
 
         Count: function ({
@@ -282,7 +299,7 @@ export let view = (() => {
         }) {
             let x, y, deltaX, deltaY, font;
             if (model.mobile) {
-                x = 70;
+                x = 80;
                 y = 100;
                 deltaX = 0;
                 deltaY = 13;
@@ -329,7 +346,14 @@ export let view = (() => {
 
             let circle = game.add.graphics(0, 0, plus3Group);
             circle.beginFill(0x000000, 0.3).drawCircle(0, 0, 200);
-            let plus3 = game.add.sprite(0, 0, 'plus3', null, plus3Group);
+            // let plus3 = game.add.sprite(0, 0, 'plus3', null, plus3Group);
+            // plus3.anchor.set(0.5);
+            // model.el('plus3', plus3);
+
+            let fontSize = (model.desktop) ? 35 : 25;
+
+            let plus3 = game.add.bitmapText(0, 40, 'numbersFont', '+3', fontSize, plus3Group);
+            plus3.align = 'center';
             plus3.anchor.set(0.5);
             model.el('plus3', plus3);
 
