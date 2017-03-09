@@ -30,11 +30,8 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('bg')
         }) {
-            let mainBG = game.add.sprite(0, 0, 'mainBG', null, container);
+            let mainBG = game.add.sprite(0, 0, 'fsBG', null, container);
             model.el('mainBG', mainBG);
-
-            let transitionBG = game.add.graphics(0, 0, container).beginFill(0x000000, 0.7).drawRect(0, 0, game.width, game.height);
-            model.el('transitionBG', transitionBG);
 
         },
 
@@ -50,6 +47,14 @@ export let view = (() => {
             let deltaX = (model.desktop) ? 106 : 81;
             let deltaY = (model.desktop) ? 55 : 50;
             let deltaY2 = (model.desktop) ? 37 : -18;
+            let y1 = (model.desktop) ? 80 : 55;
+            let y2 = (model.desktop) ? 100 : 15;
+
+            let fonTop = game.add.sprite(-10, gameMachine.top + y1, 'fonTopFS', null, container);
+            fonTop.anchor.set(0.5);
+
+            let fonBottom = game.add.sprite(-10, gameMachine.bottom - y2, 'fonBottomFS', null, container);
+            fonBottom.anchor.set(0.5);
 
             let logoGM = game.add.sprite(0, gameMachine.top + deltaY, 'logoGM', null, container);
             logoGM.anchor.set(0.5);
@@ -63,22 +68,23 @@ export let view = (() => {
 
         machineContainer: function ({
             game = model.el('game'),
+            gameMachine = model.el('gameMachine'),
             container = model.group('main')
         }) {
             let machineGroup = game.add.group();
-            container.addAt(machineGroup, 2);
+            container.addAt(machineGroup, 1);
             model.group('machine', machineGroup);
 
             let numbersContainer = game.add.group();
-            container.addAt(numbersContainer, 3);
+            container.addAt(numbersContainer, 2);
             model.group('numbers', numbersContainer);
 
             let winUp = game.add.group();
-            container.addAt(winUp, 4);
+            container.addAt(winUp, 3);
             model.group('winUp', winUp);
 
             let winTop = game.add.group();
-            container.addAt(winTop, 5);
+            container.addAt(winTop, 4);
             model.group('winTop', winTop);
 
             machineGroup.glistaLightContainer = game.add.group();

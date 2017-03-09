@@ -54,7 +54,7 @@ export class Main {
         mainView.draw.mainBG({});
         mainView.draw.mainContainer({});
         mainView.draw.machineContainer({});
-        mainView.draw.machineMask({});
+        // mainView.draw.machineMask({});
         mainView.draw.lineNumbers({});
         winView.draw.UpWinContainer({});
 

@@ -47,6 +47,15 @@ export let view = (() => {
             let deltaX = (model.desktop) ? 106 : 81;
             let deltaY = (model.desktop) ? 55 : 50;
             let deltaY2 = (model.desktop) ? 37 : -18;
+            let y1 = (model.desktop) ? 95 : 70;
+            let y2 = (model.desktop) ? 100 : 15;
+            let x = (model.desktop) ? 0 : 80;
+
+            let fonTop = game.add.sprite(x, gameMachine.top + y1, 'fonTop', null, container);
+            fonTop.anchor.set(0.5);
+
+            let fonBottom = game.add.sprite(x, gameMachine.bottom - y2, 'fonBottom', null, container);
+            fonBottom.anchor.set(0.5);
 
             let logoGM = game.add.sprite(0, gameMachine.top + deltaY, 'logoGM', null, container);
             logoGM.anchor.set(0.5);
@@ -60,10 +69,10 @@ export let view = (() => {
 
         addLight: function ({
             game = model.el('game'),
-            container = model.group('bg')
+            container = model.group('main')
         }) {
             for (let i = 0; i < 3; i++) {
-                let topLight = game.add.sprite(0 - i * game.rnd.integerInRange(25, 35), 0 - i * game.rnd.integerInRange(15, 25), 'topLight', null, container);
+                let topLight = game.add.sprite(0 - i * game.rnd.integerInRange(25, 35), 0 - i * game.rnd.integerInRange(15, 25), 'topLight');
                 topLight.alpha = game.rnd.integerInRange(0, 70) / 100;
                 game.add.tween(topLight)
                     .to({alpha: game.rnd.integerInRange(30, 70) / 100}, game.rnd.integerInRange(3000, 5000), 'Linear', true, null, -1, true);
@@ -112,9 +121,9 @@ export let view = (() => {
 
         addBubbles: function ({
             game = model.el('game'),
-            container = model.group('bg')
+            container = model.group('main')
         }) {
-            let emitter = game.add.emitter(game.world.centerX, game.height + 200, 400);
+            let emitter = game.add.emitter(0, game.height + 200, 400);
             container.add(emitter);
             emitter.makeParticles('bubble');
             emitter.width = game.width;

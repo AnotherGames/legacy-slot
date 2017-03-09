@@ -180,8 +180,10 @@ export class FS {
             // });
         }
 
+        mainView.draw.addLight({});
+
         // Добавляем маску
-        fsView.draw.machineMask({});
+        // fsView.draw.machineMask({});
         // Рисуем множитель
         fsView.draw.Multi({
             start: this.fsMulti

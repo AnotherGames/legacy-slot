@@ -23,7 +23,7 @@ export let controller = (() => {
 
         // Восстановление экрана с которого мы ошли на Фри Спины
         let firstWheels = checkFirstScreen();
-        let deltaY = (model.desktop) ? 55 : 25;
+        let deltaY = (model.desktop) ? 45 : -10;
 
         // Заполняемм колеса элементами
         for (let i = 0; i < 5; i++) {

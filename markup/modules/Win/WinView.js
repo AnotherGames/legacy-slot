@@ -15,7 +15,7 @@ export let view = (() => {
         }) {
             let elSize = config[model.res].elements;
             let upWheels = [];
-            let deltaY = (model.desktop) ? 55 : 25;
+            let deltaY = (model.desktop) ? 45 : -10;
             for (let i = 0; i < 5; i++) {
                 upWheels.push([]);
                 for (let j = 0; j < 3; j++) {

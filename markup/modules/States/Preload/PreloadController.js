@@ -80,8 +80,8 @@ export class Preload {
         const game = model.el('game');
         game.load.spritesheet('bigFish', 'bonus/bigFish.png', 226, 182, 12);
         game.load.image('mainBG', 'bg/mainBG.png');
-        game.load.image('transitionBG1', 'bg/transitionBG1.png');
-        game.load.image('transitionBG2', 'bg/transitionBG2.jpg');
+        game.load.image('fonTop', 'bg/fonTop.png');
+        game.load.image('fonBottom', 'bg/fonBottom.png');
         game.load.image('bubble', 'bg/bubble.png');
         // game.load.image('eyeLight', 'bg/eyeLight.png');
         game.load.image('topLight', 'bg/topLight.png');
@@ -122,6 +122,8 @@ export class Preload {
     loadFSAssets() {
         const game = model.el('game');
         game.load.image('fsBG', 'bg/fsBG.png');
+        game.load.image('fonTopFS', 'bg/fonTopFS.png');
+        game.load.image('fonBottomFS', 'bg/fonBottomFS.png');
         game.load.image('octopusChar', 'fs/octopus.png');
         game.load.image('diverChar', 'fs/diver.png');
         game.load.atlasJSONArray('multi', 'fs/multi.png', 'fs/multi.json');
