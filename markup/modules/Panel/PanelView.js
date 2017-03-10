@@ -243,30 +243,58 @@ export let view = (() => {
                 infoRules.scale.set(1.3);
             model.el('infoRules', infoRules);
 
-            let closed = game.add.sprite(infoRules.width + 260, infoRules.height - (infoRules.height - 180), 'closed', null, container);
+            let closed = game.add.sprite(infoRules.right, infoRules.top, 'closed', null, container);
             model.el('closed', closed);
+            closed.x -= closed.width;
 
-            let arrowRight = game.add.sprite(game.width / 2 + 60, infoRules.height + 160, 'ar', null, container);
-            model.el('arrowRight', arrowRight);
+            let infoControllers = game.add.group();
 
-            let arrowLeft = game.add.sprite(game.width / 2 - 100, infoRules.height + 160, 'arLeft', null, container);
-            model.el('arrowLeft', arrowLeft);
+            draw._markers(infoControllers);
+            draw._arrows(infoControllers);
+
+            infoControllers.y = infoRules.bottom - infoControllers.height / 2;
+            infoControllers.x = game.width / 2 - infoControllers.width / 2 + 50;
+
+            container.add(infoControllers);
+            model.group('infoControllers', infoControllers);
+
+            return infoRules;
+        },
+
+        _markers: function (container) {
+            let game = model.el('game');
 
             let infoMarkers = [];
-            let infoMarker = game.add.sprite(game.width / 2 - 80, infoRules.height + 130, 'infoMarker', 'marker_on.png', container);
-                infoMarker.name = 'infoMarker0';
-                infoMarkers.push(infoMarker);
+            let infoMarker = game.add.sprite(60, 0, 'infoMarker', 'marker_on.png', container);
+            let numberOfInfoImages = 8;
+            infoMarker.anchor.set(0.5);
+            infoMarker.name = 'infoMarker0';
+            infoMarkers.push(infoMarker);
 
-            for (let i = 1; i < 8; i++) {
+            for (let i = 1; i < numberOfInfoImages; i++) {
                 let name = 'infoMarker' + i;
-                let counter = i;
-                let marker = game.add.sprite(infoMarker.x, infoRules.height + 130, 'infoMarker', 'marker_off.png', container);
+                let marker = game.add.sprite(infoMarker.x, 0, 'infoMarker', 'marker_off.png', container);
                 marker.name = name;
+                marker.anchor.set(0.5);
                 marker.x = marker.x + 30 * i;
                 infoMarkers.push(marker);
             }
+
             model.el('infoMarkers', infoMarkers);
-            return infoRules;
+        },
+
+        _arrows: function (container) {
+            let game = model.el('game');
+            let infoMarkers = model.el('infoMarkers');
+
+            let arrowRight = game.add.sprite(infoMarkers[infoMarkers.length - 1].x + 50, 85, 'arrow', null, container);
+            arrowRight.anchor.set(0.5);
+            arrowRight.scale.set(-1, 1);
+            model.el('arrowRight', arrowRight);
+
+            let arrowLeft = game.add.sprite(infoMarkers[0].x - 50, 85, 'arrow', null, container);
+            arrowLeft.anchor.set(0.5);
+            model.el('arrowLeft', arrowLeft);
         }
     }
 
