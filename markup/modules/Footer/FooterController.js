@@ -93,25 +93,45 @@ export let controller = (() => {
         }
     };
 
-    function initDesktop() {
+    function initDesktopMain() {
         view.draw.DesktopFooter({});
         view.draw.Time({});
 
-        let homeButton = view.draw.HomeButton({});
+        let homeButton = view.draw.HomeButton({x: 25});
         homeButton.onInputDown.add(handle.Home);
 
-        let menuButton = view.draw.MenuButton({});
+        let menuButton = view.draw.MenuButton({x: 75});
         menuButton.onInputDown.add(handle.Menu);
 
-        let soundButton = view.draw.SoundButton({});
+        let soundButton = view.draw.SoundButton({x: 125});
         soundButton.freezeFrames = true;
         soundButton.onInputDown.add(handle.Sound);
 
-        let fastButton = view.draw.FastButton({});
+        let fastButton = view.draw.FastButton({x: 175});
         fastButton.freezeFrames = true;
         fastButton.onInputDown.add(handle.Fast);
 
-        let fullScreenButton = view.draw.FullScreenButton({});
+        let fullScreenButton = view.draw.FullScreenButton({x: 225});
+        fullScreenButton.onInputDown.add(handle.toggleFullScreen);
+        fullScreenButton.freezeFrames = true;
+    }
+
+    function initDesktopFs() {
+        view.draw.DesktopFooter({});
+        view.draw.Time({});
+
+        let homeButton = view.draw.HomeButton({x: 25});
+        homeButton.onInputDown.add(handle.Home);
+
+        let soundButton = view.draw.SoundButton({x: 75});
+        soundButton.freezeFrames = true;
+        soundButton.onInputDown.add(handle.Sound);
+
+        let fastButton = view.draw.FastButton({x: 125});
+        fastButton.freezeFrames = true;
+        fastButton.onInputDown.add(handle.Fast);
+
+        let fullScreenButton = view.draw.FullScreenButton({x: 175});
         fullScreenButton.onInputDown.add(handle.toggleFullScreen);
         fullScreenButton.freezeFrames = true;
     }
@@ -129,7 +149,8 @@ export let controller = (() => {
     }
 
     return {
-        initDesktop,
+        initDesktopMain,
+        initDesktopFs,
         initMobile,
         updateTime
     };

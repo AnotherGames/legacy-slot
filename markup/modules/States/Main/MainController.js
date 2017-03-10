@@ -81,7 +81,7 @@ export class Main {
             mobileSetBetController.init({});
         } else {    // Desktop
             // Рисуем футер
-            footerController.initDesktop();
+            footerController.initDesktopMain();
 
             mainView.draw.addBird({});
             mainView.draw.addTable({});

@@ -175,7 +175,7 @@ export class FS {
         } else {    // Desktop
             fsView.draw.addCows({});
 
-            footerController.initDesktop();
+            footerController.initDesktopFs();
 
             // Автоматически позиционируем основной контейнер
             this.positionMainContainer();
