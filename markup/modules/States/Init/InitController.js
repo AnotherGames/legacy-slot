@@ -102,6 +102,11 @@ export class Init {
         const game = model.el('game');
         let soundContainer = game.add.group();
         soundContainer.position.set(game.width - 500, game.height - 100);
+
+        let background = game.add.graphics(0, 0);
+        background.beginFill(0xffffff, 0.1);
+        background.drawRoundedRect(soundContainer.x - 30, soundContainer.y - 15, 470, 80, 40);
+
         let style = { font: "bold 42px Arial", fill: "#f3eba0"};
         let textSound = game.add.text(0, 0, "Sound:", style, soundContainer);
         this.styleOff = { font: "bold 42px Arial", fill: "#474747"};
