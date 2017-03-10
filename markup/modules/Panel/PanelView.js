@@ -278,7 +278,9 @@ export let view = (() => {
             infoRules.scale.set(1.3);
             model.el('infoRules', infoRules);
 
-            let closed = game.add.sprite(game.width - 410, 210, 'closed', null, container);
+            let closed = game.add.sprite(infoRules.right, infoRules.top, 'closed', null, container);
+            closed.x -= closed.width;
+            closed.y += 40;
             model.el('closed', closed);
 
             let infoControllers = game.add.group();
