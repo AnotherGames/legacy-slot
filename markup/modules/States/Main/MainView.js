@@ -233,7 +233,7 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('main')
         }) {
-            let gameBG = game.add.sprite(0, 0, 'gameBG', null, container);
+            let gameBG = game.add.sprite(0, 5, 'gameBG', null, container);
             gameBG.anchor.set(0.5);
             model.el('gameBG', gameBG);
 
