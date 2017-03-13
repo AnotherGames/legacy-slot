@@ -294,15 +294,25 @@ export let view = (() => {
             el
         }) {
             let container = el.group.parent;
-            let diver = game.add.spine(0, el.group.y, 'diverBig');
-            if (model.mobile) {
-                diver.scale.set(0.75);
+            // let diver = game.add.spine(0, el.group.y, 'diverBig');
+            // if (model.mobile) {
+            //     diver.scale.set(0.75);
+            // }
+            // diver.pivot.x = 10;
+            // diver.pivot.y = -380;
+            // container.add(diver);
+            // diver.setAnimationByName(1, '1', true);
+            // model.el('diver', diver);
+
+            let mermaid = game.add.sprite(10, el.group.y, 'mermaid', null, container);
+            mermaid.anchor.set(0.5);
+            mermaid.animations.add('move', Phaser.Animation.generateFrameNames('rusalka-idle-x_', 0, 30, '.png', 1), 20, true);
+            mermaid.animations.play('move');
+            if (model.desktop) {
+                mermaid.scale.set(1.3);
             }
-            diver.pivot.x = 10;
-            diver.pivot.y = -380;
-            container.add(diver);
-            diver.setAnimationByName(1, '1', true);
-            model.el('diver', diver);
+            model.el('mermaid', mermaid);
+
         }
 
     };

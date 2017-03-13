@@ -1,0 +1,260 @@
+{"frames": [
+
+{
+	"filename": "rusalka-idle-x_0.png",
+	"frame": {"x":1269,"y":1,"w":190,"h":504},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":24,"w":190,"h":504},
+	"sourceSize": {"w":235,"h":539}
+},
+{
+	"filename": "rusalka-idle-x_1.png",
+	"frame": {"x":1252,"y":511,"w":191,"h":505},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":24,"w":191,"h":505},
+	"sourceSize": {"w":235,"h":539}
+},
+{
+	"filename": "rusalka-idle-x_2.png",
+	"frame": {"x":1075,"y":1,"w":192,"h":508},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":23,"w":192,"h":508},
+	"sourceSize": {"w":235,"h":539}
+},
+{
+	"filename": "rusalka-idle-x_3.png",
+	"frame": {"x":872,"y":1036,"w":192,"h":511},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":21,"w":192,"h":511},
+	"sourceSize": {"w":235,"h":539}
+},
+{
+	"filename": "rusalka-idle-x_4.png",
+	"frame": {"x":855,"y":520,"w":194,"h":514},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":20,"w":194,"h":514},
+	"sourceSize": {"w":235,"h":539}
+},
+{
+	"filename": "rusalka-idle-x_5.png",
+	"frame": {"x":657,"y":527,"w":196,"h":518},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":17,"w":196,"h":518},
+	"sourceSize": {"w":235,"h":539}
+},
+{
+	"filename": "rusalka-idle-x_6.png",
+	"frame": {"x":457,"y":1,"w":202,"h":524},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":13,"w":202,"h":524},
+	"sourceSize": {"w":235,"h":539}
+},
+{
+	"filename": "rusalka-idle-x_7.png",
+	"frame": {"x":225,"y":537,"w":209,"h":529},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":8,"w":209,"h":529},
+	"sourceSize": {"w":235,"h":539}
+},
+{
+	"filename": "rusalka-idle-x_8.png",
+	"frame": {"x":1,"y":1072,"w":216,"h":533},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":5,"w":216,"h":533},
+	"sourceSize": {"w":235,"h":539}
+},
+{
+	"filename": "rusalka-idle-x_9.png",
+	"frame": {"x":1,"y":537,"w":222,"h":533},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":3,"w":222,"h":533},
+	"sourceSize": {"w":235,"h":539}
+},
+{
+	"filename": "rusalka-idle-x_10.png",
+	"frame": {"x":1,"y":1,"w":229,"h":534},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":0,"w":229,"h":534},
+	"sourceSize": {"w":235,"h":539}
+},
+{
+	"filename": "rusalka-idle-x_11.png",
+	"frame": {"x":219,"y":1072,"w":226,"h":531},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":0,"w":226,"h":531},
+	"sourceSize": {"w":235,"h":539}
+},
+{
+	"filename": "rusalka-idle-x_12.png",
+	"frame": {"x":232,"y":1,"w":223,"h":528},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":0,"w":223,"h":528},
+	"sourceSize": {"w":235,"h":539}
+},
+{
+	"filename": "rusalka-idle-x_13.png",
+	"frame": {"x":436,"y":531,"w":219,"h":524},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":0,"w":219,"h":524},
+	"sourceSize": {"w":235,"h":539}
+},
+{
+	"filename": "rusalka-idle-x_14.png",
+	"frame": {"x":447,"y":1057,"w":215,"h":520},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":0,"w":215,"h":520},
+	"sourceSize": {"w":235,"h":539}
+},
+{
+	"filename": "rusalka-idle-x_15.png",
+	"frame": {"x":661,"y":1,"w":209,"h":517},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":209,"h":517},
+	"sourceSize": {"w":235,"h":539}
+},
+{
+	"filename": "rusalka-idle-x_16.png",
+	"frame": {"x":664,"y":1047,"w":206,"h":516},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":206,"h":516},
+	"sourceSize": {"w":235,"h":539}
+},
+{
+	"filename": "rusalka-idle-x_17.png",
+	"frame": {"x":872,"y":1,"w":201,"h":511},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":2,"w":201,"h":511},
+	"sourceSize": {"w":235,"h":539}
+},
+{
+	"filename": "rusalka-idle-x_18.png",
+	"frame": {"x":1051,"y":514,"w":199,"h":509},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":2,"w":199,"h":509},
+	"sourceSize": {"w":235,"h":539}
+},
+{
+	"filename": "rusalka-idle-x_19.png",
+	"frame": {"x":1066,"y":1025,"w":197,"h":505},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":4,"w":197,"h":505},
+	"sourceSize": {"w":235,"h":539}
+},
+{
+	"filename": "rusalka-idle-x_20.png",
+	"frame": {"x":1445,"y":507,"w":196,"h":501},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":6,"w":196,"h":501},
+	"sourceSize": {"w":235,"h":539}
+},
+{
+	"filename": "rusalka-idle-x_21.png",
+	"frame": {"x":1065,"y":1549,"w":195,"h":495},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":10,"w":195,"h":495},
+	"sourceSize": {"w":235,"h":539}
+},
+{
+	"filename": "rusalka-idle-x_22.png",
+	"frame": {"x":1846,"y":1,"w":193,"h":491},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":6,"y":12,"w":193,"h":491},
+	"sourceSize": {"w":235,"h":539}
+},
+{
+	"filename": "rusalka-idle-x_23.png",
+	"frame": {"x":1653,"y":1,"w":191,"h":493},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":7,"y":13,"w":191,"h":493},
+	"sourceSize": {"w":235,"h":539}
+},
+{
+	"filename": "rusalka-idle-x_24.png",
+	"frame": {"x":1643,"y":504,"w":191,"h":494},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":6,"y":15,"w":191,"h":494},
+	"sourceSize": {"w":235,"h":539}
+},
+{
+	"filename": "rusalka-idle-x_25.png",
+	"frame": {"x":1457,"y":1010,"w":191,"h":495},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":17,"w":191,"h":495},
+	"sourceSize": {"w":235,"h":539}
+},
+{
+	"filename": "rusalka-idle-x_26.png",
+	"frame": {"x":872,"y":1549,"w":191,"h":497},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":18,"w":191,"h":497},
+	"sourceSize": {"w":235,"h":539}
+},
+{
+	"filename": "rusalka-idle-x_27.png",
+	"frame": {"x":1454,"y":1522,"w":189,"h":499},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":20,"w":189,"h":499},
+	"sourceSize": {"w":235,"h":539}
+},
+{
+	"filename": "rusalka-idle-x_28.png",
+	"frame": {"x":1461,"y":1,"w":190,"h":501},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":21,"w":190,"h":501},
+	"sourceSize": {"w":235,"h":539}
+},
+{
+	"filename": "rusalka-idle-x_29.png",
+	"frame": {"x":1265,"y":1018,"w":190,"h":502},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":23,"w":190,"h":502},
+	"sourceSize": {"w":235,"h":539}
+},
+{
+	"filename": "rusalka-idle-x_30.png",
+	"frame": {"x":1262,"y":1532,"w":190,"h":504},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":24,"w":190,"h":504},
+	"sourceSize": {"w":235,"h":539}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "mermaid.png",
+	"format": "RGBA8888",
+	"size": {"w":2048,"h":2048},
+	"scale": "0.75",
+	"smartupdate": "$TexturePacker:SmartUpdate:1968416350fdb4cd9e26a5c7bcb849a2:dd9f78355ad686267391665148b85963:edb381f2f65466794243f5f836a6bd21$"
+}
+}

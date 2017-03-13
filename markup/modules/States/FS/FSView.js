@@ -262,24 +262,26 @@ export let view = (() => {
             }, 300);
 
 
-            // draw._drawDiver({});
+            draw._drawMermaid({});
         },
 
-        _drawDiver: function ({
+        _drawMermaid: function ({
             game = model.el('game'),
             container = model.group('panel')
         }) {
-            let x = (model.desktop) ? -50 : 80;
+            let x = (model.desktop) ? -650 : 80;
             let y = (model.desktop) ? -500 : 350;
-            let diverFS = game.add.spine(x, y, 'diverFS');
-            container.add(diverFS);
-            if (model.mobile) {
-                diverFS.scale.set(0.6);
-            }
-            model.el('diverFS', diverFS);
-            diverFS.setAnimationByName(1, 'start', false);
 
-            game.add.tween(diverFS).to({y: diverFS.y + 10}, 3000, 'Linear', true, 500, -1, true);
+            let mermaidFS = game.add.sprite(x, y, 'mermaidFS0', null, container);
+            mermaidFS.anchor.set(0.5);
+            mermaidFS.animations.add('move0', Phaser.Animation.generateFrameNames('rusalka-idle-0_', 0, 30, '.png', 1), 20, true);
+            mermaidFS.animations.play('move0');
+            mermaidFS.width = -mermaidFS.width;
+
+            if (model.desktop) {
+                mermaidFS.scale.set(1.3);
+            }
+            model.el('mermaidFS', mermaidFS);
 
         },
 

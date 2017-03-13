@@ -338,6 +338,18 @@ export let view = (() => {
             machineGroup.glistaContainer = game.add.group();
             model.group('glista', machineGroup.glistaContainer);
             machineGroup.add(machineGroup.glistaContainer);
+
+            // let mermaid = game.add.sprite(0, 0, 'mermaid', null, container);
+            // mermaid.anchor.set(0.5);
+            // // mermaid.pivot.x = 10;
+            // // mermaid.pivot.y = -380;
+            // mermaid.scale.set(1.25);
+            // mermaid.animations.add('move', Phaser.Animation.generateFrameNames('rusalka-idle-x_', 0, 30, '.png', 1), 20, true);
+            // mermaid.animations.play('move');
+            // if (model.desktop) {
+            //     mermaid.scale.set(1.25);
+            // }
+            // console.log(container);
         },
 
         machineMask: function ({

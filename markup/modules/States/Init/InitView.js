@@ -12,7 +12,21 @@ export let view = (() => {
 
     function drawLogo() {
         const game = model.el('game');
-        let initLogo = game.add.sprite(game.world.centerX, game.world.centerY * 0.7, 'logo');
+
+        let mermaid = game.add.sprite(game.world.centerX + 20, game.height * 0.35, 'mermaid');
+        mermaid.anchor.set(0.5);
+        if (model.desktop) {
+            mermaid.scale.set(1.25);
+        }
+        mermaid.animations.add('move', Phaser.Animation.generateFrameNames('rusalka-idle-x_', 0, 30, '.png', 1), 20, true);
+        mermaid.animations.play('move');
+        // let anim = mermaid.animations.getAnimation('move');
+        // anim.enableUpdate = true;
+        // anim.onUpdate.add(() => {
+        //     console.log(anim.currentFrame, anim.frameTotal);
+        // });
+
+        let initLogo = game.add.sprite(game.world.centerX, game.height * 0.6, 'logo');
         initLogo.anchor.set(0.5);
         initLogo.scale.setTo(0.1, 0.1);
         game.add.tween(initLogo.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true);

@@ -128,6 +128,13 @@ export class Preload {
         game.load.image('diverChar', 'fs/diver.png');
         game.load.atlasJSONArray('multi', 'fs/multi.png', 'fs/multi.json');
         game.load.atlasJSONArray('shell', 'fs/shell.png', 'fs/shell.json');
+        game.load.atlasJSONArray('mermaid', 'fs/mermaid.png', 'fs/mermaid.json');
+        game.load.atlasJSONArray('mermaidFS0', 'fs/mermaidFS0.png', 'fs/mermaidFS0.json');
+        game.load.atlasJSONArray('mermaidFS1', 'fs/mermaidFS1.png', 'fs/mermaidFS1.json');
+        game.load.atlasJSONArray('mermaidFS2', 'fs/mermaidFS2.png', 'fs/mermaidFS2.json');
+        game.load.atlasJSONArray('mermaidFS3', 'fs/mermaidFS3.png', 'fs/mermaidFS3.json');
+        game.load.atlasJSONArray('mermaidFS4', 'fs/mermaidFS4.png', 'fs/mermaidFS4.json');
+        game.load.atlasJSONArray('mermaidFS5', 'fs/mermaidFS5.png', 'fs/mermaidFS5.json');
         if (model.mobile) {
             game.load.image('fsCountBG', 'fs/fsCountBG.png');
             game.load.image('fsLevelBG', 'fs/fsLevelBG.png');
