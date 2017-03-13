@@ -337,19 +337,20 @@ export let view = (() => {
             model.el('closed', closed);
 
             let arrowRight = game.add.sprite(
-                infoRules.width / 2 + 200,
+                infoRules.width / 2 + 220,
                 infoRules.height + 40,
-                'ar',
+                'arrow',
                 null,
                 container);
             model.el('arrowRight', arrowRight);
 
             let arrowLeft = game.add.sprite(
-                infoRules.width / 2 - 40,
+                infoRules.width / 2 ,
                 infoRules.height + 40,
-                'arLeft',
+                'arrow',
                 null,
                 container);
+                arrowLeft.scale.set(-1, 1);
             model.el('arrowLeft', arrowLeft);
 
             let infoMarkers = [];
