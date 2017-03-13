@@ -269,32 +269,55 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('panel')
         }) {
-            let x = (model.desktop) ? -650 : 80;
-            let y = (model.desktop) ? -500 : 350;
+            let x = (model.desktop) ? -830 : 70;
+            let y = (model.desktop) ? -500 : 400;
 
-            let mermaidFS = game.add.sprite(x, y, 'mermaidFS0', null, container);
-            mermaidFS.anchor.set(0.5);
-            mermaidFS.animations.add('move0', Phaser.Animation.generateFrameNames('rusalka-idle-0_', 0, 30, '.png', 1), 20, true);
-            mermaidFS.animations.play('move0');
-            mermaidFS.width = -mermaidFS.width;
+            let mermaidArr = [];
 
-            if (model.desktop) {
-                mermaidFS.scale.set(1.3);
+            for (let i = 0; i < 6; i++) {
+                let mermaidFS = game.add.sprite(x, y, `mermaidFS${i}`, null, container);
+                mermaidFS.anchor.set(0.5);
+                mermaidFS.animations.add('move', Phaser.Animation.generateFrameNames(`rusalka-idle-${i}_`, 0, 30, '.png', 1), 15, true);
+                mermaidFS.animations.play('move');
+                if (model.desktop) {
+                    mermaidFS.scale.set(1.3);
+                } else {
+                    mermaidFS.scale.set(0.8);
+                }
+                mermaidArr.push(mermaidFS);
             }
-            model.el('mermaidFS', mermaidFS);
+
+            mermaidArr.forEach((item, index) => {
+                if (index == 0) {
+                    item.visible = true;
+                } else {
+                    item.visible = false;
+                }
+            });
+            model.el('mermaidArr', mermaidArr);
 
         },
 
         changeLevel: function ({
             number = 1,
-            animation = '0'
+            container = model.group('panel'),
+            game = model.el('game')
         }) {
             let fsLevel = model.el('fsLevel');
             fsLevel.text = number;
             model.el('fsLevel', fsLevel);
 
-            // let diverFS = model.el('diverFS');
-            // diverFS.addAnimationByName(1, animation, false);
+            let mermaidArr = model.el('mermaidArr');
+
+            mermaidArr.forEach((item, index) => {
+                if (index == number) {
+                    item.visible = true;
+                } else {
+                    item.visible = false;
+                }
+            });
+
+
             // soundController.sound.playSound({currentSound: 'diverDown'});
         },
 

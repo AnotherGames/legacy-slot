@@ -84,6 +84,8 @@ export let controller = (() => {
         let multiValue = rollData.FsBonus.Multi;
         let currMulti = model.data('fsMulti');
         let multiCounter = model.el('multiCounter');
+        console.warn(multiValue);
+        console.warn(currMulti);
 
         // Увеличиваем мульти(разбивание бутылки)
         if (multiValue > currMulti) {

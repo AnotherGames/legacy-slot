@@ -76,6 +76,7 @@ body:not(.ios) {
     box-sizing: border-box;
     padding: 0 10%;
     width: 100%;
+    color: #fff;
 }
 
 #popup img{
@@ -86,9 +87,10 @@ body:not(.ios) {
     margin: 0;
     font: 1.5vw arial;
     position: absolute;
-    top: 85%;
+    top: 75%;
     width: 100%;
     text-align: center;
+    color: #fff;
 }
 
 #settings {

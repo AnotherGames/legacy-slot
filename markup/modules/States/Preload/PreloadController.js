@@ -124,8 +124,8 @@ export class Preload {
         game.load.image('fsBG', 'bg/fsBG.png');
         game.load.image('fonTopFS', 'bg/fonTopFS.png');
         game.load.image('fonBottomFS', 'bg/fonBottomFS.png');
-        game.load.image('octopusChar', 'fs/octopus.png');
-        game.load.image('diverChar', 'fs/diver.png');
+        // game.load.image('octopusChar', 'fs/octopus.png');
+        // game.load.image('diverChar', 'fs/diver.png');
         game.load.atlasJSONArray('multi', 'fs/multi.png', 'fs/multi.json');
         game.load.atlasJSONArray('shell', 'fs/shell.png', 'fs/shell.json');
         game.load.atlasJSONArray('mermaid', 'fs/mermaid.png', 'fs/mermaid.json');
