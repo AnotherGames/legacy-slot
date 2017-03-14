@@ -13,25 +13,35 @@ export let view = (() => {
     function drawLogo() {
         const game = model.el('game');
 
+        let logoBack = game.add.spine(game.world.centerX, game.world.centerY, 'logoBack');
+        logoBack.setAnimationByName(0, 'new', false);
+        logoBack.addAnimationByName(0, 'idle', true);
+        if (model.mobile) {
+            logoBack.scale.set(0.66);
+        }
+
         let mermaid = game.add.sprite(game.world.centerX + 20, game.height * 0.35, 'mermaid');
         mermaid.anchor.set(0.5);
-        if (model.desktop) {
-            mermaid.scale.set(1.25);
-        }
+        mermaid.scale.set(0.1);
+        mermaid.alpha = 0;
         mermaid.animations.add('move', Phaser.Animation.generateFrameNames('rusalka-idle-x_', 0, 30, '.png', 1), 20, true);
         mermaid.animations.play('move');
-        // let anim = mermaid.animations.getAnimation('move');
-        // anim.enableUpdate = true;
-        // anim.onUpdate.add(() => {
-        //     console.log(anim.currentFrame, anim.frameTotal);
-        // });
 
-        let initLogo = game.add.sprite(game.world.centerX, game.height * 0.6, 'logo');
-        initLogo.anchor.set(0.5);
-        initLogo.scale.setTo(0.1, 0.1);
-        game.add.tween(initLogo.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true);
-        model.el('initLogo', initLogo);
-        return initLogo;
+        let scaleX = (model.desktop) ? 1.25 : 1.0;
+        let scaleY = (model.desktop) ? 1.25 : 1.0;
+        game.add.tween(mermaid).to({alpha: 1}, 500, 'Linear', true);
+        game.add.tween(mermaid.scale).to({x: scaleX, y: scaleY}, 1500, Phaser.Easing.Elastic.Out, true);
+
+        let logoFront = game.add.spine(game.world.centerX, game.world.centerY, 'logoFront');
+        logoFront.setAnimationByName(0, 'new', false);
+        logoFront.addAnimationByName(0, 'idle', true);
+        if (model.mobile) {
+            logoFront.scale.set(0.66);
+        }
+
+        let logoSmall = game.add.sprite(game.width * 0.1, game.height * 0.92, 'logoSmall');
+        logoSmall.anchor.set(0.5);
+
     }
 
     function drawPlay() {

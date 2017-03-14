@@ -1,0 +1,48 @@
+
+ZST-back.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+img/Calipso_Zastavka_0007_Layer-5
+  rotate: false
+  xy: 767, 320
+  size: 192, 188
+  orig: 192, 188
+  offset: 0, 0
+  index: -1
+img/Calipso_Zastavka_0008_Layer-4
+  rotate: false
+  xy: 2, 2
+  size: 58, 57
+  orig: 58, 57
+  offset: 0, 0
+  index: -1
+img/Calipso_Zastavka_0009_Layer-3
+  rotate: true
+  xy: 442, 64
+  size: 184, 215
+  orig: 184, 215
+  offset: 0, 0
+  index: -1
+img/Calipso_Zastavka_0010_Layer-2
+  rotate: false
+  xy: 442, 250
+  size: 323, 258
+  orig: 323, 258
+  offset: 0, 0
+  index: -1
+img/Calipso_Zastavka_0012_Layer-1
+  rotate: true
+  xy: 659, 94
+  size: 154, 131
+  orig: 154, 131
+  offset: 0, 0
+  index: -1
+img/Calipso_Zastavka_0013_Layer-6
+  rotate: false
+  xy: 2, 61
+  size: 438, 447
+  orig: 438, 447
+  offset: 0, 0
+  index: -1

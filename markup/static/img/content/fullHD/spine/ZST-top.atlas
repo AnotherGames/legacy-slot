@@ -1,0 +1,83 @@
+
+ZST-top.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+img/Calipso_Zastavka_0000_twister-text-effect-copy-2
+  rotate: false
+  xy: 364, 703
+  size: 324, 314
+  orig: 324, 314
+  offset: 0, 0
+  index: -1
+img/Calipso_Zastavka_0001_twister-text-effect-copy-3
+  rotate: false
+  xy: 690, 701
+  size: 316, 316
+  orig: 316, 316
+  offset: 0, 0
+  index: -1
+img/Calipso_Zastavka_0002_twister-text-effect-copy-4
+  rotate: false
+  xy: 2, 321
+  size: 323, 336
+  orig: 323, 336
+  offset: 0, 0
+  index: -1
+img/Calipso_Zastavka_0003_twister-text-effect-copy-5
+  rotate: false
+  xy: 327, 309
+  size: 253, 348
+  orig: 253, 348
+  offset: 0, 0
+  index: -1
+img/Calipso_Zastavka_0004_twister-text-effect-copy-6
+  rotate: true
+  xy: 324, 49
+  size: 258, 341
+  orig: 258, 341
+  offset: 0, 0
+  index: -1
+img/Calipso_Zastavka_0005_twister-text-effect-copy-7
+  rotate: false
+  xy: 2, 2
+  size: 320, 317
+  orig: 320, 317
+  offset: 0, 0
+  index: -1
+img/Calipso_Zastavka_0006_twister-text-effect
+  rotate: false
+  xy: 2, 659
+  size: 360, 358
+  orig: 360, 358
+  offset: 0, 0
+  index: -1
+img/Stars_0000_twister-text-effect-copy-9
+  rotate: false
+  xy: 582, 558
+  size: 164, 141
+  orig: 164, 141
+  offset: 0, 0
+  index: -1
+img/Stars_0001_twister-text-effect-copy-8
+  rotate: false
+  xy: 748, 561
+  size: 133, 138
+  orig: 133, 138
+  offset: 0, 0
+  index: -1
+img/Stars_0002_twister-text-effect-copy
+  rotate: true
+  xy: 883, 565
+  size: 134, 113
+  orig: 134, 113
+  offset: 0, 0
+  index: -1
+img/Stars_0003_twister-text-effect
+  rotate: false
+  xy: 582, 401
+  size: 146, 155
+  orig: 146, 155
+  offset: 0, 0
+  index: -1

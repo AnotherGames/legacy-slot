@@ -72,7 +72,7 @@ export class Preload {
         game.load.path = `static/img/content/${model.res}/`;
         game.load.image('initBG', 'bg/initBG.png');
         game.load.image('play', 'preloader/play.png');
-        game.load.image('logo', 'bg/logo.png');
+        game.load.image('logoSmall', 'bg/logoSmall.png');
         game.load.atlasJSONArray('text', 'text/text.png', 'text/text.json');
     }
 
@@ -83,12 +83,9 @@ export class Preload {
         game.load.image('fonTop', 'bg/fonTop.png');
         game.load.image('fonBottom', 'bg/fonBottom.png');
         game.load.image('bubble', 'bg/bubble.png');
-        // game.load.image('eyeLight', 'bg/eyeLight.png');
         game.load.image('topLight', 'bg/topLight.png');
-        // game.load.spritesheet('labelLight', 'bg/labelLight.png', 617, 508, 3);
         game.load.spritesheet('fish', 'bg/fish.png', 103, 33, 12);
         game.load.spritesheet('shark', 'bg/shark.png', 493, 188, 12);
-        // game.load.image('eyeLight', 'bg/eyeLight.png');
         game.load.image('gameMachine', 'game/gameMachine.png');
         game.load.image('gameMachineBG', 'game/gameMachineBG.png');
         game.load.image('lineLeft', 'game/lineLeft.png');
@@ -111,7 +108,6 @@ export class Preload {
         if (model.desktop) {
             game.load.image('panelBG', 'game/panelBG.png');
             game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
-            // game.load.image('gameMachineFS', 'game/gameMachineFS.png');
             game.load.image('autoSelect', 'desk_buttons/autoSelect.png');
         }
         if (model.mobile) {
@@ -125,8 +121,6 @@ export class Preload {
         game.load.image('fsBG', 'bg/fsBG.png');
         game.load.image('fonTopFS', 'bg/fonTopFS.png');
         game.load.image('fonBottomFS', 'bg/fonBottomFS.png');
-        // game.load.image('octopusChar', 'fs/octopus.png');
-        // game.load.image('diverChar', 'fs/diver.png');
         game.load.atlasJSONArray('multi', 'fs/multi.png', 'fs/multi.json');
         game.load.atlasJSONArray('shell', 'fs/shell.png', 'fs/shell.json');
         game.load.atlasJSONArray('mermaid', 'fs/mermaid.png', 'fs/mermaid.json');
@@ -165,10 +159,12 @@ export class Preload {
 
     loadSpineAssets() {
         const game = model.el('game');
-        game.load.spine('diverBig', 'spine/Vodolaz.json');
-        game.load.spine('diverFS', 'spine/sunken.json');
-        game.load.spine('chestFS', 'spine/skeleton.json');
-        game.load.spine('ink', 'spine/ink.json');
+        game.load.spine('logoBack', 'spine/ZST-back.json');
+        game.load.spine('logoFront', 'spine/ZST-top.json');
+        // game.load.spine('diverBig', 'spine/Vodolaz.json');
+        // game.load.spine('diverFS', 'spine/sunken.json');
+        // game.load.spine('chestFS', 'spine/skeleton.json');
+        // game.load.spine('ink', 'spine/ink.json');
 
     }
 
