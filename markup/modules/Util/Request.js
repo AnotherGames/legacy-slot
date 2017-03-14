@@ -6,7 +6,7 @@ export let request = (() => {
     let randomId = Math.round(Math.random() * 100000);
 
     const mode = {
-        normal: 'goldsea3',
+        normal: 'calipso2',
         fsBonus: 'goldfs2',
         doorsBonus: 'goldship2'
     };
