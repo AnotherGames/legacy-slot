@@ -108,7 +108,6 @@ export class Preload {
         if (model.desktop) {
             game.load.image('panelBG', 'game/panelBG.png');
             game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
-            // game.load.image('autoSelect', 'desk_buttons/autoSelect.png');
         }
         if (model.mobile) {
             game.load.atlasJSONArray('mobileButtons', 'mobile_buttons/mobileButtons.png', 'mobile_buttons/mobileButtons.json');
@@ -134,6 +133,7 @@ export class Preload {
             game.load.image('fsCountBG', 'fs/fsCountBG.png');
             game.load.image('fsLevelBG', 'fs/fsLevelBG.png');
             game.load.image('fsMultiBG', 'fs/fsMultiBG.png');
+            game.load.image('autoSelect', 'fs/autoSelect.png');
         } else {
             game.load.image('panelBGfs', 'game/panelBGfs.png');
         }

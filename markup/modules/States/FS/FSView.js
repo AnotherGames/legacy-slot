@@ -326,21 +326,19 @@ export let view = (() => {
             container = model.group('panel'),
             start = 15,
             fontDesktop = '80px Helvetica, Arial',
-            fontMobile = '50px Helvetica, Arial'
+            fontMobile = '40px Helvetica, Arial'
         }) {
             let x, y, deltaX, deltaY, font;
             if (model.mobile) {
                 x = 80;
-                y = 100;
+                y = 110;
                 deltaX = 0;
-                deltaY = 13;
+                deltaY = 3;
                 font = fontMobile;
 
-                let fsCountBG = game.add.sprite(x, y, 'fsCountBG', null, container);
+                let fsCountBG = game.add.sprite(x, y, 'autoSelect', null, container);
                 fsCountBG.anchor.set(0.5);
-                if (model.desktop) {
-                    fsCountBG.scale.set(1.3);
-                }
+                fsCountBG.scale.set(1.5);
                 model.el('fsCountBG', fsCountBG);
             } else {
                 x = 10;
