@@ -2,31 +2,47 @@
 
 {
 	"filename": "bigW.png",
-	"frame": {"x":1,"y":215,"w":931,"h":237},
+	"frame": {"x":1,"y":468,"w":931,"h":237},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":39,"y":68,"w":931,"h":237},
 	"sourceSize": {"w":1001,"h":362}
 },
 {
+	"filename": "bonusLevel.png",
+	"frame": {"x":1,"y":1,"w":1000,"h":251},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1000,"h":251},
+	"sourceSize": {"w":1000,"h":251}
+},
+{
 	"filename": "continue.png",
-	"frame": {"x":1,"y":737,"w":304,"h":76},
+	"frame": {"x":1,"y":1243,"w":304,"h":76},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":15,"y":13,"w":304,"h":76},
 	"sourceSize": {"w":333,"h":101}
 },
 {
-	"filename": "freespins.png",
-	"frame": {"x":1,"y":454,"w":904,"h":281},
+	"filename": "freespin.png",
+	"frame": {"x":1,"y":707,"w":904,"h":281},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":904,"h":281},
 	"sourceSize": {"w":904,"h":281}
 },
 {
+	"filename": "multiplay.png",
+	"frame": {"x":1,"y":990,"w":764,"h":251},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":764,"h":251},
+	"sourceSize": {"w":764,"h":251}
+},
+{
 	"filename": "totalW.png",
-	"frame": {"x":1,"y":1,"w":954,"h":212},
+	"frame": {"x":1,"y":254,"w":954,"h":212},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":24,"y":59,"w":954,"h":212},
@@ -37,8 +53,8 @@
 	"version": "1.0",
 	"image": "text.png",
 	"format": "RGBA8888",
-	"size": {"w":1024,"h":1024},
+	"size": {"w":1024,"h":2048},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:ff3913505080add7f48b8f88edd510cb:f707d57fe95d2f05e32fb0d09fd75c80:a569396aede2f37d3ec322fe54e4aaf6$"
+	"smartupdate": "$TexturePacker:SmartUpdate:1d8e5b8ff385782a5bfdbb29568f3676:9913d525dfcdd1260fab6d5575bb459e:a569396aede2f37d3ec322fe54e4aaf6$"
 }
 }

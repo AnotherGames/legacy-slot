@@ -40,7 +40,7 @@ export let view = (() => {
         model.el('transitionBG', transitionBG);
 
         // Надпись Free Spins
-        let freeSpinsText = game.add.sprite(game.width / 2, game.height * 0.2, 'text', 'freespins.png', transitionContainer);
+        let freeSpinsText = game.add.sprite(game.width / 2, game.height * 0.2, 'text', 'freespin.png', transitionContainer);
         freeSpinsText.anchor.set(0.5);
         freeSpinsText.scale.set(0.1);
         model.el('freeSpinsText', freeSpinsText);

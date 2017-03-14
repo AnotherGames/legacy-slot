@@ -1,5 +1,4 @@
 import { config } from 'modules/Util/Config';
-import { model } from 'modules/Model/Model';
 
 export class Glista {
     /*  param: {
@@ -16,15 +15,15 @@ export class Glista {
             console.error('constructor: param is not object');
             return;
         }
-        if (typeof param.game === 'undefined') {
+        if (param.game === undefined) {
             console.error('constructor: param.game is undefined', param);
             return;
         }
-        if (typeof param.lightParent === 'undefined') {
+        if (param.lightParent === undefined) {
             console.error('constructor: param.parent is undefined', param);
             return;
         }
-        if (typeof param.parent === 'undefined') {
+        if (param.parent === undefined) {
             console.error('constructor: param.parent is undefined', param);
             return;
         }
@@ -64,13 +63,15 @@ export class Glista {
 
         this.sprites = [];
         this.light = [];
-        for (let atlasInd = 0; atlasInd <= 30; atlasInd++) {
-            let sprite = this.game.add.sprite( atlasInd * -80, 0, 'bubble', null, param.parent);
-            sprite.anchor.set(0.5);
+        for (let atlasInd = 0; atlasInd <= 8; atlasInd++) {
+            this.rnd = this.game.rnd.integerInRange(1, 5);
+            let sprite = this.game.add.sprite( atlasInd * -80, 0, 'glista', `fish${this.rnd}.png`, param.parent);
+            sprite.anchor.set(0.5, 0.5);
+            sprite.myDeltaY = this.game.rnd.integerInRange(-30, 30);
+            sprite.myScale = this.game.rnd.integerInRange(10, 15) / 10;
             sprite.visible = false;
-            sprite.myDeltaY = this.game.rnd.integerInRange(-30, 30) + (model.desktop) ? 40 : -10;
-            sprite.myScale = this.game.rnd.integerInRange(1, 5) / (atlasInd + 5);
             this.sprites.push(sprite);
+            // this.game.add.tween(sprite).to({angle: 360}, this.game.rnd.integerInRange(50 * 6, 80 * 6), null, true, 0, -1);
 
             // let lightSprite = this.game.add.sprite( atlasInd * -80, 0, 'ligthGlista', null, param.lightParent);
             // lightSprite.scale.set(1.3 - 0.2 * atlasInd);
@@ -161,7 +162,7 @@ export class Glista {
 
         let nodes = [];
 
-        for (let spriteInd = 0; spriteInd < this.sprites.length; spriteInd++) {
+        for (let spriteInd = 0; spriteInd < 9; spriteInd++) {
             this.sprites[spriteInd].visible = true;
             this.sprites[spriteInd].position.set(this.bezierPath.x[0], this.bezierPath.y[0]);
             this.sprites[spriteInd].rotation = 0;
@@ -177,7 +178,7 @@ export class Glista {
         this._clock.start();
         this.timer = 0;
         this.progress = 0;
-        let margin = 0.015;
+        let margin = 0.04;
 
 
         let anim = function () {
@@ -188,12 +189,12 @@ export class Glista {
             }
 
             if (_this.progress < 0.5) {
-                margin = 0.015 - 0.015 * _this.progress;
+                margin = 0.04 - 0.015 * _this.progress;
             } else {
-                margin = 0.015 - 0.015 * (1 - _this.progress);
+                margin = 0.04 - 0.015 * (1 - _this.progress);
             }
 
-            for (let spriteInd = 0; spriteInd < _this.sprites.length; spriteInd++) {
+            for (let spriteInd = 0; spriteInd < 6; spriteInd++) {
                 let progress = _this.progress - margin * spriteInd;
                 if (progress <= 0) {
                     break;
@@ -208,9 +209,9 @@ export class Glista {
                 _this.sprites[spriteInd].scale.set(_this.sprites[spriteInd].myScale);
                 // _this.light[spriteInd].position.set(px, py);
                 // if (progress < 0.5) {
-                //     _this.sprites[spriteInd].scale.set(1.2 - 1.2 * progress);
+                //     _this.sprites[spriteInd].scale.set((1.2 - 1.2 * progress) * _this.sprites[spriteInd].myScale);
                 // } else {
-                //     _this.sprites[spriteInd].scale.set(1.2 * progress);
+                //     _this.sprites[spriteInd].scale.set(1.2 * progress * _this.sprites[spriteInd].myScale);
                 // }
                 _this.sprites[spriteInd].rotation = angle;
             }
@@ -219,7 +220,7 @@ export class Glista {
                 _this.isPlay = false;
                 _this.game.frameAnims.splice(_this.game.frameAnims.indexOf(anim), 1);
 
-                for (let spriteInd = 0; spriteInd < _this.sprites.length; spriteInd++) {
+                for (let spriteInd = 0; spriteInd < 9; spriteInd++) {
                     _this.sprites[spriteInd].visible = false;
                     // _this.light[spriteInd].visible = false;
                 }
@@ -232,7 +233,6 @@ export class Glista {
         this.game.frameAnims.push(anim);
     }
     remove() {
-        let game = model.el('game');
         if (this.isPlay) {
             console.error('remove: glista is play.');
             return;
@@ -243,10 +243,7 @@ export class Glista {
         }
         this.isRemove = true;
         this.sprites.forEach((sprite) => {
-            game.add.tween(sprite).to({alpha: 0}, 300, 'Linear', true)
-                .onComplete.add(() => {
-                    sprite.destroy();
-                });
+            sprite.destroy();
         });
         // this.light.forEach((item) => {
         //     item.destroy();

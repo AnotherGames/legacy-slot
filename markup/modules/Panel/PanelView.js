@@ -243,12 +243,12 @@ export let view = (() => {
 
             let infoTableBg = game.add.sprite(x, y, 'infoTableBg', null, container);
             infoTableBg.anchor.set(0.5);
-            infoTableBg.scale.set((model.desktop) ? 1.3 : 1);
+            infoTableBg.scale.set((model.desktop) ? 0.9 : 0.6);
             model.el('infoTableBg', infoTableBg);
 
             let infoTable = game.add.sprite(x, y, 'infoTable', '1_en.png', container);
             infoTable.anchor.set(0.5);
-            infoTable.scale.set((model.desktop) ? 1.3 : 1);
+            infoTable.scale.set((model.desktop) ? 1.2 : 0.9);
             model.el('infoTable', infoTable);
 
             let closeButton = game.add.sprite(game.width - 170, 120, 'closeButton', null, container);
@@ -294,11 +294,11 @@ export let view = (() => {
             let game = model.el('game');
             let infoMarkers = model.el('infoMarkers');
 
-            let arrowRight = game.add.sprite(infoMarkers[infoMarkers.length - 1].x + 50, 85, 'arrow', null, container);
+            let arrowRight = game.add.sprite(infoMarkers[infoMarkers.length - 1].x + 50, 45, 'arrow', null, container);
             arrowRight.anchor.set(0.5);
             model.el('arrowRight', arrowRight);
 
-            let arrowLeft = game.add.sprite(infoMarkers[0].x - 50, 85, 'arrow', null, container);
+            let arrowLeft = game.add.sprite(infoMarkers[0].x - 50, 45, 'arrow', null, container);
             arrowLeft.anchor.set(0.5);
             arrowLeft.scale.set(-1, 1);
             model.el('arrowLeft', arrowLeft);
