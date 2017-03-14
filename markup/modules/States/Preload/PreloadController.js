@@ -88,10 +88,11 @@ export class Preload {
         game.load.image('gameShadow', 'game/gameShadow.png');
         game.load.image('aim', 'other/aim.png');
         game.load.atlasJSONArray('shuriken', 'other/shuriken.png', 'other/shuriken.json');
-        game.load.image('closed', 'other/closed.png');
+        game.load.image('closeButton', 'other/closeButton.png');
+        game.load.image('arrow', 'other/arrow.png');
+        game.load.image('infoTableBg', 'other/infoTableBg.png');
+        game.load.atlasJSONArray('infoTable', 'other/infoTable.png', 'other/infoTable.json');
         game.load.image('coinGold', 'other/coinGold.png');
-        game.load.image('ar', 'other/ar.png');
-        game.load.atlasJSONArray('info', 'other/info.png', 'other/info.json');
         game.load.atlasJSONArray('infoMarker', 'other/infoMarker.png', 'other/infoMarker.json');
         game.load.image('winLine', 'win/winLine.png');
         game.load.image('winTotal', 'win/winTotal.png');
