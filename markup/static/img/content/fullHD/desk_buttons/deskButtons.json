@@ -65,7 +65,7 @@
 	"sourceSize": {"w":115,"h":54}
 },
 {
-	"filename": "maxBetHover.png",
+	"filename": "maxBetClose.png",
 	"frame": {"x":382,"y":148,"w":115,"h":54},
 	"rotated": false,
 	"trimmed": false,
@@ -73,8 +73,16 @@
 	"sourceSize": {"w":115,"h":54}
 },
 {
-	"filename": "maxBetOn.png",
+	"filename": "maxBetHover.png",
 	"frame": {"x":382,"y":204,"w":115,"h":54},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":115,"h":54},
+	"sourceSize": {"w":115,"h":54}
+},
+{
+	"filename": "maxBetOn.png",
+	"frame": {"x":382,"y":260,"w":115,"h":54},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":115,"h":54},
@@ -151,6 +159,6 @@
 	"format": "RGBA8888",
 	"size": {"w":512,"h":512},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:8eaab860607a236591fca622d6667f32:46437c43521fa4520d5a839f9acec4ea:7216a24ceb66389c4ebee7eae85622d5$"
+	"smartupdate": "$TexturePacker:SmartUpdate:8198632c545f3b19efbd93c2bed6ac04:7160759ae4c95d060d463abcf9856675:7216a24ceb66389c4ebee7eae85622d5$"
 }
 }
