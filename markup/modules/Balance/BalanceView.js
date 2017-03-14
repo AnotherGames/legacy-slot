@@ -104,12 +104,12 @@ export let view = (() => {
             betSumValue = model.balance('betSum'),
             coinValueAmount = model.balance('coinValue'),
             betValueAmount = model.balance('betValue'),
-            sumStyle = {font: 'bold 27px Titania, Arial', fill: '#fff', align: 'center'},
-            valueStyle = {font: 'bold 25px Titania, Arial', fill: '#fff', align: 'center'},
-            sumCoinStyle = {font: 'bold 27px Titania, Arial', fill: '#fff', align: 'center'},
-            valueCoinStyle = {font: 'bold 22px Titania, Arial', fill: '#fff', align: 'center'},
-            y = [-20, -33],
-            x = [-320, -155, 150, 310]
+            sumStyle = {font: 'bold 27px Helvetica, Arial', fill: '#fff', align: 'center'},
+            valueStyle = {font: 'bold 27px Helvetica, Arial', fill: '#fff', align: 'center'},
+            sumCoinStyle = {font: 'bold 27px Helvetica, Arial', fill: '#fff', align: 'center'},
+            valueCoinStyle = {font: 'bold 22px Helvetica, Arial', fill: '#fff', align: 'center'},
+            y = [-19, -30],
+            x = [-320, -153, 150, 310]
         }) {
 
             let coinSum = game.add.text(x[3], y[0], `${coinSumValue.toFixed(0)}`, sumCoinStyle, container);
@@ -120,8 +120,8 @@ export let view = (() => {
 
             coinSum.setShadow(5, 5, 'rgba(0, 0, 0, 0.7)', 8);
             betSum.setShadow(5, 5, 'rgba(0, 0, 0, 0.7)', 8);
-            coinValue.setShadow(5, 5, 'rgba(0, 0, 0, 0.7)', 8);
-            betValue.setShadow(5, 5, 'rgba(0, 0, 0, 0.7)', 8);
+            coinValue.setShadow(2, 2, 'rgba(0, 0, 0, 0.7)', 8);
+            betValue.setShadow(2, 2, 'rgba(0, 0, 0, 0.7)', 8);
 
             model.el('coinSum', coinSum);
             model.el('betSum', betSum);
@@ -163,8 +163,8 @@ export let view = (() => {
             betSumValue = model.balance('betSum'),
             coinValueAmount = model.balance('coinValue'),
             betValueAmount = model.balance('betValue'),
-            sumStyle = {font: '24px Titania, Arial', fill: '#ffffff', align: 'center'},
-            valueStyle = {font: '27px Titania, Arial', fill: '#ffffff', align: 'center'},
+            sumStyle = {font: '24px Helvetica, Arial', fill: '#ffffff', align: 'center'},
+            valueStyle = {font: '27px Helvetica, Arial', fill: '#ffffff', align: 'center'},
             y = [-17, 99, 133, 148],
             x = [-310, 230, 250, 310]
         }) {

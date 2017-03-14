@@ -115,8 +115,8 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('panel'),
             start = 1,
-            fontDesktop = '60px Titania, Arial',
-            fontMobile = '50px Titania, Arial'
+            fontDesktop = '60px Helvetica, Arial',
+            fontMobile = '50px Helvetica, Arial'
         }) {
 
             let x, y, deltaX = 0, deltaY = 0, font, fsMultiBG;
@@ -229,8 +229,8 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('panel'),
             start = 1,
-            fontDesktop = '60px Titania, Arial',
-            fontMobile = '50px Titania, Arial'
+            fontDesktop = '60px Helvetica, Arial',
+            fontMobile = '50px Helvetica, Arial'
         }) {
 
             let x, y, deltaX = 0, deltaY = 0, font, fsLevelBG;
@@ -325,8 +325,8 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('panel'),
             start = 15,
-            fontDesktop = '80px Titania, Arial',
-            fontMobile = '50px Titania, Arial'
+            fontDesktop = '80px Helvetica, Arial',
+            fontMobile = '50px Helvetica, Arial'
         }) {
             let x, y, deltaX, deltaY, font;
             if (model.mobile) {

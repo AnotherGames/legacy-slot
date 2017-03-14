@@ -36,15 +36,24 @@ export let view = (() => {
         TotalWin: function ({
             winTotalData,
             game = model.el('game'),
-            container = model.group('winTop')
+            container = model.group('winTop'),
+            desktopStyle = {font: 'bold 120px Helvetica, Arial', fill: '#fff', align: 'center',  stroke: '#188bb4', strokeThickness: 5},
+            mobileStyle = {font: 'bold 70px Helvetica, Arial', fill: '#fff', align: 'center',  stroke: '#188bb4', strokeThickness: 5}
         }) {
             if (winTotalData === 0) return;
             let winTotal = game.add.sprite(0, (model.mobile) ? -30 : 20, 'winTotal', null, container);
             winTotal.anchor.set(0.5);
             winTotal.scale.set(1.4);
 
-            let winTotalText = game.add.bitmapText(0, (model.mobile) ? -50 : 0, 'numbersFont2', winTotalData, 100, container);
+            // let winTotalText = game.add.bitmapText(0, (model.mobile) ? -50 : 0, 'numbersFont2', winTotalData, 100, container);
+            let style = (model.desktop) ? desktopStyle : mobileStyle;
+            let winTotalText = game.add.text(0, winTotal.y, winTotalData, style, container);
             winTotalText.anchor.set(0.5);
+
+            let grd = winTotalText.context.createLinearGradient(0, 0, 0, winTotalText.height);
+            grd.addColorStop(0, '#ffffff');
+            grd.addColorStop(1, '#eeeeee');
+            winTotalText.fill = grd;
         },
 
         WinSplash: function ({
@@ -294,15 +303,6 @@ export let view = (() => {
             el
         }) {
             let container = el.group.parent;
-            // let diver = game.add.spine(0, el.group.y, 'diverBig');
-            // if (model.mobile) {
-            //     diver.scale.set(0.75);
-            // }
-            // diver.pivot.x = 10;
-            // diver.pivot.y = -380;
-            // container.add(diver);
-            // diver.setAnimationByName(1, '1', true);
-            // model.el('diver', diver);
 
             let mermaid = game.add.sprite(10, el.group.y, 'mermaid', null, container);
             mermaid.anchor.set(0.5);
