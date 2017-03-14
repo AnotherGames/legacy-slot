@@ -1,7 +1,8 @@
 let arr = [[], [], [], [], []];
 let min = 1;
-let max = 7;
-let wild = 8;
+let game = 'Chibi';
+let max = 8;
+let wild = 9;
 let combLines = 10;
 let initObject = {};
 let rollObject = {};
@@ -18,19 +19,18 @@ let lines =
     [{X: 0, Y: 1}, {X: 1, Y: 0}, {X: 2, Y: 0}, {X: 3, Y: 0}, {X: 4, Y: 1}],
     [{X: 0, Y: 1}, {X: 1, Y: 2}, {X: 2, Y: 2}, {X: 3, Y: 2}, {X: 4, Y: 1}],
     [{X: 0, Y: 2}, {X: 1, Y: 1}, {X: 2, Y: 1}, {X: 3, Y: 1}, {X: 4, Y: 2}]];
-let wins = {};
+let wins = [];
 let Modes = {
     Chibi: ['root', 'fsBonus1', 'shuriken1', 'shuriken2', 'shuriken3', 'shuriken4', 'shuriken5'],
     GoldSea: []
 };
 
 let Symbols = {
-    Chibi: [{Name: 'Jack', Symbol: '1'}, {Name: 'Queen', Symbol: '3'}, {Name: 'King', Symbol: '5'},
-    {Name: 'Ace', Symbol: '7'}, {Name: 'Warrior', Symbol: '2'}, {Name: 'Ninja', Symbol: '4'},
-    {Name: 'Samurai', Symbol: '6'}, {Name: 'Geisha', Symbol: '8'}, {Name: 'Wild', Symbol: '9'},
+    Chibi: [{Name: 'Jack', Symbol: '1'}, {Name: 'Warrior', Symbol: '2'}, {Name: 'Queen', Symbol: '3'},
+     {Name: 'Ninja', Symbol: '4'}, {Name: 'King', Symbol: '5'}, {Name: 'Samurai', Symbol: '6'},
+    {Name: 'Ace', Symbol: '7'}, {Name: 'Geisha', Symbol: '8'}, {Name: 'Wild', Symbol: '9'},
     {Name: 'Scatter', Symbol: '10'}, {Name: 'fsScatter', Symbol: '11'}, {Name: 'Shuriken', Symbol: '12'}]
 };
-
 
 function generateArray() {
     for (let i = 0; i < 5; i++) {
@@ -57,6 +57,7 @@ function firtNumberInWinLine(arrComb) {
 }
 
 function checkForWinLines() {
+    let numinWins = 0;
     for (let k = 0; k < combLines; k++) {
         let win = 0;
         let winNumber = firtNumberInWinLine(winComb[k]);
@@ -70,56 +71,191 @@ function checkForWinLines() {
         }
 
         if (win > 2) {
-            wins[`line${k + 1}`] = win;
+            wins[numinWins] = {
+                Count: win,
+                Line: k + 1,
+                Name: Symbols[game][k].Name,
+                Symbol: winNumber,
+                Win: winNumber * 2
+            };
+            numinWins++;
         }
     }
 }
 
 function addWilds() {
-    let numOfWild = Math.round(Math.random() * (5 - 0) + 0);
+    let numOfWilds = Math.round(Math.random() * (5 - 0) + 0);
 
-    for (let i = 1; i < numOfWild; i++) {
+    for (let i = 1; i < numOfWilds; i++) {
         arr[i][Math.round(Math.random() * (4 - 1) + 1)] = wild;
+    }
+}
+
+
+function addBottleFS(num) {
+    switch (num) {
+        case 3:
+            for (let k = 1; k < 4; k++) {
+                arr[4][k] = wild;
+            }
+        case 2:
+            for (let k = 1; k < 4; k++) {
+                arr[2][k] = wild;
+            }
+        case 1:
+            for (let k = 1; k < 4; k++) {
+                arr[0][k] = wild;
+            }
+            break;
+        default: {
+            break;
+        }
+    }
+}
+
+
+
+let firstRequest = true;
+let firstFs = true;
+let freespins = false;
+let numOfSpins = 0;
+let nextMode = 'root';
+let currentMode = 'root';
+let numOfBottles;
+let fsBonus = {
+    CountFS: numOfSpins,
+    Level: 0,
+    Multi: numOfBottles,
+    TotalFSWinCentes: 0,
+    TotalFSWinCoins: 0
+};
+function checkForFs() {
+    let goFs = (Math.round(Math.random() * (1000 - 0) + 1) > 100) ? true : false;
+    if (goFs) {
+        numOfBottles = Math.round(Math.random() * (3 - 1) + 1);
+        numOfSpins = 20;
+        nextMode = 'fsBonus';
+    } else {
+        nextMode = 'root';
     }
 }
 
 generateArray();
 addWilds();
+// addBottleFS();
 logMatrix();
 checkForWinLines();
 
 console.log(wins);
+function generateRoot() {
+    generateArray();
+    addWilds();
+    checkForWinLines();
+    return {
+        Balance: {
+            BetLevel: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            CoinValue: [1, 2, 5, 10, 20, 50, 100],
+            Currency: 'USD',
+            ScoreCents: 500000,
+            ScoreCons: 500000
+        },
+        FreeSpinsLeft: numOfSpins,
+        FreeSpinsWin: 0,
+        FsBonus: null,
+        LinesCouns: combLines,
+        Mode: currentMode,
+        NextMode: nextMode,
+        Screen: arr,
+        WinLines: wins
+    };
+}
 
-initObject = {
-    Balance: {
-        BetLevel: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-        CoinValue: [1, 2, 5, 10, 20, 50, 100],
-        Currency: 'USD',
-        ScoreCents: 500000,
-        ScoreCons: 500000
-    },
-    FirstScreen: arr,
-    Lines: lines,
-    Modes: Modes.Chibi,
-    Saved: null,
-    SessionID: 753,
-    Symbols: Symbols.Chibi
-};
+function generateFs() {
+    generateArray();
+    addBottleFS();
+    checkForWinLines();
+    return {
+        Balance: {
+            BetLevel: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            CoinValue: [1, 2, 5, 10, 20, 50, 100],
+            Currency: 'USD',
+            ScoreCents: 500000,
+            ScoreCons: 500000
+        },
+        FreeSpinsLeft: numOfSpins,
+        FreeSpinsWin: 0,
+        FsBonus: fsBonus,
+        LinesCouns: combLines,
+        Mode: currentMode,
+        NextMode: nextMode,
+        Screen: arr,
+        WinLines: wins
+    };
+}
 
-rollObject = {
-    Balance: {
-        BetLevel: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-        CoinValue: [1, 2, 5, 10, 20, 50, 100],
-        Currency: 'USD',
-        ScoreCents: 500000,
-        ScoreCons: 500000
-    },
-    FreeSpinsLeft: 0,
-    FreeSpinsWin: 0,
-    FsBonus: null,
-    LinesCouns: combLines,
-    Mode: 'root',
-    NextMode: 'root',
-    Screen: arr,
-    WinLines: []
-};
+function generateInit() {
+    generateArray();
+    addWilds();
+    return {
+        Balance: {
+            BetLevel: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            CoinValue: [1, 2, 5, 10, 20, 50, 100],
+            Currency: 'USD',
+            ScoreCents: 500000,
+            ScoreCons: 500000
+        },
+        FirstScreen: arr,
+        Lines: lines,
+        Modes: Modes.Chibi,
+        Saved: null,
+        SessionID: 753,
+        Symbols: Symbols.Chibi
+    };
+}
+
+function returnParams(mode) {
+    switch (mode) {
+        case 'root':
+            console.log(generateRoot());
+            break;
+        case 'fsBonus':
+            console.log(generateFs());
+            break;
+        case 'init':
+            console.log(generateInit());
+            break;
+        default: {
+            console.log('Uncorrect mode');
+        }
+    }
+}
+
+function request() {
+    if (firstRequest) {
+        returnParams('init');
+        firstRequest = false;
+    } else {
+        currentMode = nextMode;
+        if (numOfSpins > 0) {
+            console.log(numOfSpins);
+            returnParams('fsBonus');
+            numOfSpins--;
+        }
+        if (numOfSpins <= 0) {
+            checkForFs();
+            returnParams('root');
+        }
+    }
+}
+
+
+
+
+
+let button = document.createElement('button');
+button.innerHTML = 'Request';
+
+let body = document.getElementsByTagName('body')[0];
+body.appendChild(button);
+
+button.addEventListener('click', request);
