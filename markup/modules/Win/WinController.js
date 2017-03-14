@@ -176,18 +176,18 @@ export let controller = (() => {
 
             // Запускаем переходной экран
             game.time.events.add(1500, () => {
-                let ink = game.add.spine(game.world.centerX, game.world.centerY, 'ink');
-                if (model.mobile) {
-                    ink.scale.set(0.8);
-                } else {
-                    ink.scale.set(1.4);
-                }
-                model.el('ink', ink);
-                ink.setAnimationByName(1, '1', false);
-                setTimeout(() => {
-                    game.state.start('Bonus');
-                }, 2000);
-                // transitionView.fsStart();
+                transitionView.bonusStart();
+                // let ink = game.add.spine(game.world.centerX, game.world.centerY, 'ink');
+                // if (model.mobile) {
+                //     ink.scale.set(0.8);
+                // } else {
+                //     ink.scale.set(1.4);
+                // }
+                // model.el('ink', ink);
+                // ink.setAnimationByName(1, '1', false);
+                // setTimeout(() => {
+                //     game.state.start('Bonus');
+                // }, 2000);
             });
         }
     }

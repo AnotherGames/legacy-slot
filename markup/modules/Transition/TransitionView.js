@@ -40,18 +40,33 @@ export let view = (() => {
         model.el('transitionBG', transitionBG);
 
         // Надпись Free Spins
-        let freeSpinsText = game.add.sprite(game.width / 2, game.height * 0.2, 'text', 'freespin.png', transitionContainer);
+        let freeSpinsText = game.add.sprite(game.width / 2, -400, 'text', 'freespin.png', transitionContainer);
         freeSpinsText.anchor.set(0.5);
-        freeSpinsText.scale.set(0.1);
+        // freeSpinsText.scale.set(0.1);
         model.el('freeSpinsText', freeSpinsText);
 
         // Счетчик Фри-Спинов
         let freeSpinsCount = model.data('rollResponse').FreeSpinsLeft;
-        let freeSpinsLevel = game.add.bitmapText(game.width / 2, game.height * 0.6, 'numbersFont', freeSpinsCount, 120, transitionContainer);
+        let freeSpinsLevel = game.add.bitmapText(game.width / 2, -400, 'numbersFont', freeSpinsCount, 120, transitionContainer);
         freeSpinsLevel.align = 'center';
         freeSpinsLevel.anchor.set(0.5);
-        freeSpinsLevel.scale.set(0.1);
+        (model.desktop) ? freeSpinsLevel.scale.set(0.6) : freeSpinsLevel.scale.set(0.3) ;
         model.el('freeSpinsLevel', freeSpinsLevel);
+
+        // Надпись Multi
+        let multiText = game.add.sprite(game.width / 2, game.height * 0.2, 'text', 'multiplay.png', transitionContainer);
+        multiText.anchor.set(0.5);
+        multiText.scale.set(0.1);
+        multiText.alpha = 0;
+        model.el('multiText', multiText);
+
+        // Счетчик Multi
+        let multiLevel = game.add.bitmapText(game.width / 2, game.height * 0.6, 'numbersFont', 'x2', 120, transitionContainer);
+        multiLevel.align = 'center';
+        multiLevel.anchor.set(0.5);
+        multiLevel.scale.set(0.1);
+        multiLevel.alpha = 0;
+        model.el('multiLevel', multiLevel);
 
         // Кнопка продолжить
         let continueText = game.add.sprite(game.width / 2,
@@ -69,15 +84,61 @@ export let view = (() => {
         let game = model.el('game');
         let freeSpinsText = model.el('freeSpinsText');
         let freeSpinsLevel = model.el('freeSpinsLevel');
+        let multiText = model.el('multiText');
+        let multiLevel = model.el('multiLevel');
         let continueText = model.el('continueText');
-        let scaleX = (model.desktop) ? 0.6 : 0.3;
-        let scaleY = (model.desktop) ? 0.6 : 0.3;
+        let scaleX = (model.desktop) ?  0.6 : 0.3;
+        let scaleY = (model.desktop) ?  0.6 : 0.3;
+
+        let delta = (model.mobile) ? 215 : 160;
+
+        function _addFSBG(){
+            game.add.tween(freeSpinsText).to({y: game.height * 0.2}, 1500, Phaser.Easing.Bounce.Out, true);
+            game.add.tween(freeSpinsLevel).to({y: game.height * 0.6}, 1500, Phaser.Easing.Bounce.Out, true)
+                .onComplete.add(() => {
+                    _removeFSBG();
+                }, this);
+        }
+
+        function _removeFSBG() {
+            game.add.tween(freeSpinsText.scale).to({x: 0.1, y: 0.1}, 500, Phaser.Easing.Elastic.Out, true);
+            game.add.tween(freeSpinsLevel.scale).to({x: 0.1, y: 0.1}, 500, Phaser.Easing.Elastic.Out, true);
+            game.add.tween(freeSpinsText).to({alpha: 0}, 250, Phaser.Easing.Elastic.Out, true);
+            game.add.tween(freeSpinsLevel).to({alpha: 0}, 250, Phaser.Easing.Elastic.Out, true)
+            _addMultiBG();
+        }
+
+        function _addMultiBG() {
+            game.add.tween(multiText).to({alpha: 1}, 500, 'Linear', true);
+            game.add.tween(multiLevel).to({alpha: 1}, 500, 'Linear', true);
+            game.add.tween(multiText.scale).to({x: 1.0, y: 1.0}, 1500, Phaser.Easing.Elastic.Out, true);
+            game.add.tween(multiLevel.scale).to({x: scaleX, y: scaleY}, 1500, Phaser.Easing.Elastic.Out, true)
+                .onComplete.add(() => {
+                    _removeMultiBG();
+                }, this);
+        }
+
+        function _removeMultiBG() {
+            let fsLevelScale = (model.mobile) ? 0.75 : 1;
+
+            game.add.tween(multiText.scale).to({x: 0.1, y: 0.1}, 500, Phaser.Easing.Elastic.Out, true);
+            game.add.tween(multiLevel.scale).to({x: 0.1, y: 0.1}, 500, Phaser.Easing.Elastic.Out, true);
+            game.add.tween(multiText).to({alpha: 0}, 250, Phaser.Easing.Elastic.Out, true);
+            game.add.tween(multiLevel).to({alpha: 0}, 250, Phaser.Easing.Elastic.Out, true);
+            game.add.tween(freeSpinsText).to({alpha: 1}, 500, 'Linear', true);
+            game.add.tween(freeSpinsLevel).to({alpha: 1}, 500, 'Linear', true);
+            game.add.tween(freeSpinsText.scale).to({x: 1.0, y: 1.0}, 1500, Phaser.Easing.Elastic.Out, true);
+            game.add.tween(freeSpinsLevel.scale).to({x: scaleX, y: scaleY}, 1500, Phaser.Easing.Elastic.Out, true)
+                .onComplete.add(() => {
+                    _removeFSBG();
+                })
+
+        }
 
         // Анимации появления
-        game.add.tween(freeSpinsText.scale).to({x: 1.0, y: 1.0}, 1500, Phaser.Easing.Bounce.Out, true);
-        game.add.tween(freeSpinsLevel.scale).to({x: scaleX, y: scaleY}, 1500, Phaser.Easing.Bounce.Out, true);
-        game.add.tween(continueText.scale).to({x: 1.0, y: 1.0}, 1500, Phaser.Easing.Bounce.Out, true)
-            // Болтание кнопки продолжить
+        _addFSBG();
+
+        game.add.tween(continueText.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true)
             .onComplete.add(() => {
                 continueText.rotation = 0.1;
                 game.add.tween(continueText).to({rotation: -0.1}, 100, 'Linear', true, 0, 4, true)
@@ -236,9 +297,100 @@ export let view = (() => {
         game.frameAnims.push(anim);
     }
 
+    // Бонусный экран
+    function bonusStart() {
+        let game = model.el('game');
+        model.state('transitionScreen', true);
+        // Запускаем затемнение
+        game.camera.flash(0x000000, 500);
+        // Отрисовываем переходной экран
+        _bonusStartDraw();
+        _bonusStartTween();
+        _bonusStartInput();
+        game.input.keyboard.enabled = true;
+        // Автопереход если включен
+        if (model.state('autoTransititon')) {
+            game.time.events.add(config.autoTransitionTime, () => {
+                soundController.sound.playSound({currentSound: 'buttonClick'});
+                soundController.music.stopMusic('startPerehod');
+                model.el('game').state.start('Bonus');
+                model.state('transitionScreen', false);
+            });
+        }
+    }
+
+    function _bonusStartDraw() {
+        let game = model.el('game');
+        let transitionContainer = model.group('transition');
+        // Изменяем музыку
+        soundController.music.stopMusic('fon');
+        soundController.music.playMusic('startPerehod');
+
+        // Отрисовываем фон
+        let transitionBG = game.add.graphics(0, 0, transitionContainer).beginFill(0x000000, 0.8).drawRect(0, 0, game.width, game.height);
+        model.el('transitionBG', transitionBG);
+
+        // Надпись Bonus
+        let bonusText = game.add.sprite(game.width / 2, game.height * 0.2, 'text', 'bonusLevel.png', transitionContainer);
+        bonusText.anchor.set(0.5);
+        bonusText.scale.set(0.1);
+        model.el('bonusText', bonusText);
+
+        // Fish
+        let fishBonus = game.add.sprite(game.width / 2, game.height * 0.5, 'bonusFish', null, transitionContainer);
+        fishBonus.anchor.set(0.5);
+        fishBonus.scale.set(0.1);
+        model.el('fishBonus', fishBonus);
+
+        // Кнопка продолжить
+        let continueText = game.add.sprite(game.width / 2,
+            game.world.height * 0.8,
+            'text',
+            'continue.png',
+            transitionContainer);
+        continueText.anchor.set(0.5);
+        continueText.scale.setTo(0.1, 0.1);
+        model.el('continueText', continueText);
+
+    }
+
+    function _bonusStartTween() {
+        let game = model.el('game');
+        let bonusText = model.el('bonusText');
+        let fishBonus = model.el('fishBonus');
+        let continueText = model.el('continueText');
+
+        // Анимации появления
+        game.add.tween(bonusText.scale).to({x: 1.0, y: 1.0}, 1500, Phaser.Easing.Bounce.Out, true);
+        game.add.tween(fishBonus.scale).to({x: 1.0, y: 1.0}, 1500, Phaser.Easing.Bounce.Out, true);
+        game.add.tween(continueText.scale).to({x: 1.0, y: 1.0}, 1500, Phaser.Easing.Bounce.Out, true)
+            // Болтание кнопки продолжить
+            .onComplete.add(() => {
+                continueText.rotation = 0.1;
+                game.add.tween(continueText).to({rotation: -0.1}, 100, 'Linear', true, 0, 4, true)
+                    .onComplete.add(() => {
+                        continueText.rotation = 0;
+                    }, this);
+            }, this);
+    }
+
+    function _bonusStartInput() {
+        // При клике на фон будет переход на Фри-Спины
+        let transitionBG = model.el('transitionBG');
+        transitionBG.inputEnabled = true;
+        transitionBG.input.priorityID = 2;
+        transitionBG.events.onInputDown.add(function () {
+            soundController.sound.playSound({currentSound: 'buttonClick'});
+            soundController.music.stopMusic('startPerehod');
+            model.el('game').state.start('Bonus');
+            model.state('transitionScreen', false);
+        });
+    }
+
     return {
         fsStart,
-        fsFinish
+        fsFinish,
+        bonusStart
     };
 
 })();
