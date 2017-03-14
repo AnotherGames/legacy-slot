@@ -112,6 +112,7 @@ export class Init {
         background.drawRoundedRect(soundContainer.x - 30, soundContainer.y - 15, 470, 80, 40);
 
         let style = { font: 'bold 42px Arial', fill: '#f3eba0'};
+        game.add.text(0, 0, 'Sound:', style, soundContainer);
         this.styleOff = { font: 'bold 42px Arial', fill: '#474747'};
         this.textOff = game.add.text(170, 0, 'Off', style, soundContainer);
         this.textOff.setStyle(this.styleOff);

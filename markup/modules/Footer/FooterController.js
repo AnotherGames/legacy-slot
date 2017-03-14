@@ -198,9 +198,11 @@ export let controller = (() => {
 
             // после нажатия кнопки и открытия поверх нее меню, она зависает до перовго наведения
             // костыль чтоб исправить это
-            model.el('infoButton').destroy();
-            let infoButton = view.draw.InfoButton({x: 1525, y: model.el('game').height - 100});
-            infoButton.onInputDown.add(handle.openInfo);
+            if (model.desktop) {
+                model.el('infoButton').destroy();
+                let infoButton = view.draw.InfoButton({x: 1525, y: model.el('game').height - 100});
+                infoButton.onInputDown.add(handle.openInfo);
+            }
 
             model.state('infoPanelOpen', true);
             soundController.sound.playSound({sound: 'buttonClick'});

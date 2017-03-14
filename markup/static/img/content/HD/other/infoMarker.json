@@ -2,27 +2,27 @@
 
 {
 	"filename": "marker_off.png",
-	"frame": {"x":1,"y":1,"w":18,"h":18},
+	"frame": {"x":1,"y":1,"w":16,"h":16},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":18},
-	"sourceSize": {"w":18,"h":18}
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
 },
 {
 	"filename": "marker_on.png",
-	"frame": {"x":21,"y":1,"w":18,"h":18},
+	"frame": {"x":1,"y":19,"w":16,"h":16},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":18},
-	"sourceSize": {"w":18,"h":18}
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
 }],
 "meta": {
 	"app": "http://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "infoMarker.png",
 	"format": "RGBA8888",
-	"size": {"w":40,"h":20},
+	"size": {"w":32,"h":64},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:0d3717a94278b6b4eb275786b4ce1c60:f71ceb200627a9373eead3b84d4ec481:def6aa7e90398c3c47efdf83778336ef$"
+	"smartupdate": "$TexturePacker:SmartUpdate:dc67103130abc63ea6c23bc8bdb4feca:f04de00ffa439e45b3aef418db6f2f2b:def6aa7e90398c3c47efdf83778336ef$"
 }
 }
