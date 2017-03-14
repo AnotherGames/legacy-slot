@@ -7,8 +7,8 @@ export let request = (() => {
 
     const mode = {
         normal: 'calipso2',
-        fsBonus: 'goldfs2',
-        doorsBonus: 'goldship2'
+        fsBonus: 'califs1 ',
+        doorsBonus: 'califind1'
     };
 
     function send(name, options) {

@@ -158,7 +158,7 @@ export let controller = (() => {
             mode = data.Mode,
             nextMode = data.NextMode;
 
-        if (mode == 'root' && nextMode == 'shipBonus') {
+        if (mode == 'root' && nextMode == 'findBonus') {
             // Лочим все кнопки
             model.state('buttons:locked', true);
             // Остонавливаем автоплей если был
