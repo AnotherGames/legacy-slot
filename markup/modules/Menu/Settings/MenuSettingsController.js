@@ -1,6 +1,8 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
 
+import Info from '../../../../Info/Info';
+
 import { view } from 'modules/Menu/Settings/MenuSettingsView';
 import { view as mainView } from 'modules/States/Main/MainView';
 import { view as panelView} from 'modules/Panel/PanelView';
@@ -12,22 +14,9 @@ export let controller = (() => {
 
     let game;
     let touchX = 0;
+    let info;
 
     let handle = {
-        _touchEnd: function () {
-            document.removeEventListener('touchend', handle._touchEnd, false);
-            if (touchX + 100 < game.input.mouse.input.x) {
-                panelController.handle.switchInfoLeft();
-            } else
-            if (touchX - 100 > game.input.mouse.input.x) {
-                panelController.handle.switchInfoRight();
-            }
-        },
-        touchRules: function () {
-            touchX = game.input.mouse.input.x;
-
-            document.addEventListener("touchend", handle._touchEnd, false);
-        },
         openSettings: function () {
             if(model.state('buttons:locked')
             || model.state('roll:progress')
@@ -140,13 +129,13 @@ export let controller = (() => {
             model.state('settings', 'rules');
             view.hide.Settings({});
             view.hide.Overlay({});
-            panelController.handle.openInfo();
+            info.open();
         },
         closeRules: function () {
             if (model.state('settings') === 'close') return;
 
             model.state('settings', 'close');
-            panelController.handle.closeInfo();
+            info.handleClose();
         },
         showHistory: function () {
             soundController.sound.playSound({sound : 'buttonClick'});
@@ -211,27 +200,9 @@ export let controller = (() => {
             backButton.input.priorityID = 12;
             backButton.events.onInputDown.add(handle.closeSettings);
 
-            panelView.draw.info({});
-
-            let infoTable = model.el('infoTable');
-            let closeButton = model.el('closeButton');
-            let arrowRight = model.el('arrowRight');
-            let arrowLeft = model.el('arrowLeft');
-
-            infoTable.inputEnabled = true;
-            closeButton.inputEnabled = true;
-            arrowRight.inputEnabled = true;
-            arrowLeft.inputEnabled = true;
-
-            infoTable.input.priorityID = 11;
-            closeButton.input.priorityID = 12;
-            arrowRight.input.priorityID = 12;
-            arrowLeft.input.priorityID = 12;
-
-            infoTable.events.onInputDown.add(handle.touchRules);
-            closeButton.events.onInputDown.add(handle.closeRules);
-            arrowRight.events.onInputDown.add(panelController.handle.switchInfoRight);
-            arrowLeft.events.onInputDown.add(panelController.handle.switchInfoLeft);
+            info = new Info({
+                model
+            });
 
             model.state('settings', 'close');
     }
