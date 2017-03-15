@@ -9,7 +9,6 @@ let rollObject = {};
 let winComb = [[2, 2, 2, 2, 2], [3, 3, 3, 3, 3], [1, 1, 1, 1, 1], [3, 2, 1, 2, 3], [1, 2, 3, 2, 1], [3, 3, 2, 3, 3], [1, 1, 2, 3, 3], [2, 3, 3, 3, 2], [2, 1, 1, 1, 2], [1, 2, 2, 2, 1], [3, 2, 2, 2, 3], [3, 2, 2, 2, 1], [1, 2, 2, 2, 3], [3, 3, 2, 1, 1], [1, 1, 2, 3, 3], [3, 3, 3, 2, 1], [1, 1, 1, 2, 3], [3, 2, 1, 1, 1], [1, 2, 3, 3, 3], [2, 2, 1, 2, 2], [2, 2, 3, 2, 2]];
 let lines =
     [[{X: 0, Y: 1}, {X: 1, Y: 1}, {X: 2, Y: 1}, {X: 3, Y: 1}, {X: 4, Y: 1}],
-    [{X: 0, Y: 1}, {X: 1, Y: 1}, {X: 2, Y: 1}, {X: 3, Y: 1}, {X: 4, Y: 1}],
     [{X: 0, Y: 0}, {X: 1, Y: 0}, {X: 2, Y: 0}, {X: 3, Y: 0}, {X: 4, Y: 0}],
     [{X: 0, Y: 2}, {X: 1, Y: 2}, {X: 2, Y: 2}, {X: 3, Y: 2}, {X: 4, Y: 2}],
     [{X: 0, Y: 0}, {X: 1, Y: 1}, {X: 2, Y: 2}, {X: 3, Y: 1}, {X: 4, Y: 0}],
@@ -21,12 +20,13 @@ let lines =
     [{X: 0, Y: 2}, {X: 1, Y: 1}, {X: 2, Y: 1}, {X: 3, Y: 1}, {X: 4, Y: 2}]];
 let wins = [];
 let Modes = {
-    Chibi: ['root', 'fsBonus1', 'shuriken1', 'shuriken2', 'shuriken3', 'shuriken4', 'shuriken5'],
-    GoldSea: []
+    chibi: ['root', 'fsBonus1', 'shuriken1', 'shuriken2', 'shuriken3', 'shuriken4', 'shuriken5'],
+    goldSea: [],
+    candyLand: ['root', 'fsBonus1', 'shuriken1', 'shuriken2', 'shuriken3', 'shuriken4', 'shuriken5']
 };
 
 let Symbols = {
-    Chibi: [{Name: 'Jack', Symbol: '1'}, {Name: 'Warrior', Symbol: '2'}, {Name: 'Queen', Symbol: '3'},
+    chibi: [{Name: 'Jack', Symbol: '1'}, {Name: 'Warrior', Symbol: '2'}, {Name: 'Queen', Symbol: '3'},
      {Name: 'Ninja', Symbol: '4'}, {Name: 'King', Symbol: '5'}, {Name: 'Samurai', Symbol: '6'},
     {Name: 'Ace', Symbol: '7'}, {Name: 'Geisha', Symbol: '8'}, {Name: 'Wild', Symbol: '9'},
     {Name: 'Scatter', Symbol: '10'}, {Name: 'fsScatter', Symbol: '11'}, {Name: 'Shuriken', Symbol: '12'}]
@@ -116,8 +116,6 @@ function addBottleFS(num) {
 
 
 let firstRequest = true;
-let firstFs = true;
-let freespins = false;
 let numOfSpins = 0;
 let nextMode = 'root';
 let currentMode = 'root';
@@ -140,29 +138,31 @@ function checkForFs() {
     }
 }
 
-generateArray();
-addWilds();
-// addBottleFS();
-logMatrix();
-checkForWinLines();
-
 console.log(wins);
+let betLevel = 1;
+let coinValue = 2;
+// в копейках
+let money = 50000;
+let totalWin = 0;
+
 function generateRoot() {
     generateArray();
     addWilds();
     checkForWinLines();
     return {
         Balance: {
-            BetLevel: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-            CoinValue: [1, 2, 5, 10, 20, 50, 100],
+            BetLevel: betLevel,
+            CoinValue: coinValue,
             Currency: 'USD',
-            ScoreCents: 500000,
-            ScoreCons: 500000
+            ScoreCents: money,
+            ScoreCons: money / coinValue,
+            TotalWiNCents: totalWin,
+            TotalWinCoins: totalWin / coinValue
         },
         FreeSpinsLeft: numOfSpins,
         FreeSpinsWin: 0,
         FsBonus: null,
-        LinesCouns: combLines,
+        LinesCount: combLines,
         Mode: currentMode,
         NextMode: nextMode,
         Screen: arr,
@@ -176,16 +176,18 @@ function generateFs() {
     checkForWinLines();
     return {
         Balance: {
-            BetLevel: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-            CoinValue: [1, 2, 5, 10, 20, 50, 100],
+            BetLevel: betLevel,
+            CoinValue: coinValue,
             Currency: 'USD',
-            ScoreCents: 500000,
-            ScoreCons: 500000
+            ScoreCents: money,
+            ScoreCons: money / coinValue,
+            TotalWiNCents: totalWin,
+            TotalWinCoins: totalWin / coinValue
         },
         FreeSpinsLeft: numOfSpins,
         FreeSpinsWin: 0,
         FsBonus: fsBonus,
-        LinesCouns: combLines,
+        LinesCount: combLines,
         Mode: currentMode,
         NextMode: nextMode,
         Screen: arr,
@@ -202,14 +204,14 @@ function generateInit() {
             CoinValue: [1, 2, 5, 10, 20, 50, 100],
             Currency: 'USD',
             ScoreCents: 500000,
-            ScoreCons: 500000
+            ScoreCoins: 500000
         },
         FirstScreen: arr,
         Lines: lines,
-        Modes: Modes.Chibi,
+        Modes: Modes[game],
         Saved: null,
         SessionID: 753,
-        Symbols: Symbols.Chibi
+        Symbols: Symbols[game]
     };
 }
 
@@ -240,6 +242,9 @@ function request() {
             console.log(numOfSpins);
             returnParams('fsBonus');
             numOfSpins--;
+            if (numOfSpins === 0) {
+                nextMode = 'root';
+            }
         }
         if (numOfSpins <= 0) {
             checkForFs();
