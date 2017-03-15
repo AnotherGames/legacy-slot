@@ -59,8 +59,9 @@ export class Main {
         winView.draw.UpWinContainer({});
 
         mainView.draw.addShark({});
-        game.time.events.add(7000, () => {
-            mainView.draw.addFishes({});
+        game.time.events.add(game.rnd.integerInRange(7000, 12000), () => {
+            mainView.draw.addFish1({});
+            mainView.draw.addFish2({});
         });
 
         // Инициализируем крутки

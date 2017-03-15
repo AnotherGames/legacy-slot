@@ -87,6 +87,8 @@ export class Preload {
         // game.load.spritesheet('fish', 'bg/fish.png', 103, 33, 12);
         game.load.atlasJSONArray('shark', 'bg/shark.png', 'bg/shark.json');
         game.load.atlasJSONArray('fish1', 'bg/fish1.png', 'bg/fish1.json');
+        game.load.atlasJSONArray('fish2', 'bg/fish2.png', 'bg/fish2.json');
+        game.load.atlasJSONArray('fish3', 'bg/fish3.png', 'bg/fish3.json');
         game.load.image('gameMachine', 'game/gameMachine.png');
         game.load.image('gameMachineBG', 'game/gameMachineBG.png');
         game.load.image('lineLeft', 'game/lineLeft.png');

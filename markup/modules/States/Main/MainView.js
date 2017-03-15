@@ -146,10 +146,6 @@ export let view = (() => {
             let y = (model.desktop) ? game.rnd.integerInRange(300, 900) : game.rnd.integerInRange(200, 600);
             let shark = game.add.sprite(-500, y, 'shark', null, container);
             shark.anchor.set(0.5);
-            // if (model.mobile) {
-            //     shark.scale.set(0.6);
-            // }
-            // shark.scale.set(0.5);
             shark.animations.add('move', Phaser.Animation.generateFrameNames('shark1-move_', 0, 60, '.png', 1), 20, true);
             shark.animations.play('move');
             model.el('shark', shark);
@@ -178,22 +174,24 @@ export let view = (() => {
 
         },
 
-        addFishes: function ({
+        addFish1: function ({
             game = model.el('game'),
             container = model.group('bg'),
             y1 = (model.desktop) ? 450 : 350,
             y2 = (model.desktop) ? 700 : 600
         }) {
-            // let y = (model.desktop) ? game.height * 0.8 : game.rnd.integerInRange(200, 600);
+
             let fish = game.add.sprite(-500, game.height * 0.8 , 'fish1', null, container);
             fish.anchor.set(0.5);
-            // if (model.mobile) {
-            //     fish.scale.set(0.6);
-            // }
-            // fish.scale.set(0.5);
             fish.animations.add('move', Phaser.Animation.generateFrameNames('F1-animation_', 0, 30, '.png', 1), 20, true);
             fish.animations.play('move');
             model.el('fish', fish);
+
+            let fish2 =game.add.sprite(-500, y, 'fish2', null, container);
+            fish2.anchor.set(0.5);
+            fish2.animations.add('move', Phaser.Animation.generateFrameNames('F2-animation_', 0, 30, '.png', 1), 20, true);
+            fish2.animations.play('move');
+            model.el('fish2', fish2);
 
             let time = game.rnd.integerInRange(14, 20);
             let time2 = game.rnd.integerInRange(14, 20);
@@ -206,12 +204,51 @@ export let view = (() => {
             }
 
             let y = (model.desktop) ? game.rnd.integerInRange(500, 800) : game.rnd.integerInRange(400, 600);
-
             game.add.tween(fish).to({x: delta, y: y}, time * 1000, 'Linear', true)
                 .onComplete.add(() => {
                     fish.destroy();
                     game.time.events.add(time2 * 1000, () => {
-                        this.addFishes({});
+                        this.addFish1({});
+                    });
+                }, this);
+
+        },
+
+        addFish2: function ({
+            game = model.el('game'),
+            container = model.group('bg'),
+            y1 = (model.desktop) ? 450 : 350,
+            y2 = (model.desktop) ? 700 : 600
+        }) {
+            let y = (model.desktop) ? game.rnd.integerInRange(300, 800) : game.rnd.integerInRange(400, 600);
+            let index = (game.rnd.sign() < 0) ? 2 : 3;
+            console.log(index);
+
+            let fish =game.add.sprite(-500, y, `fish${index}`, null, container);
+            fish.anchor.set(0.5);
+            if (index == 2) {
+                fish.animations.add('move', Phaser.Animation.generateFrameNames(`F2-animation_`, 0, 30, '.png', 1), 20, true);
+            } else {
+                fish.animations.add('move', Phaser.Animation.generateFrameNames(`BF-animation_`, 0, 30, '.png', 1), 20, true);
+            }
+            fish.animations.play('move');
+            model.el('fish', fish);
+
+            let time = game.rnd.integerInRange(17, 23);
+            let time2 = game.rnd.integerInRange(14, 20);
+            let side = (game.rnd.sign() < 0) ? 'left' : 'right';
+
+            fish.x = (side === 'left') ? -fish.width : game.width + fish.width;
+            let delta = (side === 'left') ? game.width + fish.width: -fish.width;
+            if (side === 'left') {
+                fish.width = -fish.width;
+            }
+
+            game.add.tween(fish).to({x: delta}, time * 1000, 'Linear', true, game.rnd.integerInRange(4000, 8000))
+                .onComplete.add(() => {
+                    fish.destroy();
+                    game.time.events.add(time2 * 1000, () => {
+                        this.addFish2({});
                     });
                 }, this);
 
