@@ -101,10 +101,11 @@ export let controller = (function () {
         });
         $('#btnRules').on('click', function () {
             console.log('btnRules');
-            panelController.handle.info();
+            panelController.handle.openInfo();
+            // panelController.handle.info();
             $('#settings').addClass('closed');
             $('#darkness').addClass('closed');
-            $('.history').addClass('closed');
+            // $('.history').addClass('closed');
             $('#darkness').off();
         });
         $('#settingsSave').on('click', function () {
