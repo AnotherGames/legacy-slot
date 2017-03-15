@@ -304,13 +304,23 @@ export let view = (() => {
             game = model.el('game')
         }) {
             let fsLevel = model.el('fsLevel');
-            fsLevel.text = number;
-            model.el('fsLevel', fsLevel);
+            let currNumber = number % 5;
+            if (currNumber == 0) {
+                fsLevel.text = 5;
+                model.el('fsLevel', fsLevel);
+                game.time.events.add(2000, () => {
+                    fsLevel.text = currNumber;
+                    model.el('fsLevel', fsLevel);
+                });
+            } else {
+                fsLevel.text = currNumber;
+                model.el('fsLevel', fsLevel);
+            }
 
             let mermaidArr = model.el('mermaidArr');
 
             mermaidArr.forEach((item, index) => {
-                if (index == number) {
+                if (index == currNumber) {
                     item.visible = true;
                 } else {
                     item.visible = false;

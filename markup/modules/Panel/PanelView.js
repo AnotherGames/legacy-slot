@@ -243,7 +243,7 @@ export let view = (() => {
 
             let infoTableBg = game.add.sprite(x, y, 'infoTableBg', null, container);
             infoTableBg.anchor.set(0.5);
-            infoTableBg.scale.set((model.desktop) ? 0.9 : 0.6);
+            infoTableBg.scale.set((model.desktop) ? 1.0 : 0.66);
             model.el('infoTableBg', infoTableBg);
 
             let infoTable = game.add.sprite(x, y, 'infoTable', '1_en.png', container);

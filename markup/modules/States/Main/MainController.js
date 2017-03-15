@@ -58,6 +58,11 @@ export class Main {
         mainView.draw.lineNumbers({});
         winView.draw.UpWinContainer({});
 
+        mainView.draw.addShark({});
+        game.time.events.add(7000, () => {
+            mainView.draw.addFishes({});
+        });
+
         // Инициализируем крутки
         rollController.init();
 

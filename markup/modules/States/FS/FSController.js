@@ -84,7 +84,7 @@ export let controller = (() => {
         let multiValue = rollData.FsBonus.Multi;
         let currMulti = model.data('fsMulti');
         let multiCounter = model.el('multiCounter');
-        console.warn(multiValue);
+        console.warn(levelValue);
         console.warn(currMulti);
 
         // Увеличиваем мульти(разбивание бутылки)
@@ -96,10 +96,10 @@ export let controller = (() => {
             model.el('multiCounter', multiCounter);
         }
 
-        if (levelValue > currLevel) {
-            fsView.draw.changeLevel({number: levelValue, animation: levelValue - 1 + ''});
+        // if (levelValue > currLevel) {
+            fsView.draw.changeLevel({number: levelValue});
             model.data('fsLevel', levelValue);
-        }
+        // }
 
     }
 
@@ -152,6 +152,11 @@ export class FS {
         mainView.draw.lineNumbers({});
         winView.draw.UpWinContainer({});
 
+        mainView.draw.addShark({});
+        game.time.events.add(7000, () => {
+            mainView.draw.addFishes({});
+        });
+
         // Инициализируем крутки
         rollController.init();
 
@@ -176,10 +181,7 @@ export class FS {
             balanceController.initFSDesktop();
             // BG animations
             mainView.draw.addBubbles({});
-            // mainView.draw.addShark({});
-            // game.time.events.add(6000, () => {
-            //     mainView.draw.addFishes({});
-            // });
+
         }
 
         mainView.draw.addLight({});
