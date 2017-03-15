@@ -1,6 +1,6 @@
 let arr = [[], [], [], [], []];
 let min = 1;
-let game = 'Chibi';
+let game = 'candyLand';
 let max = 8;
 let wild = 9;
 let combLines = 10;
@@ -22,15 +22,27 @@ let wins = [];
 let Modes = {
     chibi: ['root', 'fsBonus1', 'shuriken1', 'shuriken2', 'shuriken3', 'shuriken4', 'shuriken5'],
     goldSea: [],
-    candyLand: ['root', 'fsBonus1', 'shuriken1', 'shuriken2', 'shuriken3', 'shuriken4', 'shuriken5']
+    candyLand: ['root', 'fsBonus1', 'fsBonus2', 'fsBonus3', 'fsBonus4', 'fsBonus5', 'fsBonus6', 'fsBonus7']
 };
 
 let Symbols = {
     chibi: [{Name: 'Jack', Symbol: '1'}, {Name: 'Warrior', Symbol: '2'}, {Name: 'Queen', Symbol: '3'},
      {Name: 'Ninja', Symbol: '4'}, {Name: 'King', Symbol: '5'}, {Name: 'Samurai', Symbol: '6'},
     {Name: 'Ace', Symbol: '7'}, {Name: 'Geisha', Symbol: '8'}, {Name: 'Wild', Symbol: '9'},
-    {Name: 'Scatter', Symbol: '10'}, {Name: 'fsScatter', Symbol: '11'}, {Name: 'Shuriken', Symbol: '12'}]
+    {Name: 'Scatter', Symbol: '10'}, {Name: 'fsScatter', Symbol: '11'}, {Name: 'Shuriken', Symbol: '12'}],
+    candyLand: [{Name: 'Jack', Symbol: '1'}, {Name: 'CandyCane', Symbol: '2'}, {Name: 'Queen', Symbol: '3'},
+     {Name: 'Lollypop', Symbol: '4'}, {Name: 'King', Symbol: '5'}, {Name: 'Icecream', Symbol: '6'},
+    {Name: 'Ace', Symbol: '7'}, {Name: 'Donut', Symbol: '8'},
+    {Name: 'GreenBottleTop', Symbol: '9'}, {Name: 'GreenBottleMid', Symbol: '10'}, {Name: 'GreenBottleBottom', Symbol: '11'},
+    {Name: 'OrangeBottleTop', Symbol: '12'}, {Name: 'OrangeBottleMid', Symbol: '13'}, {Name: 'OrangeBottleBottom', Symbol: '14'},
+    {Name: 'CherryBottleTop', Symbol: '15'}, {Name: 'CherryBottleMid', Symbol: '16'}, {Name: 'CherryBottleBottom', Symbol: '17'},
+    {Name: 'fsWild', Symbol: '21'}]
 };
+
+let SymbolsValue = {
+    '1': [3, 5, 10], '2': [25, 50, 100], '3': [25, 50, 100], '4': [25, 50, 100], '5': [25, 50, 100],
+    '6': [25, 50, 100], '7': [25, 50, 100], '8': [25, 50, 100],
+}
 
 function generateArray() {
     for (let i = 0; i < 5; i++) {
@@ -113,9 +125,30 @@ function addBottleFS(num) {
     }
 }
 
+function changeWildsToBottles(num) {
+    let green = 9;
+    let orange = 12;
+    let cherry = 15;
+    switch (num) {
+        case 3:
+            for (let k = 1; k < 4; k++) {
+                arr[4][k] = orange++;
+            }
+        case 2:
+            for (let k = 1; k < 4; k++) {
+                arr[2][k] = cherry++;
+            }
+        case 1:
+            for (let k = 1; k < 4; k++) {
+                arr[0][k] = green++;
+            }
+            break;
+        default: {
+            break;
+        }
+    }
+}
 
-
-let firstRequest = true;
 let numOfSpins = 0;
 let nextMode = 'root';
 let currentMode = 'root';
@@ -131,7 +164,7 @@ function checkForFs() {
     let goFs = (Math.round(Math.random() * (1000 - 0) + 1) > 100) ? true : false;
     if (goFs) {
         numOfBottles = Math.round(Math.random() * (3 - 1) + 1);
-        numOfSpins = 20;
+        numOfSpins = 5;
         nextMode = 'fsBonus';
     } else {
         nextMode = 'root';
@@ -170,10 +203,21 @@ function generateRoot() {
     };
 }
 
-function generateFs() {
+function generateCandyFs() {
     generateArray();
-    addBottleFS();
+    addBottleFS(numOfBottles);
     checkForWinLines();
+    changeWildsToBottles(numOfBottles);
+}
+
+function generateFs() {
+    switch (game) {
+        case 'candyLand': generateCandyFs();
+            break;
+        default:
+            break;
+    }
+
     return {
         Balance: {
             BetLevel: betLevel,
@@ -232,35 +276,43 @@ function returnParams(mode) {
     }
 }
 
-function request() {
-    if (firstRequest) {
-        returnParams('init');
-        firstRequest = false;
-    } else {
-        currentMode = nextMode;
-        if (numOfSpins > 0) {
-            console.log(numOfSpins);
-            returnParams('fsBonus');
-            numOfSpins--;
-            if (numOfSpins === 0) {
-                nextMode = 'root';
+function request(reqMode) {
+    switch (reqMode) {
+        case 'init':
+            returnParams('init');
+            break;
+        case 'roll':
+            currentMode = nextMode;
+            if (numOfSpins > 0) {
+                returnParams('fsBonus');
+                numOfSpins--;
+                if (numOfSpins === 0) {
+                    nextMode = 'root';
+                }
             }
-        }
-        if (numOfSpins <= 0) {
-            checkForFs();
-            returnParams('root');
-        }
+            if (numOfSpins <= 0) {
+                checkForFs();
+                returnParams('root');
+            }
+            break;
+        case 'ready':
+            console.log('123');
+
+            break;
+        default: console.log('Undefined request');
+            break;
     }
 }
-
-
-
-
 
 let button = document.createElement('button');
 button.innerHTML = 'Request';
 
+let input = document.createElement('input');
+
 let body = document.getElementsByTagName('body')[0];
 body.appendChild(button);
+body.appendChild(input);
 
-button.addEventListener('click', request);
+button.addEventListener('click', () => {
+    request(document.querySelector('input').value);
+});
