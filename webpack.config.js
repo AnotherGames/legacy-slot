@@ -71,7 +71,7 @@ if (tars.config.js.useBabel) {
         {
             test: /\.js$/,
             loader: 'babel',
-            include: /markup/
+            include: [/Info/, /markup/]
         }
     );
 }
