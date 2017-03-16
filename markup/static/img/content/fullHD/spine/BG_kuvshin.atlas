@@ -1,0 +1,34 @@
+
+BG_kuvshin.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+img/BG_15
+  rotate: false
+  xy: 2, 144
+  size: 295, 280
+  orig: 295, 280
+  offset: 0, 0
+  index: -1
+img/BG_16
+  rotate: true
+  xy: 582, 194
+  size: 230, 304
+  orig: 230, 304
+  offset: 0, 0
+  index: -1
+img/BG_17
+  rotate: false
+  xy: 2, 2
+  size: 351, 140
+  orig: 351, 140
+  offset: 0, 0
+  index: -1
+img/BG_36
+  rotate: true
+  xy: 299, 161
+  size: 263, 281
+  orig: 263, 281
+  offset: 0, 0
+  index: -1

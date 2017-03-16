@@ -1,0 +1,48 @@
+
+BG_dveri.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+img/BG_18
+  rotate: false
+  xy: 372, 114
+  size: 180, 382
+  orig: 180, 382
+  offset: 0, 0
+  index: -1
+img/BG_19
+  rotate: false
+  xy: 554, 226
+  size: 88, 270
+  orig: 88, 270
+  offset: 0, 0
+  index: -1
+img/BG_21
+  rotate: false
+  xy: 554, 226
+  size: 88, 270
+  orig: 88, 270
+  offset: 0, 0
+  index: -1
+img/BG_20
+  rotate: false
+  xy: 644, 243
+  size: 38, 253
+  orig: 38, 253
+  offset: 0, 0
+  index: -1
+img/BG_22
+  rotate: true
+  xy: 2, 2
+  size: 59, 251
+  orig: 59, 251
+  offset: 0, 0
+  index: -1
+img/BG_32
+  rotate: false
+  xy: 2, 63
+  size: 368, 433
+  orig: 368, 433
+  offset: 0, 0
+  index: -1

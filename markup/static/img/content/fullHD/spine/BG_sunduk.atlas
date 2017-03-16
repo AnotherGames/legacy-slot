@@ -1,0 +1,41 @@
+
+BG_sunduk.png
+size: 2048,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+img/BG_26
+  rotate: false
+  xy: 2, 2
+  size: 294, 239
+  orig: 294, 239
+  offset: 0, 0
+  index: -1
+img/BG_27
+  rotate: false
+  xy: 1191, 61
+  size: 257, 180
+  orig: 257, 180
+  offset: 0, 0
+  index: -1
+img/BG_28
+  rotate: false
+  xy: 298, 5
+  size: 285, 236
+  orig: 285, 236
+  offset: 0, 0
+  index: -1
+img/BG_29
+  rotate: false
+  xy: 879, 100
+  size: 310, 141
+  orig: 310, 141
+  offset: 0, 0
+  index: -1
+img/BG_33
+  rotate: false
+  xy: 585, 49
+  size: 292, 192
+  orig: 292, 192
+  offset: 0, 0
+  index: -1

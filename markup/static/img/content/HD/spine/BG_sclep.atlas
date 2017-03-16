@@ -1,0 +1,41 @@
+
+BG_sclep.png
+size: 2048,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+img/BG_24
+  rotate: false
+  xy: 2, 49
+  size: 419, 392
+  orig: 419, 392
+  offset: 0, 0
+  index: -1
+img/BG_24-2
+  rotate: false
+  xy: 1226, 264
+  size: 245, 177
+  orig: 245, 177
+  offset: 0, 0
+  index: -1
+img/BG_24-3
+  rotate: false
+  xy: 2, 2
+  size: 37, 45
+  orig: 37, 45
+  offset: 0, 0
+  index: -1
+img/BG_25
+  rotate: false
+  xy: 423, 145
+  size: 419, 296
+  orig: 419, 296
+  offset: 0, 0
+  index: -1
+img/BG_35
+  rotate: false
+  xy: 844, 189
+  size: 380, 252
+  orig: 380, 252
+  offset: 0, 0
+  index: -1

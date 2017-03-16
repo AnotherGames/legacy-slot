@@ -1,0 +1,48 @@
+
+BG_ship.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+img/BG_23
+  rotate: false
+  xy: 366, 134
+  size: 177, 209
+  orig: 177, 209
+  offset: 0, 0
+  index: -1
+img/BG_34
+  rotate: false
+  xy: 2, 91
+  size: 362, 407
+  orig: 362, 407
+  offset: 0, 0
+  index: -1
+img/dopsvet_0000_окно4
+  rotate: false
+  xy: 2, 2
+  size: 91, 87
+  orig: 91, 87
+  offset: 0, 0
+  index: -1
+img/dopsvet_0001_окно3
+  rotate: false
+  xy: 366, 345
+  size: 251, 153
+  orig: 251, 153
+  offset: 0, 0
+  index: -1
+img/dopsvet_0002_окно2
+  rotate: false
+  xy: 744, 374
+  size: 117, 124
+  orig: 117, 124
+  offset: 0, 0
+  index: -1
+img/dopsvet_0003_окно1
+  rotate: false
+  xy: 619, 362
+  size: 123, 136
+  orig: 123, 136
+  offset: 0, 0
+  index: -1

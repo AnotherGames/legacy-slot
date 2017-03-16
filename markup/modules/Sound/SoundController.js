@@ -15,12 +15,11 @@ export let controller = (() => {
                 game.sound.volume = 0;
                 model.state('globalSound', false);
                 model.cookie('globalSound', false);
+            } else {
+                game.sound.volume = volume.getVolume();
+                model.state('globalSound', true);
+                model.cookie('globalSound', true);
             }
-            // } else {
-            //     game.sound.volume = volume.getVolume();
-            //     model.state('globalSound', true);
-            //     model.cookie('globalSound', true);
-            // }
         },
 
         getVolume: function () {

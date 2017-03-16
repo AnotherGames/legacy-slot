@@ -150,7 +150,7 @@ export let view = (() => {
             shark.animations.play('move');
             model.el('shark', shark);
 
-            let time = game.rnd.integerInRange(14, 20);
+            let time = game.rnd.integerInRange(25, 35);
             let time2 = game.rnd.integerInRange(14, 20);
             let side = (game.rnd.sign() < 0) ? 'left' : 'right';
 
@@ -193,7 +193,7 @@ export let view = (() => {
             fish2.animations.play('move');
             model.el('fish2', fish2);
 
-            let time = game.rnd.integerInRange(14, 20);
+            let time = game.rnd.integerInRange(25, 35);
             let time2 = game.rnd.integerInRange(14, 20);
             let side = (game.rnd.sign() < 0) ? 'left' : 'right';
 
@@ -222,7 +222,6 @@ export let view = (() => {
         }) {
             let y = (model.desktop) ? game.rnd.integerInRange(300, 800) : game.rnd.integerInRange(400, 600);
             let index = (game.rnd.sign() < 0) ? 2 : 3;
-            console.log(index);
 
             let fish =game.add.sprite(-500, y, `fish${index}`, null, container);
             fish.anchor.set(0.5);
@@ -234,7 +233,7 @@ export let view = (() => {
             fish.animations.play('move');
             model.el('fish', fish);
 
-            let time = game.rnd.integerInRange(17, 23);
+            let time = game.rnd.integerInRange(25, 35);
             let time2 = game.rnd.integerInRange(14, 20);
             let side = (game.rnd.sign() < 0) ? 'left' : 'right';
 
