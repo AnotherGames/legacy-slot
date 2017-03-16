@@ -140,7 +140,7 @@ export let controller = (() => {
         view.draw.MobileFooter({alphaTop: 0.6, alphaBottom: 0.85});
         view.draw.Time({});
 
-        let homeButton = view.draw.HomeButton({});
+        let homeButton = view.draw.HomeButton({x: 25});
         homeButton.onInputDown.add(handle.Home);
     }
 
