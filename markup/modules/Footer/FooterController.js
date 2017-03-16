@@ -7,17 +7,101 @@ import { controller as soundController } from 'modules/Sound/SoundController';
 
 export let controller = (() => {
 
+    function initMainDesktop() {
+        view.draw.DesktopFooter({});
+        view.draw.Time({});
+
+        let homeButton = view.draw.HomeButton({x: 30});
+        homeButton.onInputDown.add(handle.Home);
+
+        let settingsButton = view.draw.SettingsButton({x: 80});
+        settingsButton.onInputDown.add(handle.Setting);
+
+        let soundButton = view.draw.SoundButton({x: 130});
+        soundButton.freezeFrames = true;
+        soundButton.onInputDown.add(handle.Sound);
+
+        let fastButton = view.draw.FastButton({x: 180});
+        fastButton.freezeFrames = true;
+        fastButton.onInputDown.add(handle.Fast);
+
+        let fullScreenButton = view.draw.FullScreenButton({x: 230});
+        fullScreenButton.onInputDown.add(handle.toggleFullScreen);
+        fullScreenButton.freezeFrames = true;
+
+        let footerMenu = model.group('footerMenu').children;
+        footerMenu.forEach((elem) => {
+            elem.onInputOver.add(() => {
+                elem.scale.set(1.4);
+            });
+            elem.onInputOut.add(() => {
+                elem.scale.set(1);
+            });
+        });
+
+        model.group('footer').add(model.group('footerMenu'));
+    }
+
+    function initFsDesktop() {
+        view.draw.DesktopFooter({});
+        view.draw.Time({});
+
+        let homeButton = view.draw.HomeButton({x: 30});
+        homeButton.onInputDown.add(handle.Home);
+
+        let soundButton = view.draw.SoundButton({x: 80});
+        soundButton.freezeFrames = true;
+        soundButton.onInputDown.add(handle.Sound);
+
+        let fastButton = view.draw.FastButton({x: 130});
+        fastButton.freezeFrames = true;
+        fastButton.onInputDown.add(handle.Fast);
+
+        let fullScreenButton = view.draw.FullScreenButton({x: 180});
+        fullScreenButton.onInputDown.add(handle.toggleFullScreen);
+        fullScreenButton.freezeFrames = true;
+
+        let footerMenu = model.group('footerMenu').children;
+        footerMenu.forEach((elem) => {
+            elem.onInputOver.add(() => {
+                elem.scale.set(1.4);
+            });
+            elem.onInputOut.add(() => {
+                elem.scale.set(1);
+            });
+        });
+
+        model.group('footer').add(model.group('footerMenu'));
+    }
+
+    function initMobile() {
+        view.draw.MobileFooter({});
+        view.draw.Time({});
+
+        let homeButton = view.draw.HomeButton({x: 30});
+            homeButton.onInputDown.add(handle.Home);
+    }
+
+    function updateTime() {
+        view.update.Time();
+    }
+
     const handle = {
-        Menu: function () {
+        Setting: function () {
             if (model.state('buttons:locked')
             || model.state('roll:progress')
-            || model.state('autoplay:start')) {
-                return;
-            }
+            || model.state('autoplay:start')) return;
 
             let game = model.el('game');
             // Выключаем управление с клавиатуры
             game.input.keyboard.enabled = false;
+
+            // костыль на баг с зависанием кнопки после открытия области поверъ нее
+            if (model.desktop) {
+                model.el('settingsButton').destroy();
+                let settingsButton = view.draw.SettingsButton({x: 80});
+                settingsButton.onInputDown.add(handle.Setting);
+            }
 
             soundController.sound.playSound({sound: 'buttonClick'});
 
@@ -51,7 +135,7 @@ export let controller = (() => {
                 soundButton.frameName = 'soundOff.png';
                 soundController.volume.switchVolume();
             } else {
-                soundButton.frameName = 'sound.png';
+                soundButton.frameName = 'soundOn.png';
                 soundController.volume.switchVolume();
             }
         },
@@ -63,7 +147,7 @@ export let controller = (() => {
             if (model.state('fastRoll')) {
                 model.state('fastRoll', false);
                 model.cookie('fastRoll', false);
-                fastButton.frameName = 'fastSpin.png';
+                fastButton.frameName = 'fastSpinOn.png';
             } else {
                 model.state('fastRoll', true);
                 model.cookie('fastRoll', true);
@@ -93,64 +177,9 @@ export let controller = (() => {
         }
     };
 
-    function initDesktopMain() {
-        view.draw.DesktopFooter({});
-        view.draw.Time({});
-
-        let homeButton = view.draw.HomeButton({x: 25});
-        homeButton.onInputDown.add(handle.Home);
-
-        let menuButton = view.draw.MenuButton({x: 75});
-        menuButton.onInputDown.add(handle.Menu);
-
-        let soundButton = view.draw.SoundButton({x: 125});
-        soundButton.freezeFrames = true;
-        soundButton.onInputDown.add(handle.Sound);
-
-        let fastButton = view.draw.FastButton({x: 175});
-        fastButton.freezeFrames = true;
-        fastButton.onInputDown.add(handle.Fast);
-
-        let fullScreenButton = view.draw.FullScreenButton({x: 225});
-        fullScreenButton.onInputDown.add(handle.toggleFullScreen);
-        fullScreenButton.freezeFrames = true;
-    }
-
-    function initDesktopFs() {
-        view.draw.DesktopFooter({});
-        view.draw.Time({});
-
-        let homeButton = view.draw.HomeButton({x: 25});
-        homeButton.onInputDown.add(handle.Home);
-
-        let soundButton = view.draw.SoundButton({x: 75});
-        soundButton.freezeFrames = true;
-        soundButton.onInputDown.add(handle.Sound);
-
-        let fastButton = view.draw.FastButton({x: 125});
-        fastButton.freezeFrames = true;
-        fastButton.onInputDown.add(handle.Fast);
-
-        let fullScreenButton = view.draw.FullScreenButton({x: 175});
-        fullScreenButton.onInputDown.add(handle.toggleFullScreen);
-        fullScreenButton.freezeFrames = true;
-    }
-
-    function initMobile() {
-        view.draw.MobileFooter({alphaTop: 0.6, alphaBottom: 0.85});
-        view.draw.Time({});
-
-        let homeButton = view.draw.HomeButton({x: 25});
-        homeButton.onInputDown.add(handle.Home);
-    }
-
-    function updateTime() {
-        view.update.Time();
-    }
-
     return {
-        initDesktopMain,
-        initDesktopFs,
+        initMainDesktop,
+        initFsDesktop,
         initMobile,
         updateTime
     };

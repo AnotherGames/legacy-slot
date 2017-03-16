@@ -175,7 +175,7 @@ export class FS {
         } else {    // Desktop
             fsView.draw.addCows({});
 
-            footerController.initDesktopFs();
+            footerController.initFsDesktop();
 
             // Автоматически позиционируем основной контейнер
             this.positionMainContainer();
@@ -226,7 +226,7 @@ export class FS {
 
         if (model.desktop) {
             let fullScreeButton = model.el('fullScreeButton');
-            fullScreeButton.frameName = (game.scale.isFullScreen || window.innerHeight === screen.height) ? 'fullscreenOff.png' : 'fullscreen.png';
+            fullScreeButton.frameName = (game.scale.isFullScreen || window.innerHeight === screen.height) ? 'fullScreenOff.png' : 'fullScreenOn.png';
         }
 
         if (model.mobile && !game.device.iOS) {
