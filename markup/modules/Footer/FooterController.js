@@ -28,6 +28,9 @@ export let controller = (() => {
         fullScreenButton.onInputDown.add(handle.toggleFullScreen);
         fullScreenButton.freezeFrames = true;
 
+        let settingsButton = view.draw.SettingsButton({x: 80});
+        settingsButton.onInputDown.add(handle.Setting);
+
         let footerMenu = model.group('footerMenu').children;
         footerMenu.forEach((elem) => {
             elem.onInputOver.add(() => {
@@ -62,7 +65,7 @@ export let controller = (() => {
         });
         view.draw.Time({});
 
-        let homeButton = view.draw.HomeButton({});
+        let homeButton = view.draw.HomeButton({x: 30});
         homeButton.onInputDown.add(handle.Home);
     }
 
@@ -166,12 +169,10 @@ export let controller = (() => {
                 game.scale.startFullScreen();
             }
         }
-
     };
 
     return {
         initDesktop,
-        initSettingInfoButtons,
         initMobile,
         updateTime,
         handle

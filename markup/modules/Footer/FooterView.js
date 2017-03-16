@@ -119,26 +119,6 @@ export let view = (() => {
             return fastButton;
         },
 
-        InfoButton: function ({
-            game = model.el('game'),
-            container = model.group('footerMenu'),
-            x = 230,
-            y = model.el('game').height - 20
-        }) {
-            let infoButton = game.add.button(x, y, 'deskButtons', null, null, null, 'info.png', null, null, container);
-            infoButton.anchor.set(0.5);
-
-            infoButton.onInputOver.add(() => {
-                infoButton.scale.set(1.4);
-            });
-            infoButton.onInputOut.add(() => {
-                infoButton.scale.set(1);
-            });
-
-            model.el('infoButton', infoButton);
-            return infoButton;
-        },
-
         SettingsButton: function ({
             game = model.el('game'),
             container = model.group('footerMenu'),

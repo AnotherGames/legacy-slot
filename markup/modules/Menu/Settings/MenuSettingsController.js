@@ -4,11 +4,10 @@ import { config } from 'modules/Util/Config';
 import Info from '../../../../Info/Info';
 
 import { view } from 'modules/Menu/Settings/MenuSettingsView';
-import { view as mainView } from 'modules/States/Main/MainView';
-import { view as footerView } from 'modules/Footer/FooterView';
+import { view as panelView } from 'modules/Panel/PanelView';
 
 import { controller as soundController } from 'modules/Sound/SoundController';
-import { controller as footerController } from 'modules/Footer/FooterController';
+import { controller as panelController } from 'modules/Panel/PanelController';
 
 export let controller = (() => {
 
