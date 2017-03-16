@@ -3,11 +3,7 @@ import { request } from 'modules/Util/Request';
 import { view } from 'modules/Footer/FooterView';
 import { controller as soundController } from 'modules/Sound/SoundController';
 
-import Info from '../../../Info/Info';
-
 export let controller = (() => {
-
-    let info;
 
     function initDesktop() {
         view.draw.DesktopFooter({});
@@ -40,22 +36,6 @@ export let controller = (() => {
                 elem.scale.set(1);
             });
         });
-    }
-
-    function initSettingInfoButtons() {
-
-        info = new Info({
-            model,
-            desktopBGScale: 1.1,
-            desktopTableScale: 1.1,
-            desktopCloseButtonMargin: 5
-        });
-
-        let infoButton = view.draw.InfoButton({x: 1525, y: model.el('game').height - 100});
-        infoButton.onInputDown.add(info.open.bind(info));
-
-        let settingsButton = view.draw.SettingsButton({x: 80});
-        settingsButton.onInputDown.add(handle.Setting);
     }
 
     function initMobile() {
