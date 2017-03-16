@@ -66,6 +66,7 @@ export let view = (() => {
                 .drawRect(0, 0, game.width, game.height);
             overlay.alpha = alpha;
             overlay.visible = false;
+            model.group('infoTable').add(overlay);
             model.el('settingsOverlay', overlay);
             return overlay;
         },
@@ -450,7 +451,7 @@ export let view = (() => {
             game = model.el('game'),
             time = 700
         }) {
-            let container = model.group('info');
+            let container = model.group('infoTable');
             let tween = game.add.tween(container).to( { alpha: 0 }, time, 'Quart.easeOut', true);
             tween.onComplete.add(() => {
                 container.visible = false;
