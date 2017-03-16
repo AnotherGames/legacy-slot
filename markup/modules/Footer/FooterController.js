@@ -7,34 +7,78 @@ import { controller as soundController } from 'modules/Sound/SoundController';
 
 export let controller = (() => {
 
-    function initDesktop() {
+    function initMainDesktop() {
         view.draw.DesktopFooter({});
         view.draw.Time({});
 
-        let homeButton = view.draw.HomeButton({});
-            homeButton.onInputDown.add(handle.Home);
+        let homeButton = view.draw.HomeButton({x: 30});
+        homeButton.onInputDown.add(handle.Home);
 
-        let menuButton = view.draw.MenuButton({});
-            menuButton.onInputDown.add(handle.Menu);
+        let settingsButton = view.draw.SettingsButton({x: 80});
+        settingsButton.onInputDown.add(handle.Setting);
 
-        let soundButton = view.draw.SoundButton({});
-            soundButton.freezeFrames = true;
-            soundButton.onInputDown.add(handle.Sound);
+        let soundButton = view.draw.SoundButton({x: 130});
+        soundButton.freezeFrames = true;
+        soundButton.onInputDown.add(handle.Sound);
 
-        let fastButton = view.draw.FastButton({});
-            fastButton.freezeFrames = true;
-            fastButton.onInputDown.add(handle.Fast);
+        let fastButton = view.draw.FastButton({x: 180});
+        fastButton.freezeFrames = true;
+        fastButton.onInputDown.add(handle.Fast);
 
-        let fullScreenButton = view.draw.FullScreenButton({});
-            fullScreenButton.onInputDown.add(handle.toggleFullScreen);
-            fullScreenButton.freezeFrames = true;
+        let fullScreenButton = view.draw.FullScreenButton({x: 230});
+        fullScreenButton.onInputDown.add(handle.toggleFullScreen);
+        fullScreenButton.freezeFrames = true;
+
+        let footerMenu = model.group('footerMenu').children;
+        footerMenu.forEach((elem) => {
+            elem.onInputOver.add(() => {
+                elem.scale.set(1.4);
+            });
+            elem.onInputOut.add(() => {
+                elem.scale.set(1);
+            });
+        });
+
+        model.group('footer').add(model.group('footerMenu'));
+    }
+
+    function initFsDesktop() {
+        view.draw.DesktopFooter({});
+        view.draw.Time({});
+
+        let homeButton = view.draw.HomeButton({x: 30});
+        homeButton.onInputDown.add(handle.Home);
+
+        let soundButton = view.draw.SoundButton({x: 80});
+        soundButton.freezeFrames = true;
+        soundButton.onInputDown.add(handle.Sound);
+
+        let fastButton = view.draw.FastButton({x: 130});
+        fastButton.freezeFrames = true;
+        fastButton.onInputDown.add(handle.Fast);
+
+        let fullScreenButton = view.draw.FullScreenButton({x: 180});
+        fullScreenButton.onInputDown.add(handle.toggleFullScreen);
+        fullScreenButton.freezeFrames = true;
+
+        let footerMenu = model.group('footerMenu').children;
+        footerMenu.forEach((elem) => {
+            elem.onInputOver.add(() => {
+                elem.scale.set(1.4);
+            });
+            elem.onInputOut.add(() => {
+                elem.scale.set(1);
+            });
+        });
+
+        model.group('footer').add(model.group('footerMenu'));
     }
 
     function initMobile() {
         view.draw.MobileFooter({});
         view.draw.Time({});
 
-        let homeButton = view.draw.HomeButton({});
+        let homeButton = view.draw.HomeButton({x: 30});
             homeButton.onInputDown.add(handle.Home);
     }
 
@@ -43,7 +87,7 @@ export let controller = (() => {
     }
 
     const handle = {
-        Menu: function () {
+        Setting: function () {
             if (model.state('buttons:locked')
             || model.state('roll:progress')
             || model.state('autoplay:start')) return;
@@ -52,7 +96,14 @@ export let controller = (() => {
             // Выключаем управление с клавиатуры
             game.input.keyboard.enabled = false;
 
-            soundController.sound.playSound({sound : 'buttonClick'});
+            // костыль на баг с зависанием кнопки после открытия области поверъ нее
+            if (model.desktop) {
+                model.el('settingsButton').destroy();
+                let settingsButton = view.draw.SettingsButton({x: 80});
+                settingsButton.onInputDown.add(handle.Setting);
+            }
+
+            soundController.sound.playSound({sound: 'buttonClick'});
 
             // Обновляем состояния чекбоксов в настройках
             $('#volume').prop('value', (model.state('globalSound')) ? soundController.volume.getVolume() * 100 : 0);
@@ -80,23 +131,23 @@ export let controller = (() => {
 
         Sound: function () {
             let soundButton = model.el('soundButton');
-            if (model.state('globalSound')){
+            if (model.state('globalSound')) {
                 soundButton.frameName = 'soundOff.png';
-                soundController.volume.switchVolume()
+                soundController.volume.switchVolume();
             } else {
-                soundButton.frameName = 'sound.png';
+                soundButton.frameName = 'soundOn.png';
                 soundController.volume.switchVolume();
             }
         },
 
         Fast: function () {
-            soundController.sound.playSound({sound : 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
             let fastButton = model.el('fastButton');
             // Ищменяем состояние fastRoll и меняем фрейм кнопки
             if (model.state('fastRoll')) {
                 model.state('fastRoll', false);
                 model.cookie('fastRoll', false);
-                fastButton.frameName = 'fastSpin.png';
+                fastButton.frameName = 'fastSpinOn.png';
             } else {
                 model.state('fastRoll', true);
                 model.cookie('fastRoll', true);
@@ -105,7 +156,7 @@ export let controller = (() => {
         },
 
         Home: function () {
-            soundController.sound.playSound({sound : 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
             // Отправляем запрос Logout
             request.send('Logout')
                 .then((response) => {
@@ -115,19 +166,20 @@ export let controller = (() => {
                 });
         },
 
-        toggleFullScreen: function() {
+        toggleFullScreen: function () {
             let game = model.el('game');
 
             if (game.scale.isFullScreen) {
-                game.scale.stopFullScreen()
+                game.scale.stopFullScreen();
             } else {
-                game.scale.startFullScreen()
+                game.scale.startFullScreen();
             }
         }
     };
 
     return {
-        initDesktop,
+        initMainDesktop,
+        initFsDesktop,
         initMobile,
         updateTime
     };

@@ -17,6 +17,7 @@ export let view = (() => {
             model.group('menuContainer', game.add.group());
             model.group('dragon', game.add.group());
             model.group('footer', game.add.group());
+            model.group('footerMenu', game.add.group());
             model.group('balanceCash', game.add.group());
             model.group('balanceCoin', game.add.group());
             model.group('fs', game.add.group());
