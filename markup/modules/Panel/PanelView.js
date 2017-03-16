@@ -226,48 +226,6 @@ export let view = (() => {
                 candle.animations.add('burn');
                 candle.animations.play('burn', 12, true);
             return candle;
-        },
-
-        info: function({
-            game = model.el('game'),
-            container = model.group('infoTable'),
-            x = model.el('game').world.centerX,
-            y = model.el('game').world.centerY,
-        }) {
-            container.alpha = 0;
-            container.visible = false;
-            let overlay = game.add.graphics(0, 0, container).beginFill(0x000000, 0.8).drawRect(0, 0, game.width, game.height);
-            model.el('overlay', overlay);
-
-            let infoRules = game.add.sprite(x, y, 'info', '1_en.png', container);
-                infoRules.anchor.set(0.5);
-                infoRules.scale.set(1.3);
-            model.el('infoRules', infoRules);
-
-            let closed = game.add.sprite(game.width - 390, 200, 'closed', null, container);
-            model.el('closed', closed);
-
-            let arrowRight = game.add.sprite(game.width / 2 + 40, 780, 'ar', null, container);
-            model.el('arrowRight', arrowRight);
-
-            let arrowLeft = game.add.sprite(game.width / 2 - 180, 780, 'arLeft', null, container);
-            model.el('arrowLeft', arrowLeft);
-
-            let infoMarkers = [];
-            let infoMarker = game.add.sprite(game.width / 2 - 100, 770, 'infoMarker', 'marker_on.png', container);
-                infoMarker.name = 'infoMarker0';
-                infoMarkers.push(infoMarker);
-
-            for (let i = 1; i < 6; i++) {
-                let name = 'infoMarker' + i;
-                let counter = i;
-                let marker = game.add.sprite(infoMarker.x, 770, 'infoMarker', 'marker_off.png', container);
-                marker.name = name;
-                marker.x = marker.x + 30 * i;
-                infoMarkers.push(marker);
-            }
-            model.el('infoMarkers', infoMarkers);
-            return infoRules;
         }
     }
 

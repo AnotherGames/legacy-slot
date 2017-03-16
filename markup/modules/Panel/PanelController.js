@@ -2,19 +2,27 @@ import { model } from 'modules/Model/Model';
 import { view } from 'modules/Panel/PanelView';
 import { view as mainView } from 'modules/States/Main/MainView';
 
+import Info from '../../../Info/Info';
+
 import { controller as soundController } from 'modules/Sound/SoundController';
 import { controller as autoplayController } from 'modules/Autoplay/AutoplayController';
 import { controller as rollController } from 'modules/Roll/RollController';
 
 export let controller = (() => {
 
+    let info;
+
     function drawButtons() {
         let game = model.el('game');
         view.draw.PanelBG({});
         view.draw.LinesNumber({});
         view.draw.AutoContainer({});
-        view.draw.info({});
-        handle.info();
+
+        info = new Info({
+            model,
+            desktopCloseButtonMargin: 0
+        });
+
         view.draw.AutoPanel({}).forEach((panelButton) => {
             panelButton.inputEnabled = true;
             panelButton.events.onInputUp.add(handle.panelButton, panelButton);
@@ -45,7 +53,7 @@ export let controller = (() => {
             maxBetButtonDesk.onInputDown.add(handle.maxBet);
 
         let infoButtonDesk = view.draw.InfoButton({});
-            infoButtonDesk.onInputDown.add(handle.openInfo);
+            infoButtonDesk.onInputDown.add(info.open.bind(info));
 
         let betLevelPlus = view.draw.PlusButton({});
             betLevelPlus.onInputDown.add(handle.betPlus);
@@ -122,109 +130,6 @@ export let controller = (() => {
 
             soundController.sound.playSound({sound : 'buttonClick'});
             model.changeBet({toMax: true});
-        },
-
-        info: function() {
-
-            let game = model.el('game');
-            let infoRules = model.el('infoRules')
-            let overlay = model.el('overlay');
-            let closed = model.el('closed');
-            let arrowRight = model.el('arrowRight');
-            let arrowLeft = model.el('arrowLeft');
-
-            overlay.inputEnabled = true;
-            overlay.input.priorityID = 2;
-            infoRules.inputEnabled = true;
-            infoRules.input.priorityID = 3;
-            closed.inputEnabled = true;
-            closed.input.priorityID = 4;
-            arrowRight.inputEnabled = true;
-            arrowRight.input.priorityID = 4;
-            arrowLeft.inputEnabled = true;
-            arrowLeft.input.priorityID = 4;
-
-            overlay.events.onInputDown.add(handle.closeInfo);
-            closed.events.onInputDown.add(handle.closeInfo);
-            arrowRight.events.onInputDown.add(handle.switchInfoRight);
-            arrowLeft.events.onInputDown.add(handle.switchInfoLeft);
-        },
-
-        openInfo: function() {
-            if(model.state('buttons:locked')
-            || model.state('roll:progress')
-            || model.state('isAnim:info')
-            || model.state('autoplay:start')) return;
-
-            let game = model.el('game');
-            game.input.keyboard.enabled = false;
-            soundController.sound.playSound({sound : 'buttonClick'});
-            let counter = 0;
-            model.el('infoCounter', counter);
-
-            let container = model.group('infoTable');
-            model.state('isAnim:info', true)
-            container.visible = true;
-            game.add.tween(container).to( { alpha: 1 }, 700, 'Quart.easeOut', true)
-                .onComplete.add(()=>{
-                    model.state('isAnim:info', false);
-                })
-        },
-
-        closeInfo: function () {
-            if(model.state('isAnim:info')) return;
-
-            let game = model.el('game');
-            let counter = 0;
-            model.el('infoCounter', counter);
-
-            game.input.keyboard.enabled = true;
-            model.state('infoPanelOpen', false);
-
-            let container = model.group('infoTable')
-            model.state('isAnim:info', true)
-            game.add.tween(container).to( { alpha: 0 }, 700, 'Quart.easeOut', true)
-                .onComplete.add(()=>{
-                    model.state('isAnim:info', false)
-                    container.visible = false;
-                })
-        },
-
-        switchInfoRight: function () {
-            let infoRules = model.el('infoRules');
-            let counter = model.el('infoCounter');
-            let infoMarkers = model.el('infoMarkers');
-
-            infoMarkers.forEach((elem) => {
-                elem.frameName = 'marker_off.png';
-            });
-            if (counter > 4) {
-                counter = 0;
-            } else {
-                counter++;
-            }
-            model.el('infoCounter', counter);
-            infoMarkers[counter].frameName = 'marker_on.png';
-            infoRules.frameName = `${counter + 1}_en.png`;
-        },
-
-        switchInfoLeft: function () {
-            let infoRules = model.el('infoRules');
-            let counter = model.el('infoCounter');
-            let infoMarkers = model.el('infoMarkers');
-
-            infoMarkers.forEach((elem) => {
-                elem.frameName = 'marker_off.png';
-            });
-            if (counter < 1) {
-                counter = 5;
-            } else {
-                counter--;
-                infoMarkers[counter + 1].frameName = 'marker_off.png';
-            }
-            model.el('infoCounter', counter);
-            infoMarkers[counter].frameName = 'marker_on.png';
-            infoRules.frameName = `${counter + 1}_en.png`;
         },
 
         betPlus: function() {
