@@ -87,7 +87,6 @@ export class Main {
         } else {    // Desktop
             // Рисуем футер
             footerController.initDesktop();
-            footerController.initSettingInfoButtons();
             // Автоматически позиционируем основной контейнер
             this.positionMainContainer();
             // Инициализируем десктопные сеттинги

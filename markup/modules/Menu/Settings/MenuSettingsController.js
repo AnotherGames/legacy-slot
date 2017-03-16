@@ -2,11 +2,10 @@ import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
 
 import { view } from 'modules/Menu/Settings/MenuSettingsView';
-import { view as mainView } from 'modules/States/Main/MainView';
-import { view as footerView } from 'modules/Footer/FooterView';
+import { view as panelView } from 'modules/Panel/PanelView';
 
 import { controller as soundController } from 'modules/Sound/SoundController';
-import { controller as footerController } from 'modules/Footer/FooterController';
+import { controller as panelController } from 'modules/Panel/PanelController';
 
 export let controller = (() => {
 
@@ -17,10 +16,10 @@ export let controller = (() => {
         _touchEnd: function () {
             document.removeEventListener('touchend', handle._touchEnd, false);
             if (touchX + 100 < game.input.mouse.input.x) {
-                footerController.handle.switchInfoLeft();
+                panelController.handle.switchInfoLeft();
             } else
             if (touchX - 100 > game.input.mouse.input.x) {
-                footerController.handle.switchInfoRight();
+                panelController.handle.switchInfoRight();
             }
         },
         touchRules: function () {
@@ -140,13 +139,13 @@ export let controller = (() => {
             model.state('settings', 'rules');
             view.hide.Settings({});
             view.hide.Overlay({});
-            footerController.handle.openInfo();
+            panelController.handle.openInfo();
         },
         closeRules: function () {
             if (model.state('settings') === 'close') return;
-            
+
             model.state('settings', 'close');
-            footerController.handle.closeInfo();
+            panelController.handle.closeInfo();
         },
         showHistory: function () {
             soundController.sound.playSound({sound : 'buttonClick'});
@@ -211,7 +210,7 @@ export let controller = (() => {
             backButton.input.priorityID = 12;
             backButton.events.onInputDown.add(handle.closeSettings);
 
-        footerView.draw.info({});
+        panelView.draw.info({});
 
         let infoTable = model.el('infoTable');
         let closeButton = model.el('closeButton');
@@ -230,8 +229,8 @@ export let controller = (() => {
 
         infoTable.events.onInputDown.add(handle.touchRules);
         closeButton.events.onInputDown.add(handle.closeRules);
-        arrowRight.events.onInputDown.add(footerController.handle.switchInfoRight);
-        arrowLeft.events.onInputDown.add(footerController.handle.switchInfoLeft);
+        arrowRight.events.onInputDown.add(panelController.handle.switchInfoRight);
+        arrowLeft.events.onInputDown.add(panelController.handle.switchInfoLeft);
 
         model.state('settings', 'close');
     }
