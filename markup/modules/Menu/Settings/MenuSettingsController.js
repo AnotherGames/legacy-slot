@@ -1,6 +1,8 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
 
+import Info from '../../../../Info/Info';
+
 import { view } from 'modules/Menu/Settings/MenuSettingsView';
 import { view as mainView } from 'modules/States/Main/MainView';
 
@@ -9,23 +11,10 @@ import { controller as soundController } from 'modules/Sound/SoundController';
 export let controller = (() => {
 
     let game;
+    let info;
     let touchX = 0;
 
     let handle = {
-        _touchEnd: function () {
-            document.removeEventListener('touchend', handle._touchEnd, false);
-            if (touchX + 100 < game.input.mouse.input.x) {
-                handle.switchRulesLeft();
-            } else
-            if (touchX - 100 > game.input.mouse.input.x) {
-                handle.switchRulesRight();
-            }
-        },
-        touchRules: function () {
-            touchX = game.input.mouse.input.x;
-
-            document.addEventListener("touchend", handle._touchEnd, false);
-        },
         openSettings: function () {
             if(model.state('buttons:locked')
             || model.state('roll:progress')
@@ -137,56 +126,8 @@ export let controller = (() => {
 
             model.state('settings', 'rules');
             view.hide.Settings({});
-            view.show.Rules({});
-            let counter = 0;
-            model.el('infoCounter', counter);
-        },
-        closeRules: function () {
-            if (model.state('settings') === 'close') return;
-
-            model.state('settings', 'close');
-            view.hide.Rules({});
             view.hide.Overlay({});
-            let counter = model.el('infoCounter');
-            counter = 0;
-            model.el('infoCounter', counter);
-        },
-        switchRulesRight: function () {
-            let counter = model.el('infoCounter');
-            let infoMarkers = model.el('infoMarkers');
-
-            infoMarkers.forEach((elem) => {
-                elem.frameName = 'marker_off.png';
-            });
-            if (counter > config.numOfInfoDots - 2) {
-                counter = 0;
-            } else {
-                counter++;
-            }
-            infoMarkers[counter].frameName = 'marker_on.png';
-
-            let infoRules = model.el('infoRules');
-            infoRules.frameName = counter + 1 + '_en.png';
-            model.el('infoCounter', counter);
-        },
-        switchRulesLeft: function () {
-            let counter = model.el('infoCounter');
-            let infoMarkers = model.el('infoMarkers');
-
-            infoMarkers.forEach((elem) => {
-                elem.frameName = 'marker_off.png';
-            });
-            if (counter < 1) {
-                counter = config.numOfInfoDots - 1;
-            } else {
-                counter--;
-                infoMarkers[counter + 1].frameName = 'marker_off.png';
-            }
-            infoMarkers[counter].frameName = 'marker_on.png';
-
-            let infoRules = model.el('infoRules');
-            infoRules.frameName = counter + 1 + '_en.png';
-            model.el('infoCounter', counter);
+            info.open();
         },
         showHistory: function () {
             soundController.sound.playSound({sound : 'buttonClick'});
@@ -209,6 +150,12 @@ export let controller = (() => {
 
         view.draw.Border({});
         view.draw.Title({});
+
+        info = new Info({
+            model,
+            mobileBGScale: 0.7,
+            mobileCloseButtonMargin: 0
+        });
 
         let soundButton = view.draw.SoundButton({});
             soundButton.inputEnabled = true;
@@ -250,33 +197,6 @@ export let controller = (() => {
             backButton.inputEnabled = true;
             backButton.input.priorityID = 12;
             backButton.events.onInputDown.add(handle.closeSettings);
-
-
-        let infoContainer = game.add.group();
-        model.group('info', infoContainer);
-        view.draw.RulesScreen(infoContainer);
-
-        let infoRules = model.el('infoRules');
-        let closed = model.el('closed');
-        let arrowRight = model.el('arrowRight');
-        let arrowLeft = model.el('arrowLeft');
-        let infoMarkers = model.el('infoMarkers');
-        let counter = 0;
-
-        infoRules.inputEnabled = true;
-        closed.inputEnabled = true;
-        arrowRight.inputEnabled = true;
-        arrowLeft.inputEnabled = true;
-
-        infoRules.input.priorityID = 11;
-        closed.input.priorityID = 12;
-        arrowRight.input.priorityID = 12;
-        arrowLeft.input.priorityID = 12;
-
-        infoRules.events.onInputDown.add(handle.touchRules);
-        closed.events.onInputDown.add(handle.closeRules);
-        arrowRight.events.onInputDown.add(handle.switchRulesRight);
-        arrowLeft.events.onInputDown.add(handle.switchRulesLeft);
 
         model.state('settings', 'close');
     }
