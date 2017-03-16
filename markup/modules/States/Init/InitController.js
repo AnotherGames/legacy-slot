@@ -83,7 +83,7 @@ export class Init {
                     game.state.start('FS');
                 }
             } else {
-                game.state.start('Bonus');
+                game.state.start('Main');
             }
         });
 

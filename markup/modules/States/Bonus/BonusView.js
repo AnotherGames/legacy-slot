@@ -32,34 +32,73 @@ export let view = (() => {
             model.el('mainBG', mainBG);
         },
 
+        doorsElements: function ({
+            game = model.el('game'),
+            container = model.group('bg')
+        }) {
+            let doorsElements = [];
+            for (let i = 1; i < 6; i++) {
+                let element = game.add.spine(game.world.centerX, game.world.centerY, `element${i}`);
+                element.setAnimationByName(0, 'idle', true);
+                container.add(element);
+                if (model.mobile) {
+                    element.scale.set(0.66);
+                }
+                doorsElements.push(element);
+            }
+            model.el('doorsElements', doorsElements);
+
+        },
+
+        changeAnim: function ({
+            game = model.el('game'),
+            container = model.group('bg'),
+            number = 1,
+            anim = 'open'
+        }) {
+            let doorsElements = model.el('doorsElements');
+            doorsElements.forEach((item, index) => {
+                if (index + 1 == number) {
+                    if (anim == 'open') {
+                        item.setAnimationByName(0, anim, false);
+                        item.addAnimationByName(0, 'idle_opened', true);
+                    } else {
+                        item.setAnimationByName(0, anim, false);
+                        item.addAnimationByName(0, 'idle', true);
+                    }
+                }
+            });
+        },
+
         upperBG: function ({
             game = model.el('game'),
             container = model.group('upperBG')
         }) {
-            let middleBG = game.add.sprite(0, 0, 'bonusBG2', null, container);
-            model.el('middleBG', middleBG);
-
-            let upperBG = game.add.sprite(0, 0, 'bonusBG3', null, container);
-            model.el('upperBG', upperBG);
-        },
-
-        bigFish: function ({
-            game = model.el('game'),
-            container = model.group('bg')
-        }) {
-            let x = (model.desktop) ? 200 : 150;
-            let y = (model.desktop) ? 520 : 350;
-            let bigFish = game.add.sprite(x, y, 'bigFish', null, container);
-            bigFish.anchor.set(0.5);
+            let bgTop = game.add.spine(game.world.centerX, game.world.centerY, 'BG_top');
+            bgTop.setAnimationByName(0, 'idle', true);
+            container.add(bgTop);
             if (model.mobile) {
-                bigFish.scale.set(0.6);
+                bgTop.scale.set(0.66);
             }
-            bigFish.animations.add('move', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2]);
-            bigFish.animations.play('move', 20, true);
-            model.el('bigFish', bigFish);
-
-            game.add.tween(bigFish).to({y: bigFish.y + 40}, 3000, 'Linear', true, 0, -1, true);
         },
+
+        // bigFish: function ({
+        //     game = model.el('game'),
+        //     container = model.group('bg')
+        // }) {
+        //     let x = (model.desktop) ? 200 : 150;
+        //     let y = (model.desktop) ? 520 : 350;
+        //     let bigFish = game.add.sprite(x, y, 'bigFish', null, container);
+        //     bigFish.anchor.set(0.5);
+        //     if (model.mobile) {
+        //         bigFish.scale.set(0.6);
+        //     }
+        //     bigFish.animations.add('move', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2]);
+        //     bigFish.animations.play('move', 20, true);
+        //     model.el('bigFish', bigFish);
+        //
+        //     game.add.tween(bigFish).to({y: bigFish.y + 40}, 3000, 'Linear', true, 0, -1, true);
+        // },
 
         addLight: function ({
             game = model.el('game'),
@@ -110,7 +149,7 @@ export let view = (() => {
             model.el('winText', winText);
 
             // Отрисовываем Выигрыш
-            let winCount = game.add.bitmapText(game.width / 2, game.height / 2, 'numbersFont', '0', 120, container);
+            let winCount = game.add.bitmapText(game.width / 2, game.height * 0.6, 'numbersFont', '0', 100, container);
             winCount.align = 'center';
             winCount.anchor.set(0.5);
             winCount.scale.set(0.1);
@@ -124,8 +163,8 @@ export let view = (() => {
             winText = model.el('winText'),
             winCount = model.el('winCount')
         }) {
-            let scaleX = (model.desktop) ? 1.0 : 0.7;
-            let scaleY = (model.desktop) ? 1.0 : 0.7;
+            let scaleX = (model.desktop) ? 0.6 : 0.3;
+            let scaleY = (model.desktop) ? 0.6 : 0.3;
             game.add.tween(winText.scale).to({x: 1.0, y: 1.0}, 1500, Phaser.Easing.Bounce.Out, true);
             let winCountValue = model.data('bonusWinCoins');
             draw._сountMeter(winCountValue, winCount);

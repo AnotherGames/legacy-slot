@@ -48,7 +48,7 @@ export let view = (() => {
             let deltaY = (model.desktop) ? 55 : 50;
             let deltaY2 = (model.desktop) ? 37 : -18;
             let y1 = (model.desktop) ? 95 : 70;
-            let y2 = (model.desktop) ? 100 : 15;
+            let y2 = (model.desktop) ? 110 : 15;
             let x = (model.desktop) ? 0 : 80;
 
             let fonTop = game.add.sprite(x, gameMachine.top + y1, 'fonTop', null, container);
@@ -122,9 +122,10 @@ export let view = (() => {
 
         addBubbles: function ({
             game = model.el('game'),
-            container = model.group('main')
+            container = model.group('main'),
+            x = 0
         }) {
-            let emitter = game.add.emitter(0, game.height + 200, 400);
+            let emitter = game.add.emitter(x, game.height + 200, 400);
             container.add(emitter);
             emitter.makeParticles('bubble');
             emitter.width = game.width;
@@ -181,7 +182,7 @@ export let view = (() => {
             y2 = (model.desktop) ? 700 : 600
         }) {
 
-            let fish = game.add.sprite(-500, game.height * 0.8 , 'fish1', null, container);
+            let fish = game.add.sprite(-500, game.height * 0.75 , 'fish1', null, container);
             fish.anchor.set(0.5);
             fish.animations.add('move', Phaser.Animation.generateFrameNames('F1-animation_', 0, 30, '.png', 1), 20, true);
             fish.animations.play('move');

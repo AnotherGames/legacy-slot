@@ -148,9 +148,11 @@ export class Preload {
     loadBonusAssets() {
         const game = model.el('game');
         game.load.image('bonusBG', 'bg/bonusBG.png');
-        game.load.image('bonusBG2', 'bg/bonusBG2.png');
-        game.load.image('bonusBG3', 'bg/bonusBG3.png');
-        game.load.spritesheet('bigFish', 'bonus/bigFish.png', 226, 182, 12);
+        // game.load.image('bonusBG2', 'bg/bonusBG2.png');
+        // game.load.image('bonusBG3', 'bg/bonusBG3.png');
+        // game.load.spritesheet('bigFish', 'bonus/bigFish.png', 226, 182, 12);
+        game.load.atlasJSONArray('doors', 'bonus/doors.png', 'bonus/doors.json');
+
         game.load.spritesheet('chernila', 'bonus/chernila.png', 259, 185, 12);
         game.load.atlasJSONArray('tentacles', 'bonus/tentacles.png', 'bonus/tentacles.json');
         game.load.atlasJSONArray('bonusNumber', 'bonus/bonusNumber.png', 'bonus/bonusNumber.json');
@@ -164,11 +166,12 @@ export class Preload {
         const game = model.el('game');
         game.load.spine('logoBack', 'spine/ZST-back.json');
         game.load.spine('logoFront', 'spine/ZST-top.json');
-        // game.load.spine('diverBig', 'spine/Vodolaz.json');
-        // game.load.spine('diverFS', 'spine/sunken.json');
-        // game.load.spine('chestFS', 'spine/skeleton.json');
-        // game.load.spine('ink', 'spine/ink.json');
-
+        game.load.spine('element1', 'spine/BG_dveri.json');
+        game.load.spine('element2', 'spine/BG_kuvshin.json');
+        game.load.spine('element3', 'spine/BG_sclep.json');
+        game.load.spine('element4', 'spine/BG_ship.json');
+        game.load.spine('element5', 'spine/BG_sunduk.json');
+        game.load.spine('BG_top', 'spine/BG_top.json');
     }
 
     loadTest() {

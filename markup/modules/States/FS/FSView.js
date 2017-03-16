@@ -217,10 +217,13 @@ export let view = (() => {
             let fsMultiBig = game.add.sprite(shell.x, shell.y, 'multi', `x${number}.png`, container);
             fsMultiBig.anchor.set(0.5);
             fsMultiBig.alpha = 0;
-            game.add.tween(fsMultiBig).to({alpha: 1, y: fsMultiBig.y - 120}, 700, Phaser.Easing.Elastic.Out, true)
-                .onComplete.add(() => {
-                    game.add.tween(fsMultiBig).to({y: shell.y - 30}, 400, Phaser.Easing.Back.Out, true);
-                }, this);
+            fsMultiBig.scale.set(0.1);
+
+            game.add.tween(fsMultiBig).to({alpha: 1}, 500, 'Linear', true);
+            game.add.tween(fsMultiBig.scale).to({x: 1.0, y: 1.0}, 1500, Phaser.Easing.Elastic.Out, true);
+                // .onComplete.add(() => {
+                //     game.add.tween(fsMultiBig).to({y: shell.y - 30}, 400, Phaser.Easing.Back.Out, true);
+                // }, this);
 
             // soundController.sound.playSound({currentSound: 'chestDown'});
         },
