@@ -9,9 +9,9 @@ export let view = (() => {
             container = model.group('footer'),
             color = 0x000000,
             heightTop = 40,
-            heightBottom = 30,
-            alphaTop = 0.25,
-            alphaBottom = 0.7
+            heightBottom = 35,
+            alphaTop = 0.5,
+            alphaBottom = 0.8
         }) {
 
             let footerTop = game.add.graphics(0, 0, container)
@@ -32,8 +32,8 @@ export let view = (() => {
                 );
             model.el('footerBottom', footerBottom);
 
-            model.data('footerTopCenterY', game.height - (heightBottom + heightTop / 2));
-            model.data('footerBottomCenterY', game.height - heightBottom / 2);
+            model.data('footerTopCenterY', game.height - (heightBottom + heightTop / 2) + 4);
+            model.data('footerBottomCenterY', game.height - heightBottom / 2 + 4);
 
         },
 
@@ -41,7 +41,7 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('footer'),
             color = 0x000000,
-            heightBottom = 30,
+            heightBottom = 40,
             alphaBottom = 0.7
         }) {
 
@@ -54,44 +54,50 @@ export let view = (() => {
                 );
             model.el('footerBottom', footerBottom);
 
-            model.data('footerBottomCenterY', game.height - heightBottom / 2);
+            model.data('footerBottomCenterY', game.height - heightBottom / 2 + 3);
         },
 
         HomeButton: function ({
             game = model.el('game'),
-            container = model.group('footer'),
-            x = 25,
+            container = model.group('footerMenu'),
+            x = 30,
             y = model.el('game').height - 20
         }) {
-            let homeButton = game.add.button(x, y, 'footerButtons', null, null, 'homeOn.png', 'home.png', 'homeOn.png', null, container);
-                homeButton.anchor.set(0.5);
+            if (model.mobile) {
+                y = game.height - 17;
+            }
+            let homeButton = game.add.button(x, y, 'footerButtons', null, null, null, 'home.png', null, null, container);
+            homeButton.anchor.set(0.5);
+
             model.el('homeButton', homeButton);
             return homeButton;
         },
 
-        MenuButton: function ({
+        FullScreenButton: function ({
             game = model.el('game'),
-            container = model.group('footer'),
-            x = 75,
+            container = model.group('footerMenu'),
+            x = 80,
             y = model.el('game').height - 20
         }) {
-            let menuButton = game.add.button(x, y, 'footerButtons', null, null, 'menuOn.png', 'menu.png', 'menuOn.png', null, container);
-                menuButton.anchor.set(0.5);
-            model.el('menuButton', menuButton);
-            return menuButton;
+            let fullScreeButton = game.add.button(x, y, 'footerButtons', null, null, null, 'fullScreenOn.png', null, null, container);
+            fullScreeButton.anchor.set(0.5);
+
+            model.el('fullScreeButton', fullScreeButton);
+            return fullScreeButton;
         },
 
         SoundButton: function ({
             game = model.el('game'),
-            container = model.group('footer'),
-            x = 125,
+            container = model.group('footerMenu'),
+            x = 130,
             y = model.el('game').height - 20
         }) {
-            let soundButton = game.add.button(x, y, 'footerButtons', null, null, null, 'sound.png', null, null, container);
-                soundButton.anchor.set(0.5);
+            let soundButton = game.add.button(x, y, 'footerButtons', null, null, null, 'soundOn.png', null, null, container);
+            soundButton.anchor.set(0.5);
+
             // Определяем начальный фрейм
             if (model.state('globalSound')) {
-                soundButton.frameName = 'sound.png';
+                soundButton.frameName = 'soundOn.png';
             } else {
                 soundButton.frameName = 'soundOff.png';
             }
@@ -101,33 +107,36 @@ export let view = (() => {
 
         FastButton: function ({
             game = model.el('game'),
-            container = model.group('footer'),
-            x = 175,
+            container = model.group('footerMenu'),
+            x = 180,
             y = model.el('game').height - 20
         }) {
-            let fastButton = game.add.button(x, y, 'footerButtons', null, null, null, 'fastSpin.png', null, null, container);
-                fastButton.anchor.set(0.5);
-            // Определяем начальный фрейм
-            if (model.state('fastRoll')) {
-                fastButton.frameName = 'fastSpinOff.png';
-            } else {
-                fastButton.frameName = 'fastSpin.png';
-            }
+            let fastButton = game.add.button(x, y, 'footerButtons', null, null, null, 'fastSpinOff.png', null, null, container);
+            fastButton.anchor.set(0.5);
+            fastButton.frameName = (model.state('fastRoll')) ? 'fastSpinOff.png' : 'fastSpinOn.png';
+
             model.el('fastButton', fastButton);
             return fastButton;
         },
 
-        FullScreenButton: function({
+        SettingsButton: function ({
             game = model.el('game'),
-            container = model.group('footer'),
-            x = 225,
+            container = model.group('footerMenu'),
+            x = 280,
             y = model.el('game').height - 20
         }) {
-            let fullScreeButton = game.add.button(x, y, 'footerButtons', null, null, null, 'fullscreen.png', null, null, container);
-                fullScreeButton.anchor.set(0.5);
+            let settingsButton = game.add.button(x, y, 'footerButtons', null, null, null, 'settings.png', null, null, container);
+            settingsButton.anchor.set(0.5);
 
-            model.el('fullScreeButton', fullScreeButton);
-            return fullScreeButton;
+            settingsButton.onInputOver.add(() => {
+                settingsButton.scale.set(1.4);
+            });
+            settingsButton.onInputOut.add(() => {
+                settingsButton.scale.set(1);
+            });
+
+            model.el('settingsButton', settingsButton);
+            return settingsButton;
         },
 
         Time: function ({
@@ -158,9 +167,11 @@ export let view = (() => {
                 style = styleMobile;
             }
 
+            let timeHeight = (model.desktop) ? game.height - 17 : game.height - 11;
+
             let footerTime = game.add.text(
                 0,
-                game.height - 12,
+                timeHeight,
                 `${currentHour} : ${currentMinutes}`,
                 style,
                 container);

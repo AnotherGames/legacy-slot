@@ -15,7 +15,7 @@ export let controller = (function () {
             } else {
                 model.state('globalSound', true);
                 model.cookie('globalSound', true);
-                soundButton.frameName = 'sound.png';
+                soundButton.frameName = 'soundOn.png';
             }
             soundController.volume.changeVolume(this.value);
             if(this.value > 0){
