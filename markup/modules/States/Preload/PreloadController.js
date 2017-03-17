@@ -78,19 +78,16 @@ export class Preload {
 
     loadMainAssets() {
         const game = model.el('game');
-        // game.load.spritesheet('bigFish', 'bonus/bigFish.png', 226, 182, 12);
         game.load.image('mainBG', 'bg/mainBG.png');
         game.load.image('fonTop', 'bg/fonTop.png');
         game.load.image('fonBottom', 'bg/fonBottom.png');
         game.load.image('bubble', 'bg/bubble.png');
         game.load.image('topLight', 'bg/topLight.png');
-        // game.load.spritesheet('fish', 'bg/fish.png', 103, 33, 12);
         game.load.atlasJSONArray('shark', 'bg/shark.png', 'bg/shark.json');
         game.load.atlasJSONArray('fish1', 'bg/fish1.png', 'bg/fish1.json');
         game.load.atlasJSONArray('fish2', 'bg/fish2.png', 'bg/fish2.json');
         game.load.atlasJSONArray('fish3', 'bg/fish3.png', 'bg/fish3.json');
         game.load.image('gameMachine', 'game/gameMachine.png');
-        // game.load.image('gameMachineBG', 'game/gameMachineBG.png');
         game.load.image('lineLeft', 'game/lineLeft.png');
         game.load.image('lineRight', 'game/lineRight.png');
         game.load.image('logoGM', 'game/logoGM.png');
@@ -99,7 +96,6 @@ export class Preload {
         game.load.image('infoTableBg', 'other/infoTableBg.png');
         game.load.atlasJSONArray('infoTable', 'other/infoTable.png', 'other/infoTable.json');
         game.load.atlasJSONArray('infoMarker', 'other/infoMarker.png', 'other/infoMarker.json');
-        game.load.atlasJSONArray('coins', 'bonus/coins.png', 'bonus/coins.json');
         game.load.image('winLine', 'win/winNumber.png');
         game.load.image('winTotal', 'win/winTable.png');
         game.load.atlasJSONArray('winSplash', 'win/splash.png', 'win/splash.json');
@@ -146,12 +142,6 @@ export class Preload {
         game.load.atlasJSONArray('doors', 'bonus/doors.png', 'bonus/doors.json');
         game.load.image('bonusFish', 'bonus/bonusFish.png');
 
-        // game.load.spritesheet('chernila', 'bonus/chernila.png', 259, 185, 12);
-        // game.load.atlasJSONArray('tentacles', 'bonus/tentacles.png', 'bonus/tentacles.json');
-        // game.load.atlasJSONArray('bonusNumber', 'bonus/bonusNumber.png', 'bonus/bonusNumber.json');
-        // game.load.atlasJSONArray('illuminators', 'bonus/illuminators.png', 'bonus/illuminators.json');
-        // game.load.image('light', 'bonus/light.png');
-        // game.load.image('octopus', 'bonus/octopus.png');
     }
 
     loadSpineAssets() {
