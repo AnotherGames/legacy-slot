@@ -82,24 +82,6 @@ export let view = (() => {
             }
         },
 
-        // bigFish: function ({
-        //     game = model.el('game'),
-        //     container = model.group('bg')
-        // }) {
-        //     let x = (model.desktop) ? 200 : 150;
-        //     let y = (model.desktop) ? 520 : 350;
-        //     let bigFish = game.add.sprite(x, y, 'bigFish', null, container);
-        //     bigFish.anchor.set(0.5);
-        //     if (model.mobile) {
-        //         bigFish.scale.set(0.6);
-        //     }
-        //     bigFish.animations.add('move', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2]);
-        //     bigFish.animations.play('move', 20, true);
-        //     model.el('bigFish', bigFish);
-        //
-        //     game.add.tween(bigFish).to({y: bigFish.y + 40}, 3000, 'Linear', true, 0, -1, true);
-        // },
-
         addLight: function ({
             game = model.el('game'),
             container = model.group('bg')
@@ -112,26 +94,48 @@ export let view = (() => {
             }
         },
 
-        showOctopus: function ({
+        showFailBubbles: function ({
             game = model.el('game'),
-            container = model.group('bg')
+            container = model.group('bg'),
+            x = 0,
+            y = 0
         }) {
-            let octopus = game.add.sprite(game.width * 0.68, game.height * 0.75, 'octopus', null, container);
-            octopus.anchor.set(0.5);
-            octopus.alpha = 0;
+            console.log('i am here', x, y);
+            let emitter = game.add.emitter(x, y, 300);
+            container.add(emitter);
+            emitter.makeParticles('bubble');
+            emitter.width = 100;
 
-            let inkSmall = game.add.sprite(game.width * 0.68, game.height * 0.75, 'chernila', null, container);
-            inkSmall.anchor.set(0.5);
-            inkSmall.scale.set(4.0);
-            if (model.mobile) {
-                inkSmall.scale.set(2.0);
-            }
-            inkSmall.animations.add('move');
-            inkSmall.animations.play('move', 20, false);
+            emitter.setRotation(0, 0);
+            emitter.setAlpha(0.1, 1, 3000);
+            emitter.minParticleScale = 0.1;
+            emitter.maxParticleScale = 0.4;
+            emitter.setYSpeed(20, 80);
+            emitter.gravity = -300;
 
-            game.add.tween(inkSmall).to({alpha: 0}, 1500, 'Linear', true, 500);
-            game.add.tween(octopus).to({alpha: 1}, 1500, 'Linear', true, 500);
+            emitter.start(true, 7000, 20);
         },
+
+        // showOctopus: function ({
+        //     game = model.el('game'),
+        //     container = model.group('bg')
+        // }) {
+        //     let octopus = game.add.sprite(game.width * 0.68, game.height * 0.75, 'octopus', null, container);
+        //     octopus.anchor.set(0.5);
+        //     octopus.alpha = 0;
+        //
+        //     let inkSmall = game.add.sprite(game.width * 0.68, game.height * 0.75, 'chernila', null, container);
+        //     inkSmall.anchor.set(0.5);
+        //     inkSmall.scale.set(4.0);
+        //     if (model.mobile) {
+        //         inkSmall.scale.set(2.0);
+        //     }
+        //     inkSmall.animations.add('move');
+        //     inkSmall.animations.play('move', 20, false);
+        //
+        //     game.add.tween(inkSmall).to({alpha: 0}, 1500, 'Linear', true, 500);
+        //     game.add.tween(octopus).to({alpha: 1}, 1500, 'Linear', true, 500);
+        // },
 
         showWin: function ({
             game = model.el('game'),

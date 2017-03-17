@@ -23,10 +23,10 @@ class Door {
         this.destroyed = false;
         this.isWinPlayed = false;
 
-        this.light = this.game.add.sprite(this.x, this.y, 'light');
-        this.light.anchor.set(0.5);
-        this.light.alpha = 0;
-        model.group('bg').add(this.light);
+        // this.light = this.game.add.sprite(this.x, this.y, 'light');
+        // this.light.anchor.set(0.5);
+        // this.light.alpha = 0;
+        // model.group('bg').add(this.light);
 
         this.sprite = this.game.add.sprite(this.x, this.y, 'doors', `${index}.png`);
         this.sprite.anchor.set(0.5);
@@ -79,6 +79,8 @@ class Door {
         // this.destroyed = true;
 
         soundController.sound.playSound({ currentSound: 'illumFail', soundVolume: 3 });
+
+        bonusView.draw.showFailBubbles({x: this.x, y: this.y});
 
         // this.doors.forEach((door) => {
         //     door.tentacle = this.game.add.sprite(door.x - 50, door.y + 5, 'tentacles');
@@ -204,7 +206,7 @@ export class Bonus {
         model.el('doors', this.doors);
 
         if (model.desktop) {
-            mainView.draw.addBubbles({container: model.group('bg'), x: this.game.world.centerX});
+            // mainView.draw.addBubbles({container: model.group('bg'), x: this.game.world.centerX});
             // mainView.draw.addFishes({ y1: 650, y2: 900 });
             bonusView.draw.addLight({});
             bonusView.draw.upperBG({});
@@ -290,6 +292,7 @@ function handleDoorClick() {
             model.updateBalance({ startBonusRoll: true });
             if (!this.isWinPlayed) {
                 this.showAnim();
+                console.log(this.sprite);
                 if (this.data.CurrentValue != 'Exit') {
                     this.win();
                     this.isWinPlayed = true;

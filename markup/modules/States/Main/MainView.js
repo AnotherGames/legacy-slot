@@ -125,19 +125,19 @@ export let view = (() => {
             container = model.group('main'),
             x = 0
         }) {
-            let emitter = game.add.emitter(x, game.height + 200, 400);
+            let emitter = game.add.emitter(x, game.height + 5, 200);
             container.add(emitter);
             emitter.makeParticles('bubble');
             emitter.width = game.width;
 
             emitter.setRotation(0, 0);
             emitter.setAlpha(0.1, 1, 3000);
-            emitter.minParticleScale = 0.1;
+            emitter.minParticleScale = 0.2;
             emitter.maxParticleScale = 0.4;
-            emitter.setYSpeed(20, 80);
-            emitter.gravity = -200;
+            emitter.setYSpeed(0, 15);
+            emitter.gravity = -15;
 
-            emitter.start(false, 7000, 150);
+            emitter.start(false, 15000, 300);
         },
 
         addShark: function ({

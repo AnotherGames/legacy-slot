@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "VNYfyQcG2RKv83fW95VuBAWThig", "spine": "3.5.51", "width": 320.04, "height": 240.29, "images": "" },
+"skeleton": { "hash": "O/9T+znmpWz8a0oE4ObF6Z8VW80", "spine": "3.5.51", "width": 320.04, "height": 240.29, "images": "" },
 "bones": [
 	{ "name": "root" },
 	{ "name": "sunduk", "parent": "root" },
@@ -35,6 +35,13 @@
 },
 "animations": {
 	"idle": {
+		"slots": {
+			"img/BG_33": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			}
+		},
 		"bones": {
 			"bone18": {
 				"rotate": [
@@ -82,6 +89,11 @@
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
 					{ "time": 6.6667, "color": "ffffffff" }
+				]
+			},
+			"img/BG_33": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
 				]
 			}
 		},
@@ -173,6 +185,11 @@
 				"color": [
 					{ "time": 0.3333, "color": "ffffff00" },
 					{ "time": 0.3667, "color": "ffffffff" }
+				]
+			},
+			"img/BG_33": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
 				]
 			}
 		},
