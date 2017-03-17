@@ -1,22 +1,21 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
+import { request } from 'modules/Util/Request';
 
 import { view as mainView } from 'modules/States/Main/MainView';
 import { view as winView } from 'modules/Win/WinView';
+import Footer from '../../../../Info/Footer';
 
 import { controller as soundController } from 'modules/Sound/SoundController';
 import { controller as settingsController } from 'modules/Settings/DesktopSettingsController';
 import { controller as balanceController } from 'modules/Balance/BalanceController';
-import { controller as footerController } from 'modules/Footer/FooterController';
 import { controller as panelController } from 'modules/Panel/PanelController';
 import { controller as buttonsController } from 'modules/Buttons/ButtonsController';
 import { controller as rollController } from 'modules/Roll/RollController';
-import { controller as winController } from 'modules/Win/WinController';
 import { controller as autoplayController } from 'modules/Autoplay/AutoplayController';
 import { controller as mobileSettingsController } from 'modules/Menu/Settings/MenuSettingsController';
 import { controller as mobileAutoplayController } from 'modules/Menu/Autoplay/MenuAutoplayController';
 import { controller as mobileSetBetController } from 'modules/Menu/SetBet/MenuSetBetController';
-import { controller as fsController } from 'modules/States/FS/FSController';
 import { controller as keyboardController } from 'modules/Keyboard/KeyboardController';
 
 export class Main {
@@ -41,6 +40,8 @@ export class Main {
 
     create() {
         let game = model.el('game');
+        let footer = new Footer({model, soundController, request});
+        model.el('footer', footer);
 
         soundController.music.stopMusic('finishPerehod');
         soundController.music.stopMusic('fsFon');
@@ -61,7 +62,7 @@ export class Main {
 
         if (model.mobile) {
             // Рисуем футер
-            footerController.initMobile();
+            footer.initMobile();
             // Рисуем кнопки управления
             buttonsController.drawButtons();
             // Автоматически позиционируем основной контейнер
@@ -74,7 +75,7 @@ export class Main {
             mobileSetBetController.init({});
         } else {    // Desktop
             // Рисуем футер
-            footerController.initMainDesktop();
+            footer.initMainDesktop();
             // Автоматически позиционируем основной контейнер
             this.positionMainContainer();
             // Инициализируем десктопные сеттинги
@@ -100,15 +101,10 @@ export class Main {
 
     update() {
         const game = model.el('game');
-        footerController.updateTime({});
+        model.el('footer').update();
         game.frameAnims.forEach((anim) => {
             anim();
         });
-
-        if (model.desktop) {
-        let fullScreeButton = model.el('fullScreeButton');
-            fullScreeButton.frameName = (game.scale.isFullScreen || window.innerHeight == screen.height) ? 'fullScreenOff.png' : 'fullScreenOn.png';
-        }
 
         if (model.mobile && !game.device.iOS) {
             (game.scale.isFullScreen) ? $('#fakeButton').addClass('closed') : $('#fakeButton').removeClass('closed');
