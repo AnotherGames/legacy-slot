@@ -1,10 +1,8 @@
 import { model } from 'modules/Model/Model';
 import { request } from 'modules/Util/Request';
 import { config } from 'modules/Util/Config';
+import Footer from '../../../../Info/Footer';
 
-import { controller as footerController } from 'modules/Footer/FooterController';
-
-import { view as footerView } from 'modules/Footer/FooterView';
 import { view as balanceView } from 'modules/Balance/BalanceView';
 import { view as bonusView } from 'modules/States/Bonus/BonusView';
 import { view as mainView } from 'modules/States/Main/MainView';
@@ -165,6 +163,9 @@ export class Bonus {
     }
 
     create() {
+        let footer = new Footer({model, soundController, request});
+        model.el('footer', footer);
+
         soundController.music.stopMusic('fon');
         soundController.music.playMusic('bonusFon');
 
@@ -182,18 +183,17 @@ export class Bonus {
             mainView.draw.addFishes({ y1: 650, y2: 900 });
             bonusView.draw.addLight({});
             bonusView.draw.upperBG({});
-            footerController.initFsDesktop();
-            footerView.draw.TopFooter({});
+            footer.initMobile();
             balanceView.draw.FSMobileBalance({});
         } else {
-            footerController.initMobile();
+            footer.initMobile();
             mobileSetBetController.init({});
             balanceView.draw.FSMobileBalance({});
         }
         balanceView.draw.CashBalance({});
         model.updateBalance({ startBonus: true });
 
-        if(model.data('savedFS')){
+        if (model.data('savedFS')) {
             this.drawRecoveredPanel();
         }
 
@@ -202,7 +202,7 @@ export class Bonus {
     update() {
         let game = model.el('game');
 
-        footerController.updateTime({});
+        model.el('footer').update();
         game.winAnims.forEach((anim) => {
             anim();
         });
@@ -219,7 +219,7 @@ export class Bonus {
 
     drawRecoveredPanel() {
         let saved = model.data('savedFS').doorsValue;
-        for(let i = 0; i < saved.length; i++) {
+        for (let i = 0; i < saved.length; i++) {
             let door = this.doors[i];
             door.destroyed = true;
             door._playGold();
