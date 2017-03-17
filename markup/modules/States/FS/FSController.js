@@ -1,14 +1,16 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
+import { request } from 'modules/Util/Request';
 
 import { view as fsView } from 'modules/States/FS/FSView';
 import { view as transitionView } from 'modules/Transition/TransitionView';
 import { view as winView } from 'modules/Win/WinView';
 import { view as mainView } from 'modules/States/Main/MainView';
 
+import Footer from '../../../../Info/Footer';
+
 import { controller as soundController } from 'modules/Sound/SoundController';
 import { controller as balanceController } from 'modules/Balance/BalanceController';
-import { controller as footerController } from 'modules/Footer/FooterController';
 import { controller as panelController } from 'modules/Panel/PanelController';
 import { controller as rollController } from 'modules/Roll/RollController';
 import { controller as mobileSetBetController } from 'modules/Menu/SetBet/MenuSetBetController';
@@ -145,6 +147,8 @@ export class FS {
 
     create() {
         let game = model.el('game');
+        let footer = new Footer({model, soundController, request});
+        model.el('footer', footer);
 
         // Играем фоновую музыку
         soundController.music.stopMusic('startPerehod');
@@ -166,7 +170,7 @@ export class FS {
         if (model.mobile) {
             fsView.draw.addPole({});
             // Рисуем футер
-            footerController.initMobile();
+            footer.initMobile();
             // Отрисовуем баланс
             balanceController.initFSMobile();
             mobileSetBetController.init({});
@@ -175,7 +179,7 @@ export class FS {
         } else {    // Desktop
             fsView.draw.addCows({});
 
-            footerController.initFsDesktop();
+            footer.initFsDesktop();
 
             // Автоматически позиционируем основной контейнер
             this.positionMainContainer();
@@ -217,17 +221,12 @@ export class FS {
 
     update() {
         const game = model.el('game');
-        // Обновляем время
-        footerController.updateTime({});
+        // Обновляем футер
+        model.el('footer').update();
         // Проигрываем анимацию
         model.el('game').frameAnims.forEach((anim) => {
             anim();
         });
-
-        if (model.desktop) {
-            let fullScreeButton = model.el('fullScreeButton');
-            fullScreeButton.frameName = (game.scale.isFullScreen || window.innerHeight === screen.height) ? 'fullScreenOff.png' : 'fullScreenOn.png';
-        }
 
         if (model.mobile && !game.device.iOS) {
             (game.scale.isFullScreen) ? $('#fakeButton').addClass('closed') : $('#fakeButton').removeClass('closed');

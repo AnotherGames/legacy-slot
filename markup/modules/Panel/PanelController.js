@@ -1,5 +1,4 @@
 import { model } from 'modules/Model/Model';
-import { config } from 'modules/Util/Config';
 import { view } from 'modules/Panel/PanelView';
 
 import Info from '../../../Info/Info';
