@@ -146,6 +146,7 @@ export let model = (() => {
         model.state('doorFinish', false);
         model.state('fontNotLoaded', true);
         model.state('oneAfterAnother', false);
+        model.state('changeLevel', false);
     }
 
     function initSettings() {

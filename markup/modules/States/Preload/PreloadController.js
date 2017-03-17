@@ -78,7 +78,7 @@ export class Preload {
 
     loadMainAssets() {
         const game = model.el('game');
-        game.load.spritesheet('bigFish', 'bonus/bigFish.png', 226, 182, 12);
+        // game.load.spritesheet('bigFish', 'bonus/bigFish.png', 226, 182, 12);
         game.load.image('mainBG', 'bg/mainBG.png');
         game.load.image('fonTop', 'bg/fonTop.png');
         game.load.image('fonBottom', 'bg/fonBottom.png');
@@ -90,7 +90,7 @@ export class Preload {
         game.load.atlasJSONArray('fish2', 'bg/fish2.png', 'bg/fish2.json');
         game.load.atlasJSONArray('fish3', 'bg/fish3.png', 'bg/fish3.json');
         game.load.image('gameMachine', 'game/gameMachine.png');
-        game.load.image('gameMachineBG', 'game/gameMachineBG.png');
+        // game.load.image('gameMachineBG', 'game/gameMachineBG.png');
         game.load.image('lineLeft', 'game/lineLeft.png');
         game.load.image('lineRight', 'game/lineRight.png');
         game.load.image('logoGM', 'game/logoGM.png');
@@ -126,12 +126,9 @@ export class Preload {
         game.load.atlasJSONArray('multi', 'fs/multi.png', 'fs/multi.json');
         game.load.atlasJSONArray('shell', 'fs/shell.png', 'fs/shell.json');
         game.load.atlasJSONArray('mermaid', 'fs/mermaid.png', 'fs/mermaid.json');
-        game.load.atlasJSONArray('mermaidFS0', 'fs/mermaidFS0.png', 'fs/mermaidFS0.json');
-        game.load.atlasJSONArray('mermaidFS1', 'fs/mermaidFS1.png', 'fs/mermaidFS1.json');
-        game.load.atlasJSONArray('mermaidFS2', 'fs/mermaidFS2.png', 'fs/mermaidFS2.json');
-        game.load.atlasJSONArray('mermaidFS3', 'fs/mermaidFS3.png', 'fs/mermaidFS3.json');
-        game.load.atlasJSONArray('mermaidFS4', 'fs/mermaidFS4.png', 'fs/mermaidFS4.json');
-        game.load.atlasJSONArray('mermaidFS5', 'fs/mermaidFS5.png', 'fs/mermaidFS5.json');
+        game.load.atlasJSONArray('mermaidFS', 'fs/mermaidFS.png', 'fs/mermaidFS.json');
+        game.load.atlasJSONArray('box', 'fs/box.png', 'fs/box.json');
+        game.load.atlasJSONArray('perl', 'fs/perl.png', 'fs/perl.json');
         if (model.mobile) {
             game.load.image('fsCountBG', 'fs/fsCountBG.png');
             game.load.image('fsLevelBG', 'fs/fsLevelBG.png');
@@ -141,25 +138,20 @@ export class Preload {
             game.load.image('panelBGfs', 'game/panelBGfs.png');
         }
 
-        // game.load.image('plus3', 'fs/plus3.png');
-
     }
 
     loadBonusAssets() {
         const game = model.el('game');
         game.load.image('bonusBG', 'bg/bonusBG.png');
-        // game.load.image('bonusBG2', 'bg/bonusBG2.png');
-        // game.load.image('bonusBG3', 'bg/bonusBG3.png');
-        // game.load.spritesheet('bigFish', 'bonus/bigFish.png', 226, 182, 12);
         game.load.atlasJSONArray('doors', 'bonus/doors.png', 'bonus/doors.json');
-
-        game.load.spritesheet('chernila', 'bonus/chernila.png', 259, 185, 12);
-        game.load.atlasJSONArray('tentacles', 'bonus/tentacles.png', 'bonus/tentacles.json');
-        game.load.atlasJSONArray('bonusNumber', 'bonus/bonusNumber.png', 'bonus/bonusNumber.json');
-        game.load.atlasJSONArray('illuminators', 'bonus/illuminators.png', 'bonus/illuminators.json');
-        game.load.image('light', 'bonus/light.png');
-        game.load.image('octopus', 'bonus/octopus.png');
         game.load.image('bonusFish', 'bonus/bonusFish.png');
+
+        // game.load.spritesheet('chernila', 'bonus/chernila.png', 259, 185, 12);
+        // game.load.atlasJSONArray('tentacles', 'bonus/tentacles.png', 'bonus/tentacles.json');
+        // game.load.atlasJSONArray('bonusNumber', 'bonus/bonusNumber.png', 'bonus/bonusNumber.json');
+        // game.load.atlasJSONArray('illuminators', 'bonus/illuminators.png', 'bonus/illuminators.json');
+        // game.load.image('light', 'bonus/light.png');
+        // game.load.image('octopus', 'bonus/octopus.png');
     }
 
     loadSpineAssets() {

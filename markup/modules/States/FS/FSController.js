@@ -79,13 +79,11 @@ export let controller = (() => {
         if (model.state('maxFsMultiplier')) return;
 
         let rollData = model.data('rollResponse');
-        let levelValue = rollData.FsBonus.Level;
-        let currLevel = model.data('fsLevel');
+        // let levelValue = rollData.FsBonus.Level;
+        // let currLevel = model.data('fsLevel');
         let multiValue = rollData.FsBonus.Multi;
         let currMulti = model.data('fsMulti');
         let multiCounter = model.el('multiCounter');
-        console.warn(levelValue);
-        console.warn(currMulti);
 
         // Увеличиваем мульти(разбивание бутылки)
         if (multiValue > currMulti) {
@@ -96,10 +94,7 @@ export let controller = (() => {
             model.el('multiCounter', multiCounter);
         }
 
-        // if (levelValue > currLevel) {
-            fsView.draw.changeLevel({number: levelValue});
-            model.data('fsLevel', levelValue);
-        // }
+        model.state('changeLevel', true);
 
     }
 

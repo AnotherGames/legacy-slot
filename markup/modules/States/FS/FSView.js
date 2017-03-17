@@ -191,10 +191,14 @@ export let view = (() => {
 
             model.el('shell3', shell3);
 
-            if (model.mobile) {
-                shell1.scale.set(0.8);
-                shell2.scale.set(0.8);
-                shell3.scale.set(0.8);
+            if (model.desktop) {
+                shell1.scale.set(1.3);
+                shell2.scale.set(1.3);
+                shell3.scale.set(1.3);
+            } else {
+                shell1.scale.set(0.9);
+                shell2.scale.set(0.9);
+                shell3.scale.set(0.9);
             }
         },
 
@@ -209,21 +213,20 @@ export let view = (() => {
             model.el('fsMulti', fsMulti);
 
             let shell= model.el(`shell${counter}`);
-            shell.animations.play('open');
-            shell.animations.getAnimation('open').onComplete.add(() => {
-                shell.animations.play('openIdle');
-            });
-
-            let fsMultiBig = game.add.sprite(shell.x, shell.y, 'multi', `x${number}.png`, container);
+            let fsMultiBig = game.add.sprite(shell.x, shell.y - 50, 'multi', `x${number}.png`, container);
             fsMultiBig.anchor.set(0.5);
             fsMultiBig.alpha = 0;
             fsMultiBig.scale.set(0.1);
 
-            game.add.tween(fsMultiBig).to({alpha: 1}, 500, 'Linear', true);
-            game.add.tween(fsMultiBig.scale).to({x: 1.0, y: 1.0}, 1500, Phaser.Easing.Elastic.Out, true);
-                // .onComplete.add(() => {
-                //     game.add.tween(fsMultiBig).to({y: shell.y - 30}, 400, Phaser.Easing.Back.Out, true);
-                // }, this);
+            shell.animations.play('open');
+            shell.animations.getAnimation('open').onComplete.add(() => {
+                shell.animations.play('openIdle');
+                game.add.tween(fsMultiBig).to({alpha: 1}, 500, 'Linear', true);
+                game.add.tween(fsMultiBig.scale).to({x: 1.5, y: 1.5}, 1000, Phaser.Easing.Elastic.Out, true)
+                    .onComplete.add(() => {
+                        game.add.tween(fsMultiBig.scale).to({x: 1.0, y: 1.0}, 300, 'Linear', true);
+                    }, this);
+            });
 
             // soundController.sound.playSound({currentSound: 'chestDown'});
         },
@@ -272,32 +275,48 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('panel')
         }) {
-            let x = (model.desktop) ? -830 : 70;
+
+            let x = (model.desktop) ? -830 : 60;
             let y = (model.desktop) ? -500 : 400;
+            let deltaX = (model.desktop) ? 107 : 73;
+            let deltaY = (model.desktop) ? 160 : 110;
 
-            let mermaidArr = [];
-
-            for (let i = 0; i < 6; i++) {
-                let mermaidFS = game.add.sprite(x, y, `mermaidFS${i}`, null, container);
+            let mermaidFS = game.add.sprite(x, y, `mermaidFS`, null, container);
                 mermaidFS.anchor.set(0.5);
-                mermaidFS.animations.add('move', Phaser.Animation.generateFrameNames(`rusalka-idle-${i}_`, 0, 30, '.png', 1), 15, true);
-                mermaidFS.animations.play('move');
                 if (model.desktop) {
                     mermaidFS.scale.set(1.3);
-                } else {
-                    mermaidFS.scale.set(0.8);
                 }
-                mermaidArr.push(mermaidFS);
-            }
+                mermaidFS.animations.add('move', Phaser.Animation.generateFrameNames(`rusalka-idle-0-1_`, 0, 30, '.png', 1), 15, true);
+                mermaidFS.animations.play('move')
+                mermaidFS.animations.getAnimation('move').onLoop.add(() => {
+                    if (model.state('changeLevel') == true) {
+                        let rollData = model.data('rollResponse');
+                        let levelValue = rollData.FsBonus.Level;
+                        draw.changeLevel({number: levelValue});
+                        model.data('fsLevel', levelValue);
+                    }
+                });
 
-            mermaidArr.forEach((item, index) => {
-                if (index == 0) {
-                    item.visible = true;
-                } else {
-                    item.visible = false;
-                }
-            });
-            model.el('mermaidArr', mermaidArr);
+                model.el('mermaidFS', mermaidFS);
+
+            let perl = game.add.sprite(x + deltaX, y - deltaY- 500, `perl`, null, container);
+                perl.anchor.set(0.5);
+                perl.animations.add('fall', Phaser.Animation.generateFrameNames(`G-animation_`, 0, 30, '.png', 1), 15, false);
+                perl.visible = false;
+                model.el('perl', perl);
+
+            let box = game.add.sprite(x + deltaX, y - deltaY, `box`, null, container);
+                box.anchor.set(0.5);
+                box.animations.add('0', Phaser.Animation.generateFrameNames(`rusalka-idle-0_`, 0, 30, '.png', 1), 15, true);
+                box.animations.add('1', Phaser.Animation.generateFrameNames(`rusalka-idle-1_`, 0, 30, '.png', 1), 15, true);
+                box.animations.add('2', Phaser.Animation.generateFrameNames(`rusalka-idle-2_`, 0, 30, '.png', 1), 15, true);
+                box.animations.add('3', Phaser.Animation.generateFrameNames(`rusalka-idle-3_`, 0, 30, '.png', 1), 15, true);
+                box.animations.add('4', Phaser.Animation.generateFrameNames(`rusalka-idle-4_`, 0, 30, '.png', 1), 15, true);
+                box.animations.add('5', Phaser.Animation.generateFrameNames(`rusalka-idle-5_`, 0, 30, '.png', 1), 15, true);
+                box.animations.play('0');
+
+                model.el('box', box);
+
 
         },
 
@@ -306,30 +325,37 @@ export let view = (() => {
             container = model.group('panel'),
             game = model.el('game')
         }) {
+            model.state('changeLevel', false);
+
             let fsLevel = model.el('fsLevel');
+            let perl = model.el('perl');
+            let box = model.el('box');
+            let mermaidFS = model.el('mermaidFS');
             let currNumber = number % 5;
-            if (currNumber == 0) {
-                fsLevel.text = 5;
-                model.el('fsLevel', fsLevel);
-                game.time.events.add(2000, () => {
-                    fsLevel.text = currNumber;
-                    model.el('fsLevel', fsLevel);
-                });
-            } else {
-                fsLevel.text = currNumber;
-                model.el('fsLevel', fsLevel);
-            }
 
-            let mermaidArr = model.el('mermaidArr');
-
-            mermaidArr.forEach((item, index) => {
-                if (index == currNumber) {
-                    item.visible = true;
-                } else {
-                    item.visible = false;
-                }
+            perl.visible = true;
+            game.time.events.add(150, () => {
+                perl.animations.play('fall');
             });
-
+            game.add.tween(perl).to({y: box.y}, 200, 'Linear', true)
+                .onComplete.add(() => {
+                    perl.visible = false;
+                    perl.y = perl.y - 500;
+                    if (currNumber == 0) {
+                        fsLevel.text = 5;
+                        box.animations.play('5');
+                        model.el('fsLevel', fsLevel);
+                        game.time.events.add(2500, () => {
+                            fsLevel.text = currNumber;
+                            model.el('fsLevel', fsLevel);
+                            box.animations.play(currNumber + '');
+                        });
+                    } else {
+                        fsLevel.text = currNumber;
+                        model.el('fsLevel', fsLevel);
+                        box.animations.play(currNumber + '');
+                    }
+                }, this);
 
             // soundController.sound.playSound({currentSound: 'diverDown'});
         },
