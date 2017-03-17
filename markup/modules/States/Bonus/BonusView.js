@@ -101,7 +101,7 @@ export let view = (() => {
             y = 0
         }) {
             console.log('i am here', x, y);
-            let emitter = game.add.emitter(x, y, 300);
+            let emitter = game.add.emitter(x, y - 50, 100);
             container.add(emitter);
             emitter.makeParticles('bubble');
             emitter.width = 100;
@@ -110,32 +110,13 @@ export let view = (() => {
             emitter.setAlpha(0.1, 1, 3000);
             emitter.minParticleScale = 0.1;
             emitter.maxParticleScale = 0.4;
-            emitter.setYSpeed(20, 80);
-            emitter.gravity = -300;
+            emitter.setYSpeed(-100, -500);
+            emitter.gravity = -400;
 
-            emitter.start(true, 7000, 20);
+            let emitterFrequency = (model.desktop) ? 200 : 100;
+
+            emitter.start(true, 0, null, emitterFrequency, true);
         },
-
-        // showOctopus: function ({
-        //     game = model.el('game'),
-        //     container = model.group('bg')
-        // }) {
-        //     let octopus = game.add.sprite(game.width * 0.68, game.height * 0.75, 'octopus', null, container);
-        //     octopus.anchor.set(0.5);
-        //     octopus.alpha = 0;
-        //
-        //     let inkSmall = game.add.sprite(game.width * 0.68, game.height * 0.75, 'chernila', null, container);
-        //     inkSmall.anchor.set(0.5);
-        //     inkSmall.scale.set(4.0);
-        //     if (model.mobile) {
-        //         inkSmall.scale.set(2.0);
-        //     }
-        //     inkSmall.animations.add('move');
-        //     inkSmall.animations.play('move', 20, false);
-        //
-        //     game.add.tween(inkSmall).to({alpha: 0}, 1500, 'Linear', true, 500);
-        //     game.add.tween(octopus).to({alpha: 1}, 1500, 'Linear', true, 500);
-        // },
 
         showWin: function ({
             game = model.el('game'),

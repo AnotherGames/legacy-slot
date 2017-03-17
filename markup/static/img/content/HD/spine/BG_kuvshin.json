@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "O60zsjwjg1bi3TsS6bJ/lETUBDY", "spine": "3.5.51", "width": 351, "height": 335.65, "images": "" },
+"skeleton": { "hash": "xARHrdzPISqQ+yZM2+k5mfO54Bo", "spine": "3.5.51", "width": 351, "height": 335.65, "images": "" },
 "bones": [
 	{ "name": "root" },
 	{ "name": "kuvshini", "parent": "root" },
@@ -31,6 +31,13 @@
 },
 "animations": {
 	"idle": {
+		"slots": {
+			"img/BG_36": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			}
+		},
 		"bones": {
 			"bone16": {
 				"rotate": [
@@ -69,6 +76,13 @@
 		}
 	},
 	"idle_opened": {
+		"slots": {
+			"img/BG_36": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			}
+		},
 		"bones": {
 			"bone16": {
 				"rotate": [
@@ -107,6 +121,13 @@
 		}
 	},
 	"open": {
+		"slots": {
+			"img/BG_36": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			}
+		},
 		"bones": {
 			"bone22": {
 				"rotate": [

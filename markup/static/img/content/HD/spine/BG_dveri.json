@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "d0w93BX44e7qrMCDiz6xuCPJ0XA", "spine": "3.5.51", "width": 1920.39, "height": 1117.89, "images": "" },
+"skeleton": { "hash": "OELfwaJSPvohZiiC44djvjZX0vs", "spine": "3.5.51", "width": 369.23, "height": 460.53, "images": "" },
 "bones": [
 	{ "name": "root", "rotation": 0.16 },
 	{ "name": "doors", "parent": "root" },
@@ -38,7 +38,15 @@
 	}
 },
 "animations": {
-	"idle": {},
+	"idle": {
+		"slots": {
+			"img/BG_32": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			}
+		}
+	},
 	"idle_opened": {
 		"slots": {
 			"img/BG_18": {
@@ -71,6 +79,11 @@
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
 					{ "time": 6.6667, "color": "ffffffff" }
+				]
+			},
+			"img/BG_32": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
 				]
 			}
 		},
@@ -130,6 +143,11 @@
 					{ "time": 0, "color": "ffffff00", "curve": "stepped" },
 					{ "time": 0.1667, "color": "ffffff00" },
 					{ "time": 0.2, "color": "ffffffff" }
+				]
+			},
+			"img/BG_32": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
 				]
 			}
 		},

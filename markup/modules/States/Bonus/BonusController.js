@@ -52,16 +52,10 @@ class Door {
     }
 
     win() {
-        // this.destroyed = true
 
         let rnd = this.game.rnd.integerInRange(1, 3);
         soundController.sound.playSound({ currentSound: `illumBreak${rnd}` });
         soundController.sound.playSound({ currentSound: 'illumWin', duration: 1200 });
-
-
-        // this._playGold();
-        // this._playGlassBoom();
-        // this._playTable(parseInt(this.data.CurrentValue, 10));
 
         let number = parseInt(this.data.CurrentValue, 10);
 
@@ -76,100 +70,21 @@ class Door {
     }
 
     fail() {
-        // this.destroyed = true;
-
         soundController.sound.playSound({ currentSound: 'illumFail', soundVolume: 3 });
-
         bonusView.draw.showFailBubbles({x: this.x, y: this.y});
-
-        // this.doors.forEach((door) => {
-        //     door.tentacle = this.game.add.sprite(door.x - 50, door.y + 5, 'tentacles');
-        //     door.tentacle.anchor.set(0.5);
-        //     door.tentacle.angle = this.game.rnd.integerInRange(-40, 40);
-        //     if (model.mobile) {
-        //         door.tentacle.scale.set(0.66);
-        //         door.tentacle.angle = this.game.rnd.integerInRange(-30, 30);
-        //     }
-        //     model.group('bg').add(door.tentacle);
-        //
-        //     let tentacleShow = door.tentacle.animations.add('show', Phaser.Animation.generateFrameNames('tc1_', 0, 16, '.png', 2), 20, false);
-        //     door.tentacle.animations.add('move', Phaser.Animation.generateFrameNames('tc2_', 0, 16, '.png', 2), 20, true);
-        //     door.tentacle.animations.play('show');
-        //     tentacleShow.onComplete.add(() => {
-        //         door.tentacle.animations.play('move');
-        //     }, door);
-        //
-        //     this.game.add.tween(door.sprite)
-        //         .to({ alpha: 0 }, 500, 'Linear', true);
-        //     if (door.table) {
-        //         this.game.add.tween(door.table)
-        //             .to({ alpha: 0 }, 300, 'Linear', true);
-        //     }
-        // });
-
     }
 
-    lightBlinking(delay = 0) {
-        let game = model.el('game');
-        game.time.events.add(delay, () => {
-            if (this.destroyed || model.state('doorFinish')) {
-                return;
-            }
-            this.game.add.tween(this.light).to({ alpha: 0.6 }, 500, 'Linear', true, 0, 0, true)
-            .onComplete.add(()=>{
-                this.lightBlinking(4000);
-            })
-        });
-    }
-
-    // _playGold() {
-    //     this.gold = this.game.add.sprite(this.x, this.y, 'coins', 'skeleton-2_01.png');
-    //     this.gold.animations.add('gold', Phaser.Animation.generateFrameNames('skeleton-2_', 1, 44, '.png', 2), 30, false);
-    //     this.gold.anchor.set(0.5, 0.1);
-    //     this.gold.alpha = 0;
-    //     if (model.desktop) this.gold.scale.set(1.5);
-    //
-    //     this.gold.play('gold')
-    //         .onComplete.add(() => {
-    //             this.gold.alpha = 0;
-    //         });
-    //     this.game.add.tween(this.gold)
-    //         .to({ alpha: 1 }, 500, 'Linear', true);
-    //
-    //     model.group('bg').add(this.gold);
-    // }
-    //
-    // _playGlassBoom() {
-    //     this.glass = this.game.add.sprite(this.x, this.y, 'coins', 'skeleton-1_01.png');
-    //     this.glass.animations.add('glassBoom', Phaser.Animation.generateFrameNames('skeleton-1_', 1, 19, '.png', 2), 30, false);
-    //     this.glass.anchor.set(0.5);
-    //     this.glass.alpha = 0;
-    //
-    //
-    //     this.glass.play('glassBoom')
-    //         .onComplete.add(() => {
-    //             this.glass.alpha = 0;
-    //         });
-    //     this.game.add.tween(this.glass)
-    //         .to({ alpha: 1 }, 500, 'Linear', true);
-    //
-    //     model.group('bg').add(this.glass);
-    // }
-
-    // _playTable(value) {
-    //     this.game.add.tween(this.sprite)
-    //         .to({ alpha: 0 }, 300, 'Linear', true);
-    //     this.table = this.game.add.sprite(this.x, this.y, 'bonusNumber', `x${value}.png`);
-    //     this.table.anchor.set(0.6, 0.8);
-    //     this.table.alpha = 0;
-    //     this.table.angle = this.game.rnd.integerInRange(-15, 15);
-    //     if (model.mobile) this.table.scale.set(0.66);
-    //
-    //     this.game.add.tween(this.table)
-    //         .to({ alpha: 1 }, 500, 'Linear', true);
-    //     this.game.add.tween(this.table)
-    //         .from({ y: this.table.y + 50 }, 400, 'Linear', true);
-    //     model.group('bg').add(this.table);
+    // lightBlinking(delay = 0) {
+    //     let game = model.el('game');
+    //     game.time.events.add(delay, () => {
+    //         if (this.destroyed || model.state('doorFinish')) {
+    //             return;
+    //         }
+    //         this.game.add.tween(this.light).to({ alpha: 0.6 }, 500, 'Linear', true, 0, 0, true)
+    //         .onComplete.add(()=>{
+    //             this.lightBlinking(4000);
+    //         })
+    //     });
     // }
 
 }
@@ -206,7 +121,7 @@ export class Bonus {
         model.el('doors', this.doors);
 
         if (model.desktop) {
-            // mainView.draw.addBubbles({container: model.group('bg'), x: this.game.world.centerX});
+            mainView.draw.addBubbles({container: model.group('bg'), x: this.game.world.centerX});
             // mainView.draw.addFishes({ y1: 650, y2: 900 });
             bonusView.draw.addLight({});
             bonusView.draw.upperBG({});

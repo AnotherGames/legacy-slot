@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "L1eyrtfNoRYEw9xpn7V5L9WxemM", "spine": "3.5.51", "width": 431.12, "height": 414.38, "images": "" },
+"skeleton": { "hash": "PvpWamEOnCUC2PweIknrBdwdjf4", "spine": "3.5.51", "width": 431.12, "height": 414.38, "images": "" },
 "bones": [
 	{ "name": "root" },
 	{ "name": "Ship", "parent": "root" }
@@ -59,7 +59,15 @@
 	}
 },
 "animations": {
-	"idle": {},
+	"idle": {
+		"slots": {
+			"img/BG_34": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			}
+		}
+	},
 	"idle_opened": {
 		"slots": {
 			"img/BG_23": {
@@ -73,6 +81,11 @@
 					{ "time": 5, "color": "ffffffff" },
 					{ "time": 5.8333, "color": "ffffff4f" },
 					{ "time": 6.6667, "color": "ffffffff" }
+				]
+			},
+			"img/BG_34": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
 				]
 			},
 			"img/dopsvet_0000_окно4": {
@@ -143,6 +156,11 @@
 					{ "time": 0.8333, "color": "ffffffff" },
 					{ "time": 1, "color": "ffffff00" },
 					{ "time": 1.3333, "color": "ffffffff" }
+				]
+			},
+			"img/BG_34": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
 				]
 			},
 			"img/dopsvet_0000_окно4": {
