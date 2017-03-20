@@ -34,12 +34,17 @@ export let view = (() => {
 
         doorsElements: function ({
             game = model.el('game'),
-            container = model.group('bg')
+            container = model.group('bg'),
+            delay = 400
         }) {
             let doorsElements = [];
             for (let i = 1; i < 6; i++) {
                 let element = game.add.spine(game.world.centerX, game.world.centerY, `element${i}`);
-                element.setAnimationByName(0, 'idle', true);
+                game.time.events.add(delay * i, () => {
+                    element.setAnimationByName(0, 'target', false);
+                    element.addAnimationByName(0, 'idle', true);
+                });
+                // element.setAnimationByName(0, 'idle', true);
                 container.add(element);
                 if (model.mobile) {
                     element.scale.set(0.66);
@@ -70,6 +75,29 @@ export let view = (() => {
             });
         },
 
+        // targetAnim: function ({
+        //     game = model.el('game'),
+        //     container = model.group('bg'),
+        //     delay = 400
+        // }) {
+        //     let doorsElements = model.el('doorsElements');
+        //
+        //     doorsElements.forEach((item, index) => {
+        //         game.time.events.add(delay * index, () => {
+        //             if (this.destroyed || model.state('doorFinish')) {
+        //                 return;
+        //             }
+        //             item.setAnimationByName(0, 'target', false);
+        //             item.addAnimationByName(0, 'idle', true);
+        //         });
+        //     });
+        //
+        //     game.time.events.add(7000, () => {
+        //         this.targetAnim({});
+        //     });
+        //
+        // },
+
         upperBG: function ({
             game = model.el('game'),
             container = model.group('upperBG')
@@ -98,9 +126,10 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('bg'),
             x = 0,
-            y = 0
+            y = 0,
+            number = 1
         }) {
-            console.log('i am here', x, y);
+            console.log('i am here', x, y, number);
             let emitter = game.add.emitter(x, y - 50, 100);
             container.add(emitter);
             emitter.makeParticles('bubble');
@@ -113,8 +142,27 @@ export let view = (() => {
             emitter.setYSpeed(-100, -500);
             emitter.gravity = -400;
 
-            let emitterFrequency = (model.desktop) ? 200 : 100;
+            if (number == 1) {
+                emitter.y = (model.desktop) ? emitter.y + 150 : emitter.y + 150 * 2 / 3;
+                emitter.x = (model.desktop) ? emitter.x - 30 : emitter.x - 30 * 2 / 3;
+                emitter.width  = (model.desktop) ? 20 : 20 * 2 / 3;
+            }
 
+            if (number == 2) {
+                emitter.y = (model.desktop) ? emitter.y + 80 : emitter.y + 80 * 2 / 3;
+                emitter.width  = (model.desktop) ? 20 : 20 * 2 / 3;
+            }
+            if (number == 3) {
+                emitter.y = (model.desktop) ? emitter.y - 30 : emitter.y - 30 * 2 / 3;
+            }
+
+            if (number == 4) {
+                emitter.y = (model.desktop) ? emitter.y + 180 : emitter.y + 180 * 2 / 3;
+                emitter.x = (model.desktop) ? emitter.x + 40 : emitter.x + 40 * 2 / 3;
+                emitter.width  = (model.desktop) ? 30 : 30 * 2 / 3;
+            }
+
+            let emitterFrequency = (model.desktop) ? 150 : 100;
             emitter.start(true, 0, null, emitterFrequency, true);
         },
 

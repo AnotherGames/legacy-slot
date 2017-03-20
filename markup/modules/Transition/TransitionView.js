@@ -4,6 +4,8 @@ import { config } from 'modules/Util/Config';
 import { controller as keyboardController } from 'modules/Keyboard/KeyboardController';
 import { controller as soundController } from 'modules/Sound/SoundController';
 
+import { view as mainView } from 'modules/States/Main/MainView';
+
 export let view = (() => {
 
     function fsStart() {
@@ -39,6 +41,7 @@ export let view = (() => {
         let transitionBG = game.add.graphics(0, 0, transitionContainer).beginFill(0x000000, 0.8).drawRect(0, 0, game.width, game.height);
         model.el('transitionBG', transitionBG);
 
+        mainView.draw.addShark({container: transitionContainer});
         // Надпись Free Spins
         let freeSpinsText = game.add.sprite(game.width / 2, -400, 'text', 'freespin.png', transitionContainer);
         freeSpinsText.anchor.set(0.5);
@@ -77,6 +80,7 @@ export let view = (() => {
         continueText.anchor.set(0.5);
         continueText.scale.setTo(0.1, 0.1);
         model.el('continueText', continueText);
+
 
     }
 
@@ -198,6 +202,7 @@ export let view = (() => {
         let transitionBG = game.add.graphics(0, 0, transitionContainer).beginFill(0x000000, 0.8).drawRect(0, 0, game.width, game.height);
         model.el('transitionBG', transitionBG);
 
+        mainView.draw.addShark({container: transitionContainer});
         // выбираем надпись для конечного экрна (Big Win --- Total Win)
         let winTextFrame;
         if (model.data('fsMulti') === 7) {
@@ -234,6 +239,7 @@ export let view = (() => {
         }
         continueText.scale.setTo(0.1, 0.1);
         model.el('continueText', continueText);
+
 
     }
 

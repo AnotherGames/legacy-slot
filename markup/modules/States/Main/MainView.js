@@ -80,46 +80,6 @@ export let view = (() => {
             }
         },
 
-        // eyeLight: function ({
-        //     game = model.el('game'),
-        //     container = model.group('main')
-        // }) {
-        //     let eyeLight = game.add.sprite((model.desktop) ? -235 : -135, (model.desktop) ? -373 : -320, 'eyeLight', null, container);
-        //     eyeLight.anchor.set(0.5);
-        //     eyeLight.alpha = 0;
-        //
-        //     game.add.tween(eyeLight).to({angle: 45, alpha: 1}, 300, 'Linear', true)
-        //         .onComplete.add(() => {
-        //             game.add.tween(eyeLight).to({alpha: 0}, 300, 'Linear', true);
-        //             eyeLight.destroy();
-        //             game.time.events.add(7000, () => {
-        //                 this.eyeLight({});
-        //             });
-        //         });
-        //
-        // },
-        //
-        // labelLight: function ({
-        //     game = model.el('game'),
-        //     container = model.group('main')
-        // }) {
-        //     let labelLight = game.add.sprite((model.desktop) ? -200 : -290, (model.desktop) ? -360 : -310, 'labelLight', null, container);
-        //     labelLight.anchor.set(0.5);
-        //     labelLight.alpha = 0;
-        //     (model.desktop) ? labelLight.scale.set(0.15) : labelLight.scale.set(0.1);
-        //     labelLight.animations.add('move');
-        //     labelLight.animations.play('move', 20, false);
-        //
-        //     game.add.tween(labelLight).to({alpha: 1, x: labelLight.x + 400}, 500, 'Linear', true)
-        //         .onComplete.add(() => {
-        //             game.add.tween(labelLight).to({alpha: 0}, 300, 'Linear', true);
-        //             labelLight.destroy();
-        //             game.time.events.add(8000, () => {
-        //                 this.labelLight({});
-        //             });
-        //         });
-        // },
-
         addBubbles: function ({
             game = model.el('game'),
             container = model.group('main'),
@@ -131,7 +91,7 @@ export let view = (() => {
             emitter.width = game.width;
 
             emitter.setRotation(0, 0);
-            emitter.setAlpha(0.1, 1, 3000);
+            emitter.setAlpha(0.1, 0.6, 3000);
             emitter.minParticleScale = 0.2;
             emitter.maxParticleScale = 0.4;
             emitter.setYSpeed(0, 15);

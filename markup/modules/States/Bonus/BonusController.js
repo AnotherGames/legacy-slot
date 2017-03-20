@@ -23,11 +23,6 @@ class Door {
         this.destroyed = false;
         this.isWinPlayed = false;
 
-        // this.light = this.game.add.sprite(this.x, this.y, 'light');
-        // this.light.anchor.set(0.5);
-        // this.light.alpha = 0;
-        // model.group('bg').add(this.light);
-
         this.sprite = this.game.add.sprite(this.x, this.y, 'doors', `${index}.png`);
         this.sprite.anchor.set(0.5);
         this.sprite.inputEnabled = true;
@@ -36,7 +31,6 @@ class Door {
         this.sprite.alpha = 0.01;
         model.group('bg').add(this.sprite);
 
-        // this.lightBlinking(1000);
     }
 
     showAnim() {
@@ -66,26 +60,17 @@ class Door {
         this.multi.scale.set(0.1);
 
         this.game.add.tween(this.multi).to({alpha: 1}, 500, 'Linear', true);
-        this.game.add.tween(this.multi.scale).to({x: 1.0, y: 1.0}, 1500, Phaser.Easing.Elastic.Out, true);
+        this.game.add.tween(this.multi.scale).to({x: 2.0, y: 2.0}, 700, Phaser.Easing.Bounce.Out, true)
+            .onComplete.add(() => {
+                this.game.add.tween(this.multi.scale).to({x: 1.0, y: 1.0}, 500, Phaser.Easing.Elastic.Out, true)
+            });
     }
 
-    fail() {
+    fail(sprite) {
+        let number = parseInt(sprite.frameName, 10);
         soundController.sound.playSound({ currentSound: 'illumFail', soundVolume: 3 });
-        bonusView.draw.showFailBubbles({x: this.x, y: this.y});
+        bonusView.draw.showFailBubbles({x: this.x, y: this.y, number: number});
     }
-
-    // lightBlinking(delay = 0) {
-    //     let game = model.el('game');
-    //     game.time.events.add(delay, () => {
-    //         if (this.destroyed || model.state('doorFinish')) {
-    //             return;
-    //         }
-    //         this.game.add.tween(this.light).to({ alpha: 0.6 }, 500, 'Linear', true, 0, 0, true)
-    //         .onComplete.add(()=>{
-    //             this.lightBlinking(4000);
-    //         })
-    //     });
-    // }
 
 }
 
@@ -207,27 +192,13 @@ function handleDoorClick() {
             model.updateBalance({ startBonusRoll: true });
             if (!this.isWinPlayed) {
                 this.showAnim();
-                console.log(this.sprite);
                 if (this.data.CurrentValue != 'Exit') {
+                    // this.fail(this.sprite);
                     this.win();
                     this.isWinPlayed = true;
                     if (this.data.BonusEnd) {
                         // Переходной экран Big Win
                         soundController.sound.playSound({ currentSound: 'illumWin' });
-                        // this.doors.forEach((door) => {
-                        //     door.finalGold = this.game.add.sprite(door.x, door.y, 'coins', 'skeleton-2_01.png');
-                        //     door.finalGold.animations.add('gold', Phaser.Animation.generateFrameNames('skeleton-2_', 1, 44, '.png', 2), 30, false);
-                        //     door.finalGold.anchor.set(0.5, 0.1);
-                        //     door.finalGold.alpha = 0;
-                        //     if (model.desktop) door.finalGold.scale.set(1.5);
-                        //
-                        //     door.finalGold.play('gold')
-                        //         .onComplete.add(() => {
-                        //             door.finalGold.alpha = 0;
-                        //         });
-                        //     door.game.add.tween(door.finalGold)
-                        //         .to({ alpha: 1 }, 500, 'Linear', true);
-                        // });
                         soundController.sound.playSound({ currentSound: 'win' });
                         bonusView.draw.showWin({ winTextFrame: 'bigW.png' });
                         soundController.music.stopMusic('bonusFon');
@@ -237,9 +208,8 @@ function handleDoorClick() {
                     }
                 } else {
                     model.state('doorFinish', true);
-                    this.fail();
+                    this.fail(this.sprite);
                     this.isWinPlayed = true;
-                    // bonusView.draw.showOctopus({});
                     // Переходной экран Total Win
                     bonusView.draw.showWin({});
                     soundController.music.stopMusic('bonusFon');
