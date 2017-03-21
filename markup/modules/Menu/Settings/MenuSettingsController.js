@@ -6,7 +6,7 @@ import Info from '../../../../Info/Info';
 import { view } from 'modules/Menu/Settings/MenuSettingsView';
 import { view as mainView } from 'modules/States/Main/MainView';
 
-import { controller as soundController } from 'modules/Sound/SoundController';
+import { controller as soundController } from '../../../../Info/SoundController';
 
 export let controller = (() => {
 

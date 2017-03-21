@@ -3,7 +3,7 @@ import { config } from 'modules/Util/Config';
 import { view } from 'modules/Buttons/ButtonsView';
 
 import { controller as rollController } from 'modules/Roll/RollController';
-import { controller as soundController } from 'modules/Sound/SoundController';
+import { controller as soundController } from '../../../Info/SoundController';
 import { controller as autoplayController } from 'modules/Autoplay/AutoplayController';
 import { controller as mobileSettingsController } from 'modules/Menu/Settings/MenuSettingsController';
 import { controller as mobileAutoplayController } from 'modules/Menu/Autoplay/MenuAutoplayController';

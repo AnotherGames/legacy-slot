@@ -5,7 +5,7 @@ import { view } from 'modules/Win/WinView';
 import { view as transitionView } from 'modules/Transition/TransitionView';
 
 import { controller as autoplayController } from 'modules/Autoplay/AutoplayController';
-import { controller as soundController } from 'modules/Sound/SoundController';
+import { controller as soundController } from '../../../Info/SoundController';
 
 export let controller = (() => {
 
