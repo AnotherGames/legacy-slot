@@ -1,7 +1,7 @@
 import { model } from 'modules/Model/Model';
 import { view } from 'modules/States/Init/InitView';
 import { controller as soundController} from '../../../../Info/SoundController';
-import { controller as keyboardController} from 'modules/keyboard/KeyboardController';
+import { controller as keyboardController} from '../../../../Info/KeyboardController';
 
 export class Init {
     constructor(game) {
@@ -44,7 +44,7 @@ export class Init {
         });
 
         if (model.desktop) {
-            keyboardController.initInitKeys();
+            keyboardController.initInitKeys(this.stateHandler);
         } else {
             view.drawLogo();
         }
@@ -72,20 +72,18 @@ export class Init {
         let game = model.el('game');
         game.scale.startFullScreen();
     }
+
     handlePlay() {
         const game = model.el('game');
 
         view.stopYoyoTween();
-
-        if (model.desktop) {
-            game.canvas.onclick = null;
-        }
 
         game.camera.onFadeComplete.add(() => {
             game.state.start('Main');
         });
 
         game.camera.fade(0x000000, 500);
+
         let fakeButton = document.querySelector('#fakeButton');
         fakeButton.removeEventListener('click', this.stateHandler);
     }
