@@ -1,7 +1,7 @@
 import { model } from 'modules/Model/Model';
 import { view } from 'modules/States/Init/InitView';
 import { Element } from 'modules/Class/Element';
-import { controller as soundController} from 'modules/Sound/SoundController';
+import { controller as soundController } from '../../../../Info/SoundController';
 import { controller as keyboardController} from 'modules/keyboard/KeyboardController';
 import { view as transitionView} from 'modules/Transition/TransitionView';
 

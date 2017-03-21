@@ -1,7 +1,7 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
 import { view as transitionView } from 'modules/Transition/TransitionView';
-import { controller as soundController } from 'modules/Sound/SoundController';
+import { controller as soundController } from '../../../../Info/SoundController';
 
 export let view = (() => {
 

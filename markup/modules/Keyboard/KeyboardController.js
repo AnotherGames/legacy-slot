@@ -1,6 +1,5 @@
 import { model } from 'modules/Model/Model';
 import { controller as panelController} from 'modules/Panel/PanelController';
-import { controller as soundController} from 'modules/Sound/SoundController';
 import { view as transitionView} from 'modules/Transition/TransitionView';
 
 export let controller = (() => {
@@ -48,20 +47,20 @@ export let controller = (() => {
     }
 
     function initFsKeys() {
-      let game = model.el('game');
+        let game = model.el('game');
         let space = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         space.onUp.add(transitionView.transitionOutFs);
     }
 
     function initInitKeys() {
-      let game = model.el('game');
+        let game = model.el('game');
         let space = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-        space.onUp.add(()=>{
-          game.camera.onFadeComplete.add(()=>{
-              game.state.start('Main');
-          })
+        space.onUp.add( () => {
+            game.camera.onFadeComplete.add( () => {
+                game.state.start('Main');
+            });
 
-          game.camera.fade(0x000000, 500)
+            game.camera.fade(0x000000, 500);
         });
     }
 
@@ -69,6 +68,6 @@ export let controller = (() => {
         initMainKeys,
         initFsKeys,
         initInitKeys
-    }
+    };
 
 })();

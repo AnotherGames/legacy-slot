@@ -7,7 +7,7 @@ import { view } from 'modules/Menu/Settings/MenuSettingsView';
 import { view as mainView } from 'modules/States/Main/MainView';
 import { view as panelView} from 'modules/Panel/PanelView';
 
-import { controller as soundController } from 'modules/Sound/SoundController';
+import { controller as soundController } from '../../../../Info/SoundController';
 import { controller as panelController } from 'modules/Panel/PanelController';
 
 export let controller = (() => {
