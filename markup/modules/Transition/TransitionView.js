@@ -261,12 +261,7 @@ export let view = (() => {
         game.input.keyboard.enabled = true;
         // Автопереход если включен
         if (model.state('autoTransititon')) {
-            game.time.events.add(config.autoTransitionTime, () => {
-                soundController.sound.playSound({sound: 'buttonClick'});
-                soundController.music.stopMusic('startPerehod');
-                model.el('game').state.start('FS');
-                model.state('transitionScreen', false);
-            });
+            game.time.events.add(config.autoTransitionTime, transitionInFs);
         }
     }
 
@@ -285,11 +280,7 @@ export let view = (() => {
         model.state('maxFsMultiplier', false);
         // Автопереход
         if (model.state('autoTransititon')) {
-            game.time.events.add(config.autoTransitionTime, () => {
-                soundController.sound.playSound({sound: 'buttonClick'});
-                soundController.music.stopMusic('finishPerehod');
-                model.el('game').state.start('Main');
-            });
+            game.time.events.add(config.autoTransitionTime, transitionOutFs);
         }
     }
 
