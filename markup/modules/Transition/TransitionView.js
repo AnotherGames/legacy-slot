@@ -1,7 +1,7 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
 
-import { controller as keyboardController } from 'modules/Keyboard/KeyboardController';
+import { controller as keyboardController } from '../../../Info/KeyboardController';
 import { controller as soundController } from '../../../Info/SoundController';
 
 export let view = (() => {
@@ -273,7 +273,7 @@ export let view = (() => {
     function fsFinish() {
         let game = model.el('game');
         // game.input.keyboard.enabled = true;
-        keyboardController.initFsKeys();
+        keyboardController.initFsKeys(transitionOutFs);
         model.state('buttons:locked', false);
         // Темнота
         game.camera.flash(0x000000, 500);
@@ -339,7 +339,9 @@ export let view = (() => {
         fsStart,
         fsFinish,
         addCloud,
-        addLines
+        addLines,
+        transitionOutFs,
+        transitionInFs
     };
 
 })();
