@@ -44,6 +44,15 @@ export let view = (() => {
 
     }
 
+    function transitionInFs() {
+        model.el('game').state.start('FS');
+        model.state('transitionScreen', false);
+    }
+
+    function transitionOutFs() {
+        model.el('game').state.start('Main');
+    }
+
     function _fsStartDraw() {
         let game = model.el('game');
         let transitionContainer = model.group('transition');
@@ -120,12 +129,7 @@ export let view = (() => {
         let transitionBG = model.el('transitionBG');
         transitionBG.inputEnabled = true;
         transitionBG.input.priorityID = 2;
-        transitionBG.events.onInputDown.add(function () {
-            soundController.sound.playSound({sound: 'buttonClick'});
-            soundController.music.stopMusic('startPerehod');
-            model.el('game').state.start('FS');
-            model.state('transitionScreen', false);
-        });
+        transitionBG.events.onInputDown.add(transitionInFs);
     }
 
     function _fsFinishDraw() {
@@ -242,11 +246,7 @@ export let view = (() => {
         let transitionBG = model.el('transitionBG');
         transitionBG.inputEnabled = true;
         transitionBG.input.priorityID = 2;
-        transitionBG.events.onInputDown.add(function () {
-            soundController.sound.playSound({sound: 'buttonClick'});
-            soundController.music.stopMusic('finishPerehod');
-            model.el('game').state.start('Main');
-        });
+        transitionBG.events.onInputDown.add(transitionOutFs);
     }
 
     function fsStart() {
