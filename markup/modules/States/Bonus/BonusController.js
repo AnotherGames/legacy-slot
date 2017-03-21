@@ -183,13 +183,13 @@ export class Bonus {
             mainView.draw.addFishes({ y1: 650, y2: 900 });
             bonusView.draw.addLight({});
             bonusView.draw.upperBG({});
-            footer.initMobile();
             balanceView.draw.FSMobileBalance({});
         } else {
-            footer.initMobile();
             mobileSetBetController.init({});
             balanceView.draw.FSMobileBalance({});
         }
+
+        footer.initMobile();
         balanceView.draw.CashBalance({});
         model.updateBalance({ startBonus: true });
 
@@ -202,15 +202,10 @@ export class Bonus {
     update() {
         let game = model.el('game');
 
-        model.el('footer').update();
+        model.el('footer').updateTime();
         game.winAnims.forEach((anim) => {
             anim();
         });
-
-        if (model.desktop) {
-            let fullScreeButton = model.el('fullScreeButton');
-            fullScreeButton.frameName = (this.game.scale.isFullScreen || window.innerHeight == screen.height) ? 'fullScreenOff.png' : 'fullScreenOn.png';
-        }
 
         if (model.mobile && !game.device.iOS) {
             (game.scale.isFullScreen) ? $('#fakeButton').addClass('closed') : $('#fakeButton').removeClass('closed');
