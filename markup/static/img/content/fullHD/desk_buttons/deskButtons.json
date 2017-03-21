@@ -106,10 +106,10 @@
 },
 {
 	"filename": "plusClose.png",
-	"frame": {"x":148,"y":1,"w":27,"h":27},
+	"frame": {"x":471,"y":77,"w":36,"h":36},
 	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":4,"y":4,"w":27,"h":27},
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":36,"h":36},
 	"sourceSize": {"w":36,"h":36}
 },
 {
@@ -167,6 +167,6 @@
 	"format": "RGBA8888",
 	"size": {"w":512,"h":512},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:62d1c1e23ce1df4d23dcb4b3e09de56d:3711841f3505610afd7678771379caf3:7216a24ceb66389c4ebee7eae85622d5$"
+	"smartupdate": "$TexturePacker:SmartUpdate:42e22eb91044cb1d5683f7165d044289:43d11c12d1ace4cd6bf9aba505d9ac7f:7216a24ceb66389c4ebee7eae85622d5$"
 }
 }

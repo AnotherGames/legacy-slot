@@ -241,6 +241,9 @@ export let controller = (() => {
         let rollResponse = model.data('rollResponse');
         // Здесь определяется время через которое начнется следующая крутка: если не было выигрыша, то сразу, если был, то через секунду
         let time = (rollResponse.WinLines.length) ? 1200 : 0;
+        if (rollResponse.FreeSpinsWin) {
+            time = 2000;
+        }
 
         let fsTimer = game.time.events.add(time, () => {
             if (model.state('fs:end')) {

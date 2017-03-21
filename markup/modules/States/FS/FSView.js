@@ -286,12 +286,13 @@ export let view = (() => {
                 if (model.desktop) {
                     mermaidFS.scale.set(1.3);
                 }
-                mermaidFS.animations.add('move', Phaser.Animation.generateFrameNames(`rusalka-idle-0-1_`, 0, 30, '.png', 1), 15, true);
+                mermaidFS.animations.add('move', Phaser.Animation.generateFrameNames(`rusalka-idle-0-1_`, 0, 29, '.png', 1), 15, true);
                 mermaidFS.animations.play('move')
                 mermaidFS.animations.getAnimation('move').onLoop.add(() => {
                     if (model.state('changeLevel') == true) {
                         let rollData = model.data('rollResponse');
                         let levelValue = rollData.FsBonus.Level;
+                        console.warn(levelValue);
                         draw.changeLevel({number: levelValue});
                         model.data('fsLevel', levelValue);
                     }
@@ -301,18 +302,18 @@ export let view = (() => {
 
             let perl = game.add.sprite(x + deltaX, y - deltaY- 500, `perl`, null, container);
                 perl.anchor.set(0.5);
-                perl.animations.add('fall', Phaser.Animation.generateFrameNames(`G-animation_`, 0, 30, '.png', 1), 15, false);
+                perl.animations.add('fall', Phaser.Animation.generateFrameNames(`G-animation_`, 16, 29, '.png', 1), 15, false);
                 perl.visible = false;
                 model.el('perl', perl);
 
             let box = game.add.sprite(x + deltaX, y - deltaY, `box`, null, container);
                 box.anchor.set(0.5);
-                box.animations.add('0', Phaser.Animation.generateFrameNames(`rusalka-idle-0_`, 0, 30, '.png', 1), 15, true);
-                box.animations.add('1', Phaser.Animation.generateFrameNames(`rusalka-idle-1_`, 0, 30, '.png', 1), 15, true);
-                box.animations.add('2', Phaser.Animation.generateFrameNames(`rusalka-idle-2_`, 0, 30, '.png', 1), 15, true);
-                box.animations.add('3', Phaser.Animation.generateFrameNames(`rusalka-idle-3_`, 0, 30, '.png', 1), 15, true);
-                box.animations.add('4', Phaser.Animation.generateFrameNames(`rusalka-idle-4_`, 0, 30, '.png', 1), 15, true);
-                box.animations.add('5', Phaser.Animation.generateFrameNames(`rusalka-idle-5_`, 0, 30, '.png', 1), 15, true);
+                box.animations.add('0', Phaser.Animation.generateFrameNames(`rusalka-idle-0_`, 0, 29, '.png', 1), 15, true);
+                box.animations.add('1', Phaser.Animation.generateFrameNames(`rusalka-idle-1_`, 0, 29, '.png', 1), 15, true);
+                box.animations.add('2', Phaser.Animation.generateFrameNames(`rusalka-idle-2_`, 0, 29, '.png', 1), 15, true);
+                box.animations.add('3', Phaser.Animation.generateFrameNames(`rusalka-idle-3_`, 0, 29, '.png', 1), 15, true);
+                box.animations.add('4', Phaser.Animation.generateFrameNames(`rusalka-idle-4_`, 0, 29, '.png', 1), 15, true);
+                box.animations.add('5', Phaser.Animation.generateFrameNames(`rusalka-idle-5_`, 0, 29, '.png', 1), 15, true);
                 box.animations.play('0');
 
                 model.el('box', box);
@@ -328,35 +329,40 @@ export let view = (() => {
             model.state('changeLevel', false);
 
             let fsLevel = model.el('fsLevel');
-            let perl = model.el('perl');
             let box = model.el('box');
             let mermaidFS = model.el('mermaidFS');
             let currNumber = number % 5;
 
-            perl.visible = true;
-            game.time.events.add(150, () => {
-                perl.animations.play('fall');
-            });
-            game.add.tween(perl).to({y: box.y}, 200, 'Linear', true)
-                .onComplete.add(() => {
-                    perl.visible = false;
-                    perl.y = perl.y - 500;
-                    if (currNumber == 0) {
-                        fsLevel.text = 5;
-                        box.animations.play('5');
-                        model.el('fsLevel', fsLevel);
-                        game.time.events.add(2500, () => {
-                            fsLevel.text = currNumber;
-                            model.el('fsLevel', fsLevel);
-                            box.animations.play(currNumber + '');
-                        });
-                    } else {
-                        fsLevel.text = currNumber;
-                        model.el('fsLevel', fsLevel);
-                        box.animations.play(currNumber + '');
-                    }
-                }, this);
+            // let perl = model.el('perl');
+            // perl.visible = true;
+            // game.time.events.add(1000, () => {
+            //     perl.animations.play('fall');
+            //     game.add.tween(perl).to({y: box.y}, 1000, 'Linear', true)
+            //         .onComplete.add(() => {
+            //             perl.visible = false;
+            //             perl.y = perl.y - 500;
+            //         }, this);
+            // });
 
+            console.warn(currNumber);
+
+            if (currNumber == 0) {
+                fsLevel.text = 5;
+                box.animations.play('5');
+                model.el('fsLevel', fsLevel);
+                game.time.events.add(2000, () => {
+                // mermaidFS.animations.getAnimation('move').onLoop.add(() => {
+                    fsLevel.text = currNumber;
+                    model.el('fsLevel', fsLevel);
+                    box.animations.play(currNumber + '');
+                // });
+                });
+            } else {
+                console.warn('i am here');
+                fsLevel.text = currNumber;
+                model.el('fsLevel', fsLevel);
+                box.animations.play(currNumber + '');
+            }
             // soundController.sound.playSound({currentSound: 'diverDown'});
         },
 
@@ -402,6 +408,18 @@ export let view = (() => {
         }) {
             if (model.state('CountPlus3')) return;
             model.state('CountPlus3', true);
+
+            // Show perl
+
+            let perl = model.el('perl');
+            let box = model.el('box');
+            perl.visible = true;
+            perl.animations.play('fall');
+            game.add.tween(perl).to({y: box.y}, 300, 'Linear', true)
+                .onComplete.add(() => {
+                    perl.visible = false;
+                    perl.y = perl.y - 500;
+                }, this);
 
             if (model.desktop) {
                 deltaY = 30;

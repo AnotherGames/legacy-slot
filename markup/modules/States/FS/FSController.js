@@ -88,7 +88,7 @@ export let controller = (() => {
         // Увеличиваем мульти(разбивание бутылки)
         if (multiValue > currMulti) {
             multiCounter++;
-            console.warn(multiCounter);
+            // console.warn(multiCounter);
             fsView.draw.changeMulti({number: multiValue, counter: multiCounter});
             model.data('fsMulti', multiValue);
             model.el('multiCounter', multiCounter);
