@@ -5,7 +5,7 @@ import Info from '../../../../Info/Info';
 
 import { view } from 'modules/Menu/Settings/MenuSettingsView';
 
-import { controller as soundController } from 'modules/Sound/SoundController';
+import { controller as soundController } from '../../../../Info/SoundController';
 
 export let controller = (() => {
 
@@ -147,9 +147,9 @@ export let controller = (() => {
 
             model.state('settings', 'close');
             view.hide.Overlay({});
-            
+
             info.handleClose();
-            
+
             // view.hide.Rules({});
             // let counter = model.el('infoCounter');
             // counter = 0;

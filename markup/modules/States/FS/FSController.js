@@ -9,7 +9,7 @@ import { view as mainView } from 'modules/States/Main/MainView';
 
 import Footer from '../../../../Info/Footer';
 
-import { controller as soundController } from 'modules/Sound/SoundController';
+import { controller as soundController } from '../../../../Info/SoundController';
 import { controller as balanceController } from 'modules/Balance/BalanceController';
 import { controller as panelController } from 'modules/Panel/PanelController';
 import { controller as rollController } from 'modules/Roll/RollController';
