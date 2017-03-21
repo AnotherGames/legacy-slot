@@ -1,7 +1,7 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
 
-import { controller as keyboardController } from 'modules/Keyboard/KeyboardController'
+import { controller as keyboardController } from '../../../Info/KeyboardController'
 import { controller as soundController } from '../../../Info/SoundController';
 
 export let view = (() => {
@@ -101,8 +101,6 @@ export let view = (() => {
     }
 
     function transitionInFs() {
-        soundController.sound.playSound({sound : 'buttonClick'});
-        soundController.music.stopMusic('startPerehod');
         model.el('game').state.start('FS');
         model.state('transitionScreen', false);
     }
@@ -110,7 +108,7 @@ export let view = (() => {
     function fsFinish() {
         let game = model.el('game');
         // game.input.keyboard.enabled = true;
-        keyboardController.initFsKeys();
+        keyboardController.initFsKeys(transitionOutFs);
         model.state('buttons:locked', false);
         // Темнота
         game.camera.flash(0x000000, 500)
@@ -128,8 +126,6 @@ export let view = (() => {
     }
 
     function transitionOutFs() {
-        soundController.sound.playSound({sound : 'buttonClick'});
-        soundController.music.stopMusic('finishPerehod');
         model.el('game').state.start('Main');
     }
 
@@ -241,11 +237,7 @@ export let view = (() => {
         let transitionBG = model.el('transitionBG');
         transitionBG.inputEnabled = true;
         transitionBG.input.priorityID = 2;
-        transitionBG.events.onInputDown.add(function () {
-            soundController.sound.playSound({sound : 'buttonClick'});
-            soundController.music.stopMusic('finishPerehod');
-            model.el('game').state.start('Main');
-        });
+        transitionBG.events.onInputDown.add(transitionOutFs);
     }
 
     function _addCoin(container) {
