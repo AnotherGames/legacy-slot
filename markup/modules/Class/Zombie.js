@@ -1,7 +1,7 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
 
-import { controller as soundController } from 'modules/Sound/SoundController';
+import { controller as soundController } from '../../../Info/SoundController';
 
 export class Zombie {
 

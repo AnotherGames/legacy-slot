@@ -4,7 +4,7 @@ import { view as mainView } from 'modules/States/Main/MainView';
 
 import Info from '../../../Info/Info';
 
-import { controller as soundController } from 'modules/Sound/SoundController';
+import { controller as soundController } from '../../../Info/SoundController';
 import { controller as autoplayController } from 'modules/Autoplay/AutoplayController';
 import { controller as rollController } from 'modules/Roll/RollController';
 
