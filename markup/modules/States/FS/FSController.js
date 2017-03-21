@@ -15,10 +15,6 @@ export let controller = (() => {
     function stop() {
         let game = model.el('game');
 
-        model.state('fs:end', true);
-        model.state('fs', false);
-        model.updateBalance({endFS: true});
-        model.state('buttons:locked', false);
 
         winView.draw.hideBottle();
         motionPath.motion.destroyPath({name: 'cat2'});
@@ -35,6 +31,13 @@ export let controller = (() => {
             panelController.drawMainPanel();
             soundController.music.stopMusic('fsFon');
             soundController.music.playMusic('fon');
+
+            model.state('fs:end', true);
+            model.state('fs', false);
+            model.updateBalance({endFS: true});
+            model.state('buttons:locked', false);
+
+            game.input.keyboard.enabled = true;
         });
     }
 

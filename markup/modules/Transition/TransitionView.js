@@ -190,7 +190,6 @@ export let view = (() => {
         _fsStartDraw();
         _fsStartTween();
 
-        game.input.keyboard.enabled = true;
         // Автопереход если включен
         game.time.events.add(config.autoTransitionTime, transitionInFs);
     }
@@ -198,7 +197,7 @@ export let view = (() => {
     function fsFinish() {
         let game = model.el('game');
         // game.input.keyboard.enabled = true;
-        keyboardController.initFsKeys(transitionInFs);
+        // keyboardController.initFsKeys(transitionInFs);
         model.state('buttons:locked', false);
         // Темнота
         game.camera.flash(0x000000, 500);
