@@ -6,7 +6,7 @@ import Footer from '../../../../Info/Footer';
 import { view as balanceView } from 'modules/Balance/BalanceView';
 import { view as bonusView } from 'modules/States/Bonus/BonusView';
 import { view as mainView } from 'modules/States/Main/MainView';
-import { controller as soundController } from 'modules/Sound/SoundController';
+import { controller as soundController } from '../../../../Info/SoundController';
 import { controller as mobileSetBetController } from 'modules/Menu/SetBet/MenuSetBetController';
 
 class Door {
@@ -37,8 +37,8 @@ class Door {
 
     win() {
         let rnd = this.game.rnd.integerInRange(1, 3);
-        soundController.sound.playSound({ currentSound: `illumBreak${rnd}` });
-        soundController.sound.playSound({ currentSound: 'illumWin', duration: 1200 });
+        soundController.sound.playSound({ sound: `illumBreak${rnd}` });
+        soundController.sound.playSound({ sound: 'illumWin', duration: 1200 });
 
         this.destroyed = true;
 
@@ -50,7 +50,7 @@ class Door {
     fail() {
         this.destroyed = true;
 
-        soundController.sound.playSound({ currentSound: 'illumFail', soundVolume: 3 });
+        soundController.sound.playSound({ sound: 'illumFail', soundVolume: 3 });
 
         this.doors.forEach((door) => {
             door.tentacle = this.game.add.sprite(door.x - 50, door.y + 5, 'tentacles');
@@ -265,7 +265,7 @@ function handleDoorClick() {
                     this.isWinPlayed = true;
                     if (this.data.BonusEnd) {
                         // Переходной экран Big Win
-                        soundController.sound.playSound({ currentSound: 'illumWin' });
+                        soundController.sound.playSound({ sound: 'illumWin' });
                         this.doors.forEach((door) => {
                             door.finalGold = this.game.add.sprite(door.x, door.y, 'coins', 'skeleton-2_01.png');
                             door.finalGold.animations.add('gold', Phaser.Animation.generateFrameNames('skeleton-2_', 1, 44, '.png', 2), 30, false);
@@ -280,7 +280,7 @@ function handleDoorClick() {
                             door.game.add.tween(door.finalGold)
                                 .to({ alpha: 1 }, 500, 'Linear', true);
                         });
-                        soundController.sound.playSound({ currentSound: 'win' });
+                        soundController.sound.playSound({ sound: 'win' });
                         bonusView.draw.showWin({ winTextFrame: 'bigW.png' });
                         soundController.music.stopMusic('bonusFon');
                         setTimeout(() => {

@@ -1,6 +1,6 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
-import { controller as soundController } from 'modules/Sound/SoundController';
+import { controller as soundController } from '../../../../Info/SoundController';
 
 export let view = (() => {
 
@@ -160,7 +160,7 @@ export let view = (() => {
 
             let chestFS = model.el('chestFS');
             chestFS.addAnimationByName(1, animation, false);
-            soundController.sound.playSound({currentSound: 'chestDown'});
+            soundController.sound.playSound({sound: 'chestDown'});
         },
 
         Level: function ({
@@ -227,7 +227,7 @@ export let view = (() => {
 
             let diverFS = model.el('diverFS');
             diverFS.addAnimationByName(1, animation, false);
-            soundController.sound.playSound({currentSound: 'diverDown'});
+            soundController.sound.playSound({sound: 'diverDown'});
         },
 
         Count: function ({

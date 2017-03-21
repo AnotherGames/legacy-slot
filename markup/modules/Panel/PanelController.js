@@ -3,7 +3,7 @@ import { view } from 'modules/Panel/PanelView';
 
 import Info from '../../../Info/Info';
 
-import { controller as soundController } from 'modules/Sound/SoundController';
+import { controller as soundController } from '../../../Info/SoundController';
 import { controller as autoplayController } from 'modules/Autoplay/AutoplayController';
 import { controller as rollController } from 'modules/Roll/RollController';
 
@@ -82,7 +82,7 @@ export let controller = (() => {
         spin: function () {
             if (model.state('buttons:locked')) return;
 
-            soundController.sound.playSound({currentSound: 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
             if (!model.state('autoplay:panelClosed')) {
                 model.state('autoplay:panelClosed', true);
                 view.hide.autoPanel({});
@@ -98,7 +98,7 @@ export let controller = (() => {
         stop: function () {
             if (model.state('buttons:locked')) return;
 
-            soundController.sound.playSound({currentSound: 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
             model.state('autoplay:panelClosed', true);
             autoplayController.stop();
         },
@@ -108,7 +108,7 @@ export let controller = (() => {
             || model.state('roll:progress')
             || model.state('panelInAnim') // проигрывается ли сейчас анимация закрытия/открытия панели
             || model.state('buttons:locked')) return;
-            soundController.sound.playSound({currentSound: 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
 
             if (model.state('autoplay:panelClosed') && !model.data('remainAutoCount')) {
                 model.state('autoplay:panelClosed', false);
@@ -124,7 +124,7 @@ export let controller = (() => {
             || model.state('roll:progress')
             || model.state('autoplay:start')) return;
 
-            soundController.sound.playSound({currentSound: 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
             model.changeBet({toMax: true});
         },
 
@@ -132,7 +132,7 @@ export let controller = (() => {
             if (model.state('buttons:locked')
             || model.state('roll:progress')
             || model.state('autoplay:start')) return;
-            soundController.sound.playSound({currentSound: 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
             model.changeBet({up: true});
         },
 
@@ -140,7 +140,7 @@ export let controller = (() => {
             if (model.state('buttons:locked')
             || model.state('roll:progress')
             || model.state('autoplay:start')) return;
-            soundController.sound.playSound({currentSound: 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
             model.changeBet({down: true});
         },
 
@@ -148,7 +148,7 @@ export let controller = (() => {
             if (model.state('buttons:locked')
             || model.state('roll:progress')
             || model.state('autoplay:start')) return;
-            soundController.sound.playSound({currentSound: 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
             model.changeCoin({up: true});
         },
 
@@ -156,7 +156,7 @@ export let controller = (() => {
             if (model.state('buttons:locked')
             || model.state('roll:progress')
             || model.state('autoplay:start')) return;
-            soundController.sound.playSound({currentSound: 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
             model.changeCoin({down: true});
         },
 

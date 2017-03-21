@@ -1,7 +1,7 @@
 import { model } from 'modules/Model/Model';
 import { view } from 'modules/Menu/SetBet/MenuSetBetView';
 
-import { controller as soundController } from 'modules/Sound/SoundController';
+import { controller as soundController } from '../../../../Info/SoundController';
 
 export let controller = (() => {
 
@@ -15,7 +15,7 @@ export let controller = (() => {
         closePanel: function () {
             if (model.state('setbetPanel') === 'close') return;
 
-            soundController.sound.playSound({currentSound: 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
             if (model.state('setbetPanel') === 'open') {
                 view.hide.Panel({});
             }
@@ -24,23 +24,23 @@ export let controller = (() => {
             model.state('setbetPanel', 'close');
         },
         maxBet: function () {
-            soundController.sound.playSound({currentSound: 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
             model.changeBet({toMax: true});
         },
         betLevelPlus: function () {
-            soundController.sound.playSound({currentSound: 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
             model.changeBet({up: true});
         },
         betLevelMinus: function () {
-            soundController.sound.playSound({currentSound: 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
             model.changeBet({down: true});
         },
         coinPlus: function () {
-            soundController.sound.playSound({currentSound: 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
             model.changeCoin({up: true});
         },
         coinMinus: function () {
-            soundController.sound.playSound({currentSound: 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
             model.changeCoin({down: true});
         }
     };

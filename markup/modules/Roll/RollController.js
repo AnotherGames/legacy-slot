@@ -6,7 +6,7 @@ import { Wheel } from 'modules/Class/Wheel';
 import { view as mainView } from 'modules/States/Main/MainView';
 import { view as panelView } from 'modules/Panel/PanelView';
 
-import { controller as soundController } from 'modules/Sound/SoundController';
+import { controller as soundController } from '../../../Info/SoundController';
 import { controller as autoplayController } from 'modules/Autoplay/AutoplayController';
 import { controller as buttonsController } from 'modules/Buttons/ButtonsController';
 import { controller as winController } from 'modules/Win/WinController';
@@ -103,7 +103,7 @@ export let controller = (() => {
                     let finishScreen = _convertArray(data.Screen);
                     model.data('finishScreen', finishScreen);
 
-                    soundController.sound.playSound({currentSound: 'baraban'});
+                    soundController.sound.playSound({sound: 'baraban'});
 
                     // Крутим колеса
                     wheels.forEach((wheel, columnIndex) => {
