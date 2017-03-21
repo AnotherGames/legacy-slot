@@ -1,6 +1,5 @@
 import { model } from 'modules/Model/Model';
 import { controller as panelController} from 'modules/Panel/PanelController';
-import { controller as soundController} from 'modules/Sound/SoundController';
 import { view as transitionView} from 'modules/Transition/TransitionView';
 
 export let controller = (() => {

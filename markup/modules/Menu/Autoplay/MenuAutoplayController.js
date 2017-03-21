@@ -1,7 +1,7 @@
 import { model } from 'modules/Model/Model';
 import { view } from 'modules/Menu/Autoplay/MenuAutoplayView';
 
-import { controller as soundController } from 'modules/Sound/SoundController';
+import { controller as soundController } from '../../../../Info/SoundController';
 import { controller as autoplayController } from 'modules/Autoplay/AutoplayController';
 
 export let controller = (() => {

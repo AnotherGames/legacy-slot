@@ -4,10 +4,9 @@ import { config } from 'modules/Util/Config';
 import Info from '../../../../Info/Info';
 
 import { view } from 'modules/Menu/Settings/MenuSettingsView';
-import { view as panelView } from 'modules/Panel/PanelView';
 
-import { controller as soundController } from 'modules/Sound/SoundController';
-import { controller as panelController } from 'modules/Panel/PanelController';
+import { controller as soundController } from '../../../../Info/SoundController';
+
 
 export let controller = (() => {
 
@@ -202,7 +201,7 @@ export let controller = (() => {
             backButton.inputEnabled = true;
             backButton.input.priorityID = 12;
             backButton.events.onInputDown.add(handle.closeSettings);
-        
+
         info = new Info({
             model,
             mobileBGScale: 0.75,

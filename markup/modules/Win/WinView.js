@@ -3,7 +3,7 @@ import { config } from 'modules/Util/Config';
 import { Glista } from 'modules/Class/Glista';
 import { Element } from 'modules/Class/Element';
 
-import { controller as soundController } from 'modules/Sound/SoundController';
+import { controller as soundController } from '../../../Info/SoundController';
 import { controller as winController } from 'modules/Win/WinController';
 
 export let view = (() => {

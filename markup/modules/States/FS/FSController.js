@@ -5,7 +5,7 @@ import { view as transitionView } from 'modules/Transition/TransitionView';
 import { view as winView } from 'modules/Win/WinView';
 import { view as mainView } from 'modules/States/Main/mainView';
 
-import { controller as soundController } from 'modules/Sound/SoundController';
+import { controller as soundController } from '../../../../Info/SoundController';
 import { controller as panelController } from 'modules/Panel/PanelController';
 import { controller as buttonsController } from 'modules/Buttons/ButtonsController';
 import { controller as rollController } from 'modules/Roll/RollController';
