@@ -1,7 +1,7 @@
 import { model } from 'modules/Model/Model';
 import { view } from 'modules/States/Init/InitView';
 import { controller as soundController} from '../../../../Info/SoundController';
-import { controller as keyboardController} from 'modules/keyboard/KeyboardController';
+import { controller as keyboardController} from '../../../../Info/KeyboardController';
 
 export class Init {
     init() {
@@ -23,7 +23,6 @@ export class Init {
         view.drawBG();
         // view.drawLogo();
 
-        if (model.desktop) keyboardController.initInitKeys();
 
         let initPlay = view.drawPlay();
 
@@ -37,6 +36,10 @@ export class Init {
         } else {
             initPlay.inputEnabled = true;
             initPlay.events.onInputDown.add(this.handlePlay, this);
+        }
+
+        if (model.desktop) {
+            keyboardController.initInitKeys(this.stateHandler);
         }
 
         model.el('initPlayTween')

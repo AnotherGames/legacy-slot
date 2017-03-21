@@ -4,6 +4,7 @@ import { request } from 'modules/Util/Request';
 
 import { view as mainView } from 'modules/States/Main/MainView';
 import { view as winView } from 'modules/Win/WinView';
+import { view as transitionView } from 'modules/Transition/TransitionView';
 import Footer from '../../../../Info/Footer';
 
 import { controller as soundController } from '../../../../Info/SoundController';
@@ -16,7 +17,7 @@ import { controller as autoplayController } from 'modules/Autoplay/AutoplayContr
 import { controller as mobileSettingsController } from 'modules/Menu/Settings/MenuSettingsController';
 import { controller as mobileAutoplayController } from 'modules/Menu/Autoplay/MenuAutoplayController';
 import { controller as mobileSetBetController } from 'modules/Menu/SetBet/MenuSetBetController';
-import { controller as keyboardController } from 'modules/Keyboard/KeyboardController';
+import { controller as keyboardController } from '../../../../Info/KeyboardController';
 
 export class Main {
 
@@ -91,7 +92,7 @@ export class Main {
             // Отрисовуем баланс
             balanceController.initDesktop();
             // Инициализируем управление клавиатурой
-            keyboardController.initMainKeys();
+            keyboardController.initMainKeys(transitionView.transitionInFs);
             // BG animations
             mainView.draw.addBubbles({});
             mainView.draw.addShark({});
