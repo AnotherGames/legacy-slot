@@ -1,5 +1,5 @@
 import { model } from 'modules/Model/Model';
-import { request } from 'modules/Util/Request';
+import { request } from '../../../../Info/Request';
 import { config } from 'modules/Util/Config';
 import Footer from '../../../../Info/Footer';
 
