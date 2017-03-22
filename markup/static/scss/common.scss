@@ -125,6 +125,7 @@ body:not(.ios) {
     }
     & input {
         outline: none;
+        appearance: none;
     }
     & input[type=range] {
         -webkit-appearance: none;
@@ -223,9 +224,6 @@ body:not(.ios) {
     }
     &:checked+label:after {
         left: 30px;
-    }
-    &:focus+label:before {
-        box-shadow: 0 0 0 3px rgba(255, 255, 0, 0.5);
     }
 }
 
