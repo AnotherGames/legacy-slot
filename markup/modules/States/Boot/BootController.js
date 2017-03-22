@@ -1,11 +1,16 @@
 import { model } from 'modules/Model/Model';
-import { request } from 'modules/Util/Request';
+import { request } from '../../../../Info/Request';
 
 export class Boot {
 
     init() {
         model.state('isNoConnect', false);
         const game = model.el('game');
+
+        request.setMode({
+            normal: 'chibi2',
+            fsBonus: 'chibifs1'
+        });
 
         request.send('Initialise', 'fsBonus')
             .then((initData) => {
