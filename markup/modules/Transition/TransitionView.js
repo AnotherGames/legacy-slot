@@ -1,12 +1,22 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
 
-import { controller as keyboardController } from 'modules/Keyboard/KeyboardController';
+import { controller as keyboardController } from '../../../Info/KeyboardController';
 import { controller as soundController } from 'modules/Sound/SoundController';
 
 import { view as mainView } from 'modules/States/Main/MainView';
 
 export let view = (() => {
+
+
+    function transitionInFs() {
+        model.state('transitionScreen', false);
+        model.el('game').state.start('FS');
+    }
+
+    function transitionOutFs() {
+        model.el('game').state.start('Main');
+    }
 
     function fsStart() {
         let game = model.el('game');
@@ -20,12 +30,7 @@ export let view = (() => {
         game.input.keyboard.enabled = true;
         // Автопереход если включен
         if (model.state('autoTransititon')) {
-            game.time.events.add(config.autoTransitionTime, () => {
-                soundController.sound.playSound({currentSound: 'buttonClick'});
-                soundController.music.stopMusic('startPerehod');
-                model.el('game').state.start('FS');
-                model.state('transitionScreen', false);
-            });
+            game.time.events.add(config.autoTransitionTime, transitionInFs);
         }
     }
 
@@ -157,18 +162,13 @@ export let view = (() => {
         let transitionBG = model.el('transitionBG');
         transitionBG.inputEnabled = true;
         transitionBG.input.priorityID = 2;
-        transitionBG.events.onInputDown.add(function () {
-            soundController.sound.playSound({currentSound: 'buttonClick'});
-            soundController.music.stopMusic('startPerehod');
-            model.el('game').state.start('FS');
-            model.state('transitionScreen', false);
-        });
+        transitionBG.events.onInputDown.add(transitionInFs);
     }
 
     function fsFinish() {
         let game = model.el('game');
         // game.input.keyboard.enabled = true;
-        keyboardController.initFsKeys();
+        keyboardController.initFsKeys(transitionOutFs);
         model.state('buttons:locked', false);
         // Темнота
         game.camera.flash(0x000000, 500);
@@ -180,18 +180,13 @@ export let view = (() => {
         model.state('maxFsMultiplier', false);
         // Автопереход
         if (model.state('autoTransititon')) {
-            game.time.events.add(config.autoTransitionTime, () => {
-                soundController.sound.playSound({currentSound: 'buttonClick'});
-                soundController.music.stopMusic('finishPerehod');
-                model.el('game').state.start('Main');
-            });
+            game.time.events.add(config.autoTransitionTime, transitionOutFs);
         }
     }
 
     function _fsFinishDraw() {
         let game = model.el('game');
         let transitionContainer = model.group('transition');
-        game.camera.flash(0x000000, 777);
         // Изменяем музыку
         soundController.music.stopMusic('fsFon');
         soundController.music.playMusic('finishPerehod');
@@ -270,12 +265,7 @@ export let view = (() => {
         let transitionBG = model.el('transitionBG');
         transitionBG.inputEnabled = true;
         transitionBG.input.priorityID = 2;
-        transitionBG.events.onInputDown.add(function () {
-            soundController.sound.playSound({currentSound: 'buttonClick'});
-            soundController.sound.stopSound({currentSound: 'win'});
-            soundController.music.stopMusic('finishPerehod');
-            model.el('game').state.start('Main');
-        });
+        transitionBG.events.onInputDown.add(transitionOutFs);
     }
 
     // Накрутка выигрыша
@@ -396,7 +386,9 @@ export let view = (() => {
     return {
         fsStart,
         fsFinish,
-        bonusStart
+        bonusStart,
+        transitionInFs,
+        transitionOutFs
     };
 
 })();

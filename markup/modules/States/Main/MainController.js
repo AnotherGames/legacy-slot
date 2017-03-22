@@ -17,7 +17,7 @@ import { controller as autoplayController } from 'modules/Autoplay/AutoplayContr
 import { controller as mobileSettingsController } from 'modules/Menu/Settings/MenuSettingsController';
 import { controller as mobileAutoplayController } from 'modules/Menu/Autoplay/MenuAutoplayController';
 import { controller as mobileSetBetController } from 'modules/Menu/SetBet/MenuSetBetController';
-import { controller as keyboardController } from 'modules/Keyboard/KeyboardController';
+import { controller as keyboardController } from '../../../../Info/KeyboardController';
 
 export class Main {
 
@@ -98,7 +98,7 @@ export class Main {
             // Отрисовуем баланс
             balanceController.initDesktop();
             // Инициализируем управление клавиатурой
-            keyboardController.initMainKeys();
+            keyboardController.initMainKeys(transitionView.transitionInFs);
             // BG animations
             mainView.draw.addBubbles({});
 
