@@ -190,7 +190,7 @@ export let view = (() => {
         // Изменяем музыку
         soundController.music.stopMusic('fsFon');
         soundController.music.playMusic('finishPerehod');
-        soundController.sound.playSound({sound: 'win'});
+        // soundController.sound.playSound({sound: 'win'});
 
         // Рисуем фон
 
