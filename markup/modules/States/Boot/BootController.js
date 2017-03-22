@@ -1,11 +1,16 @@
 import { model } from 'modules/Model/Model';
-import { request } from 'modules/Util/Request';
+import { request } from '../../../../Info/Request';
 
 export class Boot {
 
     init() {
         model.state('isNoConnect', false);
         const game = model.el('game');
+
+        request.setMode({
+            normal: 'candyland5',
+            fsBonus: 'candyfs1'
+        });
 
         request.send('Initialise', 'normal')
             .then((initData) => {
