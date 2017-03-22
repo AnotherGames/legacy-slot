@@ -10,11 +10,9 @@ export let controller = (function () {
             if (this.value == 0) {
                 model.state('globalSound', false);
                 model.cookie('globalSound', false);
-                soundButton.frameName = 'soundOff.png';
             } else {
                 model.state('globalSound', true);
                 model.cookie('globalSound', true);
-                soundButton.frameName = 'soundOn.png';
             }
             soundController.volume.changeVolume(this.value);
             if(this.value > 0){
@@ -47,12 +45,6 @@ export let controller = (function () {
         $('#fastSpin').on('change', function () {
             model.state('fastRoll', this.checked);
             model.cookie('fastRoll', this.checked);
-            let fastButton = model.el('fastButton');
-            if (model.state('fastRoll')) {
-                fastButton.frameName = 'fastSpinOff.png';
-            } else {
-                fastButton.frameName = 'fastSpin.png';
-            }
         });
         $('#isAnimBG').on('change', function () {
             let isAnim = this.checked;
