@@ -53,7 +53,7 @@ export let view = (() => {
         let freeSpinsLevel = game.add.bitmapText(game.width / 2, -400, 'numbersFont', freeSpinsCount, 120, transitionContainer);
         freeSpinsLevel.align = 'center';
         freeSpinsLevel.anchor.set(0.5);
-        (model.desktop) ? freeSpinsLevel.scale.set(0.6) : freeSpinsLevel.scale.set(0.3) ;
+        (model.desktop) ? freeSpinsLevel.scale.set(0.6) : freeSpinsLevel.scale.set(0.3);
         model.el('freeSpinsLevel', freeSpinsLevel);
 
         // Надпись Multi
