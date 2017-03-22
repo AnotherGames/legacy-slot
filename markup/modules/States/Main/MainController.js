@@ -64,6 +64,7 @@ export class Main {
         game.time.events.add(game.rnd.integerInRange(7000, 12000), () => {
             mainView.draw.addFish1({});
             mainView.draw.addFish2({});
+            mainView.draw.addFish3({});
         });
 
         // Инициализируем крутки

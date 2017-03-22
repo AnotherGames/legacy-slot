@@ -18,6 +18,13 @@ body:not(.ios) {
     display: none;
 }
 
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
 @keyframes blinker {
   50% { opacity: 0; }
 }
@@ -135,7 +142,7 @@ body:not(.ios) {
         border-radius: 8px;
         width: calc(100% - 350px);
         height: 14px;
-        background: #7ec710;
+        background: #49a3d8 ;
         min-width: 100px;
     }
     & input[type=range]::-webkit-slider-thumb {
@@ -221,14 +228,14 @@ body:not(.ios) {
         transition: all .2s;
     }
     &:checked+label:before {
-        background: #7ec710;
+        background: #49a3d8 ;
     }
     &:checked+label:after {
         left: 30px;
     }
-    &:focus+label:before {
-        box-shadow: 0 0 0 3px rgba(255, 255, 0, 0.5);
-    }
+    // &:focus+label:before {
+    //     box-shadow: 0 0 0 3px rgba(255, 255, 0, 0.5);
+    // }
 }
 
 .marginBottom {

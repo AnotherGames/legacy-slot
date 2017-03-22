@@ -104,31 +104,35 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('bg')
         }) {
-            let y = (model.desktop) ? game.rnd.integerInRange(300, 900) : game.rnd.integerInRange(200, 600);
-            let shark = game.add.sprite(-500, y, 'shark', null, container);
+            let sharkContainer= game.add.group();
+            container.add(sharkContainer);
+            let y = (model.desktop) ? game.rnd.integerInRange(500, 850) : game.rnd.integerInRange(200, 600);
+            sharkContainer.y = y;
+
+            let shark = game.add.sprite(0, 0, 'shark', null, sharkContainer);
             shark.anchor.set(0.5);
             shark.animations.add('move', Phaser.Animation.generateFrameNames('shark1-move_', 0, 60, '.png', 1), 20, true);
             shark.animations.play('move');
             model.el('shark', shark);
 
             let time = game.rnd.integerInRange(25, 35);
-            let time2 = game.rnd.integerInRange(14, 20);
             let side = (game.rnd.sign() < 0) ? 'left' : 'right';
 
-            shark.x = (side === 'left') ? -shark.width : game.width + shark.width;
+            sharkContainer.x = (side === 'left') ? -shark.width : game.width + shark.width;
             let delta = (side === 'left') ? game.width + shark.width : -shark.width;
             if (side === 'left') {
                 shark.width = -shark.width;
             }
 
-            let scaleX = (model.desktop) ? 1.0 : 0.75;
-            let scaleY = (model.desktop) ? 1.0 : 0.75;
+            sharkContainer.scale.set(0.5);
+            let scaleX = (model.desktop) ? 2.0 : 1.2;
+            let scaleY = (model.desktop) ? 2.0 : 1.2;
 
-            // game.add.tween(shark.scale).to({x: scaleX, y: scaleY}, time * 1000, 'Linear', true);
-            game.add.tween(shark).to({x: delta, y: 150}, time * 1000, 'Linear', true)
+            game.add.tween(sharkContainer.scale).to({x: scaleX, y: scaleY}, time * 1000, 'Linear', true);
+            game.add.tween(sharkContainer).to({x: delta, y: 150}, time * 1000, 'Linear', true)
                 .onComplete.add(() => {
                     shark.destroy();
-                    game.time.events.add(time2 * 1000, () => {
+                    game.time.events.add(time * 1000, () => {
                         this.addShark({});
                     });
                 }, this);
@@ -142,33 +146,34 @@ export let view = (() => {
             y2 = (model.desktop) ? 700 : 600
         }) {
 
-            let fish = game.add.sprite(-500, game.height * 0.75 , 'fish1', null, container);
+            let fishContainer = game.add.group();
+            container.add(fishContainer);
+            fishContainer.y = game.height * 0.75;
+
+            let fish = game.add.sprite(0, 0, 'fish1', null, fishContainer);
             fish.anchor.set(0.5);
             fish.animations.add('move', Phaser.Animation.generateFrameNames('F1-animation_', 0, 30, '.png', 1), 20, true);
             fish.animations.play('move');
             model.el('fish', fish);
 
-            let fish2 =game.add.sprite(-500, y, 'fish2', null, container);
-            fish2.anchor.set(0.5);
-            fish2.animations.add('move', Phaser.Animation.generateFrameNames('F2-animation_', 0, 30, '.png', 1), 20, true);
-            fish2.animations.play('move');
-            model.el('fish2', fish2);
 
             let time = game.rnd.integerInRange(25, 35);
-            let time2 = game.rnd.integerInRange(14, 20);
             let side = (game.rnd.sign() < 0) ? 'left' : 'right';
 
-            fish.x = (side === 'left') ? -fish.width : game.width + fish.width;
+            fishContainer.x = (side === 'left') ? -fish.width : game.width + fish.width;
             let delta = (side === 'left') ? game.width + fish.width : -fish.width;
             if (side === 'right') {
                 fish.width = -fish.width;
             }
 
-            let y = (model.desktop) ? game.rnd.integerInRange(500, 800) : game.rnd.integerInRange(400, 600);
-            game.add.tween(fish).to({x: delta, y: y}, time * 1000, 'Linear', true)
+            fishContainer.scale.set(1.5);
+
+            let y = (model.desktop) ? game.rnd.integerInRange(400, 600) : game.rnd.integerInRange(400, 600);
+            game.add.tween(fishContainer.scale).to({x: 0.5, y: 0.5}, time * 1000, 'Linear', true);
+            game.add.tween(fishContainer).to({x: delta, y: y}, time * 1000, 'Linear', true)
                 .onComplete.add(() => {
                     fish.destroy();
-                    game.time.events.add(time2 * 1000, () => {
+                    game.time.events.add(time * 1000, () => {
                         this.addFish1({});
                     });
                 }, this);
@@ -177,38 +182,69 @@ export let view = (() => {
 
         addFish2: function ({
             game = model.el('game'),
-            container = model.group('bg'),
-            y1 = (model.desktop) ? 450 : 350,
-            y2 = (model.desktop) ? 700 : 600
+            container = model.group('bg')
         }) {
-            let y = (model.desktop) ? game.rnd.integerInRange(300, 800) : game.rnd.integerInRange(400, 600);
-            let index = (game.rnd.sign() < 0) ? 2 : 3;
+            let y = (model.desktop) ? game.rnd.integerInRange(300, 800) : game.rnd.integerInRange(200, 500);
 
-            let fish =game.add.sprite(-500, y, `fish${index}`, null, container);
+            let fish = game.add.sprite(-500, y, 'fish2', null, container);
             fish.anchor.set(0.5);
-            if (index == 2) {
-                fish.animations.add('move', Phaser.Animation.generateFrameNames(`F2-animation_`, 0, 30, '.png', 1), 20, true);
-            } else {
-                fish.animations.add('move', Phaser.Animation.generateFrameNames(`BF-animation_`, 0, 30, '.png', 1), 20, true);
-            }
+            fish.animations.add('move', Phaser.Animation.generateFrameNames(`F2-animation_`, 0, 30, '.png', 1), 20, true);
             fish.animations.play('move');
             model.el('fish', fish);
 
             let time = game.rnd.integerInRange(25, 35);
-            let time2 = game.rnd.integerInRange(14, 20);
+            let delay = game.rnd.integerInRange(10, 15);
             let side = (game.rnd.sign() < 0) ? 'left' : 'right';
 
             fish.x = (side === 'left') ? -fish.width : game.width + fish.width;
-            let delta = (side === 'left') ? game.width + fish.width: -fish.width;
+            let delta = (side === 'left') ? game.width + fish.width : -fish.width;
             if (side === 'left') {
                 fish.width = -fish.width;
             }
 
-            game.add.tween(fish).to({x: delta}, time * 1000, 'Linear', true, game.rnd.integerInRange(4000, 8000))
+            game.add.tween(fish).to({x: delta}, time * 1000, 'Linear', true, delay * 1000)
                 .onComplete.add(() => {
                     fish.destroy();
-                    game.time.events.add(time2 * 1000, () => {
+                    game.time.events.add(time * 1000, () => {
                         this.addFish2({});
+                    });
+                }, this);
+
+        },
+
+        addFish3: function ({
+            game = model.el('game'),
+            container = model.group('main')
+        }) {
+
+            let y = (model.desktop) ? game.rnd.integerInRange(-50, -250) : game.rnd.integerInRange(-30, -80);
+            let fishContainer = game.add.group();
+            container.add(fishContainer);
+            fishContainer.y = y;
+
+            let fish = game.add.sprite(0, 0, `fish3`, null, fishContainer);
+            fish.anchor.set(0.5);
+            fish.animations.add('move', Phaser.Animation.generateFrameNames(`BF-animation_`, 0, 30, '.png', 1), 20, true);
+            fish.animations.play('move');
+            model.el('fish', fish);
+
+            let time = game.rnd.integerInRange(25, 35);
+            let delay = game.rnd.integerInRange(10, 15);
+            let side = (game.rnd.sign() < 0) ? 'left' : 'right';
+
+            fishContainer.x = (side === 'left') ? -fish.width - game.width / 2 : game.width / 2 + fish.width + 50;
+            let delta = (side === 'left') ? -300 : 300;
+            if (side === 'left') {
+                fish.width = -fish.width;
+            }
+
+            fishContainer.scale.set(0.5);
+            game.add.tween(fishContainer.scale).to({x: 2.0, y: 2.0}, time * 1000, 'Linear', true, delay * 1000);
+            game.add.tween(fishContainer).to({x: delta, y: game.height / 2 + fish.width + 150}, time * 1000, 'Linear', true, delay * 1000)
+                .onComplete.add(() => {
+                    fish.destroy();
+                    game.time.events.add(time * 1000, () => {
+                        this.addFish3({});
                     });
                 }, this);
 
