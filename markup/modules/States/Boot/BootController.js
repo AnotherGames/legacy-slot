@@ -1,5 +1,5 @@
 import { model } from 'modules/Model/Model';
-import { request } from 'modules/Util/Request';
+import { request } from '../../../../Info/Request';
 
 export class Boot {
 
@@ -7,7 +7,12 @@ export class Boot {
         model.state('isNoConnect', false);
         const game = model.el('game');
 
-        request.send('Initialise', 'fsBonus')
+        request.setMode({
+            normal: 'monsushi8',
+            fsBonus: 'monsfs4'
+        });
+
+        request.send('Initialise', 'normal')
             .then((initData) => {
                 model.initStates(initData);
                 model.initSettings(initData.Settings);
