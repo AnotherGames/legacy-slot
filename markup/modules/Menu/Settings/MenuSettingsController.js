@@ -4,7 +4,7 @@ import { view as panelView} from 'modules/Panel/PanelView';
 
 import Info from '../../../../Info/Info';
 
-import { controller as soundController } from 'modules/Sound/SoundController';
+import { controller as soundController } from '../../../../Info/SoundController';
 import { controller as panelController } from 'modules/Panel/PanelController';
 
 export let controller = (() => {
@@ -27,7 +27,7 @@ export let controller = (() => {
         closeSettings: function () {
             if (model.state('settings') === 'close') return;
 
-            soundController.sound.playSound({currentSound: 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
             if (model.state('settings') === 'rules') {
                 view.hide.Rules({});
             }
@@ -94,7 +94,7 @@ export let controller = (() => {
         changeMusic: function () {
             let musicButton = model.el('settingsMusicButton');
 
-            soundController.sound.playSound({currentSound: 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
             if (model.state('music')) {
                 musicButton.frameName = 'musicOff.png';
                 model.state('music', false);
@@ -109,7 +109,7 @@ export let controller = (() => {
         },
         changeFastSpin: function () {
             let fastSpinButton = model.el('settingsFastSpinButton');
-            soundController.sound.playSound({currentSound: 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
             if (model.state('fastRoll') === true) {
                 model.state('fastRoll', false);
                 model.cookie('fastRoll', false);
@@ -137,7 +137,7 @@ export let controller = (() => {
             info.handleClose();
         },
         showHistory: function () {
-            soundController.sound.playSound({currentSound: 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
         }
     };
 

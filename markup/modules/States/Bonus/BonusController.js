@@ -7,7 +7,7 @@ import Footer from '../../../../Info/Footer';
 import { view as balanceView } from 'modules/Balance/BalanceView';
 import { view as bonusView } from 'modules/States/Bonus/BonusView';
 import { view as mainView } from 'modules/States/Main/MainView';
-import { controller as soundController } from 'modules/Sound/SoundController';
+import { controller as soundController } from '../../../../Info/SoundController';
 import { controller as mobileSetBetController } from 'modules/Menu/SetBet/MenuSetBetController';
 
 class Door {
@@ -47,8 +47,8 @@ class Door {
     win() {
 
         let rnd = this.game.rnd.integerInRange(1, 3);
-        soundController.sound.playSound({ currentSound: `illumBreak${rnd}` });
-        soundController.sound.playSound({ currentSound: 'illumWin', duration: 1200 });
+        soundController.sound.playSound({ sound: `illumBreak${rnd}` });
+        soundController.sound.playSound({ sound: 'illumWin', duration: 1200 });
 
         let number = parseInt(this.data.CurrentValue, 10);
 
@@ -67,7 +67,7 @@ class Door {
 
     fail(sprite) {
         let number = parseInt(sprite.frameName, 10);
-        soundController.sound.playSound({ currentSound: 'illumFail', soundVolume: 3 });
+        soundController.sound.playSound({ sound: 'illumFail', soundVolume: 3 });
         bonusView.draw.showFailBubbles({x: this.x, y: this.y, number: number});
     }
 
@@ -194,8 +194,8 @@ function handleDoorClick() {
                     this.isWinPlayed = true;
                     if (this.data.BonusEnd) {
                         // Переходной экран Big Win
-                        soundController.sound.playSound({ currentSound: 'illumWin' });
-                        soundController.sound.playSound({ currentSound: 'win' });
+                        soundController.sound.playSound({ sound: 'illumWin' });
+                        soundController.sound.playSound({ sound: 'win' });
                         bonusView.draw.showWin({ winTextFrame: 'bigW.png' });
                         soundController.music.stopMusic('bonusFon');
                         setTimeout(() => {

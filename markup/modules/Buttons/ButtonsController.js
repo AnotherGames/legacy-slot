@@ -3,7 +3,7 @@ import { config } from 'modules/Util/Config';
 import { view } from 'modules/Buttons/ButtonsView';
 
 import { controller as rollController } from 'modules/Roll/RollController';
-import { controller as soundController } from 'modules/Sound/SoundController';
+import { controller as soundController } from '../../../Info/SoundController';
 import { controller as autoplayController } from 'modules/Autoplay/AutoplayController';
 import { controller as mobileSettingsController } from 'modules/Menu/Settings/MenuSettingsController';
 import { controller as mobileAutoplayController } from 'modules/Menu/Autoplay/MenuAutoplayController';
@@ -97,7 +97,7 @@ export let controller = (() => {
             if (model.state('buttons:locked')
             || spinButton.frameName === 'spinEmpty.png') return;
 
-            soundController.sound.playSound({currentSound: 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
             lockButtons();
 
             rollController.startRoll();
@@ -108,7 +108,7 @@ export let controller = (() => {
             if (model.state('buttons:locked')) return;
             let autoButton = model.el('autoButton');
 
-            soundController.sound.playSound({currentSound: 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
 
             if (autoButton.frameName === 'stop.png') {
                 autoplayController.stop();
@@ -124,7 +124,7 @@ export let controller = (() => {
             if (model.state('buttons:locked')
             || betButton.frameName === 'setBetOut.png') return;
 
-            soundController.sound.playSound({currentSound: 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
             mobileSetBetController.handle.openPanel({});
         },
 
@@ -132,7 +132,7 @@ export let controller = (() => {
             if (model.state('buttons:locked')
             || model.state('roll:progress')) return;
 
-            soundController.sound.playSound({currentSound: 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
             mobileSettingsController.handle.openSettings({});
         },
 

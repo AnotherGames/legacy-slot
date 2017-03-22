@@ -2,7 +2,7 @@ import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
 
 import { controller as keyboardController } from '../../../Info/KeyboardController';
-import { controller as soundController } from 'modules/Sound/SoundController';
+import { controller as soundController } from '../../../Info/SoundController';
 
 import { view as mainView } from 'modules/States/Main/MainView';
 
@@ -190,7 +190,7 @@ export let view = (() => {
         // Изменяем музыку
         soundController.music.stopMusic('fsFon');
         soundController.music.playMusic('finishPerehod');
-        soundController.sound.playSound({currentSound: 'win'});
+        soundController.sound.playSound({sound: 'win'});
 
         // Рисуем фон
 
@@ -307,7 +307,7 @@ export let view = (() => {
         // Автопереход если включен
         if (model.state('autoTransititon')) {
             game.time.events.add(config.autoTransitionTime, () => {
-                soundController.sound.playSound({currentSound: 'buttonClick'});
+                soundController.sound.playSound({sound: 'buttonClick'});
                 soundController.music.stopMusic('startPerehod');
                 model.el('game').state.start('Bonus');
                 model.state('transitionScreen', false);
@@ -376,7 +376,7 @@ export let view = (() => {
         transitionBG.inputEnabled = true;
         transitionBG.input.priorityID = 2;
         transitionBG.events.onInputDown.add(function () {
-            soundController.sound.playSound({currentSound: 'buttonClick'});
+            soundController.sound.playSound({sound: 'buttonClick'});
             soundController.music.stopMusic('startPerehod');
             model.el('game').state.start('Bonus');
             model.state('transitionScreen', false);
