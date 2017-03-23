@@ -5,21 +5,35 @@ let noConnect = (function() {
     let game = 'candyLand';
     let max = 8;
     let wild = 9;
-    let combLines = 10;
+    let numberOfLines = 10;
     let initObject = {};
     let rollObject = {};
     let winComb = [[2, 2, 2, 2, 2], [3, 3, 3, 3, 3], [1, 1, 1, 1, 1], [3, 2, 1, 2, 3], [1, 2, 3, 2, 1], [3, 3, 2, 3, 3], [1, 1, 2, 3, 3], [2, 3, 3, 3, 2], [2, 1, 1, 1, 2], [1, 2, 2, 2, 1], [3, 2, 2, 2, 3], [3, 2, 2, 2, 1], [1, 2, 2, 2, 3], [3, 3, 2, 1, 1], [1, 1, 2, 3, 3], [3, 3, 3, 2, 1], [1, 1, 1, 2, 3], [3, 2, 1, 1, 1], [1, 2, 3, 3, 3], [2, 2, 1, 2, 2], [2, 2, 3, 2, 2]];
-    let lines =
-        [[{X: 0, Y: 1}, {X: 1, Y: 1}, {X: 2, Y: 1}, {X: 3, Y: 1}, {X: 4, Y: 1}],
-        [{X: 0, Y: 0}, {X: 1, Y: 0}, {X: 2, Y: 0}, {X: 3, Y: 0}, {X: 4, Y: 0}],
-        [{X: 0, Y: 2}, {X: 1, Y: 2}, {X: 2, Y: 2}, {X: 3, Y: 2}, {X: 4, Y: 2}],
-        [{X: 0, Y: 0}, {X: 1, Y: 1}, {X: 2, Y: 2}, {X: 3, Y: 1}, {X: 4, Y: 0}],
-        [{X: 0, Y: 2}, {X: 1, Y: 1}, {X: 2, Y: 0}, {X: 3, Y: 1}, {X: 4, Y: 2}],
-        [{X: 0, Y: 0}, {X: 1, Y: 0}, {X: 2, Y: 1}, {X: 3, Y: 0}, {X: 4, Y: 0}],
-        [{X: 0, Y: 2}, {X: 1, Y: 2}, {X: 2, Y: 1}, {X: 3, Y: 2}, {X: 4, Y: 2}],
-        [{X: 0, Y: 1}, {X: 1, Y: 0}, {X: 2, Y: 0}, {X: 3, Y: 0}, {X: 4, Y: 1}],
-        [{X: 0, Y: 1}, {X: 1, Y: 2}, {X: 2, Y: 2}, {X: 3, Y: 2}, {X: 4, Y: 1}],
-        [{X: 0, Y: 2}, {X: 1, Y: 1}, {X: 2, Y: 1}, {X: 3, Y: 1}, {X: 4, Y: 2}]];
+
+    let lines = [
+    [{X: 0, Y: 1}, {X: 1, Y: 1}, {X: 2, Y: 1}, {X: 3, Y: 1}, {X: 4, Y: 1}],
+    [{X: 0, Y: 0}, {X: 1, Y: 0}, {X: 2, Y: 0}, {X: 3, Y: 0}, {X: 4, Y: 0}],
+    [{X: 0, Y: 2}, {X: 1, Y: 2}, {X: 2, Y: 2}, {X: 3, Y: 2}, {X: 4, Y: 2}],
+    [{X: 0, Y: 0}, {X: 1, Y: 1}, {X: 2, Y: 2}, {X: 3, Y: 1}, {X: 4, Y: 0}],
+    [{X: 0, Y: 2}, {X: 1, Y: 1}, {X: 2, Y: 0}, {X: 3, Y: 1}, {X: 4, Y: 2}],
+    [{X: 0, Y: 0}, {X: 1, Y: 0}, {X: 2, Y: 1}, {X: 3, Y: 0}, {X: 4, Y: 0}],
+    [{X: 0, Y: 2}, {X: 1, Y: 2}, {X: 2, Y: 1}, {X: 3, Y: 2}, {X: 4, Y: 2}],
+    [{X: 0, Y: 1}, {X: 1, Y: 0}, {X: 2, Y: 0}, {X: 3, Y: 0}, {X: 4, Y: 1}],
+    [{X: 0, Y: 1}, {X: 1, Y: 2}, {X: 2, Y: 2}, {X: 3, Y: 2}, {X: 4, Y: 1}],
+    [{X: 0, Y: 2}, {X: 1, Y: 1}, {X: 2, Y: 1}, {X: 3, Y: 1}, {X: 4, Y: 2}],
+    [{X: 0, Y: 0}, {X: 1, Y: 1}, {X: 2, Y: 1}, {X: 3, Y: 1}, {X: 4, Y: 0}],
+    [{X: 0, Y: 0}, {X: 1, Y: 1}, {X: 2, Y: 1}, {X: 3, Y: 1}, {X: 4, Y: 2}],
+    [{X: 0, Y: 2}, {X: 1, Y: 1}, {X: 2, Y: 1}, {X: 3, Y: 1}, {X: 4, Y: 0}],
+    [{X: 0, Y: 0}, {X: 1, Y: 0}, {X: 2, Y: 1}, {X: 3, Y: 2}, {X: 4, Y: 2}],
+    [{X: 0, Y: 2}, {X: 1, Y: 2}, {X: 2, Y: 1}, {X: 3, Y: 0}, {X: 4, Y: 0}],
+    [{X: 0, Y: 0}, {X: 1, Y: 0}, {X: 2, Y: 0}, {X: 3, Y: 1}, {X: 4, Y: 2}],
+    [{X: 0, Y: 2}, {X: 1, Y: 2}, {X: 2, Y: 2}, {X: 3, Y: 1}, {X: 4, Y: 0}],
+    [{X: 0, Y: 0}, {X: 1, Y: 1}, {X: 2, Y: 2}, {X: 3, Y: 2}, {X: 4, Y: 2}],
+    [{X: 0, Y: 2}, {X: 1, Y: 1}, {X: 2, Y: 0}, {X: 3, Y: 0}, {X: 4, Y: 0}],
+    [{X: 0, Y: 1}, {X: 1, Y: 1}, {X: 2, Y: 2}, {X: 3, Y: 1}, {X: 4, Y: 1}],
+    [{X: 0, Y: 1}, {X: 1, Y: 1}, {X: 2, Y: 0}, {X: 3, Y: 1}, {X: 4, Y: 1}]
+    ];
+
     let wins = [];
     let Modes = {
         chibi: ['root', 'fsBonus1', 'shuriken1', 'shuriken2', 'shuriken3', 'shuriken4', 'shuriken5'],
@@ -43,14 +57,24 @@ let noConnect = (function() {
 
     let SymbolsValue = {
         candyLand: {
-            '1': [3, 5, 10], '2': [25, 50, 100], '3': [5, 10, 25], '4': [50, 100, 200], '5': [10, 15, 35],
-            '6': [100, 200, 500], '7': [10, 25, 50], '8': [200, 500, 1000]}
+            '1': [3, 5, 10],
+            '2': [25, 50, 100],
+            '3': [5, 10, 25],
+            '4': [50, 100, 200],
+            '5': [10, 15, 35],
+            '6': [100, 200, 500],
+            '7': [10, 25, 50],
+            '8': [200, 500, 1000]}
     };
+
+    function intRandom(end, start = 0) {
+        return Math.round(Math.random() * (end - start) + start);
+    }
 
     function generateArray() {
         for (let i = 0; i < 5; i++) {
             for (let k = 0; k < 5; k++) {
-                arr[i][k] = Math.round(Math.random() * (max - min) + min);
+                arr[i][k] = intRandom(max, min);
             }
         }
     }
@@ -73,49 +97,71 @@ let noConnect = (function() {
 
     function checkForWinLines() {
         let numinWins = 0;
-        for (let k = 0; k < combLines; k++) {
+        for (let k = 0; k < numberOfLines; k++) {
             let win = 0;
             let winNumber = firtNumberInWinLine(winComb[k]);
 
-            for (let i = 0; i < 5; i++) {
-                if (arr[i][winComb[k][i]] === winNumber || arr[i][winComb[k][i]] === wild) {
-                    win++;
-                } else {
-                    break;
-                }
+                for (let i = 0; i < 5; i++) {
+                    if (arr[i][winComb[k][i]] === winNumber || arr[i][winComb[k][i]] === wild) {
+                        win++;
+                    } else {
+                        break;
+                    }
             }
 
             if (win > 2) {
-                let winValue = SymbolsValue[game][winNumber - 1][win - 3] * betLevel
-                let symbolValue = Symbols[game][winNumber - 1].Name
+                let symbolValue = SymbolsValue[game][winNumber][win - 3];
+                let winValue = symbolValue * betLevel;
+                let symbolName = Symbols[game][winNumber].Name;
                 wins[numinWins] = {
                     Count: win,
                     Line: k + 1,
-                    Name: symbolValue,
+                    Name: symbolName,
                     Symbol: winNumber,
                     Win: winValue
                 };
-                money += (-betLevel * lines) + winValue;
+                money += winValue;
                 numinWins++;
             }
         }
     }
 
-    function addWilds() {
-        let numOfWilds = Math.round(Math.random() * (5 - 0) + 0);
 
-        for (let i = 1; i < numOfWilds; i++) {
-            arr[i][Math.round(Math.random() * (4 - 1) + 1)] = wild;
+    function addWildsOrNot() {
+        let wildChance = intRandom(100);
+        if(wildChance < 80) {
+            return;
         }
+        if(wildChance >= 80 && wildChance < 86) {
+            addWildsInArray(1)
+        }
+        if(wildChance >= 86 && wildChance < 91) {
+            addWildsInArray(2)
+        }
+        if(wildChance >= 91 && wildChance < 94) {
+            addWildsInArray(3)
+        }
+        if(wildChance >= 95 && wildChance < 98) {
+            addWildsInArray(4)
+        }
+        if(wildChance >= 98) {
+            addWildsInArray(5)
+        }
+
     }
 
+    function addWildsInArray(numOfWilds) {
+        for (let i = 1; i < numOfWilds; i++) {
+            arr[intRandom(4, 1)][intRandom(4, 1)] = wild;
+        }
+    }
 
     function addBottleFS(num) {
         switch (num) {
             case 3:
-                for (let k = 1; k < 4; k++) {
-                    arr[4][k] = wild;
-                }
+            for (let k = 1; k < 4; k++) {
+                arr[4][k] = wild;
+            }
             case 2:
                 for (let k = 1; k < 4; k++) {
                     arr[2][k] = wild;
@@ -167,9 +213,18 @@ let noConnect = (function() {
         TotalFSWinCoins: 0
     };
     function checkForFs() {
-        let goFs = (Math.round(Math.random() * (1000 - 0) + 1) > 600) ? true : false;
+        let goFs = (intRandom(1000) > 980);
         if (goFs) {
-            numOfBottles = Math.round(Math.random() * (3 - 1) + 1);
+            let bottleChance = intRandom(100);
+            if(bottleChance < 90) {
+                numOfBottles = 1;
+            }
+            if(bottleChance >= 90 && bottleChance < 95) {
+                numOfBottles = 2
+            }
+            if(bottleChance >= 95) {
+                numOfBottles = 3;
+            }
             numOfSpins = 7;
             nextMode = 'fsBonus';
         } else {
@@ -177,16 +232,17 @@ let noConnect = (function() {
         }
     }
 
-    console.log(wins);
     let betLevel = 1;
     let coinValue = 1;
     // в копейках
-    let money;
+    let money = 1000000;
+    let startmoney = 1000000;
     let totalWin = 0;
 
     function generateRoot() {
+        money -= betLevel * numberOfLines;
         generateArray();
-        addWilds();
+        addWildsOrNot();
         checkForWinLines();
         return {
             Balance: {
@@ -201,7 +257,7 @@ let noConnect = (function() {
             FreeSpinsLeft: numOfSpins,
             FreeSpinsWin: 0,
             FsBonus: null,
-            LinesCount: combLines,
+            LinesCount: numberOfLines,
             Mode: currentMode,
             NextMode: nextMode,
             Screen: arr,
@@ -237,7 +293,7 @@ let noConnect = (function() {
             FreeSpinsLeft: numOfSpins,
             FreeSpinsWin: 0,
             FsBonus: fsBonus,
-            LinesCount: combLines,
+            LinesCount: numberOfLines,
             Mode: currentMode,
             NextMode: nextMode,
             Screen: arr,
@@ -247,7 +303,7 @@ let noConnect = (function() {
 
     function generateInit() {
         generateArray();
-        addWilds();
+        console.log(money / startmoney * 100);
         return {
             Balance: {
                 BetLevel: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
@@ -257,7 +313,7 @@ let noConnect = (function() {
                 ScoreCoins: money / coinValue
             },
             FirstScreen: arr,
-            Lines: lines,
+            Lines: numberOfLines,
             Modes: Modes[game],
             Saved: null,
             SessionID: 753,
@@ -289,7 +345,7 @@ let noConnect = (function() {
         let answer;
         switch (rMode) {
             case 'init':
-            money = 500000;
+            // money = 500000;
                 answer = returnParams('init');
                 break;
             case 'roll':
@@ -336,4 +392,44 @@ let noConnect = (function() {
     };
 })();
 
-module.exports = noConnect;
+// for(let i = 0; i < 1000000; i++) {
+//     noConnect.request('candyLand', 'roll', 1, 1);
+// }
+// console.log(noConnect.request('candyLand', 'init', 1, 1));
+
+
+let chanceArray = [20, 19, 19 ,19 ,17, 3, 2, 1]
+function getNumber(position, number) {
+    let delta = chanceArray[position] - number;
+    chanceArray[position] = number;
+
+    let sum = 0;
+    for(let i = 0; i < chanceArray.length; i++){
+        if (i == position) continue;
+        sum += chanceArray[i];
+    }
+    let arrOfP = [];
+    let remainP = 1;
+    for(let i = 0; i < chanceArray.length; i++){
+        if (i == position) continue;
+        if (i == chanceArray.length - 1) {
+            arrOfP[i] = remainP;
+        }
+        arrOfP[i] = chanceArray[i] / sum;
+        remainP -= arrOfP[i];
+    }
+    sum += delta;
+    let remain;
+    for(let i = 0; i < arrOfP.length; i++){
+        if (i == position) continue;
+        if (i == chanceArray.length - 1) {
+            chanceArray[i] = remain;
+        }
+        chanceArray[i] = sum * arrOfP[i];
+        console.log(chanceArray[i]);
+        remain = sum - chanceArray[i];
+    }
+}
+
+getNumber(2, 50);
+console.log(chanceArray);
