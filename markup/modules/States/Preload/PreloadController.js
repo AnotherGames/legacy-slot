@@ -119,6 +119,8 @@ export class Preload {
         game.load.image('fsBG', 'bg/fsBG.png');
         game.load.image('fonTopFS', 'bg/fonTopFS.png');
         game.load.image('fonBottomFS', 'bg/fonBottomFS.png');
+        game.load.image('perlSmall', 'fs/perlSmall.png');
+        game.load.image('perlCounter', 'fs/perlCounter.png');
         game.load.atlasJSONArray('multi', 'fs/multi.png', 'fs/multi.json');
         game.load.atlasJSONArray('shell', 'fs/shell.png', 'fs/shell.json');
         game.load.atlasJSONArray('mermaid', 'fs/mermaid.png', 'fs/mermaid.json');

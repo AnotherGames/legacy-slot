@@ -115,7 +115,7 @@ export let view = (() => {
             shark.animations.play('move');
             model.el('shark', shark);
 
-            let time = game.rnd.integerInRange(25, 35);
+            let time = game.rnd.integerInRange(30, 40);
             let side = (game.rnd.sign() < 0) ? 'left' : 'right';
 
             sharkContainer.x = (side === 'left') ? -shark.width : game.width + shark.width;
@@ -192,8 +192,8 @@ export let view = (() => {
             fish.animations.play('move');
             model.el('fish', fish);
 
-            let time = game.rnd.integerInRange(25, 35);
-            let delay = game.rnd.integerInRange(10, 15);
+            let time = game.rnd.integerInRange(20, 30);
+            let delay = game.rnd.integerInRange(25, 30);
             let side = (game.rnd.sign() < 0) ? 'left' : 'right';
 
             fish.x = (side === 'left') ? -fish.width : game.width + fish.width;

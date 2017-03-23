@@ -200,6 +200,50 @@ export let view = (() => {
                 shell2.scale.set(0.9);
                 shell3.scale.set(0.9);
             }
+
+            let perlContainer = game.add.group();
+            container.add(perlContainer);
+            let perlDelta = (model.desktop) ? 125 : 80;
+            perlContainer.x = shell1.x;
+            perlContainer.y = shell1.y + perlDelta;
+            if (model.mobile) {
+                perlContainer.scale.set(0.8);
+            }
+
+            let perlCounter = game.add.sprite(0, 0, 'perlCounter', null, perlContainer);
+            perlCounter.anchor.set(0.5);
+
+            let perlsArr = [];
+            let perlY = (model.desktop) ? 15 : 10;
+
+            for (let i = 0; i < 5; i++) {
+                let perlSmall = game.add.sprite(2, perlY, 'perlSmall', null, perlContainer);
+                perlSmall.anchor.set(0.5);
+                perlsArr.push(perlSmall);
+            }
+
+            perlsArr.forEach((perl, index) => {
+                if (index == 0) {
+                    perl.x = (model.desktop) ? perl.x - 90 : perl.x - 90 * 2 / 3;
+                    perl.y = (model.desktop) ? perl.y - 22 : perl.y - 22 * 2 / 3;
+                }
+                if (index == 1) {
+                    perl.x = (model.desktop) ? perl.x - 45 : perl.x - 45 * 2 / 3;
+                    perl.y = (model.desktop) ? perl.y - 7 : perl.y - 7 * 2 / 3;
+                }
+                if (index == 3) {
+                    perl.x = (model.desktop) ? perl.x + 45 : perl.x + 45 * 2 / 3;
+                    perl.y = (model.desktop) ? perl.y - 5 : perl.y - 5 * 2 / 3;
+                }
+                if (index == 4) {
+                    perl.x = (model.desktop) ? perl.x + 88 : perl.x + 88 * 2 / 3;
+                    perl.y = (model.desktop) ? perl.y - 22 : perl.y - 22 * 2 / 3;
+                }
+                perl.visible = false;
+            });
+
+            model.el('perlsArr', perlsArr);
+            model.group('perlContainer', perlContainer);
         },
 
         changeMulti: function ({
@@ -227,6 +271,12 @@ export let view = (() => {
                         game.add.tween(fsMultiBig.scale).to({x: 1.0, y: 1.0}, 300, 'Linear', true);
                     }, this);
             });
+
+            // if (counter !== 1) {
+            //     let perlContainer = model.group(perlContainer);
+            //     perlContainer.y = shell.y + 130;
+            //     game.add.tween(perlContainer).to({alpha: 1}, 200, 'Linear', true);
+            // }
 
             // soundController.sound.playSound({sound: 'chestDown'});
         },
@@ -333,35 +383,40 @@ export let view = (() => {
             let mermaidFS = model.el('mermaidFS');
             let currNumber = number % 5;
 
-            // let perl = model.el('perl');
-            // perl.visible = true;
-            // game.time.events.add(1000, () => {
-            //     perl.animations.play('fall');
-            //     game.add.tween(perl).to({y: box.y}, 1000, 'Linear', true)
-            //         .onComplete.add(() => {
-            //             perl.visible = false;
-            //             perl.y = perl.y - 500;
-            //         }, this);
-            // });
+            let perlsArr = model.el('perlsArr');
+            let perlContainer = model.group('perlContainer');
+            let deltaY = (model.desktop) ? 250 :  170;
 
             console.warn(currNumber);
 
             if (currNumber == 0) {
                 fsLevel.text = 5;
                 box.animations.play('5');
+                perlsArr[4].visible = true;
                 model.el('fsLevel', fsLevel);
                 game.time.events.add(2000, () => {
-                // mermaidFS.animations.getAnimation('move').onLoop.add(() => {
                     fsLevel.text = currNumber;
                     model.el('fsLevel', fsLevel);
+
                     box.animations.play(currNumber + '');
-                // });
+                    game.add.tween(perlContainer).to({alpha: 0}, 150, 'Linear', true)
+                        .onComplete.add(() => {
+                            perlContainer.y = perlContainer.y - deltaY;
+                            perlsArr.forEach((perl) => {
+                                perl.visible = false;
+                            });
+                            game.add.tween(perlContainer).to({alpha: 1}, 150, 'Linear', true)
+                        });
                 });
             } else {
-                console.warn('i am here');
                 fsLevel.text = currNumber;
                 model.el('fsLevel', fsLevel);
                 box.animations.play(currNumber + '');
+                perlsArr.forEach((perl, index) => {
+                    if (index == currNumber - 1) {
+                        perl.visible = true;
+                    }
+                });
             }
             // soundController.sound.playSound({sound: 'diverDown'});
         },
