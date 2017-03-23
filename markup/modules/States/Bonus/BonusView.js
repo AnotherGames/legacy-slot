@@ -40,11 +40,11 @@ export let view = (() => {
             let doorsElements = [];
             for (let i = 1; i < 6; i++) {
                 let element = game.add.spine(game.world.centerX, game.world.centerY, `element${i}`);
-                game.time.events.add(delay * i, () => {
-                    element.setAnimationByName(0, 'target', false);
-                    element.addAnimationByName(0, 'idle', true);
-                });
-                // element.setAnimationByName(0, 'idle', true);
+                // game.time.events.add(delay * i, () => {
+                //     element.setAnimationByName(0, 'target', false);
+                //     element.addAnimationByName(0, 'idle', true);
+                // });
+                element.setAnimationByName(0, 'idle', true);
                 container.add(element);
                 if (model.mobile) {
                     element.scale.set(0.66);
@@ -52,6 +52,8 @@ export let view = (() => {
                 doorsElements.push(element);
             }
             model.el('doorsElements', doorsElements);
+
+            this.targetAnim({});
 
         },
 
@@ -75,28 +77,36 @@ export let view = (() => {
             });
         },
 
-        // targetAnim: function ({
-        //     game = model.el('game'),
-        //     container = model.group('bg'),
-        //     delay = 400
-        // }) {
-        //     let doorsElements = model.el('doorsElements');
-        //
-        //     doorsElements.forEach((item, index) => {
-        //         game.time.events.add(delay * index, () => {
-        //             if (this.destroyed || model.state('doorFinish')) {
-        //                 return;
-        //             }
-        //             item.setAnimationByName(0, 'target', false);
-        //             item.addAnimationByName(0, 'idle', true);
-        //         });
-        //     });
-        //
-        //     game.time.events.add(7000, () => {
-        //         this.targetAnim({});
-        //     });
-        //
-        // },
+        targetAnim: function ({
+            game = model.el('game'),
+            container = model.group('bg'),
+            delay = 400
+        }) {
+            let doorsSpines = model.el('doorsElements');
+            let doorsSprites = model.el('doors');
+            model.state('hoverBonus', false);
+
+
+            doorsSpines.forEach((item, index) => {
+                game.time.events.add(delay * index, () => {
+                    if (doorsSprites && doorsSprites[index].destroyed) return;
+
+                    item.setAnimationByName(0, 'target', false);
+                    item.addAnimationByName(0, 'idle', true);
+                });
+                if (index == doorsSpines.length - 1) {
+                    game.time.events.add(delay, () => {
+                        model.state('hoverBonus', true);
+                    });
+                }
+            });
+
+            let targetTimer = game.time.events.add(7000, () => {
+                this.targetAnim({});
+            });
+            model.el('targetTimer', targetTimer);
+
+        },
 
         upperBG: function ({
             game = model.el('game'),

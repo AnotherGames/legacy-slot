@@ -147,6 +147,7 @@ export let model = (() => {
         model.state('fontNotLoaded', true);
         model.state('oneAfterAnother', false);
         model.state('changeLevel', false);
+        model.state('hoverBonus', true);
     }
 
     function initSettings() {

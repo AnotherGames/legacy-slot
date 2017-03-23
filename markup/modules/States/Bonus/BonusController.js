@@ -42,6 +42,16 @@ class Door {
         if (this.destroyed == true) return;
         let number = parseInt(this.sprite.frameName, 10);
         bonusView.draw.changeAnim({number: number, anim: 'target'});
+
+        if (model.el('targetTimer')) {
+            let targetTimer = model.el('targetTimer');
+            this.game.time.events.remove(targetTimer);
+        }
+
+        let newTimer = this.game.time.events.add(4000, () => {
+            bonusView.draw.targetAnim({});
+        });
+        model.el('targetTimer', newTimer);
     }
 
     win() {
@@ -156,7 +166,9 @@ export class Bonus {
 }
 
 function handleDoorHover() {
+    if (model.state('hoverBonus') == false) return;
     this.showHover();
+
 }
 
 function handleDoorClick() {
