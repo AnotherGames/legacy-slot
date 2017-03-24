@@ -67,17 +67,18 @@ export let view = (() => {
             let winTotal = game.add.sprite(0, 0, 'winTotal', null, container);
             winTotal.anchor.set(0.5);
 
-            let winTotalText = game.add.bitmapText(40, 0, 'textOrange', winTotalData + '', 90, container);
+            let fontSize = (model.desktop) ? 30 : 20;
+            let winTotalText = game.add.bitmapText(0, 20, 'numbersFont', winTotalData + '', fontSize, container);
             winTotalText.anchor.set(0.5);
 
             // small table
             if (!model.state('fs') && model.desktop) {
-                let winTotalSmall = game.add.sprite(model.group('panel').width / 2, 150, 'deskButtons', 'win.png');
+                let winTotalSmall = game.add.sprite(model.group('panel').width / 2, 100, 'deskButtons', 'win.png');
                 winTotalSmall.anchor.set(0.5);
                 winTotalSmall.alpha = 0;
                 model.group('panel').addAt(winTotalSmall, 2);
 
-                let winTotalTextSmall = game.add.text(model.group('panel').width / 2, 170, winTotalData, style2);
+                let winTotalTextSmall = game.add.text(model.group('panel').width / 2, 120, winTotalData, style2);
                 winTotalTextSmall.anchor.set(0.5);
                 winTotalTextSmall.alpha = 0;
                 model.group('panel').addAt(winTotalTextSmall, 3);
@@ -85,8 +86,8 @@ export let view = (() => {
                 model.el('winTotalSmall', winTotalSmall);
                 model.el('winTotalTextSmall', winTotalTextSmall);
 
-                game.add.tween(winTotalSmall).to({ alpha: 1, y: 50 }, 300, 'Linear', true);
-                game.add.tween(winTotalTextSmall).to({ alpha: 1, y: 65 }, 300, 'Linear', true);
+                game.add.tween(winTotalSmall).to({ alpha: 1, y: 0 }, 300, 'Linear', true);
+                game.add.tween(winTotalTextSmall).to({ alpha: 1, y: 15 }, 300, 'Linear', true);
 
             }
 
@@ -329,20 +330,20 @@ export let view = (() => {
             winBG.anchor.set(0.5);
             let font;
             if (winValue > 999) {
-                font = '13px Arial, Helvetica';
+                font = '14px Arial, Helvetica';
             } else if (winValue > 99) {
-                font = '16px Arial, Helvetica';
+                font = '18px Arial, Helvetica';
             } else {
-                font = '22px Arial, Helvetica';
+                font = '24px Arial, Helvetica';
             }
-            let text = game.add.text(x - 5, y + 6, winValue, {
+            let text = game.add.text(x - 7, y + 7, winValue, {
                 font: font
             }, container);
             text.anchor.set(0.5);
 
             let grd = text.context.createLinearGradient(0, 0, 0, text.canvas.height);
-            grd.addColorStop(0, '#ffffff');
-            grd.addColorStop(1, '#eeeeee');
+            grd.addColorStop(0, '#eedf60');
+            grd.addColorStop(1, '#c17118');
             text.fill = grd;
 
         },

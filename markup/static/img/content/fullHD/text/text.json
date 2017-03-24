@@ -2,43 +2,51 @@
 
 {
 	"filename": "bigW.png",
-	"frame": {"x":1,"y":1,"w":1047,"h":219},
+	"frame": {"x":1,"y":1,"w":680,"h":130},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":31,"y":46,"w":1047,"h":219},
-	"sourceSize": {"w":1100,"h":300}
+	"spriteSourceSize": {"x":11,"y":36,"w":680,"h":130},
+	"sourceSize": {"w":700,"h":200}
 },
 {
 	"filename": "continue.png",
-	"frame": {"x":1,"y":424,"w":388,"h":59},
+	"frame": {"x":593,"y":133,"w":402,"h":93},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":9,"y":9,"w":388,"h":59},
-	"sourceSize": {"w":400,"h":70}
+	"spriteSourceSize": {"x":49,"y":14,"w":402,"h":93},
+	"sourceSize": {"w":500,"h":120}
 },
 {
-	"filename": "play.png",
-	"frame": {"x":1,"y":222,"w":283,"h":200},
+	"filename": "freespin.png",
+	"frame": {"x":1,"y":251,"w":431,"h":110},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":9,"y":0,"w":283,"h":200},
-	"sourceSize": {"w":300,"h":200}
+	"spriteSourceSize": {"x":35,"y":6,"w":431,"h":110},
+	"sourceSize": {"w":500,"h":120}
+},
+{
+	"filename": "multiplay.png",
+	"frame": {"x":1,"y":363,"w":449,"h":108},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":27,"y":7,"w":449,"h":108},
+	"sourceSize": {"w":500,"h":120}
 },
 {
 	"filename": "totalW.png",
-	"frame": {"x":286,"y":222,"w":730,"h":141},
+	"frame": {"x":1,"y":133,"w":590,"h":116},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":35,"y":4,"w":730,"h":141},
-	"sourceSize": {"w":800,"h":150}
+	"spriteSourceSize": {"x":56,"y":43,"w":590,"h":116},
+	"sourceSize": {"w":700,"h":200}
 }],
 "meta": {
 	"app": "http://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "text.png",
 	"format": "RGBA8888",
-	"size": {"w":2048,"h":512},
+	"size": {"w":1024,"h":512},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:dc140e5f2637a8c07373e5ddfb7fe44a:a6ee7ee5b3b211ee7c1a570a21dc5730:a569396aede2f37d3ec322fe54e4aaf6$"
+	"smartupdate": "$TexturePacker:SmartUpdate:8159df7ca759f95cc9bffb351c2a3bb7:2566ac42db0601e02e52e849490f4a75:a569396aede2f37d3ec322fe54e4aaf6$"
 }
 }

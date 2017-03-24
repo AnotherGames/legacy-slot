@@ -1,4 +1,5 @@
 import { model } from 'modules/Model/Model';
+import { controller as balanceController } from 'modules/Balance/BalanceController';
 
 export let view = (() => {
 
@@ -10,16 +11,24 @@ export let view = (() => {
             x = game.world.centerX,
             y = model.el('gameMachine').bottom + model.el('gameMachine').height / 2,
             framePanelBG = 'panelBGgreen.png',
-            deltaY = 70
+            deltaY = 20
         }) {
             container.x = x;
             container.top = y;
-            let panelBG = game.add.sprite(1, deltaY, 'panelBG', framePanelBG, container);
+            let panelBG = game.add.sprite(1, deltaY, 'panel', null, container);
 
-            if (model.state('fs')) {
-                container.alpha = 0;
-                container.y = -500;
-            }
+            // if (model.state('fs')) {
+            //     container.alpha = 0;
+            //     container.y = -500;
+            // }
+
+            let convertSign = game.add.sprite(100, 105, 'deskButtons', 'switch1.png', container);
+            convertSign.anchor.set(0.5);
+            convertSign.inputEnabled = true;
+            convertSign.events.onInputDown.add(() => {
+                balanceController.changeCoinsToCash();
+            });
+            model.el('convertSign', convertSign);
 
             container.pivot.set(panelBG.width / 2, 0);
             return panelBG;
@@ -82,7 +91,7 @@ export let view = (() => {
         AutoContainer: function ({
             game = model.el('game'),
             x = model.group('panel').width / 2,
-            y = 168
+            y = 95
         }) {
             let autoDesktopContainer = game.add.group();
             autoDesktopContainer.x = x;
@@ -97,7 +106,7 @@ export let view = (() => {
         AnimatedSpinButton: function ({
             game = model.el('game'),
             x = model.group('panel').width / 2,
-            y = 168,
+            y = 95,
             container = model.group('panel')
         }) {
             let animatedSpinButton = game.add.sprite(x, y, 'deskButtonsAnim', null, container);
@@ -113,7 +122,7 @@ export let view = (() => {
         SpinButton: function ({
             game = model.el('game'),
             x = model.group('panel').width / 2,
-            y = 168,
+            y = 95,
             container = model.group('panel')
         }) {
             let spinButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'spinOn.png', 'spin.png', 'spinOn.png', null, container);
@@ -126,8 +135,8 @@ export let view = (() => {
         AutoButton: function ({
             game = model.el('game'),
             container = model.group('panel'),
-            x = model.el('spinButtonDesk').x - 136,
-            y = 168
+            x = model.el('spinButtonDesk').x - 125,
+            y = 95
         }) {
             let autoButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'autoOn.png', 'auto.png', 'autoOn.png', null, container);
             autoButtonDesk.anchor.set(0.5);
@@ -138,8 +147,8 @@ export let view = (() => {
         MaxBetButton: function ({
             game = model.el('game'),
             container = model.group('panel'),
-            x = model.el('spinButtonDesk').x + 136,
-            y = 168
+            x = model.el('spinButtonDesk').x + 125,
+            y = 95
         }) {
             let maxBetButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'maxBetOn.png', 'maxBet.png', 'maxBetOn.png', null, container);
             maxBetButtonDesk.anchor.set(0.5);
@@ -164,8 +173,8 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('panel'),
             style = {font: 'normal 27px Helvetica, Arial', align: 'center', fill: '#ffffff'},
-            x = 103,
-            y = 195,
+            x = 260,
+            y = 93,
         }) {
             let linesNumber = game.add.text(x, y, '10', style, container);
             model.el('linesNumber', linesNumber);
@@ -175,28 +184,28 @@ export let view = (() => {
         PlusButton: function ({
             game = model.el('game'),
             container = model.group('panel'),
-            x = 277,
-            y = 183,
+            x = 463,
+            y = 77,
         }) {
-            let plusButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'plusOn.png', 'plus.png', 'plusOn.png', null, container);
+            let plusButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'plusFreeze.png', 'plus.png', 'plusFreeze.png', null, container);
             return plusButtonDesk;
         },
 
         MinusButton: function ({
             game = model.el('game'),
             container = model.group('panel'),
-            x = 173,
-            y = 183
+            x = 318,
+            y = 77
         }) {
-            let minusButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'minusOn.png', 'minus.png', 'minusOn.png', null, container);
+            let minusButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'minusFreeze.png', 'minus.png', 'minusFreeze.png', null, container);
             return minusButtonDesk;
         },
 
         InfoButton: function ({
             game = model.el('game'),
             container = model.group('footerMenu'),
-            x = 230,
-            y = model.el('game').height - 20
+            x = 0,
+            y = 0
         }) {
             let infoButton = game.add.button(x, y, 'deskButtons', null, null, null, 'info.png', null, null, container);
             infoButton.anchor.set(0.5);

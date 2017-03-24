@@ -5,38 +5,39 @@ export let view = (() => {
     function drawBG() {
         const game = model.el('game');
 
-        let initBG;
-
-        if (model.desktop) {
-            initBG = game.add.spine(game.world.centerX, game.world.centerY, 'fon');
-            initBG.setAnimationByName(0, 'show', false);
-            initBG.addAnimationByName(0, 'move', true);
-
-        } else {
-            initBG = game.add.tileSprite(0, 0, game.width, game.height, 'gradientLine');
-
-            let luchi = game.add.sprite(game.world.centerX, game.world.centerY, 'shine');
-            luchi.anchor.set(0.5);
-            game.add.tween(luchi).to({rotation: 2 * Math.PI, alpha: 0.1}, 30000, 'Linear', true, 0, -1, true);
-        }
-
-        let logosSmall = game.add.sprite(game.width * 0.1, game.height * 0.93, 'logosSmall');
-        logosSmall.anchor.set(0.5);
+        let initBG = game.add.sprite(0, 0, 'initBG');
 
         return initBG;
+        // if (model.desktop) {
+        //     initBG = game.add.spine(game.world.centerX, game.world.centerY, 'fon');
+        //     initBG.setAnimationByName(0, 'show', false);
+        //     initBG.addAnimationByName(0, 'move', true);
+        //
+        // } else {
+        //
+        //     let luchi = game.add.sprite(game.world.centerX, game.world.centerY, 'shine');
+        //     luchi.anchor.set(0.5);
+        //     game.add.tween(luchi).to({rotation: 2 * Math.PI, alpha: 0.1}, 30000, 'Linear', true, 0, -1, true);
+        // }
+
     }
 
     function drawLogo() {
         const game = model.el('game');
 
-        let initLogo = game.add.sprite(game.world.centerX, game.height * 0.4, 'initLogo');
+        let initMain = game.add.sprite(game.world.centerX, game.height * 0.45, 'initMain');
+        initMain.anchor.set(0.5);
+
+        let initLogo = game.add.sprite(game.world.centerX, game.height * 0.6, 'logoInit');
         initLogo.anchor.set(0.5);
-        initLogo.scale.set(0.66);
+
+        // let logosSmall = game.add.sprite(game.width * 0.1, game.height * 0.93, 'logosSmall');
+        // logosSmall.anchor.set(0.5);
     }
 
     function drawPlay() {
         const game = model.el('game');
-        let initPlay = game.add.sprite(game.world.centerX, game.height * 0.8, 'text', 'play.png');
+        let initPlay = game.add.sprite(game.world.centerX, game.height * 0.8, 'text', 'continue.png');
         initPlay.anchor.set(0.5);
         initPlay.scale.setTo(0.1, 0.1);
         let initPlayTween = game.add.tween(initPlay.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true);

@@ -23,6 +23,7 @@ export class Init {
         this.game.plugins.add(new Phaser.Plugin.SaveCPU(this));
 
         view.drawBG();
+        view.drawLogo();
         let initPlay = view.drawPlay();
 
         // Костыльный фулскрин
@@ -45,8 +46,6 @@ export class Init {
 
         if (model.desktop) {
             keyboardController.initInitKeys(this.stateHandler);
-        } else {
-            view.drawLogo();
         }
 
         this.drawSoundTrigger();

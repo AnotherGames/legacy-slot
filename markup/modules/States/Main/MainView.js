@@ -33,20 +33,46 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('bg')
         }) {
-            let mainBG;
-            if (model.desktop) {
-                mainBG = game.add.spine(game.world.centerX, game.world.centerY, 'fon');
-                mainBG.setAnimationByName(0, 'move2', true);
-                container.add(mainBG);
-                model.el('mainBG', mainBG);
 
-            } else {
-                mainBG = game.add.tileSprite(0, 0, game.width, game.height, 'gradientLine', null, container);
+            let mainBG = game.add.sprite(0, 0, 'mainBG', null, container);
+            // if (model.desktop) {
+            //     mainBG = game.add.spine(game.world.centerX, game.world.centerY, 'fon');
+            //     mainBG.setAnimationByName(0, 'move2', true);
+            //     container.add(mainBG);
+            //     model.el('mainBG', mainBG);
+            //
+            // } else {
+            //
+            //     let luchi = game.add.sprite(game.world.centerX, game.world.centerY, 'shine', null, container);
+            //     luchi.anchor.set(0.5);
+            //     game.add.tween(luchi).to({rotation: 2 * Math.PI, alpha: 0.1}, 30000, 'Linear', true, 0, -1, true);
+            // }
 
-                let luchi = game.add.sprite(game.world.centerX, game.world.centerY, 'shine', null, container);
-                luchi.anchor.set(0.5);
-                game.add.tween(luchi).to({rotation: 2 * Math.PI, alpha: 0.1}, 30000, 'Linear', true, 0, -1, true);
-            }
+        },
+
+        mainContainer: function ({
+            game = model.el('game'),
+            container = model.group('main')
+        }) {
+            let gameBG = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachineBG', null, container);
+            gameBG.anchor.set(0.5);
+            model.el('gameBG', gameBG);
+
+            let darknessBG = game.add.sprite(0, config[model.res].gameMachine.y, 'darkness', null, container);
+            darknessBG.anchor.set(0.5);
+            model.el('darknessBG', darknessBG);
+
+            let gameMachine = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachine', null, container);
+            gameMachine.anchor.set(0.5);
+            model.el('gameMachine', gameMachine);
+
+            let gameMachineUp = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachineUp', null, container);
+            gameMachineUp.anchor.set(0.5);
+            model.el('gameMachineUp', gameMachineUp);
+
+            let logoGM = game.add.sprite(0, model.el('gameMachine').top + 30, 'logoGM', null, container);
+            logoGM.anchor.set(0.5);
+            model.el('logoGM', logoGM);
 
         },
 
@@ -59,160 +85,160 @@ export let view = (() => {
             mainBG.setAnimationByName(0, 'move' + index, true);
         },
 
-        addBalloons: function ({
-            game = model.el('game'),
-            container = model.group('bg')
-        }) {
-            let balloons = game.add.sprite(100, game.height + 500, 'balloons', null, container);
-            balloons.anchor.set(0.5);
-            if (model.mobile) {
-                balloons.scale.set(0.66);
-            }
-
-            let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
-            let deltaX;
-            if (side === 'left') {
-                balloons.x = game.rnd.integerInRange(100, 400);
-                deltaX = balloons.x + 300;
-            } else {
-                let random = game.rnd.integerInRange(7, 9) / 10;
-                balloons.x = game.width * random;
-                deltaX = balloons.x - 300;
-            }
-
-            game.add.tween(balloons).to({y: -500, x: deltaX}, 10000, 'Linear', true)
-                .onComplete.add(() => {
-                    balloons.destroy();
-                }, this);
-
-            let rnd = game.rnd.integerInRange(18, 23);
-            game.time.events.add(rnd * 1000, () => {
-                draw.addBalloons({});
-            });
-        },
-
-        addCloud: function ({
-            x = model.el('game').rnd.integerInRange(0, model.el('game').width),
-            container = model.group('bg')
-        }) {
-            let game = model.el('game');
-            let randomScale = game.rnd.integerInRange(3, 9);
-
-            for (let i = 0; i < 5; i++) {
-                let cloud = game.add.sprite(0, 150, 'cloud', null, container);
-                cloud.anchor.set(0.5);
-                cloud.angle = 40;
-                cloud.scale.set(randomScale / 10);
-
-                let time = game.rnd.integerInRange(30, 50);
-                let delay = game.rnd.integerInRange(500, 1500);
-                let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
-                // console.log(side);
-                if (model.desktop) {
-                    cloud.y = cloud.y = cloud.y + game.rnd.integerInRange(20, 350) + 80;
-                } else {
-                    cloud.y = cloud.y = cloud.y + game.rnd.integerInRange(20, 250) + 50;
-                }
-                cloud.x = x;
-
-                if (container === model.group('bg')) {
-                    cloud.x = (side === 'left') ? -cloud.width : game.width + cloud.width;
-                }
-                let delta = (side === 'left') ? game.width + cloud.width : -cloud.width;
-
-                game.add.tween(cloud).to({x: delta}, time * 1000, 'Linear', true, delay)
-                    .onComplete.add(() => {
-                        cloud.destroy();
-                    }, this);
-            }
-            game.time.events.add(20000, () => {
-                draw.addCloud({});
-            });
-
-        },
-
-        addConfetti: function ({
-            game = model.el('game'),
-            container = model.group('bg')
-        }) {
-            let i = game.rnd.integerInRange(1, 3);
-            let confetti = game.add.sprite(100, -500, `confetti${i}`, null, container);
-            confetti.anchor.set(0.5);
-            if (model.mobile) {
-                confetti.scale.set(0.66);
-            }
-
-            let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
-            let deltaX;
-            if (side === 'left') {
-                confetti.x = game.rnd.integerInRange(100, 600);
-                deltaX = confetti.x + 300;
-            } else {
-                let random = game.rnd.integerInRange(6, 9) / 10;
-                confetti.x = game.width * random;
-                deltaX = confetti.x - 300;
-            }
-
-            game.add.tween(confetti).to({y: game.height + 500, x: deltaX}, 10000, 'Linear', true, 2000)
-                .onComplete.add(() => {
-                    confetti.destroy();
-                }, this);
-
-            let rnd = game.rnd.integerInRange(10, 15);
-            game.time.events.add(rnd * 1000, () => {
-                draw.addConfetti({});
-            });
-        },
-
-        addCat: function ({
-            game = model.el('game'),
-            container = model.group('bg')
-        }) {
-            let i = game.rnd.integerInRange(3, 9) / 10;
-            let cat = game.add.spine(0, game.height * i, 'cat');
-            container.add(cat);
-            if (model.mobile) {
-                cat.scale.set(0.66);
-            }
-            if (model.state('fs')) {
-                cat.alpha = 0;
-            } else {
-                cat.alpha = 1;
-            }
-            cat.setAnimationByName(0, 'run', true);
-            model.el('cat', cat);
-
-            let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
-            let delay = game.rnd.integerInRange(5000, 10000);
-            let delay2 = game.rnd.integerInRange(3000, 6000);
-            let rnd = game.rnd.integerInRange(2, 4);
-            let deltaX, deltaX2;
-
-            if (side === 'left') {
-                cat.x = -500;
-                deltaX = game.width * 0.05;
-                deltaX2 = game.width + 500;
-            } else {
-                cat.x = game.width + 500;
-                deltaX = game.width * 0.95;
-                deltaX2 = -500;
-                cat.scale.set(-1, 1);
-            }
-
-            game.add.tween(cat).to({x: deltaX}, 10000, 'Linear', true, delay)
-                .onComplete.add(() => {
-                    cat.setAnimationByName(0, rnd + '', false);
-                    cat.addAnimationByName(0, 'run', true);
-                    if (!model.state('fs')) {
-                        soundController.sound.playSound({sound: 'cat'});
-                    }
-                    game.add.tween(cat).to({x: deltaX2}, 10000, 'Linear', true, delay2)
-                        .onComplete.add(() => {
-                            cat.destroy();
-                            draw.addCat({});
-                        }, this);
-                }, this);
-        },
+        // addBalloons: function ({
+        //     game = model.el('game'),
+        //     container = model.group('bg')
+        // }) {
+        //     let balloons = game.add.sprite(100, game.height + 500, 'balloons', null, container);
+        //     balloons.anchor.set(0.5);
+        //     if (model.mobile) {
+        //         balloons.scale.set(0.66);
+        //     }
+        //
+        //     let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
+        //     let deltaX;
+        //     if (side === 'left') {
+        //         balloons.x = game.rnd.integerInRange(100, 400);
+        //         deltaX = balloons.x + 300;
+        //     } else {
+        //         let random = game.rnd.integerInRange(7, 9) / 10;
+        //         balloons.x = game.width * random;
+        //         deltaX = balloons.x - 300;
+        //     }
+        //
+        //     game.add.tween(balloons).to({y: -500, x: deltaX}, 10000, 'Linear', true)
+        //         .onComplete.add(() => {
+        //             balloons.destroy();
+        //         }, this);
+        //
+        //     let rnd = game.rnd.integerInRange(18, 23);
+        //     game.time.events.add(rnd * 1000, () => {
+        //         draw.addBalloons({});
+        //     });
+        // },
+        //
+        // addCloud: function ({
+        //     x = model.el('game').rnd.integerInRange(0, model.el('game').width),
+        //     container = model.group('bg')
+        // }) {
+        //     let game = model.el('game');
+        //     let randomScale = game.rnd.integerInRange(3, 9);
+        //
+        //     for (let i = 0; i < 5; i++) {
+        //         let cloud = game.add.sprite(0, 150, 'cloud', null, container);
+        //         cloud.anchor.set(0.5);
+        //         cloud.angle = 40;
+        //         cloud.scale.set(randomScale / 10);
+        //
+        //         let time = game.rnd.integerInRange(30, 50);
+        //         let delay = game.rnd.integerInRange(500, 1500);
+        //         let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
+        //         // console.log(side);
+        //         if (model.desktop) {
+        //             cloud.y = cloud.y = cloud.y + game.rnd.integerInRange(20, 350) + 80;
+        //         } else {
+        //             cloud.y = cloud.y = cloud.y + game.rnd.integerInRange(20, 250) + 50;
+        //         }
+        //         cloud.x = x;
+        //
+        //         if (container === model.group('bg')) {
+        //             cloud.x = (side === 'left') ? -cloud.width : game.width + cloud.width;
+        //         }
+        //         let delta = (side === 'left') ? game.width + cloud.width : -cloud.width;
+        //
+        //         game.add.tween(cloud).to({x: delta}, time * 1000, 'Linear', true, delay)
+        //             .onComplete.add(() => {
+        //                 cloud.destroy();
+        //             }, this);
+        //     }
+        //     game.time.events.add(20000, () => {
+        //         draw.addCloud({});
+        //     });
+        //
+        // },
+        //
+        // addConfetti: function ({
+        //     game = model.el('game'),
+        //     container = model.group('bg')
+        // }) {
+        //     let i = game.rnd.integerInRange(1, 3);
+        //     let confetti = game.add.sprite(100, -500, `confetti${i}`, null, container);
+        //     confetti.anchor.set(0.5);
+        //     if (model.mobile) {
+        //         confetti.scale.set(0.66);
+        //     }
+        //
+        //     let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
+        //     let deltaX;
+        //     if (side === 'left') {
+        //         confetti.x = game.rnd.integerInRange(100, 600);
+        //         deltaX = confetti.x + 300;
+        //     } else {
+        //         let random = game.rnd.integerInRange(6, 9) / 10;
+        //         confetti.x = game.width * random;
+        //         deltaX = confetti.x - 300;
+        //     }
+        //
+        //     game.add.tween(confetti).to({y: game.height + 500, x: deltaX}, 10000, 'Linear', true, 2000)
+        //         .onComplete.add(() => {
+        //             confetti.destroy();
+        //         }, this);
+        //
+        //     let rnd = game.rnd.integerInRange(10, 15);
+        //     game.time.events.add(rnd * 1000, () => {
+        //         draw.addConfetti({});
+        //     });
+        // },
+        //
+        // addCat: function ({
+        //     game = model.el('game'),
+        //     container = model.group('bg')
+        // }) {
+        //     let i = game.rnd.integerInRange(3, 9) / 10;
+        //     let cat = game.add.spine(0, game.height * i, 'cat');
+        //     container.add(cat);
+        //     if (model.mobile) {
+        //         cat.scale.set(0.66);
+        //     }
+        //     if (model.state('fs')) {
+        //         cat.alpha = 0;
+        //     } else {
+        //         cat.alpha = 1;
+        //     }
+        //     cat.setAnimationByName(0, 'run', true);
+        //     model.el('cat', cat);
+        //
+        //     let side = game.rnd.integerInRange(0, 1) ? 'left' : 'right';
+        //     let delay = game.rnd.integerInRange(5000, 10000);
+        //     let delay2 = game.rnd.integerInRange(3000, 6000);
+        //     let rnd = game.rnd.integerInRange(2, 4);
+        //     let deltaX, deltaX2;
+        //
+        //     if (side === 'left') {
+        //         cat.x = -500;
+        //         deltaX = game.width * 0.05;
+        //         deltaX2 = game.width + 500;
+        //     } else {
+        //         cat.x = game.width + 500;
+        //         deltaX = game.width * 0.95;
+        //         deltaX2 = -500;
+        //         cat.scale.set(-1, 1);
+        //     }
+        //
+        //     game.add.tween(cat).to({x: deltaX}, 10000, 'Linear', true, delay)
+        //         .onComplete.add(() => {
+        //             cat.setAnimationByName(0, rnd + '', false);
+        //             cat.addAnimationByName(0, 'run', true);
+        //             if (!model.state('fs')) {
+        //                 soundController.sound.playSound({sound: 'cat'});
+        //             }
+        //             game.add.tween(cat).to({x: deltaX2}, 10000, 'Linear', true, delay2)
+        //                 .onComplete.add(() => {
+        //                     cat.destroy();
+        //                     draw.addCat({});
+        //                 }, this);
+        //         }, this);
+        // },
 
         addCat2: function ({
             game = model.el('game'),
@@ -241,28 +267,28 @@ export let view = (() => {
             });
         },
 
-        addBurst: function ({
-            game = model.el('game'),
-            container = model.group('bg')
-        }) {
-            let emitter = game.add.emitter(game.world.centerX, game.world.centerY + 100, 20);
-            model.el('emitter', emitter);
-
-            emitter.makeParticles('trash', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19], 500, true, false);
-            container.add(emitter);
-
-            emitter.minParticleSpeed.setTo(-1000, -5000);
-            emitter.maxParticleSpeed.setTo(1000, -2000);
-            emitter.minParticleScale = 0.4;
-            emitter.maxParticleScale = 0.8;
-            emitter.gravity = 5000;
-            emitter.bounce.setTo(0.5, 0.5);
-            emitter.angularDrag = 30;
-
-            let emitterFrequency = (model.desktop) ? 200 : 40;
-
-            emitter.start(true, 0, null, emitterFrequency, true);
-        },
+        // addBurst: function ({
+        //     game = model.el('game'),
+        //     container = model.group('bg')
+        // }) {
+        //     let emitter = game.add.emitter(game.world.centerX, game.world.centerY + 100, 20);
+        //     model.el('emitter', emitter);
+        //
+        //     emitter.makeParticles('trash', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19], 500, true, false);
+        //     container.add(emitter);
+        //
+        //     emitter.minParticleSpeed.setTo(-1000, -5000);
+        //     emitter.maxParticleSpeed.setTo(1000, -2000);
+        //     emitter.minParticleScale = 0.4;
+        //     emitter.maxParticleScale = 0.8;
+        //     emitter.gravity = 5000;
+        //     emitter.bounce.setTo(0.5, 0.5);
+        //     emitter.angularDrag = 30;
+        //
+        //     let emitterFrequency = (model.desktop) ? 200 : 40;
+        //
+        //     emitter.start(true, 0, null, emitterFrequency, true);
+        // },
 
         addTrash: function ({
             game = model.el('game'),
@@ -289,24 +315,6 @@ export let view = (() => {
         removeTrash: function () {
             let emitterTrash = model.el('emitterTrash');
             emitterTrash.destroy();
-        },
-
-        mainContainer: function ({
-            game = model.el('game'),
-            container = model.group('main')
-        }) {
-            let gameBG = game.add.sprite(0, config[model.res].gameMachine.y, 'gameBG', null, container);
-            gameBG.anchor.set(0.5);
-            model.el('gameBG', gameBG);
-
-            let gameMachine = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachine', null, container);
-            gameMachine.anchor.set(0.5);
-            model.el('gameMachine', gameMachine);
-
-            let logoGM = game.add.sprite(0, model.el('gameMachine').top, 'logoGM', null, container);
-            logoGM.anchor.set(0.5);
-            model.el('logoGM', logoGM);
-
         },
 
         lineNumbers: function ({

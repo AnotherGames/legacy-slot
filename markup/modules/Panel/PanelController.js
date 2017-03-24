@@ -245,17 +245,18 @@ export let controller = (() => {
         betLevelMinus.onInputDown.add(handle.betMinus);
         model.el('betLevelMinus', betLevelMinus);
 
-        let coinsLevelPlus = view.draw.PlusButton({x: 1112});
+        let coinsLevelPlus = view.draw.PlusButton({x: 998, y: 75});
         coinsLevelPlus.onInputDown.add(handle.coinsPlus);
         model.el('coinsLevelPlus', coinsLevelPlus);
 
-        let coinsLevelMinus = view.draw.MinusButton({x: 984});
+        let coinsLevelMinus = view.draw.MinusButton({x: 860, y: 75});
         coinsLevelMinus.onInputDown.add(handle.coinsMinus);
         model.el('coinsLevelMinus', coinsLevelMinus);
 
-        let infoButton = view.draw.InfoButton({x: 1525, y: model.el('game').height - 100});
+        let infoButton = view.draw.InfoButton({x: 1540, y: model.el('game').height - 120});
         infoButton.onInputDown.add(info.open.bind(info));
 
+        view.draw.LinesNumber({});
         view.draw.AnimatedSpinButton({});
         view.draw.AutoContainer({});
         view.draw.AutoPanel({}).forEach((panelButton) => {

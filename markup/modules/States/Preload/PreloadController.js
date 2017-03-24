@@ -40,7 +40,7 @@ export class Preload {
         this.loadMainAssets();
         this.loadFSAssets();
         this.loadSpineAssets();
-        this.loadTest();
+        this.loadElements();
 
         mainView.draw.initPopup();
 
@@ -69,27 +69,32 @@ export class Preload {
     loadInitAssets() {
         const game = model.el('game');
         game.load.path = `static/img/content/${model.res}/`;
-        game.load.image('initLogo', 'bg/initLogo.png');
-        game.load.image('logosSmall', 'bg/logosSmall.png');
-        game.load.image('gradientLine', 'bg/gradientLine.png');
+        game.load.image('initBG', 'bg/initBG.png');
+        game.load.image('initMain', 'preloader/initMain.png');
+        game.load.image('logoInit', 'preloader/logoInit.png');
+        game.load.image('logosSmall', 'preloader/logosSmall.png');
+        // game.load.image('gradientLine', 'bg/gradientLine.png');
         game.load.atlasJSONArray('text', 'text/text.png', 'text/text.json');
     }
 
     loadMainAssets() {
         const game = model.el('game');
+        game.load.image('mainBG', 'bg/mainBG.png');
         game.load.image('gameMachine', 'game/gameMachine.png');
-        game.load.image('gameBG', 'game/gameBG.png');
+        game.load.image('gameMachineBG', 'game/gameMachineBG.png');
+        game.load.image('gameMachineUp', 'game/gameMachineUp.png');
+        game.load.image('darkness', 'game/darkness.png');
         game.load.image('logoGM', 'game/logoGM.png');
-        game.load.image('cloud', 'bg/cloud.png');
-        game.load.image('shine', 'bg/shine.png');
+        // game.load.image('cloud', 'bg/cloud.png');
+        // game.load.image('shine', 'bg/shine.png');
         game.load.image('green', 'bg/f-green.png');
         game.load.image('orange', 'bg/f-orange.png');
         game.load.image('red', 'bg/f-red.png');
-        game.load.image('bubble', 'bg/bubble.png');
-        game.load.image('balloons', 'bg/balloons.png');
-        game.load.image('confetti1', 'bg/confetti1.png');
-        game.load.image('confetti2', 'bg/confetti2.png');
-        game.load.image('confetti3', 'bg/confetti3.png');
+        // game.load.image('bubble', 'bg/bubble.png');
+        // game.load.image('balloons', 'bg/balloons.png');
+        // game.load.image('confetti1', 'bg/confetti1.png');
+        // game.load.image('confetti2', 'bg/confetti2.png');
+        // game.load.image('confetti3', 'bg/confetti3.png');
         game.load.atlasJSONArray('trash', 'bg/trash.png', 'bg/trash.json');
         game.load.atlasJSONArray('cat2', 'bg/cat2.png', 'bg/cat2.json');
         game.load.image('closeButton', 'other/closeButton.png');
@@ -108,10 +113,10 @@ export class Preload {
         game.load.bitmapFont('textGreen', 'text/text2.png', 'text/text2.xml');
         if (model.desktop) {
             game.load.image('panel', 'game/panel.png');
-            game.load.atlasJSONArray('panelBG', 'game/panelBG.png', 'game/panelBG.json');
+            // game.load.atlasJSONArray('panelBG', 'game/panelBG.png', 'game/panelBG.json');
             game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
             game.load.atlasJSONArray('deskButtonsAnim', 'desk_buttons/deskButtonsAnim.png', 'desk_buttons/deskButtonsAnim.json');
-            game.load.atlasJSONArray('switcher', 'desk_buttons/switcher.png', 'desk_buttons/switcher.json');
+            // game.load.atlasJSONArray('switcher', 'desk_buttons/switcher.png', 'desk_buttons/switcher.json');
         }
         if (model.mobile) {
             game.load.atlasJSONArray('mobileButtons', 'mobile_buttons/mobileButtons.png', 'mobile_buttons/mobileButtons.json');
@@ -127,21 +132,25 @@ export class Preload {
         const game = model.el('game');
         game.load.atlasJSONArray('fsCountBG', 'fs/fsCountBG.png', 'fs/fsCountBG.json');
         game.load.image('fsWinText', 'fs/fsWinText.png');
+        game.load.image('gameMachineFSBG', 'game/gameMachineFSBG.png');
+        if (model.desktop) {
+            game.load.image('panelFS', 'game/panelFS.png');
+        }
     }
 
     loadSpineAssets() {
         const game = model.el('game');
         game.load.spine('bottle', 'spine/Bottle.json');
         game.load.spine('boy', 'spine/boy.json');
-        game.load.spine('cat', 'spine/skeleton.json');
+        // game.load.spine('cat', 'spine/skeleton.json');
         game.load.spine('gun', 'spine/gun.json');
-        if (model.desktop) {
-            game.load.spine('fon', 'spine/Zastavka.json');
-        }
+        // if (model.desktop) {
+        //     game.load.spine('fon', 'spine/Zastavka.json');
+        // }
 
     }
 
-    loadTest() {
+    loadElements() {
         const game = model.el('game');
         game.load.atlasJSONArray('1', 'elements/1.png', 'elements/1.json');
         game.load.atlasJSONArray('2', 'elements/2.png', 'elements/2.json');
