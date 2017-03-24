@@ -399,7 +399,7 @@ let noConnect = (function() {
 
 
 let chanceArray = [20, 19, 19 ,19 ,17, 3, 2, 1]
-function getNumber(position, number) {
+function setPercent(position, number) {
     let delta = chanceArray[position] - number;
     chanceArray[position] = number;
 
@@ -431,5 +431,55 @@ function getNumber(position, number) {
     }
 }
 
-getNumber(2, 50);
-console.log(chanceArray);
+function sortArrayObject(array) {
+    let notSorted = true;
+    while (notSorted) {
+        notSorted = false;
+        for (var i = 0; i < array.length - 1; i++)
+        {
+            let currentValue = array[i][Object.keys(array[i])[0]];
+            console.log(currentValue);
+            let nextValue = array[i + 1][Object.keys(array[i + 1])[0]];
+            console.log(nextValue);
+            if (currentValue > nextValue){
+                let tmp = array[i+1];
+                array[i+1] = array[i];
+                array[i] = tmp;
+                notSorted = true;
+            }
+        }
+    }
+    return array;
+};
+
+let someArr = [{'1':30}, {'2': 20}, {'34': 50}, {'44': 0}];
+
+let sortedArray = sortArrayObject(someArr);
+
+function getRandomElem(array) {
+    let random = Math.random();
+    console.log(random);
+    for (let i = 0; i < array.length; i++) {
+        array[i][Object.keys(array[i])[0]] /= 100;
+    }
+    let percentInArr = 0;
+    for (let i = 0; i < array.length; i++) {
+        percentInArr += array[i][Object.keys(array[i])[0]];
+    }
+
+    let percent = 0;
+    for (let i = 0; i < array.length; i++){
+        if (percent === percentInArr) break;
+
+        let value = array[i][Object.keys(array[i])[0]];
+        if (random > percent && random < percent + value) {
+            return Object.keys(array[i])[0]
+        } else {
+            percent += value;
+        }
+    }
+}
+
+
+console.log('-----');
+console.log(getRandomElem(sortedArray));
