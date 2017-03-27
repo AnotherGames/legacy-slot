@@ -272,13 +272,7 @@ export let view = (() => {
                     }, this);
             });
 
-            // if (counter !== 1) {
-            //     let perlContainer = model.group(perlContainer);
-            //     perlContainer.y = shell.y + 130;
-            //     game.add.tween(perlContainer).to({alpha: 1}, 200, 'Linear', true);
-            // }
 
-            // soundController.sound.playSound({sound: 'chestDown'});
         },
 
         Level: function ({

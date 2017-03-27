@@ -167,21 +167,18 @@ export let view = (() => {
                 emitter.x = (model.desktop) ? emitter.x - 30 : emitter.x - 30 * 2 / 3;
                 emitter.width  = (model.desktop) ? 20 : 20 * 2 / 3;
             }
-
             if (number == 2) {
-                emitter.y = (model.desktop) ? emitter.y + 80 : emitter.y + 80 * 2 / 3;
-                emitter.width  = (model.desktop) ? 20 : 20 * 2 / 3;
-            }
-            if (number == 3) {
-                emitter.y = (model.desktop) ? emitter.y - 30 : emitter.y - 30 * 2 / 3;
-            }
-
-            if (number == 4) {
                 emitter.y = (model.desktop) ? emitter.y + 180 : emitter.y + 180 * 2 / 3;
                 emitter.x = (model.desktop) ? emitter.x + 40 : emitter.x + 40 * 2 / 3;
                 emitter.width  = (model.desktop) ? 30 : 30 * 2 / 3;
             }
-
+            if (number == 3) {
+                emitter.y = (model.desktop) ? emitter.y - 30 : emitter.y - 30 * 2 / 3;
+            }
+            if (number == 5) {
+                emitter.y = (model.desktop) ? emitter.y + 80 : emitter.y + 80 * 2 / 3;
+                emitter.width  = (model.desktop) ? 20 : 20 * 2 / 3;
+            }
             let emitterFrequency = (model.desktop) ? 150 : 100;
             emitter.start(true, 0, null, emitterFrequency, true);
         },

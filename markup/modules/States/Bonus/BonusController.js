@@ -60,6 +60,8 @@ class Door {
         bonusView.draw.showWinAnim({number: number});
 
         let numberMulti = parseInt(this.data.CurrentValue, 10);
+        // let fontSize = (model.desktop) ? 30 : 15;
+        // this.multi = this.game.add.bitmapText(this.x, this.y - 50, 'numbersFont', `x${numberMulti}`, fontSize, model.group('bg'));
         this.multi = this.game.add.sprite(this.x, this.y, 'multi', `x${numberMulti}.png`, model.group('bg'));
         this.multi.anchor.set(0.6, 0.8);
         this.multi.anchor.set(0.5);
@@ -200,7 +202,6 @@ function handleDoorClick() {
         .then(() => {
             model.updateBalance({ startBonusRoll: true });
             if (!this.isWinPlayed) {
-                // this.showAnim();
                 if (this.data.CurrentValue != 'Exit') {
                     this.win(this.sprite);
                     this.isWinPlayed = true;
