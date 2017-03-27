@@ -42,17 +42,43 @@ let noConnect = (function() {
     };
 
     let Symbols = {
-        chibi: [{Name: 'Jack', Symbol: '1'}, {Name: 'Warrior', Symbol: '2'}, {Name: 'Queen', Symbol: '3'},
-            {Name: 'Ninja', Symbol: '4'}, {Name: 'King', Symbol: '5'}, {Name: 'Samurai', Symbol: '6'},
-            {Name: 'Ace', Symbol: '7'}, {Name: 'Geisha', Symbol: '8'}, {Name: 'Wild', Symbol: '9'},
-            {Name: 'Scatter', Symbol: '10'}, {Name: 'fsScatter', Symbol: '11'}, {Name: 'Shuriken', Symbol: '12'}],
-        candyLand: [{Name: 'Jack', Symbol: '1'}, {Name: 'CandyCane', Symbol: '2'}, {Name: 'Queen', Symbol: '3'},
-            {Name: 'Lollypop', Symbol: '4'}, {Name: 'King', Symbol: '5'}, {Name: 'Icecream', Symbol: '6'},
-            {Name: 'Ace', Symbol: '7'}, {Name: 'Donut', Symbol: '8'},
-            {Name: 'GreenBottleTop', Symbol: '9'}, {Name: 'GreenBottleMid', Symbol: '10'}, {Name: 'GreenBottleBottom', Symbol: '11'},
-            {Name: 'OrangeBottleTop', Symbol: '12'}, {Name: 'OrangeBottleMid', Symbol: '13'}, {Name: 'OrangeBottleBottom', Symbol: '14'},
-            {Name: 'CherryBottleTop', Symbol: '15'}, {Name: 'CherryBottleMid', Symbol: '16'}, {Name: 'CherryBottleBottom', Symbol: '17'},
-            {Name: 'fsWild', Symbol: '21'}]
+        chibi:
+            [
+                {Name: 'Jack', Symbol: '1'},
+                {Name: 'Warrior', Symbol: '2'},
+                {Name: 'Queen', Symbol: '3'},
+                {Name: 'Ninja', Symbol: '4'},
+                {Name: 'King', Symbol: '5'},
+                {Name: 'Samurai', Symbol: '6'},
+                {Name: 'Ace', Symbol: '7'},
+                {Name: 'Geisha', Symbol: '8'},
+                {Name: 'Wild', Symbol: '9'},
+                {Name: 'Scatter', Symbol: '10'},
+                {Name: 'fsScatter', Symbol: '11'},
+                {Name: 'Shuriken', Symbol: '12'}
+            ],
+
+        candyLand:
+            [
+                {Name: 'Jack', Symbol: '1'},
+                {Name: 'CandyCane', Symbol: '2'},
+                {Name: 'Queen', Symbol: '3'},
+                {Name: 'Lollypop', Symbol: '4'},
+                {Name: 'King', Symbol: '5'},
+                {Name: 'Icecream', Symbol: '6'},
+                {Name: 'Ace', Symbol: '7'},
+                {Name: 'Donut', Symbol: '8'},
+                {Name: 'GreenBottleTop', Symbol: '9'},
+                {Name: 'GreenBottleMid', Symbol: '10'},
+                {Name: 'GreenBottleBottom', Symbol: '11'},
+                {Name: 'OrangeBottleTop', Symbol: '12'},
+                {Name: 'OrangeBottleMid', Symbol: '13'},
+                {Name: 'OrangeBottleBottom', Symbol: '14'},
+                {Name: 'CherryBottleTop', Symbol: '15'},
+                {Name: 'CherryBottleMid', Symbol: '16'},
+                {Name: 'CherryBottleBottom', Symbol: '17'},
+                {Name: 'fsWild', Symbol: '21'}
+            ]
     };
 
     let SymbolsValue = {
@@ -435,12 +461,10 @@ function sortArrayObject(array) {
     let notSorted = true;
     while (notSorted) {
         notSorted = false;
-        for (var i = 0; i < array.length - 1; i++)
+        for (let i = 0; i < array.length - 1; i++)
         {
             let currentValue = array[i][Object.keys(array[i])[0]];
-            console.log(currentValue);
             let nextValue = array[i + 1][Object.keys(array[i + 1])[0]];
-            console.log(nextValue);
             if (currentValue > nextValue){
                 let tmp = array[i+1];
                 array[i+1] = array[i];
@@ -450,36 +474,61 @@ function sortArrayObject(array) {
         }
     }
     return array;
-};
+}
 
-let someArr = [{'1':30}, {'2': 20}, {'34': 50}, {'44': 0}];
-
-let sortedArray = sortArrayObject(someArr);
+let someArr = [{'1':9}, {'2': 30}, {'3': 40}, {'4': 20}, {'5': 1}];
 
 function getRandomElem(array) {
+    // let sortedArray = sortArrayObject(array);
+    let sortedArray = array;
     let random = Math.random();
-    console.log(random);
-    for (let i = 0; i < array.length; i++) {
-        array[i][Object.keys(array[i])[0]] /= 100;
+
+    for (let i = 0; i < sortedArray.length; i++) {
+        sortedArray[i][Object.keys(sortedArray[i])[0]] /= 100;
     }
     let percentInArr = 0;
-    for (let i = 0; i < array.length; i++) {
-        percentInArr += array[i][Object.keys(array[i])[0]];
+    for (let i = 0; i < sortedArray.length; i++) {
+        percentInArr += sortedArray[i][Object.keys(sortedArray[i])[0]];
     }
 
     let percent = 0;
-    for (let i = 0; i < array.length; i++){
+    for (let i = 0; i < sortedArray.length; i++){
         if (percent === percentInArr) break;
 
-        let value = array[i][Object.keys(array[i])[0]];
+        let value = sortedArray[i][Object.keys(sortedArray[i])[0]];
         if (random > percent && random < percent + value) {
-            return Object.keys(array[i])[0]
+            for (let i = 0; i < sortedArray.length; i++) {
+                sortedArray[i][Object.keys(sortedArray[i])[0]] *= 100;
+            }
+            return Object.keys(sortedArray[i])[0]
         } else {
             percent += value;
         }
     }
 }
 
+let sum1 = 0;
+let sum2 = 0;
+let sum3 = 0;
+let sum4 = 0;
+let sum5 = 0;
+let wat = 0;
 
-console.log('-----');
-console.log(getRandomElem(sortedArray));
+for( let i = 0; i <= 1000000; i++) {
+    let result = getRandomElem(someArr);
+    switch(result) {
+        case '1': sum1++;
+            break;
+        case '2': sum2++;
+            break;
+        case '3': sum3++;
+            break;
+        case '4': sum4++;
+            break;
+        case '5': sum5++;
+            break;
+        default: wat++;
+            break;
+    }
+}
+console.log(`sum1 = ${sum1} sum2 = ${sum2} sum3 = ${sum3} sum4 = ${sum4} sum5 = ${sum5} wat = ${wat} `);
