@@ -54,17 +54,19 @@ export class Preload {
         game.load.audio('baraban', 'baraban.mp3');
         game.load.audio('buttonClick', 'buttonClick.mp3');
         game.load.audio('startPerehod', 'startPerehod.mp3');
-        game.load.audio('finishPerehod', 'startPerehod.mp3');
+        game.load.audio('finishPerehod', 'finishPerehod.mp3');
         game.load.audio('win', 'totalWin.mp3');
         game.load.audio('lineWin', 'lineWin1.mp3');
         game.load.audio('lineWin2', 'lineWin2.mp3');
-        game.load.audio('illumBreak1', 'illumBreak01.mp3');
-        game.load.audio('illumBreak2', 'illumBreak02.mp3');
-        game.load.audio('illumBreak3', 'illumBreak03.mp3');
-        game.load.audio('illumFail', 'illumFail.mp3');
-        game.load.audio('illumWin', 'illumWin.mp3');
-        game.load.audio('chestDown', 'chestDown.mp3');
-        game.load.audio('diverDown', 'diverDown.mp3');
+        game.load.audio('bubbleFail', 'bubbleFail.mp3');
+        game.load.audio('sea', 'sea.mp3');
+        // game.load.audio('illumBreak1', 'illumBreak01.mp3');
+        // game.load.audio('illumBreak2', 'illumBreak02.mp3');
+        // game.load.audio('illumBreak3', 'illumBreak03.mp3');
+        // game.load.audio('illumFail', 'illumFail.mp3');
+        // game.load.audio('illumWin', 'illumWin.mp3');
+        // game.load.audio('chestDown', 'chestDown.mp3');
+        // game.load.audio('diverDown', 'diverDown.mp3');
     }
 
     loadInitAssets() {
@@ -151,10 +153,10 @@ export class Preload {
         game.load.spine('logoBack', 'spine/ZST-back.json');
         game.load.spine('logoFront', 'spine/ZST-top.json');
         game.load.spine('element1', 'spine/BG_dveri.json');
-        game.load.spine('element2', 'spine/BG_kuvshin.json');
+        game.load.spine('element2', 'spine/BG_ship.json');
         game.load.spine('element3', 'spine/BG_sclep.json');
-        game.load.spine('element4', 'spine/BG_ship.json');
-        game.load.spine('element5', 'spine/BG_sunduk.json');
+        game.load.spine('element4', 'spine/BG_sunduk.json');
+        game.load.spine('element5', 'spine/BG_kuvshin.json');
         game.load.spine('BG_top', 'spine/BG_top.json');
     }
 

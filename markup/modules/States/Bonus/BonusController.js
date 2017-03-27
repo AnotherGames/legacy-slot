@@ -54,7 +54,7 @@ class Door {
 
         let rnd = this.game.rnd.integerInRange(1, 3);
         // soundController.sound.playSound({ sound: `illumBreak${rnd}` });
-        // soundController.sound.playSound({ sound: 'illumWin', duration: 1200 });
+        // soundController.sound.playSound({ sound: 'sea', duration: 500 });
 
         let number = parseInt(sprite.frameName, 10);
         bonusView.draw.showWinAnim({number: number});
@@ -78,7 +78,7 @@ class Door {
         let number = parseInt(sprite.frameName, 10);
         bonusView.draw.changeAnim({number: number, anim: 'open'});
         bonusView.draw.showFailBubbles({x: this.x, y: this.y, number: number});
-        soundController.sound.playSound({ sound: 'illumFail', soundVolume: 3 });
+        soundController.sound.playSound({ sound: 'bubbleFail', soundVolume: 3 });
     }
 
 }
@@ -104,6 +104,7 @@ export class Bonus {
     create() {
         let footer = new Footer({model, soundController, request});
         model.el('footer', footer);
+        soundController.music.stopMusic('startPerehod');
         soundController.music.stopMusic('fon');
         soundController.music.playMusic('bonusFon');
 
@@ -205,10 +206,11 @@ function handleDoorClick() {
                     this.isWinPlayed = true;
                     if (this.data.BonusEnd) {
                         // Переходной экран Big Win
-                        soundController.sound.playSound({ sound: 'illumWin' });
-                        soundController.sound.playSound({ sound: 'win' });
+                        // soundController.sound.playSound({ sound: 'illumWin' });
                         bonusView.draw.showWin({ winTextFrame: 'bigW.png' });
+                        soundController.sound.playSound({ sound: 'win' });
                         soundController.music.stopMusic('bonusFon');
+                        soundController.music.stopMusic('sea');
                         setTimeout(() => {
                             endBonus();
                         }, 4500);
@@ -219,6 +221,7 @@ function handleDoorClick() {
                     this.isWinPlayed = true;
                     // Переходной экран Total Win
                     bonusView.draw.showWin({});
+                    soundController.sound.playSound({ sound: 'win' });
                     soundController.music.stopMusic('bonusFon');
                     setTimeout(() => {
                         endBonus();

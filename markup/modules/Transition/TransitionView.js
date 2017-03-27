@@ -308,7 +308,7 @@ export let view = (() => {
         if (model.state('autoTransititon')) {
             game.time.events.add(config.autoTransitionTime, () => {
                 soundController.sound.playSound({sound: 'buttonClick'});
-                soundController.music.stopMusic('startPerehod');
+                // soundController.music.stopMusic('startPerehod');
                 model.el('game').state.start('Bonus');
                 model.state('transitionScreen', false);
             });
@@ -371,15 +371,15 @@ export let view = (() => {
     }
 
     function _bonusStartInput() {
-        // При клике на фон будет переход на Фри-Спины
+        // При клике на фон будет переход
         let transitionBG = model.el('transitionBG');
         transitionBG.inputEnabled = true;
         transitionBG.input.priorityID = 2;
         transitionBG.events.onInputDown.add(function () {
-            soundController.sound.playSound({sound: 'buttonClick'});
-            soundController.music.stopMusic('startPerehod');
             model.el('game').state.start('Bonus');
             model.state('transitionScreen', false);
+            soundController.sound.playSound({sound: 'buttonClick'});
+
         });
     }
 
