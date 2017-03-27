@@ -6,36 +6,155 @@ filter: Linear,Linear
 repeat: none
 img/BG_24
   rotate: false
-  xy: 2, 49
+  xy: 2, 118
   size: 419, 392
   orig: 419, 392
   offset: 0, 0
   index: -1
 img/BG_24-2
   rotate: false
-  xy: 1226, 264
+  xy: 1226, 333
   size: 245, 177
   orig: 245, 177
   offset: 0, 0
   index: -1
 img/BG_24-3
   rotate: false
-  xy: 2, 2
+  xy: 423, 167
   size: 37, 45
   orig: 37, 45
   offset: 0, 0
   index: -1
 img/BG_25
   rotate: false
-  xy: 423, 145
+  xy: 423, 214
   size: 419, 296
   orig: 419, 296
   offset: 0, 0
   index: -1
 img/BG_35
   rotate: false
-  xy: 844, 189
+  xy: 844, 258
   size: 380, 252
   orig: 380, 252
+  offset: 0, 0
+  index: -1
+img/gold/TR_0000_Layer-18
+  rotate: false
+  xy: 2, 63
+  size: 79, 53
+  orig: 79, 53
+  offset: 0, 0
+  index: -1
+img/gold/TR_0001_Layer-18-copy
+  rotate: true
+  xy: 2, 2
+  size: 59, 44
+  orig: 59, 44
+  offset: 0, 0
+  index: -1
+img/gold/TR_0007_Layer-17
+  rotate: false
+  xy: 844, 244
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
+img/gold/TR_0008_Layer-16
+  rotate: false
+  xy: 1226, 319
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
+img/gold/TR_0009_Layer-15
+  rotate: false
+  xy: 1473, 498
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
+img/gold/TR_0010_Layer-14
+  rotate: false
+  xy: 83, 104
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
+img/gold/TR_0011_Layer-13
+  rotate: false
+  xy: 48, 49
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
+img/gold/TR_0012_Layer-12
+  rotate: false
+  xy: 423, 153
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
+img/gold/TR_0013_Layer-11
+  rotate: false
+  xy: 462, 200
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
+img/gold/TR_0014_Layer-10
+  rotate: false
+  xy: 1473, 485
+  size: 12, 11
+  orig: 12, 11
+  offset: 0, 0
+  index: -1
+img/gold/TR_0015_Layer-9
+  rotate: false
+  xy: 844, 230
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
+img/gold/TR_0016_Layer-8
+  rotate: false
+  xy: 858, 244
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
+img/gold/TR_0017_Layer-7
+  rotate: false
+  xy: 1487, 499
+  size: 12, 11
+  orig: 12, 11
+  offset: 0, 0
+  index: -1
+img/gold/TR_0018_Layer-5
+  rotate: false
+  xy: 83, 90
+  size: 11, 12
+  orig: 11, 12
+  offset: 0, 0
+  index: -1
+img/gold/TR_0019_Layer-4
+  rotate: false
+  xy: 1226, 305
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
+img/gold/TR_0020_Layer-3
+  rotate: false
+  xy: 97, 104
+  size: 11, 12
+  orig: 11, 12
+  offset: 0, 0
+  index: -1
+img/gold/TR_0021_Layer-2
+  rotate: false
+  xy: 1240, 319
+  size: 12, 12
+  orig: 12, 12
   offset: 0, 0
   index: -1

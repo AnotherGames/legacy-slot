@@ -32,12 +32,6 @@ class Door {
 
     }
 
-    showAnim() {
-        this.destroyed = true;
-        let number = parseInt(this.sprite.frameName, 10);
-        bonusView.draw.changeAnim({number: number, anim: 'open'});
-    }
-
     showHover() {
         if (this.destroyed == true) return;
         let number = parseInt(this.sprite.frameName, 10);
@@ -54,15 +48,19 @@ class Door {
         model.el('targetTimer', newTimer);
     }
 
-    win() {
+    win(sprite) {
+
+        this.destroyed = true;
 
         let rnd = this.game.rnd.integerInRange(1, 3);
-        soundController.sound.playSound({ sound: `illumBreak${rnd}` });
-        soundController.sound.playSound({ sound: 'illumWin', duration: 1200 });
+        // soundController.sound.playSound({ sound: `illumBreak${rnd}` });
+        // soundController.sound.playSound({ sound: 'illumWin', duration: 1200 });
 
-        let number = parseInt(this.data.CurrentValue, 10);
+        let number = parseInt(sprite.frameName, 10);
+        bonusView.draw.showWinAnim({number: number});
 
-        this.multi = this.game.add.sprite(this.x, this.y, 'multi', `x${number}.png`, model.group('bg'));
+        let numberMulti = parseInt(this.data.CurrentValue, 10);
+        this.multi = this.game.add.sprite(this.x, this.y, 'multi', `x${numberMulti}.png`, model.group('bg'));
         this.multi.anchor.set(0.6, 0.8);
         this.multi.anchor.set(0.5);
         this.multi.alpha = 0;
@@ -76,9 +74,11 @@ class Door {
     }
 
     fail(sprite) {
+        this.destroyed = true;
         let number = parseInt(sprite.frameName, 10);
-        soundController.sound.playSound({ sound: 'illumFail', soundVolume: 3 });
+        bonusView.draw.changeAnim({number: number, anim: 'open'});
         bonusView.draw.showFailBubbles({x: this.x, y: this.y, number: number});
+        soundController.sound.playSound({ sound: 'illumFail', soundVolume: 3 });
     }
 
 }
@@ -199,10 +199,9 @@ function handleDoorClick() {
         .then(() => {
             model.updateBalance({ startBonusRoll: true });
             if (!this.isWinPlayed) {
-                this.showAnim();
+                // this.showAnim();
                 if (this.data.CurrentValue != 'Exit') {
-                    // this.fail(this.sprite);
-                    this.win();
+                    this.win(this.sprite);
                     this.isWinPlayed = true;
                     if (this.data.BonusEnd) {
                         // Переходной экран Big Win

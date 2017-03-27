@@ -6,29 +6,120 @@ filter: Linear,Linear
 repeat: none
 img/BG_15
   rotate: false
-  xy: 2, 144
+  xy: 2, 186
   size: 295, 280
   orig: 295, 280
   offset: 0, 0
   index: -1
 img/BG_16
   rotate: true
-  xy: 582, 194
+  xy: 582, 236
   size: 230, 304
   orig: 230, 304
   offset: 0, 0
   index: -1
 img/BG_17
   rotate: false
-  xy: 2, 2
+  xy: 2, 44
   size: 351, 140
   orig: 351, 140
   offset: 0, 0
   index: -1
 img/BG_36
   rotate: true
-  xy: 299, 161
+  xy: 299, 203
   size: 263, 281
   orig: 263, 281
+  offset: 0, 0
+  index: -1
+img/gold/TR_0006_Layer-18
+  rotate: true
+  xy: 888, 140
+  size: 326, 115
+  orig: 326, 115
+  offset: 0, 0
+  index: -1
+img/gold/TR_0007_Layer-17
+  rotate: false
+  xy: 582, 222
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
+img/gold/TR_0008_Layer-16
+  rotate: false
+  xy: 1005, 454
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
+img/gold/TR_0009_Layer-15
+  rotate: false
+  xy: 299, 189
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
+img/gold/TR_0010_Layer-14
+  rotate: false
+  xy: 2, 16
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
+img/gold/TR_0013_Layer-11
+  rotate: false
+  xy: 16, 30
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
+img/gold/TR_0014_Layer-10
+  rotate: false
+  xy: 313, 190
+  size: 12, 11
+  orig: 12, 11
+  offset: 0, 0
+  index: -1
+img/gold/TR_0015_Layer-9
+  rotate: false
+  xy: 582, 208
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
+img/gold/TR_0016_Layer-8
+  rotate: false
+  xy: 596, 222
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
+img/gold/TR_0018_Layer-5
+  rotate: false
+  xy: 2, 2
+  size: 11, 12
+  orig: 11, 12
+  offset: 0, 0
+  index: -1
+img/gold/TR_0019_Layer-4
+  rotate: false
+  xy: 1005, 440
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
+img/gold/TR_0020_Layer-3
+  rotate: false
+  xy: 16, 16
+  size: 11, 12
+  orig: 11, 12
+  offset: 0, 0
+  index: -1
+img/gold/TR_0021_Layer-2
+  rotate: false
+  xy: 2, 30
+  size: 12, 12
+  orig: 12, 12
   offset: 0, 0
   index: -1

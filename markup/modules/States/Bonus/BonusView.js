@@ -40,10 +40,6 @@ export let view = (() => {
             let doorsElements = [];
             for (let i = 1; i < 6; i++) {
                 let element = game.add.spine(game.world.centerX, game.world.centerY, `element${i}`);
-                // game.time.events.add(delay * i, () => {
-                //     element.setAnimationByName(0, 'target', false);
-                //     element.addAnimationByName(0, 'idle', true);
-                // });
                 element.setAnimationByName(0, 'idle', true);
                 container.add(element);
                 if (model.mobile) {
@@ -73,6 +69,20 @@ export let view = (() => {
                         item.setAnimationByName(0, anim, false);
                         item.addAnimationByName(0, 'idle', true);
                     }
+                }
+            });
+        },
+
+        showWinAnim: function ({
+            game = model.el('game'),
+            container = model.group('bg'),
+            number = 1
+        }) {
+            let doorsElements = model.el('doorsElements');
+            doorsElements.forEach((item, index) => {
+                if (index + 1 == number) {
+                    item.setAnimationByName(0, 'open_win', false);
+                    item.addAnimationByName(0, 'idle_win', true);
                 }
             });
         },
