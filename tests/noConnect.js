@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+
 let noConnect = (function() {
 
     let arr = [[], [], [], [], []];
@@ -97,10 +99,20 @@ let noConnect = (function() {
         return Math.round(Math.random() * (end - start) + start);
     }
 
+    function isNumeric(n) {
+        return !isNaN(parseFloat(n)) && isFinite(n);
+    }
+
+    let someArr = [{'1':18}, {'2': 9}, {'3': 15}, {'4': 9}, {'5': 15}, {'6': 9}, {'7': 15}, {'8': 9}];
+
     function generateArray() {
         for (let i = 0; i < 5; i++) {
             for (let k = 0; k < 5; k++) {
-                arr[i][k] = intRandom(max, min);
+                if(arr[i][k]){
+                    continue;
+                } else {
+                    arr[i][k] = +getRandomElem(someArr);
+                }
             }
         }
     }
@@ -111,11 +123,11 @@ let noConnect = (function() {
         }
     }
 
-    function firtNumberInWinLine(arrComb) {
+    function firstNumberInWinLine(arrComb) {
         for (let k = 0; k < 5; k++) {
             for (let i = 0; i < 5; i++) {
-                if (arr[i][arrComb[i]] !== wild) {
-                    return arr[i][arrComb[i]];
+                if (arr[k][arrComb[i]] !== wild) {
+                    return arr[k][arrComb[i]];
                 }
             }
         }
@@ -125,7 +137,7 @@ let noConnect = (function() {
         let numinWins = 0;
         for (let k = 0; k < numberOfLines; k++) {
             let win = 0;
-            let winNumber = firtNumberInWinLine(winComb[k]);
+            let winNumber = firstNumberInWinLine(winComb[k]);
 
                 for (let i = 0; i < 5; i++) {
                     if (arr[i][winComb[k][i]] === winNumber || arr[i][winComb[k][i]] === wild) {
@@ -148,6 +160,72 @@ let noConnect = (function() {
                 };
                 money += winValue;
                 numinWins++;
+            }
+        }
+    }
+
+    let chanceArray = [40, 9, 20 ,30 ,1];
+    function setPercent(position, number) {
+        let delta = chanceArray[position] - number;
+        chanceArray[position] = number;
+
+        let sum = 0;
+        for(let i = 0; i < chanceArray.length; i++){
+            if (i == position) continue;
+            sum += chanceArray[i];
+        }
+        let arrOfP = [];
+        let remainP = 1;
+        for(let i = 0; i < chanceArray.length; i++){
+            if (i == position) continue;
+            if (i == chanceArray.length - 1) {
+                arrOfP[i] = remainP;
+            }
+            arrOfP[i] = chanceArray[i] / sum;
+            remainP -= arrOfP[i];
+        }
+        sum += delta;
+        let remain;
+        for(let i = 0; i < arrOfP.length; i++){
+            if (i == position) continue;
+            if (i == chanceArray.length - 1) {
+                chanceArray[i] = remain;
+            }
+            chanceArray[i] = sum * arrOfP[i];
+            remain = sum - chanceArray[i];
+        }
+    }
+
+
+
+    function getRandomElem(array) {
+        let sortedArray = array;
+        let random = Math.random();
+
+        for (let i = 0; i < sortedArray.length; i++) {
+            sortedArray[i][Object.keys(sortedArray[i])[0]] /= 100;
+        }
+        let percentInArr = 0;
+        for (let i = 0; i < sortedArray.length; i++) {
+            percentInArr += sortedArray[i][Object.keys(sortedArray[i])[0]];
+        }
+
+        if(percentInArr > 1) {
+            console.error(`Too much percents in your config. ${percentInArr * 100} at least of 100`);
+        }
+
+        let percent = 0;
+        for (let i = 0; i < sortedArray.length; i++){
+            if (percent === percentInArr) break;
+
+            let value = sortedArray[i][Object.keys(sortedArray[i])[0]];
+            if (random > percent && random < percent + value) {
+                for (let i = 0; i < sortedArray.length; i++) {
+                    sortedArray[i][Object.keys(sortedArray[i])[0]] *= 100;
+                }
+                return Object.keys(sortedArray[i])[0];
+            } else {
+                percent += value;
             }
         }
     }
@@ -177,8 +255,16 @@ let noConnect = (function() {
     }
 
     function addWildsInArray(numOfWilds) {
-        for (let i = 1; i < numOfWilds; i++) {
-            arr[intRandom(4, 1)][intRandom(4, 1)] = wild;
+        while(numOfWilds) {
+            let randomX = intRandom(4, 1);
+            let randomY = intRandom(4, 1);
+            let elem = arr[randomX][randomY];
+
+            if(elem) {
+            } else {
+                elem = wild;
+                --numOfWilds;
+            }
         }
     }
 
@@ -227,6 +313,7 @@ let noConnect = (function() {
         }
     }
 
+    let sessionID;
     let numOfSpins = 0;
     let nextMode = 'root';
     let currentMode = 'root';
@@ -267,8 +354,8 @@ let noConnect = (function() {
 
     function generateRoot() {
         money -= betLevel * numberOfLines;
-        generateArray();
         addWildsOrNot();
+        generateArray();
         checkForWinLines();
         return {
             Balance: {
@@ -327,8 +414,38 @@ let noConnect = (function() {
         };
     }
 
+    function generateSessionID() {
+        return Math.round(Math.random() * 1000000);
+    }
+
+    function connectToDB() {
+        mongoose.connect('mongodb://honey:nohoney@ds143340.mlab.com:43340/nomoneynohoney');
+        var db = mongoose.connection;
+        db.on('error', console.error.bind(console, 'connection error:'));
+        db.once('open', function() {
+            console.log('connected');
+            // we're connected!
+        });
+        var balanceSchema = mongoose.Schema({
+            currentBalance: Number,
+            currency: String,
+            sessionID: Number
+        });
+        var Balance = mongoose.model('Balance', balanceSchema);
+        let initBalance = new Balance({
+            currentBalance: 5000,
+            currency: '$',
+            sessionID: generateSessionID()
+        });
+        initBalance.save((err, init) => {
+            if (err) return console.error('Wrong init');
+            console.log('Init Balance saved', init);
+        });
+    }
+
     function generateInit() {
         generateArray();
+        connectToDB();
         console.log(money / startmoney * 100);
         return {
             Balance: {
@@ -395,6 +512,7 @@ let noConnect = (function() {
             default: answer = 'Undefined request';
                 break;
         }
+        arr = [[], [], [], [], []];
         return answer;
     }
 
@@ -418,117 +536,10 @@ let noConnect = (function() {
     };
 })();
 
-// for(let i = 0; i < 1000000; i++) {
+// for(let i = 0; i < 100000; i++) {
 //     noConnect.request('candyLand', 'roll', 1, 1);
 // }
-// console.log(noConnect.request('candyLand', 'init', 1, 1));
+console.log(noConnect.request('candyLand', 'init', 1, 1));
 
 
-let chanceArray = [20, 19, 19 ,19 ,17, 3, 2, 1]
-function setPercent(position, number) {
-    let delta = chanceArray[position] - number;
-    chanceArray[position] = number;
 
-    let sum = 0;
-    for(let i = 0; i < chanceArray.length; i++){
-        if (i == position) continue;
-        sum += chanceArray[i];
-    }
-    let arrOfP = [];
-    let remainP = 1;
-    for(let i = 0; i < chanceArray.length; i++){
-        if (i == position) continue;
-        if (i == chanceArray.length - 1) {
-            arrOfP[i] = remainP;
-        }
-        arrOfP[i] = chanceArray[i] / sum;
-        remainP -= arrOfP[i];
-    }
-    sum += delta;
-    let remain;
-    for(let i = 0; i < arrOfP.length; i++){
-        if (i == position) continue;
-        if (i == chanceArray.length - 1) {
-            chanceArray[i] = remain;
-        }
-        chanceArray[i] = sum * arrOfP[i];
-        console.log(chanceArray[i]);
-        remain = sum - chanceArray[i];
-    }
-}
-
-function sortArrayObject(array) {
-    let notSorted = true;
-    while (notSorted) {
-        notSorted = false;
-        for (let i = 0; i < array.length - 1; i++)
-        {
-            let currentValue = array[i][Object.keys(array[i])[0]];
-            let nextValue = array[i + 1][Object.keys(array[i + 1])[0]];
-            if (currentValue > nextValue){
-                let tmp = array[i+1];
-                array[i+1] = array[i];
-                array[i] = tmp;
-                notSorted = true;
-            }
-        }
-    }
-    return array;
-}
-
-let someArr = [{'1':9}, {'2': 30}, {'3': 40}, {'4': 20}, {'5': 1}];
-
-function getRandomElem(array) {
-    // let sortedArray = sortArrayObject(array);
-    let sortedArray = array;
-    let random = Math.random();
-
-    for (let i = 0; i < sortedArray.length; i++) {
-        sortedArray[i][Object.keys(sortedArray[i])[0]] /= 100;
-    }
-    let percentInArr = 0;
-    for (let i = 0; i < sortedArray.length; i++) {
-        percentInArr += sortedArray[i][Object.keys(sortedArray[i])[0]];
-    }
-
-    let percent = 0;
-    for (let i = 0; i < sortedArray.length; i++){
-        if (percent === percentInArr) break;
-
-        let value = sortedArray[i][Object.keys(sortedArray[i])[0]];
-        if (random > percent && random < percent + value) {
-            for (let i = 0; i < sortedArray.length; i++) {
-                sortedArray[i][Object.keys(sortedArray[i])[0]] *= 100;
-            }
-            return Object.keys(sortedArray[i])[0]
-        } else {
-            percent += value;
-        }
-    }
-}
-
-let sum1 = 0;
-let sum2 = 0;
-let sum3 = 0;
-let sum4 = 0;
-let sum5 = 0;
-let wat = 0;
-
-for( let i = 0; i <= 1000000; i++) {
-    let result = getRandomElem(someArr);
-    switch(result) {
-        case '1': sum1++;
-            break;
-        case '2': sum2++;
-            break;
-        case '3': sum3++;
-            break;
-        case '4': sum4++;
-            break;
-        case '5': sum5++;
-            break;
-        default: wat++;
-            break;
-    }
-}
-console.log(`sum1 = ${sum1} sum2 = ${sum2} sum3 = ${sum3} sum4 = ${sum4} sum5 = ${sum5} wat = ${wat} `);
