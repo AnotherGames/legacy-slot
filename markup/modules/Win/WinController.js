@@ -47,6 +47,7 @@ export let controller = (() => {
             if (model.state('autoplay:end')
             && model.state('fs:end')
             && !model.state('bonus')
+            && !model.state('fsChecked')
             && !model.state('roll:progress')) {
                 oneAfterAnother();
             }
@@ -208,6 +209,8 @@ export let controller = (() => {
             view.draw.Mermaid({
                 el: middleEl
             });
+
+            model.state('fsChecked', true);
 
             // model.state('fs:end', false);
 

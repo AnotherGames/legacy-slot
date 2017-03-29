@@ -69,6 +69,7 @@ export let controller = (() => {
         model.state('fs:end', true);
         model.updateBalance({endFS: true});
         model.state('fs', false);
+        model.state('fsChecked', false);
 
     }
 
