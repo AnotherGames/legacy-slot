@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-let noConnect = (function() {
+let noConnect = (function () {
 
     let arr = [[], [], [], [], []];
     let min = 1;
@@ -13,27 +13,27 @@ let noConnect = (function() {
     let winComb = [[2, 2, 2, 2, 2], [3, 3, 3, 3, 3], [1, 1, 1, 1, 1], [3, 2, 1, 2, 3], [1, 2, 3, 2, 1], [3, 3, 2, 3, 3], [1, 1, 2, 3, 3], [2, 3, 3, 3, 2], [2, 1, 1, 1, 2], [1, 2, 2, 2, 1], [3, 2, 2, 2, 3], [3, 2, 2, 2, 1], [1, 2, 2, 2, 3], [3, 3, 2, 1, 1], [1, 1, 2, 3, 3], [3, 3, 3, 2, 1], [1, 1, 1, 2, 3], [3, 2, 1, 1, 1], [1, 2, 3, 3, 3], [2, 2, 1, 2, 2], [2, 2, 3, 2, 2]];
 
     let lines = [
-    [{X: 0, Y: 1}, {X: 1, Y: 1}, {X: 2, Y: 1}, {X: 3, Y: 1}, {X: 4, Y: 1}],
-    [{X: 0, Y: 0}, {X: 1, Y: 0}, {X: 2, Y: 0}, {X: 3, Y: 0}, {X: 4, Y: 0}],
-    [{X: 0, Y: 2}, {X: 1, Y: 2}, {X: 2, Y: 2}, {X: 3, Y: 2}, {X: 4, Y: 2}],
-    [{X: 0, Y: 0}, {X: 1, Y: 1}, {X: 2, Y: 2}, {X: 3, Y: 1}, {X: 4, Y: 0}],
-    [{X: 0, Y: 2}, {X: 1, Y: 1}, {X: 2, Y: 0}, {X: 3, Y: 1}, {X: 4, Y: 2}],
-    [{X: 0, Y: 0}, {X: 1, Y: 0}, {X: 2, Y: 1}, {X: 3, Y: 0}, {X: 4, Y: 0}],
-    [{X: 0, Y: 2}, {X: 1, Y: 2}, {X: 2, Y: 1}, {X: 3, Y: 2}, {X: 4, Y: 2}],
-    [{X: 0, Y: 1}, {X: 1, Y: 0}, {X: 2, Y: 0}, {X: 3, Y: 0}, {X: 4, Y: 1}],
-    [{X: 0, Y: 1}, {X: 1, Y: 2}, {X: 2, Y: 2}, {X: 3, Y: 2}, {X: 4, Y: 1}],
-    [{X: 0, Y: 2}, {X: 1, Y: 1}, {X: 2, Y: 1}, {X: 3, Y: 1}, {X: 4, Y: 2}],
-    [{X: 0, Y: 0}, {X: 1, Y: 1}, {X: 2, Y: 1}, {X: 3, Y: 1}, {X: 4, Y: 0}],
-    [{X: 0, Y: 0}, {X: 1, Y: 1}, {X: 2, Y: 1}, {X: 3, Y: 1}, {X: 4, Y: 2}],
-    [{X: 0, Y: 2}, {X: 1, Y: 1}, {X: 2, Y: 1}, {X: 3, Y: 1}, {X: 4, Y: 0}],
-    [{X: 0, Y: 0}, {X: 1, Y: 0}, {X: 2, Y: 1}, {X: 3, Y: 2}, {X: 4, Y: 2}],
-    [{X: 0, Y: 2}, {X: 1, Y: 2}, {X: 2, Y: 1}, {X: 3, Y: 0}, {X: 4, Y: 0}],
-    [{X: 0, Y: 0}, {X: 1, Y: 0}, {X: 2, Y: 0}, {X: 3, Y: 1}, {X: 4, Y: 2}],
-    [{X: 0, Y: 2}, {X: 1, Y: 2}, {X: 2, Y: 2}, {X: 3, Y: 1}, {X: 4, Y: 0}],
-    [{X: 0, Y: 0}, {X: 1, Y: 1}, {X: 2, Y: 2}, {X: 3, Y: 2}, {X: 4, Y: 2}],
-    [{X: 0, Y: 2}, {X: 1, Y: 1}, {X: 2, Y: 0}, {X: 3, Y: 0}, {X: 4, Y: 0}],
-    [{X: 0, Y: 1}, {X: 1, Y: 1}, {X: 2, Y: 2}, {X: 3, Y: 1}, {X: 4, Y: 1}],
-    [{X: 0, Y: 1}, {X: 1, Y: 1}, {X: 2, Y: 0}, {X: 3, Y: 1}, {X: 4, Y: 1}]
+        [{X: 0, Y: 1}, {X: 1, Y: 1}, {X: 2, Y: 1}, {X: 3, Y: 1}, {X: 4, Y: 1}],
+        [{X: 0, Y: 0}, {X: 1, Y: 0}, {X: 2, Y: 0}, {X: 3, Y: 0}, {X: 4, Y: 0}],
+        [{X: 0, Y: 2}, {X: 1, Y: 2}, {X: 2, Y: 2}, {X: 3, Y: 2}, {X: 4, Y: 2}],
+        [{X: 0, Y: 0}, {X: 1, Y: 1}, {X: 2, Y: 2}, {X: 3, Y: 1}, {X: 4, Y: 0}],
+        [{X: 0, Y: 2}, {X: 1, Y: 1}, {X: 2, Y: 0}, {X: 3, Y: 1}, {X: 4, Y: 2}],
+        [{X: 0, Y: 0}, {X: 1, Y: 0}, {X: 2, Y: 1}, {X: 3, Y: 0}, {X: 4, Y: 0}],
+        [{X: 0, Y: 2}, {X: 1, Y: 2}, {X: 2, Y: 1}, {X: 3, Y: 2}, {X: 4, Y: 2}],
+        [{X: 0, Y: 1}, {X: 1, Y: 0}, {X: 2, Y: 0}, {X: 3, Y: 0}, {X: 4, Y: 1}],
+        [{X: 0, Y: 1}, {X: 1, Y: 2}, {X: 2, Y: 2}, {X: 3, Y: 2}, {X: 4, Y: 1}],
+        [{X: 0, Y: 2}, {X: 1, Y: 1}, {X: 2, Y: 1}, {X: 3, Y: 1}, {X: 4, Y: 2}],
+        [{X: 0, Y: 0}, {X: 1, Y: 1}, {X: 2, Y: 1}, {X: 3, Y: 1}, {X: 4, Y: 0}],
+        [{X: 0, Y: 0}, {X: 1, Y: 1}, {X: 2, Y: 1}, {X: 3, Y: 1}, {X: 4, Y: 2}],
+        [{X: 0, Y: 2}, {X: 1, Y: 1}, {X: 2, Y: 1}, {X: 3, Y: 1}, {X: 4, Y: 0}],
+        [{X: 0, Y: 0}, {X: 1, Y: 0}, {X: 2, Y: 1}, {X: 3, Y: 2}, {X: 4, Y: 2}],
+        [{X: 0, Y: 2}, {X: 1, Y: 2}, {X: 2, Y: 1}, {X: 3, Y: 0}, {X: 4, Y: 0}],
+        [{X: 0, Y: 0}, {X: 1, Y: 0}, {X: 2, Y: 0}, {X: 3, Y: 1}, {X: 4, Y: 2}],
+        [{X: 0, Y: 2}, {X: 1, Y: 2}, {X: 2, Y: 2}, {X: 3, Y: 1}, {X: 4, Y: 0}],
+        [{X: 0, Y: 0}, {X: 1, Y: 1}, {X: 2, Y: 2}, {X: 3, Y: 2}, {X: 4, Y: 2}],
+        [{X: 0, Y: 2}, {X: 1, Y: 1}, {X: 2, Y: 0}, {X: 3, Y: 0}, {X: 4, Y: 0}],
+        [{X: 0, Y: 1}, {X: 1, Y: 1}, {X: 2, Y: 2}, {X: 3, Y: 1}, {X: 4, Y: 1}],
+        [{X: 0, Y: 1}, {X: 1, Y: 1}, {X: 2, Y: 0}, {X: 3, Y: 1}, {X: 4, Y: 1}]
     ];
 
     let wins = [];
@@ -44,43 +44,41 @@ let noConnect = (function() {
     };
 
     let Symbols = {
-        chibi:
-            [
-                {Name: 'Jack', Symbol: '1'},
-                {Name: 'Warrior', Symbol: '2'},
-                {Name: 'Queen', Symbol: '3'},
-                {Name: 'Ninja', Symbol: '4'},
-                {Name: 'King', Symbol: '5'},
-                {Name: 'Samurai', Symbol: '6'},
-                {Name: 'Ace', Symbol: '7'},
-                {Name: 'Geisha', Symbol: '8'},
-                {Name: 'Wild', Symbol: '9'},
-                {Name: 'Scatter', Symbol: '10'},
-                {Name: 'fsScatter', Symbol: '11'},
-                {Name: 'Shuriken', Symbol: '12'}
-            ],
+        chibi: [
+            {Name: 'Jack', Symbol: '1'},
+            {Name: 'Warrior', Symbol: '2'},
+            {Name: 'Queen', Symbol: '3'},
+            {Name: 'Ninja', Symbol: '4'},
+            {Name: 'King', Symbol: '5'},
+            {Name: 'Samurai', Symbol: '6'},
+            {Name: 'Ace', Symbol: '7'},
+            {Name: 'Geisha', Symbol: '8'},
+            {Name: 'Wild', Symbol: '9'},
+            {Name: 'Scatter', Symbol: '10'},
+            {Name: 'fsScatter', Symbol: '11'},
+            {Name: 'Shuriken', Symbol: '12'}
+        ],
 
-        candyLand:
-            [
-                {Name: 'Jack', Symbol: '1'},
-                {Name: 'CandyCane', Symbol: '2'},
-                {Name: 'Queen', Symbol: '3'},
-                {Name: 'Lollypop', Symbol: '4'},
-                {Name: 'King', Symbol: '5'},
-                {Name: 'Icecream', Symbol: '6'},
-                {Name: 'Ace', Symbol: '7'},
-                {Name: 'Donut', Symbol: '8'},
-                {Name: 'GreenBottleTop', Symbol: '9'},
-                {Name: 'GreenBottleMid', Symbol: '10'},
-                {Name: 'GreenBottleBottom', Symbol: '11'},
-                {Name: 'OrangeBottleTop', Symbol: '12'},
-                {Name: 'OrangeBottleMid', Symbol: '13'},
-                {Name: 'OrangeBottleBottom', Symbol: '14'},
-                {Name: 'CherryBottleTop', Symbol: '15'},
-                {Name: 'CherryBottleMid', Symbol: '16'},
-                {Name: 'CherryBottleBottom', Symbol: '17'},
-                {Name: 'fsWild', Symbol: '21'}
-            ]
+        candyLand: [
+            {Name: 'Jack', Symbol: '1'},
+            {Name: 'CandyCane', Symbol: '2'},
+            {Name: 'Queen', Symbol: '3'},
+            {Name: 'Lollypop', Symbol: '4'},
+            {Name: 'King', Symbol: '5'},
+            {Name: 'Icecream', Symbol: '6'},
+            {Name: 'Ace', Symbol: '7'},
+            {Name: 'Donut', Symbol: '8'},
+            {Name: 'GreenBottleTop', Symbol: '9'},
+            {Name: 'GreenBottleMid', Symbol: '10'},
+            {Name: 'GreenBottleBottom', Symbol: '11'},
+            {Name: 'OrangeBottleTop', Symbol: '12'},
+            {Name: 'OrangeBottleMid', Symbol: '13'},
+            {Name: 'OrangeBottleBottom', Symbol: '14'},
+            {Name: 'CherryBottleTop', Symbol: '15'},
+            {Name: 'CherryBottleMid', Symbol: '16'},
+            {Name: 'CherryBottleBottom', Symbol: '17'},
+            {Name: 'fsWild', Symbol: '21'}
+        ]
     };
 
     let SymbolsValue = {
@@ -92,7 +90,8 @@ let noConnect = (function() {
             '5': [10, 15, 35],
             '6': [100, 200, 500],
             '7': [10, 25, 50],
-            '8': [200, 500, 1000]}
+            '8': [200, 500, 1000]
+        }
     };
 
     function intRandom(end, start = 0) {
@@ -103,12 +102,12 @@ let noConnect = (function() {
         return !isNaN(parseFloat(n)) && isFinite(n);
     }
 
-    let someArr = [{'1':18}, {'2': 9}, {'3': 15}, {'4': 9}, {'5': 15}, {'6': 9}, {'7': 15}, {'8': 9}];
+    let someArr = [{'1': 18}, {'2': 9}, {'3': 15}, {'4': 9}, {'5': 15}, {'6': 9}, {'7': 15}, {'8': 9}];
 
     function generateArray() {
         for (let i = 0; i < 5; i++) {
             for (let k = 0; k < 5; k++) {
-                if(arr[i][k]){
+                if (arr[i][k]) {
                     continue;
                 } else {
                     arr[i][k] = +getRandomElem(someArr);
@@ -118,7 +117,7 @@ let noConnect = (function() {
     }
 
     function logMatrix() {
-        for ( let i = 0; i < 5; i++) {
+        for (let i = 0; i < 5; i++) {
             console.log(`${arr[i][0]} ${arr[i][1]} ${arr[i][2]} ${arr[i][3]} ${arr[i][4]}`);
         }
     }
@@ -139,12 +138,12 @@ let noConnect = (function() {
             let win = 0;
             let winNumber = firstNumberInWinLine(winComb[k]);
 
-                for (let i = 0; i < 5; i++) {
-                    if (arr[i][winComb[k][i]] === winNumber || arr[i][winComb[k][i]] === wild) {
-                        win++;
-                    } else {
-                        break;
-                    }
+            for (let i = 0; i < 5; i++) {
+                if (arr[i][winComb[k][i]] === winNumber || arr[i][winComb[k][i]] === wild) {
+                    win++;
+                } else {
+                    break;
+                }
             }
 
             if (win > 2) {
@@ -164,19 +163,20 @@ let noConnect = (function() {
         }
     }
 
-    let chanceArray = [40, 9, 20 ,30 ,1];
+    let chanceArray = [40, 9, 20, 30, 1];
+
     function setPercent(position, number) {
         let delta = chanceArray[position] - number;
         chanceArray[position] = number;
 
         let sum = 0;
-        for(let i = 0; i < chanceArray.length; i++){
+        for (let i = 0; i < chanceArray.length; i++) {
             if (i == position) continue;
             sum += chanceArray[i];
         }
         let arrOfP = [];
         let remainP = 1;
-        for(let i = 0; i < chanceArray.length; i++){
+        for (let i = 0; i < chanceArray.length; i++) {
             if (i == position) continue;
             if (i == chanceArray.length - 1) {
                 arrOfP[i] = remainP;
@@ -186,7 +186,7 @@ let noConnect = (function() {
         }
         sum += delta;
         let remain;
-        for(let i = 0; i < arrOfP.length; i++){
+        for (let i = 0; i < arrOfP.length; i++) {
             if (i == position) continue;
             if (i == chanceArray.length - 1) {
                 chanceArray[i] = remain;
@@ -195,8 +195,6 @@ let noConnect = (function() {
             remain = sum - chanceArray[i];
         }
     }
-
-
 
     function getRandomElem(array) {
         let sortedArray = array;
@@ -210,12 +208,12 @@ let noConnect = (function() {
             percentInArr += sortedArray[i][Object.keys(sortedArray[i])[0]];
         }
 
-        if(percentInArr > 1) {
+        if (percentInArr > 1) {
             console.error(`Too much percents in your config. ${percentInArr * 100} at least of 100`);
         }
 
         let percent = 0;
-        for (let i = 0; i < sortedArray.length; i++){
+        for (let i = 0; i < sortedArray.length; i++) {
             if (percent === percentInArr) break;
 
             let value = sortedArray[i][Object.keys(sortedArray[i])[0]];
@@ -230,37 +228,36 @@ let noConnect = (function() {
         }
     }
 
-
     function addWildsOrNot() {
         let wildChance = intRandom(100);
-        if(wildChance < 80) {
+        if (wildChance < 80) {
             return;
         }
-        if(wildChance >= 80 && wildChance < 86) {
+        if (wildChance >= 80 && wildChance < 86) {
             addWildsInArray(1)
         }
-        if(wildChance >= 86 && wildChance < 91) {
+        if (wildChance >= 86 && wildChance < 91) {
             addWildsInArray(2)
         }
-        if(wildChance >= 91 && wildChance < 94) {
+        if (wildChance >= 91 && wildChance < 94) {
             addWildsInArray(3)
         }
-        if(wildChance >= 95 && wildChance < 98) {
+        if (wildChance >= 95 && wildChance < 98) {
             addWildsInArray(4)
         }
-        if(wildChance >= 98) {
+        if (wildChance >= 98) {
             addWildsInArray(5)
         }
 
     }
 
     function addWildsInArray(numOfWilds) {
-        while(numOfWilds) {
+        while (numOfWilds) {
             let randomX = intRandom(4, 1);
             let randomY = intRandom(4, 1);
             let elem = arr[randomX][randomY];
 
-            if(elem) {
+            if (elem) {
             } else {
                 elem = wild;
                 --numOfWilds;
@@ -271,9 +268,9 @@ let noConnect = (function() {
     function addBottleFS(num) {
         switch (num) {
             case 3:
-            for (let k = 1; k < 4; k++) {
-                arr[4][k] = wild;
-            }
+                for (let k = 1; k < 4; k++) {
+                    arr[4][k] = wild;
+                }
             case 2:
                 for (let k = 1; k < 4; k++) {
                     arr[2][k] = wild;
@@ -325,17 +322,18 @@ let noConnect = (function() {
         TotalFSWinCentes: 0,
         TotalFSWinCoins: 0
     };
+
     function checkForFs() {
         let goFs = (intRandom(1000) > 980);
         if (goFs) {
             let bottleChance = intRandom(100);
-            if(bottleChance < 90) {
+            if (bottleChance < 90) {
                 numOfBottles = 1;
             }
-            if(bottleChance >= 90 && bottleChance < 95) {
+            if (bottleChance >= 90 && bottleChance < 95) {
                 numOfBottles = 2
             }
-            if(bottleChance >= 95) {
+            if (bottleChance >= 95) {
                 numOfBottles = 3;
             }
             numOfSpins = 7;
@@ -387,7 +385,8 @@ let noConnect = (function() {
 
     function generateFs() {
         switch (game) {
-            case 'candyLand': generateCandyFs();
+            case 'candyLand':
+                generateCandyFs();
                 break;
             default:
                 break;
@@ -422,7 +421,7 @@ let noConnect = (function() {
         mongoose.connect('mongodb://honey:nohoney@ds143340.mlab.com:43340/nomoneynohoney');
         var db = mongoose.connection;
         db.on('error', console.error.bind(console, 'connection error:'));
-        db.once('open', function() {
+        db.once('open', function () {
             console.log('connected');
             // we're connected!
         });
@@ -437,9 +436,12 @@ let noConnect = (function() {
             currency: '$',
             sessionID: generateSessionID()
         });
-        initBalance.save((err, init) => {
-            if (err) return console.error('Wrong init');
-            console.log('Init Balance saved', init);
+        // initBalance.save((err, init) => {
+        //     if (err) return console.error('Wrong init');
+        //     console.log('Init Balance saved', init);
+        // });
+        Balance.find({sessionID: 207693}, (err, init) => {
+            console.log(init[0]);
         });
     }
 
@@ -488,7 +490,7 @@ let noConnect = (function() {
         let answer;
         switch (rMode) {
             case 'init':
-            // money = 500000;
+                // money = 500000;
                 answer = returnParams('init');
                 break;
             case 'roll':
@@ -509,7 +511,8 @@ let noConnect = (function() {
                 answer = 'ready';
 
                 break;
-            default: answer = 'Undefined request';
+            default:
+                answer = 'Undefined request';
                 break;
         }
         arr = [[], [], [], [], []];
@@ -539,7 +542,7 @@ let noConnect = (function() {
 // for(let i = 0; i < 100000; i++) {
 //     noConnect.request('candyLand', 'roll', 1, 1);
 // }
-console.log(noConnect.request('candyLand', 'init', 1, 1));
+noConnect.request('candyLand', 'init', 1, 1);
 
 
 

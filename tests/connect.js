@@ -1,16 +1,131 @@
-import { config } from './config'
+// import { config } from 'config';
+const mongoose = require('mongoose');
 
-export class Connect {
+let config = {
+    Chibi: {
+        Modes: ['root', 'fsBonus1', 'shuriken1', 'shuriken2', 'shuriken3', 'shuriken4', 'shuriken5'],
+        Symbols: [
+            {Name: 'Jack', Symbol: '1'},
+            {Name: 'Warrior', Symbol: '2'},
+            {Name: 'Queen', Symbol: '3'},
+            {Name: 'Ninja', Symbol: '4'},
+            {Name: 'King', Symbol: '5'},
+            {Name: 'Samurai', Symbol: '6'},
+            {Name: 'Ace', Symbol: '7'},
+            {Name: 'Geisha', Symbol: '8'},
+            {Name: 'Wild', Symbol: '9'},
+            {Name: 'Scatter', Symbol: '10'},
+            {Name: 'fsScatter', Symbol: '11'},
+            {Name: 'Shuriken', Symbol: '12'}
+        ],
+        SymbolValue: {
+            '1': [0, 0, 3, 5, 10],
+            '2': [0, 0, 25, 50, 100],
+            '3': [0, 0, 5, 10, 25],
+            '4': [0, 0, 50, 100, 200],
+            '5': [0, 0, 10, 15, 35],
+            '6': [0, 0, 100, 200, 500],
+            '7': [0, 0, 10, 25, 50],
+            '8': [0, 0, 200, 500, 1000]},
+        WildSymbol: 9,
+        WildSymbolPercent: [
+            {Name: 0, Percent: 10},
+            {Name: 1, Percent: 20},
+            {Name: 2, Percent: 20},
+            {Name: 3, Percent: 20},
+            {Name: 4, Percent: 20},
+            {Name: 5, Percent: 10}
+        ],
+        NormalSymbolPercent: [
+            {Name: 1, Percent: 8},
+            {Name: 2, Percent: 18},
+            {Name: 3, Percent: 8},
+            {Name: 4, Percent: 16},
+            {Name: 5, Percent: 18},
+            {Name: 6, Percent: 4},
+            {Name: 7, Percent: 18},
+            {Name: 8, Percent: 10}
+        ],
+        WinLines: 10,
+        BetLevel: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        CoinValue: [1, 2, 5, 10, 20, 50, 100]
+    },
+
+    winCombinations: [
+        [2, 2, 2, 2, 2],
+        [3, 3, 3, 3, 3],
+        [1, 1, 1, 1, 1],
+        [3, 2, 1, 2, 3],
+        [1, 2, 3, 2, 1],
+        [3, 3, 2, 3, 3],
+        [1, 1, 2, 3, 3],
+        [2, 3, 3, 3, 2],
+        [2, 1, 1, 1, 2],
+        [1, 2, 2, 2, 1],
+        [3, 2, 2, 2, 3],
+        [3, 2, 2, 2, 1],
+        [1, 2, 2, 2, 3],
+        [3, 3, 2, 1, 1],
+        [1, 1, 2, 3, 3],
+        [3, 3, 3, 2, 1],
+        [1, 1, 1, 2, 3],
+        [3, 2, 1, 1, 1],
+        [1, 2, 3, 3, 3],
+        [2, 2, 1, 2, 2],
+        [2, 2, 3, 2, 2]
+    ],
+
+    CandyLand: {
+        Modes: ['root', 'fsBonus1', 'fsBonus2', 'fsBonus3', 'fsBonus4', 'fsBonus5', 'fsBonus6', 'fsBonus7'],
+        Symbols: [
+            {Name: 'Jack', Symbol: '1'},
+            {Name: 'CandyCane', Symbol: '2'},
+            {Name: 'Queen', Symbol: '3'},
+            {Name: 'Lollypop', Symbol: '4'},
+            {Name: 'King', Symbol: '5'},
+            {Name: 'Icecream', Symbol: '6'},
+            {Name: 'Ace', Symbol: '7'},
+            {Name: 'Donut', Symbol: '8'},
+            {Name: 'GreenBottleTop', Symbol: '9'},
+            {Name: 'GreenBottleMid', Symbol: '10'},
+            {Name: 'GreenBottleBottom', Symbol: '11'},
+            {Name: 'OrangeBottleTop', Symbol: '12'},
+            {Name: 'OrangeBottleMid', Symbol: '13'},
+            {Name: 'OrangeBottleBottom', Symbol: '14'},
+            {Name: 'CherryBottleTop', Symbol: '15'},
+            {Name: 'CherryBottleMid', Symbol: '16'},
+            {Name: 'CherryBottleBottom', Symbol: '17'},
+            {Name: 'fsWild', Symbol: '21'}
+        ],
+        SymbolValue: {
+            '1': [3, 5, 10],
+            '2': [25, 50, 100],
+            '3': [5, 10, 25],
+            '4': [50, 100, 200],
+            '5': [10, 15, 35],
+            '6': [100, 200, 500],
+            '7': [10, 25, 50],
+            '8': [200, 500, 1000]},
+        WildSymbol: 9,
+        MinSymbol: 1,
+        MaxSymbol: 8
+    }
+};
+
+class Connect {
     constructor(game) {
+        this.game = game;
         this.finalScreen = [[], [], [], [], []];
-        this.modes = config[game]['Modes'];
-        this.symbols = config[game]['Symbols'];
-        this.symbolValue = config[game]['SymbolValue'];
-        this.wildSymbol = config[game]['WildSymbol'];
-        this.wildSymbolPercent = config[game]['wildSymbolPercent'];
-        this.normalSymbolPercent = config[game]['NormalSymbolPercent'];
-        this.betLevel = config[game]['BetLevel'];
-        this.coinValue = config[game]['CoinValue'];
+        this.modes = config[game].Modes;
+        this.symbols = config[game].Symbols;
+        this.symbolValue = config[game].SymbolValue;
+        this.wildSymbol = config[game].WildSymbol;
+        this.wildSymbolPercent = config[game].WildSymbolPercent;
+        this.normalSymbolPercent = config[game].NormalSymbolPercent;
+        this.betLevel = config[game].BetLevel;
+        this.coinValue = config[game].CoinValue;
+        this.winLines = config[game].WinLines;
+        this.winCombinations = config.winCombinations.filter((comb, index) => index < this.winLines);
     }
 
     intRandom(end, start = 0) {
@@ -25,28 +140,30 @@ export class Connect {
 
     getRandomElem(array) {
         let random = Math.random();
-
         for (let i = 0; i < array.length; i++) {
-            array[i]['Percent'] /= 100;
+            array[i].Percent /= 100;
         }
         let sumPercent = 0;
         for (let i = 0; i < array.length; i++) {
-            sumPercent += array[i]['Percent'];
+            sumPercent += array[i].Percent;
         }
 
         if (sumPercent > 1) {
             console.error(`Too much percents in your config. ${sumPercent * 100} of 100`);
         }
-
         let currentPercent = 0;
+
         for (let i = 0; i < array.length; i++) {
             if (currentPercent === sumPercent) {
                 break;
             }
+            let value = array[i].Percent;
 
-            let value = array[i]['Name'];
             if (random > currentPercent && random < currentPercent + value) {
-                return array[i]['Name'];
+                for (let i = 0; i < array.length; i++) {
+                    array[i].Percent *= 100;
+                }
+                return array[i].Name;
             } else {
                 currentPercent += value;
             }
@@ -54,15 +171,15 @@ export class Connect {
     }
 
     changePercent(array, position, percent) {
-        let delta = array[position]['Percent'] - percent;
-        array[position]['Percent'] = percent;
+        let delta = array[position].Percent - percent;
+        array[position].Percent = percent;
 
         let sumPercent = 0;
         for (let i = 0; i < array.length; i++) {
             if (i === position) {
                 continue;
             }
-            sumPercent += array[i]['Percent'];
+            sumPercent += array[i].Percent;
         }
 
         let arrOfP = [];
@@ -76,8 +193,8 @@ export class Connect {
                 arrOfP[i] = remainP;
             }
 
-            arrOfP[i] = array[i]['Percent'] / sumPercent;
-            remainP -= arrOfP[i]['Percent'];
+            arrOfP[i] = array[i].Percent / sumPercent;
+            remainP -= arrOfP[i].Percent;
         }
 
         sumPercent += delta;
@@ -88,11 +205,11 @@ export class Connect {
             }
 
             if (i === array.length - 1) {
-                array[i]['Percent'] = remain;
+                array[i].Percent = remain;
             }
 
-            array[i]['Percent'] = sumPercent * arrOfP[i];
-            remain = sumPercent - array[i]['Percent'];
+            array[i].Percent = sumPercent * arrOfP[i];
+            remain = sumPercent - array[i].Percent;
         }
     }
 
@@ -100,7 +217,7 @@ export class Connect {
         let wildsInLine = 0;
         for (let k = 0; k < this.winLines; k++) {
             for (let i = 0; i < 5; i++) {
-                if (this.finalScreen[i][this.combinationArray[k][i]] === this.wildSymbol) {
+                if (this.finalScreen[i][this.winCombinations[k][i]] === this.wildSymbol) {
                     wildsInLine++;
                 }
             }
@@ -121,8 +238,8 @@ export class Connect {
             if (elem) {
                 continue;
             } else {
-                elem = wildSymbol;
-                if(this.fiveWildInLine()) {
+                elem = this.wildSymbol;
+                if (this.fiveWildInLine()) {
                     elem = undefined;
                 } else {
                     --numOfWilds;
@@ -132,21 +249,21 @@ export class Connect {
     }
 
     addWildsOrNot() {
-        let numberOfWilds = +this.getRandomElem(config.wildSymbolPercent);
+        let numberOfWilds = this.getRandomElem(this.wildSymbolPercent);
         if (numberOfWilds === 0) {
             return;
         } else {
-            addWildsInArray(numberOfWilds);
+            this.addWildsInArray(numberOfWilds);
         }
     }
 
-    addNormalSymbols(array) {
+    addNormalSymbols() {
         for (let i = 0; i < 5; i++) {
             for (let k = 0; k < 5; k++) {
-                if (array[i][k]) {
+                if (this.finalScreen[i][k]) {
                     continue;
                 } else {
-                    array[i][k] = +this.getRandomElem(config.normalSymbolPercent);
+                    this.finalScreen[i][k] = +this.getRandomElem(this.normalSymbolPercent);
                 }
             }
         }
@@ -155,22 +272,23 @@ export class Connect {
     firstNumberInWinLine(combinationArray) {
         for (let i = 0; i < 5; i++) {
             let elem = this.finalScreen[i][combinationArray[i]];
-            if (elem !== config.wildSymbol) {
+            if (elem !== this.wildSymbol) {
                 return elem;
             }
         }
     }
 
-    checkForWinLines(numberOfLines) {
+    checkForWinLines() {
         let winCounter = 0;
         this.wins = [];
-        for (let k = 0; k < numberOfLines; k++) {
+        this.totalWin = 0;
+        for (let k = 0; k < this.winLines; k++) {
             let win = 0;
-            let winNumber = firstNumberInWinLine(this.arrayOfCombination[k]);
 
+            let winNumber = this.firstNumberInWinLine(this.winCombinations[k]);
             for (let i = 0; i < 5; i++) {
-                let numberFromCombination = this.arrayOfCombination[k][i];
-                let elementInScreen = this.finalScreen[i][numberFromCombination]
+                let numberFromCombination = this.winCombinations[k][i];
+                let elementInScreen = this.finalScreen[i][numberFromCombination];
                 if (elementInScreen === winNumber || elementInScreen === this.wildSymbol) {
                     win++;
                 } else {
@@ -189,55 +307,154 @@ export class Connect {
                     Symbol: winNumber,
                     Win: winValue
                 };
-                this.money += winValue;
+                this.totalWin += winValue;
                 winCounter++;
             }
         }
     }
 
-    generateInit() {
-        // connectToDB();
-        this.addNormalSymbols();
+    generateAnswer() {
         return {
             Balance: {
                 BetLevel: this.betLevel,
                 CoinValue: this.coinValue,
-                Currency: this.Currency, // server
-                ScoreCents: this.money, //server
-                ScoreCoins: this.money  // изначально money / coinValue но при ините coinvalue = 1
+                Currency: this.currency, // server
+                ScoreCents: this.money,
+                ScoreCoins: this.money / this.coinValue,
+                TotalWiNCents: this.totalWin,
+                TotalWinCoins: this.totalWin / this.coinValue
             },
-            FirstScreen: this.finalScreen,
-            Lines: this.numberOfLines,
-            Modes: config[this.game]['Modes'],
-            Saved: null, //TODO session recovery
-            SessionID: 753,
-            Symbols: config[this.game]['Symbols']
+            FreeSpinsLeft: 0,
+            FreeSpinsWin: 0,
+            FsBonus: null,
+            LinesCount: this.winLines,
+            Mode: this.currentMode,
+            NextMode: this.nextMode,
+            Screen: this.finalScreen,
+            WinLines: this.wins
         };
     }
 
-    generateRoot() {
-        this.money -= betLevel * numberOfLines;
-        addWildsOrNot();
-        generateArray();
-        checkForWinLines();
+    generateFs() {
+        switch (this.game) {
+            case 'candyLand': this.generateCandyFs();
+                break;
+            case 'chibi': this.generateChibiFs();
+                break;
+            default:
+                break;
+        }
+
+        return this.generateAnswer();
+    }
+
+    connectToDB() {
+        mongoose.connect('mongodb://honey:nohoney@ds143340.mlab.com:43340/nomoneynohoney');
+        let db = mongoose.connection;
+        db.on('error', console.error.bind(console, 'connection error:'));
+        db.once('open', function () {
+            console.log('connected');
+            // we're connected!
+        });
+        let balanceSchema = mongoose.Schema({
+            currentBalance: Number,
+            currency: String,
+            sessionID: Number
+        });
+        let Balance = mongoose.model('Balance', balanceSchema);
+        let initBalance = new Balance({
+            currentBalance: 5000,
+            currency: '$',
+            sessionID: generateSessionID()
+        });
+        // initBalance.save((err, init) => {
+        //     if (err) return console.error('Wrong init');
+        //     console.log('Init Balance saved', init);
+        // });
+        Balance.find({sessionID: 207693}, (err, init) => {
+            return init;
+        });
+    }
+
+    getInitialize() {
+        this.addNormalSymbols();
+        // this.init = this.connectToDB();
+        // console.log(this.init.currency);
+        this.betLevel = 1;
+        this.coinValue = 1;
+        this.currency = '$';
+        this.money = 5000000;
         return {
             Balance: {
-                BetLevel: betLevel,
-                CoinValue: coinValue,
-                Currency: 'USD',
-                ScoreCents: money,
-                ScoreCoins: money / coinValue,
-                TotalWiNCents: totalWin,
-                TotalWinCoins: totalWin / coinValue
+                BetLevel: this.betLevel, //server
+                CoinValue: this.coinValue, //server
+                Currency: this.currency, // server
+                ScoreCents: this.money, // server
+                ScoreCoins: this.money / this.coinValue
             },
-            FreeSpinsLeft: numOfSpins,
-            FreeSpinsWin: 0,
-            FsBonus: null,
-            LinesCount: numberOfLines,
-            Mode: currentMode,
-            NextMode: nextMode,
-            Screen: arr,
-            WinLines: wins
+            FirstScreen: this.finalScreen,
+            Lines: this.winLines,
+            Modes: config[this.game].Modes,
+            Saved: null, // TODO session recovery
+            SessionID: 753,
+            Symbols: config[this.game].Symbols
         };
     }
+
+    getRoll(bet) {
+        this.betLevel = bet;
+        this.finalScreen = [[],[],[],[],[]];
+        this.money -= this.betLevel * this.winLines;
+        this.addWildsOrNot();
+        this.addNormalSymbols();
+        this.checkForWinLines();
+        this.money += this.totalWin;
+
+        // return this.generateAnswer();
+    }
+    // request(rGame, rMode, rBetLevel, rCoinValue) {
+    //     game = rGame;
+    //     betLevel = rBetLevel;
+    //     coinValue = rCoinValue;
+    //     let answer;
+    //     switch (rMode) {
+    //         case 'init':
+    //         // money = 500000;
+    //             answer = this.generateInit();
+    //             break;
+    //         case 'roll':
+    //             currentMode = nextMode;
+    //             if (numOfSpins > 0) {
+    //                 answer = this.generateFs();
+    //                 numOfSpins--;
+    //                 if (numOfSpins === 0) {
+    //                     nextMode = 'root';
+    //                 }
+    //             }
+    //             if (numOfSpins <= 0) {
+    //                 checkForFs();
+    //                 answer = this.generateRoot();
+    //             }
+    //             break;
+    //         case 'ready':
+    //             answer = 'ready';
+    //
+    //             break;
+    //         default: answer = 'Undefined request';
+    //             break;
+    //     }
+    //
+    //     return answer;
+    // }
+
 }
+let timer;
+console.time(timer);
+let chibi = new Connect('Chibi');
+chibi.getInitialize();
+for(let i = 0; i < 100000; i++){
+    chibi.getRoll(chibi.intRandom(10, 1));
+}
+console.timeEnd(timer);
+// console.log(chibi.generateAnswer());
+console.log(chibi.money / 5000000 * 100);
