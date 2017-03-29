@@ -13,17 +13,6 @@ export class Element {
 
         // Заполняем его спрайтами всех элементов (они будут расположенны друг на друге)
         this.sprites = [];
-        this.bg = game.add.sprite(0, 0, 'elementBackground', 'f-n-00.png', this.group);
-        this.bg.anchor.set(0.5);
-        if (model.desktop) {
-            this.bg.scale.set(1.25);
-        }
-        this.bg.animations.add('winBG', Phaser.Animation.generateFrameNames('f-w-', 0, 18, '.png', 2), 30, false);
-        this.bg.animations.add('normalBG', Phaser.Animation.generateFrameNames('f-n-', 0, 29, '.png', 2), 30, true);
-        // this.bg.animations.getAnimation('winBG').onComplete.add(() => {
-        //     this.bg.destroy();
-        // });
-        this.bg.isBursted = false;
 
         for (let i = 1; i <= config.symbolsCount; i++) {
 
@@ -31,16 +20,19 @@ export class Element {
             let sprite = game.add.sprite(0, 0, i, null, this.group);
             sprite.anchor.set(0.5);
             sprite.visible = false;
-            // if (i == 11
-            // || i == 12
-            // || i == 13 ) {
-            //     sprite.y += (model.desktop) ? 50 : 50 * 0.75;
-            // }
             this.sprites.push(sprite);
 
             // Каждому спрайту добавляем необходимые анимации
             this.addSpriteAnimation(sprite, i);
         }
+
+        this.bg = game.add.sprite(0, 0, 'elementBackground', 'f-n-00.png', this.group);
+        this.bg.anchor.set(0.5);
+        if (model.desktop) {
+            this.bg.scale.set(1.25);
+        }
+        this.bg.animations.add('winBG', Phaser.Animation.generateFrameNames('f-w-', 0, 18, '.png', 2), 30, false);
+        this.bg.animations.add('normalBG', Phaser.Animation.generateFrameNames('f-n-', 0, 29, '.png', 2), 30, true);
 
         // По умолчанию все символы будут проигрывать анимацию "1-n" и этот символ будет видимым
         this.active = 1;
@@ -114,18 +106,27 @@ export class Element {
 
     }
 
-    burstBubble() {
-        this.bg.isBursted = true;
+    bangBubble() {
         this.bg.play('winBG');
-        this.bg.animations.getAnimation('winBG').onComplete.add(() => {
-            this.bg.visible = false;
-        });
+        let game = model.el('game');
+
+        game.add.tween(this.bg).to({alpha: 0}, 1000, 'Linear', true);
+    }
+
+    hideBubble() {
+        this.bg.alpha = 0;
     }
 
     showBubble() {
-        this.bg.isBursted = false;
-        this.bg.visible = true;
+        this.bg.alpha = 1;
     }
+
+    // burstBubble() {
+    //     this.bg.animations.getAnimation('winBG').onComplete.add(() => {
+    //         this.bg.visible = false;
+    //         this.bg.isBursted = true;
+    //     });
+    // }
 
     // Вспомогательные методы для добавления анимаций для спрайтов
     addSpriteAnimation(sprite, index) {

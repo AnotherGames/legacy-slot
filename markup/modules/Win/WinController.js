@@ -56,7 +56,7 @@ export let controller = (() => {
 
     }
 
-    function cleanWin(cleanAlpha = false, normalAnim = true) {
+    function cleanWin(cleanAlpha = false, normalAnim = true, cleanBubble = false) {
         let container = model.group('winTop');
         // Обнуляем счетчики глист
         model.data('glistaFiredCounter', 0);
@@ -68,12 +68,18 @@ export let controller = (() => {
             upWheel.forEach((upEl) => {
                 upEl.hide(0);
                 upEl.normal();
+                if (cleanBubble) {
+                    upEl.showBubble();
+                }
             });
         });
         let wheels = model.el('wheels');
         wheels.forEach((wheel) => {
             wheel.elements.forEach((el) => {
                 el.show();
+                if (cleanBubble) {
+                    el.showBubble();
+                }
             });
         });
 

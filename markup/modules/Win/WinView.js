@@ -92,12 +92,13 @@ export let view = (() => {
                 model.el('winElements', winElements);
                 winElements.elements.forEach((el) => {
                     el.hide(0);
+                    el.hideBubble();
                 });
                 winElements.upElements.forEach((upEl) => {
                     upEl.show();
                     upEl.win();
                     // взрыв шара
-                    // upEl.burstBubble();
+                    upEl.bangBubble();
                     draw.scaleJumping({
                         el: upEl,
                         start: 0.3,
@@ -234,6 +235,8 @@ export let view = (() => {
             let lineValue = line.Line;
             let currentLineY;
             let x, y;
+            if (line.Win == 0) return;
+
             // Если обычная линия
             if (!scatter) {
                 currentLineY = model.data('lines')[lineValue - 1][countValue - 1].Y;
@@ -241,8 +244,8 @@ export let view = (() => {
                     x = 192 * (countValue - 0.5) + 165 - gameMachine.width / 2;
                     y = 180 * (currentLineY + 0.5) + 125 - gameMachine.height / 2 - 25;
                 } else {
-                    x = 256 * (countValue - 0.5) + 200 - gameMachine.width / 2;
-                    y = 240 * (currentLineY + 0.5) + 310 - gameMachine.height / 2 - 25;
+                    x = 256 * (countValue - 0.5) + 205 - gameMachine.width / 2;
+                    y = 240 * (currentLineY + 0.5) + 312 - gameMachine.height / 2 - 25;
                 }
             }
             // Рассчитываем если скаттер
@@ -265,8 +268,8 @@ export let view = (() => {
                     x = 192 * (lastWheel + 0.5) + 165 - gameMachine.width / 2;
                     y = 180 * (lastElement + 0.5) + 125 - gameMachine.height / 2 - 25;
                 } else {
-                    x = 256 * (lastWheel + 0.5) + 200 - gameMachine.width / 2;
-                    y = 240 * (lastElement + 0.5) + 310 - gameMachine.height / 2 - 25;
+                    x = 256 * (lastWheel + 0.5) + 205 - gameMachine.width / 2;
+                    y = 240 * (lastElement + 0.5) + 313 - gameMachine.height / 2 - 25;
                 }
             }
 
@@ -281,7 +284,7 @@ export let view = (() => {
             } else {
                 font = '25px Arial, Helvetica';
             }
-            let text = game.add.text(x, y + 4, winValue, {font: font, fill: '#fff'}, container);
+            let text = game.add.text(x + 2, y + 4, winValue, {font: font, fill: '#fff'}, container);
             text.anchor.set(0.5);
 
         },
@@ -304,7 +307,7 @@ export let view = (() => {
         }) {
             let container = el.group.parent;
 
-            let mermaid = game.add.sprite(10, el.group.y, 'mermaid', null, container);
+            let mermaid = game.add.sprite(20, el.group.y, 'mermaid', null, container);
             mermaid.anchor.set(0.5);
             mermaid.animations.add('move', Phaser.Animation.generateFrameNames('rusalka-idle-x_', 0, 30, '.png', 1), 20, true);
             mermaid.animations.play('move');

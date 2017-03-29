@@ -82,7 +82,7 @@ export let controller = (() => {
                 } else {
 
                     // Очищаем выигрышный экран
-                    winController.cleanWin();
+                    winController.cleanWin(false, true, true);
 
                     // Записываем полученные данные
                     model.data('rollResponse', data);
