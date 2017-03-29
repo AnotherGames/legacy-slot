@@ -227,6 +227,11 @@ export class Bonus {
 }
 function handleDoorClick() {
     if (this.destroyed || model.state('doorFinish') || !model.state('bonusReady')) return;
+    let doorIndex = this.doors.findIndex((element) => {
+        return this === element;
+    });
+    model.data('lastClickedDoor', doorIndex);
+
     request.send('Roll')
         .then((data) => {
             model.state('bonusReady', false);

@@ -144,6 +144,7 @@ export let model = (() => {
         model.state('isFirstAutoChangeAnimBG', true);
         model.state('maxFsMultiplier', false);
         model.state('doorFinish', false);
+        model.data('lastClickedDoor', 0);
         model.state('fontNotLoaded', true);
     }
 
