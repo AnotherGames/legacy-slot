@@ -58,13 +58,15 @@ export let view = (() => {
             gameBG.anchor.set(0.5);
             model.el('gameBG', gameBG);
 
-            let darknessBG = game.add.sprite(0, config[model.res].gameMachine.y, 'darkness', null, container);
-            darknessBG.anchor.set(0.5);
-            model.el('darknessBG', darknessBG);
-
             let gameMachine = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachine', null, container);
             gameMachine.anchor.set(0.5);
             model.el('gameMachine', gameMachine);
+
+            let darknessBG = game.add.sprite(0, config[model.res].gameMachine.y, 'darkness', null, container);
+            darknessBG.anchor.set(0.5);
+            darknessBG.visible = false;
+            model.el('darknessBG', darknessBG);
+
 
             let gameMachineUp = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachineUp', null, container);
             gameMachineUp.anchor.set(0.5);
