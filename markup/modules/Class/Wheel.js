@@ -7,8 +7,9 @@ export class Wheel {
         if (typeof this.elSwitch === 'undefined') return;
 
         let elems = [];
+
         for (let i = 2; i < 5; i++) {
-            elems.push( this.items[(this.elSwitch - i) % 6]);
+            elems.push( this.items[Math.abs(i - this.elSwitch) % 6]);
         }
         return elems;
     }
@@ -64,8 +65,8 @@ export class Wheel {
         }
 
         this.randomScreen = [];
-        for(let i = 0; i < 5; i++){
-            this.randomScreen[i] = Math.round(Math.random() * (8 - 1) + 1)
+        for (let i = 0; i < 5; i++) {
+            this.randomScreen[i] = Math.round(Math.random() * (8 - 1) + 1);
         }
         // инитим входящие параметры
 
@@ -132,6 +133,11 @@ export class Wheel {
             }
 
         } else {
+            if (model.state('firstRoll')) {
+                this.elSwitch = 5;
+            } else {
+                this.elSwitch = 10;
+            }
             let elems = [];
             for (let i = 5; i > -1; i--) {
                 let item = this.items[(this.elSwitch - i) % 6];
@@ -200,15 +206,17 @@ export class Wheel {
             console.error('roll: finishScreen is undefined');
             return;
         }
+        // this.elSwitch = 30;
 
         this.mode = 'roll';
         this.update();
+
 
         let _this = this;
         this.timeLength = config.wheel.roll.time;
         this.easingSeparation = config.wheel.roll.easingSeparation;
         this.rollLength = config.wheel.roll.length;
-        this.currentScreen = this.finishScreen = finishScreen;
+        this.currentScreen = this.finishScreen = finishScreen.reverse();
 
         if (typeof (param) === 'object') {
             if (typeof (param.time) === 'number') {
@@ -270,7 +278,7 @@ export class Wheel {
                     if (_this.progress > 1) {
                         _this.progress = 1;
                     }
-                    _this.wheelLastY = _this.container.y = startY + _this._loopLengthY + pathLenth * _this._easingBackInOut(_this.progress);
+                    _this.wheelLastY = _this.container.y = startY + _this._loopLengthY - pathLenth * _this._easingBackInOut(_this.progress);
 
                     _this._elemGotoSwitchTop();
                     _this._elemGotoSwitchBottom();
@@ -282,6 +290,10 @@ export class Wheel {
                         _this.isFast = false;
 
                         if (_this.finishCallback) {
+                            console.log(_this.items);
+                            console.log(_this.elements);
+                            model.state('firstRoll', false);
+                            _this.elSwitch = 10;
                             _this.finishCallback();
                         }
                     }
@@ -331,13 +343,15 @@ export class Wheel {
     _elemGotoSwitchTop() {
         if (this.container.y < this.wheelY) return;
 
+        debugger;
+
         if (this.mode === 'roll') --this.rollLength;
 
         this._gotoMode();
 
         let rand;
         if (model.state('fs')) {
-            rand = this.game.rnd.integerInRange(1, 10);
+            rand = this.game.rnd.integerInRange(1, 8);
         } else {
             rand = this.game.rnd.integerInRange(1, 10);
         }
@@ -366,22 +380,22 @@ export class Wheel {
     _elemGotoSwitchBottom() {
         if (this.container.y > this.wheelY - this.elSize.height * 2) return;
 
-        if (this.mode === 'roll') ++this.rollLength;
+        if (this.mode === 'roll') --this.rollLength;
 
         this._gotoMode();
 
         let rand;
         if (model.state('fs')) {
-            rand = this.game.rnd.integerInRange(1, 11);
+            rand = this.game.rnd.integerInRange(1, 8);
         } else {
             rand = this.game.rnd.integerInRange(1, 10);
         }
         let anim = rand + '-b';
 
-        if (this.rollLength < 1
-            && this.rollLength > -4
+        if (this.rollLength < 5
+            && this.rollLength > 0
         ) {
-            anim = this.finishScreen[4 + this.rollLength] + '-n';
+            anim = this.finishScreen[this.rollLength] + '-n';
         }
 
         let itemInd = (this.elSwitch < 0) ? 5 - (Math.abs(this.elSwitch + 1) % 6) : Math.abs(this.elSwitch) % 6;
@@ -392,8 +406,8 @@ export class Wheel {
             anim
         });
 
-        --this.elSwitch;
         this.wheelY -= this.elSize.height;
+        --this.elSwitch;
 
         this._elemGotoSwitchBottom();
     }

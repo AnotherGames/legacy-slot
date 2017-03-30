@@ -42,6 +42,7 @@ export class Main {
         let game = model.el('game');
         let footer = new Footer({model, soundController, request});
         model.el('footer', footer);
+        model.state('firstRoll', true);
         // Первая темнота
         game.camera.flash(0x000000, 500);
 
@@ -123,6 +124,11 @@ export class Main {
             (game.scale.isFullScreen) ? $('#fakeButton').addClass('closed') : $('#fakeButton').removeClass('closed');
         }
 
+        this.scaleElements();
+
+    }
+
+    scaleElements() {
         let wheels = model.el('wheels');
 
         let scale1 = (model.desktop) ? 1.25 : 0.95;
@@ -132,6 +138,7 @@ export class Main {
         wheels.forEach((wheel) => {
 
             let act = wheel.elements;
+
             wheel.elements[0].activeSprite.scale.set(1);
             wheel.elements[0].bg.scale.set(scale1);
 
@@ -150,8 +157,6 @@ export class Main {
             }
 
         });
-
-
     }
 
     positionMainContainer() {

@@ -137,6 +137,7 @@ export class FS {
         let game = model.el('game');
         let footer = new Footer({model, soundController, request});
         model.el('footer', footer);
+        model.state('firstRoll', true);
 
         // Играем фоновую музыку
         soundController.music.stopMusic('startPerehod');
@@ -229,6 +230,10 @@ export class FS {
             (game.scale.isFullScreen) ? $('#fakeButton').addClass('closed') : $('#fakeButton').removeClass('closed');
         }
 
+        this.scaleElements();
+    }
+
+    scaleElements() {
         let wheels = model.el('wheels');
 
         let scale1 = (model.desktop) ? 1.25 : 0.95;
@@ -256,7 +261,6 @@ export class FS {
             }
 
         });
-
     }
 
     positionMainContainer() {
