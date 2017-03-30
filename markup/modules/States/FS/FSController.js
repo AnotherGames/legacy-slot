@@ -1,6 +1,6 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
-import { request } from 'modules/Util/Request';
+import { request } from '../../../../Info/Request';
 
 import { view as fsView } from 'modules/States/FS/FSView';
 import { view as transitionView } from 'modules/Transition/TransitionView';
