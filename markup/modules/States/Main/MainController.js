@@ -124,7 +124,7 @@ export class Main {
             (game.scale.isFullScreen) ? $('#fakeButton').addClass('closed') : $('#fakeButton').removeClass('closed');
         }
 
-        this.scaleElements();
+        // this.scaleElements();
 
     }
 
@@ -140,7 +140,7 @@ export class Main {
             let act = wheel.elements;
 
             wheel.elements[0].activeSprite.scale.set(1);
-            wheel.elements[0].bg.scale.set(scale1);
+            wheel.elements[0].bg.scale.set(0.5);
 
             if (act[1].active == 11 || act[1].active == 12 || act[1].active == 13) {
                 wheel.elements[1].activeSprite.scale.set(1);

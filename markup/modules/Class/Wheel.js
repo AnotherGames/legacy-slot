@@ -290,8 +290,6 @@ export class Wheel {
                         _this.isFast = false;
 
                         if (_this.finishCallback) {
-                            console.log(_this.items);
-                            console.log(_this.elements);
                             model.state('firstRoll', false);
                             _this.elSwitch = 10;
                             _this.finishCallback();

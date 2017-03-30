@@ -47,7 +47,7 @@ export let view = (() => {
             let deltaX = (model.desktop) ? 106 : 81;
             let deltaY = (model.desktop) ? 55 : 50;
             let deltaY2 = (model.desktop) ? 37 : -18;
-            let y1 = (model.desktop) ? 95 : 70;
+            let y1 = (model.desktop) ? 95 : 69;
             let y2 = (model.desktop) ? 110 : 15;
             let x = (model.desktop) ? 0 : 80;
 
