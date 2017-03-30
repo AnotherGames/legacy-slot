@@ -140,10 +140,11 @@ export class Preload {
 
     loadSpineAssets() {
         const game = model.el('game');
-        game.load.spine('bottle', 'spine/Bottle.json');
         game.load.spine('boy', 'spine/boy.json');
+        game.load.spine('lever', 'spine/img.json');
+        // game.load.spine('bottle', 'spine/Bottle.json');
         // game.load.spine('cat', 'spine/skeleton.json');
-        game.load.spine('gun', 'spine/gun.json');
+        // game.load.spine('gun', 'spine/gun.json');
         // if (model.desktop) {
         //     game.load.spine('fon', 'spine/Zastavka.json');
         // }
@@ -160,9 +161,16 @@ export class Preload {
         game.load.atlasJSONArray('6', 'elements/6.png', 'elements/6.json');
         game.load.atlasJSONArray('7', 'elements/7.png', 'elements/7.json');
         game.load.atlasJSONArray('8', 'elements/8.png', 'elements/8.json');
+        game.load.atlasJSONArray('9', 'elements/9.png', 'elements/9.json');
+        game.load.atlasJSONArray('11', 'elements/11.png', 'elements/11.json');
+        game.load.atlasJSONArray('12', 'elements/12.png', 'elements/12.json');
+        game.load.atlasJSONArray('13', 'elements/13.png', 'elements/13.json');
+        game.load.atlasJSONArray('14', 'elements/14.png', 'elements/14.json');
+        game.load.atlasJSONArray('15', 'elements/15.png', 'elements/15.json');
+        game.load.atlasJSONArray('16', 'elements/16.png', 'elements/16.json');
+        game.load.atlasJSONArray('17', 'elements/17.png', 'elements/17.json');
         game.load.atlasJSONArray('18', 'elements/18.png', 'elements/18.json');
         game.load.atlasJSONArray('19', 'elements/19.png', 'elements/19.json');
-        game.load.atlasJSONArray('20', 'elements/20.png', 'elements/20.json');
     }
 
     hidePreloader() {

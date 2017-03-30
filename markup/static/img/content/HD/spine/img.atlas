@@ -1,0 +1,83 @@
+
+img.png
+size: 1024,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+img/rod_0000_Group-236
+  rotate: false
+  xy: 511, 62
+  size: 66, 64
+  orig: 66, 64
+  offset: 0, 0
+  index: -1
+img/rod_0001_Ellipse-12-copy
+  rotate: false
+  xy: 393, 10
+  size: 116, 116
+  orig: 116, 116
+  offset: 0, 0
+  index: -1
+img/rod_0002_Shape-23
+  rotate: true
+  xy: 2, 83
+  size: 43, 389
+  orig: 43, 389
+  offset: 0, 0
+  index: -1
+img/rod_0003_Ellipse-13
+  rotate: false
+  xy: 579, 97
+  size: 59, 29
+  orig: 59, 29
+  offset: 0, 0
+  index: -1
+img/rod_0004_Shape-22-copy
+  rotate: true
+  xy: 2, 12
+  size: 69, 143
+  orig: 69, 143
+  offset: 0, 0
+  index: -1
+img/rod_0005_Rounded-Rectangle-8
+  rotate: false
+  xy: 511, 2
+  size: 61, 58
+  orig: 61, 58
+  offset: 0, 0
+  index: -1
+img/rod_0006_Layer-1
+  rotate: true
+  xy: 147, 31
+  size: 50, 112
+  orig: 50, 112
+  offset: 0, 0
+  index: -1
+img/rod_0007_Layer-2
+  rotate: true
+  xy: 261, 52
+  size: 29, 66
+  orig: 29, 66
+  offset: 0, 0
+  index: -1
+img/rod_0008_Rounded-Rectangle-8-copy
+  rotate: false
+  xy: 579, 60
+  size: 37, 35
+  orig: 37, 35
+  offset: 0, 0
+  index: -1
+img/rod_0009_Group-234-copy
+  rotate: true
+  xy: 147, 13
+  size: 16, 23
+  orig: 16, 23
+  offset: 0, 0
+  index: -1
+img/rod_0010_Group-234-copy-2
+  rotate: false
+  xy: 261, 36
+  size: 10, 14
+  orig: 10, 14
+  offset: 0, 0
+  index: -1

@@ -13,19 +13,11 @@ export class Element {
 
         // Заполняем его спрайтами всех элементов (они будут расположенны друг на друге)
         this.sprites = [];
-        for (let i = 1; i <= 21; i++) {
-            let fakeIndex;
-            // Создаем по спрайту для каждого символа и делаем их не видимыми
-            if (i >= 9 && i <= 11) {
-                fakeIndex = 18;
-            } else if (i >= 12 && i <= 14) {
-                fakeIndex = 19;
-            } else if (i >= 15 && i <= 17 || i == 21) {
-                fakeIndex = 20;
-            } else {
-                fakeIndex = i;
-            }
-            let sprite = game.add.sprite(0, 0, fakeIndex, null, this.group);
+        for (let i = 1; i <= 19; i++) {
+
+            if (i == 10) continue;
+
+            let sprite = game.add.sprite(0, 0, i, null, this.group);
                 sprite.anchor.set(0.5);
                 sprite.visible = false;
 
@@ -125,31 +117,29 @@ export class Element {
                 this.addAnimation(sprite, { el: 8, n: 29, w: 29 });
                 break;
             case 9:
-                this.addBottleAnimation(sprite, { el: 9, n: 29, w: 29 });
+                this.addAnimation(sprite, { el: 9, n: 29, w: 29 });
                 break;
-            case 10:
-                this.addBottleAnimation(sprite, { el: 10, n: 29, w: 29 });
-                break;
+
             case 11:
-                this.addBottleAnimation(sprite, { el: 11, n: 29, w: 29 });
+                this.addAnimation(sprite, { el: 11, n: 29, w: 29 });
                 break;
             case 12:
-                this.addBottleAnimation(sprite, { el: 12, n: 29, w: 29 });
+                this.addAnimation(sprite, { el: 12, n: 29, w: 29 });
                 break;
             case 13:
-                this.addBottleAnimation(sprite, { el: 13, n: 29, w: 29 });
+                this.addAnimation(sprite, { el: 13, n: 29, w: 29 });
                 break;
             case 14:
-                this.addBottleAnimation(sprite, { el: 14, n: 29, w: 29 });
+                this.addAnimation(sprite, { el: 14, n: 29, w: 29 });
                 break;
             case 15:
-                this.addBottleAnimation(sprite, { el: 15, n: 29, w: 29 });
+                this.addAnimation(sprite, { el: 15, n: 29, w: 29 });
                 break;
             case 16:
-                this.addBottleAnimation(sprite, { el: 16, n: 29, w: 29 });
+                this.addAnimation(sprite, { el: 16, n: 29, w: 29 });
                 break;
             case 17:
-                this.addBottleAnimation(sprite, { el: 17, n: 29, w: 29 });
+                this.addAnimation(sprite, { el: 17, n: 29, w: 29 });
                 break;
             case 18:
                 this.addAnimation(sprite, { el: 18, n: 29, w: 29 });
@@ -157,12 +147,7 @@ export class Element {
             case 19:
                 this.addAnimation(sprite, { el: 19, n: 29, w: 29 });
                 break;
-            case 20:
-                this.addAnimation(sprite, { el: 20, n: 29, w: 29 });
-                break;
-            case 21:
-                this.addBottleAnimation(sprite, { el: 21, n: 29, w: 29 });
-                break;
+
             default:
                 break;
 

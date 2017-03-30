@@ -2,7 +2,7 @@ export let config = {
     fadeinMusicTime: 5000,
     countMeterTime: 2500,
     autoTransitionTime: 15000,
-    symbolsCount: 20,
+    symbolsCount: 18,
     maxMulti: 7,
     wheel: {
         roll: {

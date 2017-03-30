@@ -17,7 +17,7 @@ export let view = (() => {
             let elSize = config[model.res].elements;
             let upWheels = [];
             upWheels.containers = [];
-            let deltaY = (model.desktop) ? 28 : 15;
+            let deltaY = (model.desktop) ? 0 : 20;
             for (let i = 0; i < 5; i++) {
                 upWheels.push([]);
                 let currentContainer = game.add.group();
@@ -26,7 +26,7 @@ export let view = (() => {
                         container: currentContainer,
                         position: {
                             x: elSize.width * (i + 0.5 - 2.5),
-                            y: elSize.height * (j + 0.5 - 1.5) + deltaY
+                            y: elSize.height * (j + 0.5 - 1.5) - deltaY
                         }
                     });
                     el.hide(0);
@@ -293,10 +293,10 @@ export let view = (() => {
                 currentLineY = model.data('lines')[lineValue - 1][countValue - 1].Y;
                 if (model.mobile) {
                     x = 192 * (countValue - 0.5) + 105 - gameMachine.width / 2;
-                    y = 180 * (currentLineY + 0.5) + 135 - gameMachine.height / 2 - 25;
+                    y = 180 * (currentLineY + 0.5) + 125 - gameMachine.height / 2 - 25;
                 } else {
                     x = 256 * (countValue - 0.5) + 140 - gameMachine.width / 2;
-                    y = 240 * (currentLineY + 0.5) + 140 - gameMachine.height / 2;
+                    y = 240 * (currentLineY + 0.5) + 130 - gameMachine.height / 2;
                 }
             }
             // Рассчитываем если скаттер
@@ -318,10 +318,10 @@ export let view = (() => {
                 });
                 if (model.mobile) {
                     x = 192 * (lastWheel + 0.5) + 105 - gameMachine.width / 2;
-                    y = 180 * (lastElement + 0.5) + 135 - gameMachine.height / 2 - 25;
+                    y = 180 * (lastElement + 0.5) + 125 - gameMachine.height / 2 - 25;
                 } else {
                     x = 256 * (lastWheel + 0.5) + 140 - gameMachine.width / 2;
-                    y = 240 * (lastElement + 0.5) + 140 - gameMachine.height / 2 - 25;
+                    y = 240 * (lastElement + 0.5) + 130 - gameMachine.height / 2 - 25;
                 }
             }
 
@@ -334,7 +334,7 @@ export let view = (() => {
             } else if (winValue > 99) {
                 font = '18px Arial, Helvetica';
             } else {
-                font = '24px Arial, Helvetica';
+                font = '26px Arial, Helvetica';
             }
             let text = game.add.text(x - 7, y + 7, winValue, {
                 font: font
@@ -342,354 +342,354 @@ export let view = (() => {
             text.anchor.set(0.5);
 
             let grd = text.context.createLinearGradient(0, 0, 0, text.canvas.height);
-            grd.addColorStop(0, '#eedf60');
-            grd.addColorStop(1, '#c17118');
+            grd.addColorStop(0, '#ffffff');
+            grd.addColorStop(1, '#eeeeee');
             text.fill = grd;
 
-        },
-
-        addBigBottleToStage: function (fsLevelNumber) {
-            let game = model.el('game');
-            let wheels = model.el('wheels');
-            let container = model.group('winUp');
-
-            let bottle1, bottle2, bottle3;
-            let bottleBG1, bottleBG2, bottleBG3;
-            let bottleContainer1, bottleContainer2, bottleContainer3;
-
-            switch (+fsLevelNumber) {
-                case 1:
-                    bottleContainer1 = draw.addBottleContainer(+fsLevelNumber).bottleContainer1;
-                    bottleBG1 = draw.addBottleBG(bottleContainer1, wheels[0].elements[1]);
-
-                    bottle1 = game.add.spine(0, 70, 'bottle');
-                    draw.playBottleAnim(bottle1, wheels[0].elements[1]);
-
-                    draw.hideWheels([0]);
-                    break;
-
-                case 2:
-                    bottleContainer1 = draw.addBottleContainer(+fsLevelNumber).bottleContainer1;
-                    bottleBG1 = draw.addBottleBG(bottleContainer1, wheels[2].elements[1]);
-
-                    bottle1 = game.add.spine(0, 70, 'bottle');
-                    draw.playBottleAnim(bottle1, wheels[2].elements[1]);
-
-                    draw.hideWheels([2]);
-                    break;
-                case 3:
-                    bottleContainer1 = draw.addBottleContainer(+fsLevelNumber).bottleContainer1;
-                    bottleBG1 = draw.addBottleBG(bottleContainer1, wheels[4].elements[1]);
-
-                    bottle1 = game.add.spine(0, 70, 'bottle');
-                    draw.playBottleAnim(bottle1, wheels[4].elements[1]);
-
-                    draw.hideWheels([4]);
-                    break;
-                case 4:
-                    bottleContainer1 = draw.addBottleContainer(+fsLevelNumber).bottleContainer1;
-                    bottleContainer2 = draw.addBottleContainer(+fsLevelNumber).bottleContainer2;
-
-                    bottleBG1 = draw.addBottleBG(bottleContainer1, wheels[0].elements[1]);
-                    bottleBG2 = draw.addBottleBG(bottleContainer2, wheels[2].elements[1]);
-
-                    bottle1 = game.add.spine(0, 70, 'bottle');
-                    bottle2 = game.add.spine(0, 70, 'bottle');
-
-                    draw.playBottleAnim(bottle1, wheels[0].elements[1]);
-                    draw.playBottleAnim(bottle2, wheels[2].elements[1]);
-
-                    draw.hideWheels([0, 2]);
-                    break;
-                case 5:
-                    bottleContainer1 = draw.addBottleContainer(+fsLevelNumber).bottleContainer1;
-                    bottleContainer2 = draw.addBottleContainer(+fsLevelNumber).bottleContainer2;
-                    bottleBG1 = draw.addBottleBG(bottleContainer1, wheels[2].elements[1]);
-                    bottleBG2 = draw.addBottleBG(bottleContainer2, wheels[4].elements[1]);
-
-                    bottle1 = game.add.spine(0, 70, 'bottle');
-                    bottle2 = game.add.spine(0, 70, 'bottle');
-                    draw.playBottleAnim(bottle1, wheels[2].elements[1]);
-                    draw.playBottleAnim(bottle2, wheels[4].elements[1]);
-
-                    draw.hideWheels([2, 4]);
-                    break;
-                case 6:
-                    bottleContainer1 = draw.addBottleContainer(+fsLevelNumber).bottleContainer1;
-                    bottleContainer2 = draw.addBottleContainer(+fsLevelNumber).bottleContainer2;
-                    bottleBG1 = draw.addBottleBG(bottleContainer1, wheels[0].elements[1]);
-                    bottleBG2 = draw.addBottleBG(bottleContainer2, wheels[4].elements[1]);
-
-                    bottle1 = game.add.spine(0, 70, 'bottle');
-                    bottle2 = game.add.spine(0, 70, 'bottle');
-                    draw.playBottleAnim(bottle1, wheels[0].elements[1]);
-                    draw.playBottleAnim(bottle2, wheels[4].elements[1]);
-
-                    draw.hideWheels([0, 4]);
-                    break;
-                case 7:
-                    bottleContainer1 = draw.addBottleContainer(+fsLevelNumber).bottleContainer1;
-                    bottleContainer2 = draw.addBottleContainer(+fsLevelNumber).bottleContainer2;
-                    bottleContainer3 = draw.addBottleContainer(+fsLevelNumber).bottleContainer3;
-                    bottleBG1 = draw.addBottleBG(bottleContainer1, wheels[0].elements[1]);
-                    bottleBG2 = draw.addBottleBG(bottleContainer2, wheels[2].elements[1]);
-                    bottleBG3 = draw.addBottleBG(bottleContainer3, wheels[4].elements[1]);
-
-                    bottle1 = game.add.spine(0, 70, 'bottle');
-                    bottle2 = game.add.spine(0, 70, 'bottle');
-                    bottle3 = game.add.spine(0, 70, 'bottle');
-                    draw.playBottleAnim(bottle1, wheels[0].elements[1]);
-                    draw.playBottleAnim(bottle2, wheels[2].elements[1]);
-                    draw.playBottleAnim(bottle3, wheels[4].elements[1]);
-
-                    draw.hideWheels([0, 2, 4]);
-                    break;
-                default:
-
-            }
-            if (bottle1) {
-                bottleContainer1.add(bottle1);
-                model.el('bottleContainer1', bottleContainer1);
-                bottleContainer1.alpha = 0;
-                game.add.tween(bottleContainer1).to({
-                    alpha: 1
-                }, 1000, 'Linear', true);
-                container.addAt(bottleContainer1, 0);
-                soundController.sound.playSound({sound: 'gaz'});
-
-                if (model.desktop) {
-                    draw.addBubbles({
-                        bottle: bottleBG1,
-                        container: bottleContainer1
-                    });
-                }
-            }
-
-            if (bottle2) {
-                bottleContainer2.add(bottle2);
-                model.el('bottleContainer2', bottleContainer2);
-                bottleContainer2.alpha = 0;
-                game.add.tween(bottleContainer2).to({
-                    alpha: 1
-                }, 1000, 'Linear', true);
-                container.addAt(bottleContainer2, 1);
-                soundController.sound.playSound({sound: 'gaz'});
-
-                if (model.desktop) {
-                    draw.addBubbles({
-                        bottle: bottleBG1,
-                        container: bottleContainer1
-                    });
-                }
-            }
-
-            if (bottle3) {
-                bottleContainer3.add(bottle3);
-                model.el('bottleContainer3', bottleContainer3);
-                bottleContainer3.alpha = 0;
-                game.add.tween(bottleContainer3).to({
-                    alpha: 1
-                }, 1000, 'Linear', true);
-                container.addAt(bottleContainer3, 2);
-                soundController.sound.playSound({sound: 'gaz'});
-
-                if (model.desktop) {
-                    draw.addBubbles({
-                        bottle: bottleBG1,
-                        container: bottleContainer1
-                    });
-                }
-            }
-
-        },
-
-        hideWheels: function (array) {
-            let game = model.el('game');
-            let wheels = model.el('wheels');
-            let upWheels = model.el('upWheels');
-            array.forEach((item) => {
-                upWheels.containers[item].visible = false;
-                game.add.tween(wheels[item].container).to({
-                    alpha: 0
-                }, 1000, 'Linear', true);
-            });
-        },
-
-        addBottleContainer: function (fsLevelNumber) {
-
-            let bottleContainer1, bottleContainer2, bottleContainer3;
-            let x = (model.desktop) ? 512 : 384;
-
-            switch (+fsLevelNumber) {
-                case 1:
-                    bottleContainer1 = draw.createBottleContainer(-x);
-
-                    return {
-                        bottleContainer1
-                    };
-                case 2:
-                    bottleContainer1 = draw.createBottleContainer(0);
-
-                    return {
-                        bottleContainer1
-                    };
-                case 3:
-                    bottleContainer1 = draw.createBottleContainer(x);
-
-                    return {
-                        bottleContainer1
-                    };
-                case 4:
-                    bottleContainer1 = draw.createBottleContainer(-x);
-                    bottleContainer2 = draw.createBottleContainer(0);
-
-                    return {
-                        bottleContainer1,
-                        bottleContainer2
-                    };
-                case 5:
-                    bottleContainer1 = draw.createBottleContainer(0);
-                    bottleContainer2 = draw.createBottleContainer(x);
-
-                    return {
-                        bottleContainer1,
-                        bottleContainer2
-                    };
-                case 6:
-                    bottleContainer1 = draw.createBottleContainer(-x);
-                    bottleContainer2 = draw.createBottleContainer(x);
-
-                    return {
-                        bottleContainer1,
-                        bottleContainer2
-                    };
-                case 7:
-                    bottleContainer1 = draw.createBottleContainer(-x);
-                    bottleContainer2 = draw.createBottleContainer(0);
-                    bottleContainer3 = draw.createBottleContainer(x);
-
-                    return {
-                        bottleContainer1,
-                        bottleContainer2,
-                        bottleContainer3
-                    };
-                default:
-            }
-        },
-
-        createBottleContainer: function (x) {
-            let game = model.el('game');
-            let deltaY = (model.desktop) ? 10 : 0;
-            let elSize = config[model.res].elements;
-            let bottleContainer = game.add.group();
-
-            let someGraphic = game.add.graphics(-elSize.width * 0.5, -elSize.height * 1.5 + deltaY, bottleContainer);
-            someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 1, elSize.height * 3);
-
-            bottleContainer.mask = someGraphic;
-            bottleContainer.x = x;
-
-            return bottleContainer;
-        },
-
-        addBottleBG: function (container, element) {
-            let bottleBG;
-            let game = model.el('game');
-            let y = (model.desktop) ? 12 : 2;
-            if (element.active === 10) {
-                bottleBG = game.add.sprite(0, y, 'green', null, container);
-            }
-            if (element.active === 13) {
-                bottleBG = game.add.sprite(0, y, 'red', null, container);
-            }
-            if (element.active === 16) {
-                bottleBG = game.add.sprite(0, y, 'orange', null, container);
-            }
-            bottleBG.anchor.set(0.5);
-            return bottleBG;
-        },
-
-        addBubbles: function ({
-            game = model.el('game'),
-            container = model.group('bottle'),
-            bottle = model.el('bottleBG')
-        }) {
-            let emitter = game.add.emitter(bottle.x, game.height, 1800);
-            container.addAt(emitter, 2);
-            emitter.makeParticles('bubble');
-            emitter.width = bottle.width;
-            // console.log(container);
-
-            emitter.setRotation(0, 0);
-            emitter.setAlpha(0.1, 1, 3000);
-            emitter.minParticleScale = 0.1;
-            emitter.maxParticleScale = 0.4;
-            emitter.setYSpeed(20, 60);
-            emitter.gravity = -200;
-
-            emitter.start(false, 7000, 10);
-
-            let emitter2 = game.add.emitter(bottle.x, game.height, 100);
-            container.addAt(emitter2, 4);
-            emitter2.makeParticles('bubble');
-            emitter2.width = bottle.width;
-
-            emitter2.setRotation(0, 0);
-            emitter2.setAlpha(0.1, 1, 3000);
-            emitter2.minParticleScale = 0.3;
-            emitter2.maxParticleScale = 0.6;
-            emitter2.setYSpeed(10, 30);
-            emitter2.gravity = -200;
-
-            emitter2.start(false, 7000, 60);
-        },
-
-        playBottleAnim: function (bottle, element) {
-            if (model.mobile) {
-                bottle.scale.set(0.75);
-            }
-            if (element.active === 10) {
-                bottle.setAnimationByName(0, 'bang1_g', false);
-                bottle.addAnimationByName(0, 'open_g', false);
-                bottle.addAnimationByName(0, 'pena_idle_g', true);
-            }
-            if (element.active === 13) {
-                bottle.setAnimationByName(0, 'bang1_r', false);
-                bottle.addAnimationByName(0, 'open_r', false);
-                bottle.addAnimationByName(0, 'pena_idle_r', true);
-            }
-            if (element.active === 16) {
-                bottle.setAnimationByName(0, 'bang1_y', false);
-                bottle.addAnimationByName(0, 'open_y', false);
-                bottle.addAnimationByName(0, 'pena_idle_y', true);
-            }
-
-        },
-
-        hideBottle: function () {
-            let bottleContainer1 = model.el('bottleContainer1');
-            let bottleContainer2 = model.el('bottleContainer2');
-            let bottleContainer3 = model.el('bottleContainer3');
-            bottleContainer1.removeAll();
-            if (bottleContainer2) {
-                bottleContainer2.removeAll();
-            }
-            if (bottleContainer3) {
-                bottleContainer3.removeAll();
-            }
-
-            let array = [0, 2, 4];
-
-            let game = model.el('game');
-            let wheels = model.el('wheels');
-            let upWheels = model.el('upWheels');
-            array.forEach((item) => {
-                upWheels.containers[item].visible = true;
-                game.add.tween(wheels[item].container).to({
-                    alpha: 1
-                }, 1000, 'Linear', true);
-            });
         }
+
+        // addBigBottleToStage: function (fsLevelNumber) {
+        //     let game = model.el('game');
+        //     let wheels = model.el('wheels');
+        //     let container = model.group('winUp');
+        //
+        //     let bottle1, bottle2, bottle3;
+        //     let bottleBG1, bottleBG2, bottleBG3;
+        //     let bottleContainer1, bottleContainer2, bottleContainer3;
+        //
+        //     switch (+fsLevelNumber) {
+        //         case 1:
+        //             bottleContainer1 = draw.addBottleContainer(+fsLevelNumber).bottleContainer1;
+        //             bottleBG1 = draw.addBottleBG(bottleContainer1, wheels[0].elements[1]);
+        //
+        //             bottle1 = game.add.spine(0, 70, 'bottle');
+        //             draw.playBottleAnim(bottle1, wheels[0].elements[1]);
+        //
+        //             draw.hideWheels([0]);
+        //             break;
+        //
+        //         case 2:
+        //             bottleContainer1 = draw.addBottleContainer(+fsLevelNumber).bottleContainer1;
+        //             bottleBG1 = draw.addBottleBG(bottleContainer1, wheels[2].elements[1]);
+        //
+        //             bottle1 = game.add.spine(0, 70, 'bottle');
+        //             draw.playBottleAnim(bottle1, wheels[2].elements[1]);
+        //
+        //             draw.hideWheels([2]);
+        //             break;
+        //         case 3:
+        //             bottleContainer1 = draw.addBottleContainer(+fsLevelNumber).bottleContainer1;
+        //             bottleBG1 = draw.addBottleBG(bottleContainer1, wheels[4].elements[1]);
+        //
+        //             bottle1 = game.add.spine(0, 70, 'bottle');
+        //             draw.playBottleAnim(bottle1, wheels[4].elements[1]);
+        //
+        //             draw.hideWheels([4]);
+        //             break;
+        //         case 4:
+        //             bottleContainer1 = draw.addBottleContainer(+fsLevelNumber).bottleContainer1;
+        //             bottleContainer2 = draw.addBottleContainer(+fsLevelNumber).bottleContainer2;
+        //
+        //             bottleBG1 = draw.addBottleBG(bottleContainer1, wheels[0].elements[1]);
+        //             bottleBG2 = draw.addBottleBG(bottleContainer2, wheels[2].elements[1]);
+        //
+        //             bottle1 = game.add.spine(0, 70, 'bottle');
+        //             bottle2 = game.add.spine(0, 70, 'bottle');
+        //
+        //             draw.playBottleAnim(bottle1, wheels[0].elements[1]);
+        //             draw.playBottleAnim(bottle2, wheels[2].elements[1]);
+        //
+        //             draw.hideWheels([0, 2]);
+        //             break;
+        //         case 5:
+        //             bottleContainer1 = draw.addBottleContainer(+fsLevelNumber).bottleContainer1;
+        //             bottleContainer2 = draw.addBottleContainer(+fsLevelNumber).bottleContainer2;
+        //             bottleBG1 = draw.addBottleBG(bottleContainer1, wheels[2].elements[1]);
+        //             bottleBG2 = draw.addBottleBG(bottleContainer2, wheels[4].elements[1]);
+        //
+        //             bottle1 = game.add.spine(0, 70, 'bottle');
+        //             bottle2 = game.add.spine(0, 70, 'bottle');
+        //             draw.playBottleAnim(bottle1, wheels[2].elements[1]);
+        //             draw.playBottleAnim(bottle2, wheels[4].elements[1]);
+        //
+        //             draw.hideWheels([2, 4]);
+        //             break;
+        //         case 6:
+        //             bottleContainer1 = draw.addBottleContainer(+fsLevelNumber).bottleContainer1;
+        //             bottleContainer2 = draw.addBottleContainer(+fsLevelNumber).bottleContainer2;
+        //             bottleBG1 = draw.addBottleBG(bottleContainer1, wheels[0].elements[1]);
+        //             bottleBG2 = draw.addBottleBG(bottleContainer2, wheels[4].elements[1]);
+        //
+        //             bottle1 = game.add.spine(0, 70, 'bottle');
+        //             bottle2 = game.add.spine(0, 70, 'bottle');
+        //             draw.playBottleAnim(bottle1, wheels[0].elements[1]);
+        //             draw.playBottleAnim(bottle2, wheels[4].elements[1]);
+        //
+        //             draw.hideWheels([0, 4]);
+        //             break;
+        //         case 7:
+        //             bottleContainer1 = draw.addBottleContainer(+fsLevelNumber).bottleContainer1;
+        //             bottleContainer2 = draw.addBottleContainer(+fsLevelNumber).bottleContainer2;
+        //             bottleContainer3 = draw.addBottleContainer(+fsLevelNumber).bottleContainer3;
+        //             bottleBG1 = draw.addBottleBG(bottleContainer1, wheels[0].elements[1]);
+        //             bottleBG2 = draw.addBottleBG(bottleContainer2, wheels[2].elements[1]);
+        //             bottleBG3 = draw.addBottleBG(bottleContainer3, wheels[4].elements[1]);
+        //
+        //             bottle1 = game.add.spine(0, 70, 'bottle');
+        //             bottle2 = game.add.spine(0, 70, 'bottle');
+        //             bottle3 = game.add.spine(0, 70, 'bottle');
+        //             draw.playBottleAnim(bottle1, wheels[0].elements[1]);
+        //             draw.playBottleAnim(bottle2, wheels[2].elements[1]);
+        //             draw.playBottleAnim(bottle3, wheels[4].elements[1]);
+        //
+        //             draw.hideWheels([0, 2, 4]);
+        //             break;
+        //         default:
+        //
+        //     }
+        //     if (bottle1) {
+        //         bottleContainer1.add(bottle1);
+        //         model.el('bottleContainer1', bottleContainer1);
+        //         bottleContainer1.alpha = 0;
+        //         game.add.tween(bottleContainer1).to({
+        //             alpha: 1
+        //         }, 1000, 'Linear', true);
+        //         container.addAt(bottleContainer1, 0);
+        //         soundController.sound.playSound({sound: 'gaz'});
+        //
+        //         if (model.desktop) {
+        //             draw.addBubbles({
+        //                 bottle: bottleBG1,
+        //                 container: bottleContainer1
+        //             });
+        //         }
+        //     }
+        //
+        //     if (bottle2) {
+        //         bottleContainer2.add(bottle2);
+        //         model.el('bottleContainer2', bottleContainer2);
+        //         bottleContainer2.alpha = 0;
+        //         game.add.tween(bottleContainer2).to({
+        //             alpha: 1
+        //         }, 1000, 'Linear', true);
+        //         container.addAt(bottleContainer2, 1);
+        //         soundController.sound.playSound({sound: 'gaz'});
+        //
+        //         if (model.desktop) {
+        //             draw.addBubbles({
+        //                 bottle: bottleBG1,
+        //                 container: bottleContainer1
+        //             });
+        //         }
+        //     }
+        //
+        //     if (bottle3) {
+        //         bottleContainer3.add(bottle3);
+        //         model.el('bottleContainer3', bottleContainer3);
+        //         bottleContainer3.alpha = 0;
+        //         game.add.tween(bottleContainer3).to({
+        //             alpha: 1
+        //         }, 1000, 'Linear', true);
+        //         container.addAt(bottleContainer3, 2);
+        //         soundController.sound.playSound({sound: 'gaz'});
+        //
+        //         if (model.desktop) {
+        //             draw.addBubbles({
+        //                 bottle: bottleBG1,
+        //                 container: bottleContainer1
+        //             });
+        //         }
+        //     }
+        //
+        // },
+
+        // hideWheels: function (array) {
+        //     let game = model.el('game');
+        //     let wheels = model.el('wheels');
+        //     let upWheels = model.el('upWheels');
+        //     array.forEach((item) => {
+        //         upWheels.containers[item].visible = false;
+        //         game.add.tween(wheels[item].container).to({
+        //             alpha: 0
+        //         }, 1000, 'Linear', true);
+        //     });
+        // },
+        //
+        // addBottleContainer: function (fsLevelNumber) {
+        //
+        //     let bottleContainer1, bottleContainer2, bottleContainer3;
+        //     let x = (model.desktop) ? 512 : 384;
+        //
+        //     switch (+fsLevelNumber) {
+        //         case 1:
+        //             bottleContainer1 = draw.createBottleContainer(-x);
+        //
+        //             return {
+        //                 bottleContainer1
+        //             };
+        //         case 2:
+        //             bottleContainer1 = draw.createBottleContainer(0);
+        //
+        //             return {
+        //                 bottleContainer1
+        //             };
+        //         case 3:
+        //             bottleContainer1 = draw.createBottleContainer(x);
+        //
+        //             return {
+        //                 bottleContainer1
+        //             };
+        //         case 4:
+        //             bottleContainer1 = draw.createBottleContainer(-x);
+        //             bottleContainer2 = draw.createBottleContainer(0);
+        //
+        //             return {
+        //                 bottleContainer1,
+        //                 bottleContainer2
+        //             };
+        //         case 5:
+        //             bottleContainer1 = draw.createBottleContainer(0);
+        //             bottleContainer2 = draw.createBottleContainer(x);
+        //
+        //             return {
+        //                 bottleContainer1,
+        //                 bottleContainer2
+        //             };
+        //         case 6:
+        //             bottleContainer1 = draw.createBottleContainer(-x);
+        //             bottleContainer2 = draw.createBottleContainer(x);
+        //
+        //             return {
+        //                 bottleContainer1,
+        //                 bottleContainer2
+        //             };
+        //         case 7:
+        //             bottleContainer1 = draw.createBottleContainer(-x);
+        //             bottleContainer2 = draw.createBottleContainer(0);
+        //             bottleContainer3 = draw.createBottleContainer(x);
+        //
+        //             return {
+        //                 bottleContainer1,
+        //                 bottleContainer2,
+        //                 bottleContainer3
+        //             };
+        //         default:
+        //     }
+        // },
+        //
+        // createBottleContainer: function (x) {
+        //     let game = model.el('game');
+        //     let deltaY = (model.desktop) ? 10 : 0;
+        //     let elSize = config[model.res].elements;
+        //     let bottleContainer = game.add.group();
+        //
+        //     let someGraphic = game.add.graphics(-elSize.width * 0.5, -elSize.height * 1.5 + deltaY, bottleContainer);
+        //     someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 1, elSize.height * 3);
+        //
+        //     bottleContainer.mask = someGraphic;
+        //     bottleContainer.x = x;
+        //
+        //     return bottleContainer;
+        // },
+        //
+        // addBottleBG: function (container, element) {
+        //     let bottleBG;
+        //     let game = model.el('game');
+        //     let y = (model.desktop) ? 12 : 2;
+        //     if (element.active === 10) {
+        //         bottleBG = game.add.sprite(0, y, 'green', null, container);
+        //     }
+        //     if (element.active === 13) {
+        //         bottleBG = game.add.sprite(0, y, 'red', null, container);
+        //     }
+        //     if (element.active === 16) {
+        //         bottleBG = game.add.sprite(0, y, 'orange', null, container);
+        //     }
+        //     bottleBG.anchor.set(0.5);
+        //     return bottleBG;
+        // },
+        //
+        // addBubbles: function ({
+        //     game = model.el('game'),
+        //     container = model.group('bottle'),
+        //     bottle = model.el('bottleBG')
+        // }) {
+        //     let emitter = game.add.emitter(bottle.x, game.height, 1800);
+        //     container.addAt(emitter, 2);
+        //     emitter.makeParticles('bubble');
+        //     emitter.width = bottle.width;
+        //     // console.log(container);
+        //
+        //     emitter.setRotation(0, 0);
+        //     emitter.setAlpha(0.1, 1, 3000);
+        //     emitter.minParticleScale = 0.1;
+        //     emitter.maxParticleScale = 0.4;
+        //     emitter.setYSpeed(20, 60);
+        //     emitter.gravity = -200;
+        //
+        //     emitter.start(false, 7000, 10);
+        //
+        //     let emitter2 = game.add.emitter(bottle.x, game.height, 100);
+        //     container.addAt(emitter2, 4);
+        //     emitter2.makeParticles('bubble');
+        //     emitter2.width = bottle.width;
+        //
+        //     emitter2.setRotation(0, 0);
+        //     emitter2.setAlpha(0.1, 1, 3000);
+        //     emitter2.minParticleScale = 0.3;
+        //     emitter2.maxParticleScale = 0.6;
+        //     emitter2.setYSpeed(10, 30);
+        //     emitter2.gravity = -200;
+        //
+        //     emitter2.start(false, 7000, 60);
+        // },
+        //
+        // playBottleAnim: function (bottle, element) {
+        //     if (model.mobile) {
+        //         bottle.scale.set(0.75);
+        //     }
+        //     if (element.active === 10) {
+        //         bottle.setAnimationByName(0, 'bang1_g', false);
+        //         bottle.addAnimationByName(0, 'open_g', false);
+        //         bottle.addAnimationByName(0, 'pena_idle_g', true);
+        //     }
+        //     if (element.active === 13) {
+        //         bottle.setAnimationByName(0, 'bang1_r', false);
+        //         bottle.addAnimationByName(0, 'open_r', false);
+        //         bottle.addAnimationByName(0, 'pena_idle_r', true);
+        //     }
+        //     if (element.active === 16) {
+        //         bottle.setAnimationByName(0, 'bang1_y', false);
+        //         bottle.addAnimationByName(0, 'open_y', false);
+        //         bottle.addAnimationByName(0, 'pena_idle_y', true);
+        //     }
+        //
+        // },
+        //
+        // hideBottle: function () {
+        //     let bottleContainer1 = model.el('bottleContainer1');
+        //     let bottleContainer2 = model.el('bottleContainer2');
+        //     let bottleContainer3 = model.el('bottleContainer3');
+        //     bottleContainer1.removeAll();
+        //     if (bottleContainer2) {
+        //         bottleContainer2.removeAll();
+        //     }
+        //     if (bottleContainer3) {
+        //         bottleContainer3.removeAll();
+        //     }
+        //
+        //     let array = [0, 2, 4];
+        //
+        //     let game = model.el('game');
+        //     let wheels = model.el('wheels');
+        //     let upWheels = model.el('upWheels');
+        //     array.forEach((item) => {
+        //         upWheels.containers[item].visible = true;
+        //         game.add.tween(wheels[item].container).to({
+        //             alpha: 1
+        //         }, 1000, 'Linear', true);
+        //     });
+        // }
 
     };
 

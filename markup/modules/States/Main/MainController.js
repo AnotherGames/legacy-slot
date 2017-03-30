@@ -62,7 +62,7 @@ export class Main {
         mainView.draw.lineNumbers({side: 'right'});
         winView.draw.UpWinContainer({});
 
-        transitionView.fsStart();
+        // transitionView.fsStart();
 
         // Инициализируем крутки
         rollController.init();

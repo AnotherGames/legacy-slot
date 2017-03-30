@@ -159,7 +159,7 @@ export let view = (() => {
         StopButton: function ({
             game = model.el('game'),
             x = model.group('panel').width / 2,
-            y = 168,
+            y = 95,
             container = model.group('panel')
         }) {
             let stopButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'stopOn.png', 'stop.png', 'stopOn.png', null, container);

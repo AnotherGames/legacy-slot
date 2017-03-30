@@ -25,13 +25,14 @@ export let controller = (() => {
         let firstWheels = checkFirstScreen();
 
         // Заполняемм колеса элементами
+        let deltaY = (model.desktop) ? 0 : 20;
         for (let i = 0; i < 5; i++) {
             wheels.push(new Wheel({
                 game,
                 parent: elementsContainer,
                 position: {
                     x: (i - 2) * elSize.width,
-                    y: (model.desktop) ? -elSize.height + 28 : -elSize.height + 15
+                    y: -elSize.height - deltaY
                 },
                 elSize,
                 currentScreen: firstWheels[i]

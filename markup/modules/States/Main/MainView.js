@@ -337,6 +337,7 @@ export let view = (() => {
                     container);
                 lineNumber.name = i;
                 lineNumber.anchor.set(0.5);
+                lineNumber.visible = false;
 
                 let winNumber = game.add.sprite(x, config[model.res].win[i][0].y - gameMachine.height / 2 - deltaY,
                     'winNumbers',
@@ -458,9 +459,9 @@ export let view = (() => {
             machineGroup = model.group('machine')
         }) {
             const elSize = config[model.res].elements;
-            let deltaY = (model.desktop) ? 10 : 0;
+            let deltaY = (model.desktop) ? -15 : 20;
 
-            let someGraphic = game.add.graphics(-elSize.width * 2.5 - 500, -elSize.height * 1.5 + deltaY, machineGroup);
+            let someGraphic = game.add.graphics(-elSize.width * 2.5 - 500, -elSize.height * 1.5 - deltaY, machineGroup);
             someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5 + 1500, elSize.height * 3);
             machineGroup.mask = someGraphic;
         },
