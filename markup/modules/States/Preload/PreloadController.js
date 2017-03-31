@@ -85,18 +85,6 @@ export class Preload {
         game.load.image('gameMachineUp', 'game/gameMachineUp.png');
         game.load.image('darkness', 'game/darkness.png');
         game.load.image('logoGM', 'game/logoGM.png');
-        // game.load.image('cloud', 'bg/cloud.png');
-        // game.load.image('shine', 'bg/shine.png');
-        game.load.image('green', 'bg/f-green.png');
-        game.load.image('orange', 'bg/f-orange.png');
-        game.load.image('red', 'bg/f-red.png');
-        // game.load.image('bubble', 'bg/bubble.png');
-        // game.load.image('balloons', 'bg/balloons.png');
-        // game.load.image('confetti1', 'bg/confetti1.png');
-        // game.load.image('confetti2', 'bg/confetti2.png');
-        // game.load.image('confetti3', 'bg/confetti3.png');
-        game.load.atlasJSONArray('trash', 'bg/trash.png', 'bg/trash.json');
-        game.load.atlasJSONArray('cat2', 'bg/cat2.png', 'bg/cat2.json');
         game.load.image('closeButton', 'other/closeButton.png');
         game.load.image('arrow', 'other/arrow.png');
         game.load.image('infoTableBg', 'other/infoTableBg.png');
@@ -113,10 +101,8 @@ export class Preload {
         game.load.bitmapFont('textGreen', 'text/text2.png', 'text/text2.xml');
         if (model.desktop) {
             game.load.image('panel', 'game/panel.png');
-            // game.load.atlasJSONArray('panelBG', 'game/panelBG.png', 'game/panelBG.json');
             game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
             game.load.atlasJSONArray('deskButtonsAnim', 'desk_buttons/deskButtonsAnim.png', 'desk_buttons/deskButtonsAnim.json');
-            // game.load.atlasJSONArray('switcher', 'desk_buttons/switcher.png', 'desk_buttons/switcher.json');
         }
         if (model.mobile) {
             game.load.atlasJSONArray('mobileButtons', 'mobile_buttons/mobileButtons.png', 'mobile_buttons/mobileButtons.json');
@@ -142,12 +128,7 @@ export class Preload {
         const game = model.el('game');
         game.load.spine('boy', 'spine/boy.json');
         game.load.spine('lever', 'spine/img.json');
-        // game.load.spine('bottle', 'spine/Bottle.json');
-        // game.load.spine('cat', 'spine/skeleton.json');
-        // game.load.spine('gun', 'spine/gun.json');
-        // if (model.desktop) {
-        //     game.load.spine('fon', 'spine/Zastavka.json');
-        // }
+
 
     }
 

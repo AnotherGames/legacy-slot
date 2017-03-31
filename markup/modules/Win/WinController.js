@@ -17,7 +17,7 @@ export let controller = (() => {
     function drawFsState(fsLevelNumber, numberOfSpins) {
         let game = model.el('game');
 
-        view.draw.addBigBottleToStage(fsLevelNumber);
+        // view.draw.addBigBottleToStage(fsLevelNumber);
 
         // Остонавливаем автоплей если был
         if (model.state('autoplay:start')) {
@@ -35,19 +35,19 @@ export let controller = (() => {
         game.input.keyboard.enabled = false;
 
         // Изменяем панель на FS
-        panelController.drawFsPanel(numberOfSpins);
+        // panelController.drawFsPanel(numberOfSpins);
 
         fsController.init(10);
 
         // Персонаж объявляет количество фриспинов
         game.time.events.add(500, () => {
             transitionView.fsStart();
-            mainView.draw.addCat2({});
-            if (model.desktop) {
-                mainView.draw.changeBG({});
-            } else {
-                mainView.draw.addTrash({});
-            }
+            // mainView.draw.addCat2({});
+            // if (model.desktop) {
+            //     mainView.draw.changeBG({});
+            // } else {
+            //     mainView.draw.addTrash({});
+            // }
         });
     }
 
@@ -59,7 +59,8 @@ export let controller = (() => {
 
         if (mode === 'root' && nextMode.indexOf('fsBonus') !== -1 ) {
             let fsBonusLevel = nextMode[7];
-            // drawFsState(fsBonusLevel, fsBonusLevel);
+            console.warn('fs start!');
+            drawFsState(fsBonusLevel, fsBonusLevel);
         }
     }
 
@@ -187,13 +188,13 @@ export let controller = (() => {
         let leftLineArr = model.el('leftLineArr');
         let rightLineArr = model.el('rightLineArr');
 
-        leftLineArr.forEach((el) => {
-            el.visible = true;
-        });
-
-        rightLineArr.forEach((el) => {
-            el.visible = true;
-        });
+        // leftLineArr.forEach((el) => {
+        //     el.visible = true;
+        // });
+        //
+        // rightLineArr.forEach((el) => {
+        //     el.visible = true;
+        // });
 
         // Прячем маленькую таблицу Win
 

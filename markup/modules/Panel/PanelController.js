@@ -27,6 +27,10 @@ export let controller = (() => {
             let game = model.el('game');
             game.input.keyboard.enabled = false;
             view.lockButtons();
+            let lever = model.el('lever');
+            lever.setAnimationByName(0, 'win', false);
+            lever.addAnimationByName(0, 'idle', true);
+
             rollController.startRoll();
             rollController.fastRoll();
         },

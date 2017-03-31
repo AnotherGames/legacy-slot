@@ -15,20 +15,21 @@ export let controller = (() => {
     function stop() {
         let game = model.el('game');
 
+        // winView.draw.hideBottle();
+        // motionPath.motion.destroyPath({name: 'cat2'});
+        // model.el('cat2').destroy();
 
-        winView.draw.hideBottle();
-        motionPath.motion.destroyPath({name: 'cat2'});
-        model.el('cat2').destroy();
-
+        // if (model.desktop) {
+        //     mainView.draw.changeBG({index: 2});
+        // } else {
+        //     mainView.draw.removeTrash({});
+        // }
         transitionView.fsFinish();
-        if (model.desktop) {
-            mainView.draw.changeBG({index: 2});
-        } else {
-            mainView.draw.removeTrash({});
+        if (model.mobile) {
             buttonsController.unlockButtons();
         }
         game.time.events.add(6000, () => {
-            panelController.drawMainPanel();
+            // panelController.drawMainPanel();
             soundController.music.stopMusic('fsFon');
             soundController.music.playMusic('fon');
 

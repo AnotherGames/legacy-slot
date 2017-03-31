@@ -225,12 +225,12 @@ export let view = (() => {
               game = model.el('game'),
               container = model.group('autoDesktop')
           }) {
-            let autoBG10 = this._AutoPanelItem({text: 10, x: -87, y: -65, width: 83, height: 40});
-            let autoBG25 = this._AutoPanelItem({text: 25, x: -3, y: -65, width: 90, height: 40});
-            let autoBG50 = this._AutoPanelItem({text: 50, x: -87, y: -18, width: 83, height: 38});
-            let autoBG100 = this._AutoPanelItem({text: 100, x: -3, y: -18, width: 90, height: 38});
-            let autoBG250 = this._AutoPanelItem({text: 250, x: -87, y: 26, width: 83, height: 40});
-            let autoBG500 = this._AutoPanelItem({text: 500, x: -3, y: 26, width: 90, height: 40});
+            let autoBG10 = this._AutoPanelItem({text: 10, x: -83, y: -54, width: 78, height: 37});
+            let autoBG25 = this._AutoPanelItem({text: 25, x: -3, y: -54, width: 80, height: 37});
+            let autoBG50 = this._AutoPanelItem({text: 50, x: -83, y: -17, width: 78, height: 38});
+            let autoBG100 = this._AutoPanelItem({text: 100, x: -3, y: -17, width: 80, height: 38});
+            let autoBG250 = this._AutoPanelItem({text: 250, x: -83, y: 18, width: 78, height: 38});
+            let autoBG500 = this._AutoPanelItem({text: 500, x: -3, y: 18, width: 80, height: 38});
 
             model.el('autoBG10', autoBG10);
             model.el('autoBG25', autoBG25);
@@ -283,11 +283,11 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('panel'),
             style = {
-                font: '42px Arial, Helvetica',
+                font: '40px Arial, Helvetica',
                 align: 'center'
             },
             amount = 10,
-            x = model.el('autoButtonDesk').x + 5,
+            x = model.el('autoButtonDesk').x + 9,
             y = model.el('autoButtonDesk').y + 5,
         }) {
             let autoCount = game.add.text(x, y, amount, style, container);

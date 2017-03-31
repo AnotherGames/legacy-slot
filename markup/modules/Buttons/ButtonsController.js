@@ -104,6 +104,9 @@ export let controller = (() => {
 
             soundController.sound.playSound({sound : 'buttonClick'});
             lockButtons();
+            let lever = model.el('lever');
+            lever.setAnimationByName(0, 'win', false);
+            lever.addAnimationByName(0, 'idle', true);
 
             rollController.startRoll();
             rollController.fastRoll();
