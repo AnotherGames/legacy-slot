@@ -6,8 +6,8 @@ export let config = {
     maxMulti: 7,
     wheel: {
         roll: {
-            time: 1500,
-            fastTime: 800,
+            time: 3000,
+            fastTime: 1500,
             length: 25,
             easingSeparation: 0.9,
             deltaTime: 100,
