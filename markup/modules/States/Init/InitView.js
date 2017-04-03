@@ -25,11 +25,19 @@ export let view = (() => {
     function drawLogo() {
         const game = model.el('game');
 
-        let initMain = game.add.sprite(game.world.centerX, game.height * 0.45, 'initMain');
-        initMain.anchor.set(0.5);
+        let initFon = game.add.spine(game.world.centerX, game.world.centerY, 'initFon');
+        initFon.setAnimationByName(0, 'win', false);
+        initFon.addAnimationByName(0, 'idle', true);
 
-        let initLogo = game.add.sprite(game.world.centerX, game.height * 0.6, 'logoInit');
-        initLogo.anchor.set(0.5);
+        if (model.mobile) {
+            initFon.scale.set(0.66);
+        }
+
+        // let initMain = game.add.sprite(game.world.centerX, game.height * 0.45, 'initMain');
+        // initMain.anchor.set(0.5);
+        //
+        // let initLogo = game.add.sprite(game.world.centerX, game.height * 0.6, 'logoInit');
+        // initLogo.anchor.set(0.5);
 
         // let logosSmall = game.add.sprite(game.width * 0.1, game.height * 0.93, 'logosSmall');
         // logosSmall.anchor.set(0.5);
@@ -43,6 +51,7 @@ export let view = (() => {
         let initPlayTween = game.add.tween(initPlay.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true);
         model.el('initPlay', initPlay);
         model.el('initPlayTween', initPlayTween);
+        initPlay.alpha = 0;
         return initPlay;
     }
 

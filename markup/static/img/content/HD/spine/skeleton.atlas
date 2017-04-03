@@ -1,0 +1,188 @@
+
+skeleton.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+B_imj/Z_JJ_0000_continue
+  rotate: false
+  xy: 1007, 1740
+  size: 400, 91
+  orig: 400, 91
+  offset: 0, 0
+  index: -1
+B_imj/Z_JJ_0001_Layer-1-copy1-21
+  rotate: true
+  xy: 853, 1435
+  size: 102, 91
+  orig: 102, 91
+  offset: 0, 0
+  index: -1
+B_imj/Z_JJ_0002_Layer-1-copy1-2
+  rotate: false
+  xy: 2, 1450
+  size: 471, 559
+  orig: 471, 559
+  offset: 0, 0
+  index: -1
+B_imj/Z_JJ_0003_Group-7-copy-2
+  rotate: false
+  xy: 2, 1032
+  size: 392, 416
+  orig: 392, 416
+  offset: 0, 0
+  index: -1
+B_imj/Z_JJ_0004_cherry
+  rotate: false
+  xy: 907, 902
+  size: 212, 230
+  orig: 212, 230
+  offset: 0, 0
+  index: -1
+B_imj/Z_JJ_0005_Layer-791
+  rotate: false
+  xy: 808, 697
+  size: 225, 203
+  orig: 225, 203
+  offset: 0, 0
+  index: -1
+B_imj/Z_JJ_0006_simvoly4-copy-4
+  rotate: true
+  xy: 594, 665
+  size: 235, 212
+  orig: 235, 212
+  offset: 0, 0
+  index: -1
+B_imj/Z_JJ_0007_Layer-804
+  rotate: false
+  xy: 1165, 1539
+  size: 237, 199
+  orig: 237, 199
+  offset: 0, 0
+  index: -1
+B_imj/Z_JJ_0008_s-copy-2
+  rotate: false
+  xy: 2, 2
+  size: 101, 118
+  orig: 101, 118
+  offset: 0, 0
+  index: -1
+B_imj/Z_JJ_0009_s-copy
+  rotate: false
+  xy: 1917, 1871
+  size: 126, 138
+  orig: 126, 138
+  offset: 0, 0
+  index: -1
+B_imj/Z_JJ_0010_s
+  rotate: false
+  xy: 369, 661
+  size: 223, 239
+  orig: 223, 239
+  offset: 0, 0
+  index: -1
+B_imj/Z_JJ_0011_Layer-782
+  rotate: false
+  xy: 714, 1134
+  size: 299, 299
+  orig: 299, 299
+  offset: 0, 0
+  index: -1
+B_imj/Z_JJ_0012_Shape-2
+  rotate: false
+  xy: 191, 265
+  size: 304, 350
+  orig: 304, 350
+  offset: 0, 0
+  index: -1
+B_imj/Z_JJ_0013_Layer-2-copy-2
+  rotate: false
+  xy: 672, 916
+  size: 233, 216
+  orig: 233, 216
+  offset: 0, 0
+  index: -1
+B_imj/Z_JJ_0014_Group-11
+  rotate: false
+  xy: 396, 1142
+  size: 316, 291
+  orig: 316, 291
+  offset: 0, 0
+  index: -1
+B_imj/Z_JJ_0015_simvoly1
+  rotate: false
+  xy: 920, 1548
+  size: 243, 190
+  orig: 243, 190
+  offset: 0, 0
+  index: -1
+B_imj/Z_JJ_0016_p
+  rotate: true
+  xy: 396, 902
+  size: 238, 274
+  orig: 238, 274
+  offset: 0, 0
+  index: -1
+B_imj/Z_JJ_0017_Layer-82-copy
+  rotate: true
+  xy: 191, 5
+  size: 258, 310
+  orig: 258, 310
+  offset: 0, 0
+  index: -1
+JJ_imj/Logo_0000_3-copy
+  rotate: true
+  xy: 2, 547
+  size: 483, 187
+  orig: 483, 187
+  offset: 0, 0
+  index: -1
+JJ_imj/Logo_0001_3
+  rotate: true
+  xy: 2, 122
+  size: 423, 187
+  orig: 423, 187
+  offset: 0, 0
+  index: -1
+JJ_imj/Logo_0002_2-copy
+  rotate: false
+  xy: 1007, 1833
+  size: 471, 176
+  orig: 471, 176
+  offset: 0, 0
+  index: -1
+JJ_imj/Logo_0003_2
+  rotate: true
+  xy: 191, 617
+  size: 413, 176
+  orig: 413, 176
+  offset: 0, 0
+  index: -1
+JJ_imj/Logo_0004_1-copy
+  rotate: false
+  xy: 1480, 1868
+  size: 435, 141
+  orig: 435, 141
+  offset: 0, 0
+  index: -1
+JJ_imj/Logo_0005_1
+  rotate: false
+  xy: 475, 1435
+  size: 376, 140
+  orig: 376, 140
+  offset: 0, 0
+  index: -1
+JJ_imj/Logo_0006_Rectangle-1
+  rotate: false
+  xy: 475, 1577
+  size: 443, 215
+  orig: 443, 215
+  offset: 0, 0
+  index: -1
+JJ_imj/Logo_0007_Rectangle-1-copy
+  rotate: false
+  xy: 475, 1794
+  size: 530, 215
+  orig: 530, 215
+  offset: 0, 0
+  index: -1

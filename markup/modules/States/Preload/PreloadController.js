@@ -80,6 +80,7 @@ export class Preload {
     loadMainAssets() {
         const game = model.el('game');
         game.load.image('mainBG', 'bg/mainBG.png');
+        game.load.atlasJSONArray('light', 'bg/light.png', 'bg/light.json');
         game.load.image('gameMachine', 'game/gameMachine.png');
         game.load.image('gameMachineBG', 'game/gameMachineBG.png');
         game.load.image('gameMachineUp', 'game/gameMachineUp.png');
@@ -128,7 +129,7 @@ export class Preload {
         const game = model.el('game');
         game.load.spine('boy', 'spine/boy.json');
         game.load.spine('lever', 'spine/img.json');
-
+        game.load.spine('initFon', 'spine/skeleton.json');
 
     }
 

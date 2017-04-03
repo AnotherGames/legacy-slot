@@ -62,6 +62,9 @@ export class Main {
         mainView.draw.lineNumbers({side: 'right'});
         winView.draw.UpWinContainer({});
 
+        mainView.draw.addLight({});
+        mainView.draw.addLight({side: 'right'});
+
         // transitionView.fsStart();
 
         // Инициализируем крутки

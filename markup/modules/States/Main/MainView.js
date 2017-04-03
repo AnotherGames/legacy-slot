@@ -68,6 +68,7 @@ export let view = (() => {
             let gameMachineUp = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachineUp', null, container);
             gameMachineUp.anchor.set(0.5);
             model.el('gameMachineUp', gameMachineUp);
+            gameMachineUp.visible = false;
 
             let logoGM = game.add.sprite(0, model.el('gameMachine').top + 30, 'logoGM', null, container);
             logoGM.anchor.set(0.5);
@@ -182,7 +183,7 @@ export let view = (() => {
             container = model.group('main')
         }) {
             let machineGroup = game.add.group();
-            container.addAt(machineGroup, 2);
+            container.addAt(machineGroup, 1);
             model.group('machine', machineGroup);
 
             let winUp = game.add.group();
@@ -196,6 +197,10 @@ export let view = (() => {
             let numbersContainer = game.add.group();
             container.addAt(numbersContainer, 5);
             model.group('numbers', numbersContainer);
+
+            let lightContainer = game.add.group();
+            container.addAt(lightContainer, 6);
+            model.group('light', lightContainer);
 
             machineGroup.glistaLightContainer = game.add.group();
             model.group('glistaLight', machineGroup.glistaLightContainer);
@@ -222,6 +227,69 @@ export let view = (() => {
             machineGroup.mask = someGraphic;
         },
 
+        addLight: function ({
+            game = model.el('game'),
+            container = model.group('light'),
+            gameMachine = model.el('gameMachine'),
+            side = 'left'
+        }) {
+            let lightArr = [];
+            let x = (side === 'right') ? gameMachine.right - 30 : gameMachine.left + 33;
+            let y = [80, 140, 200, 260, 320, 380, 440, 500, 560, 620, 680, 735, 790, 845];
+
+            let xHorisontal = [-630, -570, -450, -390, -330, -270, -210, -150, -90, -30, 30, 90, 150, 210, 270, 330, 390, 450, 510, 570, 630, 690];
+            let yHorisontal = (side === 'right') ? gameMachine.top + 33 : gameMachine.bottom - 35;
+            if (model.mobile) {
+                x = (side === 'right') ? gameMachine.right - 22 : gameMachine.left + 25;
+                y = [50, 90, 130, 170, 210, 250, 290, 330, 370, 410, 450, 490, 530];
+
+                xHorisontal = [-550, -510, -470];
+                yHorisontal = (side === 'right') ? gameMachine.top + 22 : gameMachine.bottom - 25;
+
+            }
+
+            for (let i = 0; i < 13; i++) {
+
+                let light = game.add.sprite(x, y[i] - gameMachine.height / 2,
+                    'light',
+                    'L-green_1_0.png',
+                    container);
+                light.name = i;
+                light.anchor.set(0.5);
+
+
+                light.animations.add('green', Phaser.Animation.generateFrameNames('L-green_1_', 0, 15, '.png', 1), 15, true);
+                light.animations.add('red', Phaser.Animation.generateFrameNames('L-red_1_', 0, 15, '.png', 1), 15, true);
+
+                if (i % 2 == 0) {
+                    light.animations.play('green');
+                } else {
+                    light.animations.play('red');
+                }
+
+                lightArr.push(light);
+            }
+
+            for (let i = 0; i < 21; i++) {
+                let rnd = (game.rnd.integerInRange(0, 1)) ? 'red' : 'green';
+                let light = game.add.sprite(xHorisontal[i], yHorisontal,
+                    'light',
+                    'L-green_1_0.png',
+                    container);
+                light.name = i;
+                light.anchor.set(0.5);
+
+                light.animations.add('green', Phaser.Animation.generateFrameNames('L-green_1_', 0, 15, '.png', 1), 15, true);
+                light.animations.add('red', Phaser.Animation.generateFrameNames('L-red_1_', 0, 15, '.png', 1), 15, true);
+                if (i % 2 == 0) {
+                    light.animations.play('green');
+                } else {
+                    light.animations.play('red');
+                }
+
+                lightArr.push(light);
+            }
+        },
 
         initPopup: function () {
             let popup = document.querySelector('#popup');
