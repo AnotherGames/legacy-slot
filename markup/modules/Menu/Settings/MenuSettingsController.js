@@ -205,7 +205,7 @@ export let controller = (() => {
         info = new Info({
             model,
             mobileBGScale: 0.75,
-            mobileTableScale: 0.75,
+            mobileTableScale: 1,
             mobileCloseButtonMargin: 0
         });
 

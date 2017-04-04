@@ -216,7 +216,7 @@ export let controller = (() => {
             model,
             desktopCloseButtonMargin: 2,
             desktopBGScale: 1.1,
-            desktopTableScale: 1.1
+            desktopTableScale: 1.3
         });
 
         let spinButtonDesk = view.draw.SpinButton({});
