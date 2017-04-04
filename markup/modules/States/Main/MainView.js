@@ -42,6 +42,18 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('main')
         }) {
+            let lever = game.add.spine(0, 0, 'lever');
+            container.add(lever);
+            lever.setAnimationByName(0, 'idle', true);
+            model.el('lever', lever);
+            if (model.mobile) {
+                lever.scale.set(0.75);
+                lever.x = gameMachine.right + 45;
+                lever.y = gameMachine.bottom - 240;
+            }
+            lever.visible = false;
+            
+
             let gameBG = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachineBG', null, container);
             gameBG.anchor.set(0.5);
             model.el('gameBG', gameBG);
@@ -55,15 +67,6 @@ export let view = (() => {
             darknessBG.visible = false;
             model.el('darknessBG', darknessBG);
 
-            let lever = game.add.spine(gameMachine.right + 60, gameMachine.bottom - 160, 'lever');
-            container.add(lever);
-            lever.setAnimationByName(0, 'idle', true);
-            model.el('lever', lever);
-            if (model.mobile) {
-                lever.scale.set(0.75);
-                lever.x = gameMachine.right + 45;
-                lever.y = gameMachine.bottom - 240;
-            }
 
             let gameMachineUp = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachineUp', null, container);
             gameMachineUp.anchor.set(0.5);
@@ -161,6 +164,55 @@ export let view = (() => {
             model.el(side + 'WinArr', winNumbersArr);
         },
 
+        showFlag: function ({
+            number = 1,
+            container = model.group('numbers'),
+            game = model.el('game'),
+            gameMachine = model.el('gameMachine'),
+            deltaY = (model.desktop) ? 50 : 60,
+            timeDelay = 500
+        }) {
+
+            let flagRight = game.add.spine(gameMachine.right - 30, -300, 'flagRight');
+            container.add(flagRight);
+            flagRight.width = -flagRight.width;
+            model.el('flagRight', flagRight);
+
+            let flagLeft = game.add.spine(gameMachine.left + 30, -300, 'flagLeft');
+            container.add(flagLeft);
+            model.el('flagLeft', flagLeft);
+
+            let color;
+            if (model.state('fs')) {
+                color = 'r';
+            } else {
+                color = 'g';
+            }
+
+            flagRight.setAnimationByName(0, `open_${color}_${number}`, false);
+            flagRight.y = config[model.res].win[number][0].y - gameMachine.height / 2 - deltaY;
+
+            flagLeft.setAnimationByName(0, `open_${color}_${number}`, false);
+            flagLeft.y = config[model.res].win[number][0].y - gameMachine.height / 2 - deltaY;
+
+            game.time.events.add(timeDelay, () => {
+                flagRight.setAnimationByName(0, `close_${color}_${number}`, false);
+                flagLeft.setAnimationByName(0, `close_${color}_${number}`, false);
+            });
+        },
+
+        hideFlag: function ({
+            flagRight = model.el('flagRight'),
+            flagLeft = model.el('flagLeft')
+        }) {
+            if (flagRight) {
+                flagRight.destroy();
+            }
+            if (flagLeft) {
+                flagLeft.destroy();
+            }
+        },
+
         lineShape: function (number) {
             let game = model.el('game');
             let container = model.group('glistaLight');
@@ -182,25 +234,28 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('main')
         }) {
+            let numbersContainer = game.add.group();
+            container.addAt(numbersContainer, 1);
+            model.group('numbers', numbersContainer);
+
             let machineGroup = game.add.group();
-            container.addAt(machineGroup, 1);
+            container.addAt(machineGroup, 3);
             model.group('machine', machineGroup);
 
             let winUp = game.add.group();
-            container.addAt(winUp, 3);
+            container.addAt(winUp, 5);
             model.group('winUp', winUp);
 
             let winTop = game.add.group();
-            container.addAt(winTop, 4);
+            container.addAt(winTop, 6);
             model.group('winTop', winTop);
 
-            let numbersContainer = game.add.group();
-            container.addAt(numbersContainer, 5);
-            model.group('numbers', numbersContainer);
 
             let lightContainer = game.add.group();
-            container.addAt(lightContainer, 6);
+            container.addAt(lightContainer, 7);
             model.group('light', lightContainer);
+
+            console.log(model.group('main'));
 
             machineGroup.glistaLightContainer = game.add.group();
             model.group('glistaLight', machineGroup.glistaLightContainer);
@@ -233,6 +288,13 @@ export let view = (() => {
             gameMachine = model.el('gameMachine'),
             side = 'left'
         }) {
+
+            let lightBroken1 = game.add.sprite((model.desktop) ? -510 : -390, (model.desktop) ? gameMachine.top + 33 : gameMachine.top + 25, 'lightBroken', null, container);
+            lightBroken1.anchor.set(0.5);
+
+            let lightBroken2 = game.add.sprite((model.desktop) ? -510 : -390, (model.desktop) ? gameMachine.bottom - 35 : gameMachine.bottom - 27, 'lightBroken', null, container);
+            lightBroken2.anchor.set(0.5);
+
             let lightArr = [];
             let x = (side === 'right') ? gameMachine.right - 30 : gameMachine.left + 33;
             let y = [80, 140, 200, 260, 320, 380, 440, 500, 560, 620, 680, 735, 790, 845];
@@ -243,8 +305,8 @@ export let view = (() => {
                 x = (side === 'right') ? gameMachine.right - 22 : gameMachine.left + 25;
                 y = [50, 90, 130, 170, 210, 250, 290, 330, 370, 410, 450, 490, 530];
 
-                xHorisontal = [-550, -510, -470];
-                yHorisontal = (side === 'right') ? gameMachine.top + 22 : gameMachine.bottom - 25;
+                xHorisontal = [-470, -430, -350, -310, -270, -230, -190, -150, -110, -70, -30, 10, 50, 90, 130, 170, 210, 250, 290, 330, 375, 420, 460];
+                yHorisontal = (side === 'right') ? gameMachine.top + 25 : gameMachine.bottom - 27;
 
             }
 
@@ -257,9 +319,10 @@ export let view = (() => {
                 light.name = i;
                 light.anchor.set(0.5);
 
-
                 light.animations.add('green', Phaser.Animation.generateFrameNames('L-green_1_', 0, 15, '.png', 1), 15, true);
                 light.animations.add('red', Phaser.Animation.generateFrameNames('L-red_1_', 0, 15, '.png', 1), 15, true);
+                light.animations.add('greenWin', Phaser.Animation.generateFrameNames('L-green_2_', 0, 15, '.png', 1), 15, true);
+                light.animations.add('redWin', Phaser.Animation.generateFrameNames('L-red_2_', 0, 15, '.png', 1), 15, true);
 
                 if (i % 2 == 0) {
                     light.animations.play('green');
@@ -270,7 +333,9 @@ export let view = (() => {
                 lightArr.push(light);
             }
 
-            for (let i = 0; i < 21; i++) {
+            let j = (model.desktop) ? 21 : 23;
+
+            for (let i = 0; i < j; i++) {
                 let rnd = (game.rnd.integerInRange(0, 1)) ? 'red' : 'green';
                 let light = game.add.sprite(xHorisontal[i], yHorisontal,
                     'light',
@@ -281,6 +346,8 @@ export let view = (() => {
 
                 light.animations.add('green', Phaser.Animation.generateFrameNames('L-green_1_', 0, 15, '.png', 1), 15, true);
                 light.animations.add('red', Phaser.Animation.generateFrameNames('L-red_1_', 0, 15, '.png', 1), 15, true);
+                light.animations.add('greenWin', Phaser.Animation.generateFrameNames('L-green_2_', 0, 15, '.png', 1), 15, true);
+                light.animations.add('redWin', Phaser.Animation.generateFrameNames('L-red_2_', 0, 15, '.png', 1), 15, true);
                 if (i % 2 == 0) {
                     light.animations.play('green');
                 } else {
@@ -289,6 +356,52 @@ export let view = (() => {
 
                 lightArr.push(light);
             }
+            model.el(side + 'LightArr', lightArr);
+        },
+
+        lightWin: function ({
+            game = model.el('game'),
+            leftLightArr = model.el('leftLightArr'),
+            rightLightArr = model.el('rightLightArr')
+        }) {
+
+            leftLightArr.forEach((light, index) => {
+                if (index % 2 == 0) {
+                    light.animations.play('greenWin');
+                } else {
+                    light.animations.play('redWin');
+                }
+            });
+            rightLightArr.forEach((light, index) => {
+                if (index % 2 == 0) {
+                    light.animations.play('greenWin');
+                } else {
+                    light.animations.play('redWin');
+                }
+            });
+
+        },
+
+        lightNormal: function ({
+            game = model.el('game'),
+            leftLightArr = model.el('leftLightArr'),
+            rightLightArr = model.el('rightLightArr')
+        }) {
+            leftLightArr.forEach((light, index) => {
+                if (index % 2 == 0) {
+                    light.animations.play('green');
+                } else {
+                    light.animations.play('red');
+                }
+            });
+
+            rightLightArr.forEach((light, index) => {
+                if (index % 2 == 0) {
+                    light.animations.play('green');
+                } else {
+                    light.animations.play('red');
+                }
+            });
         },
 
         initPopup: function () {

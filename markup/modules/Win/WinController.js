@@ -188,13 +188,8 @@ export let controller = (() => {
         let leftLineArr = model.el('leftLineArr');
         let rightLineArr = model.el('rightLineArr');
 
-        // leftLineArr.forEach((el) => {
-        //     el.visible = true;
-        // });
-        //
-        // rightLineArr.forEach((el) => {
-        //     el.visible = true;
-        // });
+        mainView.draw.lightNormal({});
+        mainView.draw.hideFlag({});
 
         // Прячем маленькую таблицу Win
 

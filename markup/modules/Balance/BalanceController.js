@@ -63,7 +63,7 @@ export let controller = (() => {
                 view.update.CashBalance({});
             }
             if (model.desktop) {
-                view.update.FSDesktopBalance({});
+                // view.update.FSDesktopBalance({});
                 view.update.CashBalance({});
                 view.update.FooterBalance({});
             }

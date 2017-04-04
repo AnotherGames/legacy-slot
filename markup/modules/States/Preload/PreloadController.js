@@ -70,10 +70,9 @@ export class Preload {
         const game = model.el('game');
         game.load.path = `static/img/content/${model.res}/`;
         game.load.image('initBG', 'bg/initBG.png');
-        game.load.image('initMain', 'preloader/initMain.png');
-        game.load.image('logoInit', 'preloader/logoInit.png');
+        // game.load.image('initMain', 'preloader/initMain.png');
+        // game.load.image('logoInit', 'preloader/logoInit.png');
         game.load.image('logosSmall', 'preloader/logosSmall.png');
-        // game.load.image('gradientLine', 'bg/gradientLine.png');
         game.load.atlasJSONArray('text', 'text/text.png', 'text/text.json');
     }
 
@@ -81,6 +80,7 @@ export class Preload {
         const game = model.el('game');
         game.load.image('mainBG', 'bg/mainBG.png');
         game.load.atlasJSONArray('light', 'bg/light.png', 'bg/light.json');
+        game.load.image('lightBroken', 'bg/lightBroken.png');
         game.load.image('gameMachine', 'game/gameMachine.png');
         game.load.image('gameMachineBG', 'game/gameMachineBG.png');
         game.load.image('gameMachineUp', 'game/gameMachineUp.png');
@@ -130,7 +130,8 @@ export class Preload {
         game.load.spine('boy', 'spine/boy.json');
         game.load.spine('lever', 'spine/img.json');
         game.load.spine('initFon', 'spine/skeleton.json');
-
+        game.load.spine('flagLeft', 'spine/Flag_l.json');
+        game.load.spine('flagRight', 'spine/Flag_R.json');
     }
 
     loadElements() {

@@ -1,0 +1,97 @@
+
+Flag_l.png
+size: 256,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+img/F_0010_G
+  rotate: false
+  xy: 2, 35
+  size: 65, 81
+  orig: 65, 81
+  offset: 0, 0
+  index: -1
+img/F_0011_R
+  rotate: false
+  xy: 69, 35
+  size: 65, 81
+  orig: 65, 81
+  offset: 0, 0
+  index: -1
+img/NN_0000_5
+  rotate: false
+  xy: 136, 89
+  size: 33, 27
+  orig: 33, 27
+  offset: 0, 0
+  index: -1
+img/NN_0001_3
+  rotate: false
+  xy: 136, 60
+  size: 33, 27
+  orig: 33, 27
+  offset: 0, 0
+  index: -1
+img/NN_0002_7
+  rotate: false
+  xy: 171, 89
+  size: 33, 27
+  orig: 33, 27
+  offset: 0, 0
+  index: -1
+img/NN_0003_8
+  rotate: false
+  xy: 171, 60
+  size: 33, 27
+  orig: 33, 27
+  offset: 0, 0
+  index: -1
+img/NN_0004_1
+  rotate: false
+  xy: 206, 89
+  size: 33, 27
+  orig: 33, 27
+  offset: 0, 0
+  index: -1
+img/NN_0005_10
+  rotate: false
+  xy: 206, 60
+  size: 33, 27
+  orig: 33, 27
+  offset: 0, 0
+  index: -1
+img/NN_0006_9
+  rotate: false
+  xy: 136, 31
+  size: 33, 27
+  orig: 33, 27
+  offset: 0, 0
+  index: -1
+img/NN_0007_6
+  rotate: false
+  xy: 171, 31
+  size: 33, 27
+  orig: 33, 27
+  offset: 0, 0
+  index: -1
+img/NN_0008_2
+  rotate: false
+  xy: 206, 31
+  size: 33, 27
+  orig: 33, 27
+  offset: 0, 0
+  index: -1
+img/NN_0009_4
+  rotate: false
+  xy: 114, 2
+  size: 33, 27
+  orig: 33, 27
+  offset: 0, 0
+  index: -1
+img/S
+  rotate: false
+  xy: 2, 2
+  size: 110, 31
+  orig: 110, 31
+  offset: 0, 0
+  index: -1

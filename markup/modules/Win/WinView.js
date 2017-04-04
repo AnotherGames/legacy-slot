@@ -3,6 +3,8 @@ import { config } from 'modules/Util/Config';
 import { Glista } from 'modules/Class/Glista';
 import { Element } from 'modules/Class/Element';
 
+import { view as mainView } from 'modules/States/Main/MainView';
+
 import { controller as soundController } from '../../../Info/SoundController';
 import { controller as winController } from 'modules/Win/WinController';
 
@@ -96,38 +98,40 @@ export let view = (() => {
         WinSplash: function ({
             number,
             ind,
-            game = model.el('game'),
-            container = model.group('winTop')
+            game = model.el('game')
         }) {
 
-            let leftLineArr = model.el('leftLineArr');
-            let rightLineArr = model.el('rightLineArr');
+            mainView.draw.lightWin({});
+            mainView.draw.showFlag({number: number});
 
-            let lineNumberLeft = leftLineArr.filter((el) => {
-                return el.name === number;
-            })[0];
-            let lineNumberRight = rightLineArr.filter((el) => {
-                return el.name === number;
-            })[0];
-
-            lineNumberLeft.visible = false;
-            lineNumberRight.visible = false;
-
-            let leftWinArr = model.el('leftWinArr');
-            let rightWinArr = model.el('rightWinArr');
-
-            let winSplashLeft = leftWinArr.filter((el) => {
-                return el.name === number;
-            })[0];
-            let winSplashRight = rightWinArr.filter((el) => {
-                return el.name === number;
-            })[0];
-
-            winSplashLeft.visible = true;
-            winSplashRight.visible = true;
-
-            winSplashLeft.animations.play('win');
-            winSplashRight.animations.play('win');
+            // let leftLineArr = model.el('leftLineArr');
+            // let rightLineArr = model.el('rightLineArr');
+            //
+            // let lineNumberLeft = leftLineArr.filter((el) => {
+            //     return el.name === number;
+            // })[0];
+            // let lineNumberRight = rightLineArr.filter((el) => {
+            //     return el.name === number;
+            // })[0];
+            //
+            // lineNumberLeft.visible = false;
+            // lineNumberRight.visible = false;
+            //
+            // let leftWinArr = model.el('leftWinArr');
+            // let rightWinArr = model.el('rightWinArr');
+            //
+            // let winSplashLeft = leftWinArr.filter((el) => {
+            //     return el.name === number;
+            // })[0];
+            // let winSplashRight = rightWinArr.filter((el) => {
+            //     return el.name === number;
+            // })[0];
+            //
+            // winSplashLeft.visible = true;
+            // winSplashRight.visible = true;
+            //
+            // winSplashLeft.animations.play('win');
+            // winSplashRight.animations.play('win');
 
         },
 
