@@ -78,6 +78,8 @@ export let controller = (() => {
                 } else {
                     // Очищаем выигрышный экран
                     winController.cleanWin();
+                    let logoGM = model.el('logoGM');
+                    logoGM.setAnimationByName(0, 'idle', true);
 
                     // Записываем полученные данные
                     model.data('rollResponse', data);

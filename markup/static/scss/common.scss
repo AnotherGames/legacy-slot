@@ -45,7 +45,7 @@ body:not(.ios) {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.7);
 }
 
 #fakeButton {
@@ -60,9 +60,9 @@ body:not(.ios) {
     margin: 0;
     z-index: 11;
     position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    left: 30%;
+    top: 10%;
+    // transform: translate(-50%, -50%);
 }
 
 #popup h2{
@@ -70,13 +70,15 @@ body:not(.ios) {
     position: absolute;
     font: 3vw arial;
     box-sizing: border-box;
-    padding: 0 10% 0 45%;
-    top: 25%;
+    // padding: 0 10% 0 45%;
+    top: 35%;
     width: 100%;
+    color: #eee;
 }
 
 #popup img{
     max-width: 100%;
+    margin-left: 60%;
 }
 
 #popup p{
@@ -84,9 +86,26 @@ body:not(.ios) {
     font: 1.5vw arial;
     position: absolute;
     top: 60%;
-    padding: 0 15% 0 17%;
+    // padding: 0 15% 0 17%;
     width: 100%;
     text-align: center;
+    color: #eee;
+}
+
+@media screen and (max-width: 1280px) {
+    #popup {
+        left: 0;
+        top: 0;
+    }
+    #popup img {
+        max-width: 60%;
+    }
+    #popup h2 {
+        top: 35%;
+    }
+    #popup p {
+        top: 50%;
+    }
 }
 
 #settings {

@@ -134,6 +134,10 @@ export let controller = (() => {
         view.play.WinSound();
         // Рисуем табличку
         view.draw.TotalWin({winTotalData});
+
+        let logoGM = model.el('logoGM');
+        logoGM.setAnimationByName(0, 'win', true);
+
         // Для каждой линии проигрываем символы, глисты и номерки
         let winElements = { number: [], amount: [] };
         winLines.forEach((winLine) => {
@@ -182,11 +186,6 @@ export let controller = (() => {
                 el.show();
             });
         });
-
-        // Показываем обычные номера линий
-
-        let leftLineArr = model.el('leftLineArr');
-        let rightLineArr = model.el('rightLineArr');
 
         mainView.draw.lightNormal({});
         mainView.draw.hideFlag({});

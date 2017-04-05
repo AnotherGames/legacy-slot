@@ -65,6 +65,7 @@ export class Main {
         mainView.draw.addLight({});
         mainView.draw.addLight({side: 'right'});
 
+        // mainView.draw.showPopup({message: 'You have low balance on your account', balance: true});
         // transitionView.fsStart();
 
         // Инициализируем крутки

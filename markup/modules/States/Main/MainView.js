@@ -42,17 +42,15 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('main')
         }) {
-            let lever = game.add.spine(0, 0, 'lever');
+            let lever = game.add.spine(755, 250, 'lever');
             container.add(lever);
             lever.setAnimationByName(0, 'idle', true);
             model.el('lever', lever);
             if (model.mobile) {
                 lever.scale.set(0.75);
-                lever.x = gameMachine.right + 45;
-                lever.y = gameMachine.bottom - 240;
+                lever.x = 570;
+                lever.y = 40;
             }
-            lever.visible = false;
-            
 
             let gameBG = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachineBG', null, container);
             gameBG.anchor.set(0.5);
@@ -67,14 +65,18 @@ export let view = (() => {
             darknessBG.visible = false;
             model.el('darknessBG', darknessBG);
 
-
             let gameMachineUp = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachineUp', null, container);
             gameMachineUp.anchor.set(0.5);
             model.el('gameMachineUp', gameMachineUp);
             gameMachineUp.visible = false;
 
-            let logoGM = game.add.sprite(0, model.el('gameMachine').top + 30, 'logoGM', null, container);
-            logoGM.anchor.set(0.5);
+            let deltaY = (model.desktop) ? 90 : 45;
+            let logoGM = game.add.spine(0, deltaY, 'logoGM');
+            container.add(logoGM);
+            if (model.mobile) {
+                logoGM.scale.set(0.75);
+            }
+            logoGM.setAnimationByName(0, 'idle', true);
             model.el('logoGM', logoGM);
 
         },
@@ -181,6 +183,11 @@ export let view = (() => {
             let flagLeft = game.add.spine(gameMachine.left + 30, -300, 'flagLeft');
             container.add(flagLeft);
             model.el('flagLeft', flagLeft);
+
+            if (model.mobile) {
+                flagRight.x = gameMachine.right - 55;
+                flagLeft.x = gameMachine.left + 55;
+            }
 
             let color;
             if (model.state('fs')) {

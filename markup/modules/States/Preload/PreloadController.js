@@ -85,7 +85,7 @@ export class Preload {
         game.load.image('gameMachineBG', 'game/gameMachineBG.png');
         game.load.image('gameMachineUp', 'game/gameMachineUp.png');
         game.load.image('darkness', 'game/darkness.png');
-        game.load.image('logoGM', 'game/logoGM.png');
+        // game.load.image('logoGM', 'game/logoGM.png');
         game.load.image('closeButton', 'other/closeButton.png');
         game.load.image('arrow', 'other/arrow.png');
         game.load.image('infoTableBg', 'other/infoTableBg.png');
@@ -132,6 +132,7 @@ export class Preload {
         game.load.spine('initFon', 'spine/skeleton.json');
         game.load.spine('flagLeft', 'spine/Flag_l.json');
         game.load.spine('flagRight', 'spine/Flag_R.json');
+        game.load.spine('logoGM', 'spine/Z_top.json');
     }
 
     loadElements() {
