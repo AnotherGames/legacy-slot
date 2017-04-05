@@ -104,35 +104,6 @@ export let view = (() => {
             mainView.draw.lightWin({});
             mainView.draw.showFlag({number: number});
 
-            // let leftLineArr = model.el('leftLineArr');
-            // let rightLineArr = model.el('rightLineArr');
-            //
-            // let lineNumberLeft = leftLineArr.filter((el) => {
-            //     return el.name === number;
-            // })[0];
-            // let lineNumberRight = rightLineArr.filter((el) => {
-            //     return el.name === number;
-            // })[0];
-            //
-            // lineNumberLeft.visible = false;
-            // lineNumberRight.visible = false;
-            //
-            // let leftWinArr = model.el('leftWinArr');
-            // let rightWinArr = model.el('rightWinArr');
-            //
-            // let winSplashLeft = leftWinArr.filter((el) => {
-            //     return el.name === number;
-            // })[0];
-            // let winSplashRight = rightWinArr.filter((el) => {
-            //     return el.name === number;
-            // })[0];
-            //
-            // winSplashLeft.visible = true;
-            // winSplashRight.visible = true;
-            //
-            // winSplashLeft.animations.play('win');
-            // winSplashRight.animations.play('win');
-
         },
 
         WinNumber: function ({
