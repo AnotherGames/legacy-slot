@@ -192,7 +192,8 @@ export let controller = (() => {
         drawButtons,
         auto,
         lockButtons,
-        unlockButtons
+        unlockButtons,
+        handle
     };
 
 })();

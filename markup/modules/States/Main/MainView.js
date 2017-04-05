@@ -1,6 +1,8 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
 import { motionPath } from 'modules/Util/Motion';
+import { controller as panelController } from 'modules/Panel/PanelController';
+import { controller as buttonsController } from 'modules/Buttons/ButtonsController';
 import { controller as soundController } from '../../../../Info/SoundController';
 
 export let view = (() => {
@@ -65,11 +67,6 @@ export let view = (() => {
             darknessBG.visible = false;
             model.el('darknessBG', darknessBG);
 
-            let gameMachineUp = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachineUp', null, container);
-            gameMachineUp.anchor.set(0.5);
-            model.el('gameMachineUp', gameMachineUp);
-            gameMachineUp.visible = false;
-
             let deltaY = (model.desktop) ? 90 : 45;
             let logoGM = game.add.spine(0, deltaY, 'logoGM');
             container.add(logoGM);
@@ -79,6 +76,17 @@ export let view = (() => {
             logoGM.setAnimationByName(0, 'idle', true);
             model.el('logoGM', logoGM);
 
+            // Hit area for lever
+            let deltaY2 = (model.desktop) ? 250 : 200;
+            let circle = game.add.graphics(lever.x, lever.y - deltaY2, container).beginFill(0xffffff, 0.01).drawCircle(0, 0, 100);
+            circle.inputEnabled = true;
+            circle.events.onInputDown.add(() => {
+                if (model.desktop) {
+                    panelController.handle.spin();
+                } else {
+                    buttonsController.handle.spinButton();
+                }
+            });
         },
 
         lineNumbers: function ({
