@@ -167,11 +167,11 @@ body:not(.ios) {
     }
     &::before {
         left: -50px;
-        background-image:url(http://casino.bossgs.org/monstersushi/static/img/content/settings/soundMinus.png);
+        background-image:url(../img/content/settings/soundMinus.png);
     }
     &::after {
         right: -50px;
-        background-image:url(http://casino.bossgs.org/monstersushi/static/img/content/settings/soundPlus.png);
+        background-image:url(../img/content/settings/soundPlus.png);
     }
 }
 
