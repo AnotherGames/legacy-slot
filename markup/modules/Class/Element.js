@@ -13,9 +13,7 @@ export class Element {
 
         // Заполняем его спрайтами всех элементов (они будут расположенны друг на друге)
         this.sprites = [];
-        for (let i = 1; i <= 19; i++) {
-
-            if (i == 10) continue;
+        for (let i = 1; i <= 18; i++) {
 
             let sprite = game.add.sprite(0, 0, i, null, this.group);
                 sprite.anchor.set(0.5);
@@ -119,7 +117,9 @@ export class Element {
             case 9:
                 this.addAnimation(sprite, { el: 9, n: 29, w: 29 });
                 break;
-
+            case 10:
+                this.addAnimation(sprite, { el: 10, n: 29, w: 29 });
+                break;
             case 11:
                 this.addAnimation(sprite, { el: 11, n: 29, w: 29 });
                 break;
@@ -144,31 +144,10 @@ export class Element {
             case 18:
                 this.addAnimation(sprite, { el: 18, n: 29, w: 29 });
                 break;
-            case 19:
-                this.addAnimation(sprite, { el: 19, n: 29, w: 29 });
-                break;
 
             default:
                 break;
 
-        }
-    }
-
-    addBottleAnimation(sprite, options) {
-        if (options.el >= 9 && options.el <= 11) {
-            sprite.animations.add(`${options.el}-n`, Phaser.Animation.generateFrameNames(`18-n-`, 0, options.n, '.png', 2));
-            sprite.animations.add(`${options.el}-b`, [`18-b-00.png`]);
-            sprite.animations.add(`${options.el}-w`, Phaser.Animation.generateFrameNames(`18-w-`, 0, options.w, '.png', 2));
-        }
-        if (options.el >= 12 && options.el <= 14) {
-            sprite.animations.add(`${options.el}-n`, Phaser.Animation.generateFrameNames(`19-n-`, 0, options.n, '.png', 2));
-            sprite.animations.add(`${options.el}-b`, [`19-b-00.png`]);
-            sprite.animations.add(`${options.el}-w`, Phaser.Animation.generateFrameNames(`19-w-`, 0, options.w, '.png', 2));
-        }
-        if (options.el >= 15 && options.el <= 17 || options.el == 21) {
-            sprite.animations.add(`${options.el}-n`, Phaser.Animation.generateFrameNames(`20-n-`, 0, options.n, '.png', 2));
-            sprite.animations.add(`${options.el}-b`, [`20-b-00.png`]);
-            sprite.animations.add(`${options.el}-w`, Phaser.Animation.generateFrameNames(`20-w-`, 0, options.w, '.png', 2));
         }
     }
 

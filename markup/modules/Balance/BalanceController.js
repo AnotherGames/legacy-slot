@@ -59,11 +59,11 @@ export let controller = (() => {
     function updateBalance() {
         if (model.state('fs')) {
             if (model.mobile) {
-                // view.update.FSMobileBalance({});
+                view.update.FSMobileBalance({});
                 view.update.CashBalance({});
             }
             if (model.desktop) {
-                // view.update.FSDesktopBalance({});
+                view.update.FSDesktopBalance({});
                 view.update.CashBalance({});
                 view.update.FooterBalance({});
             }

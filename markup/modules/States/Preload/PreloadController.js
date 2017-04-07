@@ -115,8 +115,10 @@ export class Preload {
 
     loadFSAssets() {
         const game = model.el('game');
-        game.load.atlasJSONArray('fsCountBG', 'fs/fsCountBG.png', 'fs/fsCountBG.json');
-        game.load.image('fsWinText', 'fs/fsWinText.png');
+        game.load.image('fsCountBG', 'fs/fsCountBG.png');
+        game.load.image('jack', 'fs/jack.png');
+        game.load.image('coin1', 'fs/coin1.png');
+        game.load.image('coin2', 'fs/coin2.png');
         game.load.image('gameMachineFSBG', 'game/gameMachineFSBG.png');
         if (model.desktop) {
             game.load.image('panelFS', 'game/panelFS.png');
@@ -143,6 +145,7 @@ export class Preload {
         game.load.atlasJSONArray('7', 'elements/7.png', 'elements/7.json');
         game.load.atlasJSONArray('8', 'elements/8.png', 'elements/8.json');
         game.load.atlasJSONArray('9', 'elements/9.png', 'elements/9.json');
+        game.load.atlasJSONArray('10', 'elements/10.png', 'elements/10.json');
         game.load.atlasJSONArray('11', 'elements/11.png', 'elements/11.json');
         game.load.atlasJSONArray('12', 'elements/12.png', 'elements/12.json');
         game.load.atlasJSONArray('13', 'elements/13.png', 'elements/13.json');
@@ -151,7 +154,6 @@ export class Preload {
         game.load.atlasJSONArray('16', 'elements/16.png', 'elements/16.json');
         game.load.atlasJSONArray('17', 'elements/17.png', 'elements/17.json');
         game.load.atlasJSONArray('18', 'elements/18.png', 'elements/18.json');
-        game.load.atlasJSONArray('19', 'elements/19.png', 'elements/19.json');
     }
 
     hidePreloader() {

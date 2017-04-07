@@ -14,17 +14,14 @@ export let controller = (() => {
     model.data('glistaFiredCounter', 0);
     model.data('glistaDoneCounter', 0);
 
-    function drawFsState(fsLevelNumber, numberOfSpins) {
+    function drawFsState() {
         let game = model.el('game');
-
-        // view.draw.addBigBottleToStage(fsLevelNumber);
 
         // Остонавливаем автоплей если был
         if (model.state('autoplay:start')) {
             model.data('remainAutoCount', model.data('autoplay:count'));
             autoplayController.stop();
         }
-
         model.state('fs', true);
         // Лочим все кнопки
         model.state('buttons:locked', true);
@@ -35,20 +32,10 @@ export let controller = (() => {
         game.input.keyboard.enabled = false;
 
         // Изменяем панель на FS
-        // panelController.drawFsPanel(numberOfSpins);
+        panelController.drawFsPanel();
 
-        fsController.init(10);
+        fsController.init(20);
 
-        // Персонаж объявляет количество фриспинов
-        game.time.events.add(500, () => {
-            transitionView.fsStart();
-            // mainView.draw.addCat2({});
-            // if (model.desktop) {
-            //     mainView.draw.changeBG({});
-            // } else {
-            //     mainView.draw.addTrash({});
-            // }
-        });
     }
 
     function checkForFS() {
@@ -58,9 +45,8 @@ export let controller = (() => {
         let nextMode = data.NextMode;
 
         if (mode === 'root' && nextMode.indexOf('fsBonus') !== -1 ) {
-            let fsBonusLevel = nextMode[7];
             console.warn('fs start!');
-            drawFsState(fsBonusLevel, fsBonusLevel);
+            transitionView.fsStart();
         }
     }
 

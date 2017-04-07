@@ -62,6 +62,11 @@ export let view = (() => {
             gameMachine.anchor.set(0.5);
             model.el('gameMachine', gameMachine);
 
+            let darknessBG = game.add.sprite(0, config[model.res].gameMachine.y, 'darkness', null, container);
+            darknessBG.anchor.set(0.5);
+            darknessBG.visible = false;
+            model.el('darknessBG', darknessBG);
+
             let deltaY = (model.desktop) ? 90 : 45;
             let logoGM = game.add.spine(0, deltaY, 'logoGM');
             container.add(logoGM);
@@ -71,10 +76,6 @@ export let view = (() => {
             logoGM.setAnimationByName(0, 'idle', true);
             model.el('logoGM', logoGM);
 
-            let darknessBG = game.add.sprite(0, config[model.res].gameMachine.y, 'darkness', null, container);
-            darknessBG.anchor.set(0.5);
-            darknessBG.visible = false;
-            model.el('darknessBG', darknessBG);
 
             // Hit area for lever
             let deltaY2 = (model.desktop) ? 250 : 200;
@@ -262,11 +263,11 @@ export let view = (() => {
             model.group('light', lightContainer);
             let winUp = game.add.group();
 
-            container.addAt(winUp, 7);
+            container.addAt(winUp, 6);
             model.group('winUp', winUp);
 
             let winTop = game.add.group();
-            container.addAt(winTop, 8);
+            container.addAt(winTop, 7);
             model.group('winTop', winTop);
 
             machineGroup.glistaLightContainer = game.add.group();
@@ -280,6 +281,8 @@ export let view = (() => {
             machineGroup.glistaContainer = game.add.group();
             model.group('glista', machineGroup.glistaContainer);
             machineGroup.add(machineGroup.glistaContainer);
+
+            console.log(model.group('main'));
         },
 
         machineMask: function ({

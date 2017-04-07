@@ -13,33 +13,25 @@ import { controller as rollController } from 'modules/Roll/RollController';
 export let controller = (() => {
 
     function stop() {
-        let game = model.el('game');
-
-        // winView.draw.hideBottle();
-        // motionPath.motion.destroyPath({name: 'cat2'});
-        // model.el('cat2').destroy();
-
-        // if (model.desktop) {
-        //     mainView.draw.changeBG({index: 2});
-        // } else {
-        //     mainView.draw.removeTrash({});
-        // }
         transitionView.fsFinish();
+    }
+
+    function changeToMain() {
+        let game = model.el('game');
         if (model.mobile) {
             buttonsController.unlockButtons();
         }
-        game.time.events.add(6000, () => {
-            // panelController.drawMainPanel();
-            soundController.music.stopMusic('fsFon');
-            soundController.music.playMusic('fon');
+        panelController.drawMainPanel();
+        soundController.music.stopMusic('fsFon');
+        soundController.music.playMusic('fon');
 
-            model.state('fs:end', true);
-            model.state('fs', false);
-            model.updateBalance({endFS: true});
-            model.state('buttons:locked', false);
+        model.state('fs:end', true);
+        model.state('fs', false);
+        model.updateBalance({endFS: true});
+        model.state('buttons:locked', false);
 
-            game.input.keyboard.enabled = true;
-        });
+        game.input.keyboard.enabled = true;
+
     }
 
     function next() {
@@ -73,15 +65,14 @@ export let controller = (() => {
         end
     }) {
         if (start) {
-            console.log(model.data('fs:count'));
             let newFsCount = model.data('fs:count');
-            // newFsCount--;
-            // model.data('fs:count', newFsCount);
-            // model.el('fs:count').text = newFsCount;
+            newFsCount--;
+            model.data('fs:count', newFsCount);
+            model.el('fs:count').text = newFsCount;
         }
         if (end) {
-            // model.data('fs:count', model.data('rollResponse').FreeSpinsLeft);
-            // model.el('fs:count').text = model.data('rollResponse').FreeSpinsLeft;
+            model.data('fs:count', model.data('rollResponse').FreeSpinsLeft);
+            model.el('fs:count').text = model.data('rollResponse').FreeSpinsLeft;
         }
     }
 
@@ -89,6 +80,7 @@ export let controller = (() => {
         init,
         next,
         count,
-        stop
+        stop,
+        changeToMain
     };
 })();

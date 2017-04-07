@@ -293,34 +293,8 @@ export let controller = (() => {
         }
     }
 
-    function drawFsPanel(index) {
+    function drawFsPanel() {
         let game = model.el('game');
-        let framePanel;
-
-        switch (+index) {
-            case 1:
-                framePanel = 'panelGreen.png';
-                break;
-            case 2:
-                framePanel = 'panelRed.png';
-                break;
-            case 3:
-                framePanel = 'panelOrange.png';
-                break;
-            case 4:
-                framePanel = 'panelGreenRed.png';
-                break;
-            case 5:
-                framePanel = 'panelRedOrange.png';
-                break;
-            case 6:
-                framePanel = 'panelGreenOrange.png';
-                break;
-            case 7:
-                framePanel = 'panelGreenRedOrange.png';
-                break;
-            default:
-        }
 
         let container2 = model.group('balanceCash');
         container2.removeAll();
@@ -329,7 +303,6 @@ export let controller = (() => {
 
             view.draw.PanelBG({
                 frameName: 'panelFS',
-                framePanelBG: framePanel,
                 container: model.group('panelFS'),
                 deltaX: 0
             });
@@ -344,7 +317,7 @@ export let controller = (() => {
         }
 
         view.draw.FsLevelAndMulti({});
-        view.draw.changeLevelAndMulti({});
+        // view.draw.changeLevelAndMulti({});
 
     }
 

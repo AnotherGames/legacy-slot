@@ -10,25 +10,25 @@ export let view = (() => {
             container = model.group('panel'),
             x = game.world.centerX,
             y = model.el('gameMachine').bottom + model.el('gameMachine').height / 2,
-            framePanelBG = 'panelBGgreen.png',
+            frameName = 'panel',
             deltaY = 20
         }) {
             container.x = x;
             container.top = y;
-            let panelBG = game.add.sprite(1, deltaY, 'panel', null, container);
+            let panelBG = game.add.sprite(1, deltaY, frameName, null, container);
 
-            // if (model.state('fs')) {
-            //     container.alpha = 0;
-            //     container.y = -500;
-            // }
+            if (model.state('fs')) {
+                container.alpha = 0;
+                container.y = -500;
+            }
 
-            let convertSign = game.add.sprite(100, 105, 'deskButtons', 'switch1.png', container);
-            convertSign.anchor.set(0.5);
-            convertSign.inputEnabled = true;
-            convertSign.events.onInputDown.add(() => {
-                balanceController.changeCoinsToCash();
-            });
-            model.el('convertSign', convertSign);
+                let convertSign = game.add.sprite(100, 105, 'deskButtons', 'switch1.png', container);
+                convertSign.anchor.set(0.5);
+                convertSign.inputEnabled = true;
+                convertSign.events.onInputDown.add(() => {
+                    balanceController.changeCoinsToCash();
+                });
+                model.el('convertSign', convertSign);
 
             container.pivot.set(panelBG.width / 2, 0);
             return panelBG;
@@ -38,11 +38,11 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('panelFS'),
             startLevel = 15,
-            startMulti = 'x3',
+            startMulti = 'x2',
             fontDesktop = '80px Cooper, Arial',
             fontMobile = '40px Cooper, Arial',
-            x = container.width / 2 + 10,
-            y = 160
+            x = container.width / 2 - 30,
+            y = 115
         }) {
             if (model.mobile) {
                 y = game.height * 0.85;
@@ -54,39 +54,33 @@ export let view = (() => {
             }
             let fsCountBG = game.add.sprite(x, y, 'fsCountBG', null, container);
             fsCountBG.anchor.set(0.5);
-            fsCountBG.animations.add('start');
-            fsCountBG.animations.play('start', 15, true);
 
             let font = (model.desktop) ? fontDesktop : fontMobile;
-            let deltaX = (model.desktop) ? 97 : 60;
-            let deltaY1 = (model.desktop) ? 40 : 20;
-            let deltaY2 = (model.desktop) ? 10 : 5;
+            let deltaX = (model.desktop) ? 70 : 60;
+            let deltaY = (model.desktop) ? 25 : 20;
 
-            let fsCount = game.add.text(fsCountBG.x - deltaX, fsCountBG.y - deltaY1, startLevel, {font: font, align: 'center'}, container);
+            let fsCount = game.add.bitmapText(fsCountBG.x - deltaX, fsCountBG.y + deltaY, 'numbersFont', '' + startLevel, 20, container);
+            fsCount.align = 'center';
             fsCount.anchor.set(0.5);
             model.el('fs:count', fsCount);
 
-            let grd = fsCount.context.createLinearGradient(0, 0, 0, fsCount.canvas.height);
-            grd.addColorStop(0, '#ffffff');
-            grd.addColorStop(1, '#eeeeee');
-            fsCount.fill = grd;
-
-            let fsMulti = game.add.text(fsCountBG.x + deltaX, fsCountBG.y + deltaY2, startMulti, {font: font, align: 'center', fill: '#ffffff'}, container);
+            let fsMulti = game.add.bitmapText(fsCountBG.x + deltaX, fsCountBG.y + deltaY, 'numbersFont', '' + startMulti, 20, container);
+            fsMulti.align = 'center';
             fsMulti.anchor.set(0.5);
             model.el('fs:multi', fsMulti);
         },
 
-        changeLevelAndMulti: function ({
-            fsCount = model.el('fs:count'),
-            fsMulti = model.el('fs:multi'),
-        }) {
-            let freeSpinsCount = model.data('rollResponse').FreeSpinsLeft;
-            setTimeout(() => {
-                fsCount.text = freeSpinsCount;
-                fsMulti.text = 'x2';
-            }, 500);
-            console.log(fsCount, fsMulti);
-        },
+        // changeLevelAndMulti: function ({
+        //     fsCount = model.el('fs:count'),
+        //     fsMulti = model.el('fs:multi'),
+        // }) {
+        //     let freeSpinsCount = model.data('rollResponse').FreeSpinsLeft;
+        //     setTimeout(() => {
+        //         fsCount.text = freeSpinsCount;
+        //         fsMulti.text = 'x2';
+        //     }, 500);
+        //     console.log(fsCount, fsMulti);
+        // },
 
         AutoContainer: function ({
             game = model.el('game'),
