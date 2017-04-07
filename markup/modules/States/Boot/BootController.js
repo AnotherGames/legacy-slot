@@ -8,8 +8,8 @@ export class Boot {
         const game = model.el('game');
 
         request.setMode({
-            normal: 'jokerjack1',
-            fsBonus: 'candyfs1'
+            normal: 'jokerjack3',
+            fsBonus: 'jokerfs1'
         });
 
         request.send('Initialise', 'normal')

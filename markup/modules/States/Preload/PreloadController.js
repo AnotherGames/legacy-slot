@@ -79,6 +79,8 @@ export class Preload {
         game.load.image('mainBG', 'bg/mainBG.png');
         game.load.atlasJSONArray('light', 'bg/light.png', 'bg/light.json');
         game.load.image('lightBroken', 'bg/lightBroken.png');
+        game.load.image('lightGreen', 'bg/lightGreen.png');
+        game.load.image('lightRed', 'bg/lightRed.png');
         game.load.image('gameMachine', 'game/gameMachine.png');
         game.load.image('gameMachineBG', 'game/gameMachineBG.png');
         game.load.image('darkness', 'game/darkness.png');

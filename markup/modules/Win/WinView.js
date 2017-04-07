@@ -118,7 +118,8 @@ export let view = (() => {
 
         WinElements: function ({
             number,
-            amount
+            amount,
+            finalScale = (model.desktop) ? 1.3 : 1.5
         }) {
 
             // Если нам нужно зажечь несколько линий элементов одновременно
@@ -135,6 +136,11 @@ export let view = (() => {
                 winElements.upElements.forEach((upEl) => {
                     upEl.show();
                     upEl.win();
+                    draw.scaleJumping({
+                        el: upEl,
+                        start: 0.3,
+                        finish: finalScale
+                    });
                 });
                 return;
             }

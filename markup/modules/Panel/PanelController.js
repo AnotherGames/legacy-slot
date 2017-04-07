@@ -218,8 +218,8 @@ export let controller = (() => {
 
         info = new Info({
             model,
-            desktopCloseButtonMargin: 2,
-            desktopBGScale: 1.1,
+            desktopCloseButtonMargin: 1,
+            desktopBGScale: 1.0,
             desktopTableScale: 1.1
         });
 
