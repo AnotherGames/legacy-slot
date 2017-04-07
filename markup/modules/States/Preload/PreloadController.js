@@ -60,13 +60,8 @@ export class Preload {
         game.load.audio('lineWin2', 'lineWin2.mp3');
         game.load.audio('bubbleFail', 'bubbleFail.mp3');
         game.load.audio('sea', 'sea.mp3');
-        // game.load.audio('illumBreak1', 'illumBreak01.mp3');
-        // game.load.audio('illumBreak2', 'illumBreak02.mp3');
-        // game.load.audio('illumBreak3', 'illumBreak03.mp3');
-        // game.load.audio('illumFail', 'illumFail.mp3');
-        // game.load.audio('illumWin', 'illumWin.mp3');
-        // game.load.audio('chestDown', 'chestDown.mp3');
-        // game.load.audio('diverDown', 'diverDown.mp3');
+        game.load.audio('coins', 'coins.mp3');
+        game.load.audio('sundukOpen', 'sundukOpen.mp3');
     }
 
     loadInitAssets() {

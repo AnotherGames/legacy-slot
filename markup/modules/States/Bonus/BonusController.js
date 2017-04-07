@@ -53,8 +53,8 @@ class Door {
         this.destroyed = true;
 
         let rnd = this.game.rnd.integerInRange(1, 3);
-        // soundController.sound.playSound({ sound: `illumBreak${rnd}` });
-        // soundController.sound.playSound({ sound: 'sea', duration: 500 });
+        // soundController.sound.playSound({ sound: 'sundukOpen' });
+        soundController.sound.playSound({ sound: 'coins', duration: 1500, volume: 2 });
 
         let number = parseInt(sprite.frameName, 10);
         bonusView.draw.showWinAnim({number: number});
