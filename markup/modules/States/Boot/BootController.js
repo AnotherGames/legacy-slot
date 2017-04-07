@@ -12,7 +12,7 @@ export class Boot {
             fsBonus: 'jokerfs1'
         });
 
-        request.send('Initialise', 'normal')
+        request.send('Initialise', 'fsBonus')
             .then((initData) => {
                 console.log('Init: ', initData);
                 model.initStates(initData);

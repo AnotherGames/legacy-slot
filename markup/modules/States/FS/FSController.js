@@ -73,14 +73,15 @@ export let controller = (() => {
         end
     }) {
         if (start) {
+            console.log(model.data('fs:count'));
             let newFsCount = model.data('fs:count');
-            newFsCount--;
-            model.data('fs:count', newFsCount);
-            model.el('fs:count').text = newFsCount;
+            // newFsCount--;
+            // model.data('fs:count', newFsCount);
+            // model.el('fs:count').text = newFsCount;
         }
         if (end) {
-            model.data('fs:count', model.data('rollResponse').FreeSpinsLeft);
-            model.el('fs:count').text = model.data('rollResponse').FreeSpinsLeft;
+            // model.data('fs:count', model.data('rollResponse').FreeSpinsLeft);
+            // model.el('fs:count').text = model.data('rollResponse').FreeSpinsLeft;
         }
     }
 
