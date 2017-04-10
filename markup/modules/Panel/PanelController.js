@@ -65,8 +65,9 @@ export let controller = (() => {
 
         let info = new Info({
             model,
-            desktopBGScale: 1.3,
-            desktopTableScale: 1.3
+            desktopBGScale: 1,
+            desktopTableScale: 1.3,
+	        desktopCloseButtonMargin: 6
         });
 
         // Развешиваем ивенты на кнопки в инфо

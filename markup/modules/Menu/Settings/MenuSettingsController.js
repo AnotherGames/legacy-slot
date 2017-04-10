@@ -197,7 +197,8 @@ export let controller = (() => {
         info = new Info({
             model,
             mobileBGScale: 1,
-            mobileTableScale: 1
+            mobileTableScale: 1,
+	        mobileCloseButtonMargin: 5
         });
 
         model.state('settings', 'close');
