@@ -153,7 +153,7 @@ export let controller = (() => {
 
         info = new Info({
             model,
-            mobileBGScale: 0.7,
+            mobileBGScale: 1,
             mobileCloseButtonMargin: 0
         });
 
