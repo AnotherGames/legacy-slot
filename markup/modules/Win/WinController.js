@@ -15,27 +15,10 @@ export let controller = (() => {
     model.data('glistaDoneCounter', 0);
 
     function drawFsState() {
-        let game = model.el('game');
-
-        // Остонавливаем автоплей если был
-        if (model.state('autoplay:start')) {
-            model.data('remainAutoCount', model.data('autoplay:count'));
-            autoplayController.stop();
-        }
         model.state('fs', true);
-        // Лочим все кнопки
-        model.state('buttons:locked', true);
-        if (model.mobile) {
-            buttonsController.lockButtons();
-        }
-        // Убираем управление с клавиатуры
-        game.input.keyboard.enabled = false;
-
         // Изменяем панель на FS
         panelController.drawFsPanel();
-
         fsController.init(20);
-
     }
 
     function checkForFS() {
@@ -46,6 +29,18 @@ export let controller = (() => {
 
         if (mode === 'root' && nextMode.indexOf('fsBonus') !== -1 ) {
             console.warn('fs start!');
+            // Убираем управление с клавиатуры
+            game.input.keyboard.enabled = false;
+            // Лочим все кнопки
+            model.state('buttons:locked', true);
+            if (model.mobile) {
+                buttonsController.lockButtons();
+            }
+            // Остонавливаем автоплей если был
+            if (model.state('autoplay:start')) {
+                model.data('remainAutoCount', model.data('autoplay:count'));
+                autoplayController.stop();
+            }
             transitionView.fsStart();
         }
     }

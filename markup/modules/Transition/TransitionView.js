@@ -21,7 +21,10 @@ export let view = (() => {
         _fsStartInput();
 
         // Автопереход если включен
-        game.time.events.add(config.autoTransitionTime, transitionInFs);
+        if (model.state('autoTransititon')) {
+            game.time.events.add(config.autoTransitionTime, transitionInFs);
+        }
+        console.log(model.state('autoTransititon'));
     }
 
     function _fsStartDraw() {
@@ -75,10 +78,10 @@ export let view = (() => {
         game.add.tween(freeSpinsText).to({alpha: 1}, 500, 'Linear', true, 700);
         game.add.tween(continueText).to({alpha: 1}, 500, 'Linear', true, 700);
         game.add.tween(jocker).to({alpha: 1}, 500, 'Linear', true, 700);
-        game.add.tween(freeSpinsNumber.scale).to({x: scaleX, y: scaleY}, 1000, Phaser.Easing.Elastic.Out, true, 700);
-        game.add.tween(freeSpinsText.scale).to({x: scaleX, y: scaleY}, 1000, Phaser.Easing.Elastic.Out, true, 700);
-        game.add.tween(jocker.scale).to({x: scaleX, y: scaleY}, 1000, Phaser.Easing.Elastic.Out, true, 700);
-        game.add.tween(continueText.scale).to({x: scaleX, y: scaleY}, 1000, Phaser.Easing.Elastic.Out, true, 700)
+        game.add.tween(freeSpinsNumber.scale).to({x: scaleX, y: scaleY}, 700, Phaser.Easing.Elastic.Out, true, 700);
+        game.add.tween(freeSpinsText.scale).to({x: scaleX, y: scaleY}, 700, Phaser.Easing.Elastic.Out, true, 700);
+        game.add.tween(jocker.scale).to({x: scaleX, y: scaleY}, 700, Phaser.Easing.Elastic.Out, true, 700);
+        game.add.tween(continueText.scale).to({x: scaleX, y: scaleY}, 700, Phaser.Easing.Elastic.Out, true, 700)
             .onComplete.add(() => {
                 game.add.tween(continueText.scale).to({x: 1.3, y: 1.3}, 1500, Phaser.Easing.Elastic.Out, true, 400, -1, true);
             });
@@ -120,10 +123,11 @@ export let view = (() => {
         _fsFinishDraw();
         _fsFinishTween();
         _fsFinishInput();
+        _coinsTween();
 
         model.state('maxFsMultiplier', false);
         // Автопереход
-        game.time.events.add(config.autoTransitionTime, transitionOutFs);
+        // game.time.events.add(config.autoTransitionTime, transitionOutFs);
     }
 
     function _fsFinishDraw() {
@@ -149,17 +153,19 @@ export let view = (() => {
             winTextFrame = 'totalW.png';
         }
 
-        let winText = game.add.sprite(model.el('gameMachine').width / 2, -400, 'text', winTextFrame);
+        let deltaX = (model.desktop) ? 0 : 50;
+
+        let winText = game.add.sprite(game.world.centerX - deltaX, -400, 'text', winTextFrame);
         winText.anchor.set(0.5);
         model.el('winText', winText);
 
         // Отрисовываем Выигрыш
-        let winCount = game.add.bitmapText(model.el('gameMachine').width / 2, -200, 'numbersFont', '0', 70);
+        let winCount = game.add.bitmapText(game.world.centerX - deltaX, -200, 'numbersFont', '0', 70);
         winCount.align = 'center';
         winCount.anchor.set(0.5);
         model.el('winCount', winCount);
 
-        let continueText = game.add.sprite(model.el('gameMachine').width / 2, -200, 'text', 'continue.png', transitionContainer);
+        let continueText = game.add.sprite(game.world.centerX - deltaX, -200, 'text', 'continue.png', transitionContainer);
         continueText.anchor.set(0.5);
         model.el('continueText', continueText);
 
@@ -180,6 +186,7 @@ export let view = (() => {
         game.add.tween(winCount).to({y: game.height * 0.5}, 1500, Phaser.Easing.Bounce.Out, true, 500);
         game.add.tween(continueText).to({y: game.height * 0.65}, 1500, Phaser.Easing.Bounce.Out, true, 500)
             .onComplete.add(() => {
+                game.add.tween(continueText.scale).to({x: 1.3, y: 1.3}, 1500, Phaser.Easing.Elastic.Out, true, 400, -1, true);
                 let winCountValue = model.data('rollResponse').FsBonus.TotalFSWinCoins + model.data('rollResponse').Balance.TotalWinCoins;
                 _сountMeter(winCountValue, winCount);
             });
@@ -235,6 +242,48 @@ export let view = (() => {
 
         };
         game.frameAnims.push(anim);
+    }
+
+    function _addCoin(container) {
+        let game = model.el('game');
+        if (container.y >= game.height * 5.7) return;
+
+        let number = game.rnd.integerInRange(1, 2);
+        let posX = game.rnd.integerInRange(game.width * 0.1, game.width * 0.9);
+        let coin = game.add.sprite(posX, container.y * -1 - 100, `coin${number}`, null, container);
+        coin.anchor.set(0.5);
+        let scale = game.rnd.integerInRange(30, 70) / 100;
+        coin.scale.set(scale);
+        let height = coin.height;
+        coin.height = game.rnd.integerInRange(height * 0.3, height);
+        let tween = game.add.tween(coin)
+           .to({rotation: 200}, 1000, 'Linear', true)
+           .start();
+        tween.onComplete.add(() => {
+            coin.destroy();
+        });
+        game.add.tween(coin)
+            .to({height: height}, 200, 'Linear')
+            .to({height: height * 0.2}, 100, 'Linear')
+            .to({height: height}, 200, 'Linear')
+            .to({height: height * 0.2}, 100, 'Linear')
+            .to({height: height}, 200, 'Linear')
+            .to({height: height * 0.2}, 100, 'Linear')
+            .to({height: height}, 200, 'Linear')
+            .start();
+
+            game.time.events.add(50, () => {
+            _addCoin(container)
+        });
+    }
+
+    function _coinsTween() {
+        let game = model.el('game');
+        let container = model.group('transition');
+        let coinsContainer = game.add.group();
+        container.addAt(coinsContainer, 1);
+        _addCoin(coinsContainer);
+        game.add.tween(coinsContainer).to({y: game.height * 7}, 5000, 'Linear', true);
     }
 
 

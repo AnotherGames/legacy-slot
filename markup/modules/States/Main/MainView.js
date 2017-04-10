@@ -90,6 +90,18 @@ export let view = (() => {
             });
         },
 
+        changeBG: function ({
+            game = model.el('game'),
+            container = model.group('main'),
+            gameBG = model.el('gameBG')
+        }) {
+            if (model.state('fs')) {
+                gameBG.frameName = 'gameMachineBGFS';
+            } else {
+                gameBG.frameName = 'gameMachineBG';
+            }
+        },
+
         lineNumbers: function ({
             game = model.el('game'),
             container = model.group('numbers'),

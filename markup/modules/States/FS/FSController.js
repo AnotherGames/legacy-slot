@@ -13,25 +13,24 @@ import { controller as rollController } from 'modules/Roll/RollController';
 export let controller = (() => {
 
     function stop() {
+        let game = model.el('game');
+        if (model.mobile) {
+            buttonsController.unlockButtons();
+            model.state('buttons:locked', false);
+
+            game.input.keyboard.enabled = true;
+        }
+        soundController.music.stopMusic('fsFon');
+        model.state('fs:end', true);
         transitionView.fsFinish();
     }
 
     function changeToMain() {
         let game = model.el('game');
-        if (model.mobile) {
-            buttonsController.unlockButtons();
-        }
-        panelController.drawMainPanel();
-        soundController.music.stopMusic('fsFon');
-        soundController.music.playMusic('fon');
-
-        model.state('fs:end', true);
         model.state('fs', false);
+        panelController.drawMainPanel();
+        soundController.music.playMusic('fon');
         model.updateBalance({endFS: true});
-        model.state('buttons:locked', false);
-
-        game.input.keyboard.enabled = true;
-
     }
 
     function next() {

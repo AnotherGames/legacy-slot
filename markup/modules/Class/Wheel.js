@@ -334,7 +334,7 @@ export class Wheel {
 
         let rand;
         if (model.state('fs')) {
-            rand = this.game.rnd.integerInRange(1, 8);
+            rand = this.game.rnd.integerInRange(10, 18);
         } else {
             rand = this.game.rnd.integerInRange(1, 8);
         }
@@ -369,9 +369,9 @@ export class Wheel {
 
         let rand;
         if (model.state('fs')) {
-            rand = this.game.rnd.integerInRange(1, 11);
+            rand = this.game.rnd.integerInRange(10, 18);
         } else {
-            rand = this.game.rnd.integerInRange(1, 10);
+            rand = this.game.rnd.integerInRange(1, 8);
         }
         let anim = rand + '-b';
 
