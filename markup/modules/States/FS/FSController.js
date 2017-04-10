@@ -230,7 +230,7 @@ export class FS {
             (game.scale.isFullScreen) ? $('#fakeButton').addClass('closed') : $('#fakeButton').removeClass('closed');
         }
 
-        this.scaleElements();
+        // this.scaleElements();
     }
 
     scaleElements() {

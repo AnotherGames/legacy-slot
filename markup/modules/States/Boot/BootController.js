@@ -8,7 +8,7 @@ export class Boot {
         const game = model.el('game');
         request.setMode({
             normal: 'calipso2',
-            fsBonus: 'califs1 ',
+            fsBonus: 'califs1',
             doorsBonus: 'califind1'
         });
 
