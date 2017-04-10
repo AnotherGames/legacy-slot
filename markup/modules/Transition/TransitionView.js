@@ -139,7 +139,9 @@ export let view = (() => {
 
         model.state('maxFsMultiplier', false);
         // Автопереход
-        // game.time.events.add(config.autoTransitionTime, transitionOutFs);
+        if (model.state('autoTransititon')) {
+            game.time.events.add(config.autoTransitionTime, transitionOutFs);
+        }
     }
 
     function _fsFinishDraw() {

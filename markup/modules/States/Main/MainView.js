@@ -252,7 +252,7 @@ export let view = (() => {
             container = model.group('main')
         }) {
             let numbersContainer = game.add.group();
-            container.addAt(numbersContainer, 3);
+            container.addAt(numbersContainer, 1);
             model.group('numbers', numbersContainer);
 
             let machineGroup = game.add.group();
