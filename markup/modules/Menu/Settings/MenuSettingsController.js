@@ -135,10 +135,6 @@ export let controller = (() => {
             view.hide.Settings({});
 
             info.open();
-
-            // view.show.Rules({});
-            // let counter = 0;
-            // model.el('infoCounter', counter);
         },
         closeRules: function () {
             if (model.state('settings') === 'close') {
@@ -149,11 +145,6 @@ export let controller = (() => {
             view.hide.Overlay({});
 
             info.handleClose();
-
-            // view.hide.Rules({});
-            // let counter = model.el('infoCounter');
-            // counter = 0;
-            // model.el('infoCounter', counter);
         }
     };
 
@@ -220,31 +211,9 @@ export let controller = (() => {
         info = new Info({
             model,
             container: infoContainer,
-            mobileBGScale: 0.72,
+            mobileBGScale: 1,
             mobileTableScale: 1.1
         });
-
-        // view.draw.RulesScreen(infoContainer);
-
-        // let infoRules = model.el('infoRules');
-        // let closed = model.el('closed');
-        // let arrowRight = model.el('arrowRight');
-        // let arrowLeft = model.el('arrowLeft');
-
-        // infoRules.inputEnabled = true;
-        // closed.inputEnabled = true;
-        // arrowRight.inputEnabled = true;
-        // arrowLeft.inputEnabled = true;
-
-        // infoRules.input.priorityID = 11;
-        // closed.input.priorityID = 12;
-        // arrowRight.input.priorityID = 12;
-        // arrowLeft.input.priorityID = 12;
-
-        // infoRules.events.onInputDown.add(handle.touchRules);
-        // closed.events.onInputDown.add(handle.closeRules);
-        // arrowRight.events.onInputDown.add(handle.switchRulesRight);
-        // arrowLeft.events.onInputDown.add(handle.switchRulesLeft);
 
         model.state('settings', 'close');
     }

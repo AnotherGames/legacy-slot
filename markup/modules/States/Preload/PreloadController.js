@@ -104,8 +104,6 @@ export class Preload {
         game.load.image('gameBGfs', 'game/gameBGfs.png');
         game.load.image('gameShadow', 'game/gameShadow.png');
         game.load.image('smoke', 'other/smoke.png');
-        // game.load.image('transitionCoin', 'other/transitionCoin.png');
-        game.load.image('arLeft', 'other/arLeft.png');
 
         game.load.image('arrow', 'other/ar.png');
         game.load.image('closeButton', 'other/closed.png');

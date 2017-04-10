@@ -180,7 +180,7 @@ export let controller = (() => {
         view.draw.AutoContainer({});
 
         info = new Info({
-            model,
+            model
         });
 
         view.draw.AutoPanel({}).forEach((panelButton) => {
