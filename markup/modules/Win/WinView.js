@@ -75,12 +75,12 @@ export let view = (() => {
 
             // small table
             if (!model.state('fs') && model.desktop) {
-                let winTotalSmall = game.add.sprite(model.group('panel').width / 2, 100, 'deskButtons', 'win.png');
+                let winTotalSmall = game.add.sprite(model.el('gameMachine').width / 2 - 10, 100, 'deskButtons', 'win.png');
                 winTotalSmall.anchor.set(0.5);
                 winTotalSmall.alpha = 0;
                 model.group('panel').addAt(winTotalSmall, 2);
 
-                let winTotalTextSmall = game.add.text(model.group('panel').width / 2, 120, winTotalData, style2);
+                let winTotalTextSmall = game.add.text(model.el('gameMachine').width / 2 - 10, 120, winTotalData, style2);
                 winTotalTextSmall.anchor.set(0.5);
                 winTotalTextSmall.alpha = 0;
                 model.group('panel').addAt(winTotalTextSmall, 3);

@@ -7,12 +7,20 @@ import { controller as soundController } from '../../../Info/SoundController';
 import { view as mainView } from 'modules/States/Main/MainView';
 import { controller as fsController } from 'modules/States/FS/FSController';
 import { controller as winController } from 'modules/Win/WinController';
+import { controller as panelController } from 'modules/Panel/PanelController';
 
 export let view = (() => {
 
     function fsStart() {
         let game = model.el('game');
         model.state('transitionScreen', true);
+        // Убираем управление с клавиатуры
+        game.input.keyboard.enabled = false;
+        // Лочим все кнопки
+        model.state('buttons:locked', true);
+        if (model.mobile) {
+            buttonsController.lockButtons();
+        }
         // Запускаем затемнение
         game.camera.flash(0x000000, 500);
         // Отрисовываем переходной экран
@@ -30,6 +38,7 @@ export let view = (() => {
     function _fsStartDraw() {
         let game = model.el('game');
         let transitionContainer = model.group('transition');
+        transitionContainer.alpha = 1;
         // Изменяем музыку
         soundController.music.stopMusic('fon');
         soundController.sound.playSound({sound: 'startPerehod'});
@@ -89,9 +98,9 @@ export let view = (() => {
 
     function _fsStartInput() {
         // При клике на фон будет переход на Фри-Спины
-        let darknessBG = model.el('darknessBG');
-        darknessBG.inputEnabled = true;
-        darknessBG.events.onInputDown.add(transitionInFs);
+        let continueText = model.el('continueText');
+        continueText.inputEnabled = true;
+        continueText.events.onInputDown.add(transitionInFs);
     }
 
 
@@ -114,9 +123,12 @@ export let view = (() => {
 
     function fsFinish() {
         let game = model.el('game');
-        // game.input.keyboard.enabled = true;
-        // keyboardController.initFsKeys(transitionInFs);
+        game.input.keyboard.enabled = true;
         model.state('buttons:locked', false);
+        if (model.mobile) {
+            buttonsController.unlockButtons();
+        }
+        // keyboardController.initFsKeys(transitionInFs);
         // Темнота
         game.camera.flash(0x000000, 500);
         // Отрисовка финишного экрана
@@ -142,8 +154,6 @@ export let view = (() => {
 
         let jack = game.add.sprite(game.width * 0.2, game.height * 0.2, 'jack', null, transitionContainer);
         jack.anchor.set(0.5);
-        // jack.scale.set(0.1);
-        // jack.alpha = 0;
         model.el('jack', jack);
 
         let winTextFrame;
@@ -155,12 +165,12 @@ export let view = (() => {
 
         let deltaX = (model.desktop) ? 0 : 50;
 
-        let winText = game.add.sprite(game.world.centerX - deltaX, -400, 'text', winTextFrame);
+        let winText = game.add.sprite(game.world.centerX - deltaX, -400, 'text', winTextFrame, transitionContainer);
         winText.anchor.set(0.5);
         model.el('winText', winText);
 
         // Отрисовываем Выигрыш
-        let winCount = game.add.bitmapText(game.world.centerX - deltaX, -200, 'numbersFont', '0', 70);
+        let winCount = game.add.bitmapText(game.world.centerX - deltaX, -200, 'numbersFont', '0', 70, transitionContainer);
         winCount.align = 'center';
         winCount.anchor.set(0.5);
         model.el('winCount', winCount);
@@ -195,9 +205,9 @@ export let view = (() => {
 
     function _fsFinishInput() {
         // При клике на фон будет переход на Фри-Спины
-        let darknessBG = model.el('darknessBG');
-        darknessBG.inputEnabled = true;
-        darknessBG.events.onInputDown.add(transitionOutFs);
+        let continueText = model.el('continueText');
+        continueText.inputEnabled = true;
+        continueText.events.onInputDown.add(transitionOutFs);
     }
 
     function transitionOutFs() {
@@ -212,10 +222,8 @@ export let view = (() => {
                 darknessBG.visible = false;
 
                 transitionContainer.removeAll();
-                winText.destroy();
-                winCount.destroy();
-
-                fsController.changeToMain();
+                panelController.drawMainPanel();
+                mainView.draw.changeBG({});
             }, this);
     }
 

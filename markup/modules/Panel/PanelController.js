@@ -276,19 +276,18 @@ export let controller = (() => {
     }
 
     function drawMainPanel() {
-        let container2 = model.group('balanceCash');
-        container2.removeAll();
+        model.group('balanceCash').removeAll();
         if (model.desktop) {
-            view.hide.dropPaneltoMain({});
-            view.show.showPanelMain({});
+            view.hide.hidePanel({container: model.group('panelFS')});
             drawButtons();
+            view.show.showPanel({container: model.group('panel')});
             balanceController.initDesktop();
             model.el('infoButton').visible = true;
+            model.el('convertSign').visible = true;
+
         } else {
-            let container = model.group('balanceCoin');
-            let container3 = model.group('panelFS');
-            container.removeAll();
-            container3.removeAll();
+            model.group('balanceCoin').removeAll();
+            model.group('panelFS').removeAll();
             balanceController.initMobile();
         }
     }
@@ -296,28 +295,28 @@ export let controller = (() => {
     function drawFsPanel() {
         let game = model.el('game');
 
-        let container2 = model.group('balanceCash');
-        container2.removeAll();
+        let container = model.group('panelFS');
+        container.alpha = 0;
+        container.scale.set(0.01);
+        model.group('balanceCash').removeAll();
         if (model.desktop) {
-            view.hide.dropPaneltoFS({});
+            view.hide.hidePanel({container: model.group('panel')});
 
             view.draw.PanelBG({
                 frameName: 'panelFS',
-                container: model.group('panelFS'),
-                deltaX: 0
+                container: model.group('panelFS')
             });
+            view.show.showPanel({container: model.group('panelFS')});
 
-            view.show.showPanelFS({});
             balanceController.initFSDesktop();
             model.el('infoButton').visible = false;
+            model.el('convertSign').visible = false;
         } else {
-            let container = model.group('balanceCoin');
-            container.removeAll();
+            model.group('balanceCoin').removeAll();
             balanceController.initFSMobile();
         }
 
         view.draw.FsLevelAndMulti({});
-        // view.draw.changeLevelAndMulti({});
 
     }
 

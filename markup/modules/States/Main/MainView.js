@@ -58,11 +58,16 @@ export let view = (() => {
             gameBG.anchor.set(0.5);
             model.el('gameBG', gameBG);
 
+            let gameBGFS = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachineFSBG', null, container);
+            gameBGFS.anchor.set(0.5);
+            model.el('gameBGFS', gameBGFS);
+            gameBGFS.visible = false;
+
             let gameMachine = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachine', null, container);
             gameMachine.anchor.set(0.5);
             model.el('gameMachine', gameMachine);
 
-            let darknessBG = game.add.sprite(0, config[model.res].gameMachine.y, 'darkness', null, container);
+            let darknessBG = game.add.sprite(0, config[model.res].gameMachine.y + 5, 'darkness', null, container);
             darknessBG.anchor.set(0.5);
             darknessBG.visible = false;
             model.el('darknessBG', darknessBG);
@@ -93,13 +98,17 @@ export let view = (() => {
         changeBG: function ({
             game = model.el('game'),
             container = model.group('main'),
-            gameBG = model.el('gameBG')
+            gameBG = model.el('gameBG'),
+            gameBGFS = model.el('gameBGFS')
         }) {
             if (model.state('fs')) {
-                gameBG.frameName = 'gameMachineBGFS';
+                gameBG.visible = false;
+                gameBGFS.visible = true;
             } else {
-                gameBG.frameName = 'gameMachineBG';
+                gameBGFS.visible = false;
+                gameBG.visible = true;
             }
+            console.log(container);
         },
 
         lineNumbers: function ({
@@ -108,83 +117,63 @@ export let view = (() => {
             gameMachine = model.el('gameMachine'),
             side = 'left'
         }) {
-            let x = (side === 'right') ? gameMachine.right - 11 : gameMachine.left + 11;
-            let deltaY = (model.desktop) ? 70 : 60;
+            let deltaX = model.desktop ? 125 : 95;
+            let x = (side === 'right') ? gameMachine.right - deltaX : gameMachine.left + deltaX;
+            let deltaY = (model.desktop) ? 45 : 55;
+            let lightColor = (model.state('fs')) ? 'lightGreen' : 'lightRed';
             let lineNumbersArr = [];
-            let winNumbersArr = [];
 
             for (let i = 1; i < 11; i++) {
                 let lineNumber = game.add.sprite(x, config[model.res].win[i][0].y - gameMachine.height / 2 - deltaY,
-                    'lineNumbers',
-                    'line_' + i + '.png',
+                    lightColor,
+                    null,
                     container);
                 lineNumber.name = i;
                 lineNumber.anchor.set(0.5);
-                lineNumber.visible = false;
-
-                let winNumber = game.add.sprite(x, config[model.res].win[i][0].y - gameMachine.height / 2 - deltaY,
-                    'winNumbers',
-                    'line-' + i + '-bang_0.png',
-                    container);
-                winNumber.name = i;
-                winNumber.anchor.set(0.5);
-                winNumber.scale.set(1.4);
-                winNumber.visible = false;
-
-                winNumber.animations.add('win', Phaser.Animation.generateFrameNames('line-' + i + '-bang_', 0, 30, '.png', 1), 30, false);
-                winNumber.animations.getAnimation('win').onComplete.add(() => {
-                    winNumber.frameName = 'line-' + i + '-bang_0.png';
-                    winNumber.visible = false;
-                });
+                if (side == 'right') {
+                    lineNumber.scale.set(-1, 1);
+                }
+                console.log(lineNumber.x);
 
                 if (model.state('fs')) {
                     lineNumbersArr.push(lineNumber);
-                    winNumbersArr.push(winNumber);
                     continue;
                 }
 
                 lineNumber.inputEnabled = true;
                 lineNumber.input.priorityID = 2;
-                lineNumber.hitArea = new Phaser.Circle(0, 0, 50);
+                lineNumber.hitArea = new Phaser.Circle(0, 0, 100);
 
                 if (model.desktop) {
                     lineNumber.events.onInputOver.add(() => {
                         if (lineNumber.lineShape) {
-                            lineNumber.frameName = 'line_' + lineNumber.name + '.png';
                             lineNumber.lineShape.destroy();
                         }
-                        lineNumber.frameName = 'line_big_' + lineNumber.name + '.png';
                         lineNumber.lineShape = this.lineShape(lineNumber.name);
                     });
 
                     lineNumber.events.onInputOut.add(() => {
                         if (lineNumber.lineShape) {
-                            lineNumber.frameName = 'line_' + lineNumber.name + '.png';
                             lineNumber.lineShape.destroy();
                         }
                     });
                 } else {
                     lineNumber.events.onInputDown.add(() => {
                         if (lineNumber.lineShape) {
-                            lineNumber.frameName = 'line_' + lineNumber.name + '.png';
                             lineNumber.lineShape.destroy();
                         }
-                        lineNumber.frameName = 'line_big_' + lineNumber.name + '.png';
                         lineNumber.lineShape = this.lineShape(lineNumber.name);
                         game.time.events.add(1500, () => {
                             if (lineNumber.lineShape) {
-                                lineNumber.frameName = 'line_' + lineNumber.name + '.png';
                                 lineNumber.lineShape.destroy();
                             }
                         });
                     });
                 }
                 lineNumbersArr.push(lineNumber);
-                winNumbersArr.push(winNumber);
             }
 
             model.el(side + 'LineArr', lineNumbersArr);
-            model.el(side + 'WinArr', winNumbersArr);
         },
 
         showFlag: function ({
@@ -249,7 +238,7 @@ export let view = (() => {
             let lineShape = game.add.graphics(0, 0, container);
             let y = (model.desktop) ? 50 : 30;
             lineShape
-               .lineStyle(4, 0xffffff, 0.8)
+               .lineStyle(4, 0x000000, 0.8)
                .moveTo((line[0].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[0].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + y)
                .lineTo((line[1].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[1].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + y)
                .lineTo((line[2].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[2].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + y)
@@ -263,11 +252,11 @@ export let view = (() => {
             container = model.group('main')
         }) {
             let numbersContainer = game.add.group();
-            container.addAt(numbersContainer, 1);
+            container.addAt(numbersContainer, 3);
             model.group('numbers', numbersContainer);
 
             let machineGroup = game.add.group();
-            container.addAt(machineGroup, 3);
+            container.addAt(machineGroup, 4);
             model.group('machine', machineGroup);
 
             let lightContainer = game.add.group();
@@ -275,11 +264,11 @@ export let view = (() => {
             model.group('light', lightContainer);
             let winUp = game.add.group();
 
-            container.addAt(winUp, 6);
+            container.addAt(winUp, 7);
             model.group('winUp', winUp);
 
             let winTop = game.add.group();
-            container.addAt(winTop, 7);
+            container.addAt(winTop, 8);
             model.group('winTop', winTop);
 
             machineGroup.glistaLightContainer = game.add.group();
@@ -307,6 +296,29 @@ export let view = (() => {
             let someGraphic = game.add.graphics(-elSize.width * 2.5 - 500, -elSize.height * 1.5 - deltaY, machineGroup);
             someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5 + 1500, elSize.height * 3);
             machineGroup.mask = someGraphic;
+        },
+
+        addBigLight: function ({
+            game = model.el('game'),
+            container = model.group('panel'),
+            gameMachine = model.el('gameMachine')
+        }) {
+            y = [0, 50, 100, 0, 50, 100];
+            for (let i = 0; i < 5; i++) {
+                let light = game.add.sprite(gameMachine.left, y[i], 'light', null, container);
+                light.anchor.set(0.5);
+                if (i > 2) {
+                    light.x = gameMachine.right;
+                }
+                light.animations.add('green', Phaser.Animation.generateFrameNames('L-Bgreen_', 0, 15, '.png', 1), 15, true);
+                light.animations.add('red', Phaser.Animation.generateFrameNames('L-Bred_', 0, 15, '.png', 1), 15, true);
+
+                if (i % 2 == 0) {
+                    light.animations.play('green');
+                } else {
+                    light.animations.play('red');
+                }
+            }
         },
 
         addLight: function ({

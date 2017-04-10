@@ -17,18 +17,18 @@ export let view = (() => {
             container.top = y;
             let panelBG = game.add.sprite(1, deltaY, frameName, null, container);
 
-            if (model.state('fs')) {
-                container.alpha = 0;
-                container.y = -500;
-            }
+            // if (model.state('fs')) {
+            //     container.alpha = 0;
+            //     container.scale = 0.01;
+            // }
 
-                let convertSign = game.add.sprite(100, 105, 'deskButtons', 'switch1.png', container);
-                convertSign.anchor.set(0.5);
-                convertSign.inputEnabled = true;
-                convertSign.events.onInputDown.add(() => {
-                    balanceController.changeCoinsToCash();
-                });
-                model.el('convertSign', convertSign);
+            let convertSign = game.add.sprite(100, 105, 'deskButtons', 'switch1.png', container);
+            convertSign.anchor.set(0.5);
+            convertSign.inputEnabled = true;
+            convertSign.events.onInputDown.add(() => {
+                balanceController.changeCoinsToCash();
+            });
+            model.el('convertSign', convertSign);
 
             container.pivot.set(panelBG.width / 2, 0);
             return panelBG;
@@ -41,9 +41,11 @@ export let view = (() => {
             startMulti = 'x2',
             fontDesktop = '80px Cooper, Arial',
             fontMobile = '40px Cooper, Arial',
-            x = container.width / 2 - 30,
             y = 115
         }) {
+            let fsCountBG = game.add.sprite(model.el('gameMachine').width / 2 - 30, y, 'fsCountBG', null, container);
+            fsCountBG.anchor.set(0.5);
+
             if (model.mobile) {
                 y = game.height * 0.85;
                 if (model.state('gameSideLeft')) {
@@ -52,8 +54,6 @@ export let view = (() => {
                     x = game.world.centerX + 90;
                 }
             }
-            let fsCountBG = game.add.sprite(x, y, 'fsCountBG', null, container);
-            fsCountBG.anchor.set(0.5);
 
             let font = (model.desktop) ? fontDesktop : fontMobile;
             let deltaX = (model.desktop) ? 70 : 60;
@@ -84,7 +84,7 @@ export let view = (() => {
 
         AutoContainer: function ({
             game = model.el('game'),
-            x = model.group('panel').width / 2,
+            x = model.el('gameMachine').width / 2 - 10,
             y = 95
         }) {
             let autoDesktopContainer = game.add.group();
@@ -99,7 +99,7 @@ export let view = (() => {
 
         AnimatedSpinButton: function ({
             game = model.el('game'),
-            x = model.group('panel').width / 2,
+            x = model.el('gameMachine').width / 2 - 10,
             y = 95,
             container = model.group('panel')
         }) {
@@ -115,7 +115,7 @@ export let view = (() => {
 
         SpinButton: function ({
             game = model.el('game'),
-            x = model.group('panel').width / 2,
+            x = model.el('gameMachine').width / 2 - 10,
             y = 95,
             container = model.group('panel')
         }) {
@@ -152,7 +152,7 @@ export let view = (() => {
 
         StopButton: function ({
             game = model.el('game'),
-            x = model.group('panel').width / 2,
+            x = model.el('gameMachine').width / 2 - 10,
             y = 95,
             container = model.group('panel')
         }) {
@@ -408,20 +408,13 @@ export let view = (() => {
                 x: finalX
             }, time, 'Linear', true);
         },
-        showPanelFS: function ({
-            game = model.el('game'),
-        }) {
-            let panelGroup = model.group('panelFS');
-            panelGroup.y = -500;
-            game.add.tween(panelGroup).to({y: model.el('gameMachine').bottom + model.el('gameMachine').height / 2, alpha: 1}, 1000, 'Linear', true);
-        },
 
-        showPanelMain: function ({
+        showPanel: function ({
             game = model.el('game'),
+            container = null
         }) {
-            let panelGroup = model.group('panel');
-            panelGroup.y = -500;
-            game.add.tween(panelGroup).to({y: model.el('gameMachine').bottom + model.el('gameMachine').height / 2, alpha: 1}, 1000, 'Linear', true);
+            game.add.tween(container.scale).to({x: 1.0, y: 1.0}, 500, Phaser.Easing.Elastic.Out, true);
+            game.add.tween(container).to({alpha: 1}, 500, 'Linear', true);
         }
 
     };
@@ -448,24 +441,16 @@ export let view = (() => {
                 x: finalX + 5
             }, time, 'Linear', true);
         },
-        dropPaneltoFS: function ({
-            game = model.el('game'),
-        }) {
-            let panelGroup = model.group('panel');
-            game.add.tween(panelGroup).to({y: game.height + 500, alpha: 0}, 1000, 'Linear', true)
-                .onComplete.add(() => {
-                    panelGroup.removeAll();
-                }, this);
-        },
 
-        dropPaneltoMain: function ({
+        hidePanel: function ({
             game = model.el('game'),
+            container = null
         }) {
-            let panelGroup = model.group('panelFS');
-            game.add.tween(panelGroup).to({y: game.height + 500, alpha: 0}, 1000, 'Linear', true)
-            .onComplete.add(() => {
-                panelGroup.removeAll();
-            }, this);
+            game.add.tween(container.scale).to({x: 0.01, y: 0.01}, 300, 'Linear', true);
+            game.add.tween(container).to({alpha: 0}, 300, 'Linear', true)
+                .onComplete.add(() => {
+                    container.removeAll();
+                }, this);
         }
     };
 
