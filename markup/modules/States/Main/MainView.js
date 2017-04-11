@@ -119,24 +119,28 @@ export let view = (() => {
             container.addAt(flagsContainer, 1);
             model.group('flags', flagsContainer);
 
+            let blurBGContainer = game.add.group();
+            container.addAt(blurBGContainer, 4);
+            model.group('blurBG', blurBGContainer);
+
             let machineGroup = game.add.group();
-            container.addAt(machineGroup, 4);
+            container.addAt(machineGroup, 5);
             model.group('machine', machineGroup);
 
             let lightContainer = game.add.group();
-            container.addAt(lightContainer, 5);
+            container.addAt(lightContainer, 6);
             model.group('light', lightContainer);
 
             let twinkleContainer = game.add.group();
-            container.addAt(twinkleContainer,7);
+            container.addAt(twinkleContainer,8);
             model.group('twinkle', twinkleContainer);
 
             let winUp = game.add.group();
-            container.addAt(winUp, 8);
+            container.addAt(winUp, 9);
             model.group('winUp', winUp);
 
             let winTop = game.add.group();
-            container.addAt(winTop, 9);
+            container.addAt(winTop, 10);
             model.group('winTop', winTop);
 
             machineGroup.glistaLightContainer = game.add.group();
@@ -164,6 +168,43 @@ export let view = (() => {
             let someGraphic = game.add.graphics(-elSize.width * 2.5 - 500, -elSize.height * 1.5 - deltaY, machineGroup);
             someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5 + 1500, elSize.height * 3);
             machineGroup.mask = someGraphic;
+        },
+
+        drawBlurBg: function ({
+            game = model.el('game'),
+            container = model.group('blurBG'),
+            elSize = config[model.res].elements
+        }) {
+            let color = (model.state('fs')) ? 'redRoll' : 'greenRoll';
+            for (let i = 0; i < 5; i++) {
+                let blurBG = game.add.sprite((i - 2) * elSize.width, config[model.res].gameMachine.y, color, null, container);
+                blurBG.anchor.set(0.5);
+                model.el('blurBG', blurBG);
+            }
+            container.alpha = 0;
+
+        },
+
+        showBlurBg: function ({
+            game = model.el('game'),
+            container = model.group('blurBG'),
+            time = 200
+        }) {
+            if (model.state('fs')) {
+                time = 100;
+            }
+            game.add.tween(container).to({alpha: 1}, time, 'Linear', true);
+        },
+
+        hideBlurBg: function ({
+            game = model.el('game'),
+            container = model.group('blurBG'),
+            time = 200
+        }) {
+            if (model.state('fs')) {
+                time = 100;
+            }
+            game.add.tween(container).to({alpha: 0}, 200, 'Linear', true);
         },
 
         showFlag: function ({

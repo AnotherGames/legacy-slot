@@ -104,6 +104,19 @@ export let view = (() => {
             mainView.draw.lightWin({});
             mainView.draw.showFlag({number: number});
 
+            let leftInnerLightArr = model.el('leftInnerLightArr');
+            let rightInnerLightArr = model.el('rightInnerLightArr');
+
+            let leftLight = leftInnerLightArr.filter((el) => {
+                return el.name === number;
+            })[0];
+            let rightLight = rightInnerLightArr.filter((el) => {
+                return el.name === number;
+            })[0];
+
+            game.add.tween(leftLight).to({alpha: 1}, 200, 'Linear', true);
+            game.add.tween(rightLight).to({alpha: 1}, 200, 'Linear', true);
+
         },
 
         WinNumber: function ({

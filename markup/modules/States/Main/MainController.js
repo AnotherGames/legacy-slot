@@ -58,6 +58,7 @@ export class Main {
         mainView.draw.mainBG({});
         mainView.draw.mainContainer({});
         mainView.draw.machineContainer({});
+        mainView.draw.drawBlurBg({});
         winView.draw.UpWinContainer({});
 
         // Анимации

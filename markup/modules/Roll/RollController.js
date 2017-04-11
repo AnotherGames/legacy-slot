@@ -95,6 +95,8 @@ export let controller = (() => {
                     model.state('roll:progress', true);
                     model.state('roll:fast', false);
 
+                    mainView.draw.showBlurBg({});
+
                     // Играем звук кручения барабанов
                     soundController.sound.playSound({sound: 'baraban', volume: 0.3});
                     // soundController.sound.changeSoundVolume('baraban', 60);
@@ -170,6 +172,7 @@ export let controller = (() => {
         request.send('Ready').then((data) => {
             // Показываем выигришь
             winController.showWin();
+            mainView.draw.hideBlurBg({});
 
             // Обновляем баланс в конце крутки
             if (model.state('fs')) {

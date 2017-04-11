@@ -20,6 +20,8 @@ export let controller = (() => {
         // Изменяем панель на FS
         panelController.drawFsPanel();
         mainView.draw.addBigLight({});
+        model.group('blurBG').removeAll();
+        mainView.draw.drawBlurBg({});
         fsController.init(20);
         mainView.draw.changeBG({});
         // Остонавливаем автоплей если был
@@ -164,6 +166,17 @@ export let controller = (() => {
             wheel.elements.forEach((el) => {
                 el.show();
             });
+        });
+
+        let leftInnerLightArr = model.el('leftInnerLightArr');
+        let rightInnerLightArr = model.el('rightInnerLightArr');
+
+        leftInnerLightArr.forEach((el) => {
+            el.alpha = 0;
+        });
+
+        rightInnerLightArr.forEach((el) => {
+            el.alpha = 0;
         });
 
         mainView.draw.lightNormal({});

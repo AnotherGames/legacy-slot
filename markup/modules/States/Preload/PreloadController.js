@@ -83,6 +83,8 @@ export class Preload {
         game.load.image('lightRed', 'bg/lightRed.png');
         game.load.image('gameMachine', 'game/gameMachine.png');
         game.load.image('gameMachineBG', 'game/gameMachineBG.png');
+        game.load.image('redRoll', 'game/redRoll.png');
+        game.load.image('greenRoll', 'game/greenRoll.png');
         game.load.image('darkness', 'game/darkness.png');
         game.load.image('closeButton', 'other/closeButton.png');
         game.load.image('arrow', 'other/arrow.png');

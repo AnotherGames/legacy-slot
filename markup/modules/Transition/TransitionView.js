@@ -240,6 +240,8 @@ export let view = (() => {
                 transitionContainer.removeAll();
                 panelController.drawMainPanel();
                 mainView.draw.changeBG({});
+                model.group('blurBG').removeAll();
+                mainView.draw.drawBlurBg({});
 
                 game.input.keyboard.enabled = true;
                 model.state('buttons:locked', false);
