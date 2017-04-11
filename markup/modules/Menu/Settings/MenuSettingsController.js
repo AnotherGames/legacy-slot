@@ -201,7 +201,8 @@ export let controller = (() => {
             backButton.events.onInputDown.add(handle.closeSettings);
 
             info = new Info({
-                model
+                model,
+	            mobileBGScale: 1
             });
 
             model.state('settings', 'close');
