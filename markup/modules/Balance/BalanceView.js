@@ -42,10 +42,10 @@ export let view = (() => {
             betCashValue = model.balance('betCash'),
             winCashValue = model.balance('winCash'),
             greyStyle = {font: '22px Helvetica, Arial', fill: '#888888', align: 'center'},
-            cashStyle = {font: '25px Helvetica, Arial', fill: '#ffffff', align: 'center'},
-            y = 112,
-            x1 = (model.state('fs')) ? 1195 : 1140,
-            x2 = (model.state('fs')) ? 170 : 185
+            cashStyle = {font: '22px Helvetica, Arial', fill: '#ffffff', align: 'center'},
+            y = 113,
+            x1 = (model.state('fs')) ? 1165 : 1140,
+            x2 = 185
         }) {
 
             let coinCash = game.add.text(x1, y, `${currencySymbol} ${coinCashValue.toFixed(2)}`, cashStyle, container);

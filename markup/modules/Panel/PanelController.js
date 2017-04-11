@@ -296,10 +296,10 @@ export let controller = (() => {
         let game = model.el('game');
 
         let container = model.group('panelFS');
-        container.alpha = 0;
-        container.scale.set(0.01);
         model.group('balanceCash').removeAll();
         if (model.desktop) {
+            container.alpha = 0;
+            container.scale.set(0.01);
             view.hide.hidePanel({container: model.group('panel')});
 
             view.draw.PanelBG({

@@ -6,8 +6,9 @@ import { controller as soundController } from '../../../Info/SoundController';
 
 import { view as mainView } from 'modules/States/Main/MainView';
 import { controller as fsController } from 'modules/States/FS/FSController';
-import { controller as winController } from 'modules/Win/WinController';
+import { controller as buttonsController } from 'modules/Buttons/ButtonsController';
 import { controller as panelController } from 'modules/Panel/PanelController';
+import { controller as winController } from 'modules/Win/WinController';
 
 export let view = (() => {
 
@@ -23,6 +24,7 @@ export let view = (() => {
         }
         // Запускаем затемнение
         game.camera.flash(0x000000, 500);
+
         // Отрисовываем переходной экран
         _fsStartDraw();
         _fsStartTween();
@@ -32,7 +34,6 @@ export let view = (() => {
         if (model.state('autoTransititon')) {
             game.time.events.add(config.autoTransitionTime, transitionInFs);
         }
-        console.log(model.state('autoTransititon'));
     }
 
     function _fsStartDraw() {
@@ -46,26 +47,36 @@ export let view = (() => {
         let darknessBG = model.el('darknessBG');
         darknessBG.visible = true;
 
+        let x = (model.desktop) ? game.world.centerX : model.el('gameMachine').width / 2;
+
+
         let jocker = game.add.sprite(game.width * 0.8, game.height * 0.2, 'popup', null, transitionContainer);
         jocker.anchor.set(0.5);
         jocker.scale.set(0.1);
         jocker.alpha = 0;
         model.el('jocker', jocker);
 
-        let freeSpinsText = game.add.sprite(game.world.centerX, game.height * 0.2, 'text', 'freespin.png', transitionContainer);
+        if (model.mobile) {
+            if (!model.state('gameSideLeft')) {
+                x = game.width * 0.55;
+                jocker.x = game.width * 0.9;
+            }
+        }
+
+        let freeSpinsText = game.add.sprite(x, (model.desktop) ? game.height * 0.2 : game.height * 0.25, 'text', 'freespin.png', transitionContainer);
         freeSpinsText.anchor.set(0.5);
         freeSpinsText.scale.set(0.1);
         freeSpinsText.alpha = 0;
         model.el('freeSpinsText', freeSpinsText);
 
         let freeSpinsCount = model.data('rollResponse').FreeSpinsLeft;
-        let freeSpinsNumber = game.add.bitmapText(game.world.centerX, game.height * 0.5, 'numbersFont', '+' + freeSpinsCount, 70, transitionContainer);
+        let freeSpinsNumber = game.add.bitmapText(x, game.height * 0.5, 'numbersFont', '+' + freeSpinsCount, (model.desktop) ? 70 : 50 , transitionContainer);
         freeSpinsNumber.anchor.set(0.5);
         freeSpinsNumber.scale.set(0.1);
         freeSpinsNumber.alpha = 0;
         model.el('freeSpinsNumber', freeSpinsNumber);
 
-        let continueText = game.add.sprite(game.world.centerX, game.height * 0.65, 'text', 'continue.png', transitionContainer);
+        let continueText = game.add.sprite(x, (model.desktop) ? game.height * 0.65 : game.height * 0.68, 'text', 'continue.png', transitionContainer);
         continueText.anchor.set(0.5);
         continueText.scale.set(0.1);
         continueText.alpha = 0;
@@ -123,11 +134,7 @@ export let view = (() => {
 
     function fsFinish() {
         let game = model.el('game');
-        game.input.keyboard.enabled = true;
-        model.state('buttons:locked', false);
-        if (model.mobile) {
-            buttonsController.unlockButtons();
-        }
+
         // keyboardController.initFsKeys(transitionInFs);
         // Темнота
         game.camera.flash(0x000000, 500);
@@ -154,9 +161,18 @@ export let view = (() => {
         let darknessBG = model.el('darknessBG');
         darknessBG.visible = true;
 
-        let jack = game.add.sprite(game.width * 0.2, game.height * 0.2, 'jack', null, transitionContainer);
+        let x = (model.desktop) ? game.world.centerX : model.el('gameMachine').width / 2;
+
+        let jack = game.add.sprite((model.desktop) ? game.width * 0.2 : game.width * 0.15, game.height * 0.2, 'jack', null, transitionContainer);
         jack.anchor.set(0.5);
         model.el('jack', jack);
+
+        if (model.mobile) {
+            if (!model.state('gameSideLeft')) {
+                x = game.width * 0.55;
+                jack.x = game.width * 0.25;
+            }
+        }
 
         let winTextFrame;
         if (model.data('fsMulti') === 8) {
@@ -165,19 +181,17 @@ export let view = (() => {
             winTextFrame = 'totalW.png';
         }
 
-        let deltaX = (model.desktop) ? 0 : 50;
-
-        let winText = game.add.sprite(game.world.centerX - deltaX, -400, 'text', winTextFrame, transitionContainer);
+        let winText = game.add.sprite(x, -400, 'text', winTextFrame, transitionContainer);
         winText.anchor.set(0.5);
         model.el('winText', winText);
 
         // Отрисовываем Выигрыш
-        let winCount = game.add.bitmapText(game.world.centerX - deltaX, -200, 'numbersFont', '0', 70, transitionContainer);
+        let winCount = game.add.bitmapText(x, -200, 'numbersFont', '0', (model.desktop) ? 70 : 50 , transitionContainer);
         winCount.align = 'center';
         winCount.anchor.set(0.5);
         model.el('winCount', winCount);
 
-        let continueText = game.add.sprite(game.world.centerX - deltaX, -200, 'text', 'continue.png', transitionContainer);
+        let continueText = game.add.sprite(x, -200, 'text', 'continue.png', transitionContainer);
         continueText.anchor.set(0.5);
         model.el('continueText', continueText);
 
@@ -194,9 +208,9 @@ export let view = (() => {
         let continueText = model.el('continueText');
 
         game.add.tween(transitionContainer).to({alpha: 1}, 1000, 'Linear', true);
-        game.add.tween(winText).to({y: game.height * 0.2}, 1500, Phaser.Easing.Bounce.Out, true, 500);
+        game.add.tween(winText).to({y: (model.desktop) ? game.height * 0.2 : game.height * 0.25}, 1500, Phaser.Easing.Bounce.Out, true, 500);
         game.add.tween(winCount).to({y: game.height * 0.5}, 1500, Phaser.Easing.Bounce.Out, true, 500);
-        game.add.tween(continueText).to({y: game.height * 0.65}, 1500, Phaser.Easing.Bounce.Out, true, 500)
+        game.add.tween(continueText).to({y: (model.desktop) ? game.height * 0.65 :  game.height * 0.68}, 1500, Phaser.Easing.Bounce.Out, true, 500)
             .onComplete.add(() => {
                 game.add.tween(continueText.scale).to({x: 1.3, y: 1.3}, 1500, Phaser.Easing.Elastic.Out, true, 400, -1, true);
                 let winCountValue = model.data('rollResponse').FsBonus.TotalFSWinCoins + model.data('rollResponse').Balance.TotalWinCoins;
@@ -226,6 +240,12 @@ export let view = (() => {
                 transitionContainer.removeAll();
                 panelController.drawMainPanel();
                 mainView.draw.changeBG({});
+
+                game.input.keyboard.enabled = true;
+                model.state('buttons:locked', false);
+                if (model.mobile) {
+                    buttonsController.unlockButtons();
+                }
             }, this);
     }
 

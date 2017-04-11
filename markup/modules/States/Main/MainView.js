@@ -111,74 +111,64 @@ export let view = (() => {
             console.log(container);
         },
 
-        lineNumbers: function ({
+        machineContainer: function ({
             game = model.el('game'),
-            container = model.group('numbers'),
-            gameMachine = model.el('gameMachine'),
-            side = 'left'
+            container = model.group('main')
         }) {
-            let deltaX = model.desktop ? 125 : 95;
-            let x = (side === 'right') ? gameMachine.right - deltaX : gameMachine.left + deltaX;
-            let deltaY = (model.desktop) ? 45 : 55;
-            let lightColor = (model.state('fs')) ? 'lightGreen' : 'lightRed';
-            let lineNumbersArr = [];
+            let flagsContainer = game.add.group();
+            container.addAt(flagsContainer, 1);
+            model.group('flags', flagsContainer);
 
-            for (let i = 1; i < 11; i++) {
-                let lineNumber = game.add.sprite(x, config[model.res].win[i][0].y - gameMachine.height / 2 - deltaY,
-                    lightColor,
-                    null,
-                    container);
-                lineNumber.name = i;
-                lineNumber.anchor.set(0.5);
-                if (side == 'right') {
-                    lineNumber.scale.set(-1, 1);
-                }
-                console.log(lineNumber.x);
+            let machineGroup = game.add.group();
+            container.addAt(machineGroup, 4);
+            model.group('machine', machineGroup);
 
-                if (model.state('fs')) {
-                    lineNumbersArr.push(lineNumber);
-                    continue;
-                }
+            let lightContainer = game.add.group();
+            container.addAt(lightContainer, 5);
+            model.group('light', lightContainer);
 
-                lineNumber.inputEnabled = true;
-                lineNumber.input.priorityID = 2;
-                lineNumber.hitArea = new Phaser.Circle(0, 0, 100);
+            let twinkleContainer = game.add.group();
+            container.addAt(twinkleContainer,7);
+            model.group('twinkle', twinkleContainer);
 
-                if (model.desktop) {
-                    lineNumber.events.onInputOver.add(() => {
-                        if (lineNumber.lineShape) {
-                            lineNumber.lineShape.destroy();
-                        }
-                        lineNumber.lineShape = this.lineShape(lineNumber.name);
-                    });
+            let winUp = game.add.group();
+            container.addAt(winUp, 8);
+            model.group('winUp', winUp);
 
-                    lineNumber.events.onInputOut.add(() => {
-                        if (lineNumber.lineShape) {
-                            lineNumber.lineShape.destroy();
-                        }
-                    });
-                } else {
-                    lineNumber.events.onInputDown.add(() => {
-                        if (lineNumber.lineShape) {
-                            lineNumber.lineShape.destroy();
-                        }
-                        lineNumber.lineShape = this.lineShape(lineNumber.name);
-                        game.time.events.add(1500, () => {
-                            if (lineNumber.lineShape) {
-                                lineNumber.lineShape.destroy();
-                            }
-                        });
-                    });
-                }
-                lineNumbersArr.push(lineNumber);
-            }
+            let winTop = game.add.group();
+            container.addAt(winTop, 9);
+            model.group('winTop', winTop);
 
-            model.el(side + 'LineArr', lineNumbersArr);
+            machineGroup.glistaLightContainer = game.add.group();
+            model.group('glistaLight', machineGroup.glistaLightContainer);
+            machineGroup.add(machineGroup.glistaLightContainer);
+
+            machineGroup.elementsContainer = game.add.group();
+            model.group('elements', machineGroup.elementsContainer);
+            machineGroup.add(machineGroup.elementsContainer);
+
+            machineGroup.glistaContainer = game.add.group();
+            model.group('glista', machineGroup.glistaContainer);
+            machineGroup.add(machineGroup.glistaContainer);
+
+            console.log(model.group('main'));
+        },
+
+        machineMask: function ({
+            game = model.el('game'),
+            machineGroup = model.group('machine')
+        }) {
+            const elSize = config[model.res].elements;
+            let deltaY = (model.desktop) ? -15 : 20;
+
+            let someGraphic = game.add.graphics(-elSize.width * 2.5 - 500, -elSize.height * 1.5 - deltaY, machineGroup);
+            someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5 + 1500, elSize.height * 3);
+            machineGroup.mask = someGraphic;
         },
 
         showFlag: function ({
             number = 1,
-            container = model.group('numbers'),
+            container = model.group('flags'),
             game = model.el('game'),
             gameMachine = model.el('gameMachine'),
             deltaY = (model.desktop) ? 50 : 60,
@@ -230,6 +220,71 @@ export let view = (() => {
             }
         },
 
+        addLight: function ({
+            game = model.el('game'),
+            container = model.group('light'),
+            gameMachine = model.el('gameMachine'),
+            side = 'left'
+        }) {
+            let deltaX = model.desktop ? 125 : 95;
+            let x = (side === 'right') ? gameMachine.right - deltaX : gameMachine.left + deltaX;
+            let deltaY = (model.desktop) ? 45 : 55;
+            let lightColor = (model.state('fs')) ? 'lightGreen' : 'lightRed';
+            let innerLightArr = [];
+
+            for (let i = 1; i < 11; i++) {
+                let innerLight = game.add.sprite(x, config[model.res].win[i][0].y - gameMachine.height / 2 - deltaY,
+                    lightColor,
+                    null,
+                    container);
+                innerLight.name = i;
+                innerLight.anchor.set(0.5);
+                if (side == 'right') {
+                    innerLight.scale.set(-1, 1);
+                }
+                innerLight.alpha = 0;
+
+                if (model.state('fs')) {
+                    innerLightsArr.push(innerLight);
+                    continue;
+                }
+
+                innerLight.inputEnabled = true;
+                innerLight.input.priorityID = 2;
+                innerLight.hitArea = new Phaser.Circle(0, 0, 100);
+
+                if (model.desktop) {
+                    innerLight.events.onInputOver.add(() => {
+                        if (innerLight.lineShape) {
+                            innerLight.lineShape.destroy();
+                        }
+                        innerLight.lineShape = this.lineShape(innerLight.name);
+                    });
+
+                    innerLight.events.onInputOut.add(() => {
+                        if (innerLight.lineShape) {
+                            innerLight.lineShape.destroy();
+                        }
+                    });
+                } else {
+                    innerLight.events.onInputDown.add(() => {
+                        if (innerLight.lineShape) {
+                            innerLight.lineShape.destroy();
+                        }
+                        innerLight.lineShape = this.lineShape(innerLight.name);
+                        game.time.events.add(1500, () => {
+                            if (innerLight.lineShape) {
+                                innerLight.lineShape.destroy();
+                            }
+                        });
+                    });
+                }
+                innerLightArr.push(innerLight);
+            }
+
+            model.el(side + 'InnerLightArr', innerLightArr);
+        },
+
         lineShape: function (number) {
             let game = model.el('game');
             let container = model.group('glistaLight');
@@ -238,7 +293,7 @@ export let view = (() => {
             let lineShape = game.add.graphics(0, 0, container);
             let y = (model.desktop) ? 50 : 30;
             lineShape
-               .lineStyle(4, 0x000000, 0.8)
+               .lineStyle(4, 0xdf9e4c, 0.8)
                .moveTo((line[0].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[0].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + y)
                .lineTo((line[1].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[1].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + y)
                .lineTo((line[2].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[2].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + y)
@@ -247,68 +302,21 @@ export let view = (() => {
             return lineShape;
         },
 
-        machineContainer: function ({
-            game = model.el('game'),
-            container = model.group('main')
-        }) {
-            let numbersContainer = game.add.group();
-            container.addAt(numbersContainer, 1);
-            model.group('numbers', numbersContainer);
-
-            let machineGroup = game.add.group();
-            container.addAt(machineGroup, 4);
-            model.group('machine', machineGroup);
-
-            let lightContainer = game.add.group();
-            container.addAt(lightContainer, 5);
-            model.group('light', lightContainer);
-            let winUp = game.add.group();
-
-            container.addAt(winUp, 7);
-            model.group('winUp', winUp);
-
-            let winTop = game.add.group();
-            container.addAt(winTop, 8);
-            model.group('winTop', winTop);
-
-            machineGroup.glistaLightContainer = game.add.group();
-            model.group('glistaLight', machineGroup.glistaLightContainer);
-            machineGroup.add(machineGroup.glistaLightContainer);
-
-            machineGroup.elementsContainer = game.add.group();
-            model.group('elements', machineGroup.elementsContainer);
-            machineGroup.add(machineGroup.elementsContainer);
-
-            machineGroup.glistaContainer = game.add.group();
-            model.group('glista', machineGroup.glistaContainer);
-            machineGroup.add(machineGroup.glistaContainer);
-
-            console.log(model.group('main'));
-        },
-
-        machineMask: function ({
-            game = model.el('game'),
-            machineGroup = model.group('machine')
-        }) {
-            const elSize = config[model.res].elements;
-            let deltaY = (model.desktop) ? -15 : 20;
-
-            let someGraphic = game.add.graphics(-elSize.width * 2.5 - 500, -elSize.height * 1.5 - deltaY, machineGroup);
-            someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5 + 1500, elSize.height * 3);
-            machineGroup.mask = someGraphic;
-        },
-
         addBigLight: function ({
             game = model.el('game'),
             container = model.group('panel'),
             gameMachine = model.el('gameMachine')
         }) {
-            y = [0, 50, 100, 0, 50, 100];
-            for (let i = 0; i < 5; i++) {
-                let light = game.add.sprite(gameMachine.left, y[i], 'light', null, container);
+            if (model.mobile) return;
+            if (model.state('fs')) {
+                container = model.group('panelFS');
+            }
+            let y = [46, 100, 150, 50, 100, 150];
+            for (let i = 0; i < 6; i++) {
+                let light = game.add.sprite(25, y[i], 'light', null, container);
                 light.anchor.set(0.5);
                 if (i > 2) {
-                    light.x = gameMachine.right;
+                    light.x = 1350;
                 }
                 light.animations.add('green', Phaser.Animation.generateFrameNames('L-Bgreen_', 0, 15, '.png', 1), 15, true);
                 light.animations.add('red', Phaser.Animation.generateFrameNames('L-Bred_', 0, 15, '.png', 1), 15, true);
@@ -321,9 +329,9 @@ export let view = (() => {
             }
         },
 
-        addLight: function ({
+        addTwinkle: function ({
             game = model.el('game'),
-            container = model.group('light'),
+            container = model.group('twinkle'),
             gameMachine = model.el('gameMachine'),
             side = 'left'
         }) {

@@ -19,6 +19,7 @@ export let controller = (() => {
         model.state('fs', true);
         // Изменяем панель на FS
         panelController.drawFsPanel();
+        mainView.draw.addBigLight({});
         fsController.init(20);
         mainView.draw.changeBG({});
         // Остонавливаем автоплей если был
@@ -37,7 +38,7 @@ export let controller = (() => {
         if (mode === 'root' && nextMode.indexOf('fsBonus') !== -1 ) {
             console.warn('fs start!');
 
-
+            mainView.draw.addBigLight({});
             transitionView.fsStart();
         }
     }

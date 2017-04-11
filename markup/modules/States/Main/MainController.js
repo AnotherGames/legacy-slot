@@ -58,12 +58,13 @@ export class Main {
         mainView.draw.mainBG({});
         mainView.draw.mainContainer({});
         mainView.draw.machineContainer({});
-        mainView.draw.lineNumbers({side: 'left'});
-        mainView.draw.lineNumbers({side: 'right'});
         winView.draw.UpWinContainer({});
 
-        mainView.draw.addLight({});
+        // Анимации
+        mainView.draw.addLight({side: 'left'});
         mainView.draw.addLight({side: 'right'});
+        mainView.draw.addTwinkle({});
+        mainView.draw.addTwinkle({side: 'right'});
 
         // mainView.draw.showPopup({message: 'You have low balance on your account', balance: true});
         // transitionView.fsStart();
@@ -93,6 +94,7 @@ export class Main {
             settingsController.initDesktopSettings(game);
             // Рисуем кнопки управления
             panelController.drawButtons();
+
             // Отрисовуем баланс
             balanceController.initDesktop();
         }

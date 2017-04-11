@@ -17,11 +17,6 @@ export let view = (() => {
             container.top = y;
             let panelBG = game.add.sprite(1, deltaY, frameName, null, container);
 
-            // if (model.state('fs')) {
-            //     container.alpha = 0;
-            //     container.scale = 0.01;
-            // }
-
             let convertSign = game.add.sprite(100, 105, 'deskButtons', 'switch1.png', container);
             convertSign.anchor.set(0.5);
             convertSign.inputEnabled = true;
@@ -39,32 +34,30 @@ export let view = (() => {
             container = model.group('panelFS'),
             startLevel = 15,
             startMulti = 'x2',
-            fontDesktop = '80px Cooper, Arial',
-            fontMobile = '40px Cooper, Arial',
+            x = model.el('gameMachine').width / 2 - 30,
             y = 115
         }) {
-            let fsCountBG = game.add.sprite(model.el('gameMachine').width / 2 - 30, y, 'fsCountBG', null, container);
-            fsCountBG.anchor.set(0.5);
-
             if (model.mobile) {
-                y = game.height * 0.85;
+                y = game.height * 0.86;
                 if (model.state('gameSideLeft')) {
                     x = game.world.centerX - 80;
                 } else {
                     x = game.world.centerX + 90;
                 }
             }
+            console.log(model.state('gameSideLeft'));
+            let fsCountBG = game.add.sprite(x, y, 'fsCountBG', null, container);
+            fsCountBG.anchor.set(0.5);
 
-            let font = (model.desktop) ? fontDesktop : fontMobile;
-            let deltaX = (model.desktop) ? 70 : 60;
+            let deltaX = (model.desktop) ? 70 : 45;
             let deltaY = (model.desktop) ? 25 : 20;
 
-            let fsCount = game.add.bitmapText(fsCountBG.x - deltaX, fsCountBG.y + deltaY, 'numbersFont', '' + startLevel, 20, container);
+            let fsCount = game.add.bitmapText(fsCountBG.x - deltaX, fsCountBG.y + deltaY, 'numbersFont', '' + startLevel, (model.desktop) ? 20 : 15, container);
             fsCount.align = 'center';
             fsCount.anchor.set(0.5);
             model.el('fs:count', fsCount);
 
-            let fsMulti = game.add.bitmapText(fsCountBG.x + deltaX, fsCountBG.y + deltaY, 'numbersFont', '' + startMulti, 20, container);
+            let fsMulti = game.add.bitmapText(fsCountBG.x + deltaX, fsCountBG.y + deltaY, 'numbersFont', '' + startMulti, (model.desktop) ? 20 : 15, container);
             fsMulti.align = 'center';
             fsMulti.anchor.set(0.5);
             model.el('fs:multi', fsMulti);

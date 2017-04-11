@@ -7,7 +7,6 @@ import { view as mainView } from 'modules/States/Main/mainView';
 
 import { controller as soundController } from '../../../../Info/SoundController';
 import { controller as panelController } from 'modules/Panel/PanelController';
-import { controller as buttonsController } from 'modules/Buttons/ButtonsController';
 import { controller as rollController } from 'modules/Roll/RollController';
 
 export let controller = (() => {
@@ -16,14 +15,12 @@ export let controller = (() => {
 
         model.state('fs', false);
         model.state('fs:end', true);
+        model.updateBalance({endFS: true});
+
         transitionView.fsFinish();
-        // panelController.drawMainPanel();
         soundController.music.stopMusic('fsFon');
         soundController.music.playMusic('fon');
 
-        model.updateBalance({endFS: true});
-        // model.state('buttons:locked', false);
-        // game.input.keyboard.enabled = true;
     }
 
     function next() {
