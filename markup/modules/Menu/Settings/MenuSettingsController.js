@@ -133,19 +133,12 @@ export let controller = (() => {
 
             model.state('settings', 'rules');
             view.hide.Settings({});
-
+	        view.hide.Overlay({});
             info.open();
         },
-        closeRules: function () {
-            if (model.state('settings') === 'close') {
-                return;
-            }
-
-            model.state('settings', 'close');
-            view.hide.Overlay({});
-
-            info.handleClose();
-        }
+	    showHistory: function () {
+		    soundController.sound.playSound({sound : 'buttonClick'});
+	    }
     };
 
     function init() {
@@ -206,11 +199,9 @@ export let controller = (() => {
         backButton.input.priorityID = 12;
         backButton.events.onInputDown.add(handle.closeSettings);
 
-        let infoContainer = game.add.group();
 
         info = new Info({
             model,
-            container: infoContainer,
             mobileBGScale: 1,
             mobileTableScale: 1.1
         });

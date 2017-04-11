@@ -66,7 +66,6 @@ export let view = (() => {
                 .drawRect(0, 0, game.width, game.height);
             overlay.alpha = alpha;
             overlay.visible = false;
-            model.group('infoTable').add(overlay);
             model.el('settingsOverlay', overlay);
             return overlay;
         },
