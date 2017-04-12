@@ -22,6 +22,7 @@ export let view = (() => {
         if (model.mobile) {
             buttonsController.lockButtons();
         }
+        mainView.draw.lightOneColor({});
         // Запускаем затемнение
         game.camera.flash(0x000000, 500);
 
@@ -140,6 +141,7 @@ export let view = (() => {
         // keyboardController.initFsKeys(transitionInFs);
         // Темнота
         game.camera.flash(0x000000, 500);
+        mainView.draw.lightOneColor({color: 'red'});
         // Отрисовка финишного экрана
         _fsFinishDraw();
         _fsFinishTween();
@@ -167,13 +169,7 @@ export let view = (() => {
         jack.anchor.set(0.5);
         model.el('jack', jack);
 
-        let x = (model.desktop) ? game.world.centerX : model.el('gameMachine').width / 2 + 20;
-        if (model.mobile) {
-            if (!model.state('gameSideLeft')) {
-                x = game.width * 0.55;
-                jack.x = game.width * 0.25;
-            }
-        }
+        let x = game.world.centerX;
 
         let winTextFrame;
         if (model.data('fsMulti') === 8) {
@@ -214,11 +210,11 @@ export let view = (() => {
         game.add.tween(transitionContainer).to({alpha: 1}, 1000, 'Linear', true);
         game.add.tween(winText).to({y: (model.desktop) ? game.height * 0.2 : game.height * 0.25}, 1500, Phaser.Easing.Bounce.Out, true, 500);
         game.add.tween(winCount).to({y: game.height * 0.5}, 1500, Phaser.Easing.Bounce.Out, true, 500);
-        game.add.tween(continueText).to({y: (model.desktop) ? game.height * 0.65 :  game.height * 0.68}, 1500, Phaser.Easing.Bounce.Out, true, 500)
+        let winCountValue = model.data('rollResponse').FsBonus.TotalFSWinCoins + model.data('rollResponse').Balance.TotalWinCoins;
+        _сountMeter(winCountValue, winCount);
+        game.add.tween(continueText).to({y: (model.desktop) ? game.height * 0.65 :  game.height * 0.67}, 1500, Phaser.Easing.Bounce.Out, true, 500)
             .onComplete.add(() => {
                 game.add.tween(continueText.scale).to({x: 1.3, y: 1.3}, 1500, Phaser.Easing.Elastic.Out, true, 400, -1, true);
-                let winCountValue = model.data('rollResponse').FsBonus.TotalFSWinCoins + model.data('rollResponse').Balance.TotalWinCoins;
-                _сountMeter(winCountValue, winCount);
             });
 
     }
@@ -245,7 +241,10 @@ export let view = (() => {
                 panelController.drawMainPanel();
                 mainView.draw.changeBG({});
                 model.group('blurBG').removeAll();
+                model.group('light').removeAll();
                 mainView.draw.drawBlurBg({});
+                mainView.draw.addLight({side: 'left'});
+                mainView.draw.addLight({side: 'right'});
 
                 game.input.keyboard.enabled = true;
                 model.state('buttons:locked', false);
@@ -254,7 +253,11 @@ export let view = (() => {
                 }
                 if (model.mobile) {
                     model.group('buttons').visible = true;
-                    mainView.positionMainContainer();
+                    if (model.state('gameSideLeft')) {
+                        model.group('main').x = model.data('mainXLeft');
+                    } else {
+                        model.group('main').x = model.data('mainXRight');
+                    }
                 }
             }, this);
     }

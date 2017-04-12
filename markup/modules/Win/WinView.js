@@ -101,7 +101,7 @@ export let view = (() => {
             game = model.el('game')
         }) {
 
-            mainView.draw.lightWin({});
+            mainView.draw.lightPlay({});
             mainView.draw.showFlag({number: number});
 
             let leftInnerLightArr = model.el('leftInnerLightArr');

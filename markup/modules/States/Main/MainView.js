@@ -132,8 +132,12 @@ export let view = (() => {
             model.group('light', lightContainer);
 
             let twinkleContainer = game.add.group();
-            container.addAt(twinkleContainer,8);
+            container.addAt(twinkleContainer, 8);
             model.group('twinkle', twinkleContainer);
+
+            let twinkleUpContainer = game.add.group();
+            container.addAt(twinkleUpContainer, 8);
+            model.group('twinkleUp', twinkleUpContainer);
 
             let winUp = game.add.group();
             container.addAt(winUp, 9);
@@ -263,7 +267,7 @@ export let view = (() => {
             let deltaX = model.desktop ? 125 : 95;
             let x = (side === 'right') ? gameMachine.right - deltaX : gameMachine.left + deltaX;
             let deltaY = (model.desktop) ? 45 : 55;
-            let lightColor = (model.state('fs')) ? 'lightGreen' : 'lightRed';
+            let lightColor = (model.state('fs')) ? 'lightRed' : 'lightGreen';
             let innerLightArr = [];
 
             for (let i = 1; i < 11; i++) {
@@ -279,7 +283,7 @@ export let view = (() => {
                 innerLight.alpha = 0;
 
                 if (model.state('fs')) {
-                    innerLightsArr.push(innerLight);
+                    innerLightArr.push(innerLight);
                     continue;
                 }
 
@@ -370,6 +374,10 @@ export let view = (() => {
             side = 'left'
         }) {
 
+            if (container == model.group('twinkleUp')) {
+                container.visible = false;
+            }
+
             let lightBroken1 = game.add.sprite((model.desktop) ? -510 : -390, (model.desktop) ? gameMachine.top + 33 : gameMachine.top + 25, 'lightBroken', null, container);
             lightBroken1.anchor.set(0.5);
 
@@ -440,48 +448,50 @@ export let view = (() => {
             model.el(side + 'LightArr', lightArr);
         },
 
-        lightWin: function ({
+        lightPlay: function ({
             game = model.el('game'),
             leftLightArr = model.el('leftLightArr'),
-            rightLightArr = model.el('rightLightArr')
+            rightLightArr = model.el('rightLightArr'),
+            win = true
         }) {
+            let greenAnim, redAnim;
+            if (win) {
+                greenAnim = 'greenWin';
+                redAnim = 'redWin';
+            } else {
+                greenAnim = 'green';
+                redAnim = 'red';
+            }
 
             leftLightArr.forEach((light, index) => {
                 if (index % 2 == 0) {
-                    light.animations.play('greenWin');
+                    light.animations.play(greenAnim);
                 } else {
-                    light.animations.play('redWin');
+                    light.animations.play(redAnim);
                 }
             });
             rightLightArr.forEach((light, index) => {
                 if (index % 2 == 0) {
-                    light.animations.play('greenWin');
+                    light.animations.play(greenAnim);
                 } else {
-                    light.animations.play('redWin');
+                    light.animations.play(redAnim);
                 }
             });
 
         },
 
-        lightNormal: function ({
+        lightOneColor: function ({
             game = model.el('game'),
             leftLightArr = model.el('leftLightArr'),
-            rightLightArr = model.el('rightLightArr')
+            rightLightArr = model.el('rightLightArr'),
+            color = 'green'
         }) {
+            console.log(' i am here');
             leftLightArr.forEach((light, index) => {
-                if (index % 2 == 0) {
-                    light.animations.play('green');
-                } else {
-                    light.animations.play('red');
-                }
+                light.animations.play(color);
             });
-
             rightLightArr.forEach((light, index) => {
-                if (index % 2 == 0) {
-                    light.animations.play('green');
-                } else {
-                    light.animations.play('red');
-                }
+                light.animations.play(color);
             });
         },
 

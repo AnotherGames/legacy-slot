@@ -21,18 +21,17 @@ export let controller = (() => {
         panelController.drawFsPanel();
         mainView.draw.addBigLight({});
         model.group('blurBG').removeAll();
+        model.group('light').removeAll();
         mainView.draw.drawBlurBg({});
+        mainView.draw.addLight({side: 'left'});
+        mainView.draw.addLight({side: 'right'});
         fsController.init(20);
         mainView.draw.changeBG({});
         if (model.mobile) {
             model.group('buttons').visible = false;
             model.group('main').x = game.world.centerX;
         }
-        // Остонавливаем автоплей если был
-        if (model.state('autoplay:start')) {
-            model.data('remainAutoCount', model.data('autoplay:count'));
-            autoplayController.stop();
-        }
+
     }
 
     function checkForFS() {
@@ -43,6 +42,13 @@ export let controller = (() => {
 
         if (mode === 'root' && nextMode.indexOf('fsBonus') !== -1 ) {
             console.warn('fs start!');
+
+            // Остонавливаем автоплей если был
+            if (model.state('autoplay:start')) {
+                model.data('remainAutoCount', model.data('autoplay:count'));
+                // autoplayController.stop();
+                panelController.handle.stop();
+            }
 
             mainView.draw.addBigLight({});
             transitionView.fsStart();
@@ -183,7 +189,7 @@ export let controller = (() => {
             el.alpha = 0;
         });
 
-        mainView.draw.lightNormal({});
+        mainView.draw.lightPlay({win: false});
         mainView.draw.hideFlag({});
 
         model.group('glistaLight').removeAll();

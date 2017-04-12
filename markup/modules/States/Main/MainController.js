@@ -64,6 +64,8 @@ export class Main {
         // Анимации
         mainView.draw.addLight({side: 'left'});
         mainView.draw.addLight({side: 'right'});
+        mainView.draw.addTwinkle({container: model.group('twinkleUp')});
+        mainView.draw.addTwinkle({side: 'right', container: model.group('twinkleUp')});
         mainView.draw.addTwinkle({});
         mainView.draw.addTwinkle({side: 'right'});
 

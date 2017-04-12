@@ -39,13 +39,8 @@ export let view = (() => {
         }) {
             if (model.mobile) {
                 y = game.height * 0.84;
-                if (model.state('gameSideLeft')) {
-                    x = game.world.centerX - 80;
-                } else {
-                    x = game.world.centerX + 90;
-                }
+                x = game.world.centerX ;
             }
-            console.log(model.state('gameSideLeft'));
             let fsCountBG = game.add.sprite(x, y, 'fsCountBG', null, container);
             fsCountBG.anchor.set(0.5);
 
