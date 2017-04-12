@@ -35,10 +35,10 @@ export let view = (() => {
             startLevel = 15,
             startMulti = 'x2',
             x = model.el('gameMachine').width / 2 - 30,
-            y = 115
+            y = 105
         }) {
             if (model.mobile) {
-                y = game.height * 0.86;
+                y = game.height * 0.84;
                 if (model.state('gameSideLeft')) {
                     x = game.world.centerX - 80;
                 } else {
@@ -52,15 +52,15 @@ export let view = (() => {
             let deltaX = (model.desktop) ? 70 : 45;
             let deltaY = (model.desktop) ? 25 : 20;
 
-            let fsCount = game.add.bitmapText(fsCountBG.x - deltaX, fsCountBG.y + deltaY, 'numbersFont', '' + startLevel, (model.desktop) ? 20 : 15, container);
+            let fsCount = game.add.bitmapText(fsCountBG.x, fsCountBG.y + deltaY, 'numbersFont', '' + startLevel, (model.desktop) ? 20 : 15, container);
             fsCount.align = 'center';
             fsCount.anchor.set(0.5);
             model.el('fs:count', fsCount);
 
-            let fsMulti = game.add.bitmapText(fsCountBG.x + deltaX, fsCountBG.y + deltaY, 'numbersFont', '' + startMulti, (model.desktop) ? 20 : 15, container);
-            fsMulti.align = 'center';
-            fsMulti.anchor.set(0.5);
-            model.el('fs:multi', fsMulti);
+            // let fsMulti = game.add.bitmapText(fsCountBG.x + deltaX, fsCountBG.y + deltaY, 'numbersFont', '' + startMulti, (model.desktop) ? 20 : 15, container);
+            // fsMulti.align = 'center';
+            // fsMulti.anchor.set(0.5);
+            // model.el('fs:multi', fsMulti);
         },
 
         // changeLevelAndMulti: function ({

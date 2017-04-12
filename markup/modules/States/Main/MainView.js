@@ -155,7 +155,6 @@ export let view = (() => {
             model.group('glista', machineGroup.glistaContainer);
             machineGroup.add(machineGroup.glistaContainer);
 
-            console.log(model.group('main'));
         },
 
         machineMask: function ({
@@ -188,11 +187,8 @@ export let view = (() => {
         showBlurBg: function ({
             game = model.el('game'),
             container = model.group('blurBG'),
-            time = 200
+            time = 300
         }) {
-            if (model.state('fs')) {
-                time = 100;
-            }
             game.add.tween(container).to({alpha: 1}, time, 'Linear', true);
         },
 
@@ -201,9 +197,6 @@ export let view = (() => {
             container = model.group('blurBG'),
             time = 200
         }) {
-            if (model.state('fs')) {
-                time = 100;
-            }
             game.add.tween(container).to({alpha: 0}, 200, 'Linear', true);
         },
 
@@ -332,7 +325,7 @@ export let view = (() => {
             let line = model.data('lines')[number - 1];
             let elSize = config[model.res].elements;
             let lineShape = game.add.graphics(0, 0, container);
-            let y = (model.desktop) ? 50 : 30;
+            let y = (model.desktop) ? 60 : 30;
             lineShape
                .lineStyle(4, 0xdf9e4c, 0.8)
                .moveTo((line[0].X + 0.5) * elSize.width - model.el('gameMachine').width / 2 + 50, (line[0].Y + 0.5) * elSize.height - model.el('gameMachine').height / 2 + y)

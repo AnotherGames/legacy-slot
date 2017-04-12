@@ -73,12 +73,13 @@ body:not(.ios) {
     // padding: 0 10% 0 45%;
     top: 35%;
     width: 100%;
+    max-width: 500px;
     color: #eee;
 }
 
 #popup img{
     max-width: 100%;
-    margin-left: 60%;
+    margin-left: 80%;
 }
 
 #popup p{
@@ -190,7 +191,7 @@ body:not(.ios) {
     }
     &::after {
         right: -50px;
-        background-image:url(../img/content/settings/soundPlus.png); 
+        background-image:url(../img/content/settings/soundPlus.png);
     }
 }
 

@@ -251,6 +251,8 @@ export let view = (() => {
                 glistaMas.push(coord.Y);
             });
 
+            mainView.draw.lineShape(number);
+
             // Запускаем глисту
             glista.start(glistaMas, time, () => {
                 // По окончании пути глиста удалится

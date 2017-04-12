@@ -40,15 +40,14 @@ export let view = (() => {
         let game = model.el('game');
         let transitionContainer = model.group('transition');
         transitionContainer.alpha = 1;
+
         // Изменяем музыку
         soundController.music.stopMusic('fon');
         soundController.sound.playSound({sound: 'startPerehod'});
 
+
         let darknessBG = model.el('darknessBG');
         darknessBG.visible = true;
-
-        let x = (model.desktop) ? game.world.centerX : model.el('gameMachine').width / 2;
-
 
         let jocker = game.add.sprite(game.width * 0.8, game.height * 0.2, 'popup', null, transitionContainer);
         jocker.anchor.set(0.5);
@@ -56,6 +55,7 @@ export let view = (() => {
         jocker.alpha = 0;
         model.el('jocker', jocker);
 
+        let x = (model.desktop) ? game.world.centerX : model.el('gameMachine').width / 2 + 20;
         if (model.mobile) {
             if (!model.state('gameSideLeft')) {
                 x = game.width * 0.55;
@@ -82,6 +82,8 @@ export let view = (() => {
         continueText.alpha = 0;
         model.el('continueText', continueText);
 
+        let hitArea = game.add.graphics(0, 0, transitionContainer).beginFill(0xffffff, 0.01).drawRect(0, 0, game.width, game.height);
+        model.el('hitArea', hitArea);
     }
 
     function _fsStartTween() {
@@ -109,9 +111,9 @@ export let view = (() => {
 
     function _fsStartInput() {
         // При клике на фон будет переход на Фри-Спины
-        let continueText = model.el('continueText');
-        continueText.inputEnabled = true;
-        continueText.events.onInputDown.add(transitionInFs);
+        let hitArea = model.el('hitArea');
+        hitArea.inputEnabled = true;
+        hitArea.events.onInputDown.add(transitionInFs);
     }
 
 
@@ -161,12 +163,11 @@ export let view = (() => {
         let darknessBG = model.el('darknessBG');
         darknessBG.visible = true;
 
-        let x = (model.desktop) ? game.world.centerX : model.el('gameMachine').width / 2;
-
         let jack = game.add.sprite((model.desktop) ? game.width * 0.2 : game.width * 0.15, game.height * 0.2, 'jack', null, transitionContainer);
         jack.anchor.set(0.5);
         model.el('jack', jack);
 
+        let x = (model.desktop) ? game.world.centerX : model.el('gameMachine').width / 2 + 20;
         if (model.mobile) {
             if (!model.state('gameSideLeft')) {
                 x = game.width * 0.55;
@@ -195,6 +196,9 @@ export let view = (() => {
         continueText.anchor.set(0.5);
         model.el('continueText', continueText);
 
+        let hitArea = game.add.graphics(0, 0, transitionContainer).beginFill(0xffffff, 0.01).drawRect(0, 0, game.width, game.height);
+        model.el('hitArea', hitArea);
+
         transitionContainer.alpha = 0;
 
     }
@@ -221,9 +225,9 @@ export let view = (() => {
 
     function _fsFinishInput() {
         // При клике на фон будет переход на Фри-Спины
-        let continueText = model.el('continueText');
-        continueText.inputEnabled = true;
-        continueText.events.onInputDown.add(transitionOutFs);
+        let hitArea = model.el('hitArea');
+        hitArea.inputEnabled = true;
+        hitArea.events.onInputDown.add(transitionOutFs);
     }
 
     function transitionOutFs() {
@@ -247,6 +251,10 @@ export let view = (() => {
                 model.state('buttons:locked', false);
                 if (model.mobile) {
                     buttonsController.unlockButtons();
+                }
+                if (model.mobile) {
+                    model.group('buttons').visible = true;
+                    mainView.positionMainContainer();
                 }
             }, this);
     }

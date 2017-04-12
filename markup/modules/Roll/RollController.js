@@ -128,6 +128,9 @@ export let controller = (() => {
                     let countFinish = 0;
                     function callback() {
                         ++countFinish;
+                        if (countFinish === 1) {
+                            mainView.draw.hideBlurBg({});
+                        }
                         if (countFinish === 5) {
                             endRoll();
                         }
@@ -172,7 +175,7 @@ export let controller = (() => {
         request.send('Ready').then((data) => {
             // Показываем выигришь
             winController.showWin();
-            mainView.draw.hideBlurBg({});
+
 
             // Обновляем баланс в конце крутки
             if (model.state('fs')) {

@@ -24,6 +24,10 @@ export let controller = (() => {
         mainView.draw.drawBlurBg({});
         fsController.init(20);
         mainView.draw.changeBG({});
+        if (model.mobile) {
+            model.group('buttons').visible = false;
+            model.group('main').x = game.world.centerX;
+        }
         // Остонавливаем автоплей если был
         if (model.state('autoplay:start')) {
             model.data('remainAutoCount', model.data('autoplay:count'));
@@ -181,6 +185,8 @@ export let controller = (() => {
 
         mainView.draw.lightNormal({});
         mainView.draw.hideFlag({});
+
+        model.group('glistaLight').removeAll();
 
         // Прячем маленькую таблицу Win
 

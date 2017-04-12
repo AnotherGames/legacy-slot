@@ -78,6 +78,7 @@ export class Glista {
             sprite.anchor.set(0.5, 0.5);
             sprite.myDeltaY = this.game.rnd.integerInRange(-30, 30);
             sprite.visible = false;
+            sprite.alpha = 0;
             this.sprites.push(sprite);
 
             let lightSprite = this.game.add.sprite( atlasInd * -80, 0, 'ligthGlista', null, param.lightParent);
