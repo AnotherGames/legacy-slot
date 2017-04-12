@@ -31,7 +31,6 @@ export let view = (() => {
 
         let initLogo = game.add.sprite(game.world.centerX, game.height * 0.4, 'initLogo');
         initLogo.anchor.set(0.5);
-        initLogo.scale.set(0.66);
     }
 
     function drawPlay() {
