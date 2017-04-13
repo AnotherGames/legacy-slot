@@ -74,11 +74,11 @@ export let view = (() => {
 
         let axeSmall = game.add.sprite(game.width / 2 - 350,
             game.world.height / 2 + 50,
-            'axeSmall',
+            'axe',
             null,
             transitionContainer);
             axeSmall.anchor.set(0.5);
-            axeSmall.scale.setTo(0.1, 0.1);
+            axeSmall.scale.setTo(-0.1, 0.1);
         model.el('axeSmall', axeSmall);
         // Кнопка продолжить
         let continueText = game.add.sprite(game.width / 2,
@@ -104,7 +104,7 @@ export let view = (() => {
         game.add.tween(freeSpinsText).to({y: game.height * 0.2}, 1500, Phaser.Easing.Bounce.Out, true);
         game.add.tween(freeSpinsLevel).to({y: game.height / 2}, 1500, Phaser.Easing.Bounce.Out, true);
         game.add.tween(axeBig.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true);
-        game.add.tween(axeSmall.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true);
+        game.add.tween(axeSmall.scale).to({x: -0.6, y: 0.6}, 2500, Phaser.Easing.Elastic.Out, true);
         game.add.tween(continueText.scale).to({x: 1.0, y: 1.0}, 2500, Phaser.Easing.Elastic.Out, true)
             // Болтание кнопки продолжить
             .onComplete.add(() => {

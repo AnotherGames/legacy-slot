@@ -28,28 +28,31 @@ export let view = (() => {
         mainBG: function ({
             game = model.el('game')
         }) {
-            let animBG = game.add.spine(
-                game.world.centerX,
-                game.world.centerY,
-                'animBG'
-            );
-            //убирает пиксельные полосы по бокам
-            animBG.scale.set(1.01)
-            animBG.setAnimationByName(0, '1', true);
-            model.group('bg').add(animBG);
-            model.el('animMainBG', animBG);
-
             let mainBG = game.add.sprite(0, 0, 'mainBG', null, model.group('bg'));
-            model.el('mainBG', mainBG);
+	        model.el('mainBG', mainBG);
 
-            if (model.state('isAnimBG')) {
-                mainBG.visible = false;
-            } else {
-                animBG.visible = false;
-                for (let i = 0; i < 5; i++) {
-                    transitionView.addCloud({container: model.group('bg')});
-                }
-            }
+	        if (model.desktop) {
+		        let animBG = game.add.spine(
+			        game.world.centerX,
+			        game.world.centerY,
+			        'animBG'
+		        );
+		        model.group('bg').add(animBG);
+		        model.el('animMainBG', animBG);
+		        //убирает пиксельные полосы по бокам
+		        animBG.scale.set(1.01)
+		        animBG.setAnimationByName(0, '1', true);
+
+		        if (model.state('isAnimBG')) {
+			        mainBG.visible = false;
+		        } else {
+			        animBG.visible = false;
+			        for (let i = 0; i < 5; i++) {
+				        transitionView.addCloud({container: model.group('bg')});
+			        }
+		        }
+	        }
+
         },
 
         mainContainer: function ({

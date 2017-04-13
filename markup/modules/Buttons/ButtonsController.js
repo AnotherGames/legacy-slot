@@ -138,11 +138,9 @@ export let controller = (() => {
         soundButton: function() {
             let soundButton = model.el('soundButton');
             if (model.state('globalSound')) {
-                console.log('off');
                 soundController.volume.switchVolume();
                 soundButton.frameName = 'soundOut.png';
             } else {
-                console.log('on');
                 soundController.volume.switchVolume();
                 soundButton.frameName = 'sound.png';
             }

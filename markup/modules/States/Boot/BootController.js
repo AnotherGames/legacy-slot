@@ -12,7 +12,7 @@ export class Boot {
             fsBonus: 'zombiefs2'
         });
 
-        request.send('Initialise', 'normal')
+        request.send('Initialise', 'fsBonus')
             .then((initData) => {
                 model.initStates(initData);
                 model.initSettings(initData.Settings);

@@ -75,41 +75,34 @@ export let controller = (function () {
             }
         });
         $('#optionAutoplay1').on('change', function () {
-            console.log(this.id, this.checked);
             model.state('autoplay:cashRoll', this.checked);
         });
         $('#optionAutoplayVal1').on('input change', function () {
             if (this.value < 0) {
                 this.value = 0;
             }
-            console.log('optionAutoplayVal1', this.value);
             model.state('autoplay:cashRollDelta', this.value);
         });
         $('#optionAutoplay2').on('change', function () {
-            console.log(this.id, this.checked);
             model.state('autoplay:cashUp', this.checked);
         });
         $('#optionAutoplayVal2').on('input change', function () {
             if (this.value < 0) {
                 this.value = 0;
             }
-            console.log('optionAutoplayVal2', this.value);
             model.state('autoplay:cashDelta', this.value);
         });
         $('#optionAutoplay3').on('change', function () {
-            console.log(this.id, this.checked);
             model.state('autoplay:cashDown', this.checked);
         });
         $('#optionAutoplayVal3').on('input change', function () {
             if (this.value < 0) {
                 this.value = 0;
             }
-            console.log('optionAutoplayVal3', this.value);
             model.state('autoplay:cashDelta', this.value);
         });
         $('#optionAutoplay4').on('change', function () {
             model.state('autoStopWhenFS', this.checked);
-            console.log(this.id, this.checked);
         });
         $('#optionAutoplay5').on('change', function () {
             model.cookie('autoTransititon', this.checked);
@@ -119,7 +112,6 @@ export let controller = (function () {
             $('.history').removeClass('closed');
         });
         $('#btnRules').on('click', function () {
-            console.log('btnRules');
             panelController.handle.openInfo();
             // panelController.handle.info();
             $('#settings').addClass('closed');

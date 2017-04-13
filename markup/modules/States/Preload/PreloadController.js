@@ -89,8 +89,7 @@ export class Preload {
         game.load.image('winTotal', 'win/winTotalRect.png');
         game.load.atlasJSONArray('win', 'win/win.png', 'win/win.json');
         game.load.atlasJSONArray('numbers', 'numbers/multiNumbers.png', 'numbers/multiNumbers.json');
-        game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
-        game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
+
         game.load.atlasJSONArray('footerButtons', 'footer/footerButtons.png', 'footer/footerButtons.json');
         game.load.bitmapFont("numbersFont", "numbers/numbers.png", "numbers/numbers.xml");
         game.load.bitmapFont("fsLevelNumbers", "numbers/numbers1.png", "numbers/numbers1.xml");
@@ -101,6 +100,8 @@ export class Preload {
             game.load.image('autoSelect', 'desk_buttons/autoSelect.png');
         }
         if (model.mobile) {
+	        game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
+	        game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
             game.load.atlasJSONArray('mobileButtons', 'mobile_buttons/mobileButtons.png', 'mobile_buttons/mobileButtons.json');
         }
         // Glista
@@ -112,7 +113,6 @@ export class Preload {
         const game = model.el('game');
         game.load.image('fsBG', 'bg/fsBG.png');
         game.load.image('axe', 'fs/axe.png');
-        game.load.image('axeSmall', 'fs/axeSmall.png');
         game.load.image('skull', 'fs/skull.png');
         game.load.image('plus3', 'fs/plus3.png');
         if (model.mobile) {
@@ -124,7 +124,9 @@ export class Preload {
 
     loadSpineAssets() {
         const game = model.el('game');
-        game.load.spine('animBG', 'skeleton/skeleton.json');
+        if (model.desktop) {
+	        game.load.spine('animBG', 'skeleton/skeleton.json');
+        }
         game.load.spine('Zombie', 'spine/Zomb.json');
         game.load.spine('FlyingBrain', 'spine/Brain.json');
         game.load.spine('mozgiCount', 'fs/mozgi.json');
