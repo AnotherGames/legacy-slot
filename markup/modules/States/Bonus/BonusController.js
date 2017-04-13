@@ -17,7 +17,8 @@ class Door {
         this.x = (model.desktop) ? x : x * 2 / 3;
         this.y = (model.desktop) ? y : y * 2 / 3;
         this.doors = arr;
-        this.deltaTime = 100 * index;
+        this.index = index;
+        this.deltaTime = 100 * this.index;
 
         this.destroyed = false;
         this.isWinPlayed = false;
@@ -52,16 +53,12 @@ class Door {
 
         this.destroyed = true;
 
-        let rnd = this.game.rnd.integerInRange(1, 3);
-        // soundController.sound.playSound({ sound: 'sundukOpen' });
         soundController.sound.playSound({ sound: 'coins', duration: 1500, volume: 2 });
 
         let number = parseInt(sprite.frameName, 10);
         bonusView.draw.showWinAnim({number: number});
 
-        let numberMulti = parseInt(this.data.CurrentValue, 10);
-        // let fontSize = (model.desktop) ? 30 : 15;
-        // this.multi = this.game.add.bitmapText(this.x, this.y - 50, 'numbersFont', `x${numberMulti}`, fontSize, model.group('bg'));
+        let numberMulti = parseInt(this.data.CurrentValue.Multi, 10);
         this.multi = this.game.add.sprite(this.x, this.y, 'multi', `x${numberMulti}.png`, model.group('bg'));
         this.multi.anchor.set(0.6, 0.8);
         this.multi.anchor.set(0.5);
@@ -176,7 +173,7 @@ function handleDoorHover() {
 
 function handleDoorClick() {
     if (this.destroyed || model.state('doorFinish') || !model.state('bonusReady')) return;
-    request.send('Roll')
+    request.send('Roll', null, this.index - 1)
         .then((data) => {
             model.state('bonusReady', false);
             this.data = data;
@@ -202,12 +199,11 @@ function handleDoorClick() {
         .then(() => {
             model.updateBalance({ startBonusRoll: true });
             if (!this.isWinPlayed) {
-                if (this.data.CurrentValue != 'Exit') {
+                if (this.data.CurrentValue.Multi != 'Exit') {
                     this.win(this.sprite);
                     this.isWinPlayed = true;
                     if (this.data.BonusEnd) {
                         // Переходной экран Big Win
-                        // soundController.sound.playSound({ sound: 'illumWin' });
                         bonusView.draw.showWin({ winTextFrame: 'bigW.png' });
                         soundController.sound.playSound({ sound: 'win' });
                         soundController.music.stopMusic('bonusFon');
