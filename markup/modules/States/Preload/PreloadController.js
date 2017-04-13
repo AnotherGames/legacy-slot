@@ -78,8 +78,6 @@ export class Preload {
         game.load.image('gameBG', 'game/gameBG.png');
         game.load.image('gameLogo', 'game/gmLogo.png');
         game.load.image('gameShadow', 'game/gameShadow.png');
-        game.load.image('arLeft', 'other/arLeft.png');
-
         game.load.image('arrow', 'other/ar.png');
         game.load.image('infoTableBg', 'other/infoTableBg.png');
         game.load.image('closeButton', 'other/closed.png');
@@ -91,18 +89,18 @@ export class Preload {
         game.load.image('betBonus', 'win/betBonus.png');
         game.load.atlasJSONArray('lineNumbers', 'win/lineNumbers.png', 'win/lineNumbers.json');
         game.load.atlasJSONArray('multiNumbers', 'numbers/multiNumbers.png', 'numbers/multiNumbers.json');
-        game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
         game.load.atlasJSONArray('footerButtons', 'footer/footerButtons.png', 'footer/footerButtons.json');
-        game.load.bitmapFont("numbersFont", "numbers/numbers.png", "numbers/numbers.xml");
-        if (model.desktop) {
-            game.load.image('ui', 'game/UI.png');
-            game.load.image('uiFS', 'game/UI_FS.png');
-            game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
-            game.load.image('autoSelect', 'desk_buttons/autoSelect.png');
-        }
-        if (model.mobile) {
-            game.load.atlasJSONArray('mobileButtons', 'mobile_buttons/mobileButtons.png', 'mobile_buttons/mobileButtons.json');
-        }
+	    game.load.bitmapFont("numbersFont", "numbers/numbers.png", "numbers/numbers.xml");
+	    if (model.desktop) {
+		    game.load.image('ui', 'game/UI.png');
+		    game.load.image('uiFS', 'game/UI_FS.png');
+		    game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
+		    game.load.image('autoSelect', 'desk_buttons/autoSelect.png');
+	    }
+	    if (model.mobile) {
+		    game.load.atlasJSONArray('mobileButtons', 'mobile_buttons/mobileButtons.png', 'mobile_buttons/mobileButtons.json');
+		    game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
+	    }
         // Glista
         game.load.image('ligthGlista', 'glista/lightGlista.png');
         game.load.atlasJSONArray('glistaAtlas', 'glista/glista.png', 'glista/glista.json');
@@ -118,7 +116,9 @@ export class Preload {
 
     loadSpineAssets() {
         const game = model.el('game');
-        game.load.spine('animBG', 'spine/skeleton.json');
+	    if (model.desktop) {
+		    game.load.spine('animBG', 'spine/skeleton.json');
+	    }
         game.load.spine('logo', 'spine/logo.json');
         game.load.spine('dragon', 'spine/Dragon.json');
 

@@ -30,23 +30,21 @@ export let view = (() => {
         mainBG: function ({
             game = model.el('game')
         }) {
+	        let mainBG = game.add.sprite(0, 0, 'mainBG', null, model.group('bg'));
+	        model.el('mainBG', mainBG);
 
-            let animBG = game.add.spine(game.world.centerX, game.world.centerY, 'animBG');
-            animBG.setAnimationByName(0, 'animation', true);
-            model.group('bg').add(animBG);
-            model.el('animMainBG', animBG);
+	        if (model.desktop) {
+		        let animBG = game.add.spine(game.world.centerX, game.world.centerY, 'animBG');
+		        animBG.setAnimationByName(0, 'animation', true);
+		        model.group('bg').add(animBG);
+		        model.el('animMainBG', animBG);
 
-            let mainBG = game.add.sprite(0, 0, 'mainBG', null, model.group('bg'));
-            model.el('mainBG', mainBG);
-
-            if (model.state('isAnimBG') && model.desktop) {
-                mainBG.visible = false;
-            } else {
-                animBG.visible = false;
-            }
-
-            if (model.desktop) {
-                let sticks = game.add.sprite(300, game.height * 0.6, 'sticks', null, model.group('bg'));
+		        if (model.state('isAnimBG') && model.desktop) {
+			        mainBG.visible = false;
+		        } else {
+			        animBG.visible = false;
+		        }
+		        let sticks = game.add.sprite(300, game.height * 0.6, 'sticks', null, model.group('bg'));
                     sticks.anchor.set(0.5);
                 model.el('sticks', sticks);
             }
