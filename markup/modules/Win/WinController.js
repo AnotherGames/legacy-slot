@@ -18,14 +18,15 @@ export let controller = (() => {
         let game = model.el('game');
         model.state('fs', true);
         // Изменяем панель на FS
-        panelController.drawFsPanel();
         mainView.draw.addBigLight({});
         model.group('blurBG').removeAll();
         model.group('light').removeAll();
         mainView.draw.drawBlurBg({});
         mainView.draw.addLight({side: 'left'});
         mainView.draw.addLight({side: 'right'});
-        fsController.init(20);
+        mainView.draw.lightToggle({});
+        panelController.drawFsPanel();
+        fsController.init(model.data('rollResponse').FreeSpinsLeft);
         mainView.draw.changeBG({});
         if (model.mobile) {
             model.group('buttons').visible = false;

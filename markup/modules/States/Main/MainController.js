@@ -64,10 +64,16 @@ export class Main {
         // Анимации
         mainView.draw.addLight({side: 'left'});
         mainView.draw.addLight({side: 'right'});
-        mainView.draw.addTwinkle({container: model.group('twinkleUp')});
-        mainView.draw.addTwinkle({side: 'right', container: model.group('twinkleUp')});
-        mainView.draw.addTwinkle({});
-        mainView.draw.addTwinkle({side: 'right'});
+        mainView.draw.addTwinkleLight({container: model.group('twinkleDown')});
+        mainView.draw.addTwinkleLight({side: 'right', container: model.group('twinkleDown')});
+        mainView.draw.addTwinkleLight({});
+        mainView.draw.addTwinkleLight({side: 'right'});
+        mainView.draw.addBrokenLight({});
+
+        // mainView.draw.lightToggle({});
+        // game.time.events.add(4000, () => {
+        //     mainView.draw.destroyLightToggle({});
+        // });
 
         // mainView.draw.showPopup({message: 'You have low balance on your account', balance: true});
         // transitionView.fsStart();

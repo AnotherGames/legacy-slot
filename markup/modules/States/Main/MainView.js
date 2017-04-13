@@ -108,7 +108,7 @@ export let view = (() => {
                 gameBGFS.visible = false;
                 gameBG.visible = true;
             }
-            console.log(container);
+
         },
 
         machineContainer: function ({
@@ -131,20 +131,20 @@ export let view = (() => {
             container.addAt(lightContainer, 6);
             model.group('light', lightContainer);
 
+            let twinkleDownContainer = game.add.group();
+            container.addAt(twinkleDownContainer, 8);
+            model.group('twinkleDown', twinkleDownContainer);
+
             let twinkleContainer = game.add.group();
-            container.addAt(twinkleContainer, 8);
+            container.addAt(twinkleContainer, 9);
             model.group('twinkle', twinkleContainer);
 
-            let twinkleUpContainer = game.add.group();
-            container.addAt(twinkleUpContainer, 8);
-            model.group('twinkleUp', twinkleUpContainer);
-
             let winUp = game.add.group();
-            container.addAt(winUp, 9);
+            container.addAt(winUp, 10);
             model.group('winUp', winUp);
 
             let winTop = game.add.group();
-            container.addAt(winTop, 10);
+            container.addAt(winTop, 11);
             model.group('winTop', winTop);
 
             machineGroup.glistaLightContainer = game.add.group();
@@ -367,41 +367,30 @@ export let view = (() => {
             }
         },
 
-        addTwinkle: function ({
+        addTwinkleLight: function ({
             game = model.el('game'),
             container = model.group('twinkle'),
             gameMachine = model.el('gameMachine'),
             side = 'left'
         }) {
 
-            if (container == model.group('twinkleUp')) {
-                container.visible = false;
-            }
-
-            let lightBroken1 = game.add.sprite((model.desktop) ? -510 : -390, (model.desktop) ? gameMachine.top + 33 : gameMachine.top + 25, 'lightBroken', null, container);
-            lightBroken1.anchor.set(0.5);
-
-            let lightBroken2 = game.add.sprite((model.desktop) ? -510 : -390, (model.desktop) ? gameMachine.bottom - 35 : gameMachine.bottom - 27, 'lightBroken', null, container);
-            lightBroken2.anchor.set(0.5);
-
             let lightArr = [];
-            let x = (side === 'right') ? gameMachine.right - 30 : gameMachine.left + 33;
-            let y = [80, 140, 200, 260, 320, 380, 440, 500, 560, 620, 680, 735, 790, 845];
 
-            let xHorisontal = [-630, -570, -450, -390, -330, -270, -210, -150, -90, -30, 30, 90, 150, 210, 270, 330, 390, 450, 510, 570, 630, 690];
-            let yHorisontal = (side === 'right') ? gameMachine.top + 33 : gameMachine.bottom - 35;
+            let x = (side === 'right') ? gameMachine.right - 30 : gameMachine.left + 33;
+            let y = (model.desktop) ? 100 : 50;
+            let delta = (model.desktop) ? 60 : 45;
+
+            let x2 = (model.desktop) ? -630 : -470;
+            let y2 = (side === 'right') ? gameMachine.top + 33 : gameMachine.bottom - 35;
             if (model.mobile) {
                 x = (side === 'right') ? gameMachine.right - 22 : gameMachine.left + 25;
-                y = [50, 90, 130, 170, 210, 250, 290, 330, 370, 410, 450, 490, 530];
-
-                xHorisontal = [-470, -430, -350, -310, -270, -230, -190, -150, -110, -70, -30, 10, 50, 90, 130, 170, 210, 250, 290, 330, 375, 420, 460];
-                yHorisontal = (side === 'right') ? gameMachine.top + 25 : gameMachine.bottom - 27;
-
+                y2= (side === 'right') ? gameMachine.top + 25 : gameMachine.bottom - 27;
             }
 
-            for (let i = 0; i < 13; i++) {
+            // add right and left right (depends on a side)
+            for (let i = 0; i < 12; i++) {
 
-                let light = game.add.sprite(x, y[i] - gameMachine.height / 2,
+                let light = game.add.sprite(x, y + delta * i - gameMachine.height / 2,
                     'light',
                     'L-green_1_0.png',
                     container);
@@ -412,21 +401,33 @@ export let view = (() => {
                 light.animations.add('red', Phaser.Animation.generateFrameNames('L-red_1_', 0, 15, '.png', 1), 15, true);
                 light.animations.add('greenWin', Phaser.Animation.generateFrameNames('L-green_2_', 0, 15, '.png', 1), 15, true);
                 light.animations.add('redWin', Phaser.Animation.generateFrameNames('L-red_2_', 0, 15, '.png', 1), 15, true);
+                light.animations.add('greenBigWin', Phaser.Animation.generateFrameNames('L-green_3_', 0, 15, '.png', 1), 15, true);
+                light.animations.add('redBigWin', Phaser.Animation.generateFrameNames('L-red_3_', 0, 15, '.png', 1), 15, true);
 
                 if (i % 2 == 0) {
-                    light.animations.play('green');
+                    if (container == model.group('twinkleDown')) {
+                        light.animations.play('green');
+                    } else {
+                        light.animations.play('red');
+                    }
                 } else {
-                    light.animations.play('red');
+                    if (container == model.group('twinkleDown')) {
+                        light.animations.play('red');
+                    } else {
+                        light.animations.play('green');
+                    }
+                }
+                if (side =='right' && i == 10) {
+                    light.visible = false;
                 }
 
                 lightArr.push(light);
             }
 
-            let j = (model.desktop) ? 21 : 23;
-
-            for (let i = 0; i < j; i++) {
+            // top and bottom lights (depends on a side)
+            for (let i = 0; i < 22; i++) {
                 let rnd = (game.rnd.integerInRange(0, 1)) ? 'red' : 'green';
-                let light = game.add.sprite(xHorisontal[i], yHorisontal,
+                let light = game.add.sprite(x2 + delta * i, y2,
                     'light',
                     'L-green_1_0.png',
                     container);
@@ -437,15 +438,108 @@ export let view = (() => {
                 light.animations.add('red', Phaser.Animation.generateFrameNames('L-red_1_', 0, 15, '.png', 1), 15, true);
                 light.animations.add('greenWin', Phaser.Animation.generateFrameNames('L-green_2_', 0, 15, '.png', 1), 15, true);
                 light.animations.add('redWin', Phaser.Animation.generateFrameNames('L-red_2_', 0, 15, '.png', 1), 15, true);
+                light.animations.add('greenBigWin', Phaser.Animation.generateFrameNames('L-green_3_', 0, 15, '.png', 1), 15, true);
+                light.animations.add('redBigWin', Phaser.Animation.generateFrameNames('L-red_3_', 0, 15, '.png', 1), 15, true);
+
                 if (i % 2 == 0) {
-                    light.animations.play('green');
+                    if (container == model.group('twinkleDown')) {
+                        light.animations.play('green');
+                    } else {
+                        light.animations.play('red');
+                    }
                 } else {
-                    light.animations.play('red');
+                    if (container == model.group('twinkleDown')) {
+                        light.animations.play('red');
+                    } else {
+                        light.animations.play('green');
+                    }
+                }
+                if (side =='right' && i == 2) {
+                    light.visible = false;
                 }
 
                 lightArr.push(light);
             }
-            model.el(side + 'LightArr', lightArr);
+
+            if (container == model.group('twinkleDown')) {
+                model.el(side + 'DownLightArr', lightArr);
+                container.alpha = 0;
+            } else {
+                model.el(side + 'LightArr', lightArr);
+            }
+            if (container == model.group('twinkle')) {
+            }
+
+        },
+
+        addBrokenLight: function ({
+            game = model.el('game'),
+            container = model.group('main'),
+            gameMachine = model.el('gameMachine')
+        }) {
+            let lightBroken1 = game.add.sprite((model.desktop) ? -510 : -380,
+                (model.desktop) ? gameMachine.top + 33 : gameMachine.top + 25,
+                'lightBroken',
+                null,
+                container);
+            lightBroken1.anchor.set(0.5);
+
+            let lightBroken2 = game.add.sprite((model.desktop) ? gameMachine.right - 30 : gameMachine.right - 22,
+                (model.desktop) ? 700 - gameMachine.height / 2 : 500 - gameMachine.height / 2,
+                'lightBroken',
+                null,
+                container);
+            lightBroken2.anchor.set(0.5);
+        },
+
+        lightToggle: function ({
+            game = model.el('game'),
+            leftLightArr = model.el('leftLightArr'),
+            rightLightArr = model.el('rightLightArr'),
+            leftDownLightArr = model.el('leftDownLightArr'),
+            rightDownLightArr = model.el('rightDownLightArr'),
+            twinkleContainer = model.group('twinkle'),
+            twinkleDownContainer = model.group('twinkleDown')
+        }) {
+
+            leftDownLightArr.forEach((light, index) => {
+                if (index % 2 == 0) {
+                    light.animations.play('green');
+                } else {
+                    light.animations.play('red');
+                }
+            });
+            rightDownLightArr.forEach((light, index) => {
+                if (index % 2 == 0) {
+                    light.animations.play('green');
+                } else {
+                    light.animations.play('red');
+                }
+            });
+
+            let count = 0;
+            let twinkleTimer = game.time.events.loop(200, () => {
+                count++;
+
+                if (count % 2) {
+                    twinkleContainer.alpha = 0;
+                    twinkleDownContainer.alpha = 1;
+                } else {
+                    twinkleContainer.alpha = 1;
+                    twinkleDownContainer.alpha = 0;
+                }
+            });
+            model.el('twinkleTimer', twinkleTimer);
+        },
+
+        destroyLightToggle: function ({
+            game = model.el('game'),
+            twinkleContainer = model.group('twinkle'),
+            twinkleDownContainer = model.group('twinkleDown')
+        }) {
+            game.time.events.remove(model.el('twinkleTimer'));
+            twinkleContainer.alpha = 1;
+            twinkleDownContainer.alpha = 0;
         },
 
         lightPlay: function ({
@@ -456,8 +550,8 @@ export let view = (() => {
         }) {
             let greenAnim, redAnim;
             if (win) {
-                greenAnim = 'greenWin';
-                redAnim = 'redWin';
+                greenAnim = 'greenBigWin';
+                redAnim = 'redBigWin';
             } else {
                 greenAnim = 'green';
                 redAnim = 'red';
@@ -465,16 +559,16 @@ export let view = (() => {
 
             leftLightArr.forEach((light, index) => {
                 if (index % 2 == 0) {
-                    light.animations.play(greenAnim);
-                } else {
                     light.animations.play(redAnim);
+                } else {
+                    light.animations.play(greenAnim);
                 }
             });
             rightLightArr.forEach((light, index) => {
                 if (index % 2 == 0) {
-                    light.animations.play(greenAnim);
-                } else {
                     light.animations.play(redAnim);
+                } else {
+                    light.animations.play(greenAnim);
                 }
             });
 
@@ -482,15 +576,19 @@ export let view = (() => {
 
         lightOneColor: function ({
             game = model.el('game'),
-            leftLightArr = model.el('leftLightArr'),
-            rightLightArr = model.el('rightLightArr'),
-            color = 'green'
+            leftDownLightArr = model.el('leftDownLightArr'),
+            rightDownLightArr = model.el('rightDownLightArr'),
+            color = 'green',
+            twinkleContainer = model.group('twinkle'),
+            twinkleDownContainer = model.group('twinkleDown')
         }) {
             console.log(' i am here');
-            leftLightArr.forEach((light, index) => {
+            twinkleContainer.alpha = 0;
+            twinkleDownContainer.alpha = 1;
+            leftDownLightArr.forEach((light, index) => {
                 light.animations.play(color);
             });
-            rightLightArr.forEach((light, index) => {
+            leftDownLightArr.forEach((light, index) => {
                 light.animations.play(color);
             });
         },

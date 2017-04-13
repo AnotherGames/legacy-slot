@@ -77,10 +77,10 @@ export class Preload {
     loadMainAssets() {
         const game = model.el('game');
         game.load.image('mainBG', 'bg/mainBG.png');
-        game.load.atlasJSONArray('light', 'bg/light.png', 'bg/light.json');
-        game.load.image('lightBroken', 'bg/lightBroken.png');
-        game.load.image('lightGreen', 'bg/lightGreen.png');
-        game.load.image('lightRed', 'bg/lightRed.png');
+        game.load.atlasJSONArray('light', 'game/light.png', 'game/light.json');
+        game.load.image('lightBroken', 'game/lightBroken.png');
+        game.load.image('lightGreen', 'game/lightGreen.png');
+        game.load.image('lightRed', 'game/lightRed.png');
         game.load.image('gameMachine', 'game/gameMachine.png');
         game.load.image('gameMachineBG', 'game/gameMachineBG.png');
         game.load.image('redRoll', 'game/redRoll.png');
@@ -93,13 +93,9 @@ export class Preload {
         game.load.atlasJSONArray('infoMarker', 'other/infoMarker.png', 'other/infoMarker.json');
         game.load.image('winLine', 'win/winLine.png');
         game.load.image('winTotal', 'win/winTotal.png');
-        game.load.atlasJSONArray('lineNumbers', 'win/lineNumbers.png', 'win/lineNumbers.json');
-        game.load.atlasJSONArray('winNumbers', 'win/winNumbers.png', 'win/winNumbers.json');
         game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
         game.load.atlasJSONArray('footerButtons', 'footer/footerButtons.png', 'footer/footerButtons.json');
         game.load.bitmapFont('numbersFont', 'numbers/numbers.png', 'numbers/numbers.xml');
-        game.load.bitmapFont('textOrange', 'text/text1.png', 'text/text1.xml');
-        game.load.bitmapFont('textGreen', 'text/text2.png', 'text/text2.xml');
         if (model.desktop) {
             game.load.image('panel', 'game/panel.png');
             game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');

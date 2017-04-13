@@ -32,7 +32,7 @@ export let view = (() => {
         FsLevelAndMulti: function ({
             game = model.el('game'),
             container = model.group('panelFS'),
-            startLevel = 15,
+            startLevel = model.el('fs:count'),
             startMulti = 'x2',
             x = model.el('gameMachine').width / 2 - 30,
             y = 105

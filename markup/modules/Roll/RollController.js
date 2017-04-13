@@ -95,6 +95,8 @@ export let controller = (() => {
                     model.state('roll:progress', true);
                     model.state('roll:fast', false);
 
+                    console.log('i am here');
+
                     mainView.draw.showBlurBg({});
 
                     // Играем звук кручения барабанов

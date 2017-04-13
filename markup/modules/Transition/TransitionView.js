@@ -22,7 +22,7 @@ export let view = (() => {
         if (model.mobile) {
             buttonsController.lockButtons();
         }
-        mainView.draw.lightOneColor({});
+        // mainView.draw.lightOneColor({});
         // Запускаем затемнение
         game.camera.flash(0x000000, 500);
 
@@ -141,7 +141,7 @@ export let view = (() => {
         // keyboardController.initFsKeys(transitionInFs);
         // Темнота
         game.camera.flash(0x000000, 500);
-        mainView.draw.lightOneColor({color: 'red'});
+        // mainView.draw.lightOneColor({color: 'red'});
         // Отрисовка финишного экрана
         _fsFinishDraw();
         _fsFinishTween();
@@ -234,32 +234,37 @@ export let view = (() => {
         let transitionContainer = model.group('transition');
         game.add.tween(transitionContainer).to({alpha: 0}, 500, 'Linear', true)
             .onComplete.add(() => {
-                let darknessBG = model.el('darknessBG');
-                darknessBG.visible = false;
-
                 transitionContainer.removeAll();
-                panelController.drawMainPanel();
-                mainView.draw.changeBG({});
-                model.group('blurBG').removeAll();
-                model.group('light').removeAll();
-                mainView.draw.drawBlurBg({});
-                mainView.draw.addLight({side: 'left'});
-                mainView.draw.addLight({side: 'right'});
-
-                game.input.keyboard.enabled = true;
-                model.state('buttons:locked', false);
-                if (model.mobile) {
-                    buttonsController.unlockButtons();
-                }
-                if (model.mobile) {
-                    model.group('buttons').visible = true;
-                    if (model.state('gameSideLeft')) {
-                        model.group('main').x = model.data('mainXLeft');
-                    } else {
-                        model.group('main').x = model.data('mainXRight');
-                    }
-                }
+                returnToMain();
             }, this);
+    }
+
+    function returnToMain () {
+        let game = model.el('game');
+        let darknessBG = model.el('darknessBG');
+        darknessBG.visible = false;
+
+        panelController.drawMainPanel();
+        mainView.draw.drawBlurBg({});
+        mainView.draw.changeBG({});
+        model.group('blurBG').removeAll();
+        model.group('light').removeAll();
+        mainView.draw.addLight({side: 'left'});
+        mainView.draw.addLight({side: 'right'});
+        mainView.draw.destroyLightToggle({});
+
+        game.input.keyboard.enabled = true;
+        model.state('buttons:locked', false);
+        if (model.mobile) {
+            buttonsController.unlockButtons();
+            model.group('buttons').visible = true;
+
+            if (model.state('gameSideLeft')) {
+                model.group('main').x = model.data('mainXLeft');
+            } else {
+                model.group('main').x = model.data('mainXRight');
+            }
+        }
     }
 
     // Накрутка выигрыша
