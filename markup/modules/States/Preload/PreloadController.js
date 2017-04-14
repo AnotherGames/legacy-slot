@@ -59,10 +59,6 @@ export class Preload {
         game.load.audio('finishPerehod', 'transition.mp3');
         game.load.audio('lineWin', 'lineWin.mp3');
         game.load.audio('lineWin2', 'lineWin2.mp3');
-        // game.load.audio('cat', 'cat.mp3');
-        // game.load.audio('gun', 'gun.mp3');
-        // game.load.audio('gaz', 'gaz.mp3');
-        // game.load.audio('burstConfetti', 'burstConfetti.mp3');
 
     }
 
