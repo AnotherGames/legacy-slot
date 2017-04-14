@@ -206,7 +206,7 @@ export let controller = (() => {
             model,
             mobileBGScale: 0.75,
             mobileTableScale: 0.75,
-            mobileCloseButtonMargin: 0
+            mobileCloseButtonMargin: 15
         });
 
         model.state('settings', 'close');

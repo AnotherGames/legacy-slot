@@ -22,7 +22,7 @@ export let view = (() => {
         if (model.mobile) {
             buttonsController.lockButtons();
         }
-        // mainView.draw.lightOneColor({});
+        mainView.draw.lightOneColor({anim: 'redWin'});
         // Запускаем затемнение
         game.camera.flash(0x000000, 500);
 
@@ -141,7 +141,9 @@ export let view = (() => {
         // keyboardController.initFsKeys(transitionInFs);
         // Темнота
         game.camera.flash(0x000000, 500);
-        // mainView.draw.lightOneColor({color: 'red'});
+
+        game.time.events.remove(model.el('twinkleTimer'));
+        mainView.draw.lightOneColor({anim: 'greenWin'});
         // Отрисовка финишного экрана
         _fsFinishDraw();
         _fsFinishTween();
@@ -245,13 +247,15 @@ export let view = (() => {
         darknessBG.visible = false;
 
         panelController.drawMainPanel();
-        mainView.draw.drawBlurBg({});
-        mainView.draw.changeBG({});
         model.group('blurBG').removeAll();
         model.group('light').removeAll();
+        model.group('twinkle').alpha = 1;
+        model.group('twinkleDown').alpha = 0;
         mainView.draw.addLight({side: 'left'});
         mainView.draw.addLight({side: 'right'});
-        mainView.draw.destroyLightToggle({});
+        mainView.draw.lightPlay({win: false});
+        mainView.draw.changeBG({});
+        mainView.draw.drawBlurBg({});
 
         game.input.keyboard.enabled = true;
         model.state('buttons:locked', false);
@@ -264,6 +268,9 @@ export let view = (() => {
             } else {
                 model.group('main').x = model.data('mainXRight');
             }
+        }
+        if (model.desktop) {
+            game.time.events.remove(model.el('bigLightArr'));
         }
     }
 

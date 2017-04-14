@@ -70,11 +70,7 @@ export class Main {
         mainView.draw.addTwinkleLight({side: 'right'});
         mainView.draw.addBrokenLight({});
 
-        // mainView.draw.lightToggle({});
-        // game.time.events.add(4000, () => {
-        //     mainView.draw.destroyLightToggle({});
-        // });
-
+        // tests
         // mainView.draw.showPopup({message: 'You have low balance on your account', balance: true});
         // transitionView.fsStart();
 

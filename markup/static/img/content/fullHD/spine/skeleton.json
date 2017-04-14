@@ -1,11 +1,11 @@
 {
-"skeleton": { "hash": "UHcB1Lt2KslS6KhC1zT4NYGfC44", "spine": "3.5.51", "width": 1056.99, "height": 911.66, "images": "" },
+"skeleton": { "hash": "nHxJCP7sngLqUtYXBGFll9x8Cp0", "spine": "3.5.51", "width": 1056.99, "height": 911.66, "images": "" },
 "bones": [
 	{ "name": "root" },
 	{ "name": "JJ", "parent": "root", "y": -105.25, "scaleX": 0.851, "scaleY": 0.851 },
 	{ "name": "bone", "parent": "root", "x": 4.37, "y": -358.71 },
 	{ "name": "bone19", "parent": "JJ", "length": 403.5, "rotation": -0.36, "x": 9.02, "y": -26.68 },
-	{ "name": "bone2", "parent": "bone19", "rotation": 0.36, "x": 409.01, "y": 90.25 },
+	{ "name": "bone2", "parent": "bone19", "rotation": -13.27, "x": 394.3, "y": 73.95 },
 	{ "name": "bone3", "parent": "root", "x": -82, "y": 68.78 },
 	{ "name": "bone4", "parent": "root", "x": 91.46, "y": 205.79 },
 	{ "name": "bone5", "parent": "root", "x": 178.2, "y": -124.8 },
@@ -476,18 +476,18 @@
 			"bone2": {
 				"rotate": [
 					{ "time": 0, "angle": 0 },
-					{ "time": 0.5, "angle": 13.5 },
-					{ "time": 1.5, "angle": -7.84 },
+					{ "time": 0.6667, "angle": 2.62 },
+					{ "time": 1.5, "angle": -9.45 },
 					{ "time": 2, "angle": 0 }
 				],
 				"translate": [
 					{ "time": 0, "x": 0, "y": 0 },
-					{ "time": 1, "x": 14.26, "y": -22.65 },
+					{ "time": 0.6667, "x": -1.3, "y": 1.6 },
+					{ "time": 1.5, "x": 5.71, "y": -0.86 },
 					{ "time": 2, "x": 0, "y": 0 }
 				],
 				"scale": [
-					{ "time": 0, "x": 1, "y": 1 },
-					{ "time": 1, "x": 1.264, "y": 1.264 },
+					{ "time": 0, "x": 1, "y": 1, "curve": "stepped" },
 					{ "time": 2, "x": 1, "y": 1 }
 				]
 			},

@@ -107,7 +107,7 @@ export let view = (() => {
             y = 95,
             container = model.group('panel')
         }) {
-            let spinButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'spinOn.png', 'spin.png', 'spinOn.png', null, container);
+            let spinButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'spinHover.png', 'spin.png', 'spinOn.png', null, container);
             spinButtonDesk.anchor.set(0.5);
             model.el('spinButtonDesk', spinButtonDesk);
 
@@ -120,7 +120,7 @@ export let view = (() => {
             x = model.el('spinButtonDesk').x - 125,
             y = 95
         }) {
-            let autoButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'autoOn.png', 'auto.png', 'autoOn.png', null, container);
+            let autoButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'autoHover.png', 'auto.png', 'autoOn.png', null, container);
             autoButtonDesk.anchor.set(0.5);
             model.el('autoButtonDesk', autoButtonDesk);
             return autoButtonDesk;
@@ -132,7 +132,7 @@ export let view = (() => {
             x = model.el('spinButtonDesk').x + 125,
             y = 95
         }) {
-            let maxBetButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'maxBetOn.png', 'maxBet.png', 'maxBetOn.png', null, container);
+            let maxBetButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'maxBetHover.png', 'maxBet.png', 'maxBetOn.png', null, container);
             maxBetButtonDesk.anchor.set(0.5);
             model.el('maxBetButtonDesk', maxBetButtonDesk);
             return maxBetButtonDesk;
@@ -144,7 +144,7 @@ export let view = (() => {
             y = 95,
             container = model.group('panel')
         }) {
-            let stopButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'stopOn.png', 'stop.png', 'stopOn.png', null, container);
+            let stopButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'stopHover.png', 'stop.png', 'stopOn.png', null, container);
             stopButtonDesk.anchor.set(0.5);
             stopButtonDesk.visible = false;
             model.el('stopButtonDesk', stopButtonDesk);

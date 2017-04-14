@@ -55,14 +55,14 @@ export class Preload {
         game.load.audio('initFon', 'logoAmbient.mp3');
         game.load.audio('baraban', 'baraban.mp3');
         game.load.audio('buttonClick', 'buttonClick.mp3');
-        game.load.audio('startPerehod', 'startPerehod.mp3');
-        game.load.audio('finishPerehod', 'finishPerehod.mp3');
+        game.load.audio('startPerehod', 'transition.mp3');
+        game.load.audio('finishPerehod', 'transition.mp3');
         game.load.audio('lineWin', 'lineWin.mp3');
         game.load.audio('lineWin2', 'lineWin2.mp3');
-        game.load.audio('cat', 'cat.mp3');
-        game.load.audio('gun', 'gun.mp3');
-        game.load.audio('gaz', 'gaz.mp3');
-        game.load.audio('burstConfetti', 'burstConfetti.mp3');
+        // game.load.audio('cat', 'cat.mp3');
+        // game.load.audio('gun', 'gun.mp3');
+        // game.load.audio('gaz', 'gaz.mp3');
+        // game.load.audio('burstConfetti', 'burstConfetti.mp3');
 
     }
 
@@ -87,7 +87,6 @@ export class Preload {
         game.load.image('greenRoll', 'game/greenRoll.png');
         game.load.image('darkness', 'game/darkness.png');
         game.load.image('closeButton', 'other/closeButton.png');
-        game.load.image('arrow', 'other/arrow.png');
         game.load.image('infoTableBg', 'other/infoTableBg.png');
         game.load.atlasJSONArray('infoTable', 'other/infoTable.png', 'other/infoTable.json');
         game.load.atlasJSONArray('infoMarker', 'other/infoMarker.png', 'other/infoMarker.json');
@@ -100,9 +99,11 @@ export class Preload {
             game.load.image('panel', 'game/panel.png');
             game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
             game.load.atlasJSONArray('deskButtonsAnim', 'desk_buttons/deskButtonsAnim.png', 'desk_buttons/deskButtonsAnim.json');
+            game.load.atlasJSONArray('arrow', 'other/arrow.png', 'other/arrow.json');
         }
         if (model.mobile) {
             game.load.atlasJSONArray('mobileButtons', 'mobile_buttons/mobileButtons.png', 'mobile_buttons/mobileButtons.json');
+            game.load.image('arrow', 'other/arrow.png');
         }
 
         // Glista

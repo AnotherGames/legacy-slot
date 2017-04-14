@@ -346,9 +346,11 @@ export let view = (() => {
             gameMachine = model.el('gameMachine')
         }) {
             if (model.mobile) return;
+
             if (model.state('fs')) {
                 container = model.group('panelFS');
             }
+            let bigLightArr = [];
             let y = [46, 100, 150, 50, 100, 150];
             for (let i = 0; i < 6; i++) {
                 let light = game.add.sprite(25, y[i], 'light', null, container);
@@ -364,7 +366,34 @@ export let view = (() => {
                 } else {
                     light.animations.play('red');
                 }
+                bigLightArr.push(light);
             }
+            model.el('bigLightArr', bigLightArr);
+        },
+
+        changeBigLight: function ({
+            game = model.el('game'),
+            bigLightArr = model.el('bigLightArr')
+        }) {
+            if (model.mobile) return;
+
+            console.log(bigLightArr);
+
+            let count = 0;
+            let bigLightTimer = game.time.events.loop(500, () => {
+                count++;
+
+                if (count % 2) {
+                    bigLightArr.forEach((light) => {
+                        light.animations.play('red');
+                    });
+                } else {
+                    bigLightArr.forEach((light) => {
+                        light.animations.play('green');
+                    });
+                }
+            });
+            model.el('bigLightTimer', bigLightTimer);
         },
 
         addTwinkleLight: function ({
@@ -532,22 +561,13 @@ export let view = (() => {
             model.el('twinkleTimer', twinkleTimer);
         },
 
-        destroyLightToggle: function ({
-            game = model.el('game'),
-            twinkleContainer = model.group('twinkle'),
-            twinkleDownContainer = model.group('twinkleDown')
-        }) {
-            game.time.events.remove(model.el('twinkleTimer'));
-            twinkleContainer.alpha = 1;
-            twinkleDownContainer.alpha = 0;
-        },
-
         lightPlay: function ({
             game = model.el('game'),
             leftLightArr = model.el('leftLightArr'),
             rightLightArr = model.el('rightLightArr'),
             win = true
         }) {
+
             let greenAnim, redAnim;
             if (win) {
                 greenAnim = 'greenBigWin';
@@ -578,19 +598,19 @@ export let view = (() => {
             game = model.el('game'),
             leftDownLightArr = model.el('leftDownLightArr'),
             rightDownLightArr = model.el('rightDownLightArr'),
-            color = 'green',
+            anim = null,
             twinkleContainer = model.group('twinkle'),
             twinkleDownContainer = model.group('twinkleDown')
         }) {
-            console.log(' i am here');
             twinkleContainer.alpha = 0;
             twinkleDownContainer.alpha = 1;
             leftDownLightArr.forEach((light, index) => {
-                light.animations.play(color);
+                light.animations.play(anim);
             });
-            leftDownLightArr.forEach((light, index) => {
-                light.animations.play(color);
+            rightDownLightArr.forEach((light, index) => {
+                light.animations.play(anim);
             });
+            console.log('twinkleDown', twinkleDownContainer);
         },
 
         initPopup: function () {
