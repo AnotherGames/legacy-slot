@@ -83,7 +83,8 @@ export let view = (() => {
         continueText.alpha = 0;
         model.el('continueText', continueText);
 
-        let hitArea = game.add.graphics(0, 0, transitionContainer).beginFill(0xffffff, 0.01).drawRect(0, 0, game.width, game.height);
+        let deltaY = (model.desktop) ? 200 : 0;
+        let hitArea = game.add.graphics(0, 0, transitionContainer).beginFill(0xffffff, 0.01).drawRect(0, 0, game.width, game.height - deltaY);
         model.el('hitArea', hitArea);
     }
 
@@ -194,7 +195,8 @@ export let view = (() => {
         continueText.anchor.set(0.5);
         model.el('continueText', continueText);
 
-        let hitArea = game.add.graphics(0, 0, transitionContainer).beginFill(0xffffff, 0.01).drawRect(0, 0, game.width, game.height);
+        let deltaY = (model.desktop) ? 200 : 100;
+        let hitArea = game.add.graphics(0, 0, transitionContainer).beginFill(0xffffff, 0.01).drawRect(0, 0, game.width, game.height - deltaY);
         model.el('hitArea', hitArea);
 
         transitionContainer.alpha = 0;

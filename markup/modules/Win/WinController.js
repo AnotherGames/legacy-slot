@@ -26,7 +26,7 @@ export let controller = (() => {
         mainView.draw.lightToggle({});
         panelController.drawFsPanel();
         mainView.draw.addBigLight({});
-        game.time.events.add(5000, () => {
+        game.time.events.add(2000, () => {
             mainView.draw.changeBigLight({});
         });
         fsController.init(model.data('rollResponse').FreeSpinsLeft);
