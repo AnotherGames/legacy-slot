@@ -18,7 +18,7 @@ export class Boot {
                 model.initStates(initData);
                 model.initSettings(initData.Settings);
                 model.initBalance(initData.Balance);
-                model.initSaved(initData.Saved);
+                // model.initSaved(initData.Saved);
             })
             .catch((err) => {
                 console.error(err);

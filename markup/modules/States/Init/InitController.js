@@ -11,7 +11,7 @@ export class Init {
         let game = model.el('game');
         game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-        soundController.music.playMusic('initFon');
+        // soundController.music.playMusic('initFon');
 
         // При выходе из вкладки анимации будут останавливаться
         game.stage.disableVisibilityChange = true;

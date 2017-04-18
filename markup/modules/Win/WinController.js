@@ -54,8 +54,10 @@ export let controller = (() => {
                 panelController.handle.stop();
             }
 
-            mainView.draw.addBigLight({});
-            transitionView.fsStart();
+            game.time.events.add(2000, () => {
+                mainView.draw.addBigLight({});
+                transitionView.fsStart();
+            });
         }
     }
 
@@ -136,11 +138,11 @@ export let controller = (() => {
         // Для каждой линии проигрываем символы, глисты и номерки
         let winElements = { number: [], amount: [] };
         winLines.forEach((winLine) => {
-            if (winLine.Line === -1
-            && winLine.Symbol === '11'
-            && model.state('fs')) {
-                fsController.changeMulti();
-            }
+            // if (winLine.Line === -1
+            // && winLine.Symbol === '11'
+            // && model.state('fs')) {
+            //     fsController.changeMulti();
+            // }
             view.draw.WinNumber({number: winLine.Line});
             winElements.number.push(winLine.Line);
             winElements.amount.push(winLine.Count);

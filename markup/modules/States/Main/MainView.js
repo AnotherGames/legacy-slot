@@ -610,7 +610,6 @@ export let view = (() => {
             rightDownLightArr.forEach((light, index) => {
                 light.animations.play(anim);
             });
-            console.log('twinkleDown', twinkleDownContainer);
         },
 
         initPopup: function () {

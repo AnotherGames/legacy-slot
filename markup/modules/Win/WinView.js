@@ -163,7 +163,8 @@ export let view = (() => {
         findElements: function ({
             number,
             amount,
-            game = model.el('game')
+            game = model.el('game'),
+            finalScale = (model.desktop) ? 1.3 : 1.5
         }) {
             let lines = model.data('lines');
             let upWheels = model.el('upWheels');
@@ -186,6 +187,30 @@ export let view = (() => {
                     }
                 } else {
                     game.time.events.remove(model.data('oneAfterAnotherTimer'));
+
+                    // For scatter anim
+
+                    upWheels.forEach((wheel) => {
+                        wheel.forEach((upEl, elIndex) => {
+                            if (upEl.active == 9) {
+                                upEl.show();
+                                upEl.win();
+                                draw.scaleJumping({
+                                    el: upEl,
+                                    start: 0.3,
+                                    finish: finalScale
+                                });
+                            }
+                        });
+                    });
+
+                    wheels.forEach((wheel) => {
+                        wheel.forEach((el) => {
+                            if (el.active == 9) {
+                                el.hide(0);
+                            }
+                        });
+                    });
                 }
             });
             return result;
@@ -304,7 +329,7 @@ export let view = (() => {
                     wheel.elements.forEach((element, elementIndex) => {
                         let name = parseInt(element.sprites[element.active - 1]
                             .animations.currentAnim.name);
-                        if (name === 10) {
+                        if (name === 9) {
                             if (wheelIndex > lastWheel) {
                                 lastWheel = wheelIndex;
                                 lastElement = elementIndex;
