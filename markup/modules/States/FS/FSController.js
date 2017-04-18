@@ -18,8 +18,8 @@ export let controller = (() => {
         model.updateBalance({endFS: true});
 
         transitionView.fsFinish();
-        // soundController.music.stopMusic('fsFon');
-        // soundController.music.playMusic('fon');
+        soundController.music.stopMusic('fsFon');
+        soundController.music.playMusic('fon');
 
     }
 

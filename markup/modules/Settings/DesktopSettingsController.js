@@ -36,11 +36,11 @@ export let controller = (function () {
         $('#checkMusic').on('change', function () {
             model.state('music', this.checked);
             model.cookie('music', this.checked);
-            // if(model.state('music')){
-            //     soundController.music.playMusic('fon');
-            // } else {
-            //     soundController.music.pauseMusic('fon');
-            // }
+            if(model.state('music')){
+                soundController.music.playMusic('fon');
+            } else {
+                soundController.music.pauseMusic('fon');
+            }
         });
         $('#fastSpin').on('change', function () {
             model.state('fastRoll', this.checked);

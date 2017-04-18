@@ -43,7 +43,7 @@ export let view = (() => {
         transitionContainer.alpha = 1;
 
         // Изменяем музыку
-        // soundController.music.stopMusic('fon');
+        soundController.music.stopMusic('fon');
         soundController.sound.playSound({sound: 'startPerehod'});
 
 
@@ -120,7 +120,7 @@ export let view = (() => {
 
     function transitionInFs() {
         soundController.sound.stopSound({sound: 'startPerehod'});
-        // soundController.music.playMusic('fsFon');
+        soundController.music.playMusic('fsFon');
         model.state('transitionScreen', false);
 
         let game = model.el('game');
@@ -161,7 +161,7 @@ export let view = (() => {
         let game = model.el('game');
         let transitionContainer = model.group('transition');
         // Изменяем музыку
-        // soundController.music.stopMusic('fsFon');
+        soundController.music.stopMusic('fsFon');
         soundController.sound.playSound({sound: 'finishPerehod'});
 
         let darknessBG = model.el('darknessBG');
