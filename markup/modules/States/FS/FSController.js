@@ -19,7 +19,7 @@ export let controller = (() => {
 
         transitionView.fsFinish();
         soundController.music.stopMusic('fsFon');
-        soundController.music.playMusic('fon');
+        soundController.music.playMusic('fon', 0.4);
 
     }
 

@@ -119,8 +119,8 @@ export let view = (() => {
 
 
     function transitionInFs() {
-        soundController.sound.stopSound({sound: 'startPerehod'});
-        soundController.music.playMusic('fsFon');
+        soundController.sound.stopSound('startPerehod');
+        soundController.music.playMusic('fsFon', 0.4);
         model.state('transitionScreen', false);
 
         let game = model.el('game');
@@ -232,7 +232,7 @@ export let view = (() => {
         let game = model.el('game');
         let winText = model.el('winText');
         let winCount = model.el('winCount');
-        soundController.sound.stopSound({sound: 'finishPerehod'});
+        soundController.sound.stopSound('finishPerehod');
         let transitionContainer = model.group('transition');
         game.add.tween(transitionContainer).to({alpha: 0}, 500, 'Linear', true)
             .onComplete.add(() => {

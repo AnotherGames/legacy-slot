@@ -47,13 +47,12 @@ export class Main {
         // Выход из темноты
         game.camera.flash(0x000000, 500);
 
-        soundController.music.stopMusic('finishPerehod');
+        soundController.sound.stopSound('finishPerehod');
         soundController.music.stopMusic('fsFon');
         soundController.music.stopMusic('initFon');
         // Играем фоновую музыку
 
-        soundController.music.playMusic('fon');
-        // soundController.music.changeMusicVolume('fon', 0.2);
+        soundController.music.playMusic('fon', 0.4);
 
         // Отрисовуем основной контейнер
         mainView.draw.mainBG({});
