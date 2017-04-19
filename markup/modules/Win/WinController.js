@@ -45,13 +45,14 @@ export let controller = (() => {
         let nextMode = data.NextMode;
 
         if (mode === 'root' && nextMode.indexOf('fsBonus') !== -1 ) {
+	        model.state('buttons:locked', true)
             console.warn('fs start!');
 
             // Остонавливаем автоплей если был
             if (model.state('autoplay:start')) {
                 model.data('remainAutoCount', model.data('autoplay:count'));
-                // autoplayController.stop();
-                panelController.handle.stop();
+                autoplayController.stop();
+                // panelController.handle.stop();
             }
 
             game.time.events.add(2000, () => {
@@ -138,11 +139,6 @@ export let controller = (() => {
         // Для каждой линии проигрываем символы, глисты и номерки
         let winElements = { number: [], amount: [] };
         winLines.forEach((winLine) => {
-            // if (winLine.Line === -1
-            // && winLine.Symbol === '11'
-            // && model.state('fs')) {
-            //     fsController.changeMulti();
-            // }
             view.draw.WinNumber({number: winLine.Line});
             winElements.number.push(winLine.Line);
             winElements.amount.push(winLine.Count);
