@@ -18,10 +18,10 @@
 },
 {
 	"filename": "3_en.png",
-	"frame": {"x":1026,"y":708,"w":970,"h":326},
+	"frame": {"x":1026,"y":708,"w":971,"h":324},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":59,"y":68,"w":970,"h":326},
+	"spriteSourceSize": {"x":59,"y":68,"w":971,"h":324},
 	"sourceSize": {"w":1126,"h":589}
 },
 {
@@ -55,6 +55,6 @@
 	"format": "RGBA8888",
 	"size": {"w":2048,"h":2048},
 	"scale": "0.7",
-	"smartupdate": "$TexturePacker:SmartUpdate:511fcb974c881fbb0328cb6aa9c31609:e72d429e5ddac28fff734685d7587e54:dc52dfd3ccba5d3655fff82b34c4d013$"
+	"smartupdate": "$TexturePacker:SmartUpdate:18abb3e2805e36fb0b7ba53504d546be:e44a19ad3e5095200ff63fd8da103269:dc52dfd3ccba5d3655fff82b34c4d013$"
 }
 }
