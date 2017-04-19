@@ -52,7 +52,6 @@ export let controller = (() => {
             if (model.state('autoplay:start')) {
                 model.data('remainAutoCount', model.data('autoplay:count'));
                 autoplayController.stop();
-                // panelController.handle.stop();
             }
 
             game.time.events.add(2000, () => {

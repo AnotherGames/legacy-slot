@@ -20,7 +20,6 @@ export let controller = (() => {
                 mainView.draw.showPopup({message: 'You have low balance on your account', balance: true});
                 return;
             }
-	        console.log(model.state('buttons:locked'));
 
             if (model.state('buttons:locked')) {
                 return;

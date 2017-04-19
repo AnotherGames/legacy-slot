@@ -52,7 +52,7 @@ export class Main {
         soundController.music.stopMusic('initFon');
         // Играем фоновую музыку
 
-        soundController.music.playMusic('fon', 0.4);
+        soundController.music.playMusic('fon', 0.1);
 
         // Отрисовуем основной контейнер
         mainView.draw.mainBG({});

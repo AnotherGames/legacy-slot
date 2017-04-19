@@ -129,7 +129,6 @@ export let controller = (() => {
             view.hide.Overlay({});
 
             info.open();
-            // footerController.handle.openInfo();
         },
         closeRules: function () {
             if (model.state('settings') === 'close') return;
@@ -137,7 +136,6 @@ export let controller = (() => {
             model.state('settings', 'close');
 
             info.handleClose();
-            // footerController.handle.closeInfo();
         },
         showHistory: function () {
             soundController.sound.playSound({sound : 'buttonClick'});

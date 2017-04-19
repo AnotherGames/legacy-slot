@@ -120,7 +120,7 @@ export let view = (() => {
 
     function transitionInFs() {
         soundController.sound.stopSound('startPerehod');
-        soundController.music.playMusic('fsFon', 0.4);
+        soundController.music.playMusic('fsFon', 0.1);
         model.state('transitionScreen', false);
 
         let game = model.el('game');
