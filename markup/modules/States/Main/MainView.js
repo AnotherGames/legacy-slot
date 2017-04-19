@@ -191,17 +191,27 @@ export let view = (() => {
         showBlurBg: function ({
             game = model.el('game'),
             container = model.group('blurBG'),
-            time = 300
+            time = 0
         }) {
-            game.add.tween(container).to({alpha: 1}, time, 'Linear', true);
+            if (model.state('fastRoll')) {
+                time = config.wheel.roll.fastTime / 2;
+            } else {
+                time = config.wheel.roll.time / 2;
+            }
+            game.add.tween(container).to({alpha: 1}, time, Phaser.Easing.Cubic.In, true);
         },
 
         hideBlurBg: function ({
             game = model.el('game'),
             container = model.group('blurBG'),
-            time = 200
+            time = 0
         }) {
-            game.add.tween(container).to({alpha: 0}, 200, 'Linear', true);
+            if (model.state('fastRoll')) {
+                time = config.wheel.roll.fastTime / 2;
+            } else {
+                time = config.wheel.roll.time / 2;
+            }
+            game.add.tween(container).to({alpha: 0}, time, Phaser.Easing.Cubic.Out, true);
         },
 
         showFlag: function ({
