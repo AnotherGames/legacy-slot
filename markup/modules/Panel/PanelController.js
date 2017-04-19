@@ -220,7 +220,8 @@ export let controller = (() => {
             model,
             desktopCloseButtonMargin: 1,
             desktopBGScale: 1.0,
-            desktopTableScale: 1.1,
+            desktopTableScale: 1.5
+            ,
             controlsDeltaY: 10,
             hover: true
         });

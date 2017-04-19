@@ -88,17 +88,17 @@ export class Preload {
         game.load.atlasJSONArray('infoMarker', 'other/infoMarker.png', 'other/infoMarker.json');
         game.load.image('winLine', 'win/winLine.png');
         game.load.image('winTotal', 'win/winTotal.png');
-        game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
         game.load.atlasJSONArray('footerButtons', 'footer/footerButtons.png', 'footer/footerButtons.json');
-        game.load.bitmapFont('numbersFont', 'numbers/numbers.png', 'numbers/numbers.xml');
-        if (model.desktop) {
-            game.load.image('panel', 'game/panel.png');
-            game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
-            game.load.atlasJSONArray('deskButtonsAnim', 'desk_buttons/deskButtonsAnim.png', 'desk_buttons/deskButtonsAnim.json');
-            game.load.atlasJSONArray('arrow', 'other/arrow.png', 'other/arrow.json');
-        }
-        if (model.mobile) {
-            game.load.atlasJSONArray('mobileButtons', 'mobile_buttons/mobileButtons.png', 'mobile_buttons/mobileButtons.json');
+	    game.load.bitmapFont('numbersFont', 'numbers/numbers.png', 'numbers/numbers.xml');
+	    if (model.desktop) {
+		    game.load.image('panel', 'game/panel.png');
+		    game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
+		    game.load.atlasJSONArray('deskButtonsAnim', 'desk_buttons/deskButtonsAnim.png', 'desk_buttons/deskButtonsAnim.json');
+		    game.load.atlasJSONArray('arrow', 'other/arrow.png', 'other/arrow.json');
+	    }
+	    if (model.mobile) {
+		    game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
+		    game.load.atlasJSONArray('mobileButtons', 'mobile_buttons/mobileButtons.png', 'mobile_buttons/mobileButtons.json');
             game.load.image('arrow', 'other/arrow.png');
         }
 
