@@ -281,13 +281,15 @@ export class FS {
     }
 
     checkSavedFS() {
-        if (model.data('savedFS').state === 'Freespin') {
-            let saved = model.data('savedFS');
-            this.fsCount = saved.fsCount;
-            this.fsMulti = saved.fsMulti;
-            this.fsLevel = saved.fsLevel;
-            model.data('savedFS', null);
-            model.data('fsMulti', this.fsMulti);
+        if (model.data('savedFS')) {
+	        if (model.data('savedFS').state === 'Freespin') {
+		        let saved = model.data('savedFS');
+		        this.fsCount = saved.fsCount;
+		        this.fsMulti = saved.fsMulti;
+		        this.fsLevel = saved.fsLevel;
+		        model.data('savedFS', null);
+		        model.data('fsMulti', this.fsMulti);
+	        }
         } else {
             this.fsCount = 15;
             this.fsMulti = 2;
