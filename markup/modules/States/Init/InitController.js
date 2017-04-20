@@ -83,7 +83,10 @@ export class Init {
                     break;
                 case 'Freespin': game.state.start('FS');
                     break;
-                default: game.state.start('Main');
+                default: {
+                    model.data('savedFS', null)
+                    game.state.start('Main');
+                }
                     break;
             }
         });
