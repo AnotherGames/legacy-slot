@@ -150,24 +150,57 @@ export let model = (() => {
 
     }
 
-    function initSaved(saved) {
-        if (!saved) return;
+	function getIndex(arr, findValue) {
+		let current = 0;
+		arr.filter((value, index) => {
+			if (value == findValue)
+				current = index;
+		})
+		return current;
+	}
 
-        let fsCount = +saved.RemainSpins + 1;
-        let fsLevel = saved.Multiplier.MultiplierStep;
-        let fsMulti = saved.Multiplier.MultiplierValue;
-        let totalWin = saved.CurrentTotalWinCoins;
-        let winCash = saved.CurrentTotalWinCents;
+	function initFreespin(data) {
+		let saved  = data.Saved;
+		let fsCount = +saved.RemainSpins + 1;
+		let fsLevel = saved.Multiplier.MultiplierStep;
+		let fsMulti = saved.Multiplier.MultiplierValue;
+		let totalWin = saved.CurrentTotalWinCoins;
+		let winCash = saved.CurrentTotalWinCents;
+		let denomination = saved.LastDenomination;
+		let betLevel = saved.LastBetLevel;
+		let state = saved.ResultType;
 
-        model.balance('winCash', winCash / 100);
-        model.balance('totalWin', totalWin);
-        model.data('rollResponse', {NextMode: 'fsBonus'});
-        model.data('savedFS', {
-            fsCount,
-            fsLevel,
-            fsMulti
-        });
-    }
+		model.balance('betValue', betLevel);
+		model.balance('currentBetStep', getIndex(model.balance('betSteps'), betLevel));
+		model.balance('coinValue', denomination / 100);
+		model.balance('currentCoinStep', getIndex(model.balance('coinSteps'), denomination / 100));
+
+		model.balance('betCash', data.Lines.length * betLevel * denomination / 100);
+		model.balance('winCash', winCash / 100);
+		model.balance('totalWin', totalWin);
+		model.data('rollResponse', {NextMode: 'fsBonus'});
+		model.data('savedFS', {
+			fsCount,
+			fsLevel,
+			fsMulti,
+			state
+		});
+	}
+
+	function initMain() {
+		model.data('savedFS', {	state: 'Main' });
+	}
+
+	function initSaved(data) {
+		let state = data.Saved.ResultType;
+
+		switch(state) {
+			case 'Freespin': initFreespin(data);
+				break;
+			default: initMain();
+				break;
+		}
+	}
 
     function initBalance(initData) {
 

@@ -12,12 +12,12 @@ export class Boot {
             fsBonus: 'monsfs4'
         });
 
-        request.send('Initialise', 'fsBonus')
+        request.send('Initialise', 'normal')
             .then((initData) => {
                 model.initStates(initData);
                 model.initSettings(initData.Settings);
                 model.initBalance(initData.Balance);
-                model.initSaved(initData.Saved);
+                model.initSaved(initData);
             })
             .catch((err) => {
                 console.error(err);
