@@ -155,45 +155,82 @@ export let model = (() => {
 
     }
 
-    function initSaved(saved) {
-        if (!saved) return;
+	function initDoors(data) {
+		let saved = data.Saved;
+		let PrevValues = saved.PrevValues;
+		let state = saved.ResultType;
+		let winCash = 0;
+		let winCoin = 0;
+		let totalWin = 0;
+		let denomination = saved.LastDenomination;
+		let betLevel = saved.LastBetLevel;
 
-        if (saved.ResultType == 'Doors') {
-            let doorsValue = saved.OldValues;
-            let winCash = 0;
-            let totalWin = 0;
-            let bet = 10 //пока не приходит от сервера
-            let state = saved.ResultType;
+		if (PrevValues.length !== 0) {
+			winCash = PrevValues[PrevValues.length - 1].WinCents;
+			winCoin = PrevValues[PrevValues.length - 1].WinCoins;
+			totalWin = PrevValues[PrevValues.length - 1].TotalWinCoins;
+		}
+		model.balance('betValue', betLevel);
+		model.balance('currentBetStep', getIndex(model.balance('betSteps'), betLevel));
+		model.balance('coinValue', denomination / 100);
+		model.balance('currentCoinStep', getIndex(model.balance('coinSteps'), denomination / 100));
 
-            doorsValue.forEach((value) => {
-                winCash += bet * +value.substring(1)
-            })
-            model.balance('winCash', winCash / 100);
-            model.balance('totalWin', winCash);
-            model.data('rollResponse', {NextDoorNumber: saved.NextDoorNumber});
-            model.data('savedFS', {
-                doorsValue,
-                state
-            });
-        } else {
-            let fsCount = +saved.RemainSpins + 1;
-            let fsLevel = saved.Multiplier.MultiplierStep;
-            let fsMulti = saved.Multiplier.MultiplierValue;
-            let totalWin = saved.CurrentTotalWinCoins;
-            let winCash = saved.CurrentTotalWinCents;
-            let state = saved.ResultType;
+		model.balance('betCash', data.Lines.length * betLevel * denomination / 100);
+		model.balance('winCash', winCash / 100);
+		model.balance('totalWin', totalWin);
+		model.balance('fsWin', winCoin);
 
-            model.balance('winCash', winCash / 100);
-            model.balance('totalWin', totalWin);
-            model.data('rollResponse', {NextMode: 'fsBonus'});
-            model.data('savedFS', {
-                fsCount,
-                fsLevel,
-                fsMulti,
-                state
-            });
-        }
-    }
+		model.data('rollResponse', {NextDoorNumber: saved.NextDoorNumber});
+		model.data('savedFS', {
+			PrevValues,
+			state
+		});
+	}
+
+	function initFreespin(data) {
+		let saved  = data.Saved;
+		let fsCount = +saved.RemainSpins + 1;
+		let fsLevel = saved.Multiplier.MultiplierStep;
+		let fsMulti = saved.Multiplier.MultiplierValue;
+		let totalWin = saved.CurrentTotalWinCoins;
+		let winCash = saved.CurrentTotalWinCents;
+		let denomination = saved.LastDenomination;
+		let betLevel = saved.LastBetLevel;
+		let state = saved.ResultType;
+
+		model.balance('betValue', betLevel);
+		model.balance('currentBetStep', getIndex(model.balance('betSteps'), betLevel));
+		model.balance('coinValue', denomination / 100);
+		model.balance('currentCoinStep', getIndex(model.balance('coinSteps'), denomination / 100));
+
+		model.balance('betCash', data.Lines.length * betLevel * denomination / 100);
+		model.balance('winCash', winCash / 100);
+		model.balance('totalWin', totalWin);
+		model.data('rollResponse', {NextMode: 'fsBonus'});
+		model.data('savedFS', {
+			fsCount,
+			fsLevel,
+			fsMulti,
+			state
+		});
+	}
+
+	function initMain() {
+		model.data('savedFS', {	state: 'Main' });
+	}
+
+	function initSaved(data) {
+		let state = data.Saved.ResultType;
+
+		switch(state) {
+			case 'Doors': initDoors(data);
+				break;
+			case 'Freespin': initFreespin(data);
+				break;
+			default: initMain();
+				break;
+		}
+	}
 
     function initBalance(initData) {
 

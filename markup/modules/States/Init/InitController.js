@@ -78,16 +78,14 @@ export class Init {
         fakeButton.removeEventListener('click', this.stateHandler);
 
         game.camera.onFadeComplete.add(() => {
-
-            if (model.data('savedFS')) {
-                if(model.data('savedFS').state == 'Doors') {
-                    game.state.start('Bonus');
-                } else {
-                    game.state.start('FS');
-                }
-            } else {
-                game.state.start('Main');
-            }
+	        switch (model.data('savedFS').state) {
+		        case 'Doors': game.state.start('Bonus');
+			        break;
+		        case 'Freespin': game.state.start('FS');
+			        break;
+		        default: game.state.start('Main');
+			        break;
+	        }
         });
 
         game.camera.fade(0x000000, 500);

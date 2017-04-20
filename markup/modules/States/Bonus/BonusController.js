@@ -132,9 +132,11 @@ export class Bonus {
         balanceView.draw.CashBalance({});
         model.updateBalance({ startBonus: true });
 
-        if (model.data('savedFS')) {
-            this.drawRecoveredPanel();
-        }
+	    if (model.data('savedFS')) {
+		    if (model.data('savedFS').state === 'Doors') {
+			    this.drawRecoveredPanel();
+		    }
+	    }
 
     }
 
