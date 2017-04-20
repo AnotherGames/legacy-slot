@@ -228,7 +228,7 @@ export class FS {
     }
 
     checkSavedFS() {
-        if (model.data('savedFS')) {
+        if (model.data('savedFS').state === 'Freespin') {
             let saved = model.data('savedFS');
             this.fsCount = saved.fsCount;
             this.fsMulti = saved.fsMulti;
