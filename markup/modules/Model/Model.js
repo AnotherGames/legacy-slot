@@ -1,412 +1,469 @@
-import { controller as balanceController } from 'modules/Balance/BalanceController';
-import { controller as setBetController } from 'modules/Menu/SetBet/MenuSetBetController';
-import { controller as soundController } from '../../../Info/SoundController';
+import {controller as balanceController} from "modules/Balance/BalanceController";
+import {controller as setBetController} from "modules/Menu/SetBet/MenuSetBetController";
+import {controller as soundController} from "../../../Info/SoundController";
 
 export let model = (() => {
 
-    let _data = {},
-        _balance = {},
-        _state = {},
-        _group = {},
-        _el = {},
-        _sound = {};
+	let _data = {},
+		_balance = {},
+		_state = {},
+		_group = {},
+		_el = {},
+		_sound = {};
 
-    function _getData(key, value, obj) {
-        if (typeof value != 'undefined') {
-            obj[key] = value;
-        } else {
-            return obj[key];
-        }
-    }
+	function _getData(key, value, obj) {
+		if (typeof value != 'undefined') {
+			obj[key] = value;
+		} else {
+			return obj[key];
+		}
+	}
 
-    function _getCookie(cookieName, value, exdays) {
-        if (typeof value != 'undefined') {
-            let exdate = new Date();
-            exdate.setDate(exdate.getDate() + exdays);
+	function _getCookie(cookieName, value, exdays) {
+		if (typeof value != 'undefined') {
+			let exdate = new Date();
+			exdate.setDate(exdate.getDate() + exdays);
 
-            let cookieValue = escape(value) + ((exdays == null) ? '' : `; expires=${exdate.toUTCString()}`);
-            document.cookie = `${cookieName}=${cookieValue}`;
-        } else {
-            let i, x, y, ARRcookies = document.cookie.split(';');
+			let cookieValue = escape(value) + ((exdays == null) ? '' : `; expires=${exdate.toUTCString()}`);
+			document.cookie = `${cookieName}=${cookieValue}`;
+		} else {
+			let i, x, y, ARRcookies = document.cookie.split(';');
 
-            for (i = 0; i < ARRcookies.length; i++) {
-                x = ARRcookies[i].substr(0, ARRcookies[i].indexOf('='));
-                y = ARRcookies[i].substr(ARRcookies[i].indexOf('=') + 1);
-                x = x.replace(/^\s+|\s+$/g, '');
+			for (i = 0; i < ARRcookies.length; i++) {
+				x = ARRcookies[i].substr(0, ARRcookies[i].indexOf('='));
+				y = ARRcookies[i].substr(ARRcookies[i].indexOf('=') + 1);
+				x = x.replace(/^\s+|\s+$/g, '');
 
-                if (x == cookieName) {
-                    return unescape(y);
-                }
-            }
-        }
+				if (x == cookieName) {
+					return unescape(y);
+				}
+			}
+		}
 
-    }
+	}
 
-    function data(key, value) {
-        return _getData(key, value, _data);
-    }
-    function state(key, value) {
-        return _getData(key, value, _state);
-    }
-    function balance(key, value) {
-        return _getData(key, value, _balance);
-    }
-    function group(key, value) {
-        return _getData(key, value, _group);
-    }
-    function el(key, value) {
-        return _getData(key, value, _el);
-    }
-    function sound(key, value) {
-        return _getData(key, value, _sound);
-    }
-    function log() {
-        console.log(_data, _balance, _state, _el, _group, _sound);
-    }
-    function cookie(cookieName, cookieValue, exdays) {
-        return _getCookie(cookieName, cookieValue, exdays);
-    }
+	function data(key, value) {
+		return _getData(key, value, _data);
+	}
 
-    function _checkCurrencySymbol(currency) {
-        switch (currency) {
-            case 'USD':
-                return '$ ';
-            case 'cns':
-                return '$ ';
-            case 'EUR':
-                return '€ ';
-            case 'UAH':
-                return '₴ ';
-            case 'RUB':
-                return '₽ ';
-            default:
-                return `${currency} `;
-        }
-    }
+	function state(key, value) {
+		return _getData(key, value, _state);
+	}
 
-    function initStates(initData) {
+	function balance(key, value) {
+		return _getData(key, value, _balance);
+	}
 
-        model.data('sessionID', initData.SessionID);
-        model.data('lines', initData.Lines);
-        model.data('numberOfLines', initData.Lines.length);
-        model.data('firstScreen', initData.FirstScreen);
+	function group(key, value) {
+		return _getData(key, value, _group);
+	}
 
-        // Autoplay States
-        model.state('autoplay:end', true);
-        model.state('autoplay:start', false);
-        model.state('autoplay:cashUp', false);
-        model.state('autoplay:cashDown', false);
-        model.state('autoplay:cashRoll', false);
-        model.state('autoplay:panelClosed', true);
-        model.data('autoplay:count', 0);
-        model.data('autoplay:startCash', 0);
+	function el(key, value) {
+		return _getData(key, value, _el);
+	}
 
-        // С правой стороны проверки значения, которые должны быть по умолчанию
-        let autoTransititon = (model.cookie('autoTransititon') == 'true') ? true : false;
-        model.state('autoTransititon', autoTransititon);
+	function sound(key, value) {
+		return _getData(key, value, _sound);
+	}
 
-        let fastRoll = (model.cookie('fastRoll') == 'true') ? true : false;
-        model.state('fastRoll', fastRoll);
+	function log() {
+		console.log(_data, _balance, _state, _el, _group, _sound);
+	}
 
-        let soundValue = (model.cookie('sound') == 'false') ? false : true;
-        model.state('sound', soundValue);
+	function cookie(cookieName, cookieValue, exdays) {
+		return _getCookie(cookieName, cookieValue, exdays);
+	}
 
-        let music = (model.cookie('music') == 'false') ? false : true;
-        model.state('music', music);
+	function _checkCurrencySymbol(currency) {
+		switch (currency) {
+			case 'USD':
+				return '$ ';
+			case 'cns':
+				return '$ ';
+			case 'EUR':
+				return '€ ';
+			case 'UAH':
+				return '₴ ';
+			case 'RUB':
+				return '₽ ';
+			default:
+				return `${currency} `;
+		}
+	}
 
-        let isAnimBG = (model.cookie('isAnimBG') == 'false') ? false : true;
-        model.state('isAnimBG', isAnimBG);
+	function initStates(initData) {
 
-        let gameSideLeft = (model.cookie('gameSideLeft') == 'false') ? false : true;
-        model.state('gameSideLeft', gameSideLeft);
+		model.data('sessionID', initData.SessionID);
+		model.data('lines', initData.Lines);
+		model.data('numberOfLines', initData.Lines.length);
+		model.data('firstScreen', initData.FirstScreen);
 
-        let volume = (isFinite(+model.cookie('volume'))) ? Math.abs(model.cookie('volume')) : 100;
-        soundController.volume.setVolume(volume);
+		// Autoplay States
+		model.state('autoplay:end', true);
+		model.state('autoplay:start', false);
+		model.state('autoplay:cashUp', false);
+		model.state('autoplay:cashDown', false);
+		model.state('autoplay:cashRoll', false);
+		model.state('autoplay:panelClosed', true);
+		model.data('autoplay:count', 0);
+		model.data('autoplay:startCash', 0);
 
-        let globalSound = (model.cookie('globalSound') == 'false') ? false : true;
-        model.state('globalSound', globalSound);
-        if (globalSound) {
-            soundController.volume.changeVolume(volume);
-        } else {
-            soundController.volume.changeVolume(0);
-        }
+		// С правой стороны проверки значения, которые должны быть по умолчанию
+		let autoTransititon = (model.cookie('autoTransititon') == 'true') ? true : false;
+		model.state('autoTransititon', autoTransititon);
 
-        model.state('initScreen', true);
-        model.state('ready', true);
-        model.state('firstFS', false);
-        model.state('isAnimations', true);
-        model.state('fs:end', true);
-        model.state('transitionScreen', false);
-        model.state('fs', false);
-        model.state('bonus', false);
-        model.state('infoPanelOpen', false);
-        model.state('menuOpened', false);
-        model.state('isFirstAutoChangeAnimBG', true);
-        model.state('maxFsMultiplier', false);
-        model.state('doorFinish', false);
-        model.data('lastClickedDoor', 0);
-        model.state('fontNotLoaded', true);
-    }
+		let fastRoll = (model.cookie('fastRoll') == 'true') ? true : false;
+		model.state('fastRoll', fastRoll);
 
-    function initSettings() {
+		let soundValue = (model.cookie('sound') == 'false') ? false : true;
+		model.state('sound', soundValue);
 
-    }
+		let music = (model.cookie('music') == 'false') ? false : true;
+		model.state('music', music);
 
-    function initSaved(saved) {
-        if (!saved) return;
+		let isAnimBG = (model.cookie('isAnimBG') == 'false') ? false : true;
+		model.state('isAnimBG', isAnimBG);
 
-        if (saved.ResultType == 'Doors') {
-            let doorsValue = saved.OldValues;
-            let winCash = 0;
-            let totalWin = 0;
-            let bet = 10 //пока не приходит от сервера
-            let state = saved.ResultType;
+		let gameSideLeft = (model.cookie('gameSideLeft') == 'false') ? false : true;
+		model.state('gameSideLeft', gameSideLeft);
 
-            doorsValue.forEach((value) => {
-                winCash += bet * +value.substring(1)
-            })
-            model.balance('winCash', winCash / 100);
-            model.balance('totalWin', winCash);
-            model.data('rollResponse', {NextDoorNumber: saved.NextDoorNumber});
-            model.data('savedFS', {
-                doorsValue,
-                state
-            });
-        } else {
-            let fsCount = +saved.RemainSpins + 1;
-            let fsLevel = saved.Multiplier.MultiplierStep;
-            let fsMulti = saved.Multiplier.MultiplierValue;
-            let totalWin = saved.CurrentTotalWinCoins;
-            let winCash = saved.CurrentTotalWinCents;
-            let state = saved.ResultType;
+		let volume = (isFinite(+model.cookie('volume'))) ? Math.abs(model.cookie('volume')) : 100;
+		soundController.volume.setVolume(volume);
 
-            model.balance('winCash', winCash / 100);
-            model.balance('totalWin', totalWin);
-            model.data('rollResponse', {NextMode: 'fsBonus'});
-            model.data('savedFS', {
-                fsCount,
-                fsLevel,
-                fsMulti,
-                state
-            });
-        }
-    }
+		let globalSound = (model.cookie('globalSound') == 'false') ? false : true;
+		model.state('globalSound', globalSound);
+		if (globalSound) {
+			soundController.volume.changeVolume(volume);
+		} else {
+			soundController.volume.changeVolume(0);
+		}
 
-    function initBalance(initData) {
+		model.state('initScreen', true);
+		model.state('ready', true);
+		model.state('firstFS', false);
+		model.state('isAnimations', true);
+		model.state('fs:end', true);
+		model.state('transitionScreen', false);
+		model.state('fs', false);
+		model.state('bonus', false);
+		model.state('infoPanelOpen', false);
+		model.state('menuOpened', false);
+		model.state('isFirstAutoChangeAnimBG', true);
+		model.state('maxFsMultiplier', false);
+		model.state('doorFinish', false);
+		model.data('lastClickedDoor', 0);
+		model.state('fontNotLoaded', true);
+	}
 
-        model.balance('betSteps', initData.BetLevel);
-        model.balance('currentBetStep', 0);
-        model.balance('betValue', initData.BetLevel[0]);
-        model.balance('betCash', model.data('numberOfLines') * initData.BetLevel[0] * initData.CoinValue[0] / 100);
-        model.balance('betSum', model.data('numberOfLines') * initData.BetLevel[0]);
+	function initSettings() {
 
-        model.balance('coinSteps', initData.CoinValue.map((value) => value / 100));
-        model.balance('currentCoinStep', 0);
-        model.balance('coinValue', initData.CoinValue[0] / 100);
-        model.balance('coinCash', initData.ScoreCents / 100);
-        model.balance('coinSum', initData.ScoreCoins);
+	}
 
-        model.balance('winCash', 0);
-        model.balance('currency', initData.Currency);
-        model.balance('currencySymbol', _checkCurrencySymbol(initData.Currency));
+	function getIndex(arr, findValue) {
+		let current = 0;
+		arr.filter((value, index) => {
+			if (value == findValue)
+				current = index;
+		})
+		return current;
+	}
 
-        model.balance('fsWin', 0);
-        model.balance('totalWin', 0);
+	function initDoors(data) {
+		let saved = data.Saved;
+		let PrevValues = saved.PrevValues;
+		let state = saved.ResultType;
+		let winCash = 0;
+		let winCoin = 0;
+		let totalWin = 0;
+		let denomination = saved.LastDenomination;
+		let betLevel = saved.LastBetLevel;
 
-    }
+		if (PrevValues.length !== 0) {
+			winCash = PrevValues[PrevValues.length - 1].WinCents;
+			winCoin = PrevValues[PrevValues.length - 1].WinCoins;
+			totalWin = PrevValues[PrevValues.length - 1].TotalWinCoins;
+		}
+		model.balance('betValue', betLevel);
+		model.balance('currentBetStep', getIndex(model.balance('betSteps'), betLevel));
+		model.balance('coinValue', denomination / 100);
+		model.balance('currentCoinStep', getIndex(model.balance('coinSteps'), denomination / 100));
 
-    function changeBet({up, down, toMax, toMin}) {
+		model.balance('betCash', data.Lines.length * betLevel * denomination / 100);
+		model.balance('winCash', winCash / 100);
+		model.balance('totalWin', totalWin);
+		model.balance('fsWin', winCoin);
 
-        let betValue = model.balance('betValue');
-        let betSteps = model.balance('betSteps');
-        let currentBetStep = model.balance('currentBetStep');
+		model.data('rollResponse', {NextDoorNumber: saved.NextDoorNumber});
+		model.data('savedFS', {
+			PrevValues,
+			state
+		});
+	}
 
-        if (toMax) {
-            if (currentBetStep == betSteps.length - 1) return false;
-            currentBetStep = betSteps.length - 1;
-        }
-        if (toMin) {
-            if (currentBetStep == 0) return false;
-            currentBetStep = 0;
-        }
-        if (up) {
-            if (currentBetStep == betSteps.length - 1) return false;
-            currentBetStep++;
-        }
-        if (down) {
-            if (currentBetStep == 0) return false;
-            currentBetStep--;
-        }
+	function initFreespin(data) {
+		let saved  = data.Saved;
+		let fsCount = +saved.RemainSpins + 1;
+		let fsLevel = saved.Multiplier.MultiplierStep;
+		let fsMulti = saved.Multiplier.MultiplierValue;
+		let totalWin = saved.CurrentTotalWinCoins;
+		let winCash = saved.CurrentTotalWinCents;
+		let denomination = saved.LastDenomination;
+		let betLevel = saved.LastBetLevel;
+		let state = saved.ResultType;
 
-        betValue = betSteps[currentBetStep];
-        model.balance('currentBetStep', currentBetStep);
-        model.balance('betValue', betValue);
-        updateBalance({bet: true});
-        return betValue;
+		model.balance('betValue', betLevel);
+		model.balance('currentBetStep', getIndex(model.balance('betSteps'), betLevel));
+		model.balance('coinValue', denomination / 100);
+		model.balance('currentCoinStep', getIndex(model.balance('coinSteps'), denomination / 100));
 
-    }
+		model.balance('betCash', data.Lines.length * betLevel * denomination / 100);
+		model.balance('winCash', winCash / 100);
+		model.balance('totalWin', totalWin);
+		model.data('rollResponse', {NextMode: 'fsBonus'});
+		model.data('savedFS', {
+			fsCount,
+			fsLevel,
+			fsMulti,
+			state
+		});
+	}
 
-    function changeCoin({up, down, toMax, toMin}) {
+	function initMain() {
+		model.data('savedFS', {	state: 'Main' });
+	}
 
-        let coinValue = model.balance('coinValue');
-        let betCash = model.balance('betCash');
-        let betSum = model.balance('betSum');
-        let coinSteps = model.balance('coinSteps');
-        let currentCoinStep = model.balance('currentCoinStep');
+	function initSaved(data) {
+		let state = data.Saved.ResultType;
 
-        if (toMax) {
-            if (currentCoinStep == coinSteps.length - 1) return false;
-            currentCoinStep = coinSteps.length - 1;
-        }
-        if (toMin) {
-            if (currentCoinStep == 0) return false;
-            currentCoinStep = 0;
-        }
-        if (up) {
-            if (currentCoinStep == coinSteps.length - 1) return false;
-            currentCoinStep++;
-        }
-        if (down) {
-            if (currentCoinStep == 0) return false;
-            currentCoinStep--;
-        }
+		switch(state) {
+			case 'Doors': initDoors(data);
+				break;
+			case 'Freespin': initFreespin(data);
+				break;
+			default: initMain();
+				break;
+		}
+	}
 
-        coinValue = coinSteps[currentCoinStep];
-        betCash = betSum * coinValue;
-        model.balance('currentCoinStep', currentCoinStep);
-        model.balance('coinValue', coinValue);
-        model.balance('betCash', betCash);
-        updateBalance({coin: true});
-        return coinValue;
+	function initBalance(initData) {
 
-    }
+		model.balance('betSteps', initData.BetLevel);
+		model.balance('currentBetStep', 0);
+		model.balance('betValue', initData.BetLevel[0]);
+		model.balance('betCash', model.data('numberOfLines') * initData.BetLevel[0] * initData.CoinValue[0] / 100);
+		model.balance('betSum', model.data('numberOfLines') * initData.BetLevel[0]);
 
-    function updateBalance({bet, coin, startRoll, endRoll, startFSRoll, endFSRoll, startFS, endFS, startBonus, endBonus, startBonusRoll}) {
+		model.balance('coinSteps', initData.CoinValue.map((value) => value / 100));
+		model.balance('currentCoinStep', 0);
+		model.balance('coinValue', initData.CoinValue[0] / 100);
+		model.balance('coinCash', initData.ScoreCents / 100);
+		model.balance('coinSum', initData.ScoreCoins);
 
-        if (bet) {
-            let betValue = model.balance('betValue');
-            let coinValue = model.balance('coinValue');
+		model.balance('winCash', 0);
+		model.balance('currency', initData.Currency);
+		model.balance('currencySymbol', _checkCurrencySymbol(initData.Currency));
 
-            let betSum = betValue * model.data('numberOfLines');
-            let betCash = betValue * model.data('numberOfLines') * coinValue;
+		model.balance('fsWin', 0);
+		model.balance('totalWin', 0);
 
-            model.balance('betSum', betSum);
-            model.balance('betCash', betCash);
-        }
-        if (coin) {
-            let coinValue = model.balance('coinValue');
-            let coinCash = model.balance('coinCash');
+	}
 
-            let coinSum = Math.floor(coinCash / coinValue);
+	function changeBet({up, down, toMax, toMin}) {
 
-            model.balance('coinSum', coinSum);
-        }
-        if (startRoll) {
-            let coinSum = model.balance('coinSum');
-            let betSum = model.balance('betSum');
-            let coinCash = model.balance('coinCash');
-            let betCash = model.balance('betCash');
+		let betValue = model.balance('betValue');
+		let betSteps = model.balance('betSteps');
+		let currentBetStep = model.balance('currentBetStep');
 
-            coinSum -= betSum;
-            coinCash = (coinCash * 100 - betCash * 100) / 100;
+		if (toMax) {
+			if (currentBetStep == betSteps.length - 1) return false;
+			currentBetStep = betSteps.length - 1;
+		}
+		if (toMin) {
+			if (currentBetStep == 0) return false;
+			currentBetStep = 0;
+		}
+		if (up) {
+			if (currentBetStep == betSteps.length - 1) return false;
+			currentBetStep++;
+		}
+		if (down) {
+			if (currentBetStep == 0) return false;
+			currentBetStep--;
+		}
 
-            model.balance('winCash', 0);
-            model.balance('coinSum', coinSum);
-            model.balance('coinCash', coinCash);
-        }
-        if (endRoll) {
-            let endData = model.data('rollResponse').Balance;
+		betValue = betSteps[currentBetStep];
+		model.balance('currentBetStep', currentBetStep);
+		model.balance('betValue', betValue);
+		updateBalance({bet: true});
+		return betValue;
 
-            model.balance('winCash', endData.TotalWinCents / 100);
-            model.balance('coinSum', endData.ScoreCoins);
-            model.balance('coinCash', endData.ScoreCents / 100);
-        }
-        if (startFS) {
-            model.balance('winCash', 0);
-        }
-        if (endFS) {
-            let endData = model.data('rollResponse').Balance;
-            model.balance('coinSum', endData.ScoreCoins);
-            model.balance('coinCash', endData.ScoreCents / 100);
-            model.balance('fsWin', 0);
-            model.balance('totalWin', 0);
-        }
-        if (startFSRoll) {
-            let newTotalWin = +model.balance('fsWin') + +model.balance('totalWin');
-            let newWinCash = newTotalWin * model.balance('coinValue');
-            model.balance('fsWin', 0);
-            model.balance('totalWin', newTotalWin);
-            model.balance('winCash', newWinCash);
-        }
-        if (endFSRoll) {
-            let endData = model.data('rollResponse');
-            model.balance('fsWin', endData.Balance.TotalWinCoins);
-            if (endData.FsBonus) {
-                model.balance('winCash', endData.FsBonus.TotalFSWinCents / 100);
-                model.balance('totalWin', endData.FsBonus.TotalFSWinCoins);
-            }
-            if (endData.NextMode == 'root') {
-                model.balance('winCash', (endData.FsBonus.TotalFSWinCents + endData.Balance.TotalWinCents) / 100);
-            }
-        }
+	}
 
-        if (startBonus) {
-            model.balance('winCash', 0);
-        }
+	function changeCoin({up, down, toMax, toMin}) {
 
-        if (endBonus) {
-            let newCoinSum = model.balance('coinSum') + model.balance('totalWin');
-            model.balance('coinSum', newCoinSum);
+		let coinValue = model.balance('coinValue');
+		let betCash = model.balance('betCash');
+		let betSum = model.balance('betSum');
+		let coinSteps = model.balance('coinSteps');
+		let currentCoinStep = model.balance('currentCoinStep');
 
-            let newCoinCash = (model.balance('coinCash') * 100 + model.balance('winCash') * 100) / 100;
-            model.balance('coinCash', newCoinCash);
+		if (toMax) {
+			if (currentCoinStep == coinSteps.length - 1) return false;
+			currentCoinStep = coinSteps.length - 1;
+		}
+		if (toMin) {
+			if (currentCoinStep == 0) return false;
+			currentCoinStep = 0;
+		}
+		if (up) {
+			if (currentCoinStep == coinSteps.length - 1) return false;
+			currentCoinStep++;
+		}
+		if (down) {
+			if (currentCoinStep == 0) return false;
+			currentCoinStep--;
+		}
 
-            model.balance('fsWin', 0);
-            model.balance('totalWin', 0);
-        }
+		coinValue = coinSteps[currentCoinStep];
+		betCash = betSum * coinValue;
+		model.balance('currentCoinStep', currentCoinStep);
+		model.balance('coinValue', coinValue);
+		model.balance('betCash', betCash);
+		updateBalance({coin: true});
+		return coinValue;
 
-        if (startBonusRoll) {
-            let response = model.data('bonusRollResponse');
-            let newTotalWin = model.balance('totalWin') || 0;
-            let newWinCash = model.balance('winCash');
-            let newWin = response.Balance.TotalWinCoins;
-            newTotalWin += newWin;
-            newWinCash = (newWinCash * 100 + response.Balance.TotalWinCents) / 100;
-            model.balance('fsWin', newWin);
-            model.balance('totalWin', newTotalWin);
-            model.balance('winCash', newWinCash);
-        }
+	}
 
-        if (model.mobile) {
-            setBetController.update.CoinValue({});
-            setBetController.update.BetValue({});
-        }
-        balanceController.updateBalance({});
+	function updateBalance({bet, coin, startRoll, endRoll, startFSRoll, endFSRoll, startFS, endFS, startBonus, endBonus, startBonusRoll}) {
 
-    }
+		if (bet) {
+			let betValue = model.balance('betValue');
+			let coinValue = model.balance('coinValue');
 
-    function checkBalance() {
-        return model.balance('coinSum') >= model.balance('betSum');
-    }
+			let betSum = betValue * model.data('numberOfLines');
+			let betCash = betValue * model.data('numberOfLines') * coinValue;
 
-    return {
-        data,
-        state,
-        balance,
-        group,
-        el,
-        sound,
-        log,
-        cookie,
+			model.balance('betSum', betSum);
+			model.balance('betCash', betCash);
+		}
+		if (coin) {
+			let coinValue = model.balance('coinValue');
+			let coinCash = model.balance('coinCash');
 
-        initStates,
-        initSettings,
-        initBalance,
-        initSaved,
-        changeBet,
-        changeCoin,
-        updateBalance,
-        checkBalance
-    };
+			let coinSum = Math.floor(coinCash / coinValue);
+
+			model.balance('coinSum', coinSum);
+		}
+		if (startRoll) {
+			let coinSum = model.balance('coinSum');
+			let betSum = model.balance('betSum');
+			let coinCash = model.balance('coinCash');
+			let betCash = model.balance('betCash');
+
+			coinSum -= betSum;
+			coinCash = (coinCash * 100 - betCash * 100) / 100;
+
+			model.balance('winCash', 0);
+			model.balance('coinSum', coinSum);
+			model.balance('coinCash', coinCash);
+		}
+		if (endRoll) {
+			let endData = model.data('rollResponse').Balance;
+
+			model.balance('winCash', endData.TotalWinCents / 100);
+			model.balance('coinSum', endData.ScoreCoins);
+			model.balance('coinCash', endData.ScoreCents / 100);
+		}
+		if (startFS) {
+			model.balance('winCash', 0);
+		}
+		if (endFS) {
+			let endData = model.data('rollResponse').Balance;
+			model.balance('coinSum', endData.ScoreCoins);
+			model.balance('coinCash', endData.ScoreCents / 100);
+			model.balance('fsWin', 0);
+			model.balance('totalWin', 0);
+		}
+		if (startFSRoll) {
+			let newTotalWin = +model.balance('fsWin') + +model.balance('totalWin');
+			let newWinCash = newTotalWin * model.balance('coinValue');
+			model.balance('fsWin', 0);
+			model.balance('totalWin', newTotalWin);
+			model.balance('winCash', newWinCash);
+		}
+		if (endFSRoll) {
+			let endData = model.data('rollResponse');
+			model.balance('fsWin', endData.Balance.TotalWinCoins);
+			if (endData.FsBonus) {
+				model.balance('winCash', endData.FsBonus.TotalFSWinCents / 100);
+				model.balance('totalWin', endData.FsBonus.TotalFSWinCoins);
+			}
+			if (endData.NextMode == 'root') {
+				model.balance('winCash', (endData.FsBonus.TotalFSWinCents + endData.Balance.TotalWinCents) / 100);
+			}
+		}
+
+		if (startBonus) {
+			if (model.data('savedFS')) {
+				if (model.data('savedFS').state !== 'Doors') {
+					model.balance('winCash', 0);
+				}
+			}
+		}
+
+		if (endBonus) {
+			let newCoinSum = model.balance('coinSum') + model.balance('totalWin');
+			model.balance('coinSum', newCoinSum);
+
+			let newCoinCash = (model.balance('coinCash') * 100 + model.balance('winCash') * 100) / 100;
+			model.balance('coinCash', newCoinCash);
+
+			model.balance('fsWin', 0);
+			model.balance('totalWin', 0);
+		}
+
+		if (startBonusRoll) {
+			let response = model.data('bonusRollResponse');
+			let newTotalWin = model.balance('totalWin') || 0;
+			let newWinCash = model.balance('winCash');
+			let newWin = response.Balance.TotalWinCoins;
+			newTotalWin += newWin;
+			newWinCash = (newWinCash * 100 + response.Balance.TotalWinCents) / 100;
+			model.balance('fsWin', newWin);
+			model.balance('totalWin', newTotalWin);
+			model.balance('winCash', newWinCash);
+		}
+
+		if (model.mobile) {
+			setBetController.update.CoinValue({});
+			setBetController.update.BetValue({});
+		}
+		balanceController.updateBalance({});
+
+	}
+
+	function checkBalance() {
+		return model.balance('coinSum') >= model.balance('betSum');
+	}
+
+	return {
+		data,
+		state,
+		balance,
+		group,
+		el,
+		sound,
+		log,
+		cookie,
+
+		initStates,
+		initSettings,
+		initBalance,
+		initSaved,
+		changeBet,
+		changeCoin,
+		updateBalance,
+		checkBalance
+	};
 
 })();

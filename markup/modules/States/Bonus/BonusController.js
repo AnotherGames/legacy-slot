@@ -33,6 +33,7 @@ class Door {
         model.group('bg').add(this.sprite);
 
         this.lightBlinking(1000);
+	    this._x = x;
     }
 
     win() {
@@ -44,7 +45,7 @@ class Door {
 
         this._playGold();
         this._playGlassBoom();
-        this._playTable(parseInt(this.data.CurrentValue, 10));
+        this._playTable(parseInt(this.data.CurrentValue.Multi, 10));
     }
 
     fail() {
@@ -92,7 +93,7 @@ class Door {
         });
     }
 
-    _playGold() {
+	_playGold() {
         this.gold = this.game.add.sprite(this.x, this.y, 'coins', 'skeleton-2_01.png');
         this.gold.animations.add('gold', Phaser.Animation.generateFrameNames('skeleton-2_', 1, 44, '.png', 2), 30, false);
         this.gold.anchor.set(0.5, 0.1);
@@ -166,36 +167,38 @@ export class Bonus {
         let footer = new Footer({model, soundController, request});
         model.el('footer', footer);
 
-        soundController.music.stopMusic('fon');
+	    footer.initMobile();
+	    soundController.music.stopMusic('fon');
+
         soundController.music.playMusic('bonusFon');
+	    bonusView.draw.mainBG({});
 
-        bonusView.draw.mainBG({});
         bonusView.draw.bigFish({});
-
-        for (let i = 0; i < 5; i++) {
-            this.doors.push(new Door(config.illuminatorsCoords[i].x, config.illuminatorsCoords[i].y, this.doors, i + 1));
+	    for (let i = 0; i < 5; i++) {
+	        this.doors.push(new Door(config.illuminatorsCoords[i].x, config.illuminatorsCoords[i].y, this.doors, i + 1));
         }
+
 
         model.el('doors', this.doors);
-
-        if (model.desktop) {
-            mainView.draw.addBubbles({});
-            mainView.draw.addFishes({ y1: 650, y2: 900 });
-            bonusView.draw.addLight({});
-            bonusView.draw.upperBG({});
-            balanceView.draw.FSMobileBalance({});
+	    if (model.desktop) {
+	        mainView.draw.addBubbles({});
+	        mainView.draw.addFishes({ y1: 650, y2: 900 });
+	        bonusView.draw.addLight({});
+	        bonusView.draw.upperBG({});
+	        balanceView.draw.FSMobileBalance({});
         } else {
-            mobileSetBetController.init({});
-            balanceView.draw.FSMobileBalance({});
+	        mobileSetBetController.init({});
+	        balanceView.draw.FSMobileBalance({});
         }
 
-        footer.initMobile();
-        balanceView.draw.CashBalance({});
+	    balanceView.draw.CashBalance({});
         model.updateBalance({ startBonus: true });
 
-        if (model.data('savedFS')) {
-            this.drawRecoveredPanel();
-        }
+	    if (model.data('savedFS')) {
+	        if (model.data('savedFS').state === 'Doors') {
+		        this.drawRecoveredPanel();
+	        }
+	    }
 
     }
 
@@ -213,26 +216,34 @@ export class Bonus {
     }
 
     drawRecoveredPanel() {
-        let saved = model.data('savedFS').doorsValue;
+        let saved = model.data('savedFS').PrevValues;
         for (let i = 0; i < saved.length; i++) {
-            let door = this.doors[i];
-            door.destroyed = true;
-            door._playGold();
-            door._playGlassBoom();
-            door._playTable(+saved[i].substring(1));
+	        let index = parseInt(saved[i].Index);
+	        let door = this.doors[index];
+	        door.destroyed = true;
+	        door._playGold();
+	        door._playGlassBoom();
+            let multi = parseInt(saved[i].Multi);
+
+	        door._playTable(multi);
         }
-        model.data('savedFS', null);
+	    if (saved.length === 0) {
+		    model.data('bonusWinCoins', 0)
+	    } else {
+		    model.data('bonusWinCoins', model.data('bonusWinCoins') + saved[saved.length - 1].TotalWinCoins)
+	    }
+	    model.data('savedFS', null);
     }
 
 }
+
 function handleDoorClick() {
     if (this.destroyed || model.state('doorFinish') || !model.state('bonusReady')) return;
     let doorIndex = this.doors.findIndex((element) => {
         return this === element;
     });
-    model.data('lastClickedDoor', doorIndex);
 
-    request.send('Roll')
+    request.send('Roll', null, doorIndex)
         .then((data) => {
             model.state('bonusReady', false);
             this.data = data;
@@ -241,7 +252,7 @@ function handleDoorClick() {
                 mainView.draw.showPopup({message: data.ErrorMessage});
                 return;
             }
-            model.data('bonusWinCoins', model.data('bonusWinCoins') + data.Balance.TotalWinCoins);
+            model.data('bonusWinCoins', model.data('bonusWinCoins') + data.CurrentValue.TotalWinCoins);
             console.log(data);
         })
         .then(() => {
@@ -260,7 +271,7 @@ function handleDoorClick() {
             model.updateBalance({ startBonusRoll: true });
             if (!this.isWinPlayed) {
 
-                if (this.data.CurrentValue != 'Exit') {
+                if (this.data.CurrentValue.Multi != 'Exit') {
                     this.win();
                     this.isWinPlayed = true;
                     if (this.data.BonusEnd) {
