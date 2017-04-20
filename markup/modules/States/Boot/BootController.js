@@ -11,7 +11,7 @@ export class Boot {
             fsBonus: 'snailfs3'
         });
 
-        request.send('Initialise', 'normal')
+        request.send('Initialise', 'fsBonus')
             .then((initData) => {
                 model.initStates(initData);
                 model.initSettings(initData.Settings);

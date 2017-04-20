@@ -90,7 +90,10 @@ export class Init {
 	        switch (model.data('savedFS').state) {
 		        case 'Freespin': game.state.start('FS');
 			        break;
-		        default: game.state.start('Main');
+		        default: {
+			        model.data('savedFS', null);
+			        game.state.start('Main');
+		        }
 			        break;
 	        }
         });
