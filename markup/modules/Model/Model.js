@@ -324,13 +324,11 @@ export let model = (() => {
 			currentCoinStep--;
 		}
 
-		coinValue = coinSteps[currentCoinStep];
-		betCash = betSum * coinValue;
-		model.balance('currentCoinStep', currentCoinStep);
-		model.balance('coinValue', coinValue);
-		model.balance('betCash', betCash);
-		updateBalance({coin: true});
-		return coinValue;
+        coinValue = coinSteps[currentCoinStep];
+        model.balance('currentCoinStep', currentCoinStep);
+        model.balance('coinValue', coinValue);
+        updateBalance({coin: true});
+        return coinValue;
 
 	}
 
@@ -343,22 +341,25 @@ export let model = (() => {
 			let betSum = betValue * model.data('numberOfLines');
 			let betCash = betValue * model.data('numberOfLines') * coinValue;
 
-			model.balance('betSum', betSum);
-			model.balance('betCash', betCash);
-		}
-		if (coin) {
-			let coinValue = model.balance('coinValue');
-			let coinCash = model.balance('coinCash');
+            model.balance('betSum', betSum);
+            model.balance('betCash', betCash);
+        }
+        if (coin) {
+	        let betValue = model.balance('betValue');
+            let coinValue = model.balance('coinValue');
+            let coinCash = model.balance('coinCash');
 
-			let coinSum = Math.floor(coinCash / coinValue);
+            let coinSum = Math.floor(coinCash / coinValue);
+	        let betCash = betValue * model.data('numberOfLines') * coinValue;
 
-			model.balance('coinSum', coinSum);
-		}
-		if (startRoll) {
-			let coinSum = model.balance('coinSum');
-			let betSum = model.balance('betSum');
-			let coinCash = model.balance('coinCash');
-			let betCash = model.balance('betCash');
+            model.balance('coinSum', coinSum);
+	        model.balance('betCash', betCash);
+        }
+        if (startRoll) {
+            let coinSum = model.balance('coinSum');
+            let betSum = model.balance('betSum');
+            let coinCash = model.balance('coinCash');
+            let betCash = model.balance('betCash');
 
 			coinSum -= betSum;
 			coinCash = (coinCash * 100 - betCash * 100) / 100;
