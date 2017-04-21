@@ -467,6 +467,10 @@ export let view = (() => {
         }
         autoButtonDesk.freezeFrames = true;
 
+        let infoButton = model.el('infoButton');
+        infoButton.alpha = 0.5;
+        let settingsButton = model.el('settingsButton');
+        settingsButton.alpha = 0.5;
     }
 
     function unlockButtons() {
@@ -492,6 +496,11 @@ export let view = (() => {
         let autoButtonDesk = model.el('autoButtonDesk');
         autoButtonDesk.frameName = 'auto.png';
         autoButtonDesk.freezeFrames = false;
+
+        let infoButton = model.el('infoButton');
+        infoButton.alpha = 1;
+        let settingsButton = model.el('settingsButton');
+        settingsButton.alpha = 1;
     }
 
     return {
