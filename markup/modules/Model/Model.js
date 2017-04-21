@@ -179,7 +179,7 @@ export let model = (() => {
 		let betLevel = saved.LastBetLevel;
 
 		if (PrevValues.length !== 0) {
-			winCash = PrevValues[PrevValues.length - 1].WinCents;
+			winCash = PrevValues[PrevValues.length - 1].TotalWinCents;
 			winCoin = PrevValues[PrevValues.length - 1].WinCoins;
 			totalWin = PrevValues[PrevValues.length - 1].TotalWinCoins;
 		}
