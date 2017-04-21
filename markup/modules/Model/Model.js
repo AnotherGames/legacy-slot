@@ -312,10 +312,8 @@ export let model = (() => {
         }
 
         coinValue = coinSteps[currentCoinStep];
-        betCash = betSum * coinValue;
         model.balance('currentCoinStep', currentCoinStep);
         model.balance('coinValue', coinValue);
-        model.balance('betCash', betCash);
         updateBalance({coin: true});
         return coinValue;
 
@@ -334,12 +332,15 @@ export let model = (() => {
             model.balance('betCash', betCash);
         }
         if (coin) {
+	        let betValue = model.balance('betValue');
             let coinValue = model.balance('coinValue');
             let coinCash = model.balance('coinCash');
 
             let coinSum = Math.floor(coinCash / coinValue);
+	        let betCash = betValue * model.data('numberOfLines') * coinValue;
 
             model.balance('coinSum', coinSum);
+	        model.balance('betCash', betCash);
         }
         if (startRoll) {
             let coinSum = model.balance('coinSum');
