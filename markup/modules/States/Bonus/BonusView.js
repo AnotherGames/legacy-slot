@@ -49,7 +49,9 @@ export let view = (() => {
             }
             model.el('doorsElements', doorsElements);
 
-            this.targetAnim({});
+	        if (!model.data('savedFS')) {
+		        this.targetAnim({});
+	        }
 
         },
 

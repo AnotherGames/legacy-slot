@@ -155,6 +155,15 @@ export let model = (() => {
 
     }
 
+	function getIndex(arr, findValue) {
+		let current = 0;
+		arr.filter((value, index) => {
+			if (value == findValue)
+				current = index;
+		})
+		return current;
+	}
+
 	function initDoors(data) {
 		let saved = data.Saved;
 		let PrevValues = saved.PrevValues;
@@ -166,7 +175,7 @@ export let model = (() => {
 		let betLevel = saved.LastBetLevel;
 
 		if (PrevValues.length !== 0) {
-			winCash = PrevValues[PrevValues.length - 1].WinCents;
+			winCash = PrevValues[PrevValues.length - 1].TotalWinCents;
 			winCoin = PrevValues[PrevValues.length - 1].WinCoins;
 			totalWin = PrevValues[PrevValues.length - 1].TotalWinCoins;
 		}
