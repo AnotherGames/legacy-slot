@@ -71,8 +71,8 @@ export class Preload {
         const game = model.el('game');
         game.load.path = `static/img/content/${model.res}/`;
         game.load.image('initBG', 'bg/initBG.jpg');
-        game.load.image('initLogo', 'preloader/initLogo.jpg');
-        game.load.image('initPlay', 'preloader/initPlay.jpg');
+        game.load.image('initLogo', 'preloader/initLogo.png');
+        game.load.image('initPlay', 'preloader/initPlay.png');
         game.load.spritesheet('clock', 'preloader/clock.png', 631, 403, 27);
         game.load.atlasJSONArray('text', 'text/text.png', 'text/text.json');
     }

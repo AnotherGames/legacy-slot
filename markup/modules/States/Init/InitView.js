@@ -12,7 +12,7 @@ export let view = (() => {
 
     function drawLogo() {
         const game = model.el('game');
-        let initLogo = game.add.sprite(game.world.centerX, game.world.centerY * 0.4, 'text', 'logo.png');
+        let initLogo = game.add.sprite(game.world.centerX, game.world.centerY * 0.4, 'initLogo');
         initLogo.anchor.set(0.5);
         initLogo.scale.setTo(0.1, 0.1);
         game.add.tween(initLogo.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true);
@@ -22,20 +22,22 @@ export let view = (() => {
 
     function drawPlay() {
         const game = model.el('game');
-        let clock = game.add.sprite(game.world.centerX, game.height * 0.75, 'clock');
+        let clock = game.add.sprite(game.world.centerX - 100, game.height * 0.6, 'clock');
+        clock.anchor.set(0.5);
         // let clockClose = clock.animations.add('close', 15, false);
-        // let clockSpin = clock,animations.add('spin', [24, 25, 26, 27], 15, true);
         // clock.animations.play('close');
+        // let clockSpin = clock.animations.add('spin', [23, 24, 25, 26], 15, true);
         // clockClose.onComplete.add(() => {
         //     clockSpin.play('spin');
-        // }, door);
+        // }, this);
 
-        let initPlay = game.add.sprite(game.world.centerX, game.height * 0.75, 'initPlay');
+        let initPlay = game.add.sprite(game.world.centerX, game.height * 0.6, 'initPlay');
         initPlay.anchor.set(0.5);
-        initPlay.scale.setTo(0.1, 0.1);
-        let initPlayTween = game.add.tween(initPlay.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true);
+        initPlay.scale.set(0.8);
         model.el('initPlay', initPlay);
-        model.el('initPlayTween', initPlayTween);
+        // initPlay.scale.setTo(0.1, 0.1);
+        // let initPlayTween = game.add.tween(initPlay.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true);
+        // model.el('initPlayTween', initPlayTween);
         return initPlay;
     }
 

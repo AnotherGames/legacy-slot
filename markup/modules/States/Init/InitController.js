@@ -21,8 +21,7 @@ export class Init {
         // this.savecpu.init();
 
         view.drawBG();
-        // view.drawLogo();
-
+        view.drawLogo();
 
         let initPlay = view.drawPlay();
 
