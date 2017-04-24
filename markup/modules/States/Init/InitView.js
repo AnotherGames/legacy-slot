@@ -22,7 +22,15 @@ export let view = (() => {
 
     function drawPlay() {
         const game = model.el('game');
-        let initPlay = game.add.sprite(game.world.centerX, game.height * 0.75, 'text', 'play.png');
+        let clock = game.add.sprite(game.world.centerX, game.height * 0.75, 'clock');
+        // let clockClose = clock.animations.add('close', 15, false);
+        // let clockSpin = clock,animations.add('spin', [24, 25, 26, 27], 15, true);
+        // clock.animations.play('close');
+        // clockClose.onComplete.add(() => {
+        //     clockSpin.play('spin');
+        // }, door);
+
+        let initPlay = game.add.sprite(game.world.centerX, game.height * 0.75, 'initPlay');
         initPlay.anchor.set(0.5);
         initPlay.scale.setTo(0.1, 0.1);
         let initPlayTween = game.add.tween(initPlay.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true);

@@ -2,75 +2,51 @@
 
 {
 	"filename": "bigW.png",
-	"frame": {"x":1,"y":223,"w":930,"h":236},
+	"frame": {"x":1,"y":340,"w":949,"h":260},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":38,"y":37,"w":930,"h":236},
+	"spriteSourceSize": {"x":29,"y":25,"w":949,"h":260},
 	"sourceSize": {"w":1000,"h":300}
 },
 {
-	"filename": "bonus.png",
-	"frame": {"x":1,"y":778,"w":758,"h":227},
+	"filename": "bonusWin.png",
+	"frame": {"x":952,"y":340,"w":1051,"h":227},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":21,"y":11,"w":758,"h":227},
-	"sourceSize": {"w":800,"h":250}
+	"spriteSourceSize": {"x":28,"y":16,"w":1051,"h":227},
+	"sourceSize": {"w":1100,"h":250}
 },
 {
-	"filename": "coins.png",
-	"frame": {"x":784,"y":596,"w":204,"h":69},
+	"filename": "freespin.png",
+	"frame": {"x":1,"y":602,"w":825,"h":184},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":204,"h":69},
-	"sourceSize": {"w":204,"h":69}
-},
-{
-	"filename": "continue.png",
-	"frame": {"x":1,"y":1007,"w":394,"h":118},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":394,"h":118},
-	"sourceSize": {"w":394,"h":118}
-},
-{
-	"filename": "freespins.png",
-	"frame": {"x":1,"y":1,"w":973,"h":220},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":12,"y":16,"w":973,"h":220},
-	"sourceSize": {"w":1000,"h":240}
+	"spriteSourceSize": {"x":0,"y":0,"w":825,"h":184},
+	"sourceSize": {"w":825,"h":184}
 },
 {
 	"filename": "play.png",
-	"frame": {"x":397,"y":1007,"w":265,"h":80},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":265,"h":80},
-	"sourceSize": {"w":265,"h":80}
-},
-{
-	"filename": "topLevel.png",
-	"frame": {"x":1,"y":461,"w":868,"h":133},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":868,"h":133},
-	"sourceSize": {"w":868,"h":133}
-},
-{
-	"filename": "totalW.png",
-	"frame": {"x":1,"y":596,"w":781,"h":180},
+	"frame": {"x":1280,"y":1,"w":383,"h":125},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":101,"y":59,"w":781,"h":180},
-	"sourceSize": {"w":1000,"h":300}
+	"spriteSourceSize": {"x":13,"y":0,"w":383,"h":125},
+	"sourceSize": {"w":400,"h":130}
+},
+{
+	"filename": "youWin.png",
+	"frame": {"x":1,"y":1,"w":1277,"h":337},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1277,"h":337},
+	"sourceSize": {"w":1277,"h":337}
 }],
 "meta": {
 	"app": "http://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "text.png",
 	"format": "RGBA8888",
-	"size": {"w":1024,"h":2048},
+	"size": {"w":2048,"h":1024},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:b53e45db2c6ed6be0abe7a417ef2d51e:0950829e3baa5fbb2c27b66d3e6eba22:a569396aede2f37d3ec322fe54e4aaf6$"
+	"smartupdate": "$TexturePacker:SmartUpdate:bb30014cb5c739a0268ccb387ed4dd1b:82f5b17e416fbee8dd23342a486719ae:a569396aede2f37d3ec322fe54e4aaf6$"
 }
 }

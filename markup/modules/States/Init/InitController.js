@@ -42,10 +42,10 @@ export class Init {
             keyboardController.initInitKeys(this.stateHandler);
         }
 
-        model.el('initPlayTween')
-            .onComplete.add(() => {
-                view.playYoyoTween({});
-            });
+        // model.el('initPlayTween')
+        //     .onComplete.add(() => {
+        //         view.playYoyoTween({});
+        //     });
 
         this.drawSoundTrigger();
 
@@ -73,7 +73,7 @@ export class Init {
 
         if (model.mobile) game.scale.startFullScreen();
 
-        view.stopYoyoTween();
+        // view.stopYoyoTween();
         let fakeButton = document.querySelector('#fakeButton');
         fakeButton.removeEventListener('click', this.stateHandler);
 

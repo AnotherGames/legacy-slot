@@ -70,14 +70,17 @@ export class Preload {
     loadInitAssets() {
         const game = model.el('game');
         game.load.path = `static/img/content/${model.res}/`;
-        game.load.image('initBG', 'bg/initBG.png');
+        game.load.image('initBG', 'bg/initBG.jpg');
+        game.load.image('initLogo', 'preloader/initLogo.jpg');
+        game.load.image('initPlay', 'preloader/initPlay.jpg');
+        game.load.spritesheet('clock', 'preloader/clock.png', 631, 403, 27);
         game.load.atlasJSONArray('text', 'text/text.png', 'text/text.json');
     }
 
     loadMainAssets() {
         const game = model.el('game');
         game.load.spritesheet('bigFish', 'bonus/bigFish.png', 226, 182, 12);
-        game.load.image('mainBG', 'bg/mainBG.png');
+        game.load.image('mainBG', 'bg/mainBG.jpg');
         game.load.image('transitionBG1', 'bg/transitionBG1.png');
         game.load.image('transitionBG2', 'bg/transitionBG2.jpg');
         game.load.image('bubble', 'bg/bubble.png');
@@ -115,7 +118,7 @@ export class Preload {
 
     loadFSAssets() {
         const game = model.el('game');
-        game.load.image('fsBG', 'bg/fsBG.png');
+        game.load.image('fsBG', 'bg/fsBG.jpg');
         game.load.image('octopusChar', 'fs/octopus.png');
         game.load.image('diverChar', 'fs/diver.png');
         if (model.mobile) {
