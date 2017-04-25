@@ -65,7 +65,7 @@ export let config = {
         },
         gameMachine: {
             x: 0,
-            y: -25
+            y: -35
         },
         elements: {
             width: 192,

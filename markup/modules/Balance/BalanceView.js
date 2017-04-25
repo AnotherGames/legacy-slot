@@ -105,18 +105,18 @@ export let view = (() => {
             coinValueAmount = model.balance('coinValue'),
             betValueAmount = model.balance('betValue'),
             sumStyle = {font: 'bold 32px Titania, Arial', fill: '#fff', align: 'center'},
-            valueStyle = {font: 'bold 37px Titania, Arial', fill: '#fff', align: 'center'},
+            valueStyle = {font: 'bold 32px Titania, Arial', fill: '#fff', align: 'center'},
             sumCoinStyle = {font: 'bold 28px Titania, Arial', fill: '#fff', align: 'center'},
             valueCoinStyle = {font: 'bold 26px Titania, Arial', fill: '#fff', align: 'center'},
-            y = [-123, -37],
-            x = [240, 455, 1065, 1315]
+            y = [- 145, -135, -123],
+            x = [120, 310, 1060, 1280]
         }) {
 
-            let coinSum = game.add.text(x[3], y[0], `${coinSumValue.toFixed(0)}`, sumCoinStyle, container);
+            let coinSum = game.add.text(x[3], y[1], `${coinSumValue.toFixed(0)}`, sumCoinStyle, container);
             let betSum = game.add.text(x[0], y[0], `${betSumValue.toFixed(0)}`, sumStyle, container);
 
-            let coinValue = game.add.text(x[2], y[1], `${coinValueAmount}`, valueCoinStyle, container);
-            let betValue = game.add.text(x[1], y[1], `${betValueAmount}`, valueStyle, container);
+            let coinValue = game.add.text(x[2], y[2], `${coinValueAmount}`, valueCoinStyle, container);
+            let betValue = game.add.text(x[1], y[2], `${betValueAmount}`, valueStyle, container);
 
             coinSum.setShadow(5, 5, 'rgba(0, 0, 0, 0.7)', 8);
             betSum.setShadow(5, 5, 'rgba(0, 0, 0, 0.7)', 8);

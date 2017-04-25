@@ -13,16 +13,6 @@ export class Element {
 
         // Заполняем его спрайтами всех элементов (они будут расположенны друг на друге)
         this.sprites = [];
-        this.blueBG = game.add.sprite(0, 0, 'elementBackground1', 'Back01-n-00.png', this.group);
-        this.blueBG.anchor.set(0.5);
-        this.blueBG.animations.add('winBG', Phaser.Animation.generateFrameNames('Back01-w-', 0, 29, '.png', 2), 30, false);
-
-        this.goldBG = game.add.sprite(0, 0, 'elementBackground2', 'Back02-n-00.png', this.group);
-        this.goldBG.anchor.set(0.5);
-        this.goldBG.animations.add('winBG', Phaser.Animation.generateFrameNames('Back02-w-', 0, 29, '.png', 2), 30, false);
-        this.goldBG.visible = false;
-
-        this.bg = this.blueBG;
 
         for (let i = 1; i <= config.symbolsCount; i++) {
 
@@ -60,37 +50,20 @@ export class Element {
         this.active = parseInt(animation, 10);
         this.activeSprite = this.sprites[this.active - 1];
         this.activeSprite.visible = true;
-        if (this.active == 9) {
-            this.bg = this.goldBG;
-            this.goldBG.visible = true;
-            this.blueBG.visible = false;
-        } else if (this.active == 10 || this.active == 11 || this.active == 12 || this.active == 13) {
-            this.bg.visible = false;
-        } else {
-            this.bg = this.blueBG;
-            this.goldBG.visible = false;
-            this.blueBG.visible = true;
-        }
         this.activeSprite.animations.play(animation, fps, loop);
     }
 
     win(loop = false) {
         // Проигрывам выигрышную анимацию
         this.play(`${this.active}-w`, loop, 30);
-        if (this.bg == this.blueBG) {
-            this.blueBG.play('winBG');
-        } else {
-            this.goldBG.play('winBG');
-        }
+        // this.activeSprite.animations.currentAnim.onUpdate.add(() => {
+        //     // После которой опять играем нормальную анимацию
+        //     console.log(this.activeSprite.animations.currentAnim);
+        // });
+
         this.activeSprite.animations.currentAnim.onComplete.add(() => {
             // После которой опять играем нормальную анимацию
             this.play(`${this.active}-n`);
-
-            if (this.bg == this.blueBG) {
-                this.blueBG.frameName = 'Back01-n-00.png';
-            } else {
-                this.goldBG.frameName = 'Back02-n-00.png';
-            }
         });
     }
 
@@ -120,34 +93,34 @@ export class Element {
     addSpriteAnimation(sprite, index) {
         switch (index) {
             case 1:
-                this.addAnimation(sprite, { el: 1, n: false, w: 29 });
+                this.addAnimation(sprite, { el: 1, n: false, w: 4 });
                 break;
             case 2:
-                this.addAnimation(sprite, { el: 2, n: 29, w: 29 });
+                this.addAnimation(sprite, { el: 2, n: false, w: 18 });
                 break;
             case 3:
-                this.addAnimation(sprite, { el: 3, n: false, w: 29 });
+                this.addAnimation(sprite, { el: 3, n: false, w: 4 });
                 break;
             case 4:
-                this.addAnimation(sprite, { el: 4, n: 24, w: 24 });
+                this.addAnimation(sprite, { el: 4, n: false, w: 18 });
                 break;
             case 5:
-                this.addAnimation(sprite, { el: 5, n: false, w: 29 });
+                this.addAnimation(sprite, { el: 5, n: false, w: 4 });
                 break;
             case 6:
-                this.addAnimation(sprite, { el: 6, n: 29, w: 29 });
+                this.addAnimation(sprite, { el: 6, n: false, w: 18 });
                 break;
             case 7:
-                this.addAnimation(sprite, { el: 7, n: false, w: 29 });
+                this.addAnimation(sprite, { el: 7, n: false, w: 4 });
                 break;
             case 8:
-                this.addAnimation(sprite, { el: 8, n: 29, w: 29 });
+                this.addAnimation(sprite, { el: 8, n: false, w: 18 });
                 break;
             case 9:
-                this.addAnimation(sprite, { el: 9, n: 29, w: 29 });
+                this.addAnimation(sprite, { el: 9, n: false, w: 18 });
                 break;
             case 10:
-                this.addAnimation(sprite, { el: 10, n: false, w: 29 });
+                this.addAnimation(sprite, { el: 10, n: false, w: 18 });
                 break;
             case 11:
                 this.addDiverAnimation(sprite, { el: 11 });
@@ -159,7 +132,7 @@ export class Element {
                 this.addDiverAnimation(sprite, { el: 13 });
                 break;
             case 14:
-                this.addAnimation(sprite, { el: 14, n: false, w: 29 });
+                this.addAnimation(sprite, { el: 14, n: false, w: 18 });
                 break;
             default:
                 break;

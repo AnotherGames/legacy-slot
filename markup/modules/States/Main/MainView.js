@@ -38,7 +38,7 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('main')
         }) {
-            let deltaY = (model.desktop) ? 50 : -25;
+            let deltaY = (model.desktop) ? 30 : -10;
             let gameMachineBG = game.add.sprite(0, deltaY, 'gameMachineBG', null, container);
             gameMachineBG.anchor.set(0.5);
             model.el('gameMachineBG', gameMachineBG);
@@ -47,7 +47,50 @@ export let view = (() => {
             gameMachine.anchor.set(0.5);
             model.el('gameMachine', gameMachine);
 
+        },
 
+        machineContainer: function ({
+            game = model.el('game'),
+            container = model.group('main')
+        }) {
+            let machineGroup = game.add.group();
+            container.addAt(machineGroup, 1);
+            model.group('machine', machineGroup);
+
+            let numbersContainer = game.add.group();
+            container.addAt(numbersContainer, 3);
+            model.group('numbers', numbersContainer);
+
+            let winUp = game.add.group();
+            container.addAt(winUp, 4);
+            model.group('winUp', winUp);
+
+            let winTop = game.add.group();
+            container.addAt(winTop, 5);
+            model.group('winTop', winTop);
+
+            machineGroup.glistaLightContainer = game.add.group();
+            model.group('glistaLight', machineGroup.glistaLightContainer);
+            machineGroup.add(machineGroup.glistaLightContainer);
+
+            machineGroup.elementsContainer = game.add.group();
+            model.group('elements', machineGroup.elementsContainer);
+            machineGroup.add(machineGroup.elementsContainer);
+
+            machineGroup.glistaContainer = game.add.group();
+            model.group('glista', machineGroup.glistaContainer);
+            machineGroup.add(machineGroup.glistaContainer);
+        },
+
+        machineMask: function ({
+            game = model.el('game'),
+            machineGroup = model.group('machine')
+        }) {
+            const elSize = config[model.res].elements;
+            let deltaY = (model.desktop) ? 30 : -25;
+            let someGraphic = game.add.graphics(-elSize.width * 2.5, -elSize.height * 1.5 + deltaY, machineGroup);
+            someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5, elSize.height * 3);
+            machineGroup.mask = someGraphic;
         },
 
         // addLight: function ({
@@ -288,50 +331,6 @@ export let view = (() => {
                .lineTo((line[3].X + 0.5) * elSize.width - gameMachine.width / 2 + deltaX, (line[3].Y + 0.5) * elSize.height - gameMachine.height / 2 + deltaY)
                .lineTo((line[4].X + 0.5) * elSize.width - gameMachine.width / 2 + deltaX, (line[4].Y + 0.5) * elSize.height - gameMachine.height / 2 + deltaY);
             return lineShape;
-        },
-
-        machineContainer: function ({
-            game = model.el('game'),
-            container = model.group('main')
-        }) {
-            let machineGroup = game.add.group();
-            container.addAt(machineGroup, 1);
-            model.group('machine', machineGroup);
-
-            let numbersContainer = game.add.group();
-            container.addAt(numbersContainer, 3);
-            model.group('numbers', numbersContainer);
-
-            let winUp = game.add.group();
-            container.addAt(winUp, 4);
-            model.group('winUp', winUp);
-
-            let winTop = game.add.group();
-            container.addAt(winTop, 5);
-            model.group('winTop', winTop);
-
-            machineGroup.glistaLightContainer = game.add.group();
-            model.group('glistaLight', machineGroup.glistaLightContainer);
-            machineGroup.add(machineGroup.glistaLightContainer);
-
-            machineGroup.elementsContainer = game.add.group();
-            model.group('elements', machineGroup.elementsContainer);
-            machineGroup.add(machineGroup.elementsContainer);
-
-            machineGroup.glistaContainer = game.add.group();
-            model.group('glista', machineGroup.glistaContainer);
-            machineGroup.add(machineGroup.glistaContainer);
-        },
-
-        machineMask: function ({
-            game = model.el('game'),
-            machineGroup = model.group('machine')
-        }) {
-            const elSize = config[model.res].elements;
-            let deltaY = (model.desktop) ? 50 : -25;
-            let someGraphic = game.add.graphics(-elSize.width * 2.5, -elSize.height * 1.5 + deltaY, machineGroup);
-            someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5, elSize.height * 3);
-            machineGroup.mask = someGraphic;
         },
 
         initPopup: function () {

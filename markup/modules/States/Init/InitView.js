@@ -22,20 +22,24 @@ export let view = (() => {
 
     function drawPlay() {
         const game = model.el('game');
-        let clock = game.add.sprite(game.world.centerX - 100, game.height * 0.6, 'clock');
-        clock.anchor.set(0.5);
-        // let clockClose = clock.animations.add('close', 15, false);
-        // clock.animations.play('close');
-        // let clockSpin = clock.animations.add('spin', [23, 24, 25, 26], 15, true);
-        // clockClose.onComplete.add(() => {
-        //     clockSpin.play('spin');
-        // }, this);
 
-        let initPlay = game.add.sprite(game.world.centerX, game.height * 0.6, 'initPlay');
+        let initPlay = game.add.sprite(game.world.centerX, game.height * 0.5, 'initPlay');
         initPlay.anchor.set(0.5);
-        initPlay.scale.set(0.8);
+        initPlay.scale.set(0.45);
         model.el('initPlay', initPlay);
-        // initPlay.scale.setTo(0.1, 0.1);
+        initPlay.alpha = 0;
+
+        let clock = game.add.sprite(game.world.centerX - 100, game.height * 0.5, 'clock');
+        clock.anchor.set(0.5);
+        let clockClose = clock.animations.add('close');
+        clock.animations.add('spin', [23, 24, 25, 26]);
+
+        clock.animations.play('close', 15, false);
+        game.add.tween(initPlay).to({alpha: 1}, 300, 'Linear', true);
+        clockClose.onComplete.add(() => {
+            clock.animations.play('spin', 15, true);
+        }, this);
+
         // let initPlayTween = game.add.tween(initPlay.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true);
         // model.el('initPlayTween', initPlayTween);
         return initPlay;

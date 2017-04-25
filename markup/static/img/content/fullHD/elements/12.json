@@ -2,19 +2,19 @@
 
 {
 	"filename": "12-n-00.png",
-	"frame": {"x":1,"y":1,"w":256,"h":240},
+	"frame": {"x":1,"y":1,"w":224,"h":242},
 	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":256,"h":240},
-	"sourceSize": {"w":256,"h":240}
+	"trimmed": true,
+	"spriteSourceSize": {"x":124,"y":77,"w":224,"h":242},
+	"sourceSize": {"w":436,"h":388}
 }],
 "meta": {
 	"app": "http://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "12.png",
 	"format": "RGBA8888",
-	"size": {"w":258,"h":242},
+	"size": {"w":256,"h":256},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:1373ffdc56623fcafb18b86313748219:da47e235ebc6dce746ff1c2f9d32f0e9:854c675b6cbe71802054655460cf8be8$"
+	"smartupdate": "$TexturePacker:SmartUpdate:939a5c3c147ead0573af1210899b51df:d64be68e482502cda53c469434e16484:854c675b6cbe71802054655460cf8be8$"
 }
 }

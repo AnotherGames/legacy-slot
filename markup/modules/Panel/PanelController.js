@@ -51,11 +51,11 @@ export let controller = (() => {
         betLevelMinus.onInputDown.add(handle.betMinus);
         model.el('betLevelMinus', betLevelMinus);
 
-        let coinsLevelPlus = view.draw.PlusButton({x: 1109});
+        let coinsLevelPlus = view.draw.PlusButton({x: 1103});
         coinsLevelPlus.onInputDown.add(handle.coinsPlus);
         model.el('coinsLevelPlus', coinsLevelPlus);
 
-        let coinsLevelMinus = view.draw.MinusButton({x: 985});
+        let coinsLevelMinus = view.draw.MinusButton({x: 973});
         coinsLevelMinus.onInputDown.add(handle.coinsMinus);
         model.el('coinsLevelMinus', coinsLevelMinus);
 

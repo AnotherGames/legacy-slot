@@ -84,12 +84,12 @@ export class Preload {
         game.load.image('transitionBG1', 'bg/transitionBG1.png');
         game.load.image('transitionBG2', 'bg/transitionBG2.jpg');
         game.load.image('bubble', 'bg/bubble.png');
-        game.load.image('eyeLight', 'bg/eyeLight.png');
-        game.load.image('topLight', 'bg/topLight.png');
-        game.load.spritesheet('labelLight', 'bg/labelLight.png', 617, 508, 3);
-        game.load.spritesheet('fish', 'bg/fish.png', 103, 33, 12);
-        game.load.spritesheet('shark', 'bg/shark.png', 493, 188, 12);
-        game.load.image('eyeLight', 'bg/eyeLight.png');
+        // game.load.image('eyeLight', 'bg/eyeLight.png');
+        // game.load.image('topLight', 'bg/topLight.png');
+        // game.load.spritesheet('labelLight', 'bg/labelLight.png', 617, 508, 3);
+        // game.load.spritesheet('fish', 'bg/fish.png', 103, 33, 12);
+        // game.load.spritesheet('shark', 'bg/shark.png', 493, 188, 12);
+        // game.load.image('eyeLight', 'bg/eyeLight.png');
         game.load.image('gameMachine', 'game/gameMachine.png');
         game.load.image('gameMachineBG', 'game/gameMachineBG.png');
         game.load.image('closeButton', 'other/closeButton.png');
@@ -108,7 +108,7 @@ export class Preload {
         if (model.desktop) {
             game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
             game.load.image('gameMachineFS', 'game/gameMachineFS.png');
-            game.load.image('autoSelect', 'desk_buttons/autoSelect.png');
+            // game.load.image('autoSelect', 'desk_buttons/autoSelect.png');
         }
         if (model.mobile) {
             game.load.atlasJSONArray('mobileButtons', 'mobile_buttons/mobileButtons.png', 'mobile_buttons/mobileButtons.json');
@@ -170,8 +170,8 @@ export class Preload {
         game.load.atlasJSONArray('12', 'elements/12.png', 'elements/12.json');
         game.load.atlasJSONArray('13', 'elements/13.png', 'elements/13.json');
         game.load.atlasJSONArray('14', 'elements/14.png', 'elements/14.json');
-        game.load.atlasJSONArray('elementBackground1', 'elements/elementBackground1.png', 'elements/elementBackground1.json');
-        game.load.atlasJSONArray('elementBackground2', 'elements/elementBackground2.png', 'elements/elementBackground2.json');
+        // game.load.atlasJSONArray('elementBackground1', 'elements/elementBackground1.png', 'elements/elementBackground1.json');
+        // game.load.atlasJSONArray('elementBackground2', 'elements/elementBackground2.png', 'elements/elementBackground2.json');
     }
 
     hidePreloader() {

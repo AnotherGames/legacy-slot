@@ -126,9 +126,9 @@ export class Main {
     positionMainContainer() {
         let game = model.el('game');
         if (model.mobile) {
-            let mainXLeft = model.data('buttonsDelta') * 2 + (model.el('gameMachine').width - 165) / 2;
-            let mainXRight = game.width - (model.el('gameMachine').width - 165) -
-            model.data('buttonsDelta') * 2 + (model.el('gameMachine').width - 165) / 2;
+            let mainXLeft = model.data('buttonsDelta') * 2 + (model.el('gameMachine').width - 50) / 2;
+            let mainXRight = game.width - (model.el('gameMachine').width - 50) -
+            model.data('buttonsDelta') * 2 + (model.el('gameMachine').width - 50) / 2;
 
             model.data('mainXLeft', mainXLeft);
             model.data('mainXRight', mainXRight);
@@ -141,7 +141,7 @@ export class Main {
 
             model.group('main').y = game.world.centerY + config[model.res].mainContainer.y;
         } else {
-            model.group('main').x = game.world.centerX;
+            model.group('main').x = game.world.centerX + 400;
             // model.group('main').y = game.world.centerY + config[model.res].mainContainer.y;
             model.group('main').y = 450;
         }
