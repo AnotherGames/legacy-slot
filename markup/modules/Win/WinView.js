@@ -359,29 +359,29 @@ export let view = (() => {
             switch (+fsLevelNumber) {
                 case 1:
                     bottleContainer1 = draw.addBottleContainer(+fsLevelNumber).bottleContainer1;
-                    bottleBG1 = draw.addBottleBG(bottleContainer1, wheels[0].elements[1]);
+                    bottleBG1 = draw.addBottleBG(bottleContainer1, 10);
 
                     bottle1 = game.add.spine(0, 70, 'bottle');
-                    draw.playBottleAnim(bottle1, wheels[0].elements[1]);
+                    draw.playBottleAnim(bottle1, 10);
 
                     draw.hideWheels([0]);
                     break;
 
                 case 2:
                     bottleContainer1 = draw.addBottleContainer(+fsLevelNumber).bottleContainer1;
-                    bottleBG1 = draw.addBottleBG(bottleContainer1, wheels[2].elements[1]);
+                    bottleBG1 = draw.addBottleBG(bottleContainer1, 13);
 
                     bottle1 = game.add.spine(0, 70, 'bottle');
-                    draw.playBottleAnim(bottle1, wheels[2].elements[1]);
+                    draw.playBottleAnim(bottle1, 13);
 
                     draw.hideWheels([2]);
                     break;
                 case 3:
                     bottleContainer1 = draw.addBottleContainer(+fsLevelNumber).bottleContainer1;
-                    bottleBG1 = draw.addBottleBG(bottleContainer1, wheels[4].elements[1]);
+                    bottleBG1 = draw.addBottleBG(bottleContainer1, 16);
 
                     bottle1 = game.add.spine(0, 70, 'bottle');
-                    draw.playBottleAnim(bottle1, wheels[4].elements[1]);
+                    draw.playBottleAnim(bottle1, 16);
 
                     draw.hideWheels([4]);
                     break;
@@ -389,40 +389,40 @@ export let view = (() => {
                     bottleContainer1 = draw.addBottleContainer(+fsLevelNumber).bottleContainer1;
                     bottleContainer2 = draw.addBottleContainer(+fsLevelNumber).bottleContainer2;
 
-                    bottleBG1 = draw.addBottleBG(bottleContainer1, wheels[0].elements[1]);
-                    bottleBG2 = draw.addBottleBG(bottleContainer2, wheels[2].elements[1]);
+                    bottleBG1 = draw.addBottleBG(bottleContainer1, 10);
+                    bottleBG2 = draw.addBottleBG(bottleContainer2, 13);
 
                     bottle1 = game.add.spine(0, 70, 'bottle');
                     bottle2 = game.add.spine(0, 70, 'bottle');
 
-                    draw.playBottleAnim(bottle1, wheels[0].elements[1]);
-                    draw.playBottleAnim(bottle2, wheels[2].elements[1]);
+                    draw.playBottleAnim(bottle1, 10);
+                    draw.playBottleAnim(bottle2, 13);
 
                     draw.hideWheels([0, 2]);
                     break;
                 case 5:
                     bottleContainer1 = draw.addBottleContainer(+fsLevelNumber).bottleContainer1;
                     bottleContainer2 = draw.addBottleContainer(+fsLevelNumber).bottleContainer2;
-                    bottleBG1 = draw.addBottleBG(bottleContainer1, wheels[2].elements[1]);
-                    bottleBG2 = draw.addBottleBG(bottleContainer2, wheels[4].elements[1]);
+                    bottleBG1 = draw.addBottleBG(bottleContainer1, 13);
+                    bottleBG2 = draw.addBottleBG(bottleContainer2, 16);
 
                     bottle1 = game.add.spine(0, 70, 'bottle');
                     bottle2 = game.add.spine(0, 70, 'bottle');
-                    draw.playBottleAnim(bottle1, wheels[2].elements[1]);
-                    draw.playBottleAnim(bottle2, wheels[4].elements[1]);
+                    draw.playBottleAnim(bottle1, 13);
+                    draw.playBottleAnim(bottle2, 16);
 
                     draw.hideWheels([2, 4]);
                     break;
                 case 6:
                     bottleContainer1 = draw.addBottleContainer(+fsLevelNumber).bottleContainer1;
                     bottleContainer2 = draw.addBottleContainer(+fsLevelNumber).bottleContainer2;
-                    bottleBG1 = draw.addBottleBG(bottleContainer1, wheels[0].elements[1]);
-                    bottleBG2 = draw.addBottleBG(bottleContainer2, wheels[4].elements[1]);
+                    bottleBG1 = draw.addBottleBG(bottleContainer1, 10);
+                    bottleBG2 = draw.addBottleBG(bottleContainer2, 16);
 
                     bottle1 = game.add.spine(0, 70, 'bottle');
                     bottle2 = game.add.spine(0, 70, 'bottle');
-                    draw.playBottleAnim(bottle1, wheels[0].elements[1]);
-                    draw.playBottleAnim(bottle2, wheels[4].elements[1]);
+                    draw.playBottleAnim(bottle1, 10);
+                    draw.playBottleAnim(bottle2, 16);
 
                     draw.hideWheels([0, 4]);
                     break;
@@ -430,16 +430,16 @@ export let view = (() => {
                     bottleContainer1 = draw.addBottleContainer(+fsLevelNumber).bottleContainer1;
                     bottleContainer2 = draw.addBottleContainer(+fsLevelNumber).bottleContainer2;
                     bottleContainer3 = draw.addBottleContainer(+fsLevelNumber).bottleContainer3;
-                    bottleBG1 = draw.addBottleBG(bottleContainer1, wheels[0].elements[1]);
-                    bottleBG2 = draw.addBottleBG(bottleContainer2, wheels[2].elements[1]);
-                    bottleBG3 = draw.addBottleBG(bottleContainer3, wheels[4].elements[1]);
+                    bottleBG1 = draw.addBottleBG(bottleContainer1, 10);
+                    bottleBG2 = draw.addBottleBG(bottleContainer2, 13);
+                    bottleBG3 = draw.addBottleBG(bottleContainer3, 16);
 
                     bottle1 = game.add.spine(0, 70, 'bottle');
                     bottle2 = game.add.spine(0, 70, 'bottle');
                     bottle3 = game.add.spine(0, 70, 'bottle');
-                    draw.playBottleAnim(bottle1, wheels[0].elements[1]);
-                    draw.playBottleAnim(bottle2, wheels[2].elements[1]);
-                    draw.playBottleAnim(bottle3, wheels[4].elements[1]);
+                    draw.playBottleAnim(bottle1, 10);
+                    draw.playBottleAnim(bottle2, 13);
+                    draw.playBottleAnim(bottle3, 16);
 
                     draw.hideWheels([0, 2, 4]);
                     break;
@@ -595,13 +595,13 @@ export let view = (() => {
             let bottleBG;
             let game = model.el('game');
             let y = (model.desktop) ? 12 : 2;
-            if (element.active === 10) {
+            if (element === 10) {
                 bottleBG = game.add.sprite(0, y, 'green', null, container);
             }
-            if (element.active === 13) {
+            if (element === 13) {
                 bottleBG = game.add.sprite(0, y, 'red', null, container);
             }
-            if (element.active === 16) {
+            if (element === 16) {
                 bottleBG = game.add.sprite(0, y, 'orange', null, container);
             }
             bottleBG.anchor.set(0.5);
@@ -647,17 +647,17 @@ export let view = (() => {
             if (model.mobile) {
                 bottle.scale.set(0.75);
             }
-            if (element.active === 10) {
+            if (element === 10) {
                 bottle.setAnimationByName(0, 'bang1_g', false);
                 bottle.addAnimationByName(0, 'open_g', false);
                 bottle.addAnimationByName(0, 'pena_idle_g', true);
             }
-            if (element.active === 13) {
+            if (element === 13) {
                 bottle.setAnimationByName(0, 'bang1_r', false);
                 bottle.addAnimationByName(0, 'open_r', false);
                 bottle.addAnimationByName(0, 'pena_idle_r', true);
             }
-            if (element.active === 16) {
+            if (element === 16) {
                 bottle.setAnimationByName(0, 'bang1_y', false);
                 bottle.addAnimationByName(0, 'open_y', false);
                 bottle.addAnimationByName(0, 'pena_idle_y', true);

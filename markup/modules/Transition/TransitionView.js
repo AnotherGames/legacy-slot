@@ -102,7 +102,7 @@ export let view = (() => {
 
         // выбираем надпись для конечного экрна (Big Win --- Total Win)
         let winTextFrame;
-        if (model.data('fsMulti') === 8) {
+        if (model.data('fsMulti') === 4) {
             winTextFrame = 'bigW.png';
         } else {
             winTextFrame = 'totalW.png';

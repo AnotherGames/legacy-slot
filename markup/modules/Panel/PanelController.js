@@ -288,7 +288,7 @@ export let controller = (() => {
         }
     }
 
-    function drawFsPanel(index) {
+    function drawFsPanel(index, fsCount) {
         let game = model.el('game');
         let framePanel;
 
@@ -337,9 +337,16 @@ export let controller = (() => {
             container.removeAll();
             balanceController.initFSMobile();
         }
-
+        let fsMulti;
+        if (+index >= 1 && +index <= 3) {
+            fsMulti = 'x2'
+        } else if (+index >= 4 && +index <= 6) {
+            fsMulti = 'x3'
+        } else if (+index === 7) {
+            fsMulti = 'x4'
+        }
         view.draw.FsLevelAndMulti({});
-        view.draw.changeLevelAndMulti({});
+        view.draw.changeLevelAndMulti({multi: fsMulti, count: fsCount});
 
     }
 

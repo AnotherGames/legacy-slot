@@ -35,9 +35,9 @@ export let controller = (() => {
         game.input.keyboard.enabled = false;
 
         // Изменяем панель на FS
-        panelController.drawFsPanel(numberOfSpins);
+        panelController.drawFsPanel(fsLevelNumber, numberOfSpins);
 
-        fsController.init(10);
+        fsController.init(numberOfSpins);
 
         // Персонаж объявляет количество фриспинов
         game.time.events.add(500, () => {
@@ -59,7 +59,7 @@ export let controller = (() => {
 
         if (mode === 'root' && nextMode.indexOf('fsBonus') !== -1 ) {
             let fsBonusLevel = nextMode[7];
-            drawFsState(fsBonusLevel, fsBonusLevel);
+            drawFsState(fsBonusLevel, 7);
         }
     }
 

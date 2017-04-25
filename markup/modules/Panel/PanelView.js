@@ -28,8 +28,8 @@ export let view = (() => {
         FsLevelAndMulti: function ({
             game = model.el('game'),
             container = model.group('panelFS'),
-            startLevel = 15,
-            startMulti = 'x3',
+            startLevel = 8,
+            startMulti = 'x1',
             fontDesktop = '80px Cooper, Arial',
             fontMobile = '40px Cooper, Arial',
             x = container.width / 2 + 10,
@@ -70,13 +70,13 @@ export let view = (() => {
         changeLevelAndMulti: function ({
             fsCount = model.el('fs:count'),
             fsMulti = model.el('fs:multi'),
+            multi,
+            count
         }) {
-            let freeSpinsCount = model.data('rollResponse').FreeSpinsLeft;
             setTimeout(() => {
-                fsCount.text = freeSpinsCount;
-                fsMulti.text = 'x2';
+                fsCount.text = count;
+                fsMulti.text = multi;
             }, 500);
-            console.log(fsCount, fsMulti);
         },
 
         AutoContainer: function ({

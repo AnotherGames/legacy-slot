@@ -111,7 +111,7 @@ export class Main {
 
         if (model.data('savedFS')) {
             let saved = model.data('savedFS');
-            winController.drawFsState(saved.Level, saved.fsCount);
+            winController.drawFsState(saved.fsLevel, saved.fsCount);
         }
 
     }

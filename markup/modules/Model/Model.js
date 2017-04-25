@@ -163,7 +163,7 @@ export let model = (() => {
 	function initFreespin(data) {
 		let saved  = data.Saved;
 		let fsCount = +saved.RemainSpins + 1;
-		let fsLevel = saved.Multiplier.MultiplierStep;
+		let fsLevel = saved.BonusName[7];
 		let fsMulti = saved.Multiplier.MultiplierValue;
 		let totalWin = saved.CurrentTotalWinCoins;
 		let winCash = saved.CurrentTotalWinCents;
@@ -186,7 +186,7 @@ export let model = (() => {
 			fsMulti,
 			state
 		});
-	}
+    }
 
 	function initMain() {
 		model.data('savedFS', {	state: 'Main' });

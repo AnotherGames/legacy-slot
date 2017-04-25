@@ -1,5 +1,5 @@
-import { model } from 'modules/Model/Model';
-import { request } from '../../../../Info/Request';
+import {model} from 'modules/Model/Model';
+import {request} from '../../../../Info/Request';
 
 export class Boot {
 
