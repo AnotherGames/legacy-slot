@@ -79,11 +79,11 @@ export class Preload {
 
     loadMainAssets() {
         const game = model.el('game');
-        game.load.spritesheet('bigFish', 'bonus/bigFish.png', 226, 182, 12);
         game.load.image('mainBG', 'bg/mainBG.jpg');
-        game.load.image('transitionBG1', 'bg/transitionBG1.png');
-        game.load.image('transitionBG2', 'bg/transitionBG2.jpg');
-        game.load.image('bubble', 'bg/bubble.png');
+        // game.load.spritesheet('bigFish', 'bonus/bigFish.png', 226, 182, 12);
+        // game.load.image('transitionBG1', 'bg/transitionBG1.png');
+        // game.load.image('transitionBG2', 'bg/transitionBG2.jpg');
+        // game.load.image('bubble', 'bg/bubble.png');
         // game.load.image('eyeLight', 'bg/eyeLight.png');
         // game.load.image('topLight', 'bg/topLight.png');
         // game.load.spritesheet('labelLight', 'bg/labelLight.png', 617, 508, 3);
@@ -100,7 +100,9 @@ export class Preload {
         game.load.atlasJSONArray('coins', 'bonus/coins.png', 'bonus/coins.json');
         game.load.image('winLine', 'win/winNumber.png');
         game.load.image('winTotal', 'win/winTable.png');
-        game.load.atlasJSONArray('winSplash', 'win/splash.png', 'win/splash.json');
+        game.load.image('lightLine', 'win/lightLine.png');
+        game.load.spritesheet('winSplash', 'win/winSplash.png', 169, 167, 24);
+        // game.load.atlasJSONArray('winSplash', 'win/splash.png', 'win/splash.json');
         game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
         game.load.atlasJSONArray('footerButtons', 'footer/footerButtons.png', 'footer/footerButtons.json');
         game.load.bitmapFont('numbersFont', 'numbers/numbers.png', 'numbers/numbers.xml');
@@ -119,8 +121,8 @@ export class Preload {
     loadFSAssets() {
         const game = model.el('game');
         game.load.image('fsBG', 'bg/fsBG.jpg');
-        game.load.image('octopusChar', 'fs/octopus.png');
-        game.load.image('diverChar', 'fs/diver.png');
+        game.load.image('lizaBonus', 'fs/lizaBonus.png');
+        game.load.image('lizaFS', 'fs/lizaFS.png');
         if (model.mobile) {
             game.load.image('fsCountBG', 'fs/fsCountBG.png');
             game.load.image('fsLevelBG', 'fs/fsLevelBG.png');

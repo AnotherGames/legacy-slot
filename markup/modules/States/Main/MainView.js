@@ -87,7 +87,7 @@ export let view = (() => {
             machineGroup = model.group('machine')
         }) {
             const elSize = config[model.res].elements;
-            let deltaY = (model.desktop) ? 30 : -25;
+            let deltaY = (model.desktop) ? 30 : -10;
             let someGraphic = game.add.graphics(-elSize.width * 2.5, -elSize.height * 1.5 + deltaY, machineGroup);
             someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5, elSize.height * 3);
             machineGroup.mask = someGraphic;
@@ -250,27 +250,30 @@ export let view = (() => {
             let lineNumbersArr = [];
 
             let y = (model.desktop) ?
-                [252, 297, 342, 387, 495, 543, 585, 735, 780, 825, 871, 252, 297, 342, 387, 543, 590, 637, 735, 780, 825, 870] :
-                [68, 103, 138, 173, 285, 320, 355, 435, 470, 505, 540, 68, 103, 138, 173, 285, 320, 355, 435, 470, 505, 540];
+                [252, 297, 342, 390, 495, 543, 590, 735, 785, 830, 875, 252, 297, 345, 390, 543, 590, 637, 737, 782, 832, 877] :
+                [73, 108, 143, 178, 258, 292, 328, 438, 473, 508, 543, 73, 108, 143, 178, 290, 325, 360, 438, 473, 508, 543];
 
             let numbs = [4, 6, 18, 11, 9, 1, 20, 10, 19, 7, 5, 13, 15, 2, 17, 1, 21, 8, 16, 3, 14, 12];
 
-            let deltaXright = (model.desktop) ? 105 : 81;
-            let deltaXleft = (model.desktop) ? 109 : 83;
+            let deltaXright = (model.desktop) ? 45 : 18;
+            let deltaXleft = (model.desktop) ? 29 : 12;
             let x = gameMachine.left + deltaXleft;
 
             for (let i = 0; i < 22; i++) {
                 if (i == 11) x = gameMachine.right - deltaXright;
                 let lineNumber = game.add.sprite(x, y[i] - gameMachine.height / 2,
                     'winSplash',
-                    'skeleton-animation_5.png',
+                    null,
                     container);
 
                 lineNumber.name = numbs[i];
                 lineNumber.anchor.set(0.5);
+                if (model.mobile) {
+                    lineNumber.scale.set(0.75);
+                }
                 lineNumber.alpha = 0.05;
 
-                lineNumber.animations.add('win', Phaser.Animation.generateFrameNames('skeleton-animation_', 1, 14, '.png', 1), 20, false);
+                lineNumber.animations.add('win');
 
                 if (model.state('fs')) {
                     lineNumbersArr.push(lineNumber);
@@ -321,10 +324,10 @@ export let view = (() => {
             let elSize = config[model.res].elements;
             let lineShape = game.add.graphics(0, 0, container);
             let gameMachine = model.el('gameMachine');
-            let deltaX = 150;
+            let deltaX = 50;
             let deltaY = (model.desktop) ? 200 : 40;
             lineShape
-               .lineStyle(4, 0x188bb4, 0.8)
+               .lineStyle(4, 0x634c42, 0.8)
                .moveTo((line[0].X + 0.5) * elSize.width - gameMachine.width / 2 + deltaX, (line[0].Y + 0.5) * elSize.height - gameMachine.height / 2 + deltaY)
                .lineTo((line[1].X + 0.5) * elSize.width - gameMachine.width / 2 + deltaX, (line[1].Y + 0.5) * elSize.height - gameMachine.height / 2 + deltaY)
                .lineTo((line[2].X + 0.5) * elSize.width - gameMachine.width / 2 + deltaX, (line[2].Y + 0.5) * elSize.height - gameMachine.height / 2 + deltaY)

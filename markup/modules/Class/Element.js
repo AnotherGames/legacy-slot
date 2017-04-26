@@ -55,10 +55,15 @@ export class Element {
 
     win(loop = false) {
         // Проигрывам выигрышную анимацию
-        this.play(`${this.active}-w`, loop, 30);
+        if (this.active == 1 || this.active == 3 || this.active == 5 || this.active == 7) {
+            loop = true;
+        }
+
+        this.play(`${this.active}-w`, loop, 15);
+        // this.activeSprite.animations.currentAnim.enableUpdate = true;
         // this.activeSprite.animations.currentAnim.onUpdate.add(() => {
         //     // После которой опять играем нормальную анимацию
-        //     console.log(this.activeSprite.animations.currentAnim);
+        //     console.log(this.activeSprite.animations.currentAnim.currentFrame);
         // });
 
         this.activeSprite.animations.currentAnim.onComplete.add(() => {
@@ -79,13 +84,11 @@ export class Element {
 
     hide(alpha = 0.5) {
         // Делаем элемент полупрозрачным
-        // this.bg.alpha = alpha;
         this.group.alpha = alpha;
     }
 
     show() {
         // Возращаем нормальное состояние
-        // this.bg.alpha = 1;
         this.group.alpha = 1;
     }
 
@@ -93,34 +96,34 @@ export class Element {
     addSpriteAnimation(sprite, index) {
         switch (index) {
             case 1:
-                this.addAnimation(sprite, { el: 1, n: false, w: 4 });
+                this.addAnimation(sprite, { el: 1, n: false, w: 3 });
                 break;
             case 2:
-                this.addAnimation(sprite, { el: 2, n: false, w: 18 });
+                this.addAnimation(sprite, { el: 2, n: false, w: 17 });
                 break;
             case 3:
-                this.addAnimation(sprite, { el: 3, n: false, w: 4 });
+                this.addAnimation(sprite, { el: 3, n: false, w: 3 });
                 break;
             case 4:
-                this.addAnimation(sprite, { el: 4, n: false, w: 18 });
+                this.addAnimation(sprite, { el: 4, n: false, w: 17 });
                 break;
             case 5:
-                this.addAnimation(sprite, { el: 5, n: false, w: 4 });
+                this.addAnimation(sprite, { el: 5, n: false, w: 3 });
                 break;
             case 6:
-                this.addAnimation(sprite, { el: 6, n: false, w: 18 });
+                this.addAnimation(sprite, { el: 6, n: false, w: 17 });
                 break;
             case 7:
-                this.addAnimation(sprite, { el: 7, n: false, w: 4 });
+                this.addAnimation(sprite, { el: 7, n: false, w: 3 });
                 break;
             case 8:
-                this.addAnimation(sprite, { el: 8, n: false, w: 18 });
+                this.addAnimation(sprite, { el: 8, n: false, w: 17 });
                 break;
             case 9:
-                this.addAnimation(sprite, { el: 9, n: false, w: 18 });
+                this.addAnimation(sprite, { el: 9, n: false, w: 17 });
                 break;
             case 10:
-                this.addAnimation(sprite, { el: 10, n: false, w: 18 });
+                this.addAnimation(sprite, { el: 10, n: false, w: 17 });
                 break;
             case 11:
                 this.addDiverAnimation(sprite, { el: 11 });
@@ -132,7 +135,7 @@ export class Element {
                 this.addDiverAnimation(sprite, { el: 13 });
                 break;
             case 14:
-                this.addAnimation(sprite, { el: 14, n: false, w: 18 });
+                this.addAnimation(sprite, { el: 14, n: false, w: 17 });
                 break;
             default:
                 break;

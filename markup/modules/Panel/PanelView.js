@@ -7,7 +7,7 @@ export let view = (() => {
         PanelBG: function ({
             game = model.el('game'),
             container = model.group('panel'),
-            x = game.world.centerX,
+            x = game.world.centerX + 200,
             y = model.el('gameMachine').height - ((model.state('fs')) ? 20 : 10)
         }) {
             container.x = x;

@@ -65,11 +65,11 @@ export class Glista {
         this.sprites = [];
         this.light = [];
         for (let atlasInd = 0; atlasInd <= 30; atlasInd++) {
-            let sprite = this.game.add.sprite( atlasInd * -80, 0, 'bubble', null, param.parent);
+            let sprite = this.game.add.sprite( atlasInd * -80, 0, 'lightLine', null, param.parent);
             sprite.anchor.set(0.5);
             sprite.visible = false;
             sprite.myDeltaY = this.game.rnd.integerInRange(-30, 30) + (model.desktop) ? 40 : -10;
-            sprite.myScale = this.game.rnd.integerInRange(1, 5) / (atlasInd + 5);
+            sprite.myScale = this.game.rnd.integerInRange(15, 20) / (atlasInd + 5);
             this.sprites.push(sprite);
 
             // let lightSprite = this.game.add.sprite( atlasInd * -80, 0, 'ligthGlista', null, param.lightParent);

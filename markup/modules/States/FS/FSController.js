@@ -41,9 +41,9 @@ export let controller = (() => {
 	}
 
 	function count({
-		               start,
-		               end
-	               }) {
+		start,
+		end
+	    }) {
 		if (start) {
 			let newFsCount = model.data('fs:count');
 			newFsCount--;
@@ -67,7 +67,7 @@ export let controller = (() => {
 		model.state('fs:end', true);
 		model.updateBalance({endFS: true});
 		model.state('fs', false);
-		// bulletCounter = 0;
+
 	}
 
 	function chestActions() {
@@ -84,15 +84,15 @@ export let controller = (() => {
 		let currMulti = model.data('fsMulti');
 
 		// Увеличиваем мульти(разбивание бутылки)
-		if (multiValue > currMulti) {
-			fsView.draw.changeMulti({number: multiValue, animation: multiValue + ''});
-			model.data('fsMulti', multiValue);
-		}
-
-		if (levelValue > currLevel) {
-			fsView.draw.changeLevel({number: levelValue, animation: levelValue - 1 + ''});
-			model.data('fsLevel', levelValue);
-		}
+		// if (multiValue > currMulti) {
+		// 	fsView.draw.changeMulti({number: multiValue, animation: multiValue + ''});
+		// 	model.data('fsMulti', multiValue);
+		// }
+		//
+		// if (levelValue > currLevel) {
+		// 	fsView.draw.changeLevel({number: levelValue, animation: levelValue - 1 + ''});
+		// 	model.data('fsLevel', levelValue);
+		// }
 
 	}
 
@@ -170,11 +170,11 @@ export class FS {
 			// Отрисовуем баланс
 			balanceController.initFSDesktop();
 			// BG animations
-			mainView.draw.addBubbles({});
-			mainView.draw.addShark({});
-			game.time.events.add(6000, () => {
-				mainView.draw.addFishes({});
-			});
+			// mainView.draw.addBubbles({});
+			// mainView.draw.addShark({});
+			// game.time.events.add(6000, () => {
+			// 	mainView.draw.addFishes({});
+			// });
 		}
 
 		// Добавляем маску

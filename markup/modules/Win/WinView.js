@@ -15,15 +15,16 @@ export let view = (() => {
         }) {
             let elSize = config[model.res].elements;
             let upWheels = [];
-            let deltaY = (model.desktop) ? 0 : 50;
+            let deltaX = (model.desktop) ? 20 : 10;
+            let deltaY = (model.desktop) ? 20 : -10;
             for (let i = 0; i < 5; i++) {
                 upWheels.push([]);
                 for (let j = 0; j < 3; j++) {
                     let el = new Element({
                         container,
                         position: {
-                            x: elSize.width * (i + 0.5 - 2.5),
-                            y: elSize.height * (j + 0.5 - 1.5) - deltaY
+                            x: elSize.width * (i + 0.5 - 2.5) - deltaX,
+                            y: elSize.height * (j + 0.5 - 1.5) + deltaY
                         }
                     });
                     el.hide(0);
@@ -56,7 +57,7 @@ export let view = (() => {
             })[0];
 
             winSplash.alpha = 1;
-            winSplash.animations.play('win');
+            winSplash.animations.play('win', 25, false);
             winSplash.animations.getAnimation('win').onComplete.add(() => {
                 winSplash.alpha = 0.05;
             });
@@ -227,10 +228,10 @@ export let view = (() => {
             if (!scatter) {
                 currentLineY = model.data('lines')[lineValue - 1][countValue - 1].Y;
                 if (model.mobile) {
-                    x = 192 * (countValue - 0.5) + 165 - gameMachine.width / 2;
-                    y = 180 * (currentLineY + 0.5) + 125 - gameMachine.height / 2 - 25;
+                    x = 192 * (countValue - 0.5) + 120 - gameMachine.width / 2;
+                    y = 180 * (currentLineY + 0.5) + 140 - gameMachine.height / 2 - 25;
                 } else {
-                    x = 256 * (countValue - 0.5) + 200 - gameMachine.width / 2;
+                    x = 256 * (countValue - 0.5) + 150 - gameMachine.width / 2;
                     y = 240 * (currentLineY + 0.5) + 310 - gameMachine.height / 2 - 25;
                 }
             }
@@ -251,10 +252,10 @@ export let view = (() => {
                     });
                 });
                 if (model.mobile) {
-                    x = 192 * (lastWheel + 0.5) + 165 - gameMachine.width / 2;
-                    y = 180 * (lastElement + 0.5) + 125 - gameMachine.height / 2 - 25;
+                    x = 192 * (lastWheel + 0.5) + 120 - gameMachine.width / 2;
+                    y = 180 * (lastElement + 0.5) + 140 - gameMachine.height / 2 - 25;
                 } else {
-                    x = 256 * (lastWheel + 0.5) + 200 - gameMachine.width / 2;
+                    x = 256 * (lastWheel + 0.5) + 150 - gameMachine.width / 2;
                     y = 240 * (lastElement + 0.5) + 310 - gameMachine.height / 2 - 25;
                 }
             }
@@ -262,13 +263,16 @@ export let view = (() => {
             // Рисуем саму табличку и текст в зависимости от количества символов
             let winBG = game.add.sprite(x, y, 'winLine', null, container);
             winBG.anchor.set(0.5);
+            if (model.desktop) {
+                winBG.scale.set(1.3);
+            }
             let font;
             if (winValue > 999) {
-                font = '15px Arial, Helvetica';
+                font = '14px Arial, Helvetica';
             } else if (winValue > 99) {
                 font = '18px Arial, Helvetica';
             } else {
-                font = '25px Arial, Helvetica';
+                font = '22px Arial, Helvetica';
             }
             let text = game.add.text(x, y + 4, winValue, {font: font, fill: '#fff'}, container);
             text.anchor.set(0.5);

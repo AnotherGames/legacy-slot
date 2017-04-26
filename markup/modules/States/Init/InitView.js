@@ -17,6 +17,10 @@ export let view = (() => {
         initLogo.scale.setTo(0.1, 0.1);
         game.add.tween(initLogo.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true);
         model.el('initLogo', initLogo);
+
+        // let el = game.add.sprite(game.world.centerX, game.world.centerY, '1');
+        // el.animations.add('win');
+        // el.animations.play('win', 20, true);
         return initLogo;
     }
 
