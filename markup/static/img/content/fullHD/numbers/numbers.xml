@@ -1,10 +1,8 @@
 <font>
-	<info face="C:\Users\User\Desktop
-umbers-export" size="80" />
+	<info face="numbers" size="80" />
 	<common lineHeight="80" scaleW="911" scaleH="966" pages="1" />
 	<pages>
-		<page id="0" file="C:\Users\User\Desktop
-umbers-export.png" />
+		<page id="0" file="numbers.png" />
 	</pages>
 	<chars count="13">
 		<char id="48" x="0" y="342" width="241" height="318" xoffset="0" yoffset="-238" xadvance="242" /><!-- 0 -->
