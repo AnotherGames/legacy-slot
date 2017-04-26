@@ -75,7 +75,17 @@ export let controller = (() => {
                     mainView.draw.showPopup({message: data.ErrorMessage});
                     return;
                 } else {
-                    // Очищаем выигрышный экран
+                    // Для отображения правильного цвета бутылок
+	                let elem = 9;
+	                for(let i = 0; i < 3; i += 2){
+	                    for(let k = 1; k < 4; k++){
+		                    if (data.Screen[k][i] === '21') {
+			                    data.Screen[k][i] = elem +='';
+                            }
+                            +elem++
+                        }
+                    }
+	                // Очищаем выигрышный экран
                     winController.cleanWin();
 
                     // Записываем полученные данные

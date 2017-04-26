@@ -12,13 +12,11 @@ export let view = (() => {
 
     function _fsStartDraw() {
         let game = model.el('game');
-        let transitionContainer = model.group('transition');
         // Изменяем музыку
         soundController.music.stopMusic('fon');
         soundController.sound.playSound({sound: 'startPerehod'});
 
         let boyContainer = game.add.group();
-        transitionContainer.add(boyContainer);
 
         let boy = game.add.spine(game.width * 0.11, game.height * 0.7, 'boy');
         boy.setAnimationByName(0, 'S2-newone', false);
@@ -69,6 +67,7 @@ export let view = (() => {
 
         game.add.tween(boyContainer.scale).to({x: 0.1, y: 0.1}, 500, 'Linear', true)
             .onComplete.add(() => {
+                boyContainer.destroy();
                 transitionContainer.removeAll();
             }, this);
     }
@@ -173,12 +172,9 @@ export let view = (() => {
 
         game.add.tween(transitionContainer).to({alpha: 1}, 500, 'Linear', true);
         game.add.tween(winCount).to({y: game.height * 0.4}, 1500, Phaser.Easing.Bounce.Out, true, 500);
-        game.add.tween(winText).to({y: game.height * 0.2}, 1500, Phaser.Easing.Bounce.Out, true, 500)
-            .onComplete.add(() => {
-                let winCountValue = model.data('rollResponse').FsBonus.TotalFSWinCoins + model.data('rollResponse').Balance.TotalWinCoins;
-                _сountMeter(winCountValue, winCount);
-            });
-
+        game.add.tween(winText).to({y: game.height * 0.2}, 1500, Phaser.Easing.Bounce.Out, true, 500);
+        let winCountValue = model.data('rollResponse').FsBonus.TotalFSWinCoins + model.data('rollResponse').Balance.TotalWinCoins;
+        _сountMeter(winCountValue, winCount);
     }
 
     function fsStart() {

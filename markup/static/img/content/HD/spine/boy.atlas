@@ -1,90 +1,90 @@
 
 boy.png
-size: 1024,512
+size: 2048,2048
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 img/Boy_Fase3_0000_Glaza2
   rotate: false
-  xy: 2, 31
-  size: 156, 102
-  orig: 156, 102
+  xy: 2, 3
+  size: 391, 256
+  orig: 391, 256
   offset: 0, 0
   index: -1
 img/Boy_Fase3_0001_Glaza
-  rotate: true
-  xy: 871, 349
-  size: 156, 103
-  orig: 156, 103
+  rotate: false
+  xy: 395, 2
+  size: 390, 257
+  orig: 390, 257
   offset: 0, 0
   index: -1
 img/Boy_Fase3_0002_Rot2
   rotate: false
-  xy: 871, 255
-  size: 107, 92
-  orig: 107, 92
+  xy: 667, 621
+  size: 268, 229
+  orig: 268, 229
   offset: 0, 0
   index: -1
 img/Boy_Fase3_0003_Rot5
   rotate: false
-  xy: 160, 43
-  size: 127, 90
-  orig: 127, 90
+  xy: 667, 852
+  size: 318, 225
+  orig: 318, 225
   offset: 0, 0
   index: -1
 img/Boy_Fase3_0004_Rot3
   rotate: false
-  xy: 322, 80
-  size: 205, 158
-  orig: 205, 158
+  xy: 800, 1079
+  size: 512, 396
+  orig: 512, 396
   offset: 0, 0
   index: -1
 img/Boy_Fase3_0005_Rot
   rotate: false
-  xy: 652, 293
-  size: 217, 212
-  orig: 217, 212
+  xy: 800, 1477
+  size: 542, 530
+  orig: 542, 530
   offset: 0, 0
   index: -1
 img/Boy_Fase3_0006_Nos
   rotate: false
-  xy: 976, 471
-  size: 41, 34
-  orig: 41, 34
+  xy: 987, 993
+  size: 103, 84
+  orig: 103, 84
   offset: 0, 0
   index: -1
 img/Boy_Fase3_0007_Eyebrows2
   rotate: false
-  xy: 652, 243
-  size: 42, 48
-  orig: 42, 48
+  xy: 1846, 1887
+  size: 104, 120
+  orig: 104, 120
   offset: 0, 0
   index: -1
 img/Boy_Fase3_0008_Eyebrows1
   rotate: false
-  xy: 2, 2
-  size: 47, 27
-  orig: 47, 27
+  xy: 667, 551
+  size: 118, 68
+  orig: 118, 68
   offset: 0, 0
   index: -1
 img/Boy_Fase3_0009_Loco
-  rotate: false
-  xy: 322, 240
-  size: 328, 265
-  orig: 328, 265
+  rotate: true
+  xy: 2, 261
+  size: 820, 663
+  orig: 820, 663
   offset: 0, 0
   index: -1
 img/Boy_Fase3_0010_Hair
   rotate: false
-  xy: 2, 135
-  size: 318, 370
-  orig: 318, 370
+  xy: 2, 1083
+  size: 796, 924
+  orig: 796, 924
   offset: 0, 0
   index: -1
 img/Cloud
   rotate: false
-  xy: 529, 38
-  size: 200, 200
-  orig: 200, 200
+  xy: 1344, 1507
+  size: 500, 500
+  orig: 500, 500
   offset: 0, 0
   index: -1
