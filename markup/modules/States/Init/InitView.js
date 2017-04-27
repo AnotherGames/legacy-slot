@@ -8,18 +8,6 @@ export let view = (() => {
         let initBG = game.add.sprite(0, 0, 'initBG');
 
         return initBG;
-        // if (model.desktop) {
-        //     initBG = game.add.spine(game.world.centerX, game.world.centerY, 'fon');
-        //     initBG.setAnimationByName(0, 'show', false);
-        //     initBG.addAnimationByName(0, 'move', true);
-        //
-        // } else {
-        //
-        //     let luchi = game.add.sprite(game.world.centerX, game.world.centerY, 'shine');
-        //     luchi.anchor.set(0.5);
-        //     game.add.tween(luchi).to({rotation: 2 * Math.PI, alpha: 0.1}, 30000, 'Linear', true, 0, -1, true);
-        // }
-
     }
 
     function drawLogo() {
@@ -32,15 +20,6 @@ export let view = (() => {
         if (model.mobile) {
             initFon.scale.set(0.66);
         }
-
-        // let initMain = game.add.sprite(game.world.centerX, game.height * 0.45, 'initMain');
-        // initMain.anchor.set(0.5);
-        //
-        // let initLogo = game.add.sprite(game.world.centerX, game.height * 0.6, 'logoInit');
-        // initLogo.anchor.set(0.5);
-
-        // let logosSmall = game.add.sprite(game.width * 0.1, game.height * 0.93, 'logosSmall');
-        // logosSmall.anchor.set(0.5);
     }
 
     function drawPlay() {
