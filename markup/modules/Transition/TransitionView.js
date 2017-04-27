@@ -1,7 +1,6 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
 
-import { controller as keyboardController } from '../../../Info/KeyboardController';
 import { controller as soundController } from '../../../Info/SoundController';
 
 import { view as mainView } from 'modules/States/Main/MainView';
@@ -59,16 +58,17 @@ export let view = (() => {
     function transitionInFs() {
         soundController.sound.stopSound({sound: 'startPerehod'});
         soundController.music.playMusic('fsFon');
-        model.state('transitionScreen', false);
-
         let game = model.el('game');
-        let transitionContainer = model.group('transition');
-        let boyContainer = model.group('boy');
+	    game.input.keyboard.enabled = false;
+	    let transitionContainer = model.group('transition');
+	    let boyContainer = model.group('boy');
+
 
         game.add.tween(boyContainer.scale).to({x: 0.1, y: 0.1}, 500, 'Linear', true)
             .onComplete.add(() => {
                 boyContainer.destroy();
                 transitionContainer.removeAll();
+
             }, this);
     }
 
@@ -76,14 +76,23 @@ export let view = (() => {
         let game = model.el('game');
         let winText = model.el('winText');
         let winCount = model.el('winCount');
-        soundController.sound.stopSound({sound: 'finishPerehod'});
+	    game.input.keyboard.enabled = false;
+	    soundController.sound.stopSound({sound: 'finishPerehod'});
         let transitionContainer = model.group('transition');
         game.add.tween(transitionContainer).to({alpha: 0}, 500, 'Linear', true)
             .onComplete.add(() => {
                 transitionContainer.removeAll();
                 winText.destroy();
                 winCount.destroy();
-            }, this);
+
+                if (model.desktop) {
+                    let settingsButton = model.el('settingsButton');
+                    settingsButton.alpha = 1;
+                }
+
+                model.state('transitionScreen', false);
+                game.input.keyboard.enabled = true;
+        }, this);
     }
 
     function _fsFinishDraw() {
@@ -180,7 +189,9 @@ export let view = (() => {
     function fsStart() {
         let game = model.el('game');
         model.state('transitionScreen', true);
-        // Запускаем затемнение
+	    model.state('transitionIn', true);
+	    game.input.keyboard.enabled = true;
+	    // Запускаем затемнение
         game.camera.flash(0x000000, 500);
         // Отрисовываем переходной экран
         _fsStartDraw();
@@ -192,9 +203,11 @@ export let view = (() => {
 
     function fsFinish() {
         let game = model.el('game');
-        // game.input.keyboard.enabled = true;
-        // keyboardController.initFsKeys(transitionInFs);
-        model.state('buttons:locked', false);
+
+	    model.state('transitionScreen', true);
+	    model.state('transitionIn', false);
+	    game.input.keyboard.enabled = true;
+	    model.state('buttons:locked', false);
         // Темнота
         game.camera.flash(0x000000, 500);
         // Отрисовка финишного экрана
@@ -206,11 +219,17 @@ export let view = (() => {
         game.time.events.add(config.autoTransitionTime + 4000, transitionOutFs);
     }
 
+	function transitionInOutFs() {
+		if (model.state('transitionIn')) {
+			transitionInFs()
+		} else {
+			transitionOutFs()
+		}
+	}
     return {
         fsStart,
         fsFinish,
-        transitionInFs,
-        transitionOutFs
+	    transitionInOutFs
     };
 
 })();
