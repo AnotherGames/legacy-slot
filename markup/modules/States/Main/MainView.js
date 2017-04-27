@@ -93,6 +93,67 @@ export let view = (() => {
             machineGroup.mask = someGraphic;
         },
 
+        addLight: function ({
+            game = model.el('game'),
+            container = model.group('main')
+        }) {
+            let x = (model.desktop) ? -game.width / 2 - 83 : -game.width / 2 + 160;
+            let y = (model.desktop) ? 95 : 0;
+            let light = game.add.sprite(x, y, 'light', null, container);
+            light.anchor.set(0.5);
+            model.el('light', light);
+            light.animations.add('move', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 22,
+            21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]);
+            light.animations.play('move', 15, true);
+            if (model.mobile) {
+                light.scale.set(0.66);
+            }
+        },
+
+        addGerman: function ({
+            game = model.el('game'),
+            container = model.group('main')
+        }) {
+            let germanAnims = [];
+            for (let i = 1; i < 4; i++) {
+                let german = game.add.sprite(-game.width / 2, 70, `german${i}`, null, container);
+                german.anchor.set(0.5);
+                german.scale.set(1.5);
+                german.animations.add('move');
+                if (i !== 1) {
+                    german.visible = false;
+                }
+                germanAnims.push(german);
+            }
+
+            model.el('germanAnims', germanAnims);
+
+            game.time.events.add(5000, () => {
+                this.moveGerman({});
+            });
+        },
+
+        moveGerman: function ({
+            game = model.el('game')
+        }) {
+            let germanAnims = model.el('germanAnims');
+            let rnd = game.rnd.integerInRange(0, 2);
+            let time = game.rnd.integerInRange(10, 20);
+
+            germanAnims.forEach((anim, index) => {
+                if (index === rnd) {
+                    anim.visible = true;
+                    anim.animations.play('move', 10, false);
+                } else {
+                    anim.visible = false;
+                }
+            });
+
+            game.time.events.add(time * 1000, () => {
+                this.moveGerman({});
+            });
+        },
+
         // addLight: function ({
         //     game = model.el('game'),
         //     container = model.group('bg')

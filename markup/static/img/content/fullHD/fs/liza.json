@@ -1,0 +1,188 @@
+{"frames": [
+
+{
+	"filename": "liza-01.png",
+	"frame": {"x":1,"y":666,"w":218,"h":662},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":442,"y":42,"w":218,"h":662},
+	"sourceSize": {"w":1280,"h":720}
+},
+{
+	"filename": "liza-02.png",
+	"frame": {"x":1,"y":1330,"w":207,"h":662},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":448,"y":42,"w":207,"h":662},
+	"sourceSize": {"w":1280,"h":720}
+},
+{
+	"filename": "liza-03.png",
+	"frame": {"x":1,"y":1,"w":206,"h":663},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":452,"y":42,"w":206,"h":663},
+	"sourceSize": {"w":1280,"h":720}
+},
+{
+	"filename": "liza-04.png",
+	"frame": {"x":210,"y":1330,"w":206,"h":662},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":453,"y":42,"w":206,"h":662},
+	"sourceSize": {"w":1280,"h":720}
+},
+{
+	"filename": "liza-05.png",
+	"frame": {"x":209,"y":1,"w":209,"h":662},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":451,"y":42,"w":209,"h":662},
+	"sourceSize": {"w":1280,"h":720}
+},
+{
+	"filename": "liza-06.png",
+	"frame": {"x":420,"y":1,"w":215,"h":660},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":446,"y":43,"w":215,"h":660},
+	"sourceSize": {"w":1280,"h":720}
+},
+{
+	"filename": "liza-07.png",
+	"frame": {"x":221,"y":665,"w":218,"h":660},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":440,"y":43,"w":218,"h":660},
+	"sourceSize": {"w":1280,"h":720}
+},
+{
+	"filename": "liza-08.png",
+	"frame": {"x":441,"y":663,"w":219,"h":659},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":432,"y":44,"w":219,"h":659},
+	"sourceSize": {"w":1280,"h":720}
+},
+{
+	"filename": "liza-09.png",
+	"frame": {"x":418,"y":1327,"w":230,"h":659},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":414,"y":45,"w":230,"h":659},
+	"sourceSize": {"w":1280,"h":720}
+},
+{
+	"filename": "liza-10.png",
+	"frame": {"x":637,"y":1,"w":222,"h":657},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":417,"y":46,"w":222,"h":657},
+	"sourceSize": {"w":1280,"h":720}
+},
+{
+	"filename": "liza-11.png",
+	"frame": {"x":650,"y":1324,"w":199,"h":653},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":439,"y":47,"w":199,"h":653},
+	"sourceSize": {"w":1280,"h":720}
+},
+{
+	"filename": "liza-12.png",
+	"frame": {"x":662,"y":660,"w":198,"h":651},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":438,"y":48,"w":198,"h":651},
+	"sourceSize": {"w":1280,"h":720}
+},
+{
+	"filename": "liza-13.png",
+	"frame": {"x":1229,"y":1,"w":192,"h":650},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":442,"y":48,"w":192,"h":650},
+	"sourceSize": {"w":1280,"h":720}
+},
+{
+	"filename": "liza-14.png",
+	"frame": {"x":1229,"y":1305,"w":187,"h":650},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":449,"y":48,"w":187,"h":650},
+	"sourceSize": {"w":1280,"h":720}
+},
+{
+	"filename": "liza-15.png",
+	"frame": {"x":1418,"y":1304,"w":180,"h":648},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":459,"y":48,"w":180,"h":648},
+	"sourceSize": {"w":1280,"h":720}
+},
+{
+	"filename": "liza-16.png",
+	"frame": {"x":1423,"y":1,"w":184,"h":648},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":458,"y":48,"w":184,"h":648},
+	"sourceSize": {"w":1280,"h":720}
+},
+{
+	"filename": "liza-17.png",
+	"frame": {"x":1241,"y":653,"w":186,"h":649},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":458,"y":47,"w":186,"h":649},
+	"sourceSize": {"w":1280,"h":720}
+},
+{
+	"filename": "liza-18.png",
+	"frame": {"x":1051,"y":653,"w":188,"h":650},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":458,"y":47,"w":188,"h":650},
+	"sourceSize": {"w":1280,"h":720}
+},
+{
+	"filename": "liza-19.png",
+	"frame": {"x":861,"y":1,"w":188,"h":651},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":459,"y":47,"w":188,"h":651},
+	"sourceSize": {"w":1280,"h":720}
+},
+{
+	"filename": "liza-20.png",
+	"frame": {"x":851,"y":1313,"w":187,"h":651},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":462,"y":47,"w":187,"h":651},
+	"sourceSize": {"w":1280,"h":720}
+},
+{
+	"filename": "liza-21.png",
+	"frame": {"x":862,"y":654,"w":187,"h":651},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":464,"y":47,"w":187,"h":651},
+	"sourceSize": {"w":1280,"h":720}
+},
+{
+	"filename": "liza-22.png",
+	"frame": {"x":1040,"y":1307,"w":187,"h":651},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":466,"y":47,"w":187,"h":651},
+	"sourceSize": {"w":1280,"h":720}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "liza.png",
+	"format": "RGBA8888",
+	"size": {"w":2048,"h":2048},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:e97b305b0f3590865de888061772943a:a8d47975edbf7bb5c7dce5df7f7fe59c:a977ba3167f20643966c72ab8c65751d$"
+}
+}

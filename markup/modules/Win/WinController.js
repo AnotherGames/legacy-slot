@@ -214,8 +214,8 @@ export let controller = (() => {
             // Убираем управление с клавиатуры
             game.input.keyboard.enabled = false;
 
-            let middleEl = view.hide.CroppedDiver({});
-            view.draw.Diver({
+            let middleEl = view.hide.CroppedLiza({});
+            view.draw.Liza({
                 el: middleEl
             });
 

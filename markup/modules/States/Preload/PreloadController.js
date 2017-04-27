@@ -80,6 +80,7 @@ export class Preload {
     loadMainAssets() {
         const game = model.el('game');
         game.load.image('mainBG', 'bg/mainBG.jpg');
+        game.load.spritesheet('light', 'bg/light.png', 887, 1080, 24);
         // game.load.spritesheet('bigFish', 'bonus/bigFish.png', 226, 182, 12);
         // game.load.image('transitionBG1', 'bg/transitionBG1.png');
         // game.load.image('transitionBG2', 'bg/transitionBG2.jpg');
@@ -102,7 +103,6 @@ export class Preload {
         game.load.image('winTotal', 'win/winTable.png');
         game.load.image('lightLine', 'win/lightLine.png');
         game.load.spritesheet('winSplash', 'win/winSplash.png', 169, 167, 24);
-        // game.load.atlasJSONArray('winSplash', 'win/splash.png', 'win/splash.json');
         game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
         game.load.atlasJSONArray('footerButtons', 'footer/footerButtons.png', 'footer/footerButtons.json');
         game.load.bitmapFont('numbersFont', 'numbers/numbers.png', 'numbers/numbers.xml');
@@ -110,7 +110,9 @@ export class Preload {
         if (model.desktop) {
             game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
             game.load.image('gameMachineFS', 'game/gameMachineFS.png');
-            // game.load.image('autoSelect', 'desk_buttons/autoSelect.png');
+            game.load.atlasJSONArray('german1', 'bg/german1.png', 'bg/german1.json');
+            game.load.atlasJSONArray('german2', 'bg/german2.png', 'bg/german2.json');
+            game.load.atlasJSONArray('german3', 'bg/german3.png', 'bg/german3.json');
         }
         if (model.mobile) {
             game.load.atlasJSONArray('mobileButtons', 'mobile_buttons/mobileButtons.png', 'mobile_buttons/mobileButtons.json');
@@ -123,6 +125,7 @@ export class Preload {
         game.load.image('fsBG', 'bg/fsBG.jpg');
         game.load.image('lizaBonus', 'fs/lizaBonus.png');
         game.load.image('lizaFS', 'fs/lizaFS.png');
+        game.load.atlasJSONArray('liza', 'fs/liza.png', 'fs/liza.json');
         if (model.mobile) {
             game.load.image('fsCountBG', 'fs/fsCountBG.png');
             game.load.image('fsLevelBG', 'fs/fsLevelBG.png');
@@ -143,7 +146,7 @@ export class Preload {
         game.load.atlasJSONArray('tentacles', 'bonus/tentacles.png', 'bonus/tentacles.json');
         game.load.atlasJSONArray('bonusNumber', 'bonus/bonusNumber.png', 'bonus/bonusNumber.json');
         game.load.atlasJSONArray('illuminators', 'bonus/illuminators.png', 'bonus/illuminators.json');
-        game.load.image('light', 'bonus/light.png');
+        // game.load.image('light', 'bonus/light.png');
         game.load.image('octopus', 'bonus/octopus.png');
     }
 

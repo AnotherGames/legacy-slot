@@ -291,20 +291,19 @@ export let view = (() => {
             });
         },
 
-        Diver: function ({
+        Liza: function ({
             game = model.el('game'),
             el
         }) {
             let container = el.group.parent;
-            let diver = game.add.spine(0, el.group.y, 'diverBig');
-            if (model.mobile) {
-                diver.scale.set(0.75);
-            }
-            diver.pivot.x = 10;
-            diver.pivot.y = -380;
-            container.add(diver);
-            diver.setAnimationByName(1, '1', true);
-            model.el('diver', diver);
+            let liza = game.add.sprite(el.group.x + 80, el.group.y, 'liza');
+            liza.anchor.set(0.5);
+            // liza.pivot.x = 10;
+            // liza.pivot.y = -380;
+            container.add(liza);
+            liza.animations.add('move');
+            liza.animations.play('move', 20, false);
+            model.el('liza', liza);
         }
 
     };
@@ -330,7 +329,7 @@ export let view = (() => {
             return game.add.tween(container).to( { alpha: 0 }, 300, 'Linear', true);
         },
 
-        CroppedDiver: function ({
+        CroppedLiza: function ({
             wheels = model.el('wheels')
         }) {
             let middleEl;

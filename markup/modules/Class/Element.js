@@ -23,7 +23,7 @@ export class Element {
             if (i == 11
             || i == 12
             || i == 13 ) {
-                sprite.y += (model.desktop) ? 50 : 50 * 0.75;
+                sprite.y += (model.desktop) ? 30 : 30 * 0.75;
             }
             this.sprites.push(sprite);
 
@@ -126,13 +126,13 @@ export class Element {
                 this.addAnimation(sprite, { el: 10, n: false, w: 17 });
                 break;
             case 11:
-                this.addDiverAnimation(sprite, { el: 11 });
+                this.addLizaAnimation(sprite, { el: 11 });
                 break;
             case 12:
-                this.addDiverAnimation(sprite, { el: 12 });
+                this.addLizaAnimation(sprite, { el: 12 });
                 break;
             case 13:
-                this.addDiverAnimation(sprite, { el: 13 });
+                this.addLizaAnimation(sprite, { el: 13 });
                 break;
             case 14:
                 this.addAnimation(sprite, { el: 14, n: false, w: 17 });
@@ -143,7 +143,7 @@ export class Element {
         }
     }
 
-    addDiverAnimation(sprite, options) {
+    addLizaAnimation(sprite, options) {
         sprite.animations.add(`${options.el}-n`, [`${options.el}-n-00.png`]);
         sprite.animations.add(`${options.el}-b`, [`${options.el}-n-00.png`]);
         sprite.animations.add(`${options.el}-w`, [`${options.el}-n-00.png`]);

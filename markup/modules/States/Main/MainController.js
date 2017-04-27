@@ -94,17 +94,10 @@ export class Main {
             // Инициализируем управление клавиатурой
             keyboardController.initMainKeys(transitionView.transitionInFs);
             // BG animations
-            // mainView.draw.addBubbles({});
-            // mainView.draw.addShark({});
-            // mainView.draw.eyeLight({});
-            // game.time.events.add(6000, () => {
-            //     mainView.draw.addFishes({});
-            //     mainView.draw.labelLight({});
-            // });
+            mainView.draw.addGerman({});
         }
 
-        // mainView.draw.addLight({});
-
+        mainView.draw.addLight({});
         // Проверяем остались ли автокрутки
         this.checkForRemainAutoplay();
     }
