@@ -77,9 +77,17 @@ export class Init {
 
         view.stopYoyoTween();
 
-        game.camera.onFadeComplete.add(() => {
-            game.state.start('Main');
-        });
+	    game.camera.onFadeComplete.add(() => {
+		    switch (model.data('savedFS').state) {
+			    case 'Freespin': game.state.start('Main');
+				    break;
+			    default: {
+				    model.data('savedFS', null);
+				    game.state.start('Main');
+			    }
+				    break;
+		    }
+	    });
 
         game.camera.fade(0x000000, 500);
 

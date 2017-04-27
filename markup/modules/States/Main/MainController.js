@@ -107,15 +107,24 @@ export class Main {
         mainView.draw.machineMask({});
         // Инициализируем управление клавиатурой
         if (model.desktop) {
-            keyboardController.initMainKeys(transitionView.transitionOutFs);
+            keyboardController.initMainKeys(transitionView.transitionInOutFs);
         }
 
         // Проверяем остались ли автокрутки
         this.checkForRemainAutoplay();
 
         if (model.data('savedFS')) {
+	        let game = model.el('game');
+	        game.input.keyboard.enabled = false;
+	        model.state('buttons:locked', true);
+
+            if (model.desktop) {
+	            let settingsButton = model.el('settingsButton');
+	            settingsButton.alpha = 0.5;
+            }
+
             let saved = model.data('savedFS');
-            winController.drawFsState(saved.Level, saved.fsCount);
+            winController.drawFsState(saved.fsCount);
         }
 
     }

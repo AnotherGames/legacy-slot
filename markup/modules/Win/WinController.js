@@ -14,7 +14,7 @@ export let controller = (() => {
     model.data('glistaFiredCounter', 0);
     model.data('glistaDoneCounter', 0);
 
-    function drawFsState() {
+    function drawFsState(numberOfSpins) {
         let game = model.el('game');
         model.state('fs', true);
         // Изменяем панель на FS
@@ -29,7 +29,7 @@ export let controller = (() => {
         game.time.events.add(2000, () => {
             mainView.draw.changeBigLight({});
         });
-        fsController.init(model.data('rollResponse').FreeSpinsLeft);
+        fsController.init(numberOfSpins);
         mainView.draw.changeBG({});
         if (model.mobile) {
             model.group('buttons').visible = false;

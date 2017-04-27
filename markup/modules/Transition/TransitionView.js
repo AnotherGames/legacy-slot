@@ -1,7 +1,6 @@
 import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
 
-import { controller as keyboardController } from '../../../Info/KeyboardController';
 import { controller as soundController } from '../../../Info/SoundController';
 
 import { view as mainView } from 'modules/States/Main/MainView';
@@ -15,8 +14,8 @@ export let view = (() => {
     function fsStart() {
         let game = model.el('game');
         model.state('transitionScreen', true);
-        // Убираем управление с клавиатуры
-        game.input.keyboard.enabled = false;
+        model.state('transitionIn', true);
+	    game.input.keyboard.enabled = true;
         // Лочим все кнопки
         model.state('buttons:locked', true);
         if (model.mobile) {
@@ -121,16 +120,16 @@ export let view = (() => {
     function transitionInFs() {
         soundController.sound.stopSound('startPerehod');
         soundController.music.playMusic('fsFon', 0.1);
-        model.state('transitionScreen', false);
 
         let game = model.el('game');
         let transitionContainer = model.group('transition');
         transitionContainer.removeAll();
+	    game.input.keyboard.enabled = false;
 
         let darknessBG = model.el('darknessBG');
         darknessBG.visible = false;
 
-        winController.drawFsState();
+        winController.drawFsState(model.data('rollResponse').FreeSpinsLeft);
 
     }
 
@@ -138,9 +137,11 @@ export let view = (() => {
     function fsFinish() {
         let game = model.el('game');
 
-        // keyboardController.initFsKeys(transitionInFs);
         // Темнота
         game.camera.flash(0x000000, 500);
+	    model.state('transitionScreen', true);
+	    model.state('transitionIn', false);
+	    game.input.keyboard.enabled = true;
 
         game.time.events.remove(model.el('twinkleTimer'));
         mainView.draw.lightOneColor({anim: 'greenWin'});
@@ -172,9 +173,10 @@ export let view = (() => {
         model.el('jack', jack);
 
         let x = game.world.centerX;
-
         let winTextFrame;
-        if (model.data('fsMulti') === 8) {
+	    let winCountValue = model.data('rollResponse').FsBonus.TotalFSWinCoins + model.data('rollResponse').Balance.TotalWinCoins;
+
+	    if (winCountValue >= 1000) {
             winTextFrame = 'bigW.png';
         } else {
             winTextFrame = 'totalW.png';
@@ -215,9 +217,7 @@ export let view = (() => {
         let winCountValue = model.data('rollResponse').FsBonus.TotalFSWinCoins + model.data('rollResponse').Balance.TotalWinCoins;
         _сountMeter(winCountValue, winCount);
         game.add.tween(continueText).to({y: (model.desktop) ? game.height * 0.65 :  game.height * 0.67}, 1500, Phaser.Easing.Bounce.Out, true, 500)
-            .onComplete.add(() => {
-                game.add.tween(continueText.scale).to({x: 1.3, y: 1.3}, 1500, Phaser.Easing.Elastic.Out, true, 400, -1, true);
-            });
+        game.add.tween(continueText.scale).to({x: 1.3, y: 1.3}, 1500, Phaser.Easing.Elastic.Out, true, 400, -1, true);
 
     }
 
@@ -230,6 +230,7 @@ export let view = (() => {
 
     function transitionOutFs() {
         let game = model.el('game');
+	    game.input.keyboard.enabled = false;
         let winText = model.el('winText');
         let winCount = model.el('winCount');
         soundController.sound.stopSound('finishPerehod');
@@ -257,7 +258,14 @@ export let view = (() => {
         mainView.draw.changeBG({});
         mainView.draw.drawBlurBg({});
 
-        game.input.keyboard.enabled = true;
+	    model.state('transitionScreen', false);
+	    game.input.keyboard.enabled = true;
+
+	    if (model.desktop) {
+		    let settingsButton = model.el('settingsButton');
+		    settingsButton.alpha = 1;
+	    }
+
         model.state('buttons:locked', false);
         if (model.mobile) {
             buttonsController.unlockButtons();
@@ -341,12 +349,19 @@ export let view = (() => {
         game.add.tween(coinsContainer).to({y: game.height * 7}, 5000, 'Linear', true);
     }
 
+    function transitionInOutFs() {
+        if (model.state('transitionIn')) {
+	        transitionInFs()
+        } else {
+	        transitionOutFs()
+        }
+    }
+
 
     return {
         fsStart,
         fsFinish,
-        transitionInFs,
-        transitionOutFs
+        transitionInOutFs
     };
 
 })();
