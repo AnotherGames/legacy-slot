@@ -101,20 +101,19 @@ export class Preload {
         game.load.image('winTotal', 'win/winTotal.png');
         game.load.atlasJSONArray('lineNumbers', 'win/lineNumbers.png', 'win/lineNumbers.json');
         game.load.atlasJSONArray('winNumbers', 'win/winNumbers.png', 'win/winNumbers.json');
-        game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
         game.load.atlasJSONArray('footerButtons', 'footer/footerButtons.png', 'footer/footerButtons.json');
-        game.load.bitmapFont('numbersFont', 'numbers/numbers.png', 'numbers/numbers.xml');
-        game.load.bitmapFont('textOrange', 'text/text1.png', 'text/text1.xml');
-        game.load.bitmapFont('textGreen', 'text/text2.png', 'text/text2.xml');
-        if (model.desktop) {
-            game.load.image('panel', 'game/panel.png');
-            game.load.atlasJSONArray('panelBG', 'game/panelBG.png', 'game/panelBG.json');
-            game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
-            game.load.atlasJSONArray('deskButtonsAnim', 'desk_buttons/deskButtonsAnim.png', 'desk_buttons/deskButtonsAnim.json');
-            game.load.atlasJSONArray('switcher', 'desk_buttons/switcher.png', 'desk_buttons/switcher.json');
-        }
-        if (model.mobile) {
-            game.load.atlasJSONArray('mobileButtons', 'mobile_buttons/mobileButtons.png', 'mobile_buttons/mobileButtons.json');
+	    game.load.bitmapFont('textOrange', 'text/text1.png', 'text/text1.xml');
+	    game.load.bitmapFont('textGreen', 'text/text2.png', 'text/text2.xml');
+	    if (model.desktop) {
+		    game.load.image('panel', 'game/panel.png');
+		    game.load.atlasJSONArray('panelBG', 'game/panelBG.png', 'game/panelBG.json');
+		    game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
+		    game.load.atlasJSONArray('deskButtonsAnim', 'desk_buttons/deskButtonsAnim.png', 'desk_buttons/deskButtonsAnim.json');
+		    game.load.atlasJSONArray('switcher', 'desk_buttons/switcher.png', 'desk_buttons/switcher.json');
+	    }
+	    if (model.mobile) {
+		    game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
+		    game.load.atlasJSONArray('mobileButtons', 'mobile_buttons/mobileButtons.png', 'mobile_buttons/mobileButtons.json');
         }
 
         // Glista
