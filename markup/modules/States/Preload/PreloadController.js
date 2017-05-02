@@ -71,7 +71,7 @@ export class Preload {
     loadInitAssets() {
         const game = model.el('game');
         game.load.path = `static/img/content/${model.res}/`;
-        game.load.image('initBG', 'bg/initBG.png');
+        game.load.image('initBG', 'bg/initBG.jpg');
         game.load.image('initLogo', 'bg/initLogo.png');
         game.load.image('initSuriken', 'bg/initSuriken.png');
         game.load.atlasJSONArray('text', 'text/text.png', 'text/text.json');
@@ -79,12 +79,12 @@ export class Preload {
 
     loadMainAssets() {
         const game = model.el('game');
-        game.load.image('mainBG', 'bg/mainBG.png');
+        game.load.image('mainBG', 'bg/mainBG.jpg');
         game.load.image('gameMachine', 'game/gameMachine.png');
         game.load.image('gameBG', 'game/gameBG.png');
         game.load.image('gmRight', 'game/gmRight.png');
         game.load.image('gmLeft', 'game/gmLeft.png');
-        game.load.image('gameBGfs', 'game/gameBGfs.png');
+        game.load.image('gameBGfs', 'game/gameBGfs.jpg');
         game.load.image('gameShadow', 'game/gameShadow.png');
         game.load.image('aim', 'other/aim.png');
         game.load.atlasJSONArray('shuriken', 'other/shuriken.png', 'other/shuriken.json');
@@ -120,7 +120,7 @@ export class Preload {
 
     loadFSAssets() {
         const game = model.el('game');
-        game.load.image('fsBG', 'bg/fsBG.png');
+        game.load.image('fsBG', 'bg/fsBG.jpg');
         game.load.image('transitionFS', 'fs/transitionFS.png');
         game.load.image('fsCountBG', 'fs/fsCountBG.png');
         game.load.atlasJSONArray('fsMulti', 'fs/fsMulti.png', 'fs/fsMulti.json');
