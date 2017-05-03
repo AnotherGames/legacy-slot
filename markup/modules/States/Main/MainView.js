@@ -97,6 +97,7 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('main')
         }) {
+            console.log('i am here');
             let x = (model.desktop) ? -game.width / 2 - 83 : -game.width / 2 + 160;
             let y = (model.desktop) ? 95 : 0;
             let light = game.add.sprite(x, y, 'light', null, container);
@@ -154,154 +155,6 @@ export let view = (() => {
             });
         },
 
-        // addLight: function ({
-        //     game = model.el('game'),
-        //     container = model.group('bg')
-        // }) {
-        //     for (let i = 0; i < 3; i++) {
-        //         let topLight = game.add.sprite(0 - i * game.rnd.integerInRange(25, 35), 0 - i * game.rnd.integerInRange(15, 25), 'topLight', null, container);
-        //         topLight.alpha = game.rnd.integerInRange(0, 70) / 100;
-        //         game.add.tween(topLight)
-        //             .to({alpha: game.rnd.integerInRange(30, 70) / 100}, game.rnd.integerInRange(3000, 5000), 'Linear', true, null, -1, true);
-        //     }
-        // },
-        //
-        // eyeLight: function ({
-        //     game = model.el('game'),
-        //     container = model.group('main')
-        // }) {
-        //     let eyeLight = game.add.sprite((model.desktop) ? -235 : -135, (model.desktop) ? -373 : -320, 'eyeLight', null, container);
-        //     eyeLight.anchor.set(0.5);
-        //     eyeLight.alpha = 0;
-        //
-        //     game.add.tween(eyeLight).to({angle: 45, alpha: 1}, 300, 'Linear', true)
-        //         .onComplete.add(() => {
-        //             game.add.tween(eyeLight).to({alpha: 0}, 300, 'Linear', true);
-        //             eyeLight.destroy();
-        //             game.time.events.add(7000, () => {
-        //                 this.eyeLight({});
-        //             });
-        //         });
-        //
-        // },
-        //
-        // labelLight: function ({
-        //     game = model.el('game'),
-        //     container = model.group('main')
-        // }) {
-        //     let labelLight = game.add.sprite((model.desktop) ? -200 : -290, (model.desktop) ? -360 : -310, 'labelLight', null, container);
-        //     labelLight.anchor.set(0.5);
-        //     labelLight.alpha = 0;
-        //     (model.desktop) ? labelLight.scale.set(0.15) : labelLight.scale.set(0.1);
-        //     labelLight.animations.add('move');
-        //     labelLight.animations.play('move', 20, false);
-        //
-        //     game.add.tween(labelLight).to({alpha: 1, x: labelLight.x + 400}, 500, 'Linear', true)
-        //         .onComplete.add(() => {
-        //             game.add.tween(labelLight).to({alpha: 0}, 300, 'Linear', true);
-        //             labelLight.destroy();
-        //             game.time.events.add(8000, () => {
-        //                 this.labelLight({});
-        //             });
-        //         });
-        // },
-        //
-        // addBubbles: function ({
-        //     game = model.el('game'),
-        //     container = model.group('bg')
-        // }) {
-        //     let emitter = game.add.emitter(game.world.centerX, game.height + 200, 400);
-        //     container.add(emitter);
-        //     emitter.makeParticles('bubble');
-        //     emitter.width = game.width;
-        //
-        //     emitter.setRotation(0, 0);
-        //     emitter.setAlpha(0.1, 1, 3000);
-        //     emitter.minParticleScale = 0.1;
-        //     emitter.maxParticleScale = 0.4;
-        //     emitter.setYSpeed(20, 80);
-        //     emitter.gravity = -200;
-        //
-        //     emitter.start(false, 7000, 150);
-        // },
-        //
-        // addShark: function ({
-        //     game = model.el('game'),
-        //     container = model.group('bg')
-        // }) {
-        //     let y = (model.desktop) ? game.rnd.integerInRange(150, 400) : game.rnd.integerInRange(100, 300);
-        //     let shark = game.add.sprite(-500, y, 'shark');
-        //     container.addAt(shark, 1);
-        //     shark.anchor.set(0.5);
-        //     if (model.mobile) {
-        //         shark.scale.set(0.6);
-        //     }
-        //     shark.animations.add('move');
-        //     shark.animations.play('move', 20, true);
-        //     model.el('shark', shark);
-        //
-        //     let time = game.rnd.integerInRange(10, 14);
-        //     let side = (game.rnd.sign() < 0) ? 'left' : 'right';
-        //
-        //     shark.x = (side === 'left') ? -shark.width : game.width + shark.width;
-        //     let delta = (side === 'left') ? game.width + shark.width : -shark.width;
-        //     if (side === 'right') {
-        //         shark.width = -shark.width;
-        //     }
-        //
-        //     game.add.tween(shark).to({x: delta}, time * 1000, 'Linear', true)
-        //         .onComplete.add(() => {
-        //             shark.destroy();
-        //             game.time.events.add(10000, () => {
-        //                 this.addShark({});
-        //             });
-        //         }, this);
-        //
-        // },
-        //
-        // addFishes: function ({
-        //     game = model.el('game'),
-        //     container = model.group('bg'),
-        //     y1 = (model.desktop) ? 450 : 350,
-        //     y2 = (model.desktop) ? 700 : 600
-        // }) {
-        //     let fishes = [];
-        //     let side = (game.rnd.sign() < 0) ? 'left' : 'right';
-        //
-        //     for (let i = 0; i < game.rnd.integerInRange(5, 10); i++) {
-        //
-        //         let x = (side === 'left') ? game.rnd.integerInRange(430, 500) * -1 : game.width + game.rnd.integerInRange(430, 500);
-        //         let y = game.rnd.integerInRange(y1, y2);
-        //
-        //         let fish = game.add.sprite(x, y, 'fish', null, container);
-        //         fish.anchor.set(0.5);
-        //         (model.desktop) ? fish.scale.set(game.rnd.integerInRange(6, 10) / 10) : fish.scale.set(game.rnd.integerInRange(4, 8) / 10);
-        //
-        //         fish.animations.add('move');
-        //         fish.animations.play('move', 20, true);
-        //         if (side === 'left') {
-        //             fish.width = -fish.width;
-        //         }
-        //         model.el('fish', fish);
-        //         fishes.push(fish);
-        //     }
-        //     fishes.forEach((fish) => {
-        //         let time = game.rnd.integerInRange(7, 9);
-        //         let deltaX = (side === 'left') ? game.width + 500 : -500;
-        //         game.add.tween(fish).to({x: deltaX}, time * 1000, 'Linear', true)
-        //         .onComplete.add(() => {
-        //             fish.destroy();
-        //         }, this);
-        //     });
-        //     game.time.events.add(20000, () => {
-        //         if (model.state('bonus')) {
-        //             this.addFishes({y1: (model.desktop) ? 600 : 400, y2: (model.desktop) ? 900 : 700});
-        //         } else {
-        //             this.addFishes({});
-        //         }
-        //     });
-        // },
-
         lineNumbers: function ({
             game = model.el('game'),
             container = model.group('numbers'),
@@ -318,7 +171,11 @@ export let view = (() => {
 
             let deltaXright = (model.desktop) ? 45 : 18;
             let deltaXleft = (model.desktop) ? 29 : 12;
+            if (model.state('fs')) {
+                deltaXright = (model.desktop) ? 37 : 18;
+            }
             let x = gameMachine.left + deltaXleft;
+            let deltaY = (model.desktop) ? 95 : 0;
 
             for (let i = 0; i < 22; i++) {
                 if (i == 11) x = gameMachine.right - deltaXright;
@@ -332,11 +189,12 @@ export let view = (() => {
                 if (model.mobile) {
                     lineNumber.scale.set(0.75);
                 }
-                lineNumber.alpha = 0.05;
+                // lineNumber.alpha = 0.05;
 
                 lineNumber.animations.add('win');
 
                 if (model.state('fs')) {
+                    lineNumber.y = lineNumber.y - deltaY;
                     lineNumbersArr.push(lineNumber);
                     continue;
                 }

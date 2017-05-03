@@ -141,6 +141,12 @@ export let view = (() => {
             cashStyle = {font: '25px Helvetica, Arial', fill: '#e8b075', align: 'center'},
             y = model.data('footerTopCenterY')
         }) {
+
+            if (model.desktop) {
+                console.log(y);
+                y = game.height * 0.94;
+            }
+
 	        let totalWinText = game.add.text(0, y, 'Total Win: ', greyStyle, container);
             let winText = game.add.text(0, y, 'Win: ', greyStyle, container);
             let totalWinSum = game.add.text(0, y, `${totalWinValue.toFixed(0)}`, cashStyle, container);

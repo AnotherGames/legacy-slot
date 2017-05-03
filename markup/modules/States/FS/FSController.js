@@ -83,11 +83,11 @@ export let controller = (() => {
 		let multiValue = rollData.FsBonus.Multi;
 		let currMulti = model.data('fsMulti');
 
-		// Увеличиваем мульти(разбивание бутылки)
-		// if (multiValue > currMulti) {
-		// 	fsView.draw.changeMulti({number: multiValue, animation: multiValue + ''});
-		// 	model.data('fsMulti', multiValue);
-		// }
+		// Увеличиваем мульти
+		if (multiValue > currMulti) {
+			fsView.draw.changeMulti({number: multiValue});
+			model.data('fsMulti', multiValue);
+		}
 		//
 		// if (levelValue > currLevel) {
 		// 	fsView.draw.changeLevel({number: levelValue, animation: levelValue - 1 + ''});
@@ -170,11 +170,7 @@ export class FS {
 			// Отрисовуем баланс
 			balanceController.initFSDesktop();
 			// BG animations
-			// mainView.draw.addBubbles({});
-			// mainView.draw.addShark({});
-			// game.time.events.add(6000, () => {
-			// 	mainView.draw.addFishes({});
-			// });
+
 		}
 
 		// Добавляем маску
@@ -183,10 +179,10 @@ export class FS {
 		fsView.draw.Multi({
 			start: this.fsMulti
 		});
-
-		fsView.draw.Level({
-			start: this.fsLevel
-		});
+		//
+		// fsView.draw.Level({
+		// 	start: this.fsLevel
+		// });
 
 		if (model.data('fsLevel') > 0) {
 			this.drawRecoveredPanel();
@@ -223,7 +219,8 @@ export class FS {
 
 	positionMainContainer() {
 		let game = model.el('game');
-		model.group('main').x = game.world.centerX + 8;
+		let deltaX = (model.desktop) ? 200 : 100;
+		model.group('main').x = game.world.centerX + deltaX;
 		model.group('main').y = game.world.centerY + config[model.res].mainContainer.y - 10;
 	}
 

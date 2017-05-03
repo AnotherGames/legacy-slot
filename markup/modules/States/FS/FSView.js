@@ -39,14 +39,25 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('main')
         }) {
-            let deltaY = (model.desktop) ? 50 : -25;
+            let deltaY = (model.desktop) ? 30 : -10;
+
             let gameMachineBG = game.add.sprite(0, deltaY, 'gameMachineBG', null, container);
             gameMachineBG.anchor.set(0.5);
             model.el('gameMachineBG', gameMachineBG);
 
-            let gameMachineAsset = (model.desktop) ? 'gameMachineFS' : 'gameMachine';
+            let pipeX = (model.desktop) ? 480 : 350;
+            let pipeY = (model.desktop) ? 90 : 40;
+            let pipe = game.add.sprite(pipeX, pipeY, 'pipe', null, container);
+            pipe.anchor.set(0.5);
+            model.el('pipe', pipe);
+            if (model.desktop) {
+                pipe.scale.set(1.3);
+            }
 
-            let gameMachine = game.add.sprite(0, config[model.res].gameMachine.y, gameMachineAsset, null, container);
+            let gameMachineAsset = (model.desktop) ? 'gameMachineFS' : 'gameMachine';
+            let machineY = (model.desktop) ? -5 : -35;
+
+            let gameMachine = game.add.sprite(0, machineY, gameMachineAsset, null, container);
             gameMachine.anchor.set(0.5);
             model.el('gameMachine', gameMachine);
         },
@@ -60,15 +71,15 @@ export let view = (() => {
             model.group('machine', machineGroup);
 
             let numbersContainer = game.add.group();
-            container.addAt(numbersContainer, 3);
+            container.addAt(numbersContainer, 4);
             model.group('numbers', numbersContainer);
 
             let winUp = game.add.group();
-            container.addAt(winUp, 4);
+            container.addAt(winUp, 5);
             model.group('winUp', winUp);
 
             let winTop = game.add.group();
-            container.addAt(winTop, 5);
+            container.addAt(winTop, 6);
             model.group('winTop', winTop);
 
             machineGroup.glistaLightContainer = game.add.group();
@@ -82,6 +93,8 @@ export let view = (() => {
             machineGroup.glistaContainer = game.add.group();
             model.group('glista', machineGroup.glistaContainer);
             machineGroup.add(machineGroup.glistaContainer);
+
+            console.log(model.group('main'));
         },
 
         machineMask: function ({
@@ -89,7 +102,7 @@ export let view = (() => {
             machineGroup = model.group('machine')
         }) {
             const elSize = config[model.res].elements;
-            let deltaY = (model.desktop) ? 50 : -25;
+            let deltaY = (model.desktop) ? 30 : -10;
             let someGraphic = game.add.graphics(-elSize.width * 2.5, -elSize.height * 1.5 + deltaY, machineGroup);
             someGraphic.beginFill(0xffffff).drawRect(0, 0, elSize.width * 5, elSize.height * 3);
             machineGroup.mask = someGraphic;
@@ -98,69 +111,67 @@ export let view = (() => {
         Multi: function ({
             game = model.el('game'),
             container = model.group('panel'),
-            start = 1,
-            fontDesktop = '70px Titania, Arial',
-            fontMobile = '50px Titania, Arial'
+            start = 1
         }) {
 
-            let x, y, deltaX = 0, deltaY = 0, font;
+            let x = (model.desktop) ? game.width * 0.35 : game.width * 0.58;
+            let y = (model.desktop) ? 20 : game.height * 0.88;
+
+            let fsMultiBG = game.add.sprite(x, y, 'multi', null, container);
+            fsMultiBG.anchor.set(0.5);
+
             if (model.desktop) {
-                x = 950;
-                y = -47;
-                font = fontDesktop;
-            } else {
-                x = model.el('game').width / 2 + 145;
-                y = 610;
-                deltaY = 13;
-                font = fontMobile;
-                let fsMultiBG = game.add.sprite(x, y, 'fsMultiBG', null, container);
-                fsMultiBG.anchor.set(0.5);
+                fsMultiBG.scale.set(1.3);
             }
 
-            let fsMulti;
-            fsMulti = game.add.text(x + deltaX, y + deltaY, start, {font: font, fill: '#ffffff', align: 'center', stroke: '#188bb4', strokeThickness: 5}, container);
-            fsMulti.setShadow(5, 5, 'rgba(0, 0, 0, 0.7)', 8);
-            fsMulti.anchor.set(0.5);
-            model.el('fsMulti', fsMulti);
-            setTimeout(() => {
-                fsMulti.text = 2;
-                fsMulti.text = start;
-            }, 300);
+            let multiCloseArr = [];
+            let x2 = (model.desktop) ? [510, 685, 855, 1025, 1195] : [620, 752, 882, 1015, 1148];
 
+            for (let i = 0; i < 5; i++) {
+                let multiClose = game.add.sprite(x2[i], y - 2, 'multiClose', null, container);
+                multiClose.anchor.set(0.5);
 
-            draw._drawChest({});
-        },
-
-        _drawChest: function ({
-            game = model.el('game'),
-            container = model.group('panel')
-        }) {
-            let x = (model.desktop) ? game.width * 0.82 : game.width * 0.95;
-            let y = (model.desktop) ? -450 : 370;
-            let chestFS = game.add.spine(x, y, 'chestFS');
-            container.add(chestFS);
-            if (model.mobile) {
-                chestFS.scale.set(0.6);
+                multiCloseArr.push(multiClose);
             }
-            model.el('chestFS', chestFS);
-            chestFS.setAnimationByName(1, '1', false);
-            chestFS.addAnimationByName(1, '2', false);
-
-            game.add.tween(chestFS).to({y: chestFS.y + 10}, 3000, 'Linear', true, 0, -1, true);
+            model.el('multiCloseArr', multiCloseArr);
 
         },
+
+        // _drawChest: function ({
+        //     game = model.el('game'),
+        //     container = model.group('panel')
+        // }) {
+        //     let x = (model.desktop) ? game.width * 0.82 : game.width * 0.95;
+        //     let y = (model.desktop) ? -450 : 370;
+        //     let chestFS = game.add.spine(x, y, 'chestFS');
+        //     container.add(chestFS);
+        //     if (model.mobile) {
+        //         chestFS.scale.set(0.6);
+        //     }
+        //     model.el('chestFS', chestFS);
+        //     chestFS.setAnimationByName(1, '1', false);
+        //     chestFS.addAnimationByName(1, '2', false);
+        //
+        //     game.add.tween(chestFS).to({y: chestFS.y + 10}, 3000, 'Linear', true, 0, -1, true);
+        //
+        // },
 
         changeMulti: function ({
+            game = model.el('game'),
             number = 1,
-            animation = '3'
+            multiCloseArr = model.el('multiCloseArr')
         }) {
-            let fsMulti = model.el('fsMulti');
-            fsMulti.text = number;
-            model.el('fsMulti', fsMulti);
+            // let fsMulti = model.el('fsMulti');
+            // fsMulti.text = number;
+            // model.el('fsMulti', fsMulti);
 
-            let chestFS = model.el('chestFS');
-            chestFS.addAnimationByName(1, animation, false);
-            soundController.sound.playSound({sound: 'chestDown'});
+            console.warn('change multi!');
+
+            multiCloseArr.forEach((multi, index) => {
+                if (index + 2 == number) {
+                    game.add.tween(multi).to({alpha: 0}, 300, 'Linear', true);
+                }
+            });
         },
 
         Level: function ({
@@ -196,26 +207,26 @@ export let view = (() => {
             }, 300);
 
 
-            draw._drawDiver({});
+            // draw._drawDiver({});
         },
 
-        _drawDiver: function ({
-            game = model.el('game'),
-            container = model.group('panel')
-        }) {
-            let x = (model.desktop) ? -50 : 80;
-            let y = (model.desktop) ? -500 : 350;
-            let diverFS = game.add.spine(x, y, 'diverFS');
-            container.add(diverFS);
-            if (model.mobile) {
-                diverFS.scale.set(0.6);
-            }
-            model.el('diverFS', diverFS);
-            diverFS.setAnimationByName(1, 'start', false);
-
-            game.add.tween(diverFS).to({y: diverFS.y + 10}, 3000, 'Linear', true, 500, -1, true);
-
-        },
+        // _drawDiver: function ({
+        //     game = model.el('game'),
+        //     container = model.group('panel')
+        // }) {
+        //     let x = (model.desktop) ? -50 : 80;
+        //     let y = (model.desktop) ? -500 : 350;
+        //     let diverFS = game.add.spine(x, y, 'diverFS');
+        //     container.add(diverFS);
+        //     if (model.mobile) {
+        //         diverFS.scale.set(0.6);
+        //     }
+        //     model.el('diverFS', diverFS);
+        //     diverFS.setAnimationByName(1, 'start', false);
+        //
+        //     game.add.tween(diverFS).to({y: diverFS.y + 10}, 3000, 'Linear', true, 500, -1, true);
+        //
+        // },
 
         changeLevel: function ({
             number = 1,
@@ -239,29 +250,30 @@ export let view = (() => {
         }) {
             let x, y, deltaX, deltaY, font;
             if (model.mobile) {
-                x = model.el('game').width / 2;
-                y = 600;
-                deltaX = 13;
-                deltaY = 13;
+                x = game.width * 0.85;
+                y = 60;
+                deltaX = 50;
+                deltaY = 16;
                 font = fontMobile;
-
-                let fsCountBG = game.add.sprite(x + 10, y, 'fsCountBG', null, container);
-                fsCountBG.anchor.set(0.5);
-                if (model.desktop) {
-                    fsCountBG.scale.set(1.3);
-                }
-                model.el('fsCountBG', fsCountBG);
             } else {
-                x = 767;
-                y = -65;
-                deltaX = 0;
-                deltaY = 0;
+                x = game.width * 0.6;
+                y = -750;
+                deltaX = 65;
+                deltaY = 15;
                 font = fontDesktop;
             }
 
-            let fsCount = game.add.text(x + deltaX, y + deltaY, start, {font: font, fill: '#ffffff', align: 'center', stroke: '#188bb4', strokeThickness: 5}, container);
-            fsCount.setShadow(5, 5, 'rgba(0, 0, 0, 0.7)', 8);
+            let fsCountBG = game.add.sprite(x, y, 'fsCountBG', null, container);
+            fsCountBG.anchor.set(0.5);
+            model.el('fsCountBG', fsCountBG);
+            if (model.desktop) {
+                fsCountBG.scale.set(1.3);
+            }
+
+            let fsCount = game.add.bitmapText(x + deltaX, y + deltaY, 'numbersFont', start + '', 140, container);
+            fsCount.align = 'center';
             fsCount.anchor.set(0.5);
+            fsCount.scale.set(0.1);
             model.el('fs:count', fsCount);
         },
 

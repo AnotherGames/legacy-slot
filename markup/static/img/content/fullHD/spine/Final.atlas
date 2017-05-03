@@ -1,0 +1,222 @@
+
+Final.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Porezka_0000_TOP
+  rotate: false
+  xy: 2, 952
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+Porezka_0001_L1_Lleg_01
+  rotate: false
+  xy: 2, 170
+  size: 142, 401
+  orig: 142, 401
+  offset: 0, 0
+  index: -1
+Porezka_0002_L1_Rleg_01
+  rotate: false
+  xy: 231, 579
+  size: 154, 371
+  orig: 154, 371
+  offset: 0, 0
+  index: -1
+Porezka_0003_L1_Torso_02
+  rotate: false
+  xy: 1924, 1805
+  size: 119, 227
+  orig: 119, 227
+  offset: 0, 0
+  index: -1
+Porezka_0004_L1_Torso_01
+  rotate: false
+  xy: 548, 621
+  size: 82, 153
+  orig: 82, 153
+  offset: 0, 0
+  index: -1
+Porezka_0005_L1_Rhand_01
+  rotate: true
+  xy: 695, 781
+  size: 31, 104
+  orig: 31, 104
+  offset: 0, 0
+  index: -1
+Porezka_0006_L1_Rhand_02
+  rotate: false
+  xy: 146, 252
+  size: 51, 74
+  orig: 51, 74
+  offset: 0, 0
+  index: -1
+Porezka_0007_L1_Rhand_03
+  rotate: false
+  xy: 2025, 1617
+  size: 21, 53
+  orig: 21, 53
+  offset: 0, 0
+  index: -1
+Porezka_0008_L1_Lhand_01
+  rotate: true
+  xy: 1371, 920
+  size: 30, 103
+  orig: 30, 103
+  offset: 0, 0
+  index: -1
+Porezka_0009_L1_Lhand_02
+  rotate: false
+  xy: 1924, 1205
+  size: 54, 70
+  orig: 54, 70
+  offset: 0, 0
+  index: -1
+Porezka_0010_L1_Lhand_03
+  rotate: true
+  xy: 387, 585
+  size: 22, 51
+  orig: 22, 51
+  offset: 0, 0
+  index: -1
+Porezka_0011_L1_Head_01
+  rotate: false
+  xy: 1267, 865
+  size: 102, 85
+  orig: 102, 85
+  offset: 0, 0
+  index: -1
+Porezka_0012_L1_Head_02
+  rotate: false
+  xy: 146, 441
+  size: 77, 130
+  orig: 77, 130
+  offset: 0, 0
+  index: -1
+Porezka_0039_G2_Rleg_01
+  rotate: true
+  xy: 881, 826
+  size: 124, 176
+  orig: 124, 176
+  offset: 0, 0
+  index: -1
+Porezka_0040_G2_Rleg_02
+  rotate: false
+  xy: 387, 609
+  size: 159, 165
+  orig: 159, 165
+  offset: 0, 0
+  index: -1
+Porezka_0041_G2_Rleg_03
+  rotate: true
+  xy: 1924, 1349
+  size: 110, 62
+  orig: 110, 62
+  offset: 0, 0
+  index: -1
+Porezka_0042_G2_Lleg_01
+  rotate: true
+  xy: 695, 814
+  size: 136, 184
+  orig: 136, 184
+  offset: 0, 0
+  index: -1
+Porezka_0043_G2_Lleg_02
+  rotate: false
+  xy: 2, 2
+  size: 143, 166
+  orig: 143, 166
+  offset: 0, 0
+  index: -1
+Porezka_0044_G2_Lleg_03
+  rotate: true
+  xy: 632, 662
+  size: 112, 52
+  orig: 112, 52
+  offset: 0, 0
+  index: -1
+Porezka_0045_G2_torso_01
+  rotate: false
+  xy: 2, 573
+  size: 227, 377
+  orig: 227, 377
+  offset: 0, 0
+  index: -1
+Porezka_0046_G2_Lhand_03
+  rotate: true
+  xy: 1924, 1277
+  size: 70, 55
+  orig: 70, 55
+  offset: 0, 0
+  index: -1
+Porezka_0047_G2_Lhand_02
+  rotate: false
+  xy: 1165, 851
+  size: 100, 99
+  orig: 100, 99
+  offset: 0, 0
+  index: -1
+Porezka_0048_G2_Lhand_01
+  rotate: true
+  xy: 146, 328
+  size: 111, 73
+  orig: 111, 73
+  offset: 0, 0
+  index: -1
+Porezka_0049_G0_trost
+  rotate: false
+  xy: 387, 776
+  size: 306, 174
+  orig: 306, 174
+  offset: 0, 0
+  index: -1
+Porezka_0050_G2_Rhand_03
+  rotate: false
+  xy: 1371, 872
+  size: 51, 46
+  orig: 51, 46
+  offset: 0, 0
+  index: -1
+Porezka_0051_G2_Rhand_02
+  rotate: false
+  xy: 1924, 1461
+  size: 88, 101
+  orig: 88, 101
+  offset: 0, 0
+  index: -1
+Porezka_0052_G2_Rhand_01
+  rotate: false
+  xy: 1924, 1564
+  size: 99, 106
+  orig: 99, 106
+  offset: 0, 0
+  index: -1
+Porezka_0053_G2_head_02
+  rotate: false
+  xy: 1059, 831
+  size: 104, 119
+  orig: 104, 119
+  offset: 0, 0
+  index: -1
+Porezka_0054_G2_head_01
+  rotate: true
+  xy: 1924, 1672
+  size: 131, 111
+  orig: 131, 111
+  offset: 0, 0
+  index: -1
+
+Final2.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Porezka_0055_BACK
+  rotate: false
+  xy: 2, 2
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1

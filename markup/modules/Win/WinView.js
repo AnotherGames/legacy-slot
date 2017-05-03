@@ -44,7 +44,7 @@ export let view = (() => {
             winTotal.anchor.set(0.5);
             winTotal.scale.set(1.4);
 
-            let winTotalText = game.add.bitmapText(0, (model.mobile) ? -50 : 0, 'numbersFont2', winTotalData, 100, container);
+            let winTotalText = game.add.bitmapText(0, (model.mobile) ? 0 : 50, 'numbersFont', winTotalData, 20, container);
             winTotalText.anchor.set(0.5);
         },
 

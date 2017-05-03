@@ -1,0 +1,36 @@
+{"frames": [
+
+{
+	"filename": "logoFire.png",
+	"frame": {"x":1,"y":1,"w":375,"h":129},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":38,"y":1,"w":375,"h":129},
+	"sourceSize": {"w":450,"h":130}
+},
+{
+	"filename": "logoLight.png",
+	"frame": {"x":1,"y":132,"w":357,"h":111},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":47,"y":10,"w":357,"h":111},
+	"sourceSize": {"w":450,"h":130}
+},
+{
+	"filename": "logoNormal.png",
+	"frame": {"x":1,"y":245,"w":327,"h":79},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":62,"y":26,"w":327,"h":79},
+	"sourceSize": {"w":450,"h":130}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "logoFS.png",
+	"format": "RGBA8888",
+	"size": {"w":512,"h":512},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:f5780c9d3ffc83fb976baf5a093d3660:98dc421a736182db62804f1a5d652dc9:1bbe8506f2d8aa1c381d514739eb071e$"
+}
+}

@@ -126,12 +126,15 @@ export let controller = (() => {
                 view.draw.WinGlista({number: currentLine.Line});
                 view.draw.WinLineTable({line: currentLine});
                 view.draw.WinNumber({number: currentLine.Line});
-            // Если скаттеры
-            } else {
+            } else if (currentLine.Line < 0 &&  currentLine.Count > 1) {
+                // Если скаттеры
                 view.draw.WinElements({number: [currentLine.Line], amount: [currentLine.Count]});
                 view.draw.WinLineTable({line: currentLine, scatter: true});
-                setTimeout(cleanWin, 1000);
                 // view.draw.WinNumber({number: currentLine.Line});
+                setTimeout(cleanWin, 1000);
+            } else {
+                console.log(currentLine.Count);
+                return;
             }
         } else {
             return;

@@ -81,16 +81,6 @@ export class Preload {
         const game = model.el('game');
         game.load.image('mainBG', 'bg/mainBG.jpg');
         game.load.spritesheet('light', 'bg/light.png', 887, 1080, 24);
-        // game.load.spritesheet('bigFish', 'bonus/bigFish.png', 226, 182, 12);
-        // game.load.image('transitionBG1', 'bg/transitionBG1.png');
-        // game.load.image('transitionBG2', 'bg/transitionBG2.jpg');
-        // game.load.image('bubble', 'bg/bubble.png');
-        // game.load.image('eyeLight', 'bg/eyeLight.png');
-        // game.load.image('topLight', 'bg/topLight.png');
-        // game.load.spritesheet('labelLight', 'bg/labelLight.png', 617, 508, 3);
-        // game.load.spritesheet('fish', 'bg/fish.png', 103, 33, 12);
-        // game.load.spritesheet('shark', 'bg/shark.png', 493, 188, 12);
-        // game.load.image('eyeLight', 'bg/eyeLight.png');
         game.load.image('gameMachine', 'game/gameMachine.png');
         game.load.image('gameMachineBG', 'game/gameMachineBG.png');
         game.load.image('closeButton', 'other/closeButton.png');
@@ -126,8 +116,16 @@ export class Preload {
         game.load.image('lizaBonus', 'fs/lizaBonus.png');
         game.load.image('lizaFS', 'fs/lizaFS.png');
         game.load.atlasJSONArray('liza', 'fs/liza.png', 'fs/liza.json');
+        game.load.atlasJSONArray('logoFS', 'fs/logoFS.png', 'fs/logoFS.json');
+        game.load.image('fsCountBG', 'fs/fsCountBG.png');
+        game.load.image('fsTable', 'fs/fsTable.png');
+        game.load.image('pipe', 'fs/pipe.png');
+        game.load.image('multi', 'fs/multi.png');
+        game.load.image('multiClose', 'fs/multiClose.png');
+        game.load.image('multiBlink', 'fs/multiBlink.png');
+        game.load.image('fire', 'fs/fire.png');
+        game.load.spritesheet('cardsLiza', 'fs/cardsLizawin.png', 80, 104, 4);
         if (model.mobile) {
-            game.load.image('fsCountBG', 'fs/fsCountBG.png');
             game.load.image('fsLevelBG', 'fs/fsLevelBG.png');
             game.load.image('fsMultiBG', 'fs/fsMultiBG.png');
         }
@@ -152,11 +150,11 @@ export class Preload {
 
     loadSpineAssets() {
         const game = model.el('game');
-        game.load.spine('diverBig', 'spine/Vodolaz.json');
-        game.load.spine('diverFS', 'spine/sunken.json');
-        game.load.spine('chestFS', 'spine/skeleton.json');
+        // game.load.spine('diverBig', 'spine/Vodolaz.json');
+        // game.load.spine('diverFS', 'spine/sunken.json');
+        // game.load.spine('chestFS', 'spine/skeleton.json');
         game.load.spine('ink', 'spine/ink.json');
-
+        game.load.spine('fsEnd', 'spine/Final.json');
     }
 
     loadTest() {

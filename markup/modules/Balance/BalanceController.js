@@ -30,7 +30,8 @@ export let controller = (() => {
 
     function initFSDesktop() {
         view.draw.CashBalance({});
-        view.draw.FSDesktopBalance({});
+        // view.draw.FSDesktopBalance({});
+        view.draw.FSMobileBalance({});
     }
 
     function updateBalance() {
@@ -40,7 +41,8 @@ export let controller = (() => {
                 view.update.CashBalance({});
             }
             if (model.desktop) {
-                view.update.FSDesktopBalance({});
+                // view.update.FSDesktopBalance({});
+                view.update.FSMobileBalance({});
                 view.update.CashBalance({});
             }
         } else if (model.state('bonus')) {
