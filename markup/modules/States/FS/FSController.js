@@ -23,7 +23,10 @@ export let controller = (() => {
 		model.data('fs:count', amount);
 		model.updateBalance({startFS: true});
 
-		next();
+		let game = model.el('game');
+		game.time.events.add(2000, () => {
+			next();
+		});
 	}
 
 	function next() {
@@ -58,9 +61,19 @@ export let controller = (() => {
 
 	function stop() {
 		let game = model.el('game');
+		let fsEnd;
 
 		game.time.events.add(1500, () => {
 			soundController.music.stopMusic('fsFon');
+			fsEnd = game.add.spine(game.world.centerX, game.world.centerY, 'fsEnd');
+			fsEnd.setAnimationByName(0, 'animation', false);
+			if (model.mobile) {
+				fsEnd.scale.set(0.66);
+			}
+		});
+
+		game.time.events.add(6000, () => {
+			fsEnd.destroy();
 			transitionView.fsFinish();
 		});
 
@@ -70,7 +83,7 @@ export let controller = (() => {
 
 	}
 
-	function chestActions() {
+	function fsActions() {
 		// Проигрываем анимации барабана и +3
 		fsView.draw.CountPlus3({});
 
@@ -101,7 +114,7 @@ export let controller = (() => {
 		next,
 		count,
 		stop,
-		chestActions
+		fsActions
 	};
 })();
 
@@ -141,6 +154,7 @@ export class FS {
 		soundController.music.playMusic('fsFon');
 
 		fsView.draw.mainBG({});
+		fsView.draw.addWatch({});
 		// Отрисовуем основной контейнер
 		fsView.draw.mainContainer({});
 		fsView.draw.machineContainer({});

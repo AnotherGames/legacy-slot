@@ -172,10 +172,10 @@ export let view = (() => {
             let deltaXright = (model.desktop) ? 45 : 18;
             let deltaXleft = (model.desktop) ? 29 : 12;
             if (model.state('fs')) {
-                deltaXright = (model.desktop) ? 37 : 18;
+                deltaXright = (model.desktop) ? 39 : 18;
             }
             let x = gameMachine.left + deltaXleft;
-            let deltaY = (model.desktop) ? 95 : 0;
+            let deltaY = (model.desktop) ? 97 : 0;
 
             for (let i = 0; i < 22; i++) {
                 if (i == 11) x = gameMachine.right - deltaXright;

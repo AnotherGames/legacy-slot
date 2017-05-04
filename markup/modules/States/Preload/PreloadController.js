@@ -123,13 +123,10 @@ export class Preload {
         game.load.image('multi', 'fs/multi.png');
         game.load.image('multiClose', 'fs/multiClose.png');
         game.load.image('multiBlink', 'fs/multiBlink.png');
-        game.load.image('fire', 'fs/fire.png');
+        // game.load.image('fire', 'fs/fire.png');
+        game.load.image('watchFS', 'fs/watchFS.png');
+        game.load.atlasJSONArray('watchArrows', 'fs/watchArrows.png', 'fs/watchArrows.json');
         game.load.spritesheet('cardsLiza', 'fs/cardsLizawin.png', 80, 104, 4);
-        if (model.mobile) {
-            game.load.image('fsLevelBG', 'fs/fsLevelBG.png');
-            game.load.image('fsMultiBG', 'fs/fsMultiBG.png');
-        }
-
         game.load.image('plus3', 'fs/plus3.png');
 
     }

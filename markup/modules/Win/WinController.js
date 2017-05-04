@@ -234,7 +234,7 @@ export let controller = (() => {
     function checkForChest(winLines) {
         winLines.forEach((winLine) => {
             if (winLine.Line == -1 && winLine.Symbol == '14') {
-                fsController.chestActions();
+                fsController.fsActions();
             }
         });
     }

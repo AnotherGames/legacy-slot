@@ -1,0 +1,236 @@
+{"frames": [
+
+{
+	"filename": "watch-h-00.png",
+	"frame": {"x":731,"y":725,"w":74,"h":122},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":97,"y":50,"w":74,"h":122},
+	"sourceSize": {"w":280,"h":280}
+},
+{
+	"filename": "watch-h-01.png",
+	"frame": {"x":445,"y":847,"w":72,"h":122},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":109,"y":50,"w":72,"h":122},
+	"sourceSize": {"w":280,"h":280}
+},
+{
+	"filename": "watch-h-02.png",
+	"frame": {"x":1,"y":921,"w":105,"h":105},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":107,"y":68,"w":105,"h":105},
+	"sourceSize": {"w":280,"h":280}
+},
+{
+	"filename": "watch-h-03.png",
+	"frame": {"x":829,"y":361,"w":122,"h":74},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":108,"y":98,"w":122,"h":74},
+	"sourceSize": {"w":280,"h":280}
+},
+{
+	"filename": "watch-h-04.png",
+	"frame": {"x":1,"y":847,"w":121,"h":72},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":109,"y":110,"w":121,"h":72},
+	"sourceSize": {"w":280,"h":280}
+},
+{
+	"filename": "watch-h-05.png",
+	"frame": {"x":124,"y":847,"w":106,"h":105},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":107,"y":108,"w":106,"h":105},
+	"sourceSize": {"w":280,"h":280}
+},
+{
+	"filename": "watch-h-06.png",
+	"frame": {"x":730,"y":849,"w":73,"h":122},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":109,"y":109,"w":73,"h":122},
+	"sourceSize": {"w":280,"h":280}
+},
+{
+	"filename": "watch-h-07.png",
+	"frame": {"x":730,"y":973,"w":73,"h":122},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":98,"y":109,"w":73,"h":122},
+	"sourceSize": {"w":280,"h":280}
+},
+{
+	"filename": "watch-h-08.png",
+	"frame": {"x":339,"y":847,"w":104,"h":106},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":68,"y":108,"w":104,"h":106},
+	"sourceSize": {"w":280,"h":280}
+},
+{
+	"filename": "watch-h-09.png",
+	"frame": {"x":829,"y":437,"w":122,"h":74},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":49,"y":109,"w":122,"h":74},
+	"sourceSize": {"w":280,"h":280}
+},
+{
+	"filename": "watch-h-10.png",
+	"frame": {"x":829,"y":513,"w":122,"h":72},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":49,"y":99,"w":122,"h":72},
+	"sourceSize": {"w":280,"h":280}
+},
+{
+	"filename": "watch-h-11.png",
+	"frame": {"x":232,"y":847,"w":105,"h":105},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":67,"y":68,"w":105,"h":105},
+	"sourceSize": {"w":280,"h":280}
+},
+{
+	"filename": "watch-m-00.png",
+	"frame": {"x":731,"y":565,"w":92,"h":158},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":84,"y":19,"w":92,"h":158},
+	"sourceSize": {"w":280,"h":280}
+},
+{
+	"filename": "watch-m-01.png",
+	"frame": {"x":829,"y":182,"w":126,"h":177},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":77,"y":0,"w":126,"h":177},
+	"sourceSize": {"w":280,"h":280}
+},
+{
+	"filename": "watch-m-02.png",
+	"frame": {"x":829,"y":1,"w":173,"h":179},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":81,"y":0,"w":173,"h":179},
+	"sourceSize": {"w":280,"h":280}
+},
+{
+	"filename": "watch-m-03.png",
+	"frame": {"x":825,"y":587,"w":197,"h":177},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":81,"y":0,"w":197,"h":177},
+	"sourceSize": {"w":280,"h":280}
+},
+{
+	"filename": "watch-m-04.png",
+	"frame": {"x":526,"y":840,"w":202,"h":197},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":78,"y":0,"w":202,"h":197},
+	"sourceSize": {"w":280,"h":280}
+},
+{
+	"filename": "watch-m-05.png",
+	"frame": {"x":805,"y":1048,"w":199,"h":248},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":81,"y":0,"w":199,"h":248},
+	"sourceSize": {"w":280,"h":280}
+},
+{
+	"filename": "watch-m-06.png",
+	"frame": {"x":526,"y":565,"w":203,"h":273},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":77,"y":0,"w":203,"h":273},
+	"sourceSize": {"w":280,"h":280}
+},
+{
+	"filename": "watch-m-07.png",
+	"frame": {"x":807,"y":766,"w":199,"h":280},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":81,"y":0,"w":199,"h":280},
+	"sourceSize": {"w":280,"h":280}
+},
+{
+	"filename": "watch-m-08.png",
+	"frame": {"x":277,"y":565,"w":247,"h":280},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":33,"y":0,"w":247,"h":280},
+	"sourceSize": {"w":280,"h":280}
+},
+{
+	"filename": "watch-m-09.png",
+	"frame": {"x":1,"y":1,"w":274,"h":280},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":6,"y":0,"w":274,"h":280},
+	"sourceSize": {"w":280,"h":280}
+},
+{
+	"filename": "watch-m-10.png",
+	"frame": {"x":277,"y":1,"w":274,"h":280},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":6,"y":0,"w":274,"h":280},
+	"sourceSize": {"w":280,"h":280}
+},
+{
+	"filename": "watch-m-11.png",
+	"frame": {"x":553,"y":1,"w":274,"h":280},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":6,"y":0,"w":274,"h":280},
+	"sourceSize": {"w":280,"h":280}
+},
+{
+	"filename": "watch-m-12.png",
+	"frame": {"x":1,"y":283,"w":274,"h":280},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":6,"y":0,"w":274,"h":280},
+	"sourceSize": {"w":280,"h":280}
+},
+{
+	"filename": "watch-m-13.png",
+	"frame": {"x":277,"y":283,"w":274,"h":280},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":6,"y":0,"w":274,"h":280},
+	"sourceSize": {"w":280,"h":280}
+},
+{
+	"filename": "watch-m-14.png",
+	"frame": {"x":553,"y":283,"w":274,"h":280},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":6,"y":0,"w":274,"h":280},
+	"sourceSize": {"w":280,"h":280}
+},
+{
+	"filename": "watch-m-15.png",
+	"frame": {"x":1,"y":565,"w":274,"h":280},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":6,"y":0,"w":274,"h":280},
+	"sourceSize": {"w":280,"h":280}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "watchArrows.png",
+	"format": "RGBA8888",
+	"size": {"w":1024,"h":2048},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:94d5cf567cd73c3ac859bc533be9f66d:42e3354133784ab9c249ad3d35683fb2:9e7a328724f0635bd755a5f3e0d4c9ce$"
+}
+}

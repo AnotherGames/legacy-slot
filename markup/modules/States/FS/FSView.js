@@ -40,7 +40,6 @@ export let view = (() => {
             container = model.group('main')
         }) {
             let deltaY = (model.desktop) ? 30 : -10;
-
             let gameMachineBG = game.add.sprite(0, deltaY, 'gameMachineBG', null, container);
             gameMachineBG.anchor.set(0.5);
             model.el('gameMachineBG', gameMachineBG);
@@ -56,10 +55,17 @@ export let view = (() => {
 
             let gameMachineAsset = (model.desktop) ? 'gameMachineFS' : 'gameMachine';
             let machineY = (model.desktop) ? -5 : -35;
-
             let gameMachine = game.add.sprite(0, machineY, gameMachineAsset, null, container);
             gameMachine.anchor.set(0.5);
             model.el('gameMachine', gameMachine);
+
+            let logoY = (model.desktop) ? 83 : 50;
+            let logoFS = game.add.sprite(0, gameMachine.top + logoY, 'logoFS', 'logoNormal.png', container);
+            logoFS.anchor.set(0.5);
+            if (model.desktop) {
+                logoFS.scale.set(1.33);
+            }
+            model.el('logoFS', logoFS);
         },
 
         machineContainer: function ({
@@ -81,6 +87,10 @@ export let view = (() => {
             let winTop = game.add.group();
             container.addAt(winTop, 6);
             model.group('winTop', winTop);
+
+            let plusThree = game.add.group();
+            container.addAt(plusThree, 7);
+            model.group('plusThree', plusThree);
 
             machineGroup.glistaLightContainer = game.add.group();
             model.group('glistaLight', machineGroup.glistaLightContainer);
@@ -125,36 +135,22 @@ export let view = (() => {
             }
 
             let multiCloseArr = [];
-            let x2 = (model.desktop) ? [510, 685, 855, 1025, 1195] : [620, 752, 882, 1015, 1148];
+            let multiBlinkArr = [];
+            let x2 = (model.desktop) ? [340, 510, 685, 855, 1025, 1195] : [487, 620, 752, 882, 1015, 1148];
 
-            for (let i = 0; i < 5; i++) {
+            for (let i = 0; i < 6; i++) {
                 let multiClose = game.add.sprite(x2[i], y - 2, 'multiClose', null, container);
                 multiClose.anchor.set(0.5);
+                let multiBlink = game.add.sprite(x2[i], y - 2, 'multiBlink', null, container);
+                multiBlink.anchor.set(0.5);
+                multiBlink.alpha = 0;
 
                 multiCloseArr.push(multiClose);
+                multiBlinkArr.push(multiBlink);
             }
             model.el('multiCloseArr', multiCloseArr);
 
         },
-
-        // _drawChest: function ({
-        //     game = model.el('game'),
-        //     container = model.group('panel')
-        // }) {
-        //     let x = (model.desktop) ? game.width * 0.82 : game.width * 0.95;
-        //     let y = (model.desktop) ? -450 : 370;
-        //     let chestFS = game.add.spine(x, y, 'chestFS');
-        //     container.add(chestFS);
-        //     if (model.mobile) {
-        //         chestFS.scale.set(0.6);
-        //     }
-        //     model.el('chestFS', chestFS);
-        //     chestFS.setAnimationByName(1, '1', false);
-        //     chestFS.addAnimationByName(1, '2', false);
-        //
-        //     game.add.tween(chestFS).to({y: chestFS.y + 10}, 3000, 'Linear', true, 0, -1, true);
-        //
-        // },
 
         changeMulti: function ({
             game = model.el('game'),
@@ -165,12 +161,104 @@ export let view = (() => {
             // fsMulti.text = number;
             // model.el('fsMulti', fsMulti);
 
-            console.warn('change multi!');
+            console.warn('change multi!', number);
 
             multiCloseArr.forEach((multi, index) => {
                 if (index + 2 == number) {
                     game.add.tween(multi).to({alpha: 0}, 300, 'Linear', true);
                 }
+            });
+        },
+
+        lightBlinking: function ({
+            game = model.el('game'),
+            delay = 0,
+            multiCloseArr = model.el('multiCloseArr'),
+            multiBlinkArr = model.el('multiBlinkArr')
+        }) {
+            game.time.events.add(delay, () => {
+                multiCloseArr.forEach((el) => {
+                    if (el.alpha == 0) {
+                    	return;
+                    } else {
+
+                    }
+                });
+
+                this.game.add.tween(this.light).to({alpha: 0.6}, 500, 'Linear', true, 0, 0, true)
+                    .onComplete.add(() => {
+                        this.lightBlinking({delay: 4000});
+                    })
+            });
+        },
+
+        addWatch: function ({
+            game = model.el('game'),
+            container = model.group('bg')
+        }) {
+            let watchContainer = game.add.group();
+            container.add(watchContainer);
+            if (model.mobile) {
+                container.scale.set(0.66);
+            }
+
+            let lightArr = [];
+
+            for (let i = 0; i < 40; i++) {
+                let rndAlpha = game.rnd.integerInRange(4, 10);
+                let light = game.add.sprite(game.rnd.integerInRange(-200, 200) + game.width * 0.12,
+                game.rnd.integerInRange(-150, 150) + (model.desktop) ? game.height * 0.65 : game.height * 0.85,
+                    'lightLine',
+                    null,
+                    watchContainer);
+                light.anchor.set(0.5);
+                light.alpha = rndAlpha / 10;
+                lightArr.push(light);
+            }
+            lightArr.forEach((light) => {
+                let rnd3 = game.rnd.integerInRange(-200, 200);
+                let rnd2 = game.rnd.integerInRange(-150, 150);
+                let rndAlpha = game.rnd.integerInRange(4, 10);
+                game.add.tween(light).to({x: light.x + rnd2, y: light.y + rnd2}, 5000, 'Linear', true, 0, 10000, true)
+                .onComplete.add(() => {
+                    game.add.tween(light).to({x: light.x + rnd3, y: light.y + rnd3}, 5000, 'Linear', true);
+                });
+            });
+            let watchFS = game.add.sprite(game.width * 0.12,
+                (model.desktop) ? game.height * 0.65 : game.height * 0.85,
+                'watchFS',
+                null,
+                watchContainer);
+            watchFS.anchor.set(0.5);
+
+            let minuteArrow = game.add.sprite(watchFS.x + 52, watchFS.y - 18, 'watchArrows', 'watch-m-00.png', watchContainer);
+            minuteArrow.anchor.set(0.5);
+            minuteArrow.animations.add('run', Phaser.Animation.generateFrameNames('watch-m-', 0, 15, '.png', 2), 20, false);
+            model.el('minuteArrow', minuteArrow);
+
+            let hourArrow = game.add.sprite(watchFS.x + 52, watchFS.y - 18, 'watchArrows', 'watch-h-00.png', watchContainer);
+            hourArrow.anchor.set(0.5);
+            model.el('hourArrow', hourArrow);
+
+            game.add.tween(watchContainer).to({y: watchContainer.y + 50}, 1500, 'Linear', true, 0, -1, true);
+
+        },
+
+        changeTime: function ({
+            game = model.el('game'),
+            hourArrow = model.el('hourArrow'),
+            minuteArrow = model.el('minuteArrow'),
+            watchCounter = model.el('watchCounter'),
+            number = 0
+        }) {
+            watchCounter++;
+            if (watchCounter > 1) {
+                number = watchCounter + 2;
+            }
+            console.warn(watchCounter);
+            minuteArrow.animations.play('run');
+            game.time.events.add(1000, () => {
+                hourArrow.frameName = `watch-h-0${number}.png`;
             });
         },
 
@@ -228,18 +316,18 @@ export let view = (() => {
         //
         // },
 
-        changeLevel: function ({
-            number = 1,
-            animation = '0'
-        }) {
-            let fsLevel = model.el('fsLevel');
-            fsLevel.text = number;
-            model.el('fsLevel', fsLevel);
-
-            let diverFS = model.el('diverFS');
-            diverFS.addAnimationByName(1, animation, false);
-            soundController.sound.playSound({sound: 'diverDown'});
-        },
+        // changeLevel: function ({
+        //     number = 1,
+        //     animation = '0'
+        // }) {
+        //     let fsLevel = model.el('fsLevel');
+        //     fsLevel.text = number;
+        //     model.el('fsLevel', fsLevel);
+        //
+        //     let diverFS = model.el('diverFS');
+        //     diverFS.addAnimationByName(1, animation, false);
+        //     soundController.sound.playSound({sound: 'diverDown'});
+        // },
 
         Count: function ({
             game = model.el('game'),
@@ -281,41 +369,33 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('main'),
             x = 0,
-            y = game.height / 5 * -1,
-            deltaY = 15
+            y = -290,
         }) {
             if (model.state('CountPlus3')) return;
             model.state('CountPlus3', true);
 
-            if (model.desktop) {
-                deltaY = 30;
-            }
-
             let plus3Group = game.add.group(container);
-            plus3Group.scale.set(0.3);
+            plus3Group.alpha = 0;
             plus3Group.x = x;
-            plus3Group.y = y - deltaY;
+            plus3Group.y = y;
 
-            let circle = game.add.graphics(0, 0, plus3Group);
-            circle.beginFill(0x000000, 0.3).drawCircle(0, 0, 200);
-            let plus3 = game.add.sprite(0, 0, 'plus3', null, plus3Group);
+            let elSize = config[model.res].elements;
+            let maskY = (model.desktop) ? 30 : -10;
+            let someGraphic = game.add.graphics(0, 0);
+            someGraphic.beginFill(0x000000).drawRect(0, game.height * 0.12, game.width, game.height);
+            plus3Group.mask = someGraphic;
+            console.log(someGraphic);
+
+            let plus3BG = game.add.sprite(0, 0, 'fsTable', null, plus3Group);
+            plus3BG.anchor.set(0.5);
+
+            let plus3 = game.add.sprite(0, 30, 'plus3', null, plus3Group);
             plus3.anchor.set(0.5);
-            model.el('plus3', plus3);
 
-            let tweenY;
-            let tweenX;
-
-            if (model.desktop) {
-                tweenX = plus3Group.x;
-                tweenY = 900;
-            } else {
-                tweenX = plus3Group.x;
-                tweenY = 650;
-            }
-
-            game.add.tween(plus3Group.scale).to({x: 1.0, y: 1.0}, 500, Phaser.Easing.Elastic.Out, true);
-            game.add.tween(plus3Group).to({x: tweenX, y: tweenY}, 400, 'Linear', true, 500);
-            game.add.tween(plus3Group).to({alpha: 0}, 200, 'Linear', true, 700)
+            let deltaY = (model.desktop) ? 100 : 50;
+            // game.add.tween(plus3Group.scale).to({x: 1.0, y: 1.0}, 500, Phaser.Easing.Elastic.Out, true);
+            game.add.tween(plus3Group).to({y: plus3Group.y + deltaY, alpha: 1}, 300, 'Linear', true);
+            game.add.tween(plus3Group).to({y: plus3Group.y - deltaY}, 300, 'Linear', true, 1000)
                 .onComplete.add(() => {
                     plus3Group.destroy();
                     model.state('CountPlus3', false);
