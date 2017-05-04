@@ -135,7 +135,7 @@ export let controller = (() => {
             })
             .catch((err) => {
                 if (err.status) {
-                    mainView.draw.showPopup({message: 'Connection problem. Click to restart'});
+                    mainView.draw.showPopup({message: 'Connection problem.'});
                 }
                 console.error(err);
             });
@@ -205,7 +205,7 @@ export let controller = (() => {
 
         })
         .catch((err) => {
-            mainView.draw.showPopup({message: 'You have weak Internet connection. Click to restart.'});
+            mainView.draw.showPopup({message: 'Connection problem.'});
             console.error(err);
         });
 
