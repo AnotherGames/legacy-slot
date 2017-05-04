@@ -312,7 +312,7 @@ function handleDoorClick() {
 		})
 		.catch((err) => {
 			if (err.status) {
-				mainView.draw.showPopup({message: 'Connection problem. Click to restart'});
+				mainView.draw.showPopup({message: 'Connection problem.'});
 			}
 			console.error(err);
 		});

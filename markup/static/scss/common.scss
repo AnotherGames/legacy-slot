@@ -71,11 +71,14 @@ body:not(.ios) {
 
 #popup h2{
     margin: 0;
+    margin-top: -5vw;
+    color: #fdf198;
     position: absolute;
     font: 3vw arial;
     box-sizing: border-box;
-    padding: 0 10%;
-    width: 100%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #popup img{
@@ -84,11 +87,15 @@ body:not(.ios) {
 
 #popup p{
     margin: 0;
+    margin-top: 10vw;
     font: 1.5vw arial;
+    color: #fdf198;
     position: absolute;
-    top: 85%;
     width: 100%;
     text-align: center;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #settings {
