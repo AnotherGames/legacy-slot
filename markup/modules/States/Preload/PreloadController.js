@@ -65,13 +65,13 @@ export class Preload {
     loadInitAssets() {
         const game = model.el('game');
         game.load.path = `static/img/content/${model.res}/`;
-        game.load.image('initBG', 'bg/initBG.png');
+        game.load.image('initBG', 'bg/initBG.jpg');
         game.load.atlasJSONArray('text', 'text/text.png', 'text/text.json');
     }
 
     loadMainAssets() {
         const game = model.el('game');
-        game.load.image('mainBG', 'bg/mainBG.png');
+        game.load.image('mainBG', 'bg/mainBG.jpg');
         game.load.image('logos', 'bg/logos.png');
         game.load.image('sticks', 'bg/palki.png');
         game.load.image('gameMachine', 'game/gameMachine.png');
