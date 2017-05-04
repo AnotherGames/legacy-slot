@@ -60,53 +60,38 @@ body:not(.ios) {
     margin: 0;
     z-index: 11;
     position: absolute;
-    left: 30%;
-    top: 10%;
-    // transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #popup h2{
     margin: 0;
+    margin-top: -5vw;
+    color: #f4ce46;
     position: absolute;
     font: 3vw arial;
     box-sizing: border-box;
-    // padding: 0 10% 0 45%;
-    top: 35%;
-    width: 100%;
-    max-width: 500px;
-    color: #eee;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #popup img{
     max-width: 100%;
-    margin-left: 80%;
 }
 
 #popup p{
     margin: 0;
+    margin-top: 11vw;
+    color: #f4ce46;
     font: 1.5vw arial;
     position: absolute;
-    top: 60%;
-    // padding: 0 15% 0 17%;
     width: 100%;
     text-align: center;
-    color: #eee;
-}
-
-@media screen and (max-width: 1280px) {
-    #popup {
-        left: 0;
-        top: 0;
-    }
-    #popup img {
-        max-width: 60%;
-    }
-    #popup h2 {
-        top: 35%;
-    }
-    #popup p {
-        top: 50%;
-    }
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #settings {

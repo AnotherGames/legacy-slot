@@ -49,7 +49,7 @@ export let view = (() => {
         let darknessBG = model.el('darknessBG');
         darknessBG.visible = true;
 
-        let jocker = game.add.sprite(game.width * 0.8, game.height * 0.2, 'popup', null, transitionContainer);
+        let jocker = game.add.sprite(game.width * 0.8, game.height * 0.2, 'jocker', null, transitionContainer);
         jocker.anchor.set(0.5);
         jocker.scale.set(0.1);
         jocker.alpha = 0;

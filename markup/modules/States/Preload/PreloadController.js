@@ -65,14 +65,14 @@ export class Preload {
     loadInitAssets() {
         const game = model.el('game');
         game.load.path = `static/img/content/${model.res}/`;
-        game.load.image('initBG', 'bg/initBG.png');
+        game.load.image('initBG', 'bg/initBG.jpg');
         game.load.image('logosSmall', 'preloader/logosSmall.png');
         game.load.atlasJSONArray('text', 'text/text.png', 'text/text.json');
     }
 
     loadMainAssets() {
         const game = model.el('game');
-        game.load.image('mainBG', 'bg/mainBG.png');
+        game.load.image('mainBG', 'bg/mainBG.jpg');
         game.load.atlasJSONArray('light', 'game/light.png', 'game/light.json');
         game.load.image('lightBroken', 'game/lightBroken.png');
         game.load.image('lightGreen', 'game/lightGreen.png');
@@ -112,6 +112,7 @@ export class Preload {
         const game = model.el('game');
         game.load.image('fsCountBG', 'fs/fsCountBG.png');
         game.load.image('jack', 'fs/jack.png');
+        game.load.image('jocker', 'fs/jocker.png');
         game.load.image('coin1', 'fs/coin1.png');
         game.load.image('coin2', 'fs/coin2.png');
         game.load.image('gameMachineFSBG', 'game/gameMachineFSBG.png');
@@ -156,7 +157,7 @@ export class Preload {
         if (model.state('loadError')) {
             model.el('preloadBar').visible = false;
             model.el('preloadCoin').visible = false;
-            mainView.draw.showPopup({message: 'Connection problem. Click to restart.'});
+            mainView.draw.showPopup({message: 'Connection problem.'});
             game.load.reset(true, true);
             return;
         }

@@ -209,7 +209,7 @@ export let controller = (() => {
 
         })
         .catch((err) => {
-            mainView.draw.showPopup({message: 'Connection problem. Click to restart.'});
+            mainView.draw.showPopup({message: 'Connection problem.'});
             console.error(err)
         });
 
