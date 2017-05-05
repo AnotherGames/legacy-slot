@@ -125,8 +125,12 @@ export class Preload {
         game.load.image('multiBlink', 'fs/multiBlink.png');
         // game.load.image('fire', 'fs/fire.png');
         game.load.image('watchFS', 'fs/watchFS.png');
+        game.load.image('card1', 'fs/card1.png');
+        game.load.image('card2', 'fs/card2.png');
+        game.load.image('card3', 'fs/card3.png');
+        game.load.image('card4', 'fs/card4.png');
         game.load.atlasJSONArray('watchArrows', 'fs/watchArrows.png', 'fs/watchArrows.json');
-        game.load.spritesheet('cardsLiza', 'fs/cardsLizawin.png', 80, 104, 4);
+        game.load.atlasJSONArray('cardsLiza', 'fs/cardsLiza.png', 'fs/cardsLiza.json');
         game.load.image('plus3', 'fs/plus3.png');
 
     }

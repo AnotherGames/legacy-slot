@@ -101,6 +101,10 @@ export let controller = (() => {
 			fsView.draw.changeMulti({number: multiValue});
 			model.data('fsMulti', multiValue);
 		}
+
+		if (multiValue == 7) {
+			fsView.draw.showMaxMulti({});
+		}
 		//
 		// if (levelValue > currLevel) {
 		// 	fsView.draw.changeLevel({number: levelValue, animation: levelValue - 1 + ''});
@@ -147,6 +151,9 @@ export class FS {
 		let footer = new Footer({model, soundController, request});
 		model.el('footer', footer);
 
+		let watchCounter = 0;
+		model.el('watchCounter', watchCounter);
+
 		// Играем фоновую музыку
 		soundController.music.stopMusic('startPerehod');
 		soundController.music.stopMusic('fon');
@@ -155,6 +162,7 @@ export class FS {
 
 		fsView.draw.mainBG({});
 		fsView.draw.addWatch({});
+
 		// Отрисовуем основной контейнер
 		fsView.draw.mainContainer({});
 		fsView.draw.machineContainer({});
@@ -212,8 +220,11 @@ export class FS {
 		// Запускаем Фри Спины
 		game.time.events.add(1000, () => {
 			controller.init(this.fsCount);
+			fsView.draw.changeTime({number: 2});
 		});
-
+		game.time.events.add(3000, () => {
+			fsView.draw.changeMulti({number: 2});
+		});
 
 	}
 

@@ -114,6 +114,11 @@ export class Main {
             (game.scale.isFullScreen) ? $('#fakeButton').addClass('closed') : $('#fakeButton').removeClass('closed');
         }
 
+        if (model.el('emitter')) {
+            let emitter = model.el('emitter');
+            game.physics.arcade.collide(emitter);
+        }
+
     }
 
     positionMainContainer() {

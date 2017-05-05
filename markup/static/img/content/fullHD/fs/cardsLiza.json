@@ -1,0 +1,44 @@
+{"frames": [
+
+{
+	"filename": "card1.png",
+	"frame": {"x":1,"y":1,"w":49,"h":70},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":49,"h":70},
+	"sourceSize": {"w":49,"h":70}
+},
+{
+	"filename": "card2.png",
+	"frame": {"x":1,"y":73,"w":46,"h":72},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":46,"h":72},
+	"sourceSize": {"w":46,"h":72}
+},
+{
+	"filename": "card3.png",
+	"frame": {"x":52,"y":72,"w":47,"h":70},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":47,"h":70},
+	"sourceSize": {"w":47,"h":70}
+},
+{
+	"filename": "card4.png",
+	"frame": {"x":52,"y":1,"w":49,"h":69},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":49,"h":69},
+	"sourceSize": {"w":49,"h":69}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "cardsLiza.png",
+	"format": "RGBA8888",
+	"size": {"w":128,"h":256},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:55abec59502b5f5bbe232d4d50427579:11d4aa14281d654389a55ffeb31e9f9b:c3996cd46296343cbd73612d8f655c39$"
+}
+}

@@ -296,14 +296,27 @@ export let view = (() => {
             el
         }) {
             let container = el.group.parent;
-            let liza = game.add.sprite(el.group.x + 80, el.group.y, 'liza');
+            let liza = game.add.sprite(el.group.x + 85, el.group.y, 'liza');
             liza.anchor.set(0.5);
-            // liza.pivot.x = 10;
-            // liza.pivot.y = -380;
             container.add(liza);
             liza.animations.add('move');
             liza.animations.play('move', 20, false);
             model.el('liza', liza);
+
+            // let emitter = game.add.emitter(0, 0, 100);
+            // emitter.makeParticles(['card1', 'card2', 'card3', 'card4']);
+            // model.group('main').add(emitter);
+            // emitter.maxParticleScale = 0.6;
+            // emitter.minParticleScale = 0.5;
+            // // emitter.minParticleSpeed.setTo(-200, -400);
+            // // emitter.maxParticleSpeed.setTo(200, -400);
+            // emitter.setYSpeed();
+            // emitter.gravity = 150;
+            // emitter.angularDrag = 30;
+            // model.el('emitter', emitter);
+            //
+            // emitter.start(true, 4000, null, 100);
+            // console.log(emitter);
         }
 
     };

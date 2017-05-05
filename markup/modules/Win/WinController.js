@@ -22,7 +22,7 @@ export let controller = (() => {
         if (winLines.length === 0) return;
         view.draw.copyFinishScreenToUpWheels({});
 
-        checkForChest(winLines);
+        checkforCard(winLines);
 
         // Проверяем переход на Фри-Спины
         checkForFS();
@@ -225,13 +225,13 @@ export let controller = (() => {
             // model.state('fs:end', false);
 
             // Запускаем переходной экран
-            game.time.events.add(1500, () => {
+            game.time.events.add(2000, () => {
                 transitionView.fsStart();
             });
         }
     }
 
-    function checkForChest(winLines) {
+    function checkforCard(winLines) {
         winLines.forEach((winLine) => {
             if (winLine.Line == -1 && winLine.Symbol == '14') {
                 fsController.fsActions();

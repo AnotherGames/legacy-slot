@@ -189,7 +189,7 @@ export let view = (() => {
                 if (model.mobile) {
                     lineNumber.scale.set(0.75);
                 }
-                // lineNumber.alpha = 0.05;
+                lineNumber.alpha = 0.05;
 
                 lineNumber.animations.add('win');
 

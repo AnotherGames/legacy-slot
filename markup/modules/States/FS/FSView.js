@@ -59,13 +59,20 @@ export let view = (() => {
             gameMachine.anchor.set(0.5);
             model.el('gameMachine', gameMachine);
 
-            let logoY = (model.desktop) ? 83 : 50;
+            let logoY = (model.desktop) ? 82 : 50;
+            let logoFSDown = game.add.sprite(0, gameMachine.top + logoY, 'logoFS', 'logoLight.png', container);
+            logoFSDown.anchor.set(0.5);
+            if (model.desktop) {
+                logoFSDown.scale.set(1.33);
+            }
+            logoFSDown.alpha = 0;
+            model.el('logoFSDown', logoFSDown);
+
             let logoFS = game.add.sprite(0, gameMachine.top + logoY, 'logoFS', 'logoNormal.png', container);
             logoFS.anchor.set(0.5);
             if (model.desktop) {
                 logoFS.scale.set(1.33);
             }
-            model.el('logoFS', logoFS);
         },
 
         machineContainer: function ({
@@ -87,10 +94,6 @@ export let view = (() => {
             let winTop = game.add.group();
             container.addAt(winTop, 6);
             model.group('winTop', winTop);
-
-            let plusThree = game.add.group();
-            container.addAt(plusThree, 7);
-            model.group('plusThree', plusThree);
 
             machineGroup.glistaLightContainer = game.add.group();
             model.group('glistaLight', machineGroup.glistaLightContainer);
@@ -149,6 +152,7 @@ export let view = (() => {
                 multiBlinkArr.push(multiBlink);
             }
             model.el('multiCloseArr', multiCloseArr);
+            model.el('multiBlinkArr', multiBlinkArr);
 
         },
 
@@ -170,28 +174,6 @@ export let view = (() => {
             });
         },
 
-        lightBlinking: function ({
-            game = model.el('game'),
-            delay = 0,
-            multiCloseArr = model.el('multiCloseArr'),
-            multiBlinkArr = model.el('multiBlinkArr')
-        }) {
-            game.time.events.add(delay, () => {
-                multiCloseArr.forEach((el) => {
-                    if (el.alpha == 0) {
-                    	return;
-                    } else {
-
-                    }
-                });
-
-                this.game.add.tween(this.light).to({alpha: 0.6}, 500, 'Linear', true, 0, 0, true)
-                    .onComplete.add(() => {
-                        this.lightBlinking({delay: 4000});
-                    })
-            });
-        },
-
         addWatch: function ({
             game = model.el('game'),
             container = model.group('bg')
@@ -207,7 +189,7 @@ export let view = (() => {
             for (let i = 0; i < 40; i++) {
                 let rndAlpha = game.rnd.integerInRange(4, 10);
                 let light = game.add.sprite(game.rnd.integerInRange(-200, 200) + game.width * 0.12,
-                game.rnd.integerInRange(-150, 150) + (model.desktop) ? game.height * 0.65 : game.height * 0.85,
+                game.rnd.integerInRange(-150, 150) + (model.desktop) ? game.height * 0.67 : game.height * 0.85,
                     'lightLine',
                     null,
                     watchContainer);
@@ -216,13 +198,13 @@ export let view = (() => {
                 lightArr.push(light);
             }
             lightArr.forEach((light) => {
-                let rnd3 = game.rnd.integerInRange(-200, 200);
+                let rnd3 = game.rnd.integerInRange(-150, 150);
                 let rnd2 = game.rnd.integerInRange(-150, 150);
                 let rndAlpha = game.rnd.integerInRange(4, 10);
-                game.add.tween(light).to({x: light.x + rnd2, y: light.y + rnd2}, 5000, 'Linear', true, 0, 10000, true)
-                .onComplete.add(() => {
-                    game.add.tween(light).to({x: light.x + rnd3, y: light.y + rnd3}, 5000, 'Linear', true);
-                });
+                game.add.tween(light).to({x: light.x + rnd2, y: light.y + rnd2}, 10000, 'Linear', true, 0, 20000, true)
+                    .onComplete.add(() => {
+                        game.add.tween(light).to({x: light.x + rnd3, y: light.y + rnd3}, 10000, 'Linear', true);
+                    });
             });
             let watchFS = game.add.sprite(game.width * 0.12,
                 (model.desktop) ? game.height * 0.65 : game.height * 0.85,
@@ -253,50 +235,85 @@ export let view = (() => {
         }) {
             watchCounter++;
             if (watchCounter > 1) {
-                number = watchCounter + 2;
+                number = watchCounter + 1;
             }
-            console.warn(watchCounter);
+            if (number > 11) {
+                watchCounter = 0;
+                number = watchCounter;
+            }
+            if (number > 12) return;
+            console.warn('watchCounter', watchCounter);
+            model.el('watchCounter', watchCounter);
             minuteArrow.animations.play('run');
             game.time.events.add(1000, () => {
-                hourArrow.frameName = `watch-h-0${number}.png`;
+                minuteArrow.frameName = 'watch-m-00.png';
+                if (number < 10) {
+                    hourArrow.frameName = `watch-h-0${number}.png`;
+                } else {
+                    hourArrow.frameName = `watch-h-${number}.png`;
+                }
             });
         },
 
-        Level: function ({
+        lightBlinking: function ({
             game = model.el('game'),
-            container = model.group('panel'),
-            start = 1,
-            fontDesktop = '70px Titania, Arial',
-            fontMobile = '50px Titania, Arial'
+            delay = 400,
+            multiBlinkArr = model.el('multiBlinkArr')
         }) {
-
-            let x, y, deltaX = 0, deltaY = 0, font;
-            if (model.desktop) {
-                x = 585;
-                y = -50;
-                font = fontDesktop;
-            } else {
-                x = model.el('game').width / 2 - 115;
-                y = 610;
-                deltaY = 13;
-                font = fontMobile;
-                let fsLevelBG = game.add.sprite(x, y, 'fsLevelBG', null, container);
-                fsLevelBG.anchor.set(0.5);
-            }
-
-            let fsLevel;
-                fsLevel = game.add.text(x + deltaX, y + deltaY, start, {font: font, fill: '#ffffff', align: 'center', stroke: '#188bb4', strokeThickness: 5}, container);
-                fsLevel.setShadow(5, 5, 'rgba(0, 0, 0, 0.7)', 8);
-                fsLevel.anchor.set(0.5);
-                model.el('fsLevel', fsLevel);
-            setTimeout(() => {
-                fsLevel.text = 2;
-                fsLevel.text = start;
-            }, 300);
-
-
-            // draw._drawDiver({});
+            multiBlinkArr.forEach((light) => {
+                game.add.tween(light).to({alpha: 0.6}, 500, 'Linear', true, delay, 0, true)
+                .onComplete.add(() => {
+                    light.alpha = 0;
+                })
+            });
+            game.time.events.add(4000, () => {
+                this.lightBlinking({});
+            });
         },
+
+        showMaxMulti: function ({
+            game = model.el('game'),
+            logoFSDown = model.el('logoFSDown')
+        }) {
+            this.lightBlinking({});
+            game.add.tween(logoFSDown).to({alpha: 0.6}, 400, 'Linear', true, 0 , -1, true);
+        },
+
+        // Level: function ({
+        //     game = model.el('game'),
+        //     container = model.group('panel'),
+        //     start = 1,
+        //     fontDesktop = '70px Titania, Arial',
+        //     fontMobile = '50px Titania, Arial'
+        // }) {
+        //
+        //     let x, y, deltaX = 0, deltaY = 0, font;
+        //     if (model.desktop) {
+        //         x = 585;
+        //         y = -50;
+        //         font = fontDesktop;
+        //     } else {
+        //         x = model.el('game').width / 2 - 115;
+        //         y = 610;
+        //         deltaY = 13;
+        //         font = fontMobile;
+        //         let fsLevelBG = game.add.sprite(x, y, 'fsLevelBG', null, container);
+        //         fsLevelBG.anchor.set(0.5);
+        //     }
+        //
+        //     let fsLevel;
+        //         fsLevel = game.add.text(x + deltaX, y + deltaY, start, {font: font, fill: '#ffffff', align: 'center', stroke: '#188bb4', strokeThickness: 5}, container);
+        //         fsLevel.setShadow(5, 5, 'rgba(0, 0, 0, 0.7)', 8);
+        //         fsLevel.anchor.set(0.5);
+        //         model.el('fsLevel', fsLevel);
+        //     setTimeout(() => {
+        //         fsLevel.text = 2;
+        //         fsLevel.text = start;
+        //     }, 300);
+        //
+        //
+        //     // draw._drawDiver({});
+        // },
 
         // _drawDiver: function ({
         //     game = model.el('game'),
@@ -400,6 +417,8 @@ export let view = (() => {
                     plus3Group.destroy();
                     model.state('CountPlus3', false);
                 }, this);
+
+            this.changeTime({});
         }
 
 
