@@ -303,6 +303,8 @@ export let view = (() => {
             coinsLevelMinus.frameName = 'minus.png';
             coinsLevelMinus.freezeFrames = true;
             coinsLevelMinus.alpha = 0.5;
+        let settingsButton = model.el('settingsButton');
+            settingsButton.alpha = 0.5;
         if(model.state('autoplay:start')){
             let spinButtonDesk = model.el('spinButtonDesk');
                 spinButtonDesk.visible = false;
@@ -352,6 +354,8 @@ export let view = (() => {
             autoButtonDesk.frameName = 'auto.png';
             autoButtonDesk.freezeFrames = false;
             autoButtonDesk.alpha = 1;
+        let settingsButton = model.el('settingsButton');
+            settingsButton.alpha = 1;
         if(model.state('autoplay:end')){
             let spinButtonDesk = model.el('spinButtonDesk');
                 spinButtonDesk.visible = true;
