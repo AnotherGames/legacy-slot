@@ -364,7 +364,9 @@ export let controller = (() => {
         coords[multi].forEach((sur, ind) => {
             setTimeout(() => {
                 view.draw.FireShuriken({
-                    curValue: multi
+                    curValue: {
+                        Multi: multi
+                    }
                 }, ind);
             }, 1000 * ind);
         });

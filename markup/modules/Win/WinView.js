@@ -307,17 +307,17 @@ export let view = (() => {
             let game = model.el('game');
             let container = model.group('aim');
 
-            let x = config.coords[parseInt(data.curValue)][index].x;
-            let y = config.coords[parseInt(data.curValue)][index].y;
-            let scaleX = config.coords[parseInt(data.curValue)][index].scaleX;
-            let scaleY = config.coords[parseInt(data.curValue)][index].scaleY;
+            let x = config.coords[parseInt(data.curValue.Multi)][index].x;
+            let y = config.coords[parseInt(data.curValue.Multi)][index].y;
+            let scaleX = config.coords[parseInt(data.curValue.Multi)][index].scaleX;
+            let scaleY = config.coords[parseInt(data.curValue.Multi)][index].scaleY;
             if (model.mobile) {
                 x *= 0.66;
                 y *= 0.66;
                 scaleX *= 0.66;
                 scaleY *= 0.66;
             }
-            let leftSide = config.coords[parseInt(data.curValue)][index].left;
+            let leftSide = config.coords[parseInt(data.curValue.Multi)][index].left;
 
             soundController.sound.playSound({sound: 'shurikenFly'});
 
