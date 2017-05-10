@@ -58,13 +58,13 @@ export class Preload {
         game.load.audio('win', 'totalWin.mp3');
         game.load.audio('lineWin', 'lineWin1.mp3');
         game.load.audio('lineWin2', 'lineWin2.mp3');
-        game.load.audio('illumBreak1', 'illumBreak01.mp3');
-        game.load.audio('illumBreak2', 'illumBreak02.mp3');
-        game.load.audio('illumBreak3', 'illumBreak03.mp3');
-        game.load.audio('illumFail', 'illumFail.mp3');
-        game.load.audio('illumWin', 'illumWin.mp3');
-        game.load.audio('chestDown', 'chestDown.mp3');
-        game.load.audio('diverDown', 'diverDown.mp3');
+        // game.load.audio('illumBreak1', 'illumBreak01.mp3');
+        // game.load.audio('illumBreak2', 'illumBreak02.mp3');
+        // game.load.audio('illumBreak3', 'illumBreak03.mp3');
+        // game.load.audio('illumFail', 'illumFail.mp3');
+        // game.load.audio('illumWin', 'illumWin.mp3');
+        // game.load.audio('chestDown', 'chestDown.mp3');
+        // game.load.audio('diverDown', 'diverDown.mp3');
     }
 
     loadInitAssets() {
@@ -130,31 +130,35 @@ export class Preload {
         game.load.image('card3', 'fs/card3.png');
         game.load.image('card4', 'fs/card4.png');
         game.load.atlasJSONArray('watchArrows', 'fs/watchArrows.png', 'fs/watchArrows.json');
-        game.load.atlasJSONArray('cardsLiza', 'fs/cardsLiza.png', 'fs/cardsLiza.json');
         game.load.image('plus3', 'fs/plus3.png');
 
     }
 
     loadBonusAssets() {
         const game = model.el('game');
-        game.load.image('bonusBG', 'bg/bonusBG.png');
-        game.load.image('bonusBG2', 'bg/bonusBG2.png');
-        game.load.image('bonusBG3', 'bg/bonusBG3.png');
-        game.load.spritesheet('bigFish', 'bonus/bigFish.png', 226, 182, 12);
-        game.load.spritesheet('chernila', 'bonus/chernila.png', 259, 185, 12);
-        game.load.atlasJSONArray('tentacles', 'bonus/tentacles.png', 'bonus/tentacles.json');
-        game.load.atlasJSONArray('bonusNumber', 'bonus/bonusNumber.png', 'bonus/bonusNumber.json');
-        game.load.atlasJSONArray('illuminators', 'bonus/illuminators.png', 'bonus/illuminators.json');
-        // game.load.image('light', 'bonus/light.png');
-        game.load.image('octopus', 'bonus/octopus.png');
+        game.load.image('fgDoors_0', 'bonus/fgDoors_0.png');
+        game.load.image('fgDoors_1', 'bonus/fgDoors_1.png');
+        game.load.image('fgDoors_2', 'bonus/fgDoors_2.png');
+        game.load.image('fgDoors_3', 'bonus/fgDoors_3.png');
+        game.load.image('fgDoors_4', 'bonus/fgDoors_4.png');
+        game.load.atlasJSONArray('bgDoors_0', 'bonus/bgDoors_0.png', 'bonus/bgDoors_0.json');
+        game.load.atlasJSONArray('bgDoors_1', 'bonus/bgDoors_1.png', 'bonus/bgDoors_1.json');
+        game.load.atlasJSONArray('bgDoors_2', 'bonus/bgDoors_2.png', 'bonus/bgDoors_2.json');
+        game.load.atlasJSONArray('bgDoors_3', 'bonus/bgDoors_3.png', 'bonus/bgDoors_3.json');
+        game.load.atlasJSONArray('door_0', 'bonus/door_0.png', 'bonus/door_0.json');
+        game.load.spritesheet('door_1', 'bonus/door_1.png', 133, 350, 10);
+        game.load.spritesheet('door_2', 'bonus/door_2.png', 133, 350, 10);
+        game.load.spritesheet('door_3', 'bonus/door_3.png', 133, 350, 10);
+        game.load.spritesheet('door_4_1', 'bonus/door_4_1.png', 146, 147, 3);
+        game.load.spritesheet('door_4_2', 'bonus/door_4_1.png', 146, 147, 3);
+        game.load.spritesheet('door_4_3', 'bonus/door_4_1.png', 146, 147, 3);
+        game.load.image('bigLight', 'bonus/bigLight.png');
+        game.load.image('fly', 'bonus/fly.png');
+        game.load.image('gold', 'bonus/gold.png');
     }
 
     loadSpineAssets() {
         const game = model.el('game');
-        // game.load.spine('diverBig', 'spine/Vodolaz.json');
-        // game.load.spine('diverFS', 'spine/sunken.json');
-        // game.load.spine('chestFS', 'spine/skeleton.json');
-        game.load.spine('ink', 'spine/ink.json');
         game.load.spine('fsEnd', 'spine/Final.json');
     }
 
@@ -174,8 +178,6 @@ export class Preload {
         game.load.atlasJSONArray('12', 'elements/12.png', 'elements/12.json');
         game.load.atlasJSONArray('13', 'elements/13.png', 'elements/13.json');
         game.load.atlasJSONArray('14', 'elements/14.png', 'elements/14.json');
-        // game.load.atlasJSONArray('elementBackground1', 'elements/elementBackground1.png', 'elements/elementBackground1.json');
-        // game.load.atlasJSONArray('elementBackground2', 'elements/elementBackground2.png', 'elements/elementBackground2.json');
     }
 
     hidePreloader() {

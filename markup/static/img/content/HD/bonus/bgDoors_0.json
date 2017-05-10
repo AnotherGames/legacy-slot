@@ -1,0 +1,28 @@
+{"frames": [
+
+{
+	"filename": "bgDoors_0_fail.png",
+	"frame": {"x":1,"y":374,"w":728,"h":355},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":272,"y":227,"w":728,"h":355},
+	"sourceSize": {"w":1280,"h":720}
+},
+{
+	"filename": "bgDoors_0_win.png",
+	"frame": {"x":1,"y":1,"w":728,"h":371},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":276,"y":209,"w":728,"h":371},
+	"sourceSize": {"w":1280,"h":720}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "bgDoors_0.png",
+	"format": "RGBA8888",
+	"size": {"w":1024,"h":1024},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:1076eaab014d3ae733b17d13077a31d7:12c6eccd7d6c24644796873054746f8e:398122c45129b1cf89e77ad0b47b8b82$"
+}
+}
