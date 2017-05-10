@@ -7,15 +7,15 @@ import { view as mainView } from 'modules/States/Main/MainView';
 
 export let view = (() => {
 
-    function fsStart() {
+    function fsStart(state) {
         let game = model.el('game');
         model.state('transitionScreen', true);
         // Запускаем затемнение
         game.camera.flash(0x000000, 500);
         // Отрисовываем переходной экран
-        _fsStartDraw();
-        _fsStartTween();
-        _fsStartInput();
+        _fsStartDraw(state);
+        _fsStartTween(state);
+        _fsStartInput(state);
         game.input.keyboard.enabled = true;
         // Автопереход если включен
         if (model.state('autoTransititon')) {
@@ -23,8 +23,12 @@ export let view = (() => {
         }
     }
 
-    function transitionInFs() {
-        model.el('game').state.start('FS');
+    function transitionInFs(state) {
+        if (state == 'fs') {
+            model.el('game').state.start('FS');
+        } else {
+            model.el('game').state.start('Bonus');
+        }
         model.state('transitionScreen', false);
     }
 
@@ -32,7 +36,7 @@ export let view = (() => {
         model.el('game').state.start('Main');
     }
 
-    function _fsStartDraw() {
+    function _fsStartDraw(state) {
         let game = model.el('game');
         let transitionContainer = model.group('transition');
         // Изменяем музыку
@@ -43,24 +47,32 @@ export let view = (() => {
         let transitionBG = game.add.sprite(0, 0, 'mainBG', null, transitionContainer);
         model.el('transitionBG', transitionBG);
 
-        let youWinText = game.add.sprite(game.width / 2, game.height * 0.2, 'text', 'youWin.png', transitionContainer);
+        let mainText = (state == 'fs') ? 'youWin.png' : 'bonusWin.png';
+
+        let youWinText = game.add.sprite(game.width / 2, game.height * 0.2, 'text', mainText, transitionContainer);
         youWinText.anchor.set(0.5);
         youWinText.scale.set(0.1);
+        if (state == 'bonus') {
+            youWinText.y = game.height * 0.3;
+            youWinText.scale.set(1.2);
+        }
         model.el('youWinText', youWinText);
 
-        // Надпись Free Spins
-        let freeSpinsText = game.add.sprite(game.width / 2, game.height * 0.7, 'text', 'freespin.png', transitionContainer);
-        freeSpinsText.anchor.set(0.5);
-        freeSpinsText.scale.set(0.1);
-        model.el('freeSpinsText', freeSpinsText);
+        if (state == 'fs') {
+            // Надпись Free Spins
+            let freeSpinsText = game.add.sprite(game.width / 2, game.height * 0.7, 'text', 'freespin.png', transitionContainer);
+            freeSpinsText.anchor.set(0.5);
+            freeSpinsText.scale.set(0.1);
+            model.el('freeSpinsText', freeSpinsText);
 
-        // Счетчик Фри-Спинов
-        let freeSpinsCount = model.data('rollResponse').FreeSpinsLeft;
-        let freeSpinsLevel = game.add.bitmapText(game.width / 2, game.height / 2, 'numbersFont', freeSpinsCount, 70, transitionContainer);
-        freeSpinsLevel.align = 'center';
-        freeSpinsLevel.anchor.set(0.5);
-        freeSpinsLevel.scale.set(0.1);
-        model.el('freeSpinsLevel', freeSpinsLevel);
+            // Счетчик Фри-Спинов
+            let freeSpinsCount = model.data('rollResponse').FreeSpinsLeft;
+            let freeSpinsLevel = game.add.bitmapText(game.width / 2, game.height / 2, 'numbersFont', freeSpinsCount, 70, transitionContainer);
+            freeSpinsLevel.align = 'center';
+            freeSpinsLevel.anchor.set(0.5);
+            freeSpinsLevel.scale.set(0.1);
+            model.el('freeSpinsLevel', freeSpinsLevel);
+        }
 
         let liza = game.add.sprite(game.width + 500, game.height * 0.9, 'lizaFS', null, transitionContainer);
         liza.anchor.set(0.5);
@@ -76,25 +88,31 @@ export let view = (() => {
         continueText.anchor.set(0.5);
         continueText.scale.setTo(0.1, 0.1);
         model.el('continueText', continueText);
+        if (state == 'bonus') {
+            continueText.y = game.height * 0.6;
+        }
 
         mainView.draw.addLight({container: transitionContainer});
 
     }
 
-    function _fsStartTween() {
+    function _fsStartTween(state) {
         let game = model.el('game');
-        let freeSpinsText = model.el('freeSpinsText');
         let youWinText = model.el('youWinText');
-        let freeSpinsLevel = model.el('freeSpinsLevel');
         let continueText = model.el('continueText');
         let liza = model.el('liza');
         let scaleX = (model.desktop) ? 1.0 : 0.7;
         let scaleY = (model.desktop) ? 1.0 : 0.7;
 
+        if (state == 'fs') {
+            let freeSpinsText = model.el('freeSpinsText');
+            let freeSpinsLevel = model.el('freeSpinsLevel');
+            game.add.tween(freeSpinsText.scale).to({x: 1.0, y: 1.0}, 1500, Phaser.Easing.Bounce.Out, true);
+            game.add.tween(freeSpinsLevel.scale).to({x: scaleX, y: scaleY}, 1500, Phaser.Easing.Bounce.Out, true);
+        }
+
         // Анимации появления
         game.add.tween(youWinText.scale).to({x: 1.0, y: 1.0}, 1500, Phaser.Easing.Bounce.Out, true);
-        game.add.tween(freeSpinsText.scale).to({x: 1.0, y: 1.0}, 1500, Phaser.Easing.Bounce.Out, true);
-        game.add.tween(freeSpinsLevel.scale).to({x: scaleX, y: scaleY}, 1500, Phaser.Easing.Bounce.Out, true);
         game.add.tween(continueText.scale).to({x: 1.0, y: 1.0}, 1500, Phaser.Easing.Bounce.Out, true);
         game.add.tween(liza).to({x: game.width * 0.85, angle: 0}, 500, Phaser.Easing.Cubic.Out, true, 300)
             // Болтание кнопки продолжить
@@ -107,12 +125,12 @@ export let view = (() => {
             }, this);
     }
 
-    function _fsStartInput() {
+    function _fsStartInput(state) {
         // При клике на фон будет переход на Фри-Спины
         let transitionBG = model.el('transitionBG');
         transitionBG.inputEnabled = true;
         transitionBG.input.priorityID = 2;
-        transitionBG.events.onInputDown.add(transitionInFs);
+        transitionBG.events.onInputDown.add(() => transitionInFs(state));
     }
 
     function fsFinish() {

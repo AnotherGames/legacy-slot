@@ -300,23 +300,25 @@ export let view = (() => {
             liza.anchor.set(0.5);
             container.add(liza);
             liza.animations.add('move');
-            liza.animations.play('move', 20, false);
             model.el('liza', liza);
 
-            // let emitter = game.add.emitter(0, 0, 100);
-            // emitter.makeParticles(['card1', 'card2', 'card3', 'card4']);
-            // model.group('main').add(emitter);
-            // emitter.maxParticleScale = 0.6;
-            // emitter.minParticleScale = 0.5;
-            // // emitter.minParticleSpeed.setTo(-200, -400);
-            // // emitter.maxParticleSpeed.setTo(200, -400);
-            // emitter.setYSpeed();
-            // emitter.gravity = 150;
-            // emitter.angularDrag = 30;
-            // model.el('emitter', emitter);
-            //
-            // emitter.start(true, 4000, null, 100);
-            // console.log(emitter);
+            let emitter = game.add.emitter(el.group.x, el.group.y - 200, 25);
+            emitter.makeParticles(['card1', 'card2', 'card3', 'card4']);
+            container.add(emitter);
+            emitter.maxParticleScale = 0.6;
+            emitter.minParticleScale = 0.5;
+            emitter.minParticleSpeed.setTo(-400, -400);
+            emitter.maxParticleSpeed.setTo(600, 600);
+            emitter.gravity = 150;
+            emitter.bounce.setTo(0.5, 0.5);
+            emitter.angularDrag = 30;
+            model.el('emitter', emitter);
+
+            liza.animations.play('move', 20, false);
+            game.time.events.add(500, () => {
+                emitter.start(true, 2500, null, 50);
+            })
+
         }
 
     };

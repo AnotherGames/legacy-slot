@@ -8,7 +8,7 @@ export let view = (() => {
             game = model.el('game')
         }) {
             model.group('bg', game.add.group());
-            model.group('upperBG', game.add.group());
+            // model.group('upperBG', game.add.group());
             model.group('main', game.add.group());
             model.group('buttons', game.add.group());
             model.group('balanceContainer', game.add.group());
