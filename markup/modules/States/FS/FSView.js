@@ -224,6 +224,8 @@ export let view = (() => {
 
             game.add.tween(watchContainer).to({y: watchContainer.y + 50}, 1500, 'Linear', true, 0, -1, true);
 
+            soundController.sound.playSound({sound: 'clock'});
+
         },
 
         changeTime: function ({

@@ -36,7 +36,7 @@ export class Bonus {
 		balanceView.draw.CashBalance({});
 		model.updateBalance({startBonus: true});
 
-		soundController.music.stopMusic('fon');
+		soundController.music.stopMusic('startPerehod');
 		soundController.music.playMusic('bonusFon');
 
 		let level = new DoorLevel({container: model.group('main'), level: 0});

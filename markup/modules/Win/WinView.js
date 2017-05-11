@@ -326,9 +326,7 @@ export let view = (() => {
     let play = {
 
         WinSound: function () {
-            let winSound = Math.round(Math.random())
-            ? soundController.sound.playSound({sound: 'lineWin', duration: 1200})
-            : soundController.sound.playSound({sound: 'lineWin2', duration: 1200});
+            let winSound = soundController.sound.playSound({sound: 'lineWin', duration: 1200})
             return winSound;
 
         }

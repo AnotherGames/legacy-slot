@@ -2,6 +2,7 @@ import { model } from 'modules/Model/Model';
 import { request } from "../../../Info/Request";
 import {view as bonusView} from "modules/States/Bonus/BonusView";
 import {view as mainView} from "modules/States/Main/MainView";
+import { controller as soundController } from '../../../Info/SoundController';
 
 const config = [
     [ // level 0
@@ -245,6 +246,8 @@ export class Door {
 
                     request.send('Ready');
 
+                    soundController.sound.playSound({sound: `door${level + 1}`});
+
                     if (data.CurrentValue.Multi !== 'Exit' && data.BonusEnd !== true) {
 
                         // Изменить бекграунд уровня дверей
@@ -271,6 +274,12 @@ export class Door {
 
                         // Обычный выход Total Win
                         this.parent.setResult('fail', this.sprite.x, this.sprite.y);
+                        if (level == 2) {
+                            soundController.sound.playSound({sound: 'laugh'});
+                        }
+                        if (level == 4) {
+                            soundController.sound.playSound({sound: 'fly'});
+                        }
                         bonusView.draw.showWin({});
                         setTimeout(() => {
                             this.container.removeAll();
@@ -289,6 +298,7 @@ export class Door {
                             parseInt(data.CurrentValue.Multi)
                         );
                         this.parent.showLastWin(this.sprite.x, this.sprite.y);
+                        soundController.sound.playSound({sound: 'coins'});
                         bonusView.draw.showWin({winTextFrame: 'bigW.png'});
                         setTimeout(() => {
                             this.container.removeAll();
@@ -334,13 +344,15 @@ export class Door {
         model.state('buttons:locked', false);
         model.state('bonus', false);
         model.state('doorFinish', false);
-        model.el('game').state.start('Main');
+        soundController.music.stopMusic('bonusFon');
 
         model.state(`doors:0:open`, false);
         model.state(`doors:1:open`, false);
         model.state(`doors:2:open`, false);
         model.state(`doors:3:open`, false);
         model.state(`doors:4:open`, false);
+
+        model.el('game').state.start('Main');
     }
 
 }

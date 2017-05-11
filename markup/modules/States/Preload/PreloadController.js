@@ -55,16 +55,17 @@ export class Preload {
         game.load.audio('buttonClick', 'buttonClick.mp3');
         game.load.audio('startPerehod', 'startPerehod.mp3');
         game.load.audio('finishPerehod', 'startPerehod.mp3');
-        game.load.audio('win', 'totalWin.mp3');
-        game.load.audio('lineWin', 'lineWin1.mp3');
-        game.load.audio('lineWin2', 'lineWin2.mp3');
-        // game.load.audio('illumBreak1', 'illumBreak01.mp3');
-        // game.load.audio('illumBreak2', 'illumBreak02.mp3');
-        // game.load.audio('illumBreak3', 'illumBreak03.mp3');
-        // game.load.audio('illumFail', 'illumFail.mp3');
-        // game.load.audio('illumWin', 'illumWin.mp3');
-        // game.load.audio('chestDown', 'chestDown.mp3');
-        // game.load.audio('diverDown', 'diverDown.mp3');
+        game.load.audio('lineWin', 'lineWin.mp3');
+        // game.load.audio('win', 'totalWin.mp3');
+
+        game.load.audio('clock', 'clock.mp3');
+        game.load.audio('coins', 'coins.mp3');
+        game.load.audio('laugh', 'laugh.mp3');
+        game.load.audio('door1', 'door1.mp3');
+        game.load.audio('door2', 'door2.mp3');
+        game.load.audio('door3', 'door3.mp3');
+        game.load.audio('door4', 'door4.mp3');
+        game.load.audio('door5', 'door5.mp3');
     }
 
     loadInitAssets() {
