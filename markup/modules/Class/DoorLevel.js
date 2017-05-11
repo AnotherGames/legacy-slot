@@ -1,5 +1,7 @@
 import { model } from 'modules/Model/Model';
 import { request } from "../../../Info/Request";
+import {view as bonusView} from "modules/States/Bonus/BonusView";
+import {view as mainView} from "modules/States/Main/MainView";
 
 const config = [
     [ // level 0
@@ -31,11 +33,11 @@ const config = [
         { x: 0.723, y: 0.553 }
     ],
     [ // level 4
-        { x: 0.27, y: 0.55},
-        { x: 0.38, y: 0.55},
-        { x: 0.5, y: 0.55},
-        { x: 0.61, y: 0.55},
-        { x: 0.73, y: 0.55}
+        { x: 0.268, y: 0.6},
+        { x: 0.38, y: 0.6},
+        { x: 0.5, y: 0.6},
+        { x: 0.617, y: 0.6},
+        { x: 0.73, y: 0.6}
     ]
 ]
 
@@ -49,6 +51,7 @@ export default class DoorLevel {
         this.game = model.el('game')
         this.container = container;
         this.level = level;
+        this.doors = [];
 
         // Выигрыш или проигрыш который за дверями
         if (this.level != 4) {
@@ -57,15 +60,21 @@ export default class DoorLevel {
             if (model.desktop) {
                 this.bg.scale.set(1.5);
             }
+
+            // все двери кроме последней
+            this.addDoors(level);
         }
 
-        // все двери
-        this.addDoors(level);
 
         // Заставка этого уровня дверей
         this.fg = this.game.add.sprite(0, 0, `fgDoors_${level}`, null, container);
         if (model.desktop) {
             this.fg.scale.set(1.5);
+        }
+
+        if (level == 4) {
+            // Последние двери
+            this.addDoors(level);
         }
 
         // Затемнение
@@ -74,7 +83,6 @@ export default class DoorLevel {
     }
 
     addDoors(level) {
-        this.doors = [];
         for (let i = 0; i < 5; i++) {
             this.doors.push(
                 new Door({
@@ -87,21 +95,82 @@ export default class DoorLevel {
         }
     }
 
-    setResult(result) {
+    setResult(result, x = 0, y = 0) {
 
         if (this.level != 4) {
             this.bg.frameName = `bgDoors_${this.level}_${result}.png`;
+        } else {
+            if (result == 'fail') {
+                let fly = this.game.add.sprite(x, y, 'fly', null, this.container);
+                this.game.add.tween(fly).to({x: fly.x + this.game.rnd.integerInRange(-50, 50), y: fly.y - 500}, 1000, 'Linear', true);
+            }
         }
 
     }
 
+    showLastWin(x, y) {
+        this.gold = new Gold({
+            container: this.container,
+            x: x,
+            y: y
+        });
+        setTimeout(() => {
+            this.gold.start();
+        }, 300)
+    }
+
     showMulti(amount) {
 
-        this.multi = this.game.add.bitmapText(this.game.world.centerX, this.game.world.centerY + 100, 'numbersFont', 'x' + amount, 20, this.container);
+        this.multi = this.game.add.bitmapText(this.game.world.centerX, this.game.world.centerY + 150, 'numbersFont', 'x' + amount, 20, this.container);
         this.multi.anchor.set(0.5);
         this.multi.scale.set(0);
 
         this.game.add.tween(this.multi.scale).to({x: 1.5, y: 1.5}, 1500, Phaser.Easing.Bounce.Out, true);
+
+    }
+
+}
+
+export class Gold {
+
+    constructor({
+        container,
+        x = 0,
+        y = 0
+    }) {
+
+        x = (model.desktop) ? x - 40 : x - 20;
+        y = (model.desktop) ? y - 950 : y - 630;
+
+        this.game = model.el('game');
+
+        this.container = this.game.add.group();
+        container.add(this.container);
+
+        this.light = this.game.add.sprite(x, y, 'bigLight', null, this.container);
+        this.light.anchor.set(0.5);
+        this.gold = this.game.add.sprite(x + 10, y + this.light.height, 'gold', null, this.container);
+        this.gold.anchor.set(0.5);
+        this.gold.alpha = 0;
+        this.light.alpha = 0;
+
+        if (model.desktop) {
+            this.light.scale.set(1.5);
+            this.gold.scale.set(1.5);
+        }
+
+        // Добавить маску в контейнер
+        let mask = this.game.add.graphics(x - 20, y, this.container);
+        mask.beginFill(0xffffff).drawRect(0, 0, this.light.width, this.light.height);
+        this.container.mask = mask;
+
+    }
+
+    start() {
+        this.gold.alpha = 1;
+        this.game.add.tween(this.gold).to({ y: this.gold.y - this.light.height - this.gold.height, alpha: 0 }, 1500, Phaser.Easing.Out, true);
+        this.game.add.tween(this.light).to({ alpha: 1 }, 600, Phaser.Easing.Out, true);
+        this.game.add.tween(this.light).to({ alpha: 0 }, 1500, Phaser.Easing.Out, true, 600);
 
     }
 
@@ -124,9 +193,9 @@ export class Door {
 
         let sprite;
         if (level == 4) {
-            if (index == 0 && index == 1) {
+            if (index == 0 || index == 1) {
                 sprite = 'door_4_1';
-            } else if (level == 2) {
+            } else if (index == 2) {
                 sprite = 'door_4_2';
             } else {
                 sprite = 'door_4_3';
@@ -146,6 +215,12 @@ export class Door {
         this.sprite.anchor.set(0.5);
         if (model.desktop) {
             this.sprite.scale.set(1.5);
+        } else {
+            if (level == 0) {
+                if (index == 0 || index == 2) {
+                    this.sprite.x = this.sprite.x - 10;
+                }
+            }
         }
 
         if (level != 0 && level != 4) {
@@ -160,19 +235,25 @@ export class Door {
                 .then((data) => {
                     model.data(`doors:${level}:data`, data);
                     model.data('bonusRollResponse', data);
+                    if (data.ErrorCode) {
+                        mainView.draw.showPopup({message: data.ErrorMessage});
+                        return;
+                    }
+                    model.data('bonusWinCoins', model.data('bonusWinCoins') + data.CurrentValue.TotalWinCoins);
 
                     console.log(data);
 
                     request.send('Ready');
 
-                    // Изменить бекграунд уровня дверей
-                    if (data.CurrentValue.Multi !== 'Exit') {
+                    if (data.CurrentValue.Multi !== 'Exit' && data.BonusEnd !== true) {
+
+                        // Изменить бекграунд уровня дверей
                         this.parent.setResult('win');
                         // Отрисовать множитель
                         this.parent.showMulti(
                             parseInt(data.CurrentValue.Multi)
                         );
-                        // Через определенный таймер (порядка 2-ух секунд) сделать затемнение убрать все спрайты из контейнера
+                        // Через определенный таймер сделать затемнение убрать все спрайты из контейнера
                         setTimeout(() => {
                             this.container.removeAll();
                             this.game.camera.flash(0x000000, 500);
@@ -181,23 +262,45 @@ export class Door {
                         setTimeout(() => {
                             new DoorLevel({container: model.group('main'), level: ++level});
                         }, 2500)
-                        // Заполнить поля баланса (это можно стырить из GS)
+                        // Заполнить поля баланса
                         model.updateBalance({startBonusRoll: true});
-                        model.log();
-                    } else {
 
-                        // Если это последний уровень, то мы показываем Big Win и выходим с бонусного уровня
+                    }
 
-                        // Если это не последний уровень, то мы показываем Total Win и выходим с бонусного уровня
+                    if (data.CurrentValue.Multi === 'Exit' && data.BonusEnd === true) {
 
-                        this.parent.setResult('fail');
+                        // Обычный выход Total Win
+                        this.parent.setResult('fail', this.sprite.x, this.sprite.y);
+                        bonusView.draw.showWin({});
                         setTimeout(() => {
                             this.container.removeAll();
                             this.game.camera.flash(0x000000, 500);
-                            model.updateBalance({endBonus: true});
-                        }, 2000);
-                        // либо показать заставку последнего экрана если человек проиграл
+                        }, 3000);
+                        setTimeout(() => {
+                            this.endBonus();
+                        }, 3500)
+
                     }
+
+                    if (data.CurrentValue.Multi !== 'Exit' && data.BonusEnd === true) {
+
+                        // выход с последнего уровня Big Win
+                        this.parent.showMulti(
+                            parseInt(data.CurrentValue.Multi)
+                        );
+                        this.parent.showLastWin(this.sprite.x, this.sprite.y);
+                        bonusView.draw.showWin({winTextFrame: 'bigW.png'});
+                        setTimeout(() => {
+                            this.container.removeAll();
+                            this.game.camera.flash(0x000000, 500);
+                        }, 3000);
+                        setTimeout(() => {
+                            this.endBonus();
+                        }, 3500)
+
+                    }
+
+                        // либо показать заставку последнего экрана если человек проиграл
 
                     this.open(level);
                     model.state(`doors:${level}:open`, true);
@@ -224,6 +327,20 @@ export class Door {
 
         return request.send('Roll', null, doorIndex)
 
+    }
+
+    endBonus() {
+        model.updateBalance({endBonus: true});
+        model.state('buttons:locked', false);
+        model.state('bonus', false);
+        model.state('doorFinish', false);
+        model.el('game').state.start('Main');
+
+        model.state(`doors:0:open`, false);
+        model.state(`doors:1:open`, false);
+        model.state(`doors:2:open`, false);
+        model.state(`doors:3:open`, false);
+        model.state(`doors:4:open`, false);
     }
 
 }

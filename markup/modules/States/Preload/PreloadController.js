@@ -88,7 +88,7 @@ export class Preload {
         game.load.image('infoTableBg', 'other/infoTableBg.png');
         game.load.atlasJSONArray('infoTable', 'other/infoTable.png', 'other/infoTable.json');
         game.load.atlasJSONArray('infoMarker', 'other/infoMarker.png', 'other/infoMarker.json');
-        game.load.atlasJSONArray('coins', 'bonus/coins.png', 'bonus/coins.json');
+        // game.load.atlasJSONArray('coins', 'bonus/coins.png', 'bonus/coins.json');
         game.load.image('winLine', 'win/winNumber.png');
         game.load.image('winTotal', 'win/winTable.png');
         game.load.image('lightLine', 'win/lightLine.png');
@@ -150,9 +150,10 @@ export class Preload {
         game.load.spritesheet('door_2', 'bonus/door_2.png', 133, 350, 10);
         game.load.spritesheet('door_3', 'bonus/door_3.png', 133, 350, 10);
         game.load.spritesheet('door_4_1', 'bonus/door_4_1.png', 146, 147, 3);
-        game.load.spritesheet('door_4_2', 'bonus/door_4_1.png', 146, 147, 3);
-        game.load.spritesheet('door_4_3', 'bonus/door_4_1.png', 146, 147, 3);
+        game.load.spritesheet('door_4_2', 'bonus/door_4_2.png', 146, 147, 3);
+        game.load.spritesheet('door_4_3', 'bonus/door_4_3.png', 146, 147, 3);
         game.load.image('bigLight', 'bonus/bigLight.png');
+        game.load.image('smallLight', 'bonus/smallLight.png');
         game.load.image('fly', 'bonus/fly.png');
         game.load.image('gold', 'bonus/gold.png');
     }
