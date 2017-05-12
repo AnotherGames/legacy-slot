@@ -1,14 +1,15 @@
 // Common styles of the project
 
 html, body {
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background: black;
-    & .ios {
-        height: 2500px; // Hack for iOS
-    }
+    // & .ios {
+    //     height: 2500px; // Hack for iOS
+    // }
 }
 
-body:not(.ios) {
+body {
     display: flex;
     align-items: center;
     justify-content: center;
