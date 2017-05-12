@@ -90,7 +90,7 @@ export class Preload {
         game.load.atlasJSONArray('shuriken', 'other/shuriken.png', 'other/shuriken.json');
         game.load.image('closeButton', 'other/closeButton.png');
         game.load.image('arrow', 'other/arrow.png');
-        game.load.image('infoTableBg', 'other/infoTableBg.png');
+        game.load.image('infoTableBg', 'other/infoTableBG.png');
         game.load.atlasJSONArray('infoTable', 'other/infoTable.png', 'other/infoTable.json');
         game.load.image('coinGold', 'other/coinGold.png');
         game.load.atlasJSONArray('infoMarker', 'other/infoMarker.png', 'other/infoMarker.json');
@@ -99,7 +99,7 @@ export class Preload {
         game.load.atlasJSONArray('lineNumbers', 'win/lineNumbers.png', 'win/lineNumbers.json');
         game.load.atlasJSONArray('lineNumbersLeft', 'win/lineNumbersLeft.png', 'win/lineNumbersLeft.json');
         game.load.atlasJSONArray('footerButtons', 'footer/footerButtons.png', 'footer/footerButtons.json');
-	    game.load.bitmapFont("numbersFont", "numbers/numbers.png", "numbers/numbers.xml");
+	    game.load.bitmapFont('numbersFont', 'numbers/numbers.png', 'numbers/numbers.xml');
 	    if (model.desktop) {
 		    game.load.image('ui', 'game/UI.png');
 		    game.load.image('uiFS', 'game/UI_FS.png');
@@ -165,7 +165,7 @@ export class Preload {
             model.el('preloadBar').visible = false;
             model.el('preloadCoin').visible = false;
             mainView.draw.showPopup({message: 'Connection problem. Click to restart.'});
-            game.load.reset(true, true)
+            game.load.reset(true, true);
             return;
         }
         view.hideBar();
