@@ -344,7 +344,7 @@ export class Door {
         model.state('buttons:locked', false);
         model.state('bonus', false);
         model.state('doorFinish', false);
-        soundController.music.stopMusic('bonusFon');
+        // soundController.music.stopMusic('bonusFon');
 
         model.state(`doors:0:open`, false);
         model.state(`doors:1:open`, false);

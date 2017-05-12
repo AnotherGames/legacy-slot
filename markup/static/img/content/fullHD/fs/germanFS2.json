@@ -1,0 +1,132 @@
+{"frames": [
+
+{
+	"filename": "german_fs_background_walkstop_01.png",
+	"frame": {"x":613,"y":909,"w":304,"h":298},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":179,"w":304,"h":298},
+	"sourceSize": {"w":304,"h":477}
+},
+{
+	"filename": "german_fs_background_walkstop_03.png",
+	"frame": {"x":1,"y":1509,"w":304,"h":297},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":180,"w":304,"h":297},
+	"sourceSize": {"w":304,"h":477}
+},
+{
+	"filename": "german_fs_background_walkstop_05.png",
+	"frame": {"x":1,"y":1210,"w":304,"h":297},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":180,"w":304,"h":297},
+	"sourceSize": {"w":304,"h":477}
+},
+{
+	"filename": "german_fs_background_walkstop_07.png",
+	"frame": {"x":1,"y":910,"w":304,"h":298},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":179,"w":304,"h":298},
+	"sourceSize": {"w":304,"h":477}
+},
+{
+	"filename": "german_fs_background_walkstop_09.png",
+	"frame": {"x":1,"y":306,"w":304,"h":300},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":177,"w":304,"h":300},
+	"sourceSize": {"w":304,"h":477}
+},
+{
+	"filename": "german_fs_background_walkstop_11.png",
+	"frame": {"x":613,"y":305,"w":304,"h":301},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":176,"w":304,"h":301},
+	"sourceSize": {"w":304,"h":477}
+},
+{
+	"filename": "german_fs_background_walkstop_13.png",
+	"frame": {"x":613,"y":1,"w":304,"h":302},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":175,"w":304,"h":302},
+	"sourceSize": {"w":304,"h":477}
+},
+{
+	"filename": "german_fs_background_walkstop_15.png",
+	"frame": {"x":1,"y":1,"w":304,"h":303},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":174,"w":304,"h":303},
+	"sourceSize": {"w":304,"h":477}
+},
+{
+	"filename": "german_fs_background_walkstop_17.png",
+	"frame": {"x":307,"y":1,"w":304,"h":303},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":174,"w":304,"h":303},
+	"sourceSize": {"w":304,"h":477}
+},
+{
+	"filename": "german_fs_background_walkstop_19.png",
+	"frame": {"x":307,"y":306,"w":304,"h":300},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":177,"w":304,"h":300},
+	"sourceSize": {"w":304,"h":477}
+},
+{
+	"filename": "german_fs_background_walkstop_21.png",
+	"frame": {"x":307,"y":910,"w":304,"h":298},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":179,"w":304,"h":298},
+	"sourceSize": {"w":304,"h":477}
+},
+{
+	"filename": "german_fs_background_walkstop_23.png",
+	"frame": {"x":613,"y":1209,"w":304,"h":298},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":179,"w":304,"h":298},
+	"sourceSize": {"w":304,"h":477}
+},
+{
+	"filename": "german_fs_background_walkstop_25.png",
+	"frame": {"x":613,"y":608,"w":304,"h":299},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":178,"w":304,"h":299},
+	"sourceSize": {"w":304,"h":477}
+},
+{
+	"filename": "german_fs_background_walkstop_27.png",
+	"frame": {"x":1,"y":608,"w":304,"h":300},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":177,"w":304,"h":300},
+	"sourceSize": {"w":304,"h":477}
+},
+{
+	"filename": "german_fs_background_walkstop_29.png",
+	"frame": {"x":307,"y":608,"w":304,"h":300},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":177,"w":304,"h":300},
+	"sourceSize": {"w":304,"h":477}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "germanFS2.png",
+	"format": "RGBA8888",
+	"size": {"w":1024,"h":2048},
+	"scale": "0.33",
+	"smartupdate": "$TexturePacker:SmartUpdate:79feea7752fae2df2e470e2a247c633f:99c744afe996322ddcae03feef393780:4843e2da8ff8f33a6efe16f336b28a1d$"
+}
+}

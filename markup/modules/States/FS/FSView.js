@@ -174,9 +174,55 @@ export let view = (() => {
             });
         },
 
+        addGerman: function ({
+            game = model.el('game'),
+            container = model.group('fs')
+        }) {
+
+            let germanAnims = [];
+            for (let i = 1; i < 4; i++) {
+                let german = game.add.sprite(170, 650, `germanFS${i}`, null, container);
+                german.anchor.set(0.5);
+                german.animations.add('move');
+                if (i !== 1) {
+                    german.scale.set(2.0);
+                    german.visible = false;
+                }
+                germanAnims.push(german);
+            }
+
+            model.el('germanAnims', germanAnims);
+
+            game.time.events.add(3000, () => {
+                this.moveGerman({});
+            });
+
+        },
+
+        moveGerman: function ({
+            game = model.el('game')
+        }) {
+            let germanAnims = model.el('germanAnims');
+            let rnd = game.rnd.integerInRange(0, 2);
+            let time = game.rnd.integerInRange(5, 10);
+
+            germanAnims.forEach((anim, index) => {
+                if (index === rnd) {
+                    anim.visible = true;
+                    anim.animations.play('move', 10, false);
+                } else {
+                    anim.visible = false;
+                }
+            });
+
+            game.time.events.add(time * 1000, () => {
+                this.moveGerman({});
+            });
+        },
+
         addWatch: function ({
             game = model.el('game'),
-            container = model.group('bg')
+            container = model.group('fs')
         }) {
             let watchContainer = game.add.group();
             container.add(watchContainer);
@@ -188,8 +234,8 @@ export let view = (() => {
 
             for (let i = 0; i < 40; i++) {
                 let rndAlpha = game.rnd.integerInRange(4, 10);
-                let light = game.add.sprite(game.rnd.integerInRange(-200, 200) + game.width * 0.12,
-                game.rnd.integerInRange(-150, 150) + (model.desktop) ? game.height * 0.67 : game.height * 0.85,
+                let light = game.add.sprite(game.rnd.integerInRange(-150, 150) + game.width * 0.22,
+                game.rnd.integerInRange(-150, 150) + (model.desktop) ? game.height * 0.80 : game.height * 0.87,
                     'lightLine',
                     null,
                     watchContainer);
@@ -201,13 +247,13 @@ export let view = (() => {
                 let rnd3 = game.rnd.integerInRange(-150, 150);
                 let rnd2 = game.rnd.integerInRange(-150, 150);
                 let rndAlpha = game.rnd.integerInRange(4, 10);
-                game.add.tween(light).to({x: light.x + rnd2, y: light.y + rnd2}, 10000, 'Linear', true, 0, 20000, true)
+                game.add.tween(light).to({x: light.x + rnd2, y: light.y + rnd2}, 10000, 'Linear', true)
                     .onComplete.add(() => {
-                        game.add.tween(light).to({x: light.x + rnd3, y: light.y + rnd3}, 10000, 'Linear', true);
+                        game.add.tween(light).to({x: light.x + rnd3, y: light.y + rnd3}, 10000, 'Linear', true, 0, 10000, true);
                     });
             });
-            let watchFS = game.add.sprite(game.width * 0.12,
-                (model.desktop) ? game.height * 0.65 : game.height * 0.85,
+            let watchFS = game.add.sprite(game.width * 0.205,
+                (model.desktop) ? game.height * 0.88 : game.height * 0.85,
                 'watchFS',
                 null,
                 watchContainer);
@@ -222,7 +268,7 @@ export let view = (() => {
             hourArrow.anchor.set(0.5);
             model.el('hourArrow', hourArrow);
 
-            game.add.tween(watchContainer).to({y: watchContainer.y + 50}, 1500, 'Linear', true, 0, -1, true);
+            game.add.tween(watchContainer).to({y: watchContainer.y + 30}, 1500, 'Linear', true, 0, -1, true);
 
             soundController.sound.playSound({sound: 'clock'});
 
@@ -280,73 +326,6 @@ export let view = (() => {
             this.lightBlinking({});
             game.add.tween(logoFSDown).to({alpha: 0.6}, 400, 'Linear', true, 0 , -1, true);
         },
-
-        // Level: function ({
-        //     game = model.el('game'),
-        //     container = model.group('panel'),
-        //     start = 1,
-        //     fontDesktop = '70px Titania, Arial',
-        //     fontMobile = '50px Titania, Arial'
-        // }) {
-        //
-        //     let x, y, deltaX = 0, deltaY = 0, font;
-        //     if (model.desktop) {
-        //         x = 585;
-        //         y = -50;
-        //         font = fontDesktop;
-        //     } else {
-        //         x = model.el('game').width / 2 - 115;
-        //         y = 610;
-        //         deltaY = 13;
-        //         font = fontMobile;
-        //         let fsLevelBG = game.add.sprite(x, y, 'fsLevelBG', null, container);
-        //         fsLevelBG.anchor.set(0.5);
-        //     }
-        //
-        //     let fsLevel;
-        //         fsLevel = game.add.text(x + deltaX, y + deltaY, start, {font: font, fill: '#ffffff', align: 'center', stroke: '#188bb4', strokeThickness: 5}, container);
-        //         fsLevel.setShadow(5, 5, 'rgba(0, 0, 0, 0.7)', 8);
-        //         fsLevel.anchor.set(0.5);
-        //         model.el('fsLevel', fsLevel);
-        //     setTimeout(() => {
-        //         fsLevel.text = 2;
-        //         fsLevel.text = start;
-        //     }, 300);
-        //
-        //
-        //     // draw._drawDiver({});
-        // },
-
-        // _drawDiver: function ({
-        //     game = model.el('game'),
-        //     container = model.group('panel')
-        // }) {
-        //     let x = (model.desktop) ? -50 : 80;
-        //     let y = (model.desktop) ? -500 : 350;
-        //     let diverFS = game.add.spine(x, y, 'diverFS');
-        //     container.add(diverFS);
-        //     if (model.mobile) {
-        //         diverFS.scale.set(0.6);
-        //     }
-        //     model.el('diverFS', diverFS);
-        //     diverFS.setAnimationByName(1, 'start', false);
-        //
-        //     game.add.tween(diverFS).to({y: diverFS.y + 10}, 3000, 'Linear', true, 500, -1, true);
-        //
-        // },
-
-        // changeLevel: function ({
-        //     number = 1,
-        //     animation = '0'
-        // }) {
-        //     let fsLevel = model.el('fsLevel');
-        //     fsLevel.text = number;
-        //     model.el('fsLevel', fsLevel);
-        //
-        //     let diverFS = model.el('diverFS');
-        //     diverFS.addAnimationByName(1, animation, false);
-        //     soundController.sound.playSound({sound: 'diverDown'});
-        // },
 
         Count: function ({
             game = model.el('game'),

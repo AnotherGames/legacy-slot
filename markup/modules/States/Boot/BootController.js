@@ -14,7 +14,7 @@ export class Boot {
             doorsBonus: 'goldship2'
         });
 
-        request.send('Initialise', 'doorsBonus')
+        request.send('Initialise', 'fsBonus')
             .then((initData) => {
                 model.initStates(initData);
                 model.initSettings(initData.Settings);

@@ -95,12 +95,12 @@ export let view = (() => {
 
         addLight: function ({
             game = model.el('game'),
-            container = model.group('main')
+            container = model.group('main'),
+            x = (model.desktop) ? -game.width / 2 - 83 : -game.width / 2 + 160,
+            y = (model.desktop) ? 95 : 0
         }) {
-            console.log('i am here');
-            let x = (model.desktop) ? -game.width / 2 - 83 : -game.width / 2 + 160;
-            let y = (model.desktop) ? 95 : 0;
             let light = game.add.sprite(x, y, 'light', null, container);
+            console.log(light.x, light.y);
             light.anchor.set(0.5);
             model.el('light', light);
             light.animations.add('move', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 22,

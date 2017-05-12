@@ -304,6 +304,7 @@ export let view = (() => {
         if (model.state('autoplay:start')) {
             let spinButtonDesk = model.el('spinButtonDesk');
             spinButtonDesk.frameName = 'autoEmpty.png';
+            spinButtonDesk.freezeFrames = true;
             let stopButtonDesk = model.el('stopButtonDesk');
             stopButtonDesk.visible = true;
             let autoButtonDesk = model.el('autoButtonDesk');
@@ -348,6 +349,7 @@ export let view = (() => {
         if (model.state('autoplay:end')) {
             let spinButtonDesk = model.el('spinButtonDesk');
             spinButtonDesk.frameName = 'spin.png';
+            spinButtonDesk.freezeFrames = false;
             let stopButtonDesk = model.el('stopButtonDesk');
             stopButtonDesk.visible = false;
             stopButtonDesk.frameName = 'stop.png';

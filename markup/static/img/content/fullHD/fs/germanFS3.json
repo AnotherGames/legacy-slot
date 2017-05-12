@@ -1,0 +1,164 @@
+{"frames": [
+
+{
+	"filename": "german_fs_background_walkstart_01.png",
+	"frame": {"x":613,"y":306,"w":304,"h":300},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":177,"w":304,"h":300},
+	"sourceSize": {"w":304,"h":477}
+},
+{
+	"filename": "german_fs_background_walkstart_03.png",
+	"frame": {"x":919,"y":306,"w":304,"h":300},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":177,"w":304,"h":300},
+	"sourceSize": {"w":304,"h":477}
+},
+{
+	"filename": "german_fs_background_walkstart_05.png",
+	"frame": {"x":1,"y":306,"w":304,"h":301},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":176,"w":304,"h":301},
+	"sourceSize": {"w":304,"h":477}
+},
+{
+	"filename": "german_fs_background_walkstart_07.png",
+	"frame": {"x":1531,"y":1,"w":304,"h":302},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":175,"w":304,"h":302},
+	"sourceSize": {"w":304,"h":477}
+},
+{
+	"filename": "german_fs_background_walkstart_09.png",
+	"frame": {"x":1531,"y":305,"w":304,"h":302},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":175,"w":304,"h":302},
+	"sourceSize": {"w":304,"h":477}
+},
+{
+	"filename": "german_fs_background_walkstart_11.png",
+	"frame": {"x":1,"y":1,"w":304,"h":303},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":174,"w":304,"h":303},
+	"sourceSize": {"w":304,"h":477}
+},
+{
+	"filename": "german_fs_background_walkstart_13.png",
+	"frame": {"x":1,"y":609,"w":304,"h":302},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":175,"w":304,"h":302},
+	"sourceSize": {"w":304,"h":477}
+},
+{
+	"filename": "german_fs_background_walkstart_15.png",
+	"frame": {"x":307,"y":1,"w":304,"h":303},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":174,"w":304,"h":303},
+	"sourceSize": {"w":304,"h":477}
+},
+{
+	"filename": "german_fs_background_walkstart_17.png",
+	"frame": {"x":1,"y":913,"w":304,"h":302},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":175,"w":304,"h":302},
+	"sourceSize": {"w":304,"h":477}
+},
+{
+	"filename": "german_fs_background_walkstart_19.png",
+	"frame": {"x":1,"y":1217,"w":304,"h":302},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":175,"w":304,"h":302},
+	"sourceSize": {"w":304,"h":477}
+},
+{
+	"filename": "german_fs_background_walkstart_21.png",
+	"frame": {"x":613,"y":1,"w":304,"h":303},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":174,"w":304,"h":303},
+	"sourceSize": {"w":304,"h":477}
+},
+{
+	"filename": "german_fs_background_walkstart_23.png",
+	"frame": {"x":919,"y":1,"w":304,"h":303},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":174,"w":304,"h":303},
+	"sourceSize": {"w":304,"h":477}
+},
+{
+	"filename": "german_fs_background_walkstart_25.png",
+	"frame": {"x":1225,"y":1,"w":304,"h":303},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":174,"w":304,"h":303},
+	"sourceSize": {"w":304,"h":477}
+},
+{
+	"filename": "german_fs_background_walkstart_27.png",
+	"frame": {"x":1225,"y":306,"w":304,"h":300},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":177,"w":304,"h":300},
+	"sourceSize": {"w":304,"h":477}
+},
+{
+	"filename": "german_fs_background_walkstart_29.png",
+	"frame": {"x":613,"y":608,"w":304,"h":299},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":178,"w":304,"h":299},
+	"sourceSize": {"w":304,"h":477}
+},
+{
+	"filename": "german_fs_background_walkstart_31.png",
+	"frame": {"x":919,"y":608,"w":304,"h":295},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":182,"w":304,"h":295},
+	"sourceSize": {"w":304,"h":477}
+},
+{
+	"filename": "german_fs_background_walkstart_33.png",
+	"frame": {"x":307,"y":610,"w":304,"h":297},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":180,"w":304,"h":297},
+	"sourceSize": {"w":304,"h":477}
+},
+{
+	"filename": "german_fs_background_walkstart_35.png",
+	"frame": {"x":1,"y":1521,"w":304,"h":302},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":175,"w":304,"h":302},
+	"sourceSize": {"w":304,"h":477}
+},
+{
+	"filename": "german_fs_background_walkstart_37.png",
+	"frame": {"x":307,"y":306,"w":304,"h":302},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":175,"w":304,"h":302},
+	"sourceSize": {"w":304,"h":477}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "germanFS3.png",
+	"format": "RGBA8888",
+	"size": {"w":2048,"h":2048},
+	"scale": "0.33",
+	"smartupdate": "$TexturePacker:SmartUpdate:b3c3e716516d65c36beb975face7741b:aefa6e74045e14002c4e760d051edd48:02680c3836820d53091ef00534c1affb$"
+}
+}

@@ -1,0 +1,84 @@
+{"frames": [
+
+{
+	"filename": "german_fs_background_walk_01.png",
+	"frame": {"x":610,"y":605,"w":607,"h":592},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":362,"w":607,"h":592},
+	"sourceSize": {"w":607,"h":954}
+},
+{
+	"filename": "german_fs_background_walk_03.png",
+	"frame": {"x":1219,"y":1,"w":607,"h":601},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":353,"w":607,"h":601},
+	"sourceSize": {"w":607,"h":954}
+},
+{
+	"filename": "german_fs_background_walk_05.png",
+	"frame": {"x":1,"y":1,"w":607,"h":609},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":345,"w":607,"h":609},
+	"sourceSize": {"w":607,"h":954}
+},
+{
+	"filename": "german_fs_background_walk_07.png",
+	"frame": {"x":1219,"y":604,"w":607,"h":598},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":356,"w":607,"h":598},
+	"sourceSize": {"w":607,"h":954}
+},
+{
+	"filename": "german_fs_background_walk_08.png",
+	"frame": {"x":610,"y":1199,"w":607,"h":590},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":364,"w":607,"h":590},
+	"sourceSize": {"w":607,"h":954}
+},
+{
+	"filename": "german_fs_background_walk_10.png",
+	"frame": {"x":1219,"y":1204,"w":607,"h":589},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":365,"w":607,"h":589},
+	"sourceSize": {"w":607,"h":954}
+},
+{
+	"filename": "german_fs_background_walk_12.png",
+	"frame": {"x":1,"y":1220,"w":607,"h":603},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":351,"w":607,"h":603},
+	"sourceSize": {"w":607,"h":954}
+},
+{
+	"filename": "german_fs_background_walk_14.png",
+	"frame": {"x":1,"y":612,"w":607,"h":606},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":348,"w":607,"h":606},
+	"sourceSize": {"w":607,"h":954}
+},
+{
+	"filename": "german_fs_background_walk_15.png",
+	"frame": {"x":610,"y":1,"w":607,"h":602},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":352,"w":607,"h":602},
+	"sourceSize": {"w":607,"h":954}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "germanFS.png",
+	"format": "RGBA8888",
+	"size": {"w":2048,"h":2048},
+	"scale": "0.66",
+	"smartupdate": "$TexturePacker:SmartUpdate:941096b7a48991336de1dda68d5ad95d:956bac17eb65d7ced780dab89e10306f:8dcc355f49e79bcf387561c92b90f1de$"
+}
+}

@@ -61,21 +61,28 @@ export let controller = (() => {
 
 	function stop() {
 		let game = model.el('game');
-		let fsEnd;
 
-		game.time.events.add(1500, () => {
-			soundController.music.stopMusic('fsFon');
-			fsEnd = game.add.spine(game.world.centerX, game.world.centerY, 'fsEnd');
-			fsEnd.setAnimationByName(0, 'animation', false);
-			if (model.mobile) {
-				fsEnd.scale.set(0.66);
-			}
-		});
+		if (model.data('rollResponse').FsBonus.Multi == 7) { // Max multi
+			let fsEnd;
+			game.time.events.add(1500, () => {
+				soundController.music.stopMusic('fsFon');
+				fsEnd = game.add.spine(game.world.centerX, game.world.centerY, 'fsEnd');
+				fsEnd.setAnimationByName(0, 'animation', false);
+				if (model.mobile) {
+					fsEnd.scale.set(0.66);
+				}
+			});
 
-		game.time.events.add(6000, () => {
-			fsEnd.destroy();
-			transitionView.fsFinish();
-		});
+			game.time.events.add(6000, () => {
+				fsEnd.destroy();
+				transitionView.fsFinish();
+			});
+		} else {
+			game.time.events.add(1500, () => {
+				soundController.music.stopMusic('fsFon');
+				transitionView.fsFinish();
+			});
+		}
 
 		model.state('fs:end', true);
 		model.updateBalance({endFS: true});
@@ -161,13 +168,16 @@ export class FS {
 		soundController.music.playMusic('fsFon');
 
 		fsView.draw.mainBG({});
-		fsView.draw.addWatch({});
 
 		// Отрисовуем основной контейнер
 		fsView.draw.mainContainer({});
 		fsView.draw.machineContainer({});
 		mainView.draw.lineNumbers({});
 		winView.draw.UpWinContainer({});
+		if (model.desktop) {
+			fsView.draw.addGerman({});
+		}
+		fsView.draw.addWatch({});
 
 		// Инициализируем крутки
 		rollController.init();

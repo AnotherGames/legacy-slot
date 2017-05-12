@@ -133,6 +133,12 @@ export class Preload {
         game.load.atlasJSONArray('watchArrows', 'fs/watchArrows.png', 'fs/watchArrows.json');
         game.load.image('plus3', 'fs/plus3.png');
 
+        if (model.desktop) {
+            game.load.atlasJSONArray('germanFS1', 'fs/germanFS.png', 'fs/germanFS.json');
+            game.load.atlasJSONArray('germanFS2', 'fs/germanFS2.png', 'fs/germanFS2.json');
+            game.load.atlasJSONArray('germanFS3', 'fs/germanFS3.png', 'fs/germanFS3.json');
+        }
+
     }
 
     loadBonusAssets() {

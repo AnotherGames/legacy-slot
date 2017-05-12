@@ -47,6 +47,7 @@ export class Main {
 
         soundController.music.stopMusic('finishPerehod');
         soundController.music.stopMusic('fsFon');
+        soundController.music.stopMusic('bonusFon');
         soundController.music.stopMusic('initFon');
         // Играем фоновую музыку
 

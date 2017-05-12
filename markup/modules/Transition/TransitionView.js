@@ -92,7 +92,7 @@ export let view = (() => {
             continueText.y = game.height * 0.6;
         }
 
-        mainView.draw.addLight({container: transitionContainer});
+        mainView.draw.addLight({container: transitionContainer, x: (model.desktop) ? 117 : 75, y: (model.desktop) ? 545 : 360});
 
     }
 
@@ -159,7 +159,7 @@ export let view = (() => {
         // Изменяем музыку
         soundController.music.stopMusic('fsFon');
         soundController.music.playMusic('finishPerehod');
-        soundController.sound.playSound({sound: 'win'});
+        // soundController.sound.playSound({sound: 'win'});
 
         // Рисуем фон
         let transitionBG = game.add.sprite(0, 0, 'mainBG', null, transitionContainer);
@@ -206,6 +206,8 @@ export let view = (() => {
         }
         continueText.scale.setTo(0.1, 0.1);
         model.el('continueText', continueText);
+
+        mainView.draw.addLight({container: transitionContainer, x: (model.desktop) ? 117 : 75, y: (model.desktop) ? 545 : 360});
 
     }
 
