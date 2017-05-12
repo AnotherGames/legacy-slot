@@ -6,6 +6,7 @@ export class Boot {
     init() {
         model.state('isNoConnect', false);
         const game = model.el('game');
+        this.game = game;
 
         request.setMode({
             normal: 'chibi2',
@@ -30,7 +31,43 @@ export class Boot {
                 .then((response) => {
                     console.log('Logout response:', response);
                 });
+
         });
+
+
+        if (this.game.device.android && this.game.device.chrome && this.game.device.chromeVersion >= 55) {
+            this.game.sound.touchLocked = true;
+            this.game.input.touch.addTouchLockCallback(function () {
+                if (this.noAudio || !this.touchLocked || this._unlockSource !== null) {
+                    return true;
+                }
+                if (this.usingWebAudio) {
+                    // Create empty buffer and play it
+                    // The SoundManager.update loop captures the state of it and then resets touchLocked to false
+
+                    let buffer = this.context.createBuffer(1, 1, 22050);
+                    this._unlockSource = this.context.createBufferSource();
+                    this._unlockSource.buffer = buffer;
+                    this._unlockSource.connect(this.context.destination);
+
+                    if (this._unlockSource.start === undefined) {
+                        this._unlockSource.noteOn(0);
+                    } else {
+                        this._unlockSource.start(0);
+                    }
+
+                    // Hello Chrome 55!
+                    if (this._unlockSource.context.state === 'suspended') {
+                        this._unlockSource.context.resume();
+                    }
+                }
+
+                //  We can remove the event because we've done what we needed (started the unlock sound playing)
+                return true;
+
+            }, this.game.sound, true);
+        }
+
 
         // При выходе из вкладки анимации будут останавливаться
         game.stage.disableVisibilityChange = true;
