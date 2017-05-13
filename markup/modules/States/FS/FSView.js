@@ -176,17 +176,19 @@ export let view = (() => {
 
         addGerman: function ({
             game = model.el('game'),
-            container = model.group('fs')
+            container = model.group('bg')
         }) {
 
             let germanAnims = [];
             for (let i = 1; i < 4; i++) {
-                let german = game.add.sprite(170, 650, `germanFS${i}`, null, container);
+                let german = game.add.sprite(170, 570, `germanFS${i}`, null, container);
                 german.anchor.set(0.5);
                 german.animations.add('move');
                 if (i !== 1) {
                     german.scale.set(2.0);
                     german.visible = false;
+                } else {
+                    german.animations.play('move', 10, true);
                 }
                 germanAnims.push(german);
             }
@@ -207,17 +209,26 @@ export let view = (() => {
             let time = game.rnd.integerInRange(5, 10);
 
             germanAnims.forEach((anim, index) => {
-                if (index === rnd) {
+                if (index === 1) {
                     anim.visible = true;
                     anim.animations.play('move', 10, false);
+                    anim.animations.getAnimation('move').onComplete.add(() => {
+                        germanAnims[0].visible = false;
+                        germanAnims[1].visible = false;
+                        germanAnims[2].visible = true;
+                        germanAnims[2].animations.play('move', 10, false);
+                        germanAnims[2].animations.getAnimation('move').onComplete.add(() => {
+                            germanAnims[1].visible = false;
+                            germanAnims[2].visible = false;
+                            germanAnims[0].visible = true;
+                            germanAnims[0].animations.play('move', 10, true);
+                        });
+                    });
                 } else {
                     anim.visible = false;
                 }
             });
 
-            game.time.events.add(time * 1000, () => {
-                this.moveGerman({});
-            });
         },
 
         addWatch: function ({
@@ -235,7 +246,7 @@ export let view = (() => {
             for (let i = 0; i < 40; i++) {
                 let rndAlpha = game.rnd.integerInRange(4, 10);
                 let light = game.add.sprite(game.rnd.integerInRange(-150, 150) + game.width * 0.22,
-                game.rnd.integerInRange(-150, 150) + (model.desktop) ? game.height * 0.80 : game.height * 0.87,
+                game.rnd.integerInRange(-150, 150) + game.height * 0.80,
                     'lightLine',
                     null,
                     watchContainer);
@@ -253,7 +264,7 @@ export let view = (() => {
                     });
             });
             let watchFS = game.add.sprite(game.width * 0.205,
-                (model.desktop) ? game.height * 0.88 : game.height * 0.85,
+                game.height * 0.88,
                 'watchFS',
                 null,
                 watchContainer);
@@ -382,7 +393,6 @@ export let view = (() => {
             let someGraphic = game.add.graphics(0, 0);
             someGraphic.beginFill(0x000000).drawRect(0, game.height * 0.12, game.width, game.height);
             plus3Group.mask = someGraphic;
-            console.log(someGraphic);
 
             let plus3BG = game.add.sprite(0, 0, 'fsTable', null, plus3Group);
             plus3BG.anchor.set(0.5);
@@ -400,6 +410,9 @@ export let view = (() => {
                 }, this);
 
             this.changeTime({});
+            if (model.desktop) {
+                this.moveGerman({});
+            }
         }
 
 

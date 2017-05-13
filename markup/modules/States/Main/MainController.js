@@ -96,9 +96,9 @@ export class Main {
             keyboardController.initMainKeys(transitionView.transitionInFs);
             // BG animations
             mainView.draw.addGerman({});
+            mainView.draw.addLight({});
         }
 
-        mainView.draw.addLight({});
         // Проверяем остались ли автокрутки
         this.checkForRemainAutoplay();
     }

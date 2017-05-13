@@ -92,7 +92,9 @@ export let view = (() => {
             continueText.y = game.height * 0.6;
         }
 
-        mainView.draw.addLight({container: transitionContainer, x: (model.desktop) ? 117 : 75, y: (model.desktop) ? 545 : 360});
+        if (model.desktop) {
+            mainView.draw.addLight({container: transitionContainer, x: 117, y: 545});
+        }
 
     }
 
@@ -207,7 +209,9 @@ export let view = (() => {
         continueText.scale.setTo(0.1, 0.1);
         model.el('continueText', continueText);
 
-        mainView.draw.addLight({container: transitionContainer, x: (model.desktop) ? 117 : 75, y: (model.desktop) ? 545 : 360});
+        if (model.desktop) {
+            mainView.draw.addLight({container: transitionContainer, x: 117, y: 545});
+        }
 
     }
 

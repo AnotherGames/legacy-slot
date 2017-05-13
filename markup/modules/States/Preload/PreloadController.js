@@ -58,6 +58,7 @@ export class Preload {
         game.load.audio('lineWin', 'lineWin.mp3');
         // game.load.audio('win', 'totalWin.mp3');
 
+        game.load.audio('fly', 'fly.mp3');
         game.load.audio('clock', 'clock.mp3');
         game.load.audio('coins', 'coins.mp3');
         game.load.audio('laugh', 'laugh.mp3');
@@ -81,7 +82,6 @@ export class Preload {
     loadMainAssets() {
         const game = model.el('game');
         game.load.image('mainBG', 'bg/mainBG.jpg');
-        game.load.spritesheet('light', 'bg/light.png', 887, 1080, 24);
         game.load.image('gameMachine', 'game/gameMachine.png');
         game.load.image('gameMachineBG', 'game/gameMachineBG.png');
         game.load.image('closeButton', 'other/closeButton.png');
@@ -89,7 +89,6 @@ export class Preload {
         game.load.image('infoTableBg', 'other/infoTableBg.png');
         game.load.atlasJSONArray('infoTable', 'other/infoTable.png', 'other/infoTable.json');
         game.load.atlasJSONArray('infoMarker', 'other/infoMarker.png', 'other/infoMarker.json');
-        // game.load.atlasJSONArray('coins', 'bonus/coins.png', 'bonus/coins.json');
         game.load.image('winLine', 'win/winNumber.png');
         game.load.image('winTotal', 'win/winTable.png');
         game.load.image('lightLine', 'win/lightLine.png');
@@ -104,6 +103,7 @@ export class Preload {
             game.load.atlasJSONArray('german1', 'bg/german1.png', 'bg/german1.json');
             game.load.atlasJSONArray('german2', 'bg/german2.png', 'bg/german2.json');
             game.load.atlasJSONArray('german3', 'bg/german3.png', 'bg/german3.json');
+            game.load.spritesheet('light', 'bg/light.png', 887, 1080, 24);
         }
         if (model.mobile) {
             game.load.atlasJSONArray('mobileButtons', 'mobile_buttons/mobileButtons.png', 'mobile_buttons/mobileButtons.json');

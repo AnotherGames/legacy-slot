@@ -122,11 +122,16 @@ export default class DoorLevel {
 
     showMulti(amount) {
 
-        this.multi = this.game.add.bitmapText(this.game.world.centerX, this.game.world.centerY + 150, 'numbersFont', 'x' + amount, 20, this.container);
+        this.multiX = this.game.add.bitmapText(this.game.world.centerX - 30, this.game.world.centerY + 135, 'numbersFont', 'x', 12, this.container);
+        this.multiX.anchor.set(0.5);
+        this.multiX.scale.set(0);
+
+        this.multi = this.game.add.bitmapText(this.game.world.centerX + 50, this.game.world.centerY + 150, 'numbersFont', '' + amount, 20, this.container);
         this.multi.anchor.set(0.5);
         this.multi.scale.set(0);
 
         this.game.add.tween(this.multi.scale).to({x: 1.5, y: 1.5}, 1500, Phaser.Easing.Bounce.Out, true);
+        this.game.add.tween(this.multiX.scale).to({x: 1.5, y: 1.5}, 1500, Phaser.Easing.Bounce.Out, true);
 
     }
 
@@ -140,9 +145,6 @@ export class Gold {
         y = 0
     }) {
 
-        x = (model.desktop) ? x - 40 : x - 20;
-        y = (model.desktop) ? y - 950 : y - 630;
-
         this.game = model.el('game');
 
         this.container = this.game.add.group();
@@ -150,7 +152,9 @@ export class Gold {
 
         this.light = this.game.add.sprite(x, y, 'bigLight', null, this.container);
         this.light.anchor.set(0.5);
-        this.gold = this.game.add.sprite(x + 10, y + this.light.height, 'gold', null, this.container);
+        this.light.y = this.light.y - this.light.height * 0.5;
+
+        this.gold = this.game.add.sprite(x + 10, y + this.light.height * 0.5, 'gold', null, this.container);
         this.gold.anchor.set(0.5);
         this.gold.alpha = 0;
         this.light.alpha = 0;
@@ -161,8 +165,8 @@ export class Gold {
         }
 
         // Добавить маску в контейнер
-        let mask = this.game.add.graphics(x - 20, y, this.container);
-        mask.beginFill(0xffffff).drawRect(0, 0, this.light.width, this.light.height);
+        let mask = this.game.add.graphics(0, 0, this.container);
+        mask.beginFill(0xffffff).drawRect(x - this.light.width * 0.5, y - this.light.height, this.light.width, this.light.height);
         this.container.mask = mask;
 
     }
@@ -206,22 +210,18 @@ export class Door {
         }
 
         if (level == 0) {
-            this.bg = this.game.add.graphics(this.game.width * config[level][index].x - 205 / 2,  // magic number - this.sprite.width
-                this.game.height * config[level][index].y - 525 / 2, // magic number - this.sprite.height
+            let width = (model.desktop) ? 205 : 137;
+            let height = (model.desktop) ? 525 : 312;
+            this.bg = this.game.add.graphics(this.game.width * config[level][index].x - width / 2,  // magic number - this.sprite.width
+                this.game.height * config[level][index].y - height / 2, // magic number - this.sprite.height
                 this.container
-            ).beginFill(0x000000, 1.0).drawRect(0, 0, 205, 525);
+            ).beginFill(0x000000, 1.0).drawRect(0, 0, width, height);
         }
 
         this.sprite = this.game.add.sprite(this.game.width * config[level][index].x, this.game.height * config[level][index].y, sprite, spriteName, this.container);
         this.sprite.anchor.set(0.5);
         if (model.desktop) {
             this.sprite.scale.set(1.5);
-        } else {
-            if (level == 0) {
-                if (index == 0 || index == 2) {
-                    this.sprite.x = this.sprite.x - 10;
-                }
-            }
         }
 
         if (level != 0 && level != 4) {
@@ -240,7 +240,7 @@ export class Door {
                         mainView.draw.showPopup({message: data.ErrorMessage});
                         return;
                     }
-                    model.data('bonusWinCoins', model.data('bonusWinCoins') + data.CurrentValue.TotalWinCoins);
+                    model.data('bonusWinCoins', data.CurrentValue.TotalWinCoins);
 
                     console.log(data);
 

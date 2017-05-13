@@ -143,7 +143,6 @@ export let view = (() => {
         }) {
 
             if (model.desktop && model.state('fs')) {
-                console.log(y);
                 y = game.height * 0.94;
             }
 
