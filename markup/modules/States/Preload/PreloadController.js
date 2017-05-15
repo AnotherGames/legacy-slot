@@ -39,9 +39,9 @@ export class Preload {
         this.loadSpineAssets();
         this.loadTest();
 
-        game.load.onLoadComplete.add(this.hidePreloader);
-
         mainView.draw.initPopup();
+
+	    game.load.onLoadComplete.add(this.checkInit, this);
     }
 
     loadSounds() {
@@ -188,7 +188,23 @@ export class Preload {
         game.load.atlasJSONArray('14', 'elements/14.png', 'elements/14.json');
     }
 
-    hidePreloader() {
+	checkInit() {
+		if (model.state('initialised')) {
+			this.hidePreloader();
+		} else {
+			setTimeout( () => {
+				if(model.state('initialised')) {
+					this.hidePreloader();
+				} else {
+					model.el('preloadBar').visible = false;
+					model.el('preloadCoin').visible = false;
+					mainView.draw.showPopup({message: 'Connection problem.'});
+				}
+			}, 3000)
+		}
+	}
+
+	hidePreloader() {
         const game = model.el('game');
         if (model.state('loadError')) {
             model.el('preloadBar').visible = false;
