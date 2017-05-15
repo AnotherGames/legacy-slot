@@ -24,13 +24,13 @@ export let view = (() => {
 
     function drawPlay() {
         const game = model.el('game');
-        let initPlay = game.add.sprite(game.world.centerX, game.height * 0.8, 'text', 'continue.png');
+        let initPlay = game.add.sprite(game.world.centerX, game.height * 0.8, 'play');
         initPlay.anchor.set(0.5);
         initPlay.scale.setTo(0.1, 0.1);
         let initPlayTween = game.add.tween(initPlay.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true);
         model.el('initPlay', initPlay);
         model.el('initPlayTween', initPlayTween);
-        initPlay.alpha = 0;
+        initPlay.alpha = 1;
         return initPlay;
     }
 
