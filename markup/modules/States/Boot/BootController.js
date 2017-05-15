@@ -13,12 +13,14 @@ export class Boot {
             fsBonus: 'snailfs3'
         });
 
+	    model.state('initialised', false);
         request.send('Initialise', 'normal')
             .then((initData) => {
                 model.initStates(initData);
                 model.initSettings(initData.Settings);
                 model.initBalance(initData.Balance);
                 model.initSaved(initData);
+                model.state('initialised', true);
             })
             .catch((err) => {
                 console.error(err);
@@ -30,7 +32,6 @@ export class Boot {
                 .then((response) => {
                     console.log('Logout response:', response);
                 });
-
         });
 
 
@@ -95,7 +96,7 @@ export class Boot {
 
         this.loadPreloadAssets();
 
-        game.load.onLoadComplete.add(() => {
+        game.load.onLoadComplete.addOnce(() => {
             game.state.start('Preload');
         });
     }
