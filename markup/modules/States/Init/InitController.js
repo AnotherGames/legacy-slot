@@ -105,6 +105,9 @@ export class Init {
 		    }
 	    });
 
+	    // make fakebutton 100% width again
+	    $('#fakeButton').addClass('fullwidth')
+
         game.camera.fade(0x000000, 500);
     }
 
