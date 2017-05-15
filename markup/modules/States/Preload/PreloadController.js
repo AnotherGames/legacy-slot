@@ -9,6 +9,7 @@ export class Preload {
 
     init() {
         const game = model.el('game');
+
         game.add.plugin(Fabrique.Plugins.Spine);
         if (!game.device.iOS) {
             game.scale.pageAlignHorizontally = true;
@@ -21,7 +22,7 @@ export class Preload {
         game.stage.disableVisibilityChange = true;
     }
 
-    preload() {
+	preload() {
         const game = model.el('game');
 
         model.group('popup', game.add.group());
@@ -44,7 +45,7 @@ export class Preload {
 
         mainView.draw.initPopup();
 
-        game.load.onLoadComplete.add(this.hidePreloader);
+        game.load.onLoadComplete.add(this.checkInit, this);
     }
 
     loadSounds() {
@@ -153,6 +154,22 @@ export class Preload {
         game.load.atlasJSONArray('18', 'elements/18.png', 'elements/18.json');
         game.load.atlasJSONArray('19', 'elements/19.png', 'elements/19.json');
         game.load.atlasJSONArray('20', 'elements/20.png', 'elements/20.json');
+    }
+
+    checkInit() {
+        if (model.state('initialised')) {
+	        this.hidePreloader();
+        } else {
+	        setTimeout( () => {
+                if(model.state('initialised')) {
+	                this.hidePreloader();
+                } else {
+	                model.el('preloadBar').visible = false;
+	                model.el('preloadCoin').visible = false;
+	                mainView.draw.showPopup({message: 'Connection problem.'});
+                }
+            }, 3000)
+        }
     }
 
     hidePreloader() {
