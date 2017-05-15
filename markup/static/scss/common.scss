@@ -2,7 +2,8 @@
 
 html, body {
     width: 100vw;
-    height: 100vh;
+    //height: 100vh;
+    height: 100%;
     background: black;
     // & .ios {
     //     height: 2500px; // Hack for iOS
@@ -52,9 +53,14 @@ body {
 #fakeButton {
     z-index: 12;
     position: absolute;
-    width: 100%;
+    left: 50%;
+    transform: translate(-50%);
+    width: 30%;
     height: 100%;
     background: rgba(0, 0, 0, 0.01);
+    &.fullwidth {
+        width: 100%;
+    }
 }
 
 #popup {
