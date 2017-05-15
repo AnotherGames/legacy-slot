@@ -17,7 +17,7 @@
 	"sourceSize": {"w":31,"h":24}
 },
 {
-	"filename": "fullScreenOff.png",
+	"filename": "fullScreenOn.png",
 	"frame": {"x":1,"y":81,"w":25,"h":25},
 	"rotated": false,
 	"trimmed": false,
@@ -25,7 +25,7 @@
 	"sourceSize": {"w":25,"h":25}
 },
 {
-	"filename": "fullScreenOn.png",
+	"filename": "fullScreenOff.png",
 	"frame": {"x":28,"y":81,"w":25,"h":25},
 	"rotated": false,
 	"trimmed": false,
