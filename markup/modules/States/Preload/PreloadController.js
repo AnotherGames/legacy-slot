@@ -5,6 +5,7 @@ import { view as mainView } from 'modules/States/Main/MainView';
 export class Preload {
     init() {
         const game = model.el('game');
+
         game.add.plugin(Fabrique.Plugins.Spine);
         if (!game.device.iOS) {
             game.scale.pageAlignHorizontally = true;
@@ -17,7 +18,7 @@ export class Preload {
         game.stage.disableVisibilityChange = true;
     }
 
-    preload() {
+	preload() {
         const game = model.el('game');
 
         model.group('popup', game.add.group());
@@ -39,7 +40,7 @@ export class Preload {
         this.loadSpineAssets();
         this.loadTest();
 
-        game.load.onLoadComplete.add(this.hidePreloader);
+        game.load.onLoadComplete.add(this.checkInit, this);
 
         mainView.draw.initPopup();
     }
@@ -173,6 +174,22 @@ export class Preload {
         game.load.atlasJSONArray('14', 'elements/14.png', 'elements/14.json');
         game.load.atlasJSONArray('elementBackground', 'elements/elementBackground.png', 'elements/elementBackground.json');
         // game.load.atlasJSONArray('elementBackground2', 'elements/elementBackground2.png', 'elements/elementBackground2.json');
+    }
+
+    checkInit() {
+        if (model.state('initialised')) {
+	        this.hidePreloader();
+        } else {
+	        setTimeout( () => {
+                if(model.state('initialised')) {
+	                this.hidePreloader();
+                } else {
+	                model.el('preloadBar').visible = false;
+	                model.el('preloadCoin').visible = false;
+	                mainView.draw.showPopup({message: 'Connection problem.'});
+                }
+            }, 3000)
+        }
     }
 
     hidePreloader() {
