@@ -96,7 +96,7 @@ export class Main {
             keyboardController.initMainKeys(transitionView.transitionInFs);
             // BG animations
             mainView.draw.addGerman({});
-            mainView.draw.addLight({});
+            mainView.draw.addLantern({y: -395, x:-1080});
         }
 
         // Проверяем остались ли автокрутки

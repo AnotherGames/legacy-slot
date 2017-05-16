@@ -93,7 +93,7 @@ export let view = (() => {
         }
 
         if (model.desktop) {
-            mainView.draw.addLight({container: transitionContainer, x: 117, y: 545});
+            mainView.draw.addLantern({container: transitionContainer, y: 55, x:80});
         }
 
     }
@@ -210,7 +210,7 @@ export let view = (() => {
         model.el('continueText', continueText);
 
         if (model.desktop) {
-            mainView.draw.addLight({container: transitionContainer, x: 117, y: 545});
+            mainView.draw.addLantern({container: transitionContainer, y: 55, x:80});
         }
 
     }

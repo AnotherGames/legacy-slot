@@ -98,10 +98,10 @@ export class Preload {
 	    if (model.desktop) {
 		    game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
 		    game.load.image('gameMachineFS', 'game/gameMachineFS.png');
+		    game.load.image('lantern', 'bg/lantern.png');
 		    game.load.atlasJSONArray('german1', 'bg/german1.png', 'bg/german1.json');
 		    game.load.atlasJSONArray('german2', 'bg/german2.png', 'bg/german2.json');
 		    game.load.atlasJSONArray('german3', 'bg/german3.png', 'bg/german3.json');
-		    game.load.spritesheet('light', 'bg/light.png', 887, 1080, 24);
 	    }
 	    if (model.mobile) {
 		    game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');

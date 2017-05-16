@@ -98,21 +98,33 @@ export let view = (() => {
             machineGroup.mask = someGraphic;
         },
 
-        addLight: function ({
-            game = model.el('game'),
-            container = model.group('main'),
-            x = (model.desktop) ? -game.width / 2 - 83 : -game.width / 2 + 160,
-            y = (model.desktop) ? 95 : 0
+        addLantern: function({
+	            game = model.el('game'),
+	            container = model.group('main'),
+	            x,
+	            y
         }) {
-            let light = game.add.sprite(x, y, 'light', null, container);
-            light.anchor.set(0.5);
-            model.el('light', light);
-            light.animations.add('move', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 22,
-            21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]);
-            light.animations.play('move', 15, true);
-            if (model.mobile) {
-                light.scale.set(0.66);
-            }
+          let lantern = game.add.sprite(x, y, 'lantern', null, container)
+	        lantern.anchor.set(0.5, 0);
+	        model.el('lantern', lantern);
+
+	        if (model.desktop) {
+		        draw.rotateLantern(lantern);
+	        }
+        },
+
+        rotateLantern: function(lantern) {
+	        let game = model.el('game');
+	        game.add.tween(lantern).to({rotation: -Math.PI / 16}, 1500, 'Linear', true)
+                .onComplete.add(()=> {
+		            game.add.tween(lantern).to({rotation: Math.PI / 16}, 3000, 'Linear', true)
+                        .onComplete.add(()=> {
+			                game.add.tween(lantern).to({rotation: 0}, 1500, 'Linear', true)
+                                .onComplete.add(()=> {
+			                    draw.rotateLantern(lantern)
+                            })
+                    })
+            });
         },
 
         addGerman: function ({
