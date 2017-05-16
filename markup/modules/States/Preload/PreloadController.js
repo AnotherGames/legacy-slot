@@ -83,7 +83,6 @@ export class Preload {
         const game = model.el('game');
         game.load.image('mainBG', 'bg/mainBG.jpg');
         game.load.image('gameMachine', 'game/gameMachine.png');
-        game.load.image('gameMachineBG', 'game/gameMachineBG.png');
         game.load.image('closeButton', 'other/closeButton.png');
         game.load.image('arrow', 'other/arrow.png');
         game.load.image('infoTableBg', 'other/infoTableBg.png');
@@ -93,20 +92,20 @@ export class Preload {
         game.load.image('winTotal', 'win/winTable.png');
         game.load.image('lightLine', 'win/lightLine.png');
         game.load.spritesheet('winSplash', 'win/winSplash.png', 169, 167, 24);
-        game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
         game.load.atlasJSONArray('footerButtons', 'footer/footerButtons.png', 'footer/footerButtons.json');
-        game.load.bitmapFont('numbersFont', 'numbers/numbers.png', 'numbers/numbers.xml');
-        game.load.bitmapFont('numbersFont2', 'numbers/numbers2.png', 'numbers/numbers2.xml');
-        if (model.desktop) {
-            game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
-            game.load.image('gameMachineFS', 'game/gameMachineFS.png');
-            game.load.atlasJSONArray('german1', 'bg/german1.png', 'bg/german1.json');
-            game.load.atlasJSONArray('german2', 'bg/german2.png', 'bg/german2.json');
-            game.load.atlasJSONArray('german3', 'bg/german3.png', 'bg/german3.json');
-            game.load.spritesheet('light', 'bg/light.png', 887, 1080, 24);
-        }
-        if (model.mobile) {
-            game.load.atlasJSONArray('mobileButtons', 'mobile_buttons/mobileButtons.png', 'mobile_buttons/mobileButtons.json');
+	    game.load.bitmapFont('numbersFont', 'numbers/numbers.png', 'numbers/numbers.xml');
+	    game.load.bitmapFont('numbersFont2', 'numbers/numbers2.png', 'numbers/numbers2.xml');
+	    if (model.desktop) {
+		    game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
+		    game.load.image('gameMachineFS', 'game/gameMachineFS.png');
+		    game.load.atlasJSONArray('german1', 'bg/german1.png', 'bg/german1.json');
+		    game.load.atlasJSONArray('german2', 'bg/german2.png', 'bg/german2.json');
+		    game.load.atlasJSONArray('german3', 'bg/german3.png', 'bg/german3.json');
+		    game.load.spritesheet('light', 'bg/light.png', 887, 1080, 24);
+	    }
+	    if (model.mobile) {
+		    game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
+		    game.load.atlasJSONArray('mobileButtons', 'mobile_buttons/mobileButtons.png', 'mobile_buttons/mobileButtons.json');
         }
 
     }

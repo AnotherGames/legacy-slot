@@ -39,8 +39,13 @@ export let view = (() => {
             container = model.group('main')
         }) {
             let deltaY = (model.desktop) ? 30 : -10;
-            let gameMachineBG = game.add.sprite(0, deltaY, 'gameMachineBG', null, container);
+            let gameMachineBG = game.add.sprite(0, deltaY, 'initBG', null, container);
             gameMachineBG.anchor.set(0.5);
+            if (model.desktop) {
+	            gameMachineBG.scale.set(0.675);
+            } else {
+	            gameMachineBG.scale.set(0.76);
+            }
             model.el('gameMachineBG', gameMachineBG);
 
             let gameMachine = game.add.sprite(0, config[model.res].gameMachine.y, 'gameMachine', null, container);
