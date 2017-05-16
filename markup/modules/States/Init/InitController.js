@@ -94,6 +94,7 @@ export class Init {
         fakeButton.removeEventListener('click', this.stateHandler);
 
 	    game.camera.onFadeComplete.add(() => {
+		    game.camera.onFadeComplete.removeAll();
 		    switch (model.data('savedFS').state) {
 			    case 'Freespin': game.state.start('FS');
 				    break;
