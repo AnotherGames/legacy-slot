@@ -122,7 +122,9 @@ export let view = (() => {
         WinNumber: function ({
             number
         }) {
-            if (number < 0) return;
+            if (number < 0) {
+                return;
+            }
             draw.WinSplash({
                 number,
                 ind: 0
@@ -366,7 +368,6 @@ export let view = (() => {
             grd.addColorStop(0, '#ffffff');
             grd.addColorStop(1, '#eeeeee');
             text.fill = grd;
-
         }
 
     };

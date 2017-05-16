@@ -45,7 +45,7 @@ export let controller = (() => {
         let nextMode = data.NextMode;
 
         if (mode === 'root' && nextMode.indexOf('fsBonus') !== -1 ) {
-	        model.state('buttons:locked', true)
+            model.state('buttons:locked', true);
             console.warn('fs start!');
 
             // Остонавливаем автоплей если был
@@ -69,6 +69,8 @@ export let controller = (() => {
         // Обнуляем счетчики для глист
         model.data('glistaFiredCounter', 0);
         model.data('glistaDoneCounter', 0);
+
+        cleanWin();
 
         // Определяем индекс линии которую будем сейчас проигрывать
         let index = model.data('currentLineIndex') || 0;
@@ -158,8 +160,8 @@ export let controller = (() => {
     }
 
     function cleanWin(cleanAlpha = false, normalAnim = true) {
-        let container = model.group('winTop');
         let game = model.el('game');
+        let container = model.group('winTop');
         // Обнуляем счетчики глист
         model.data('glistaFiredCounter', 0);
         model.data('glistaDoneCounter', 0);
@@ -223,11 +225,11 @@ export let controller = (() => {
         }
 
         // Убираем элементы в контенере WinTop (это таблички с выигрышами)
-        view.hide.WinTop({})
-            .onComplete.add(() => {
-                container.removeAll();
-                container.alpha = 1;
-            });
+        container.removeAll();
+        // view.hide.WinTop({})
+        //     .onComplete.add(() => {
+        //         container.alpha = 1;
+        //     });
     }
 
     return {
