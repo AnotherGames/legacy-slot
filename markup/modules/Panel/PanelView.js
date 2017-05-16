@@ -32,7 +32,7 @@ export let view = (() => {
 
         SpinButton: function ({
             game = model.el('game'),
-            x = model.el('gameMachine').width / 2 - 3,
+            x = model.el('gameMachine').width / 2 - 7,
             y = -150,
             container = model.group('panel')
         }) {
@@ -44,8 +44,8 @@ export let view = (() => {
 
         StopButton: function ({
             game = model.el('game'),
-            x = model.el('spinButtonDesk').x - 188,
-            y = -135,
+            x = model.el('spinButtonDesk').x - 185,
+            y = -132,
             container = model.group('panel')
         }) {
             let stopButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'stopHover.png', 'stop.png', 'stopOn.png', null, container);
@@ -58,8 +58,8 @@ export let view = (() => {
         AutoButton: function ({
             game = model.el('game'),
             container = model.group('panel'),
-            x = model.el('spinButtonDesk').x - 188,
-            y = -135
+            x = model.el('spinButtonDesk').x - 185,
+            y = -132
         }) {
             let autoButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'autoHover.png', 'auto.png', 'autoOn.png', null, container);
             autoButtonDesk.anchor.set(0.5);
@@ -70,8 +70,8 @@ export let view = (() => {
         MaxBetButton: function ({
             game = model.el('game'),
             container = model.group('panel'),
-            x = model.el('spinButtonDesk').x + 180,
-            y = -135
+            x = model.el('spinButtonDesk').x + 185,
+            y = -132
         }) {
             let maxBetButtonDesk = game.add.button(x, y, 'deskButtons', null, null, 'maxBetHover.png', 'maxBet.png', 'maxBetOn.png', null, container);
             maxBetButtonDesk.anchor.set(0.5);

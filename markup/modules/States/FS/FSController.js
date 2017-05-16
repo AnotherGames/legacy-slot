@@ -112,12 +112,6 @@ export let controller = (() => {
 		if (multiValue == 7) {
 			fsView.draw.showMaxMulti({});
 		}
-		//
-		// if (levelValue > currLevel) {
-		// 	fsView.draw.changeLevel({number: levelValue, animation: levelValue - 1 + ''});
-		// 	model.data('fsLevel', levelValue);
-		// }
-
 	}
 
 	return {
@@ -183,8 +177,8 @@ export class FS {
 		rollController.init();
 
 		if (model.mobile) {
-			footer.initMobile();
 			// Рисуем футер
+			footer.initMobile();
 			// Отрисовуем баланс
 			balanceController.initFSMobile();
 			mobileSetBetController.init({});
@@ -211,10 +205,6 @@ export class FS {
 		fsView.draw.Multi({
 			start: this.fsMulti
 		});
-		//
-		// fsView.draw.Level({
-		// 	start: this.fsLevel
-		// });
 
 		if (model.data('fsLevel') > 0) {
 			this.drawRecoveredPanel();
