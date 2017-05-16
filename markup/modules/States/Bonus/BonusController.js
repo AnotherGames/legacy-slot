@@ -20,6 +20,7 @@ export class Bonus {
 		this.game.frameAnims = [];
 		this.game.spriteAnims = [];
 
+		model.updateBalance({startFSRoll: true})
 		model.data('bonusWinCoins', 0);
 		model.state('bonus', true);
 		model.state('bonusReady', true);
