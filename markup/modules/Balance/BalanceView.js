@@ -142,10 +142,6 @@ export let view = (() => {
             y = model.data('footerTopCenterY')
         }) {
 
-            if (model.desktop && model.state('fs')) {
-                y = game.height * 0.94;
-            }
-
 	        let totalWinText = game.add.text(0, y, 'Total Win: ', greyStyle, container);
             let winText = game.add.text(0, y, 'Win: ', greyStyle, container);
             let totalWinSum = game.add.text(0, y, `${totalWinValue.toFixed(0)}`, cashStyle, container);

@@ -183,8 +183,8 @@ export class FS {
 		rollController.init();
 
 		if (model.mobile) {
-			// Рисуем футер
 			footer.initMobile();
+			// Рисуем футер
 			// Отрисовуем баланс
 			balanceController.initFSMobile();
 			mobileSetBetController.init({});
@@ -192,6 +192,7 @@ export class FS {
 			this.positionMainContainer();
 		} else {    // Desktop
 
+			footer.addTopFooter();
 			footer.initFsDesktop();
 
 			// Автоматически позиционируем основной контейнер
@@ -199,10 +200,9 @@ export class FS {
 
 			// Рисуем кнопки управления
 			panelController.drawFsPanel();
+
 			// Отрисовуем баланс
 			balanceController.initFSDesktop();
-			// BG animations
-
 		}
 
 		// Добавляем маску

@@ -30,7 +30,6 @@ export let controller = (() => {
 
     function initFSDesktop() {
         view.draw.CashBalance({});
-        // view.draw.FSDesktopBalance({});
         view.draw.FSMobileBalance({});
     }
 
