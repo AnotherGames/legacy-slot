@@ -79,6 +79,7 @@ export class Init {
         fakeButton.removeEventListener('click', this.stateHandler);
 
         game.camera.onFadeComplete.add(() => {
+	        game.camera.onFadeComplete.removeAll();
             switch (model.data('savedFS').state) {
                 case 'Doors': game.state.start('Bonus');
                     break;
