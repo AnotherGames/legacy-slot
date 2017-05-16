@@ -72,7 +72,9 @@ export class Init {
 
         if (model.mobile) game.scale.startFullScreen();
 
-        // view.stopYoyoTween();
+	    $('#fakeButton').addClass('fullwidth')
+	    // make fakebutton 100% width again
+
         let fakeButton = document.querySelector('#fakeButton');
         fakeButton.removeEventListener('click', this.stateHandler);
 
