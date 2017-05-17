@@ -78,24 +78,31 @@ body {
 
 #popup h2{
     margin: 0;
+    margin-top: -3vw;
+    color: #241d1c;
     position: absolute;
     font: 3vw arial;
     box-sizing: border-box;
-    padding: 0 10%;
-    width: 100%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #popup img{
-    max-width: 100%;
+    max-width: 40vw;
 }
 
 #popup p{
     margin: 0;
+    margin-top: 9vw;
+    color: #241d1c;
     font: 1.5vw arial;
     position: absolute;
-    top: 85%;
     width: 100%;
     text-align: center;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #settings {
