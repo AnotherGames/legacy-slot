@@ -74,31 +74,29 @@ body {
 
 #popup h2{
     margin: 0;
-    margin-left: 6vw;
-    margin-top: -4vw;
+    margin-top: -5vw;
     color: #068ad7;
     position: absolute;
     font: 2.5vw arial;
     box-sizing: border-box;
-    left: 50%;
+    left: 67%;
     top: 50%;
     transform: translate(-50%, -50%);
 }
 
 #popup img{
-    max-width: 100%;
+    max-width: 34vw;
 }
 
 #popup p{
     margin: 0;
-    margin-left: 5vw;
     margin-top: 2vw;
     color: #068ad7;
     font: 1.5vw arial;
     position: absolute;
     width: 100%;
     text-align: center;
-    left: 50%;
+    left: 67%;
     top: 50%;
     transform: translate(-50%, -50%);
 }
