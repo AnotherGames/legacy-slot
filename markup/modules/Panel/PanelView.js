@@ -51,24 +51,7 @@ export let view = (() => {
             fsCount.align = 'center';
             fsCount.anchor.set(0.5);
             model.el('fs:count', fsCount);
-
-            // let fsMulti = game.add.bitmapText(fsCountBG.x + deltaX, fsCountBG.y + deltaY, 'numbersFont', '' + startMulti, (model.desktop) ? 20 : 15, container);
-            // fsMulti.align = 'center';
-            // fsMulti.anchor.set(0.5);
-            // model.el('fs:multi', fsMulti);
         },
-
-        // changeLevelAndMulti: function ({
-        //     fsCount = model.el('fs:count'),
-        //     fsMulti = model.el('fs:multi'),
-        // }) {
-        //     let freeSpinsCount = model.data('rollResponse').FreeSpinsLeft;
-        //     setTimeout(() => {
-        //         fsCount.text = freeSpinsCount;
-        //         fsMulti.text = 'x2';
-        //     }, 500);
-        //     console.log(fsCount, fsMulti);
-        // },
 
         AutoContainer: function ({
             game = model.el('game'),
@@ -265,7 +248,7 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('panel'),
             style = {
-                font: '40px Arial, Helvetica',
+                font: '34px Arial, Helvetica',
                 align: 'center'
             },
             amount = 10,
