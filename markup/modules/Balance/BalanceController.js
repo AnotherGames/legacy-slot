@@ -36,6 +36,9 @@ export let controller = (() => {
         if (model.state('balance') == 'cash') {
             model.el('coinCash').visible = false;
             model.el('betCash').visible = false;
+            model.el('coinCashSymbol').visible = false;
+            model.el('betCashSymbol').visible = false;
+
             model.el('coinSum').visible = true;
             model.el('betSum').visible = true;
             model.state('balance', 'coins');
@@ -46,8 +49,11 @@ export let controller = (() => {
         } else {
             model.el('coinSum').visible = false;
             model.el('betSum').visible = false;
+
             model.el('coinCash').visible = true;
             model.el('betCash').visible = true;
+	        model.el('coinCashSymbol').visible = true;
+	        model.el('betCashSymbol').visible = true;
             model.state('balance', 'cash');
             convertSign.frameName = 'switch2.png';
             game.time.events.add(500, () => {

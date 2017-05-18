@@ -117,9 +117,16 @@ export let controller = (() => {
     function showWin() {
         let game = model.el('game');
         let data = model.data('rollResponse'),
-            winTotalData = data.Balance.TotalWinCoins,
             winLines = data.WinLines;
-        // Если нет выигрыша - выходим
+
+	    let winTotalData;
+	    if (model.state('balance') == 'cash') {
+		    winTotalData = (data.Balance.TotalWinCents / 100).toFixed(2);
+	    } else {
+		    winTotalData = data.Balance.TotalWinCoins;
+        }
+	    console.log(winTotalData);
+	    // Если нет выигрыша - выходим
         if (winLines.length === 0) {
             return;
         }

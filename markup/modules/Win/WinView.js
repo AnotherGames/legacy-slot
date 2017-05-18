@@ -63,7 +63,7 @@ export let view = (() => {
                 return;
             }
             if (model.state('balance') === 'cash') {
-                winTotalData = `${model.balance('currencySymbol')} ${(model.balance('coinValue') * winTotalData).toFixed(2)}`;
+                winTotalData = `${winTotalData}`;
             }
 
             let winTotal = game.add.sprite(0, 0, 'winTotal', null, container);
