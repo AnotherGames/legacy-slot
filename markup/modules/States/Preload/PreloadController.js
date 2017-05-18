@@ -70,7 +70,6 @@ export class Preload {
         game.load.path = `static/img/content/${model.res}/`;
         game.load.image('initBG', 'bg/initBG.jpg');
         game.load.image('logosSmall', 'preloader/logosSmall.png');
-        game.load.image('play', 'text/playText.png');
         game.load.atlasJSONArray('text', 'text/text.png', 'text/text.json');
     }
 
