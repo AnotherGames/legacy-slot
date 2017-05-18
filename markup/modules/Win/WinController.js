@@ -125,7 +125,7 @@ export let controller = (() => {
 	    } else {
 		    winTotalData = data.Balance.TotalWinCoins;
         }
-	    console.log(winTotalData);
+
 	    // Если нет выигрыша - выходим
         if (winLines.length === 0) {
             return;
