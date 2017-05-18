@@ -180,6 +180,8 @@ export let model = (() => {
 		model.balance('winCash', winCash / 100);
 		model.balance('totalWin', totalWin);
 		model.data('rollResponse', {NextMode: 'fsBonus'});
+
+		model.data('rollResponse').FreeSpinsLeft = fsCount;
 		model.data('savedFS', {
 			fsCount,
 			fsLevel,
