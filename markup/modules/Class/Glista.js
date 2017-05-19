@@ -61,25 +61,25 @@ export class Glista {
         };
 
 
-        this.sprites = [];
+        // this.sprites = [];
         this.light = [];
         for (let atlasInd = 0; atlasInd <= 10; atlasInd++) {
-            let sprite;
-            if (atlasInd == 0) {
-                sprite = this.game.add.sprite( atlasInd * -80, 0, 'glista', 'rocket-fli_0.png', param.parent);
-                sprite.myScale = 0.5;
-                sprite.animations.add('play', Phaser.Animation.generateFrameNames('rocket-fli_', 0, 30, '.png', 1), 30, false);
-                sprite.animations.play('play');
-            } else {
-                sprite = this.game.add.sprite( atlasInd * -80, 0, 'stars', `star_${this.game.rnd.integerInRange(0, 6)}.png`, param.parent);
-                sprite.myScale = this.game.rnd.integerInRange(2, 4) / 10;
-                this.game.add.tween(sprite).to({angle: 360}, this.game.rnd.integerInRange(50 * 6, 80 * 6), null, true, 0, -1);
-            }
-            sprite.anchor.set(0.5, 0.5);
-            sprite.myDeltaY = this.game.rnd.integerInRange(-30, 30);
-            sprite.visible = false;
-            sprite.alpha = 0;
-            this.sprites.push(sprite);
+            // let sprite;
+            // if (atlasInd == 0) {
+            //     sprite = this.game.add.sprite( atlasInd * -80, 0, 'glista', 'rocket-fli_0.png', param.parent);
+            //     sprite.myScale = 0.5;
+            //     sprite.animations.add('play', Phaser.Animation.generateFrameNames('rocket-fli_', 0, 30, '.png', 1), 30, false);
+            //     sprite.animations.play('play');
+            // } else {
+            //     sprite = this.game.add.sprite( atlasInd * -80, 0, 'stars', `star_${this.game.rnd.integerInRange(0, 6)}.png`, param.parent);
+            //     sprite.myScale = this.game.rnd.integerInRange(2, 4) / 10;
+            //     this.game.add.tween(sprite).to({angle: 360}, this.game.rnd.integerInRange(50 * 6, 80 * 6), null, true, 0, -1);
+            // }
+            // sprite.anchor.set(0.5, 0.5);
+            // sprite.myDeltaY = this.game.rnd.integerInRange(-30, 30);
+            // sprite.visible = false;
+            // sprite.alpha = 0;
+            // this.sprites.push(sprite);
 
             let lightSprite = this.game.add.sprite( atlasInd * -80, 0, 'ligthGlista', null, param.lightParent);
             lightSprite.scale.set(1.3 - 0.2 * atlasInd);
@@ -171,9 +171,9 @@ export class Glista {
         let nodes = [];
 
         for (let spriteInd = 0; spriteInd < 11; spriteInd++) {
-            this.sprites[spriteInd].visible = true;
-            this.sprites[spriteInd].position.set(this.bezierPath.x[0], this.bezierPath.y[0]);
-            this.sprites[spriteInd].rotation = 0;
+            // this.sprites[spriteInd].visible = true;
+            // this.sprites[spriteInd].position.set(this.bezierPath.x[0], this.bezierPath.y[0]);
+            // this.sprites[spriteInd].rotation = 0;
             nodes.push({ x: this.bezierPath.x[0], y: this.bezierPath.y[0], angle: 0 });
 
             this.light[spriteInd].visible = true;
@@ -213,15 +213,15 @@ export class Glista {
                 let angle = _this.game.math.angleBetweenPoints(nodes[spriteInd], { x: px, y: py, angle: 0 });
                 nodes[spriteInd] = { x: px, y: py, angle: angle };
 
-                _this.sprites[spriteInd].position.set(px, py + _this.sprites[spriteInd].myDeltaY);
-                _this.sprites[spriteInd].scale.set(_this.sprites[spriteInd].myScale);
+                // _this.sprites[spriteInd].position.set(px, py + _this.sprites[spriteInd].myDeltaY);
+                // _this.sprites[spriteInd].scale.set(_this.sprites[spriteInd].myScale);
                 _this.light[spriteInd].position.set(px, py);
                 // if (progress < 0.5) {
                 //     _this.sprites[spriteInd].scale.set((1.2 - 1.2 * progress) * _this.sprites[spriteInd].myScale);
                 // } else {
                 //     _this.sprites[spriteInd].scale.set(1.2 * progress * _this.sprites[spriteInd].myScale);
                 // }
-                _this.sprites[spriteInd].rotation = angle;
+                // _this.sprites[spriteInd].rotation = angle;
             }
 
             if (_this.progress === 1) {
@@ -229,7 +229,7 @@ export class Glista {
                 _this.game.frameAnims.splice(_this.game.frameAnims.indexOf(anim), 1);
 
                 for (let spriteInd = 0; spriteInd < 11; spriteInd++) {
-                    _this.sprites[spriteInd].visible = false;
+                    // _this.sprites[spriteInd].visible = false;
                     _this.light[spriteInd].visible = false;
                 }
 
@@ -250,9 +250,9 @@ export class Glista {
             return;
         }
         this.isRemove = true;
-        this.sprites.forEach((sprite) => {
-            sprite.destroy();
-        });
+        // this.sprites.forEach((sprite) => {
+        //     sprite.destroy();
+        // });
         this.light.forEach((item) => {
             item.destroy();
         });

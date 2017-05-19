@@ -107,8 +107,8 @@ export class Preload {
 
         // Glista
         game.load.image('ligthGlista', 'glista/lightGlista.png');
-        game.load.atlasJSONArray('glista', 'glista/glista.png', 'glista/glista.json');
-        game.load.atlasJSONArray('stars', 'glista/stars.png', 'glista/stars.json');
+        // game.load.atlasJSONArray('glista', 'glista/glista.png', 'glista/glista.json');
+        // game.load.atlasJSONArray('stars', 'glista/stars.png', 'glista/stars.json');
     }
 
     loadFSAssets() {
