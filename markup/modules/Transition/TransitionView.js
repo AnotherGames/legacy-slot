@@ -62,7 +62,7 @@ export let view = (() => {
         model.el('freeSpinsLevel', freeSpinsLevel);
 
         // Надпись Multi
-        let multiText = game.add.sprite(game.width / 2, game.height * 0.2, 'text', 'multiplay.png', transitionContainer);
+        let multiText = game.add.sprite(game.width / 2, game.height * 0.2, 'text', 'multiplier.png', transitionContainer);
         multiText.anchor.set(0.5);
         multiText.scale.set(0.1);
         multiText.alpha = 0;

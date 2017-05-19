@@ -220,7 +220,6 @@ function handleDoorClick() {
 						bonusView.draw.showWin({winTextFrame: 'bigW.png'});
 						soundController.sound.playSound({sound: 'win'});
 						soundController.music.stopMusic('bonusFon');
-						soundController.music.stopMusic('sea');
 						setTimeout(() => {
 							endBonus();
 						}, 4500);

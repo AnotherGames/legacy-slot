@@ -60,7 +60,6 @@ export class Preload {
         game.load.audio('lineWin', 'lineWin1.mp3');
         game.load.audio('lineWin2', 'lineWin2.mp3');
         game.load.audio('bubbleFail', 'bubbleFail.mp3');
-        game.load.audio('sea', 'sea.mp3');
         game.load.audio('coins', 'coins.mp3');
         game.load.audio('sundukOpen', 'sundukOpen.mp3');
     }
@@ -100,7 +99,6 @@ export class Preload {
         game.load.atlasJSONArray('glista', 'win/glista.png', 'win/glista.json');
         game.load.atlasJSONArray('footerButtons', 'footer/footerButtons.png', 'footer/footerButtons.json');
 	    game.load.bitmapFont('numbersFont', 'numbers/numbers.png', 'numbers/numbers.xml');
-	    game.load.bitmapFont('numbersFont2', 'numbers/numbers2.png', 'numbers/numbers2.xml');
 	    if (model.desktop) {
 		    game.load.image('panelBG', 'game/panelBG.png');
 		    game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');

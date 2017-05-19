@@ -33,12 +33,12 @@
 	"sourceSize": {"w":904,"h":281}
 },
 {
-	"filename": "multiplay.png",
-	"frame": {"x":1,"y":990,"w":764,"h":251},
+	"filename": "multiplier.png",
+	"frame": {"x":1,"y":990,"w":769,"h":251},
 	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":764,"h":251},
-	"sourceSize": {"w":764,"h":251}
+	"trimmed": true,
+	"spriteSourceSize": {"x":151,"y":0,"w":769,"h":251},
+	"sourceSize": {"w":1000,"h":251}
 },
 {
 	"filename": "totalW.png",
@@ -53,8 +53,8 @@
 	"version": "1.0",
 	"image": "text.png",
 	"format": "RGBA8888",
-	"size": {"w":1024,"h":2048},
+	"size": {"w":1002,"h":1320},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:1d8e5b8ff385782a5bfdbb29568f3676:9913d525dfcdd1260fab6d5575bb459e:a569396aede2f37d3ec322fe54e4aaf6$"
+	"smartupdate": "$TexturePacker:SmartUpdate:a32fd36816c86a581d8e27fa49adee17:ffa574d7852e4ef6497d5aecb5e5e7f6:a569396aede2f37d3ec322fe54e4aaf6$"
 }
 }
