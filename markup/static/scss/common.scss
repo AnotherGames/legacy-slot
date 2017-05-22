@@ -64,6 +64,10 @@ body {
 }
 
 #popup {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+
     margin: 0;
     z-index: 11;
     position: absolute;
