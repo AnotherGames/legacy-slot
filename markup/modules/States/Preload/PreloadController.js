@@ -99,17 +99,17 @@ export class Preload {
         game.load.image('winLine', 'win/winNumber.png');
         game.load.image('winTotal', 'win/winTable.png');
         game.load.atlasJSONArray('winSplash', 'win/splash.png', 'win/splash.json');
-        game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
         game.load.atlasJSONArray('footerButtons', 'footer/footerButtons.png', 'footer/footerButtons.json');
-        game.load.bitmapFont('numbersFont', 'numbers/numbers.png', 'numbers/numbers.xml');
-        game.load.bitmapFont('numbersFont2', 'numbers/numbers2.png', 'numbers/numbers2.xml');
-        if (model.desktop) {
-            game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
-            game.load.image('gameMachineFS', 'game/gameMachineFS.png');
-            game.load.image('autoSelect', 'desk_buttons/autoSelect.png');
-        }
-        if (model.mobile) {
-            game.load.atlasJSONArray('mobileButtons', 'mobile_buttons/mobileButtons.png', 'mobile_buttons/mobileButtons.json');
+	    game.load.bitmapFont('numbersFont', 'numbers/numbers.png', 'numbers/numbers.xml');
+	    game.load.bitmapFont('numbersFont2', 'numbers/numbers2.png', 'numbers/numbers2.xml');
+	    if (model.desktop) {
+		    game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
+		    game.load.image('gameMachineFS', 'game/gameMachineFS.png');
+		    game.load.image('autoSelect', 'desk_buttons/autoSelect.png');
+	    }
+	    if (model.mobile) {
+		    game.load.atlasJSONArray('menuButtons', 'menu/menu.png', 'menu/menu.json');
+		    game.load.atlasJSONArray('mobileButtons', 'mobile_buttons/mobileButtons.png', 'mobile_buttons/mobileButtons.json');
         }
 
     }
