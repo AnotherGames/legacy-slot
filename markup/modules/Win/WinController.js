@@ -298,6 +298,7 @@ export let controller = (() => {
                 });
             })
             .catch((err) => {
+	            model.el('popup').showReloadPopup();
                 console.error(err);
             });
     }

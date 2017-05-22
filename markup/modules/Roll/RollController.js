@@ -69,11 +69,11 @@ export let controller = (() => {
                             game.input.keyboard.enabled = true;
                             panelView.unlockButtons();
                         }
-                        mainView.draw.showPopup({message: data.ErrorMessage, balance: true});
+                        model.el('popup').showClosePopup(data.ErrorMessage);
                         return;
                     }
 
-                    mainView.draw.showPopup({message: data.ErrorMessage});
+                    model.el('popup').showReloadPopup(data.ErrorMessage);
                     return;
                 } else {
                     // Очищаем выигрышный экран
@@ -131,9 +131,7 @@ export let controller = (() => {
                 }
             })
             .catch((err) => {
-                if (err.status) {
-                    mainView.draw.showPopup({message: 'Connection problem.'});
-                }
+                model.el('popup').showReloadPopup();
                 console.error(err);
             });
         }
@@ -201,7 +199,7 @@ export let controller = (() => {
 
         })
         .catch((err) => {
-            mainView.draw.showPopup({message: 'You have weak Internet connection. Click to restart.'});
+	        model.el('popup').showReloadPopup();
             console.error(err)
         });
 
