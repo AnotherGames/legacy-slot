@@ -19,7 +19,6 @@ export let view = (() => {
             model.group('footerMenu', game.add.group());
             model.group('balanceCash', game.add.group());
             model.group('balanceCoin', game.add.group());
-            model.group('popup', game.add.group());
             model.group('infoTable', game.add.group());
             model.group('transition', game.add.group());
         }
@@ -379,51 +378,7 @@ export let view = (() => {
                             draw.flyingSmoke({});
                         });
                 });
-        },
-
-        initPopup: function () {
-            let popup = document.querySelector('#popup');
-            popup.addEventListener('click', draw.closePopup);
-        },
-
-        showPopup: function ({
-            message = 'popup',
-            balance = false
-        }) {
-            model.state('notReload', balance);
-
-            let popup = document.querySelector('#popup');
-            let overlay = document.querySelector('#darkness');
-            let popupText = document.querySelector('#popup h2');
-            let popupBottomText = document.querySelector('#popup p');
-            let bottomText;
-
-            popup.classList.remove('closed');
-            overlay.classList.remove('closed');
-
-            popupText.innerHTML = message;
-
-            if (model.desktop) {
-                bottomText = `Click to ${(balance) ? 'close' : 'restart'}`;
-            } else {
-                bottomText = `Tap to ${(balance) ? 'close' : 'restart'}`;
-            }
-
-            popupBottomText.innerHTML = bottomText;
-        },
-
-        closePopup: function () {
-            if (model.state('notReload')) {
-                let popup = document.querySelector('#popup');
-                let overlay = document.querySelector('#darkness');
-
-                popup.classList.add('closed');
-                overlay.classList.add('closed');
-            } else {
-                window.location.reload();
-            }
         }
-
     };
 
     return {
