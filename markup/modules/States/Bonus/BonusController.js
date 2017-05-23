@@ -248,7 +248,7 @@ function handleDoorClick() {
 			this.data = data;
 			model.data('bonusRollResponse', data);
 			if (data.ErrorCode) {
-				mainView.draw.showPopup({message: data.ErrorMessage});
+				model.el('popup').showReloadPopup(data.ErrorMessage);
 				return;
 			}
 			model.data('bonusWinCoins', model.data('bonusWinCoins') + data.CurrentValue.TotalWinCoins);
@@ -260,7 +260,7 @@ function handleDoorClick() {
 		})
 		.then((readyData) => {
 			if (readyData.ErrorCode) {
-				mainView.draw.showPopup({message: readyData.ErrorMessage});
+				model.el('popup').showReloadPopup(readyData.ErrorMessage);
 				return;
 			}
 
@@ -312,9 +312,7 @@ function handleDoorClick() {
 			}
 		})
 		.catch((err) => {
-			if (err.status) {
-				mainView.draw.showPopup({message: 'Connection problem.'});
-			}
+			model.el('popup').showReloadPopup();
 			console.error(err);
 		});
 }
