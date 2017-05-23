@@ -68,12 +68,12 @@ export let controller = (() => {
                             game.input.keyboard.enabled = true;
                             panelView.unlockButtons();
                         }
-                        mainView.draw.showPopup({message: data.ErrorMessage, balance: true});
+	                    model.el('popup').showClosePopup(data.ErrorMessage);
                         return;
                     }
 
-                    mainView.draw.showPopup({message: data.ErrorMessage});
-                    return;
+	                model.el('popup').showReloadPopup(data.ErrorMessage);
+	                return;
                 } else {
                     // Для отображения правильного цвета бутылок
 	                let elem = 9;
@@ -104,7 +104,6 @@ export let controller = (() => {
 
                     // Играем звук кручения барабанов
                     soundController.sound.playSound({sound: 'baraban', volume: 0.3});
-                    // soundController.sound.changeSoundVolume('baraban', 60);
 
                     // Расчитываем конечный экран
                     let wheels = model.el('wheels');
@@ -140,10 +139,8 @@ export let controller = (() => {
                 }
             })
             .catch((err) => {
-                if (err.status) {
-                    mainView.draw.showPopup({message: 'Connection problem.'});
-                }
-                console.error(err);
+	            model.el('popup').showReloadPopup();
+	            console.error(err);
             });
         }
 
@@ -210,8 +207,8 @@ export let controller = (() => {
 
         })
         .catch((err) => {
-            mainView.draw.showPopup({message: 'Connection problem. Click to restart.'});
-            console.error(err)
+	        model.el('popup').showReloadPopup();
+	        console.error(err);
         });
 
     }

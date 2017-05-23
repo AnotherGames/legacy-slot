@@ -106,7 +106,6 @@ export class Boot {
         const game = model.el('game');
 
         game.load.path = `static/img/content/${model.res}/preloader/`;
-        game.load.image('popup', 'popup.png');
         game.load.image('preloadBar', 'preloaderBar.png');
         game.load.atlasJSONHash('preloadCoin', 'coin-0.png', 'coin.json');
     }
