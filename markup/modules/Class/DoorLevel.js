@@ -237,8 +237,8 @@ export class Door {
                     model.data(`doors:${level}:data`, data);
                     model.data('bonusRollResponse', data);
                     if (data.ErrorCode) {
-                        mainView.draw.showPopup({message: data.ErrorMessage});
-                        return;
+	                    model.el('popup').showReloadPopup();
+	                    return;
                     }
                     model.data('bonusWinCoins', data.CurrentValue.TotalWinCoins);
 
