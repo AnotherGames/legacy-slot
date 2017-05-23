@@ -69,12 +69,12 @@ export let controller = (() => {
                             game.input.keyboard.enabled = true;
                             panelView.unlockButtons();
                         }
-                        mainView.draw.showPopup({message: data.ErrorMessage, balance: true});
-                        return;
+	                    model.el('popup').showClosePopup(data.ErrorMessage);
+	                    return;
                     }
 
-                    mainView.draw.showPopup({message: data.ErrorMessage});
-                    return;
+	                model.el('popup').showReloadPopup(data.ErrorMessage);
+	                return;
                 } else {
                     // Очищаем выигрышный экран
                     winController.cleanWin();
@@ -138,10 +138,8 @@ export let controller = (() => {
                 }
             })
             .catch((err) => {
-                if (err.status) {
-                    mainView.draw.showPopup({message: 'Connection problem.'});
-                }
-                console.error(err);
+	            model.el('popup').showReloadPopup();
+	            console.error(err);
             });
         }
 
@@ -209,8 +207,8 @@ export let controller = (() => {
 
         })
         .catch((err) => {
-            mainView.draw.showPopup({message: 'Connection problem.'});
-            console.error(err)
+	        model.el('popup').showReloadPopup();
+	        console.error(err)
         });
 
     }

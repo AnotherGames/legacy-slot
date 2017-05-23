@@ -1,6 +1,6 @@
 import { model } from 'modules/Model/Model';
 import { view } from 'modules/States/Preload/PreloadView';
-import { view as mainView } from 'modules/States/Main/MainView';
+import Popup from '../../../../Info/Popup';
 
 export class Preload {
     constructor(game) {
@@ -25,10 +25,7 @@ export class Preload {
 	preload() {
 
 
-        const game = model.el('game');
-
-        model.group('popup', game.add.group());
-        $('#wait').addClass('closed');
+        const game = model.el('game');;
 
         game.load.setPreloadSprite(view.drawPreloadBar());
         view.drawPreloadCoin();
@@ -45,9 +42,10 @@ export class Preload {
         this.loadSpineAssets();
         this.loadElements();
 
-        mainView.draw.initPopup();
+		let popup = new Popup(model);
+		model.el('popup', popup);
 
-        game.load.onLoadComplete.add(this.checkInit, this);
+		game.load.onLoadComplete.add(this.checkInit, this);
     }
 
     loadSounds() {
@@ -165,7 +163,7 @@ export class Preload {
                 } else {
 	                model.el('preloadBar').visible = false;
 	                model.el('preloadCoin').visible = false;
-	                mainView.draw.showPopup({message: 'Connection problem.'});
+	                model.el('popup').showReloadPopup();
                 }
             }, 3000)
         }
@@ -176,8 +174,8 @@ export class Preload {
         if (model.state('loadError')) {
             model.el('preloadBar').visible = false;
             model.el('preloadCoin').visible = false;
-            mainView.draw.showPopup({message: 'Connection problem.'});
-            game.load.reset(true, true);
+	        model.el('popup').showReloadPopup();
+	        game.load.reset(true, true);
             return;
         }
         view.hideBar();

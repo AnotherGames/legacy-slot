@@ -70,10 +70,6 @@ export class Main {
         mainView.draw.addTwinkleLight({side: 'right'});
         mainView.draw.addBrokenLight({});
 
-        // tests
-        // mainView.draw.showPopup({message: 'You have low balance on your account', balance: true});
-        // transitionView.fsStart();
-
         // Инициализируем крутки
         rollController.init();
 
