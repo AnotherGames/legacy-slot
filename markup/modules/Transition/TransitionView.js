@@ -92,7 +92,7 @@ export let view = (() => {
         game.add.tween(freeSpinsText.scale).to({x: 1.0, y: 1.0}, 1500, Phaser.Easing.Bounce.Out, true);
         game.add.tween(freeSpinsLevel.scale).to({x: scaleX, y: scaleY}, 1500, Phaser.Easing.Bounce.Out, true);
         game.add.tween(continueText.scale).to({x: 1.0, y: 1.0}, 1500, Phaser.Easing.Bounce.Out, true);
-        game.add.tween(diverChar).to({x: game.width * 0.1, y: game.height * 0.55, angle: 0}, 500, Phaser.Easing.Cubic.Out, true, 1500);
+        game.add.tween(diverChar).to({x: game.width * 0.1, y: game.height * 0.56, angle: 0}, 500, Phaser.Easing.Cubic.Out, true, 1500);
         game.add.tween(octopusChar).to({x: game.width * 0.82, y: game.height * 0.65, angle: 0}, 500, Phaser.Easing.Cubic.Out, true, 2000)
             // Болтание кнопки продолжить
             .onComplete.add(() => {
@@ -216,7 +216,7 @@ export let view = (() => {
 
         game.add.tween(winCount.scale).to({x: scaleX, y: scaleY}, 1500, Phaser.Easing.Bounce.Out, true);
         game.add.tween(continueText.scale).to({x: 1.0, y: 1.0}, 1500, Phaser.Easing.Bounce.Out, true);
-        game.add.tween(diverChar).to({x: game.width * 0.1, y: game.height * 0.55, angle: 0}, 500, Phaser.Easing.Cubic.Out, true, 1500);
+        game.add.tween(diverChar).to({x: game.width * 0.1, y: game.height * 0.56, angle: 0}, 500, Phaser.Easing.Cubic.Out, true, 1500);
         game.add.tween(octopusChar).to({x: game.width * 0.82, y: game.height * 0.65, angle: 0}, 500, Phaser.Easing.Cubic.Out, true, 2000);
         game.add.tween(treasureChest).to({y: game.height * 0.65}, 1000, Phaser.Easing.Elastic.Out, true, 2500)
             .onComplete.add(() => {
