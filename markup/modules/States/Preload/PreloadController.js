@@ -92,7 +92,6 @@ export class Preload {
         game.load.spritesheet('winSplash', 'win/winSplash.png', 169, 167, 24);
         game.load.atlasJSONArray('footerButtons', 'footer/footerButtons.png', 'footer/footerButtons.json');
 	    game.load.bitmapFont('numbersFont', 'numbers/numbers.png', 'numbers/numbers.xml');
-	    game.load.bitmapFont('numbersFont2', 'numbers/numbers2.png', 'numbers/numbers2.xml');
 	    if (model.desktop) {
 		    game.load.atlasJSONArray('deskButtons', 'desk_buttons/deskButtons.png', 'desk_buttons/deskButtons.json');
 		    game.load.image('gameMachineFS', 'game/gameMachineFS.png');

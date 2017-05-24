@@ -83,7 +83,7 @@ export let view = (() => {
         let continueText = game.add.sprite(game.width / 2,
             game.world.height * 0.88,
             'text',
-            'play.png',
+            'continue.png',
             transitionContainer);
         continueText.anchor.set(0.5);
         continueText.scale.setTo(0.1, 0.1);
@@ -200,7 +200,7 @@ export let view = (() => {
         let continueText = game.add.sprite(game.width / 2,
             game.world.height * 0.85,
             'text',
-            'play.png',
+            'continue.png',
             transitionContainer);
         continueText.anchor.set(0.5);
         if (model.mobile) {
