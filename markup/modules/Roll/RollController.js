@@ -54,9 +54,24 @@ export let controller = (() => {
                 // Если есть ошибка - выкидываем попап
                 if (data.ErrorCode) {
                     console.log(data);
-                    if (data.ErrorCode == 8) {
+                    if (data.ErrorCode == 1) {
                         if (model.state('autoplay:start')){
                             model.state('autoplay:panelClosed', true);
+                            
+	                        let animatedSpinButton = model.el('animatedSpinButton');
+	                        let spinButton = model.el('spinButtonDesk');
+	                        let stopButton = model.el('stopButtonDesk');
+
+	                        model.state('spinInAnim', true);
+	                        stopButton.visible = false;
+	                        animatedSpinButton.visible = true;
+	                        animatedSpinButton.animations.play('stopToSpin')
+		                        .onComplete.add(() => {
+		                        model.state('spinInAnim', false);
+		                        animatedSpinButton.visible = false;
+		                        spinButton.visible = true;
+	                        });
+
                             autoplayController.stop();
                         }
 
