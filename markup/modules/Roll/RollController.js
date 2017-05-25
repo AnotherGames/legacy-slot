@@ -54,7 +54,7 @@ export let controller = (() => {
                 // Если есть ошибка - выкидываем попап
                 if (data.ErrorCode) {
                     console.log(data);
-                    if (data.ErrorCode == 8) {
+                    if (data.ErrorCode == 1) {
                         if (model.state('autoplay:start')){
                             model.state('autoplay:panelClosed', true);
                             autoplayController.stop();
