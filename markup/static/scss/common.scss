@@ -79,9 +79,10 @@ body {
 #popup h2{
     margin: 0;
     margin-top: -3vw;
-    color: grey;
+    width: 30vw;
+    color: #afafaf;
     position: absolute;
-    font: 3vw arial;
+    font: 2.5vw arial;
     box-sizing: border-box;
     left: 50%;
     top: 60%;
@@ -95,7 +96,7 @@ body {
 #popup p{
     margin: 0;
     margin-top: 8vw;
-    color: grey;
+    color: #afafaf;
     font: 1.5vw arial;
     position: absolute;
     width: 100%;
