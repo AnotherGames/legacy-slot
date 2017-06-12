@@ -8,6 +8,7 @@ import { view as transitionView} from 'modules/Transition/TransitionView';
 import Footer from '../../../../Info/Footer';
 
 import { controller as soundController } from '../../../../Info/SoundController';
+import { controller as winController } from 'modules/Win/WinController';
 import { controller as settingsController } from 'modules/Settings/DesktopSettingsController';
 import { controller as balanceController } from 'modules/Balance/BalanceController';
 import { controller as panelController } from 'modules/Panel/PanelController';
@@ -98,6 +99,7 @@ export class Main {
         // Проверяем остались ли автокрутки
         this.checkForRemainAutoplay();
 
+        this.checkSessionRecovery();
     }
 
     update() {
@@ -139,8 +141,50 @@ export class Main {
     checkForRemainAutoplay() {
         if (model.data('remainAutoCount') && !model.state('autoStopWhenFS')) {
             autoplayController.start(model.data('remainAutoCount'));
-            model.data('remainAutoCount', null);
         }
+	    model.data('remainAutoCount', null);
+    }
+
+	checkSessionRecovery() {
+        if (model.data('savedFS')) {
+	        this.startSessionRecovery()
+        } else {
+            console.log('nope');
+        }
+    }
+
+    startSessionRecovery() {
+	    let saved = model.data('savedFS');
+	    let firstScreen = model.data('firstScreen');
+	    let finishScreen = [[],[],[],[],[]];
+
+	    firstScreen.forEach((row, rowIndex) => {
+		    row.forEach((el, colIndex) => {
+			    finishScreen[colIndex] = finishScreen[colIndex] || [];
+			    finishScreen[colIndex].push(el);
+		    });
+	    });
+
+	    for (let i = 0; i < 5; i++) {
+		    for (let k = 0; k < 3; k++) {
+			    finishScreen[i].push(firstScreen[i][k + 1]);
+		    }
+	    }
+
+	    model.data('finishScreen', finishScreen);
+	    winView.draw.UpWinContainer({});
+	    winView.draw.copyFinishScreenToUpWheels({});
+
+	    let shurikenArray = [];
+	    saved.prevValue.forEach((el)=> {
+		    shurikenArray.push({
+			    curValue: el,
+			    winCoins: el.TotalWinCoins,
+			    winCents: el.TotalWinCents
+		    });
+        });
+
+        winController.startShurikenBonus(shurikenArray);
     }
 
 }

@@ -79,6 +79,8 @@ export class Init {
 		    switch (model.data('savedFS').state) {
 			    case 'Freespin': game.state.start('FS');
 				    break;
+                case 'Doors': game.state.start('Main');
+                    break;
 			    default: {
 				    model.data('savedFS', null);
 			        game.state.start('Main');

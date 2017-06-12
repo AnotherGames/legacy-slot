@@ -214,49 +214,53 @@ export let controller = (() => {
             mode = data.Mode,
             nextMode = data.NextMode;
         if (mode == 'root' && nextMode.indexOf('shuriken') != -1) {
-
-            let shurikenArray = [];
-            model.data('shurikenArray', shurikenArray);
-
-            // Лочим все кнопки
-            model.state('buttons:locked', true);
-
-            // Остонавливаем автоплей если был
-            if (model.state('autoplay:start')) {
-                if (!model.state('autoStopWhenFS')) {
-                    model.data('remainAutoCount', model.data('autoplay:count'));
-                }
-                autoplayController.stop();
-            }
-
-            let shurikens = findShurikens();
-            let amountOFShurikens = +nextMode[8];
-            let counter = 0;
-
-            shurikens.elements.forEach((el) => {
-                el.hide(0);
-            });
-
-            shurikens.upElements.forEach((upEl) => {
-                upEl.show();
-                game.add.tween(upEl.group.scale)
-                    .to({x: 1.8, y: 1.8}, 800, Phaser.Easing.Bounce.Out, true)
-                    .onComplete.add(() => {
-                        game.add.tween(upEl.group.scale)
-                            .to({x: 1, y: 1}, 300, 'Linear', true)
-                    });
-
-
-                upEl.win(false, () => {
-                    counter++;
-                    if (counter == 1) {
-                        model.state('bonus', true);
-                        getShurikens(amountOFShurikens);
-                    }
-                });
-            });
-            if (model.desktop) mainView.draw.returnDroppedLamps();
+            startShurikenBonus();
         }
+    }
+
+    function startShurikenBonus( array = []) {
+	    let game = model.el('game');
+        let shurikenArray = array;
+	    model.data('shurikenArray', shurikenArray);
+
+	    // Лочим все кнопки
+	    model.state('buttons:locked', true);
+
+	    // Остонавливаем автоплей если был
+	    if (model.state('autoplay:start')) {
+		    if (!model.state('autoStopWhenFS')) {
+			    model.data('remainAutoCount', model.data('autoplay:count'));
+		    }
+		    autoplayController.stop();
+	    }
+
+	    let shurikens = findShurikens();
+	    let counter = 0;
+
+	    let amountOFShurikens = shurikenArray.length + shurikens.elements.length;
+
+	    shurikens.elements.forEach((el) => {
+		    el.hide(0);
+	    });
+
+	    shurikens.upElements.forEach((upEl) => {
+		    upEl.show();
+		    game.add.tween(upEl.group.scale)
+			    .to({x: 1.8, y: 1.8}, 800, Phaser.Easing.Bounce.Out, true)
+			    .onComplete.add(() => {
+			    game.add.tween(upEl.group.scale)
+				    .to({x: 1, y: 1}, 300, 'Linear', true)
+		    });
+
+		    upEl.win(false, () => {
+			    counter++;
+			    if (counter === 1) {
+				    model.state('bonus', true);
+				    getShurikens(amountOFShurikens);
+			    }
+		    });
+	    });
+	    if (model.desktop) mainView.draw.returnDroppedLamps();
     }
 
     function findShurikens() {
@@ -313,7 +317,7 @@ export let controller = (() => {
     }
 
     function finishShurikens(totalSum) {
-        view.draw.TotalWin({
+	    view.draw.TotalWin({
             winTotalData: totalSum
         });
         model.updateBalance({
@@ -333,8 +337,7 @@ export let controller = (() => {
         let shurikenArray = model.data('shurikenArray');
         let aim = view.draw.Aim({});
         let bonusSum = 0, bonusCashSum = 0;
-        let totalSum = model.data('rollResponse').Balance.TotalWinCoins;
-
+        let totalSum = 0;
         shurikenArray.forEach((data, index) => {
             setTimeout(() => {
                 view.draw.FireShuriken(data, index);
@@ -350,7 +353,7 @@ export let controller = (() => {
             model.state('buttons:locked', false);
             model.state('bonus', false);
             view.hide.Aim({
-                cb: finishShurikens.bind(null, totalSum)
+                callback: finishShurikens(totalSum)
             });
             game.input.keyboard.enabled = true;
             if (model.desktop) {
@@ -361,24 +364,10 @@ export let controller = (() => {
         }, 800 * shurikenArray.length + 2000);
     }
 
-    function fireAllSurikDemo(multi) {
-        coords[multi].forEach((sur, ind) => {
-            setTimeout(() => {
-                view.draw.FireShuriken({
-                    curValue: {
-                        Multi: multi
-                    }
-                }, ind);
-            }, 1000 * ind);
-        });
-    }
-
-
-
-
     return {
         showWin,
-        cleanWin
+        cleanWin,
+        startShurikenBonus
     };
 
 })();

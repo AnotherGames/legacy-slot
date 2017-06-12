@@ -10,10 +10,10 @@ export class Boot {
 
         request.setMode({
             normal: 'chibi2',
-            fsBonus: 'chibifs1'
+            fsBonus: 'chibifs1',
+            doorsBonus: 'chibishu1'
         });
-
-	    model.state('initialised', false);
+        model.state('initialised', false);
         request.send('Initialise', 'normal')
             .then((initData) => {
                 console.log('Init: ', initData);

@@ -153,9 +153,9 @@ export let model = (() => {
 	function getIndex(arr, findValue) {
 		let current = 0;
 		arr.filter((value, index) => {
-			if (value == findValue)
+			if (value === findValue)
 				current = index;
-		})
+		});
 		return current;
 	}
 
@@ -191,12 +191,37 @@ export let model = (() => {
 		model.data('savedFS', {	state: 'Main' });
 	}
 
+	function initDoors(data) {
+		let saved  = data.Saved;
+		let totalWin = saved.CurrentTotalWinCoins;
+		let winCash = saved.CurrentTotalWinCents;
+		let denomination = saved.LastDenomination;
+		let betLevel = saved.LastBetLevel;
+		let state = saved.ResultType;
+		let prevValue = saved.PrevValues;
+
+		model.balance('betValue', betLevel);
+		model.balance('currentBetStep', getIndex(model.balance('betSteps'), betLevel));
+		model.balance('coinValue', denomination / 100);
+		model.balance('currentCoinStep', getIndex(model.balance('coinSteps'), denomination / 100));
+
+		model.balance('betCash', data.Lines.length * betLevel * denomination / 100);
+		// model.balance('winCash', winCash / 100);
+		// model.balance('totalWin', totalWin);
+		model.data('savedFS', {
+            prevValue,
+			state
+		});
+    }
+
 	function initSaved(data) {
 		let state = data.Saved.ResultType;
 
 		switch(state) {
 			case 'Freespin': initFreespin(data);
 				break;
+            case 'Doors': initDoors(data);
+                break;
 			default: initMain();
 				break;
 		}

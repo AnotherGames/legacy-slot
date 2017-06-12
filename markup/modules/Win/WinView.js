@@ -372,14 +372,14 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('aim'),
             shurikenDarkness = model.el('shurikenDarkness'),
-            cb = false
+            callback = false
         }) {
             game.add.tween(container)
                 .to({y: -800}, 800, Phaser.Easing.Back.In, true)
                 .onComplete.add(() => {
                     container.y = 0;
-                    if (cb) {
-                        cb();
+                    if (callback) {
+	                    callback();
                     }
                 });
 
