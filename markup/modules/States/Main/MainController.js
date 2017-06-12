@@ -147,8 +147,8 @@ export class Main {
     checkForRemainAutoplay() {
         if (model.data('remainAutoCount') && !model.state('autoStopWhenFS')) {
             autoplayController.start(model.data('remainAutoCount'));
-            model.data('remainAutoCount', null);
         }
+	    model.data('remainAutoCount', null);
     }
 
 }
