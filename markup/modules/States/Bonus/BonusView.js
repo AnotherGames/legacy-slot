@@ -37,9 +37,6 @@ export let view = (() => {
         }) {
             let middleBG = game.add.sprite(0, 0, 'bonusBG2', null, container);
             model.el('middleBG', middleBG);
-
-            let upperBG = game.add.sprite(0, 0, 'bonusBG3', null, container);
-            model.el('upperBG', upperBG);
         },
 
         bigFish: function ({
