@@ -67,7 +67,6 @@ export class Preload {
         game.load.audio('bonusSword', 'bonusSword.mp3');
         game.load.audio('changeChar', 'changeChar.mp3');
         game.load.audio('wow', 'wow.mp3');
-        game.load.audio('numberRustle', 'numberRustle.mp3');
     }
 
     loadInitAssets() {
