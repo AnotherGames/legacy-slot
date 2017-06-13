@@ -25,7 +25,7 @@ export class Init {
 
         view.drawBG();
         view.drawLogo();
-
+	    view.drawCopy();
 
         let initPlay = view.drawPlay();
 

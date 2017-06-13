@@ -27,7 +27,7 @@ export let view = (() => {
         mainBG: function ({
             game = model.el('game')
         }) {
-            let mainBG = game.add.sprite(0, 0, 'mainBG', null, model.group('bg'));
+            let mainBG = game.add.sprite(0, 0, 'initBG', null, model.group('bg'));
 	        model.el('mainBG', mainBG);
 
 	        if (model.desktop) {

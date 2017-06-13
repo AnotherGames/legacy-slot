@@ -68,13 +68,13 @@ export class Preload {
     loadInitAssets() {
         const game = model.el('game');
         game.load.path = `static/img/content/${model.res}/`;
-        game.load.image('initBG', 'bg/initBG.png');
+        game.load.image('initBG', 'bg/initBG.jpg');
+        game.load.image('copy', 'bg/copy.png');
         game.load.atlasJSONArray('text', 'text/text.png', 'text/text.json');
     }
 
     loadMainAssets() {
         const game = model.el('game');
-        game.load.image('mainBG', 'bg/mainBG.png');
         game.load.atlasJSONArray('clouds', 'bg/clouds.png', 'bg/clouds.json');
         game.load.atlasJSONArray('candle', 'bg/candle.png', 'bg/candle.json');
         game.load.image('gameMachine', 'game/gameMachine.png');
@@ -83,7 +83,7 @@ export class Preload {
         game.load.image('transitionCoin', 'other/transitionCoin.png');
         game.load.image('arrow', 'other/arrow.png');
         game.load.image('closeButton', 'other/closed.png');
-        game.load.image('infoTableBg', 'other/infoTableBg.png');
+        game.load.image('infoTableBg', 'other/infoTableBg.jpg');
         game.load.atlasJSONArray('infoTable', 'other/infoTable.png', 'other/infoTable.json');
         game.load.atlasJSONArray('infoMarker', 'other/infoMarker.png', 'other/infoMarker.json');
         game.load.image('winLine', 'win/winLineRect.png');

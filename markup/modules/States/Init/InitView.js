@@ -6,7 +6,6 @@ export let view = (() => {
         const game = model.el('game');
         let initBG = game.add.sprite(0, 0, 'initBG');
         model.el('initBG', initBG);
-        return initBG;
     }
 
     function drawLogo() {
@@ -16,7 +15,6 @@ export let view = (() => {
             initLogo.scale.setTo(0.1, 0.1);
         game.add.tween(initLogo.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true);
         model.el('initLogo', initLogo);
-        return initLogo;
     }
 
     function drawPlay() {
@@ -28,6 +26,15 @@ export let view = (() => {
         model.el('initPlay', initPlay);
         model.el('initPlayTween', initPlayTween);
         return initPlay;
+    }
+
+    function drawCopy() {
+		const game = model.el('game');
+		let initCopy = game.add.sprite(game.world.centerX, game.world.centerY, 'copy');
+		initCopy.anchor.set(0.5);
+	    initCopy.left = 0 + 10;
+	    initCopy.bottom = game.height - 10;
+		model.el('initCopy', initCopy);
     }
 
     function playYoyoTween({
@@ -55,6 +62,7 @@ export let view = (() => {
         drawBG,
         drawLogo,
         drawPlay,
+        drawCopy,
         playYoyoTween,
         stopYoyoTween
     }
