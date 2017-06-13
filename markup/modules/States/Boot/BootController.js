@@ -9,7 +9,7 @@ export class Boot {
         this.game = game;
 
         request.setMode({
-            normal: 'goldsea3',
+            normal: 'qos',
             fsBonus: 'goldfs2',
             doorsBonus: 'goldship2'
         });
