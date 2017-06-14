@@ -126,7 +126,7 @@ export let controller = (() => {
                 view.draw.WinGlista({number: currentLine.Line});
                 view.draw.WinLineTable({line: currentLine});
                 view.draw.WinNumber({number: currentLine.Line});
-            } else if (currentLine.Line < 0 &&  currentLine.Count > 1) {
+            } else if (currentLine.Line < 0 && currentLine.Count > 1) {
                 // Если скаттеры
                 view.draw.WinElements({number: [currentLine.Line], amount: [currentLine.Count]});
                 view.draw.WinLineTable({line: currentLine, scatter: true});
@@ -161,7 +161,7 @@ export let controller = (() => {
             mode = data.Mode,
             nextMode = data.NextMode;
 
-        if (mode == 'root' && nextMode == 'shipBonus') {
+        if (mode == 'root' && nextMode == 'DoorsBonus') {
             // Лочим все кнопки
             model.state('buttons:locked', true);
             // Остонавливаем автоплей если был

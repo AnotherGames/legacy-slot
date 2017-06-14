@@ -10,8 +10,8 @@ export class Boot {
 
         request.setMode({
             normal: 'qos',
-            fsBonus: 'goldfs2',
-            doorsBonus: 'goldship2'
+            fsBonus: 'qosfs',
+            doorsBonus: 'qosdoors'
         });
 
 	    model.state('initialised', false);
