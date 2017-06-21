@@ -22,30 +22,30 @@ export class Preload {
         game.stage.disableVisibilityChange = true;
     }
 
-	preload() {
-        const game = model.el('game');
-        $('#wait').addClass('closed');
+    preload() {
+    const game = model.el('game');
+    $('#wait').addClass('closed');
 
-        game.load.setPreloadSprite(view.drawPreloadBar());
-        view.drawPreloadCoin();
+    game.load.setPreloadSprite(view.drawPreloadBar());
+    view.drawPreloadCoin();
 
-        model.state('loadError', false);
-        game.load.onFileError.add(() => {
+    model.state('loadError', false);
+    game.load.onFileError.add(() => {
             model.state('loadError', true);
         });
 
-        this.loadSounds();
-        this.loadInitAssets();
-        this.loadMainAssets();
-        this.loadFSAssets();
-        this.loadSpineAssets();
-        this.loadTest();
+    this.loadSounds();
+    this.loadInitAssets();
+    this.loadMainAssets();
+    this.loadFSAssets();
+    this.loadSpineAssets();
+    this.loadTest();
 
-		let popup = new Popup(model);
-		model.el('popup', popup);
+    let popup = new Popup(model);
+    model.el('popup', popup);
 
-		game.load.onLoadComplete.add(this.checkInit, this);
-    }
+    game.load.onLoadComplete.add(this.checkInit, this);
+}
 
     loadSounds() {
         const game = model.el('game');
@@ -92,8 +92,8 @@ export class Preload {
         game.load.atlasJSONArray('numbers', 'numbers/multiNumbers.png', 'numbers/multiNumbers.json');
 
         game.load.atlasJSONArray('footerButtons', 'footer/footerButtons.png', 'footer/footerButtons.json');
-        game.load.bitmapFont("numbersFont", "numbers/numbers.png", "numbers/numbers.xml");
-        game.load.bitmapFont("fsLevelNumbers", "numbers/numbers1.png", "numbers/numbers1.xml");
+        game.load.bitmapFont('numbersFont', 'numbers/numbers.png', 'numbers/numbers.xml');
+        game.load.bitmapFont('fsLevelNumbers', 'numbers/numbers1.png', 'numbers/numbers1.xml');
         if (model.desktop) {
             game.load.image('ui', 'game/UI.png');
             game.load.image('uiFS', 'game/UI_FS.png');
@@ -112,7 +112,7 @@ export class Preload {
 
     loadFSAssets() {
         const game = model.el('game');
-        game.load.image('fsBG', 'bg/fsBG.png');
+        game.load.image('fsBG', 'bg/fsBG.jpg');
         game.load.image('axe', 'fs/axe.png');
         game.load.image('skull', 'fs/skull.png');
         game.load.image('plus3', 'fs/plus3.png');
@@ -155,14 +155,14 @@ export class Preload {
 	        this.hidePreloader();
         } else {
 	        setTimeout( () => {
-                if(model.state('initialised')) {
+            if (model.state('initialised')) {
 	                this.hidePreloader();
                 } else {
 	                model.el('preloadBar').visible = false;
 	                model.el('preloadCoin').visible = false;
 	                model.el('popup').showReloadPopup();
                 }
-            }, 3000)
+        }, 3000);
         }
     }
 
@@ -172,7 +172,7 @@ export class Preload {
             model.el('preloadBar').visible = false;
             model.el('preloadCoin').visible = false;
 	        model.el('popup').showReloadPopup();
-	        game.load.reset(true, true)
+	        game.load.reset(true, true);
             return;
         }
         view.hideCoin();

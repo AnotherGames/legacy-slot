@@ -93,6 +93,9 @@ export class Main {
         // Добавляем маску
         mainView.draw.machineMask({});
 
+        mainView.draw.lineNumbers({ side: 'left' });
+        mainView.draw.lineNumbers({ side: 'right' });
+
         // Инициализируем управление клавиатурой
         if (model.desktop) {
             keyboardController.initMainKeys(transitionView.transitionInFs);
