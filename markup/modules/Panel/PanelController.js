@@ -66,7 +66,7 @@ export let controller = (() => {
         let info = new Info({
             model,
             desktopBGScale: 1,
-            desktopTableScale: 1.3,
+            desktopTableScale: 1,
 	        desktopCloseButtonMargin: 6
         });
 
