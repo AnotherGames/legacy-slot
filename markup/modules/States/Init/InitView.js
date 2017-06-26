@@ -33,19 +33,13 @@ export let view = (() => {
         model.el('initPlay', initPlay);
         initPlay.alpha = 0;
 
-        let clock = game.add.sprite(game.world.centerX - 100, game.height * 0.5, 'clock');
+        let clock = game.add.sprite(game.world.centerX, game.height * 0.5, 'clock');
         clock.anchor.set(0.5);
-        let clockClose = clock.animations.add('close');
-        clock.animations.add('spin', [23, 24, 25, 26]);
+	    clock.animations.add('clock', null, 15, true);
+	    clock.animations.play('clock');
 
-        clock.animations.play('close', 15, false);
         game.add.tween(initPlay).to({alpha: 1}, 300, 'Linear', true);
-        clockClose.onComplete.add(() => {
-            clock.animations.play('spin', 15, true);
-        }, this);
 
-        // let initPlayTween = game.add.tween(initPlay.scale).to({x: 1.0, y: 1.0}, 1000, Phaser.Easing.Elastic.Out, true);
-        // model.el('initPlayTween', initPlayTween);
         return initPlay;
     }
 

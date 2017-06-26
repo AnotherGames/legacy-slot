@@ -73,7 +73,8 @@ export class Preload {
         game.load.image('initBG', 'bg/initBG.jpg');
         game.load.image('initLogo', 'preloader/initLogo.png');
         game.load.image('initPlay', 'preloader/initPlay.png');
-        game.load.spritesheet('clock', 'preloader/clock.png', 631, 403, 27);
+	    game.load.atlasJSONArray('clock', 'preloader/clock.png', 'preloader/clock.json');
+        // game.load.spritesheet('clock', 'preloader/clock.png', 631, 403, 27);
         game.load.atlasJSONArray('text', 'text/text.png', 'text/text.json');
     }
 

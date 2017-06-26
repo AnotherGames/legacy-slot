@@ -222,7 +222,7 @@ export class FS {
 			controller.init(this.fsCount);
 			fsView.draw.changeTime({number: 2});
 		});
-		game.time.events.add(3000, () => {
+		game.time.events.add(1000, () => {
 			fsView.draw.changeMulti({number: 2});
 		});
 
@@ -274,7 +274,7 @@ export class FS {
 		for (let i = 2; i < multi; i++) {
 			fsView.draw.changeMulti({number: i + 1, animation: i + 1 + ''});
 		}
-		fsView.draw.changeLevel({number: level, animation: level - 1 + ''});
+		// fsView.draw.changeLevel({number: level, animation: level - 1 + ''});
 	}
 
 }

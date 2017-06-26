@@ -18,7 +18,6 @@ export class Init {
         let game = model.el('game');
 
         this.game.plugins.add(new Phaser.Plugin.SaveCPU(this));
-        // this.savecpu.init();
 
         view.drawBG();
         view.drawLogo();
@@ -40,11 +39,6 @@ export class Init {
         if (model.desktop) {
             keyboardController.initInitKeys(this.stateHandler);
         }
-
-        // model.el('initPlayTween')
-        //     .onComplete.add(() => {
-        //         view.playYoyoTween({});
-        //     });
 
         this.drawSoundTrigger();
 

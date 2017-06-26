@@ -137,6 +137,7 @@ export let view = (() => {
 
     function fsFinish() {
         let game = model.el('game');
+	    soundController.sound.stopSound('clock');
         // game.input.keyboard.enabled = true;
         keyboardController.initFsKeys(transitionOutFs);
         model.state('buttons:locked', false);

@@ -6,7 +6,6 @@ import DoorLevel from 'modules/Class/DoorLevel';
 
 import {view as balanceView} from "modules/Balance/BalanceView";
 import {view as bonusView} from "modules/States/Bonus/BonusView";
-import {view as mainView} from "modules/States/Main/MainView";
 import {controller as soundController} from "../../../../Info/SoundController";
 import {controller as mobileSetBetController} from "modules/Menu/SetBet/MenuSetBetController";
 
@@ -16,11 +15,11 @@ export class Bonus {
 		this.game = model.el('game');
 		this.game.winAnims = [];
 		this.doors = [];
+		this.level = 0;
 
 		this.game.frameAnims = [];
 		this.game.spriteAnims = [];
 
-		model.updateBalance({startFSRoll: true})
 		model.data('bonusWinCoins', 0);
 		model.state('bonus', true);
 		model.state('bonusReady', true);
@@ -43,15 +42,17 @@ export class Bonus {
 		soundController.music.stopMusic('initFon');
 		soundController.music.playMusic('bonusFon');
 
-		let level = new DoorLevel({container: model.group('main'), level: 0});
+		if (model.data('savedFS')) {
+			this.drawRecoveredPanel();
+		} else {
+			model.updateBalance({startFSRoll: true});
+		}
 
+		let level = new DoorLevel({container: model.group('main'), level: this.level});
 		if (model.mobile) {
 			mobileSetBetController.init({});
 		}
 
-		if (model.data('savedFS')) {
-			this.drawRecoveredPanel();
-		}
 
 	}
 
@@ -70,21 +71,13 @@ export class Bonus {
 
 	drawRecoveredPanel() {
 		let saved = model.data('savedFS').PrevValues;
-		// for (let i = 0; i < saved.length; i++) {
-		// 	let index = parseInt(saved[i].Index);
-		// 	let door = this.doors[index];
-		// 	door.destroyed = true;
-		// 	door._playGold();
-		// 	door._playGlassBoom();
-		// 	let multi = parseInt(saved[i].Multi);
-		//
-		// 	door._playTable(multi);
-		// }
 		if (saved.length === 0) {
 			model.data('bonusWinCoins', 0)
 		} else {
 			model.data('bonusWinCoins', model.data('bonusWinCoins') + saved[saved.length - 1].TotalWinCoins)
 		}
+		console.log(saved);
+		this.level = saved.length;
 		model.data('savedFS', null);
 	}
 
