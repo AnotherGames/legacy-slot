@@ -109,28 +109,28 @@ export let model = (() => {
 		model.data('autoplay:startCash', 0);
 
 		// С правой стороны проверки значения, которые должны быть по умолчанию
-		let autoTransititon = (model.cookie('autoTransititon') == 'true') ? true : false;
+		let autoTransititon = (model.cookie('autoTransititon') === 'true') ? true : false;
 		model.state('autoTransititon', autoTransititon);
 
-		let fastRoll = (model.cookie('fastRoll') == 'true') ? true : false;
+		let fastRoll = (model.cookie('fastRoll') === 'true') ? true : false;
 		model.state('fastRoll', fastRoll);
 
-		let soundValue = (model.cookie('sound') == 'false') ? false : true;
+		let soundValue = (model.cookie('sound') === 'false') ? false : true;
 		model.state('sound', soundValue);
 
-		let music = (model.cookie('music') == 'false') ? false : true;
+		let music = (model.cookie('music') === 'false') ? false : true;
 		model.state('music', music);
 
-		let isAnimBG = (model.cookie('isAnimBG') == 'false') ? false : true;
+		let isAnimBG = (model.cookie('isAnimBG') === 'false') ? false : true;
 		model.state('isAnimBG', isAnimBG);
 
-		let gameSideLeft = (model.cookie('gameSideLeft') == 'false') ? false : true;
+		let gameSideLeft = (model.cookie('gameSideLeft') === 'false') ? false : true;
 		model.state('gameSideLeft', gameSideLeft);
 
 		let volume = (isFinite(+model.cookie('volume'))) ? Math.abs(model.cookie('volume')) : 100;
 		soundController.volume.setVolume(volume);
 
-		let globalSound = (model.cookie('globalSound') == 'false') ? false : true;
+		let globalSound = (model.cookie('globalSound') === 'false') ? false : true;
 		model.state('globalSound', globalSound);
 		if (globalSound) {
 			soundController.volume.changeVolume(volume);
@@ -165,9 +165,9 @@ export let model = (() => {
 	function getIndex(arr, findValue) {
 		let current = 0;
 		arr.filter((value, index) => {
-			if (value == findValue)
+			if (value === findValue)
 				current = index;
-		})
+		});
 		return current;
 	}
 
