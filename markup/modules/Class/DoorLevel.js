@@ -53,6 +53,7 @@ export default class DoorLevel {
         this.container = container;
         this.level = level;
         this.doors = [];
+	    this.game.input.maxPointers = 1;
 
         // Выигрыш или проигрыш который за дверями
         if (this.level != 4) {
