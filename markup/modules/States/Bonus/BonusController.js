@@ -30,7 +30,7 @@ class Door {
 		this.sprite = this.game.add.sprite(this.x, this.y, 'illuminators', `${index}.png`);
 		this.sprite.anchor.set(0.5);
 		this.sprite.inputEnabled = true;
-		this.sprite.events.onInputDown.addOnce(handleDoorClick, this);
+		this.sprite.events.onInputDown.add(handleDoorClick, this);
 		model.group('bg').add(this.sprite);
 
 		this.lightBlinking(1000);
@@ -239,14 +239,14 @@ export class Bonus {
 
 function handleDoorClick() {
 	if (this.destroyed || model.state('doorFinish') || !model.state('bonusReady')) return;
+	this.destroyed = true;
+	model.state('bonusReady', false);
 	let doorIndex = this.doors.findIndex((element) => {
 		return this === element;
 	});
-	this.destroyed = true;
-
 	request.send('Roll', null, doorIndex)
 		.then((data) => {
-			model.state('bonusReady', false);
+
 			this.data = data;
 			model.data('bonusRollResponse', data);
 			if (data.ErrorCode) {
@@ -257,7 +257,6 @@ function handleDoorClick() {
 			console.log(data);
 		})
 		.then(() => {
-
 			return request.send('Ready');
 		})
 		.then((readyData) => {
@@ -266,13 +265,12 @@ function handleDoorClick() {
 				return;
 			}
 
-			model.state('bonusReady', true);
 		})
 		.then(() => {
 			model.updateBalance({startBonusRoll: true});
 			if (!this.isWinPlayed) {
 
-				if (this.data.CurrentValue.Multi != 'Exit') {
+				if (this.data.CurrentValue.Multi !== 'Exit') {
 					this.win();
 					this.isWinPlayed = true;
 					if (this.data.BonusEnd) {
@@ -298,6 +296,8 @@ function handleDoorClick() {
 						setTimeout(() => {
 							endBonus();
 						}, 4500);
+					} else {
+						model.state('bonusReady', true);
 					}
 				} else {
 					model.state('doorFinish', true);
