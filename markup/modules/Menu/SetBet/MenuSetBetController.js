@@ -4,6 +4,7 @@ import { view } from 'modules/Menu/SetBet/MenuSetBetView';
 import { controller as soundController } from '../../../../Info/SoundController';
 
 export let controller = (() => {
+    let betButtons = [];
 
     let game;
 
@@ -11,7 +12,8 @@ export let controller = (() => {
         openPanel: function () {
             if (model.state('setbetPanel') === 'open') return;
             model.state('setbetPanel', 'open');
-            view.show.Panel({});
+            view.show.Panel({})
+                .onComplete.add(enableInput);
             view.show.Overlay({});
         },
         closePanel: function () {
@@ -19,6 +21,7 @@ export let controller = (() => {
 
             soundController.sound.playSound({sound : 'buttonClick'});
             if (model.state('setbetPanel') === 'open') {
+	            disableInput();
                 view.hide.Panel({});
             }
 
@@ -65,41 +68,63 @@ export let controller = (() => {
         view.draw.Title({});
 
         let maxBetButton = view.draw.maxBetButton({});
-            maxBetButton.inputEnabled = true;
-            maxBetButton.input.priorityID = 12;
-            maxBetButton.events.onInputDown.add(handle.maxBet);
+        maxBetButton.inputEnabled = true;
+        maxBetButton.input.priorityID = 12;
+        maxBetButton.events.onInputDown.add(handle.maxBet);
+	    betButtons.push(maxBetButton);
 
         view.draw.BetLevelText({});
         view.draw.BetLevelBG({});
         view.draw.BetLevelValue({});
+
         let betLevelPlus = view.draw.BetLevelPlus({});
-            betLevelPlus.inputEnabled = true;
-            betLevelPlus.input.priorityID = 12;
-            betLevelPlus.events.onInputDown.add(handle.betLevelPlus);
+        betLevelPlus.inputEnabled = true;
+        betLevelPlus.input.priorityID = 12;
+        betLevelPlus.events.onInputDown.add(handle.betLevelPlus);
+	    betButtons.push(betLevelPlus);
+
         let betLevelMinus = view.draw.BetLevelMinus({});
-            betLevelMinus.inputEnabled = true;
-            betLevelMinus.input.priorityID = 12;
-            betLevelMinus.events.onInputDown.add(handle.betLevelMinus);
+        betLevelMinus.inputEnabled = true;
+        betLevelMinus.input.priorityID = 12;
+        betLevelMinus.events.onInputDown.add(handle.betLevelMinus);
+	    betButtons.push(betLevelMinus);
 
         view.draw.coinText({});
         view.draw.coinBG({});
         view.draw.coinValue({});
+
         let coinPlus = view.draw.CoinPlus({});
-            coinPlus.inputEnabled = true;
-            coinPlus.input.priorityID = 12;
-            coinPlus.events.onInputDown.add(handle.coinPlus);
+        coinPlus.inputEnabled = true;
+        coinPlus.input.priorityID = 12;
+        coinPlus.events.onInputDown.add(handle.coinPlus);
+	    betButtons.push(coinPlus);
+
         let coinMinus = view.draw.CoinMinus({});
-            coinMinus.inputEnabled = true;
-            coinMinus.input.priorityID = 12;
-            coinMinus.events.onInputDown.add(handle.coinMinus);
+        coinMinus.inputEnabled = true;
+        coinMinus.input.priorityID = 12;
+        coinMinus.events.onInputDown.add(handle.coinMinus);
+	    betButtons.push(coinMinus);
 
         let backButton = view.draw.BackButton({});
-            backButton.inputEnabled = true;
-            backButton.input.priorityID = 12;
-            backButton.events.onInputDown.add(handle.closePanel);
+        backButton.inputEnabled = true;
+        backButton.input.priorityID = 12;
+        backButton.events.onInputDown.add(handle.closePanel);
+	    betButtons.push(backButton);
 
         model.state('setbetPanel', 'close');
     }
+
+	function disableInput() {
+		betButtons.forEach((el) => {
+			el.input.enabled = false;
+		})
+	}
+
+	function enableInput () {
+		betButtons.forEach((el) => {
+			el.input.enabled = true;
+		})
+	}
 
     let update = {
 
