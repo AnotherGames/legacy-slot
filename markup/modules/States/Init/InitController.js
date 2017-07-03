@@ -20,6 +20,7 @@ export class Init {
     create() {
         let game = model.el('game');
 
+	    game.input.maxPointers = 1;
         this.game.plugins.add(new Phaser.Plugin.SaveCPU(this));
 
         view.drawBG();
