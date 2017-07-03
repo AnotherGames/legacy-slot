@@ -12,6 +12,7 @@ import {controller as mobileSetBetController} from "modules/Menu/SetBet/MenuSetB
 class Door {
 	constructor(x, y, arr, index) {
 		this.game = model.el('game');
+		// this.game.input.maxPointers = 1;
 
 		this.x = (model.desktop) ? x : x * 2 / 3;
 		this.y = (model.desktop) ? y : y * 2 / 3;
@@ -241,6 +242,7 @@ function handleDoorClick() {
 	let doorIndex = this.doors.findIndex((element) => {
 		return this === element;
 	});
+	this.destroyed = true;
 
 	request.send('Roll', null, doorIndex)
 		.then((data) => {
