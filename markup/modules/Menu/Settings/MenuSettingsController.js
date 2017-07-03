@@ -9,6 +9,7 @@ export let controller = (() => {
     let game;
     let info;
     let touchX = 0;
+    let settingsButtons = [];
 
     let handle = {
         openSettings: function () {
@@ -18,7 +19,8 @@ export let controller = (() => {
             || model.state('settings') === 'open') return;
 
             model.state('settings', 'open');
-            view.show.Settings({});
+            view.show.Settings({})
+	            .onComplete.add(enableInput);
             view.show.Overlay({});
         },
         closeSettings: function () {
@@ -29,6 +31,7 @@ export let controller = (() => {
                 view.hide.Rules({});
             }
             if (model.state('settings') === 'open') {
+	            disableInput();
                 view.hide.Settings({});
             }
 
@@ -41,6 +44,7 @@ export let controller = (() => {
             model.state('settings', 'close');
             const time = 700;
 
+	        disableInput();
             view.hide.Settings({});
             view.hide.Overlay({});
 
@@ -121,6 +125,7 @@ export let controller = (() => {
             if (model.state('settings') === 'rules') return;
 
             model.state('settings', 'rules');
+	        disableInput();
             view.hide.Settings({});
             view.hide.Overlay({});
             info.open();
@@ -154,45 +159,55 @@ export let controller = (() => {
         view.draw.Title({});
 
         let soundButton = view.draw.SoundButton({});
-        soundButton.inputEnabled = true;
+	    soundButton.inputEnabled = true;
         soundButton.input.priorityID = 12;
         soundButton.events.onInputDown.add(handle.changeSound);
         view.draw.SoundButtonText({});
+	    settingsButtons.push(soundButton);
 
         let musicButton = view.draw.MusicButton({});
-        musicButton.inputEnabled = true;
+	    musicButton.inputEnabled = true;
         musicButton.input.priorityID = 12;
         musicButton.events.onInputDown.add(handle.changeMusic);
         view.draw.MusicButtonText({});
+	    settingsButtons.push(musicButton);
 
         let fastSpinButton = view.draw.FastSpinButton({});
-        fastSpinButton.inputEnabled = true;
+	    fastSpinButton.inputEnabled = true;
         fastSpinButton.input.priorityID = 12;
         fastSpinButton.events.onInputDown.add(handle.changeFastSpin);
         view.draw.FastSpinButtonText({});
+	    settingsButtons.push(fastSpinButton);
 
         let handModeButton = view.draw.HandModeButton({});
-        handModeButton.inputEnabled = true;
+	    handModeButton.inputEnabled = true;
         handModeButton.input.priorityID = 12;
         handModeButton.events.onInputDown.add(handle.handMode);
         view.draw.HandModeButtonText({});
+	    settingsButtons.push(handModeButton);
 
         let rulesButton = view.draw.RulesButton({});
-        rulesButton.inputEnabled = true;
+	    rulesButton.inputEnabled = true;
         rulesButton.input.priorityID = 12;
         rulesButton.events.onInputDown.add(handle.openRules);
         view.draw.RulesButtonText({});
+	    settingsButtons.push(rulesButton);
 
         let historyButton = view.draw.HistoryButton({});
-        historyButton.inputEnabled = true;
+	    historyButton.inputEnabled = true;
         historyButton.input.priorityID = 12;
         historyButton.events.onInputDown.add(handle.showHistory);
         view.draw.HistoryButtonText({});
+	    settingsButtons.push(historyButton);
 
         let backButton = view.draw.BackButton({});
-        backButton.inputEnabled = true;
+	    backButton.inputEnabled = true;
         backButton.input.priorityID = 12;
         backButton.events.onInputDown.add(handle.closeSettings);
+	    settingsButtons.push(backButton);
+
+        disableInput();
+	    model.el('menuButtons', settingsButtons);
 
         info = new Info({
             model,
@@ -202,6 +217,18 @@ export let controller = (() => {
         });
 
         model.state('settings', 'close');
+    }
+
+    function disableInput() {
+        settingsButtons.forEach((el) => {
+            el.input.enabled = false;
+        })
+    }
+
+	function enableInput () {
+		settingsButtons.forEach((el) => {
+			el.input.enabled = true;
+		})
     }
 
     return {
