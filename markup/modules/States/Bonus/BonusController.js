@@ -30,7 +30,7 @@ class Door {
 		this.sprite = this.game.add.sprite(this.x, this.y, 'illuminators', `${index}.png`);
 		this.sprite.anchor.set(0.5);
 		this.sprite.inputEnabled = true;
-		this.sprite.events.onInputDown.add(handleDoorClick, this);
+		this.sprite.events.onInputDown.addOnce(handleDoorClick, this);
 		model.group('bg').add(this.sprite);
 
 		this.lightBlinking(1000);
