@@ -53,7 +53,6 @@ export default class DoorLevel {
         this.container = container;
         this.level = level;
         this.doors = [];
-	    this.game.input.maxPointers = 1;
 
         // Выигрыш или проигрыш который за дверями
         if (this.level != 4) {
@@ -230,9 +229,9 @@ export class Door {
         }
 
         this.sprite.inputEnabled = true;
-        this.sprite.events.onInputDown.add(() => {
+        this.sprite.events.onInputDown.addOnce(() => {
             if (model.state(`doors:${level}:open`)) return;
-
+	        model.state(`doors:${level}:open`, true);
             this.sendRoll(index)
                 .then((data) => {
                     model.data(`doors:${level}:data`, data);
@@ -314,7 +313,6 @@ export class Door {
                         // либо показать заставку последнего экрана если человек проиграл
 
                     this.open(level);
-                    model.state(`doors:${level}:open`, true);
                 })
 
         }, this);
