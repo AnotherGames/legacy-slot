@@ -16,13 +16,11 @@ export class Init {
 
     create() {
         let game = model.el('game');
-
-        this.game.plugins.add(new Phaser.Plugin.SaveCPU(this));
-        // this.savecpu.init();
+	    game.input.maxPointers = 1;
+        game.plugins.add(new Phaser.Plugin.SaveCPU(this));
 
         view.drawBG();
         view.drawLogo();
-
 
         let initPlay = view.drawPlay();
 

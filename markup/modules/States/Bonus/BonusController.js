@@ -34,7 +34,7 @@ class Door {
 	}
 
 	showHover() {
-		if (this.destroyed == true) return;
+		if (this.destroyed === true) return;
 		let number = this.index;
 		bonusView.draw.changeAnim({number: number, anim: 'target'});
 
@@ -186,9 +186,10 @@ function handleDoorHover() {
 
 function handleDoorClick() {
 	if (this.destroyed || model.state('doorFinish') || !model.state('bonusReady')) return;
+	this.destroyed = true;
+	model.state('bonusReady', false);
 	request.send('Roll', null, this.index - 1)
 		.then((data) => {
-			model.state('bonusReady', false);
 			this.data = data;
 			model.data('bonusRollResponse', data);
 			if (data.ErrorCode) {
@@ -206,13 +207,12 @@ function handleDoorClick() {
 				model.el('popup').showReloadPopup(readyData.ErrorMessage);
 				return;
 			}
-
-			model.state('bonusReady', true);
 		})
 		.then(() => {
 			model.updateBalance({startBonusRoll: true});
 			if (!this.isWinPlayed) {
 				if (this.data.CurrentValue.Multi != 'Exit') {
+					model.state('bonusReady', true);
 					this.win();
 					this.isWinPlayed = true;
 					if (this.data.BonusEnd) {
