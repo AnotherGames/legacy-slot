@@ -20,8 +20,8 @@ export class Init {
     create() {
         let game = model.el('game');
 
-        // Лочим 30 фпс
-        this.game.plugins.add(new Phaser.Plugin.SaveCPU(this));
+	    game.input.maxPointers = 1;
+        game.plugins.add(new Phaser.Plugin.SaveCPU(this));
 
         view.drawBG();
         view.drawLogo();
