@@ -21,8 +21,9 @@ export let controller = (() => {
 
 		model.state('fs:end', false);
 		model.data('fs:count', amount);
-		let multiCounter = 0;
-		model.el('multiCounter', multiCounter);
+		if (!model.el('multiCounter')){
+			model.el('multiCounter', 0);
+		}
 
 		next();
 	}
@@ -72,6 +73,8 @@ export let controller = (() => {
 
 	}
 
+	window.fsc = fsMainActions;
+
 	function fsMainActions() {
 		// Проигрываем анимации барабана и +3
 		fsView.draw.CountPlus3({});
@@ -80,15 +83,15 @@ export let controller = (() => {
 		if (model.state('maxFsMultiplier')) return;
 
 		let rollData = model.data('rollResponse');
-		// let levelValue = rollData.FsBonus.Level;
-		// let currLevel = model.data('fsLevel');
 		let multiValue = rollData.FsBonus.Multi;
 		let currMulti = model.data('fsMulti');
 		let multiCounter = model.el('multiCounter');
 
 		// Увеличиваем мульти(открытие ракушки)
 		if (multiValue > currMulti) {
+			console.log(multiCounter);
 			multiCounter++;
+			console.log(multiCounter);
 			fsView.draw.changeMulti({number: multiValue, counter: multiCounter});
 			model.el('multiCounter', multiCounter);
 		}
@@ -291,10 +294,10 @@ export class FS {
 
 		let multiCounter = (multi - 2) / 2;
 		for(let i = 1; i <= multiCounter; i++) {
-			console.log(i)
 			fsView.draw.changeMulti({number: (i + 1) * 2, counter: i})
 		}
-		model.el('multiCounter', multiCounter)
+		console.log(multiCounter);
+		model.el('multiCounter', multiCounter);
 
 		for(let i = 1; i <= level; i++) {
 			fsView.draw.changeLevel({number: i});

@@ -252,15 +252,12 @@ export let view = (() => {
         }) {
 	        model.data('fsMulti', number);
 	        model.el('fsMulti').text = number;
-	        console.log('here');
 	        let shell = model.el(`shell${counter}`);
             let fsMultiBig = game.add.sprite(shell.x, shell.y - 50, 'multi', `x${number}.png`, container);
             fsMultiBig.anchor.set(0.5);
             // fsMultiBig.alpha = 0;
             fsMultiBig.scale.set(0.1);
 
-	        // debugger;
-            console.log(shell.name)
 	        shell.animations.play('open');
 	        shell.animations.getAnimation('open').onComplete.add(() => {
 		        shell.animations.play('openIdle');

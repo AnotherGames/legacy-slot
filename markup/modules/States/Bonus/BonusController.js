@@ -172,7 +172,7 @@ export class Bonus {
 			if (saved.length === 0) {
 				model.data('bonusWinCoins', 0)
 			} else {
-				model.data('bonusWinCoins', model.data('bonusWinCoins') + saved[saved.length - 1].TotalWinCoins)
+				model.data('bonusWinCoins', saved[saved.length - 1].TotalWinCoins)
 			}
 			model.data('savedFS', null);
 		}
