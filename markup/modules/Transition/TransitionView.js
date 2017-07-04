@@ -200,7 +200,7 @@ export let view = (() => {
         mainView.draw.addShark({container: transitionContainer});
         // выбираем надпись для конечного экрна (Big Win --- Total Win)
         let winTextFrame;
-        if (model.data('fsMulti') === 7) {
+        if (model.data('fsMulti') === 8) {
             winTextFrame = 'bigW.png';
         } else {
             winTextFrame = 'totalW.png';

@@ -159,6 +159,7 @@ export let view = (() => {
 
             let shell1 = game.add.sprite(x, y, 'shell', null, container);
             shell1.anchor.set(0.5);
+	        shell1.name = 'shell1'
 
             shell1.animations.add('idle', Phaser.Animation.generateFrameNames('s-idle-c', 0, 29, '.png', 2), 20, true);
             shell1.animations.add('open', Phaser.Animation.generateFrameNames('s-o-', 0, 29, '.png', 2), 20, false);
@@ -168,25 +169,23 @@ export let view = (() => {
 
             let shell2 = game.add.sprite(x, y - deltaY, 'shell', null, container);
             shell2.anchor.set(0.5);
+	        shell2.name = 'shell2'
 
             shell2.animations.add('idle', Phaser.Animation.generateFrameNames('s-idle-c', 0, 29, '.png', 2), 20, true);
             shell2.animations.add('open', Phaser.Animation.generateFrameNames('s-o-', 0, 29, '.png', 2), 20, false);
             shell2.animations.add('openIdle', Phaser.Animation.generateFrameNames('s-idle-o', 0, 29, '.png', 2), 20, true);
-            game.time.events.add(500, () => {
-                shell2.animations.play('idle');
-            });
+            shell2.animations.play('idle');
 
             model.el('shell2', shell2);
 
             let shell3 = game.add.sprite(x, y - deltaY * 2, 'shell', null, container);
             shell3.anchor.set(0.5);
+	        shell3.name = 'shell3'
 
             shell3.animations.add('idle', Phaser.Animation.generateFrameNames('s-idle-c', 0, 29, '.png', 2), 20, true);
             shell3.animations.add('open', Phaser.Animation.generateFrameNames('s-o-', 0, 29, '.png', 2), 20, false);
             shell3.animations.add('openIdle', Phaser.Animation.generateFrameNames('s-idle-o', 0, 29, '.png', 2), 20, true);
-            game.time.events.add(500, () => {
-                shell3.animations.play('idle');
-            });
+            shell3.animations.play('idle');
 
             model.el('shell3', shell3);
 
@@ -251,25 +250,26 @@ export let view = (() => {
             container = model.group('panel'),
             game = model.el('game')
         }) {
-            let fsMulti = model.el('fsMulti');
-            fsMulti.text = number;
-            model.el('fsMulti', fsMulti);
-
-            let shell= model.el(`shell${counter}`);
+	        model.data('fsMulti', number);
+	        model.el('fsMulti').text = number;
+	        console.log('here');
+	        let shell = model.el(`shell${counter}`);
             let fsMultiBig = game.add.sprite(shell.x, shell.y - 50, 'multi', `x${number}.png`, container);
             fsMultiBig.anchor.set(0.5);
-            fsMultiBig.alpha = 0;
+            // fsMultiBig.alpha = 0;
             fsMultiBig.scale.set(0.1);
 
-            shell.animations.play('open');
-            shell.animations.getAnimation('open').onComplete.add(() => {
-                shell.animations.play('openIdle');
-                game.add.tween(fsMultiBig).to({alpha: 1}, 500, 'Linear', true);
-                game.add.tween(fsMultiBig.scale).to({x: 1.5, y: 1.5}, 1000, Phaser.Easing.Elastic.Out, true)
-                    .onComplete.add(() => {
-                        game.add.tween(fsMultiBig.scale).to({x: 1.0, y: 1.0}, 300, 'Linear', true);
-                    }, this);
-            });
+	        // debugger;
+            console.log(shell.name)
+	        shell.animations.play('open');
+	        shell.animations.getAnimation('open').onComplete.add(() => {
+		        shell.animations.play('openIdle');
+		        game.add.tween(fsMultiBig).to({alpha: 1}, 500, 'Linear', true);
+		        game.add.tween(fsMultiBig.scale).to({x: 1.5, y: 1.5}, 1000, Phaser.Easing.Elastic.Out, true)
+			        .onComplete.add(() => {
+			        game.add.tween(fsMultiBig.scale).to({x: 1.0, y: 1.0}, 300, 'Linear', true);
+		        }, this);
+	        });
 
 
         },
@@ -335,7 +335,6 @@ export let view = (() => {
                     if (model.state('changeLevel') == true) {
                         let rollData = model.data('rollResponse');
                         let levelValue = rollData.FsBonus.Level;
-                        console.warn(levelValue);
                         draw.changeLevel({number: levelValue});
                         model.data('fsLevel', levelValue);
                     }
@@ -380,27 +379,25 @@ export let view = (() => {
             let perlContainer = model.group('perlContainer');
             let deltaY = (model.desktop) ? 250 :  170;
 
-            console.warn(currNumber);
-
             if (currNumber == 0) {
                 fsLevel.text = 5;
                 box.animations.play('5');
                 perlsArr[4].visible = true;
                 model.el('fsLevel', fsLevel);
-                game.time.events.add(2000, () => {
-                    fsLevel.text = currNumber;
-                    model.el('fsLevel', fsLevel);
+	            perlsArr.forEach((perl) => {
+		            perl.visible = false;
+	            });
 
-                    box.animations.play(currNumber + '');
-                    game.add.tween(perlContainer).to({alpha: 0}, 150, 'Linear', true)
-                        .onComplete.add(() => {
-                            perlContainer.y = perlContainer.y - deltaY;
-                            perlsArr.forEach((perl) => {
-                                perl.visible = false;
-                            });
-                            game.add.tween(perlContainer).to({alpha: 1}, 150, 'Linear', true)
-                        });
-                });
+                fsLevel.text = currNumber;
+                model.el('fsLevel', fsLevel);
+
+                box.animations.play(currNumber + '');
+                game.add.tween(perlContainer).to({alpha: 0}, 150, 'Linear', true)
+                    .onComplete.add(() => {
+                        perlContainer.y = perlContainer.y - deltaY;
+
+                        game.add.tween(perlContainer).to({alpha: 1}, 150, 'Linear', true)
+                    });
             } else {
                 fsLevel.text = currNumber;
                 model.el('fsLevel', fsLevel);

@@ -87,12 +87,10 @@ export let controller = (() => {
 		let currMulti = model.data('fsMulti');
 		let multiCounter = model.el('multiCounter');
 
-		// Увеличиваем мульти(разбивание бутылки)
+		// Увеличиваем мульти(открытие ракушки)
 		if (multiValue > currMulti) {
 			multiCounter++;
-			// console.warn(multiCounter);
 			fsView.draw.changeMulti({number: multiValue, counter: multiCounter});
-			model.data('fsMulti', multiValue);
 			model.el('multiCounter', multiCounter);
 		}
 
@@ -291,10 +289,16 @@ export class FS {
 		let multi = model.data('fsMulti');
 		let level = model.data('fsLevel');
 
-		for (let i = 2; i < multi; i++) {
-			fsView.draw.changeMulti({number: i + 1, animation: i + 1 + ''});
+		let multiCounter = (multi - 2) / 2;
+		for(let i = 1; i <= multiCounter; i++) {
+			console.log(i)
+			fsView.draw.changeMulti({number: (i + 1) * 2, counter: i})
 		}
-		fsView.draw.changeLevel({number: level, animation: level - 1 + ''});
+		model.el('multiCounter', multiCounter)
+
+		for(let i = 1; i <= level; i++) {
+			fsView.draw.changeLevel({number: i});
+		}
 	}
 
 }
