@@ -295,7 +295,7 @@ export let view = (() => {
         }) {
             upWheels.forEach((wheel, wheelIndex) => {
                 wheel.forEach((el, elIndex) => {
-                    let curEl = finishScreen[wheelIndex].reverse()[elIndex + 1];
+                    let curEl = finishScreen[wheelIndex][elIndex + 1];
                     el.play(`${curEl}-n`);
                 });
             });
