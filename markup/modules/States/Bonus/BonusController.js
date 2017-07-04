@@ -135,10 +135,12 @@ export class Bonus {
 			balanceView.draw.FSMobileBalance({});
 		}
 		balanceView.draw.CashBalance({});
-		model.updateBalance({startBonus: true});
 
 		if (model.data('savedFS')) {
 			this.drawRecoveredPanel();
+			// model.updateBalance({});
+		} else {
+			model.updateBalance({startBonus: true});
 		}
 
 	}

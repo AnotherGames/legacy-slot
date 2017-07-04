@@ -21,7 +21,6 @@ export let controller = (() => {
 
 		model.state('fs:end', false);
 		model.data('fs:count', amount);
-		model.updateBalance({startFS: true});
 		let multiCounter = 0;
 		model.el('multiCounter', multiCounter);
 
@@ -277,6 +276,7 @@ export class FS {
 			model.data('fsLevel', this.fsLevel);
 			model.data('savedFS', null);
 		} else {
+			model.updateBalance({startFS: true});
 			this.fsCount = 15;
 			this.fsMulti = 2;
 			this.fsLevel = 0;
