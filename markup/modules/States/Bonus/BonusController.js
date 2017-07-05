@@ -156,7 +156,7 @@ export class Bonus {
 		this.game.frameAnims = [];
 		this.game.spriteAnims = [];
 
-		model.updateBalance({startFSRoll: true})
+		// model.updateBalance({startFSRoll: true})
 		model.data('bonusWinCoins', 0);
 		model.state('bonus', true);
 		model.state('bonusReady', true);
@@ -198,6 +198,8 @@ export class Bonus {
 
 		if (model.data('savedFS')) {
 			this.drawRecoveredPanel();
+		} else {
+			model.updateBalance({startFSRoll: true})
 		}
 
 	}
@@ -230,7 +232,7 @@ export class Bonus {
 		if (saved.length === 0) {
 			model.data('bonusWinCoins', 0)
 		} else {
-			model.data('bonusWinCoins', model.data('bonusWinCoins') + saved[saved.length - 1].TotalWinCoins)
+			model.data('bonusWinCoins', saved[saved.length - 1].TotalWinCoins)
 		}
 		model.data('savedFS', null);
 	}
@@ -253,7 +255,7 @@ function handleDoorClick() {
 				model.el('popup').showReloadPopup(data.ErrorMessage);
 				return;
 			}
-			model.data('bonusWinCoins', model.data('bonusWinCoins') + data.CurrentValue.TotalWinCoins);
+			model.data('bonusWinCoins', data.CurrentValue.TotalWinCoins);
 			console.log(data);
 		})
 		.then(() => {
