@@ -34,7 +34,7 @@ export class Bonus {
 		footer.initMobile();
 		balanceView.draw.FSMobileBalance({});
 		balanceView.draw.CashBalance({});
-		model.updateBalance({startBonus: true});
+
 
 		// Играем фоновую музыку
 		soundController.music.stopMusic('startPerehod');
@@ -45,6 +45,7 @@ export class Bonus {
 		if (model.data('savedFS')) {
 			this.drawRecoveredPanel();
 		} else {
+			model.updateBalance({startBonus: true});
 			model.updateBalance({startFSRoll: true});
 		}
 

@@ -15,7 +15,7 @@ export class Boot {
         });
 
 	    model.state('initialised', false);
-	    request.send('Initialise', 'doorsBonus')
+	    request.send('Initialise', 'normal')
             .then((initData) => {
                 model.initStates(initData);
                 model.initSettings(initData.Settings);
