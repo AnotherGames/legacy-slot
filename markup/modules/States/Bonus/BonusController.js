@@ -198,7 +198,7 @@ function handleDoorClick() {
 				model.el('popup').showReloadPopup(data.ErrorMessage);
 				return;
 			}
-			model.data('bonusWinCoins', model.data('bonusWinCoins') + data.Balance.TotalWinCoins);
+			model.data('bonusWinCoins', data.CurrentValue.TotalWinCoins);
 			console.log(data);
 		})
 		.then(() => {
