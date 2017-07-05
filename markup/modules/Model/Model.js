@@ -171,6 +171,7 @@ export let model = (() => {
 		let state = saved.ResultType;
 
 		model.balance('betValue', betLevel);
+		model.balance('betSum', data.Lines.length * betLevel);
 		model.balance('currentBetStep', getIndex(model.balance('betSteps'), betLevel));
 		model.balance('coinValue', denomination / 100);
 		model.balance('currentCoinStep', getIndex(model.balance('coinSteps'), denomination / 100));
