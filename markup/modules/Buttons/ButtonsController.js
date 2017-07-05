@@ -143,7 +143,7 @@ export let controller = (() => {
                 soundButton.frameName = 'soundOut.png';
             } else {
                 soundController.volume.switchVolume();
-                soundButton.frameName = 'soundOn.png';
+                soundButton.frameName = 'sound.png';
             }
         }
     };
