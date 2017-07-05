@@ -365,6 +365,7 @@ export let view = (() => {
             container = model.group('panel'),
             game = model.el('game')
         }) {
+            if (number > 15) return;
             model.state('changeLevel', false);
 
             let fsLevel = model.el('fsLevel');
@@ -391,6 +392,7 @@ export let view = (() => {
                 box.animations.play(currNumber + '');
                 game.add.tween(perlContainer).to({alpha: 0}, 150, 'Linear', true)
                     .onComplete.add(() => {
+                        if(number >= 15) return;
                         perlContainer.y = perlContainer.y - deltaY;
 
                         game.add.tween(perlContainer).to({alpha: 1}, 150, 'Linear', true)
