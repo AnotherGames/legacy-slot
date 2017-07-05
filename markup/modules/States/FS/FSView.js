@@ -111,6 +111,7 @@ export let view = (() => {
                 x = model.el('game').width / 2 + 145;
                 y = 610;
                 deltaY = 13;
+                deltaX = 5;
                 font = fontMobile;
                 let fsMultiBG = game.add.sprite(x, y, 'fsMultiBG', null, container);
                 fsMultiBG.anchor.set(0.5);
@@ -119,6 +120,8 @@ export let view = (() => {
             let fsMulti;
             fsMulti = game.add.text(x + deltaX, y + deltaY, start, {font: font, fill: '#ffffff', align: 'center', stroke: '#188bb4', strokeThickness: 5}, container);
             fsMulti.setShadow(5, 5, 'rgba(0, 0, 0, 0.7)', 8);
+	        // Убрать полосы на тени
+            fsMulti.padding.x = 10;
             fsMulti.anchor.set(0.5);
             model.el('fsMulti', fsMulti);
             setTimeout(() => {
@@ -179,6 +182,7 @@ export let view = (() => {
                 x = model.el('game').width / 2 - 115;
                 y = 610;
                 deltaY = 13;
+                deltaX = 5;
                 font = fontMobile;
                 let fsLevelBG = game.add.sprite(x, y, 'fsLevelBG', null, container);
                 fsLevelBG.anchor.set(0.5);
@@ -187,6 +191,8 @@ export let view = (() => {
             let fsLevel;
                 fsLevel = game.add.text(x + deltaX, y + deltaY, start, {font: font, fill: '#ffffff', align: 'center', stroke: '#188bb4', strokeThickness: 5}, container);
                 fsLevel.setShadow(5, 5, 'rgba(0, 0, 0, 0.7)', 8);
+	            // Убрать полосы на тени
+                fsLevel.padding.x = 10;
                 fsLevel.anchor.set(0.5);
                 model.el('fsLevel', fsLevel);
             setTimeout(() => {
@@ -261,6 +267,8 @@ export let view = (() => {
             let fsCount = game.add.text(x + deltaX, y + deltaY, start, {font: font, fill: '#ffffff', align: 'center', stroke: '#188bb4', strokeThickness: 5}, container);
             fsCount.setShadow(5, 5, 'rgba(0, 0, 0, 0.7)', 8);
             fsCount.anchor.set(0.5);
+            // Убрать полосы на тени
+            fsCount.padding.x = 10;
             model.el('fs:count', fsCount);
         },
 
