@@ -59,12 +59,12 @@ export let controller = (() => {
         if (model.state('fs:end') === false) {
             return;
         }
-
+        console.log('inited')
+	    let game = model.el('game');
+	    model.state('firstFs', true);
         model.state('fs:end', false);
         model.data('fs:count', amount);
         model.updateBalance({startFS: true});
-
-        next();
     }
 
     function count({

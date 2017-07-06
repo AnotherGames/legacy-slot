@@ -9,6 +9,7 @@ import Footer from '../../../../Info/Footer';
 
 import { controller as soundController } from '../../../../Info/SoundController';
 import { controller as winController } from 'modules/Win/WinController';
+import { controller as fsController } from 'modules/States/FS/FSController';
 import { controller as settingsController } from 'modules/Settings/DesktopSettingsController';
 import { controller as balanceController } from 'modules/Balance/BalanceController';
 import { controller as panelController } from 'modules/Panel/PanelController';
@@ -120,6 +121,10 @@ export class Main {
 
             let saved = model.data('savedFS');
             winController.drawFsState(saved.fsLevel, saved.fsCount);
+	        game.time.events.add(3000, () => {
+		        model.state('firstFs', false);
+		        fsController.next();
+	        });
         }
 
     }

@@ -339,6 +339,8 @@ export let model = (() => {
         }
         if (startFS) {
             model.balance('winCash', 0);
+	        model.balance('fsWin', 0);
+	        model.balance('totalWin', 0);
         }
         if (endFS) {
             let endData = model.data('rollResponse').Balance;

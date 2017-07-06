@@ -189,8 +189,6 @@ export let controller = (() => {
 
         // Отправляем запрос Ready
         request.send('Ready').then((data) => {
-            // Показываем выигришь
-            winController.showWin();
 
             // Обновляем баланс в конце крутки
             if (model.state('fs')) {
@@ -200,16 +198,19 @@ export let controller = (() => {
                 model.updateBalance({endRoll: true});
             }
 
-            // Убираем состояния прогресса
+	        // Убираем состояния прогресса
             model.state('ready', true);
-            model.state('roll:progress', false);
+	        // Запускаем следующую автокрутку (или ФС-крутку)
+	        // Показываем выигришь
+	        winController.showWin();
 
-            // Запускаем следующую автокрутку (или ФС-крутку)
-            if (!model.state('fs')) {
-                _runNextAutoIfExist();
+            model.state('roll:progress', false);
+	        if (model.state('fs')) {
+	            _runNextFSIfExist();
             } else {
-                _runNextFSIfExist();
+	            _runNextAutoIfExist();
             }
+
 
             // Убираем лок кнопок
             if(!model.state('fs') && model.state('autoplay:end') && !model.state('buttons:locked')){
@@ -256,9 +257,10 @@ export let controller = (() => {
     function _runNextFSIfExist() {
         const game = model.el('game');
         let rollResponse = model.data('rollResponse');
-        // Здесь определяется время через которое начнется следующая крутка: если не было выигрыша, то сразу, если был, то через секунду
-        let time = (rollResponse.WinLines.length) ? 1300 : 0;
-
+	    // Здесь определяется время через которое начнется следующая крутка: если не было выигрыша, то сразу, если был, то через секунду
+	    let time = (rollResponse.WinLines.length) ? 1300 : 0;
+	    time += (model.state('firstFs')) ? 3000 : 0;
+	    model.state('firstFs', false);
         let fsTimer = game.time.events.add(time, () => {
             if (model.state('fs:end')) return;
             fsController.next();
