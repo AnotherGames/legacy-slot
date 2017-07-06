@@ -14,35 +14,18 @@ export class Boot {
         });
 
 	    model.state('initialised', false);
-
-	    $.get('http://autorisation.bossgs.org/casino/dev/api.php?uId=22&pid=anothergames&game=candyland&demo=0&show=0&getGameUrl=%D0%9F%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D1%82%D1%8C+%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D1%83',
-		    (data)=>{
-			    let sid = data.split('=')[1];
-			    request.send('Initialise', 'fsBonus', sid)
-				    .then((initData) => {
-					    model.initStates(initData);
-					    model.initSettings(initData.Settings);
-					    model.initBalance(initData.Balance);
-					    model.initSaved(initData);
-					    model.state('initialised', true);
-				    })
-				    .catch((err) => {
-					    console.error(err);
-				    });
-		    })
-
-        // request.send('Initialise', 'normal')
-        //     .then((initData) => {
-        //         console.log('Init: ', initData);
-        //         model.initStates(initData);
-        //         model.initSettings(initData.Settings);
-        //         model.initBalance(initData.Balance);
-        //         model.initSaved(initData);
-        //         model.state('initialised', true);
-        //     })
-        //     .catch((err) => {
-        //         console.error(err);
-        //     });
+        request.send('Initialise', 'normal')
+            .then((initData) => {
+                console.log('Init: ', initData);
+                model.initStates(initData);
+                model.initSettings(initData.Settings);
+                model.initBalance(initData.Balance);
+                model.initSaved(initData);
+                model.state('initialised', true);
+            })
+            .catch((err) => {
+                console.error(err);
+            });
 
         this._checkDevice();
         $(window).on('beforeunload', function () {
