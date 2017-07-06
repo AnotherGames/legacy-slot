@@ -30,8 +30,8 @@ export let view = (() => {
             container = model.group('panelFS'),
             startLevel = 8,
             startMulti = 'x1',
-            fontDesktop = '80px Cooper, Arial',
-            fontMobile = '40px Cooper, Arial',
+            fontDesktop = (game.device.iOS) ? 'bold 80px Arial' : '80px Cooper, Arial',
+            fontMobile = (game.device.iOS) ? 'bold 40px Arial' : '40px Cooper, Arial',
             x = container.width / 2 + 10,
             y = 160
         }) {
