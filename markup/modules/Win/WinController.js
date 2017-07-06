@@ -286,18 +286,17 @@ export let controller = (() => {
         return result;
     }
 
-    function getShurikens(i) {
+    function getShurikens() {
         request.send('Roll')
             .then((data) => {
                 console.log('Data is: ', data);
                 writeShurikenData(data);
                 request.send('Ready')
                 .then(() => {
-                    i--;
-                    if (i > 0) {
-                        getShurikens(i)
+                    if (data.BonusEnd) {
+	                    fireAllShurikens();
                     } else {
-                        fireAllShurikens();
+	                    getShurikens()
                     }
                 });
             })
