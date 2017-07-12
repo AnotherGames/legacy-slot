@@ -346,8 +346,8 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('panel'),
             start = 15,
-            fontDesktop = '80px Titania, Arial',
-            fontMobile = '50px Titania, Arial'
+            fontDesktop = '80px Arial',
+            fontMobile = '50px Arial'
         }) {
             let x, y, deltaX, deltaY, font;
             if (model.mobile) {

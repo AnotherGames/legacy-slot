@@ -104,10 +104,10 @@ export let view = (() => {
             betSumValue = model.balance('betSum'),
             coinValueAmount = model.balance('coinValue'),
             betValueAmount = model.balance('betValue'),
-            sumStyle = {font: 'bold 32px Titania, Arial', fill: '#fff', align: 'center'},
-            valueStyle = {font: 'bold 32px Titania, Arial', fill: '#fff', align: 'center'},
-            sumCoinStyle = {font: 'bold 28px Titania, Arial', fill: '#fff', align: 'center'},
-            valueCoinStyle = {font: 'bold 26px Titania, Arial', fill: '#fff', align: 'center'},
+            sumStyle = {font: 'bold 32px Arial', fill: '#fff', align: 'center'},
+            valueStyle = {font: 'bold 32px Arial', fill: '#fff', align: 'center'},
+            sumCoinStyle = {font: 'bold 28px Arial', fill: '#fff', align: 'center'},
+            valueCoinStyle = {font: 'bold 26px Arial', fill: '#fff', align: 'center'},
             y = [- 145, -135, -123],
             x = [120, 310, 1060, 1280]
         }) {
@@ -163,8 +163,8 @@ export let view = (() => {
             betSumValue = model.balance('betSum'),
             coinValueAmount = model.balance('coinValue'),
             betValueAmount = model.balance('betValue'),
-            sumStyle = {font: '24px Titania, Arial', fill: '#ffffff', align: 'center'},
-            valueStyle = {font: '27px Titania, Arial', fill: '#ffffff', align: 'center'},
+            sumStyle = {font: '24px Arial', fill: '#ffffff', align: 'center'},
+            valueStyle = {font: '27px Arial', fill: '#ffffff', align: 'center'},
             y = [-115, 99, 133, 148],
             x = [260, 230, 250, 1315]
         }) {
