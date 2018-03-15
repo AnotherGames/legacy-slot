@@ -34,14 +34,6 @@
 },
 {
 	"filename": "5_en.png",
-	"frame": {"x":1069,"y":1,"w":939,"h":350},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":83,"y":68,"w":939,"h":350},
-	"sourceSize": {"w":1211,"h":637}
-},
-{
-	"filename": "6_en.png",
 	"frame": {"x":1,"y":375,"w":1043,"h":361},
 	"rotated": false,
 	"trimmed": true,
@@ -49,7 +41,7 @@
 	"sourceSize": {"w":1211,"h":637}
 },
 {
-	"filename": "7_en.png",
+	"filename": "6_en.png",
 	"frame": {"x":1,"y":738,"w":1026,"h":406},
 	"rotated": false,
 	"trimmed": true,
