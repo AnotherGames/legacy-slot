@@ -213,6 +213,7 @@ export let controller = (() => {
         let data = model.data('rollResponse'),
             mode = data.Mode,
             nextMode = data.NextMode;
+        console.log(mode == 'root', nextMode.indexOf('shuriken') != -1)
         if (mode == 'root' && nextMode.indexOf('shuriken') != -1) {
             startShurikenBonus();
         }
@@ -239,8 +240,9 @@ export let controller = (() => {
 
 	    let amountOFShurikens = shurikenArray.length + shurikens.elements.length;
 
-	    shurikens.elements.forEach((el) => {
-		    el.hide(0);
+
+		shurikens.elements.forEach((el) => {
+			el.hide(0);
 	    });
 
 	    shurikens.upElements.forEach((upEl) => {
@@ -252,14 +254,12 @@ export let controller = (() => {
 				    .to({x: 1, y: 1}, 300, 'Linear', true)
 		    });
 
-		    upEl.win(false, () => {
-			    counter++;
-			    if (counter === 1) {
-				    model.state('bonus', true);
-				    getShurikens(amountOFShurikens);
-			    }
-		    });
+			upEl.win(false);
 	    });
+
+		model.state('bonus', true);
+		getShurikens(amountOFShurikens);  
+
 	    if (model.desktop) mainView.draw.returnDroppedLamps();
     }
 
@@ -283,7 +283,8 @@ export let controller = (() => {
                 }
             });
         });
-        return result;
+
+		return result;
     }
 
     function getShurikens() {
@@ -293,6 +294,7 @@ export let controller = (() => {
                 writeShurikenData(data);
                 request.send('Ready')
                 .then(() => {
+                    // debugger
                     if (data.BonusEnd) {
 	                    fireAllShurikens();
                     } else {
