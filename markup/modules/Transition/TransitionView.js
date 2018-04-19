@@ -2,7 +2,7 @@ import { model } from 'modules/Model/Model';
 import { config } from 'modules/Util/Config';
 
 import { controller as soundController } from '../../../Info/SoundController';
-
+import { controller as buttonsController } from 'modules/Buttons/ButtonsController';
 import { view as mainView } from 'modules/States/Main/MainView';
 
 export let view = (() => {
@@ -68,7 +68,6 @@ export let view = (() => {
             .onComplete.add(() => {
                 boyContainer.destroy();
                 transitionContainer.removeAll();
-
             }, this);
     }
 
@@ -79,7 +78,8 @@ export let view = (() => {
 	    game.input.keyboard.enabled = false;
 	    soundController.sound.stopSound({sound: 'finishPerehod'});
         let transitionContainer = model.group('transition');
-        game.add.tween(transitionContainer).to({alpha: 0}, 500, 'Linear', true)
+
+		game.add.tween(transitionContainer).to({alpha: 0}, 500, 'Linear', true)
             .onComplete.add(() => {
                 transitionContainer.removeAll();
                 winText.destroy();
@@ -92,6 +92,8 @@ export let view = (() => {
 
                 model.state('transitionScreen', false);
                 game.input.keyboard.enabled = true;
+
+			    buttonsController.unlockButtons();
         }, this);
     }
 
@@ -206,7 +208,7 @@ export let view = (() => {
 
 	    model.state('transitionScreen', true);
 	    model.state('transitionIn', false);
-	    game.input.keyboard.enabled = true;
+	    // game.input.keyboard.enabled = true;
 	    model.state('buttons:locked', false);
         // Темнота
         game.camera.flash(0x000000, 500);

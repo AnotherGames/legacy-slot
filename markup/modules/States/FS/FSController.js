@@ -7,7 +7,6 @@ import { view as mainView } from 'modules/States/Main/mainView';
 
 import { controller as soundController } from '../../../../Info/SoundController';
 import { controller as panelController } from 'modules/Panel/PanelController';
-import { controller as buttonsController } from 'modules/Buttons/ButtonsController';
 import { controller as rollController } from 'modules/Roll/RollController';
 
 export let controller = (() => {
@@ -25,14 +24,13 @@ export let controller = (() => {
             mainView.draw.changeBG({index: 2});
         } else {
             mainView.draw.removeTrash({});
-            buttonsController.unlockButtons();
         }
         game.time.events.add(6000, () => {
             panelController.drawMainPanel();
             soundController.music.stopMusic('fsFon');
             soundController.music.playMusic('fon');
 
-            model.state('fs:end', true);
+			model.state('fs:end', true);
             model.state('fs', false);
             model.updateBalance({endFS: true});
             model.state('buttons:locked', false);

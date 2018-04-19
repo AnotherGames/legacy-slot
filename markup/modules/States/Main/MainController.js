@@ -104,7 +104,7 @@ export class Main {
         mainView.draw.machineMask({});
         // Инициализируем управление клавиатурой
         if (model.desktop) {
-            keyboardController.initMainKeys(transitionView.transitionInOutFs);
+            keyboardController.initMainKeys(() => {});
         }
 
         // Проверяем остались ли автокрутки

@@ -96,9 +96,13 @@ export let view = (() => {
             || model.state('autoplay:start')) return;
 
             model.el('betButton').frameName = 'setBetOut.png';
+            model.el('betButton').input.enabled = false;
             model.el('menuButton').frameName = 'menuOut.png';
+            model.el('menuButton').input.enabled = false;
             model.el('autoButton').frameName = 'autoOut.png';
+            model.el('autoButton').input.enabled = false;
             model.el('spinButton').frameName = 'spinOut.png';
+            model.el('spinButton').input.enabled = false;
         },
 
         unlockButtons: function() {
@@ -106,9 +110,13 @@ export let view = (() => {
             || model.state('autoplay:start')) return;
 
             model.el('betButton').frameName = 'setBet.png';
+            model.el('betButton').input.enabled = true;
             model.el('menuButton').frameName = 'menu.png';
+            model.el('menuButton').input.enabled = true;
             model.el('autoButton').frameName = 'auto.png';
+            model.el('autoButton').input.enabled = true;
             model.el('spinButton').frameName = 'spin.png';
+            model.el('spinButton').input.enabled = true;
         }
 
     };
