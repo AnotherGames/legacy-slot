@@ -146,6 +146,7 @@ export let model = (() => {
         model.state('isFirstAutoChangeAnimBG', true);
         model.state('maxFsMultiplier', false);
         model.state('balance', 'coins');
+		model.state('fullscreen', false);
     }
 
     function initSettings(settings) {
