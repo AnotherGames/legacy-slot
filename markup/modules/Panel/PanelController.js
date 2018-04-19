@@ -179,7 +179,7 @@ export let controller = (() => {
         stop: function () {
             let game = model.el('game');
             let autoButtonDesk = model.el('autoButtonDesk');
-            autoButtonDesk.frameName = 'auto.png';
+            autoButtonDesk.frameName = 'autoFreeze.png';
             autoButtonDesk.freezeFrames = true;
 
             if (model.state('ready')) {

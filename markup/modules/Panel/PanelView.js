@@ -484,6 +484,10 @@ export let view = (() => {
         coinsLevelMinus.freezeFrames = true;
         let autoButtonDesk = model.el('autoButtonDesk');
         if (model.state('autoplay:start')) {
+			let spinButtonDesk = model.el('spinButtonDesk');
+			spinButtonDesk.visible = false;
+			let stopButtonDesk = model.el('stopButtonDesk');
+			stopButtonDesk.visible = true;
             autoButtonDesk.frameName = 'autoCount.png';
         } else {
             autoButtonDesk.frameName = 'autoFreeze.png';
@@ -516,14 +520,23 @@ export let view = (() => {
         let coinsLevelMinus = model.el('coinsLevelMinus');
         coinsLevelMinus.frameName = 'minus.png';
         coinsLevelMinus.freezeFrames = false;
-        let autoButtonDesk = model.el('autoButtonDesk');
-        autoButtonDesk.frameName = 'auto.png';
-        autoButtonDesk.freezeFrames = false;
 
 	    let infoButton = model.el('infoButton');
 	    infoButton.alpha = 1;
 	    let settingsButton = model.el('settingsButton');
 	    settingsButton.alpha = 1;
+
+		if(model.state('autoplay:end')){
+			let spinButtonDesk = model.el('spinButtonDesk');
+			spinButtonDesk.visible = true;
+			let stopButtonDesk = model.el('stopButtonDesk');
+			stopButtonDesk.visible = false;
+			stopButtonDesk.frameName = 'stop.png';
+			stopButtonDesk.freezeFrames = false
+			let autoButtonDesk = model.el('autoButtonDesk');
+			autoButtonDesk.frameName = 'auto.png';
+			autoButtonDesk.freezeFrames = false;
+		}
     }
 
     return {
