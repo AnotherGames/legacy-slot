@@ -274,7 +274,7 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('panel'),
             style = {
-                font: '42px Arial, Helvetica',
+                font: '42px',
                 align: 'center'
             },
             amount = 10,
