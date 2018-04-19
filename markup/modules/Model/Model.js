@@ -144,7 +144,8 @@ export let model = (() => {
         model.state('menuOpened', false);
         model.state('isFirstAutoChangeAnimBG', true);
         model.state('maxFsMultiplier', false);
-    }
+		model.state('fullscreen', false);
+	}
 
     function initSettings(settings) {
 
