@@ -144,7 +144,8 @@ export let model = (() => {
         model.state('infoPanelOpen', false);
         model.state('menuOpened', false);
         model.state('isFirstAutoChangeAnimBG', true);
-    }
+		model.state('fullscreen', false);
+	}
 
     function initSettings(settings) {
 
