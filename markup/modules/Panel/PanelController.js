@@ -193,8 +193,11 @@ export let controller = (() => {
             let stopButtonDesk = model.el('stopButtonDesk');
             stopButtonDesk.frameName = 'stopOn.png';
             stopButtonDesk.freezeFrames = true;
+			let spinButtonDesk = model.el('spinButtonDesk');
+			spinButtonDesk.frameName = 'spin.png';
+			spinButtonDesk.freezeFrames = true;
 
-            if (model.state('ready')) {
+			if (model.state('ready')) {
                 game.input.keyboard.enabled = true;
                 view.unlockButtons();
             }
