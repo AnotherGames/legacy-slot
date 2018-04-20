@@ -155,6 +155,7 @@ export let model = (() => {
 		model.state('doorFinish', false);
 		model.data('lastClickedDoor', 0);
 		model.state('fontNotLoaded', true);
+		model.state('fullscreen', false);
 
 	}
 
