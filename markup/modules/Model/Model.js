@@ -150,7 +150,8 @@ export let model = (() => {
         model.state('oneAfterAnother', false);
         model.state('changeLevel', false);
         model.state('hoverBonus', true);
-    }
+		model.state('fullscreen', false);
+	}
 
     function initSettings() {
 
