@@ -24,8 +24,8 @@ export let view = (() => {
     }
 
     function transitionInFs(state) {
-        if (state == 'fs') {
-            model.el('game').state.start('FS');
+		if (model.data('rollResponse').NextMode == 'fsBonus') {
+			model.el('game').state.start('FS');
         } else {
             model.el('game').state.start('Bonus');
         }
