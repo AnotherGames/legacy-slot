@@ -30,8 +30,8 @@ export let view = (() => {
             container = model.group('panelFS'),
             startLevel = 8,
             startMulti = 'x1',
-            fontDesktop = (game.device.iOS) ? 'bold 80px Arial' : '80px Cooper, Arial',
-            fontMobile = (game.device.iOS) ? 'bold 40px Arial' : '40px Cooper, Arial',
+            fontDesktop = 'bold 80px Arial',
+            fontMobile = 'bold 40px Arial',
             x = container.width / 2 + 10,
             y = 160
         }) {
@@ -274,7 +274,7 @@ export let view = (() => {
             game = model.el('game'),
             container = model.group('panel'),
             style = {
-                font: '42px',
+                font: '42px Arial, Helvetica',
                 align: 'center'
             },
             amount = 10,
